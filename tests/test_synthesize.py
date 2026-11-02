@@ -30,7 +30,8 @@ class FakeMessages:
         if self.error:
             raise self.error
         return SimpleNamespace(
-            stop_reason=self.stop_reason, parsed_output=self.output,
+            stop_reason=self.stop_reason,
+            parsed_output=self.output[len(self.calls) - 1] if isinstance(self.output, list) else self.output,
             usage=SimpleNamespace(input_tokens=100, output_tokens=20),
         )
 
@@ -254,3 +255,72 @@ def test_headline_prompt_forbids_counts():
     assert 'at most 90 characters' in prompt
     assert '"cluster", "category",' in prompt
     assert '"signal", "items", or "rises" in the headline' in prompt
+
+
+@pytest.mark.parametrize('field', ['headline', 'summary', 'synthesis', 'item_one_liners'])
+def test_ungrounded_synthesis_retries_once_then_falls_back(context, caplog, field):
+    ctx = context
+    ctx.item.abstract = 'We used 12 datasets.'
+    text = {ctx.item.id: '47 datasets'} if field == 'item_one_liners' else '47 datasets'
+    ctx.beta.output = [{**OUTPUT, field: text}, {**OUTPUT, field: text}]
+    _, _, notes = run(ctx)
+    assert len(ctx.beta.calls) == 2
+    first, second = ctx.beta.calls
+    assert second['model'] == first['model']
+    assert second['messages'][0]['content'].startswith(first['messages'][0]['content'])
+    assert 'Your previous answer stated numbers not present in the items or signals: 47.' in second['messages'][0]['content']
+    assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
+    assert ctx.topic.synthesis is None
+    assert ctx.topic.headline == 'Protein Design'
+    assert ctx.llm.fallback_reasons[ctx.topic.slug] == 'grounding'
+    assert f'llm_grounding_retry id={ctx.topic.slug} values=47' in caplog.text
+    assert 'reason=grounding detail=47' in caplog.text
+    assert ctx.budget.month_spend_usd() == pytest.approx(0.0016)
+
+
+@pytest.mark.parametrize('backfill', [False, True])
+def test_ungrounded_synthesis_retry_succeeds(context, backfill):
+    ctx = context
+    ctx.item.abstract = 'We used 12 datasets.'
+    messages = ctx.plain if backfill else ctx.beta
+    messages.output = [{**OUTPUT, 'synthesis': '47 datasets'}, {**OUTPUT, 'synthesis': '12 datasets'}]
+    _, _, notes = run(ctx, backfill=backfill)
+    assert ctx.topic.synthesis == '12 datasets'
+    assert notes == []
+    assert len(messages.calls) == 2
+    assert ctx.topic.slug not in ctx.llm.fallback_reasons
+
+
+def test_synthesis_counts_from_signals_are_supported(context):
+    ctx = context
+    ctx.sig.preprint = 7
+    ctx.beta.output = {**OUTPUT, 'synthesis': 'seven preprints this week'}
+    _, _, notes = run(ctx)
+    assert notes == []
+    assert len(ctx.beta.calls) == 1
+
+
+@pytest.mark.parametrize('source', ['signals', 'label', 'title', 'published_at', 'summary', 'abstract'])
+def test_synthesis_grounding_includes_all_evidence(context, source):
+    ctx = context
+    if source == 'signals':
+        ctx.sig.preprint = 47
+    elif source == 'label':
+        ctx.topic.label = '47 datasets'
+    elif source == 'published_at':
+        ctx.item.published_at = date(2026, 11, 27)
+    else:
+        setattr(ctx.item, source, '47 datasets')
+    ctx.beta.output = {**OUTPUT, 'synthesis': '27' if source == 'published_at' else '47 datasets'}
+    _, _, notes = run(ctx)
+    assert notes == []
+    assert len(ctx.beta.calls) == 1
+
+
+def test_previous_synthesis_is_not_grounding_source(context):
+    ctx = context
+    ctx.beta.output = [{**OUTPUT, 'synthesis': '47 datasets'}, OUTPUT]
+    result = ctx.llm.synthesize(ctx.topic, [ctx.item], ctx.sig, '47 datasets', 'claude-opus-5-5')
+    assert result.synthesis == OUTPUT['synthesis']
+    assert '47 datasets' in ctx.beta.calls[0]['messages'][0]['content']
+    assert len(ctx.beta.calls) == 2

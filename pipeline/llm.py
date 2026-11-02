@@ -9,6 +9,7 @@ from anthropic.types.message_create_params import MessageCreateParamsNonStreamin
 from anthropic.types.messages.batch_create_params import Request
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, create_model, field_validator
 
+from pipeline import grounding
 from pipeline.budget import Budget
 from pipeline.config import Taxonomy
 from pipeline.models import Item, Signals, Topic
@@ -107,9 +108,12 @@ class LLM:
         self.budget = budget
         self.fallback_reasons: dict[str, str] = {}
 
-    def _failure(self, entity_id: str, reason: str) -> None:
+    def _failure(self, entity_id: str, reason: str, detail: str | None = None) -> None:
         self.fallback_reasons[entity_id] = reason
-        logger.warning('llm_fallback id=%s reason=%s', entity_id, reason)
+        if detail is None:
+            logger.warning('llm_fallback id=%s reason=%s', entity_id, reason)
+        else:
+            logger.warning('llm_fallback id=%s reason=%s detail=%s', entity_id, reason, detail)
 
     def enrich(
         self, item: Item, taxonomy: Taxonomy, hints: list[str], model: str = 'claude-haiku-5-5',
@@ -120,11 +124,16 @@ class LLM:
         validated = _validate_categories(result, taxonomy)
         if result is not None and validated is None:
             return self._failure(item.id, 'validation:primary')
+        if validated is not None:
+            bad = grounding.unsupported(validated.summary, item.title + ' ' + item.abstract)
+            if bad:
+                return self._failure(item.id, 'grounding', detail=','.join(f'{v:g}' for v in bad))
         return validated
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,
     ) -> Synthesis | None:
+        self.fallback_reasons.pop(topic.slug, None)
         template = Path(__file__).with_name('prompts').joinpath('synthesize.md').read_text(encoding='utf-8')
         prompt = template.format(
             category=topic.category, label=topic.label, signals=signals.model_dump_json(),
@@ -134,8 +143,31 @@ class LLM:
             ),
             previous=f'Previous synthesis (context only, not evidence):\n{previous}' if previous else '',
         )
-        return self._parse(Synthesis, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
-                           entity_id=topic.slug, fallbacks=model == 'claude-opus-5-5')
+        source = '\n'.join([
+            signals.model_dump_json(), topic.label,
+            *(text for item in items for text in (
+                item.title, item.published_at.isoformat(), item.summary or '', item.abstract,
+            )),
+        ])
+        for attempt in range(2):
+            result = self._parse(Synthesis, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
+                                 entity_id=topic.slug, fallbacks=model == 'claude-opus-5-5')
+            if result is None:
+                return None
+            bad = grounding.unsupported('\n'.join([
+                result.headline, result.summary, result.synthesis, *result.item_one_liners.values(),
+            ]), source)
+            if not bad:
+                return result
+            detail = ','.join(f'{v:g}' for v in bad)
+            if attempt:
+                return self._failure(topic.slug, 'grounding', detail=detail)
+            logger.warning('llm_grounding_retry id=%s values=%s', topic.slug, detail)
+            prompt += (
+                '\n\nYour previous answer stated numbers not present in the items or signals: '
+                f'{detail}. Remove or correct them. '
+                'State only numbers that appear in the items, signals, or abstracts.'
+            )
 
     def _parse[T: BaseModel](
         self, output_model: type[T], messages: list[dict], model: str, max_tokens: int,
@@ -215,4 +247,10 @@ class LLM:
                 results[item_id] = _validate_categories(result, taxonomy)
                 if results[item_id] is None:
                     self._failure(item_id, 'validation:primary')
+                    continue
+                item = chunk[int(row.custom_id)]
+                bad = grounding.unsupported(result.summary, item.title + ' ' + item.abstract)
+                if bad:
+                    self._failure(item_id, 'grounding', detail=','.join(f'{v:g}' for v in bad))
+                    results[item_id] = None
         return results
