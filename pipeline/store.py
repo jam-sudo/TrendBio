@@ -150,10 +150,12 @@ class Store:
             for repo, history in json.loads(path.read_text(encoding="utf-8")).items()
         }
 
-    def put_star_counts(self, counts: dict[str, list[tuple[date, int]]]) -> None:
-        """Replace history, retaining 60 calendar days ending at its latest date."""
+    def put_star_counts(self, counts: dict[str, list[tuple[date, int]]], *, keep_days: int = 60) -> None:
+        """Replace history, retaining keep_days calendar days ending at its latest date."""
+        if keep_days < 1:
+            raise ValueError('keep_days must be positive')
         latest = max((day for history in counts.values() for day, _ in history), default=None)
-        cutoff = latest - timedelta(days=59) if latest is not None else date.min
+        cutoff = latest - timedelta(days=keep_days - 1) if latest is not None else date.min
         self._write(self.root / self.domain / "github_stars.json", {
             repo: [{"date": day.isoformat(), "stars": stars}
                    for day, stars in sorted(history) if day >= cutoff]

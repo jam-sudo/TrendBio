@@ -29,6 +29,11 @@ class Budget:
         spend = json.loads(self.path.read_text(encoding='utf-8')) if self.path.exists() else {}
         month = datetime.now(timezone.utc).strftime('%Y-%m')
         spend[month] = spend.get(month, 0.0) + cost
+        usage = spend.setdefault('usage', {}).setdefault(month, {}).setdefault(
+            model, {'input_tokens': 0, 'output_tokens': 0},
+        )
+        usage['input_tokens'] += input_tokens
+        usage['output_tokens'] += output_tokens
         self.path.parent.mkdir(parents=True, exist_ok=True)
         descriptor, name = tempfile.mkstemp(dir=self.path.parent, prefix='.tmp-')
         os.close(descriptor)
@@ -48,3 +53,8 @@ class Budget:
 
     def over_ceiling(self) -> bool:
         return self.month_spend_usd() > self.ceiling_usd
+
+    def usage(self, month: str | None = None) -> dict[str, dict[str, int]]:
+        month = month or datetime.now(timezone.utc).strftime('%Y-%m')
+        spend = json.loads(self.path.read_text(encoding='utf-8')) if self.path.exists() else {}
+        return spend.get('usage', {}).get(month, {})
