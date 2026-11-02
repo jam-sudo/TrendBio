@@ -3,7 +3,7 @@ from datetime import date
 import httpx
 import pytest
 
-from pipeline.sources.github import GithubAdapter, fetch_star_counts, fetch_star_history
+from pipeline.sources.github import GithubAdapter, collapse_duplicates, fetch_star_counts, fetch_star_history
 from pipeline.store import Store
 
 
@@ -172,3 +172,82 @@ def test_cached_release_page_is_reused_across_daily_runs(source_config, fixture_
     assert second.rest_calls == 0
     assert releases.call_count == search.call_count == 1
     assert len(store.github_repos()['repos']['scverse/scanpy']['_releases']) == 1
+
+
+def test_search_query_excludes_forks(source_config, respx_mock):
+    cfg = source_config['github']
+    cfg.update(watchlist=[], topics=['single-cell', 'genomics'])
+    search = respx_mock.get(f"{cfg['endpoint']}/search/repositories").respond(json={'total_count': 0, 'items': []})
+    with httpx.Client() as client:
+        assert GithubAdapter(source_config).repos(date(2026, 10, 29), client) == []
+    assert [call.request.url.params['q'] for call in search.calls] == [
+        'topic:single-cell fork:false archived:false', 'topic:genomics fork:false archived:false',
+    ]
+
+
+@pytest.mark.parametrize('cached', [False, True])
+def test_forked_search_result_is_skipped(cached, source_config, fixture_json, respx_mock):
+    cfg = source_config['github']
+    cfg.update(watchlist=[], topics=['single-cell'])
+    repo = dict(fixture_json('github.json'), fork=True, pushed_at='2026-10-29T12:00:00Z')
+    adapter = GithubAdapter(source_config)
+    if cached:
+        adapter.repo_cache = {'refreshed': '2026-10-29', 'repos': {repo['full_name']: repo}}
+    else:
+        respx_mock.get(f"{cfg['endpoint']}/search/repositories").respond(json={'total_count': 1, 'items': [repo]})
+    with httpx.Client() as client:
+        assert adapter.fetch(date(2026, 10, 29), date(2026, 10, 29), client) == []
+    assert adapter.observations == {}
+
+
+def test_collapse_duplicates_keeps_highest_star_variant():
+    repos = [dict(name=name, description=description, stargazers_count=stars) for name, description, stars in [
+        ('TxGNN', 'Drug discovery!', 100),
+        ('TxGNN-korea', ' DRUG discovery. ', 300),
+        ('txgnn_de', 'Drug-discovery', 200),
+    ]]
+    assert collapse_duplicates(repos) == [repos[1]]
+    assert [repo['stargazers_count'] for repo in repos] == [100, 300, 200]
+
+
+@pytest.mark.parametrize('name,description,stars,collapsed', [
+    ('koreaTxGNN', 'Drug discovery!', 100, True),
+    ('unrelated', 'Drug discovery!', 49, True),
+    ('unrelated', 'Drug discovery!', 50, False),
+    ('unrelated', 'DRUG DISCOVERY', 49, False),
+    ('TxGNN-de', 'Different work', 49, False),
+    ('TxGNN-de', None, 49, False),
+    ('TxGNN-de', '', 49, False),
+])
+def test_collapse_duplicates_boundaries(name, description, stars, collapsed):
+    original = dict(name='TxGNN', description='Drug discovery!', stargazers_count=300)
+    candidate = dict(name=name, description=description, stargazers_count=stars)
+    assert collapse_duplicates([candidate, original]) == ([original] if collapsed else [original, candidate])
+    assert len(collapse_duplicates([dict(original, description=None), dict(candidate, description='')])) == 2
+
+
+@pytest.mark.parametrize('stars,expected', [(19, []), (20, ['scverse/scanpy'])])
+def test_discovery_minimum_stars(stars, expected, source_config, fixture_json, respx_mock):
+    cfg = source_config['github']
+    cfg.update(watchlist=[], topics=['single-cell'])
+    repo = dict(fixture_json('github.json'), stargazers_count=stars)
+    respx_mock.get(f"{cfg['endpoint']}/search/repositories").respond(json={'total_count': 1, 'items': [repo]})
+    with httpx.Client() as client:
+        assert GithubAdapter(source_config).repos(date(2026, 10, 29), client) == expected
+
+
+def test_watchlist_bypasses_discovery_filters(source_config, fixture_json, respx_mock, caplog):
+    caplog.set_level('INFO')
+    cfg = source_config['github']
+    cfg.update(watchlist=['scverse/scanpy'], topics=['single-cell'])
+    repo = dict(fixture_json('github.json'), fork=True, stargazers_count=1, pushed_at='2026-10-29T12:00:00Z')
+    discovered = [dict(repo, fork=False, name=name, full_name=f'other/{name}', stargazers_count=stars)
+                  for name, stars in [('scanpy', 100), ('scanpy-de', 200)]]
+    respx_mock.get(f"{cfg['endpoint']}/search/repositories").respond(json={'total_count': 3, 'items': [repo, *discovered]})
+    respx_mock.get(f"{cfg['endpoint']}/repos/scverse/scanpy").respond(json=repo)
+    for name in ['scverse/scanpy', 'other/scanpy-de']:
+        respx_mock.get(f"{cfg['endpoint']}/repos/{name}/releases").respond(json=fixture_json('github_releases.json'))
+    with httpx.Client() as client:
+        items = GithubAdapter(source_config).fetch(date(2026, 10, 29), date(2026, 10, 29), client)
+    assert [item.id for item in items] == ['github:scverse/scanpy', 'github:other/scanpy-de']
+    assert 'github: collected 2 items collapsed=1' in caplog.text
