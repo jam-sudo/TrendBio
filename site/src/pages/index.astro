@@ -1,0 +1,10 @@
+---
+import Base from "../layouts/Base.astro";
+import { latestDay } from "../lib/data";
+
+const day = latestDay("computational");
+---
+
+<Base lastRun={day?.run.finished}>
+  <h1>What moved in computational biology today</h1>
+</Base>
