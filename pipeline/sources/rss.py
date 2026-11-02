@@ -24,7 +24,9 @@ class RssAdapter:
                 raise ValueError('Invalid RSS/Atom feed')
             for entry in feed.entries:
                 abstract = entry.get('summary') or '\n'.join(c['value'] for c in entry.get('content', []))
-                if not matches_keywords(entry.get('title', '') + ' ' + abstract, self.config['keywords']):
+                if spec['kind'] == 'news' and not matches_keywords(
+                    entry.get('title', '') + ' ' + abstract, self.config['industry_keywords']
+                ):
                     continue
                 parsed = entry.get('published_parsed') or entry.get('updated_parsed')
                 if parsed is None or not entry.get('link'):

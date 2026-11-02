@@ -69,6 +69,57 @@ keywords:
   - alphafold
   - bionemo
   - biological foundation model
+industry_keywords:
+  - AI drug discovery
+  - drug discovery
+  - foundation model
+  - machine learning
+  - artificial intelligence
+  - genomics
+  - genome
+  - sequencing
+  - single-cell
+  - single cell
+  - spatial
+  - transcriptomics
+  - proteomics
+  - protein design
+  - protein folding
+  - antibody design
+  - biomarker
+  - multiomics
+  - multi-omics
+  - bioinformatics
+  - computational
+  - data platform
+  - cloud
+  - partnership
+  - collaboration
+  - licensing
+  - Series A
+  - Series B
+  - Series C
+  - funding
+  - raises
+  - acquisition
+  - merger
+  - launches
+  - platform
+  - model
+  - dataset
+  - atlas
+  - FDA
+  - IND
+  - clinical trial
+  - pipeline
+  - therapeutics
+  - biotechnology
+  - synthetic biology
+  - gene editing
+  - CRISPR
+  - precision medicine
+  - diagnostics
+  - target discovery
 pubmed:
   backfill_chunk_days: 30
   endpoint: https://eutils.ncbi.nlm.nih.gov/entrez/eutils
@@ -118,15 +169,25 @@ github:
   min_stars_for_discovery: 20
 rss:
   backfill_chunk_days: 30
-  # Verified public RSS feeds from the spec examples; some other examples have no public feed.
+  # Verified with live GETs on 2026-11-02; company feeds bypass keyword filtering.
   feeds:
     - {name: insitro, url: 'https://www.insitro.com/feed/', kind: company}
     - {name: CZI, url: 'https://chanzuckerberg.com/feed/', kind: company}
     - {name: NVIDIA BioNeMo, url: 'https://blogs.nvidia.com/feed/', kind: company}
     - {name: Google DeepMind science, url: 'https://deepmind.google/blog/rss.xml', kind: company}
     - {name: Microsoft Research health, url: 'https://www.microsoft.com/en-us/research/feed/', kind: company}
+    # Parseable feed, currently empty.
+    - {name: Generate Biomedicines, url: 'https://generatebiomedicines.com/feed/', kind: company}
+    - {name: Broad Institute, url: 'https://www.broadinstitute.org/rss/news-blog-feed', kind: company}
+    - {name: Wellcome Sanger, url: 'https://sangerinstitute.blog/feed/', kind: company}
+    - {name: Chan Zuckerberg Biohub, url: 'https://biohub.org/feed/', kind: company}
+    - {name: Benchling, url: 'https://www.benchling.com/feed.rss', kind: company}
+    - {name: Latch Bio, url: 'https://blog.latch.bio/feed', kind: company}
+    - {name: Certara, url: 'https://www.certara.com/feed/', kind: company}
     - {name: GEN, url: 'https://www.genengnews.com/feed/', kind: news}
     - {name: STAT, url: 'https://www.statnews.com/feed/', kind: news}
+    - {name: Nature Biotechnology, url: 'https://www.nature.com/nbt.rss', kind: news}
+    - {name: BioPharma Dive, url: 'https://www.biopharmadive.com/feeds/news/', kind: news}
 hints:
   biorxiv_category:
     bioinformatics: [tools-infra, ml-ai]

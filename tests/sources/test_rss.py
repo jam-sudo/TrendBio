@@ -8,12 +8,14 @@ import pytest
 from pipeline.sources.rss import RssAdapter
 
 
-def test_rss_keywords(source_config, fixture_text, respx_mock):
+def test_company_feed_entries_are_not_keyword_filtered(source_config, fixture_text, respx_mock):
+    source_config['keywords'] = []
+    source_config['industry_keywords'] = []
     source_config['rss']['feeds'] = [{'name':'insitro','url':'https://www.insitro.com/feed/','kind':'company'}]
     respx_mock.get('https://www.insitro.com/feed/').respond(text=fixture_text('rss.xml'))
     with httpx.Client() as client:
         items=RssAdapter(source_config).fetch(date(2026,10,1),date(2026,10,31),client)
-    assert len(items) == 2
+    assert len(items) == 3
     item=items[0]
     root=ET.fromstring(fixture_text('rss.xml'))
     assert (item.id,item.type,item.doi,item.published_at) == (
@@ -22,6 +24,19 @@ def test_rss_keywords(source_config, fixture_text, respx_mock):
     assert item.metadata['feed_kind'] == 'company'
     assert item.summary is item.primary_category is None
     assert item.first_seen == date(2026,10,31)
+
+
+@pytest.mark.parametrize('keyword', ['COLLABORATION', 'patient heterogeneity'])
+def test_news_feed_uses_industry_keywords(source_config, fixture_text, respx_mock, keyword):
+    source_config['keywords'] = ['extraterrestrial']
+    source_config['industry_keywords'] = [keyword]
+    source_config['rss']['feeds'] = [{'name': 'news', 'url': 'https://example.org/feed', 'kind': 'news'}]
+    respx_mock.get('https://example.org/feed').respond(text=fixture_text('rss.xml'))
+    with httpx.Client() as client:
+        items = RssAdapter(source_config).fetch(date(2026, 10, 1), date(2026, 10, 31), client)
+    assert len(items) == 1
+    assert items[0].id == 'rss:https://www.insitro.com/?p=2697'
+    assert items[0].metadata['feed_kind'] == 'news'
 
 
 def test_rss_url_hash_and_date_filter(source_config, fixture_text, respx_mock):

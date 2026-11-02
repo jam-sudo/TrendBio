@@ -1,4 +1,19 @@
+from urllib.parse import urlsplit
+
 from pipeline.config import Scoring, load_scoring, load_taxonomy
+from pipeline.sources.base import load_config
+
+
+def test_industry_source_config():
+    config = load_config()
+    assert len(config['industry_keywords']) >= 40
+    assert all(isinstance(term, str) and term.strip() for term in config['industry_keywords'])
+    assert config['rss']['feeds']
+    for feed in config['rss']['feeds']:
+        assert feed['name']
+        url = urlsplit(feed['url'])
+        assert url.scheme == 'https' and url.netloc
+        assert feed['kind'] in {'company', 'news'}
 
 
 def test_taxonomy_has_11_spec_slugs():
