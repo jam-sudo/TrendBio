@@ -119,7 +119,7 @@ def test_fixtures_validate(fixtures_root):
 
     assert len(items) == 40
     assert len(topics) == 5
-    assert sorted(days) == [date(2026, 10, 30), date(2026, 10, 31), date(2026, 11, 1)]
+    assert sorted(days) == [date(2026, 10, 29), date(2026, 10, 30), date(2026, 10, 31), date(2026, 11, 1)]
     assert {item.type for item in items.values()} == {"preprint", "published", "code", "industry"}
     assert {item.source for item in items.values()} == {"biorxiv", "arxiv", "pubmed", "github", "rss"}
     taxonomy = yaml.safe_load((fixtures_root.parent / "config/taxonomy/computational.yaml").read_text(encoding="utf-8"))
@@ -162,11 +162,16 @@ def test_fixtures_validate(fixtures_root):
     binder = topics["protein-design-binders-a1b2"]
     assert len(binder.history) == 70
     assert any(entry.rank is None for entry in binder.history)
-    assert [entry.rank for entry in binder.history if entry.date in days] == [1, 1, 2]
+    assert [entry.rank for entry in binder.history if entry.date in days] == [None, 1, 1, 2]
     assert all(getattr(binder.history[-1].signals, kind) > 0 for kind in ("published", "preprint", "code", "industry"))
     assert days[date(2026, 10, 30)].run.backfilled is True
     for day in days.values():
         assert day.domain == "computational"
+        if day.date == date(2026, 10, 29):
+            assert day.ranked == []
+            assert day.run.status == "ok"
+            assert day.run.backfilled is True
+            continue
         assert [row.rank for row in day.ranked] == [1, 2, 3, 4, 5]
         assert {row.slug for row in day.ranked} == topics.keys()
         assert [row.scores.total for row in day.ranked] == sorted((row.scores.total for row in day.ranked), reverse=True)
