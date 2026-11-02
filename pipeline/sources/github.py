@@ -77,6 +77,46 @@ def fetch_star_history(repo: str, client: httpx.Client, max_stars: int = 40_000)
     return result
 
 
+class _HistoryRateLimit(Exception):
+    def __init__(self, response: httpx.Response):
+        self.response = response
+        super().__init__('GitHub history rate limit reserve reached')
+
+
+def seed_star_history(repos: list[str], client: httpx.Client) -> dict[str, list[tuple[date, int]]]:
+    """Best-effort seeding; discard incomplete histories and reserve API capacity."""
+    histories = {}
+    remaining = None
+
+    def check_rate_limit(response):
+        nonlocal remaining
+        header = response.headers.get('X-RateLimit-Remaining')
+        if header is not None:
+            remaining = int(header)
+            if remaining < 200:
+                raise _HistoryRateLimit(response)
+
+    client.event_hooks['response'].append(check_rate_limit)
+    try:
+        for repo in repos:
+            try:
+                history = fetch_star_history(repo, client)
+                if history:
+                    histories[repo] = history
+            except Exception as error:
+                response = getattr(error, 'response', None)
+                if not isinstance(error, _HistoryRateLimit) or response.is_error:
+                    logger.warning('stage=github_history event=failed repo=%s status=%s error=%s',
+                                   repo, response.status_code if response is not None else 'unknown',
+                                   type(error).__name__)
+            if remaining is not None and remaining < 200:
+                logger.warning('stage=github_history event=stopped remaining=%d', remaining)
+                break
+    finally:
+        client.event_hooks['response'].remove(check_rate_limit)
+    return histories
+
+
 class GithubAdapter:
     name: Source = 'github'
 

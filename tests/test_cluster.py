@@ -190,3 +190,25 @@ def test_fill_unranked_days_leaves_no_gaps(topic):
     assert topic == original
     fill_unranked_days(topic, today + timedelta(days=3))
     assert topic.history[-1].date == today + timedelta(days=2)
+
+
+def test_keyword_slug_prefers_terms_shared_across_titles():
+    titles = ['genomics prediction', 'genomics mapping', 'genomics sequencing', 'myopia']
+    corpus = titles + ['genomics prediction mapping sequencing'] * 100
+    _, label = keyword_slug(titles, corpus, list('abcd'))
+    assert label == 'genomics topic'
+
+
+@pytest.mark.parametrize('titles', [
+    ['cell death analysis', 'cells death study', 'human cell death', 'mouse death'],
+    ['cell death death', 'cell death death'],
+])
+def test_keyword_slug_drops_fillers_and_repeated_words(titles):
+    _, label = keyword_slug(titles, titles, [str(i) for i in range(len(titles))])
+    assert label == 'death topic'
+
+
+def test_keyword_slug_rejects_single_title_terms_in_large_clusters():
+    titles = ['myopia', 'cancer', 'genomics', 'proteomics']
+    _, label = keyword_slug(titles, titles, list('abcd'))
+    assert label == 'untitled topic'
