@@ -35,6 +35,7 @@ def synthesize_top(
             topic.summary = ''
             notes.append(f'synthesis-fallback:{topic.slug}')
         else:
+            topic.label = result.label
             topic.headline = result.headline
             topic.summary = result.summary
             topic.synthesis = result.synthesis

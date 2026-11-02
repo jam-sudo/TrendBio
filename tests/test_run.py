@@ -57,7 +57,7 @@ class FakeLLM:
         self.budget.record(model, 100, 20)
         if self.fallback:
             return None
-        return Synthesis(headline='Protein design evidence', summary='New evidence.',
+        return Synthesis(label='Protein Design', headline='Protein design evidence', summary='New evidence.',
                          synthesis='Evidence from these items.', item_one_liners={})
 
 
@@ -297,9 +297,9 @@ def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeyp
     import pipeline.run as runner
     from pipeline.sources.github import GithubAdapter
 
-    github = GithubAdapter({'github': {}}, star_gain_threshold=100)
+    github = GithubAdapter({'github': {'watchlist': ['org/watchlist']}}, star_gain_threshold=100)
     github.fetch = lambda *args: []
-    github.repos = lambda *args: ['org/watchlist', 'org/topic']
+    github.repo_cache = {'repos': {'org/topic': {'full_name': 'org/topic', 'stargazers_count': 30}}}
     ctx.deps.adapters.append(github)
     history = [(TODAY - timedelta(days=300), 1), (TODAY - timedelta(days=7), 20), (TODAY, 30)]
     fetched = []
@@ -308,7 +308,7 @@ def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeyp
         fetched.append(repo)
         return history
 
-    monkeypatch.setattr(runner, 'fetch_star_history', star_history)
+    monkeypatch.setattr('pipeline.sources.github.fetch_star_history', star_history)
     run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
     assert fetched == ['org/watchlist', 'org/topic']
     assert any('stage=github_star_history event=end elapsed=' in record.getMessage()
@@ -509,26 +509,98 @@ def test_backfill_stage_logs_and_fallback_reasons(ctx, caplog):
     assert all(item.abstract not in caplog.text and item.url not in caplog.text for item in ctx.items)
 
 
-def test_backfill_github_history_failure_is_checkpointed_and_retried(ctx, monkeypatch, caplog):
+@pytest.mark.parametrize('status', [None, 404])
+def test_github_history_failure_does_not_degrade_day(ctx, monkeypatch, caplog, status):
     from pipeline.sources.github import GithubAdapter
 
-    github = GithubAdapter({'github': {}})
-    github.fetch = lambda *args: []
-    github.repos = lambda *args: ['org/repo']
+    github = GithubAdapter({'github': {'watchlist': ['org/bad', 'org/good']}})
+    code = ctx.items[0].model_copy(update={
+        'id': 'github:org/good', 'source': 'github', 'type': 'code', 'title': 'org/good',
+    })
+    github.fetch = lambda *args: [code]
     ctx.deps.adapters.append(github)
+    fetched = []
 
-    def unavailable(*args):
-        raise RuntimeError('https://example.org/?secret=must-not-log')
+    def history(repo, client):
+        fetched.append(repo)
+        if repo == 'org/bad':
+            if status is not None:
+                httpx.Response(status, request=httpx.Request(
+                    'GET', 'https://example.org/?secret=must-not-log')).raise_for_status()
+            raise RuntimeError('https://example.org/?secret=must-not-log')
+        return [(TODAY, 10)]
 
-    monkeypatch.setattr('pipeline.run.fetch_star_history', unavailable)
+    monkeypatch.setattr('pipeline.sources.github.fetch_star_history', history)
+    run_backfill('computational', TODAY, TODAY + timedelta(days=1), ctx.store, ctx.deps, resume=False)
+    assert fetched == ['org/bad', 'org/good']
+    assert json.loads((ctx.root / 'computational/.backfill_state.json').read_text())['failed_chunks'] == []
+    for day in [TODAY, TODAY + timedelta(days=1)]:
+        assert ctx.store.get_day(day).run.source_status['github'] == 'ok'
+        assert ctx.store.get_day(day).run.status == 'ok'
+    assert ctx.store.get_item(code.id) is not None
+    assert ctx.store.star_counts()['org/good'] == [(TODAY, 10)]
+    assert f"repo=org/bad status={status or 'unknown'}" in caplog.text
+    assert 'secret' not in caplog.text
+
+
+def test_resynthesize_updates_topic_and_day(ctx, monkeypatch):
+    days = [TODAY, TODAY + timedelta(days=1)]
+    for day in days:
+        run_day('computational', day, ctx.store, ctx.deps, backfill=True)
+    for topic in ctx.store.all_topics():
+        topic.related = ['missing-topic']
+        ctx.store.put_topic(topic)
+    outputs = []
+
+    def synthesize(self, topic, items, signals, previous, model):
+        assert model == 'claude-haiku-5-5'
+        result = Synthesis(label=f'Grounded Biology {len(outputs)}',
+                           headline=f'New scientific finding {len(outputs)}',
+                           summary=f'New evidence {len(outputs)}',
+                           synthesis=f'Common scientific thread {len(outputs)}')
+        outputs.append((topic.slug, result))
+        return result
+
+    monkeypatch.setattr(FakeLLM, 'synthesize', synthesize)
+    monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
+    result = CliRunner().invoke(app, ['resynthesize', '--domain', 'computational',
+                                    '--from', str(days[0]), '--to', str(days[-1]),
+                                    '--model', 'claude-haiku-5-5', '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    rows = [row for day in days for row in ctx.store.get_day(day).ranked]
+    assert len(outputs) == len(rows) > 1
+    for row, (slug, output) in zip(rows, outputs, strict=True):
+        assert row.slug == slug
+        assert (row.headline, row.summary) == (output.headline, output.summary)
+    for slug, output in dict(outputs).items():
+        topic = ctx.store.get_topic(slug)
+        assert (topic.label, topic.headline, topic.summary, topic.synthesis) == (
+            output.label, output.headline, output.summary, output.synthesis)
+        assert topic.synthesized_on == days[-1]
+    for topic in ctx.store.all_topics():
+        assert len(topic.related) == 3
+        assert all(ctx.store.get_topic(slug) is not None for slug in topic.related)
+
+
+def test_github_history_seeding_caps_discovery_and_keeps_watchlist(ctx, monkeypatch):
+    from pipeline.sources.github import GithubAdapter
+
+    github = GithubAdapter({'github': {'watchlist': ['org/watch', 'org/104']}})
+    github.fetch = lambda *args: []
+    github.repo_cache = {'repos': {f'org/{i}': {'full_name': f'org/{i}', 'stargazers_count': i}
+                                  for i in range(105)}}
+    ctx.deps.adapters.append(github)
+    seeded = []
+    monkeypatch.setattr('pipeline.sources.github.fetch_star_history', lambda repo, client: seeded.append(repo))
     run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
-    path = ctx.root / 'computational/.backfill_state.json'
-    assert json.loads(path.read_text())['failed_chunks'] == [
-        {'source': 'github', 'start': str(TODAY), 'end': str(TODAY)}]
-    assert ctx.store.get_day(TODAY).run.source_status['github'] == 'failed'
-    assert 'error=RuntimeError' in caplog.text and 'secret' not in caplog.text
-    monkeypatch.setattr('pipeline.run.fetch_star_history', lambda *args: [(TODAY, 10)])
-    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=True)
-    assert json.loads(path.read_text())['failed_chunks'] == []
-    assert ctx.store.star_counts()['org/repo'] == [(TODAY, 10)]
-    assert ctx.store.get_day(TODAY).run.source_status['github'] == 'ok'
+    assert seeded == ['org/watch', 'org/104'] + [f'org/{i}' for i in range(103, 3, -1)]
+
+
+@pytest.mark.parametrize('source,backfill,expected', [
+    ('github', False, 'degraded'), ('github', True, 'ok'), ('rss', False, 'ok'),
+])
+def test_only_daily_github_collection_failure_degrades_day(ctx, source, backfill, expected):
+    ctx.deps.adapters.append(FakeAdapter(source, error=RuntimeError('offline')))
+    result = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=backfill)
+    assert result.run.source_status[source] == 'failed'
+    assert result.run.status == expected

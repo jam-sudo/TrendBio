@@ -16,7 +16,7 @@ from pipeline.budget import Budget
 from pipeline.config import load_scoring, load_taxonomy
 from pipeline.embed import Embedder
 from pipeline.llm import LLM
-from pipeline.run import Deps, _stage, _staging, run_backfill, run_day
+from pipeline.run import Deps, _related, _stage, _staging, run_backfill, run_day
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.biorxiv import BiorxivAdapter
@@ -135,10 +135,16 @@ def resynthesize(start: FromDate, end: ToDate, model: Annotated[str, typer.Optio
                     degraded = (any('-fallback:' in note for note in result.run.notes)
                                 or any(result.run.source_status.get(name) == 'failed'
                                        for name in ('biorxiv', 'arxiv', 'pubmed'))
+                                or (not result.run.backfilled
+                                    and result.run.source_status.get('github') == 'failed')
                                 or staged_deps.budget.over_ceiling())
                     result.run.status = 'degraded' if degraded else 'ok'
                     staged.put_day(result)
                 day += timedelta(days=1)
+            topics = staged.all_topics()
+            _related(topics)
+            for topic in topics:
+                staged.put_topic(topic)
 
 
 if __name__ == '__main__':

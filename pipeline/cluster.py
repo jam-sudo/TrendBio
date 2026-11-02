@@ -4,11 +4,17 @@ from hashlib import sha1
 
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
 
 from pipeline.config import Scoring
 from pipeline.embed import l2_normalize
 from pipeline.models import Item, Scores, Signals, Topic, TopicDay
+
+
+BIOMEDICAL_FILLERS = {
+    'cell', 'cells', 'analysis', 'study', 'based', 'using', 'data', 'novel',
+    'approach', 'method', 'methods', 'human', 'mouse', 'patients',
+}
 
 
 def cluster_items(ids: list[str], X: np.ndarray, cfg: Scoring) -> list[list[str]]:
@@ -27,7 +33,8 @@ def cluster_items(ids: list[str], X: np.ndarray, cfg: Scoring) -> list[list[str]
 def keyword_slug(titles: list[str], corpus_titles: list[str],
                  item_ids: list[str]) -> tuple[str, str]:
     vectorizer = TfidfVectorizer(
-        stop_words='english', ngram_range=(1, 2), strip_accents='ascii',
+        stop_words=sorted(ENGLISH_STOP_WORDS | BIOMEDICAL_FILLERS),
+        ngram_range=(1, 2), strip_accents='ascii',
         token_pattern=r'(?u)\b[a-z0-9]{2,}\b',
     )
     try:
@@ -37,14 +44,24 @@ def keyword_slug(titles: list[str], corpus_titles: list[str],
             raise
         terms = []
     else:
-        scores = np.asarray(vectorizer.transform(titles).sum(axis=0)).ravel()
+        matrix = vectorizer.transform(titles)
+        title_counts = np.asarray((matrix > 0).sum(axis=0)).ravel()
+        scores = np.asarray(matrix.sum(axis=0)).ravel() * title_counts / max(1, len(titles))
+        scores[title_counts < (2 if len(titles) >= 4 else 1)] = 0
         ranked = sorted(zip(vectorizer.get_feature_names_out(), scores),
                         key=lambda pair: (-pair[1], pair[0]))
-        terms = [term for term, score in ranked if score > 0][:2]
+        terms, words = [], set()
+        for term, score in ranked:
+            tokens = term.split()
+            if score > 0 and not words.intersection(tokens) and len(set(tokens)) == len(tokens):
+                terms.append(term)
+                words.update(tokens)
+                if len(terms) == 2:
+                    break
     if not terms:
         terms = ['untitled', 'topic']
-    elif len(terms) == 1:
-        terms.append('topic')
+    elif len(terms) == 1 and len(terms[0].split()) == 1:
+        terms.append('topic' if terms[0] != 'topic' else 'research')
     suffix = sha1('\n'.join(sorted(item_ids)).encode()).hexdigest()[:4]
     label = ' '.join(terms)
     return label.replace(' ', '-') + '-' + suffix, label

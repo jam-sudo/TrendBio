@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from pathlib import Path
 from types import SimpleNamespace
 
 import anthropic
@@ -13,7 +14,7 @@ from pipeline.synthesize import synthesize_top
 
 
 TODAY = date(2026, 11, 2)
-OUTPUT = dict(headline='Protein design advances', summary='New protein design evidence.',
+OUTPUT = dict(label='Protein Design', headline='Protein design advances', summary='New protein design evidence.',
               synthesis=' '.join(['Evidence'] * 80), item_one_liners={'biorxiv:paper': 'New one-liner.'})
 
 
@@ -88,7 +89,7 @@ def test_uses_opus_normally_and_haiku_when_backfill_or_over_ceiling(context, bac
     assert [message['role'] for message in call['messages']] == ['user']
     prompt = call['messages'][0]['content']
     assert f'{ctx.item.id} | preprint | {TODAY} | Protein design | Original summary.' in prompt
-    assert ctx.topic.category in prompt and ctx.topic.label in prompt
+    assert ctx.topic.category in prompt and 'protein design' in prompt
     assert '"preprint":1' in prompt and '"rise_ratio":2.0' in prompt
     assert '80–160 words' in prompt and 'expert' in prompt
 
@@ -227,3 +228,29 @@ def test_synthesis_limit_must_be_positive():
 
     with pytest.raises(ValidationError):
         Scoring(weights={}, synthesis_max_items=0)
+
+
+def test_synthesis_label_replaces_auto_label(context):
+    context.topic.label = 'myopia genetic'
+    slug = context.topic.slug
+    topics, _, notes = run(context)
+    assert topics[0].label == 'Protein Design'
+    assert topics[0].slug == slug
+    assert notes == []
+    prompt = context.beta.calls[0]['messages'][0]['content']
+    assert 'Noisy automatic keywords, not the topic name; name the topic from the items: myopia genetic' in prompt
+
+
+def test_synthesis_label_is_trimmed_and_normalized():
+    result = Synthesis(**{**OUTPUT, 'label': '  protein-design: with neural_networks and more! '})
+    assert result.label == 'Protein Design With Neural Networks'
+    with pytest.raises(ValueError):
+        Synthesis(**{**OUTPUT, 'label': '... -- '})
+
+
+def test_headline_prompt_forbids_counts():
+    prompt = Path('pipeline/prompts/synthesize.md').read_text()
+    assert 'No item counts or ratios in the headline.' in prompt
+    assert 'at most 90 characters' in prompt
+    assert '"cluster", "category",' in prompt
+    assert '"signal", "items", or "rises" in the headline' in prompt

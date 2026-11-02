@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 import time
 from pathlib import Path
 
@@ -49,10 +50,19 @@ class Enrichment(BaseModel):
 
 
 class Synthesis(BaseModel):
+    label: str
     headline: str
     summary: str
     synthesis: str
     item_one_liners: dict[str, str] = {}
+
+    @field_validator('label')
+    @classmethod
+    def clean_label(cls, value: str) -> str:
+        label = ' '.join(re.sub(r'[^\w\s]|_', ' ', value).split()[:5]).title()
+        if not label:
+            raise ValueError('label must contain words')
+        return label
 
     @field_validator('headline', 'summary')
     @classmethod

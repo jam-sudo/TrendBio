@@ -27,7 +27,7 @@ from pipeline.enrich import enrich_items, first_sentence, hints_for
 from pipeline.llm import Enrichment, LLM
 from pipeline.models import Day, RankedTopic, RunInfo, Source
 from pipeline.score import rank, score_topics, signals_for
-from pipeline.sources.github import GithubAdapter, fetch_star_history
+from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.store import Store
 from pipeline.synthesize import synthesize_top
 
@@ -295,6 +295,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 store.put_topic(topic)
             degraded = (any('-fallback:' in note for note in notes)
                         or any(source_status[name] == 'failed' for name in ('biorxiv', 'arxiv', 'pubmed'))
+                        or (not backfill and source_status['github'] == 'failed')
                         or deps.budget.over_ceiling())
             result = Day(domain=domain, date=day, ranked=[RankedTopic(
                 slug=topic.slug, rank=index, headline=topic.headline or topic.label.title(),
@@ -335,17 +336,6 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                 # Historical first-seen dates must not collapse onto the chunk's final day.
                 items = [item.model_copy(update={'first_seen': item.published_at}) for item in items
                          if chunk_start <= item.published_at <= chunk_end]
-                if isinstance(adapter, GithubAdapter):
-                    with _stage('github_star_history', repos=0) as star_counts:
-                        stars = store.star_counts()
-                        repos = adapter.repos(chunk_end, deps.client)
-                        star_counts['repos'] = len(repos)
-                        for repo in repos:
-                            history = fetch_star_history(repo, deps.client)
-                            if history:
-                                stars[repo] = history
-                        store.put_star_counts(stars, keep_days=400)
-                        adapter.star_counts = stars
                 items = dedupe(sorted(items, key=lambda item: item.id), store)
                 for item in items:
                     store.put_item(item)
@@ -356,6 +346,18 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                     state['failed_chunks'].append(chunk)
                 counts['source_status'] = 'failed'
             else:
+                if isinstance(adapter, GithubAdapter):
+                    discovered = sorted(adapter.repo_cache.get('repos', {}).values(),
+                                        key=lambda repo: (-repo['stargazers_count'], repo['full_name']))
+                    repos = list(dict.fromkeys(adapter.config['github']['watchlist'] + [
+                        repo['full_name'] for repo in discovered
+                        if repo['full_name'] not in adapter.config['github']['watchlist']
+                    ][:100]))
+                    with _stage('github_star_history', repos=len(repos)):
+                        stars = store.star_counts()
+                        stars.update(seed_star_history(repos, deps.client))
+                        store.put_star_counts(stars, keep_days=400)
+                        adapter.star_counts = stars
                 counts.update(items=len(items), source_status='ok')
                 state['collected'] += len(items)
                 if adapter.name not in state['successful_sources']:

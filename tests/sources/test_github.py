@@ -251,3 +251,37 @@ def test_watchlist_bypasses_discovery_filters(source_config, fixture_json, respx
         items = GithubAdapter(source_config).fetch(date(2026, 10, 29), date(2026, 10, 29), client)
     assert [item.id for item in items] == ['github:scverse/scanpy', 'github:other/scanpy-de']
     assert 'github: collected 2 items collapsed=1' in caplog.text
+
+
+@pytest.mark.parametrize('status', [200, 403, 429])
+@pytest.mark.parametrize('stop_at', ['metadata', 'page'])
+def test_github_history_stops_when_rate_limit_low(status, stop_at, caplog):
+    from pipeline.sources.github import seed_star_history
+
+    paths = []
+
+    def respond(request):
+        path = request.url.path
+        paths.append(str(request.url))
+        assert 'org/skipped' not in path
+        if '/org/partial' in path and (
+            stop_at == 'metadata' or request.url.params.get('page') == '2'
+        ):
+            return httpx.Response(status, json=[], headers={'X-RateLimit-Remaining': '199'})
+        if path.endswith('/stargazers'):
+            headers = {'X-RateLimit-Remaining': '200'}
+            if '/org/partial' in path:
+                headers['Link'] = f'<{request.url.copy_set_param("page", "2")}>; rel="next"'
+            return httpx.Response(200, json=[{'starred_at': '2026-10-01T12:00:00Z'}], headers=headers)
+        return httpx.Response(200, json={'stargazers_count': 2},
+                              headers={'X-RateLimit-Remaining': '200'})
+
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        hooks = client.event_hooks['response'][:]
+        histories = seed_star_history(['org/complete', 'org/partial', 'org/skipped'], client)
+        assert client.event_hooks['response'] == hooks
+    assert histories == {'org/complete': [(date(2026, 10, 1), 1)]}
+    assert len(paths) == (3 if stop_at == 'metadata' else 5)
+    assert 'stage=github_history event=stopped remaining=199' in caplog.text
+    if status != 200:
+        assert f'repo=org/partial status={status}' in caplog.text
