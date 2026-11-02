@@ -1,5 +1,6 @@
 from datetime import date
 from fnmatch import fnmatchcase
+import logging
 import re
 import time
 import xml.etree.ElementTree as ET
@@ -11,6 +12,7 @@ from pipeline.sources.base import collected, load_config, matches_keywords, requ
 
 NS = {'atom': 'http://www.w3.org/2005/Atom', 'arxiv': 'http://arxiv.org/schemas/atom',
       'opensearch': 'http://a9.com/-/spec/opensearch/1.1/'}
+logger = logging.getLogger(__name__)
 
 
 class ArxivAdapter:
@@ -21,14 +23,27 @@ class ArxivAdapter:
 
     def fetch(self, start: date, end: date, client: httpx.Client) -> list[Item]:
         cfg = self.config['arxiv']
-        categories = ' OR '.join(f'cat:{c}' for c in cfg['categories'] + cfg['keyword_filtered'])
-        query = f'({categories}) AND submittedDate:[{start:%Y%m%d}0000 TO {end:%Y%m%d}2359]'
+        categories = ' OR '.join(f'cat:{c}' for c in cfg['categories'])
+        filtered = ' OR '.join(f'cat:{c}' for c in cfg['keyword_filtered'])
+        terms = self.config['keywords'][:cfg.get('query_keywords_max', 25)]
+        keywords = ' OR '.join('abs:"' + term.replace('"', r'\"') + '"' for term in terms)
+        clauses = [f'({categories})'] if categories else []
+        if filtered and keywords:
+            clauses.append(f'(({filtered}) AND ({keywords}))')
+        if not clauses:
+            return collected(self.name, [])
+        query = f'({" OR ".join(clauses)}) AND submittedDate:[{start:%Y%m%d}0000 TO {end:%Y%m%d}2359]'
+        cap = cfg.get('max_results_per_query', 2000)
+        if cap < 1:
+            raise ValueError('arxiv.max_results_per_query must be positive')
         items, offset = [], 0
         while True:
             if offset:
                 time.sleep(3)  # arXiv asks clients to leave three seconds between calls.
-            response = request(client, cfg['endpoint'], params={
-                'search_query': query, 'start': offset, 'max_results': 100,
+            max_results = min(100, cap - offset)
+            logger.info('source=arxiv chunk=%s..%s offset=%d max_results=%d', start, end, offset, max_results)
+            response = request(client, cfg['endpoint'], attempts=5, backoff=5.0, params={
+                'search_query': query, 'start': offset, 'max_results': max_results,
                 'sortBy': 'submittedDate', 'sortOrder': 'ascending',
             })
             feed = ET.fromstring(response.content)
@@ -59,8 +74,10 @@ class ArxivAdapter:
                               'categories': tags, 'xml': ET.tostring(entry, encoding='unicode')},
                 ))
             offset += len(entries)
-            if offset >= int(total):
+            if offset >= int(total) or len(entries) < max_results:
                 break
-            if not entries:
-                raise ValueError('arXiv pagination ended before total')
+            if offset >= cap:
+                logger.warning('source=arxiv event=query_truncated chunk=%s..%s offset=%d cap=%d total=%s',
+                               start, end, offset, cap, total)
+                break
         return collected(self.name, items)

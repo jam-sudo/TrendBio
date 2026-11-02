@@ -161,6 +161,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             if checkpoint.exists():
                 state = json.loads(checkpoint.read_text(encoding='utf-8'))
                 source_status.update(dict.fromkeys(state['done_sources'], 'ok'))
+                for chunk in state.get('failed_chunks', []):
+                    if date.fromisoformat(chunk['start']) <= day and date.fromisoformat(chunk['end']) >= start:
+                        source_status[chunk['source']] = 'failed'
                 notes.extend(state.get('notes', []))
             new_items = []
         else:
@@ -315,34 +318,80 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
     state = json.loads(path.read_text(encoding='utf-8')) if resume and path.exists() else {
         'stage': 'collect', 'done_sources': [], 'last_day': None,
     }
+    state.setdefault('failed_chunks', [])
+    state.setdefault('next_chunk', {})
+    state.setdefault('successful_sources', list(state['done_sources']))
+    state.setdefault('collected', 0)
     store._write(path, state)
-    if state['stage'] == 'collect':
-        for adapter in deps.adapters:
-            if adapter.name in state['done_sources']:
-                continue
-            if isinstance(adapter, GithubAdapter):
-                adapter.store = store
-            chunk_start = start
-            while chunk_start <= end:
-                chunk_end = min(chunk_start + timedelta(days=29), end)
+    adapters = {adapter.name: adapter for adapter in deps.adapters}
+
+    def collect_chunk(adapter, chunk_start, chunk_end, *, retry=False):
+        chunk = {'source': adapter.name, 'start': chunk_start.isoformat(), 'end': chunk_end.isoformat()}
+        if isinstance(adapter, GithubAdapter):
+            adapter.store = store
+        with _stage('collect', source=adapter.name, chunk=f'{chunk_start}..{chunk_end}', items=0) as counts:
+            try:
                 items = adapter.fetch(chunk_start, chunk_end, deps.client)
                 # Historical first-seen dates must not collapse onto the chunk's final day.
                 items = [item.model_copy(update={'first_seen': item.published_at}) for item in items
                          if chunk_start <= item.published_at <= chunk_end]
-                for item in dedupe(sorted(items, key=lambda item: item.id), store):
+                if isinstance(adapter, GithubAdapter):
+                    with _stage('github_star_history', repos=0) as star_counts:
+                        stars = store.star_counts()
+                        repos = adapter.repos(chunk_end, deps.client)
+                        star_counts['repos'] = len(repos)
+                        for repo in repos:
+                            history = fetch_star_history(repo, deps.client)
+                            if history:
+                                stars[repo] = history
+                        store.put_star_counts(stars, keep_days=400)
+                        adapter.star_counts = stars
+                items = dedupe(sorted(items, key=lambda item: item.id), store)
+                for item in items:
                     store.put_item(item)
+            except Exception as error:
+                logger.warning('stage=collect event=chunk_failed source=%s chunk=%s..%s error=%s',
+                               adapter.name, chunk_start, chunk_end, type(error).__name__)
+                if chunk not in state['failed_chunks']:
+                    state['failed_chunks'].append(chunk)
+                counts['source_status'] = 'failed'
+            else:
+                counts.update(items=len(items), source_status='ok')
+                state['collected'] += len(items)
+                if adapter.name not in state['successful_sources']:
+                    state['successful_sources'].append(adapter.name)
+                if chunk in state['failed_chunks']:
+                    state['failed_chunks'].remove(chunk)
+                if retry and state['stage'] != 'collect':
+                    # Recovered data must be enriched and included in already-written days.
+                    state['stage'] = 'enrich'
+                    state['last_day'] = None
+            if not retry:
+                state['next_chunk'][adapter.name] = (chunk_end + timedelta(days=1)).isoformat()
+            store._write(path, state)
+
+    if resume:
+        for chunk in list(state['failed_chunks']):
+            collect_chunk(adapters[chunk['source']], date.fromisoformat(chunk['start']),
+                          date.fromisoformat(chunk['end']), retry=True)
+    if state['stage'] == 'collect':
+        for adapter in deps.adapters:
+            if adapter.name in state['done_sources']:
+                continue
+            chunk_days = getattr(adapter, 'config', {}).get(adapter.name, {}).get('backfill_chunk_days', 30)
+            if chunk_days < 1:
+                raise ValueError('backfill_chunk_days must be positive')
+            chunk_start = date.fromisoformat(state['next_chunk'].get(adapter.name, start.isoformat()))
+            while chunk_start <= end:
+                chunk_end = end if adapter.name == 'github' else min(chunk_start + timedelta(days=chunk_days - 1), end)
+                collect_chunk(adapter, chunk_start, chunk_end)
                 chunk_start = chunk_end + timedelta(days=1)
             state['done_sources'].append(adapter.name)
             store._write(path, state)
-        stars = store.star_counts()
-        for adapter in deps.adapters:
-            if isinstance(adapter, GithubAdapter):
-                for repo in adapter.repos(end, deps.client):
-                    history = fetch_star_history(repo, deps.client)
-                    if history:
-                        stars[repo] = history
-                adapter.star_counts = stars
-        store.put_star_counts(stars, keep_days=400)
+    papers = {'biorxiv', 'arxiv', 'pubmed'}
+    if papers <= set(adapters) and not papers.intersection(state['successful_sources']):
+        raise AllPaperSourcesFailed('All paper source chunks failed')
+    if state['stage'] == 'collect':
         state['stage'] = 'enrich'
         store._write(path, state)
     if state['stage'] == 'enrich':
@@ -350,7 +399,17 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
         for offset in range(0, len(pending), 2_000):
             chunk = pending[offset:offset + 2_000]
             hints = {item.id: hints_for(item, deps.hints_cfg) for item in chunk}
-            results = deps.llm.enrich_batch(chunk, deps.taxonomy, hints)
+            with _stage('enrich_batch', items=len(chunk), chunk=offset // 2_000 + 1, waited=0.0) as counts:
+                started = perf_counter()
+                try:
+                    results = deps.llm.enrich_batch(chunk, deps.taxonomy, hints)
+                finally:
+                    counts['waited'] = round(perf_counter() - started, 3)
+                reasons = getattr(deps.llm, 'fallback_reasons', {})
+                counts['fallback_reasons'] = dict(Counter(
+                    reasons.get(item.id, 'unknown') for item in chunk if results.get(item.id) is None
+                ))
+                counts['llm_fallbacks'] = sum(counts['fallback_reasons'].values())
             vectors = l2_normalize(deps.embedder.embed([item.title + '\n' + item.abstract for item in chunk]))
             for item, vector in zip(chunk, vectors, strict=True):
                 result = results.get(item.id)
@@ -367,7 +426,13 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
         store._write(path, state)
     day = max(start, date.fromisoformat(state['last_day']) + timedelta(days=1)) if state['last_day'] else start
     while day <= end:
-        run_day(domain, day, store, deps, backfill=True, skip_collect=True)
+        with _stage('day', day=day, topics=0, ranked=0) as counts:
+            result = run_day(domain, day, store, deps, backfill=True, skip_collect=True)
+            counts.update(topics=len(store.all_topics()), ranked=len(result.ranked))
         state['last_day'] = day.isoformat()
         store._write(path, state)
         day += timedelta(days=1)
+    summary = f"backfill_summary collected={state['collected']} failed_chunks={len(state['failed_chunks'])}"
+    print(summary)
+    if state['failed_chunks']:
+        logger.warning(summary)
