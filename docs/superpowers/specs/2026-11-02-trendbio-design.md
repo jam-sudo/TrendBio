@@ -27,7 +27,7 @@ The owner is one person and will not write content. The pipeline must run unatte
 - No social-media signals (X/Bluesky). Deferred to a later version.
 - No email newsletter. (A third-party subscription form may be embedded later; nothing to build now.)
 - No admin UI. Operator notes are files in the repo.
-- No custom domain at launch. Use the host's default URL; a domain can be attached later.
+- Custom domain `trendbio.dev` (owner decided 2026-11-02 to buy it); attached in D4. Until then the host's default URL.
 - No languages other than English.
 
 ### Anti-goals (what would make it a failure even if it "works")
