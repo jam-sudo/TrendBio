@@ -1,0 +1,36 @@
+from pipeline.config import Scoring, load_scoring, load_taxonomy
+
+
+def test_taxonomy_has_11_spec_slugs():
+    assert load_taxonomy("computational").slugs() == [
+        "genomics",
+        "transcriptomics",
+        "proteomics",
+        "metabolomics",
+        "epigenomics",
+        "single-cell",
+        "structural",
+        "systems",
+        "ml-ai",
+        "tools-infra",
+        "industry",
+    ]
+
+
+def test_scoring_defaults():
+    expected = {
+        "weights": {"rise": 0.45, "diversity": 0.25, "code_velocity": 0.15, "volume": 0.15},
+        "yesterday_penalty": 0.05,
+        "rise_k": 3,
+        "rise_cap": 10.0,
+        "history_days_for_own_baseline": 14,
+        "cluster_distance_threshold": 0.35,
+        "min_cluster_size": 3,
+        "continuity_threshold": 0.80,
+        "window_days": 7,
+        "top_n": 5,
+        "monthly_ceiling_usd": 50.0,
+        "star_gain_threshold": 100,
+    }
+    assert load_scoring().model_dump() == expected
+    assert Scoring(weights=expected["weights"]).model_dump() == expected
