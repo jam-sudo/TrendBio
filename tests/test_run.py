@@ -182,6 +182,7 @@ def test_backfill_runs_days_in_order_and_resumes_from_checkpoint(ctx, monkeypatc
     assert calls == [TODAY, TODAY + timedelta(days=1), end]
     checkpoint = ctx.root / 'computational/.backfill_state.json'
     assert json.loads(checkpoint.read_text())['last_day'] == str(TODAY + timedelta(days=1))
+    assert json.loads(checkpoint.read_text())['range'] == {'from': str(TODAY), 'to': str(end)}
     batches = len(ctx.deps.llm.batches)
     source_calls = [len(adapter.calls) for adapter in ctx.deps.adapters]
     calls.clear()
@@ -197,6 +198,64 @@ def test_backfill_runs_days_in_order_and_resumes_from_checkpoint(ctx, monkeypatc
     assert [len(adapter.calls) for adapter in ctx.deps.adapters] == source_calls
     assert ctx.store.get_day(end).run.backfilled
     assert ctx.store.get_day(end).run.synthesis_model == 'claude-haiku-5-5'
+
+
+@pytest.fixture
+def october_checkpoint(ctx):
+    path = ctx.root / 'computational/.backfill_state.json'
+    state = {
+        'range': {'from': '2026-10-01', 'to': '2026-10-31'},
+        'stage': 'days', 'last_day': '2026-10-31',
+        'done_sources': [adapter.name for adapter in ctx.deps.adapters],
+        'next_chunk': {adapter.name: '2026-11-01' for adapter in ctx.deps.adapters},
+        'failed_chunks': [{'source': 'arxiv', 'start': '2026-10-01', 'end': '2026-10-31'}],
+    }
+    ctx.store._write(path, state)
+    return path
+
+
+def test_resume_ignores_checkpoint_from_other_range(ctx, october_checkpoint, caplog):
+    start, end = date(2026, 9, 1), date(2026, 9, 30)
+    run_backfill('computational', start, end, ctx.store, ctx.deps, resume=True)
+    assert all(ctx.store.get_day(start + timedelta(days=i)) is not None for i in range(30))
+    assert all(adapter.calls == [(start, end)] for adapter in ctx.deps.adapters)
+    assert any(record.levelname == 'WARNING' and record.getMessage() == (
+        'stage=backfill event=checkpoint_ignored reason=range_mismatch previous=2026-10-01..2026-10-31'
+    ) for record in caplog.records)
+
+
+def test_resume_ignores_legacy_checkpoint_without_range(ctx, october_checkpoint, caplog):
+    state = json.loads(october_checkpoint.read_text())
+    del state['range']
+    ctx.store._write(october_checkpoint, state)
+    start, end = date(2026, 9, 1), date(2026, 9, 30)
+    run_backfill('computational', start, end, ctx.store, ctx.deps, resume=True)
+    assert all(ctx.store.get_day(start + timedelta(days=i)) is not None for i in range(30))
+    assert all(adapter.calls == [(start, end)] for adapter in ctx.deps.adapters)
+    assert any(record.levelname == 'WARNING' and record.getMessage() == (
+        'stage=backfill event=checkpoint_ignored reason=range_mismatch previous=unknown..unknown'
+    ) for record in caplog.records)
+
+
+def test_completed_backfill_removes_checkpoint(ctx, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    assert ctx.store.get_day(TODAY) is not None
+    assert not (ctx.root / 'computational/.backfill_state.json').exists()
+    assert f'stage=backfill event=complete range={TODAY}..{TODAY}' in caplog.text
+
+
+def test_backfill_without_resume_starts_fresh(ctx, october_checkpoint, monkeypatch):
+    monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
+    result = CliRunner().invoke(app, ['backfill', '--domain', 'computational',
+                                    '--from', '2026-10-01', '--to', '2026-10-31',
+                                    '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    start, end = date(2026, 10, 1), date(2026, 10, 31)
+    assert all(ctx.store.get_day(start + timedelta(days=i)) is not None for i in range(31))
+    assert all(adapter.calls == [(start, end - timedelta(days=1)), (end, end)]
+               for adapter in ctx.deps.adapters)
+    assert not october_checkpoint.exists()
 
 
 def test_unexpected_failure_rolls_back_items_and_budget(ctx, monkeypatch):
@@ -441,7 +500,7 @@ def test_backfill_resume_retries_failed_chunks_first(ctx):
     run_backfill('computational', TODAY, TODAY + timedelta(days=2), ctx.store, ctx.deps, resume=True)
     assert calls == [('biorxiv', TODAY), ('biorxiv', TODAY + timedelta(days=2))]
     assert all(ctx.store.get_item(item.id).summary for item in ctx.items)
-    assert json.loads((ctx.root / 'computational/.backfill_state.json').read_text())['failed_chunks'] == []
+    assert not (ctx.root / 'computational/.backfill_state.json').exists()
 
 
 def test_backfill_resume_after_days_enriches_recovered_items_and_updates_days(ctx):
@@ -533,7 +592,7 @@ def test_github_history_failure_does_not_degrade_day(ctx, monkeypatch, caplog, s
     monkeypatch.setattr('pipeline.sources.github.fetch_star_history', history)
     run_backfill('computational', TODAY, TODAY + timedelta(days=1), ctx.store, ctx.deps, resume=False)
     assert fetched == ['org/bad', 'org/good']
-    assert json.loads((ctx.root / 'computational/.backfill_state.json').read_text())['failed_chunks'] == []
+    assert not (ctx.root / 'computational/.backfill_state.json').exists()
     for day in [TODAY, TODAY + timedelta(days=1)]:
         assert ctx.store.get_day(day).run.source_status['github'] == 'ok'
         assert ctx.store.get_day(day).run.status == 'ok'

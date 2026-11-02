@@ -316,9 +316,18 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
     if domain != store.domain:
         raise ValueError('domain does not match store')
     path = store.root / domain / '.backfill_state.json'
-    state = json.loads(path.read_text(encoding='utf-8')) if resume and path.exists() else {
-        'stage': 'collect', 'done_sources': [], 'last_day': None,
+    requested_range = {'from': start.isoformat(), 'to': end.isoformat()}
+    state = {
+        'range': requested_range, 'stage': 'collect', 'done_sources': [], 'last_day': None,
     }
+    if resume and path.exists():
+        saved = json.loads(path.read_text(encoding='utf-8'))
+        if saved.get('range') == requested_range:
+            state = saved
+        else:
+            previous = saved.get('range') or {}
+            logger.warning('stage=backfill event=checkpoint_ignored reason=range_mismatch previous=%s..%s',
+                           previous.get('from', 'unknown'), previous.get('to', 'unknown'))
     state.setdefault('failed_chunks', [])
     state.setdefault('next_chunk', {})
     state.setdefault('successful_sources', list(state['done_sources']))
@@ -438,3 +447,6 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
     print(summary)
     if state['failed_chunks']:
         logger.warning(summary)
+    else:
+        path.unlink()
+        logger.info('stage=backfill event=complete range=%s..%s', start, end)
