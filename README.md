@@ -10,8 +10,9 @@ machine-generated syntheses for readers familiar with the field.
 
 GitHub Actions runs the Python pipeline daily at 06:00 UTC. It collects,
 deduplicates, enriches, clusters, ranks, and synthesizes evidence, then commits
-successful output under `data/computational/`. Cloudflare Pages builds the Astro
-site on pushes to `main`. Failed runs leave the last published data available.
+successful output under `data/computational/`. Failed runs leave the last published data available.
+GitHub Actions builds and deploys the Astro site to Cloudflare Pages on every push to `main` via `.github/workflows/deploy.yml`.
+The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
 GitHub discovery excludes forks and repos below `github.min_stars_for_discovery` (20 stars); explicit watchlist entries bypass these filters.
 Discovered repos with matching normalized descriptions and variant names, or identical descriptions and fewer than 50 stars, collapse to the most-starred copy; collection logs report `collapsed=<n>`.
