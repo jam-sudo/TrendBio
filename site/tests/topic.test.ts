@@ -1,11 +1,12 @@
 import { execFileSync } from "node:child_process";
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, inject, it } from "vitest";
-import { allTopics, loadItems, loadNote, loadTopic } from "../src/lib/data";
+import { allTopics, rankedTopics, loadItems, loadNote, loadTaxonomy, loadTopic } from "../src/lib/data";
 
 const domain = "computational";
 const slug = "protein-design-binders-a1b2";
+const neverRankedSlug = "never-ranked-fixture-0000";
 const topic = loadTopic(domain, slug)!;
 const latest = topic.history.at(-1)!;
 const items = loadItems(domain, latest.item_ids);
@@ -71,10 +72,12 @@ describe("built topic pages", () => {
       .toEqual(ranked.map((entry) => entry.date));
     for (const entry of ranked) expect(history).toContain(`${entry.date} · #${entry.rank}`);
     const related = section(html, "related-topics");
-    expect(related.match(/<a\b/g)).toHaveLength(3);
+    expect(related.match(/<a\b/g)).toHaveLength(2);
     for (const relatedSlug of topic.related.slice(0, 3)) {
       expect(related).toContain(loadTopic(domain, relatedSlug)!.label);
     }
+    expect(related).not.toContain(`href="/topic/${neverRankedSlug}/"`);
+    expect(related).toMatch(new RegExp(`<li[^>]*>${loadTopic(domain, neverRankedSlug)!.label}</li>`));
   });
 
   it("warns about orphan notes without failing the build", () => {
@@ -82,16 +85,29 @@ describe("built topic pages", () => {
     expect(inject("buildOutput")).toContain("[build] Complete!");
   });
 
-  it("lists all five topics with categories for the reused filter", () => {
+  it("lists exactly the five ranked topics with matching category filters", () => {
     const html = readPage("topics");
+    const ranked = allTopics(domain).filter((entry) => entry.history.some((day) => day.rank !== null));
+    expect(rankedTopics(domain)).toEqual(ranked);
+    expect(rankedTopics("missing-domain")).toEqual([]);
     expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(5);
-    for (const entry of allTopics(domain)) {
+    expect([...html.matchAll(/href="\/topic\/([^/]+)\/"/g)].map((match) => match[1]))
+      .toEqual(ranked.map((entry) => entry.slug));
+    for (const entry of ranked) {
       expect(html).toContain(`data-topic-cats="${[entry.category, ...entry.secondary_categories].join(" ")}"`);
       expect(html).toContain(entry.headline ?? entry.label);
       expect(html).toContain(`href="/topic/${entry.slug}/"`);
     }
     expect(html).toContain("data-category-chips");
     expect(html.match(/datetime="2026-11-01"/g)).toHaveLength(5);
+    expect(html).not.toContain(neverRankedSlug);
+    expect(html).not.toContain(loadTopic(domain, neverRankedSlug)!.label);
+    expect(existsSync(`dist/topic/${neverRankedSlug}`)).toBe(false);
+    for (const category of loadTaxonomy(domain)) {
+      const chip = html.match(new RegExp(`<button[^>]*data-cat="${category.slug}"[^>]*>`))![0];
+      expect(chip.includes("disabled")).toBe(!ranked.some((entry) =>
+        [entry.category, ...entry.secondary_categories].includes(category.slug)));
+    }
   });
 
   it("handles unranked latest entries, never-ranked topics, short histories and empty evidence", () => {
@@ -106,8 +122,10 @@ describe("built topic pages", () => {
         signals: { published: 1, preprint: 0, code: 0, industry: 0, star_gain_7d: 0, rise_ratio: 1.49 } });
       changed.related = [];
       writeFileSync(join(data, domain, "topics", `${slug}.json`), JSON.stringify(changed));
-      const other = allTopics(domain).find((entry) => entry.slug !== slug)!;
-      other.history = other.history.slice(0, 2).map((entry) => ({ ...entry, rank: null, item_ids: [] }));
+      const other = rankedTopics(domain).find((entry) => entry.slug !== slug)!;
+      other.history = other.history.slice(-2).map((entry, index) => ({ ...entry,
+        rank: index === 0 ? 3 : null, item_ids: [] }));
+      other.history.reverse();
       other.headline = other.synthesis = null;
       other.related = [];
       writeFileSync(join(data, domain, "topics", `${other.slug}.json`), JSON.stringify(other));
@@ -122,16 +140,20 @@ describe("built topic pages", () => {
       expect(html).toContain("1 published");
       expect(html).not.toContain("vs 4-wk avg");
       expect(section(html, "topic-history")).not.toContain("2026-11-02");
-      const unranked = readFileSync(join(output, `topic/${other.slug}/index.html`), "utf8");
-      expect(unranked).toContain("Topic ·");
-      expect(unranked).toContain(other.label);
-      expect(unranked).not.toContain("<svg");
-      expect(unranked).not.toContain("Editor's note");
-      expect(headings(unranked)).toEqual(["Topic history"]);
-      expect(section(unranked, "topic-history")).not.toContain("/day/");
+      const short = readFileSync(join(output, `topic/${other.slug}/index.html`), "utf8");
+      expect(short).toContain("#3 ·");
+      expect(short).toContain(other.label);
+      expect(short).not.toContain("<svg");
+      expect(short).not.toContain("Editor's note");
+      expect(headings(short)).toEqual(["Topic history"]);
+      expect(section(short, "topic-history")).toContain("/day/2026-10-31/");
+      expect(section(short, "topic-history")).not.toContain("/day/2026-11-01/");
+      expect(existsSync(join(output, `topic/${neverRankedSlug}`))).toBe(false);
       const index = readFileSync(join(output, "topics/index.html"), "utf8");
       const links = [...index.matchAll(/href="\/topic\/([^/]+)\/"/g)].map((match) => match[1]);
       expect(links.at(-1)).toBe(other.slug);
+      expect(links).toHaveLength(5);
+      expect(links).not.toContain(neverRankedSlug);
     } finally {
       rmSync(temporary, { recursive: true, force: true });
     }

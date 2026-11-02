@@ -115,6 +115,14 @@ def build(root: Path) -> None:
             item_one_liners={items[4].id: "Published evaluation with a linked preprint and shared analysis inputs."},
             related=[spec[0] for spec in specs if spec[0] != slug][:3],
         ))
+    never_ranked = topics[-1].model_copy(update={
+        "slug": "never-ranked-fixture-0000", "label": "Never-ranked workflow fixture",
+        "headline": "Never-ranked workflow fixture",
+        "history": [entry.model_copy(update={"rank": None}) for entry in topics[-1].history],
+        "related": [],
+    })
+    topics[0].related[-1] = never_ranked.slug
+    dump(never_ranked, topic_path(root / "data", "computational", never_ranked.slug))
     for topic in topics:
         dump(topic, topic_path(root / "data", "computational", topic.slug))
     for today in [days[0] - timedelta(days=1), *days]:

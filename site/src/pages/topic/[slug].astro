@@ -4,11 +4,11 @@ import SignalBadges from "../../components/SignalBadges.astro";
 import Sparkline from "../../components/Sparkline.astro";
 import EditorNote from "../../components/EditorNote.astro";
 import EvidenceList from "../../components/EvidenceList.astro";
-import { allTopics, latestDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
+import { rankedTopics, latestDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
 import type { Topic } from "../../lib/types";
 
 export function getStaticPaths() {
-  return allTopics("computational").map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
+  return rankedTopics("computational").map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
 }
 
 interface Props { topic: Topic }
@@ -35,7 +35,8 @@ const headline = topic.headline ?? topic.label;
     <EvidenceList items={loadItems(domain, latestEntry?.item_ids ?? [])} oneLiners={topic.item_one_liners} />
     {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading">
       <h2 id="related-heading">Related topics</h2>
-      <ul>{related.map((entry) => <li><a href={`/topic/${entry.slug}/`}>{entry.label}</a></li>)}</ul>
+      <ul>{related.map((entry) => <li>{entry.history.some((day) => day.rank !== null)
+        ? <a href={`/topic/${entry.slug}/`}>{entry.label}</a> : entry.label}</li>)}</ul>
     </section>}
     <section id="topic-history" aria-labelledby="history-heading">
       <h2 id="history-heading">Topic history</h2>

@@ -47,6 +47,15 @@ export function allTopics(domain: string): Topic[] {
   return readRecords<Topic>(join(DATA_ROOT, domain, "topics"));
 }
 
+export function rankedTopics(domain: string): Topic[] {
+  return allTopics(domain).map((topic) => ({
+    topic,
+    lastRanked: topic.history.filter((entry) => entry.rank !== null).map((entry) => entry.date).sort().at(-1),
+  })).filter((entry) => entry.lastRanked !== undefined)
+    .sort((a, b) => b.lastRanked!.localeCompare(a.lastRanked!))
+    .map(({ topic }) => topic);
+}
+
 export function loadItems(domain: string, ids: string[]): Item[] {
   // shortcut: scans the item store per call; index by ID when archive builds become slow.
   const items = new Map(
