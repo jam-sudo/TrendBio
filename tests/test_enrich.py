@@ -1,3 +1,5 @@
+import json
+import re
 from datetime import date
 from pathlib import Path
 from types import SimpleNamespace
@@ -42,6 +44,37 @@ class FakeMessages:
             stop_reason=self.stop_reason, parsed_output=self.output,
             usage=SimpleNamespace(input_tokens=100, output_tokens=20),
         )
+
+
+class FakeBatches:
+    def __init__(self, summary=None):
+        self.summary = summary
+        self.requests = []
+        self.polls = 0
+
+    def create(self, *, requests):
+        self.requests.append(requests)
+        return SimpleNamespace(id=str(len(self.requests) - 1))
+
+    def retrieve(self, batch_id):
+        self.polls += 1
+        return SimpleNamespace(processing_status='in_progress' if self.polls == 1 else 'ended')
+
+    def results(self, batch_id):
+        for request in reversed(self.requests[int(batch_id)]):
+            index = int(request['custom_id'])
+            kind = {1: 'errored', 2: 'canceled', 3: 'expired'}.get(index, 'succeeded')
+            message = SimpleNamespace(
+                stop_reason='refusal' if index == 4 else 'end_turn',
+                content=[] if index == 4 else [SimpleNamespace(type='text', text=(
+                    'invalid json' if index == 5 else json.dumps({
+                        'summary': self.summary or ('evidence ' * 30 if index == 6 else 'Summary ' + str(index)),
+                        'primary': 'genomics', 'relevant': True,
+                        'secondary': ['unknown', 'ml-ai', 'structural', 'systems'] if index == 6 else ['unknown'],
+                    })
+                ))], usage=SimpleNamespace(input_tokens=100, output_tokens=20),
+            )
+            yield SimpleNamespace(custom_id=request['custom_id'], result=SimpleNamespace(type=kind, message=message))
 
 
 class FakeEmbedder:
@@ -183,44 +216,14 @@ def test_connection_error_then_success(tmp_path, item, taxonomy, monkeypatch):
 
 
 def test_batch_chunks_maps_unordered_results_and_records_discount(tmp_path, item, taxonomy, monkeypatch):
-    import json
-    import re
-
-    class Batches:
-        def __init__(self):
-            self.requests = []
-            self.polls = 0
-
-        def create(self, *, requests):
-            self.requests.append(requests)
-            return SimpleNamespace(id=str(len(self.requests) - 1))
-
-        def retrieve(self, batch_id):
-            self.polls += 1
-            return SimpleNamespace(processing_status='in_progress' if self.polls == 1 else 'ended')
-
-        def results(self, batch_id):
-            for request in reversed(self.requests[int(batch_id)]):
-                index = int(request['custom_id'])
-                kind = {1: 'errored', 2: 'canceled', 3: 'expired'}.get(index, 'succeeded')
-                message = SimpleNamespace(
-                    stop_reason='refusal' if index == 4 else 'end_turn',
-                    content=[] if index == 4 else [SimpleNamespace(type='text', text=(
-                        'invalid json' if index == 5 else json.dumps({
-                            'summary': 'evidence ' * 30 if index == 6 else 'Summary ' + str(index),
-                            'primary': 'genomics', 'relevant': True,
-                            'secondary': ['unknown', 'ml-ai', 'structural', 'systems'] if index == 6 else ['unknown'],
-                        })
-                    ))], usage=SimpleNamespace(input_tokens=100, output_tokens=20),
-                )
-                yield SimpleNamespace(custom_id=request['custom_id'], result=SimpleNamespace(type=kind, message=message))
-
-    batches = Batches()
+    batches = FakeBatches()
     sleeps = []
     monkeypatch.setattr('pipeline.llm.time.sleep', sleeps.append)
     budget = Budget(tmp_path / 'spend.json', 50)
     llm = LLM(SimpleNamespace(messages=SimpleNamespace(batches=batches)), budget)
-    items = [item.model_copy(update={'id': f'biorxiv:10.1101/{index}'}) for index in range(2001)]
+    items = [item.model_copy(update={
+        'id': f'biorxiv:10.1101/{index}', 'abstract': f'We compare {index % 2000} genomes.',
+    }) for index in range(2001)]
     results = llm.enrich_batch(items, taxonomy, {items[0].id: ['genomics']}, poll_seconds=0.1)
     assert [len(chunk) for chunk in batches.requests] == [2000, 1]
     assert sleeps == [0.1]
@@ -430,3 +433,43 @@ def test_enrich_prompt_defines_relevance():
     prompt = Path('pipeline/prompts/enrich.md').read_text(encoding='utf-8')
     assert 'relevant:' in prompt
     assert 'main contribution is computational' in prompt
+
+
+def test_ungrounded_summary_falls_back_with_grounding_reason(tmp_path, item, taxonomy, caplog):
+    item.abstract = 'We compare 12 pathogen genomes.'
+    messages = FakeMessages(output=Enrichment(
+        summary='Compares 47 pathogen genomes.', primary='genomics', secondary=[], relevant=True,
+    ))
+    llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
+    store = Store(tmp_path, 'computational')
+    _, notes, _ = enrich_items([item], store, llm, None, taxonomy,
+                              {'biorxiv_category': {'genomics': ['genomics']}})
+    assert store.get_item(item.id).summary == item.abstract
+    assert item.primary_category == 'genomics'
+    assert notes == [f'enrichment-fallback:{item.id}']
+    assert llm.fallback_reasons[item.id] == 'grounding'
+    assert 'reason=grounding detail=47' in caplog.text
+
+
+def test_grounded_summary_in_other_notation_passes(tmp_path, item, taxonomy):
+    item.abstract = '82 million reads'
+    messages = FakeMessages(output=Enrichment(
+        summary='Analyses 82M reads.', primary='genomics', secondary=[], relevant=True,
+    ))
+    llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
+    store = Store(tmp_path, 'computational')
+    _, notes, _ = enrich_items([item], store, llm, None, taxonomy, {})
+    assert store.get_item(item.id).summary == 'Analyses 82M reads.'
+    assert notes == []
+    assert item.id not in llm.fallback_reasons
+
+
+def test_batch_ungrounded_summary_falls_back(tmp_path, item, taxonomy, caplog):
+    item.abstract = 'We compare 12 pathogen genomes.'
+    batches = FakeBatches(summary='Compares 47 pathogen genomes.')
+    llm = LLM(SimpleNamespace(messages=SimpleNamespace(batches=batches)),
+              Budget(tmp_path / 'spend.json', 50))
+    results = llm.enrich_batch([item], taxonomy, {}, poll_seconds=0)
+    assert results == {item.id: None}
+    assert llm.fallback_reasons[item.id] == 'grounding'
+    assert 'reason=grounding detail=47' in caplog.text
