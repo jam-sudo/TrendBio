@@ -1,0 +1,96 @@
+from collections import Counter
+from datetime import date, timedelta
+from hashlib import sha1
+
+import numpy as np
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+from pipeline.config import Scoring
+from pipeline.embed import l2_normalize
+from pipeline.models import Item, Scores, Signals, Topic, TopicDay
+
+
+def cluster_items(ids: list[str], X: np.ndarray, cfg: Scoring) -> list[list[str]]:
+    if len(ids) < 2:
+        return [ids] if ids and len(ids) >= cfg.min_cluster_size else []
+    labels = AgglomerativeClustering(
+        metric='cosine', linkage='average',
+        distance_threshold=cfg.cluster_distance_threshold, n_clusters=None,
+    ).fit_predict(X)
+    groups: dict[int, list[str]] = {}
+    for item_id, label in zip(ids, labels, strict=True):
+        groups.setdefault(label, []).append(item_id)
+    return [group for group in groups.values() if len(group) >= cfg.min_cluster_size]
+
+
+def keyword_slug(titles: list[str], corpus_titles: list[str],
+                 item_ids: list[str]) -> tuple[str, str]:
+    vectorizer = TfidfVectorizer(
+        stop_words='english', ngram_range=(1, 2), strip_accents='ascii',
+        token_pattern=r'(?u)\b[a-z0-9]{2,}\b',
+    )
+    try:
+        vectorizer.fit(corpus_titles)
+    except ValueError as exc:
+        if 'empty vocabulary' not in str(exc):
+            raise
+        terms = []
+    else:
+        scores = np.asarray(vectorizer.transform(titles).sum(axis=0)).ravel()
+        ranked = sorted(zip(vectorizer.get_feature_names_out(), scores),
+                        key=lambda pair: (-pair[1], pair[0]))
+        terms = [term for term, score in ranked if score > 0][:2]
+    if not terms:
+        terms = ['untitled', 'topic']
+    elif len(terms) == 1:
+        terms.append('topic')
+    suffix = sha1('\n'.join(sorted(item_ids)).encode()).hexdigest()[:4]
+    label = ' '.join(terms)
+    return label.replace(' ', '-') + '-' + suffix, label
+
+
+def match_or_create(cluster_ids: list[str], centroid: np.ndarray, topics: list[Topic],
+                    today: date, cfg: Scoring, titles: list[str], corpus_titles: list[str],
+                    items_by_id: dict[str, Item]) -> Topic:
+    counts = Counter(items_by_id[item_id].primary_category for item_id in cluster_ids)
+    category = min(counts, key=lambda name: (-counts[name], name))
+    secondary = sorted(name for name, count in counts.items()
+                       if name != category and count / len(cluster_ids) >= .25)
+    if topics:
+        similarities = l2_normalize([topic.centroid for topic in topics]) @ l2_normalize([centroid])[0]
+        best = int(np.argmax(similarities))
+        if similarities[best] >= cfg.continuity_threshold:
+            topic = topics[best]
+            topic.centroid = l2_normalize([(np.asarray(topic.centroid) + centroid) / 2])[0].tolist()
+            topic.category = category
+            topic.secondary_categories = secondary
+            return topic
+    slug, label = keyword_slug(titles, corpus_titles, cluster_ids)
+    return Topic(
+        slug=slug, label=label, category=category, secondary_categories=secondary,
+        centroid=centroid.tolist(), history=[], headline=None, summary=None,
+        synthesis=None, synthesis_model=None, synthesized_on=None,
+    )
+
+
+def append_history(topic: Topic, today: date, item_ids: list[str], count_7d: int) -> None:
+    entry = TopicDay(
+        date=today, rank=None, item_ids=item_ids, count_7d=count_7d,
+        signals=Signals(published=0, preprint=0, code=0, industry=0, rise_ratio=0.0, star_gain_7d=0),
+        scores=Scores(rise=0, diversity=0, code_velocity=0, volume=0, penalty=0, total=0),
+    )
+    topic.history = sorted([day for day in topic.history if day.date != today] + [entry],
+                           key=lambda day: day.date)
+
+
+def fill_unranked_days(topic: Topic, today: date) -> None:
+    if not topic.history:
+        return
+    dates = {entry.date for entry in topic.history}
+    # Also repair interior gaps when today's entry has already been appended.
+    day = min(dates) + timedelta(days=1)
+    while day < today:
+        if day not in dates:
+            append_history(topic, day, [], 0)
+        day += timedelta(days=1)
