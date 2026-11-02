@@ -1,6 +1,8 @@
 """Command-line entry points for the TrendBio pipeline."""
 
+import logging
 import os
+import sys
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -14,7 +16,7 @@ from pipeline.budget import Budget
 from pipeline.config import load_scoring, load_taxonomy
 from pipeline.embed import Embedder
 from pipeline.llm import LLM
-from pipeline.run import Deps, _staging, run_backfill, run_day
+from pipeline.run import Deps, _stage, _staging, run_backfill, run_day
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.biorxiv import BiorxivAdapter
@@ -30,6 +32,15 @@ Domain = Annotated[str, typer.Option(help='Configured taxonomy domain.')]
 DataRoot = Annotated[Path, typer.Option(help='Root directory for pipeline data.')]
 FromDate = Annotated[datetime, typer.Option('--from', formats=['%Y-%m-%d'])]
 ToDate = Annotated[datetime, typer.Option('--to', formats=['%Y-%m-%d'])]
+
+
+@app.callback()
+def configure_logging():
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout,
+                        format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+    # HTTP request logs include query strings, which can contain API credentials.
+    for name in ("httpx", "httpcore", "httpx2", "httpcore2"):
+        logging.getLogger(name).setLevel(logging.WARNING)
 
 
 def build_deps(domain: str, data_root: Path) -> Deps:
@@ -51,7 +62,8 @@ def build_deps(domain: str, data_root: Path) -> Deps:
 def _dependencies(domain: str, data_root: Path):
     deps = None
     try:
-        deps = build_deps(domain, data_root)
+        with _stage('initialize'):
+            deps = build_deps(domain, data_root)
         yield deps
     except Exception as error:
         message = str(error)

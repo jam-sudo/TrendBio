@@ -8,6 +8,7 @@ import httpx
 from pipeline.config import load_scoring
 from pipeline.models import Item, Source
 from pipeline.sources.base import collected, load_config, request
+from pipeline.store import Store
 
 logger = logging.getLogger(__name__)
 
@@ -56,18 +57,21 @@ class GithubAdapter:
     name: Source = 'github'
 
     def __init__(self, config: dict | None = None, *, star_counts: dict[str, list[tuple[date, int]]] | None = None,
-                 star_gain_threshold: int | None = None):
+                 star_gain_threshold: int | None = None, store: Store | None = None):
         self.config = config if config is not None else load_config()
         self.star_counts = star_counts if star_counts is not None else {}
         self.star_gain_threshold = load_scoring().star_gain_threshold if star_gain_threshold is None else star_gain_threshold
-        self.topic_repos: list[str] = []
-        self.topics_refreshed: date | None = None
+        self.store = store
+        self.repo_cache = {}
+        self.observations: dict[str, int] = {}
+        self.rest_calls = 0
 
     def repos(self, day: date, client: httpx.Client) -> list[str]:
         cfg = self.config['github']
-        # shortcut: discovery cache is per instance; persist it when the runner owns cross-run state.
-        if self.topics_refreshed is None or abs((day - self.topics_refreshed).days) >= 7:
-            names = []
+        cache = self.store.github_repos() if self.store is not None else self.repo_cache
+        refreshed = date.fromisoformat(cache['refreshed']) if cache else None
+        if refreshed is None or not 0 <= (day - refreshed).days < 7:
+            records_by_name = {}
             limit = cfg['top_n_per_topic']
             if not 0 <= limit <= 1000:
                 raise ValueError('GitHub topic limit must be between 0 and 1000')
@@ -81,19 +85,41 @@ class GithubAdapter:
                     if data.get('incomplete_results'):
                         raise ValueError('GitHub repository search is incomplete')
                     records = data['items'][:limit - found]
-                    names.extend(record['full_name'] for record in records)
+                    records_by_name.update((record['full_name'], record) for record in records)
                     found += len(records)
                     if not records or found >= min(data['total_count'], limit):
                         break
                     page += 1
-            self.topic_repos, self.topics_refreshed = names, day
-        return list(dict.fromkeys(cfg['watchlist'] + self.topic_repos))
+            cache = {'refreshed': day.isoformat(), 'repos': records_by_name}
+            if self.store is not None:
+                self.store.put_github_repos(cache)
+        self.repo_cache = cache
+        return list(dict.fromkeys(cfg['watchlist'] + list(cache['repos'])))
 
     def fetch(self, start: date, end: date, client: httpx.Client) -> list[Item]:
+        self.rest_calls = 0
+        self.observations = {}
+
+        def count_call(request):
+            self.rest_calls += 1
+
+        client.event_hooks['request'].append(count_call)
+        try:
+            return self._fetch(start, end, client)
+        finally:
+            client.event_hooks['request'].remove(count_call)
+            logger.info('github: rest_calls=%d', self.rest_calls)
+
+    def _fetch(self, start: date, end: date, client: httpx.Client) -> list[Item]:
         endpoint = self.config['github']['endpoint']
         items = []
         for repo in self.repos(end, client):
-            data = request(client, f'{endpoint}/repos/{repo}', headers=_headers()).json()
+            if repo in self.config['github']['watchlist']:
+                data = request(client, f'{endpoint}/repos/{repo}', headers=_headers()).json()
+            else:
+                # shortcut: topic metadata is weekly; add bulk refresh if daily topic star precision is needed.
+                data = self.repo_cache['repos'][repo]
+            self.observations[repo] = data['stargazers_count']
             history = dict(self.star_counts.get(repo, []))
             if end == date.today():
                 history[end] = data['stargazers_count']
@@ -101,15 +127,24 @@ class GithubAdapter:
                      for day, count in history.items()
                      if start <= day <= end and day - timedelta(days=7) in history}
             gain = max(gains.values(), default=0)
-            releases, url = [], f'{endpoint}/repos/{repo}/releases?per_page=100'
-            while url:
-                response = request(client, url, headers=_headers())
-                for release in response.json():
+            releases = []
+            pushed = data.get('pushed_at')
+            if pushed and start <= date.fromisoformat(pushed[:10]) <= end:
+                # Reuse release pages for unchanged discovery snapshots between weekly refreshes.
+                if repo in self.config['github']['watchlist'] or data.get('_release_pushed_at') != pushed:
+                    response = request(client, f'{endpoint}/repos/{repo}/releases',
+                                       headers=_headers(), params={'per_page': 100})
+                    release_page = response.json()
+                else:
+                    release_page = data['_releases']
+                for release in release_page:
                     if release.get('draft') or not release.get('published_at'):
                         continue
                     if start <= date.fromisoformat(release['published_at'][:10]) <= end:
                         releases.append(release)
-                url = response.links.get('next', {}).get('url')
+                # Daily windows move forward; historical release bodies need not bloat the cache.
+                data['_releases'] = releases
+                data['_release_pushed_at'] = pushed
             if gain < self.star_gain_threshold and not releases:
                 continue
             event_days = [day for day, value in gains.items() if value >= self.star_gain_threshold]
@@ -120,6 +155,9 @@ class GithubAdapter:
                 doi=None, published_at=published_at, first_seen=end, authors=[],
                 org=data['owner']['login'], abstract=data.get('description') or '',
                 summary=None, primary_category=None, published_doi=None, preprint_id=None,
-                metadata={**data, 'github_topics': data.get('topics', []), 'star_gain_7d': gain, 'releases': releases},
+                metadata={**{key: value for key, value in data.items() if not key.startswith('_')},
+                          'github_topics': data.get('topics', []), 'star_gain_7d': gain, 'releases': releases},
             ))
+        if self.store is not None:
+            self.store.put_github_repos(self.repo_cache)
         return collected(self.name, items)

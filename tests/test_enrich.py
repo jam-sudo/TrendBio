@@ -288,3 +288,26 @@ def test_interrupted_embedding_write_is_retryable(tmp_path, item, taxonomy, monk
         enrich_items([item], store, SimpleNamespace(enrich=lambda *args: None), FakeEmbedder(), taxonomy, {})
     assert store.get_item(item.id).summary is None
     assert item.summary is None
+
+
+def test_enrichment_parallel_and_writes_sorted(tmp_path, item, taxonomy):
+    from time import perf_counter, sleep
+    from unittest.mock import Mock
+
+    def slow_enrich(*args):
+        sleep(0.05)
+        return None
+
+    items = [item.model_copy(update={'id': f'biorxiv:{i:02d}'}) for i in reversed(range(40))]
+    store = Store(tmp_path, 'computational')
+    store.put_item = Mock(wraps=store.put_item)
+    embedder = FakeEmbedder()
+    embedder.embed = Mock(wraps=embedder.embed)
+    started = perf_counter()
+    _, notes = enrich_items(items, store, SimpleNamespace(enrich=slow_enrich), embedder, taxonomy, {})
+    assert perf_counter() - started < 1.2  # Sequential calls alone would take 2 seconds.
+    written = [call.args[0].id for call in store.put_item.call_args_list]
+    assert written == sorted(written)
+    assert notes == sorted(notes)
+    assert len(store.items_between(date.min, date.max)) == 40
+    embedder.embed.assert_called_once()
