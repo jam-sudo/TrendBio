@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, create_model
 
 from pipeline.budget import Budget
 from pipeline.config import Taxonomy
-from pipeline.models import Item
+from pipeline.models import Item, Signals, Topic
 
 
 class Enrichment(BaseModel):
@@ -18,6 +18,13 @@ class Enrichment(BaseModel):
     summary: str = Field(max_length=160)
     primary: str
     secondary: list[str] = Field(max_length=2)
+
+
+class Synthesis(BaseModel):
+    headline: str = Field(max_length=90)
+    summary: str = Field(max_length=160)
+    synthesis: str
+    item_one_liners: dict[str, str] = {}
 
 
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
@@ -58,13 +65,35 @@ class LLM:
     def enrich(
         self, item: Item, taxonomy: Taxonomy, hints: list[str], model: str = 'claude-haiku-5-5',
     ) -> Enrichment | None:
-        output_model = _output_model(taxonomy)
-        messages = _messages(item, taxonomy, hints)
+        result = self._parse(_output_model(taxonomy), _messages(item, taxonomy, hints), model, 512, 'low')
+        return _validate_categories(result, taxonomy)
+
+    def synthesize(
+        self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,
+    ) -> Synthesis | None:
+        template = Path(__file__).with_name('prompts').joinpath('synthesize.md').read_text(encoding='utf-8')
+        prompt = template.format(
+            category=topic.category, label=topic.label, signals=signals.model_dump_json(),
+            items='\n'.join(
+                f'{item.id} | {item.type} | {item.published_at} | {item.title} | {item.summary or ""}'
+                for item in items
+            ),
+            previous=f'Previous synthesis (context only, not evidence):\n{previous}' if previous else '',
+        )
+        return self._parse(Synthesis, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
+                           fallbacks=model == 'claude-opus-5-5')
+
+    def _parse[T: BaseModel](
+        self, output_model: type[T], messages: list[dict], model: str, max_tokens: int,
+        effort: str, *, fallbacks: bool = False,
+    ) -> T | None:
+        parse = self.client.beta.messages.parse if fallbacks else self.client.messages.parse
+        options = {'betas': ['server-side-fallback-2026-07-01'], 'fallbacks': 'default'} if fallbacks else {}
         for attempt in range(4):
             try:
-                response = self.client.messages.parse(
-                    model=model, max_tokens=512, output_format=output_model,
-                    messages=messages, output_config={'effort': 'low'},
+                response = parse(
+                    model=model, max_tokens=max_tokens, output_format=output_model,
+                    messages=messages, output_config={'effort': effort}, **options,
                 )
             except anthropic.APIError as error:
                 status = getattr(error, 'status_code', None)
@@ -81,7 +110,12 @@ class LLM:
             self.budget.record(model, response.usage.input_tokens, response.usage.output_tokens)
             if refused:
                 return None
-            return _validate_categories(response.parsed_output, taxonomy)
+            if response.parsed_output is None:
+                return None
+            try:
+                return output_model.model_validate(response.parsed_output, from_attributes=True)
+            except ValidationError:
+                return None
         return None
 
     def enrich_batch(
