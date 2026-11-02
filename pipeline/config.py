@@ -33,6 +33,8 @@ class Scoring(BaseModel):
     top_n: int = 5
     synthesis_max_items: int = Field(default=40, ge=1)
     monthly_ceiling_usd: float = 50.0
+    degraded_fallback_min: int = 3
+    degraded_fallback_rate: float = 0.2
     star_gain_threshold: int = 100
 
 

@@ -32,6 +32,8 @@ def test_scoring_defaults():
         "top_n": 5,
         "synthesis_max_items": 40,
         "monthly_ceiling_usd": 50.0,
+        "degraded_fallback_min": 3,
+        "degraded_fallback_rate": 0.2,
         "star_gain_threshold": 100,
     }
     assert load_scoring().model_dump() == expected

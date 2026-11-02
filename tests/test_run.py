@@ -16,7 +16,7 @@ from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
 from pipeline.store import Store
-from pipeline.run import Deps, run_backfill, run_day
+from pipeline.run import Deps, is_degraded, run_backfill, run_day
 from pipeline.__main__ import app
 
 
@@ -156,14 +156,68 @@ def test_dry_run_leaves_data_untouched(ctx, capsys):
     assert Store(Path(output['staging_root']), 'computational').get_day(TODAY) == result
 
 
-def test_degraded_when_fallback_note_present(ctx):
-    ctx.deps.llm.fallback = True
+@pytest.mark.parametrize('count,attempted,expected', [
+    pytest.param(3, 10, False, id='few_enrichment_fallbacks_do_not_degrade'),
+    pytest.param(4, 100, False, id='fallbacks_above_floor_but_below_rate_do_not_degrade'),
+    pytest.param(5, 10, True, id='many_enrichment_fallbacks_degrade'),
+    pytest.param(4, 20, False, id='fallbacks_at_rate_do_not_degrade'),
+])
+def test_enrichment_fallback_threshold(count, attempted, expected):
+    notes = [f'enrichment-fallback:{i}' for i in range(count)]
+    sources = dict.fromkeys(('biorxiv', 'arxiv', 'pubmed', 'github', 'rss'), 'ok')
+    assert is_degraded(notes, sources, backfill=False, over_ceiling=False,
+                       attempted=attempted, cfg=load_scoring()) is expected
+
+
+def test_synthesis_fallback_always_degrades():
+    assert is_degraded(['synthesis-fallback:topic'], {}, backfill=False,
+                       over_ceiling=False, attempted=1000, cfg=load_scoring())
+
+
+def test_paper_source_failure_always_degrades():
+    assert is_degraded([], {'pubmed': 'failed'}, backfill=True,
+                       over_ceiling=False, attempted=1000, cfg=load_scoring())
+
+
+@pytest.mark.parametrize('copies', [2, 5])
+def test_duplicate_fallback_notes_count_once(copies):
+    assert not is_degraded(['enrichment-fallback:x'] * copies, {}, backfill=False,
+                           over_ceiling=False, attempted=10, cfg=load_scoring())
+
+
+def test_budget_over_ceiling_always_degrades():
+    assert is_degraded([], {}, backfill=True, over_ceiling=True,
+                       attempted=1000, cfg=load_scoring())
+
+
+@pytest.mark.parametrize('synthesis_fallback', [False, True])
+def test_degraded_when_fallback_note_present(ctx, monkeypatch, synthesis_fallback):
+    original = ctx.deps.llm.enrich
+    monkeypatch.setattr(ctx.deps.llm, 'enrich', lambda item, *args:
+                        None if item.id == ctx.items[0].id else original(item, *args))
+    ctx.deps.llm.fallback = synthesis_fallback
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
-    assert result.run.status == 'degraded'
-    assert any(note.startswith('synthesis-fallback:') for note in result.run.notes)
+    assert result.run.status == ('degraded' if synthesis_fallback else 'ok')
+    assert sum(note.startswith('enrichment-fallback:') for note in result.run.notes) == 1
+    assert any(note.startswith('synthesis-fallback:') for note in result.run.notes) == synthesis_fallback
     before = tree(ctx.root)
     run_day('computational', TODAY, ctx.store, ctx.deps)
     assert tree(ctx.root) == before
+
+
+def test_degraded_threshold_counts_window_before_relevance_filter(ctx, monkeypatch):
+    ctx.items.extend(ctx.items[0].model_copy(update={
+        'id': f'biorxiv:test-{i}', 'title': f'Protein binder experiment {i}',
+        'url': f'https://example.org/{i}',
+    }) for i in range(3, 20))
+    ctx.deps.llm.irrelevant_ids = {item.id for item in ctx.items[4:]}
+    fallback_ids = {item.id for item in ctx.items[:4]}
+    original = ctx.deps.llm.enrich
+    monkeypatch.setattr(ctx.deps.llm, 'enrich', lambda item, *args:
+                        None if item.id in fallback_ids else original(item, *args))
+    result = run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert sum(note.startswith('enrichment-fallback:') for note in result.run.notes) == 4
+    assert result.run.status == 'ok'
 
 
 def test_backfill_runs_days_in_order_and_resumes_from_checkpoint(ctx, monkeypatch):
@@ -306,6 +360,21 @@ def test_cli_resynthesize_honors_model(ctx, monkeypatch):
     day = ctx.store.get_day(TODAY)
     assert day.run.synthesis_model == ctx.deps.llm.calls[-1] == 'claude-opus-5-5'
     assert ctx.store.get_topic(day.ranked[0].slug).synthesis_model == 'claude-opus-5-5'
+
+
+def test_cli_resynthesize_uses_threshold_rule(ctx, monkeypatch):
+    day = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True)
+    day.run.status = 'degraded'
+    day.run.notes = [f'enrichment-fallback:{item.id}' for item in ctx.items[:2]]
+    ctx.store.put_day(day)
+    monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
+    result = CliRunner().invoke(app, ['resynthesize', '--domain', 'computational',
+                                    '--from', str(TODAY), '--to', str(TODAY),
+                                    '--model', 'claude-opus-5-5', '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    refreshed = ctx.store.get_day(TODAY)
+    assert refreshed.run.status == 'ok'
+    assert refreshed.run.notes == day.run.notes
 
 
 def test_cli_redacts_secret_exception_messages(ctx, monkeypatch):
