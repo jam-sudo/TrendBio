@@ -1,0 +1,39 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  lastRun?: string | null;
+}
+
+const { title = "TrendBio", lastRun } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <nav aria-label="Main navigation">
+        <a class="wordmark" href="/">TrendBio</a>
+        <div class="nav-links">
+          <a href="/">Today</a>
+          <a href="/topics">Topics</a>
+          <a href="/archive">Archive</a>
+          <a href="/about">About</a>
+        </div>
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer>
+      <p>Auto-curated from bioRxiv, arXiv, PubMed, GitHub and industry sources. Summaries are machine-generated.</p>
+      <p><a href="/about">How this works</a></p>
+      {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{lastRun}</time></p>}
+    </footer>
+  </body>
+</html>
