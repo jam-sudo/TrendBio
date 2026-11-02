@@ -1,8 +1,18 @@
-import { execFileSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
+import type { TestProject } from "vitest/node";
 
-export default function setup() {
-  execFileSync(process.execPath, ["node_modules/astro/astro.js", "build"], {
+declare module "vitest" {
+  export interface ProvidedContext { buildOutput: string }
+}
+
+export default function setup(project: TestProject) {
+  const result = spawnSync(process.execPath, ["node_modules/astro/astro.js", "build"], {
     env: { ...process.env, TRENDBIO_DATA_ROOT: "../fixtures/data", TRENDBIO_NOTES_ROOT: "../fixtures/notes" },
-    stdio: "inherit",
+    encoding: "utf8",
   });
+  process.stdout.write(result.stdout ?? "");
+  process.stderr.write(result.stderr ?? "");
+  if (result.error) throw result.error;
+  if (result.status !== 0) throw new Error(`Astro build failed: ${result.status}`);
+  project.provide("buildOutput", result.stdout + result.stderr);
 }

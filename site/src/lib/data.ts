@@ -64,6 +64,16 @@ export function loadNote(slug: string): string | null {
   }
 }
 
+export function orphanNotes(domain: string): string[] {
+  if (!existsSync(NOTES_ROOT)) return [];
+  const slugs = new Set(allTopics(domain).map((topic) => topic.slug));
+  return readdirSync(NOTES_ROOT, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .map((entry) => entry.name.slice(0, -3))
+    .filter((slug) => !slugs.has(slug))
+    .sort();
+}
+
 export function loadTaxonomy(domain: string): Category[] {
   return parse(readFileSync(join("../config/taxonomy", `${domain}.yaml`), "utf8")).categories;
 }
