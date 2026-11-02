@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadDays } from "../lib/data";
+
+const days = loadDays("computational");
+---
+
+<Base title="Archive — TrendBio" lastRun={days[0]?.run.finished}>
+  <h1>Archive</h1>
+  {days.map((day) => (
+    <section>
+      <h2><a href={`/day/${day.date}/`}><time datetime={day.date}>{day.date}</time></a></h2>
+      <ol>
+        {day.ranked.map((topic) => <li><a href={`/topic/${topic.slug}/`}>{topic.headline}</a></li>)}
+      </ol>
+    </section>
+  ))}
+</Base>
+
+<style>
+  section { border-top: 1px solid var(--border); padding-block: 1rem; }
+  li { margin-bottom: 0.5rem; }
+</style>

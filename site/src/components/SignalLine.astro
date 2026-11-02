@@ -1,0 +1,22 @@
+---
+import type { Signals } from "../lib/types";
+
+interface Props {
+  signals: Signals;
+}
+
+const { signals } = Astro.props;
+const parts = [
+  signals.preprint && `${signals.preprint} preprint${signals.preprint === 1 ? "" : "s"}`,
+  signals.published && `${signals.published} published`,
+  signals.code && `${signals.code} tool${signals.code === 1 ? "" : "s"}`,
+  signals.industry && `${signals.industry} industry`,
+  signals.rise_ratio >= 1.5 && `↑ ${signals.rise_ratio.toFixed(1)}× vs 4-wk avg`,
+].filter(Boolean);
+---
+
+{parts.length > 0 && <p class="signal-line">{parts.join(" · ")}</p>}
+
+<style>
+  .signal-line { margin: 0; color: var(--muted); font-size: var(--t3); }
+</style>

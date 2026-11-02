@@ -1,17 +1,13 @@
-import { execFileSync } from "node:child_process";
 import { readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { runInNewContext } from "node:vm";
 import { beforeAll, describe, expect, it } from "vitest";
-import { latestDay, loadTaxonomy } from "../src/lib/data";
+import { latestDay, loadTaxonomy, loadTopic } from "../src/lib/data";
 
 let html: string;
 let scripts: RegExpMatchArray[];
 
 beforeAll(() => {
-  execFileSync(process.execPath, ["node_modules/astro/astro.js", "build"], {
-    env: { ...process.env, TRENDBIO_DATA_ROOT: "../fixtures/data", TRENDBIO_NOTES_ROOT: "../fixtures/notes" },
-  });
   html = readFileSync("dist/index.html", "utf8");
   scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)];
 }, 30_000);
@@ -48,10 +44,14 @@ describe("built landing hero", () => {
       expect(chip).toBeDefined();
       expect(chip).toContain('role="tab"');
       expect(chip).toContain('aria-pressed="false"');
-      expect(/\bdisabled\b/.test(chip!)).toBe(!day.ranked.some((topic) => topic.category === category.slug));
+      expect(/\bdisabled\b/.test(chip!)).toBe(!day.ranked.some((topic) =>
+        topic.category === category.slug ||
+        loadTopic("computational", topic.slug)?.secondary_categories.includes(category.slug),
+      ));
     }
     for (const topic of day.ranked) {
-      expect(html).toContain(`data-topic-cats="${topic.category}"`);
+      const secondary = loadTopic("computational", topic.slug)?.secondary_categories ?? [];
+      expect(html).toContain(`data-topic-cats="${[topic.category, ...secondary].join(" ")}"`);
       expect(html).toContain(topic.headline);
     }
   });
