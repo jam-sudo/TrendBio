@@ -23,8 +23,9 @@ The daily workflow also accepts an optional `date` and a `dry_run` switch.
 Use a dry run before the first real run to inspect usage and estimated cost.
 
 The manual backfill workflow takes inclusive `from` and `to` dates in
-`YYYY-MM-DD` format, with `resume` enabled by default. Run monthly chunks in
-chronological order; each successful invocation commits its output once.
+`YYYY-MM-DD` format, with `resume` enabled by default. Run monthly chunks;
+each successful invocation commits its output once.
+Set optional `chain_until` (`YYYY-MM-01`) to automatically backfill previous months through that month, inclusive, after each successful run; failures stop the chain.
 Daily and backfill runs share a concurrency group to prevent overlapping writes.
 Their job limits are 30 and 350 minutes, respectively.
 The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5`, shares the `pipeline` concurrency group, and commits changed data with a 120-minute job limit.
