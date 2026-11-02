@@ -1,4 +1,5 @@
 import re
+from concurrent.futures import ThreadPoolExecutor
 
 from pipeline.config import Taxonomy
 from pipeline.embed import l2_normalize
@@ -30,28 +31,34 @@ def first_sentence(text: str) -> str:
 def enrich_items(
     items: list[Item], store: Store, llm: LLM, embedder, taxonomy: Taxonomy, hints_cfg: dict,
 ) -> tuple[list[Item], list[str]]:
-    pending = []
+    pending = sorted((item for item in items if item.summary is None), key=lambda item: item.id)
     notes = []
-    for item in items:
-        if item.summary is not None:
-            continue
+
+    def enrich(item):
         hints = hints_for(item, hints_cfg)
-        result = llm.enrich(item, taxonomy, hints)
+        return llm.enrich(item, taxonomy, hints)
+
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        results = list(executor.map(enrich, pending))
+    for index, (item, result) in enumerate(zip(pending, results, strict=True)):
         if result is None:
-            result = Enrichment(
+            hints = hints_for(item, hints_cfg)
+            results[index] = Enrichment(
                 summary=first_sentence(item.abstract or item.title)[:160],
                 primary=hints[0] if hints else 'ml-ai', secondary=[],
             )
             notes.append(f'enrichment-fallback:{item.id}')
-        pending.append((item, result))
     if pending:
-        vectors = l2_normalize(embedder.embed([item.title + '\n' + item.abstract for item, _ in pending]))
+        # The daily runner embeds the whole window once inside its staging transaction.
+        vectors = (l2_normalize(embedder.embed([item.title + '\n' + item.abstract for item in pending]))
+                   if embedder is not None else [None] * len(pending))
         if len(vectors) != len(pending):
             raise ValueError('embedder returned the wrong number of rows')
-        for (item, result), vector in zip(pending, vectors, strict=True):
-            # Persist the summary only after its embedding exists, allowing interrupted runs to retry.
+        for item, result, vector in zip(pending, results, vectors, strict=True):
+            # Outside a staging transaction, persist the embedding before marking enrichment complete.
             store.put_item(item)
-            store.put_embedding(item.id, vector)
+            if vector is not None:
+                store.put_embedding(item.id, vector)
             item.summary = result.summary
             item.primary_category = result.primary
             item.secondary_categories = result.secondary

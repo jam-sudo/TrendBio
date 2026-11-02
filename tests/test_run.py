@@ -307,6 +307,56 @@ def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeyp
     run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
     assert fetched == ['org/watchlist', 'org/topic']
     assert ctx.store.star_counts() == dict.fromkeys(fetched, history)
-    monkeypatch.setattr(runner, 'fetch_star_counts', lambda *args: dict.fromkeys(fetched, 31))
+    github.observations = dict.fromkeys(fetched, 31)
     run_day('computational', TODAY + timedelta(days=1), ctx.store, ctx.deps)
     assert ctx.store.star_counts() == dict.fromkeys(fetched, history[1:] + [(TODAY + timedelta(days=1), 31)])
+
+
+def test_stage_logs_have_timings_and_counts_without_item_content(ctx, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
+    run_day('computational', TODAY, ctx.store, ctx.deps)
+    messages = [record.getMessage() for record in caplog.records if record.name == 'pipeline.run']
+    for stage in ('collect', 'dedupe', 'enrich', 'embed', 'cluster', 'continuity',
+                  'score_rank', 'synthesize', 'write', 'commit'):
+        for event in ('start', 'end'):
+            assert any(f'stage={stage} event={event} elapsed=' in message for message in messages)
+    assert any('source=biorxiv items=3' in message for message in messages)
+    assert any('new=3 llm_fallbacks=0' in message for message in messages)
+    assert any('model=claude-opus-5-5' in message for message in messages)
+    assert all(item.abstract not in caplog.text and item.url not in caplog.text for item in ctx.items)
+
+
+def test_daily_embeds_new_and_existing_missing_embeddings_in_one_call(ctx):
+    from unittest.mock import Mock
+
+    existing = ctx.items[0].model_copy(update={'id': 'biorxiv:existing', 'summary': 'Already summarized'})
+    ctx.store.put_item(existing)
+    ctx.deps.embedder.embed = Mock(wraps=ctx.deps.embedder.embed)
+    run_day('computational', TODAY, ctx.store, ctx.deps)
+    ctx.deps.embedder.embed.assert_called_once()
+    assert len(ctx.deps.embedder.embed.call_args.args[0]) == 4
+    assert ctx.store.get_embeddings([existing.id]).shape == (1, 5)
+
+
+def test_daily_embedding_failure_leaves_no_enrichment_committed(ctx):
+    from unittest.mock import Mock
+
+    before = tree(ctx.root)
+    ctx.deps.embedder.embed = Mock(side_effect=RuntimeError('embedding failed'))
+    with pytest.raises(RuntimeError, match='embedding failed'):
+        run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert tree(ctx.root) == before
+
+
+def test_cli_configures_safe_stdout_logging(monkeypatch):
+    import logging
+    from unittest.mock import Mock
+    from pipeline.__main__ import configure_logging
+
+    configure = Mock()
+    monkeypatch.setattr(logging, 'basicConfig', configure)
+    configure_logging()
+    assert configure.call_args.kwargs['level'] == logging.INFO
+    assert configure.call_args.kwargs['format'] == '%(asctime)s %(levelname)s %(name)s: %(message)s'
+    for name in ('httpx', 'httpcore', 'httpx2', 'httpcore2'):
+        assert logging.getLogger(name).getEffectiveLevel() == logging.WARNING

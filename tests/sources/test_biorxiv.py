@@ -77,7 +77,7 @@ def test_source_config_is_complete(source_config):
     assert len(source_config['keywords']) >= 40
     assert len(source_config['pubmed']['journals']) == 16
     assert len(source_config['github']['watchlist']) >= 15
-    assert source_config['github']['top_n_per_topic'] == 200
+    assert source_config['github']['top_n_per_topic'] == 50
     slugs = set(load_taxonomy('computational').slugs())
     for hints in source_config['hints'].values():
         assert hints

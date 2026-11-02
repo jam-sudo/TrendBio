@@ -141,6 +141,13 @@ class Store:
             rows.append(matrix[index[item_id]])
         return np.stack(rows).astype(np.float32) if rows else np.empty((0, 0), dtype=np.float32)
 
+    def github_repos(self) -> dict:
+        path = self.root / self.domain / "github_repos.json"
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+    def put_github_repos(self, payload: dict) -> None:
+        self._write(self.root / self.domain / "github_repos.json", payload)
+
     def star_counts(self) -> dict[str, list[tuple[date, int]]]:
         path = self.root / self.domain / "github_stars.json"
         if not path.exists():

@@ -92,3 +92,13 @@ def test_budget_usage_is_additive_and_preserves_legacy_spend(tmp_path):
     }
     assert budget.month_spend_usd() == pytest.approx(1.5001775)
     assert json.loads(path.read_text())[month] == budget.month_spend_usd()
+
+
+def test_concurrent_records_preserve_all_usage(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+
+    budget = Budget(tmp_path / 'spend.json', 50)
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        list(executor.map(lambda _: budget.record('claude-haiku-5-5', 100, 20), range(100)))
+    assert budget.usage() == {'claude-haiku-5-5': {'input_tokens': 10_000, 'output_tokens': 2_000}}
+    assert budget.month_spend_usd() == pytest.approx(0.002)
