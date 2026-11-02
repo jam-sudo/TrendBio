@@ -146,6 +146,16 @@ def _related(topics) -> None:
         topic.related = [topics[j].slug for j in neighbors[:3]]
 
 
+def is_degraded(notes: list[str], source_status: dict[str, str], *, backfill: bool,
+                over_ceiling: bool, attempted: int, cfg: Scoring) -> bool:
+    count = sum(note.startswith('enrichment-fallback:') for note in set(notes))
+    return ((count > cfg.degraded_fallback_min and count > cfg.degraded_fallback_rate * attempted)
+            or any(note.startswith('synthesis-fallback:') for note in notes)
+            or any(source_status.get(name) == 'failed' for name in ('biorxiv', 'arxiv', 'pubmed'))
+            or (not backfill and source_status.get('github') == 'failed')
+            or over_ceiling)
+
+
 def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool = False,
             dry_run: bool = False, skip_collect: bool = False) -> Day:
     if domain != store.domain:
@@ -212,6 +222,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             counts['irrelevant'] = irrelevant
         with _stage('embed', items=0) as counts:
             window = sorted(store.items_between(start, day), key=lambda item: item.id)
+            attempted = len(window)
             window = [item for item in window if item.relevant]
             missing = []
             for item in window:
@@ -296,10 +307,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             _related(list(topics.values()))
             for topic in topics.values():
                 store.put_topic(topic)
-            degraded = (any('-fallback:' in note for note in notes)
-                        or any(source_status[name] == 'failed' for name in ('biorxiv', 'arxiv', 'pubmed'))
-                        or (not backfill and source_status['github'] == 'failed')
-                        or deps.budget.over_ceiling())
+            degraded = is_degraded(notes, source_status, backfill=backfill,
+                                   over_ceiling=deps.budget.over_ceiling(),
+                                   attempted=attempted, cfg=deps.cfg)
             result = Day(domain=domain, date=day, ranked=[RankedTopic(
                 slug=topic.slug, rank=index, headline=topic.headline or topic.label.title(),
                 summary=topic.summary or '', category=topic.category, signals=signals, scores=scores,
