@@ -1,0 +1,21 @@
+---
+import Base from "../../layouts/Base.astro";
+import DayTopics from "../../components/DayTopics.astro";
+import { loadDays } from "../../lib/data";
+import type { Day } from "../../lib/types";
+
+export function getStaticPaths() {
+  return loadDays("computational").map((day) => ({ params: { date: day.date }, props: { day } }));
+}
+
+interface Props {
+  day: Day;
+}
+
+const { day } = Astro.props;
+---
+
+<Base title={`${day.date} — TrendBio`} lastRun={day.run.finished}>
+  <h1><time datetime={day.date}>{day.date}</time></h1>
+  <DayTopics day={day} />
+</Base>

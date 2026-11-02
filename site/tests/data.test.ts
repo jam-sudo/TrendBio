@@ -13,7 +13,7 @@ describe("fixture data", () => {
 
   it("loads days in descending order and handles missing records", () => {
     expect(loadDays("computational").map((day) => day.date))
-      .toEqual(["2026-11-01", "2026-10-31", "2026-10-30"]);
+      .toEqual(["2026-11-01", "2026-10-31", "2026-10-30", "2026-10-29"]);
     expect(loadDay("computational", "2026-10-30")?.run.backfilled).toBe(true);
     expect(loadDay("computational", "1900-01-01")).toBeNull();
     expect(loadTopic("computational", "not-a-slug")).toBeNull();
