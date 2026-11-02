@@ -1,7 +1,7 @@
 # TrendBio — Design
 
 Date: 2026-11-02
-Status: approved by owner (brainstorm), pending builder check
+Status: approved by owner 2026-11-02 after builder check
 Builder: Codex workers (model "Astra") dispatched via the `orchestration` skill. Claude plans; Codex builds.
 
 ## 1. Intent
@@ -279,6 +279,7 @@ trendbio/
 - Trend signals: paper clustering, code velocity, source diversity, industry announcements. Social deferred.
 - English only. Expert audience. Computational domain first, expandable.
 - 12-month backfill before launch so the site is not empty; backfilled syntheses on Haiku to keep the one-time cost near USD 20.
+- Public GitHub repository.
 - Category classification: LLM zero-shot (Haiku) with source hints, no trained classifier. Owner weighed a trained classifier and chose zero-shot at ~USD 2/month.
 
 ## 11. Decisions made by the planner (Claude) — owner may override
@@ -313,11 +314,11 @@ trendbio/
 
 ## 14. Open for the owner
 
-- **Repo visibility: public or private?** Public: GitHub Actions minutes are free, so the backfill can run as monthly-chunked Actions jobs and the daily run costs nothing. Private: 2,000 free minutes/month; the backfill (~4,000+ minutes) must run on the owner's machine and the daily run alone uses ~900 minutes/month. Also decides whether pre-launch data is publicly visible before the owner reviews it.
+- None. (Repo visibility: owner chose **public**, so Actions minutes are free and the backfill runs as monthly-chunked Actions jobs; see §6.10 and §7.)
 
 ## 15. Owner prerequisites (cannot be done by the builder)
 
 1. Create the GitHub repository and push this repo to it.
 2. Create a Cloudflare account and a Pages project connected to the repository (build command and output directory will be given in the plan).
 3. Add an `ANTHROPIC_API_KEY` as a GitHub Actions secret (and optionally `NCBI_API_KEY`).
-4. If the repo is private, run the backfill locally when the builder hands over the command.
+4. Repo is **public** (owner's decision): no secrets, keys or personal data may ever be committed; the pipeline's logs must not print API keys.
