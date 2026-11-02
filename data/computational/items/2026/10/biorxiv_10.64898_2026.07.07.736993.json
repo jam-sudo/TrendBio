@@ -1,0 +1,44 @@
+{
+  "abstract": "Genomic foundation models have emerged as powerful tools for learning representations of biological sequences, but existing approaches predominantly rely on Transformer architectures, whose quadratic attention complexity limits their ability to capture long-range genomic context. This limitation is particularly relevant for metagenomics, where sequencing data have increased more than 500-fold since 2011, generating increasingly large and diverse datasets. For example, gLM2, a Transformer-based mixed-modality genomic language model, was trained with a context window of 4,096 tokens, limiting its ability to capture extended genomic context within metagenomic contigs. Developing scalable architectures capable of processing longer sequences while integrating protein and nucleotide information is therefore essential for advancing genomic foundation models. We introduce Nammu, a 167-million-parameter, bidirectional Mamba-based genomic foundation model that integrates protein and nucleotide sequences within a 20,000-token context window. Leveraging the linear scaling of state-space models, Nammu was trained using a curriculum learning strategy on the OpenMetaGenomic (OMG) corpus, first incorporating 64 million protein sequences followed by 32 million mixed-modality metagenomic contigs. Despite using approximately 37\\% fewer training tokens than gLM2, Nammu outperformed this Transformer-based model in taxonomic classification across all evaluated taxonomic ranks on a marine metagenomic dataset from the Critical Assessment of Metagenome Interpretation (CAMI). On the exact-feature-unmatched CAMI II Strain Madness test set, Nammu achieved higher all-contig genus-classification accuracy than Kraken2 (0.9182 versus 0.8142). Nammu further outperformed gLM2 (150M) in KEGG Orthology prediction using deep-sea metagenome-assembled genomes. Together, these results demonstrate the potential of state-space architectures for scalable, multimodal genomic representation learning and highlight their ability to support accurate taxonomic and functional predictions from metagenomic sequences.",
+  "authors": [
+    "Azbijari, N.",
+    "Wynne, J. H.",
+    "Irizarry, K.",
+    "Sistla, T.",
+    "Thurber, A. R.",
+    "David, M."
+  ],
+  "doi": "10.64898/2026.07.07.736993",
+  "first_seen": "2026-10-21",
+  "id": "biorxiv:10.64898/2026.07.07.736993",
+  "metadata": {
+    "abstract": "Genomic foundation models have emerged as powerful tools for learning representations of biological sequences, but existing approaches predominantly rely on Transformer architectures, whose quadratic attention complexity limits their ability to capture long-range genomic context. This limitation is particularly relevant for metagenomics, where sequencing data have increased more than 500-fold since 2011, generating increasingly large and diverse datasets. For example, gLM2, a Transformer-based mixed-modality genomic language model, was trained with a context window of 4,096 tokens, limiting its ability to capture extended genomic context within metagenomic contigs. Developing scalable architectures capable of processing longer sequences while integrating protein and nucleotide information is therefore essential for advancing genomic foundation models. We introduce Nammu, a 167-million-parameter, bidirectional Mamba-based genomic foundation model that integrates protein and nucleotide sequences within a 20,000-token context window. Leveraging the linear scaling of state-space models, Nammu was trained using a curriculum learning strategy on the OpenMetaGenomic (OMG) corpus, first incorporating 64 million protein sequences followed by 32 million mixed-modality metagenomic contigs. Despite using approximately 37\\% fewer training tokens than gLM2, Nammu outperformed this Transformer-based model in taxonomic classification across all evaluated taxonomic ranks on a marine metagenomic dataset from the Critical Assessment of Metagenome Interpretation (CAMI). On the exact-feature-unmatched CAMI II Strain Madness test set, Nammu achieved higher all-contig genus-classification accuracy than Kraken2 (0.9182 versus 0.8142). Nammu further outperformed gLM2 (150M) in KEGG Orthology prediction using deep-sea metagenome-assembled genomes. Together, these results demonstrate the potential of state-space architectures for scalable, multimodal genomic representation learning and highlight their ability to support accurate taxonomic and functional predictions from metagenomic sequences.",
+    "author_corresponding": "Nima Azbijari",
+    "author_corresponding_institution": "Oregon State University",
+    "authors": "Azbijari, N.; Wynne, J. H.; Irizarry, K.; Sistla, T.; Thurber, A. R.; David, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-21",
+    "doi": "10.64898/2026.07.07.736993",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/21/2026.07.07.736993.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Metagenomic contextualization of proteins with state space models",
+    "type": "new results",
+    "version": "2"
+  },
+  "org": "Oregon State University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-21",
+  "published_doi": null,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Nammu, a 167M-parameter bidirectional Mamba genomic foundation model with 20k-token context, outperforms gLM2 and Kraken2 on metagenomic taxonomic and KEGG…",
+  "title": "Metagenomic contextualization of proteins with state space models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.07.736993"
+}

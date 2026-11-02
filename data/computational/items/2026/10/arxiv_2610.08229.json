@@ -1,0 +1,32 @@
+{
+  "abstract": "Contextual priors improve neural-to-language decoding by reshaping candidate scores. However, confidence is read from the same reshaped scores, so the errors a prior leaves behind can become more confident with no change in accuracy to reveal it. We study how a prior shapes confidence in speech retrieval on MEG-MASC and MOUS using local decoding scores, a contextual prior combined by additive shallow fusion, and the fused top-two margin as confidence. Among initially incorrect predictions, we find a confidence-ordering reversal: a larger margin makes a repair more likely when the correct candidate starts near the top of the local ranking, but less likely when it starts lower. On MEG-MASC, pooled correctness AUROC is 0.87, yet AUROC separating repairs from residual errors falls from 0.70 at initial ranks 2-3 to 0.39 at ranks 21-50. Errors starting beyond rank 20, inside the reversed region, make up 46.6% of all post-fusion errors. We propose a score-level account: a repair must first close the correct candidate's initial deficit, limiting its final margin, whereas a residual error can build a large margin between two incorrect candidates. A causal intervention that changes only the fusion weight moves the reversal to deeper ranks as predicted. Under a word-level LM prior, it keeps moving after accuracy gain peaks, so a weight chosen for accuracy does not settle confidence. Reading local and prior scores separately improves selective decoding: the decoder answers on 74.5% of windows instead of 56.7%, while 92% of output sets still contain the correct candidate. Confidence after contextual fusion should retain the local and contextual evidence behind each prediction, not just the fused scores. Project website: https://confidencereversal.github.io/; Code: https://github.com/AmadeusFake/NeuDecodingConfReversal",
+  "authors": [
+    "Xinyu Zhang",
+    "Sichao Liu"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-06",
+  "id": "arxiv:2610.08229",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "cs.IR",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.08229v1</ns0:id>\n    <ns0:title>Confidence-Ordering Reversal under Contextual Priors in Neural Decoding</ns0:title>\n    <ns0:updated>2026-10-06T12:17:29Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.08229v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.08229v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Contextual priors improve neural-to-language decoding by reshaping candidate scores. However, confidence is read from the same reshaped scores, so the errors a prior leaves behind can become more confident with no change in accuracy to reveal it. We study how a prior shapes confidence in speech retrieval on MEG-MASC and MOUS using local decoding scores, a contextual prior combined by additive shallow fusion, and the fused top-two margin as confidence. Among initially incorrect predictions, we find a confidence-ordering reversal: a larger margin makes a repair more likely when the correct candidate starts near the top of the local ranking, but less likely when it starts lower. On MEG-MASC, pooled correctness AUROC is 0.87, yet AUROC separating repairs from residual errors falls from 0.70 at initial ranks 2-3 to 0.39 at ranks 21-50. Errors starting beyond rank 20, inside the reversed region, make up 46.6% of all post-fusion errors. We propose a score-level account: a repair must first close the correct candidate's initial deficit, limiting its final margin, whereas a residual error can build a large margin between two incorrect candidates. A causal intervention that changes only the fusion weight moves the reversal to deeper ranks as predicted. Under a word-level LM prior, it keeps moving after accuracy gain peaks, so a weight chosen for accuracy does not settle confidence. Reading local and prior scores separately improves selective decoding: the decoder answers on 74.5% of windows instead of 56.7%, while 92% of output sets still contain the correct candidate. Confidence after contextual fusion should retain the local and contextual evidence behind each prediction, not just the fused scores. Project website: https://confidencereversal.github.io/; Code: https://github.com/AmadeusFake/NeuDecodingConfReversal</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.IR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-06T12:17:29Z</ns0:published>\n    <ns1:comment>28 pages, 4 figures, 18 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Xinyu Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sichao Liu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-06",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Shows contextual-prior shallow fusion in MEG speech retrieval reverses confidence ordering: larger top-two margins predict repair only for near-top correct…",
+  "title": "Confidence-Ordering Reversal under Contextual Priors in Neural Decoding",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.08229v1"
+}

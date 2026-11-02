@@ -1,0 +1,32 @@
+{
+  "abstract": "Taxonomic classifiers based on exact matches differ in which matches they use and in how each match splits its credit among the taxa containing it: Kraken~2 gives a $k$-mer's credit to the lowest common ancestor of those taxa, SPUMONI~2 labels each position of the read, Tagger gives each maximal exact match (MEM) one label, and Cliffy splits a match's credit evenly over a roughly logarithmic sample of the taxa. We compare these schemes on the same long MEMs, mainly on short 16S rRNA reads classified to genera with SILVA, where credit proportional to the number of occurrences of the MEM in each taxon is the most accurate, by 1.0 to 6.8 percentage points. We compute long MEMs with Boyer--Moore--Li on a run-length compressed suffix array, and count their occurrences in each taxon with a complete, run-length compressed tag array, in time proportional to the number of tag runs in the MEM's BWT interval, without locating any occurrence. We bound the number of tag runs in terms of the BWT runs and of how often suffixes with long common prefixes have different tags, and show that tags constant on $d$ blocks of the text have a macro scheme with at most $r + 2d$ phrases. On SILVA our index takes 1.44\\,GB and classifies a read in 66\\,$μ$s with one thread at 93.8\\% accuracy, about what Cliffy reports for its 9\\,GB index; over minimizer digests it takes 0.49\\,GB and reaches 92.5\\%, against 84.2\\% for Cliffy's digested index on the same reads. On nanopore reads from whole genomes, where almost every long MEM occurs in one species, we instead use each read's longest MEMs, found in one pass of a variant of Boyer--Moore--Li with a $k$-mer filter, which assigns 99.6\\% of the reads to their species with no length threshold.",
+  "authors": [
+    "Travis Gagie",
+    "Gonzalo Navarro"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-07",
+  "id": "arxiv:2610.10500",
+  "metadata": {
+    "arxiv_primary_category": "cs.DS",
+    "categories": [
+      "cs.DS",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.10500v2</ns0:id>\n    <ns0:title>Taxonomic Classification with Tag Arrays</ns0:title>\n    <ns0:updated>2026-10-11T15:51:30Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.10500v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.10500v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Taxonomic classifiers based on exact matches differ in which matches they use and in how each match splits its credit among the taxa containing it: Kraken~2 gives a $k$-mer's credit to the lowest common ancestor of those taxa, SPUMONI~2 labels each position of the read, Tagger gives each maximal exact match (MEM) one label, and Cliffy splits a match's credit evenly over a roughly logarithmic sample of the taxa. We compare these schemes on the same long MEMs, mainly on short 16S rRNA reads classified to genera with SILVA, where credit proportional to the number of occurrences of the MEM in each taxon is the most accurate, by 1.0 to 6.8 percentage points. We compute long MEMs with Boyer--Moore--Li on a run-length compressed suffix array, and count their occurrences in each taxon with a complete, run-length compressed tag array, in time proportional to the number of tag runs in the MEM's BWT interval, without locating any occurrence. We bound the number of tag runs in terms of the BWT runs and of how often suffixes with long common prefixes have different tags, and show that tags constant on $d$ blocks of the text have a macro scheme with at most $r + 2d$ phrases. On SILVA our index takes 1.44\\,GB and classifies a read in 66\\,$μ$s with one thread at 93.8\\% accuracy, about what Cliffy reports for its 9\\,GB index; over minimizer digests it takes 0.49\\,GB and reaches 92.5\\%, against 84.2\\% for Cliffy's digested index on the same reads. On nanopore reads from whole genomes, where almost every long MEM occurs in one species, we instead use each read's longest MEMs, found in one pass of a variant of Boyer--Moore--Li with a $k$-mer filter, which assigns 99.6\\% of the reads to their species with no length threshold.</ns0:summary>\n    <ns0:category term=\"cs.DS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-07T17:49:27Z</ns0:published>\n    <ns1:comment>Preliminary version: The ideas in this paper are the authors'; the code, the experiments and the text were developed by Claude Opus 5.5, an AI model by Anthropic, under the authors' direction. We are in the process of verifying the results, including running a comparison with Cliffy, which we cannot build on the commodity machine we are currently using</ns1:comment>\n    <ns1:primary_category term=\"cs.DS\" />\n    <ns0:author>\n      <ns0:name>Travis Gagie</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gonzalo Navarro</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-07",
+  "published_doi": null,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Compares exact-match taxonomic classifiers and introduces a run-length compressed tag array that counts MEM occurrences per taxon, classifying SILVA 16S reads…",
+  "title": "Taxonomic Classification with Tag Arrays",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.10500v2"
+}

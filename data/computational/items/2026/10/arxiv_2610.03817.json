@@ -1,0 +1,38 @@
+{
+  "abstract": "Purpose: To evaluate the performance-feasibility tradeoffs of foundation models (FMs) and task-specific convolutional neural networks (CNNs) trained from scratch for breast implant classification in 2D mammography, with emphasis on suitability for near real-time clinical deployment. Methods: We evaluated four models: two FMs (RAD-DINO and MammoCLIP) and two CNNs trained from scratch for implant prediction (ResNet18 and our lightweight ResNetLite). Using the Emory Breast Imaging Dataset, 5,000 unilateral screening mammograms were used for training/validation and 1,000 manually reviewed unilateral images were held out for testing. For the FMs, global image embeddings from the pretrained encoder were classified using a support vector machine (SVM). The CNNs were trained end-to-end on 2D mammograms, with ResNetLite optimized via grid search over depth and width to balance accuracy and efficiency. Performance was evaluated using AUROC, sensitivity, specificity, accuracy, embedding visualization, and inference-latency. Results: All models demonstrated strong performance on held-out test data (n = 1,000). MammoCLIP achieved the highest AUROC (0.999) with the quickest training time of 493 seconds. RAD-DINO achieved the highest sensitivity (0.980; accuracy 0.989) but had the slowest inference and training times. ResNet18 and MammoCLIP achieved comparable accuracy (0.985). ResNetLite showed no statistically significant difference from ResNet18 (AUROC 0.993; accuracy 0.976) despite using only 1.4% of ResNet18's parameters, and had the fastest inference time. Conclusion: FMs and task-specific CNN models reliably detect breast implants on 2D mammography. Model selection is best guided by deployment context: MammoCLIP for GPU-equipped hospital settings requiring scalable integration, and lightweight CNNs such as ResNetLite for resource-constrained or edge deployments.",
+  "authors": [
+    "Vasisht Ishwar",
+    "Hari Trivedi",
+    "Young Seok Jeon",
+    "Beatrice Brown-Mulry",
+    "Frank Li",
+    "Rohan Satya Isaac",
+    "Mohammadreza Chavoshi",
+    "Judy Wawira Gichoya"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-01",
+  "id": "arxiv:2610.03817",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "cs.CV",
+      "q-bio.TO"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.03817v1</ns0:id>\n    <ns0:title>Image-Based Breast Implant Detection for Mammography Dataset Curation and Near-Real-Time Deployment: Comparing Foundation Models and Task-Specific Convolutional Models</ns0:title>\n    <ns0:updated>2026-10-01T22:19:10Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.03817v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.03817v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Purpose: To evaluate the performance-feasibility tradeoffs of foundation models (FMs) and task-specific convolutional neural networks (CNNs) trained from scratch for breast implant classification in 2D mammography, with emphasis on suitability for near real-time clinical deployment. Methods: We evaluated four models: two FMs (RAD-DINO and MammoCLIP) and two CNNs trained from scratch for implant prediction (ResNet18 and our lightweight ResNetLite). Using the Emory Breast Imaging Dataset, 5,000 unilateral screening mammograms were used for training/validation and 1,000 manually reviewed unilateral images were held out for testing. For the FMs, global image embeddings from the pretrained encoder were classified using a support vector machine (SVM). The CNNs were trained end-to-end on 2D mammograms, with ResNetLite optimized via grid search over depth and width to balance accuracy and efficiency. Performance was evaluated using AUROC, sensitivity, specificity, accuracy, embedding visualization, and inference-latency. Results: All models demonstrated strong performance on held-out test data (n = 1,000). MammoCLIP achieved the highest AUROC (0.999) with the quickest training time of 493 seconds. RAD-DINO achieved the highest sensitivity (0.980; accuracy 0.989) but had the slowest inference and training times. ResNet18 and MammoCLIP achieved comparable accuracy (0.985). ResNetLite showed no statistically significant difference from ResNet18 (AUROC 0.993; accuracy 0.976) despite using only 1.4% of ResNet18's parameters, and had the fastest inference time. Conclusion: FMs and task-specific CNN models reliably detect breast implants on 2D mammography. Model selection is best guided by deployment context: MammoCLIP for GPU-equipped hospital settings requiring scalable integration, and lightweight CNNs such as ResNetLite for resource-constrained or edge deployments.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.TO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-01T22:19:10Z</ns0:published>\n    <ns1:comment>15 pages, 6 figures, 2 tables. Submitted to the Journal of Imaging Informatics in Medicine</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Vasisht Ishwar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hari Trivedi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Young Seok Jeon</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Beatrice Brown-Mulry</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Frank Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rohan Satya Isaac</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mohammadreza Chavoshi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Judy Wawira Gichoya</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-01",
+  "published_doi": null,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Compares foundation models (RAD-DINO, MammoCLIP) with trained-from-scratch CNNs (ResNet18, lightweight ResNetLite) for breast implant detection in 2D…",
+  "title": "Image-Based Breast Implant Detection for Mammography Dataset Curation and Near-Real-Time Deployment: Comparing Foundation Models and Task-Specific Convolutional Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.03817v1"
+}

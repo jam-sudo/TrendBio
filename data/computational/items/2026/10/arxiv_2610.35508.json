@@ -1,0 +1,29 @@
+{
+  "abstract": "Single-cell CRISPR screens run in many cell types are used to compare how cell types respond to perturbation, to train models that transfer effects between them and to score such models. These uses assume that cells carrying a guide RNA had their target knocked down. Yet cells grow for days before sequencing: when an essential gene is knocked down, knocked-down cells are depleted or stop dividing while cells that escaped knockdown keep growing, and the measured response, an average over all cells carrying the guide, is diluted. We define the escape fraction of a perturbation as the share of its measured cells whose target was not effectively knocked down, and estimate it from each cell's counts of the targeted gene with a two-group mixture that recovers known fractions in simulated mixtures. In most cell types the escape fraction rises with how essential the gene is, it is higher in a later screen of the same cells, and it reaches about half of the measured cells in human embryonic stem cells (hESCs). It predicts how much each response is diluted: the response size falls to (1 - e)^2 of that of the knocked-down cells. Because the escape fraction differs between cell types, it changes all three uses: hESCs respond like K562 cells unless knockdown depletes them, the coefficient a simple transfer model learns is lowered by the dilution of the cell type it predicts, and a benchmark scored on all cells rewards predictions shrunk towards no change, partly because that ground truth is itself diluted. Where cells stop dividing instead, the response also contains expression differences between cell-cycle stages. Response sizes should be compared on knocked-down cells or corrected for the escape fraction.",
+  "authors": [
+    "Xuanrui Huang"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-26",
+  "id": "arxiv:2610.35508",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.35508v1</ns0:id>\n    <ns0:title>Escaping cells dilute CRISPR screen responses unequally across cell types</ns0:title>\n    <ns0:updated>2026-10-26T14:33:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.35508v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.35508v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Single-cell CRISPR screens run in many cell types are used to compare how cell types respond to perturbation, to train models that transfer effects between them and to score such models. These uses assume that cells carrying a guide RNA had their target knocked down. Yet cells grow for days before sequencing: when an essential gene is knocked down, knocked-down cells are depleted or stop dividing while cells that escaped knockdown keep growing, and the measured response, an average over all cells carrying the guide, is diluted. We define the escape fraction of a perturbation as the share of its measured cells whose target was not effectively knocked down, and estimate it from each cell's counts of the targeted gene with a two-group mixture that recovers known fractions in simulated mixtures. In most cell types the escape fraction rises with how essential the gene is, it is higher in a later screen of the same cells, and it reaches about half of the measured cells in human embryonic stem cells (hESCs). It predicts how much each response is diluted: the response size falls to (1 - e)^2 of that of the knocked-down cells. Because the escape fraction differs between cell types, it changes all three uses: hESCs respond like K562 cells unless knockdown depletes them, the coefficient a simple transfer model learns is lowered by the dilution of the cell type it predicts, and a benchmark scored on all cells rewards predictions shrunk towards no change, partly because that ground truth is itself diluted. Where cells stop dividing instead, the response also contains expression differences between cell-cycle stages. Response sizes should be compared on knocked-down cells or corrected for the escape fraction.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-26T14:33:48Z</ns0:published>\n    <ns1:comment>23 pages, 6 figures; Supplementary Information and data files are included as ancillary files. Code: https://github.com/xuanruihuang/which-cells-are-measured</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Xuanrui Huang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-10-26",
+  "published_doi": null,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Estimates an escape fraction per CRISPR perturbation showing knockdown-escaping cells dilute single-cell screen responses unequally across cell types, biasing…",
+  "title": "Escaping cells dilute CRISPR screen responses unequally across cell types",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.35508v1"
+}

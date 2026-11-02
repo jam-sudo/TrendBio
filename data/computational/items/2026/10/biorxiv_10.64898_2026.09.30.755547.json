@@ -1,0 +1,42 @@
+{
+  "abstract": "Background: Ancient microbial evidence informs research on past health, diet, and environments, but its scarcity and susceptibility to contamination demand care in selecting and processing data. Language models can now turn a research request into an analysis plan, but an unconstrained planner may reference files that do not exist, apply operations a format forbids, or answer a question the data cannot settle. A planner used on such evidence therefore needs to be bounded, and its decisions recoverable afterwards. Results: We developed PaleoRigor around three commitments. Agent: a language model plans the analysis. Constraint: a validator checks every file reference, format and step dependency before anything runs, execution is restricted to predefined local modules, and a planning contract directs the model to refuse out-of-scope requests with a named reason code rather than answer them. Reproducibility: each run is exported with its plan, intermediate files, checksums and decisions. In a preregistered, frozen held-out evaluation, PaleoRigor passed 23 of 24 runs (95.8%; Wilson 95% confidence interval, 79.8-99.3%): 11 of 12 supported runs and all 12 prespecified boundary decisions. An ablation that removed this planning contract from the same model passed 19 of 24 (79.2%). Repeating the frozen design with a second model configuration yielded 24 of 24 successes for PaleoRigor and 19 of 24 for the ablated arm. Pooled post hoc across both configurations, PaleoRigor passed 47 of 48 runs (97.9%), compared with 38 of 48 (79.2%) for the ablated arms. All 96 run labels were recomputed from retained records and matched. Dataset-level tests matched read counts and compressed-file sizes for six public sequencing records and documented the removal of 114 duplicate sequence entries. A retraction-associated audit illustrated how expert review limited conclusions to file-level evidence. Conclusions: For paleomicrobiome data, pairing a language-model agent with explicit constraints and a reproducible record makes the agent's proposed analysis reviewable before its outputs support a biological claim. PaleoRigor delivers checked inputs, a recorded transformation history and a named reason for each request it refuses, and runs as a local desktop application. It prepares data for specialist analysis; ancient-DNA authentication and biological interpretation remain with the paleobiologist.",
+  "authors": [
+    "Liu, T.",
+    "Zhang, H.",
+    "Jia, Y.",
+    "Ning, K."
+  ],
+  "doi": "10.64898/2026.09.30.755547",
+  "first_seen": "2026-10-08",
+  "id": "biorxiv:10.64898/2026.09.30.755547",
+  "metadata": {
+    "abstract": "Background: Ancient microbial evidence informs research on past health, diet, and environments, but its scarcity and susceptibility to contamination demand care in selecting and processing data. Language models can now turn a research request into an analysis plan, but an unconstrained planner may reference files that do not exist, apply operations a format forbids, or answer a question the data cannot settle. A planner used on such evidence therefore needs to be bounded, and its decisions recoverable afterwards. Results: We developed PaleoRigor around three commitments. Agent: a language model plans the analysis. Constraint: a validator checks every file reference, format and step dependency before anything runs, execution is restricted to predefined local modules, and a planning contract directs the model to refuse out-of-scope requests with a named reason code rather than answer them. Reproducibility: each run is exported with its plan, intermediate files, checksums and decisions. In a preregistered, frozen held-out evaluation, PaleoRigor passed 23 of 24 runs (95.8%; Wilson 95% confidence interval, 79.8-99.3%): 11 of 12 supported runs and all 12 prespecified boundary decisions. An ablation that removed this planning contract from the same model passed 19 of 24 (79.2%). Repeating the frozen design with a second model configuration yielded 24 of 24 successes for PaleoRigor and 19 of 24 for the ablated arm. Pooled post hoc across both configurations, PaleoRigor passed 47 of 48 runs (97.9%), compared with 38 of 48 (79.2%) for the ablated arms. All 96 run labels were recomputed from retained records and matched. Dataset-level tests matched read counts and compressed-file sizes for six public sequencing records and documented the removal of 114 duplicate sequence entries. A retraction-associated audit illustrated how expert review limited conclusions to file-level evidence. Conclusions: For paleomicrobiome data, pairing a language-model agent with explicit constraints and a reproducible record makes the agent's proposed analysis reviewable before its outputs support a biological claim. PaleoRigor delivers checked inputs, a recorded transformation history and a named reason for each request it refuses, and runs as a local desktop application. It prepares data for specialist analysis; ancient-DNA authentication and biological interpretation remain with the paleobiologist.",
+    "author_corresponding": "Kang Ning",
+    "author_corresponding_institution": "Huazhong University of Science and Technology",
+    "authors": "Liu, T.; Zhang, H.; Jia, Y.; Ning, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-08",
+    "doi": "10.64898/2026.09.30.755547",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/08/2026.09.30.755547.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "PaleoRigor: a bounded research agent with a reproducible evidence trail for paleomicrobiome data processing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Huazhong University of Science and Technology",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-08",
+  "published_doi": null,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "PaleoRigor: a bounded LLM agent with validator-checked inputs and exportable run records for paleomicrobiome data processing; 47/48 pooled runs passed.",
+  "title": "PaleoRigor: a bounded research agent with a reproducible evidence trail for paleomicrobiome data processing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.30.755547"
+}

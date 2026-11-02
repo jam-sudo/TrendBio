@@ -1,0 +1,41 @@
+{
+  "abstract": "Biological interaction inference often requires integrating heterogeneous evidence that differs in biological meaning, provenance, specificity, and reliability. Existing computational approaches typically compress such evidence into numerical features, aggregate scores, or latent representations before prediction, obscuring the contribution of individual evidence records and limiting interpretation when evidence is conflicting or incomplete. Phage-host interaction prediction provides a demanding test case for this problem, requiring the integration of genomic, functional, and reference-derived evidence with differing coverage, specificity, and reliability. Here we introduce a structured-evidence inference paradigm that retains heterogeneous biological observations as modular, named, and experimentally perturbable records rather than compressing them before prediction. We implement this paradigm in PHI-Reason, which constructs structured textual profiles from genomic annotations, receptor-binding protein homology, nucleotide-neighbour relationships, alignment-free genomic similarity, and available CRISPR spacer information. A general-purpose large language model (LLM) performs inference directly over these structured profiles without task-specific training or manually engineered evidence-fusion rules. Across phage-host benchmarks, PHI-Reason achieved species-level top-1 accuracies of 67.4% and 57.2% on RefSeq-634 and VHDB-3150, respectively, and a multi-host accuracy of 0.673 on the Hi-C cohort, outperforming established numerical methods. On 207 experimentally supported associations from 2025-2026 excluded from the reference corpus, it achieved 52.2% species-level and 90.8% genus-level top-1 accuracy. Evidence perturbations identified nucleotide-neighbour context as the dominant signal and quantified complementary or misleading evidence contributions. Target-conditioned local Jacobian and output-grounding analyses further characterized evidence-dependent inference and departures of generated rationales from the supplied evidence. Extending the framework to eukaryotic virus-host prediction preserved high predictive accuracy (67.0%), supporting cross-domain portability. Moreover, replacing the reasoning LLM with Jev, a typed-decision model, maintained broadly comparable performance across phage-host benchmarks while reducing mean per-query inference time by 11- to 40-fold, supporting the separation of evidence representation from downstream inference. These results establish structured biological evidence as a portable interface between heterogeneous biological observations and downstream inference. By separating evidence representation from the inference engine, this paradigm supports both language-model predictions with inspectable rationales and faster typed decisions for high-throughput prediction, while making the contribution and limits of evidential support directly testable.",
+  "authors": [
+    "Zhang, Y.-z.",
+    "Xu, L.",
+    "Imoto, S."
+  ],
+  "doi": "10.64898/2026.06.10.727770",
+  "first_seen": "2026-10-09",
+  "id": "biorxiv:10.64898/2026.06.10.727770",
+  "metadata": {
+    "abstract": "Biological interaction inference often requires integrating heterogeneous evidence that differs in biological meaning, provenance, specificity, and reliability. Existing computational approaches typically compress such evidence into numerical features, aggregate scores, or latent representations before prediction, obscuring the contribution of individual evidence records and limiting interpretation when evidence is conflicting or incomplete. Phage-host interaction prediction provides a demanding test case for this problem, requiring the integration of genomic, functional, and reference-derived evidence with differing coverage, specificity, and reliability. Here we introduce a structured-evidence inference paradigm that retains heterogeneous biological observations as modular, named, and experimentally perturbable records rather than compressing them before prediction. We implement this paradigm in PHI-Reason, which constructs structured textual profiles from genomic annotations, receptor-binding protein homology, nucleotide-neighbour relationships, alignment-free genomic similarity, and available CRISPR spacer information. A general-purpose large language model (LLM) performs inference directly over these structured profiles without task-specific training or manually engineered evidence-fusion rules. Across phage-host benchmarks, PHI-Reason achieved species-level top-1 accuracies of 67.4% and 57.2% on RefSeq-634 and VHDB-3150, respectively, and a multi-host accuracy of 0.673 on the Hi-C cohort, outperforming established numerical methods. On 207 experimentally supported associations from 2025-2026 excluded from the reference corpus, it achieved 52.2% species-level and 90.8% genus-level top-1 accuracy. Evidence perturbations identified nucleotide-neighbour context as the dominant signal and quantified complementary or misleading evidence contributions. Target-conditioned local Jacobian and output-grounding analyses further characterized evidence-dependent inference and departures of generated rationales from the supplied evidence. Extending the framework to eukaryotic virus-host prediction preserved high predictive accuracy (67.0%), supporting cross-domain portability. Moreover, replacing the reasoning LLM with Jev, a typed-decision model, maintained broadly comparable performance across phage-host benchmarks while reducing mean per-query inference time by 11- to 40-fold, supporting the separation of evidence representation from downstream inference. These results establish structured biological evidence as a portable interface between heterogeneous biological observations and downstream inference. By separating evidence representation from the inference engine, this paradigm supports both language-model predictions with inspectable rationales and faster typed decisions for high-throughput prediction, while making the contribution and limits of evidential support directly testable.",
+    "author_corresponding": "Yao-zhong Zhang",
+    "author_corresponding_institution": "The University of Tokyo",
+    "authors": "Zhang, Y.-z.; Xu, L.; Imoto, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-09",
+    "doi": "10.64898/2026.06.10.727770",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/09/2026.06.10.727770.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Structured biological evidence enables general-purpose language models to predict bacteriophage-host interactions",
+    "type": "new results",
+    "version": "3"
+  },
+  "org": "The University of Tokyo",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-09",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "PHI-Reason uses structured textual evidence profiles (genomic, RBP homology, nucleotide-neighbour, alignment-free similarity, CRISPR spacers) with a general…",
+  "title": "Structured biological evidence enables general-purpose language models to predict bacteriophage-host interactions",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.10.727770"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Intro: Diffusion MRI allows for in vivo probing of brain tissue architecture via micron-level diffusion aggregated at the millimeter scale, but crossing white matter fibers decrease the sensitivity of downstream tasks such as microstructural modeling and tractography. Current fixel-based methods for identifying the number, orientation, and spread of fibers rely on finding the peaks of fiber orientation distributions from constrained spherical deconvolution. However, this method is biased by the spreads of nearby fibers and fails at angular separations lower than approximately 40-50 degrees.\n  Methods: In this work, we perform a constrained nonlinear optimization called fiber segmentation by signal splitting and iterative least squares estimation (FISSILE), modeling each voxel as a mixture of single-fiber distributions. We use FISSILE to fit axially symmetric fibers in simulations and on three in vivo human subjects from the Human Connectome Project, an ex vivo raccoon brain, as well as the same human subject scanned twice at two different signal-to-noise ratios (SNRs).\n  Results: On simulated data, FISSILE successfully identifies fibers at an angular separation of 40° and a volume fraction of 0.1 at an SNR as low as 30, while MRtrix3's fod2fixel is limited to 60° separation and 0.1 volume fraction at the same SNR. On acquired data, FISSILE identified 85.8% of white matter voxels on average in human brains and 79.4% in the raccoon with at least one fiber crossing, whereas fod2fixel identified 30.1% and 44.5%. The number of white matter fiber crossings was mildly sensitive to different noise levels in the human subject with two acquisitions.\n  Conclusion: A method that models the crossing fiber phenomenon as an unmixing problem increases sensitivity to individual fibers for more precise characterization of anatomy.",
+  "authors": [
+    "Adam M. Saunders",
+    "Gaurav Rudravaram",
+    "Michael E. Kim",
+    "Elyssa M. McMaster",
+    "Yifan Shuai",
+    "Warren Boschen",
+    "Sophie Lin",
+    "Suzana Herculano-Houzel",
+    "Daniel C. Colvin",
+    "Yurui Gao",
+    "Kurt G. Schilling",
+    "Adam W. Anderson",
+    "Bennett Landman"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-14",
+  "id": "arxiv:2610.20974",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.20974v1</ns0:id>\n    <ns0:title>Separating mixtures of single-fiber orientation distributions for increased sensitivity to crossing white matter fibers</ns0:title>\n    <ns0:updated>2026-10-14T21:46:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.20974v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.20974v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Intro: Diffusion MRI allows for in vivo probing of brain tissue architecture via micron-level diffusion aggregated at the millimeter scale, but crossing white matter fibers decrease the sensitivity of downstream tasks such as microstructural modeling and tractography. Current fixel-based methods for identifying the number, orientation, and spread of fibers rely on finding the peaks of fiber orientation distributions from constrained spherical deconvolution. However, this method is biased by the spreads of nearby fibers and fails at angular separations lower than approximately 40-50 degrees.\n  Methods: In this work, we perform a constrained nonlinear optimization called fiber segmentation by signal splitting and iterative least squares estimation (FISSILE), modeling each voxel as a mixture of single-fiber distributions. We use FISSILE to fit axially symmetric fibers in simulations and on three in vivo human subjects from the Human Connectome Project, an ex vivo raccoon brain, as well as the same human subject scanned twice at two different signal-to-noise ratios (SNRs).\n  Results: On simulated data, FISSILE successfully identifies fibers at an angular separation of 40° and a volume fraction of 0.1 at an SNR as low as 30, while MRtrix3's fod2fixel is limited to 60° separation and 0.1 volume fraction at the same SNR. On acquired data, FISSILE identified 85.8% of white matter voxels on average in human brains and 79.4% in the raccoon with at least one fiber crossing, whereas fod2fixel identified 30.1% and 44.5%. The number of white matter fiber crossings was mildly sensitive to different noise levels in the human subject with two acquisitions.\n  Conclusion: A method that models the crossing fiber phenomenon as an unmixing problem increases sensitivity to individual fibers for more precise characterization of anatomy.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-14T21:46:46Z</ns0:published>\n    <ns1:comment>25 pages, 8 figures</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Adam M. Saunders</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gaurav Rudravaram</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael E. Kim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Elyssa M. McMaster</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yifan Shuai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Warren Boschen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sophie Lin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Suzana Herculano-Houzel</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Daniel C. Colvin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yurui Gao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kurt G. Schilling</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Adam W. Anderson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bennett Landman</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-14",
+  "published_doi": null,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "FISSILE models each voxel as a mixture of single-fiber orientation distributions, improving detection of crossing white matter fibers over fod2fixel in…",
+  "title": "Separating mixtures of single-fiber orientation distributions for increased sensitivity to crossing white matter fibers",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.20974v1"
+}

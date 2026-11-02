@@ -1,0 +1,44 @@
+{
+  "abstract": "Background: Linear-reference read alignment is computationally efficient but is susceptible to reference bias, whereas pangenome graph alignment better represents genetic diversity at substantially greater computational cost. Findings: We developed DCSMAP, a hybrid workflow that combines linear alignment with machine-learning-based selection of reads for remapping to a personalized pangenome graph, followed by local indel realignment. An XGBoost classifier trained on linear-alignment features achieved an area under the receiver operating characteristic curve of 0.9831 on held-out test data. Across 17 runs covering seven Genome in a Bottle samples, two sequencing platforms, and two read lengths, it selected a mean of 14.80% of read pairs for graph remapping. The optimized hybrid workflows reduced variant-calling errors by 46.66% relative to BWA-MEM2 and 8.39% relative to vg personalized-pangenome alignment. Heterozygous allelic balance indicated that the hybrid workflows substantially reduced reference bias relative to BWA-MEM2 linear alignment, yielding reference bias comparable to that of the pangenome alignment. On HG003 DNBSEQ PE150 data, DCSMAP achieved a 2 to 2.5 times speedup over the personalized-pangenome workflow; both workflows used 32 threads. Efficiency gains arose from both the hybrid architecture and tool-level optimizations, which accelerated personalized-graph construction by 2.5 times, graph alignment by 1.2 times, and indel realignment by 2.5 times. Conclusions: Selectively applying graph alignment to reads with potentially unreliable linear placements retains the accuracy benefits of personalized pangenomes while substantially reducing computation. DCSMAP provides an accurate and resource-efficient approach to short-read mapping on a standard CPU server.",
+  "authors": [
+    "Yang, Q.",
+    "Wan, R.",
+    "Gong, C.",
+    "Li, S.",
+    "Li, Y.",
+    "Zhang, Y."
+  ],
+  "doi": "10.64898/2026.10.18.759502",
+  "first_seen": "2026-10-19",
+  "id": "biorxiv:10.64898/2026.10.18.759502",
+  "metadata": {
+    "abstract": "Background: Linear-reference read alignment is computationally efficient but is susceptible to reference bias, whereas pangenome graph alignment better represents genetic diversity at substantially greater computational cost. Findings: We developed DCSMAP, a hybrid workflow that combines linear alignment with machine-learning-based selection of reads for remapping to a personalized pangenome graph, followed by local indel realignment. An XGBoost classifier trained on linear-alignment features achieved an area under the receiver operating characteristic curve of 0.9831 on held-out test data. Across 17 runs covering seven Genome in a Bottle samples, two sequencing platforms, and two read lengths, it selected a mean of 14.80% of read pairs for graph remapping. The optimized hybrid workflows reduced variant-calling errors by 46.66% relative to BWA-MEM2 and 8.39% relative to vg personalized-pangenome alignment. Heterozygous allelic balance indicated that the hybrid workflows substantially reduced reference bias relative to BWA-MEM2 linear alignment, yielding reference bias comparable to that of the pangenome alignment. On HG003 DNBSEQ PE150 data, DCSMAP achieved a 2 to 2.5 times speedup over the personalized-pangenome workflow; both workflows used 32 threads. Efficiency gains arose from both the hybrid architecture and tool-level optimizations, which accelerated personalized-graph construction by 2.5 times, graph alignment by 1.2 times, and indel realignment by 2.5 times. Conclusions: Selectively applying graph alignment to reads with potentially unreliable linear placements retains the accuracy benefits of personalized pangenomes while substantially reducing computation. DCSMAP provides an accurate and resource-efficient approach to short-read mapping on a standard CPU server.",
+    "author_corresponding": "Yong Zhang",
+    "author_corresponding_institution": "BGI Research, Wuhan 430074, China",
+    "authors": "Yang, Q.; Wan, R.; Gong, C.; Li, S.; Li, Y.; Zhang, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-19",
+    "doi": "10.64898/2026.10.18.759502",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/19/2026.10.18.759502.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DCSMAP: A Hybrid Linear-Pangenome Framework for Accurate and Efficient Read Alignment",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "BGI Research, Wuhan 430074, China",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-10-19",
+  "published_doi": null,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "DCSMAP hybridizes linear alignment with XGBoost-selected reads remapped to personalized pangenome graphs, cutting variant-calling errors versus BWA-MEM2 and…",
+  "title": "DCSMAP: A Hybrid Linear-Pangenome Framework for Accurate and Efficient Read Alignment",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.18.759502"
+}

@@ -1,0 +1,31 @@
+{
+  "abstract": "Pharmacokinetic and pharmacokinetic-pharmacodynamic models are used in simulated clinical trials to compare dosing protocols and patient groups before a trial is run. Distinct virtual patient cohorts, representing renal impairment, obesity and overdosage, can impose different input distributions on the same model. Global sensitivity analysis (GSA) identifies which uncertain inputs drive the cohort's predictions, but a direct analysis incurs its full computational cost for every cohort. An alternative accounting is proposed here: a single surrogate is trained on an input envelope wide enough to contain every cohort, each cohort is then analysed using that surrogate, and the reported quantity is the number of cohorts at which the surrogate route has cost fewer mechanistic evaluations than the direct route. The study tests three GSA methods: variance-based GSA, Morris screening and optimal transport. It covers four PK and PK/PD models with seven to twenty-three free inputs, 21 cohorts and five surrogates. Every estimate is scored against a converged mechanistic solution obtained with its own method, and all costs are expressed in mechanistic model evaluations. The parameter ranking is recovered at low cost: gradient-boosted trees reconstruct it on 20 of the 21 cohorts and cost fewer evaluations to train than one direct cohort analysis, on all four models, at break-even counts between 0.02 and 0.14 cohorts. Amortisation is fastest at the highest dimensions, where each direct variance-based sample of a $D$-input model requires $D+2$ evaluations while the training budget does not scale accordingly. Recovering absolute index values is harder, and fewer surrogates manage it as inputs grow: two of the five surrogates fail at fifteen inputs, where the gradient-boosted trees and the Gaussian process still succeed, and at twenty-three inputs no surrogate succeeds on a majority of cohorts.",
+  "authors": [
+    "Daniele Pessina",
+    "Roberto A. Abbiati",
+    "Maria M. Papathanasiou"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-10",
+  "id": "arxiv:2610.14719",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.14719v1</ns0:id>\n    <ns0:title>Amortised Global Sensitivity Analysis of Pharmacokinetic models for Simulated Clinical Trials</ns0:title>\n    <ns0:updated>2026-10-10T08:40:08Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.14719v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.14719v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Pharmacokinetic and pharmacokinetic-pharmacodynamic models are used in simulated clinical trials to compare dosing protocols and patient groups before a trial is run. Distinct virtual patient cohorts, representing renal impairment, obesity and overdosage, can impose different input distributions on the same model. Global sensitivity analysis (GSA) identifies which uncertain inputs drive the cohort's predictions, but a direct analysis incurs its full computational cost for every cohort. An alternative accounting is proposed here: a single surrogate is trained on an input envelope wide enough to contain every cohort, each cohort is then analysed using that surrogate, and the reported quantity is the number of cohorts at which the surrogate route has cost fewer mechanistic evaluations than the direct route. The study tests three GSA methods: variance-based GSA, Morris screening and optimal transport. It covers four PK and PK/PD models with seven to twenty-three free inputs, 21 cohorts and five surrogates. Every estimate is scored against a converged mechanistic solution obtained with its own method, and all costs are expressed in mechanistic model evaluations. The parameter ranking is recovered at low cost: gradient-boosted trees reconstruct it on 20 of the 21 cohorts and cost fewer evaluations to train than one direct cohort analysis, on all four models, at break-even counts between 0.02 and 0.14 cohorts. Amortisation is fastest at the highest dimensions, where each direct variance-based sample of a $D$-input model requires $D+2$ evaluations while the training budget does not scale accordingly. Recovering absolute index values is harder, and fewer surrogates manage it as inputs grow: two of the five surrogates fail at fifteen inputs, where the gradient-boosted trees and the Gaussian process still succeed, and at twenty-three inputs no surrogate succeeds on a majority of cohorts.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-10T08:40:08Z</ns0:published>\n    <ns1:comment>68 pages, 15 figures, 11 tables; main text followed by supplementary material. Code: https://github.com/DanielePessina/jaxgsa</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Daniele Pessina</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Roberto A. Abbiati</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Maria M. Papathanasiou</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-10",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes amortised global sensitivity analysis: one surrogate trained on a wide input envelope serves many virtual PK/PK-PD cohorts; gradient-boosted trees…",
+  "title": "Amortised Global Sensitivity Analysis of Pharmacokinetic models for Simulated Clinical Trials",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.14719v1"
+}

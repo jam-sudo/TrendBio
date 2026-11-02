@@ -1,0 +1,35 @@
+{
+  "abstract": "Generative Flow Networks (GFlowNets) learn a policy that samples compositional objects in proportion to an unnormalized reward $R(x)$. This makes them useful wherever many diverse, high-reward candidates are needed and oracle queries are expensive. In practice, a single GFlowNet often fails to cover all modes of a complex distribution, and the obvious ways to scale compute saturate: larger batches and data-parallel gradient averaging draw every trajectory from one, possibly biased, policy, so extra rollouts rediscover known modes instead of finding new ones. We explore whether this mode-bias problem (mode collapse in the extreme) can be addressed with a population of asynchronously trained policies which divide the state space between them. Mixture of GFlowNets (MoG) replaces the single forward policy with a community of $K$ independent GFlowNets coupled through one jointly trained soft classifier, which assigns each member its own region of the state space through reward shaping. Mixing the members under their learned partition functions provably recovers the target $p(x)\\propto R(x)$. MoG exchange (MoGX) also lets the classifier route sampled trajectories: a trajectory the classifier assigns to another member is sent to that member and trained on there, with no importance sampling. We evaluate both methods by keeping the environment-interaction budget fixed while scaling the community size, turning parallel compute into mode coverage without extra oracle calls. On HyperGrid, across six reward landscapes and communities of up to $K{=}64$, MoG and MoGX keep finding new modes as $K$ grows, while data-parallel training saturates. On a genomic ideotype-design task, MoGX covers $39%$ of the $1024$ optima at $K{=}64$, against $31\\%$ for independent agents and $20\\%$ for data-parallel training. MoG also has a lower per-iteration synchronization cost than data-parallel training.",
+  "authors": [
+    "Omar G. Younis",
+    "Joseph D. Viviano",
+    "Chirayu Anant Haryan",
+    "MD Vasimuddin",
+    "Sanchit Misra",
+    "Yoshua Bengio"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-12",
+  "id": "arxiv:2610.17007",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.DC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.17007v1</ns0:id>\n    <ns0:title>Mixture of GFlowNets</ns0:title>\n    <ns0:updated>2026-10-12T15:51:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.17007v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.17007v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Generative Flow Networks (GFlowNets) learn a policy that samples compositional objects in proportion to an unnormalized reward $R(x)$. This makes them useful wherever many diverse, high-reward candidates are needed and oracle queries are expensive. In practice, a single GFlowNet often fails to cover all modes of a complex distribution, and the obvious ways to scale compute saturate: larger batches and data-parallel gradient averaging draw every trajectory from one, possibly biased, policy, so extra rollouts rediscover known modes instead of finding new ones. We explore whether this mode-bias problem (mode collapse in the extreme) can be addressed with a population of asynchronously trained policies which divide the state space between them. Mixture of GFlowNets (MoG) replaces the single forward policy with a community of $K$ independent GFlowNets coupled through one jointly trained soft classifier, which assigns each member its own region of the state space through reward shaping. Mixing the members under their learned partition functions provably recovers the target $p(x)\\propto R(x)$. MoG exchange (MoGX) also lets the classifier route sampled trajectories: a trajectory the classifier assigns to another member is sent to that member and trained on there, with no importance sampling. We evaluate both methods by keeping the environment-interaction budget fixed while scaling the community size, turning parallel compute into mode coverage without extra oracle calls. On HyperGrid, across six reward landscapes and communities of up to $K{=}64$, MoG and MoGX keep finding new modes as $K$ grows, while data-parallel training saturates. On a genomic ideotype-design task, MoGX covers $39%$ of the $1024$ optima at $K{=}64$, against $31\\%$ for independent agents and $20\\%$ for data-parallel training. MoG also has a lower per-iteration synchronization cost than data-parallel training.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-12T15:51:36Z</ns0:published>\n    <ns1:comment>30 Pages, 21 Figures, 14 Tables, under review. Omar G. Younis and Joseph D. Viviano are co-lead authors</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Omar G. Younis</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Joseph D. Viviano</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chirayu Anant Haryan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>MD Vasimuddin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sanchit Misra</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yoshua Bengio</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-12",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes Mixture of GFlowNets, a population of asynchronously trained GFlowNet policies with a soft classifier partitioning state space to improve mode…",
+  "title": "Mixture of GFlowNets",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.17007v1"
+}

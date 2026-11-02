@@ -1,0 +1,41 @@
+{
+  "abstract": "Background. Deep learning could make malaria microscopy more accessible in low-resource settings, but training it usually needs thousands of expert-labeled images. Semi-supervised learning (SSL) reduces this need by also learning from unlabeled images. However, methods such as FixMatch accept pseudo-labels using a fixed confidence threshold, and lowering that threshold to use more data can teach the model to make confident mistakes. These silent failures are dangerous because they are never flagged for expert review. Methods. We added an uncertainty check to SSL pseudo-labeling. Each unlabeled image is passed through the model ten times with Monte Carlo dropout active; its pseudo-label is used only if the normalized predictive entropy of the averaged prediction is below 0.2, and it is then weighted by a sigmoid function of model confidence. We trained a ResNet-18 on the public Malaria Cell Images dataset (27,558 cell images; 70:10:20 split) using labels for only 20% of the training images. Over six random seeds, we compared the method with a supervised baseline and with FixMatch at thresholds of 0.95 and 0.80, measuring accuracy, AUC and silent failure rate (SFR), the share of predictions that are wrong despite confidence above 0.95. Results. Compared with FixMatch at a threshold of 0.80, our method lowered the mean SFR from 2.28% to 1.52%, a 33.2% relative reduction (paired t-test, t = 4.29, p = 0.0078), and the SFR was lower in all six runs. Accuracy (96.6% vs. 96.4%) and AUC (0.991 for both) were unchanged. The mean SFR was also below that of FixMatch at 0.95 (1.97%) and of the supervised baseline (2.01%). Conclusions. Checking epistemic uncertainty before accepting pseudo-labels reduced confident errors in semi-supervised malaria cell classification without lowering accuracy. Patient-level and external validation on whole-slide images are still needed before clinical use.",
+  "authors": [
+    "Kumar, A.",
+    "Anand, A.",
+    "Chhetri, L."
+  ],
+  "doi": "10.64898/2026.10.13.758712",
+  "first_seen": "2026-10-19",
+  "id": "biorxiv:10.64898/2026.10.13.758712",
+  "metadata": {
+    "abstract": "Background. Deep learning could make malaria microscopy more accessible in low-resource settings, but training it usually needs thousands of expert-labeled images. Semi-supervised learning (SSL) reduces this need by also learning from unlabeled images. However, methods such as FixMatch accept pseudo-labels using a fixed confidence threshold, and lowering that threshold to use more data can teach the model to make confident mistakes. These silent failures are dangerous because they are never flagged for expert review. Methods. We added an uncertainty check to SSL pseudo-labeling. Each unlabeled image is passed through the model ten times with Monte Carlo dropout active; its pseudo-label is used only if the normalized predictive entropy of the averaged prediction is below 0.2, and it is then weighted by a sigmoid function of model confidence. We trained a ResNet-18 on the public Malaria Cell Images dataset (27,558 cell images; 70:10:20 split) using labels for only 20% of the training images. Over six random seeds, we compared the method with a supervised baseline and with FixMatch at thresholds of 0.95 and 0.80, measuring accuracy, AUC and silent failure rate (SFR), the share of predictions that are wrong despite confidence above 0.95. Results. Compared with FixMatch at a threshold of 0.80, our method lowered the mean SFR from 2.28% to 1.52%, a 33.2% relative reduction (paired t-test, t = 4.29, p = 0.0078), and the SFR was lower in all six runs. Accuracy (96.6% vs. 96.4%) and AUC (0.991 for both) were unchanged. The mean SFR was also below that of FixMatch at 0.95 (1.97%) and of the supervised baseline (2.01%). Conclusions. Checking epistemic uncertainty before accepting pseudo-labels reduced confident errors in semi-supervised malaria cell classification without lowering accuracy. Patient-level and external validation on whole-slide images are still needed before clinical use.",
+    "author_corresponding": "Latchan Chhetri",
+    "author_corresponding_institution": "Sikkim Manipal Institute of Technology",
+    "authors": "Kumar, A.; Anand, A.; Chhetri, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-19",
+    "doi": "10.64898/2026.10.13.758712",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/19/2026.10.13.758712.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Trust, but Verify: Epistemic Uncertainty-Gated Pseudo-Labeling for Safer Semi-Supervised Malaria Screening",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Sikkim Manipal Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-19",
+  "published_doi": null,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Uncertainty-gated pseudo-labeling (MC dropout entropy filter) for semi-supervised malaria cell classification cuts silent failures vs FixMatch at equal…",
+  "title": "Trust, but Verify: Epistemic Uncertainty-Gated Pseudo-Labeling for Safer Semi-Supervised Malaria Screening",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.13.758712"
+}

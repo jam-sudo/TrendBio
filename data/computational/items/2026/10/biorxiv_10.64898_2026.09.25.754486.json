@@ -1,0 +1,42 @@
+{
+  "abstract": "Cell-type marker genes are definitional characteristics of a cell type, and in single-cell RNA sequencing atlases they are commonly nominated through differential expression (DE) testing. The Wilcoxon rank-sum test is the default method for marker gene discovery in Seurat and a recommended method in Scanpy, two widely used computational software packages for scRNA-seq analysis. Structurally, Wilcoxon's standardized statistic grows with sample size at a fixed underlying effect, meaning computed rankings across clusters of unequal size are incomparable. We quantified this effect across three atlas datasets - lung, kidney, and brain. Mean Wilcoxon score scaled with log cluster size at Pearson correlation r = 0.90-0.95 in each organ. In contrast, a classification-based comparator, NS-Forest, showed low correlation with cluster size (r = 0.10-0.28). This DE-cluster size relationship remained essentially unchanged after controlling for classification performance through partial correlation, decayed monotonically under cluster size downsampling, and was reproduced in simulation with marker quality fixed. The Wilcoxon rank-sum test can be transformed into a rank-based effect size by normalizing by the target-background pair count, removing the positive size dependence. However, this effect size nominates an identical set of candidate genes as the original statistic, indicating the cluster size dependence and poor specificity of DE nominated genes are separate problems. Genes nominated under default settings were substantially less specific to their target clusters, with median on-target fractions of 0.204 (lung), 0.166 (kidney), and 0.083 (brain), compared to NS-Forest's marker genes (0.580, 0.687, 0.364), revealing the relatively poor specificity that highly scoring DE genes exhibit.",
+  "authors": [
+    "Doggett, K.",
+    "Pintard, D.",
+    "Scheuermann, R. H.",
+    "Zhang, Y."
+  ],
+  "doi": "10.64898/2026.09.25.754486",
+  "first_seen": "2026-10-01",
+  "id": "biorxiv:10.64898/2026.09.25.754486",
+  "metadata": {
+    "abstract": "Cell-type marker genes are definitional characteristics of a cell type, and in single-cell RNA sequencing atlases they are commonly nominated through differential expression (DE) testing. The Wilcoxon rank-sum test is the default method for marker gene discovery in Seurat and a recommended method in Scanpy, two widely used computational software packages for scRNA-seq analysis. Structurally, Wilcoxon's standardized statistic grows with sample size at a fixed underlying effect, meaning computed rankings across clusters of unequal size are incomparable. We quantified this effect across three atlas datasets - lung, kidney, and brain. Mean Wilcoxon score scaled with log cluster size at Pearson correlation r = 0.90-0.95 in each organ. In contrast, a classification-based comparator, NS-Forest, showed low correlation with cluster size (r = 0.10-0.28). This DE-cluster size relationship remained essentially unchanged after controlling for classification performance through partial correlation, decayed monotonically under cluster size downsampling, and was reproduced in simulation with marker quality fixed. The Wilcoxon rank-sum test can be transformed into a rank-based effect size by normalizing by the target-background pair count, removing the positive size dependence. However, this effect size nominates an identical set of candidate genes as the original statistic, indicating the cluster size dependence and poor specificity of DE nominated genes are separate problems. Genes nominated under default settings were substantially less specific to their target clusters, with median on-target fractions of 0.204 (lung), 0.166 (kidney), and 0.083 (brain), compared to NS-Forest's marker genes (0.580, 0.687, 0.364), revealing the relatively poor specificity that highly scoring DE genes exhibit.",
+    "author_corresponding": "Yun Zhang",
+    "author_corresponding_institution": "National Library of Medicine",
+    "authors": "Doggett, K.; Pintard, D.; Scheuermann, R. H.; Zhang, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-01",
+    "doi": "10.64898/2026.09.25.754486",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/01/2026.09.25.754486.source.xml",
+    "license": "cc0",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Limitations of differential expression for cell-type marker discovery in single-cell RNA sequencing atlases",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "National Library of Medicine",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-10-01",
+  "published_doi": null,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows Wilcoxon rank-sum marker scores in scRNA-seq atlases scale with cluster size (r~0.90-0.95), and DE-nominated markers are less cluster-specific than…",
+  "title": "Limitations of differential expression for cell-type marker discovery in single-cell RNA sequencing atlases",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.25.754486"
+}
