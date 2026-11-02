@@ -1,3 +1,4 @@
+import logging
 from datetime import date
 
 from pipeline.budget import Budget
@@ -5,6 +6,9 @@ from pipeline.config import Scoring
 from pipeline.llm import LLM
 from pipeline.models import Item, Topic
 from pipeline.score import Scores, Signals
+
+
+logger = logging.getLogger(__name__)
 
 
 def synthesize_top(
@@ -18,7 +22,14 @@ def synthesize_top(
     for topic, signals, _ in ranked:
         previous = topic.synthesis if any(day.rank is not None and day.date < today
                                           for day in topic.history) else None
-        result = llm.synthesize(topic, items_by_topic[topic.slug], signals, previous, model)
+        items = items_by_topic[topic.slug]
+        if len(items) > cfg.synthesis_max_items:
+            logger.warning('synthesis_truncated topic=%s items=%d selected=%d',
+                           topic.slug, len(items), cfg.synthesis_max_items)
+            items = sorted(items, key=lambda item: (
+                item.type == 'preprint', -item.published_at.toordinal(), item.id,
+            ))[:cfg.synthesis_max_items]
+        result = llm.synthesize(topic, items, signals, previous, model)
         if result is None:
             topic.headline = topic.headline or topic.label.title()
             topic.summary = ''

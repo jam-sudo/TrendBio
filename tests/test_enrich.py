@@ -205,7 +205,9 @@ def test_batch_chunks_maps_unordered_results_and_records_discount(tmp_path, item
                     stop_reason='refusal' if index == 4 else 'end_turn',
                     content=[] if index == 4 else [SimpleNamespace(type='text', text=(
                         'invalid json' if index == 5 else json.dumps({
-                            'summary': 'Summary ' + str(index), 'primary': 'genomics', 'secondary': ['unknown'],
+                            'summary': 'evidence ' * 30 if index == 6 else 'Summary ' + str(index),
+                            'primary': 'genomics',
+                            'secondary': ['unknown', 'ml-ai', 'structural', 'systems'] if index == 6 else ['unknown'],
                         })
                     ))], usage=SimpleNamespace(input_tokens=100, output_tokens=20),
                 )
@@ -226,6 +228,9 @@ def test_batch_chunks_maps_unordered_results_and_records_discount(tmp_path, item
     assert results[items[2000].id].summary == 'Summary 0'
     assert all(results[items[index].id] is None for index in range(1, 6))
     assert results[items[0].id].secondary == []
+    assert len(results[items[6].id].summary) <= 160
+    assert results[items[6].id].summary.endswith('evidence…')
+    assert results[items[6].id].secondary == ['ml-ai', 'structural']
     assert budget.month_spend_usd() == pytest.approx((2001 - 3) * 0.00001)
     for chunk in batches.requests:
         assert len({request['custom_id'] for request in chunk}) == len(chunk)
@@ -311,3 +316,81 @@ def test_enrichment_parallel_and_writes_sorted(tmp_path, item, taxonomy):
     assert notes == sorted(notes)
     assert len(store.items_between(date.min, date.max)) == 40
     embedder.embed.assert_called_once()
+
+
+def test_long_summary_is_truncated_not_dropped(tmp_path, item, taxonomy):
+    text = 'Comparative genomics reveals conserved pathogen evolution. ' * 4
+    messages = FakeMessages(output={'summary': text, 'primary': 'genomics', 'secondary': []})
+    llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
+    result = llm.enrich(item, taxonomy, [])
+    assert result is not None
+    assert len(result.summary) <= 160 and result.summary.endswith('…')
+    assert text.startswith(result.summary[:-1])
+    assert text[len(result.summary) - 1].isspace()
+    assert llm.fallback_reasons == {}
+    assert 'maxLength' not in messages.calls[0]['output_format'].model_json_schema()['properties']['summary']
+
+
+def test_three_secondaries_trimmed_to_two(tmp_path, item, taxonomy):
+    messages = FakeMessages(output={
+        'summary': 'Summary', 'primary': 'genomics',
+        'secondary': ['unknown', 'ml-ai', 'structural', 'systems'],
+    })
+    llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
+    assert llm.enrich(item, taxonomy, []).secondary == ['ml-ai', 'structural']
+    assert 'maxItems' not in messages.calls[0]['output_format'].model_json_schema()['properties']['secondary']
+
+
+@pytest.mark.parametrize('case,reason', [
+    ('api', 'api_error:401'), ('retry', 'retries_exhausted'),
+    ('sdk_validation', 'validation:primary'), ('validation', 'validation:primary'),
+    ('unknown_primary', 'validation:primary'), ('empty', 'empty_output'),
+    ('refusal', 'refusal:none'), ('categorized_refusal', 'refusal:bio'),
+])
+def test_fallback_reason_logged(tmp_path, item, taxonomy, monkeypatch, caplog, case, reason):
+    import anthropic
+    import httpx
+
+    calls = []
+
+    def parse(**kwargs):
+        calls.append(kwargs)
+        if case in ('api', 'retry'):
+            raise anthropic.APIStatusError(item.abstract, response=httpx.Response(
+                401 if case == 'api' else 429,
+                request=httpx.Request('POST', 'https://example.org/messages'),
+            ), body=None)
+        if case == 'sdk_validation':
+            Enrichment.model_validate({'summary': item.abstract, 'secondary': []})
+        output = {'summary': item.abstract, 'secondary': []}
+        if case == 'unknown_primary':
+            output['primary'] = 'unknown'
+        return SimpleNamespace(
+            stop_reason='refusal' if 'refusal' in case else 'end_turn',
+            stop_details=SimpleNamespace(category='bio') if case == 'categorized_refusal' else None,
+            parsed_output=None if case == 'empty' else output,
+            usage=SimpleNamespace(input_tokens=100, output_tokens=20),
+        )
+
+    monkeypatch.setattr('pipeline.llm.time.sleep', lambda seconds: None)
+    llm = LLM(SimpleNamespace(messages=SimpleNamespace(parse=parse)), Budget(tmp_path / 'spend.json', 50))
+    with caplog.at_level('WARNING', logger='pipeline.llm'):
+        assert llm.enrich(item, taxonomy, []) is None
+    warnings = [record for record in caplog.records if record.name == 'pipeline.llm']
+    assert len(warnings) == 1
+    assert warnings[0].levelname == 'WARNING'
+    assert f'id={item.id} reason={reason}' in warnings[0].getMessage()
+    assert item.abstract not in caplog.text and item.title not in caplog.text
+    assert llm.fallback_reasons == {item.id: reason}
+    assert len(calls) == (4 if case == 'retry' else 1)
+
+
+@pytest.mark.parametrize('text,limit,expected', [
+    ('short text', 10, 'short text'), ('word another', 6, 'word…'),
+    ('word another', 5, 'word…'), ('abcdefgh', 5, 'abcd…'),
+    ('word\tanother', 8, 'word…'),
+])
+def test_truncate_preserves_words_when_possible(text, limit, expected):
+    from pipeline.llm import truncate
+
+    assert truncate(text, limit) == expected

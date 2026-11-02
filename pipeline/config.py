@@ -1,7 +1,8 @@
 from pathlib import Path
+from typing import Literal
 
 import yaml
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Category(BaseModel):
@@ -24,11 +25,13 @@ class Scoring(BaseModel):
     rise_k: int = 3
     rise_cap: float = 10.0
     history_days_for_own_baseline: int = 14
-    cluster_distance_threshold: float = 0.35
+    cluster_distance_threshold: float = 0.10
+    cluster_linkage: Literal['average', 'complete'] = 'complete'
     min_cluster_size: int = 3
     continuity_threshold: float = 0.80
     window_days: int = 7
     top_n: int = 5
+    synthesis_max_items: int = Field(default=40, ge=1)
     monthly_ceiling_usd: float = 50.0
     star_gain_threshold: int = 100
 

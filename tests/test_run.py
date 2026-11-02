@@ -360,3 +360,15 @@ def test_cli_configures_safe_stdout_logging(monkeypatch):
     assert configure.call_args.kwargs['format'] == '%(asctime)s %(levelname)s %(name)s: %(message)s'
     for name in ('httpx', 'httpcore', 'httpx2', 'httpcore2'):
         assert logging.getLogger(name).getEffectiveLevel() == logging.WARNING
+
+
+def test_enrich_stage_logs_fallback_reason_counts(ctx, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
+    reasons = ['refusal:bio', 'api_error:401', 'refusal:bio']
+    ctx.deps.llm.fallback_reasons = {item.id: reason for item, reason in zip(ctx.items, reasons)}
+    ctx.deps.llm.enrich = lambda *args: None
+    run_day('computational', TODAY, ctx.store, ctx.deps)
+    message = next(record.getMessage() for record in caplog.records
+                   if 'stage=enrich event=end' in record.getMessage())
+    assert "llm_fallbacks=3 fallback_reasons={'refusal:bio': 2, 'api_error:401': 1}" in message
+    assert all(item.abstract not in caplog.text for item in ctx.items)

@@ -6,6 +6,7 @@ import logging
 import os
 import shutil
 import tempfile
+from collections import Counter
 from time import perf_counter
 from contextlib import contextmanager
 from dataclasses import dataclass, replace
@@ -200,6 +201,10 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                                                deps.taxonomy, deps.hints_cfg)
             notes.extend(enrichment_notes)
             counts['llm_fallbacks'] = len(enrichment_notes)
+            reasons = getattr(deps.llm, 'fallback_reasons', {})
+            counts['fallback_reasons'] = dict(Counter(
+                reasons.get(note.split(':', 1)[1], 'unknown') for note in enrichment_notes
+            ))
         with _stage('embed', items=0) as counts:
             window = sorted(store.items_between(start, day), key=lambda item: item.id)
             missing = []

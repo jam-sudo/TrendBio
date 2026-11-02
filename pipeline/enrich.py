@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from pipeline.config import Taxonomy
 from pipeline.embed import l2_normalize
-from pipeline.llm import Enrichment, LLM
+from pipeline.llm import Enrichment, LLM, truncate
 from pipeline.models import Item
 from pipeline.store import Store
 
@@ -44,7 +44,7 @@ def enrich_items(
         if result is None:
             hints = hints_for(item, hints_cfg)
             results[index] = Enrichment(
-                summary=first_sentence(item.abstract or item.title)[:160],
+                summary=truncate(first_sentence(item.abstract or item.title), 160),
                 primary=hints[0] if hints else 'ml-ai', secondary=[],
             )
             notes.append(f'enrichment-fallback:{item.id}')

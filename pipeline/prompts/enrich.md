@@ -1,5 +1,5 @@
 Summarize the supplied item for an expert computational-biology audience.
-Return one factual summary of at most 160 characters, exactly one primary category,
+Return one factual summary of at most 140 characters, exactly one primary category,
 and zero to two secondary categories. Choose category slugs only from the list below.
 Use each category's covers text to guide classification. Source hints are priors,
 not orders: classify from the item's title and abstract.
