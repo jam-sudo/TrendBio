@@ -60,6 +60,27 @@ def test_same_title_after_31_days_is_new(tmp_path, item):
         assert dedupe([other], store) == [other]
 
 
+def test_industry_same_title_same_day_merges_across_rss_feeds(tmp_path, item):
+    company = item.model_copy(update={
+        'id': 'rss:company', 'source': 'rss', 'type': 'industry', 'doi': None,
+        'metadata': {'feed_kind': 'company', 'feed_url': 'https://company.example/feed'},
+    })
+    news = company.model_copy(update={
+        'id': 'rss:news', 'title': '  PROTEIN design a study! ',
+        'metadata': {'feed_kind': 'news', 'feed_url': 'https://news.example/feed'},
+    })
+    store = Store(tmp_path, 'computational')
+    assert dedupe([company, news], store) == [company]
+    assert dedupe([news, company], store) == [news]
+    store.put_item(company)
+    assert dedupe([news], store) == []
+    for offset in (-1, 1):
+        next_day = news.model_copy(update={'published_at': news.published_at + timedelta(days=offset)})
+        assert dedupe([next_day], store) == [next_day]
+    different_title = news.model_copy(update={'title': 'A different announcement'})
+    assert dedupe([different_title], store) == [different_title]
+
+
 def test_preprint_then_published_links_both_ways(tmp_path, item):
     paper = item.model_copy(update={
         "id": "pubmed:paper", "source": "pubmed", "type": "published",

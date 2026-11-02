@@ -26,8 +26,12 @@ def dedupe(new: list[Item], store: Store) -> list[Item]:
                 and (
                     (doi(item.doi) and doi(item.doi) == doi(other.doi))
                     or (title and title == normalize_title(other.title)
-                        and item.source != other.source
-                        and abs((item.published_at - other.published_at).days) <= 30)
+                        and (
+                            (item.source != other.source
+                             and abs((item.published_at - other.published_at).days) <= 30)
+                            or (item.type == other.type == "industry"
+                                and item.published_at == other.published_at)
+                        ))
                 )
             )
             for other in known
