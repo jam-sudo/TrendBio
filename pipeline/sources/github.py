@@ -2,15 +2,39 @@ from collections import Counter
 from datetime import date, timedelta
 import logging
 import os
+import re
 
 import httpx
 
 from pipeline.config import load_scoring
 from pipeline.models import Item, Source
-from pipeline.sources.base import collected, load_config, request
+from pipeline.sources.base import load_config, request
 from pipeline.store import Store
 
 logger = logging.getLogger(__name__)
+
+
+def collapse_duplicates(repos: list[dict]) -> list[dict]:
+    """Keep the most-starred copy of a described repository family."""
+    kept = []
+    descriptions = {}
+    for repo in sorted(repos, key=lambda repo: repo['stargazers_count'], reverse=True):
+        description = ''.join(char for char in (repo.get('description') or '').casefold() if char.isalnum())
+        name = repo['name'].casefold()
+        variants = descriptions.setdefault(description, [])
+        duplicate = False
+        for other in variants if description else []:
+            other_name = other['name'].casefold()
+            related = (name.startswith(other_name) or name.endswith(other_name)
+                       or other_name.startswith(name) or other_name.endswith(name)
+                       or bool(set(re.split(r'[-_.]+', name)) & set(re.split(r'[-_.]+', other_name))))
+            if related or (repo['description'] == other['description'] and repo['stargazers_count'] < 50):
+                duplicate = True
+                break
+        if not duplicate:
+            kept.append(repo)
+            variants.append(repo)
+    return kept
 
 
 def _headers(accept: str = 'application/vnd.github+json') -> dict[str, str]:
@@ -65,6 +89,7 @@ class GithubAdapter:
         self.repo_cache = {}
         self.observations: dict[str, int] = {}
         self.rest_calls = 0
+        self.collapsed = 0
 
     def repos(self, day: date, client: httpx.Client) -> list[str]:
         cfg = self.config['github']
@@ -79,7 +104,7 @@ class GithubAdapter:
                 found, page = 0, 1
                 while found < limit:
                     data = request(client, f"{cfg['endpoint']}/search/repositories", headers=_headers(), params={
-                        'q': f'topic:{topic} archived:false', 'sort': 'updated', 'order': 'desc',
+                        'q': f'topic:{topic} fork:false archived:false', 'sort': 'updated', 'order': 'desc',
                         'per_page': min(100, limit), 'page': page,
                     }).json()
                     if data.get('incomplete_results'):
@@ -91,8 +116,14 @@ class GithubAdapter:
                         break
                     page += 1
             cache = {'refreshed': day.isoformat(), 'repos': records_by_name}
-            if self.store is not None:
-                self.store.put_github_repos(cache)
+        discovered = [record for record in cache['repos'].values()
+                      if record['full_name'] not in cfg['watchlist'] and not record.get('fork')
+                      and record['stargazers_count'] >= cfg.get('min_stars_for_discovery', 20)]
+        kept = collapse_duplicates(discovered)
+        self.collapsed = len(discovered) - len(kept)
+        cache = {**cache, 'repos': {record['full_name']: record for record in kept}}
+        if self.store is not None:
+            self.store.put_github_repos(cache)
         self.repo_cache = cache
         return list(dict.fromkeys(cfg['watchlist'] + list(cache['repos'])))
 
@@ -160,4 +191,5 @@ class GithubAdapter:
             ))
         if self.store is not None:
             self.store.put_github_repos(self.repo_cache)
-        return collected(self.name, items)
+        logger.info('github: collected %d items collapsed=%d', len(items), self.collapsed)
+        return items

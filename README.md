@@ -13,6 +13,9 @@ deduplicates, enriches, clusters, ranks, and synthesizes evidence, then commits
 successful output under `data/computational/`. Cloudflare Pages builds the Astro
 site on pushes to `main`. Failed runs leave the last published data available.
 
+GitHub discovery excludes forks and repos below `github.min_stars_for_discovery` (20 stars); explicit watchlist entries bypass these filters.
+Discovered repos with matching normalized descriptions and variant names, or identical descriptions and fewer than 50 stars, collapse to the most-starred copy; collection logs report `collapsed=<n>`.
+
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
 The daily workflow also accepts an optional `date` and a `dry_run` switch.
