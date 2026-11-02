@@ -27,6 +27,7 @@ The manual backfill workflow takes inclusive `from` and `to` dates in
 chronological order; each successful invocation commits its output once.
 Daily and backfill runs share a concurrency group to prevent overlapping writes.
 Their job limits are 30 and 350 minutes, respectively.
+The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5`, shares the `pipeline` concurrency group, and commits changed data with a 120-minute job limit.
 
 ## Operator notes
 
