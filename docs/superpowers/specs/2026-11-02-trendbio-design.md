@@ -140,18 +140,18 @@ All source definitions (API endpoints, categories, journal lists, repo lists, RS
 | bioRxiv | preprints | official API, by date and category | categories: Bioinformatics, Genomics, Systems Biology, Synthetic Biology, Biophysics, Molecular Biology (keyword-filtered), Cell Biology (keyword-filtered). Also pull the published-DOI field to link preprint → paper. |
 | arXiv | preprints | API query | `q-bio.*` all; `cs.LG`, `cs.AI`, `stat.ML` filtered by a bio keyword list in config. |
 | PubMed | published papers | E-utilities, date-bounded | two queries: (a) journal list in config (Bioinformatics, Genome Biology, Nature Methods, Nature Biotechnology, Nucleic Acids Research, Cell Systems, PLOS Comp Bio, Genome Research, Briefings in Bioinformatics, BMC Bioinformatics, Nature Computational Science, Nature Machine Intelligence, Cell Genomics, Molecular Systems Biology, GigaScience, eLife — editable); (b) a MeSH/keyword query for computational biology in other journals. Match to preprints by DOI, then by normalized title. |
-| GitHub | code & tools | REST search + repo endpoints | track repos by topic tags (`bioinformatics`, `computational-biology`, `genomics`, `single-cell`, `protein-design`, …) and a curated watchlist in config. Record daily star count; a repo becomes an **item** when its 7-day star gain crosses a threshold (default 100) or it publishes a release. |
+| GitHub | code & tools | REST search + repo endpoints | track a **bounded** repo set: a curated watchlist in config plus, per topic tag (`bioinformatics`, `computational-biology`, `genomics`, `single-cell`, `protein-design`, …), the top N repos by recent activity (config, default N=200 per tag), refreshed weekly. Daily polling must stay inside the authenticated REST rate limit (5,000 requests/hour). Record daily star count; a repo becomes an **item** when its 7-day star gain crosses a threshold (default 100) or it publishes a release. |
 | Industry | announcements | RSS/Atom feeds listed in config | company blogs (e.g. Isomorphic Labs, Recursion, insitro, Arc Institute, CZI, Broad, EMBL-EBI, NVIDIA BioNeMo, Google DeepMind science, Microsoft Research health) and trade news (GEN, STAT+ RSS, Endpoints, FierceBiotech) filtered by the bio-computational keyword list. |
 
 Every collected record becomes an **item** with: stable id, source, type (`published` / `preprint` / `code` / `industry`), title, url, DOI if any, published date, first-seen date, authors or org, raw abstract or description, and raw source metadata.
 
-Dedupe rules: same DOI → same item; preprint and its published version → one item of type `published` with `preprint_url` kept; same normalized title within 30 days across sources → same item.
+Dedupe rules: same DOI → same item; same normalized title within 30 days across sources → same item. A preprint and its published version stay **two item records** linked both ways (`published_doi` on the preprint, `preprint_id` on the paper); the site renders them as one entry under Published papers with a preprint link, and clustering/scoring counts the pair once, as type `published`. Item files therefore stay immutable except for link fields.
 
 ### 6.3 Enrichment
 
 For each **new** item (not previously enriched), one LLM call plus one local embedding:
 
-- **One-line summary** (≤ 160 chars) and **primary + secondary categories** from the taxonomy, produced in one LLM call with structured output. Model: **`claude-haiku-5-5`** (bulk extraction role). Requests are submitted via the **Message Batches API** (50% price) since latency does not matter.
+- **One-line summary** (≤ 160 chars) and **primary + secondary categories** from the taxonomy, produced in one LLM call with structured output. Model: **`claude-haiku-5-5`** (bulk extraction role). In the daily run, requests are **synchronous** Haiku calls (a few hundred, well inside the 30-minute budget); the **Message Batches API** (50% price) is used only in the backfill, where volume is large and latency irrelevant.
 - **Category classification is zero-shot by the LLM; no trained classifier.** The call receives the taxonomy (slug, label, "covers" text from §5), the item's title and abstract, and **source hints** as priors: bioRxiv category, arXiv primary category, journal name, GitHub topic tags. A config file maps common hints to likely categories (e.g. bioRxiv `Genomics` → `genomics`; arXiv `q-bio.BM` → `structural`; journal `Nature Methods` → `tools-infra` or `ml-ai`). The model returns exactly one `primary` and 0–2 `secondary` slugs; the structured-output schema restricts values to the taxonomy, so no post-hoc validation is needed. Cost at ~300 items/day: about USD 2/month. The owner reviewed the alternative (a classifier trained on embeddings) and chose zero-shot for simplicity.
 - **Embedding** of title + abstract, computed locally in the Actions runner with a sentence-transformers model suited to scientific text (default `allenai/specter2_base`; builder may choose a comparable open model). No paid embedding API in v1.
 
@@ -161,7 +161,8 @@ Enrichment results are cached by item id so items are never re-processed.
 
 - **Window**: items first seen in the last **7 days**.
 - **Clustering**: agglomerative clustering on embeddings with a cosine distance threshold (config, default 0.35), minimum cluster size 3 items. Items that do not cluster are kept as items but produce no topic.
-- **Continuity**: each cluster is compared to existing topics by centroid cosine similarity. If the best match is above a threshold (config, default 0.80), the cluster **continues** that topic (same slug, history extended). Otherwise a new topic is created with a new slug derived from its headline. This is what makes sparklines and "topic history" possible.
+- **Every cluster above the minimum size is persisted as a topic**, not only the Top 5. This is what gives a topic a history before it first ranks, so `rise` has a baseline and sparklines and related-topics have data. Expect tens of topic files to change per day; that is acceptable.
+- **Continuity**: each cluster is compared to existing topics by centroid cosine similarity. If the best match is above a threshold (config, default 0.80), the cluster **continues** that topic (same slug, history extended). Otherwise a new topic is created. Its **slug** is derived from the cluster's top distinguishing terms (TF-IDF over item titles against the whole corpus, 2–4 terms, plus a short hash for uniqueness), not from the LLM headline, which only exists for ranked topics. A topic's display name is its latest headline if it has ranked, otherwise its keyword label.
 - Each topic's primary category is the majority primary category of its items.
 
 ### 6.5 Scoring and ranking
@@ -172,7 +173,7 @@ For each topic on a given day:
 score = w1 · rise + w2 · diversity + w3 · code_velocity + w4 · volume
 ```
 
-- `rise`: today's 7-day item count divided by the topic's mean weekly count over the preceding 4 weeks (floored at 1 to avoid division by zero). This is the main "trending" term.
+- `rise`: `(count_7d + k) / (baseline + k)` with smoothing `k = 3` (config). `baseline` is the topic's mean weekly item count over the preceding 4 weeks when the topic has **at least 14 days of history**; otherwise it is the **median 7-day cluster size across all of today's topics**. A brand-new cluster therefore only scores high on rise if it is clearly larger than a typical cluster, and an established topic going from 5 to 20 items/week beats it. `rise` is capped at 10 before weighting. This is the main "trending" term and the guard against the "feed dressed as trends" anti-goal.
 - `diversity`: number of distinct evidence types present among {published, preprint, code, industry}, scaled to 0–1. A topic with papers and code and a company announcement ranks above one with only preprints.
 - `code_velocity`: log of total 7-day star gain across the topic's code items, scaled.
 - `volume`: log of total items, scaled (small weight; prevents tiny clusters from winning on rise alone).
@@ -196,7 +197,7 @@ data/
     topics/<topic-slug>.json          # centroid, history [{date, rank, item_ids, scores}], current synthesis
     days/YYYY-MM-DD.json              # ranked top-5 slugs + scores + run metadata
     github_stars.json                 # repo → [{date, stars}] rolling 60 days
-    embeddings.npy + embeddings.index.json   # float16 matrix + id→row map (LFS if > 50 MB)
+    embeddings/YYYY-MM.npy + YYYY-MM.index.json  # float16 matrices sharded by first-seen month, each < 50 MB; no LFS
 notes/<topic-slug>.md
 config/
   sources/computational.yaml
@@ -290,6 +291,7 @@ trendbio/
 - 7-day topic window; agglomerative clustering; continuity by centroid similarity.
 - Operator notes as markdown files in the repo.
 - Light theme only; one accent colour.
+- After builder check: all clusters persisted as topics; smoothed `rise` with a global median baseline for young topics; keyword-derived slugs; synchronous Haiku in the daily run and Batches only in backfill; monthly embedding shards; bounded GitHub repo set; preprint/published kept as linked records.
 
 ## 12. Left to the builder
 
@@ -311,4 +313,11 @@ trendbio/
 
 ## 14. Open for the owner
 
-- None at the time of writing. (Backfill synthesis model: owner chose Haiku, see §6.10.)
+- **Repo visibility: public or private?** Public: GitHub Actions minutes are free, so the backfill can run as monthly-chunked Actions jobs and the daily run costs nothing. Private: 2,000 free minutes/month; the backfill (~4,000+ minutes) must run on the owner's machine and the daily run alone uses ~900 minutes/month. Also decides whether pre-launch data is publicly visible before the owner reviews it.
+
+## 15. Owner prerequisites (cannot be done by the builder)
+
+1. Create the GitHub repository and push this repo to it.
+2. Create a Cloudflare account and a Pages project connected to the repository (build command and output directory will be given in the plan).
+3. Add an `ANTHROPIC_API_KEY` as a GitHub Actions secret (and optionally `NCBI_API_KEY`).
+4. If the repo is private, run the backfill locally when the builder hands over the command.
