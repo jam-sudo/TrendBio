@@ -1,10 +1,27 @@
 ---
 import Base from "../layouts/Base.astro";
-import { latestDay } from "../lib/data";
+import Hero from "../components/Hero.astro";
+import CategoryChips from "../components/CategoryChips.astro";
+import { latestDay, loadTaxonomy } from "../lib/data";
 
 const day = latestDay("computational");
+const categories = loadTaxonomy("computational");
+const ranked = day?.ranked ?? [];
+const counts = Object.fromEntries(categories.map(({ slug }) => [
+  slug, ranked.filter((topic) => topic.category === slug).length,
+]));
+const updated = day ? `Updated ${day.run.finished}.` : "Updated daily.";
 ---
 
 <Base lastRun={day?.run.finished}>
-  <h1>What moved in computational biology today</h1>
+  <Hero
+    title="What moved in computational biology today"
+    subtitle={`bioRxiv, arXiv, PubMed, GitHub and industry. ${updated}`}
+  />
+  <CategoryChips categories={categories} counts={counts} />
+  {ranked.map((topic) => (
+    <article data-topic-cats={topic.category}>
+      <h2>{topic.headline}</h2>
+    </article>
+  ))}
 </Base>
