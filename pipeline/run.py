@@ -201,16 +201,18 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             new_items.sort(key=lambda item: item.id)
             for item in new_items:
                 store.put_item(item)
-            _, enrichment_notes = enrich_items(new_items, store, deps.llm, None,
-                                               deps.taxonomy, deps.hints_cfg)
+            _, enrichment_notes, irrelevant = enrich_items(new_items, store, deps.llm, None,
+                                                           deps.taxonomy, deps.hints_cfg)
             notes.extend(enrichment_notes)
             counts['llm_fallbacks'] = len(enrichment_notes)
             reasons = getattr(deps.llm, 'fallback_reasons', {})
             counts['fallback_reasons'] = dict(Counter(
                 reasons.get(note.split(':', 1)[1], 'unknown') for note in enrichment_notes
             ))
+            counts['irrelevant'] = irrelevant
         with _stage('embed', items=0) as counts:
             window = sorted(store.items_between(start, day), key=lambda item: item.id)
+            window = [item for item in window if item.relevant]
             missing = []
             for item in window:
                 try:
@@ -423,17 +425,20 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                     reasons.get(item.id, 'unknown') for item in chunk if results.get(item.id) is None
                 ))
                 counts['llm_fallbacks'] = sum(counts['fallback_reasons'].values())
+                counts['irrelevant'] = sum(result is not None and not result.relevant for result in results.values())
+            # shortcut: batch embeds irrelevant items too; filter if embedding cost warrants a more complex chunk loop.
             vectors = l2_normalize(deps.embedder.embed([item.title + '\n' + item.abstract for item in chunk]))
             for item, vector in zip(chunk, vectors, strict=True):
                 result = results.get(item.id)
                 if result is None:
                     result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
-                                        primary=next(iter(hints[item.id]), 'ml-ai'), secondary=[])
+                                        primary=next(iter(hints[item.id]), 'ml-ai'), secondary=[], relevant=True)
                     state.setdefault('notes', []).append(f'enrichment-fallback:{item.id}')
                     store._write(path, state)
                 store.put_embedding(item.id, vector)
                 item.summary, item.primary_category = result.summary, result.primary
                 item.secondary_categories = result.secondary
+                item.relevant = result.relevant
                 store.put_item(item)
         state['stage'] = 'days'
         store._write(path, state)

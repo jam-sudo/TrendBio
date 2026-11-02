@@ -30,7 +30,7 @@ def first_sentence(text: str) -> str:
 
 def enrich_items(
     items: list[Item], store: Store, llm: LLM, embedder, taxonomy: Taxonomy, hints_cfg: dict,
-) -> tuple[list[Item], list[str]]:
+) -> tuple[list[Item], list[str], int]:
     pending = sorted((item for item in items if item.summary is None), key=lambda item: item.id)
     notes = []
 
@@ -45,7 +45,7 @@ def enrich_items(
             hints = hints_for(item, hints_cfg)
             results[index] = Enrichment(
                 summary=truncate(first_sentence(item.abstract or item.title), 160),
-                primary=hints[0] if hints else 'ml-ai', secondary=[],
+                primary=hints[0] if hints else 'ml-ai', secondary=[], relevant=True,
             )
             notes.append(f'enrichment-fallback:{item.id}')
     if pending:
@@ -62,5 +62,6 @@ def enrich_items(
             item.summary = result.summary
             item.primary_category = result.primary
             item.secondary_categories = result.secondary
+            item.relevant = result.relevant
             store.put_item(item)
-    return items, notes
+    return items, notes, sum(not item.relevant for item in pending)
