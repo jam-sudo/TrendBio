@@ -62,6 +62,17 @@ def test_two_tight_groups_form_two_clusters_and_singleton_dropped(cfg):
     assert cluster_items(['a'], vectors[:1], cfg) == [['a']]
 
 
+def test_cluster_items_respects_linkage_config(cfg):
+    angles = np.deg2rad([0, 20, 40])
+    vectors = np.column_stack([np.cos(angles), np.sin(angles)])
+    cfg.min_cluster_size = 1
+    cfg.cluster_distance_threshold = 0.18
+    cfg.cluster_linkage = 'average'
+    assert cluster_items(list('abc'), vectors, cfg) == [list('abc')]
+    cfg.cluster_linkage = 'complete'
+    assert sorted(map(len, cluster_items(list('abc'), vectors, cfg))) == [1, 2]
+
+
 def test_continuity_matches_existing_topic_above_threshold(topic, items, cfg):
     today = date(2026, 11, 2)
     append_history(topic, today - timedelta(days=1), ['old'], 1)

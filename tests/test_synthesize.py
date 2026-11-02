@@ -117,17 +117,17 @@ def test_synthesis_failure_falls_back_to_label_headline_and_note(context, existi
     assert ctx.budget.month_spend_usd() > 0
 
 
-@pytest.mark.parametrize('field,length', [('headline', 120), ('summary', 161)])
-def test_headline_and_summary_length_limits_enforced_by_schema(context, field, length):
+@pytest.mark.parametrize('field,limit', [('headline', 90), ('summary', 160)])
+def test_headline_and_summary_are_truncated_not_dropped(context, field, limit):
     ctx = context
     schema = Synthesis.model_json_schema()['properties']
-    assert schema['headline']['maxLength'] == 90
-    assert schema['summary']['maxLength'] == 160
-    ctx.beta.output = {**OUTPUT, field: 'x' * length}
+    assert 'maxLength' not in schema[field]
+    ctx.beta.output = {**OUTPUT, field: 'evidence ' * 30}
     _, _, notes = run(ctx)
-    assert ctx.topic.headline == ctx.topic.label.title()
-    assert ctx.topic.summary == '' and ctx.topic.synthesis is None
-    assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
+    assert len(getattr(ctx.topic, field)) <= limit
+    assert getattr(ctx.topic, field).endswith('evidence…')
+    assert ctx.topic.synthesis == OUTPUT['synthesis']
+    assert notes == []
     assert len(ctx.beta.calls) == 1
 
 
@@ -172,17 +172,18 @@ def test_synthesis_reuses_transient_error_retries(context, monkeypatch, status, 
     assert sleeps == ([1, 2, 4] if attempts == 4 else [])
 
 
-def test_sdk_validation_error_is_not_retried(context):
+def test_sdk_validation_error_is_not_retried(context, caplog):
     from pydantic import ValidationError
 
     ctx = context
     try:
-        Synthesis(**{**OUTPUT, 'headline': 'x' * 120})
+        Synthesis(**{**OUTPUT, 'headline': None})
     except ValidationError as error:
         ctx.beta.error = error
     _, _, notes = run(ctx)
     assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
     assert len(ctx.beta.calls) == 1
+    assert f'id={ctx.topic.slug} reason=validation:headline' in caplog.text
 
 
 def test_explicit_model_overrides_backfill_selection(context):
@@ -194,3 +195,35 @@ def test_explicit_model_overrides_backfill_selection(context):
     assert model == topics[0].synthesis_model == 'claude-opus-5-5'
     assert ctx.beta.calls[0]['model'] == model
     assert ctx.plain.calls == []
+
+
+@pytest.mark.parametrize('limit', [40, 5, 2])
+def test_synthesize_caps_items_at_config_limit(context, caplog, limit):
+    from unittest.mock import Mock
+
+    ctx = context
+    cfg = load_scoring().model_copy(update={'synthesis_max_items': limit})
+    preprints = [ctx.item.model_copy(update={
+        'id': f'preprint:{i}', 'published_at': TODAY - timedelta(days=i),
+    }) for i in range(50)]
+    evidence = [ctx.item.model_copy(update={
+        'id': f'{kind}:evidence', 'type': kind, 'published_at': TODAY - timedelta(days=100),
+    }) for kind in ('published', 'code', 'industry')]
+    items = preprints[::-1] + evidence
+    original = items[:]
+    ctx.llm.synthesize = Mock(return_value=Synthesis(**OUTPUT))
+    synthesize_top([(ctx.topic, ctx.sig, ctx.scores)], {ctx.topic.slug: items},
+                   ctx.llm, ctx.budget, cfg, TODAY, backfill=False)
+    selected = ctx.llm.synthesize.call_args.args[1]
+    expected = sorted(evidence, key=lambda item: item.id) + preprints
+    assert selected == expected[:limit]
+    assert items == original
+    assert f'topic={ctx.topic.slug} items=53 selected={limit}' in caplog.text
+
+
+def test_synthesis_limit_must_be_positive():
+    from pydantic import ValidationError
+    from pipeline.config import Scoring
+
+    with pytest.raises(ValidationError):
+        Scoring(weights={}, synthesis_max_items=0)

@@ -15,7 +15,7 @@ def cluster_items(ids: list[str], X: np.ndarray, cfg: Scoring) -> list[list[str]
     if len(ids) < 2:
         return [ids] if ids and len(ids) >= cfg.min_cluster_size else []
     labels = AgglomerativeClustering(
-        metric='cosine', linkage='average',
+        metric='cosine', linkage=cfg.cluster_linkage,
         distance_threshold=cfg.cluster_distance_threshold, n_clusters=None,
     ).fit_predict(X)
     groups: dict[int, list[str]] = {}

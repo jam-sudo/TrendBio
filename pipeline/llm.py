@@ -1,30 +1,63 @@
 import json
+import logging
 import time
 from pathlib import Path
 
 import anthropic
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
 from anthropic.types.messages.batch_create_params import Request
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, create_model
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, create_model, field_validator
 
 from pipeline.budget import Budget
 from pipeline.config import Taxonomy
 from pipeline.models import Item, Signals, Topic
 
 
+logger = logging.getLogger(__name__)
+
+
+def _validation_reason(error: ValidationError) -> str:
+    location = '.'.join(str(part) for part in error.errors()[0]['loc']) or 'root'
+    return f'validation:{location}'
+
+
+def _refusal_reason(message) -> str:
+    category = getattr(getattr(message, 'stop_details', None), 'category', None)
+    return f'refusal:{category or "none"}'
+
+
+def truncate(text: str, limit: int) -> str:
+    if len(text) <= limit:
+        return text
+    prefix = text[:limit - 1]
+    if not text[limit - 1].isspace() and not prefix[-1].isspace():
+        prefix = prefix.rsplit(maxsplit=1)[0]
+    return prefix.rstrip() + '…'
+
+
 class Enrichment(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
-    summary: str = Field(max_length=160)
+    summary: str
     primary: str
-    secondary: list[str] = Field(max_length=2)
+    secondary: list[str]
+
+    @field_validator('summary')
+    @classmethod
+    def shorten_summary(cls, value: str) -> str:
+        return truncate(value, 160)
 
 
 class Synthesis(BaseModel):
-    headline: str = Field(max_length=90)
-    summary: str = Field(max_length=160)
+    headline: str
+    summary: str
     synthesis: str
     item_one_liners: dict[str, str] = {}
+
+    @field_validator('headline', 'summary')
+    @classmethod
+    def shorten_text(cls, value: str, info) -> str:
+        return truncate(value, 90 if info.field_name == 'headline' else 160)
 
 
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
@@ -32,7 +65,7 @@ def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
     return create_model(
         'TaxonomyEnrichment', __base__=Enrichment,
         primary=(str, Field(json_schema_extra={'enum': slugs})),
-        secondary=(list[str], Field(max_length=2, json_schema_extra={
+        secondary=(list[str], Field(json_schema_extra={
             'items': {'type': 'string', 'enum': slugs},
         })),
     )
@@ -52,7 +85,7 @@ def _validate_categories(result: Enrichment | None, taxonomy: Taxonomy) -> Enric
     if result is None or result.primary not in taxonomy.slugs():
         return None
     return result.model_copy(update={
-        'secondary': [slug for slug in result.secondary if slug in taxonomy.slugs()],
+        'secondary': [slug for slug in result.secondary if slug in taxonomy.slugs()][:2],
     })
 
 
@@ -61,12 +94,22 @@ class LLM:
         # Own retries here so the SDK does not multiply attempts or retry other statuses.
         self.client = client.with_options(max_retries=0) if isinstance(client, anthropic.Anthropic) else client
         self.budget = budget
+        self.fallback_reasons: dict[str, str] = {}
+
+    def _failure(self, entity_id: str, reason: str) -> None:
+        self.fallback_reasons[entity_id] = reason
+        logger.warning('llm_fallback id=%s reason=%s', entity_id, reason)
 
     def enrich(
         self, item: Item, taxonomy: Taxonomy, hints: list[str], model: str = 'claude-haiku-5-5',
     ) -> Enrichment | None:
-        result = self._parse(_output_model(taxonomy), _messages(item, taxonomy, hints), model, 512, 'low')
-        return _validate_categories(result, taxonomy)
+        self.fallback_reasons.pop(item.id, None)
+        result = self._parse(_output_model(taxonomy), _messages(item, taxonomy, hints), model, 512, 'low',
+                             entity_id=item.id)
+        validated = _validate_categories(result, taxonomy)
+        if result is not None and validated is None:
+            return self._failure(item.id, 'validation:primary')
+        return validated
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,
@@ -81,11 +124,11 @@ class LLM:
             previous=f'Previous synthesis (context only, not evidence):\n{previous}' if previous else '',
         )
         return self._parse(Synthesis, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
-                           fallbacks=model == 'claude-opus-5-5')
+                           entity_id=topic.slug, fallbacks=model == 'claude-opus-5-5')
 
     def _parse[T: BaseModel](
         self, output_model: type[T], messages: list[dict], model: str, max_tokens: int,
-        effort: str, *, fallbacks: bool = False,
+        effort: str, *, entity_id: str, fallbacks: bool = False,
     ) -> T | None:
         parse = self.client.beta.messages.parse if fallbacks else self.client.messages.parse
         options = {'betas': ['server-side-fallback-2026-07-01'], 'fallbacks': 'default'} if fallbacks else {}
@@ -101,22 +144,21 @@ class LLM:
                     status is not None and 500 <= status < 600
                 )
                 if not retryable or attempt == 3:
-                    return None
+                    return self._failure(entity_id, 'retries_exhausted' if retryable else f'api_error:{status}')
                 time.sleep(2 ** attempt)
                 continue
-            except ValidationError:
-                return None
+            except ValidationError as error:
+                return self._failure(entity_id, _validation_reason(error))
             refused = response.stop_reason == 'refusal'
             self.budget.record(model, response.usage.input_tokens, response.usage.output_tokens)
             if refused:
-                return None
+                return self._failure(entity_id, _refusal_reason(response))
             if response.parsed_output is None:
-                return None
+                return self._failure(entity_id, 'empty_output')
             try:
                 return output_model.model_validate(response.parsed_output, from_attributes=True)
-            except ValidationError:
-                return None
-        return None
+            except ValidationError as error:
+                return self._failure(entity_id, _validation_reason(error))
 
     def enrich_batch(
         self, items: list[Item], taxonomy: Taxonomy, hints_by_id: dict[str, list[str]],
@@ -140,16 +182,26 @@ class LLM:
             while batches.retrieve(batch.id).processing_status != 'ended':
                 time.sleep(poll_seconds)
             for row in batches.results(batch.id):
+                item_id = ids[row.custom_id]
+                self.fallback_reasons.pop(item_id, None)
                 if row.result.type != 'succeeded':
+                    self._failure(item_id, f'batch:{row.result.type}')
                     continue
                 message = row.result.message
                 refused = message.stop_reason == 'refusal'
                 self.budget.record(model, message.usage.input_tokens, message.usage.output_tokens, batch=True)
-                if refused or not message.content or message.content[0].type != 'text':
+                if refused:
+                    self._failure(item_id, _refusal_reason(message))
+                    continue
+                if not message.content or message.content[0].type != 'text':
+                    self._failure(item_id, 'empty_output')
                     continue
                 try:
                     result = Enrichment.model_validate_json(message.content[0].text)
-                except ValidationError:
+                except ValidationError as error:
+                    self._failure(item_id, _validation_reason(error))
                     continue
-                results[ids[row.custom_id]] = _validate_categories(result, taxonomy)
+                results[item_id] = _validate_categories(result, taxonomy)
+                if results[item_id] is None:
+                    self._failure(item_id, 'validation:primary')
         return results
