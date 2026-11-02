@@ -149,11 +149,17 @@ Dedupe rules: same DOI → same item; preprint and its published version → one
 
 ### 6.3 Enrichment
 
+Enrichment is **local and free per item**; no LLM call happens per item in steady state.
+
 For each **new** item (not previously enriched):
 
-- **One-line summary** (≤ 160 chars) and **primary + secondary categories** from the taxonomy, produced in one LLM call with structured output. Model: **`claude-haiku-5-5`** (bulk extraction role). Requests are submitted via the **Message Batches API** (50% price) since latency does not matter.
-- **Category classification is zero-shot, not a trained classifier.** The call receives the taxonomy (slug, label, "covers" text from §5), the item's title and abstract, and **source hints** as priors: bioRxiv category, arXiv primary category, journal name, GitHub topic tags. A config file maps common hints to likely categories (e.g. bioRxiv `Genomics` → `genomics`; arXiv `q-bio.BM` → `structural`; journal `Nature Methods` → `tools-infra` or `ml-ai`). The model returns exactly one `primary` and 0–2 `secondary` slugs; the structured-output schema restricts values to the taxonomy, so no post-hoc validation is needed. Rationale: at ~300 items/day this costs well under USD 1/month and needs no labelled data. If consistency or cost becomes a problem later, the accumulated LLM labels can train a small distilled classifier; not in v1.
-- **Embedding** of title + abstract, computed locally in the Actions runner with a sentence-transformers model suited to scientific text (default `allenai/specter2_base`; builder may choose a comparable open model). No paid embedding API in v1.
+- **Embedding** of title + abstract, computed locally in the Actions runner with a sentence-transformers model suited to scientific text (default `allenai/specter2_base`; builder may choose a comparable open model). No paid embedding API in v1. Embeddings serve both clustering (§6.4) and classification.
+- **Category classification by a trained lightweight classifier** on top of the embedding plus one-hot **source-hint features**: bioRxiv category, arXiv primary category, journal name, GitHub topic tags (hint vocabulary in config). Model: multinomial logistic regression (scikit-learn), with kNN as an acceptable alternative. Output: one `primary` (argmax) and 0–2 `secondary` slugs (any other class with probability ≥ 0.25). The classifier artefact (`models/classifier-<domain>-<date>.joblib`) is committed to the repo.
+  - **Bootstrap labels**: during the backfill, a stratified sample of **~5,000 items** is labelled by `claude-haiku-5-5` via the Message Batches API with structured output constrained to the taxonomy (one call carries the taxonomy "covers" text, the item's title/abstract and its source hints). 90% trains, 10% is a held-out validation set; **macro-F1 on the held-out set is recorded in the README** and must be ≥ 0.80 before the classifier is used; below that, the builder enlarges the sample.
+  - **Drift control**: once a week the pipeline samples 50 recently classified items, labels them with Haiku the same way, and logs the disagreement rate. If it exceeds a threshold (config, default 15%), the new labels are appended to the training set and the classifier is retrained in the same run. Cost: cents per month.
+- **No per-item LLM summary.** One-line summaries are only needed for items that appear on a topic page, so they are generated in the synthesis step (§6.6) for the items of the day's Top 5 only (~50 items/day instead of ~300).
+
+Rationale (owner's point, accepted): embeddings are already computed for every item, and the backfill yields tens of thousands of labelled examples, so a classifier is nearly free and removes the per-item API dependency. Steady-state LLM spend then consists of the five daily syntheses plus the weekly drift check.
 
 Enrichment results are cached by item id so items are never re-processed.
 
@@ -183,7 +189,7 @@ Every topic's component scores are stored so the About page's "how ranking works
 
 ### 6.6 Synthesis
 
-For each of the Top 5, one LLM call produces, as structured output: `headline` (≤ 90 chars), `summary` (≤ 160 chars), `synthesis` (80–160 words), and for each item a `one_liner` if the enrichment one is unsuitable in context. Input: the topic's items (title, source, date, abstract or description, summary), its category, its signal counts, and yesterday's synthesis if the topic continued. Model: **`claude-opus-5-5`** with adaptive thinking (the default; do not set `budget_tokens`). The prompt forbids introducing facts not present in the items and asks for a tone suitable for expert readers.
+For each of the Top 5, one LLM call produces, as structured output: `headline` (≤ 90 chars), `summary` (≤ 160 chars), `synthesis` (80–160 words), and a `one_liner` (≤ 160 chars) for **every item** in the topic that does not already have one from a previous day. Input: the topic's items (title, source, date, abstract or description, existing one-liners), its category, its signal counts, and yesterday's synthesis if the topic continued. Item one-liners are written back to the item files so they are never regenerated. Model: **`claude-opus-5-5`** with adaptive thinking (the default; do not set `budget_tokens`). The prompt forbids introducing facts not present in the items and asks for a tone suitable for expert readers.
 
 **Operator notes**: a markdown file at `notes/<topic-slug>.md` is rendered as the Editor's note on that topic's page. Adding or editing a note and pushing to `main` triggers a site rebuild (no pipeline run). Nothing else is needed.
 
@@ -197,6 +203,8 @@ data/
     days/YYYY-MM-DD.json              # ranked top-5 slugs + scores + run metadata
     github_stars.json                 # repo → [{date, stars}] rolling 60 days
     embeddings.npy + embeddings.index.json   # float16 matrix + id→row map (LFS if > 50 MB)
+models/classifier-<domain>-<date>.joblib    # trained category classifier
+data/<domain>/labels/bootstrap.jsonl        # LLM labels used for training/validation
 notes/<topic-slug>.md
 config/
   sources/computational.yaml
@@ -215,9 +223,9 @@ The pipeline commits its output with a message like `data: 2026-11-02 run`. Expe
 
 ### 6.9 Costs (estimate, to be verified by the builder with a dry run)
 
-- Enrichment: ~300 new items/day × ~2k tokens in, ~150 out on Haiku 5.5 via Batches → well under USD 5/month.
-- Synthesis: 5 topics/day × ~25k tokens in, ~1.5k out on Opus 5.5 → roughly USD 15–20/month.
-- Embeddings, hosting, scheduler, build: USD 0.
+- Enrichment: USD 0 per item (local embedding + local classifier). Weekly drift check: 50 items on Haiku 5.5 → cents/month.
+- Synthesis: 5 topics/day × ~25k tokens in, ~3k out (synthesis + ~10 item one-liners) on Opus 5.5 → roughly USD 15–20/month.
+- Embeddings, classifier, hosting, scheduler, build: USD 0.
 - Hard stop: the pipeline reads a monthly spend ceiling from config (default USD 50) and estimates spend from token usage returned by the API; when the estimate exceeds the ceiling it switches synthesis to Haiku 5.5 for the rest of the month and flags `degraded`.
 
 ### 6.10 Backfill (12 months before launch)
@@ -232,8 +240,8 @@ The site must not launch empty. Before the first scheduled run, a one-time **bac
   - Consequence: historical days rank mostly on `rise`, `diversity` among paper types, and `volume`. Day files record `backfilled: true`, and the day page shows a one-line notice that code and industry signals are partial for that day.
 - **Expected volume**: ~100k items. Local embedding of 100k items takes on the order of an hour on CPU; acceptable.
 - **Cost (one-time, outside the monthly ceiling; builder verifies with a one-month dry run first)**:
-  - Enrichment on Haiku 5.5 via Batches: ~USD 15.
-  - Synthesis of ~1,825 topics (365 days × 5): on **`claude-opus-5-5` via Batches ~USD 120**; on `claude-haiku-5-5` ~USD 6.
+  - Bootstrap labelling of ~5,000 items on Haiku 5.5 via Batches: ~USD 1. All other enrichment is local.
+  - Synthesis of ~1,825 topics (365 days × 5), including item one-liners: on **`claude-opus-5-5` via Batches ~USD 130**; on `claude-haiku-5-5` ~USD 7.
   - **Owner to decide** which model synthesizes backfilled topics (see §14). Default if undecided: Opus via Batches, because historical topic pages are permanent and will be read.
 - Backfill output is committed in monthly commits to keep diffs reviewable.
 
@@ -278,13 +286,13 @@ trendbio/
 - Trend signals: paper clustering, code velocity, source diversity, industry announcements. Social deferred.
 - English only. Expert audience. Computational domain first, expandable.
 - 12-month backfill before launch so the site is not empty.
-- Category classification: LLM zero-shot with source hints, no trained classifier (owner asked how; planner's approach accepted into the spec).
+- Category classification: trained lightweight classifier on local embeddings + source hints, bootstrapped from ~5k LLM labels, with a weekly LLM drift check. No per-item LLM calls in steady state (owner's requirement).
 
 ## 11. Decisions made by the planner (Claude) — owner may override
 
 - Static site, Astro, Cloudflare Pages, GitHub Actions scheduler, git-as-database. Rationale: content changes once a day, zero cost, trivial to migrate individual pages to server rendering later.
 - Python for the pipeline.
-- LLM: `claude-haiku-5-5` for bulk enrichment via Batches; `claude-opus-5-5` for the five daily syntheses. Local open-source embeddings.
+- LLM: `claude-opus-5-5` for the five daily syntheses (including item one-liners); `claude-haiku-5-5` only for bootstrap labelling and the weekly drift check. Local open-source embeddings and classifier.
 - USD 50/month LLM ceiling with automatic degradation.
 - Scoring formula and default weights in §6.5.
 - 7-day topic window; agglomerative clustering; continuity by centroid similarity.
@@ -307,8 +315,8 @@ trendbio/
 - *Is static enough?* Yes for v1; the list of things it cannot do (accounts, search, comments, real-time, newsletter) was reviewed and none are in v1.
 - *Social signals?* Deferred; API cost and access issues.
 - *Hosting?* None pre-existing; planner chose Cloudflare Pages.
-- *Category classifier?* Zero-shot LLM with source hints (§6.3).
+- *Category classifier?* Owner wanted no recurring per-item API cost; trained embedding classifier with LLM-bootstrapped labels (§6.3).
 
 ## 14. Open for the owner
 
-- Which model synthesizes the ~1,825 **backfilled** topics: `claude-opus-5-5` via Batches (~USD 120 one-time) or `claude-haiku-5-5` (~USD 6). Default: Opus.
+- Which model synthesizes the ~1,825 **backfilled** topics: `claude-opus-5-5` via Batches (~USD 130 one-time) or `claude-haiku-5-5` (~USD 7). Default: Opus.
