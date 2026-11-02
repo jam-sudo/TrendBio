@@ -234,7 +234,7 @@ The site must not launch empty. Before the first scheduled run, a one-time **bac
 - **Cost (one-time, outside the monthly ceiling; builder verifies with a one-month dry run first)**:
   - Enrichment of ~100k items on Haiku 5.5 via Batches: ~USD 15.
   - Synthesis of ~1,825 topics (365 days × 5): on **`claude-opus-5-5` via Batches ~USD 120**; on `claude-haiku-5-5` ~USD 6.
-  - **Owner to decide** which model synthesizes backfilled topics (see §14). Default if undecided: Opus via Batches, because historical topic pages are permanent and will be read.
+  - **Owner's decision: backfilled topics are synthesized with `claude-haiku-5-5` via Batches** (~USD 6). Day files record `synthesis_model` so historical topics can be re-synthesized with Opus later if wanted; the pipeline exposes a `--resynthesize --from --to --model` option for that.
 - Backfill output is committed in monthly commits to keep diffs reviewable.
 
 ## 7. Site build and hosting
@@ -277,7 +277,7 @@ trendbio/
 - Category taxonomy as in §5.
 - Trend signals: paper clustering, code velocity, source diversity, industry announcements. Social deferred.
 - English only. Expert audience. Computational domain first, expandable.
-- 12-month backfill before launch so the site is not empty.
+- 12-month backfill before launch so the site is not empty; backfilled syntheses on Haiku to keep the one-time cost near USD 20.
 - Category classification: LLM zero-shot (Haiku) with source hints, no trained classifier. Owner weighed a trained classifier and chose zero-shot at ~USD 2/month.
 
 ## 11. Decisions made by the planner (Claude) — owner may override
@@ -311,4 +311,4 @@ trendbio/
 
 ## 14. Open for the owner
 
-- Which model synthesizes the ~1,825 **backfilled** topics: `claude-opus-5-5` via Batches (~USD 120 one-time) or `claude-haiku-5-5` (~USD 6). Default: Opus.
+- None at the time of writing. (Backfill synthesis model: owner chose Haiku, see §6.10.)
