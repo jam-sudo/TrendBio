@@ -1,13 +1,18 @@
 """Regenerate the synthetic contract fixtures: python -m tests.fixtures_build."""
 
 from datetime import date, datetime, time, timedelta, timezone
-from math import log1p
+from decimal import Decimal
 from pathlib import Path
 
 import yaml
 
 from pipeline.jsonio import day_path, dump, item_path, topic_path
 from pipeline.models import Day, Item, RankedTopic, RunInfo, Scores, Signals, Topic, TopicDay
+
+
+def log1p(value: int) -> float:
+    # Decimal's correctly rounded logarithm avoids platform libm differences in fixture bytes.
+    return float(Decimal(1 + value).ln())
 
 
 def build(root: Path) -> None:

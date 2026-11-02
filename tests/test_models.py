@@ -185,11 +185,14 @@ def test_fixtures_validate(fixtures_root):
     assert "nonexistent-topic-zzzz" not in topics
 
 
-def test_fixtures_regenerate_identically(tmp_path, fixtures_root):
+def test_fixtures_regenerate_identically(tmp_path, fixtures_root, monkeypatch):
     from fixtures_build import build
 
+    monkeypatch.chdir(tmp_path)
     build(tmp_path)
     expected = {path.relative_to(fixtures_root): path.read_bytes()
                 for folder in ("data", "notes") for path in (fixtures_root / folder).rglob("*") if path.is_file()}
     actual = {path.relative_to(tmp_path): path.read_bytes() for path in tmp_path.rglob("*") if path.is_file()}
-    assert actual == expected
+    assert actual.keys() == expected.keys()
+    for path in sorted(expected):
+        assert actual[path] == expected[path], path
