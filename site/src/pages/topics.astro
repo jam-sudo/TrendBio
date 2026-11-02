@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import CategoryChips from "../components/CategoryChips.astro";
+import { allTopics, latestDay, loadTaxonomy, orphanNotes } from "../lib/data";
+
+const domain = "computational";
+const categories = loadTaxonomy(domain);
+const topics = allTopics(domain).map((topic) => ({
+  topic,
+  lastRanked: topic.history.filter((entry) => entry.rank !== null).map((entry) => entry.date).sort().at(-1) ?? "",
+})).sort((a, b) => b.lastRanked.localeCompare(a.lastRanked));
+const counts = Object.fromEntries(categories.map(({ slug }) => [
+  slug, topics.filter(({ topic }) => [topic.category, ...topic.secondary_categories].includes(slug)).length,
+]));
+for (const slug of orphanNotes(domain)) console.warn(`orphan note: ${slug}`);
+---
+
+<Base title="Topics — TrendBio" lastRun={latestDay(domain)?.run.finished}>
+  <div class="prose">
+    <h1>Topics</h1>
+    <CategoryChips categories={categories} counts={counts} />
+    <ul class="topics">
+      {topics.map(({ topic, lastRanked }) => <li data-topic-cats={[topic.category, ...topic.secondary_categories].join(" ")}>
+        <h2><a href={`/topic/${topic.slug}/`}>{topic.headline ?? topic.label}</a></h2>
+        <p>{categories.find(({ slug }) => slug === topic.category)?.label ?? topic.category}
+          {lastRanked && <> · Last ranked <time datetime={lastRanked}>{lastRanked}</time></>}
+        </p>
+      </li>)}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .topics { padding: 0; list-style: none; }
+  li { border-top: 1px solid var(--border); padding-block: 1.5rem; overflow-wrap: anywhere; }
+  h2 { margin: 0 0 0.5rem; }
+  p { margin: 0; color: var(--muted); font-size: var(--t3); }
+</style>

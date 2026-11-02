@@ -1,0 +1,22 @@
+---
+import type { Signals } from "../lib/types";
+
+interface Props { signals: Signals }
+const { signals } = Astro.props;
+const badges = [
+  signals.preprint && `${signals.preprint} preprint${signals.preprint === 1 ? "" : "s"}`,
+  signals.published && `${signals.published} published`,
+  signals.code && `${signals.code} tool${signals.code === 1 ? "" : "s"}`,
+  signals.industry && `${signals.industry} industry`,
+  signals.rise_ratio >= 1.5 && `↑ ${signals.rise_ratio.toFixed(1)}× vs 4-wk avg`,
+].filter(Boolean);
+---
+
+{badges.length > 0 && <ul class="signal-badges" aria-label="Topic signals">
+  {badges.map((badge) => <li>{badge}</li>)}
+</ul>}
+
+<style>
+  .signal-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin-block: 1.5rem; list-style: none; }
+  li { border: 1px solid var(--border); border-radius: 0.25rem; padding: 0.25rem 0.5rem; font-size: var(--t3); }
+</style>

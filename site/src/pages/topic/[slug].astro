@@ -1,0 +1,53 @@
+---
+import Base from "../../layouts/Base.astro";
+import SignalBadges from "../../components/SignalBadges.astro";
+import Sparkline from "../../components/Sparkline.astro";
+import EditorNote from "../../components/EditorNote.astro";
+import EvidenceList from "../../components/EvidenceList.astro";
+import { allTopics, latestDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
+import type { Topic } from "../../lib/types";
+
+export function getStaticPaths() {
+  return allTopics("computational").map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
+}
+
+interface Props { topic: Topic }
+const { topic } = Astro.props;
+const domain = "computational";
+const history = [...topic.history].sort((a, b) => b.date.localeCompare(a.date));
+const latestEntry = history[0];
+const ranked = history.filter((entry) => entry.rank !== null);
+const latestRanked = ranked[0];
+const category = loadTaxonomy(domain).find(({ slug }) => slug === topic.category)?.label ?? topic.category;
+const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
+const headline = topic.headline ?? topic.label;
+---
+
+<Base title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
+  <article class="prose">
+    {latestRanked && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
+    <p class="rank-category">{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</p>
+    <h1>{headline}</h1>
+    {latestEntry && <SignalBadges signals={latestEntry.signals} />}
+    <Sparkline history={topic.history} />
+    {topic.synthesis !== null && <p>{topic.synthesis}</p>}
+    <EditorNote html={loadNote(topic.slug)} />
+    <EvidenceList items={loadItems(domain, latestEntry?.item_ids ?? [])} oneLiners={topic.item_one_liners} />
+    {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading">
+      <h2 id="related-heading">Related topics</h2>
+      <ul>{related.map((entry) => <li><a href={`/topic/${entry.slug}/`}>{entry.label}</a></li>)}</ul>
+    </section>}
+    <section id="topic-history" aria-labelledby="history-heading">
+      <h2 id="history-heading">Topic history</h2>
+      <ul>{ranked.map((entry) => <li><a href={`/day/${entry.date}/`}>{entry.date} · #{entry.rank}</a></li>)}</ul>
+    </section>
+  </article>
+</Base>
+
+<style>
+  article { overflow-wrap: anywhere; }
+  nav { margin-bottom: 1.5rem; font-size: var(--t3); }
+  .rank-category { margin-bottom: 0.5rem; color: var(--muted); font-size: var(--t3); }
+  h1 { margin-top: 0; }
+  section { margin-top: 2.5rem; }
+</style>

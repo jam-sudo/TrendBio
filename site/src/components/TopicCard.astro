@@ -1,0 +1,38 @@
+---
+import SignalLine from "./SignalLine.astro";
+import { loadTaxonomy, loadTopic } from "../lib/data";
+import type { RankedTopic } from "../lib/types";
+
+interface Props {
+  ranked: RankedTopic;
+  span2: boolean;
+}
+
+const { ranked, span2 } = Astro.props;
+const category = loadTaxonomy("computational").find(({ slug }) => slug === ranked.category);
+const secondary = loadTopic("computational", ranked.slug)?.secondary_categories ?? [];
+---
+
+<a class:list={["topic-card", { span2 }]} href={`/topic/${ranked.slug}/`}
+  data-topic-cats={[ranked.category, ...secondary].join(" ")}>
+  <p class="rank-category">#{ranked.rank} · {category?.label ?? ranked.category}</p>
+  <h2>{ranked.headline}</h2>
+  {span2 && <p>{ranked.summary}</p>}
+  <SignalLine signals={ranked.signals} />
+</a>
+
+<style>
+  .topic-card {
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+  .topic-card:hover { border-color: var(--accent); }
+  .rank-category { font-size: var(--t3); color: var(--muted); margin-bottom: 0.5rem; }
+  h2 { margin: 0 0 0.75rem; letter-spacing: -0.02em; }
+  @media (min-width: 641px) {
+    .span2 { grid-column: 1 / 3; }
+  }
+</style>
