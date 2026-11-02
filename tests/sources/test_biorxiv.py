@@ -12,6 +12,8 @@ DAY = date(2025, 1, 6)
 
 def test_biorxiv(source_config, fixture_json, respx_mock):
     data = fixture_json('biorxiv.json')
+    # Keep keyword filtering independent of the revision cutoff.
+    data['collection'][1]['version'] = '1'
     route = respx_mock.get(url__startswith=source_config['biorxiv']['endpoint']).respond(json=data)
     with httpx.Client() as client:
         items = BiorxivAdapter(source_config).fetch(DAY, DAY, client)
@@ -50,6 +52,7 @@ def test_retry_exhaustion_and_nonretryable(respx_mock):
 
 def test_biorxiv_pagination(source_config, fixture_json, respx_mock):
     data = fixture_json('biorxiv.json')
+    data['collection'][1]['version'] = '1'
     first = {'messages': [{'status': 'ok', 'total': 4}], 'collection': data['collection'][:1]}
     second = {'messages': [{'status': 'ok', 'total': 4}], 'collection': data['collection'][1:]}
     endpoint = source_config['biorxiv']['endpoint']
@@ -85,3 +88,63 @@ def test_source_config_is_complete(source_config):
     for feed in source_config['rss']['feeds']:
         assert feed['url'].startswith('https://')
         assert feed['kind'] in {'company', 'news'}
+
+
+@pytest.fixture
+def revisions(source_config, fixture_json, respx_mock):
+    data = fixture_json('biorxiv_revisions.json')
+    route = respx_mock.get(url__startswith=source_config['biorxiv']['endpoint']).respond(json=data)
+    return BiorxivAdapter(source_config), route
+
+
+def test_biorxiv_revision_outside_window_is_dropped(revisions):
+    adapter, _ = revisions
+    with httpx.Client() as client:
+        items = adapter.fetch(date(2025, 1, 5), DAY, client)
+    assert 'biorxiv:10.1101/2024.06.01.222222' not in {item.id for item in items}
+    assert next(item for item in items if item.doi == '10.1101/2025.01.06.111111').published_at == DAY
+
+
+def test_biorxiv_revision_inside_window_uses_doi_date(revisions):
+    adapter, _ = revisions
+    with httpx.Client() as client:
+        items = adapter.fetch(date(2025, 1, 5), DAY, client)
+    item = next(item for item in items if item.doi == '10.1101/2025.01.05.333333')
+    assert item.published_at == date(2025, 1, 5)
+    assert item.metadata['version'] == '2'
+
+
+def test_biorxiv_undated_doi_revision_is_dropped(revisions):
+    adapter, _ = revisions
+    with httpx.Client() as client:
+        items = adapter.fetch(date(2025, 1, 5), DAY, client)
+    assert 'biorxiv:10.1101/123456' not in {item.id for item in items}
+
+
+def test_biorxiv_logs_dropped_revisions(revisions, caplog):
+    caplog.set_level('INFO', logger='pipeline.sources.biorxiv')
+    adapter, route = revisions
+    with httpx.Client() as client:
+        adapter.fetch(date(2025, 1, 5), DAY, client)
+        assert adapter.dropped_revisions == 2
+        assert 'dropped 2 revisions' in caplog.text
+        route.respond(json={'messages': [{'status': 'no posts found'}], 'collection': []})
+        adapter.fetch(date(2025, 1, 5), DAY, client)
+    assert adapter.dropped_revisions == 0
+    assert 'dropped 0 revisions' in caplog.text
+
+
+@pytest.mark.parametrize('doi,expected', [
+    ('10.64898/2025.01.05.734591', date(2025, 1, 5)),
+    ('10.1101/2025.02.30.123456', None),
+])
+def test_biorxiv_revision_doi_dates(source_config, fixture_json, respx_mock, doi, expected):
+    record = fixture_json('biorxiv_revisions.json')['collection'][2]
+    record['doi'] = doi
+    respx_mock.get(url__startswith=source_config['biorxiv']['endpoint']).respond(
+        json={'messages': [{'status': 'ok', 'total': 1}], 'collection': [record]})
+    adapter = BiorxivAdapter(source_config)
+    with httpx.Client() as client:
+        items = adapter.fetch(date(2025, 1, 5), DAY, client)
+    assert [item.published_at for item in items] == ([] if expected is None else [expected])
+    assert adapter.dropped_revisions == (expected is None)
