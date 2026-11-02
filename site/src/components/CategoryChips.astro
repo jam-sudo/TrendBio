@@ -1,0 +1,70 @@
+---
+import type { Category } from "../lib/data";
+
+interface Props {
+  categories: Category[];
+  counts: Record<string, number>;
+}
+
+const { categories, counts } = Astro.props;
+---
+
+<div class="category-chips" role="tablist" aria-label="Topic categories" data-category-chips>
+  <button type="button" role="tab" data-cat="all" aria-pressed="true" aria-selected="true">All</button>
+  {categories.map(({ slug, label }) => (
+    <button type="button" role="tab" data-cat={slug} aria-pressed="false" aria-selected="false" disabled={!counts[slug]}>
+      {label}
+    </button>
+  ))}
+</div>
+
+<script is:inline>
+  document.querySelectorAll('[data-category-chips]').forEach((row) => {
+    const buttons = [...row.querySelectorAll('[data-cat]')];
+    row.addEventListener('click', (event) => {
+      const chosen = event.target.closest('button[data-cat]');
+      if (!chosen || chosen.disabled) return;
+      buttons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button === chosen));
+        button.setAttribute('aria-selected', String(button === chosen));
+      });
+      document.querySelectorAll('[data-topic-cats]').forEach((card) => {
+        card.hidden = chosen.dataset.cat !== 'all' && !card.dataset.topicCats.split(/\s+/).includes(chosen.dataset.cat);
+      });
+    });
+    row.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const enabled = buttons.filter((button) => !button.disabled);
+      const index = enabled.indexOf(event.target);
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? enabled.length - 1 :
+        (index + (event.key === 'ArrowRight' ? 1 : -1) + enabled.length) % enabled.length;
+      enabled[next].focus();
+      enabled[next].click();
+    });
+  });
+</script>
+
+<style>
+  .category-chips {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem;
+    margin: 0 -0.5rem 1.5rem;
+  }
+  button {
+    flex: 0 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    padding: 0.5rem 0.875rem;
+    font: inherit;
+    font-size: var(--t3);
+    color: var(--fg);
+    background: var(--bg);
+    cursor: pointer;
+  }
+  button[aria-pressed="true"] { border-color: var(--accent); font-weight: 700; }
+  button:disabled { color: var(--muted); cursor: default; }
+  button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+</style>
