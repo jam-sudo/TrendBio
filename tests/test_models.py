@@ -195,4 +195,15 @@ def test_fixtures_regenerate_identically(tmp_path, fixtures_root, monkeypatch):
     actual = {path.relative_to(tmp_path): path.read_bytes() for path in tmp_path.rglob("*") if path.is_file()}
     assert actual.keys() == expected.keys()
     for path in sorted(expected):
+        if path.parts[:3] == ('data', 'computational', 'items'):
+            # Legacy fixtures omit the relevance flag, which defaults to true.
+            data = json.loads(expected[path])
+            data.setdefault('relevant', True)
+            expected[path] = (json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False) + '\n').encode()
         assert actual[path] == expected[path], path
+
+
+def test_item_without_relevant_field_loads_as_relevant(item):
+    raw = item.model_dump_json(exclude={'relevant'})
+    assert 'relevant' not in json.loads(raw)
+    assert Item.model_validate_json(raw).relevant is True

@@ -1,4 +1,5 @@
 from datetime import date
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -55,15 +56,16 @@ class FakeEmbedder:
 def test_enrich_sets_summary_and_categories_within_taxonomy(tmp_path, item, taxonomy):
     messages = FakeMessages(output=Enrichment(
         summary='Comparative analysis of pathogen genomes.', primary='genomics',
-        secondary=['ml-ai', 'invented-category'],
+        secondary=['ml-ai', 'invented-category'], relevant=True,
     ))
     budget = Budget(tmp_path / 'spend.json', 50)
     store = Store(tmp_path, 'computational')
     embedder = FakeEmbedder()
-    items, notes = enrich_items([item], store, LLM(SimpleNamespace(messages=messages), budget),
-                                embedder, taxonomy, {'biorxiv_category': {'genomics': ['genomics']}})
+    items, notes, irrelevant = enrich_items([item], store, LLM(SimpleNamespace(messages=messages), budget),
+                                           embedder, taxonomy, {'biorxiv_category': {'genomics': ['genomics']}})
     assert items == [item]
     assert notes == []
+    assert irrelevant == 0
     assert item.summary == 'Comparative analysis of pathogen genomes.'
     assert item.primary_category == 'genomics'
     assert item.secondary_categories == ['ml-ai']
@@ -86,8 +88,8 @@ def test_refusal_falls_back_to_abstract_sentence_and_hint_category(tmp_path, ite
     messages = FakeMessages(stop_reason='refusal')
     budget = Budget(tmp_path / 'spend.json', 50)
     store = Store(tmp_path, 'computational')
-    _, notes = enrich_items([item], store, LLM(SimpleNamespace(messages=messages), budget),
-                           FakeEmbedder(), taxonomy, {'biorxiv_category': {'genomics': ['genomics']}})
+    _, notes, _ = enrich_items([item], store, LLM(SimpleNamespace(messages=messages), budget),
+                              FakeEmbedder(), taxonomy, {'biorxiv_category': {'genomics': ['genomics']}})
     assert item.summary == 'We compare pathogen genomes.'
     assert item.primary_category == 'genomics'
     assert item.secondary_categories == []
@@ -101,7 +103,7 @@ def test_already_enriched_items_skipped(tmp_path, item, taxonomy):
     messages = FakeMessages()
     embedder = FakeEmbedder()
     llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
-    assert enrich_items([item], Store(tmp_path, 'computational'), llm, embedder, taxonomy, {}) == ([item], [])
+    assert enrich_items([item], Store(tmp_path, 'computational'), llm, embedder, taxonomy, {}) == ([item], [], 0)
     assert messages.calls == []
     assert embedder.texts == []
     assert not list(tmp_path.iterdir())
@@ -130,9 +132,9 @@ def test_hints_follow_source_order_and_deduplicate(item):
 
 def test_unknown_primary_falls_back_to_title_without_hints(tmp_path, item, taxonomy):
     item.abstract = ''
-    messages = FakeMessages(output=Enrichment(summary='Summary', primary='unknown', secondary=[]))
+    messages = FakeMessages(output=Enrichment(relevant=True, summary='Summary', primary='unknown', secondary=[]))
     llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
-    _, notes = enrich_items([item], Store(tmp_path, 'computational'), llm, FakeEmbedder(), taxonomy, {})
+    _, notes, _ = enrich_items([item], Store(tmp_path, 'computational'), llm, FakeEmbedder(), taxonomy, {})
     assert item.summary == item.title
     assert item.primary_category == 'ml-ai'
     assert notes == [f'enrichment-fallback:{item.id}']
@@ -165,7 +167,7 @@ def test_connection_error_then_success(tmp_path, item, taxonomy, monkeypatch):
     import anthropic
     import httpx
 
-    messages = FakeMessages(output=Enrichment(summary='Summary', primary='genomics', secondary=[]))
+    messages = FakeMessages(output=Enrichment(relevant=True, summary='Summary', primary='genomics', secondary=[]))
     calls = []
 
     def parse(**kwargs):
@@ -206,7 +208,7 @@ def test_batch_chunks_maps_unordered_results_and_records_discount(tmp_path, item
                     content=[] if index == 4 else [SimpleNamespace(type='text', text=(
                         'invalid json' if index == 5 else json.dumps({
                             'summary': 'evidence ' * 30 if index == 6 else 'Summary ' + str(index),
-                            'primary': 'genomics',
+                            'primary': 'genomics', 'relevant': True,
                             'secondary': ['unknown', 'ml-ai', 'structural', 'systems'] if index == 6 else ['unknown'],
                         })
                     ))], usage=SimpleNamespace(input_tokens=100, output_tokens=20),
@@ -238,7 +240,7 @@ def test_batch_chunks_maps_unordered_results_and_records_discount(tmp_path, item
     params = batches.requests[0][0]['params']
     schema = params['output_config']['format']['schema']
     assert schema['additionalProperties'] is False
-    assert set(schema['required']) == {'summary', 'primary', 'secondary'}
+    assert set(schema['required']) == {'summary', 'primary', 'secondary', 'relevant'}
     assert schema['properties']['primary']['enum'] == taxonomy.slugs()
     assert schema['properties']['secondary']['items']['enum'] == taxonomy.slugs()
     assert 'maxLength' not in schema['properties']['summary']
@@ -309,7 +311,7 @@ def test_enrichment_parallel_and_writes_sorted(tmp_path, item, taxonomy):
     embedder = FakeEmbedder()
     embedder.embed = Mock(wraps=embedder.embed)
     started = perf_counter()
-    _, notes = enrich_items(items, store, SimpleNamespace(enrich=slow_enrich), embedder, taxonomy, {})
+    _, notes, _ = enrich_items(items, store, SimpleNamespace(enrich=slow_enrich), embedder, taxonomy, {})
     assert perf_counter() - started < 1.2  # Sequential calls alone would take 2 seconds.
     written = [call.args[0].id for call in store.put_item.call_args_list]
     assert written == sorted(written)
@@ -320,7 +322,7 @@ def test_enrichment_parallel_and_writes_sorted(tmp_path, item, taxonomy):
 
 def test_long_summary_is_truncated_not_dropped(tmp_path, item, taxonomy):
     text = 'Comparative genomics reveals conserved pathogen evolution. ' * 4
-    messages = FakeMessages(output={'summary': text, 'primary': 'genomics', 'secondary': []})
+    messages = FakeMessages(output={'summary': text, 'primary': 'genomics', 'relevant': True, 'secondary': []})
     llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
     result = llm.enrich(item, taxonomy, [])
     assert result is not None
@@ -333,7 +335,7 @@ def test_long_summary_is_truncated_not_dropped(tmp_path, item, taxonomy):
 
 def test_three_secondaries_trimmed_to_two(tmp_path, item, taxonomy):
     messages = FakeMessages(output={
-        'summary': 'Summary', 'primary': 'genomics',
+        'summary': 'Summary', 'primary': 'genomics', 'relevant': True,
         'secondary': ['unknown', 'ml-ai', 'structural', 'systems'],
     })
     llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
@@ -361,8 +363,8 @@ def test_fallback_reason_logged(tmp_path, item, taxonomy, monkeypatch, caplog, c
                 request=httpx.Request('POST', 'https://example.org/messages'),
             ), body=None)
         if case == 'sdk_validation':
-            Enrichment.model_validate({'summary': item.abstract, 'secondary': []})
-        output = {'summary': item.abstract, 'secondary': []}
+            Enrichment.model_validate({'summary': item.abstract, 'secondary': [], 'relevant': True})
+        output = {'summary': item.abstract, 'secondary': [], 'relevant': True}
         if case == 'unknown_primary':
             output['primary'] = 'unknown'
         return SimpleNamespace(
@@ -394,3 +396,37 @@ def test_truncate_preserves_words_when_possible(text, limit, expected):
     from pipeline.llm import truncate
 
     assert truncate(text, limit) == expected
+
+
+def test_irrelevant_item_keeps_categories_and_is_flagged(tmp_path, item, taxonomy):
+    messages = FakeMessages(output={
+        'summary': 'General machine-learning benchmark.', 'primary': 'ml-ai',
+        'secondary': [], 'relevant': False,
+    })
+    store = Store(tmp_path, 'computational')
+    llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
+    items, notes, irrelevant = enrich_items([item], store, llm, None, taxonomy, {})
+    saved = store.get_item(item.id)
+    assert items == [item] and notes == []
+    assert saved.relevant is False
+    assert saved.primary_category == 'ml-ai'
+    assert saved.summary == 'General machine-learning benchmark.'
+    assert irrelevant == 1
+
+
+def test_fallback_marks_item_relevant(tmp_path, item, taxonomy):
+    item.relevant = False
+    messages = FakeMessages(stop_reason='refusal')
+    store = Store(tmp_path, 'computational')
+    llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
+    _, notes, irrelevant = enrich_items([item], store, llm, None, taxonomy, {})
+    assert item.relevant is True
+    assert store.get_item(item.id).relevant is True
+    assert notes == [f'enrichment-fallback:{item.id}']
+    assert irrelevant == 0
+
+
+def test_enrich_prompt_defines_relevance():
+    prompt = Path('pipeline/prompts/enrich.md').read_text(encoding='utf-8')
+    assert 'relevant:' in prompt
+    assert 'main contribution is computational' in prompt

@@ -12,6 +12,7 @@ from typer.testing import CliRunner
 
 from pipeline.budget import Budget
 from pipeline.config import load_scoring, load_taxonomy
+from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
 from pipeline.store import Store
@@ -41,15 +42,18 @@ class FakeLLM:
         self.fallback = False
         self.calls = []
         self.batches = []
+        self.irrelevant_ids: set[str] = set()
 
     def enrich(self, item, taxonomy, hints):
         self.budget.record('claude-haiku-5-5', 100, 20)
-        return Enrichment(summary=item.title, primary='structural', secondary=[])
+        return Enrichment(summary=item.title, primary='structural', secondary=[],
+                          relevant=item.id not in self.irrelevant_ids)
 
     def enrich_batch(self, items, taxonomy, hints_by_id):
         self.batches.append([item.id for item in items])
         self.budget.record('claude-haiku-5-5', 100 * len(items), 20 * len(items), batch=True)
-        return {item.id: Enrichment(summary=item.title, primary='structural', secondary=[])
+        return {item.id: Enrichment(summary=item.title, primary='structural', secondary=[],
+                                    relevant=item.id not in self.irrelevant_ids)
                 for item in items}
 
     def synthesize(self, topic, items, signals, previous, model):
@@ -676,3 +680,42 @@ def test_collect_stage_logs_dropped_revisions(ctx, caplog, backfill):
     assert any('stage=collect event=end' in record.getMessage()
                and 'source=biorxiv' in record.getMessage()
                and 'dropped_revisions=3' in record.getMessage() for record in caplog.records)
+
+
+def test_irrelevant_items_are_excluded_from_clustering_and_signals(ctx):
+    ctx.items.append(ctx.items[0].model_copy(update={
+        'id': 'biorxiv:test-3', 'title': 'Protein binder experiment 3',
+        'url': 'https://example.org/3', 'abstract': 'Binder experiment 3.',
+    }))
+    item = ctx.items[0]
+    ctx.deps.llm.irrelevant_ids = {item.id}
+    run_day('computational', TODAY, ctx.store, ctx.deps)
+    topics = ctx.store.all_topics()
+    assert all(item.id not in entry.item_ids for topic in topics for entry in topic.history)
+    with pytest.raises(KeyError):
+        ctx.store.get_embeddings([item.id])
+    raw = json.loads(item_path(ctx.root, 'computational', item).read_text())
+    assert raw['relevant'] is False
+    entries = [entry for topic in topics for entry in topic.history if entry.date == TODAY]
+    assert sum(entry.count_7d for entry in entries) == 3
+    assert sum(entry.signals.preprint for entry in entries) == 3
+
+
+def test_enrich_stage_logs_irrelevant_count(ctx, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
+    ctx.deps.llm.irrelevant_ids = {ctx.items[0].id}
+    run_day('computational', TODAY, ctx.store, ctx.deps)
+    message = next(record.getMessage() for record in caplog.records
+                   if 'stage=enrich event=end' in record.getMessage())
+    assert 'irrelevant=1' in message
+
+
+def test_backfill_enrich_batch_sets_relevance_and_logs_count(ctx, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
+    item = ctx.items[0]
+    ctx.deps.llm.irrelevant_ids = {item.id}
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    assert ctx.store.get_item(item.id).relevant is False
+    message = next(record.getMessage() for record in caplog.records
+                   if 'stage=enrich_batch event=end' in record.getMessage())
+    assert 'irrelevant=1' in message

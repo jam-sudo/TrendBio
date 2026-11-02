@@ -42,6 +42,7 @@ class Enrichment(BaseModel):
     summary: str
     primary: str
     secondary: list[str]
+    relevant: bool
 
     @field_validator('summary')
     @classmethod

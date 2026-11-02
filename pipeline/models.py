@@ -22,6 +22,7 @@ class Item(BaseModel):
     summary: str | None
     primary_category: str | None
     secondary_categories: list[str] = []
+    relevant: bool = True
     published_doi: str | None
     preprint_id: str | None
     metadata: dict[str, Any] = {}
