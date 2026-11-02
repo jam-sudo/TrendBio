@@ -1,0 +1,50 @@
+---
+import type { Item, ItemType } from "../lib/types";
+
+interface Props { items: Item[]; oneLiners: Record<string, string> }
+const { items, oneLiners } = Astro.props;
+const linkedPreprints = new Set(items.filter((item) => item.type === "published").map((item) => item.preprint_id));
+const sections: [ItemType, string][] = [
+  ["published", "Published papers"], ["preprint", "Preprints"], ["code", "Code & tools"], ["industry", "Industry"],
+];
+const badge = (item: Item) => {
+  if (item.type === "published") return item.metadata.journal;
+  if (item.type === "preprint") return item.source === "biorxiv" ? "bioRxiv" : "arXiv";
+  if (item.type === "code") return "GitHub";
+  return item.metadata.source_name ?? item.org;
+};
+---
+
+{sections.map(([type, heading]) => {
+  const evidence = items.filter((item) => item.type === type && !(type === "preprint" && linkedPreprints.has(item.id)));
+  return evidence.length > 0 && <section id={type} aria-labelledby={`${type}-heading`}>
+    <h2 id={`${type}-heading`}>{heading}</h2>
+    <ul>
+      {evidence.map((item) => {
+        const preprint = item.type === "published" && items.find((entry) => entry.type === "preprint" && entry.id === item.preprint_id);
+        return <li>
+          <h3><a href={item.url}>{item.title}</a>{preprint && <> <small><a href={preprint.url}>preprint</a></small></>}</h3>
+          <div class="metadata">
+            {badge(item) && <span class="badge">{badge(item)}</span>}
+            <time datetime={item.published_at}>{item.published_at}</time>
+            {item.authors.length > 0 && <span>{item.authors[0]}{item.authors.length > 1 && " et al."}</span>}
+            {item.type === "code" && item.metadata.star_gain_7d != null && <span>+{item.metadata.star_gain_7d} ★ this week</span>}
+            {item.type === "code" && item.metadata.license && <span>{item.metadata.license}</span>}
+          </div>
+          {(oneLiners[item.id] ?? item.summary) != null && <p>{oneLiners[item.id] ?? item.summary}</p>}
+        </li>;
+      })}
+    </ul>
+  </section>;
+})}
+
+<style>
+  section { margin-block: 2.5rem; }
+  ul { padding: 0; list-style: none; }
+  li { padding-block: 1rem; border-top: 1px solid var(--border); }
+  h3 { margin: 0 0 0.5rem; }
+  small { font-weight: 400; }
+  .metadata { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-bottom: 0.5rem; color: var(--muted); font-size: var(--t3); }
+  .badge { border: 1px solid var(--border); border-radius: 0.25rem; padding-inline: 0.375rem; }
+  p { margin: 0; }
+</style>
