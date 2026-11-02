@@ -770,7 +770,7 @@
     -0.023314906284213066,
     -0.03564109280705452
   ],
-  "headline": "Benchmark-focused evaluation of perturbation prediction and cell-state inference models",
+  "headline": "Graph and hypergraph learning predicts molecular interactions across biological networks",
   "history": [
     {
       "count_7d": 9,
@@ -1560,7 +1560,7 @@
     }
   ],
   "item_one_liners": {},
-  "label": "prediction learning",
+  "label": "Graph Learning For Interaction Prediction",
   "related": [
     "mortality-skeletal-d22b",
     "pathway-diabetic-c074",
@@ -1568,8 +1568,8 @@
   ],
   "secondary_categories": [],
   "slug": "prediction-learning-ec3e",
-  "summary": "Ten preprints and one paper scrutinize benchmark design, baselines, and reliability of perturbation, deconvolution, and histology-based prediction models.",
-  "synthesis": "Recent items center on evaluation methodology for predictive models in single-cell and spatial biology rather than new model architectures. Several benchmarks make evaluation assumptions explicit: InverseBench reports ridge accuracy falling from 0.959 on a proxy to 0.445 on K562 growth data, and a CRISPRi study shows that averaging cells per perturbation label discards perturbation-strength variation. Other work tests whether models add value beyond explicit baselines, including sequence models (AlphaGenome, RNA-FM) in noncoding RNA assays. Across ten perturbation-prediction systems, prediction transfer does not imply reliability transfer in single-cell foundation models. Additional preprints find that uncertainty in histology-to-spatial transcriptomics is largely redundant with the predicted mean, and argue that deconvolution misreads disease cell states as abundance changes. The single published paper reports that retaining spliced and unspliced counts as distinct NMF features yields more stable latent structure. The signal data show a rise ratio of 3.11; the items do not establish a cause.",
+  "summary": "",
+  "synthesis": "The common thread is relational modeling: each item represents biological entities as graphs or hypergraphs and learns over their connectivity to predict associations, interactions or clinical outcomes. Architectures vary: GATv2 attention in HMVA-DDI (AUROC 0.9819 on DrugBank), a dual-view multi-head GAT with SAC-tuned multi-task learning in RL-DMGLMD, and motif-aware hypergraph convolution in Motif-GRN. Several works address sparsity or feature selection directly, including adaptive hypergraph structure adjustment for circRNA-miRNA associations, adaptive Top-k feature selection in ASHL-DTI, and curriculum plus contrastive learning in JCCLPPI, which reports a ~4% micro-F1 gain. HGKAN applies Kolmogorov-Arnold networks over hierarchical hypergraphs for interpretable herb-symptom prediction. The distinctive elements are adaptive structure learning and interpretability-oriented designs rather than standard graph convolution alone.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-10-28"
+  "synthesized_on": "2026-10-01"
 }

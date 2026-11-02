@@ -770,7 +770,7 @@
     -0.009373601526021957,
     -0.033277470618486404
   ],
-  "headline": "Structure-aware ML across complexes and drug-target work; research-stage output only",
+  "headline": "PLM embeddings coupled to structural cues for binding and complex scoring",
   "history": [
     {
       "count_7d": 4,
@@ -1630,7 +1630,7 @@
     }
   ],
   "item_one_liners": {},
-  "label": "contact domain",
+  "label": "Protein Language Model Binding Prediction",
   "related": [
     "circadian-metabolism-f2c2",
     "prediction-learning-ec3e",
@@ -1640,8 +1640,8 @@
     "tools-infra"
   ],
   "slug": "contact-domain-dd02",
-  "summary": "Sixteen published articles and five preprints on PLM and structure-conditioned models; no code or industry records; rise ratio 3.4.",
-  "synthesis": "Current items cluster around protein language model and structure-aware methods for complex selection, antibody affinity and paratope prediction, enzyme kinetics, drug-target interaction and molecular generation. Complex-level work reports DeepUMQA-Selection as 317-fold faster than US-align, and EnsPlex reports a 27.8% relative gain. AbAffinity reports Pearson r 0.838 on SAAINT-DB. The enzyme-substrate leakage study shows that similarity-driven leakage inflates model performance. Output is mostly published in Bioinformatics (sixteen articles), with five preprints and no code or industry records. The 3.4 rise ratio is the sole growth signal, and the 7-day star gain is zero. The items do not establish what drives this increase.",
+  "summary": "Protein language models are now being fused with structural and interface information across antibody, complex, pocket, and enzyme prediction tasks.",
+  "synthesis": "The dominant thread is pretrained protein language model representations (ESM-2, ESM3, ESM-IF) coupled to structural or interface information to score candidate complexes, pockets and residues. AbAffinity uses frozen ESM-2 embeddings for sequence-only antibody-antigen affinity, and ParaEM predicts paratope residues from sequence with ESM3 embeddings and antigen-aware scoring. Candidate selection is a second theme: DeepUMQA-Selection pairs accuracy estimators with USR-based alignment, and EnsPlex merges docking and AlphaFold-family models under a DockQ-supervised scorer. New elements include training-free pocket exploration in ACER and preference optimization of a frozen ESM-IF decoder in SimBinder-IF, with modest reported gains. Generative design and conformal uncertainty papers are adjacent rather than part of this scaffold, and a leakage analysis of enzyme-substrate prediction shows similarity-driven inflation of reported performance.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2026-10-05"
 }

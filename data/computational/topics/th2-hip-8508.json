@@ -770,7 +770,7 @@
     -0.008244852535426617,
     -0.04752268269658089
   ],
-  "headline": "Perturbation models face stricter benchmarks: OOD failure and frozen-evaluation scrutiny",
+  "headline": "Single-cell perturbation models face scrutiny against simple baselines and OOD shifts",
   "history": [
     {
       "count_7d": 4,
@@ -1489,7 +1489,7 @@
     }
   ],
   "item_one_liners": {},
-  "label": "th2 hip",
+  "label": "Single Cell Perturbation Prediction Benchmarks",
   "related": [
     "faims-sample-preparation-9b40",
     "pathway-diabetic-c074",
@@ -1497,8 +1497,8 @@
   ],
   "secondary_categories": [],
   "slug": "th2-hip-8508",
-  "summary": "Preprints stress-test perturbation and multi-omics models; benchmarks show reported gains hinge on evaluation design, including OOD and frozen settings.",
-  "synthesis": "Activity in this cluster concentrates on validating perturbation and multi-omics models rather than introducing new architectures alone. Several preprints report that claimed gains depend on evaluation design. A benchmark over 600 embedding-task pairs tests whether foundation-model embeddings outperform simple baselines, and a frozen-evaluation study finds pretraining-scale effects visible only without standard finetuning. EL-PERTURB reports that perturbation prediction models fail out-of-distribution, and SABLE-MO shows factor reproducibility alone is insufficient, with stricter retention reducing false acceptance from 33% to 19% in simulations. Newer modeling work includes SynGeneFlow's additive-prior residual flow and DCAF's unified simulation framework. The signal shows a rise ratio of 3.16 across 12 items (10 preprints, 2 published), with no code or industry signals recorded. Two published items extend representation choices: spliced/unspliced NMF and genome-aware semi-supervised DNA classification.",
+  "summary": "Recent benchmarks test whether pretrained embeddings and generative models outperform simple baselines for perturbation response.",
+  "synthesis": "The dominant thread is rigorous evaluation of predictive models for single-cell perturbation response. Foundation-model embeddings are benchmarked against simple baselines across 600 embedding-task pairs, and pretraining-scale benefits appear only under fully frozen evaluation rather than standard finetuning. EL-PERTURB, a stratified out-of-distribution benchmark, tests 20 perturbation models on essential-gene and Perturb-seq screens, and the title reports that these models fail out-of-distribution. Methodological proposals include SynGeneFlow, which anchors on an additive perturbation prior and learns a non-additive residual flow with gene-interaction masks, and DCAF, which couples data validity, evaluation validity, and optimal-transport reconstruction. Signature recontextualization extends this framing to cross-context prediction. Other items, spanning multi-omics factor stability, enzyme kcat prediction, epigenetic age estimation, and DNA sequence augmentation, share the emphasis on validation but not the perturbation setting.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2026-10-23"
 }
