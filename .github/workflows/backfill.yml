@@ -15,6 +15,11 @@ on:
         description: Continue from the saved checkpoint
         type: boolean
         default: true
+      chain_until:
+        description: Earliest month start to backfill (YYYY-MM-01)
+        type: string
+        required: false
+        default: ""
 
 concurrency:
   group: pipeline
@@ -22,6 +27,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   pipeline:
@@ -66,3 +72,20 @@ jobs:
             git commit -m "data: backfill $FROM_DATE..$TO_DATE"
             git push
           fi
+      - name: Chain previous month
+        if: ${{ success() && inputs.chain_until != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FROM: ${{ inputs.from }}
+          CHAIN_UNTIL: ${{ inputs.chain_until }}
+        run: |
+          read -r PREV_FROM PREV_TO < <(python3 - "$FROM" <<'EOF'
+          import sys, calendar
+          from datetime import date
+          d = date.fromisoformat(sys.argv[1])
+          y, m = (d.year, d.month - 1) if d.month > 1 else (d.year - 1, 12)
+          print(date(y, m, 1), date(y, m, calendar.monthrange(y, m)[1]))
+          EOF
+          )
+          if [[ "$PREV_FROM" < "$CHAIN_UNTIL" ]]; then echo "::notice::chain finished at $FROM"; exit 0; fi
+          gh workflow run backfill.yml -f from="$PREV_FROM" -f to="$PREV_TO" -f resume=false -f chain_until="$CHAIN_UNTIL"
