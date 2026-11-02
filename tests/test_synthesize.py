@@ -183,3 +183,14 @@ def test_sdk_validation_error_is_not_retried(context):
     _, _, notes = run(ctx)
     assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
     assert len(ctx.beta.calls) == 1
+
+
+def test_explicit_model_overrides_backfill_selection(context):
+    ctx = context
+    topics, model, _ = synthesize_top(
+        [(ctx.topic, ctx.sig, ctx.scores)], {ctx.topic.slug: [ctx.item]},
+        ctx.llm, ctx.budget, load_scoring(), TODAY, backfill=True, model='claude-opus-5-5',
+    )
+    assert model == topics[0].synthesis_model == 'claude-opus-5-5'
+    assert ctx.beta.calls[0]['model'] == model
+    assert ctx.plain.calls == []

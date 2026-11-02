@@ -15,7 +15,7 @@ def test_budget_month_spend_and_ceiling(tmp_path):
     assert budget.over_ceiling()
     assert Budget(path, 5).month_spend_usd() == 6.0
     month = datetime.now(timezone.utc).strftime('%Y-%m')
-    assert json.loads(path.read_text()) == {month: 6.0}
+    assert json.loads(path.read_text())[month] == 6.0
 
 
 def test_budget_batch_discount_and_other_months(tmp_path):
@@ -75,3 +75,20 @@ def test_budget_rejects_invalid_inputs(tmp_path):
     with pytest.raises(KeyError):
         budget.record('unknown-model', 100, 10)
     assert not list(tmp_path.iterdir())
+
+
+def test_budget_usage_is_additive_and_preserves_legacy_spend(tmp_path):
+    path = tmp_path / 'spend.json'
+    month = datetime.now(timezone.utc).strftime('%Y-%m')
+    path.write_text(json.dumps({month: 1.5}))
+    budget = Budget(path, 50)
+    assert budget.usage() == budget.usage('2000-01') == {}
+    budget.record('claude-haiku-5-5', 100, 20)
+    budget.record('claude-haiku-5-5', 200, 30, batch=True)
+    budget.record('claude-opus-5-5', 10, 5)
+    assert Budget(path, 50).usage() == {
+        'claude-haiku-5-5': {'input_tokens': 300, 'output_tokens': 50},
+        'claude-opus-5-5': {'input_tokens': 10, 'output_tokens': 5},
+    }
+    assert budget.month_spend_usd() == pytest.approx(1.5001775)
+    assert json.loads(path.read_text())[month] == budget.month_spend_usd()

@@ -10,8 +10,10 @@ from pipeline.score import Scores, Signals
 def synthesize_top(
     ranked: list[tuple[Topic, Signals, Scores]], items_by_topic: dict[str, list[Item]],
     llm: LLM, budget: Budget, cfg: Scoring, today: date, *, backfill: bool,
+    model: str | None = None,
 ) -> tuple[list[Topic], str, list[str]]:
-    model = 'claude-haiku-5-5' if backfill or budget.over_ceiling() else 'claude-opus-5-5'
+    if model is None:
+        model = 'claude-haiku-5-5' if backfill or budget.over_ceiling() else 'claude-opus-5-5'
     topics, notes = [], []
     for topic, signals, _ in ranked:
         previous = topic.synthesis if any(day.rank is not None and day.date < today

@@ -171,3 +171,15 @@ def test_star_counts_pruned_to_60_days(tmp_path):
     assert path.read_text() == json.dumps(raw, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     store.put_star_counts({})
     assert store.star_counts() == {}
+
+
+def test_star_counts_backfill_retains_400_days(tmp_path):
+    store = Store(tmp_path, 'computational')
+    latest = date(2026, 11, 2)
+    history = [(latest - timedelta(days=i), 500 - i) for i in range(405)]
+    store.put_star_counts({'org/repo': history}, keep_days=400)
+    assert store.star_counts()['org/repo'] == sorted(history[:400])
+    store.put_star_counts(store.star_counts())
+    assert store.star_counts()['org/repo'] == sorted(history[:60])
+    with pytest.raises(ValueError, match='positive'):
+        store.put_star_counts({}, keep_days=0)
