@@ -35,7 +35,15 @@ pipeline run is needed. A note for an unknown slug produces a build warning.
 
 ## Costs (measured)
 
-Pending: record token usage and estimated USD cost after the first live dry run.
+Hosted dry run on 2026-11-02 (GitHub Actions `ubuntu-latest`, 7-day window, 1,196 new items, 164 topics):
+
+| Stage | Result |
+|---|---|
+| Wall time | 16 min including setup (collect 4.7 min, enrich 3.4 min, embed 4.5 min, synthesize 56 s) |
+| Haiku 5.5 (enrichment) | 1.96M input / 124k output tokens |
+| Opus 5.5 (5 syntheses) | 17.5k input / 5.1k output tokens |
+| Estimated cost | USD 0.43 for the run; a steady-state day (~170 new items) is lower, so roughly USD 10-15/month |
+| Enrichment fallbacks | 10 of 1,196 (5 `refusal:bio`, 4 `empty_output`, 1 `validation`) |
 
 ## Run locally
 
