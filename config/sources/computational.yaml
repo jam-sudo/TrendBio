@@ -1,22 +1,186 @@
-# Task B2 fills the source lists and query before live collection.
 biorxiv:
-  categories: []
-  keyword_filtered_categories: []
+  endpoint: https://api.biorxiv.org/details/biorxiv
+  categories: [bioinformatics, genomics, systems biology, synthetic biology, biophysics, molecular biology, cell biology]
+  keyword_filtered_categories: [molecular biology, cell biology]
 arxiv:
-  categories: []
-  keyword_filtered: []
-keywords: []
+  endpoint: https://export.arxiv.org/api/query
+  categories: [q-bio.*]
+  keyword_filtered: [cs.LG, cs.AI, stat.ML]
+keywords:
+  - bioinformatics
+  - computational biology
+  - genomics
+  - genome
+  - genomic
+  - transcriptomics
+  - transcriptome
+  - proteomics
+  - proteome
+  - metabolomics
+  - metabolome
+  - epigenomics
+  - epigenome
+  - single-cell
+  - single cell
+  - scrna
+  - scatac
+  - rna-seq
+  - rna sequencing
+  - atac-seq
+  - spatial transcriptomics
+  - spatial analysis
+  - gene expression
+  - gene regulation
+  - gene regulatory
+  - gene editing
+  - crispr
+  - protein design
+  - protein folding
+  - protein structure
+  - protein language model
+  - structure prediction
+  - molecular dynamics
+  - molecular docking
+  - drug discovery
+  - drug design
+  - therapeutics
+  - pharmacokinetic
+  - cheminformatics
+  - chemoinformatics
+  - systems biology
+  - synthetic biology
+  - multi-omics
+  - multiomics
+  - variant calling
+  - pangenome
+  - gwas
+  - sequence alignment
+  - genome assembly
+  - metagenomics
+  - microbiome
+  - phylogenetic
+  - cell atlas
+  - cell type
+  - perturbation model
+  - alphafold
+  - bionemo
+  - biological foundation model
 pubmed:
-  journals: []
-  query: ""
+  endpoint: https://eutils.ncbi.nlm.nih.gov/entrez/eutils
+  journals:
+    - Bioinformatics
+    - Genome Biology
+    - Nature Methods
+    - Nature Biotechnology
+    - Nucleic Acids Research
+    - Cell Systems
+    - PLOS Computational Biology
+    - Genome Research
+    - Briefings in Bioinformatics
+    - BMC Bioinformatics
+    - Nature Computational Science
+    - Nature Machine Intelligence
+    - Cell Genomics
+    - Molecular Systems Biology
+    - GigaScience
+    - eLife
+  query: '("Computational Biology"[MeSH Terms] OR "bioinformatics"[Title/Abstract] OR "single-cell"[Title/Abstract] OR "protein design"[Title/Abstract] OR ("Machine Learning"[MeSH Terms] AND (genomics[Title/Abstract] OR protein[Title/Abstract] OR "drug discovery"[Title/Abstract])))'
 github:
-  watchlist: []
-  topics: []
+  endpoint: https://api.github.com
+  watchlist:
+    - scverse/scanpy
+    - scverse/anndata
+    - scverse/scvi-tools
+    - satijalab/seurat
+    - stuart-lab/signac
+    - google-deepmind/alphafold
+    - google-deepmind/alphafold3
+    - facebookresearch/esm
+    - RosettaCommons/RFdiffusion
+    - dauparas/ProteinMPNN
+    - sokrypton/ColabFold
+    - deepchem/deepchem
+    - rdkit/rdkit
+    - biopython/biopython
+    - snakemake/snakemake
+    - nextflow-io/nextflow
+    - nf-core/rnaseq
+    - broadinstitute/gatk
+    - lh3/minimap2
+    - samtools/samtools
+  topics: [bioinformatics, computational-biology, genomics, single-cell, protein-design, proteomics, transcriptomics, drug-discovery]
   top_n_per_topic: 200
 rss:
-  feeds: []
+  # Verified public RSS feeds from the spec examples; some other examples have no public feed.
+  feeds:
+    - {name: insitro, url: 'https://www.insitro.com/feed/', kind: company}
+    - {name: CZI, url: 'https://chanzuckerberg.com/feed/', kind: company}
+    - {name: NVIDIA BioNeMo, url: 'https://blogs.nvidia.com/feed/', kind: company}
+    - {name: Google DeepMind science, url: 'https://deepmind.google/blog/rss.xml', kind: company}
+    - {name: Microsoft Research health, url: 'https://www.microsoft.com/en-us/research/feed/', kind: company}
+    - {name: GEN, url: 'https://www.genengnews.com/feed/', kind: news}
+    - {name: STAT, url: 'https://www.statnews.com/feed/', kind: news}
 hints:
-  biorxiv_category: {}
-  arxiv_category: {}
-  journal: {}
-  github_topic: {}
+  biorxiv_category:
+    bioinformatics: [tools-infra, ml-ai]
+    genomics: [genomics]
+    systems biology: [systems]
+    synthetic biology: [systems]
+    biophysics: [structural]
+    molecular biology: [structural, systems]
+    cell biology: [single-cell, systems]
+  arxiv_category:
+    q-bio.BM: [structural]
+    q-bio.CB: [single-cell, systems]
+    q-bio.GN: [genomics]
+    q-bio.MN: [systems]
+    q-bio.NC: [systems]
+    q-bio.OT: [systems]
+    q-bio.PE: [genomics, systems]
+    q-bio.QM: [tools-infra, ml-ai]
+    q-bio.SC: [structural]
+    q-bio.TO: [systems]
+    cs.LG: [ml-ai]
+    cs.AI: [ml-ai]
+    stat.ML: [ml-ai]
+  journal:
+    Bioinformatics: [tools-infra, ml-ai]
+    Genome Biology: [genomics, transcriptomics]
+    Nature Methods: [tools-infra]
+    Nature Biotechnology: [tools-infra, systems]
+    Nucleic Acids Research: [genomics, tools-infra]
+    Cell Systems: [systems]
+    PLOS Computational Biology: [systems, ml-ai]
+    Genome Research: [genomics]
+    Briefings in Bioinformatics: [tools-infra, ml-ai]
+    BMC Bioinformatics: [tools-infra, ml-ai]
+    Nature Computational Science: [ml-ai]
+    Nature Machine Intelligence: [ml-ai]
+    Cell Genomics: [genomics, single-cell]
+    Molecular Systems Biology: [systems]
+    GigaScience: [tools-infra]
+    eLife: [systems]
+    # PubMed's returned full titles (preserve raw journal names in metadata).
+    Bioinformatics (Oxford, England): [tools-infra, ml-ai]
+    Genome biology: [genomics, transcriptomics]
+    Nature methods: [tools-infra]
+    Nature biotechnology: [tools-infra, systems]
+    Nucleic acids research: [genomics, tools-infra]
+    Cell systems: [systems]
+    PLoS computational biology: [systems, ml-ai]
+    Genome research: [genomics]
+    Briefings in bioinformatics: [tools-infra, ml-ai]
+    BMC bioinformatics: [tools-infra, ml-ai]
+    Nature computational science: [ml-ai]
+    Nature machine intelligence: [ml-ai]
+    Cell genomics: [genomics, single-cell]
+    Molecular systems biology: [systems]
+  github_topic:
+    bioinformatics: [tools-infra]
+    computational-biology: [systems, tools-infra]
+    genomics: [genomics]
+    single-cell: [single-cell]
+    protein-design: [structural]
+    proteomics: [proteomics]
+    transcriptomics: [transcriptomics]
+    drug-discovery: [structural, ml-ai]
