@@ -1,14 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 import CategoryChips from "../components/CategoryChips.astro";
-import { allTopics, latestDay, loadTaxonomy, orphanNotes } from "../lib/data";
+import { rankedTopics, latestDay, loadTaxonomy, orphanNotes } from "../lib/data";
 
 const domain = "computational";
 const categories = loadTaxonomy(domain);
-const topics = allTopics(domain).map((topic) => ({
+const topics = rankedTopics(domain).map((topic) => ({
   topic,
   lastRanked: topic.history.filter((entry) => entry.rank !== null).map((entry) => entry.date).sort().at(-1) ?? "",
-})).sort((a, b) => b.lastRanked.localeCompare(a.lastRanked));
+}));
 const counts = Object.fromEntries(categories.map(({ slug }) => [
   slug, topics.filter(({ topic }) => [topic.category, ...topic.secondary_categories].includes(slug)).length,
 ]));
