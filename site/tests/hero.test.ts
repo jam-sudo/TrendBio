@@ -42,7 +42,7 @@ describe("built landing hero", () => {
     for (const category of loadTaxonomy("computational")) {
       const chip = html.match(new RegExp(`<button\\b[^>]*data-cat="${category.slug}"[^>]*>`))?.[0];
       expect(chip).toBeDefined();
-      expect(chip).toContain('role="tab"');
+      expect(chip).not.toContain('role="tab"');
       expect(chip).toContain('aria-pressed="false"');
       expect(/\bdisabled\b/.test(chip!)).toBe(!day.ranked.some((topic) =>
         topic.category === category.slug ||

@@ -9,10 +9,10 @@ interface Props {
 const { categories, counts } = Astro.props;
 ---
 
-<div class="category-chips" role="tablist" aria-label="Topic categories" data-category-chips>
-  <button type="button" role="tab" data-cat="all" aria-pressed="true" aria-selected="true">All</button>
+<div class="category-chips" role="group" aria-label="Topic categories" data-category-chips>
+  <button type="button" data-cat="all" aria-pressed="true">All</button>
   {categories.map(({ slug, label }) => (
-    <button type="button" role="tab" data-cat={slug} aria-pressed="false" aria-selected="false" disabled={!counts[slug]}>
+    <button type="button" data-cat={slug} aria-pressed="false" disabled={!counts[slug]}>
       {label}
     </button>
   ))}
@@ -26,7 +26,6 @@ const { categories, counts } = Astro.props;
       if (!chosen || chosen.disabled) return;
       buttons.forEach((button) => {
         button.setAttribute('aria-pressed', String(button === chosen));
-        button.setAttribute('aria-selected', String(button === chosen));
       });
       document.querySelectorAll('[data-topic-cats]').forEach((card) => {
         card.hidden = chosen.dataset.cat !== 'all' && !card.dataset.topicCats.split(/\s+/).includes(chosen.dataset.cat);
