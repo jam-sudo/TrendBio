@@ -63,6 +63,12 @@ npm test
 npm run dev
 ```
 
+To re-run a backfilled month after a collection fix, wipe that whole month before backfilling it again:
+
+```sh
+python -m pipeline wipe --domain computational --from 2026-10-01 --to 2026-10-31 --data-root data
+```
+
 The development server uses synthetic fixtures. To build against real output,
 run from `site/`:
 

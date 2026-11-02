@@ -663,3 +663,16 @@ def test_only_daily_github_collection_failure_degrades_day(ctx, source, backfill
     result = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=backfill)
     assert result.run.source_status[source] == 'failed'
     assert result.run.status == expected
+
+
+@pytest.mark.parametrize('backfill', [False, True])
+def test_collect_stage_logs_dropped_revisions(ctx, caplog, backfill):
+    caplog.set_level('INFO', logger='pipeline.run')
+    ctx.deps.adapters[0].dropped_revisions = 3
+    if backfill:
+        run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    else:
+        run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert any('stage=collect event=end' in record.getMessage()
+               and 'source=biorxiv' in record.getMessage()
+               and 'dropped_revisions=3' in record.getMessage() for record in caplog.records)

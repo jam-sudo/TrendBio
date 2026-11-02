@@ -175,6 +175,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 with _stage('collect', source=adapter.name, items=0) as counts:
                     try:
                         items = adapter.fetch(start, day, deps.client)
+                        counts['dropped_revisions'] = getattr(adapter, 'dropped_revisions', 0)
                     except Exception as error:
                         logger.warning('source=%s failed error=%s', adapter.name, type(error).__name__)
                         source_status[adapter.name] = 'failed'
@@ -342,6 +343,7 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
         with _stage('collect', source=adapter.name, chunk=f'{chunk_start}..{chunk_end}', items=0) as counts:
             try:
                 items = adapter.fetch(chunk_start, chunk_end, deps.client)
+                counts['dropped_revisions'] = getattr(adapter, 'dropped_revisions', 0)
                 # Historical first-seen dates must not collapse onto the chunk's final day.
                 items = [item.model_copy(update={'first_seen': item.published_at}) for item in items
                          if chunk_start <= item.published_at <= chunk_end]

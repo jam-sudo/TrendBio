@@ -25,6 +25,7 @@ from pipeline.sources.pubmed import PubmedAdapter
 from pipeline.sources.rss import RssAdapter
 from pipeline.store import Store
 from pipeline.synthesize import synthesize_top
+from pipeline.wipe import wipe as wipe_store
 
 
 app = typer.Typer(help='Collect, rank, and synthesize computational biology trends.', no_args_is_help=True)
@@ -95,6 +96,14 @@ def backfill(start: FromDate, end: ToDate, domain: Domain = 'computational',
     """Collect a historical range, batch-enrich it, then process days in order."""
     with _dependencies(domain, data_root) as deps:
         run_backfill(domain, start.date(), end.date(), Store(data_root, domain), deps, resume=resume)
+
+
+@app.command()
+def wipe(start: FromDate, end: ToDate, domain: Domain = 'computational',
+         data_root: DataRoot = Path('data')):
+    """Delete whole months of pipeline output before re-running a backfill."""
+    counts = wipe_store(Store(data_root, domain), start.date(), end.date())
+    typer.echo(' '.join(f'{name}={count}' for name, count in counts.items()))
 
 
 @app.command()
