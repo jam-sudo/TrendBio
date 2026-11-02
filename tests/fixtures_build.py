@@ -112,17 +112,17 @@ def build(root: Path) -> None:
         ))
     for topic in topics:
         dump(topic, topic_path(root / "data", "computational", topic.slug))
-    for today in days:
+    for today in [days[0] - timedelta(days=1), *days]:
         ranked = []
-        for topic in topics:
+        for topic in topics if today in days else []:
             entry = next(entry for entry in topic.history if entry.date == today)
             ranked.append(RankedTopic(slug=topic.slug, rank=entry.rank, headline=topic.headline,
                                       summary=topic.summary, category=topic.category,
                                       signals=entry.signals, scores=entry.scores))
         started = datetime.combine(today, time(6), tzinfo=timezone.utc)
         run = RunInfo(started=started, finished=started + timedelta(minutes=2), status="ok",
-                      backfilled=today == days[0],
-                      synthesis_model="claude-haiku-5-5" if today == days[0] else "claude-opus-5-5",
+                      backfilled=today <= days[0],
+                      synthesis_model="claude-haiku-5-5" if today <= days[0] else "claude-opus-5-5",
                       source_status={source: "ok" for source in ("biorxiv", "arxiv", "pubmed", "github", "rss")})
         dump(Day(domain="computational", date=today, ranked=sorted(ranked, key=lambda row: row.rank), run=run),
              day_path(root / "data", "computational", today))
