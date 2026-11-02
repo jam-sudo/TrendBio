@@ -1,0 +1,30 @@
+{
+  "abstract": "Closed-loop neuromodulation requires sleep staging that respects stage-specific minimum dwells: stimulation policies switch by sleep stage, and a policy change is permitted only after the current stage has persisted for its minimum duration. Discriminative classifiers fragment stage trajectories---for example, a 30 s Wake segment inside a 10 min N2 run---and even hidden semi-Markov smoothing leaves 11.3% of segments below the minimum dwell threshold. This paper presents a world model in which a recurrent state-space model (RSSM) learns dwell structure endogenously from EEG, via duration-aware latent sampling, a survival-curve dwell prior, and transition-matrix calibration, and a trajectory-level hard-constraint layer guarantees the minimum dwell at decoding. On SHHS-1 (200 subjects, 160/20/20, three repeated splits), the model reaches a test accuracy of 0.690 +/- 0.053 (95% CI over 3 folds) versus 0.641 +/- 0.042 for an identically split discriminative baseline, with macro-F1 +17.5 pp and better accuracy on all three folds. On Sleep-EDF the constraint layer cuts below-threshold segments from 71.8% to 0.1% with no accuracy loss (0.734 to 0.737), and an online locked scheduler reduces RL policy switches by 87% per night while keeping every policy run at least 90 s. To the best of the author's knowledge, this is the first system to couple learned dwell statistics with a decoding-time hard guarantee. Code and pretrained weights will be released.",
+  "authors": [
+    "Junhui Gao"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-14",
+  "id": "arxiv:2610.33033",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.NE"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.33033v1</ns0:id>\n    <ns0:title>Duration-Aware World Models for Sleep Staging with Dwell-Time Constraints</ns0:title>\n    <ns0:updated>2026-10-14T09:09:42Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.33033v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.33033v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Closed-loop neuromodulation requires sleep staging that respects stage-specific minimum dwells: stimulation policies switch by sleep stage, and a policy change is permitted only after the current stage has persisted for its minimum duration. Discriminative classifiers fragment stage trajectories---for example, a 30 s Wake segment inside a 10 min N2 run---and even hidden semi-Markov smoothing leaves 11.3% of segments below the minimum dwell threshold. This paper presents a world model in which a recurrent state-space model (RSSM) learns dwell structure endogenously from EEG, via duration-aware latent sampling, a survival-curve dwell prior, and transition-matrix calibration, and a trajectory-level hard-constraint layer guarantees the minimum dwell at decoding. On SHHS-1 (200 subjects, 160/20/20, three repeated splits), the model reaches a test accuracy of 0.690 +/- 0.053 (95% CI over 3 folds) versus 0.641 +/- 0.042 for an identically split discriminative baseline, with macro-F1 +17.5 pp and better accuracy on all three folds. On Sleep-EDF the constraint layer cuts below-threshold segments from 71.8% to 0.1% with no accuracy loss (0.734 to 0.737), and an online locked scheduler reduces RL policy switches by 87% per night while keeping every policy run at least 90 s. To the best of the author's knowledge, this is the first system to couple learned dwell statistics with a decoding-time hard guarantee. Code and pretrained weights will be released.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.NE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-14T09:09:42Z</ns0:published>\n    <ns1:comment>16 pages, 7 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Junhui Gao</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-14",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "RSSM-based world model for EEG sleep staging learns stage dwell structure and enforces minimum dwell via a hard-constraint decoding layer, improving accuracy…",
+  "title": "Duration-Aware World Models for Sleep Staging with Dwell-Time Constraints",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.33033v1"
+}

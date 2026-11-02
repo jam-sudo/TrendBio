@@ -1,0 +1,44 @@
+{
+  "abstract": "Protein models such as Evolutionary Scale Modeling (ESM), AlphaFold and Boltz have transformed computational protein science, yet a pretrained model rarely transfers to a particular laboratory's assay without adaptation to its data and experimental setting, and that adaptation is technically demanding and spends real compute budget. Existing agentic systems can automate model training, yet typically treat fine-tuning as a reliable tool call: feasibility and cost are estimated rather than measured, and infeasibility is discovered only after compute has been spent. We formulate protein-model adaptation as a gated decision problem: given a task, raw data and a compute budget c_max, a system should decide whether and how to adapt a model before committing expensive computation. We introduce CAPO (Compute-Aware Automated Protein-Model Optimization), a multi-agent system built around one rule: gate before you train. CAPO measures feasibility on the target accelerator, projects cost against the available budget, runs a canary inside the actual training loop and maintains an auditable artifact trail; critically, it can decline an unaffordable adaptation and select a cheaper alternative. We evaluate CAPO, without system changes, on three protein-modeling tasks: (i) SARS-CoV-2 host-range prediction, (ii) hit-to-lead affinity ranking and (iii) temporal variant-effect reclassification. On host range, CAPO partially fine-tuned an 8-million-parameter ESM-2 model to a species-averaged MCC of 0.826, compared with 0.743 for a hand-designed expert transformer; it matched a general coding agent while using 57.4% less GPU time and reduced failed training trials from four to zero. For hit-to-lead affinity ranking, CAPO rejected Boltz-2 fine-tuning and instead trained an assay-calibrated lightweight head over frozen representations, improving ranking on 11 of 15 held-out targets in 1.68 GPU-hours. On temporally held-out ClinVar variants, rank-4 low-rank adaptation of ESM-2 reached an MCC of 0.478, compared with 0.252 for a one-hot baseline and 0.000 for the frozen zero-shot score. These results come from single runs, without a gate ablation and with one generalist-agent comparison. Within those limits, they show that measured admission control can make protein-model adaptation not only automated but selective: deciding what to compute, what not to compute and why.",
+  "authors": [
+    "Schifferli, T.",
+    "Garcia Pardinas, J.",
+    "B. Irvine, E.",
+    "Hartley, M.-A.",
+    "Bikias, T."
+  ],
+  "doi": "10.64898/2026.10.12.758406",
+  "first_seen": "2026-10-18",
+  "id": "biorxiv:10.64898/2026.10.12.758406",
+  "metadata": {
+    "abstract": "Protein models such as Evolutionary Scale Modeling (ESM), AlphaFold and Boltz have transformed computational protein science, yet a pretrained model rarely transfers to a particular laboratory's assay without adaptation to its data and experimental setting, and that adaptation is technically demanding and spends real compute budget. Existing agentic systems can automate model training, yet typically treat fine-tuning as a reliable tool call: feasibility and cost are estimated rather than measured, and infeasibility is discovered only after compute has been spent. We formulate protein-model adaptation as a gated decision problem: given a task, raw data and a compute budget c_max, a system should decide whether and how to adapt a model before committing expensive computation. We introduce CAPO (Compute-Aware Automated Protein-Model Optimization), a multi-agent system built around one rule: gate before you train. CAPO measures feasibility on the target accelerator, projects cost against the available budget, runs a canary inside the actual training loop and maintains an auditable artifact trail; critically, it can decline an unaffordable adaptation and select a cheaper alternative. We evaluate CAPO, without system changes, on three protein-modeling tasks: (i) SARS-CoV-2 host-range prediction, (ii) hit-to-lead affinity ranking and (iii) temporal variant-effect reclassification. On host range, CAPO partially fine-tuned an 8-million-parameter ESM-2 model to a species-averaged MCC of 0.826, compared with 0.743 for a hand-designed expert transformer; it matched a general coding agent while using 57.4% less GPU time and reduced failed training trials from four to zero. For hit-to-lead affinity ranking, CAPO rejected Boltz-2 fine-tuning and instead trained an assay-calibrated lightweight head over frozen representations, improving ranking on 11 of 15 held-out targets in 1.68 GPU-hours. On temporally held-out ClinVar variants, rank-4 low-rank adaptation of ESM-2 reached an MCC of 0.478, compared with 0.252 for a one-hot baseline and 0.000 for the frozen zero-shot score. These results come from single runs, without a gate ablation and with one generalist-agent comparison. Within those limits, they show that measured admission control can make protein-model adaptation not only automated but selective: deciding what to compute, what not to compute and why.",
+    "author_corresponding": "Thomas Bikias",
+    "author_corresponding_institution": "Botnar Institute of Immune Engineering",
+    "authors": "Schifferli, T.; Garcia Pardinas, J.; B. Irvine, E.; Hartley, M.-A.; Bikias, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-18",
+    "doi": "10.64898/2026.10.12.758406",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/18/2026.10.12.758406.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CAPO: Compute-Aware Automated Protein-Model Optimization",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Botnar Institute of Immune Engineering",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-18",
+  "published_doi": null,
+  "secondary_categories": [
+    "tools-infra",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "CAPO: a multi-agent system that gates protein-model adaptation on measured feasibility and compute budget, declining unaffordable fine-tuning and choosing…",
+  "title": "CAPO: Compute-Aware Automated Protein-Model Optimization",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.12.758406"
+}

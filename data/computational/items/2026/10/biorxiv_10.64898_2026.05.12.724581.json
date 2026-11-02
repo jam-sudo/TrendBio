@@ -1,0 +1,43 @@
+{
+  "abstract": "Searching petabase-scale repositories of raw sequencing data such as the NIH Sequence Read Archive (SRA) could unlock biological insights that remain inaccessible. Existing sequence-search methods either do not scale well or rely on exact $k$-mer matching that is brittle to genomic variation, which is high both within and across species and is further compounded by sequencing error. We recast sequence search as dense retrieval: we learn sequence embeddings whose inner-product similarity ranks locally aligned sequences above unaligned ones. We introduce LOCALE, an encoder trained with an InfoNCE objective on biologically informed augmentations: overlapping crops of parent sequences corrupted with substitutions, insertions, and deletions. This training recipe, rather than a specialized architecture, consistently induces variation-robust representations across four encoders spanning three tokenization schemes, improving Recall@$R_q$ by 7--39 points at 10% genomic variation. On a 50-accession SRA benchmark LOCALE retains 63.2% Recall@$R_q$ at 10% variation while existing k-mer indexes and DNA embedding methods fall below 35%, and on the full 4,571-accession MetaGraph benchmark (296 Gbp, 2.06 billion vectors) it achieves 4.5x the AUPRC of MetaGraph, the state-of-the-art k-mer index, with a single-node GPU IVF-PQ index retaining a 3.6x advantage at MetaGraph's query latency. Our encoder and training strategy generalize to real biological variance: on a cross-genotype Hepatitis B task, querying reads from one genotype against accessions of another with >8% natural divergence, LOCALE reaches 0.813 Recall@R_q versus 0.518 for MetaGraph.",
+  "authors": [
+    "Synk, R.",
+    "Pandey, P.",
+    "Sahinalp, C.",
+    "Duraiswami, R."
+  ],
+  "doi": "10.64898/2026.05.12.724581",
+  "first_seen": "2026-10-13",
+  "id": "biorxiv:10.64898/2026.05.12.724581",
+  "metadata": {
+    "abstract": "Searching petabase-scale repositories of raw sequencing data such as the NIH Sequence Read Archive (SRA) could unlock biological insights that remain inaccessible. Existing sequence-search methods either do not scale well or rely on exact $k$-mer matching that is brittle to genomic variation, which is high both within and across species and is further compounded by sequencing error. We recast sequence search as dense retrieval: we learn sequence embeddings whose inner-product similarity ranks locally aligned sequences above unaligned ones. We introduce LOCALE, an encoder trained with an InfoNCE objective on biologically informed augmentations: overlapping crops of parent sequences corrupted with substitutions, insertions, and deletions. This training recipe, rather than a specialized architecture, consistently induces variation-robust representations across four encoders spanning three tokenization schemes, improving Recall@$R_q$ by 7--39 points at 10% genomic variation. On a 50-accession SRA benchmark LOCALE retains 63.2% Recall@$R_q$ at 10% variation while existing k-mer indexes and DNA embedding methods fall below 35%, and on the full 4,571-accession MetaGraph benchmark (296 Gbp, 2.06 billion vectors) it achieves 4.5x the AUPRC of MetaGraph, the state-of-the-art k-mer index, with a single-node GPU IVF-PQ index retaining a 3.6x advantage at MetaGraph's query latency. Our encoder and training strategy generalize to real biological variance: on a cross-genotype Hepatitis B task, querying reads from one genotype against accessions of another with >8% natural divergence, LOCALE reaches 0.813 Recall@R_q versus 0.518 for MetaGraph.",
+    "author_corresponding": "Ramani Duraiswami",
+    "author_corresponding_institution": "University of Maryland",
+    "authors": "Synk, R.; Pandey, P.; Sahinalp, C.; Duraiswami, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-13",
+    "doi": "10.64898/2026.05.12.724581",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/13/2026.05.12.724581.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "LOCALE: Local-Alignment Embeddings for Noise-Robust DNA Search at Scale",
+    "type": "new results",
+    "version": "3"
+  },
+  "org": "University of Maryland",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-13",
+  "published_doi": null,
+  "secondary_categories": [
+    "tools-infra",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "LOCALE trains DNA sequence embeddings with InfoNCE on alignment-aware augmentations for noise-robust dense retrieval, outperforming MetaGraph k-mer index at…",
+  "title": "LOCALE: Local-Alignment Embeddings for Noise-Robust DNA Search at Scale",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.12.724581"
+}

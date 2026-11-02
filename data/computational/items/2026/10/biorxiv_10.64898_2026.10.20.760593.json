@@ -1,0 +1,49 @@
+{
+  "abstract": "Accurate interpretation of germline variants remains a central challenge in clinical genomics. Existing in silico pathogenicity predictors often provide incomplete coverage or restricted to missense variants from the coding region, leaving the variants from splice sites, -UTR, and intronic regions under-scored. We present AGVarPred, a gradient-boosted classifier designed to predict the pathogenicity of germline mutants, with a broad consequence-class coverage across SNVs and indels. Here, the population allele frequency from gnomAD, functional consequence annotations from Ensembl VEP, and cell-type-specific functional genomic scores from the AlphaGenome platform were integrated to develop the classifier. Using a gene-level split of 134,002 high-confidence ClinVar variants across 9,222 genes, AGVarPred achieved an AUC-ROC of 0.9753 (95% CI 0.9731-0.9775) and a AUC-PR of 0.9606 on 12,385 scored internal test variants. A paired DeLong analysis showed that the full model significantly outperformed an allele-frequency-plus-VEP model ({Delta}AUC = 0.1539, 95% CI 0.1489-0.1589; p < 1 x 10-300), supporting a substantial incremental contribution from AlphaGenome-derived features. Performance remained strong when restricted to SNVs (AUC-ROC 0.9558) and was also high for indels (AUC-ROC 0.9532). On five external benchmarks, AUC-ROCs ranged from 0.528 on a functional-assay-derived benchmark to 0.977 on a clinically curated deafness database, reflecting its dependence on benchmark composition and label source. A separate analysis of the VIP Database, whose pathogenic labels are ClinVar-derived, showed consistent performance (AUC-ROC of 0.892) in held-out genes. AGVarPred scored 100% of evaluated variants in the external benchmarks, whereas AlphaMissense and REVEL covered only small fractions of non-missense variants. Model interpretation indicated that gnomAD allele frequency was the dominant individual predictor; the 111 AlphaGenome features provided complementary functional signal, with splicing and chromatin assays contributing to the largest share of the AlphaGenome SHAP mass. A web-based interface for AGVarPred is available at https://pankaj357.github.io/AGVarPred/ to facilitate the submission of normalized GRCh38 germline variants and retrieval of pathogenicity predictions using the frozen AGVarPred model.",
+  "authors": [
+    "Kumar, P.",
+    "Singh, S.",
+    "Garai, S.",
+    "Ramesh, M.",
+    "Goli, R. C.",
+    "KC, N.",
+    "Sahu, T. K.",
+    "Naskar, S.",
+    "Bhadana, V. P.",
+    "Nandineni, M. R.",
+    "KK, K."
+  ],
+  "doi": "10.64898/2026.10.20.760593",
+  "first_seen": "2026-10-25",
+  "id": "biorxiv:10.64898/2026.10.20.760593",
+  "metadata": {
+    "abstract": "Accurate interpretation of germline variants remains a central challenge in clinical genomics. Existing in silico pathogenicity predictors often provide incomplete coverage or restricted to missense variants from the coding region, leaving the variants from splice sites, -UTR, and intronic regions under-scored. We present AGVarPred, a gradient-boosted classifier designed to predict the pathogenicity of germline mutants, with a broad consequence-class coverage across SNVs and indels. Here, the population allele frequency from gnomAD, functional consequence annotations from Ensembl VEP, and cell-type-specific functional genomic scores from the AlphaGenome platform were integrated to develop the classifier. Using a gene-level split of 134,002 high-confidence ClinVar variants across 9,222 genes, AGVarPred achieved an AUC-ROC of 0.9753 (95% CI 0.9731-0.9775) and a AUC-PR of 0.9606 on 12,385 scored internal test variants. A paired DeLong analysis showed that the full model significantly outperformed an allele-frequency-plus-VEP model ({Delta}AUC = 0.1539, 95% CI 0.1489-0.1589; p < 1 x 10-300), supporting a substantial incremental contribution from AlphaGenome-derived features. Performance remained strong when restricted to SNVs (AUC-ROC 0.9558) and was also high for indels (AUC-ROC 0.9532). On five external benchmarks, AUC-ROCs ranged from 0.528 on a functional-assay-derived benchmark to 0.977 on a clinically curated deafness database, reflecting its dependence on benchmark composition and label source. A separate analysis of the VIP Database, whose pathogenic labels are ClinVar-derived, showed consistent performance (AUC-ROC of 0.892) in held-out genes. AGVarPred scored 100% of evaluated variants in the external benchmarks, whereas AlphaMissense and REVEL covered only small fractions of non-missense variants. Model interpretation indicated that gnomAD allele frequency was the dominant individual predictor; the 111 AlphaGenome features provided complementary functional signal, with splicing and chromatin assays contributing to the largest share of the AlphaGenome SHAP mass. A web-based interface for AGVarPred is available at https://pankaj357.github.io/AGVarPred/ to facilitate the submission of normalized GRCh38 germline variants and retrieval of pathogenicity predictions using the frozen AGVarPred model.",
+    "author_corresponding": "Kanaka KK",
+    "author_corresponding_institution": "ICAR- Indian Institute of AGricultural Biotechnology, Ranchi, India",
+    "authors": "Kumar, P.; Singh, S.; Garai, S.; Ramesh, M.; Goli, R. C.; KC, N.; Sahu, T. K.; Naskar, S.; Bhadana, V. P.; Nandineni, M. R.; KK, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-25",
+    "doi": "10.64898/2026.10.20.760593",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/25/2026.10.20.760593.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "AlphaGenome informed machine learning for pathogenicity prediction of germline mutations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "ICAR- Indian Institute of AGricultural Biotechnology, Ranchi, India",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-10-25",
+  "published_doi": null,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "AGVarPred, a gradient-boosted classifier combining gnomAD allele frequency, VEP annotations and AlphaGenome features, reports AUC-ROC 0.9753 on ClinVar…",
+  "title": "AlphaGenome informed machine learning for pathogenicity prediction of germline mutations",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.20.760593"
+}

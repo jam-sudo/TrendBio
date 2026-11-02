@@ -1,0 +1,40 @@
+{
+  "abstract": "Peptide therapeutics occupy a compelling middle ground between small molecules and larger proteins, and in practice, most approved peptide drugs incorporate non-canonical amino acids (ncAAs) or other non-peptidic chemistries to elicit improved physiochemical properties (Yaseen Khan et al. (2026)). The chemical space of known ncAAs numbers in the thousands, yet current state-of-theart sequence-to-structure prediction models handle them poorly, because fewer than 0.02% of residues deposited in the Protein Data Bank (PDB) (Berman et al. (2003)), the main source of training data, correspond to ncAAs. Our central idea is that this data bottleneck can be overcome by coupling generative structure prediction with reinforcement learning (RL) from machine-learned force field (MLFF)-derived energy. We present Neopep, a sequence-conditioned diffusion model for ncAA-containing peptide structure prediction, first pretrained on PDB structures to establish a structural prior and then fine-tuned via RL: for ncAAcontaining peptide sequences, the model proposes structures that are scored by a frozen MLFF, and this energy signal is backpropagated directly into the model to progressively lower the energy of its predictions. MLFFs have demonstrated near-quantum accuracy across much of chemical space, approacing DFT-level accuracy at a fraction of the computational cost (Kabylda et al. (2025)). This makes them substantially more accurate than classical, empirically derived force fields, which are parametrised for the canonical 20 amino acids and do not generalise to arbitrary chemistries. While Neopep is trained on a fixed set of 189 ncAAs, the underlying architecture operates at atom-level granularity and is in principle generalisable to any chemistry. We show that our model is able to produce structures of ncAA-containing peptides that achieve lower RMSD values on average to the ground truth structures, in comparison to without finetuning and other state-of the-art structure prediction models.",
+  "authors": [
+    "Jagannathan, D.",
+    "Kim, P. M."
+  ],
+  "doi": "10.64898/2026.10.22.760799",
+  "first_seen": "2026-10-28",
+  "id": "biorxiv:10.64898/2026.10.22.760799",
+  "metadata": {
+    "abstract": "Peptide therapeutics occupy a compelling middle ground between small molecules and larger proteins, and in practice, most approved peptide drugs incorporate non-canonical amino acids (ncAAs) or other non-peptidic chemistries to elicit improved physiochemical properties (Yaseen Khan et al. (2026)). The chemical space of known ncAAs numbers in the thousands, yet current state-of-theart sequence-to-structure prediction models handle them poorly, because fewer than 0.02% of residues deposited in the Protein Data Bank (PDB) (Berman et al. (2003)), the main source of training data, correspond to ncAAs. Our central idea is that this data bottleneck can be overcome by coupling generative structure prediction with reinforcement learning (RL) from machine-learned force field (MLFF)-derived energy. We present Neopep, a sequence-conditioned diffusion model for ncAA-containing peptide structure prediction, first pretrained on PDB structures to establish a structural prior and then fine-tuned via RL: for ncAAcontaining peptide sequences, the model proposes structures that are scored by a frozen MLFF, and this energy signal is backpropagated directly into the model to progressively lower the energy of its predictions. MLFFs have demonstrated near-quantum accuracy across much of chemical space, approacing DFT-level accuracy at a fraction of the computational cost (Kabylda et al. (2025)). This makes them substantially more accurate than classical, empirically derived force fields, which are parametrised for the canonical 20 amino acids and do not generalise to arbitrary chemistries. While Neopep is trained on a fixed set of 189 ncAAs, the underlying architecture operates at atom-level granularity and is in principle generalisable to any chemistry. We show that our model is able to produce structures of ncAA-containing peptides that achieve lower RMSD values on average to the ground truth structures, in comparison to without finetuning and other state-of the-art structure prediction models.",
+    "author_corresponding": "Philip M Kim",
+    "author_corresponding_institution": "University of Toronto",
+    "authors": "Jagannathan, D.; Kim, P. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-28",
+    "doi": "10.64898/2026.10.22.760799",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/28/2026.10.22.760799.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Neopep: Reinforcement Learning From Machine-Learned Force Field Energy for Non-Canonical Peptide Structure Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Toronto",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-10-28",
+  "published_doi": null,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Neopep is a sequence-conditioned diffusion model for non-canonical amino acid peptide structure prediction, pretrained on PDB and fine-tuned via RL using…",
+  "title": "Neopep: Reinforcement Learning From Machine-Learned Force Field Energy for Non-Canonical Peptide Structure Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.22.760799"
+}

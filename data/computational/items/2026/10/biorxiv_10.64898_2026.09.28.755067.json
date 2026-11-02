@@ -1,0 +1,43 @@
+{
+  "abstract": "tRNA are short, ~76 nucleotide-long, modification-rich molecules that play an important role in protein translation. Nanopore sequencing is the only platform capable of directly sequencing full-length, native tRNA molecules. This capability is enabled by splinted ligation of tRNA-specific adapters. As a result, the measured ionic current signal reflects a composition of both adapter and tRNA sequence features. Despite these advantages, analysis of nanopore tRNA sequencing data poses distinct computational challenges. Existing ionic current-based signal-to-sequence decoding (basecalling) models are optimized for mRNA and perform suboptimally on short, modification-dense RNA such as tRNA. Furthermore, alignment algorithms for reference-guided analysis of short-length reads are not optimized for nanopore reads with lower accuracy than Next-generation sequencing reads. To overcome these limitations, domain-specific computational approaches are required. We present tRNAZAP, a nanopore ionic current signal analysis toolkit designed to enable precise reference-guided sequence alignment. tRNAZAP operates directly on raw ionic current signals and decomposes the analysis into two complementary tasks: 1) segmentation of adapter and tRNA regions, and 2) tRNA classification, both implemented using transformer-based models. The segmentation component isolates the tRNA signal portion and extracts the corresponding nucleotide sequence as the alignment query, while the classification component identifies the tRNA type as the alignment reference without requiring sequence-level information. Together, these outputs allow direct optimal pairwise alignment between the tRNA subsequence of the full query and reference sequences. Trained on in vitro transcribed RNA data and evaluated on yeast tRNA, these models achieved ~98% classification accuracy and intersection-over-union of ~0.98 for segmentation.",
+  "authors": [
+    "Daneshwar Kakhaki, P.",
+    "Akeson, S.",
+    "Ghohabi Esfahani, N.",
+    "Abu-Shumays, R. L.",
+    "Jain, M."
+  ],
+  "doi": "10.64898/2026.09.28.755067",
+  "first_seen": "2026-10-12",
+  "id": "biorxiv:10.64898/2026.09.28.755067",
+  "metadata": {
+    "abstract": "tRNA are short, ~76 nucleotide-long, modification-rich molecules that play an important role in protein translation. Nanopore sequencing is the only platform capable of directly sequencing full-length, native tRNA molecules. This capability is enabled by splinted ligation of tRNA-specific adapters. As a result, the measured ionic current signal reflects a composition of both adapter and tRNA sequence features. Despite these advantages, analysis of nanopore tRNA sequencing data poses distinct computational challenges. Existing ionic current-based signal-to-sequence decoding (basecalling) models are optimized for mRNA and perform suboptimally on short, modification-dense RNA such as tRNA. Furthermore, alignment algorithms for reference-guided analysis of short-length reads are not optimized for nanopore reads with lower accuracy than Next-generation sequencing reads. To overcome these limitations, domain-specific computational approaches are required. We present tRNAZAP, a nanopore ionic current signal analysis toolkit designed to enable precise reference-guided sequence alignment. tRNAZAP operates directly on raw ionic current signals and decomposes the analysis into two complementary tasks: 1) segmentation of adapter and tRNA regions, and 2) tRNA classification, both implemented using transformer-based models. The segmentation component isolates the tRNA signal portion and extracts the corresponding nucleotide sequence as the alignment query, while the classification component identifies the tRNA type as the alignment reference without requiring sequence-level information. Together, these outputs allow direct optimal pairwise alignment between the tRNA subsequence of the full query and reference sequences. Trained on in vitro transcribed RNA data and evaluated on yeast tRNA, these models achieved ~98% classification accuracy and intersection-over-union of ~0.98 for segmentation.",
+    "author_corresponding": "Miten Jain",
+    "author_corresponding_institution": "Northeastern University",
+    "authors": "Daneshwar Kakhaki, P.; Akeson, S.; Ghohabi Esfahani, N.; Abu-Shumays, R. L.; Jain, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-12",
+    "doi": "10.64898/2026.09.28.755067",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/12/2026.09.28.755067.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "tRNAZAP: Deep learning toolkit for nanopore tRNA signal analysis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Northeastern University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-12",
+  "published_doi": null,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "tRNAZAP is a transformer-based nanopore toolkit that segments adapter and tRNA signal regions and classifies tRNA type to enable reference-guided alignment;…",
+  "title": "tRNAZAP: Deep learning toolkit for nanopore tRNA signal analysis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.28.755067"
+}

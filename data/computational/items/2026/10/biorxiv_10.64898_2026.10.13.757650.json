@@ -1,0 +1,40 @@
+{
+  "abstract": "Development of computational models for single-channel patch-clamp analysis is hampered by limited availability of labelled (idealised) data. Since experiment alone cannot provide a genuine ground truth, two simulation methods are commonly employed; Stochastic sampling from a specified Markov model, augmented with synthetic noise allows creation of unlimited, flawlessly idealised/annotated datasets, yet its authenticity hinges entirely on the premises underlying data and noise generation. A more recent method uses GAN-based generation, this also replicates real-world noise and artefacts, but does not include a ground truth idealisation or annotation and training is notoriously unstable. Here, we introduce DiffuChannel, a conditional noise-removal diffusion model that addresses these drawbacks. Channel dynamics come directly from a user-defined discrete-time Markov chain (or a model fitted to biological seed data), thus, the state assignment for each synthetic trace is precisely determined by design. The diffusion model is then trained exclusively to capture the noise distribution of raw current conditioned on a given idealisation, thereby replicating genuine noise, filtering, and artefact patterns observed in real data without needing to hand craft noise models. We use a two-step coarse-to-fine workflow that starts with a defined slow-envelope component conditioned on longer-term dwell-time features extracted from the input idealisation. This allows a degree of baseline drift and time-dependent relaxations to be captured over timescales far longer than the network's field of view. At generation time, we use a context-preserving inpainting method that enables creation of relatively seamless traces of any desired duration. We demonstrate that with only a limited set of labelled seed traces, synthetic records yield realistic all-points amplitude distribution, noise power spectrum, autocorrelation pattern, and slow envelope comparable to the source data. The model achieves a maximum mean discrepancy (MMD) between windowed real and generated data of 0.005 (median across the five phenotypes). This compares to a within real-split-half MMD value of 0.002 and an amplitude-matched white noise MMD value of 0.108. In this paper, we benchmark this against DeepGANnel. Since the underlying Markov model is defined rather than estimated, DiffuChannel generates infinite, perfectly labelled, phenotype-consistent training data ideal for developing and testing idealisation algorithms. We find that, in practice, this new method is far more stable than previous GAN models and runs start to end without human intervention. We provide the model open-source along with an interactive web-based training and synthesis interface/app.",
+  "authors": [
+    "Ball, S. T. M.",
+    "Barrett-Jolley, R."
+  ],
+  "doi": "10.64898/2026.10.13.757650",
+  "first_seen": "2026-10-14",
+  "id": "biorxiv:10.64898/2026.10.13.757650",
+  "metadata": {
+    "abstract": "Development of computational models for single-channel patch-clamp analysis is hampered by limited availability of labelled (idealised) data. Since experiment alone cannot provide a genuine ground truth, two simulation methods are commonly employed; Stochastic sampling from a specified Markov model, augmented with synthetic noise allows creation of unlimited, flawlessly idealised/annotated datasets, yet its authenticity hinges entirely on the premises underlying data and noise generation. A more recent method uses GAN-based generation, this also replicates real-world noise and artefacts, but does not include a ground truth idealisation or annotation and training is notoriously unstable. Here, we introduce DiffuChannel, a conditional noise-removal diffusion model that addresses these drawbacks. Channel dynamics come directly from a user-defined discrete-time Markov chain (or a model fitted to biological seed data), thus, the state assignment for each synthetic trace is precisely determined by design. The diffusion model is then trained exclusively to capture the noise distribution of raw current conditioned on a given idealisation, thereby replicating genuine noise, filtering, and artefact patterns observed in real data without needing to hand craft noise models. We use a two-step coarse-to-fine workflow that starts with a defined slow-envelope component conditioned on longer-term dwell-time features extracted from the input idealisation. This allows a degree of baseline drift and time-dependent relaxations to be captured over timescales far longer than the network's field of view. At generation time, we use a context-preserving inpainting method that enables creation of relatively seamless traces of any desired duration. We demonstrate that with only a limited set of labelled seed traces, synthetic records yield realistic all-points amplitude distribution, noise power spectrum, autocorrelation pattern, and slow envelope comparable to the source data. The model achieves a maximum mean discrepancy (MMD) between windowed real and generated data of 0.005 (median across the five phenotypes). This compares to a within real-split-half MMD value of 0.002 and an amplitude-matched white noise MMD value of 0.108. In this paper, we benchmark this against DeepGANnel. Since the underlying Markov model is defined rather than estimated, DiffuChannel generates infinite, perfectly labelled, phenotype-consistent training data ideal for developing and testing idealisation algorithms. We find that, in practice, this new method is far more stable than previous GAN models and runs start to end without human intervention. We provide the model open-source along with an interactive web-based training and synthesis interface/app.",
+    "author_corresponding": "Richard Barrett-Jolley",
+    "author_corresponding_institution": "University of Liverpool",
+    "authors": "Ball, S. T. M.; Barrett-Jolley, R.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-10-14",
+    "doi": "10.64898/2026.10.13.757650",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/14/2026.10.13.757650.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DiffuChannel: A Conditional Denoising Diffusion Model that Synthesises Single-Molecule Patch-Clamp Data with Exactly Known Idealisation (Ground Truth)",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Liverpool",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-14",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "DiffuChannel: a conditional denoising diffusion model generating single-channel patch-clamp traces with exact ground-truth idealisation from a Markov chain;…",
+  "title": "DiffuChannel: A Conditional Denoising Diffusion Model that Synthesises Single-Molecule Patch-Clamp Data with Exactly Known Idealisation (Ground Truth)",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.13.757650"
+}

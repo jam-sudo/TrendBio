@@ -1,0 +1,34 @@
+{
+  "abstract": "Identifying small-molecule structures from molecular formulas and tandem mass spectra remains a bottleneck in untargeted metabolomics and natural-product discovery. Even when database retrieval or de novo prediction misses the exact structure, the resulting candidates can provide starting points for exploring nearby structures through a few bond edits. We introduce GEMS (Guided Editing of Molecular Structures), which refines candidates through learned 2-switch bond edits that preserve the molecular formula and each atom's total valence. GEMS uses MIST, a pretrained spectrum-to-fingerprint model, to predict fingerprint probabilities once per spectrum. A neural policy compares each candidate's fingerprint with these predictions, links present features to the atoms and bonds that generate them, and scores all valid edits in one forward pass. The policy is trained on shortest edit paths between structures, so it can be pretrained on PubChem isomers without spectra and then fine-tuned with spectrum-predicted fingerprints. At inference, GEMS searches from multiple initial candidates matching the supplied molecular formula and ranks candidates by fingerprint agreement and multi-start consensus. With the target structure excluded from PubChem initialization, three edit rounds achieve Hit@1/Hit@10 of 29.64%/50.81% on NPLIB1 and 30.22%/41.33% on MassSpecGym, exceeding published baselines under comparable settings. On NPLIB1, GEMS achieves higher identification accuracy in about 3.3 minutes end to end, compared with 26.2 hours for our FRIGID run. GEMS also improves identification from generated candidates, including those refined by FRIGID. Experiments with exact target fingerprints identify fingerprint prediction error as a bottleneck in target recovery and final ranking. Deeper search recovers additional targets without retraining, with larger gains from weaker initial candidates.",
+  "authors": [
+    "Utku Umur Acikalin",
+    "Yingheng Wang",
+    "Goncalo J. Gouveia",
+    "Tyler J. Schwertfeger",
+    "Frank C. Schroeder",
+    "Carla P. Gomes"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-16",
+  "id": "arxiv:2610.23617",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.23617v1</ns0:id>\n    <ns0:title>GEMS: Molecular Structure Elucidation as Learned Search over Isomer Graphs</ns0:title>\n    <ns0:updated>2026-10-16T15:28:34Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.23617v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.23617v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Identifying small-molecule structures from molecular formulas and tandem mass spectra remains a bottleneck in untargeted metabolomics and natural-product discovery. Even when database retrieval or de novo prediction misses the exact structure, the resulting candidates can provide starting points for exploring nearby structures through a few bond edits. We introduce GEMS (Guided Editing of Molecular Structures), which refines candidates through learned 2-switch bond edits that preserve the molecular formula and each atom's total valence. GEMS uses MIST, a pretrained spectrum-to-fingerprint model, to predict fingerprint probabilities once per spectrum. A neural policy compares each candidate's fingerprint with these predictions, links present features to the atoms and bonds that generate them, and scores all valid edits in one forward pass. The policy is trained on shortest edit paths between structures, so it can be pretrained on PubChem isomers without spectra and then fine-tuned with spectrum-predicted fingerprints. At inference, GEMS searches from multiple initial candidates matching the supplied molecular formula and ranks candidates by fingerprint agreement and multi-start consensus. With the target structure excluded from PubChem initialization, three edit rounds achieve Hit@1/Hit@10 of 29.64%/50.81% on NPLIB1 and 30.22%/41.33% on MassSpecGym, exceeding published baselines under comparable settings. On NPLIB1, GEMS achieves higher identification accuracy in about 3.3 minutes end to end, compared with 26.2 hours for our FRIGID run. GEMS also improves identification from generated candidates, including those refined by FRIGID. Experiments with exact target fingerprints identify fingerprint prediction error as a bottleneck in target recovery and final ranking. Deeper search recovers additional targets without retraining, with larger gains from weaker initial candidates.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-16T15:28:34Z</ns0:published>\n    <ns1:comment>36 pages, 9 figures, 17 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Utku Umur Acikalin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yingheng Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Goncalo J. Gouveia</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tyler J. Schwertfeger</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Frank C. Schroeder</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Carla P. Gomes</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-16",
+  "published_doi": null,
+  "secondary_categories": [
+    "metabolomics"
+  ],
+  "source": "arxiv",
+  "summary": "GEMS refines candidate small-molecule structures via learned 2-switch bond edits guided by MIST fingerprint predictions, reaching Hit@1 29.6-30.2% on NPLIB1…",
+  "title": "GEMS: Molecular Structure Elucidation as Learned Search over Isomer Graphs",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.23617v1"
+}

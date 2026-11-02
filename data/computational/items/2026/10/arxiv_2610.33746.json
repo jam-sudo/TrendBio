@@ -1,0 +1,35 @@
+{
+  "abstract": "Protein annotation agents must choose suitable bioinformatics tools, interpret their outputs, and use the resulting evidence in the final answer. Most existing systems rely on frontier-scale models. We ask whether a compact model can instead learn this behavior through post-training with real tool interaction. We present ProtAgent, a two-stage pipeline that uses supervised fine-tuning (SFT) to learn the tool interface and standard on-policy REINFORCE to improve the interaction policy. Intermediate tool calls receive action rewards, and the final response receives a terminal answer reward. Step-level returns assign these rewards to the responses that produced them and to preceding actions. The episode-level baseline instead assigns one episode return to every action. On a fixed closed-loop protocol with real bioinformatics tools, ProtAgent-8B achieves 61.00% success under the annotation-coverage metric, compared with 41.60% for DeepSeek-V3.2-Thinking 671B and 60.80% for the strongest evaluated frontier system. In the three-seed comparison, mean success is 42.70% with episode-level returns and 61.40% with step-level returns under identity return normalization; the corresponding group-relative results are 36.50% and 58.20%. The metric measures recovery of reference annotations under this protocol; it does not by itself establish biological correctness or complete evidence grounding.",
+  "authors": [
+    "Yuxiang Wang",
+    "Baojian Zhou",
+    "Qifang Zhao",
+    "Keyue Jiang",
+    "Yanghua Xiao",
+    "Xiaoxiao Xu"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-24",
+  "id": "arxiv:2610.33746",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.33746v1</ns0:id>\n    <ns0:title>ProtAgent: Post-Training Compact Protein Tool Agents with Interaction-Level Credit Assignment</ns0:title>\n    <ns0:updated>2026-10-24T15:42:13Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.33746v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.33746v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Protein annotation agents must choose suitable bioinformatics tools, interpret their outputs, and use the resulting evidence in the final answer. Most existing systems rely on frontier-scale models. We ask whether a compact model can instead learn this behavior through post-training with real tool interaction. We present ProtAgent, a two-stage pipeline that uses supervised fine-tuning (SFT) to learn the tool interface and standard on-policy REINFORCE to improve the interaction policy. Intermediate tool calls receive action rewards, and the final response receives a terminal answer reward. Step-level returns assign these rewards to the responses that produced them and to preceding actions. The episode-level baseline instead assigns one episode return to every action. On a fixed closed-loop protocol with real bioinformatics tools, ProtAgent-8B achieves 61.00% success under the annotation-coverage metric, compared with 41.60% for DeepSeek-V3.2-Thinking 671B and 60.80% for the strongest evaluated frontier system. In the three-seed comparison, mean success is 42.70% with episode-level returns and 61.40% with step-level returns under identity return normalization; the corresponding group-relative results are 36.50% and 58.20%. The metric measures recovery of reference annotations under this protocol; it does not by itself establish biological correctness or complete evidence grounding.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-24T15:42:13Z</ns0:published>\n    <ns1:comment>20 pages, 2 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Yuxiang Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Baojian Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qifang Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Keyue Jiang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yanghua Xiao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaoxiao Xu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-24",
+  "published_doi": null,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "ProtAgent: an 8B compact model post-trained via SFT and step-level REINFORCE to select and use protein annotation tools, matching frontier-scale agents on…",
+  "title": "ProtAgent: Post-Training Compact Protein Tool Agents with Interaction-Level Credit Assignment",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.33746v1"
+}

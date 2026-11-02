@@ -1,0 +1,41 @@
+{
+  "abstract": "This paper predicts antimicrobial resistance (AMR) from matrix-assisted laser desorption/ionization time-of-flight (MALDI-TOF) mass spectra using DRIAMS, evaluated across 13 species-antibiotic datasets spanning sensitive/resistant imbalance ratios of 2.95:1 to 141.21:1 and raw spectral similarities of 0.9166-0.9946. We propose HetSAGE, a heterogeneous graph neural network (GNN) that combines full-spectrum \"raw\" edges with consensus \"biomarker\" edges derived from a 4-method feature-selection vote and applies per-edge-type dropout to regularize the two views separately. HetSAGE outperforms a plain multilayer perceptron (MLP) only when spectral similarity is high, consistent with oversmoothing effects reported in the broader GNN literature; the biomarker view converges on features close to independently established clinical markers: within {+/-}1 Da in Staphylococcus aureus, Oxacillin, and within range in Klebsiella pneumoniae, Meropenem, confirming it is not a black box. At the same time, per-edge-type dropout protects this smaller signal from dilution by regularization tuned for the noisier raw spectrum. Together, these results indicate that heterogeneous graph structure is not a universal win for MALDI-TOF AMR prediction but a conditional one, tied to a measurable property of the data, spectral similarity, rather than to architecture alone. This caveat is largely unaddressed in current DRIAMS-based GNN work. It provides a concrete signal for practitioners deciding when a graph model is worth the added complexity over a plain MLP.",
+  "authors": [
+    "Tsai, W.-Y.",
+    "Shih, Y.- T.",
+    "Chen, Y.- H."
+  ],
+  "doi": "10.64898/2026.09.24.754085",
+  "first_seen": "2026-10-01",
+  "id": "biorxiv:10.64898/2026.09.24.754085",
+  "metadata": {
+    "abstract": "This paper predicts antimicrobial resistance (AMR) from matrix-assisted laser desorption/ionization time-of-flight (MALDI-TOF) mass spectra using DRIAMS, evaluated across 13 species-antibiotic datasets spanning sensitive/resistant imbalance ratios of 2.95:1 to 141.21:1 and raw spectral similarities of 0.9166-0.9946. We propose HetSAGE, a heterogeneous graph neural network (GNN) that combines full-spectrum \"raw\" edges with consensus \"biomarker\" edges derived from a 4-method feature-selection vote and applies per-edge-type dropout to regularize the two views separately. HetSAGE outperforms a plain multilayer perceptron (MLP) only when spectral similarity is high, consistent with oversmoothing effects reported in the broader GNN literature; the biomarker view converges on features close to independently established clinical markers: within {+/-}1 Da in Staphylococcus aureus, Oxacillin, and within range in Klebsiella pneumoniae, Meropenem, confirming it is not a black box. At the same time, per-edge-type dropout protects this smaller signal from dilution by regularization tuned for the noisier raw spectrum. Together, these results indicate that heterogeneous graph structure is not a universal win for MALDI-TOF AMR prediction but a conditional one, tied to a measurable property of the data, spectral similarity, rather than to architecture alone. This caveat is largely unaddressed in current DRIAMS-based GNN work. It provides a concrete signal for practitioners deciding when a graph model is worth the added complexity over a plain MLP.",
+    "author_corresponding": "Y.-T. Shih",
+    "author_corresponding_institution": "National Chung Hsing University",
+    "authors": "Tsai, W.-Y.; Shih, Y.- T.; Chen, Y.- H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-01",
+    "doi": "10.64898/2026.09.24.754085",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/01/2026.09.24.754085.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Branch-Wise Regularization for Heterogeneous GNN-Based MALDI-TOF AMR Prediction with Biomarker-Consensus Edges",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "National Chung Hsing University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-01",
+  "published_doi": null,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "HetSAGE, a heterogeneous GNN with raw-spectrum and biomarker-consensus edges, predicts MALDI-TOF AMR; it beats an MLP only at high spectral similarity.",
+  "title": "Branch-Wise Regularization for Heterogeneous GNN-Based MALDI-TOF AMR Prediction with Biomarker-Consensus Edges",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.24.754085"
+}

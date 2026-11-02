@@ -1,0 +1,31 @@
+{
+  "abstract": "Altered resting-state functional connectivity (FC) is a candidate marker for the diagnosis of Parkinson's disease (PD). Publicly available PD datasets, however, are small and fragmented across sites, scanners and clinical criteria. Transfer learning mitigates data scarcity by reusing a model trained on larger cohorts, but represents their knowledge primarily through a single set of weights shared by all individuals. Motivated by precision neuroimaging, we propose a retrieval-augmented classification (RAC) framework that additionally places each target individual in the context of similar individuals from external cohorts. A graph convolutional autoencoder (GAE), trained on external PD and control cohorts, encodes these cohorts into a neuro-knowledge base. Each target individual is encoded using the pretrained GAE, and its nearest neighbors are retrieved from the external knowledge base. Their embeddings are combined with the target embedding using mean aggregation or attention for classification. A systematic comparison on the TaoWu cohort separated the contributions of encoder pretraining, retrieval, attention and partial fine-tuning. Pretraining improved mean classification accuracy from 60.5% to 66.0%. However, retrieval and attention did not consistently improve performance over the pretrained-only variants. Several retrieval-based configurations nevertheless showed modestly higher ROC-AUC than the randomly initialized baseline. Varying the number of retrieved neighbors and partially fine-tuning the encoder provided no consistent additional gains. Retrieval-neighborhood analysis further showed diagnostically mixed neighborhoods. These findings provide initial evidence that population-learned representations can be complemented by individual-specific retrieval in neuroimaging, although larger datasets are needed to determine when such contextual information improves classification.",
+  "authors": [
+    "Tara Niknam",
+    "Sana Hassan Imam",
+    "Daniel Kristanto"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-26",
+  "id": "arxiv:2610.35107",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.NC",
+    "categories": [
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.35107v1</ns0:id>\n    <ns0:title>Retrieval-Augmented Parkinson's Disease Classification from Resting-State Functional Connectivity</ns0:title>\n    <ns0:updated>2026-10-26T09:46:26Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.35107v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.35107v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Altered resting-state functional connectivity (FC) is a candidate marker for the diagnosis of Parkinson's disease (PD). Publicly available PD datasets, however, are small and fragmented across sites, scanners and clinical criteria. Transfer learning mitigates data scarcity by reusing a model trained on larger cohorts, but represents their knowledge primarily through a single set of weights shared by all individuals. Motivated by precision neuroimaging, we propose a retrieval-augmented classification (RAC) framework that additionally places each target individual in the context of similar individuals from external cohorts. A graph convolutional autoencoder (GAE), trained on external PD and control cohorts, encodes these cohorts into a neuro-knowledge base. Each target individual is encoded using the pretrained GAE, and its nearest neighbors are retrieved from the external knowledge base. Their embeddings are combined with the target embedding using mean aggregation or attention for classification. A systematic comparison on the TaoWu cohort separated the contributions of encoder pretraining, retrieval, attention and partial fine-tuning. Pretraining improved mean classification accuracy from 60.5% to 66.0%. However, retrieval and attention did not consistently improve performance over the pretrained-only variants. Several retrieval-based configurations nevertheless showed modestly higher ROC-AUC than the randomly initialized baseline. Varying the number of retrieved neighbors and partially fine-tuning the encoder provided no consistent additional gains. Retrieval-neighborhood analysis further showed diagnostically mixed neighborhoods. These findings provide initial evidence that population-learned representations can be complemented by individual-specific retrieval in neuroimaging, although larger datasets are needed to determine when such contextual information improves classification.</ns0:summary>\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-26T09:46:26Z</ns0:published>\n    <ns1:comment>5 pages, 2 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.NC\" />\n    <ns0:author>\n      <ns0:name>Tara Niknam</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sana Hassan Imam</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Daniel Kristanto</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-26",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Retrieval-augmented GAE framework classifies Parkinson's disease from resting-state FC; pretraining lifts accuracy 60.5% to 66.0%, retrieval gains inconsistent.",
+  "title": "Retrieval-Augmented Parkinson's Disease Classification from Resting-State Functional Connectivity",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.35107v1"
+}

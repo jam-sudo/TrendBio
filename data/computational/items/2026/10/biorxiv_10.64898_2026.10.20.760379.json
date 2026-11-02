@@ -1,0 +1,45 @@
+{
+  "abstract": "Cell-type identification of clusters from unsupervised cytometry pipelines (e.g. FlowSOM, GigaSOM) is a time-consuming, expert-dependent bottleneck, typically requiring an expert to read a heatmap of median marker intensities and assign a label to each cluster. Large language models (LLMs) can annotate single-cell RNA-seq clusters from marker-gene lists, but cytometry cluster data differ in both dimensionality and data type. We present a direct procedure in which cluster medians are scaled per marker and grouped by similarity into a few dozen metaclusters. The continuous marker profiles are then passed to the LLM, which returns a cell-type label and confidence level for each metacluster in a single call, without a gating hierarchy, manually defined marker-specific thresholds, or task-specific training data. Across four human and mouse datasets spanning blood, bone marrow and gut, a single well-chosen model reproduces the reference annotation at the major-lineage level with 85-98% metacluster-level concordance (cloud Claude Sonnet 4.6 85-98%, best local model 83-96%), substantially exceeding majority-class baselines; chance-corrected agreement is Cohen's k = 0.67-0.83. Local open-weight models perform competitively with the cloud model on the independent benchmarks, enabling application to clinical or patient-derived data subject to data-protection restrictions. Reliability is model-dependent: no local model is best everywhere, and the frontier model Claude Opus 5 was no more reliable than Claude Sonnet 4.6, the most consistent in concordance across datasets. Because no annotation is absolute ground truth, we obtained two additional expert annotations of the same continuous heatmaps, blinded to the reference and to all model output, to establish a method-matched agreement ceiling. The experts agreed on ~99% of major-lineage assignments but only ~73% of T-cell maturation states; on that axis the best models fall within the expert disagreement range. LLM-based annotation is therefore a practical, training-free alternative to rule-based annotation, provided its output is checked against the intended panel and species.",
+  "authors": [
+    "Hunewald, O.",
+    "Grant, E. T.",
+    "Boehm, T.-M.",
+    "Kuehn, A.",
+    "Despotovic, V.",
+    "Desai, M. S.",
+    "Nazarov, P. V."
+  ],
+  "doi": "10.64898/2026.10.20.760379",
+  "first_seen": "2026-10-24",
+  "id": "biorxiv:10.64898/2026.10.20.760379",
+  "metadata": {
+    "abstract": "Cell-type identification of clusters from unsupervised cytometry pipelines (e.g. FlowSOM, GigaSOM) is a time-consuming, expert-dependent bottleneck, typically requiring an expert to read a heatmap of median marker intensities and assign a label to each cluster. Large language models (LLMs) can annotate single-cell RNA-seq clusters from marker-gene lists, but cytometry cluster data differ in both dimensionality and data type. We present a direct procedure in which cluster medians are scaled per marker and grouped by similarity into a few dozen metaclusters. The continuous marker profiles are then passed to the LLM, which returns a cell-type label and confidence level for each metacluster in a single call, without a gating hierarchy, manually defined marker-specific thresholds, or task-specific training data. Across four human and mouse datasets spanning blood, bone marrow and gut, a single well-chosen model reproduces the reference annotation at the major-lineage level with 85-98% metacluster-level concordance (cloud Claude Sonnet 4.6 85-98%, best local model 83-96%), substantially exceeding majority-class baselines; chance-corrected agreement is Cohen's k = 0.67-0.83. Local open-weight models perform competitively with the cloud model on the independent benchmarks, enabling application to clinical or patient-derived data subject to data-protection restrictions. Reliability is model-dependent: no local model is best everywhere, and the frontier model Claude Opus 5 was no more reliable than Claude Sonnet 4.6, the most consistent in concordance across datasets. Because no annotation is absolute ground truth, we obtained two additional expert annotations of the same continuous heatmaps, blinded to the reference and to all model output, to establish a method-matched agreement ceiling. The experts agreed on ~99% of major-lineage assignments but only ~73% of T-cell maturation states; on that axis the best models fall within the expert disagreement range. LLM-based annotation is therefore a practical, training-free alternative to rule-based annotation, provided its output is checked against the intended panel and species.",
+    "author_corresponding": "Oliver Hunewald",
+    "author_corresponding_institution": "Luxembourg Institute of Health",
+    "authors": "Hunewald, O.; Grant, E. T.; Boehm, T.-M.; Kuehn, A.; Despotovic, V.; Desai, M. S.; Nazarov, P. V.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-24",
+    "doi": "10.64898/2026.10.20.760379",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/24/2026.10.20.760379.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Language models annotate mass cytometry clusters within the range where human experts disagree",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Luxembourg Institute of Health",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-24",
+  "published_doi": null,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "LLMs annotate FlowSOM/GigaSOM cytometry metaclusters from scaled marker medians, reaching 85-98% concordance with references, within expert disagreement range…",
+  "title": "Language models annotate mass cytometry clusters within the range where human experts disagree",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.20.760379"
+}

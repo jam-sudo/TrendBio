@@ -1,0 +1,45 @@
+{
+  "abstract": "Spatial gene expression prediction from histology is typically evaluated by the mean per-gene Pearson correlation (PCC). PCC does not distinguish spatial scales: coarse tissue organization alone can earn most of the score. A domain oracle makes this precise: given an image-derived partition of the tissue, the predictor that assigns each domain its measured mean expression is the best that any predictor constant on that partition can do. On a widely used benchmark with a ~100 um pitch, a learnable version that estimates each domain mean from training data reaches 82% of the PCC of a trained model, and a partition of the spot coordinates alone, given measured means, reaches 123%. At that pitch the score rewards coarse spatial structure whatever its source. We introduce OCTAVE, a scale-resolved evaluation that filters prediction and measurement into spatial bands with widths in micrometers and scores their agreement in each band. On 16 um Xenium data, differences that look modest under PCC grow at finer scales: at ~20 um the oracle shortfall relative to the trained model is 2.4 times its PCC shortfall at the median and exceeds it in all 13 specimens. Across 57 image encoders the finest band reorders 261 of the 1596 encoder pairs relative to PCC. The benchmark own finest band is 50 um wide, coarser than the scale at which these differences appear, so no score on that pitch can directly validate finer structure. OCTAVE reports how well a model predicts spatial expression at each spatial scale.",
+  "authors": [
+    "Wang, Q.",
+    "Gu, S.",
+    "Lan, Q.",
+    "Jiang, X.",
+    "Chen, Y.",
+    "Song, Q."
+  ],
+  "doi": "10.64898/2026.09.25.754484",
+  "first_seen": "2026-10-01",
+  "id": "biorxiv:10.64898/2026.09.25.754484",
+  "metadata": {
+    "abstract": "Spatial gene expression prediction from histology is typically evaluated by the mean per-gene Pearson correlation (PCC). PCC does not distinguish spatial scales: coarse tissue organization alone can earn most of the score. A domain oracle makes this precise: given an image-derived partition of the tissue, the predictor that assigns each domain its measured mean expression is the best that any predictor constant on that partition can do. On a widely used benchmark with a ~100 um pitch, a learnable version that estimates each domain mean from training data reaches 82% of the PCC of a trained model, and a partition of the spot coordinates alone, given measured means, reaches 123%. At that pitch the score rewards coarse spatial structure whatever its source. We introduce OCTAVE, a scale-resolved evaluation that filters prediction and measurement into spatial bands with widths in micrometers and scores their agreement in each band. On 16 um Xenium data, differences that look modest under PCC grow at finer scales: at ~20 um the oracle shortfall relative to the trained model is 2.4 times its PCC shortfall at the median and exceeds it in all 13 specimens. Across 57 image encoders the finest band reorders 261 of the 1596 encoder pairs relative to PCC. The benchmark own finest band is 50 um wide, coarser than the scale at which these differences appear, so no score on that pitch can directly validate finer structure. OCTAVE reports how well a model predicts spatial expression at each spatial scale.",
+    "author_corresponding": "Qianqian Song",
+    "author_corresponding_institution": "Purdue University",
+    "authors": "Wang, Q.; Gu, S.; Lan, Q.; Jiang, X.; Chen, Y.; Song, Q.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-01",
+    "doi": "10.64898/2026.09.25.754484",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/01/2026.09.25.754484.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Octave: Scale-resolved Evaluation of Spatial Gene Expression Prediction from Histology",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Purdue University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-01",
+  "published_doi": null,
+  "secondary_categories": [
+    "structural",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces OCTAVE, a scale-resolved evaluation filtering spatial gene expression predictions from histology into micrometer bands; shows PCC is dominated by…",
+  "title": "Octave: Scale-resolved Evaluation of Spatial Gene Expression Prediction from Histology",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.25.754484"
+}

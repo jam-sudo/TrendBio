@@ -1,0 +1,31 @@
+{
+  "abstract": "Greedy State Boundary Search (GSBS) identifies transitions between relatively stable neural activity patterns in continuous recordings. Repeated template reconstruction and correlation evaluation make analyses across recordings and parameter settings computationally expensive. We present HP-GSBS, an open-source implementation that expresses the matching objective as additive interval contributions and computes t-distance from reusable correlation statistics. Streaming candidate reduction, sequential local refinement, and active-block reuse complement CPU, PyTorch CUDA, and Triton execution paths. Across seven controlled workloads with two input realizations each, median same-input speedups range from 154 to 1,730. All 168 optimized executions reproduce complete reference boundary histories and selected state counts, with a maximum absolute t-distance difference of $1.88\\times10^{-11}$. Four publicly supplied BBBD EEG analysis matrices provide complementary cross-backend validation. A naturalistic fMRI application segments 4,230 angular-gyrus voxels in a group response and 16 participants; the 17 CPU fits total 213.10 seconds. Mean pairwise boundary alignment exceeds a circular-shift baseline, illustrating cohort-level use of the saved segmentations. Versioned results, recording-level parallelism, and optional low-memory execution support varied analysis scales. HP-GSBS connects an explicit mathematical reformulation of repeated computation to efficient and reproducible neural-state analysis.",
+  "authors": [
+    "Yanzhe Zhao",
+    "Yongzhang Ji"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-19",
+  "id": "arxiv:2610.25898",
+  "metadata": {
+    "arxiv_primary_category": "cs.CE",
+    "categories": [
+      "cs.CE",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.25898v2</ns0:id>\n    <ns0:title>HP-GSBS: Accelerating greedy state boundary search with reusable interval statistics</ns0:title>\n    <ns0:updated>2026-10-23T07:02:32Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.25898v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.25898v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Greedy State Boundary Search (GSBS) identifies transitions between relatively stable neural activity patterns in continuous recordings. Repeated template reconstruction and correlation evaluation make analyses across recordings and parameter settings computationally expensive. We present HP-GSBS, an open-source implementation that expresses the matching objective as additive interval contributions and computes t-distance from reusable correlation statistics. Streaming candidate reduction, sequential local refinement, and active-block reuse complement CPU, PyTorch CUDA, and Triton execution paths. Across seven controlled workloads with two input realizations each, median same-input speedups range from 154 to 1,730. All 168 optimized executions reproduce complete reference boundary histories and selected state counts, with a maximum absolute t-distance difference of $1.88\\times10^{-11}$. Four publicly supplied BBBD EEG analysis matrices provide complementary cross-backend validation. A naturalistic fMRI application segments 4,230 angular-gyrus voxels in a group response and 16 participants; the 17 CPU fits total 213.10 seconds. Mean pairwise boundary alignment exceeds a circular-shift baseline, illustrating cohort-level use of the saved segmentations. Versioned results, recording-level parallelism, and optional low-memory execution support varied analysis scales. HP-GSBS connects an explicit mathematical reformulation of repeated computation to efficient and reproducible neural-state analysis.</ns0:summary>\n    <ns0:category term=\"cs.CE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-19T06:58:18Z</ns0:published>\n    <ns1:primary_category term=\"cs.CE\" />\n    <ns0:author>\n      <ns0:name>Yanzhe Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yongzhang Ji</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-19",
+  "published_doi": null,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "HP-GSBS is an open-source reformulation of Greedy State Boundary Search using reusable interval statistics, with CPU, PyTorch CUDA, and Triton backends,…",
+  "title": "HP-GSBS: Accelerating greedy state boundary search with reusable interval statistics",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.25898v2"
+}

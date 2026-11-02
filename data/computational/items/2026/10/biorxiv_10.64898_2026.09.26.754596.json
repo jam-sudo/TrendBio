@@ -1,0 +1,40 @@
+{
+  "abstract": "Phenotype prediction from public gene-expression data is straightforward to implement but reliable prediction is harder. Leakage during feature selection can inflate performance estimates. Class imbalance can hide poor performance in minority classes. Confounds like tissue type, repeated sampling, and demographic differences can also create patterns that resemble phenotype-associated biology. Here, I present LOL (Latent Omics Learning), a Python package for phenotype prediction from bulk GEO RNA-seq and microarray data. LOL uses leakage-safe preprocessing, imbalance-aware evaluation, and group-aware validation where repeated samples are present. Each analysis produces two audit diagnostics. The leakage inflation index ({Delta}LII) measures the change in performance between naive and leakage-safe evaluation. PVCA-lite examines associations between the latent representation and available metadata covariates, including phenotype. I evaluated the workflow across six independent GEO cohorts. The datasets covered microarray and RNA-seq platforms, binary and multi-class phenotypes, and sample sizes ranging from 18 to 566. The analyses produced a varied set of outcomes. Across diverse GEO datasets, LOL can reveal phenotype-associated expression patterns while identifying factors distort their interpretation. These include information leakage, class imbalance, repeated sampling, tissue differences, and demographic or other metadata-associated confounding. The resulting diagnostics help distinguish robust predictions from results that require further scrutiny. LOL does not introduce a new representation-learning algorithm. Its contribution is a reproducible workflow that places validation and diagnostic checks alongside prediction. The resulting analysis can expose weaknesses in an apparently convincing result and make those limitations visible. LOL is freely available under the MIT license from https://github.com/ngangao/lol-omics.",
+  "authors": [
+    "Muigano, M. N."
+  ],
+  "doi": "10.64898/2026.09.26.754596",
+  "first_seen": "2026-10-01",
+  "id": "biorxiv:10.64898/2026.09.26.754596",
+  "metadata": {
+    "abstract": "Phenotype prediction from public gene-expression data is straightforward to implement but reliable prediction is harder. Leakage during feature selection can inflate performance estimates. Class imbalance can hide poor performance in minority classes. Confounds like tissue type, repeated sampling, and demographic differences can also create patterns that resemble phenotype-associated biology. Here, I present LOL (Latent Omics Learning), a Python package for phenotype prediction from bulk GEO RNA-seq and microarray data. LOL uses leakage-safe preprocessing, imbalance-aware evaluation, and group-aware validation where repeated samples are present. Each analysis produces two audit diagnostics. The leakage inflation index ({Delta}LII) measures the change in performance between naive and leakage-safe evaluation. PVCA-lite examines associations between the latent representation and available metadata covariates, including phenotype. I evaluated the workflow across six independent GEO cohorts. The datasets covered microarray and RNA-seq platforms, binary and multi-class phenotypes, and sample sizes ranging from 18 to 566. The analyses produced a varied set of outcomes. Across diverse GEO datasets, LOL can reveal phenotype-associated expression patterns while identifying factors distort their interpretation. These include information leakage, class imbalance, repeated sampling, tissue differences, and demographic or other metadata-associated confounding. The resulting diagnostics help distinguish robust predictions from results that require further scrutiny. LOL does not introduce a new representation-learning algorithm. Its contribution is a reproducible workflow that places validation and diagnostic checks alongside prediction. The resulting analysis can expose weaknesses in an apparently convincing result and make those limitations visible. LOL is freely available under the MIT license from https://github.com/ngangao/lol-omics.",
+    "author_corresponding": "Martin Nganga Muigano",
+    "author_corresponding_institution": "Bio One Scientific Ltd",
+    "authors": "Muigano, M. N.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-01",
+    "doi": "10.64898/2026.09.26.754596",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/01/2026.09.26.754596.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "LOL: a Python package for leakage-aware phenotype prediction and confounding diagnostics in GEO transcriptomics datasets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Bio One Scientific Ltd",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-01",
+  "published_doi": null,
+  "secondary_categories": [
+    "transcriptomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "LOL is a Python package for leakage-aware phenotype prediction on bulk GEO RNA-seq and microarray data, adding confounding diagnostics (ΔLII, PVCA-lite) across…",
+  "title": "LOL: a Python package for leakage-aware phenotype prediction and confounding diagnostics in GEO transcriptomics datasets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.26.754596"
+}
