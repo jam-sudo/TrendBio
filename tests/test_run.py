@@ -274,7 +274,11 @@ def test_backfill_chunks_dates_and_preserves_publication_day(ctx, monkeypatch):
     ctx.items[0].published_at = ctx.items[0].first_seen = start
     ctx.items[1].published_at = ctx.items[1].first_seen = start + timedelta(days=30)
     calls = []
-    monkeypatch.setattr(runner, 'run_day', lambda domain, day, *args, **kwargs: calls.append(day))
+    def record_day(domain, day, *args, **kwargs):
+        calls.append(day)
+        return SimpleNamespace(ranked=[])
+
+    monkeypatch.setattr(runner, 'run_day', record_day)
     run_backfill('computational', start, end, ctx.store, ctx.deps, resume=False)
     assert ctx.deps.adapters[0].calls == [
         (start, start + timedelta(days=29)),
@@ -288,7 +292,8 @@ def test_backfill_chunks_dates_and_preserves_publication_day(ctx, monkeypatch):
     assert all(len(batch) <= 2000 for batch in ctx.deps.llm.batches)
 
 
-def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeypatch):
+def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeypatch, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
     import pipeline.run as runner
     from pipeline.sources.github import GithubAdapter
 
@@ -306,6 +311,8 @@ def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeyp
     monkeypatch.setattr(runner, 'fetch_star_history', star_history)
     run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
     assert fetched == ['org/watchlist', 'org/topic']
+    assert any('stage=github_star_history event=end elapsed=' in record.getMessage()
+               and 'repos=2' in record.getMessage() for record in caplog.records)
     assert ctx.store.star_counts() == dict.fromkeys(fetched, history)
     github.observations = dict.fromkeys(fetched, 31)
     run_day('computational', TODAY + timedelta(days=1), ctx.store, ctx.deps)
@@ -372,3 +379,156 @@ def test_enrich_stage_logs_fallback_reason_counts(ctx, caplog):
                    if 'stage=enrich event=end' in record.getMessage())
     assert "llm_fallbacks=3 fallback_reasons={'refusal:bio': 2, 'api_error:401': 1}" in message
     assert all(item.abstract not in caplog.text for item in ctx.items)
+
+
+def test_backfill_chunk_failure_is_logged_and_skipped(ctx, caplog, capsys):
+    caplog.set_level('INFO', logger='pipeline.run')
+    adapter = ctx.deps.adapters[0]
+    adapter.config = {'biorxiv': {'backfill_chunk_days': 1}}
+    for index, item in enumerate(ctx.items):
+        item.published_at = TODAY + timedelta(days=index)
+    fetch = adapter.fetch
+    failed_day = TODAY + timedelta(days=1)
+
+    def flaky(start, end, client):
+        if start == failed_day:
+            raise RuntimeError('https://example.org/?secret=must-not-log')
+        return fetch(start, end, client)
+
+    adapter.fetch = flaky
+    run_backfill('computational', TODAY, TODAY + timedelta(days=2), ctx.store, ctx.deps, resume=False)
+    assert ctx.store.get_item(ctx.items[0].id).summary
+    assert ctx.store.get_item(ctx.items[1].id) is None
+    assert ctx.store.get_item(ctx.items[2].id).summary
+    state = json.loads((ctx.root / 'computational/.backfill_state.json').read_text())
+    assert state['failed_chunks'] == [{'source': 'biorxiv', 'start': str(failed_day), 'end': str(failed_day)}]
+    assert state['stage'] == 'days' and state['last_day'] == str(TODAY + timedelta(days=2))
+    assert ctx.store.get_day(failed_day).run.source_status['biorxiv'] == 'failed'
+    assert ctx.store.get_day(failed_day).run.status == 'degraded'
+    assert (f'stage=collect event=chunk_failed source=biorxiv chunk={failed_day}..{failed_day} '
+            'error=RuntimeError') in caplog.text
+    assert 'secret' not in caplog.text
+    summary = 'backfill_summary collected=2 failed_chunks=1'
+    assert summary in capsys.readouterr().out
+    assert any(record.levelname == 'WARNING' and record.getMessage() == summary for record in caplog.records)
+
+
+def test_backfill_resume_retries_failed_chunks_first(ctx):
+    adapter = ctx.deps.adapters[0]
+    adapter.config = {'biorxiv': {'backfill_chunk_days': 1}}
+    ctx.items[1].published_at = TODAY + timedelta(days=1)
+    fetch = adapter.fetch
+    interrupted = True
+    calls = []
+
+    def flaky(start, end, client):
+        calls.append(('biorxiv', start))
+        if interrupted:
+            if start == TODAY:
+                raise RuntimeError('temporary')
+            if start == TODAY + timedelta(days=2):
+                raise KeyboardInterrupt()
+        return fetch(start, end, client)
+
+    adapter.fetch = flaky
+    with pytest.raises(KeyboardInterrupt):
+        run_backfill('computational', TODAY, TODAY + timedelta(days=2), ctx.store, ctx.deps, resume=False)
+    state = json.loads((ctx.root / 'computational/.backfill_state.json').read_text())
+    assert state['next_chunk']['biorxiv'] == str(TODAY + timedelta(days=2))
+    assert len(state['failed_chunks']) == 1
+    interrupted = False
+    calls.clear()
+    run_backfill('computational', TODAY, TODAY + timedelta(days=2), ctx.store, ctx.deps, resume=True)
+    assert calls == [('biorxiv', TODAY), ('biorxiv', TODAY + timedelta(days=2))]
+    assert all(ctx.store.get_item(item.id).summary for item in ctx.items)
+    assert json.loads((ctx.root / 'computational/.backfill_state.json').read_text())['failed_chunks'] == []
+
+
+def test_backfill_resume_after_days_enriches_recovered_items_and_updates_days(ctx):
+    ctx.deps.adapters[0].error = RuntimeError('offline')
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    assert ctx.store.get_day(TODAY).run.source_status['biorxiv'] == 'failed'
+    other_calls = [len(adapter.calls) for adapter in ctx.deps.adapters[1:]]
+    ctx.deps.adapters[0].error = None
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=True)
+    assert [len(adapter.calls) for adapter in ctx.deps.adapters[1:]] == other_calls
+    assert all(ctx.store.get_item(item.id).summary for item in ctx.items)
+    assert ctx.store.get_day(TODAY).run.source_status['biorxiv'] == 'ok'
+    assert ctx.store.get_day(TODAY).ranked
+
+
+def test_backfill_all_paper_chunks_failed_raises(ctx):
+    from pipeline.collect import AllPaperSourcesFailed
+
+    for adapter in ctx.deps.adapters:
+        adapter.config = {adapter.name: {'backfill_chunk_days': 1}}
+        adapter.error = RuntimeError('offline')
+    with pytest.raises(AllPaperSourcesFailed):
+        run_backfill('computational', TODAY, TODAY + timedelta(days=1), ctx.store, ctx.deps, resume=False)
+    assert ctx.store.get_day(TODAY) is None
+    assert not ctx.deps.llm.batches
+    state = json.loads((ctx.root / 'computational/.backfill_state.json').read_text())
+    assert len(state['failed_chunks']) == 6
+    assert state['stage'] == 'collect'
+    assert all(len(adapter.calls) == 2 for adapter in ctx.deps.adapters)
+    ctx.deps.adapters[1].error = None
+    run_backfill('computational', TODAY, TODAY + timedelta(days=1), ctx.store, ctx.deps, resume=True)
+    assert ctx.store.get_day(TODAY)
+    state = json.loads((ctx.root / 'computational/.backfill_state.json').read_text())
+    assert len(state['failed_chunks']) == 4
+
+
+def test_backfill_per_source_chunk_sizes_and_github_whole_range(ctx, monkeypatch):
+    ctx.deps.adapters[1].config = {'arxiv': {'backfill_chunk_days': 2}}
+    github = FakeAdapter('github')
+    ctx.deps.adapters.append(github)
+    monkeypatch.setattr('pipeline.run.run_day', lambda *args, **kwargs: SimpleNamespace(ranked=[]))
+    end = TODAY + timedelta(days=30)
+    run_backfill('computational', TODAY, end, ctx.store, ctx.deps, resume=False)
+    assert len(ctx.deps.adapters[0].calls) == 2
+    assert len(ctx.deps.adapters[1].calls) == 16
+    assert ctx.deps.adapters[1].calls[0] == (TODAY, TODAY + timedelta(days=1))
+    assert ctx.deps.adapters[1].calls[-1] == (end, end)
+    assert github.calls == [(TODAY, end)]
+
+
+def test_backfill_stage_logs_and_fallback_reasons(ctx, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
+    ctx.deps.llm.enrich_batch = lambda *args: {}
+    ctx.deps.llm.fallback_reasons = {ctx.items[0].id: 'refusal:bio',
+                                     ctx.items[1].id: 'refusal:bio', ctx.items[2].id: 'api_error:401'}
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    messages = [record.getMessage() for record in caplog.records if record.name == 'pipeline.run']
+    for stage in ('collect', 'enrich_batch', 'day'):
+        for event in ('start', 'end'):
+            assert any(f'stage={stage} event={event} elapsed=' in message for message in messages)
+    batch = next(message for message in messages if 'stage=enrich_batch event=end' in message)
+    assert 'items=3 chunk=1 waited=' in batch
+    assert "fallback_reasons={'refusal:bio': 2, 'api_error:401': 1} llm_fallbacks=3" in batch
+    assert any(f'day={TODAY} topics=' in message and 'ranked=' in message for message in messages)
+    assert all(item.abstract not in caplog.text and item.url not in caplog.text for item in ctx.items)
+
+
+def test_backfill_github_history_failure_is_checkpointed_and_retried(ctx, monkeypatch, caplog):
+    from pipeline.sources.github import GithubAdapter
+
+    github = GithubAdapter({'github': {}})
+    github.fetch = lambda *args: []
+    github.repos = lambda *args: ['org/repo']
+    ctx.deps.adapters.append(github)
+
+    def unavailable(*args):
+        raise RuntimeError('https://example.org/?secret=must-not-log')
+
+    monkeypatch.setattr('pipeline.run.fetch_star_history', unavailable)
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    path = ctx.root / 'computational/.backfill_state.json'
+    assert json.loads(path.read_text())['failed_chunks'] == [
+        {'source': 'github', 'start': str(TODAY), 'end': str(TODAY)}]
+    assert ctx.store.get_day(TODAY).run.source_status['github'] == 'failed'
+    assert 'error=RuntimeError' in caplog.text and 'secret' not in caplog.text
+    monkeypatch.setattr('pipeline.run.fetch_star_history', lambda *args: [(TODAY, 10)])
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=True)
+    assert json.loads(path.read_text())['failed_chunks'] == []
+    assert ctx.store.star_counts()['org/repo'] == [(TODAY, 10)]
+    assert ctx.store.get_day(TODAY).run.source_status['github'] == 'ok'

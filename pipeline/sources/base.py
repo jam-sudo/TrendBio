@@ -1,7 +1,8 @@
 """Source contract and shared HTTP policy; callers own the HTTP client."""
 
 import logging
-from datetime import date
+from datetime import date, datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 import time
 from typing import Protocol
@@ -25,9 +26,13 @@ def load_config() -> dict:
     return yaml.safe_load(path.read_text(encoding='utf-8'))
 
 
-def request(client: httpx.Client, url: str, *, method: str = 'GET', **kwargs) -> httpx.Response:
-    """Three total attempts, including transport failures, without logging secrets."""
-    for attempt in range(3):
+def request(client: httpx.Client, url: str, *, method: str = 'GET',
+            attempts: int = 3, backoff: float = 1.0, **kwargs) -> httpx.Response:
+    """Retry transient HTTP and transport failures without logging secrets."""
+    if attempts < 1 or backoff < 0:
+        raise ValueError('attempts must be positive and backoff nonnegative')
+    for attempt in range(attempts):
+        delay = backoff * 2 ** attempt
         try:
             response = client.request(method, url, follow_redirects=True, **kwargs)
             response.raise_for_status()
@@ -35,12 +40,22 @@ def request(client: httpx.Client, url: str, *, method: str = 'GET', **kwargs) ->
         except httpx.HTTPStatusError as exc:
             if exc.response.status_code != 429 and exc.response.status_code < 500:
                 raise
-            if attempt == 2:
+            if attempt == attempts - 1:
                 raise
+            retry_after = exc.response.headers.get('Retry-After')
+            if retry_after:
+                try:
+                    seconds = float(retry_after)
+                except ValueError:
+                    try:
+                        seconds = (parsedate_to_datetime(retry_after) - datetime.now(timezone.utc)).total_seconds()
+                    except (ValueError, TypeError, OverflowError):
+                        seconds = 0
+                delay = max(delay, seconds)
         except httpx.TransportError:
-            if attempt == 2:
+            if attempt == attempts - 1:
                 raise
-        time.sleep(2 ** attempt)
+        time.sleep(delay)
     raise AssertionError('unreachable')
 
 

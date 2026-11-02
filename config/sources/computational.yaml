@@ -1,8 +1,12 @@
 biorxiv:
+  backfill_chunk_days: 30
   endpoint: https://api.biorxiv.org/details/biorxiv
   categories: [bioinformatics, genomics, systems biology, synthetic biology, biophysics, molecular biology, cell biology]
   keyword_filtered_categories: [molecular biology, cell biology]
 arxiv:
+  backfill_chunk_days: 2
+  query_keywords_max: 25
+  max_results_per_query: 2000
   endpoint: https://export.arxiv.org/api/query
   categories: [q-bio.*]
   keyword_filtered: [cs.LG, cs.AI, stat.ML]
@@ -66,6 +70,7 @@ keywords:
   - bionemo
   - biological foundation model
 pubmed:
+  backfill_chunk_days: 30
   endpoint: https://eutils.ncbi.nlm.nih.gov/entrez/eutils
   journals:
     - Bioinformatics
@@ -112,6 +117,7 @@ github:
   top_n_per_topic: 50
   min_stars_for_discovery: 20
 rss:
+  backfill_chunk_days: 30
   # Verified public RSS feeds from the spec examples; some other examples have no public feed.
   feeds:
     - {name: insitro, url: 'https://www.insitro.com/feed/', kind: company}
