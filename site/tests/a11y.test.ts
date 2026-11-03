@@ -147,6 +147,21 @@ describe("built site accessibility and responsive layout", () => {
     const novemberFirst = page.locator('a[href="/day/2026-11-01/"]');
     expect((await novemberFirst.boundingBox())!.x).toBe(sunday.x);
     expect(await novemberFirst.locator(".headline").evaluate(el => getComputedStyle(el).webkitLineClamp)).toBe("2");
+    for (const month of [october, november]) {
+      const heights = await month.locator(".calendar-day").evaluateAll(cells => cells.map(cell => cell.getBoundingClientRect().height));
+      expect(new Set(heights).size).toBe(1);
+      expect(heights[0]).toBeGreaterThanOrEqual(112);
+    }
+    const partial = october.locator('a[href="/day/2026-10-29/"]');
+    const partialBox = (await partial.boundingBox())!;
+    const badge = (await partial.locator(".day-badge").boundingBox())!;
+    const dayNumber = (await partial.locator("time").boundingBox())!;
+    expect(badge.x).toBe(dayNumber.x);
+    expect(partialBox.y + partialBox.height - badge.y - badge.height).toBeCloseTo(11, 0);
+    const number = (await novemberFirst.locator("time").boundingBox())!;
+    const icon = (await novemberFirst.locator("svg").boundingBox())!;
+    expect(icon.x).toBeGreaterThan(number.x + number.width);
+    expect(icon.y).toBeLessThan(number.y + number.height);
     await novemberFirst.focus();
     expect(await novemberFirst.evaluate(el => getComputedStyle(el).outlineStyle)).toBe("solid");
     await page.setViewportSize({ width: 375, height: 812 });

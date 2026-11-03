@@ -133,7 +133,7 @@ def build(root: Path) -> None:
                                       summary=topic.summary, category=topic.category,
                                       signals=entry.signals, scores=entry.scores))
         started = datetime.combine(today, time(6), tzinfo=timezone.utc)
-        run = RunInfo(started=started, finished=started + timedelta(minutes=2), status="ok",
+        run = RunInfo(started=started, finished=started + timedelta(minutes=2), status="ok" if ranked else "degraded",
                       backfilled=today <= days[0],
                       synthesis_model="claude-haiku-5-5" if today <= days[0] else "claude-opus-5-5",
                       source_status={source: "ok" for source in ("biorxiv", "arxiv", "pubmed", "github", "rss")})

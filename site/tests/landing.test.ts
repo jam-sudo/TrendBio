@@ -38,7 +38,7 @@ describe("built landing, day and archive pages", () => {
     expect(html).toContain("Quiet day: no topic cleared the bar.");
     expect(html).toContain("Code and industry signals are partial for backfilled days.");
     expect(cards(html)).toHaveLength(0);
-    expect(html).not.toContain("Some sources or summaries were unavailable for this run.");
+    expect(html).toContain("Some sources or summaries were unavailable for this run.");
   });
 
   it("renders monthly calendars with only the top topic and links to each full day", () => {
@@ -47,6 +47,8 @@ describe("built landing, day and archive pages", () => {
     expect(sections).toHaveLength(2);
     expect(sections[0]).toContain("November 2026");
     expect(sections[1]).toContain("October 2026");
+    expect(sections[0].match(/<h2\b[^>]*>[\s\S]*?<\/h2>/)![0]).not.toContain("backfilled");
+    expect(sections[1].match(/<h2\b[^>]*>[\s\S]*?<\/h2>/)![0]).toContain("partly backfilled");
     expect(html).toContain('href="#month-2026-11"');
     expect(html).toContain('href="#month-2026-10"');
     const cells = [...html.matchAll(/<a\b[^>]*href="\/day\/(\d{4}-\d{2}-\d{2})\/"[^>]*>[\s\S]*?<\/a>/g)];
@@ -57,9 +59,12 @@ describe("built landing, day and archive pages", () => {
       expect(cell).toContain(`aria-label="${day.date}: ${top?.headline ?? "quiet"}"`);
       expect(cell).toContain(top?.headline ?? "quiet");
       if (top) expect(cell).toMatch(/<svg[^>]*width="16"/);
+      else expect(cell).toMatch(/class="badge quiet"[^>]*>QUIET<\/span>/);
+      expect(cell.includes("PARTIAL")).toBe(day.run.status === "degraded");
       for (const topic of day.ranked.filter(({ rank }) => rank !== 1)) expect(cell).not.toContain(topic.headline);
     }
-    expect(cells.find(([, date]) => date === "2026-10-30")![0]).toContain("BACKFILLED");
+    expect(cells.find(([, date]) => date === "2026-10-30")![0]).not.toContain("BACKFILLED");
+    expect(cells.find(([, date]) => date === "2026-10-29")![0]).toContain("PARTIAL");
     expect(html).not.toContain('href="/day/2026-10-28/"');
     expect(html).toContain('datetime="2026-10-28"');
     expect(html).not.toContain('href="/topic/');
@@ -94,9 +99,12 @@ describe("built landing, day and archive pages", () => {
       const cell = archive.match(new RegExp(`<a\\b[^>]*href="/day/${day.date}/"[^>]*>[\\s\\S]*?</a>`))![0];
       expect(cell).toContain(day.ranked.find(({ rank }) => rank === 1)!.headline);
       expect(archive).not.toContain("Unique November rank-two headline");
-      expect(cell).not.toContain("PARTIAL");
+      expect(cell).toContain("PARTIAL");
       expect(archive.match(/<a\b[^>]*href="\/day\/2026-10-31\/"[^>]*>[\s\S]*?<\/a>/)![0]).toContain("PARTIAL");
-      expect(cell).toContain("BACKFILLED");
+      expect(archive).not.toContain("BACKFILLED");
+      const novemberHeading = archive.match(/<h2\b[^>]*id="heading-2026-11"[^>]*>[\s\S]*?<\/h2>/)![0];
+      expect(novemberHeading).toContain("backfilled");
+      expect(novemberHeading).not.toContain("partly backfilled");
       for (const page of ["index.html", `day/${day.date}/index.html`]) {
         const html = readFileSync(join(output, page), "utf8");
         expect(html).toContain("Some sources or summaries were unavailable for this run.");
