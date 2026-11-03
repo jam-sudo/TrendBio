@@ -1,0 +1,45 @@
+{
+  "abstract": "Multiple Sequence Alignment (MSA) constitutes an important and frequent operation in molecular sequence data analysis. There exist numerous tools, algorithms, and criteria to infer an MSA. This plethora of available approaches to MSA may induced an ensemble of divergent MSAs for the same underlying unaligned sequence set. Even a single MSA tool may infer distinct MSAs when varying the input parameters. Hence, when using a diversified set of MSA algorithms and parameterizations, the observed dispersion within an MSA ensemble expresses the difficulty of inferring a robust alignment. We refer to this notion as MSA difficulty. As downstream analyses heavily rely on the MSA, characterizing MSA difficulty for a given unaligned sequence set is critical.\n\nInitially, we show that measures of dispersion within diversified MSA ensembles can reliably predict MSA difficulty. We then assess the adequacy of these measures by computing the average reference-based distance between the MSAs in the MSA ensemble and its corresponding structural reference MSA and subsequently comparing this distance to the corresponding reference-free average distance over all MSA pairs in the ensemble. We find that Blackburne and Whelans dpos alignment metric is most appropriate as its reference-free [Formula] counterpart most accurately approximates the reference-based difficulty computed on BAliBASE reference data. We therefore use [Formula] to quantify MSA difficulty on a scale from 0 (easy) to 1 (difficult).\n\nNext, we introduce the AlDiScore open-source tool, which uses machine learning to directly and reliably predict reference-free difficulty scores from unaligned sequence sets to completely omit expensive MSA computations. The underlying regression model relies upon a large set of features, including sampling-based measures of transitive consistency. We trained our AlDiScore model on a diverse collection of empirical datasets from BAliBASE, TreeBASE, and published studies. Subsequently, we demonstrate that AlDiScore attains an R2 of 0.89 and of 0.84 on unseen AA and DNA sequence sets extracted from the PANDIT v17 database. Finally, we show that there is no correlation between MSA difficulty and the corresponding phylogenetic difficulty of the respective MSA.",
+  "authors": [
+    "Bodynek, M.",
+    "Martin-Fernandez, L.",
+    "Bettisworth, B.",
+    "Haag, J.",
+    "Stamatakis, A."
+  ],
+  "doi": "10.64898/2026.05.29.727837",
+  "first_seen": "2026-06-02",
+  "id": "biorxiv:10.64898/2026.05.29.727837",
+  "metadata": {
+    "abstract": "Multiple Sequence Alignment (MSA) constitutes an important and frequent operation in molecular sequence data analysis. There exist numerous tools, algorithms, and criteria to infer an MSA. This plethora of available approaches to MSA may induced an ensemble of divergent MSAs for the same underlying unaligned sequence set. Even a single MSA tool may infer distinct MSAs when varying the input parameters. Hence, when using a diversified set of MSA algorithms and parameterizations, the observed dispersion within an MSA ensemble expresses the difficulty of inferring a robust alignment. We refer to this notion as MSA difficulty. As downstream analyses heavily rely on the MSA, characterizing MSA difficulty for a given unaligned sequence set is critical.\n\nInitially, we show that measures of dispersion within diversified MSA ensembles can reliably predict MSA difficulty. We then assess the adequacy of these measures by computing the average reference-based distance between the MSAs in the MSA ensemble and its corresponding structural reference MSA and subsequently comparing this distance to the corresponding reference-free average distance over all MSA pairs in the ensemble. We find that Blackburne and Whelans dpos alignment metric is most appropriate as its reference-free [Formula] counterpart most accurately approximates the reference-based difficulty computed on BAliBASE reference data. We therefore use [Formula] to quantify MSA difficulty on a scale from 0 (easy) to 1 (difficult).\n\nNext, we introduce the AlDiScore open-source tool, which uses machine learning to directly and reliably predict reference-free difficulty scores from unaligned sequence sets to completely omit expensive MSA computations. The underlying regression model relies upon a large set of features, including sampling-based measures of transitive consistency. We trained our AlDiScore model on a diverse collection of empirical datasets from BAliBASE, TreeBASE, and published studies. Subsequently, we demonstrate that AlDiScore attains an R2 of 0.89 and of 0.84 on unseen AA and DNA sequence sets extracted from the PANDIT v17 database. Finally, we show that there is no correlation between MSA difficulty and the corresponding phylogenetic difficulty of the respective MSA.",
+    "author_corresponding": "Lucía Martín-Fernández",
+    "author_corresponding_institution": "Biology Department, University of Crete; Biodiversity Computing Group, Institute of Computer Science, Foundation for Research and Technology - Hellas",
+    "authors": "Bodynek, M.; Martin-Fernandez, L.; Bettisworth, B.; Haag, J.; Stamatakis, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-02",
+    "doi": "10.64898/2026.05.29.727837",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/02/2026.05.29.727837.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Quantifying and Predicting the Difficulty of Multiple Sequence Alignment with AlDiScore",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Biology Department, University of Crete; Biodiversity Computing Group, Institute of Computer Science, Foundation for Research and Technology - Hellas",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "AlDiScore is an open-source ML tool that predicts MSA difficulty directly from unaligned sequences, avoiding costly alignment; R2 0.89 (AA) and 0.84 (DNA) on…",
+  "title": "Quantifying and Predicting the Difficulty of Multiple Sequence Alignment with AlDiScore",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.29.727837"
+}

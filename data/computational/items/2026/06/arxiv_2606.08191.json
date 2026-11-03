@@ -1,0 +1,37 @@
+{
+  "abstract": "Token aggregation is a common bottleneck in models that map token representations to sample-level predictions, yet most pooling methods operate only in the original token domain. We propose FLaG, a plug-in aggregation module that transforms token representations with the real FFT, summarizes spectral components with learnable latent queries, applies a channel-wise gate, and reconstructs enhanced time-domain tokens for final pooling. We evaluate FLaG on antimicrobial peptide (AMP) activity prediction with ESM2, image classification with ResNet18 on CIFAR-10 and CIFAR-100, and text classification with RoBERTa on IMDB and GLUE. FLaG achieves its clearest gains on the ESM2-8M antimicrobial peptide tasks and on CIFAR-100, while remaining competitive with strong text baselines on IMDB and GLUE. Then we probe its behavior on the AMP setting with band knockouts, gate summaries, residue perturbations, latent-query readouts, and structure-proxy stratification. We find that low-frequency bands contribute the most overall, and the remaining higher-band pattern is more sample-specific. The gate acts as a broadly shared spectral reweighting stage and the cross-attention patterns are sample-specific with mild query-wise differentiation, and higher-helix peptides exhibit stronger average spectral sensitivity in both bacteria. The supplementary materials, source code and data are released at https://www.healthinformaticslab.org/supp/ and https://github.com/Kewei2023/AMPCliff/tree/FLaG.",
+  "authors": [
+    "Kewei Li",
+    "Rongying Zhang",
+    "Xueli Wang",
+    "Xiwen Gong",
+    "Zhongjian Wang",
+    "Lan Huang",
+    "Ruochi Zhang",
+    "Fengfeng Zhou"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-06",
+  "id": "arxiv:2606.08191",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.08191v1</ns0:id>\n    <ns0:title>Frequency-Domain Latent Attention Gating for Cross-Domain Token Aggregation</ns0:title>\n    <ns0:updated>2026-06-06T14:21:55Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.08191v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.08191v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Token aggregation is a common bottleneck in models that map token representations to sample-level predictions, yet most pooling methods operate only in the original token domain. We propose FLaG, a plug-in aggregation module that transforms token representations with the real FFT, summarizes spectral components with learnable latent queries, applies a channel-wise gate, and reconstructs enhanced time-domain tokens for final pooling. We evaluate FLaG on antimicrobial peptide (AMP) activity prediction with ESM2, image classification with ResNet18 on CIFAR-10 and CIFAR-100, and text classification with RoBERTa on IMDB and GLUE. FLaG achieves its clearest gains on the ESM2-8M antimicrobial peptide tasks and on CIFAR-100, while remaining competitive with strong text baselines on IMDB and GLUE. Then we probe its behavior on the AMP setting with band knockouts, gate summaries, residue perturbations, latent-query readouts, and structure-proxy stratification. We find that low-frequency bands contribute the most overall, and the remaining higher-band pattern is more sample-specific. The gate acts as a broadly shared spectral reweighting stage and the cross-attention patterns are sample-specific with mild query-wise differentiation, and higher-helix peptides exhibit stronger average spectral sensitivity in both bacteria. The supplementary materials, source code and data are released at https://www.healthinformaticslab.org/supp/ and https://github.com/Kewei2023/AMPCliff/tree/FLaG.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-06T14:21:55Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Kewei Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rongying Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xueli Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiwen Gong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhongjian Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lan Huang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruochi Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fengfeng Zhou</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-06",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "FLaG: plug-in FFT latent-attention gate for token pooling; tested on ESM2 antimicrobial peptide, image and text tasks.",
+  "title": "Frequency-Domain Latent Attention Gating for Cross-Domain Token Aggregation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.08191v1"
+}

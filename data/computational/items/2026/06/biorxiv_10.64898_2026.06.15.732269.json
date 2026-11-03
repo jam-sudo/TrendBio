@@ -1,0 +1,46 @@
+{
+  "abstract": "Temperature is a fundamental determinant of bacterial physiology and ecology. Optimal growth temperature (OGT) is highly variable across species, contributing to differences in where and when species are most likely to thrive. Although the OGTs for most bacteria remain unknown, the increasing availability of genomes from uncultivated and cultivated taxa has made it advantageous to build genomic, cultivation-independent models to infer OGT. However, pre-existing genomic models often lack the generalizability and mechanistic grounding required for robust inferences of OGT. We propose a novel framework for predicting bacterial OGT which uses learned protein structural signatures of thermal adaptation. We hypothesize that biophysical tradeoffs which dictate enzymatic functions across variable temperatures provide a more robust empirical basis for OGT prediction than broad genomic features. Our OGT-predicting model, ROSEATE, is based on a single gene, adenylate kinase (ADK), that encodes for a ubiquitous enzyme essential for energy homeostasis. ROSEATE uses high-dimensional latent space encoding via MSA Transformer, a protein language model which embeds ADKs in a manner which preserves biophysical information about embedded proteins. We show that the accuracy of the ROSEATE model is on par with other genome-based models, has a high degree of phylogenetic generalizability, and the ESM embeddings effectively capture key temperature-adaptive enzyme characteristics derived from AlphaFold structures. Because ROSEATE is based on analyses of a single ubiquitous protein, it can be used with metagenomic data to infer the community-level variation in bacterial OGTs. We demonstrate this feature of ROSEATE by reconstructing ADK sequences from over 500 environmental and host-associated metagenomes, successfully distinguishing community-wide thermal preferences across diverse habitats, from polar oceans to mammalian guts. By transitioning from genomic proxies to informationally dense protein structural features, this work provides an efficient, interpretable tool for predicting bacterial OGTs across taxa and whole communities.\n\nAuthor SummaryThe temperature preferences of bacteria are key to determining where species are most likely to grow and how bacterial communities may respond to changes in temperature regimes. Unfortunately, the optimal growth temperatures of most bacteria, including a broad diversity of bacteria found in many host-associated and environmental systems, currently remain unknown as many bacterial species cannot be grown or studied in a laboratory. While we now have genomic data for many bacteria, using these data to infer optimal temperatures for bacterial growth has remained a persistent challenge.\n\nWe developed and validated a novel approach to predict bacterial temperature preferences. When heated, proteins often unfold, becoming nonfunctional. To adapt to warmer environments, organisms evolve more stable proteins which resist denaturing at high temperatures. Instead of analyzing a bacterias entire genome, our approach uses a protein language model to quantify stability-enhancing changes in a single protein found across all bacteria. We found that this single-protein approach can be used to effectively predict the optimal growth temperatures of individual bacterial species and even whole bacterial communities. By changing how we use genomic information to predict temperature preferences, our framework provides a scalable blueprint for predicting other important bacterial traits from protein structure information.",
+  "authors": [
+    "Hoffert, M.",
+    "Myerscough, D.",
+    "Dragone, N. B.",
+    "Gebert, M. J.",
+    "Silberg, J. J.",
+    "Fierer, N."
+  ],
+  "doi": "10.64898/2026.06.15.732269",
+  "first_seen": "2026-06-18",
+  "id": "biorxiv:10.64898/2026.06.15.732269",
+  "metadata": {
+    "abstract": "Temperature is a fundamental determinant of bacterial physiology and ecology. Optimal growth temperature (OGT) is highly variable across species, contributing to differences in where and when species are most likely to thrive. Although the OGTs for most bacteria remain unknown, the increasing availability of genomes from uncultivated and cultivated taxa has made it advantageous to build genomic, cultivation-independent models to infer OGT. However, pre-existing genomic models often lack the generalizability and mechanistic grounding required for robust inferences of OGT. We propose a novel framework for predicting bacterial OGT which uses learned protein structural signatures of thermal adaptation. We hypothesize that biophysical tradeoffs which dictate enzymatic functions across variable temperatures provide a more robust empirical basis for OGT prediction than broad genomic features. Our OGT-predicting model, ROSEATE, is based on a single gene, adenylate kinase (ADK), that encodes for a ubiquitous enzyme essential for energy homeostasis. ROSEATE uses high-dimensional latent space encoding via MSA Transformer, a protein language model which embeds ADKs in a manner which preserves biophysical information about embedded proteins. We show that the accuracy of the ROSEATE model is on par with other genome-based models, has a high degree of phylogenetic generalizability, and the ESM embeddings effectively capture key temperature-adaptive enzyme characteristics derived from AlphaFold structures. Because ROSEATE is based on analyses of a single ubiquitous protein, it can be used with metagenomic data to infer the community-level variation in bacterial OGTs. We demonstrate this feature of ROSEATE by reconstructing ADK sequences from over 500 environmental and host-associated metagenomes, successfully distinguishing community-wide thermal preferences across diverse habitats, from polar oceans to mammalian guts. By transitioning from genomic proxies to informationally dense protein structural features, this work provides an efficient, interpretable tool for predicting bacterial OGTs across taxa and whole communities.\n\nAuthor SummaryThe temperature preferences of bacteria are key to determining where species are most likely to grow and how bacterial communities may respond to changes in temperature regimes. Unfortunately, the optimal growth temperatures of most bacteria, including a broad diversity of bacteria found in many host-associated and environmental systems, currently remain unknown as many bacterial species cannot be grown or studied in a laboratory. While we now have genomic data for many bacteria, using these data to infer optimal temperatures for bacterial growth has remained a persistent challenge.\n\nWe developed and validated a novel approach to predict bacterial temperature preferences. When heated, proteins often unfold, becoming nonfunctional. To adapt to warmer environments, organisms evolve more stable proteins which resist denaturing at high temperatures. Instead of analyzing a bacterias entire genome, our approach uses a protein language model to quantify stability-enhancing changes in a single protein found across all bacteria. We found that this single-protein approach can be used to effectively predict the optimal growth temperatures of individual bacterial species and even whole bacterial communities. By changing how we use genomic information to predict temperature preferences, our framework provides a scalable blueprint for predicting other important bacterial traits from protein structure information.",
+    "author_corresponding": "Michael Hoffert",
+    "author_corresponding_institution": "University of Colorado Boulder",
+    "authors": "Hoffert, M.; Myerscough, D.; Dragone, N. B.; Gebert, M. J.; Silberg, J. J.; Fierer, N.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-18",
+    "doi": "10.64898/2026.06.15.732269",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/18/2026.06.15.732269.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Predicting optimal growth temperatures of bacteria using learned structural information from a single protein",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Colorado Boulder",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "ROSEATE predicts bacterial optimal growth temperature from MSA Transformer embeddings of adenylate kinase, extending to metagenomic community-level thermal…",
+  "title": "Predicting optimal growth temperatures of bacteria using learned structural information from a single protein",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.15.732269"
+}

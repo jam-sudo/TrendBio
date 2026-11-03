@@ -1,0 +1,42 @@
+{
+  "abstract": "Background.Features from RNA-seq experiments are usually counted using a curated annotation (GENCODE, Ensembl, etc) as reference. This approach constrains RNA-seq counts to what the annotation considers a valid gene, transcript or exon, and misses transcription outside them. Moreover, reference annotations are known to be incomplete, and inadequate in some experiments altering splicing, and some diseases. To circumvent these constraints, annotation-free detection of expressed regions aims to detect the actual regions being expressed in a sample or samples. For large scale usage, the recount3 resource holds uniformly processed coverage tracks and splice junctions for over 8,000 human and over 10,000 mouse RNA-seq studies, with several hundred thousand samples in total. This opens an opportunity for scalable tools to call expressed regions that are annotation free.\n\nResults.We present fastder, a C++ tool to detect expressed regions directly from recount3 coverage and splice junctions files, with no read alignment steps. It also can run on local raw reads, after aligning them with STAR, making it suitable to analyze species beyond human and mouse. fastder calls expressed regions by bump hunting expression coverage files, and stitches them into spliced multi-exon structures using the splice junction data. On simulated RNA-seq with unannotated expression features, fastder calls exons at a base-level accuracy on par with derfinder and golden standard for the task. Exon precision improves with sequencing depth. We compare fastders performance against a coverage-only baseline, derfinder and groHMM. fastder extends the functionality of those by assigning strands to the expressed regions, and by also producing multi-exon regions. It runs about 15 to 20 times faster than derfinder and groHMM, within bounded memory. We showcase its use with two recount3-derived examples, including the recovery of cryptic exons from a TDP-43 knockdown experiment; and the GTEx data clustering based on the topology of the expressed regions alone, without taking the expression levels into account.\n\nConclusions.fastder makes annotation-agnostic detection of expressed-regions fast enough to run at recount3 scale. As limitation, it detects expressed regions and the junctions between them, not different isoforms from the same gene.",
+  "authors": [
+    "Lehmann, M.",
+    "Kitak, T.",
+    "Mallona, I."
+  ],
+  "doi": "10.64898/2026.06.21.733617",
+  "first_seen": "2026-06-25",
+  "id": "biorxiv:10.64898/2026.06.21.733617",
+  "metadata": {
+    "abstract": "Background.Features from RNA-seq experiments are usually counted using a curated annotation (GENCODE, Ensembl, etc) as reference. This approach constrains RNA-seq counts to what the annotation considers a valid gene, transcript or exon, and misses transcription outside them. Moreover, reference annotations are known to be incomplete, and inadequate in some experiments altering splicing, and some diseases. To circumvent these constraints, annotation-free detection of expressed regions aims to detect the actual regions being expressed in a sample or samples. For large scale usage, the recount3 resource holds uniformly processed coverage tracks and splice junctions for over 8,000 human and over 10,000 mouse RNA-seq studies, with several hundred thousand samples in total. This opens an opportunity for scalable tools to call expressed regions that are annotation free.\n\nResults.We present fastder, a C++ tool to detect expressed regions directly from recount3 coverage and splice junctions files, with no read alignment steps. It also can run on local raw reads, after aligning them with STAR, making it suitable to analyze species beyond human and mouse. fastder calls expressed regions by bump hunting expression coverage files, and stitches them into spliced multi-exon structures using the splice junction data. On simulated RNA-seq with unannotated expression features, fastder calls exons at a base-level accuracy on par with derfinder and golden standard for the task. Exon precision improves with sequencing depth. We compare fastders performance against a coverage-only baseline, derfinder and groHMM. fastder extends the functionality of those by assigning strands to the expressed regions, and by also producing multi-exon regions. It runs about 15 to 20 times faster than derfinder and groHMM, within bounded memory. We showcase its use with two recount3-derived examples, including the recovery of cryptic exons from a TDP-43 knockdown experiment; and the GTEx data clustering based on the topology of the expressed regions alone, without taking the expression levels into account.\n\nConclusions.fastder makes annotation-agnostic detection of expressed-regions fast enough to run at recount3 scale. As limitation, it detects expressed regions and the junctions between them, not different isoforms from the same gene.",
+    "author_corresponding": "Izaskun Mallona",
+    "author_corresponding_institution": "University of Zurich",
+    "authors": "Lehmann, M.; Kitak, T.; Mallona, I.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-06-25",
+    "doi": "10.64898/2026.06.21.733617",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/25/2026.06.21.733617.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "fastder: fast, annotation-agnostic detection of expressed regions from RNA-seq coverage and splicing data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Zurich",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-06-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "fastder, a fast C++ tool, detects annotation-free expressed regions from recount3 coverage and splice junctions, running 15-20x faster than derfinder and…",
+  "title": "fastder: fast, annotation-agnostic detection of expressed regions from RNA-seq coverage and splicing data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.21.733617"
+}

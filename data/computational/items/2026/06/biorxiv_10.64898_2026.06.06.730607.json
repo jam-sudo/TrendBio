@@ -1,0 +1,41 @@
+{
+  "abstract": "Hybridization is an important evolutionary process, commonly modeled by the network multispecies coalescent. Reconstructing evolutionary histories under this model is notoriously costly, even for level-1 networks where hybridization events are isolated from each other. The widely used methods that combine speed with statistical guarantees rely on quartet concordance factors computed for all subsets of four species, resulting in an O(n^4k) bottleneck that severely limits scalability to large numbers of species (n) and genes (k). Among quartet-based methods, NANUQ+ is notable because it decomposes the problem into two steps: first reconstructing a tree of blobs, which compresses each non-treelike part of the network, called a blob, into a single vertex, and second reconstructing the internal structure of each level-1 blob, specifically its circular order and hybrid vertex. Here, we investigate whether level-1 blob reconstruction is difficult once the tree of blobs is known. We present a fast and statistically consistent algorithm, called NetCS, based on two simple primitives: majority voting and merge sort, circumventing the bottleneck of computing all quartet concordance factors. In simulations, NetCS achieved comparable accuracy to NANUQ+ and was dramatically faster, enabling analyses of 200 taxa and 1000 genes in only a few minutes. Both methods attained near-perfect accuracy when given the true tree of blobs; however, their performance degraded in end-to-end pipelines due to errors in tree of blobs reconstruction. Strikingly, even methods that reconstruct level-1 networks directly struggled to accurately predict hybrid ancestry. Our results suggest that reconstructing level-1 blobs is unexpectedly easy once the tree of blobs is known, and that a major challenge for phylogenetic network inference lies in accurate tree of blobs reconstruction.",
+  "authors": [
+    "Dai, J.",
+    "Molloy, E."
+  ],
+  "doi": "10.64898/2026.06.06.730607",
+  "first_seen": "2026-06-10",
+  "id": "biorxiv:10.64898/2026.06.06.730607",
+  "metadata": {
+    "abstract": "Hybridization is an important evolutionary process, commonly modeled by the network multispecies coalescent. Reconstructing evolutionary histories under this model is notoriously costly, even for level-1 networks where hybridization events are isolated from each other. The widely used methods that combine speed with statistical guarantees rely on quartet concordance factors computed for all subsets of four species, resulting in an O(n^4k) bottleneck that severely limits scalability to large numbers of species (n) and genes (k). Among quartet-based methods, NANUQ+ is notable because it decomposes the problem into two steps: first reconstructing a tree of blobs, which compresses each non-treelike part of the network, called a blob, into a single vertex, and second reconstructing the internal structure of each level-1 blob, specifically its circular order and hybrid vertex. Here, we investigate whether level-1 blob reconstruction is difficult once the tree of blobs is known. We present a fast and statistically consistent algorithm, called NetCS, based on two simple primitives: majority voting and merge sort, circumventing the bottleneck of computing all quartet concordance factors. In simulations, NetCS achieved comparable accuracy to NANUQ+ and was dramatically faster, enabling analyses of 200 taxa and 1000 genes in only a few minutes. Both methods attained near-perfect accuracy when given the true tree of blobs; however, their performance degraded in end-to-end pipelines due to errors in tree of blobs reconstruction. Strikingly, even methods that reconstruct level-1 networks directly struggled to accurately predict hybrid ancestry. Our results suggest that reconstructing level-1 blobs is unexpectedly easy once the tree of blobs is known, and that a major challenge for phylogenetic network inference lies in accurate tree of blobs reconstruction.",
+    "author_corresponding": "Erin Molloy",
+    "author_corresponding_institution": "University of Maryland, College Park",
+    "authors": "Dai, J.; Molloy, E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-10",
+    "doi": "10.64898/2026.06.06.730607",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/10/2026.06.06.730607.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Is level-1 blob reconstruction under the network multispecies coalescent easy?",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Maryland, College Park",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-06-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces NetCS, a fast statistically consistent algorithm for level-1 blob reconstruction under the network multispecies coalescent, avoiding all-quartet…",
+  "title": "Is level-1 blob reconstruction under the network multispecies coalescent easy?",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.06.730607"
+}

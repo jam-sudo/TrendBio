@@ -1,0 +1,42 @@
+{
+  "abstract": "Lossless compression and probabilistic sequence modeling are two faces of the same coin: a model that assigns high probability to a sequence can encode it in few bits via arithmetic coding. We exploit this duality to evaluate genomic language models as compressors of DNA, using compression primarily as an objective probe of generative sequence modeling rather than as a deployable storage system. We release DNAGPT2, a family of ten GPT-2-small models pretrained for one epoch on a single A40 using the DNABERT2 multi-species corpus that differ only in byte-pair encoding vocabulary size. Coupled with arithmetic coding, the best model reaches 1.47 bits per base (bpb) on the T2T human genome, fourth in the Cobilab compression benchmark and ahead of every general-purpose compressor. Our results suggest that NLP-style tokenization choices may be suboptimal for DNA: a 32-token BPE vocabulary compresses better than larger vocabularies. We also find that, in this benchmark, published long-context genomic LMs underperform a much shorter-context BPE GPT-2; we discuss in Section 5 that this is not a controlled context-length ablation, since the compared models also differ in architecture, training data, parameter count, and tokenization. Finally, we compute a per-nucleotide information-content map of the human genome and show that exons, introns, intergenic regions, and Alu repeats have statistically distinct information profiles.",
+  "authors": [
+    "Macala, V.",
+    "Simecek, P."
+  ],
+  "doi": "10.64898/2026.06.10.731316",
+  "first_seen": "2026-06-12",
+  "id": "biorxiv:10.64898/2026.06.10.731316",
+  "metadata": {
+    "abstract": "Lossless compression and probabilistic sequence modeling are two faces of the same coin: a model that assigns high probability to a sequence can encode it in few bits via arithmetic coding. We exploit this duality to evaluate genomic language models as compressors of DNA, using compression primarily as an objective probe of generative sequence modeling rather than as a deployable storage system. We release DNAGPT2, a family of ten GPT-2-small models pretrained for one epoch on a single A40 using the DNABERT2 multi-species corpus that differ only in byte-pair encoding vocabulary size. Coupled with arithmetic coding, the best model reaches 1.47 bits per base (bpb) on the T2T human genome, fourth in the Cobilab compression benchmark and ahead of every general-purpose compressor. Our results suggest that NLP-style tokenization choices may be suboptimal for DNA: a 32-token BPE vocabulary compresses better than larger vocabularies. We also find that, in this benchmark, published long-context genomic LMs underperform a much shorter-context BPE GPT-2; we discuss in Section 5 that this is not a controlled context-length ablation, since the compared models also differ in architecture, training data, parameter count, and tokenization. Finally, we compute a per-nucleotide information-content map of the human genome and show that exons, introns, intergenic regions, and Alu repeats have statistically distinct information profiles.",
+    "author_corresponding": "Petr Simecek",
+    "author_corresponding_institution": "CEITEC Masaryk University",
+    "authors": "Macala, V.; Simecek, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-12",
+    "doi": "10.64898/2026.06.10.731316",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/12/2026.06.10.731316.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DNA Compression with Genomic Language Models: Tokenization, Benchmarking, and an Information-Content Map",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "CEITEC Masaryk University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Evaluates genomic language models as DNA compressors via arithmetic coding; releases DNAGPT2 GPT-2 variants, reaching 1.47 bpb on T2T human genome and mapping…",
+  "title": "DNA Compression with Genomic Language Models: Tokenization, Benchmarking, and an Information-Content Map",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.10.731316"
+}

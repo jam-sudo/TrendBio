@@ -1,0 +1,35 @@
+{
+  "abstract": "De novo peptide sequencing from tandem mass spectrometry is pivotal in proteomics, enabling identification of novel peptides without reference databases. While recent Transformer-based encoder-decoder models have achieved remarkable performance, we uncover a critical pathology in their inference dynamics. Through comprehensive feature scaling experiments, we demonstrate that existing auto-regressive peptide decoders tend to over-rely on generated-sequence priors while progressively under-utilizing fine-grained physical evidence from the input mass spectrum. This phenomenon leads to suboptimal results, where generated peptide sequences are biologically plausible yet not faithful to the input spectrum. To rectify this, we propose MemNovo, a training-free and plug-and-play mechanism that re-balances peptide and spectral contributions at inference time. MemNovo alleviates the information bottleneck by establishing a persistent spectral memory bank and injecting retrieved features directly into the final decoding stage via an ultra-conservative residual connection. Theoretical analysis confirms that this mechanism restores the mutual information between the decoder state and the raw spectrum. Extensive experiments on the Nine Species benchmark with two representative baselines, Casanovo and InstaNovo, demonstrate that MemNovo consistently improves both amino acid precision and peptide precision, achieving up to 39.1% relative improvement in peptide precision for Casanovo and up to 3.9% for InstaNovo, with negligible computational overhead.",
+  "authors": [
+    "Dongxin Lyu",
+    "Jingbo Zhou",
+    "Hongxin Xiang",
+    "Yuqiang Li",
+    "Jun Xia"
+  ],
+  "doi": "10.1145/3770855.3818848",
+  "first_seen": "2026-06-10",
+  "id": "arxiv:2606.11868",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.11868v2</ns0:id>\n    <ns0:title>MemNovo: Look Back at the Spectrum for Balanced De Novo Peptide Sequencing from Mass Spectrometry</ns0:title>\n    <ns0:updated>2026-08-05T11:49:01Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.11868v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.11868v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>De novo peptide sequencing from tandem mass spectrometry is pivotal in proteomics, enabling identification of novel peptides without reference databases. While recent Transformer-based encoder-decoder models have achieved remarkable performance, we uncover a critical pathology in their inference dynamics. Through comprehensive feature scaling experiments, we demonstrate that existing auto-regressive peptide decoders tend to over-rely on generated-sequence priors while progressively under-utilizing fine-grained physical evidence from the input mass spectrum. This phenomenon leads to suboptimal results, where generated peptide sequences are biologically plausible yet not faithful to the input spectrum. To rectify this, we propose MemNovo, a training-free and plug-and-play mechanism that re-balances peptide and spectral contributions at inference time. MemNovo alleviates the information bottleneck by establishing a persistent spectral memory bank and injecting retrieved features directly into the final decoding stage via an ultra-conservative residual connection. Theoretical analysis confirms that this mechanism restores the mutual information between the decoder state and the raw spectrum. Extensive experiments on the Nine Species benchmark with two representative baselines, Casanovo and InstaNovo, demonstrate that MemNovo consistently improves both amino acid precision and peptide precision, achieving up to 39.1% relative improvement in peptide precision for Casanovo and up to 3.9% for InstaNovo, with negligible computational overhead.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-10T09:43:30Z</ns0:published>\n    <ns1:comment>Code: https://github.com/AIMS-Lab-HKUSTGZ/MemNovo</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns1:journal_ref>Knowledge Discovery and Data Mining(KDD), 2026</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Dongxin Lyu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingbo Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hongxin Xiang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuqiang Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jun Xia</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3770855.3818848</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3770855.3818848\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "proteomics",
+  "published_at": "2026-06-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "MemNovo, a training-free inference-time mechanism with a spectral memory bank, rebalances peptide and spectral contributions in Transformer de novo peptide…",
+  "title": "MemNovo: Look Back at the Spectrum for Balanced De Novo Peptide Sequencing from Mass Spectrometry",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.11868v2"
+}

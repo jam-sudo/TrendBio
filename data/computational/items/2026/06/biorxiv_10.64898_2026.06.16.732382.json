@@ -1,0 +1,44 @@
+{
+  "abstract": "Genome assembly is a computational pipeline designed to reconstruct chromosomes from small sequencing reads. Following their assembly, contiguous sequences (contigs) are arranged into chromosome-long sequences during scaffolding. Hi-C, a long-range linkage information between regions of the genome widely used in recent large sequencing projects, is often required to correctly order contigs. Several tools have been developed to automate this task following either statistical or deep-learning approaches. Statistical approaches summarise 2D Hi-C matrices into contact densities across sequences, thus ignoring informative visual patterns. The sole existing deep-learning tool uses a transformer-based computer vision model to correct the assembly. It has been trained on several species and uses Hi-C matrices directly. Yet it comes as a supplementary step in the scaffolding process, introducing extra computation time, and has been trained on a dataset that might contain labelling errors, which could provide sub-optimal results. We propose SPA-C, an hybrid pipeline combining the strengths of both approaches. Linkage prediction is handled with a frugal CNN-based model and a graph-solving algorithm is used to generate the scaffolds. Through our inputs design, the model is able to both correct errors within assemblies and link contigs, leveraging small, local Hi-C contact matrices. We handled low-complexity regions that might induce erroneous predictions using an external tool, improving the overall accuracy of generated assemblies. On a benchmark of six various genomes and four standard metrics, SPA-C outperformed four out of four state-of-the-art methods while achieving comparable start-to-end computation time. Python and Bash scripts are available on GitHub (github.com/SPA-C/SPA-C.git) and Zenodo (10.5281/zenodo.19000361).",
+  "authors": [
+    "Mergez, A.",
+    "Mourad, R.",
+    "Hernandez-Raquet, G.",
+    "Zytnicki, M."
+  ],
+  "doi": "10.64898/2026.06.16.732382",
+  "first_seen": "2026-06-21",
+  "id": "biorxiv:10.64898/2026.06.16.732382",
+  "metadata": {
+    "abstract": "Genome assembly is a computational pipeline designed to reconstruct chromosomes from small sequencing reads. Following their assembly, contiguous sequences (contigs) are arranged into chromosome-long sequences during scaffolding. Hi-C, a long-range linkage information between regions of the genome widely used in recent large sequencing projects, is often required to correctly order contigs. Several tools have been developed to automate this task following either statistical or deep-learning approaches. Statistical approaches summarise 2D Hi-C matrices into contact densities across sequences, thus ignoring informative visual patterns. The sole existing deep-learning tool uses a transformer-based computer vision model to correct the assembly. It has been trained on several species and uses Hi-C matrices directly. Yet it comes as a supplementary step in the scaffolding process, introducing extra computation time, and has been trained on a dataset that might contain labelling errors, which could provide sub-optimal results. We propose SPA-C, an hybrid pipeline combining the strengths of both approaches. Linkage prediction is handled with a frugal CNN-based model and a graph-solving algorithm is used to generate the scaffolds. Through our inputs design, the model is able to both correct errors within assemblies and link contigs, leveraging small, local Hi-C contact matrices. We handled low-complexity regions that might induce erroneous predictions using an external tool, improving the overall accuracy of generated assemblies. On a benchmark of six various genomes and four standard metrics, SPA-C outperformed four out of four state-of-the-art methods while achieving comparable start-to-end computation time. Python and Bash scripts are available on GitHub (github.com/SPA-C/SPA-C.git) and Zenodo (10.5281/zenodo.19000361).",
+    "author_corresponding": "Matthias Zytnicki",
+    "author_corresponding_institution": "Univ Toulouse, INRAE, MIAT",
+    "authors": "Mergez, A.; Mourad, R.; Hernandez-Raquet, G.; Zytnicki, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-21",
+    "doi": "10.64898/2026.06.16.732382",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/21/2026.06.16.732382.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SPA-C: an hybrid tool to accurately scaffold genomes using Hi-C and Deep-Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Univ Toulouse, INRAE, MIAT",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-06-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "SPA-C is a hybrid genome scaffolding pipeline pairing a frugal CNN on local Hi-C contact matrices with a graph-solving algorithm; it outperformed four tools on…",
+  "title": "SPA-C: an hybrid tool to accurately scaffold genomes using Hi-C and Deep-Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.16.732382"
+}

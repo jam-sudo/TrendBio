@@ -1,0 +1,33 @@
+{
+  "abstract": "Predicting how a cell's transcriptome responds to a drug it has never seen is a core, hard problem in computational cell biology: recent benchmarks show complex models often fail to beat trivial baselines once test compounds are held out by chemistry. We study one cell line and assay, THP-1 cells profiled by DRUG-seq, scored by the active-compound weighted MSE(wMSE) of the VCPI prediction contest. We propose a staged approach: dumb baselines (untreated control and mean training-compound response) that the field keeps failing to beat; non-parametric retrieval (a Tanimoto-weighted average of a held-out compound's nearest training compounds); and a fusion stage combining a frozen chemistry embedding with retrieval-support features to predict the residual over the mean, with an uncertainty head and gene programs. On the released VCPI THP-1 drug-seq data (14,026 training compounds), under a Bemis-Murcko scaffold split, the model ranking inverts depending on the metric. Under an inverse-variance per-gene proxy, a regularized linear regression on Morgan fingerprints appears to win over the deep models, retrieval, and ChemBERTa -- the textbook \"simple baselines win\" result. But under the contest's true active-set metric (per-(gene, compound) Mejia weights, validated against the official scorer; mean baseline 0.535 vs the organizers' 0.507 reference), that reverses: the deep models win, our fusion decoder significantly beats the linear fingerprint baseline (-0.012 wMSE, paired bootstrap p < 10^-4), and the proxy's winner becomes the worst chemistry-aware predictor. Picking the metric picks the winner -- to our knowledge the first demonstration on real held-out drug chemistry of the metric-calibration effect established largely on genetic perturbation. We release a reproducible pipeline\n  wired to the official scorer that emits a valid submission over the real 1064 x 12,995 grid.",
+  "authors": [
+    "Dhruv Agarwal",
+    "Riya Bisht"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-10",
+  "id": "arxiv:2606.12639",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.12639v1</ns0:id>\n    <ns0:title>The Metric Picks the Winner: Evaluation Choice Flips Model Rankings for Drug-Response Prediction in Unseen Chemistry</ns0:title>\n    <ns0:updated>2026-06-10T20:03:08Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.12639v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.12639v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Predicting how a cell's transcriptome responds to a drug it has never seen is a core, hard problem in computational cell biology: recent benchmarks show complex models often fail to beat trivial baselines once test compounds are held out by chemistry. We study one cell line and assay, THP-1 cells profiled by DRUG-seq, scored by the active-compound weighted MSE(wMSE) of the VCPI prediction contest. We propose a staged approach: dumb baselines (untreated control and mean training-compound response) that the field keeps failing to beat; non-parametric retrieval (a Tanimoto-weighted average of a held-out compound's nearest training compounds); and a fusion stage combining a frozen chemistry embedding with retrieval-support features to predict the residual over the mean, with an uncertainty head and gene programs. On the released VCPI THP-1 drug-seq data (14,026 training compounds), under a Bemis-Murcko scaffold split, the model ranking inverts depending on the metric. Under an inverse-variance per-gene proxy, a regularized linear regression on Morgan fingerprints appears to win over the deep models, retrieval, and ChemBERTa -- the textbook \"simple baselines win\" result. But under the contest's true active-set metric (per-(gene, compound) Mejia weights, validated against the official scorer; mean baseline 0.535 vs the organizers' 0.507 reference), that reverses: the deep models win, our fusion decoder significantly beats the linear fingerprint baseline (-0.012 wMSE, paired bootstrap p &lt; 10^-4), and the proxy's winner becomes the worst chemistry-aware predictor. Picking the metric picks the winner -- to our knowledge the first demonstration on real held-out drug chemistry of the metric-calibration effect established largely on genetic perturbation. We release a reproducible pipeline\n  wired to the official scorer that emits a valid submission over the real 1064 x 12,995 grid.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-10T20:03:08Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Dhruv Agarwal</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Riya Bisht</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Shows that the evaluation metric flips model rankings for held-out-chemistry drug-response transcriptome prediction (THP-1 DRUG-seq, VCPI wMSE); proposes a…",
+  "title": "The Metric Picks the Winner: Evaluation Choice Flips Model Rankings for Drug-Response Prediction in Unseen Chemistry",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.12639v1"
+}

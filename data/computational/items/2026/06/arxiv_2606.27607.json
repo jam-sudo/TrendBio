@@ -1,0 +1,36 @@
+{
+  "abstract": "Efficient evaluation of sequence data likelihoods and their high-dimensional gradients on phylogenetic trees improves inference under both maximum-likelihood and Bayesian frameworks. Here, we present BEAGLE 4.1, a high-performance library for statistical phylogenetics that incorporates new algorithms to evaluate these gradients on phylogenetic trees. We also provide new hardware implementations for both likelihoods and gradients supporting ARM NEON intrinsics and optimized matrix multiplication units -- called tensor cores -- on NVIDIA graphics processing units (GPUs). We benchmark the performance scaling of the library across a number of patterns and taxa on multi-core CPUs and GPUs, and compare the speedup afforded by NVIDIA and AMD GPUs as well as performance scaling with an increasing number of GPUs. We show that multi-core CPU implementations provide up to a fourfold speedup over single-threaded CPU implementations and up to an tenfold speedup for nucleotide and codon models, respectively, with performance generally improving as the number of taxa and site patterns increases. GPUs outperform multi-threaded CPU implementations for a realistic number of patterns, even for nucleotide models with a small state-space size of 4, while for codon models they provide substantially higher performance gains even for a single pattern or four taxa. Tensor cores on GPUs provide up to 2-fold speedup relative to standard CUDA cores for codon models. Using NEON instructions on ARM CPUs affords up to a $\\sim 1.3$-fold speedup over non-SIMD implementation with the speedup going down to 1.1-fold at 8 CPU threads. We provide these new algorithms to evaluate the gradient and efficient hardware implementations for both likelihood and gradient calculations through BEAGLE 4.1, such that they can be readily integrated into phylogenetic software packages.",
+  "authors": [
+    "Karthik Gangavarapu",
+    "Xiang Ji",
+    "Yucai Shao",
+    "Philippe Lemey",
+    "Andrew Rambaut",
+    "Guy Baele",
+    "Marc A. Suchard"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-25",
+  "id": "arxiv:2606.27607",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.PE",
+    "categories": [
+      "q-bio.PE"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.27607v1</ns0:id>\n    <ns0:title>BEAGLE 4.1: A high-performance library for computation on phylogenetic trees across diverse parallel architectures</ns0:title>\n    <ns0:updated>2026-06-25T23:47:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.27607v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.27607v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Efficient evaluation of sequence data likelihoods and their high-dimensional gradients on phylogenetic trees improves inference under both maximum-likelihood and Bayesian frameworks. Here, we present BEAGLE 4.1, a high-performance library for statistical phylogenetics that incorporates new algorithms to evaluate these gradients on phylogenetic trees. We also provide new hardware implementations for both likelihoods and gradients supporting ARM NEON intrinsics and optimized matrix multiplication units -- called tensor cores -- on NVIDIA graphics processing units (GPUs). We benchmark the performance scaling of the library across a number of patterns and taxa on multi-core CPUs and GPUs, and compare the speedup afforded by NVIDIA and AMD GPUs as well as performance scaling with an increasing number of GPUs. We show that multi-core CPU implementations provide up to a fourfold speedup over single-threaded CPU implementations and up to an tenfold speedup for nucleotide and codon models, respectively, with performance generally improving as the number of taxa and site patterns increases. GPUs outperform multi-threaded CPU implementations for a realistic number of patterns, even for nucleotide models with a small state-space size of 4, while for codon models they provide substantially higher performance gains even for a single pattern or four taxa. Tensor cores on GPUs provide up to 2-fold speedup relative to standard CUDA cores for codon models. Using NEON instructions on ARM CPUs affords up to a $\\sim 1.3$-fold speedup over non-SIMD implementation with the speedup going down to 1.1-fold at 8 CPU threads. We provide these new algorithms to evaluate the gradient and efficient hardware implementations for both likelihood and gradient calculations through BEAGLE 4.1, such that they can be readily integrated into phylogenetic software packages.</ns0:summary>\n    <ns0:category term=\"q-bio.PE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-25T23:47:49Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.PE\" />\n    <ns0:author>\n      <ns0:name>Karthik Gangavarapu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiang Ji</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yucai Shao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Philippe Lemey</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrew Rambaut</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guy Baele</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Marc A. Suchard</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "BEAGLE 4.1 is a high-performance phylogenetics library adding gradient algorithms and CPU/GPU implementations (ARM NEON, NVIDIA tensor cores) for faster…",
+  "title": "BEAGLE 4.1: A high-performance library for computation on phylogenetic trees across diverse parallel architectures",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.27607v1"
+}

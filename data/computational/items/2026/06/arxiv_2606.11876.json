@@ -1,0 +1,34 @@
+{
+  "abstract": "Circulating-tumour DNA (ctDNA) carries evidence of drug resistance months before imaging shows it, but the earliest evidence lives below the assay's limit of detection (LoD): a nascent subclone is detected only intermittently, producing a flickering sequence of faint detects and non-detects. Commercial liquid biopsies treat each draw as an independent snapshot and a non-detect as nothing. We argue a non-detect is a left-censored observation, and the pattern of non-detects and faint detects over time carries actionable evidence of growth before any single value is trustworthy. We introduce Span, a censored-Poisson Bayesian latent-growth change-point detector that models the binary detection process, accumulates a sequential generalised-likelihood-ratio statistic for an upward change-point in the per-variant detection rate, and raises a competing-risks alarm with calibrated false-alarm control. Span has no learned weights, so there is nothing to overfit. On a synthetic cohort of HR+/HER2- metastatic breast cancer on first-line CDK4/6-inhibitor plus endocrine therapy, at a matched 10% false-alarm rate, Span roughly doubles the fraction of impending progressions caught three months ahead (indolent regime: 25% vs 11% for the snapshot), with a falsifiable dose-response: large for indolent emergence, vanishing for fast emergence. A value-trajectory baseline performs identically to the snapshot, isolating the gain to the censored detection model. The survival backbone matches a Cox baseline on real breast-cancer data (GBSG-2, n=686; C-index 0.67 vs 0.68), and on a real longitudinal cohort with clean biomarkers (PBC2, n=312) the same pipeline correctly declines to win, a falsifiable boundary test confirming the mechanism is regime-specific. All ctDNA trajectories are synthetic.",
+  "authors": [
+    "Aarchi Singh Thakur",
+    "Abhijoy Sarkar"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-10",
+  "id": "arxiv:2606.11876",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.LG",
+      "stat.ME"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.11876v1</ns0:id>\n    <ns0:title>Seeing Below the Limit of Detection: A Censored-Poisson Bayesian Latent-Growth Change-Point Detector (the Span Detector) for Serial ctDNA in HR+/HER2- Metastatic Breast Cancer</ns0:title>\n    <ns0:updated>2026-06-10T09:59:13Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.11876v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.11876v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Circulating-tumour DNA (ctDNA) carries evidence of drug resistance months before imaging shows it, but the earliest evidence lives below the assay's limit of detection (LoD): a nascent subclone is detected only intermittently, producing a flickering sequence of faint detects and non-detects. Commercial liquid biopsies treat each draw as an independent snapshot and a non-detect as nothing. We argue a non-detect is a left-censored observation, and the pattern of non-detects and faint detects over time carries actionable evidence of growth before any single value is trustworthy. We introduce Span, a censored-Poisson Bayesian latent-growth change-point detector that models the binary detection process, accumulates a sequential generalised-likelihood-ratio statistic for an upward change-point in the per-variant detection rate, and raises a competing-risks alarm with calibrated false-alarm control. Span has no learned weights, so there is nothing to overfit. On a synthetic cohort of HR+/HER2- metastatic breast cancer on first-line CDK4/6-inhibitor plus endocrine therapy, at a matched 10% false-alarm rate, Span roughly doubles the fraction of impending progressions caught three months ahead (indolent regime: 25% vs 11% for the snapshot), with a falsifiable dose-response: large for indolent emergence, vanishing for fast emergence. A value-trajectory baseline performs identically to the snapshot, isolating the gain to the censored detection model. The survival backbone matches a Cox baseline on real breast-cancer data (GBSG-2, n=686; C-index 0.67 vs 0.68), and on a real longitudinal cohort with clean biomarkers (PBC2, n=312) the same pipeline correctly declines to win, a falsifiable boundary test confirming the mechanism is regime-specific. All ctDNA trajectories are synthetic.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ME\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-10T09:59:13Z</ns0:published>\n    <ns1:comment>9 pages, 4 figures, 2 tables. Code and synthetic data generator: https://github.com/span-ai-labs/span-detector</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Aarchi Singh Thakur</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abhijoy Sarkar</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-06-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Span: censored-Poisson Bayesian change-point detector for serial ctDNA below LoD; beats snapshot on synthetic breast cancer data.",
+  "title": "Seeing Below the Limit of Detection: A Censored-Poisson Bayesian Latent-Growth Change-Point Detector (the Span Detector) for Serial ctDNA in HR+/HER2- Metastatic Breast Cancer",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.11876v1"
+}

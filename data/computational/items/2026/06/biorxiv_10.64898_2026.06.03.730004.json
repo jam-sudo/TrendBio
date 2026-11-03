@@ -1,0 +1,43 @@
+{
+  "abstract": "Genome-scale metabolic models (GSMs) underpin pathway and strain engineering by linking genes to metabolic reactions and enabling system-level simulation of cellular fluxes and intervention effects, yet end-to-end analysis workflows remain fragmented, expert-demanding, and slow to adapt. Large language models (LLMs) could transform this landscape, lowering the barrier by explaining concepts, interpreting GSM files, and turning natural-language instructions into valid analysis code, thereby substantially mitigating the time, effort, and expertise required. However, their reliability for domain-specific tasks remains unexplored. Here, we delivered a systematic benchmark of four leading LLMs (GPT-4, Gemini, Claude, DeepSeek-R1) across four task areas central to metabolic engineering: domain knowledge, metabolic flux prediction, pathway construction, and flux optimization. For benchmarking, we introduced a standardized, rubric-based evaluation framework that uses multi-LLM automated scoring (an ensemble of LLM-as-a-judge assessments) and two distinct sets of nine task-tailored metrics (domain vs coding-focused tasks), rated on a 1-5 scale (up to 45 per task), covering scientific validity and code executability where applicable. Across tasks, we reveal consistent strengths (conceptual explanation, code synthesis) and critical failure modes (e.g., context window limitations, incorrect identifier assumptions, strain-dependent reasoning errors, and errors in domain-specific algorithms). In aggregate, DeepSeek-R1 led in domain tasks, narrowly edging GPT-4, Claude, and Gemini, demonstrating that conceptual biological logic remains highly invariant across architectures. In contrast, Gemini achieved the highest score for coding tasks, distinguished by functional execution and excelled in error handling, documentation, and readability, followed by GPT-4, Claude, and DeepSeek. We also evaluated LLM self-inspection capability by injecting subtle, consequential faults: a stoichiometric sign error causing mass imbalance and an omitted pathway reaction. We reveal that conversational \"blind search\" prompting completely fails to localize these network faults. Instead, robust error localization requires prompts reframed with domain-informed constraints that force the LLM to leverage tool-assisted code procedures, such as COBRApy mass-balance functions. Together, this work establishes an evidence-based baseline for LLM-enabled GSM analysis, providing actionable guidance for building reliable, automation-ready workflows for pathway and strain design.\n\nGraphical Abstract\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=88 SRC=\"FIGDIR/small/730004v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (28K):\norg.highwire.dtl.DTLVardef@413e29org.highwire.dtl.DTLVardef@1581de2org.highwire.dtl.DTLVardef@11ef7borg.highwire.dtl.DTLVardef@1817653_HPS_FORMAT_FIGEXP  M_FIG C_FIG",
+  "authors": [
+    "Yeoh, J. W.",
+    "Patro, C. P. K.",
+    "Wong, L.",
+    "Poh, C. L."
+  ],
+  "doi": "10.64898/2026.06.03.730004",
+  "first_seen": "2026-06-08",
+  "id": "biorxiv:10.64898/2026.06.03.730004",
+  "metadata": {
+    "abstract": "Genome-scale metabolic models (GSMs) underpin pathway and strain engineering by linking genes to metabolic reactions and enabling system-level simulation of cellular fluxes and intervention effects, yet end-to-end analysis workflows remain fragmented, expert-demanding, and slow to adapt. Large language models (LLMs) could transform this landscape, lowering the barrier by explaining concepts, interpreting GSM files, and turning natural-language instructions into valid analysis code, thereby substantially mitigating the time, effort, and expertise required. However, their reliability for domain-specific tasks remains unexplored. Here, we delivered a systematic benchmark of four leading LLMs (GPT-4, Gemini, Claude, DeepSeek-R1) across four task areas central to metabolic engineering: domain knowledge, metabolic flux prediction, pathway construction, and flux optimization. For benchmarking, we introduced a standardized, rubric-based evaluation framework that uses multi-LLM automated scoring (an ensemble of LLM-as-a-judge assessments) and two distinct sets of nine task-tailored metrics (domain vs coding-focused tasks), rated on a 1-5 scale (up to 45 per task), covering scientific validity and code executability where applicable. Across tasks, we reveal consistent strengths (conceptual explanation, code synthesis) and critical failure modes (e.g., context window limitations, incorrect identifier assumptions, strain-dependent reasoning errors, and errors in domain-specific algorithms). In aggregate, DeepSeek-R1 led in domain tasks, narrowly edging GPT-4, Claude, and Gemini, demonstrating that conceptual biological logic remains highly invariant across architectures. In contrast, Gemini achieved the highest score for coding tasks, distinguished by functional execution and excelled in error handling, documentation, and readability, followed by GPT-4, Claude, and DeepSeek. We also evaluated LLM self-inspection capability by injecting subtle, consequential faults: a stoichiometric sign error causing mass imbalance and an omitted pathway reaction. We reveal that conversational \"blind search\" prompting completely fails to localize these network faults. Instead, robust error localization requires prompts reframed with domain-informed constraints that force the LLM to leverage tool-assisted code procedures, such as COBRApy mass-balance functions. Together, this work establishes an evidence-based baseline for LLM-enabled GSM analysis, providing actionable guidance for building reliable, automation-ready workflows for pathway and strain design.\n\nGraphical Abstract\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=88 SRC=\"FIGDIR/small/730004v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (28K):\norg.highwire.dtl.DTLVardef@413e29org.highwire.dtl.DTLVardef@1581de2org.highwire.dtl.DTLVardef@11ef7borg.highwire.dtl.DTLVardef@1817653_HPS_FORMAT_FIGEXP  M_FIG C_FIG",
+    "author_corresponding": "Chueh Loo Poh",
+    "author_corresponding_institution": "National University of Singapore",
+    "authors": "Yeoh, J. W.; Patro, C. P. K.; Wong, L.; Poh, C. L.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-06-08",
+    "doi": "10.64898/2026.06.03.730004",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/08/2026.06.03.730004.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Comprehensive evaluation of LLM capabilities for interpretation and analysis of genome-scale metabolic models in metabolic engineering",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "National University of Singapore",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks four LLMs (GPT-4, Gemini, Claude, DeepSeek-R1) on genome-scale metabolic model analysis, finding flux and coding strengths and failures in fault…",
+  "title": "Comprehensive evaluation of LLM capabilities for interpretation and analysis of genome-scale metabolic models in metabolic engineering",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.03.730004"
+}

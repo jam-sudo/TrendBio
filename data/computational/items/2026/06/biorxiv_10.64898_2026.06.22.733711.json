@@ -1,0 +1,45 @@
+{
+  "abstract": "DeepInsight-style methods make tabular feature relationships accessible to convolutional networks by placing each feature at a fixed position on an image carrier. An open design question is how the carrier geometry should be constructed when feature neighborhoods themselves carry part of the signal. We introduce vDeepInsight, an injective three-dimensional (3D) voxel carrier that preserves feature neighborhoods more faithfully than matched two-dimensional (2D) carriers while keeping a one-to-one mapping from each feature to a single voxel. Genes are embedded with t-SNE or UMAP, assigned one-to-one to a sparse voxel grid by linear-sum assignment, and processed by a submanifold sparse 3D convolutional network. We evaluate the carrier on gene expression through four linked analyses. First, representation-quality metrics show that 3D layouts reduce gene-neighborhood distortion relative to matched 2D layouts before any model is trained. Second, controlled synthetic tasks show that a sparse 3D convolution can exploit this preserved locality, but only when the supervised signal is constructed to depend on co-located genes and the receptive field spans adjacent voxels. Third, on real omics tasks the 3D carrier matches or exceeds tuned tabular baselines and consistently exceeds matched 2D carriers; the margin is small on marker-type classification, where individual genes already carry much of the label (tissue, lineage and cancer-type classification), and larger on program-type tasks, where the target depends on coordinated, pathway-level multi-gene activity (drug-response regression, TCGA immunogenomic-context regression and mechanism-of-action classification). Fourth, because the assignment is injective, voxel attribution maps directly back to genes, enabling gene-level attribution and pathway-level functional interpretation without voxel-to-gene deconvolution. Overall, the added carrier dimension improves the fidelity of feature-neighborhood representation and translates this improvement into prediction gains that are largest when the signal is distributed across local gene programs rather than dominated by individual marker genes.",
+  "authors": [
+    "Jia, S.",
+    "Lysenko, A.",
+    "Boroevich, K. A.",
+    "Sharma, A.",
+    "Tsunoda, T."
+  ],
+  "doi": "10.64898/2026.06.22.733711",
+  "first_seen": "2026-06-26",
+  "id": "biorxiv:10.64898/2026.06.22.733711",
+  "metadata": {
+    "abstract": "DeepInsight-style methods make tabular feature relationships accessible to convolutional networks by placing each feature at a fixed position on an image carrier. An open design question is how the carrier geometry should be constructed when feature neighborhoods themselves carry part of the signal. We introduce vDeepInsight, an injective three-dimensional (3D) voxel carrier that preserves feature neighborhoods more faithfully than matched two-dimensional (2D) carriers while keeping a one-to-one mapping from each feature to a single voxel. Genes are embedded with t-SNE or UMAP, assigned one-to-one to a sparse voxel grid by linear-sum assignment, and processed by a submanifold sparse 3D convolutional network. We evaluate the carrier on gene expression through four linked analyses. First, representation-quality metrics show that 3D layouts reduce gene-neighborhood distortion relative to matched 2D layouts before any model is trained. Second, controlled synthetic tasks show that a sparse 3D convolution can exploit this preserved locality, but only when the supervised signal is constructed to depend on co-located genes and the receptive field spans adjacent voxels. Third, on real omics tasks the 3D carrier matches or exceeds tuned tabular baselines and consistently exceeds matched 2D carriers; the margin is small on marker-type classification, where individual genes already carry much of the label (tissue, lineage and cancer-type classification), and larger on program-type tasks, where the target depends on coordinated, pathway-level multi-gene activity (drug-response regression, TCGA immunogenomic-context regression and mechanism-of-action classification). Fourth, because the assignment is injective, voxel attribution maps directly back to genes, enabling gene-level attribution and pathway-level functional interpretation without voxel-to-gene deconvolution. Overall, the added carrier dimension improves the fidelity of feature-neighborhood representation and translates this improvement into prediction gains that are largest when the signal is distributed across local gene programs rather than dominated by individual marker genes.",
+    "author_corresponding": "Tatsuhiko Tsunoda",
+    "author_corresponding_institution": "Laboratory for Medical Science Mathematics, Department of Computational Biology and Medical Sciences, Graduate School of Frontier Sciences, The University of To",
+    "authors": "Jia, S.; Lysenko, A.; Boroevich, K. A.; Sharma, A.; Tsunoda, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-26",
+    "doi": "10.64898/2026.06.22.733711",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/26/2026.06.22.733711.source.xml",
+    "license": "cc_by_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "vDeepInsight: an injective three-dimensional voxel carrier for tabular-feature neighborhood learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Laboratory for Medical Science Mathematics, Department of Computational Biology and Medical Sciences, Graduate School of Frontier Sciences, The University of To",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "vDeepInsight maps genes to an injective 3D voxel grid with a sparse 3D CNN, improving neighborhood fidelity and gene-level attribution over 2D carriers on…",
+  "title": "vDeepInsight: an injective three-dimensional voxel carrier for tabular-feature neighborhood learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.22.733711"
+}

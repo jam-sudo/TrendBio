@@ -1,0 +1,32 @@
+{
+  "abstract": "Proteolysis-targeting chimeras (PROTACs) can selectively degrade disease-causing proteins, yet predicting which targets are amenable to degradation remains a critical bottleneck: existing computational methods require the complete PROTAC molecular structure, information unavailable before synthesis. We present DegradoMap, a graph neural network that predicts PROTAC-mediated degradability from protein structure and E3 ligase identity alone -- the minimal information available at the target selection stage. The model encodes biophysical priors through lysine-weighted graph pooling with per-protein normalization, models protein-E3 compatibility via cross-attention, and integrates cellular context from the Cancer Dependency Map. On the PROTAC-8K benchmark (3,101 samples, 155 targets, 10 E3 ligases), DegradoMap achieves 0.646+-0.124 AUROC on target-unseen evaluation (best seed: 0.7449) and 0.811 AUROC on CRBN->VHL E3-unseen transfer, outperforming GNN and machine learning baselines. The model additionally recommends optimal E3 ligases with 74% Hit@3 accuracy. Two findings carry broader implications: E(3)-equivariant architectures underperform the simpler invariant design for this scalar prediction task, and ESM-2 embeddings improve peak performance only with careful regularization -- naive integration fails. DegradoMap provides pre-synthesis computational guidance for degradability assessment; its well-calibrated confidence scores (ECE = 0.029, target-unseen) enable practitioners to prioritize high-confidence predictions for experimental follow-up. However, the high seed variance (std = 0.124) and limited E3 coverage require ensembling for reliable deployment.",
+  "authors": [
+    "Bryan Cheng",
+    "Austin Jin"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-01",
+  "id": "arxiv:2606.04021",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.04021v1</ns0:id>\n    <ns0:title>Structure-Aware Prediction of PROTAC-Mediated Protein Degradability via Graph Neural Networks</ns0:title>\n    <ns0:updated>2026-06-01T09:39:22Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.04021v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.04021v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Proteolysis-targeting chimeras (PROTACs) can selectively degrade disease-causing proteins, yet predicting which targets are amenable to degradation remains a critical bottleneck: existing computational methods require the complete PROTAC molecular structure, information unavailable before synthesis. We present DegradoMap, a graph neural network that predicts PROTAC-mediated degradability from protein structure and E3 ligase identity alone -- the minimal information available at the target selection stage. The model encodes biophysical priors through lysine-weighted graph pooling with per-protein normalization, models protein-E3 compatibility via cross-attention, and integrates cellular context from the Cancer Dependency Map. On the PROTAC-8K benchmark (3,101 samples, 155 targets, 10 E3 ligases), DegradoMap achieves 0.646+-0.124 AUROC on target-unseen evaluation (best seed: 0.7449) and 0.811 AUROC on CRBN-&gt;VHL E3-unseen transfer, outperforming GNN and machine learning baselines. The model additionally recommends optimal E3 ligases with 74% Hit@3 accuracy. Two findings carry broader implications: E(3)-equivariant architectures underperform the simpler invariant design for this scalar prediction task, and ESM-2 embeddings improve peak performance only with careful regularization -- naive integration fails. DegradoMap provides pre-synthesis computational guidance for degradability assessment; its well-calibrated confidence scores (ECE = 0.029, target-unseen) enable practitioners to prioritize high-confidence predictions for experimental follow-up. However, the high seed variance (std = 0.124) and limited E3 coverage require ensembling for reliable deployment.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-01T09:39:22Z</ns0:published>\n    <ns1:comment>10 pages, 5 figures, ACM-BCB 2026 Main Conference Full Paper</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Bryan Cheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Austin Jin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-06-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "DegradoMap, a GNN predicting PROTAC-mediated protein degradability from protein structure and E3 ligase identity alone, reports 0.646 AUROC target-unseen on…",
+  "title": "Structure-Aware Prediction of PROTAC-Mediated Protein Degradability via Graph Neural Networks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.04021v1"
+}

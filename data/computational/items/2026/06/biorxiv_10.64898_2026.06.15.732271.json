@@ -1,0 +1,49 @@
+{
+  "abstract": "Vaccine antigen discovery requires prioritizing protein candidates according to both immunogenic potential and recombinant expression feasibility. These properties are typically evaluated using separate computational tools, requiring researchers to integrate heterogeneous outputs through ad hoc workflows. Here, we present BIOINF-farma, a modular platform integrating epitope prediction and developability assessment for rational antigen selection within a unified environment. Candidates can be submitted as amino acid sequences or three-dimensional structures. When experimental structures are unavailable, BIOINF-farma automatically searches for models in AlphaFold DB or performs structure prediction using Boltz-2, ensuring a standardized structural representation for downstream analyses. Antigenicity is quantified by combining structure-based conformational epitope signals (MLCE/REBELOT-BEPPE) and sequence-based linear epitope propensity scores (BepiPred 3.0) into a protein-level Antigenicity Score, with a classification threshold optimized on a manually curated validation dataset. Developability is evaluated through two supervised Random Forest meta-learners that integrate three solubility predictors (DeepSoluE, SoluProt, Protein-Sol) and three thermal stability predictors (TemStaPro, ProLaTherm, BertThermo), whose outputs are combined into an Expression Efficiency Score (EES). By integrating complementary predictive signals, the meta-learning framework achieves greater accuracy and robustness than individual predictors while maintaining performance across a broad range of sequence identities. The Antigenicity Score effectively discriminates antigenic from non-antigenic proteins with a large effect size, whereas EES successfully distinguishes soluble from insoluble outcomes on an independent panel of recombinant proteins expressed in Escherichia coli. BIOINF-farma jointly assesses antigenicity and expression feasibility within a single framework. Its modular architecture facilitates the incorporation of future predictive methods, while its web-based interface makes the full pipeline accessible to users without programming expertise, supporting rapid candidate triage in vaccine research and emerging pathogen responses.\n\nAuthor SummaryVaccine development begins with a critical step: identifying, among the many proteins encoded in a pathogen genome, those most suitable as candidate antigens. A promising candidate must satisfy two requirements that are rarely evaluated together. It must be recognized by the immune system, so that vaccination elicits a protective response; and it must be amenable to recombinant production, since antigens that cannot be obtained in sufficient quantity and quality are of limited practical use. Current computational tools typically address only one of these aspects, and researchers must integrate their outputs manually, through procedures that are time-consuming and prone to inconsistency. We developed BIOINF-farma, an automated platform that brings these two assessments into a single analytical framework. Starting from a protein sequence or an experimental structure, the platform retrieves or predicts a three-dimensional model, evaluates the proteins antigenic potential by combining complementary epitope predictors, and estimates its expression feasibility by integrating multiple solubility and stability predictors through supervised machine learning. A web-based interface makes the full workflow available to experimental immunologists and vaccine developers without requiring computational expertise, supporting rational candidate prioritization in routine vaccine research and during emerging pathogen responses.",
+  "authors": [
+    "Bondi, H.",
+    "Crespi, M.",
+    "Orlando, M.",
+    "Lescai, F.",
+    "Serapian, S. A.",
+    "Colombo, G.",
+    "Fasano, M.",
+    "Pollegioni, L.",
+    "Molla, G."
+  ],
+  "doi": "10.64898/2026.06.15.732271",
+  "first_seen": "2026-06-18",
+  "id": "biorxiv:10.64898/2026.06.15.732271",
+  "metadata": {
+    "abstract": "Vaccine antigen discovery requires prioritizing protein candidates according to both immunogenic potential and recombinant expression feasibility. These properties are typically evaluated using separate computational tools, requiring researchers to integrate heterogeneous outputs through ad hoc workflows. Here, we present BIOINF-farma, a modular platform integrating epitope prediction and developability assessment for rational antigen selection within a unified environment. Candidates can be submitted as amino acid sequences or three-dimensional structures. When experimental structures are unavailable, BIOINF-farma automatically searches for models in AlphaFold DB or performs structure prediction using Boltz-2, ensuring a standardized structural representation for downstream analyses. Antigenicity is quantified by combining structure-based conformational epitope signals (MLCE/REBELOT-BEPPE) and sequence-based linear epitope propensity scores (BepiPred 3.0) into a protein-level Antigenicity Score, with a classification threshold optimized on a manually curated validation dataset. Developability is evaluated through two supervised Random Forest meta-learners that integrate three solubility predictors (DeepSoluE, SoluProt, Protein-Sol) and three thermal stability predictors (TemStaPro, ProLaTherm, BertThermo), whose outputs are combined into an Expression Efficiency Score (EES). By integrating complementary predictive signals, the meta-learning framework achieves greater accuracy and robustness than individual predictors while maintaining performance across a broad range of sequence identities. The Antigenicity Score effectively discriminates antigenic from non-antigenic proteins with a large effect size, whereas EES successfully distinguishes soluble from insoluble outcomes on an independent panel of recombinant proteins expressed in Escherichia coli. BIOINF-farma jointly assesses antigenicity and expression feasibility within a single framework. Its modular architecture facilitates the incorporation of future predictive methods, while its web-based interface makes the full pipeline accessible to users without programming expertise, supporting rapid candidate triage in vaccine research and emerging pathogen responses.\n\nAuthor SummaryVaccine development begins with a critical step: identifying, among the many proteins encoded in a pathogen genome, those most suitable as candidate antigens. A promising candidate must satisfy two requirements that are rarely evaluated together. It must be recognized by the immune system, so that vaccination elicits a protective response; and it must be amenable to recombinant production, since antigens that cannot be obtained in sufficient quantity and quality are of limited practical use. Current computational tools typically address only one of these aspects, and researchers must integrate their outputs manually, through procedures that are time-consuming and prone to inconsistency. We developed BIOINF-farma, an automated platform that brings these two assessments into a single analytical framework. Starting from a protein sequence or an experimental structure, the platform retrieves or predicts a three-dimensional model, evaluates the proteins antigenic potential by combining complementary epitope predictors, and estimates its expression feasibility by integrating multiple solubility and stability predictors through supervised machine learning. A web-based interface makes the full workflow available to experimental immunologists and vaccine developers without requiring computational expertise, supporting rational candidate prioritization in routine vaccine research and during emerging pathogen responses.",
+    "author_corresponding": "Gianluca Molla",
+    "author_corresponding_institution": "University of Insubria",
+    "authors": "Bondi, H.; Crespi, M.; Orlando, M.; Lescai, F.; Serapian, S. A.; Colombo, G.; Fasano, M.; Pollegioni, L.; Molla, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-18",
+    "doi": "10.64898/2026.06.15.732271",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/18/2026.06.15.732271.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Bioinf-Farma: supervised integration of epitope prediction and recombinant protein developability for automated vaccine candidate prioritization",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Insubria",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Web platform combining epitope and solubility/stability predictors via meta-learners to prioritize vaccine antigens.",
+  "title": "Bioinf-Farma: supervised integration of epitope prediction and recombinant protein developability for automated vaccine candidate prioritization",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.15.732271"
+}

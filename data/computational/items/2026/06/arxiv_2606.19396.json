@@ -1,0 +1,35 @@
+{
+  "abstract": "Motivation: Biomedical question answering often requires evidence beyond topically retrieved literature, including gene alias resolution, database identifier normalization, and atlas-derived biological measurements. However, existing retrieval-augmented generation (RAG) systems typically follow a fixed workflow and lack an explicit mechanism for deciding when retrieved text is sufficient, when curated biomedical knowledge is required, or when executable evidence assembly over structured measurements should be invoked. This motivates a substrate-aware large language model (LLM) harness that selectively assembles sufficient evidence across literature, knowledge bases, and biological atlases.\n  Results: We introduce BioHarness, an LLM harness for staged biomedical evidence assembly across literature retrieval, curated biomedical knowledge resources, and atlas-derived structured measurements. BioHarness first attempts to answer from reranked literature evidence and escalates through grounded cascade control to REPL-style evidence assembly only when the current evidence is uncertain, weakly grounded, or substrate-mismatched. Across 19,302 biomedical QA items spanning seven answer formats, BioHarness improves the pooled score from 65.9 to 71.0 over the strongest non-oracle baseline. Ablations, case studies, and backbone-scaling analyses show that these gains arise from repairing evidence-substrate mismatches through reranking, entity grounding, and structured measurement access, rather than from indiscriminately invoking more reasoning steps, retrieving additional literature, or relying on a particular answer-model scale.",
+  "authors": [
+    "Meng Xiao",
+    "Chuan Qin",
+    "Jinmiao Chen",
+    "Yihang Cheng",
+    "Yuanchun Zhou",
+    "Hengshu Zhu"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-17",
+  "id": "arxiv:2606.19396",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.19396v1</ns0:id>\n    <ns0:title>BioHarness: Substrate-Aware Evidence Assembly for Biomedical Question Answering across Literature, Knowledge Bases, and Biological Atlases</ns0:title>\n    <ns0:updated>2026-06-17T06:25:12Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.19396v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.19396v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Motivation: Biomedical question answering often requires evidence beyond topically retrieved literature, including gene alias resolution, database identifier normalization, and atlas-derived biological measurements. However, existing retrieval-augmented generation (RAG) systems typically follow a fixed workflow and lack an explicit mechanism for deciding when retrieved text is sufficient, when curated biomedical knowledge is required, or when executable evidence assembly over structured measurements should be invoked. This motivates a substrate-aware large language model (LLM) harness that selectively assembles sufficient evidence across literature, knowledge bases, and biological atlases.\n  Results: We introduce BioHarness, an LLM harness for staged biomedical evidence assembly across literature retrieval, curated biomedical knowledge resources, and atlas-derived structured measurements. BioHarness first attempts to answer from reranked literature evidence and escalates through grounded cascade control to REPL-style evidence assembly only when the current evidence is uncertain, weakly grounded, or substrate-mismatched. Across 19,302 biomedical QA items spanning seven answer formats, BioHarness improves the pooled score from 65.9 to 71.0 over the strongest non-oracle baseline. Ablations, case studies, and backbone-scaling analyses show that these gains arise from repairing evidence-substrate mismatches through reranking, entity grounding, and structured measurement access, rather than from indiscriminately invoking more reasoning steps, retrieving additional literature, or relying on a particular answer-model scale.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-17T06:25:12Z</ns0:published>\n    <ns1:comment>14 Pages, 11 Figures, Keywords: biomedical question answering; retrieval-augmented generation; large language models; evidence assembly; biomedical knowledge bases; biological atlases</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Meng Xiao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chuan Qin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jinmiao Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yihang Cheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuanchun Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hengshu Zhu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-17",
+  "published_doi": "10.1093/bioinformatics/btag795",
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "BioHarness is an LLM harness that stages biomedical evidence assembly across literature, knowledge bases, and atlases, escalating to REPL-style structured…",
+  "title": "BioHarness: Substrate-Aware Evidence Assembly for Biomedical Question Answering across Literature, Knowledge Bases, and Biological Atlases",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.19396v1"
+}

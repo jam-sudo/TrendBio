@@ -1,0 +1,33 @@
+{
+  "abstract": "Genomic foundation models increasingly adopt large language model architectures, yet almost universally rely on fixed tokenization schemes such as $k$-mers, BPE, or single nucleotides, which impose arbitrary sequence boundaries that may obscure biologically relevant structure. We present LDARNet, a 110M-parameter hierarchical genomic foundation model that adapts H-Net-style dynamic chunking from autoregressive generation to masked language modeling, combining BiMamba-2 state-space layers with local attention, bidirectional routing, and a ratio-based regularizer to induce adaptive token boundaries without supervision. Fine-tuned on 27 tasks from the Nucleotide Transformer and Genomic Benchmarks suites, LDARNet achieves 15/18 wins among compact models ($<$300M parameters) and the best overall result on 9 of the 10 histone modification tasks, outperforming models up to 20$\\times$ larger. A FLOPs-matched controlled experiment isolates learned routing as the source of these gains: learned boundaries beat fixed-grid boundaries by up to 14 percentage points on histone tasks at identical compute. Nucleotide-resolution analysis further shows that the learned boundaries align with canonical promoter motifs and splice junctions without supervision, providing a biological interpretation for adaptive tokenization in genomic foundation models.",
+  "authors": [
+    "Daria Ledneva",
+    "Denis Kuznetsov"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-03",
+  "id": "arxiv:2606.04552",
+  "metadata": {
+    "arxiv_primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.04552v2</ns0:id>\n    <ns0:title>LDARNet: DNA Adaptive Representation Network with Learnable Tokenization for Genomic Modeling</ns0:title>\n    <ns0:updated>2026-08-04T19:23:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.04552v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.04552v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Genomic foundation models increasingly adopt large language model architectures, yet almost universally rely on fixed tokenization schemes such as $k$-mers, BPE, or single nucleotides, which impose arbitrary sequence boundaries that may obscure biologically relevant structure. We present LDARNet, a 110M-parameter hierarchical genomic foundation model that adapts H-Net-style dynamic chunking from autoregressive generation to masked language modeling, combining BiMamba-2 state-space layers with local attention, bidirectional routing, and a ratio-based regularizer to induce adaptive token boundaries without supervision. Fine-tuned on 27 tasks from the Nucleotide Transformer and Genomic Benchmarks suites, LDARNet achieves 15/18 wins among compact models ($&lt;$300M parameters) and the best overall result on 9 of the 10 histone modification tasks, outperforming models up to 20$\\times$ larger. A FLOPs-matched controlled experiment isolates learned routing as the source of these gains: learned boundaries beat fixed-grid boundaries by up to 14 percentage points on histone tasks at identical compute. Nucleotide-resolution analysis further shows that the learned boundaries align with canonical promoter motifs and splice junctions without supervision, providing a biological interpretation for adaptive tokenization in genomic foundation models.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-03T07:38:17Z</ns0:published>\n    <ns1:comment>Fix parameter count typo; update results</ns1:comment>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name>Daria Ledneva</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Denis Kuznetsov</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "epigenomics"
+  ],
+  "source": "arxiv",
+  "summary": "LDARNet is a 110M-parameter hierarchical genomic foundation model with learnable dynamic tokenization for masked LM; it beats larger compact models on histone…",
+  "title": "LDARNet: DNA Adaptive Representation Network with Learnable Tokenization for Genomic Modeling",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.04552v2"
+}

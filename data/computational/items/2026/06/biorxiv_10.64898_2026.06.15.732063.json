@@ -1,0 +1,43 @@
+{
+  "abstract": "Next-token prediction has produced predictable scaling in language, but the recipe presumes a sequence of tokens with a meaningful order. Single-cell RNA-seq counts have no natural gene ordering, so applying the recipe directly to raw expression fails under an ill-suited left-to-right bias. We instead ask whether a learned latent can supply the structure the recipe needs. We introduce ExpressionVAE (eVAE), a discrete-latent perturbation model that compresses each cell into a short sequence of discrete codes through a finite-scalar-quantization (FSQ) bottleneck and trains a perturbation-conditioned discrete prior over those codes. On Replogle and Parse 1M, eVAE sets a new state of the art on every distributional metric and leads on most cell-eval perturbation metrics, with Frechet distance and MMD2 roughly 3 to 20x lower than the strongest continuous-latent baseline. Swapping the prior between autoregressive and masked discrete diffusion leaves performance near-identical, isolating the gain to the discrete latent itself rather than the prior family. A decoder-head ablation then exposes a single design axis, the richness of the predictive distribution at inference, that splits the standard metrics into two groups, variance-sensitive and mean-sensitive, which move in opposite directions along the axis. Finally, on a held-out CRISPRi reversion benchmark of 1,732 perturbations under inflammatory cytokine stress, the frozen eVAE encoder outperforms UMAP and differential expression and matches scGPT on perturbation ranking at a fraction of the data.1 We release our code.2",
+  "authors": [
+    "Bhattacharya, S.",
+    "Gensbigler, C.",
+    "Karim, S.",
+    "Lees, J."
+  ],
+  "doi": "10.64898/2026.06.15.732063",
+  "first_seen": "2026-06-18",
+  "id": "biorxiv:10.64898/2026.06.15.732063",
+  "metadata": {
+    "abstract": "Next-token prediction has produced predictable scaling in language, but the recipe presumes a sequence of tokens with a meaningful order. Single-cell RNA-seq counts have no natural gene ordering, so applying the recipe directly to raw expression fails under an ill-suited left-to-right bias. We instead ask whether a learned latent can supply the structure the recipe needs. We introduce ExpressionVAE (eVAE), a discrete-latent perturbation model that compresses each cell into a short sequence of discrete codes through a finite-scalar-quantization (FSQ) bottleneck and trains a perturbation-conditioned discrete prior over those codes. On Replogle and Parse 1M, eVAE sets a new state of the art on every distributional metric and leads on most cell-eval perturbation metrics, with Frechet distance and MMD2 roughly 3 to 20x lower than the strongest continuous-latent baseline. Swapping the prior between autoregressive and masked discrete diffusion leaves performance near-identical, isolating the gain to the discrete latent itself rather than the prior family. A decoder-head ablation then exposes a single design axis, the richness of the predictive distribution at inference, that splits the standard metrics into two groups, variance-sensitive and mean-sensitive, which move in opposite directions along the axis. Finally, on a held-out CRISPRi reversion benchmark of 1,732 perturbations under inflammatory cytokine stress, the frozen eVAE encoder outperforms UMAP and differential expression and matches scGPT on perturbation ranking at a fraction of the data.1 We release our code.2",
+    "author_corresponding": "Sanjukta Bhattacharya",
+    "author_corresponding_institution": "University of Bristol",
+    "authors": "Bhattacharya, S.; Gensbigler, C.; Karim, S.; Lees, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-18",
+    "doi": "10.64898/2026.06.15.732063",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/18/2026.06.15.732063.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Elucidating the Design Space of Generative Models for Single-Cell Perturbation Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Bristol",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-06-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces eVAE, a discrete-latent perturbation model using FSQ-quantized cell codes and a perturbation-conditioned discrete prior; beats continuous-latent…",
+  "title": "Elucidating the Design Space of Generative Models for Single-Cell Perturbation Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.15.732063"
+}

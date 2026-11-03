@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundSingle-cell multiomic profiling of RNA expression and chromatin accessibility is now a standard tool for resolving regulatory state in single cells, but existing analysis toolchains have lagged. Cell Ranger ARC, the proprietary multiomic pipeline, uses a custom broad peak caller rather than the MACS3 narrow peaks that the ATAC field has consolidated on, and its restrictive end-user licence forbids redistribution of analysis pipelines that include it. A fully open-source, permissively-licensed alternative anchored on community-standard methods--Chromap for ATAC alignment and MACS3 for narrow peak calling--has been impractical to assemble because the two codebases are written in different languages with incompatible runtimes, leaving practitioners to chain them together with ad-hoc scripts.\n\nResultsWe present Chromap Suite, the chromatin-accessibility side of an open-source multiomic stack built in support of the NIH Molecular Phenotypes of Null Alleles in Cells (MorPhiC) consortiums multiomic production pipeline. We extended Chromap with native BAM output and coordinate sorting, in-process narrow peak calling, optional Y-chromosome filtering, and native input from the compressed binary CBQ sequencing format alongside FASTQ, and hardened the result with a regression-test matrix that auto-validates the four upstream Chromap presets (bulk ATAC, scATAC, ChIP-seq, Hi-C). We reimplemented MACS3s narrow peak caller in portable C++ as libMACS3, byte-identical to MACS3 v3.0.3 and free of any Python interpreter dependency. Finally, we extracted Chromaps alignment and fragment-generation paths into a callable C++ library (libchromap) and embedded both libchromap and libMACS3 into STAR Suite, so that one STAR invocation runs alignment, peak calling, and cell calling for both RNA and ATAC modalities concurrently--to our knowledge the first true single-binary RNA + ATAC multiomic implementation. On the public 3K PBMC Multiome at 32 threads, the platform completes in 18 minutes 55 seconds wall time and 44.6 GB peak resident memory, against 40 minutes 4 seconds and 79.1 GB resident memory for Cell Ranger ARC v2.2.0--a 2.12 x wall speedup with 1.8x less peak memory--and produces 50,274 peaks that are byte-identical to MACS3 v3.0.3. To support deployment by both research scientists and the AI agents increasingly used in bioinformatics analysis, Chromap Suite ships a Model Context Protocol (MCP) server and a browser-based Launchpad driven by a shared set of composable YAML recipes that humans and agents drive the same way.\n\nConclusionsChromap Suite delivers a unified, freely redistributable multiomic pipeline that produces the MACS3 narrow peaks downstream ATAC analyses already rely on, with substantially lower wall time and memory than the proprietary alternative. The MIT- and BSD-3-licensed code carries no redistribution restrictions, the constituent libraries are independently embeddable in other open-source tools, and the MCP server plus Launchpad recipes make the platform straightforward to drive both by humans and by AI agents.",
+  "authors": [
+    "Hung, L.-H.",
+    "Yeung, K. Y."
+  ],
+  "doi": "10.64898/2026.06.02.729736",
+  "first_seen": "2026-06-06",
+  "id": "biorxiv:10.64898/2026.06.02.729736",
+  "metadata": {
+    "abstract": "BackgroundSingle-cell multiomic profiling of RNA expression and chromatin accessibility is now a standard tool for resolving regulatory state in single cells, but existing analysis toolchains have lagged. Cell Ranger ARC, the proprietary multiomic pipeline, uses a custom broad peak caller rather than the MACS3 narrow peaks that the ATAC field has consolidated on, and its restrictive end-user licence forbids redistribution of analysis pipelines that include it. A fully open-source, permissively-licensed alternative anchored on community-standard methods--Chromap for ATAC alignment and MACS3 for narrow peak calling--has been impractical to assemble because the two codebases are written in different languages with incompatible runtimes, leaving practitioners to chain them together with ad-hoc scripts.\n\nResultsWe present Chromap Suite, the chromatin-accessibility side of an open-source multiomic stack built in support of the NIH Molecular Phenotypes of Null Alleles in Cells (MorPhiC) consortiums multiomic production pipeline. We extended Chromap with native BAM output and coordinate sorting, in-process narrow peak calling, optional Y-chromosome filtering, and native input from the compressed binary CBQ sequencing format alongside FASTQ, and hardened the result with a regression-test matrix that auto-validates the four upstream Chromap presets (bulk ATAC, scATAC, ChIP-seq, Hi-C). We reimplemented MACS3s narrow peak caller in portable C++ as libMACS3, byte-identical to MACS3 v3.0.3 and free of any Python interpreter dependency. Finally, we extracted Chromaps alignment and fragment-generation paths into a callable C++ library (libchromap) and embedded both libchromap and libMACS3 into STAR Suite, so that one STAR invocation runs alignment, peak calling, and cell calling for both RNA and ATAC modalities concurrently--to our knowledge the first true single-binary RNA + ATAC multiomic implementation. On the public 3K PBMC Multiome at 32 threads, the platform completes in 18 minutes 55 seconds wall time and 44.6 GB peak resident memory, against 40 minutes 4 seconds and 79.1 GB resident memory for Cell Ranger ARC v2.2.0--a 2.12 x wall speedup with 1.8x less peak memory--and produces 50,274 peaks that are byte-identical to MACS3 v3.0.3. To support deployment by both research scientists and the AI agents increasingly used in bioinformatics analysis, Chromap Suite ships a Model Context Protocol (MCP) server and a browser-based Launchpad driven by a shared set of composable YAML recipes that humans and agents drive the same way.\n\nConclusionsChromap Suite delivers a unified, freely redistributable multiomic pipeline that produces the MACS3 narrow peaks downstream ATAC analyses already rely on, with substantially lower wall time and memory than the proprietary alternative. The MIT- and BSD-3-licensed code carries no redistribution restrictions, the constituent libraries are independently embeddable in other open-source tools, and the MCP server plus Launchpad recipes make the platform straightforward to drive both by humans and by AI agents.",
+    "author_corresponding": "Ling-Hong Hung",
+    "author_corresponding_institution": "University of Washington Tacoma",
+    "authors": "Hung, L.-H.; Yeung, K. Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-06",
+    "doi": "10.64898/2026.06.02.729736",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/06/2026.06.02.729736.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Chromap Suite: an open-source single-binary platform for agentic multiomic RNA + ATAC profiling",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Washington Tacoma",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "epigenomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Chromap Suite: open-source single-binary RNA+ATAC multiomic pipeline with native MACS3-identical narrow peak calling, 2.12x faster than Cell Ranger ARC, and…",
+  "title": "Chromap Suite: an open-source single-binary platform for agentic multiomic RNA + ATAC profiling",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.02.729736"
+}

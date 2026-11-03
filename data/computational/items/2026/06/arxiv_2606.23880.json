@@ -1,0 +1,32 @@
+{
+  "abstract": "From climate teleconnections to gene regulation, modern time-series datasets encompass tens or hundreds of interacting variables, making causal discovery increasingly challenging. Constraint-based methods offer statistical rigor but their nonlinear CI tests are infeasible at scale, while score-based alternatives avoid CI testing but require arbitrary thresholds to binarize continuous edge scores. We propose GRACE ($\\textbf{G}$ated $\\textbf{R}$efinement for $\\textbf{A}$ccurate $\\textbf{C}$ausal $\\textbf{E}$dge discovery), which refines constraint-based discovery using Hard Concrete gates with $L_0$ regularization: each candidate edge has an independent gate whose values concentrate near 0 or 1, yielding a clean bimodal separation that makes the binary decision robust, unlike the narrow, overlapping score distributions produced by $L_1$ and attention-based methods. A fast linear CI skeleton provides high-recall candidates; a single gated model then prunes false positives by learning which edges genuinely improve prediction, with automatic regularization adapted to problem dimensions and skeleton density. Systematic experiments on synthetic benchmarks, spanning diverse graph topologies (scale-free, Erdős-R'enyi, small-world) and dimensionalities up to $d=100$, show that GRACE substantially improves F1 over its base CI method while maintaining high precision, and outperforms attention-based and score-based alternatives. GRACE matches or exceeds expensive nonlinear CI tests at a fraction of the cost ($75\\times$ faster). On a real-world river flow dataset, where rainfall confounders, variable propagation lags, and distributional shifts violate standard assumptions, a temporal bootstrap variant of GRACE recovers 9 of 11 causal edges along the Elbe River with only 1 false positive ($F_1 = 0.86$, AUROC${} = 0.99$), reducing the skeleton's 106 false positives by 99%.",
+  "authors": [
+    "Mohammad Fesanghary",
+    "Abhinav Havaldar"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-22",
+  "id": "arxiv:2606.23880",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "stat.ME"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.23880v1</ns0:id>\n    <ns0:title>GRACE: Gated Refinement for Accurate Causal Edge Discovery in High-Dimensional Time Series</ns0:title>\n    <ns0:updated>2026-06-22T19:26:38Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.23880v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.23880v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>From climate teleconnections to gene regulation, modern time-series datasets encompass tens or hundreds of interacting variables, making causal discovery increasingly challenging. Constraint-based methods offer statistical rigor but their nonlinear CI tests are infeasible at scale, while score-based alternatives avoid CI testing but require arbitrary thresholds to binarize continuous edge scores. We propose GRACE ($\\textbf{G}$ated $\\textbf{R}$efinement for $\\textbf{A}$ccurate $\\textbf{C}$ausal $\\textbf{E}$dge discovery), which refines constraint-based discovery using Hard Concrete gates with $L_0$ regularization: each candidate edge has an independent gate whose values concentrate near 0 or 1, yielding a clean bimodal separation that makes the binary decision robust, unlike the narrow, overlapping score distributions produced by $L_1$ and attention-based methods. A fast linear CI skeleton provides high-recall candidates; a single gated model then prunes false positives by learning which edges genuinely improve prediction, with automatic regularization adapted to problem dimensions and skeleton density. Systematic experiments on synthetic benchmarks, spanning diverse graph topologies (scale-free, Erdős-R'enyi, small-world) and dimensionalities up to $d=100$, show that GRACE substantially improves F1 over its base CI method while maintaining high precision, and outperforms attention-based and score-based alternatives. GRACE matches or exceeds expensive nonlinear CI tests at a fraction of the cost ($75\\times$ faster). On a real-world river flow dataset, where rainfall confounders, variable propagation lags, and distributional shifts violate standard assumptions, a temporal bootstrap variant of GRACE recovers 9 of 11 causal edges along the Elbe River with only 1 false positive ($F_1 = 0.86$, AUROC${} = 0.99$), reducing the skeleton's 106 false positives by 99%.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ME\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-22T19:26:38Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Mohammad Fesanghary</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abhinav Havaldar</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-22",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "GRACE refines constraint-based causal discovery in high-dimensional time series using Hard Concrete L0 gates, improving F1 on synthetic graphs and a river-flow…",
+  "title": "GRACE: Gated Refinement for Accurate Causal Edge Discovery in High-Dimensional Time Series",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.23880v1"
+}

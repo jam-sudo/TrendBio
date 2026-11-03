@@ -1,0 +1,50 @@
+{
+  "abstract": "BackgroundLinking distal regulatory elements to their target genes is a central problem for interpreting chromatin accessibility and other non-coding genomic data. Proximity-based mapping is convenient but ignores three-dimensional enhancer-promoter architecture and can misassign long-range regulatory effects. Correlation-based approaches can also miss regulatory links because of limited statistical power and restrictive distance or significance thresholds. Single-cell and single-nucleus multi-omic datasets, such as 10x Multiome profiles that jointly measure chromatin accessibility and gene expression in the same cells or nuclei, now provide a way to evaluate gene-peak linkage strategies by testing how well linked accessibility features predict gene expression. Existing methods often focus on scoring individual enhancer-gene pairs. In this study, we proposed and constructed a fast annotation-based candidate gene-peak network and tested whether it improves downstream prediction of gene expression.\n\nMethodsWe first built a unified gene-peak regulatory network by integrating enhancer-based, promoter-based, and proximity-based linkage strategies. We then used single-cell multiome data from the Kidney Precision Medicine Project (KPMP) 10x Multiome cohort to evaluate whether the proposed links captured regulatory signals. We aggregated RNA expression and ATAC accessibility at the cell-type cluster level and trained predictive models to evaluate how well different linkage strategies could explain gene expression based on accessibility. Model performance was compared between annotation-based (including both enhancer- and promoter-based links) and proximity-based gene-peak links using testing R{superscript 2} and mean squared error (MSE) in a strict set of 1,704 genes and an adaptive set of 7,973 genes with more relaxed requirements.\n\nResultsIn the strict regime (1,704 genes with [&ge;]20 peaks assigned by the nearest-TSS rule and [&ge;]10 annotated enhancer-based peaks), the annotation-based model consistently achieved higher testing R{superscript 2} and lower testing MSE than the proximity-based model. In the larger adaptive regime (7,973 genes with [&ge;]5 proximity-based and [&ge;]2 enhancer-based peaks), we defined for each gene a balanced number of selected peaks based on its available closest and enhancer links; the annotation-based model again showed globally higher testing R{superscript 2} and lower testing MSE. These improvements were observed over a broad range of candidate-linked peak numbers.\n\nConclusionsUsing human kidney 10x Multiome data, we show that a fast annotation-based gene-peak linkage framework can improve prediction of gene expression from chromatin accessibility compared with conventional approaches. These results support the use of biologically informed enhancer and promoter annotations when constructing candidate gene regulatory networks. Our framework also showed concordance with the correlation-based Signac LinkPeaks method while providing broader coverage and greater computational efficiency. We have implemented these annotation-based linkage methods in the GPlinksR R package, providing a fast and scalable tool for constructing regulatory networks.",
+  "authors": [
+    "Wang, X.",
+    "Siegmund, K.",
+    "Goodrich, J. A.",
+    "Nelson, J.",
+    "Mi, H.",
+    "Zhang, L.",
+    "Gazal, S.",
+    "Queme, B.",
+    "Shibata, D.",
+    "Street, K."
+  ],
+  "doi": "10.64898/2026.06.12.731741",
+  "first_seen": "2026-06-17",
+  "id": "biorxiv:10.64898/2026.06.12.731741",
+  "metadata": {
+    "abstract": "BackgroundLinking distal regulatory elements to their target genes is a central problem for interpreting chromatin accessibility and other non-coding genomic data. Proximity-based mapping is convenient but ignores three-dimensional enhancer-promoter architecture and can misassign long-range regulatory effects. Correlation-based approaches can also miss regulatory links because of limited statistical power and restrictive distance or significance thresholds. Single-cell and single-nucleus multi-omic datasets, such as 10x Multiome profiles that jointly measure chromatin accessibility and gene expression in the same cells or nuclei, now provide a way to evaluate gene-peak linkage strategies by testing how well linked accessibility features predict gene expression. Existing methods often focus on scoring individual enhancer-gene pairs. In this study, we proposed and constructed a fast annotation-based candidate gene-peak network and tested whether it improves downstream prediction of gene expression.\n\nMethodsWe first built a unified gene-peak regulatory network by integrating enhancer-based, promoter-based, and proximity-based linkage strategies. We then used single-cell multiome data from the Kidney Precision Medicine Project (KPMP) 10x Multiome cohort to evaluate whether the proposed links captured regulatory signals. We aggregated RNA expression and ATAC accessibility at the cell-type cluster level and trained predictive models to evaluate how well different linkage strategies could explain gene expression based on accessibility. Model performance was compared between annotation-based (including both enhancer- and promoter-based links) and proximity-based gene-peak links using testing R{superscript 2} and mean squared error (MSE) in a strict set of 1,704 genes and an adaptive set of 7,973 genes with more relaxed requirements.\n\nResultsIn the strict regime (1,704 genes with [&ge;]20 peaks assigned by the nearest-TSS rule and [&ge;]10 annotated enhancer-based peaks), the annotation-based model consistently achieved higher testing R{superscript 2} and lower testing MSE than the proximity-based model. In the larger adaptive regime (7,973 genes with [&ge;]5 proximity-based and [&ge;]2 enhancer-based peaks), we defined for each gene a balanced number of selected peaks based on its available closest and enhancer links; the annotation-based model again showed globally higher testing R{superscript 2} and lower testing MSE. These improvements were observed over a broad range of candidate-linked peak numbers.\n\nConclusionsUsing human kidney 10x Multiome data, we show that a fast annotation-based gene-peak linkage framework can improve prediction of gene expression from chromatin accessibility compared with conventional approaches. These results support the use of biologically informed enhancer and promoter annotations when constructing candidate gene regulatory networks. Our framework also showed concordance with the correlation-based Signac LinkPeaks method while providing broader coverage and greater computational efficiency. We have implemented these annotation-based linkage methods in the GPlinksR R package, providing a fast and scalable tool for constructing regulatory networks.",
+    "author_corresponding": "Kelly Street",
+    "author_corresponding_institution": "University of Southern California",
+    "authors": "Wang, X.; Siegmund, K.; Goodrich, J. A.; Nelson, J.; Mi, H.; Zhang, L.; Gazal, S.; Queme, B.; Shibata, D.; Street, K.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-06-17",
+    "doi": "10.64898/2026.06.12.731741",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/17/2026.06.12.731741.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Annotation-Based Gene-Peak Links Improve Regulatory Network Prediction of Gene Expression in Human Kidney Multi-Omics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Southern California",
+  "preprint_id": null,
+  "primary_category": "epigenomics",
+  "published_at": "2026-06-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes a fast annotation-based gene-peak linkage framework combining enhancer, promoter, and proximity links; it improves expression prediction from…",
+  "title": "Annotation-Based Gene-Peak Links Improve Regulatory Network Prediction of Gene Expression in Human Kidney Multi-Omics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.12.731741"
+}

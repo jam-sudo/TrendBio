@@ -1,0 +1,34 @@
+{
+  "abstract": "Therapeutic peptides occupy a valuable design space between small molecules and biologics, but their development requires satisfying several competing constraints at once: solubility, hemolytic activity, and nonspecific surface fouling are governed by overlapping sequence features, so improving one property often degrades another. Computational design addresses this by pairing generative models with sequence-based property predictors, iteratively proposing and refining candidates. However, these components are typically wired together as monolithic scripts that are difficult to inspect, extend, or reuse, and they often refine sequences by natural-language reasoning rather than by tracking the evolving multi-property state of each candidate. We present Pepti-Agent, a closed-loop, peptide-specific framework that exposes generation, property prediction, and single-residue mutation as independently inspectable Model Context Protocol (MCP) tools. A large language model controller invokes these tools and consults live predictor output between calls, so refinement is guided by each sequence's current property profile rather than by language reasoning alone. Task-specific PeptideGPT models generate candidates, ProtBERT-based classifiers score solubility, hemolysis, and non-fouling, and two interchangeable mutation operators propose sequence edits. By recording a per-step trace of controller decisions, predictor outputs, and accepted mutations, Pepti-Agent offers a reproducible substrate for benchmarking multi-objective design strategies and for prioritizing candidates for experimental validation.",
+  "authors": [
+    "Houxu Chen",
+    "Achuth Chandrasekhar",
+    "Amir Barati Farimani"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-13",
+  "id": "arxiv:2606.15422",
+  "metadata": {
+    "arxiv_primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.15422v1</ns0:id>\n    <ns0:title>Pepti-Agent: An AI Agent for Peptide Design and Optimization</ns0:title>\n    <ns0:updated>2026-06-13T18:19:21Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.15422v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.15422v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Therapeutic peptides occupy a valuable design space between small molecules and biologics, but their development requires satisfying several competing constraints at once: solubility, hemolytic activity, and nonspecific surface fouling are governed by overlapping sequence features, so improving one property often degrades another. Computational design addresses this by pairing generative models with sequence-based property predictors, iteratively proposing and refining candidates. However, these components are typically wired together as monolithic scripts that are difficult to inspect, extend, or reuse, and they often refine sequences by natural-language reasoning rather than by tracking the evolving multi-property state of each candidate. We present Pepti-Agent, a closed-loop, peptide-specific framework that exposes generation, property prediction, and single-residue mutation as independently inspectable Model Context Protocol (MCP) tools. A large language model controller invokes these tools and consults live predictor output between calls, so refinement is guided by each sequence's current property profile rather than by language reasoning alone. Task-specific PeptideGPT models generate candidates, ProtBERT-based classifiers score solubility, hemolysis, and non-fouling, and two interchangeable mutation operators propose sequence edits. By recording a per-step trace of controller decisions, predictor outputs, and accepted mutations, Pepti-Agent offers a reproducible substrate for benchmarking multi-objective design strategies and for prioritizing candidates for experimental validation.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-13T18:19:21Z</ns0:published>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name>Houxu Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Achuth Chandrasekhar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Amir Barati Farimani</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-06-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Pepti-Agent is a closed-loop LLM agent framework exposing peptide generation, ProtBERT property prediction, and mutation as MCP tools for multi-objective…",
+  "title": "Pepti-Agent: An AI Agent for Peptide Design and Optimization",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.15422v1"
+}

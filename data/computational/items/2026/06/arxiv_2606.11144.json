@@ -1,0 +1,34 @@
+{
+  "abstract": "Resistance to first-line osimertinib in EGFR-mutant non-small-cell lung cancer (NSCLC) is the canonical example of predictable clonal evolution under therapeutic pressure, yet no public benchmark exists for training or evaluating computational models on the corresponding longitudinal patient trajectories. We introduce OncoTraj, a public benchmark of 813 EGFR-mutant NSCLC patients receiving first-line osimertinib, harmonized from three real-world clinical-genomic sources: MSK-CHORD (672 patients), AACR Project GENIE BPC NSCLC (34 patients), and the FLAURA molecular-resistance supplement (107 patients). OncoTraj defines three locked tasks: (A) binary classification of progression by a fixed 12-month landmark, (B) regression of time-to-first-progression in days, and (C) six-class classification of the dominant resistance mechanism. We release the harmonized dataset, patient-level train/validation/test splits with an audited no-leakage guarantee, an open-source evaluation harness, and six reference baselines spanning a majority-class predictor, logistic regression, random forest, XGBoost, an LSTM, and a multi-task transformer. With v1's single-timepoint snapshot features, no task clears chance on clean within-source evaluation: the uniformity of this ceiling across every model class localizes the limit to the input modality (single-snapshot tissue NGS rather than serial ctDNA), not the algorithm. The benchmark does recover a reproducible literature-consistent association: TP53 co-mutation raises the 12-month progression rate from 29% to 59% cohort-wide. OncoTraj establishes a reproducible, leakage-audited baseline and converts the modality limit into concrete design requirements for a serial-ctDNA-enriched v2.",
+  "authors": [
+    "Abhijoy Sarkar",
+    "Aarchi Singh Thakur"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-09",
+  "id": "arxiv:2606.11144",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.GN",
+      "q-bio.QM",
+      "stat.AP"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.11144v1</ns0:id>\n    <ns0:title>OncoTraj: a public benchmark for longitudinal resistance prediction in EGFR-mutant non-small-cell lung cancer on osimertinib</ns0:title>\n    <ns0:updated>2026-06-09T17:33:24Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.11144v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.11144v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Resistance to first-line osimertinib in EGFR-mutant non-small-cell lung cancer (NSCLC) is the canonical example of predictable clonal evolution under therapeutic pressure, yet no public benchmark exists for training or evaluating computational models on the corresponding longitudinal patient trajectories. We introduce OncoTraj, a public benchmark of 813 EGFR-mutant NSCLC patients receiving first-line osimertinib, harmonized from three real-world clinical-genomic sources: MSK-CHORD (672 patients), AACR Project GENIE BPC NSCLC (34 patients), and the FLAURA molecular-resistance supplement (107 patients). OncoTraj defines three locked tasks: (A) binary classification of progression by a fixed 12-month landmark, (B) regression of time-to-first-progression in days, and (C) six-class classification of the dominant resistance mechanism. We release the harmonized dataset, patient-level train/validation/test splits with an audited no-leakage guarantee, an open-source evaluation harness, and six reference baselines spanning a majority-class predictor, logistic regression, random forest, XGBoost, an LSTM, and a multi-task transformer. With v1's single-timepoint snapshot features, no task clears chance on clean within-source evaluation: the uniformity of this ceiling across every model class localizes the limit to the input modality (single-snapshot tissue NGS rather than serial ctDNA), not the algorithm. The benchmark does recover a reproducible literature-consistent association: TP53 co-mutation raises the 12-month progression rate from 29% to 59% cohort-wide. OncoTraj establishes a reproducible, leakage-audited baseline and converts the modality limit into concrete design requirements for a serial-ctDNA-enriched v2.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-09T17:33:24Z</ns0:published>\n    <ns1:comment>24 pages, 7 figures, 4 tables. Code, data, and trained model weights: https://github.com/span-ai-labs/oncotraj. Python package: pip install oncotraj. Dataset: https://huggingface.co/datasets/span-ai-labs/oncotraj-v1</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Abhijoy Sarkar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aarchi Singh Thakur</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "OncoTraj: public leakage-audited benchmark of 813 EGFR-mutant NSCLC osimertinib patients with three tasks and six baselines; single-snapshot features show no…",
+  "title": "OncoTraj: a public benchmark for longitudinal resistance prediction in EGFR-mutant non-small-cell lung cancer on osimertinib",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.11144v1"
+}

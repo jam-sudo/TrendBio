@@ -1,0 +1,46 @@
+{
+  "abstract": "Large-scale cell foundation models are increasingly limited not only by model architecture, but also by the data infrastructure required to repeatedly sample sparse transcriptomic profiles from out-of-core cohorts. AnnData/H5AD has become a standard exchange format for single-cell and spatial omics analysis, yet its HDF5-backed layout is not designed for high-frequency random mini-batch loading under multi-worker and distributed pretraining. We present Cellfm-datasets, a data infrastructure artifact that converts H5AD cohorts into a self-describing compressed sparse row (CSR) memmap layout and exposes the resulting corpus through Hugging Face Dataset and IterableDataset interfaces. The artifact stores a shared gene vocabulary, per-sample metadata, optional spatial coordinates, observation metadata, manifests, and checksums, and reconstructs sparse cell or group records at runtime without dense expansion. A unified sampling abstraction supports random-cell groups, manifest-defined biological regions, and coordinate-based spatial blocks, with deterministic sharding across distributed ranks and data-loader workers. Spatial demonstrations on P14 mouse brain transcriptomics sections illustrate region- and block-level sampling over real anatomical structures. In controlled benchmarks on a public heterogeneous ModelScope scRNA-seq subset, Cellfm-datasets reached 60,571 {+/-} 1,734 samples/s in single-core random loading, scaled to approximately 160,000 samples/s with eight workers, and maintained near-constant process-private memory while reading up to one million cells. By moving sparse single-cell and spatial corpora from model-specific loader code into reusable, validated, and framework-native dataset artifacts, this design may reduce the engineering burden of reproducible cell foundation model pretraining and make repeated training runs, model comparisons, and mixed-modality data reuse easier to standardize.\n\nCode availabilityhttps://github.com/PangJiangShuan/cellfm-datasets",
+  "authors": [
+    "Zhang, L.",
+    "Pang, J.",
+    "Yan, J.",
+    "Tang, W.",
+    "Deng, Y.",
+    "He, Y."
+  ],
+  "doi": "10.64898/2026.06.11.731508",
+  "first_seen": "2026-06-14",
+  "id": "biorxiv:10.64898/2026.06.11.731508",
+  "metadata": {
+    "abstract": "Large-scale cell foundation models are increasingly limited not only by model architecture, but also by the data infrastructure required to repeatedly sample sparse transcriptomic profiles from out-of-core cohorts. AnnData/H5AD has become a standard exchange format for single-cell and spatial omics analysis, yet its HDF5-backed layout is not designed for high-frequency random mini-batch loading under multi-worker and distributed pretraining. We present Cellfm-datasets, a data infrastructure artifact that converts H5AD cohorts into a self-describing compressed sparse row (CSR) memmap layout and exposes the resulting corpus through Hugging Face Dataset and IterableDataset interfaces. The artifact stores a shared gene vocabulary, per-sample metadata, optional spatial coordinates, observation metadata, manifests, and checksums, and reconstructs sparse cell or group records at runtime without dense expansion. A unified sampling abstraction supports random-cell groups, manifest-defined biological regions, and coordinate-based spatial blocks, with deterministic sharding across distributed ranks and data-loader workers. Spatial demonstrations on P14 mouse brain transcriptomics sections illustrate region- and block-level sampling over real anatomical structures. In controlled benchmarks on a public heterogeneous ModelScope scRNA-seq subset, Cellfm-datasets reached 60,571 {+/-} 1,734 samples/s in single-core random loading, scaled to approximately 160,000 samples/s with eight workers, and maintained near-constant process-private memory while reading up to one million cells. By moving sparse single-cell and spatial corpora from model-specific loader code into reusable, validated, and framework-native dataset artifacts, this design may reduce the engineering burden of reproducible cell foundation model pretraining and make repeated training runs, model comparisons, and mixed-modality data reuse easier to standardize.\n\nCode availabilityhttps://github.com/PangJiangShuan/cellfm-datasets",
+    "author_corresponding": "Youzhe He",
+    "author_corresponding_institution": "BGI Research, Hang zhou",
+    "authors": "Zhang, L.; Pang, J.; Yan, J.; Tang, W.; Deng, Y.; He, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-14",
+    "doi": "10.64898/2026.06.11.731508",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/14/2026.06.11.731508.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Cellfm-datasets: A Unified Data Infrastructure for Single-Cell and Spatial Transcriptomics Foundation Model Pretraining",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "BGI Research, Hang zhou",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Cellfm-datasets converts H5AD single-cell and spatial transcriptomics cohorts into a CSR memmap layout with Hugging Face dataset interfaces for fast sparse…",
+  "title": "Cellfm-datasets: A Unified Data Infrastructure for Single-Cell and Spatial Transcriptomics Foundation Model Pretraining",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.11.731508"
+}

@@ -1,0 +1,46 @@
+{
+  "abstract": "PurposeTo develop and evaluate a multi-model consensus deep learning approach for automated gold fiducial marker (FM) segmentation in T1-weighted prostate MRI.\n\nMaterials and MethodsIn this retrospective study, T1-weighted MRI and CT-derived reference standard segmentations were collected from 127 prostate cancer patients (all male; mean age, 70 years {+/-} 7 [standard deviation]; age range, 50-88 years; collected between October 2020 and January 2026) who each had three implanted gold FMs. A 3D U-Net was trained on 93 subjects using four random seeds to produce an ensemble. At inference, marker-class probability maps were averaged across models and the top three connected components selected. Performance was evaluated on 34 temporally held-out subjects (9 tuning, 25 test) using marker-level sensitivity and precision with exact (Clopper-Pearson) 95% confidence intervals (CIs). A model count ablation study was performed. The pipeline was deployed for on-scanner processing on Siemens MRI systems via the OpenRecon framework and as a browser-based application using WebAssembly, executing entirely client-side.\n\nResultsThe four-model consensus achieved 96% (70 of 73) sensitivity and 95% (70 of 74) precision on 25 test subjects, with 29 of 34 (85%) subjects achieving perfect marker detection. Single models had a mean sensitivity of 84% (SD, 9%), improving to 96% with four-model consensus (SD, <1%).\n\nConclusionMulti-model consensus deep learning substantially improved FM segmentation reliability over individual models, achieving high sensitivity and precision using only routinely acquired T1-weighted MRI.",
+  "authors": [
+    "Stewart, A. W.",
+    "Goodwin, J.",
+    "Richardson, M.",
+    "Robinson, S. D.",
+    "O'Brien, K.",
+    "Jin, J.",
+    "Barth, M."
+  ],
+  "doi": "10.64898/2026.06.18.733061",
+  "first_seen": "2026-06-23",
+  "id": "biorxiv:10.64898/2026.06.18.733061",
+  "metadata": {
+    "abstract": "PurposeTo develop and evaluate a multi-model consensus deep learning approach for automated gold fiducial marker (FM) segmentation in T1-weighted prostate MRI.\n\nMaterials and MethodsIn this retrospective study, T1-weighted MRI and CT-derived reference standard segmentations were collected from 127 prostate cancer patients (all male; mean age, 70 years {+/-} 7 [standard deviation]; age range, 50-88 years; collected between October 2020 and January 2026) who each had three implanted gold FMs. A 3D U-Net was trained on 93 subjects using four random seeds to produce an ensemble. At inference, marker-class probability maps were averaged across models and the top three connected components selected. Performance was evaluated on 34 temporally held-out subjects (9 tuning, 25 test) using marker-level sensitivity and precision with exact (Clopper-Pearson) 95% confidence intervals (CIs). A model count ablation study was performed. The pipeline was deployed for on-scanner processing on Siemens MRI systems via the OpenRecon framework and as a browser-based application using WebAssembly, executing entirely client-side.\n\nResultsThe four-model consensus achieved 96% (70 of 73) sensitivity and 95% (70 of 74) precision on 25 test subjects, with 29 of 34 (85%) subjects achieving perfect marker detection. Single models had a mean sensitivity of 84% (SD, 9%), improving to 96% with four-model consensus (SD, <1%).\n\nConclusionMulti-model consensus deep learning substantially improved FM segmentation reliability over individual models, achieving high sensitivity and precision using only routinely acquired T1-weighted MRI.",
+    "author_corresponding": "Ashley Wilton Stewart",
+    "author_corresponding_institution": "The University of Queensland",
+    "authors": "Stewart, A. W.; Goodwin, J.; Richardson, M.; Robinson, S. D.; O'Brien, K.; Jin, J.; Barth, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-23",
+    "doi": "10.64898/2026.06.18.733061",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/23/2026.06.18.733061.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Automated Segmentation of Prostatic Gold Fiducial Markers for MR-Only Radiotherapy Planning Using Multi-Modal Consensus Deep Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Queensland",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-23",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Multi-model consensus 3D U-Net ensemble segments gold fiducial markers in T1-weighted prostate MRI, reaching 96% sensitivity and 95% precision on held-out test…",
+  "title": "Automated Segmentation of Prostatic Gold Fiducial Markers for MR-Only Radiotherapy Planning Using Multi-Modal Consensus Deep Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.18.733061"
+}

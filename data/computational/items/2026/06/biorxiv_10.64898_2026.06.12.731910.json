@@ -1,0 +1,42 @@
+{
+  "abstract": "Next-generation sequencing now produces whole-genome data in hours, but downstream variant calling remains a multi-hour to multi-day bottleneck that excludes genomic analysis from time-critical clinical settings. GPU acceleration offers a natural path forward -- variant calling is inherently parallelizable across genomic positions -- yet open-source infrastructure for porting existing algorithms to GPU hardware remains limited, leaving many widely-used tools without accelerated implementations. FreeBayes, a haplotype-based variant caller central to the 1000 Genomes Project and to multi-sample tumor evolution analyses, exemplifies this gap: it is natively single-threaded despite its algorithmic suitability for parallelization. We present cuBayes, a CUDA implementation of FreeBayes germline SNV calling that completes HG002 and HG004 2x250bp Illumina 60x whole-genome analysis in one minute (as opposed to hours if not days with manual region-based CPU parallelization) on a single NVIDIA RTX 6000 Ada GPU, while producing variant calls with 99.97% concordance to the CPU reference. cuBayes is structured around an atom/molecule architecture in which reusable functional units (BAM decompression, position-wise pileup, batch coordination) are cleanly separated from algorithm-specific logic, providing a foundation intended to support acceleration of additional sequence analysis algorithms without redundant low-level engineering.",
+  "authors": [
+    "Pitman, A.",
+    "Yang, C.",
+    "Qiao, Y."
+  ],
+  "doi": "10.64898/2026.06.12.731910",
+  "first_seen": "2026-06-16",
+  "id": "biorxiv:10.64898/2026.06.12.731910",
+  "metadata": {
+    "abstract": "Next-generation sequencing now produces whole-genome data in hours, but downstream variant calling remains a multi-hour to multi-day bottleneck that excludes genomic analysis from time-critical clinical settings. GPU acceleration offers a natural path forward -- variant calling is inherently parallelizable across genomic positions -- yet open-source infrastructure for porting existing algorithms to GPU hardware remains limited, leaving many widely-used tools without accelerated implementations. FreeBayes, a haplotype-based variant caller central to the 1000 Genomes Project and to multi-sample tumor evolution analyses, exemplifies this gap: it is natively single-threaded despite its algorithmic suitability for parallelization. We present cuBayes, a CUDA implementation of FreeBayes germline SNV calling that completes HG002 and HG004 2x250bp Illumina 60x whole-genome analysis in one minute (as opposed to hours if not days with manual region-based CPU parallelization) on a single NVIDIA RTX 6000 Ada GPU, while producing variant calls with 99.97% concordance to the CPU reference. cuBayes is structured around an atom/molecule architecture in which reusable functional units (BAM decompression, position-wise pileup, batch coordination) are cleanly separated from algorithm-specific logic, providing a foundation intended to support acceleration of additional sequence analysis algorithms without redundant low-level engineering.",
+    "author_corresponding": "Yi Qiao",
+    "author_corresponding_institution": "Department of Biomedical Informatics, University of Utah",
+    "authors": "Pitman, A.; Yang, C.; Qiao, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-16",
+    "doi": "10.64898/2026.06.12.731910",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/16/2026.06.12.731910.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "cuBayes: GPU accelerated FreeBayes that achieves 1-minute whole-genome SNV calling while maintaining algorithmic semantics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Biomedical Informatics, University of Utah",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "cuBayes is a CUDA port of FreeBayes germline SNV calling that runs HG002/HG004 60x whole-genome analysis in about one minute on one GPU, with 99.97%…",
+  "title": "cuBayes: GPU accelerated FreeBayes that achieves 1-minute whole-genome SNV calling while maintaining algorithmic semantics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.12.731910"
+}

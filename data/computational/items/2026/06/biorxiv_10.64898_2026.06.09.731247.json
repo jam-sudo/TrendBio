@@ -1,0 +1,44 @@
+{
+  "abstract": "Biomedical knowledge graphs (BKGs) that include drugs, genes, and diseases support drug repurposing by connecting drugs to diseases through gene-mediated multi-hop paths, thereby enabling mechanism-of-action reasoning. However, deeper traversal does not necessarily improve mechanistic reasoning: long paths grow combinatorially and frequently pass through hub genes, producing irrelevant gene regulatory signals, whereas overly constrained or sparse paths may miss broader biological context. We propose CAREPath, a KG-LLM framework inspired by depth-first search (DFS)-like and breadth-first search (BFS)-like reasoning to balance mechanistic specificity, scalability, and context recovery. The DFS-like module constrains traversal to short disease-gene-drug paths, converts each path into a structured prompt, and encodes it with a biomedical language model to generate semantic path embeddings. Complementarily, the BFS-like module constructs entity-level mechanism-context embeddings from one-hop gene neighborhoods and enriches them through similarity-guided augmentation using pharmacologically related drugs and gene-signature-similar diseases. Across five biomedical KGs, CAREPath achieves the best overall AUPRC among 18 baselines, improving performance by up to 3.8%. Additional analyses show that semantic short-path encoding contributes most to performance, while mechanism-context augmentation improves robustness under sparse evidence and strengthens Gene Ontology functional agreement. Case studies and recently FDA-approved indications further demonstrate its practical relevance, positioning CAREPath as an interpretable framework for scalable and mechanism-aware drug repurposing. Source code is available at https://github.com/hamppy-song/CAREPath.",
+  "authors": [
+    "song, h.",
+    "bang, d.",
+    "koo, b.",
+    "Kim, S.",
+    "lee, s."
+  ],
+  "doi": "10.64898/2026.06.09.731247",
+  "first_seen": "2026-06-12",
+  "id": "biorxiv:10.64898/2026.06.09.731247",
+  "metadata": {
+    "abstract": "Biomedical knowledge graphs (BKGs) that include drugs, genes, and diseases support drug repurposing by connecting drugs to diseases through gene-mediated multi-hop paths, thereby enabling mechanism-of-action reasoning. However, deeper traversal does not necessarily improve mechanistic reasoning: long paths grow combinatorially and frequently pass through hub genes, producing irrelevant gene regulatory signals, whereas overly constrained or sparse paths may miss broader biological context. We propose CAREPath, a KG-LLM framework inspired by depth-first search (DFS)-like and breadth-first search (BFS)-like reasoning to balance mechanistic specificity, scalability, and context recovery. The DFS-like module constrains traversal to short disease-gene-drug paths, converts each path into a structured prompt, and encodes it with a biomedical language model to generate semantic path embeddings. Complementarily, the BFS-like module constructs entity-level mechanism-context embeddings from one-hop gene neighborhoods and enriches them through similarity-guided augmentation using pharmacologically related drugs and gene-signature-similar diseases. Across five biomedical KGs, CAREPath achieves the best overall AUPRC among 18 baselines, improving performance by up to 3.8%. Additional analyses show that semantic short-path encoding contributes most to performance, while mechanism-context augmentation improves robustness under sparse evidence and strengthens Gene Ontology functional agreement. Case studies and recently FDA-approved indications further demonstrate its practical relevance, positioning CAREPath as an interpretable framework for scalable and mechanism-aware drug repurposing. Source code is available at https://github.com/hamppy-song/CAREPath.",
+    "author_corresponding": "sangseon lee",
+    "author_corresponding_institution": "Inha university",
+    "authors": "song, h.; bang, d.; koo, b.; Kim, S.; lee, s.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-12",
+    "doi": "10.64898/2026.06.09.731247",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/12/2026.06.09.731247.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CAREPath: Semantic Context-Aware Reasoning Paths with Mechanism-Augmented Embeddings for Drug Repurposing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Inha university",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-12",
+  "published_doi": "10.1093/bib/bbag472",
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "CAREPath: KG-LLM drug repurposing via short path embeddings and mechanism-context augmentation; best AUPRC across five KGs.",
+  "title": "CAREPath: Semantic Context-Aware Reasoning Paths with Mechanism-Augmented Embeddings for Drug Repurposing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.09.731247"
+}

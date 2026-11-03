@@ -1,0 +1,34 @@
+{
+  "abstract": "Computational design of nanobodies that bind user-specified protein epitopes could transform therapeutic development, but current methods either rely on stochastic sampling requiring days of GPU computation or inverse folding approaches unable to target epitopes directly. Here we present EasyNano, a practical pipeline for rapid, epitope-targeted nanobody complementarity-determining region (CDR) design that operates in approximately 10-20 minutes on a high-end personal workstation. EasyNano optimizes CDR residue logits via gradient descent through the ESMFold2 pairwise distance distogram, using the lightweight ESMFold2-Fast model (721M) as a differentiable oracle guided by a composite loss including a dedicated epitope proximity term. A full ESMFold2 (1.3B) CA-coordinate structure prior prevents framework pose drift. The wild-type logit initialization bias emerges as a critical practical parameter controlling CDR mutability. Across six target-framework pairs spanning self-recovery and de novo design scenarios, EasyNano improves ipTM by up to +0.559 -- from 0.143 to 0.702 (Ty1/RBD) -- and achieves a 4.6-fold improvement (ipTM 0.117 to 0.538) on a manually docked AQP4-targeting framework, while preserving ipTM on already-strong binders. Random CDR baselines (n=30 per target) confirm statistical significance (5.7 sigma above random mean for Ty1). Multi-seed analysis reveals diverse local minima, underscoring the importance of replicate runs. Kabsch cross-validation against crystal structures confirms that designed CDRs preserve the framework pose basin. EasyNano demonstrates that ESMFold2-based differentiable optimization provides a fast, practical, and epitope-specific approach to nanobody CDR design.",
+  "authors": [
+    "Yue Hu",
+    "Wanyu Cheng",
+    "Junqing Wang",
+    "Yingchao Liu"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-11",
+  "id": "arxiv:2606.12772",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.12772v1</ns0:id>\n    <ns0:title>EasyNano: rapid epitope-targeted nanobody CDR design via differentiable distogram optimization with ESMFold2</ns0:title>\n    <ns0:updated>2026-06-11T00:26:45Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.12772v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.12772v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Computational design of nanobodies that bind user-specified protein epitopes could transform therapeutic development, but current methods either rely on stochastic sampling requiring days of GPU computation or inverse folding approaches unable to target epitopes directly. Here we present EasyNano, a practical pipeline for rapid, epitope-targeted nanobody complementarity-determining region (CDR) design that operates in approximately 10-20 minutes on a high-end personal workstation. EasyNano optimizes CDR residue logits via gradient descent through the ESMFold2 pairwise distance distogram, using the lightweight ESMFold2-Fast model (721M) as a differentiable oracle guided by a composite loss including a dedicated epitope proximity term. A full ESMFold2 (1.3B) CA-coordinate structure prior prevents framework pose drift. The wild-type logit initialization bias emerges as a critical practical parameter controlling CDR mutability. Across six target-framework pairs spanning self-recovery and de novo design scenarios, EasyNano improves ipTM by up to +0.559 -- from 0.143 to 0.702 (Ty1/RBD) -- and achieves a 4.6-fold improvement (ipTM 0.117 to 0.538) on a manually docked AQP4-targeting framework, while preserving ipTM on already-strong binders. Random CDR baselines (n=30 per target) confirm statistical significance (5.7 sigma above random mean for Ty1). Multi-seed analysis reveals diverse local minima, underscoring the importance of replicate runs. Kabsch cross-validation against crystal structures confirms that designed CDRs preserve the framework pose basin. EasyNano demonstrates that ESMFold2-based differentiable optimization provides a fast, practical, and epitope-specific approach to nanobody CDR design.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-11T00:26:45Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Yue Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wanyu Cheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junqing Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yingchao Liu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-06-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "EasyNano optimizes nanobody CDR residues via gradient descent through ESMFold2 distograms with an epitope proximity loss, running in ~10-20 min on a…",
+  "title": "EasyNano: rapid epitope-targeted nanobody CDR design via differentiable distogram optimization with ESMFold2",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.12772v1"
+}

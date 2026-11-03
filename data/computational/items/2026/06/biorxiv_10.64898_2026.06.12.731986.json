@@ -1,0 +1,41 @@
+{
+  "abstract": "Probabilistic cardinality estimators (HyperLogLog), similarity sketches (MinHash), and frequency estimators (Count-Min Sketch) are fundamental approximate data structures that each target one primary problem. We present DynamicDemiLog (DDL), a sketch that unifies cardinality estimation, set similarity, containment, element frequency and composition in one tiny data structure built from a single pass over the input stream. Using an inverted index over 200,687 RefSeq sketches (159,567 organisms), DDL performs all-to-all sketch similarity comparison of the full database in 30 seconds (128 threads, indexed) -- over 375x faster per query than Mashs brute-force all-to-all comparison of 91,282 sketches, or 31x faster without the index, at double the sketch resolution. DDL extends the LogLog register with a mantissa: each register stores a floating-point-encoded hash value consisting of an integer exponent (the leading-zero count) and a fractional mantissa (the sub-leading-zero bits), rather than the integer leading-zero count alone. This preserves enough hash information for meaningful register-by-register comparison -- a property that standard 6-bit registers lack -- while improving on LogLogs cardinality estimation machinery, including DynamicLogLogs early exit mask for high-throughput streaming.\n\nWith a default 10 mantissa bits (16-bit registers, 2,048 buckets, 4 KB), DDL achieves a per-register false-match rate of 0.018% on unrelated random same-size sets (compared to 17.0% for LL6, a basic HyperLogLog implementation), enabling Weighted Kmer Identity (WKID), Average Nucleotide Identity (ANI), containment, and completeness estimation from register comparison alone. A 16-bit per-register observation counter provides element frequency information at trivial additional computation cost, and an additional byte tracks element composition (GC content, for biological data). Furthermore, DDLs high-specificity registers enable an inverted index structure (DDLIndex) that answers similarity queries against a database of N sketches in O(B + M) time, where M is the number of matching index entries, compared to O(N xB) for pairwise comparison.\n\nDDL achieves a 930x reduction in false register matches compared to LL6 (Section 11.1), accurately estimates ANI between full and partial genomes down to approximately 79% identity (at k=25, B=2,048), and maintains near-zero spurious similarity on unrelated inputs -- all at similar construction speed to LL6, and 3.5x faster than SetSketch.",
+  "authors": [
+    "Bushnell, B. J."
+  ],
+  "doi": "10.64898/2026.06.12.731986",
+  "first_seen": "2026-06-16",
+  "id": "biorxiv:10.64898/2026.06.12.731986",
+  "metadata": {
+    "abstract": "Probabilistic cardinality estimators (HyperLogLog), similarity sketches (MinHash), and frequency estimators (Count-Min Sketch) are fundamental approximate data structures that each target one primary problem. We present DynamicDemiLog (DDL), a sketch that unifies cardinality estimation, set similarity, containment, element frequency and composition in one tiny data structure built from a single pass over the input stream. Using an inverted index over 200,687 RefSeq sketches (159,567 organisms), DDL performs all-to-all sketch similarity comparison of the full database in 30 seconds (128 threads, indexed) -- over 375x faster per query than Mashs brute-force all-to-all comparison of 91,282 sketches, or 31x faster without the index, at double the sketch resolution. DDL extends the LogLog register with a mantissa: each register stores a floating-point-encoded hash value consisting of an integer exponent (the leading-zero count) and a fractional mantissa (the sub-leading-zero bits), rather than the integer leading-zero count alone. This preserves enough hash information for meaningful register-by-register comparison -- a property that standard 6-bit registers lack -- while improving on LogLogs cardinality estimation machinery, including DynamicLogLogs early exit mask for high-throughput streaming.\n\nWith a default 10 mantissa bits (16-bit registers, 2,048 buckets, 4 KB), DDL achieves a per-register false-match rate of 0.018% on unrelated random same-size sets (compared to 17.0% for LL6, a basic HyperLogLog implementation), enabling Weighted Kmer Identity (WKID), Average Nucleotide Identity (ANI), containment, and completeness estimation from register comparison alone. A 16-bit per-register observation counter provides element frequency information at trivial additional computation cost, and an additional byte tracks element composition (GC content, for biological data). Furthermore, DDLs high-specificity registers enable an inverted index structure (DDLIndex) that answers similarity queries against a database of N sketches in O(B + M) time, where M is the number of matching index entries, compared to O(N xB) for pairwise comparison.\n\nDDL achieves a 930x reduction in false register matches compared to LL6 (Section 11.1), accurately estimates ANI between full and partial genomes down to approximately 79% identity (at k=25, B=2,048), and maintains near-zero spurious similarity on unrelated inputs -- all at similar construction speed to LL6, and 3.5x faster than SetSketch.",
+    "author_corresponding": "Brian J Bushnell",
+    "author_corresponding_institution": "Joint Genome Institute",
+    "authors": "Bushnell, B. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-16",
+    "doi": "10.64898/2026.06.12.731986",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/16/2026.06.12.731986.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DynamicDemiLog: A Single Sketch for Ultrafast Similarity, Frequency, and Cardinality Estimation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Joint Genome Institute",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "DynamicDemiLog (DDL) is a single sketch unifying cardinality, similarity, containment, frequency and GC composition estimation; an inverted index compares 200k…",
+  "title": "DynamicDemiLog: A Single Sketch for Ultrafast Similarity, Frequency, and Cardinality Estimation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.12.731986"
+}

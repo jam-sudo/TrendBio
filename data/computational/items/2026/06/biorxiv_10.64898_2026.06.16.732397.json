@@ -1,0 +1,50 @@
+{
+  "abstract": "In single-cell (sc)-based scientific discovery, text-formatted biomedical prior knowledge and signaling graphs are essential for annotating and interpreting numeric sc-omics data and for generating novel testable hypotheses. A major limitation of existing single-cell large language models (scLLMs) is that they rely on numeric expression data with gene names as the only textual signal, while comprehensive biomedical priors -- cellular localization, gene function, disease associations, and signaling interaction patterns -- remain absent from the model input. We introduce CellTosg2Sequence, a textual-prior- and signaling-graph-augmented cell-omics-sentence language model.\n\nA lightweight heterogeneous graph encoder maps a curated 62,507-node biomedical knowledge graph (KG) into compact virtual tokens that are prepended to each cell sentence, allowing the language model to condition on biological structure with minimal sequence-length overhead. We train CellTosg2Sequence with a three-stage objective: Stage I anchors the KG channel under autoregressive language-model pretraining, leveraging Qwen2.5-32Bs own language reasoning for rapid KG alignment; Stage II aligns labels via supervised fine-tuning with KG-anchored InfoNCE; Stage III applies Group Relative Policy Optimization (GRPO) with an ontology-hierarchy reward, enabling free-generation cell-type prediction that generalizes beyond the closed training vocabulary.\n\nAcross multiple benchmarks and ablation experiments, CellTosg2Sequence outperforms strong baselines. All results are achieved with lightweight LoRA training and a single unified checkpoint.\n\nData ethicsThis work uses publicly available single-cell datasets from the Human Cell Atlas (https://www.humancellatlas.org) and the Tahoe-100M consortium. All HCA constituent studies were collected under appropriate donor consent and institutional oversight as described in their original publications; we perform computational re-analysis only and introduce no new human subjects data. HCA data access follows the HCA Data Portal terms of use. No new patient data are collected in this study; no additional IRB approval is required for this secondary computational analysis.",
+  "authors": [
+    "chen, w.",
+    "Ye, M.",
+    "Xu, T.",
+    "Huang, D.",
+    "Zhang, H.",
+    "Li, H.",
+    "Li, W.",
+    "Chen, Y.",
+    "Payne, P. R.",
+    "Li, F."
+  ],
+  "doi": "10.64898/2026.06.16.732397",
+  "first_seen": "2026-06-22",
+  "id": "biorxiv:10.64898/2026.06.16.732397",
+  "metadata": {
+    "abstract": "In single-cell (sc)-based scientific discovery, text-formatted biomedical prior knowledge and signaling graphs are essential for annotating and interpreting numeric sc-omics data and for generating novel testable hypotheses. A major limitation of existing single-cell large language models (scLLMs) is that they rely on numeric expression data with gene names as the only textual signal, while comprehensive biomedical priors -- cellular localization, gene function, disease associations, and signaling interaction patterns -- remain absent from the model input. We introduce CellTosg2Sequence, a textual-prior- and signaling-graph-augmented cell-omics-sentence language model.\n\nA lightweight heterogeneous graph encoder maps a curated 62,507-node biomedical knowledge graph (KG) into compact virtual tokens that are prepended to each cell sentence, allowing the language model to condition on biological structure with minimal sequence-length overhead. We train CellTosg2Sequence with a three-stage objective: Stage I anchors the KG channel under autoregressive language-model pretraining, leveraging Qwen2.5-32Bs own language reasoning for rapid KG alignment; Stage II aligns labels via supervised fine-tuning with KG-anchored InfoNCE; Stage III applies Group Relative Policy Optimization (GRPO) with an ontology-hierarchy reward, enabling free-generation cell-type prediction that generalizes beyond the closed training vocabulary.\n\nAcross multiple benchmarks and ablation experiments, CellTosg2Sequence outperforms strong baselines. All results are achieved with lightweight LoRA training and a single unified checkpoint.\n\nData ethicsThis work uses publicly available single-cell datasets from the Human Cell Atlas (https://www.humancellatlas.org) and the Tahoe-100M consortium. All HCA constituent studies were collected under appropriate donor consent and institutional oversight as described in their original publications; we perform computational re-analysis only and introduce no new human subjects data. HCA data access follows the HCA Data Portal terms of use. No new patient data are collected in this study; no additional IRB approval is required for this secondary computational analysis.",
+    "author_corresponding": "Fuhai Li",
+    "author_corresponding_institution": "Washington University in St. Louis",
+    "authors": "chen, w.; Ye, M.; Xu, T.; Huang, D.; Zhang, H.; Li, H.; Li, W.; Chen, Y.; Payne, P. R.; Li, F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-22",
+    "doi": "10.64898/2026.06.16.732397",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/22/2026.06.16.732397.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CellTosg2Sequence: A Unified Text-Omics-Signaling-Graph Large Language Model for Single-Cell Analysis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Washington University in St. Louis",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-06-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "CellTosg2Sequence augments a single-cell LLM with a 62,507-node biomedical knowledge graph encoded as virtual tokens, trained via KG-anchored SFT and GRPO for…",
+  "title": "CellTosg2Sequence: A Unified Text-Omics-Signaling-Graph Large Language Model for Single-Cell Analysis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.16.732397"
+}

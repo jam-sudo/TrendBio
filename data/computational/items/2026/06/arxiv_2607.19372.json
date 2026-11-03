@@ -1,0 +1,30 @@
+{
+  "abstract": "Background and objective: A high classifier score and a plausible class-activation map (CAM) are often presented together, although neither establishes that the other is reliable. We introduce endoExplain as a reproducible protocol for auditing score-localisation discordance rather than as a new detector or explanation algorithm. Methods: Content hashing separated HyperKvasir development images from 1,000 masked images before training. EfficientNet-B0, ResNet-34 and ConvNeXt-Tiny were trained with three seeds each. Scores were temperature scaled using validation data only. Grad-CAM, Grad-CAM++, XGrad-CAM, HiResCAM and Eigen-CAM were evaluated on identical image-mask pairs, alongside random and centre baselines. Outcomes combined peak localisation, overlap, a top-20% deletion response, score-threshold sensitivity and adjustment for lesion size and centrality. The selected checkpoint was transferred without retraining to three external mask cohorts. Results: Temperature scaling reduced test expected calibration error from 0.0167 to 0.0115. Among 172 reserved images with scaled score at least 0.90, peak-outside-lesion rates ranged from 4.1% to 62.2% across CAMs. Method dependence remained evident across architectures and seeds, although method rankings were not universal. Spatial alignment and deletion response were not interchangeable. A random-deletion control also produced positive logit drops, limiting specificity claims based on deletion alone. External positive-mask results were dataset dependent. A source-category audit also exposed that 149/155 test positives were dyed-lifted polyps, materially bounding classifier claims. Conclusions: endoExplain makes calibration, spatial agreement, perturbation response and transfer separately inspectable. The results caution against using a score or visually persuasive CAM as evidence of lesion localisation or model reasoning.",
+  "authors": [
+    "Roberto Alcaraz Machado",
+    "Ana Lucía Rodríguez Blanco"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-16",
+  "id": "arxiv:2607.19372",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.19372v2</ns0:id>\n    <ns0:title>endoExplain: A reproducible protocol for auditing score-localisation discordance in colonoscopy image classifiers</ns0:title>\n    <ns0:updated>2026-07-23T11:58:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.19372v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.19372v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Background and objective: A high classifier score and a plausible class-activation map (CAM) are often presented together, although neither establishes that the other is reliable. We introduce endoExplain as a reproducible protocol for auditing score-localisation discordance rather than as a new detector or explanation algorithm. Methods: Content hashing separated HyperKvasir development images from 1,000 masked images before training. EfficientNet-B0, ResNet-34 and ConvNeXt-Tiny were trained with three seeds each. Scores were temperature scaled using validation data only. Grad-CAM, Grad-CAM++, XGrad-CAM, HiResCAM and Eigen-CAM were evaluated on identical image-mask pairs, alongside random and centre baselines. Outcomes combined peak localisation, overlap, a top-20% deletion response, score-threshold sensitivity and adjustment for lesion size and centrality. The selected checkpoint was transferred without retraining to three external mask cohorts. Results: Temperature scaling reduced test expected calibration error from 0.0167 to 0.0115. Among 172 reserved images with scaled score at least 0.90, peak-outside-lesion rates ranged from 4.1% to 62.2% across CAMs. Method dependence remained evident across architectures and seeds, although method rankings were not universal. Spatial alignment and deletion response were not interchangeable. A random-deletion control also produced positive logit drops, limiting specificity claims based on deletion alone. External positive-mask results were dataset dependent. A source-category audit also exposed that 149/155 test positives were dyed-lifted polyps, materially bounding classifier claims. Conclusions: endoExplain makes calibration, spatial agreement, perturbation response and transfer separately inspectable. The results caution against using a score or visually persuasive CAM as evidence of lesion localisation or model reasoning.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-16T21:01:36Z</ns0:published>\n    <ns1:comment>18 pages, 5 figures, 5 tables. Substantially revised version with a new title and scope; added calibration analysis, paired multi-CAM evaluation, random-deletion controls, architecture and seed robustness analyses, and frozen external spatial transfer</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Roberto Alcaraz Machado</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ana Lucía Rodríguez Blanco</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Reproducible protocol auditing score-localisation discordance of CAMs in colonoscopy classifiers across calibration, overlap and transfer.",
+  "title": "endoExplain: A reproducible protocol for auditing score-localisation discordance in colonoscopy image classifiers",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.19372v2"
+}

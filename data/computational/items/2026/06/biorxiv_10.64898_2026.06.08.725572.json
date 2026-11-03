@@ -1,0 +1,47 @@
+{
+  "abstract": "We present Pillbox, a predictor whose pipeline is audited against the six Asiaee leakage modes with the one residual pathway shown by per-fold ablation to be non-load-bearing on hard splits. Our model combines CpGPT methylation embeddings, CLAMP drug embeddings, and per-fold-fit gene-expression principal components which are fused by Feature-wise Linear Modulation (FiLM)-conditioned graph attention on the STRING v12 protein-protein interaction graph. Then we -ensemble the model against a histogram-based gradient boosting regressor baseline. On GDSC GSE68379 (987 cell lines, 375 drugs) across seeds 42, 7, and 123, the ensemble reaches test R2 of 0.78, 0.77, and 0.76 on random, histology-blind, and site-blind splits respectively, with cell-aware lifts above the drug-mean floor of +0.054, +0.060, and +0.037. As a quantitative diagnostic for feature-stack saturation we propose the cross-architecture residual correlation, calibrated against a same-architecture-different-initialization control. On histology-blind splits the cross-architecture value of 0.939 falls short of the same-architecture ceiling of 0.974 by approximately 0.03 in residual correlation, a gap we interpret as the headroom available to architecture choice on top of the current foundation-model representation and consistent with the long-established observation that tissue lineage dominates cell-line drug response. We integrated curated mutation, methylation, and drug-target-expression channels, but these do not improve prediction once foundation-model embeddings are in place. Cross-screen validation against PRISM matches the GDSC-to-PRISM measurement reproducibility ceiling within 0.01 Spearman.",
+  "authors": [
+    "Hill, J. J. K.",
+    "Ryoo, H. J.",
+    "Ghanta, A.",
+    "Singh, S.",
+    "Anders, D.",
+    "Jiao, E.",
+    "Jeong, J."
+  ],
+  "doi": "10.64898/2026.06.08.725572",
+  "first_seen": "2026-06-11",
+  "id": "biorxiv:10.64898/2026.06.08.725572",
+  "metadata": {
+    "abstract": "We present Pillbox, a predictor whose pipeline is audited against the six Asiaee leakage modes with the one residual pathway shown by per-fold ablation to be non-load-bearing on hard splits. Our model combines CpGPT methylation embeddings, CLAMP drug embeddings, and per-fold-fit gene-expression principal components which are fused by Feature-wise Linear Modulation (FiLM)-conditioned graph attention on the STRING v12 protein-protein interaction graph. Then we -ensemble the model against a histogram-based gradient boosting regressor baseline. On GDSC GSE68379 (987 cell lines, 375 drugs) across seeds 42, 7, and 123, the ensemble reaches test R2 of 0.78, 0.77, and 0.76 on random, histology-blind, and site-blind splits respectively, with cell-aware lifts above the drug-mean floor of +0.054, +0.060, and +0.037. As a quantitative diagnostic for feature-stack saturation we propose the cross-architecture residual correlation, calibrated against a same-architecture-different-initialization control. On histology-blind splits the cross-architecture value of 0.939 falls short of the same-architecture ceiling of 0.974 by approximately 0.03 in residual correlation, a gap we interpret as the headroom available to architecture choice on top of the current foundation-model representation and consistent with the long-established observation that tissue lineage dominates cell-line drug response. We integrated curated mutation, methylation, and drug-target-expression channels, but these do not improve prediction once foundation-model embeddings are in place. Cross-screen validation against PRISM matches the GDSC-to-PRISM measurement reproducibility ceiling within 0.01 Spearman.",
+    "author_corresponding": "Justin Joon Kim Hill",
+    "author_corresponding_institution": "Quome, Inc",
+    "authors": "Hill, J. J. K.; Ryoo, H. J.; Ghanta, A.; Singh, S.; Anders, D.; Jiao, E.; Jeong, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-11",
+    "doi": "10.64898/2026.06.08.725572",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/11/2026.06.08.725572.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Pillbox: A Leakage-Aware Foundation-Model Predictor and Lineage-Ceiling Diagnostic for Cancer Drug Response",
+    "type": "confirmatory results",
+    "version": "1"
+  },
+  "org": "Quome, Inc",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Pillbox predicts cancer cell-line drug response by fusing CpGPT methylation, CLAMP drug embeddings, and expression PCs via FiLM-conditioned graph attention on…",
+  "title": "Pillbox: A Leakage-Aware Foundation-Model Predictor and Lineage-Ceiling Diagnostic for Cancer Drug Response",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.08.725572"
+}

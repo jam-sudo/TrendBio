@@ -1,0 +1,41 @@
+{
+  "abstract": "BackgroundPivotal oncology trials cost a median of {approx}$19 million each (oncology often $45 million or more) and contribute to a capitalised cost of {approx}$2.6 billion per approved drug, yet most candidate protocols never reach trial. Existing in-silico screening tools either rely on closed proprietary PK/PD modelling or require patient-level data; a transparent, cohort-level, cross-validated mechanistic alternative is missing.\n\nMethodsSentryPath is a physics-based stochastic differential equation simulator built on a Gompertzian tumour-growth term with Emax pharmacodynamic kill and Bliss-independence combination modelling, scored at the cohort level. Validation against 13 published phase-3 randomised controlled trials covering six cancer types uses the 2-year overall-survival (OS) rate ratio as the primary endpoint, cross-checked against ClinicalTrials.gov posted results. For cancer types with [&ge;]2 trials we apply leave-one-trial-out crossvalidation: two shared efficacy scalars per cancer type are fit on training trials and used to predict the heldout trial cold.\n\nResultsWith the per-drug efficacy proxies held fixed from the literature, two shared cancer-type scalars fit on the training trials transfer to the held-out trial with a mean held-out error of 3.7 % (range 0.7-7.3 %) on 2-year OS rate ratios across three NSCLC trials; extending the same method to RCC, HCC, and ESCC yields a 5.4 % aggregate across nine folds (per-fold range 0.2-11.2 %), reported with per-cancer stratification. We are explicit that only the two scalars are held out -- the per-protocol efficacy proxies underneath are literature-anchored to drug classes that include the benchmark trials, so this is a test of scalar transfer, not of the whole engine cold. Cross-validation improves on the same engine without it (16.4 % with production cancer priors; 21.9 % with no efficacy modifiers); a matched in-sample fit of the same two-scalar model gives 4.4 %, slightly below the 5.4 % held-out, the expected direction. Two prospective forecasts are preregistered on the Open Science Framework with falsification envelopes and pre-readout bias disclosure. The first forecast (NCT04770896) reaches its primary data cutoff on 2026-06-30; the observed outcome and its mapping to the pre-committed interpretation will be reported in a versioned update to this preprint.\n\nConclusionA transparent mechanistic simulator, with a literature-anchored efficacy library and only two cross-validated scalars per cancer type, transfers those scalars across held-out NSCLC trials at 3.7 % mean error (range 0.7-7.3 %) and extends to other cancers with documented per-cancer stratification. The validation is pilot-scale (3-9 folds) and the scalars sit on a fixed, trial-informed substrate; its distinguishing contribution is less the error magnitude than the public predict-verify-disclose cycle that goes beyond retrospective fit.",
+  "authors": [
+    "Kumar, M. D.",
+    "Kumar, M."
+  ],
+  "doi": "10.64898/2026.06.23.734048",
+  "first_seen": "2026-06-29",
+  "id": "biorxiv:10.64898/2026.06.23.734048",
+  "metadata": {
+    "abstract": "BackgroundPivotal oncology trials cost a median of {approx}$19 million each (oncology often $45 million or more) and contribute to a capitalised cost of {approx}$2.6 billion per approved drug, yet most candidate protocols never reach trial. Existing in-silico screening tools either rely on closed proprietary PK/PD modelling or require patient-level data; a transparent, cohort-level, cross-validated mechanistic alternative is missing.\n\nMethodsSentryPath is a physics-based stochastic differential equation simulator built on a Gompertzian tumour-growth term with Emax pharmacodynamic kill and Bliss-independence combination modelling, scored at the cohort level. Validation against 13 published phase-3 randomised controlled trials covering six cancer types uses the 2-year overall-survival (OS) rate ratio as the primary endpoint, cross-checked against ClinicalTrials.gov posted results. For cancer types with [&ge;]2 trials we apply leave-one-trial-out crossvalidation: two shared efficacy scalars per cancer type are fit on training trials and used to predict the heldout trial cold.\n\nResultsWith the per-drug efficacy proxies held fixed from the literature, two shared cancer-type scalars fit on the training trials transfer to the held-out trial with a mean held-out error of 3.7 % (range 0.7-7.3 %) on 2-year OS rate ratios across three NSCLC trials; extending the same method to RCC, HCC, and ESCC yields a 5.4 % aggregate across nine folds (per-fold range 0.2-11.2 %), reported with per-cancer stratification. We are explicit that only the two scalars are held out -- the per-protocol efficacy proxies underneath are literature-anchored to drug classes that include the benchmark trials, so this is a test of scalar transfer, not of the whole engine cold. Cross-validation improves on the same engine without it (16.4 % with production cancer priors; 21.9 % with no efficacy modifiers); a matched in-sample fit of the same two-scalar model gives 4.4 %, slightly below the 5.4 % held-out, the expected direction. Two prospective forecasts are preregistered on the Open Science Framework with falsification envelopes and pre-readout bias disclosure. The first forecast (NCT04770896) reaches its primary data cutoff on 2026-06-30; the observed outcome and its mapping to the pre-committed interpretation will be reported in a versioned update to this preprint.\n\nConclusionA transparent mechanistic simulator, with a literature-anchored efficacy library and only two cross-validated scalars per cancer type, transfers those scalars across held-out NSCLC trials at 3.7 % mean error (range 0.7-7.3 %) and extends to other cancers with documented per-cancer stratification. The validation is pilot-scale (3-9 folds) and the scalars sit on a fixed, trial-informed substrate; its distinguishing contribution is less the error magnitude than the public predict-verify-disclose cycle that goes beyond retrospective fit.",
+    "author_corresponding": "M Deeraj Kumar",
+    "author_corresponding_institution": "Easwari Engineering College",
+    "authors": "Kumar, M. D.; Kumar, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-29",
+    "doi": "10.64898/2026.06.23.734048",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/29/2026.06.23.734048.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SentryPath: a mechanistic protocol-ranking simulator with leave-one-trial-out cross-validation across 13 phase-III oncology randomised controlled trials and a pre-registered prospective forecast",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Easwari Engineering College",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-06-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "SDE tumour-growth simulator ranks oncology trial protocols; two cross-validated scalars per cancer type fit 13 phase-3 RCTs.",
+  "title": "SentryPath: a mechanistic protocol-ranking simulator with leave-one-trial-out cross-validation across 13 phase-III oncology randomised controlled trials and a pre-registered prospective forecast",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.23.734048"
+}

@@ -1,0 +1,47 @@
+{
+  "abstract": "The U.S. Tox21 collaboration has generated a large reference library of high-throughput concentration-response assays. Here we present Tox21mer, a 43.5-million-parameter transformer that encodes each Tox21 concentration-response curve together with assay metadata into a 768-dimensional representation. Tox21mer was pretrained on ~2.5 million curves from 102 assay protocols and 6,727 compounds using masked-response reconstruction as the primary objective, with low-weight auxiliary supervision on assay outcome and AC50. To evaluate the learned representation, we trained lightweight probes on frozen embeddings from concentration-response curves of held-out compounds. The representation supported a macro-F1 of 0.985 for three-class outcome prediction (agonist, antagonist, inactive), a binary F1 of 0.994 for active/inactive prediction, and an R2 of 0.87 for log10(AC50). The learned embeddings formed coherent groupings by curve-class category. A masked-only pretraining variant retained near-baseline probe performance, indicating that the representation is learned largely from the self-supervised objective rather than from auxiliary labels. Ablation analyses further showed that predictive performance depends mainly on curve-level response-value distributions conditioned on assay context, with limited reliance on detailed within-curve ordering. Tox21mer thus provides a reusable foundation representation for Tox21 concentration-response data that can support extrapolation to untested compounds through integration with chemical features or distillation into chemistry-only student models for large-scale external screening.",
+  "authors": [
+    "Li, L.",
+    "Hwang, J.",
+    "Shockley, K.",
+    "Li, Y.",
+    "Motsinger-Reif, A.",
+    "Hsieh, J.-H.",
+    "Auerbach, S. S.",
+    "Reif, D."
+  ],
+  "doi": "10.64898/2026.06.15.732308",
+  "first_seen": "2026-06-19",
+  "id": "biorxiv:10.64898/2026.06.15.732308",
+  "metadata": {
+    "abstract": "The U.S. Tox21 collaboration has generated a large reference library of high-throughput concentration-response assays. Here we present Tox21mer, a 43.5-million-parameter transformer that encodes each Tox21 concentration-response curve together with assay metadata into a 768-dimensional representation. Tox21mer was pretrained on ~2.5 million curves from 102 assay protocols and 6,727 compounds using masked-response reconstruction as the primary objective, with low-weight auxiliary supervision on assay outcome and AC50. To evaluate the learned representation, we trained lightweight probes on frozen embeddings from concentration-response curves of held-out compounds. The representation supported a macro-F1 of 0.985 for three-class outcome prediction (agonist, antagonist, inactive), a binary F1 of 0.994 for active/inactive prediction, and an R2 of 0.87 for log10(AC50). The learned embeddings formed coherent groupings by curve-class category. A masked-only pretraining variant retained near-baseline probe performance, indicating that the representation is learned largely from the self-supervised objective rather than from auxiliary labels. Ablation analyses further showed that predictive performance depends mainly on curve-level response-value distributions conditioned on assay context, with limited reliance on detailed within-curve ordering. Tox21mer thus provides a reusable foundation representation for Tox21 concentration-response data that can support extrapolation to untested compounds through integration with chemical features or distillation into chemistry-only student models for large-scale external screening.",
+    "author_corresponding": "Leping Li",
+    "author_corresponding_institution": "National Institute of Environmental Health Sciences, NIH",
+    "authors": "Li, L.; Hwang, J.; Shockley, K.; Li, Y.; Motsinger-Reif, A.; Hsieh, J.-H.; Auerbach, S. S.; Reif, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-19",
+    "doi": "10.64898/2026.06.15.732308",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/19/2026.06.15.732308.source.xml",
+    "license": "cc0",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Tox21mer, A transformer foundation model for Tox21 high-throughput concentration-response curves data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "National Institute of Environmental Health Sciences, NIH",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Tox21mer, a 43.5M-parameter transformer foundation model pretrained on ~2.5M Tox21 concentration-response curves, yields reusable embeddings with high probe…",
+  "title": "Tox21mer, A transformer foundation model for Tox21 high-throughput concentration-response curves data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.15.732308"
+}

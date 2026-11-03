@@ -1,0 +1,34 @@
+{
+  "abstract": "Saturation curves, monotone responses that rise from zero to a plateau, recur across gas adsorption, enzyme kinetics, and self-limiting growth. Learning one from a few costly, noisy measurements is a common bottleneck. We present a Bayesian active-learning platform built on a penalized monotone I-spline. Non-negative weights make every posterior draw rise from zero and never fall, a survey measurement anchors the plateau in place of a flatness prior, and the input reaching any saturation level is read from the posterior by level crossing, assuming no kinetic form. Each measurement is placed where the surrogate is least certain, which beats random designs and edges a log-spaced grid of the same budget. One fixed configuration recovers five kinetically distinct regimes from twenty measurements to a saturation error of 0.037 to 0.041, below the output noise, and averages 0.045 on 250 curves from an unseen distribution. Running unconstrained Gaussian processes (GPs) and two unpenalized monotone bases through the same loop separates each ingredient's contribution. Logarithmic resolution and the roughness penalty carry the accuracy, while monotonicity guarantees a level crossing unique on every draw. The penalty keeps the surrogate the most accurate model at every noise level, and its second-order form centers the recommended input for saturation where a first-order penalty reads late (a bias of +0.32 s with 94% coverage, against +0.44 s and 64% for the matched unconstrained GP). Because the recommended input lies where the curve is nearly flat, no method can pin it down precisely, and we report it as a cost-indexed quantile with the probability of falling short.",
+  "authors": [
+    "Pouyan Navabi",
+    "Christos G. Takoudis"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-25",
+  "id": "arxiv:2606.26577",
+  "metadata": {
+    "arxiv_primary_category": "cond-mat.mtrl-sci",
+    "categories": [
+      "cond-mat.mtrl-sci",
+      "physics.chem-ph",
+      "physics.data-an",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.26577v2</ns0:id>\n    <ns0:title>Shape-Constrained Bayesian Active Learning of Self-Limiting Saturation Curves</ns0:title>\n    <ns0:updated>2026-10-16T19:04:09Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.26577v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.26577v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Saturation curves, monotone responses that rise from zero to a plateau, recur across gas adsorption, enzyme kinetics, and self-limiting growth. Learning one from a few costly, noisy measurements is a common bottleneck. We present a Bayesian active-learning platform built on a penalized monotone I-spline. Non-negative weights make every posterior draw rise from zero and never fall, a survey measurement anchors the plateau in place of a flatness prior, and the input reaching any saturation level is read from the posterior by level crossing, assuming no kinetic form. Each measurement is placed where the surrogate is least certain, which beats random designs and edges a log-spaced grid of the same budget. One fixed configuration recovers five kinetically distinct regimes from twenty measurements to a saturation error of 0.037 to 0.041, below the output noise, and averages 0.045 on 250 curves from an unseen distribution. Running unconstrained Gaussian processes (GPs) and two unpenalized monotone bases through the same loop separates each ingredient's contribution. Logarithmic resolution and the roughness penalty carry the accuracy, while monotonicity guarantees a level crossing unique on every draw. The penalty keeps the surrogate the most accurate model at every noise level, and its second-order form centers the recommended input for saturation where a first-order penalty reads late (a bias of +0.32 s with 94% coverage, against +0.44 s and 64% for the matched unconstrained GP). Because the recommended input lies where the curve is nearly flat, no method can pin it down precisely, and we report it as a cost-indexed quantile with the probability of falling short.</ns0:summary>\n    <ns0:category term=\"cond-mat.mtrl-sci\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.chem-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.data-an\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-25T03:54:01Z</ns0:published>\n    <ns1:comment>v2: substantially revised and extended, with new analyses, figures and tables, and with the Supporting Information appended. 84 pages: main text with 8 figures and 4 tables, followed by the Supporting Information (5 figures, 19 tables). Code and cached results: https://github.com/pouyna/SplineBAL</ns1:comment>\n    <ns1:primary_category term=\"cond-mat.mtrl-sci\" />\n    <ns0:author>\n      <ns0:name>Pouyan Navabi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Christos G. Takoudis</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-25",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Bayesian active-learning platform using a penalized monotone I-spline with non-negative weights and level-crossing inference to learn saturation curves from…",
+  "title": "Shape-Constrained Bayesian Active Learning of Self-Limiting Saturation Curves",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.26577v2"
+}

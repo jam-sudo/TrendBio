@@ -1,0 +1,43 @@
+{
+  "abstract": "Single-cell RNA-seq clustering is commonly treated as reproducible once a random seed is fixed, yet the choice of seed itself may alter cell assignments and downstream interpretation. We systematically quantified seed-induced clustering variability by running Louvain and Leiden clustering across 100 seeds in Seurat and Scanpy on 28 single-cell RNA-seq datasets from the Human Cell Atlas and IMMUcan. Using Element-Centric Consistency, we found that seed choice affected a substantial fraction of cells, with Scanpy showing more unstable assignments than Seurat on average, 40.46% versus 26.78% unstable cells, respectively. This increased stability came at a marked computational cost: Seurat required approximately 19-fold higher median memory than Scanpy. Seed-dependent clustering variability also propagated to cell-type annotation, particularly among transcriptionally related populations including macrophage/monocyte, endothelial/epithelial and T/NK cell states. To mitigate this instability, we developed StAbility-BasEd Reassignment (SABER), a Scanpy-based framework that identifies seed-sensitive cells across repeated clusterings and reassigns them to stable cluster cores using cosine similarity. SABER improved clustering quality while preserving annotation concordance and reduced median memory usage 3.5-fold compared with Seurat-Louvain. Our results identify seed choice as an underappreciated source of variability in single-cell analysis and provide a scalable strategy to improve clustering robustness.",
+  "authors": [
+    "Zagaria, N.",
+    "Tini, G.",
+    "Bonetti, E.",
+    "Mazzarella, L."
+  ],
+  "doi": "10.64898/2026.06.16.732539",
+  "first_seen": "2026-06-20",
+  "id": "biorxiv:10.64898/2026.06.16.732539",
+  "metadata": {
+    "abstract": "Single-cell RNA-seq clustering is commonly treated as reproducible once a random seed is fixed, yet the choice of seed itself may alter cell assignments and downstream interpretation. We systematically quantified seed-induced clustering variability by running Louvain and Leiden clustering across 100 seeds in Seurat and Scanpy on 28 single-cell RNA-seq datasets from the Human Cell Atlas and IMMUcan. Using Element-Centric Consistency, we found that seed choice affected a substantial fraction of cells, with Scanpy showing more unstable assignments than Seurat on average, 40.46% versus 26.78% unstable cells, respectively. This increased stability came at a marked computational cost: Seurat required approximately 19-fold higher median memory than Scanpy. Seed-dependent clustering variability also propagated to cell-type annotation, particularly among transcriptionally related populations including macrophage/monocyte, endothelial/epithelial and T/NK cell states. To mitigate this instability, we developed StAbility-BasEd Reassignment (SABER), a Scanpy-based framework that identifies seed-sensitive cells across repeated clusterings and reassigns them to stable cluster cores using cosine similarity. SABER improved clustering quality while preserving annotation concordance and reduced median memory usage 3.5-fold compared with Seurat-Louvain. Our results identify seed choice as an underappreciated source of variability in single-cell analysis and provide a scalable strategy to improve clustering robustness.",
+    "author_corresponding": "Emanuele Bonetti",
+    "author_corresponding_institution": "IEO - European Institute of Oncology",
+    "authors": "Zagaria, N.; Tini, G.; Bonetti, E.; Mazzarella, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-20",
+    "doi": "10.64898/2026.06.16.732539",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/20/2026.06.16.732539.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Seed variation impacts clustering stability in Single-Cell RNA-Seq and can be mitigated by StAbility-BasEd-Reassignment (SABER)",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "IEO - European Institute of Oncology",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-06-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows random seed choice alters scRNA-seq clustering in Seurat and Scanpy across 28 datasets; introduces SABER, a Scanpy-based reassignment method improving…",
+  "title": "Seed variation impacts clustering stability in Single-Cell RNA-Seq and can be mitigated by StAbility-BasEd-Reassignment (SABER)",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.16.732539"
+}

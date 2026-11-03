@@ -1,0 +1,41 @@
+{
+  "abstract": "Bulk RNA sequencing remains central to translational genomics, yet foundation-model development has largely focused on single-cell data. Existing transformer approaches for bulk RNA-seq often rely on expression discretization, numerical reconstruction, external gene embeddings, or restricted gene sets, limiting robustness across normalization schemes and cohorts. Here, we introduce TifBERT, a self-supervised framework for full-transcriptome bulk RNA-seq representation learning. TifBERT converts each unordered expression profile into a sample-specific gene sequence using term frequency-inverse document frequency (TF-IDF) ordering, prioritizing genes that are both highly expressed within a sample and selectively expressed across the cohort. It is then pretrained using masked gene modeling, predicting gene identities from transcriptomic context rather than reconstructing expression values.\n\nPretrained on harmonized TCGA Pan-Cancer data spanning five RNA-seq normalization schemes, TifBERT learns contextual representations across approximately 10,000 genes without expression binning, landmark-gene restriction, or external biological embeddings. Across 33 TCGA cancer types, TifBERT achieved 90.83% accuracy, 0.996 macro AUC-ROC, and 0.903 MCC. It also captured pathway-level biology, achieving mean sample-wise and pathway-wise Pearson correlations of 0.754 and 0.762 across 1,387 PARADIGM pathway activities. Independent evaluation on GTEx healthy tissues showed preservation of tissue-level transcriptomic structure without retraining. In comparison with existing models, TifBERT achieves competitive subtype discrimination with substantially greater stability and produces markedly richer embedding geometry (effective rank 95.6 versus 6.3), without requiring expression discretization or in-distribution pretraining exposure. Together, TifBERT provides a scalable, normalization-independent foundation model for reusable bulk transcriptomic representation learning.",
+  "authors": [
+    "Hosseini, S.",
+    "Sharma, D."
+  ],
+  "doi": "10.64898/2026.06.08.728683",
+  "first_seen": "2026-06-11",
+  "id": "biorxiv:10.64898/2026.06.08.728683",
+  "metadata": {
+    "abstract": "Bulk RNA sequencing remains central to translational genomics, yet foundation-model development has largely focused on single-cell data. Existing transformer approaches for bulk RNA-seq often rely on expression discretization, numerical reconstruction, external gene embeddings, or restricted gene sets, limiting robustness across normalization schemes and cohorts. Here, we introduce TifBERT, a self-supervised framework for full-transcriptome bulk RNA-seq representation learning. TifBERT converts each unordered expression profile into a sample-specific gene sequence using term frequency-inverse document frequency (TF-IDF) ordering, prioritizing genes that are both highly expressed within a sample and selectively expressed across the cohort. It is then pretrained using masked gene modeling, predicting gene identities from transcriptomic context rather than reconstructing expression values.\n\nPretrained on harmonized TCGA Pan-Cancer data spanning five RNA-seq normalization schemes, TifBERT learns contextual representations across approximately 10,000 genes without expression binning, landmark-gene restriction, or external biological embeddings. Across 33 TCGA cancer types, TifBERT achieved 90.83% accuracy, 0.996 macro AUC-ROC, and 0.903 MCC. It also captured pathway-level biology, achieving mean sample-wise and pathway-wise Pearson correlations of 0.754 and 0.762 across 1,387 PARADIGM pathway activities. Independent evaluation on GTEx healthy tissues showed preservation of tissue-level transcriptomic structure without retraining. In comparison with existing models, TifBERT achieves competitive subtype discrimination with substantially greater stability and produces markedly richer embedding geometry (effective rank 95.6 versus 6.3), without requiring expression discretization or in-distribution pretraining exposure. Together, TifBERT provides a scalable, normalization-independent foundation model for reusable bulk transcriptomic representation learning.",
+    "author_corresponding": "Divya Sharma",
+    "author_corresponding_institution": "York university",
+    "authors": "Hosseini, S.; Sharma, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-11",
+    "doi": "10.64898/2026.06.08.728683",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/11/2026.06.08.728683.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TifBERT: a self-supervised foundation model for normalization-robust bulk RNA-seq representation learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "York university",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "TifBERT: self-supervised masked gene modeling on TF-IDF-ordered bulk RNA-seq profiles, pretrained on TCGA Pan-Cancer across five normalizations.",
+  "title": "TifBERT: a self-supervised foundation model for normalization-robust bulk RNA-seq representation learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.08.728683"
+}

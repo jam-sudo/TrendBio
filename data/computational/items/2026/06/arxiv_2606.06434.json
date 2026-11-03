@@ -1,0 +1,32 @@
+{
+  "abstract": "Background Restriction site-associated DNA sequencing (RAD-seq) is widely used to discover sex-linked markers in non-model organisms, and RADSex provides the reference workflow for building marker-by-individual depth tables and testing sex-biased marker distributions. Its table-building commands grow memory-hungry as panels reach millions of RAD tags, it reports frequentist calls with no posterior evidence, and it offers no Python or C interface.\n  Results rsx is a Rust implementation of the complete RADSex command set that preserves marker-table semantics and command-line compatibility. It combines 2-bit DNA keys, parallel ingestion, memory-mapped tables, external sorting, bitset group counts and a streamed Gram matrix so that writable allocations stay bounded by the number of individuals or by an explicit buffer, with false-discovery-rate ranking the one deliberate exception. Conjugate Beta-Binomial Bayes factors and directional posteriors grade each marker as a strict call, a posterior-supported hypothesis or a Bayes-factor-only row, and an optional CUDA backend batches the per-marker arithmetic on the GPU. On four published RAD-seq panels comprising 41.9 billion sequenced bases, rsx reproduced the RADSex v1.2.0 calls, recovered every Bonferroni-significant positive-control marker, and was 8.38-fold faster in geometric mean across 56 paired timings; the CUDA backend adds up to 29.86-fold on the p-value batch. Python and C bindings drive the same core from notebooks and pipelines.\n  Conclusions rsx is an allocation-bounded, statistically extended replacement for RADSex that stays backward-compatible and reports its evidence in explicit grades. It is released under the GPL-3.0-or-later licence, with a reproducibility archive covering every reported number.",
+  "authors": [
+    "Rohit Goswami",
+    "Ruhila Goswami"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-04",
+  "id": "arxiv:2606.06434",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.PF"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.06434v2</ns0:id>\n    <ns0:title>rsx: A high-performance streaming toolkit for RAD-seq sex determination</ns0:title>\n    <ns0:updated>2026-08-03T00:39:05Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.06434v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.06434v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Background Restriction site-associated DNA sequencing (RAD-seq) is widely used to discover sex-linked markers in non-model organisms, and RADSex provides the reference workflow for building marker-by-individual depth tables and testing sex-biased marker distributions. Its table-building commands grow memory-hungry as panels reach millions of RAD tags, it reports frequentist calls with no posterior evidence, and it offers no Python or C interface.\n  Results rsx is a Rust implementation of the complete RADSex command set that preserves marker-table semantics and command-line compatibility. It combines 2-bit DNA keys, parallel ingestion, memory-mapped tables, external sorting, bitset group counts and a streamed Gram matrix so that writable allocations stay bounded by the number of individuals or by an explicit buffer, with false-discovery-rate ranking the one deliberate exception. Conjugate Beta-Binomial Bayes factors and directional posteriors grade each marker as a strict call, a posterior-supported hypothesis or a Bayes-factor-only row, and an optional CUDA backend batches the per-marker arithmetic on the GPU. On four published RAD-seq panels comprising 41.9 billion sequenced bases, rsx reproduced the RADSex v1.2.0 calls, recovered every Bonferroni-significant positive-control marker, and was 8.38-fold faster in geometric mean across 56 paired timings; the CUDA backend adds up to 29.86-fold on the p-value batch. Python and C bindings drive the same core from notebooks and pipelines.\n  Conclusions rsx is an allocation-bounded, statistically extended replacement for RADSex that stays backward-compatible and reports its evidence in explicit grades. It is released under the GPL-3.0-or-later licence, with a reproducibility archive covering every reported number.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.PF\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-04T17:36:36Z</ns0:published>\n    <ns1:comment>48 pages, 14 figures. Software: https://github.com/HaoZeke/rsx-rs . Reproducibility archive: https://doi.org/10.5281/zenodo.21764999</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Rohit Goswami</ns0:name>\n      <ns1:affiliation>TurtleTech ehf., Reykjavik, Iceland</ns1:affiliation>\n      <ns1:affiliation>Institute IMX and Lab-COSMO, EPFL, Lausanne, Switzerland</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruhila Goswami</ns0:name>\n      <ns1:affiliation>Faculty of Life and Environmental Sciences, University of Iceland, Reykjavik, Iceland</ns1:affiliation>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "rsx is a Rust reimplementation of the RADSex RAD-seq sex-marker toolkit, adding bounded memory use, Bayesian evidence grades, CUDA batching, and Python/C…",
+  "title": "rsx: A high-performance streaming toolkit for RAD-seq sex determination",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.06434v2"
+}

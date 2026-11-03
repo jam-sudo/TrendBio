@@ -1,0 +1,35 @@
+{
+  "abstract": "Radiology report evaluation must distinguish clinical compatibility from surface similarity, because negation, laterality, or normal-abnormal polarity can reverse a finding. We propose RadSEM (Radiology Sentence-Level Evaluation Metric), a constrained LLM-assisted metric for reference-based evaluation of radiology Findings. RadSEM rewrites reference and generated reports into ordered atomic finding sentences, each expressing one site-finding proposition. It then performs contradiction-constrained many-to-many matching: incompatible pairs such as \"effusion\" and \"no effusion\" receive no credit, while compatible granularity differences can receive partial credit. A deterministic stage weights pairs by part-whole and abnormal-detail relationships, counts unmatched findings, and produces an abnormal-focused weighted F1 score. Thus, the LLM supports structured rewriting and local alignment rather than acting as an opaque judge. We evaluate RadSEM with SSREE, a controlled monotonicity stress test built from 2,448 de-identified reports expanded into five graded corruption levels. RadSEM achieves Kendall tau_b of 0.957, all-pairs concordance of 97.8%, adjacent concordance of 95.0%, and strict five-level ordering for 81.9% of reports, outperforming radiology-specific and general text metrics while avoiding the failure in which polarity-inverted reports regain lexical overlap. On the same SSREE set, RadSEM outperforms the Ref-anchored RadSEM-Alt policy, improving adjacent concordance from 90.7% to 95.0% and strict ordering from 67.2% to 81.9%. On a 599-triplet synonym/antonym subset, RadSEM prefers synonyms in 597 cases (99.67%). These results suggest that explicit finding units, contradiction-aware matching, and abnormal-focused deterministic scoring make report scoring more interpretable and sensitive to clinically meaningful errors. Code is available at https://github.com/jdh-algo/RadSEM.",
+  "authors": [
+    "Zhenhong Yang",
+    "Zhuoyun Liu",
+    "Jintao Fei",
+    "Wen Tang",
+    "Shichao Quan",
+    "Jun Zhao",
+    "Jun Xu"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-03",
+  "id": "arxiv:2606.17062",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.17062v1</ns0:id>\n    <ns0:title>RadSEM: A Finding-by-Finding Metric for Clinical Consistency in Radiology Reports</ns0:title>\n    <ns0:updated>2026-06-03T13:59:42Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.17062v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.17062v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Radiology report evaluation must distinguish clinical compatibility from surface similarity, because negation, laterality, or normal-abnormal polarity can reverse a finding. We propose RadSEM (Radiology Sentence-Level Evaluation Metric), a constrained LLM-assisted metric for reference-based evaluation of radiology Findings. RadSEM rewrites reference and generated reports into ordered atomic finding sentences, each expressing one site-finding proposition. It then performs contradiction-constrained many-to-many matching: incompatible pairs such as \"effusion\" and \"no effusion\" receive no credit, while compatible granularity differences can receive partial credit. A deterministic stage weights pairs by part-whole and abnormal-detail relationships, counts unmatched findings, and produces an abnormal-focused weighted F1 score. Thus, the LLM supports structured rewriting and local alignment rather than acting as an opaque judge. We evaluate RadSEM with SSREE, a controlled monotonicity stress test built from 2,448 de-identified reports expanded into five graded corruption levels. RadSEM achieves Kendall tau_b of 0.957, all-pairs concordance of 97.8%, adjacent concordance of 95.0%, and strict five-level ordering for 81.9% of reports, outperforming radiology-specific and general text metrics while avoiding the failure in which polarity-inverted reports regain lexical overlap. On the same SSREE set, RadSEM outperforms the Ref-anchored RadSEM-Alt policy, improving adjacent concordance from 90.7% to 95.0% and strict ordering from 67.2% to 81.9%. On a 599-triplet synonym/antonym subset, RadSEM prefers synonyms in 597 cases (99.67%). These results suggest that explicit finding units, contradiction-aware matching, and abnormal-focused deterministic scoring make report scoring more interpretable and sensitive to clinically meaningful errors. Code is available at https://github.com/jdh-algo/RadSEM.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-03T13:59:42Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Zhenhong Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhuoyun Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jintao Fei</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wen Tang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shichao Quan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jun Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jun Xu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "RadSEM: finding-level, contradiction-aware LLM-assisted metric for radiology report evaluation; Kendall tau_b 0.957 on SSREE.",
+  "title": "RadSEM: A Finding-by-Finding Metric for Clinical Consistency in Radiology Reports",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.17062v1"
+}

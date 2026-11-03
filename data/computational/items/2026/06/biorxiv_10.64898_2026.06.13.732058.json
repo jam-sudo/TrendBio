@@ -1,0 +1,43 @@
+{
+  "abstract": "Predicting the binding affinity of protein-protein interactions remains a central challenge in computational biology. Structure prediction models such as AlphaFold3 (AF3) and Boltz-2 can produce high-quality docking poses, and their confidence scores indicate structure quality, but these same scores fail to rank binding affinity among confirmed binders. Here we present ProtAff, a sequence-only affinity prediction model built on ESM-2 (650M parameters) with low-rank adaptation (LoRA) fine-tuning and a cross-attention module. ProtAff is trained using a margin ranking loss on 362,567 affinity measurements spanning 20 heterogeneous data sources, and we removed all training samples whose target sequence exceeds 50% similarity to the test target EGFR. On the AdaptyvBio EGFR benchmark (N =55), ProtAff achieves a Spearman correlation coefficient{rho} = 0.413, outperforming the best AF3 metric ({rho} = 0.054), the best Boltz-2 metric ({rho} = -0.046), and ML-based predictors MINT ({rho} = 0.242) and CrossAffinity ({rho} = 0.216). Applied to the AdaptyvBio Nipah virus binder design competition, a pipeline incorporating ProtAff for affinity ranking produced a design with KD = 0.132 nM (2 of 5 designs confirmed binding), a 2.8-fold improvement over the competition winner. On a cross-target discrimination benchmark of 91 VHH-antigen crystal structures, ProtAff underperforms structural methods for distinguishing cognate from non-cognate pairings, indicating that sequence-based affinity models are effective for within-target ranking but not for cross-target specificity.",
+  "authors": [
+    "Chu, L.-S.",
+    "Vogt, J.",
+    "Chungyoun, M.",
+    "Gray, J. J."
+  ],
+  "doi": "10.64898/2026.06.13.732058",
+  "first_seen": "2026-06-13",
+  "id": "biorxiv:10.64898/2026.06.13.732058",
+  "metadata": {
+    "abstract": "Predicting the binding affinity of protein-protein interactions remains a central challenge in computational biology. Structure prediction models such as AlphaFold3 (AF3) and Boltz-2 can produce high-quality docking poses, and their confidence scores indicate structure quality, but these same scores fail to rank binding affinity among confirmed binders. Here we present ProtAff, a sequence-only affinity prediction model built on ESM-2 (650M parameters) with low-rank adaptation (LoRA) fine-tuning and a cross-attention module. ProtAff is trained using a margin ranking loss on 362,567 affinity measurements spanning 20 heterogeneous data sources, and we removed all training samples whose target sequence exceeds 50% similarity to the test target EGFR. On the AdaptyvBio EGFR benchmark (N =55), ProtAff achieves a Spearman correlation coefficient{rho} = 0.413, outperforming the best AF3 metric ({rho} = 0.054), the best Boltz-2 metric ({rho} = -0.046), and ML-based predictors MINT ({rho} = 0.242) and CrossAffinity ({rho} = 0.216). Applied to the AdaptyvBio Nipah virus binder design competition, a pipeline incorporating ProtAff for affinity ranking produced a design with KD = 0.132 nM (2 of 5 designs confirmed binding), a 2.8-fold improvement over the competition winner. On a cross-target discrimination benchmark of 91 VHH-antigen crystal structures, ProtAff underperforms structural methods for distinguishing cognate from non-cognate pairings, indicating that sequence-based affinity models are effective for within-target ranking but not for cross-target specificity.",
+    "author_corresponding": "Jeffrey J. Gray",
+    "author_corresponding_institution": "Johns Hopkins University",
+    "authors": "Chu, L.-S.; Vogt, J.; Chungyoun, M.; Gray, J. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-13",
+    "doi": "10.64898/2026.06.13.732058",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/13/2026.06.13.732058.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ProtAff: Protein Binding Affinity Prediction via LoRA-Finetuned ESM-2",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "ProtAff: LoRA-tuned ESM-2 sequence model with cross-attention predicts protein binding affinity, outperforming AF3/Boltz-2 metrics on the EGFR benchmark (rho…",
+  "title": "ProtAff: Protein Binding Affinity Prediction via LoRA-Finetuned ESM-2",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.13.732058"
+}
