@@ -6,7 +6,7 @@ on:
   # Data commits are pushed with GITHUB_TOKEN, which never triggers `push` workflows,
   # so redeploy when a pipeline workflow finishes instead.
   workflow_run:
-    workflows: [Daily pipeline, Backfill, Resynthesize]
+    workflows: [Daily pipeline, Backfill, Resynthesize, Maintenance]
     types: [completed]
   workflow_dispatch:
 
