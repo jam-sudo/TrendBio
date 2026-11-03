@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgsroundGenome and transcriptome browsers are central to the interpretation of high-throughput sequencing data, but todays tools assume a human operator at a graphical interface and offer only limited programmability. As large-language-model assistants become routine in bioinformatics [Anthropic, 2024], this creates a bottleneck: agents cannot observe the visual state of the browser or drive it through the same interface as the human user, and analyses remain fragmented across a separate ecosystem of external tools. Transcript-coordinate data, produced by ribosome profiling [Ingolia et al., 2012] and direct RNA sequencing [Garalde et al., 2018], is also awkwardly supported in chromosome-oriented viewers.\n\nResultsWe present VX, a desktop genome and transcriptome viewer written in D, using GTK 3 and OpenGL, that handles genome-scale and transcriptome-scale data in a unified interface. VX exposes its full functionality through an embedded HTTP API on the loopback interface and a Model Context Protocol server of currently thirty-nine tools, so that scripts and LLM agents can load data, navigate, manage tracks, run analyses, and capture figures through the same contract used by the GUI. An integrated analysis framework provides more than fifty analyses and includes signal processing and peak calling, quantification, variant analysis, alignment statistics, interaction and cross-track comparisons, all with an explicit four-level scope hierarchy running from viewport to whole dataset; results are written to disk and, where appropriate, added as new tracks. Additional features include a magnifier popup for base-resolution inspection (Alt+hover), chromosome-alias resolution across UCSC, Ensembl, and NCBI conventions, viewport video recording via an ffmpeg pipe, and INI-based configuration.\n\nConclusionsVX complements existing desktop and web browsers by providing a native agent-control layer, an integrated analysis framework, and first-class transcriptspace handling. The binary is freely available for non-commercial use; the HTTP API and MCP protocol are fully specified in this article, so third-party clients can be written independently of the core implementation.",
+  "authors": [
+    "Shirokikh, N. E.",
+    "Cleynen, A."
+  ],
+  "doi": "10.64898/2026.05.17.725790",
+  "first_seen": "2026-05-20",
+  "id": "biorxiv:10.64898/2026.05.17.725790",
+  "metadata": {
+    "abstract": "BackgsroundGenome and transcriptome browsers are central to the interpretation of high-throughput sequencing data, but todays tools assume a human operator at a graphical interface and offer only limited programmability. As large-language-model assistants become routine in bioinformatics [Anthropic, 2024], this creates a bottleneck: agents cannot observe the visual state of the browser or drive it through the same interface as the human user, and analyses remain fragmented across a separate ecosystem of external tools. Transcript-coordinate data, produced by ribosome profiling [Ingolia et al., 2012] and direct RNA sequencing [Garalde et al., 2018], is also awkwardly supported in chromosome-oriented viewers.\n\nResultsWe present VX, a desktop genome and transcriptome viewer written in D, using GTK 3 and OpenGL, that handles genome-scale and transcriptome-scale data in a unified interface. VX exposes its full functionality through an embedded HTTP API on the loopback interface and a Model Context Protocol server of currently thirty-nine tools, so that scripts and LLM agents can load data, navigate, manage tracks, run analyses, and capture figures through the same contract used by the GUI. An integrated analysis framework provides more than fifty analyses and includes signal processing and peak calling, quantification, variant analysis, alignment statistics, interaction and cross-track comparisons, all with an explicit four-level scope hierarchy running from viewport to whole dataset; results are written to disk and, where appropriate, added as new tracks. Additional features include a magnifier popup for base-resolution inspection (Alt+hover), chromosome-alias resolution across UCSC, Ensembl, and NCBI conventions, viewport video recording via an ffmpeg pipe, and INI-based configuration.\n\nConclusionsVX complements existing desktop and web browsers by providing a native agent-control layer, an integrated analysis framework, and first-class transcriptspace handling. The binary is freely available for non-commercial use; the HTTP API and MCP protocol are fully specified in this article, so third-party clients can be written independently of the core implementation.",
+    "author_corresponding": "Nikolay E Shirokikh",
+    "author_corresponding_institution": "University of Western Australia",
+    "authors": "Shirokikh, N. E.; Cleynen, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-20",
+    "doi": "10.64898/2026.05.17.725790",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/20/2026.05.17.725790.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "VX: an AI-enabled desktop genome viewer and transcriptome browser with a programmable analysis framework",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Western Australia",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "VX is a desktop genome and transcriptome viewer with an HTTP API and MCP server for LLM agents, plus a 50+ analysis framework and transcript-coordinate support.",
+  "title": "VX: an AI-enabled desktop genome viewer and transcriptome browser with a programmable analysis framework",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.17.725790"
+}

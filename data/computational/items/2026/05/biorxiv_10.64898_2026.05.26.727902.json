@@ -1,0 +1,43 @@
+{
+  "abstract": "Spatial transcriptomics couples hematoxylin and eosin (H&E) tissue morphology with spatially resolved gene expression (GE). However, generative models that exploit this coupling to synthesize tissue images from transcriptomic profiles remain scarce. We present STMDiT (Spatial Transcriptomics and Morphology Diffusion Transformer), a diffusion transformer that synthesizes H&E histopathology patches conditioned jointly on morphological embeddings and transcriptomic profiles. Building on PixCell (Yellapragada et al., 2025), we integrate gene expression from a frozen CancerFoundation encoder (Theus et al., 2024) through adaptive layer normalization and per-block cross-attention, and we train under dual classifier-free guidance with independent modality dropout. On the 10x TuPro Visium melanoma cohort, GE conditioning improves both image quality over the no-GE PixCell-B baseline (best FID = 252.9 vs 330.7) and transcriptomic fidelity (best AUC = 0.267 vs 0.229, reaching 82% of the real-tile ceiling). Training with DeepSpots predicted-transcriptomics pseudo-labels (PTPL) uniquely transfers zero-shot to TCGA SKCM, an out-of-distribution (OOD) H&E-only melanoma cohort: PTPL-XAttn-PMA-B reaches FID = 690.0, a 57-point improvement over the no-GE baseline (747.1), with a within-model GE-ablation effect of {Delta}OOD = +309.5, enabling virtual tissue synthesis beyond native spatial-transcriptomics coverage. Our results indicate that gene-expression conditioning produces morphologically distinct tissue images and supports virtual tissue simulation for hypothesis testing in computational pathology.",
+  "authors": [
+    "Vlachas, P.",
+    "Nonchev, K.",
+    "Koelzer, V.",
+    "Ratsch, G."
+  ],
+  "doi": "10.64898/2026.05.26.727902",
+  "first_seen": "2026-05-29",
+  "id": "biorxiv:10.64898/2026.05.26.727902",
+  "metadata": {
+    "abstract": "Spatial transcriptomics couples hematoxylin and eosin (H&E) tissue morphology with spatially resolved gene expression (GE). However, generative models that exploit this coupling to synthesize tissue images from transcriptomic profiles remain scarce. We present STMDiT (Spatial Transcriptomics and Morphology Diffusion Transformer), a diffusion transformer that synthesizes H&E histopathology patches conditioned jointly on morphological embeddings and transcriptomic profiles. Building on PixCell (Yellapragada et al., 2025), we integrate gene expression from a frozen CancerFoundation encoder (Theus et al., 2024) through adaptive layer normalization and per-block cross-attention, and we train under dual classifier-free guidance with independent modality dropout. On the 10x TuPro Visium melanoma cohort, GE conditioning improves both image quality over the no-GE PixCell-B baseline (best FID = 252.9 vs 330.7) and transcriptomic fidelity (best AUC = 0.267 vs 0.229, reaching 82% of the real-tile ceiling). Training with DeepSpots predicted-transcriptomics pseudo-labels (PTPL) uniquely transfers zero-shot to TCGA SKCM, an out-of-distribution (OOD) H&E-only melanoma cohort: PTPL-XAttn-PMA-B reaches FID = 690.0, a 57-point improvement over the no-GE baseline (747.1), with a within-model GE-ablation effect of {Delta}OOD = +309.5, enabling virtual tissue synthesis beyond native spatial-transcriptomics coverage. Our results indicate that gene-expression conditioning produces morphologically distinct tissue images and supports virtual tissue simulation for hypothesis testing in computational pathology.",
+    "author_corresponding": "Kalin Nonchev",
+    "author_corresponding_institution": "ETH Zurich",
+    "authors": "Vlachas, P.; Nonchev, K.; Koelzer, V.; Ratsch, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-29",
+    "doi": "10.64898/2026.05.26.727902",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/29/2026.05.26.727902.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Transcriptomics-Conditioned Virtual Tissue Synthesis via Diffusion Transformers",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "ETH Zurich",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "STMDiT, a diffusion transformer conditioned on gene expression and morphology, synthesizes H&E tissue patches; improves FID and transcriptomic fidelity on…",
+  "title": "Transcriptomics-Conditioned Virtual Tissue Synthesis via Diffusion Transformers",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.26.727902"
+}

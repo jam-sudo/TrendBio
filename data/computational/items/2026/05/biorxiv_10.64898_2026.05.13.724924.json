@@ -1,0 +1,49 @@
+{
+  "abstract": "Protein structure prediction models (such as AlphaFold, Chai, Boltz) have transformed structural biology and are increasingly explored for drug discovery; however, their utility for large-scale screening of antibody-antigen (AB-AG) interactions remains unclear, particularly for distinguishing true binding from non-binding pairs at scale. To our knowledge, there has not been an exhaustive exploration of Boltz-2 inference settings on this high impact problem, and in this paper we set out to describe and implement a novel benchmarking framework that can accelerate progress in the field. We evaluated Boltz-2 (NVIDIA NIM implementation) on 519 therapeutic monoclonal antibodies from Thera-SAbDab, pairing each antibody with its cognate target and a randomly assigned non-cognate antigen. We developed a novel evaluation framework that systematically captures variability across stochastic seeds while benchmarking different inference settings, including datasets with and without crystallographically resolved antibody structures. Across settings, Boltz-2-derived confidence metrics showed weak, though above-chance, discrimination (0.5 < ROC-AUC < 0.60). Among evaluated metrics, the minimum value of the interface predicted TM-score (ipTM-min) across seed-samples, captured the strongest signal. Interestingly, additional feature aggregation and multivariate modelling provided little to no improvement. Increasing the number of stochastic predictions yielded front-loaded gains, with diminishing returns beyond [~]15-20 seed-samples, suggesting limited value of extensive sampling in practical workflows. Notably, inference without multiple sequence alignments (MSAs) slightly improved performance on non-crystallized antibodies ({Delta}AUROC {approx} +0.027) while reducing runtime by [~]8 seconds per prediction compared to shallow MSA settings. Overall, these results indicate that off-the-shelf confidence metrics from general-purpose structure prediction models may be insufficient for reliable target-antibody screening and highlight the need for task-specific optimization, while confirming that modest amounts of sampling can be helpful, but not in itself sufficient to improve performance significantly as gains plateau relatively quickly.",
+  "authors": [
+    "Fieux-Castagnet, A.",
+    "Waton, J.",
+    "Glukhonemykh, A.",
+    "Snow, E.",
+    "Ashokkumar, R.",
+    "Fleming, J.",
+    "Champagne, D.",
+    "Devenyns, T.",
+    "Peluffo, A.",
+    "Anagnostopoulos, C."
+  ],
+  "doi": "10.64898/2026.05.13.724924",
+  "first_seen": "2026-05-14",
+  "id": "biorxiv:10.64898/2026.05.13.724924",
+  "metadata": {
+    "abstract": "Protein structure prediction models (such as AlphaFold, Chai, Boltz) have transformed structural biology and are increasingly explored for drug discovery; however, their utility for large-scale screening of antibody-antigen (AB-AG) interactions remains unclear, particularly for distinguishing true binding from non-binding pairs at scale. To our knowledge, there has not been an exhaustive exploration of Boltz-2 inference settings on this high impact problem, and in this paper we set out to describe and implement a novel benchmarking framework that can accelerate progress in the field. We evaluated Boltz-2 (NVIDIA NIM implementation) on 519 therapeutic monoclonal antibodies from Thera-SAbDab, pairing each antibody with its cognate target and a randomly assigned non-cognate antigen. We developed a novel evaluation framework that systematically captures variability across stochastic seeds while benchmarking different inference settings, including datasets with and without crystallographically resolved antibody structures. Across settings, Boltz-2-derived confidence metrics showed weak, though above-chance, discrimination (0.5 < ROC-AUC < 0.60). Among evaluated metrics, the minimum value of the interface predicted TM-score (ipTM-min) across seed-samples, captured the strongest signal. Interestingly, additional feature aggregation and multivariate modelling provided little to no improvement. Increasing the number of stochastic predictions yielded front-loaded gains, with diminishing returns beyond [~]15-20 seed-samples, suggesting limited value of extensive sampling in practical workflows. Notably, inference without multiple sequence alignments (MSAs) slightly improved performance on non-crystallized antibodies ({Delta}AUROC {approx} +0.027) while reducing runtime by [~]8 seconds per prediction compared to shallow MSA settings. Overall, these results indicate that off-the-shelf confidence metrics from general-purpose structure prediction models may be insufficient for reliable target-antibody screening and highlight the need for task-specific optimization, while confirming that modest amounts of sampling can be helpful, but not in itself sufficient to improve performance significantly as gains plateau relatively quickly.",
+    "author_corresponding": "Alexandra Fieux-Castagnet",
+    "author_corresponding_institution": "Scientific AI, QuantumBlack, AI by McKinsey & Company",
+    "authors": "Fieux-Castagnet, A.; Waton, J.; Glukhonemykh, A.; Snow, E.; Ashokkumar, R.; Fleming, J.; Champagne, D.; Devenyns, T.; Peluffo, A.; Anagnostopoulos, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-14",
+    "doi": "10.64898/2026.05.13.724924",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/14/2026.05.13.724924.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmarking Boltz-2 for Screening of Therapeutic Antibody-Antigen Interactions",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Scientific AI, QuantumBlack, AI by McKinsey & Company",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-05-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks Boltz-2 structure predictions for antibody-antigen binding screens; ipTM-min is the best signal, but ROC-AUCs stay weak (0.5-0.6).",
+  "title": "Benchmarking Boltz-2 for Screening of Therapeutic Antibody-Antigen Interactions",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.13.724924"
+}

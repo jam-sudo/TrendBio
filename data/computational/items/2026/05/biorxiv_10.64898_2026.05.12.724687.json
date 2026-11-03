@@ -1,0 +1,42 @@
+{
+  "abstract": "Molecular similarity searching is a workhorse of cheminformatics, but the dominant Tanimoto/topological-fingerprint paradigm has well-known blind spots. It is highly sensitive to molecular size, suffers from steep activity cliffs, and frequently fails to retrieve scaffold-hopping bioisosteres. A complementary descriptor that has received comparatively little attention is global elemental composition. Despite the conceptual simplicity of comparing molecules by their elemental ratios, no widely deployed method exists for the statistically rigorous identification of \"chemical twins\" defined by stoichiometric proximity. We address this gap with TwinSAR (Stoichiometric Analysis and Retrieval), an adaptive kernel-based algorithm that combines three methodological innovations: (i) binary fingerprint blocking that partitions molecule by element-presence patterns and bounds the cost of all-pairs comparison from O(NM) to O({sum}nimi) enabling million/billion-scale searches; (ii) a per-block adaptive radial basis function (RBF) kernel whose precision parameter is calibrated independently for each fingerprint block via the median heuristic, providing fair similarity comparison across chemical sub-spaces of vastly different density; and (iii) a logit-transformed Z-score filter that maps bounded RBF scores onto an unbounded scale, allowing high-similarity pairs to be prioritized relative to the empirical score distribution of their own fingerprint block. TwinSAR is offered in two operating modes: (i) a deterministic BULK mode for exact reproducibility; and (ii) a stochastic FAST mode that achieved a 3.29x wall-clock speed-up in the present benchmark while preserving the similar unique-query and unique-target coverage. Statistical validation showed that detected twin pairs are 12.7x more similar in absolute ratio space than block-matched random pairs (p < 0.001), while a column-permutation negative control returned a median of zero spurious twins across three independent permutations. A controlled benchmark further established that an 8-element representation (single-element heavy-atom ratios) is sensitivity-equivalent to a comprehensive 254-element representation while running 3.55x faster. As a case study, TwinSAR was deployed in an end-to-end virtual screening pipeline against the BCL-2 target protein, where it reduced a 327,071-compound commercial library to a 390 focused candidate panel. The chemical interpretability of the retrieved twins is illustrated by their structural diversity around conserved heavy-atom skeletons. TwinSAR therefore provides a fast, conformation-free, and statistically principled prefilter that is fully orthogonal to topological fingerprints.",
+  "authors": [
+    "Haris Kulosmanovic, H.",
+    "Uguz, C.",
+    "DURDAGI, S."
+  ],
+  "doi": "10.64898/2026.05.12.724687",
+  "first_seen": "2026-05-15",
+  "id": "biorxiv:10.64898/2026.05.12.724687",
+  "metadata": {
+    "abstract": "Molecular similarity searching is a workhorse of cheminformatics, but the dominant Tanimoto/topological-fingerprint paradigm has well-known blind spots. It is highly sensitive to molecular size, suffers from steep activity cliffs, and frequently fails to retrieve scaffold-hopping bioisosteres. A complementary descriptor that has received comparatively little attention is global elemental composition. Despite the conceptual simplicity of comparing molecules by their elemental ratios, no widely deployed method exists for the statistically rigorous identification of \"chemical twins\" defined by stoichiometric proximity. We address this gap with TwinSAR (Stoichiometric Analysis and Retrieval), an adaptive kernel-based algorithm that combines three methodological innovations: (i) binary fingerprint blocking that partitions molecule by element-presence patterns and bounds the cost of all-pairs comparison from O(NM) to O({sum}nimi) enabling million/billion-scale searches; (ii) a per-block adaptive radial basis function (RBF) kernel whose precision parameter is calibrated independently for each fingerprint block via the median heuristic, providing fair similarity comparison across chemical sub-spaces of vastly different density; and (iii) a logit-transformed Z-score filter that maps bounded RBF scores onto an unbounded scale, allowing high-similarity pairs to be prioritized relative to the empirical score distribution of their own fingerprint block. TwinSAR is offered in two operating modes: (i) a deterministic BULK mode for exact reproducibility; and (ii) a stochastic FAST mode that achieved a 3.29x wall-clock speed-up in the present benchmark while preserving the similar unique-query and unique-target coverage. Statistical validation showed that detected twin pairs are 12.7x more similar in absolute ratio space than block-matched random pairs (p < 0.001), while a column-permutation negative control returned a median of zero spurious twins across three independent permutations. A controlled benchmark further established that an 8-element representation (single-element heavy-atom ratios) is sensitivity-equivalent to a comprehensive 254-element representation while running 3.55x faster. As a case study, TwinSAR was deployed in an end-to-end virtual screening pipeline against the BCL-2 target protein, where it reduced a 327,071-compound commercial library to a 390 focused candidate panel. The chemical interpretability of the retrieved twins is illustrated by their structural diversity around conserved heavy-atom skeletons. TwinSAR therefore provides a fast, conformation-free, and statistically principled prefilter that is fully orthogonal to topological fingerprints.",
+    "author_corresponding": "Serdar DURDAGI",
+    "author_corresponding_institution": "Bahcesehir University",
+    "authors": "Haris Kulosmanovic, H.; Uguz, C.; DURDAGI, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-15",
+    "doi": "10.64898/2026.05.12.724687",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/15/2026.05.12.724687.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TwinSAR: An Adaptive Kernel-based Algorithm with logit-transformed Z-score Filtering for Chemical Twin Detection in Large-scale Virtual Screening",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Bahcesehir University",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-05-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "TwinSAR: adaptive RBF kernel with logit Z-score filtering for stoichiometric chemical twin search, used as a BCL-2 virtual screening prefilter.",
+  "title": "TwinSAR: An Adaptive Kernel-based Algorithm with logit-transformed Z-score Filtering for Chemical Twin Detection in Large-scale Virtual Screening",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.12.724687"
+}

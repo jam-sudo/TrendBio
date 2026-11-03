@@ -1,0 +1,44 @@
+{
+  "abstract": "Inferring gene regulation from time-course expression profiles is essential for understanding how cells transition between states during development, differentiation, and disease progression. Existing approaches often model expression dynamics with ordinary differential equations (ODEs). However, due to the computational complexity of directly solving these ODE models, most methods rely on finite-difference approximations of temporal derivatives, which can amplify measurement noise, introduce discretization bias, and lead to unstable or biased parameter estimates.\n\nTo fill this gap, we develop the first computational method to directly learn a linear ODE model for gene regulation inference without relying on finite-difference approximations. We first formulate an optimization problem that directly exploits the closed-form solution of the linear ODE system. We then solve this problem via gradient descent, deriving analytical gradients with respect to the model parameters; these gradients involve matrix exponentials and integrals, which are challenging to directly compute. To make the computation efficient, we further use high-order Taylor approximations of the gradients whose truncation error is on the order of machine precision. In addition, we establish theoretical results demonstrating an inherent, non-vanishing gap between our exact solution and solutions derived from finite-difference approximations, which underscores the theoretical advantages of our approach. Finally, we demonstrate that our method consistently outperforms competing approaches on both simulated data and real-world scRNA-seq datasets in terms of AUROC. Our source codes can be accessed here: https://github.com/EJIUB/ExactLinearODE",
+  "authors": [
+    "Huang, X.",
+    "Ang, A.",
+    "Vasoya, A. P.",
+    "Wang, Y.",
+    "Teresa, P."
+  ],
+  "doi": "10.64898/2026.05.18.726023",
+  "first_seen": "2026-05-20",
+  "id": "biorxiv:10.64898/2026.05.18.726023",
+  "metadata": {
+    "abstract": "Inferring gene regulation from time-course expression profiles is essential for understanding how cells transition between states during development, differentiation, and disease progression. Existing approaches often model expression dynamics with ordinary differential equations (ODEs). However, due to the computational complexity of directly solving these ODE models, most methods rely on finite-difference approximations of temporal derivatives, which can amplify measurement noise, introduce discretization bias, and lead to unstable or biased parameter estimates.\n\nTo fill this gap, we develop the first computational method to directly learn a linear ODE model for gene regulation inference without relying on finite-difference approximations. We first formulate an optimization problem that directly exploits the closed-form solution of the linear ODE system. We then solve this problem via gradient descent, deriving analytical gradients with respect to the model parameters; these gradients involve matrix exponentials and integrals, which are challenging to directly compute. To make the computation efficient, we further use high-order Taylor approximations of the gradients whose truncation error is on the order of machine precision. In addition, we establish theoretical results demonstrating an inherent, non-vanishing gap between our exact solution and solutions derived from finite-difference approximations, which underscores the theoretical advantages of our approach. Finally, we demonstrate that our method consistently outperforms competing approaches on both simulated data and real-world scRNA-seq datasets in terms of AUROC. Our source codes can be accessed here: https://github.com/EJIUB/ExactLinearODE",
+    "author_corresponding": "Przytycka Teresa",
+    "author_corresponding_institution": "NIH/NLM/NCBI",
+    "authors": "Huang, X.; Ang, A.; Vasoya, A. P.; Wang, Y.; Teresa, P.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-05-20",
+    "doi": "10.64898/2026.05.18.726023",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/20/2026.05.18.726023.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "From time-course expression to gene regulation: direct linear ODE inference without finite-difference approximation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "NIH/NLM/NCBI",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-05-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "Direct linear ODE gene regulation inference from time-course expression using closed-form matrix-exponential gradients and Taylor approximations, avoiding…",
+  "title": "From time-course expression to gene regulation: direct linear ODE inference without finite-difference approximation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.18.726023"
+}

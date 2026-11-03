@@ -1,0 +1,43 @@
+{
+  "abstract": "Over-representation analysis (ORA) is the most commonly used interpretation tool for gene lists despite well-documented limitations: pathway boundaries are fixed, genes are assumed independent, and results depend on the background set. Network-based methods address these using interaction-network modularity, but introduce hub bias: highly connected genes appear clustered under naive nulls because curated networks overrepresent well-studied genes. Existing corrections are imperfect: edge permutation destroys the topology the test should condition on, and propagation methods hide the confound in parameter tuning. We introduce MANGO (Morans Autocorrelation for Network Gene Over-representation), which asks one conditional question: does a gene sets spatial autocorrelation on a fixed biological network exceed what its degree composition alone would predict? MANGO computes Global Morans I under a null that conditions on both the network and the binned degree distribution of the gene set, then decomposes significant signals at the component and gene level. In benchmarks, uniform nulls produce a false positive rate of 1.0 on hub-enriched gene sets with no real clustering; ten-bin degree-stratified nulls bring that to 0.0 with no power loss (AUC [&ge;] 0.98; on degree-typical signals, |{Delta}AUC| [&le;] 0.004). Pathway-spiking simulations confirm detection of real biological clustering across diverse pathway sizes and degree profiles. Applied to the FIGI colorectal cancer GWAS (204 SNPs), the set is degree-typical (KS p = 0.83), yet Morans I is highly significant (p < 0.001). Component-level jackknife localizes the entire signal to a single 24-gene module spanning TGF-{beta}, Wnt/cadherin, and related pathways, with four bottlenecks (SMAD3, MYC, CTNNB1, PTPN1) matching established CRC driver biology.\n\neTOC blurbMANGO tests whether a gene sets spatial autocorrelation on a biological network exceeds what its degree composition predicts, by conditioning Global Morans I on the binned degree distribution with the network held fixed. Significant signals are decomposed to modules, bottleneck genes, and statistical drivers through component jackknife, articulation-point, and gene-jackknife analysis.",
+  "authors": [
+    "Queme, B.",
+    "Marjoram, P.",
+    "Mi, H."
+  ],
+  "doi": "10.64898/2026.05.04.722765",
+  "first_seen": "2026-05-07",
+  "id": "biorxiv:10.64898/2026.05.04.722765",
+  "metadata": {
+    "abstract": "Over-representation analysis (ORA) is the most commonly used interpretation tool for gene lists despite well-documented limitations: pathway boundaries are fixed, genes are assumed independent, and results depend on the background set. Network-based methods address these using interaction-network modularity, but introduce hub bias: highly connected genes appear clustered under naive nulls because curated networks overrepresent well-studied genes. Existing corrections are imperfect: edge permutation destroys the topology the test should condition on, and propagation methods hide the confound in parameter tuning. We introduce MANGO (Morans Autocorrelation for Network Gene Over-representation), which asks one conditional question: does a gene sets spatial autocorrelation on a fixed biological network exceed what its degree composition alone would predict? MANGO computes Global Morans I under a null that conditions on both the network and the binned degree distribution of the gene set, then decomposes significant signals at the component and gene level. In benchmarks, uniform nulls produce a false positive rate of 1.0 on hub-enriched gene sets with no real clustering; ten-bin degree-stratified nulls bring that to 0.0 with no power loss (AUC [&ge;] 0.98; on degree-typical signals, |{Delta}AUC| [&le;] 0.004). Pathway-spiking simulations confirm detection of real biological clustering across diverse pathway sizes and degree profiles. Applied to the FIGI colorectal cancer GWAS (204 SNPs), the set is degree-typical (KS p = 0.83), yet Morans I is highly significant (p < 0.001). Component-level jackknife localizes the entire signal to a single 24-gene module spanning TGF-{beta}, Wnt/cadherin, and related pathways, with four bottlenecks (SMAD3, MYC, CTNNB1, PTPN1) matching established CRC driver biology.\n\neTOC blurbMANGO tests whether a gene sets spatial autocorrelation on a biological network exceeds what its degree composition predicts, by conditioning Global Morans I on the binned degree distribution with the network held fixed. Significant signals are decomposed to modules, bottleneck genes, and statistical drivers through component jackknife, articulation-point, and gene-jackknife analysis.",
+    "author_corresponding": "Huaiyu Mi",
+    "author_corresponding_institution": "University of Southern California",
+    "authors": "Queme, B.; Marjoram, P.; Mi, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-07",
+    "doi": "10.64898/2026.05.04.722765",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/07/2026.05.04.722765.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Beyond Pathway Boundaries: A Degree-Aware Network Clustering Test for Gene Sets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Southern California",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "MANGO tests gene-set clustering on fixed biological networks via Global Morans I under degree-stratified nulls, reducing hub-bias false positives; applied to…",
+  "title": "Beyond Pathway Boundaries: A Degree-Aware Network Clustering Test for Gene Sets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.04.722765"
+}

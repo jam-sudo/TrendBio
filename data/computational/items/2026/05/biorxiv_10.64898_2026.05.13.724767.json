@@ -1,0 +1,41 @@
+{
+  "abstract": "Glioblastoma multiforme (GBM) is characterised by profound genomic heterogeneity and heavy-tailed gene-expression distributions that challenge conventional machine-learning methods. We introduce the Tsallis-Gated Autoencoder (Tsallis-GAE), a physics-informed architecture that replaces classical softmax attention with a learnable Tsallis q-softmax followed by mean-field smoothing iterations, motivated by recent work on curved statistical manifolds and dense associative networks. Trained on the full TCGA-GBM RNA-seq cohort (391 samples, top 2,000 high-variance genes) under a rigorous 80/20 hold-out protocol, the Tsallis-GAE achieves a mean AUC-ROC of 0.977 {+/-} 0.002 across five independent seeds, compared to 0.906 {+/-} 0.003 for a matched-capacity Vanilla autoencoder trained under the identical protocol. The matched-capacity Vanilla autoencoder is statistically indistinguishable from a LocalOutlierFactor baseline (AUC 0.906 vs 0.906), confirming that the +0.07 AUC gain over the Vanilla AE stems from the gated attention architecture rather than from the use of a neural network per se. A fixed-q Softmax-AE ablation (q {equiv}1 by construction) achieves AUC 0.976 {+/-}0.001, only +0.001 below the Tsallis-GAE (DeLong p = 0.44); the physically meaningful contribution of the learnable q is its spontaneous convergence to the non-extensive regime described below. The three attention blocks each carry an independent learnable entropic index q; across 5 seeds x3 blocks = 15 measurements, q converges spontaneously to 1.554{+/-} 0.019, strictly bounded away from the Boltzmann-Gibbs limit q = 1 and in the moderate non-extensivity regime characteristic of complex biological systems. Cross-detector validation against OneClassSVM and LocalOutlier-Factor pseudo-labels yields Tsallis-GAE AUCs of 0.998 and 0.992 respectively, indicating that the learned representation captures anomaly structure intrinsic to the data rather than the decision boundary of any single labeling heuristic. We declare that DeLongs paired test on the present test-set size (n = 79) does not certify the +0.07 AUC gap as formally significant (p{approx} 0.26); a 5-fold cross-validation over the full cohort, which would supply the needed statistical power, is left to future work. The source code is available upon reasonable request to the corresponding author.",
+  "authors": [
+    "Assuncao Monteiro, S.",
+    "Alves Barbosa da Silva, F."
+  ],
+  "doi": "10.64898/2026.05.13.724767",
+  "first_seen": "2026-05-15",
+  "id": "biorxiv:10.64898/2026.05.13.724767",
+  "metadata": {
+    "abstract": "Glioblastoma multiforme (GBM) is characterised by profound genomic heterogeneity and heavy-tailed gene-expression distributions that challenge conventional machine-learning methods. We introduce the Tsallis-Gated Autoencoder (Tsallis-GAE), a physics-informed architecture that replaces classical softmax attention with a learnable Tsallis q-softmax followed by mean-field smoothing iterations, motivated by recent work on curved statistical manifolds and dense associative networks. Trained on the full TCGA-GBM RNA-seq cohort (391 samples, top 2,000 high-variance genes) under a rigorous 80/20 hold-out protocol, the Tsallis-GAE achieves a mean AUC-ROC of 0.977 {+/-} 0.002 across five independent seeds, compared to 0.906 {+/-} 0.003 for a matched-capacity Vanilla autoencoder trained under the identical protocol. The matched-capacity Vanilla autoencoder is statistically indistinguishable from a LocalOutlierFactor baseline (AUC 0.906 vs 0.906), confirming that the +0.07 AUC gain over the Vanilla AE stems from the gated attention architecture rather than from the use of a neural network per se. A fixed-q Softmax-AE ablation (q {equiv}1 by construction) achieves AUC 0.976 {+/-}0.001, only +0.001 below the Tsallis-GAE (DeLong p = 0.44); the physically meaningful contribution of the learnable q is its spontaneous convergence to the non-extensive regime described below. The three attention blocks each carry an independent learnable entropic index q; across 5 seeds x3 blocks = 15 measurements, q converges spontaneously to 1.554{+/-} 0.019, strictly bounded away from the Boltzmann-Gibbs limit q = 1 and in the moderate non-extensivity regime characteristic of complex biological systems. Cross-detector validation against OneClassSVM and LocalOutlier-Factor pseudo-labels yields Tsallis-GAE AUCs of 0.998 and 0.992 respectively, indicating that the learned representation captures anomaly structure intrinsic to the data rather than the decision boundary of any single labeling heuristic. We declare that DeLongs paired test on the present test-set size (n = 79) does not certify the +0.07 AUC gap as formally significant (p{approx} 0.26); a 5-fold cross-validation over the full cohort, which would supply the needed statistical power, is left to future work. The source code is available upon reasonable request to the corresponding author.",
+    "author_corresponding": "Sergio Assuncao Monteiro",
+    "author_corresponding_institution": "ESPM - Escola Superior de Propaganda e Marketing",
+    "authors": "Assuncao Monteiro, S.; Alves Barbosa da Silva, F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-15",
+    "doi": "10.64898/2026.05.13.724767",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/15/2026.05.13.724767.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Tsallis-Gated Autoencoder: A Nonextensive Physics-Informed Approach for Unsupervised Anomaly Detection in Glioblastoma Multiforme RNA-seq Data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "ESPM - Escola Superior de Propaganda e Marketing",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Tsallis-Gated Autoencoder for unsupervised anomaly detection on TCGA-GBM RNA-seq (n=391); AUC 0.977 vs 0.906 Vanilla AE, but gap not significant by DeLong test.",
+  "title": "Tsallis-Gated Autoencoder: A Nonextensive Physics-Informed Approach for Unsupervised Anomaly Detection in Glioblastoma Multiforme RNA-seq Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.13.724767"
+}

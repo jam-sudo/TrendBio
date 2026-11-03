@@ -1,0 +1,35 @@
+{
+  "abstract": "Softmax attention-based transformers and recurrent memory-based models (e.g., state space models (SSMs)) form the foundation of modern sequence models. Hybrid architectures aim to combine the expressivity from attention and the computational efficiency from recurrent memory, yet so far common practices simply stack both attention and recurrent layers. We propose Interdomain Attention (IA) as a novel hybrid attention architecture that mixes attention and recurrent memory in the same layer. Motivated by a kernel regression view of softmax attention, IA compresses values and kernel features of keys into a recurrent memory parameterized by an SSM. Then IA approximates dot-product attention by implicitly reconstructing the attention matrix and values from memory states; importantly this construction maintains SSM's computational efficiency advantage. We demonstrate IA's efficacy by designing and pre-training IA network architectures, where ablation studies identify attention-like readout as the primary source of gain over SSMs. Across 125M-1.3B models pre-trained on text data, IA improves over an S4D baseline at matched memory size. It also outperforms softmax attention-based Transformer in perplexity and accuracy on common-sense reasoning tasks. Based on Caduceus backbone, IA matches or outperforms the original SSM-based architecture in both perplexity and downstream tasks on genomic data.",
+  "authors": [
+    "Naoki Kiyohara",
+    "Harrison Bo Hua Zhu",
+    "Riccardo El Hassanin",
+    "Zhuo Sun",
+    "Wenlong Chen",
+    "Samir Bhatt",
+    "Yingzhen Li"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-23",
+  "id": "arxiv:2605.24330",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.24330v2</ns0:id>\n    <ns0:title>Interdomain Attention: Beyond Token-Level Key-Value Memory</ns0:title>\n    <ns0:updated>2026-10-20T11:41:39Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.24330v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.24330v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Softmax attention-based transformers and recurrent memory-based models (e.g., state space models (SSMs)) form the foundation of modern sequence models. Hybrid architectures aim to combine the expressivity from attention and the computational efficiency from recurrent memory, yet so far common practices simply stack both attention and recurrent layers. We propose Interdomain Attention (IA) as a novel hybrid attention architecture that mixes attention and recurrent memory in the same layer. Motivated by a kernel regression view of softmax attention, IA compresses values and kernel features of keys into a recurrent memory parameterized by an SSM. Then IA approximates dot-product attention by implicitly reconstructing the attention matrix and values from memory states; importantly this construction maintains SSM's computational efficiency advantage. We demonstrate IA's efficacy by designing and pre-training IA network architectures, where ablation studies identify attention-like readout as the primary source of gain over SSMs. Across 125M-1.3B models pre-trained on text data, IA improves over an S4D baseline at matched memory size. It also outperforms softmax attention-based Transformer in perplexity and accuracy on common-sense reasoning tasks. Based on Caduceus backbone, IA matches or outperforms the original SSM-based architecture in both perplexity and downstream tasks on genomic data.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-23T01:18:00Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Naoki Kiyohara</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Harrison Bo Hua Zhu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Riccardo El Hassanin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhuo Sun</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wenlong Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Samir Bhatt</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yingzhen Li</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-23",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Proposes Interdomain Attention, a hybrid layer that compresses attention key-value memory into an SSM; beats S4D and Transformers on text and matches Caduceus…",
+  "title": "Interdomain Attention: Beyond Token-Level Key-Value Memory",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.24330v2"
+}

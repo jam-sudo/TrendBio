@@ -1,0 +1,46 @@
+{
+  "abstract": "MotivationThe ToxCast database is a valuable resource for computational toxicology and new approach methodologies (NAMs), but the approximately 100 GB MySQL distribution is difficult to use for portable local analysis and cross-domain evidence mining. Many practical questions concern chemicals, in vitro bioactivity, in vivo toxicological evidence, and exposure-relevant product-use context rather than raw database keys.\n\nResultsWe present ToxCastLite, a portable semantic evidence-access system that combines assay-scoped SQLite databases with a compact RDF layer for GraphDB-based querying. The system streams large ToxCast/invitrodb MySQL dumps into curated SQLite profiles, reducing the footprint to approximately 3 GB for focused use cases such as developmental neurotoxicity. Dense numerical evidence, including concentration-response rows, remains in SQLite, while the RDF projection exposes linked semantic entities such as chemicals, assays, endpoints, model results, potency parameters (AC50), and MC6 quality flags. We further extend the graph with CPDat v4.0 product-use and functional-use evidence and ToxRefDB v3.0 in vivo toxicity evidence, including processed studies, point-of-departure records, effect summaries, and observation summaries. These layers are linked through DSSTox Substance Identifiers, enabling integrated queries across NAM bioactivity, curated animal-study evidence, and exposure/use context. A Streamlit prototype supports exploration through a locally deployed LLM that translates natural-language questions into SPARQL, grounded by a versioned RDF schema to reduce hallucination risk. Case studies in developmental neurotoxicity demonstrate how ToxCastLite identifies concordance between high-confidence in vitro DNT activity and positive in vivo apical evidence, detects in vitro DNT activity beyond available DNT-specific in vivo evidence, and prioritizes chemicals where NAM signals, ToxRefDB evidence, and CPDat product-use context intersect. For selected results, users can drill down from the semantic graph to the underlying SQLite records and retrieve concentration-response curves for expert inspection without manually writing SQL or SPARQL.\n\nAvailabilityProject website at toxcast-lite.github.io/.\n\nContactarif.doenmez@iuf-duesseldorf.de",
+  "authors": [
+    "Dönmez, A.",
+    "Nosov, O.",
+    "Heck, K.",
+    "Mosig, A.",
+    "Fritsche, E.",
+    "Koch, K."
+  ],
+  "doi": "10.64898/2026.05.16.724895",
+  "first_seen": "2026-05-19",
+  "id": "biorxiv:10.64898/2026.05.16.724895",
+  "metadata": {
+    "abstract": "MotivationThe ToxCast database is a valuable resource for computational toxicology and new approach methodologies (NAMs), but the approximately 100 GB MySQL distribution is difficult to use for portable local analysis and cross-domain evidence mining. Many practical questions concern chemicals, in vitro bioactivity, in vivo toxicological evidence, and exposure-relevant product-use context rather than raw database keys.\n\nResultsWe present ToxCastLite, a portable semantic evidence-access system that combines assay-scoped SQLite databases with a compact RDF layer for GraphDB-based querying. The system streams large ToxCast/invitrodb MySQL dumps into curated SQLite profiles, reducing the footprint to approximately 3 GB for focused use cases such as developmental neurotoxicity. Dense numerical evidence, including concentration-response rows, remains in SQLite, while the RDF projection exposes linked semantic entities such as chemicals, assays, endpoints, model results, potency parameters (AC50), and MC6 quality flags. We further extend the graph with CPDat v4.0 product-use and functional-use evidence and ToxRefDB v3.0 in vivo toxicity evidence, including processed studies, point-of-departure records, effect summaries, and observation summaries. These layers are linked through DSSTox Substance Identifiers, enabling integrated queries across NAM bioactivity, curated animal-study evidence, and exposure/use context. A Streamlit prototype supports exploration through a locally deployed LLM that translates natural-language questions into SPARQL, grounded by a versioned RDF schema to reduce hallucination risk. Case studies in developmental neurotoxicity demonstrate how ToxCastLite identifies concordance between high-confidence in vitro DNT activity and positive in vivo apical evidence, detects in vitro DNT activity beyond available DNT-specific in vivo evidence, and prioritizes chemicals where NAM signals, ToxRefDB evidence, and CPDat product-use context intersect. For selected results, users can drill down from the semantic graph to the underlying SQLite records and retrieve concentration-response curves for expert inspection without manually writing SQL or SPARQL.\n\nAvailabilityProject website at toxcast-lite.github.io/.\n\nContactarif.doenmez@iuf-duesseldorf.de",
+    "author_corresponding": "Arif Dönmez",
+    "author_corresponding_institution": "IUF - Leibniz Research Institute for Environmental Medicine, Düsseldorf, Germany",
+    "authors": "Dönmez, A.; Nosov, O.; Heck, K.; Mosig, A.; Fritsche, E.; Koch, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-19",
+    "doi": "10.64898/2026.05.16.724895",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/19/2026.05.16.724895.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ToxCastLite: A portable semantic evidence graph linking in vitro bioactivity, in vivo toxicity, and exposure-use context",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "IUF - Leibniz Research Institute for Environmental Medicine, Düsseldorf, Germany",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "ToxCastLite offers portable SQLite and RDF access to ToxCast bioactivity, ToxRefDB in vivo toxicity, and CPDat use data, with LLM-driven SPARQL querying.",
+  "title": "ToxCastLite: A portable semantic evidence graph linking in vitro bioactivity, in vivo toxicity, and exposure-use context",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.16.724895"
+}

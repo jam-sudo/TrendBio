@@ -1,0 +1,30 @@
+{
+  "abstract": "Sparse autoencoders (SAEs) decompose neural network activations into interpretable features, but many learned features never activate, a problem called feature death that wastes dictionary capacity and can reintroduce superposition. Death rates vary dramatically between models: near-zero on GPT-2, over 70% on AlphaFold3 with identical configurations. We find that dimension-level activation outliers (dimensions whose mean magnitude is large relative to per-token variation) cause this by shifting pre-activations at initialization based on each feature's alignment with the activation mean. Features anti-aligned with the mean receive permanently negative pre-activations and never fire. We formalize outlier severity as $γ= \\|μ\\|/\\|σ\\|$; it predicts initial death rates (Spearman $ρ= 0.89$ for dead-by-TopK, $0.82$ for dead-by-ReLU) across 454 model-layer combinations spanning language, vision, protein, and genomic models. Dead features can revive during training, but recovery requires the SAE bias to learn the activation mean, a process that is prohibitively slow at high $γ$. Mean-centering (subtracting the activation mean) sidesteps this and eliminates outlier-induced death across all tested models, confirming the mechanism and providing a principled basis for when and why this preprocessing step is necessary.",
+  "authors": [
+    "Elana Simon",
+    "Etowah Adams",
+    "James Zou"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-29",
+  "id": "arxiv:2605.31518",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.31518v1</ns0:id>\n    <ns0:title>On the Relationship Between Activation Outliers and Feature Death in Sparse Autoencoders</ns0:title>\n    <ns0:updated>2026-05-29T16:36:13Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.31518v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.31518v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Sparse autoencoders (SAEs) decompose neural network activations into interpretable features, but many learned features never activate, a problem called feature death that wastes dictionary capacity and can reintroduce superposition. Death rates vary dramatically between models: near-zero on GPT-2, over 70% on AlphaFold3 with identical configurations. We find that dimension-level activation outliers (dimensions whose mean magnitude is large relative to per-token variation) cause this by shifting pre-activations at initialization based on each feature's alignment with the activation mean. Features anti-aligned with the mean receive permanently negative pre-activations and never fire. We formalize outlier severity as $γ= \\|μ\\|/\\|σ\\|$; it predicts initial death rates (Spearman $ρ= 0.89$ for dead-by-TopK, $0.82$ for dead-by-ReLU) across 454 model-layer combinations spanning language, vision, protein, and genomic models. Dead features can revive during training, but recovery requires the SAE bias to learn the activation mean, a process that is prohibitively slow at high $γ$. Mean-centering (subtracting the activation mean) sidesteps this and eliminates outlier-induced death across all tested models, confirming the mechanism and providing a principled basis for when and why this preprocessing step is necessary.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-29T16:36:13Z</ns0:published>\n    <ns1:comment>Accepted to ICML 2026 main conference</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Elana Simon</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Etowah Adams</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>James Zou</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-29",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Ties sparse autoencoder feature death to activation outliers (γ=||μ||/||σ||); mean-centering eliminates it across tested models.",
+  "title": "On the Relationship Between Activation Outliers and Feature Death in Sparse Autoencoders",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.31518v1"
+}

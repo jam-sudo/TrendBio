@@ -1,0 +1,41 @@
+{
+  "abstract": "Missense variant interpretation remains a major challenge in clinical genomics. Existing missense variant impact predictors achieve strong performance, but they emphasize protein-level consequences and often share overlapping annotation priors. A missense annotation specifies the encoded amino-acid substitution, but the underlying nucleotide change may also act through nucleotide sequence context that protein-centric predictors overlook. Whether genomic language models capture distinctive nucleotide-level information beyond established missense variant impact predictors remains unclear.\n\nThrough a comprehensive comparison of model backbones, embedding aggregation strategies, classifier heads, and adaptation regimes, we developed GLM-Missense, a genomic language model fine-tuned for missense variant impact prediction. Variant-position embeddings, multi-species pretraining, and low-rank adaptation were the design choices most critical to its performance.\n\nGLM-Missense contributed information complementary to established missense variant impact predictors. It showed low concordance with AlphaMissense, ESM1b, REVEL, CADD, SIFT and PolyPhen-2. We then asked whether this divergence was predictive rather than noise: after accounting for the other predictors, GLM-Missense retained the strongest unique association with variant pathogenicity. Finally, in MetaMissense, an XGBoost ensemble of all seven predictors, GLM-Missense ranked among the most informative features, indicating that its nucleotide-context signal carries information the ensemble uses to predict pathogenicity.\n\nA subset of the variants GLM-Missense resolved were annotated as missense but carried ClinVar splicing-related evidence for pathogenicity. This suggests GLM-Missense captures splicing-relevant signal. However, substituting SpliceAI for GLM-Missense in the ensemble failed to recapitulate its feature importance, suggesting that GLM-Missense captures additional sequence-derived information beyond splicing context alone. Together, these results demonstrate that GLM-Missense, a fine-tuned genomic language model, captures nucleotide-level information overlooked by established missense variant impact predictors.",
+  "authors": [
+    "Su, Y.",
+    "Lin, Y.-J."
+  ],
+  "doi": "10.64898/2026.05.06.723362",
+  "first_seen": "2026-05-11",
+  "id": "biorxiv:10.64898/2026.05.06.723362",
+  "metadata": {
+    "abstract": "Missense variant interpretation remains a major challenge in clinical genomics. Existing missense variant impact predictors achieve strong performance, but they emphasize protein-level consequences and often share overlapping annotation priors. A missense annotation specifies the encoded amino-acid substitution, but the underlying nucleotide change may also act through nucleotide sequence context that protein-centric predictors overlook. Whether genomic language models capture distinctive nucleotide-level information beyond established missense variant impact predictors remains unclear.\n\nThrough a comprehensive comparison of model backbones, embedding aggregation strategies, classifier heads, and adaptation regimes, we developed GLM-Missense, a genomic language model fine-tuned for missense variant impact prediction. Variant-position embeddings, multi-species pretraining, and low-rank adaptation were the design choices most critical to its performance.\n\nGLM-Missense contributed information complementary to established missense variant impact predictors. It showed low concordance with AlphaMissense, ESM1b, REVEL, CADD, SIFT and PolyPhen-2. We then asked whether this divergence was predictive rather than noise: after accounting for the other predictors, GLM-Missense retained the strongest unique association with variant pathogenicity. Finally, in MetaMissense, an XGBoost ensemble of all seven predictors, GLM-Missense ranked among the most informative features, indicating that its nucleotide-context signal carries information the ensemble uses to predict pathogenicity.\n\nA subset of the variants GLM-Missense resolved were annotated as missense but carried ClinVar splicing-related evidence for pathogenicity. This suggests GLM-Missense captures splicing-relevant signal. However, substituting SpliceAI for GLM-Missense in the ensemble failed to recapitulate its feature importance, suggesting that GLM-Missense captures additional sequence-derived information beyond splicing context alone. Together, these results demonstrate that GLM-Missense, a fine-tuned genomic language model, captures nucleotide-level information overlooked by established missense variant impact predictors.",
+    "author_corresponding": "Yaqi Su",
+    "author_corresponding_institution": "University of California, Berkeley",
+    "authors": "Su, Y.; Lin, Y.-J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-11",
+    "doi": "10.64898/2026.05.06.723362",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/11/2026.05.06.723362.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A fine-tuned genomic language model adds complementary nucleotide-context information to missense variant interpretation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of California, Berkeley",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Fine-tunes a genomic language model (GLM-Missense) for missense variant impact prediction; it shows low concordance with six established predictors and adds…",
+  "title": "A fine-tuned genomic language model adds complementary nucleotide-context information to missense variant interpretation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.06.723362"
+}

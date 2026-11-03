@@ -1,0 +1,43 @@
+{
+  "abstract": "Integrating multimodal datasets in clinical oncology is frequently hindered by high dimensionality and blockwise missingness, where entire data sources are unavailable for specific patient subsets. Standard survival models often struggle with these gaps, leading to biased results or patient exclusion.\n  We introduce Multimodality Stacking with Blockwise missing values (MSB), a late-fusion framework for survival analysis that independently models modality-specific features before aggregating predictions via a cross-validated stacking meta-learner. MSB was validated on the PIONeeR study (n=443 patients, 378 biomarkers across eight heterogeneous sources) to predict progression-free survival in advanced non-small cell lung cancer patients receiving immunotherapy.\n  MSB yielded higher predictive performance (C-index) than baseline algorithms. Improvements varied by baseline strength: linear models showed a 15.9% increase (p<0.001 for the Wilcoxon signed-rank test), random survival forests gained 5.4% (p=0.002), and gradient boosting methods improved by 2.1% (p=0.030). Beyond discrimination, MSB reduced the generalization gap (train-test difference in 5 folds cross-validation repeated 3 times: 0.055 vs 0.380 for linear models). Permutation importance analysis identified routine laboratory markers, clinical features, and PD-L1 expression as primary predictive drivers. Missing block indicators showed negligible importance, suggesting the model learned from biomarker values rather than data availability patterns.\n  MSB provides a statistically validated framework for multimodal survival prediction with blockwise missingness. By enabling systematic biomarker evaluation without requiring complete data, MSB offers a practical tool for predictive modeling in biomedical research, pending external validation. Implementation is available at https://github.com/MohamedBoussena/MSB under Inria license.",
+  "authors": [
+    "Mohamed Boussena",
+    "Florence Monville",
+    "Jacques Fieschi-Meric",
+    "Frederic Vely",
+    "Pierre Milpied",
+    "Julien Mazieres",
+    "Maurice Perol",
+    "Eric Vivier",
+    "Laurent Greillier",
+    "Fabrice Barlesi",
+    "Sebastien Benzekry"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-24",
+  "id": "arxiv:2605.25050",
+  "metadata": {
+    "arxiv_primary_category": "stat.AP",
+    "categories": [
+      "stat.AP",
+      "cs.LG",
+      "q-bio.QM",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.25050v2</ns0:id>\n    <ns0:title>Multimodality Stacking with Blockwise missing values and application to the PIONeeR biomarkers study for prediction of resistance to immunotherapy</ns0:title>\n    <ns0:updated>2026-07-23T09:57:41Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.25050v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.25050v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Integrating multimodal datasets in clinical oncology is frequently hindered by high dimensionality and blockwise missingness, where entire data sources are unavailable for specific patient subsets. Standard survival models often struggle with these gaps, leading to biased results or patient exclusion.\n  We introduce Multimodality Stacking with Blockwise missing values (MSB), a late-fusion framework for survival analysis that independently models modality-specific features before aggregating predictions via a cross-validated stacking meta-learner. MSB was validated on the PIONeeR study (n=443 patients, 378 biomarkers across eight heterogeneous sources) to predict progression-free survival in advanced non-small cell lung cancer patients receiving immunotherapy.\n  MSB yielded higher predictive performance (C-index) than baseline algorithms. Improvements varied by baseline strength: linear models showed a 15.9% increase (p&lt;0.001 for the Wilcoxon signed-rank test), random survival forests gained 5.4% (p=0.002), and gradient boosting methods improved by 2.1% (p=0.030). Beyond discrimination, MSB reduced the generalization gap (train-test difference in 5 folds cross-validation repeated 3 times: 0.055 vs 0.380 for linear models). Permutation importance analysis identified routine laboratory markers, clinical features, and PD-L1 expression as primary predictive drivers. Missing block indicators showed negligible importance, suggesting the model learned from biomarker values rather than data availability patterns.\n  MSB provides a statistically validated framework for multimodal survival prediction with blockwise missingness. By enabling systematic biomarker evaluation without requiring complete data, MSB offers a practical tool for predictive modeling in biomedical research, pending external validation. Implementation is available at https://github.com/MohamedBoussena/MSB under Inria license.</ns0:summary>\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-24T12:48:38Z</ns0:published>\n    <ns1:primary_category term=\"stat.AP\" />\n    <ns0:author>\n      <ns0:name>Mohamed Boussena</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Florence Monville</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jacques Fieschi-Meric</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Frederic Vely</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pierre Milpied</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julien Mazieres</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Maurice Perol</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Eric Vivier</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Laurent Greillier</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fabrice Barlesi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sebastien Benzekry</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "MSB, a late-fusion stacking framework for survival analysis handling blockwise missing multimodal data, is validated on PIONeeR NSCLC immunotherapy biomarkers…",
+  "title": "Multimodality Stacking with Blockwise missing values and application to the PIONeeR biomarkers study for prediction of resistance to immunotherapy",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.25050v2"
+}

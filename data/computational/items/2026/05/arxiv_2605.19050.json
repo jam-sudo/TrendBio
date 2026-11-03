@@ -1,0 +1,38 @@
+{
+  "abstract": "Generating stable molecular conformations typically forces a tradeoff between the physical realism of energy-based relaxation and the sampling efficiency of data-driven generative models. While machine learning force fields (MLFFs) can sample stable conformations by relaxing molecular geometries according to physical forces, they require costly ab-initio training data. Conversely, diffusion models (DMs) learn from equilibrium data alone but are dependent on noise schedules and time-step conditioning. In this work, we propose generative pseudo-force fields (GPFFs) to bridge these paradigms by training an MLFF on a quadratic pseudo-potential energy surface relative to reference equilibrium structures. Because no ab-initio calculations are required for the perturbed geometries, non-equilibrium training data can be generated on the fly by perturbing the equilibria with Gaussian noise. We show that GPFFs constitute a time-step-agnostic variant of variance exploding DMs: the score comes from the predicted pseudo-forces but because force magnitudes implicitly encode the noise level, no time-step conditioning is needed. Our GPFF can hence be used as a drop-in replacement in standard diffusion sampling (ancestral, Heun) but also facilitates more efficient, adaptive variants and an MLFF inspired direct denoising scheme. Our proposed sampling algorithms support arbitrary structural priors and geometric constraints. On QM9, GPFF has 100 % validity at 256 neural function evaluations (NFE) and over 50 % at just 6 NFE, outperforming diffusion baselines across all samplers. Combined with custom priors, we showcase the fast and accurate generation process of our method in a molecular editor for a drug design setting, where a molecule is generated in real time.",
+  "authors": [
+    "Stefaan Simon Pierre Hessmann",
+    "Khaled Kahouli",
+    "Stefan Gugler",
+    "Michael Plainer",
+    "Frank Noé",
+    "Klaus-Robert Müller",
+    "Niklas Wolf Andreas Gebauer"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-18",
+  "id": "arxiv:2605.19050",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "physics.chem-ph",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.19050v1</ns0:id>\n    <ns0:title>Generative Pseudo-Force Fields for Molecular Generation</ns0:title>\n    <ns0:updated>2026-05-18T19:14:53Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.19050v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.19050v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Generating stable molecular conformations typically forces a tradeoff between the physical realism of energy-based relaxation and the sampling efficiency of data-driven generative models. While machine learning force fields (MLFFs) can sample stable conformations by relaxing molecular geometries according to physical forces, they require costly ab-initio training data. Conversely, diffusion models (DMs) learn from equilibrium data alone but are dependent on noise schedules and time-step conditioning. In this work, we propose generative pseudo-force fields (GPFFs) to bridge these paradigms by training an MLFF on a quadratic pseudo-potential energy surface relative to reference equilibrium structures. Because no ab-initio calculations are required for the perturbed geometries, non-equilibrium training data can be generated on the fly by perturbing the equilibria with Gaussian noise. We show that GPFFs constitute a time-step-agnostic variant of variance exploding DMs: the score comes from the predicted pseudo-forces but because force magnitudes implicitly encode the noise level, no time-step conditioning is needed. Our GPFF can hence be used as a drop-in replacement in standard diffusion sampling (ancestral, Heun) but also facilitates more efficient, adaptive variants and an MLFF inspired direct denoising scheme. Our proposed sampling algorithms support arbitrary structural priors and geometric constraints. On QM9, GPFF has 100 % validity at 256 neural function evaluations (NFE) and over 50 % at just 6 NFE, outperforming diffusion baselines across all samplers. Combined with custom priors, we showcase the fast and accurate generation process of our method in a molecular editor for a drug design setting, where a molecule is generated in real time.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.chem-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-18T19:14:53Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Stefaan Simon Pierre Hessmann</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Khaled Kahouli</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Stefan Gugler</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael Plainer</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Frank Noé</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Klaus-Robert Müller</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Niklas Wolf Andreas Gebauer</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes generative pseudo-force fields that train a machine-learning force field on a quadratic pseudo-potential to generate stable molecular conformations…",
+  "title": "Generative Pseudo-Force Fields for Molecular Generation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.19050v1"
+}

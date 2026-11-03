@@ -1,0 +1,31 @@
+{
+  "abstract": "Pertussis booster vaccination produces immune responses that vary widely across individuals in both peak magnitude and long-term durability. These two phases are governed by partly distinct biological compartments:peak reflects acute B-cell activation and antibody secretion, while durability reflects the establishment of long-term humoral memory. Yet most computational models target only one, missing the full boost-and-wane trajectory. Jointly predicting both is non-trivial because the two endpoints are biologically dissociated rather than redundant; samples are small, modalities are heterogeneous with structured missingness, and the two tasks rely on different measurement windows. We propose a multi-task contrastive multimodal fusion architecture combining frozen TabPFN-v2 per-modality encoders, a dual-label supervised contrastive loss that treats two subjects as a positive pair if they agree on the Task 1 label or the Task 2 label, modality dropout calibrated to empirical missingness, and missingness-masked attention fusion. Applied to a curated subset of the CMI-PB pertussis booster dataset (n = 158 subjects, four modalities, 44.9% with at least one modality missing; Spearman r = -0.58 between peak and durability, n = 96), the model achieves test AUROC 0.797 (95% CI [0.621, 0.948]) for peak response and 0.755 (95% CI [0.519, 0.945]) for durability, with both significant under joint label permutation (N = 1000; p = 0.002 and p = 0.045). Across logistic regression, XGBoost, and MLP baselines on raw features and on TabPFN embeddings, the proposed model is the only one whose 95% CIs lie above chance on both tasks simultaneously. Per-modality contribution analyses recover task-specific modality contributions consistent with the underlying immunology: peak prediction is carried by cytokine signatures, while durability is carried by baseline antibody features.",
+  "authors": [
+    "Divya Sitani"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-13",
+  "id": "arxiv:2605.12852",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.12852v1</ns0:id>\n    <ns0:title>Multitask Multimodal Fusion with Tabular Foundation Models for Peak and Durability Prediction of Pertussis Booster Response</ns0:title>\n    <ns0:updated>2026-05-13T01:00:50Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.12852v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.12852v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Pertussis booster vaccination produces immune responses that vary widely across individuals in both peak magnitude and long-term durability. These two phases are governed by partly distinct biological compartments:peak reflects acute B-cell activation and antibody secretion, while durability reflects the establishment of long-term humoral memory. Yet most computational models target only one, missing the full boost-and-wane trajectory. Jointly predicting both is non-trivial because the two endpoints are biologically dissociated rather than redundant; samples are small, modalities are heterogeneous with structured missingness, and the two tasks rely on different measurement windows. We propose a multi-task contrastive multimodal fusion architecture combining frozen TabPFN-v2 per-modality encoders, a dual-label supervised contrastive loss that treats two subjects as a positive pair if they agree on the Task 1 label or the Task 2 label, modality dropout calibrated to empirical missingness, and missingness-masked attention fusion. Applied to a curated subset of the CMI-PB pertussis booster dataset (n = 158 subjects, four modalities, 44.9% with at least one modality missing; Spearman r = -0.58 between peak and durability, n = 96), the model achieves test AUROC 0.797 (95% CI [0.621, 0.948]) for peak response and 0.755 (95% CI [0.519, 0.945]) for durability, with both significant under joint label permutation (N = 1000; p = 0.002 and p = 0.045). Across logistic regression, XGBoost, and MLP baselines on raw features and on TabPFN embeddings, the proposed model is the only one whose 95% CIs lie above chance on both tasks simultaneously. Per-modality contribution analyses recover task-specific modality contributions consistent with the underlying immunology: peak prediction is carried by cytokine signatures, while durability is carried by baseline antibody features.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-13T01:00:50Z</ns0:published>\n    <ns1:comment>22 pages, 8 figures, 4 tables. Code available at https://github.com/Divya1205/cmi-pb-multitask</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Divya Sitani</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Multi-task contrastive multimodal fusion with frozen TabPFN-v2 encoders predicts pertussis booster peak and durability on CMI-PB (n=158), with AUROC 0.797 and…",
+  "title": "Multitask Multimodal Fusion with Tabular Foundation Models for Peak and Durability Prediction of Pertussis Booster Response",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.12852v1"
+}

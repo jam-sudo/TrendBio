@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationMissense variant interpretation remains challenging because pathogenicity depends on heterogeneous evidence, including population frequency, evolutionary conservation, transcript context, amino acid substitution severity, prior pathogenicity predictors and protein-language-model-derived features. Although these resources are individually useful, there remains a need for reproducible workflows that integrate them at genome-wide scale, benchmark their contribution and provide accessible outputs for downstream research.\n\nResultsWe present AnnotateMissense, a scalable annotation, benchmarking and genome-wide prediction framework for missense variant interpretation. AnnotateMissense integrates chromosome-wise hg38 missense variants derived from dbNSFP v5.1 with ANNOVAR-based gene-, region- and filter-based annotations, dbNSFP transcript and protein descriptors, AlphaMissense scores, ESM-derived features, conservation metrics, population-frequency variables, established pathogenicity predictors and engineered amino acid/codon-context features. Using 132,714 ClinVar-labelled missense variants, we benchmarked machine-learning and deep-learning models under controlled feature configurations. The full 303-feature benchmark set achieved the strongest performance with XGBoost, reaching mean Matthews correlation coefficient (MCC) = 0.9411 and ROC-AUC = 0.9950 across stratified five-fold cross-validation. Restricted naive and location-oriented feature sets achieved substantially lower best MCC values of 0.4989 and 0.5113, respectively. Circularity-controlled ablations showed that removing prior-predictor, population-frequency and clinically overlapping evidence reduced performance, whereas excluding AlphaMissense and ESM-derived features alone had minimal effect. Temporal ClinVar validation on newly observed pathogenic/benign variants achieved MCC = 0.7613, accuracy = 0.8798 and F1-score = 0.8750. The final genome-wide model was applied to 90,643,830 hg38 missense variants to generate AnnotateMissense pathogenicity scores and binary prediction labels.\n\nAvailability and implementationSource code, workflow scripts and command files are available at https://github.com/MuhammadMuneeb007/CAGI7_Annotate_All_Missense. Genome-wide prediction outputs and the compressed DuckDB database are available at https://doi.org/10.5281/zenodo.19981867.\n\nSupplementary informationSupplementary data are available online.",
+  "authors": [
+    "Muneeb, M.",
+    "Ascher, D. B."
+  ],
+  "doi": "10.64898/2026.05.03.722489",
+  "first_seen": "2026-05-04",
+  "id": "biorxiv:10.64898/2026.05.03.722489",
+  "metadata": {
+    "abstract": "MotivationMissense variant interpretation remains challenging because pathogenicity depends on heterogeneous evidence, including population frequency, evolutionary conservation, transcript context, amino acid substitution severity, prior pathogenicity predictors and protein-language-model-derived features. Although these resources are individually useful, there remains a need for reproducible workflows that integrate them at genome-wide scale, benchmark their contribution and provide accessible outputs for downstream research.\n\nResultsWe present AnnotateMissense, a scalable annotation, benchmarking and genome-wide prediction framework for missense variant interpretation. AnnotateMissense integrates chromosome-wise hg38 missense variants derived from dbNSFP v5.1 with ANNOVAR-based gene-, region- and filter-based annotations, dbNSFP transcript and protein descriptors, AlphaMissense scores, ESM-derived features, conservation metrics, population-frequency variables, established pathogenicity predictors and engineered amino acid/codon-context features. Using 132,714 ClinVar-labelled missense variants, we benchmarked machine-learning and deep-learning models under controlled feature configurations. The full 303-feature benchmark set achieved the strongest performance with XGBoost, reaching mean Matthews correlation coefficient (MCC) = 0.9411 and ROC-AUC = 0.9950 across stratified five-fold cross-validation. Restricted naive and location-oriented feature sets achieved substantially lower best MCC values of 0.4989 and 0.5113, respectively. Circularity-controlled ablations showed that removing prior-predictor, population-frequency and clinically overlapping evidence reduced performance, whereas excluding AlphaMissense and ESM-derived features alone had minimal effect. Temporal ClinVar validation on newly observed pathogenic/benign variants achieved MCC = 0.7613, accuracy = 0.8798 and F1-score = 0.8750. The final genome-wide model was applied to 90,643,830 hg38 missense variants to generate AnnotateMissense pathogenicity scores and binary prediction labels.\n\nAvailability and implementationSource code, workflow scripts and command files are available at https://github.com/MuhammadMuneeb007/CAGI7_Annotate_All_Missense. Genome-wide prediction outputs and the compressed DuckDB database are available at https://doi.org/10.5281/zenodo.19981867.\n\nSupplementary informationSupplementary data are available online.",
+    "author_corresponding": "David B. Ascher",
+    "author_corresponding_institution": "The University of Queensland",
+    "authors": "Muneeb, M.; Ascher, D. B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-04",
+    "doi": "10.64898/2026.05.03.722489",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/04/2026.05.03.722489.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "AnnotateMissense: a genome-wide annotation and benchmarking framework for missense pathogenicity prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Queensland",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "AnnotateMissense: a scalable workflow integrating dbNSFP, AlphaMissense and ESM features to benchmark and predict pathogenicity for 90.6M hg38 missense…",
+  "title": "AnnotateMissense: a genome-wide annotation and benchmarking framework for missense pathogenicity prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.03.722489"
+}

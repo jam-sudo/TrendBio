@@ -1,0 +1,34 @@
+{
+  "abstract": "Structure-based drug design increasingly employs LLM agents to iteratively refine ligands against a target pocket, yet a viable ligand must satisfy two often-conflicting objectives---binding affinity and druggability---which single optimization steps rarely improve together. To quantify this difficulty, we introduce two diagnostic metrics: the first measures how often a single edit improves both objectives, and the second measures how often a gain on one objective comes with a loss on the other. Applying these diagnostics to current LLM-agent pipelines exposes a consistent failure mode: the agent performs molecular editing without knowing how the pocket-ligand complex responds to local modifications, thus rarely achieving joint improvement. Inspired by medicinal chemists, who probe the pocket-ligand complex with controlled analog edits before choosing an optimization direction, we propose \\textbf{PROBE}, an optimization framework built around edit--response probing. PROBE first decomposes the ligand into editable sites and builds a pocket-specific \\textbf{site map} that flags where joint gains are plausible, where the two objectives are likely in tension, and where liability substructures should be changed; it then performs controlled probe edits whose responses are distilled into an \\textbf{EditManual}. Guided by the site map and EditManual, PROBE runs an iterative multi-agent optimization loop. On the CrossDocked2020 benchmark, PROBE achieves state-of-the-art performance and substantially mitigates the failure modes exposed by our diagnostics metrics. Codes are in https://github.com/yzf-code/PROBE/tree/main",
+  "authors": [
+    "Zaifei Yang",
+    "Weiyu Chen",
+    "Yaqing Wang",
+    "James Kwok"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-30",
+  "id": "arxiv:2606.00555",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.00555v3</ns0:id>\n    <ns0:title>Probe Before You Edit: Probing-Guided Molecular Optimization for LLM Agents in Structure-Based Drug Design</ns0:title>\n    <ns0:updated>2026-10-23T13:42:47Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.00555v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.00555v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Structure-based drug design increasingly employs LLM agents to iteratively refine ligands against a target pocket, yet a viable ligand must satisfy two often-conflicting objectives---binding affinity and druggability---which single optimization steps rarely improve together. To quantify this difficulty, we introduce two diagnostic metrics: the first measures how often a single edit improves both objectives, and the second measures how often a gain on one objective comes with a loss on the other. Applying these diagnostics to current LLM-agent pipelines exposes a consistent failure mode: the agent performs molecular editing without knowing how the pocket-ligand complex responds to local modifications, thus rarely achieving joint improvement. Inspired by medicinal chemists, who probe the pocket-ligand complex with controlled analog edits before choosing an optimization direction, we propose \\textbf{PROBE}, an optimization framework built around edit--response probing. PROBE first decomposes the ligand into editable sites and builds a pocket-specific \\textbf{site map} that flags where joint gains are plausible, where the two objectives are likely in tension, and where liability substructures should be changed; it then performs controlled probe edits whose responses are distilled into an \\textbf{EditManual}. Guided by the site map and EditManual, PROBE runs an iterative multi-agent optimization loop. On the CrossDocked2020 benchmark, PROBE achieves state-of-the-art performance and substantially mitigates the failure modes exposed by our diagnostics metrics. Codes are in https://github.com/yzf-code/PROBE/tree/main</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-30T06:06:51Z</ns0:published>\n    <ns1:comment>Accepted at NeurIPS 2026. Revised manuscript</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Zaifei Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Weiyu Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yaqing Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>James Kwok</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-05-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "PROBE is an LLM multi-agent framework for structure-based drug design that uses edit-response probing, a pocket-specific site map, and an EditManual to jointly…",
+  "title": "Probe Before You Edit: Probing-Guided Molecular Optimization for LLM Agents in Structure-Based Drug Design",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.00555v3"
+}

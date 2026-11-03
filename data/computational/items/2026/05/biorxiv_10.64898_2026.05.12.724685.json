@@ -1,0 +1,40 @@
+{
+  "abstract": "The Mutation Annotation Format (MAF) is a standard interchange format for somatic variant data in tumor genomics. Converting variant call format (VCF) files to MAF requires functional annotation (through tools such as the Ensembl Variant Effect Predictor) and complex allele normalisation and field-mapping logic. The gold-standard implementation, vcf2maf, is written in Perl and could be made more computationally efficient by translating it to a newer language and adding support for parallel processing. Here we describe mafsmith, an implementation of vcf2maf in Rust. The mafsmith implementation of vcf2maf reimplements the allele-normalisation and field-mapping logic of vcf2maf and uses fastVEP for annotation, achieving field-for-field identical output across fifteen validated caller types and formats spanning germline, somatic, structural variant, and annotation-database VCFs. When both tools are run with the same Ensembl VEP annotation cache, mafsmith vcf2maf produces 0 conversion differences versus vcf2maf across 23 diverse datasets aligned to GRCh38 or GRCh37. The companion maf2vcf, vcf2vcf, and maf2maf subcommands were similarly validated against their reference Perl counterparts across six datasets. Benchmarked on multiple reference samples totalling 27.5 million variants, mafsmith achieves approximately 80-fold faster conversion of pre-annotated VCFs (range 74.3-84.1x), enabling faster and cheaper conversion of vcfs to mafs. mafsmith is open source under the same license as vcf2maf and available at https://github.com/nf-osi/mafsmith.",
+  "authors": [
+    "Allaway, R. J."
+  ],
+  "doi": "10.64898/2026.05.12.724685",
+  "first_seen": "2026-05-15",
+  "id": "biorxiv:10.64898/2026.05.12.724685",
+  "metadata": {
+    "abstract": "The Mutation Annotation Format (MAF) is a standard interchange format for somatic variant data in tumor genomics. Converting variant call format (VCF) files to MAF requires functional annotation (through tools such as the Ensembl Variant Effect Predictor) and complex allele normalisation and field-mapping logic. The gold-standard implementation, vcf2maf, is written in Perl and could be made more computationally efficient by translating it to a newer language and adding support for parallel processing. Here we describe mafsmith, an implementation of vcf2maf in Rust. The mafsmith implementation of vcf2maf reimplements the allele-normalisation and field-mapping logic of vcf2maf and uses fastVEP for annotation, achieving field-for-field identical output across fifteen validated caller types and formats spanning germline, somatic, structural variant, and annotation-database VCFs. When both tools are run with the same Ensembl VEP annotation cache, mafsmith vcf2maf produces 0 conversion differences versus vcf2maf across 23 diverse datasets aligned to GRCh38 or GRCh37. The companion maf2vcf, vcf2vcf, and maf2maf subcommands were similarly validated against their reference Perl counterparts across six datasets. Benchmarked on multiple reference samples totalling 27.5 million variants, mafsmith achieves approximately 80-fold faster conversion of pre-annotated VCFs (range 74.3-84.1x), enabling faster and cheaper conversion of vcfs to mafs. mafsmith is open source under the same license as vcf2maf and available at https://github.com/nf-osi/mafsmith.",
+    "author_corresponding": "Robert J Allaway",
+    "author_corresponding_institution": "Sage Bionetworks",
+    "authors": "Allaway, R. J.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-05-15",
+    "doi": "10.64898/2026.05.12.724685",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/15/2026.05.12.724685.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "mafsmith: a Rust reimplementation of vcf2maf",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Sage Bionetworks",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "mafsmith is a Rust reimplementation of vcf2maf for converting somatic VCFs to MAF, matching output across 23 datasets and running about 80-fold faster.",
+  "title": "mafsmith: a Rust reimplementation of vcf2maf",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.12.724685"
+}

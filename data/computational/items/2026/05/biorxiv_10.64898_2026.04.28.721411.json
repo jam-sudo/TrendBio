@@ -1,0 +1,44 @@
+{
+  "abstract": "Prefix-Free Parsing (PFP) is widely used in genomic data processing to construct compressed indexes on massive, highly repetitive datasets. However, existing CPU implementations are constrained by sequential bottlenecks, limiting their ability to scale to large-scale modern pangenomic collections. We introduce RAPID-PFP, a redesigned implementation of the PFP algorithm that takes advantage of the massive parallelism and high memory bandwidth of modern GPUs. RAPID-PFP parallelizes trigger-string detection, phrase parsing, dictionary construction, and parse generation through custom CUDA kernels and GPU-resident data structures built using cuDF, CuPy, and Numba-CUDA. The algorithm operates entirely within GPU memory, minimizes host interaction, and dynamically adapts to available VRAM, enabling efficient processing in a range of hardware configurations. Across E. coli and Human Pangenome (HPRC) datasets, RAPID-PFP produces identical output to established CPU pipelines while delivering an order-of-magnitude acceleration. On 3,682 E. coli assemblies, RAPID-PFP reduces runtime from 552 seconds to 17 seconds compared to PFP-FL (32.1 times) and from 1,078 seconds to 17 seconds compared to PFP-ITL (62.6 times). On the complete 46-sample HPRC dataset, RAPID-PFP achieves a 33.4 time speedup and successfully processes scales that PFP-ITL cannot handle. Performance improves with dataset size, reflecting that PFP maps naturally onto thousands of CUDA cores, yielding sublinear scaling relative to CPU implementations. RAPID-PFP demonstrates that foundational compressed-indexing algorithms can be re-engineered for accelerators, enabling scalable and practical preprocessing for large-scale genomic indexing workflows.",
+  "authors": [
+    "Ferro, E. A.",
+    "Pencinger, T.",
+    "Green, O.",
+    "Lotfollahi, M.",
+    "Boucher, C."
+  ],
+  "doi": "10.64898/2026.04.28.721411",
+  "first_seen": "2026-05-01",
+  "id": "biorxiv:10.64898/2026.04.28.721411",
+  "metadata": {
+    "abstract": "Prefix-Free Parsing (PFP) is widely used in genomic data processing to construct compressed indexes on massive, highly repetitive datasets. However, existing CPU implementations are constrained by sequential bottlenecks, limiting their ability to scale to large-scale modern pangenomic collections. We introduce RAPID-PFP, a redesigned implementation of the PFP algorithm that takes advantage of the massive parallelism and high memory bandwidth of modern GPUs. RAPID-PFP parallelizes trigger-string detection, phrase parsing, dictionary construction, and parse generation through custom CUDA kernels and GPU-resident data structures built using cuDF, CuPy, and Numba-CUDA. The algorithm operates entirely within GPU memory, minimizes host interaction, and dynamically adapts to available VRAM, enabling efficient processing in a range of hardware configurations. Across E. coli and Human Pangenome (HPRC) datasets, RAPID-PFP produces identical output to established CPU pipelines while delivering an order-of-magnitude acceleration. On 3,682 E. coli assemblies, RAPID-PFP reduces runtime from 552 seconds to 17 seconds compared to PFP-FL (32.1 times) and from 1,078 seconds to 17 seconds compared to PFP-ITL (62.6 times). On the complete 46-sample HPRC dataset, RAPID-PFP achieves a 33.4 time speedup and successfully processes scales that PFP-ITL cannot handle. Performance improves with dataset size, reflecting that PFP maps naturally onto thousands of CUDA cores, yielding sublinear scaling relative to CPU implementations. RAPID-PFP demonstrates that foundational compressed-indexing algorithms can be re-engineered for accelerators, enabling scalable and practical preprocessing for large-scale genomic indexing workflows.",
+    "author_corresponding": "Eddie A Ferro",
+    "author_corresponding_institution": "University of Florida",
+    "authors": "Ferro, E. A.; Pencinger, T.; Green, O.; Lotfollahi, M.; Boucher, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-01",
+    "doi": "10.64898/2026.04.28.721411",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/01/2026.04.28.721411.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Rapid-PFP: Accelerating Prefix-Free Parsing with GPU Parallelism",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Florida",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Rapid-PFP is a GPU-parallel redesign of prefix-free parsing for compressed indexing of pangenomic data, matching CPU output with up to 62.6x speedups on E.…",
+  "title": "Rapid-PFP: Accelerating Prefix-Free Parsing with GPU Parallelism",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.28.721411"
+}

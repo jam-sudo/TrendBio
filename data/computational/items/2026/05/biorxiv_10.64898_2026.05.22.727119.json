@@ -1,0 +1,53 @@
+{
+  "abstract": "AO_SCPLOWBSTRACTC_SCPLOWGenomic foundation models have emerged alongside the rapid progress of large language models, offering a promising framework for learning general-purpose sequence priors for DNA understanding, generation, and design. This connection to LLMs creates a major opportunity: modern architectures, scaling infrastructure, autoregressive training, and token-based modeling provide powerful tools for genomic sequence modeling. At the same time, DNA differs fundamentally from natural language. Genomic sequences are noisy, redundant, sparsely constrained, unevenly annotated, and shaped by evolutionary rather than communicative pressures. As a result, key components of the standard LLM recipe, including data construction, tokenization, and training objectives, must be reconsidered in the biological sequence setting. A central challenge in DNA modeling is reconciling single-nucleotide resolution with long-context reasoning. Single-nucleotide resolution is essential for variant effect prediction, splice-site analysis, and codon-level reasoning. Long-context modeling is equally important, as many genomic mechanisms depend on distal regulatory elements, gene neighborhoods, and long-range evolutionary constraints. However, the most direct path to nucleotide-level reasoning, single-nucleotide tokenization, makes genomic sequences extremely long and imposes substantial computational cost on Transformer models. We present CO_SCPLOWARBONC_SCPLOW, a family of efficient generative DNA language models designed as a practical reference point for this setting. CO_SCPLOWARBONC_SCPLOW includes 3B- and 8B-parameter decoder-only autoregressive models using non-overlapping 6-mer tokenization. CO_SCPLOWARBONC_SCPLOW-3B supports a maximum context length of 65,536 tokens, corresponding to approximately 393 kbp of DNA; CO_SCPLOWARBONC_SCPLOW-8B supports up to 131,072 tokens, roughly 786 kbp. This simple and controlled setup helps isolate a central question for DNA language modeling: whether current progress is limited primarily by model architecture and nominal context length, or by more basic alignment between data, tokenization, objectives, evaluation, and the biological structure of genomic sequence. In our training-free evaluation suite, CO_SCPLOWARBONC_SCPLOW-3B is competitive with Evo2-7B despite having less than half the parameters. CO_SCPLOWARBONC_SCPLOW-8B improves on CO_SCPLOWARBONC_SCPLOW-3B on every training-free task, with the largest gain on long-context retrieval. Both models deliver tens-fold faster inference under comparable settings. The CO_SCPLOWARBONC_SCPLOW recipe combines annotation-aware data curation, deterministic 6-mer tokenization, and a staged CE-to-FNS objective schedule, adapting the LLM recipe to the statistical and biological properties of DNA rather than directly transplanting it. We release the models, data, training code, and evaluation suite, including new training-free probes for sequence-level perturbation and DNA long-context retrieval. CO_SCPLOWARBONC_SCPLOW is intended as an open recipe for efficient generative DNA modeling rather than an argument for any specific architecture, tokenization strategy, or objective design as the optimal solution. Its strong performance provides grounded evidence that substantial room remains for domain-aware model design carefully aligned with the genomic sequence itself.",
+  "authors": [
+    "Allal, L. B.",
+    "Li, Q.",
+    "Fiusco, M.",
+    "Tunstall, L.",
+    "Rasul, K.",
+    "Beeching, E.",
+    "Aubakirova, D.",
+    "Patino, C.",
+    "Frere, T.",
+    "Lozhkov, A.",
+    "Channing, G.",
+    "Wolf, T.",
+    "Bernardo, D. d.",
+    "Werra, L. v."
+  ],
+  "doi": "10.64898/2026.05.22.727119",
+  "first_seen": "2026-05-25",
+  "id": "biorxiv:10.64898/2026.05.22.727119",
+  "metadata": {
+    "abstract": "AO_SCPLOWBSTRACTC_SCPLOWGenomic foundation models have emerged alongside the rapid progress of large language models, offering a promising framework for learning general-purpose sequence priors for DNA understanding, generation, and design. This connection to LLMs creates a major opportunity: modern architectures, scaling infrastructure, autoregressive training, and token-based modeling provide powerful tools for genomic sequence modeling. At the same time, DNA differs fundamentally from natural language. Genomic sequences are noisy, redundant, sparsely constrained, unevenly annotated, and shaped by evolutionary rather than communicative pressures. As a result, key components of the standard LLM recipe, including data construction, tokenization, and training objectives, must be reconsidered in the biological sequence setting. A central challenge in DNA modeling is reconciling single-nucleotide resolution with long-context reasoning. Single-nucleotide resolution is essential for variant effect prediction, splice-site analysis, and codon-level reasoning. Long-context modeling is equally important, as many genomic mechanisms depend on distal regulatory elements, gene neighborhoods, and long-range evolutionary constraints. However, the most direct path to nucleotide-level reasoning, single-nucleotide tokenization, makes genomic sequences extremely long and imposes substantial computational cost on Transformer models. We present CO_SCPLOWARBONC_SCPLOW, a family of efficient generative DNA language models designed as a practical reference point for this setting. CO_SCPLOWARBONC_SCPLOW includes 3B- and 8B-parameter decoder-only autoregressive models using non-overlapping 6-mer tokenization. CO_SCPLOWARBONC_SCPLOW-3B supports a maximum context length of 65,536 tokens, corresponding to approximately 393 kbp of DNA; CO_SCPLOWARBONC_SCPLOW-8B supports up to 131,072 tokens, roughly 786 kbp. This simple and controlled setup helps isolate a central question for DNA language modeling: whether current progress is limited primarily by model architecture and nominal context length, or by more basic alignment between data, tokenization, objectives, evaluation, and the biological structure of genomic sequence. In our training-free evaluation suite, CO_SCPLOWARBONC_SCPLOW-3B is competitive with Evo2-7B despite having less than half the parameters. CO_SCPLOWARBONC_SCPLOW-8B improves on CO_SCPLOWARBONC_SCPLOW-3B on every training-free task, with the largest gain on long-context retrieval. Both models deliver tens-fold faster inference under comparable settings. The CO_SCPLOWARBONC_SCPLOW recipe combines annotation-aware data curation, deterministic 6-mer tokenization, and a staged CE-to-FNS objective schedule, adapting the LLM recipe to the statistical and biological properties of DNA rather than directly transplanting it. We release the models, data, training code, and evaluation suite, including new training-free probes for sequence-level perturbation and DNA long-context retrieval. CO_SCPLOWARBONC_SCPLOW is intended as an open recipe for efficient generative DNA modeling rather than an argument for any specific architecture, tokenization strategy, or objective design as the optimal solution. Its strong performance provides grounded evidence that substantial room remains for domain-aware model design carefully aligned with the genomic sequence itself.",
+    "author_corresponding": "Leandro von Werra",
+    "author_corresponding_institution": "Hugging Face",
+    "authors": "Allal, L. B.; Li, Q.; Fiusco, M.; Tunstall, L.; Rasul, K.; Beeching, E.; Aubakirova, D.; Patino, C.; Frere, T.; Lozhkov, A.; Channing, G.; Wolf, T.; Bernardo, D. d.; Werra, L. v.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-05-25",
+    "doi": "10.64898/2026.05.22.727119",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/25/2026.05.22.727119.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Carbon: Decoding the Language of Life",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Hugging Face",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-05-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Carbon: efficient 3B/8B autoregressive DNA language models with non-overlapping 6-mer tokenization, up to 131k-token context, plus released models, data, and…",
+  "title": "Carbon: Decoding the Language of Life",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.22.727119"
+}

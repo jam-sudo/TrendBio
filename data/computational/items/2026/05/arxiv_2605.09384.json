@@ -1,0 +1,34 @@
+{
+  "abstract": "The reasoning gap between large and compact vision-language models (VLMs) limits the deployment of medical AI on portable clinical devices. Compact VLMs of 2-4B parameters can run on resource-constrained hardware but lack the multi-step reasoning capacity needed for interpretable clinical decision support. Existing knowledge distillation methods transfer answers without the reasoning process behind them. Medical visual question answering (VQA) serves as a testbed for this problem, as it requires models to integrate visual evidence with clinical knowledge through structured reasoning chains. We introduce LiteMedCoT-VL, a pipeline that transfers chain-of-thought reasoning from a 235B teacher model to 2B student models through LoRA-based fine-tuning on explanation-enriched training data. All inference is conducted without image captions by default, simulating the clinical scenario in which a physician interprets a medical image directly without an accompanying radiology report. On the PMC-VQA benchmark, LiteMedCoT-VL achieves 64.9% accuracy, exceeding the zero-shot Qwen3-VL-4B baseline of 53.9% by 11.0 percentage points and outperforming all published baselines. This result indicates that a 2B model with reasoning distillation can match or exceed models with twice the parameters. Visual grounding analysis shows that the model relies on image content rather than exploiting textual priors. Our code is publicly available at https://github.com/R4nzer/LiteMedCoT-VL.",
+  "authors": [
+    "Runze Ma",
+    "Shunbo Jia",
+    "Haonan Lyu",
+    "Guo Liu",
+    "Caizhi Liao"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-10",
+  "id": "arxiv:2605.09384",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.09384v2</ns0:id>\n    <ns0:title>LiteMedCoT-VL: Parameter-Efficient Adaptation for Medical Visual Question Answering</ns0:title>\n    <ns0:updated>2026-09-18T12:58:14Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.09384v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.09384v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The reasoning gap between large and compact vision-language models (VLMs) limits the deployment of medical AI on portable clinical devices. Compact VLMs of 2-4B parameters can run on resource-constrained hardware but lack the multi-step reasoning capacity needed for interpretable clinical decision support. Existing knowledge distillation methods transfer answers without the reasoning process behind them. Medical visual question answering (VQA) serves as a testbed for this problem, as it requires models to integrate visual evidence with clinical knowledge through structured reasoning chains. We introduce LiteMedCoT-VL, a pipeline that transfers chain-of-thought reasoning from a 235B teacher model to 2B student models through LoRA-based fine-tuning on explanation-enriched training data. All inference is conducted without image captions by default, simulating the clinical scenario in which a physician interprets a medical image directly without an accompanying radiology report. On the PMC-VQA benchmark, LiteMedCoT-VL achieves 64.9% accuracy, exceeding the zero-shot Qwen3-VL-4B baseline of 53.9% by 11.0 percentage points and outperforming all published baselines. This result indicates that a 2B model with reasoning distillation can match or exceed models with twice the parameters. Visual grounding analysis shows that the model relies on image content rather than exploiting textual priors. Our code is publicly available at https://github.com/R4nzer/LiteMedCoT-VL.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-10T07:21:33Z</ns0:published>\n    <ns1:comment>Accepted at NLPCC 2026 (The 15th CCF International Conference on Natural Language Processing and Chinese Computing), Springer proceedings. 17 pages, 5 figures</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Runze Ma</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shunbo Jia</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Haonan Lyu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guo Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Caizhi Liao</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "LoRA-based distillation of chain-of-thought reasoning from a 235B teacher into 2B vision-language students; 64.9% on PMC-VQA.",
+  "title": "LiteMedCoT-VL: Parameter-Efficient Adaptation for Medical Visual Question Answering",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.09384v2"
+}

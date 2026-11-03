@@ -1,0 +1,46 @@
+{
+  "abstract": "Distinguishing closely related viral strains requires identifying genomic regions where subtle sequence differences carry biological significance. While k-mer-based approaches offer computational efficiency for genome analysis, existing methods lack standardized frameworks for evaluating which k-mers are most informative. Current selection strategies focus primarily on statistical discriminative power without integrating biological relevance. We introduce KmerSignificance Score (KSS), a k-mer prioritization framework combining three components: an information-theoretic method measuring strain-distinguishing capacity, an optimized amino acid substitution matrix (MIYATA EVO) for mutation impact assessment, and protein-level functional importance scoring derived from UniProt annotations. KSS produces standardized scores in the [0, 1] interval, enabling direct cross-dataset comparison. The discriminative component achieved classification performance comparable or superior to all tested alternatives (mean F1 = 0.880 vs. 0.718-0.877 for six established methods) while additionally providing bounded scores with consistent empirical distributions for cross-dataset comparability. MIYATA EVO, optimized via genetic algorithm, improved biophysical property correlations by 28.4% over the original MIYATA matrix. Protein scoring on 17,470 viral proteins showed robust agreement with UniProt annotation scores (Kendall{tau} = 0.777) while revealing finer functional distinctions. Literature validation on SARS-CoV-2 (278,738 sequences, 19 variants), HIV-1 (12,223 sequences, 15 subtypes), and human cytomegalovirus (HCMV; 399-646 sequences, 4-8 genotypes) confirmed that high-scoring k-mers consistently map to established variant-defining mutations, subtype-specific polymorphisms, and genotype markers. KSS provides a standardized framework for viral k-mer prioritization with applications in variant surveillance, molecular epidemiology, and functional annotation. The tool is available at https://github.com/bioinfoUQAM/KmerSignificanceScore.\n\nAuthor summaryIdentifying genetic differences between closely related viral strains is essential for pandemic preparedness, vaccine development, and understanding disease outbreaks. With millions of viral genomes now sequenced, researchers need tools that can rapidly pinpoint which genomic differences matter most biologically, not just which are statistically distinctive. Current k-mer-based approaches identify patterns that distinguish viral strains but cannot assess whether those differences affect protein function or disease phenotype. We developed KmerSignificance Score (KSS), a framework that we designed to rank short genomic sequences by combining three types of evidence: how well they distinguish viral strains, how much the encoded amino acid changes affect protein properties, and how functionally important the affected protein is. We standardized the resulting scores on a 0-to-1 scale, allowing direct comparison across different viruses and studies. We validated our framework on three major human pathogens (SARS-CoV-2, HIV-1, and human cytomegalovirus) and found that top-scoring positions consistently correspond to sites with documented roles in immune evasion, drug resistance, viral fitness, and strain classification. Our framework can help prioritize genomic features for surveillance of emerging variants, guide experimental validation, and support molecular epidemiology.",
+  "authors": [
+    "Lebatteux, D.",
+    "Corso, F.",
+    "Soudeyns, H.",
+    "Boucoiran, I.",
+    "Gantt, S.",
+    "Banire Diallo, A."
+  ],
+  "doi": "10.64898/2026.05.15.725339",
+  "first_seen": "2026-05-21",
+  "id": "biorxiv:10.64898/2026.05.15.725339",
+  "metadata": {
+    "abstract": "Distinguishing closely related viral strains requires identifying genomic regions where subtle sequence differences carry biological significance. While k-mer-based approaches offer computational efficiency for genome analysis, existing methods lack standardized frameworks for evaluating which k-mers are most informative. Current selection strategies focus primarily on statistical discriminative power without integrating biological relevance. We introduce KmerSignificance Score (KSS), a k-mer prioritization framework combining three components: an information-theoretic method measuring strain-distinguishing capacity, an optimized amino acid substitution matrix (MIYATA EVO) for mutation impact assessment, and protein-level functional importance scoring derived from UniProt annotations. KSS produces standardized scores in the [0, 1] interval, enabling direct cross-dataset comparison. The discriminative component achieved classification performance comparable or superior to all tested alternatives (mean F1 = 0.880 vs. 0.718-0.877 for six established methods) while additionally providing bounded scores with consistent empirical distributions for cross-dataset comparability. MIYATA EVO, optimized via genetic algorithm, improved biophysical property correlations by 28.4% over the original MIYATA matrix. Protein scoring on 17,470 viral proteins showed robust agreement with UniProt annotation scores (Kendall{tau} = 0.777) while revealing finer functional distinctions. Literature validation on SARS-CoV-2 (278,738 sequences, 19 variants), HIV-1 (12,223 sequences, 15 subtypes), and human cytomegalovirus (HCMV; 399-646 sequences, 4-8 genotypes) confirmed that high-scoring k-mers consistently map to established variant-defining mutations, subtype-specific polymorphisms, and genotype markers. KSS provides a standardized framework for viral k-mer prioritization with applications in variant surveillance, molecular epidemiology, and functional annotation. The tool is available at https://github.com/bioinfoUQAM/KmerSignificanceScore.\n\nAuthor summaryIdentifying genetic differences between closely related viral strains is essential for pandemic preparedness, vaccine development, and understanding disease outbreaks. With millions of viral genomes now sequenced, researchers need tools that can rapidly pinpoint which genomic differences matter most biologically, not just which are statistically distinctive. Current k-mer-based approaches identify patterns that distinguish viral strains but cannot assess whether those differences affect protein function or disease phenotype. We developed KmerSignificance Score (KSS), a framework that we designed to rank short genomic sequences by combining three types of evidence: how well they distinguish viral strains, how much the encoded amino acid changes affect protein properties, and how functionally important the affected protein is. We standardized the resulting scores on a 0-to-1 scale, allowing direct comparison across different viruses and studies. We validated our framework on three major human pathogens (SARS-CoV-2, HIV-1, and human cytomegalovirus) and found that top-scoring positions consistently correspond to sites with documented roles in immune evasion, drug resistance, viral fitness, and strain classification. Our framework can help prioritize genomic features for surveillance of emerging variants, guide experimental validation, and support molecular epidemiology.",
+    "author_corresponding": "Dylan Lebatteux",
+    "author_corresponding_institution": "UQAM: Universite du Quebec a Montreal",
+    "authors": "Lebatteux, D.; Corso, F.; Soudeyns, H.; Boucoiran, I.; Gantt, S.; Banire Diallo, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-21",
+    "doi": "10.64898/2026.05.15.725339",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/21/2026.05.15.725339.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "KmerSignificance Score: A discriminative and biologically-informed framework for viral k-mer prioritization",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "UQAM: Universite du Quebec a Montreal",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-05-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "KSS scores viral k-mers by strain-distinguishing power, a GA-optimized amino acid substitution matrix, and UniProt-based protein importance, yielding…",
+  "title": "KmerSignificance Score: A discriminative and biologically-informed framework for viral k-mer prioritization",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.15.725339"
+}

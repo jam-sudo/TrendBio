@@ -1,0 +1,42 @@
+{
+  "abstract": "Quantum kernel methods offer a potential advantage for classification tasks in high-dimensional feature spaces, yet their practical benefit critically depends on how input features are prepared. We compare five dimensionality reduction strategies--principal component analysis (PCA), Gaussian random projection (RP Gaussian), sparse random projection (RP Sparse), partial least squares (PLS), and uniform manifold approximation and projection (UMAP) -- as pre-processing steps for quantum kernel support vector machines (SVMs) applied to trabecular bone classification from synthetic micro-computed tomography (micro-CT) data. Using a custom procedural generator based on Gaussian random field zero-crossings, we produced 500 synthetic trabecular bone volumes with controlled morphometric properties such as bone volume fraction (BV/TV), trabecular thickness (Tb.Th), number (Tb.N) and spacing (Tb.Sp). Texture features extracted from grayscale slices are reduced to 8-dimensional quantum circuit inputs via each method, then classified using both classical radial basis function (RBF)-SVMs and quantum kernel SVMs with ZZ feature maps on a statevector simulator, both evaluated with 5 x 5 repeated stratified cross-validation (25 folds). Our results show that UMAP is the only reduction method where the quantum kernel remains competitive with the classical baseline. Under repeated cross-validation, UMAP showed a +0.032 accuracy gap favouring the quantum kernel (Dietterich 5 x 2 CV p = 0.177); however, validation on 10 fully independent datasets--each with independently generated samples, separate reduction fits, and separate kernel matrices -- reversed the sign to -0.030 (paired t-test p = 0.123; Wilcoxon p = 0.193; quantum wins 3/10 datasets), indicating that the apparent advantage was likely inflated by fold dependence. Nevertheless, UMAPs gap remains small and non-significant in both analyses, whereas all linear methods (PCA, RP Gaussian, PLS) show substantial quantum deficits of -0.090 to -0.116 across BV/TV classification, with PCA and PLS remaining significant under corrected tests (5 x 2 CV p = 0.004 and p = 0.007 respectively). We additionally evaluate quantum kernel ridge regression for continuous morphometric prediction, finding that ZZ quantum kernels fail uniformly at regression (negative R2 for all methods except PLS at 4 qubits), suggesting that the ZZ kernel captures decision boundaries but not smooth metric structure. These findings provide practical guidance for feature engineering in near-term quantum machine learning pipelines and demonstrate that the choice of dimensionality reduction can determine whether quantum kernels remain competitive with classical baselines.",
+  "authors": [
+    "Florez, I.",
+    "Farhat, A.",
+    "Le Houx, J.",
+    "Altamura, E.",
+    "Tozzi, G."
+  ],
+  "doi": "10.64898/2026.05.04.722627",
+  "first_seen": "2026-05-07",
+  "id": "biorxiv:10.64898/2026.05.04.722627",
+  "metadata": {
+    "abstract": "Quantum kernel methods offer a potential advantage for classification tasks in high-dimensional feature spaces, yet their practical benefit critically depends on how input features are prepared. We compare five dimensionality reduction strategies--principal component analysis (PCA), Gaussian random projection (RP Gaussian), sparse random projection (RP Sparse), partial least squares (PLS), and uniform manifold approximation and projection (UMAP) -- as pre-processing steps for quantum kernel support vector machines (SVMs) applied to trabecular bone classification from synthetic micro-computed tomography (micro-CT) data. Using a custom procedural generator based on Gaussian random field zero-crossings, we produced 500 synthetic trabecular bone volumes with controlled morphometric properties such as bone volume fraction (BV/TV), trabecular thickness (Tb.Th), number (Tb.N) and spacing (Tb.Sp). Texture features extracted from grayscale slices are reduced to 8-dimensional quantum circuit inputs via each method, then classified using both classical radial basis function (RBF)-SVMs and quantum kernel SVMs with ZZ feature maps on a statevector simulator, both evaluated with 5 x 5 repeated stratified cross-validation (25 folds). Our results show that UMAP is the only reduction method where the quantum kernel remains competitive with the classical baseline. Under repeated cross-validation, UMAP showed a +0.032 accuracy gap favouring the quantum kernel (Dietterich 5 x 2 CV p = 0.177); however, validation on 10 fully independent datasets--each with independently generated samples, separate reduction fits, and separate kernel matrices -- reversed the sign to -0.030 (paired t-test p = 0.123; Wilcoxon p = 0.193; quantum wins 3/10 datasets), indicating that the apparent advantage was likely inflated by fold dependence. Nevertheless, UMAPs gap remains small and non-significant in both analyses, whereas all linear methods (PCA, RP Gaussian, PLS) show substantial quantum deficits of -0.090 to -0.116 across BV/TV classification, with PCA and PLS remaining significant under corrected tests (5 x 2 CV p = 0.004 and p = 0.007 respectively). We additionally evaluate quantum kernel ridge regression for continuous morphometric prediction, finding that ZZ quantum kernels fail uniformly at regression (negative R2 for all methods except PLS at 4 qubits), suggesting that the ZZ kernel captures decision boundaries but not smooth metric structure. These findings provide practical guidance for feature engineering in near-term quantum machine learning pipelines and demonstrate that the choice of dimensionality reduction can determine whether quantum kernels remain competitive with classical baselines.",
+    "author_corresponding": "Isabella Florez",
+    "author_corresponding_institution": "University of Greenwich",
+    "authors": "Florez, I.; Farhat, A.; Le Houx, J.; Altamura, E.; Tozzi, G.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-05-07",
+    "doi": "10.64898/2026.05.04.722627",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/07/2026.05.04.722627.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Quantum kernel support vector machines for trabecular bone classification: comparing feature reduction strategies on synthetic micro-CT data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Greenwich",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "Compares five reduction methods feeding quantum kernel SVMs on synthetic trabecular bone micro-CT data; only UMAP stays near classical.",
+  "title": "Quantum kernel support vector machines for trabecular bone classification: comparing feature reduction strategies on synthetic micro-CT data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.04.722627"
+}

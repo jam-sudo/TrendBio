@@ -1,0 +1,42 @@
+{
+  "abstract": "TP53 is mutated in roughly half of all human cancers. Eight recurrent missense substitutions in the DNA-binding domain (R175H, Y220C, G245S, R248Q, R248W, R249S, R273H, R282W) account for most of the mutational burden. Homology-directed repair (HDR) with a wild-type donor template is one of the few feasible routes to revert these alleles, but existing CRISPR sgRNA design tools rank candidates without reference to the cancer cohort being treated. We built a reproducible pipeline that prioritizes SpCas9 sgRNAs for HDR-mediated correction of TP53 hotspot codons. The pipeline uses NM 000546.6 from NCBI, GRCh38 off-target search via Cas-OFFinder with the published Doench-2016 CFD matrices, on-target Doench-2016 (Rule Set 2) scores from CRISPOR, and per-cohort hotspot prevalence from three TCGA Pan-Cancer Atlas studies (HGSOC, n = 523; PDAC, n = 179; CRC, n = 534) accessed through cBioPortal. We enumerate guides whose cut sites fall within {+/-}10 nt of each hotspot codon, exclude any candidate that fails to map to GRCh38, and score the remainder. The final set contains 21 SpCas9 NGG sgRNAs across the seven hotspots, with no PAM-desert residues. A single candidate at R248 (TP53-248-P-ad878223; spacer GCATGGGCGGCATGAACCGG, AGG PAM; off-target specificity 0.913 over 806 reference-genome hits) ranks first in all three cohorts and holds rank 1 in 97% of 147 weight settings tested. Four additional residues (R175, Y220, R273, R282) yield within-residue tier-1 picks robust in 100% of weight settings. Cohort-specific differences appear only in cross-residue ordering: R175 and R282 climb in CRC, consistent with the higher prevalence of R175H and R282W in colorectal tumors.",
+  "authors": [
+    "Loke, S.",
+    "Movva, N. S. V.",
+    "Hota, M."
+  ],
+  "doi": "10.64898/2026.05.20.726726",
+  "first_seen": "2026-05-22",
+  "id": "biorxiv:10.64898/2026.05.20.726726",
+  "metadata": {
+    "abstract": "TP53 is mutated in roughly half of all human cancers. Eight recurrent missense substitutions in the DNA-binding domain (R175H, Y220C, G245S, R248Q, R248W, R249S, R273H, R282W) account for most of the mutational burden. Homology-directed repair (HDR) with a wild-type donor template is one of the few feasible routes to revert these alleles, but existing CRISPR sgRNA design tools rank candidates without reference to the cancer cohort being treated. We built a reproducible pipeline that prioritizes SpCas9 sgRNAs for HDR-mediated correction of TP53 hotspot codons. The pipeline uses NM 000546.6 from NCBI, GRCh38 off-target search via Cas-OFFinder with the published Doench-2016 CFD matrices, on-target Doench-2016 (Rule Set 2) scores from CRISPOR, and per-cohort hotspot prevalence from three TCGA Pan-Cancer Atlas studies (HGSOC, n = 523; PDAC, n = 179; CRC, n = 534) accessed through cBioPortal. We enumerate guides whose cut sites fall within {+/-}10 nt of each hotspot codon, exclude any candidate that fails to map to GRCh38, and score the remainder. The final set contains 21 SpCas9 NGG sgRNAs across the seven hotspots, with no PAM-desert residues. A single candidate at R248 (TP53-248-P-ad878223; spacer GCATGGGCGGCATGAACCGG, AGG PAM; off-target specificity 0.913 over 806 reference-genome hits) ranks first in all three cohorts and holds rank 1 in 97% of 147 weight settings tested. Four additional residues (R175, Y220, R273, R282) yield within-residue tier-1 picks robust in 100% of weight settings. Cohort-specific differences appear only in cross-residue ordering: R175 and R282 climb in CRC, consistent with the higher prevalence of R175H and R282W in colorectal tumors.",
+    "author_corresponding": "Sathvik Loke",
+    "author_corresponding_institution": "Illinois Mathematics and Science Academy",
+    "authors": "Loke, S.; Movva, N. S. V.; Hota, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-22",
+    "doi": "10.64898/2026.05.20.726726",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/22/2026.05.20.726726.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Cohort-stratified prioritization of CRISPR-Cas9 sgRNAs for HDR-mediated correction of TP53 hotspot codons in cancer",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Illinois Mathematics and Science Academy",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Reproducible pipeline ranking SpCas9 sgRNAs for HDR correction of TP53 hotspot codons using cohort prevalence and off-target scores.",
+  "title": "Cohort-stratified prioritization of CRISPR-Cas9 sgRNAs for HDR-mediated correction of TP53 hotspot codons in cancer",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.20.726726"
+}

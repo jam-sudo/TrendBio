@@ -1,0 +1,40 @@
+{
+  "abstract": "OrthoFinders all-vs-all DIAMOND step systematically misses single-copy orthogroups (SC OGs) at deep taxonomic divergence: a marker recovered cleanly within a tightly defined cohort is dropped when the same marker is searched against phylum-broad metagenome-assembled genome (MAG) sets, because pairwise sequence similarity falls below DIAMONDs detection threshold even when the underlying ortholog is present. The result is biased dropout -- supermatrices that retain genomes near the cohort but lose genomes from the deeper, more diverged corners of the same phylum. We describe a two-stage cohort-HMM recruitment pipeline (per-OG profile HMMs built from cohort alignments, then hmmsearch against the broader proteome set) followed by an independent per-OG gene-tree QC step that classifies each recruited hit relative to the cohorts most recent common ancestor (MRCA) descendant set, with a per-MAG paralog-rate filter applied before supermatrix concatenation. We characterize the pipeline across three taxonomic ranks. At phylum scale (Omnitrophota, 97 cohort OGs, 714 NCBI MAGs), the recruitment recovers MAGs that the OrthoFinder-only supermatrix would otherwise drop, and the QC identifies 2 deep-peripheral MAGs -- divergent genomes whose per-OG tips repeatedly place outside the cohort MRCA descendant set despite being orthologs -- that the per-MAG filter removes. At family scale (Pelagibacteraceae, 146 cohort OGs, 366 NCBI MAGs) and at genus scale (Actinomarina, 289 cohort OGs, 23 NCBI MAGs), the per-tip paralog-candidate rate drops to 0.0 %. The pipeline addresses two independent failure modes. Cohort paralog density breaks strict-SC OG discovery at the cohort step (the family-rank case, where every candidate marker has at least one cohort species carrying multiple copies; the relaxed cohort criterion supplies the marker set and HMM recruitment disambiguates which copy each NCBI MAG contributes). DIAMOND-reach attrition breaks OG assignment for the most divergent NCBI MAGs (the phylum-rank case, where pairwise similarities fall below DIAMONDs detection threshold; HMM recruitment recovers the dropouts and the per-OG QC step filters residual paralog candidates). At genus rank both modes are inactive and OrthoFinder suffices directly; HMM recruitment runs but finds no new orthologs. Code and per-case data products are released as a community resource at Zenodo (DOI 10.5281/zenodo.20422348).",
+  "authors": [
+    "Nielsen, T. N."
+  ],
+  "doi": "10.64898/2026.05.27.728348",
+  "first_seen": "2026-05-31",
+  "id": "biorxiv:10.64898/2026.05.27.728348",
+  "metadata": {
+    "abstract": "OrthoFinders all-vs-all DIAMOND step systematically misses single-copy orthogroups (SC OGs) at deep taxonomic divergence: a marker recovered cleanly within a tightly defined cohort is dropped when the same marker is searched against phylum-broad metagenome-assembled genome (MAG) sets, because pairwise sequence similarity falls below DIAMONDs detection threshold even when the underlying ortholog is present. The result is biased dropout -- supermatrices that retain genomes near the cohort but lose genomes from the deeper, more diverged corners of the same phylum. We describe a two-stage cohort-HMM recruitment pipeline (per-OG profile HMMs built from cohort alignments, then hmmsearch against the broader proteome set) followed by an independent per-OG gene-tree QC step that classifies each recruited hit relative to the cohorts most recent common ancestor (MRCA) descendant set, with a per-MAG paralog-rate filter applied before supermatrix concatenation. We characterize the pipeline across three taxonomic ranks. At phylum scale (Omnitrophota, 97 cohort OGs, 714 NCBI MAGs), the recruitment recovers MAGs that the OrthoFinder-only supermatrix would otherwise drop, and the QC identifies 2 deep-peripheral MAGs -- divergent genomes whose per-OG tips repeatedly place outside the cohort MRCA descendant set despite being orthologs -- that the per-MAG filter removes. At family scale (Pelagibacteraceae, 146 cohort OGs, 366 NCBI MAGs) and at genus scale (Actinomarina, 289 cohort OGs, 23 NCBI MAGs), the per-tip paralog-candidate rate drops to 0.0 %. The pipeline addresses two independent failure modes. Cohort paralog density breaks strict-SC OG discovery at the cohort step (the family-rank case, where every candidate marker has at least one cohort species carrying multiple copies; the relaxed cohort criterion supplies the marker set and HMM recruitment disambiguates which copy each NCBI MAG contributes). DIAMOND-reach attrition breaks OG assignment for the most divergent NCBI MAGs (the phylum-rank case, where pairwise similarities fall below DIAMONDs detection threshold; HMM recruitment recovers the dropouts and the per-OG QC step filters residual paralog candidates). At genus rank both modes are inactive and OrthoFinder suffices directly; HMM recruitment runs but finds no new orthologs. Code and per-case data products are released as a community resource at Zenodo (DOI 10.5281/zenodo.20422348).",
+    "author_corresponding": "Torben N Nielsen",
+    "author_corresponding_institution": "Jorgmundir",
+    "authors": "Nielsen, T. N.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-31",
+    "doi": "10.64898/2026.05.27.728348",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/31/2026.05.27.728348.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Cohort-HMM marker recruitment with per-OG orthology QC for phylogenomic supermatrices",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Jorgmundir",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-05-31",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Cohort-HMM recruitment and per-OG gene-tree QC recover orthologs DIAMOND misses in phylogenomic supermatrices.",
+  "title": "Cohort-HMM marker recruitment with per-OG orthology QC for phylogenomic supermatrices",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.27.728348"
+}

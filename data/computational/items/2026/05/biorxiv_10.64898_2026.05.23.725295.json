@@ -1,0 +1,43 @@
+{
+  "abstract": "BackgroundPrediction of in vivo drug response is a central challenge in precision medicine, but the scarcity of labeled clinical data still necessitates the use of large-scale cancer cell line resources for model training. Domain adaptation methods, which aim to transfer knowledge learned from a source domain (cell lines) to a target domain (patients) by aligning feature distributions across domains, are a promising approach to bridge the gap between in vitro models and in vivo patients. However, we observed that these methods can exhibit a significant discrepancy between pan-cancer evaluation metrics and cancer type-specific prediction accuracy. This performance gap warrants a detailed investigation into their underlying predictive characteristics.\n\nResultsWe discovered that cancer-type-specific class imbalances in training data can lead domain adaptation models to engage in shortcut learning, where they primarily discriminate between cancer types rather than capturing the actual biological determinants of drug sensitivity. To address this, we propose a strategy of combining two approaches: (1) excluding cancer types causing imbalance from the training data, and (2) adjusting class balance through oversampling and class weighting while retaining cancer types causing the imbalance. Among all configurations tested in conjunction with the CODE-AE (Context-aware Deconfounding AutoEncoder) framework, the combination of moderate oversampling (30% non-responder ratio) with class weighting achieved the best performance, significantly improving prediction accuracy in 5 out of 11 external patient cohorts from TCGA and GEO.\n\nConclusionsOur findings demonstrate that appropriate class imbalance correction--rather than wholesale exclusion of imbalanced cancer subtypes--enables effective utilization of biologically relevant information shared across cancer types for drug response prediction. This study highlights the critical importance of jointly optimizing training data composition and class balance adjustment strategies in developing robust pan-cancer drug response prediction models for precision medicine applications.\n\nHighlightsO_LIIdentified a critical discrepancy in current domain adaptation models for drug response prediction: high pan-cancer accuracy often masks poor performance within specific cancer types.\nC_LIO_LIRevealed the root cause as \"shortcut learning,\" where models tend to distinguish between cancer tissue types (hematological vs. solid) rather than learning individual drug sensitivity.\nC_LIO_LIDiscovered severe class imbalance in training data, with hematological cell lines being disproportionately drug-responsive across multiple chemotherapeutics.\nC_LIO_LIProposed an architecture-agnostic fix using the CODE-AE framework: moderate oversampling (30% minority ratio) combined with class weighting.\nC_LIO_LIDemonstrated significant improvements in 5 of 11 external patient cohorts, showing that correcting class bias is more effective than simply excluding problematic data.\nC_LI",
+  "authors": [
+    "Shimamoto, K.",
+    "Ito, T.",
+    "Lysenko, A.",
+    "Tsunoda, T."
+  ],
+  "doi": "10.64898/2026.05.23.725295",
+  "first_seen": "2026-05-27",
+  "id": "biorxiv:10.64898/2026.05.23.725295",
+  "metadata": {
+    "abstract": "BackgroundPrediction of in vivo drug response is a central challenge in precision medicine, but the scarcity of labeled clinical data still necessitates the use of large-scale cancer cell line resources for model training. Domain adaptation methods, which aim to transfer knowledge learned from a source domain (cell lines) to a target domain (patients) by aligning feature distributions across domains, are a promising approach to bridge the gap between in vitro models and in vivo patients. However, we observed that these methods can exhibit a significant discrepancy between pan-cancer evaluation metrics and cancer type-specific prediction accuracy. This performance gap warrants a detailed investigation into their underlying predictive characteristics.\n\nResultsWe discovered that cancer-type-specific class imbalances in training data can lead domain adaptation models to engage in shortcut learning, where they primarily discriminate between cancer types rather than capturing the actual biological determinants of drug sensitivity. To address this, we propose a strategy of combining two approaches: (1) excluding cancer types causing imbalance from the training data, and (2) adjusting class balance through oversampling and class weighting while retaining cancer types causing the imbalance. Among all configurations tested in conjunction with the CODE-AE (Context-aware Deconfounding AutoEncoder) framework, the combination of moderate oversampling (30% non-responder ratio) with class weighting achieved the best performance, significantly improving prediction accuracy in 5 out of 11 external patient cohorts from TCGA and GEO.\n\nConclusionsOur findings demonstrate that appropriate class imbalance correction--rather than wholesale exclusion of imbalanced cancer subtypes--enables effective utilization of biologically relevant information shared across cancer types for drug response prediction. This study highlights the critical importance of jointly optimizing training data composition and class balance adjustment strategies in developing robust pan-cancer drug response prediction models for precision medicine applications.\n\nHighlightsO_LIIdentified a critical discrepancy in current domain adaptation models for drug response prediction: high pan-cancer accuracy often masks poor performance within specific cancer types.\nC_LIO_LIRevealed the root cause as \"shortcut learning,\" where models tend to distinguish between cancer tissue types (hematological vs. solid) rather than learning individual drug sensitivity.\nC_LIO_LIDiscovered severe class imbalance in training data, with hematological cell lines being disproportionately drug-responsive across multiple chemotherapeutics.\nC_LIO_LIProposed an architecture-agnostic fix using the CODE-AE framework: moderate oversampling (30% minority ratio) combined with class weighting.\nC_LIO_LIDemonstrated significant improvements in 5 of 11 external patient cohorts, showing that correcting class bias is more effective than simply excluding problematic data.\nC_LI",
+    "author_corresponding": "Tatsuhiko Tsunoda",
+    "author_corresponding_institution": "The University of Tokyo",
+    "authors": "Shimamoto, K.; Ito, T.; Lysenko, A.; Tsunoda, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-27",
+    "doi": "10.64898/2026.05.23.725295",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/27/2026.05.23.725295.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Training Strategy Optimization to Mitigate Shortcut Learning in Pan-Cancer Drug Response Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Tokyo",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows domain adaptation drug response models shortcut-learn cancer type; oversampling plus class weighting with CODE-AE improves patient cohort prediction in 5…",
+  "title": "Training Strategy Optimization to Mitigate Shortcut Learning in Pan-Cancer Drug Response Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.23.725295"
+}

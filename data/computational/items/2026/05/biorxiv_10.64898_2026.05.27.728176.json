@@ -1,0 +1,43 @@
+{
+  "abstract": "Gene fusions are clinically relevant genomic alterations and key cancer biomarkers. Their computational detection remains dominated by alignment-based pipelines, whose reliance on read mapping, reference annotations, and heuristic filtering makes them sensitive to mapping ambiguities, annotation incompleteness, repetitive regions, and false positives. Recent machine learning (ML) strategies aim to learn fusion-related patterns directly from sequencing data, but their adoption is still limited by dataset-specific biases, synthetic data artifacts, class imbalance, and representations that may overlook the structural organization of biological sequences.\n\nTheoretical and statistical sequence descriptors remain underexplored as efficient tools for capturing informative structural signals in biological reads. In this work, we investigate whether fusion-related information can be inferred directly from the statistical organization of DNA sequences. Each sequence is encoded into a compact, interpretable, and alignment-free feature space combining Shannon and Renyi entropy, lagged and base-resolved mutual information, GC content, and rarefied k-mer richness descriptors. Our goal is to assess whether these information-theoretic features encode discriminative sequence signatures associated with fusion events.\n\nFor discriminating fusion-derived from non-fusion sequences, nested cross-validation selected K-nearest neighbors as the most effective classifier, achieving strong held-out performance on the balanced benchmark (AUROC = 0.892, AUPRC = 0.865). The same representation was then evaluated on fusion-positive samples for fusion partner prediction and breakpoint localization, achieving strong top-k partner identification accuracy and stable breakpoint regression performance. Moreover, a two-stage strategy in which the binary classifier first filters candidate reads further improved partner prediction, suggesting its use as an enrichment step for downstream fusion characterization. Although performance decreased under repeated fusion-pair-disjoint evaluation, it remained clearly above random expectation, supporting the transferability of the proposed descriptors to unseen fusion pairs. Breakpoint-centered validation further revealed increased local sequence complexity, altered short-range dependency structure, and modest but significant microhomology enrichment around fusion regions.\n\nSuch findings support an interpretable alignment-free framework where information-theoretic features provide predictive and biologically informative signals for gene fusion analysis.\n\nThe framework is available at: https://github.com/FLaTNNBio/EntropyFusionDNA\n\nGraphical Abstract\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=73 SRC=\"FIGDIR/small/728176v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (23K):\norg.highwire.dtl.DTLVardef@805fa3org.highwire.dtl.DTLVardef@6f6cdorg.highwire.dtl.DTLVardef@1352c8borg.highwire.dtl.DTLVardef@1ff780b_HPS_FORMAT_FIGEXP  M_FIG C_FIG HighlightsO_LIAlignment-free information-theoretic DNA descriptors detect gene fusions.\nC_LIO_LIResolved mutual-information features provide the strongest predictive signal.\nC_LIO_LITwo-stage screening enriches partner-gene prediction and breakpoint analysis.\nC_LI",
+  "authors": [
+    "Benevento, G.",
+    "Malandrino, D.",
+    "Ture, A.",
+    "Zaccagnino, R."
+  ],
+  "doi": "10.64898/2026.05.27.728176",
+  "first_seen": "2026-05-30",
+  "id": "biorxiv:10.64898/2026.05.27.728176",
+  "metadata": {
+    "abstract": "Gene fusions are clinically relevant genomic alterations and key cancer biomarkers. Their computational detection remains dominated by alignment-based pipelines, whose reliance on read mapping, reference annotations, and heuristic filtering makes them sensitive to mapping ambiguities, annotation incompleteness, repetitive regions, and false positives. Recent machine learning (ML) strategies aim to learn fusion-related patterns directly from sequencing data, but their adoption is still limited by dataset-specific biases, synthetic data artifacts, class imbalance, and representations that may overlook the structural organization of biological sequences.\n\nTheoretical and statistical sequence descriptors remain underexplored as efficient tools for capturing informative structural signals in biological reads. In this work, we investigate whether fusion-related information can be inferred directly from the statistical organization of DNA sequences. Each sequence is encoded into a compact, interpretable, and alignment-free feature space combining Shannon and Renyi entropy, lagged and base-resolved mutual information, GC content, and rarefied k-mer richness descriptors. Our goal is to assess whether these information-theoretic features encode discriminative sequence signatures associated with fusion events.\n\nFor discriminating fusion-derived from non-fusion sequences, nested cross-validation selected K-nearest neighbors as the most effective classifier, achieving strong held-out performance on the balanced benchmark (AUROC = 0.892, AUPRC = 0.865). The same representation was then evaluated on fusion-positive samples for fusion partner prediction and breakpoint localization, achieving strong top-k partner identification accuracy and stable breakpoint regression performance. Moreover, a two-stage strategy in which the binary classifier first filters candidate reads further improved partner prediction, suggesting its use as an enrichment step for downstream fusion characterization. Although performance decreased under repeated fusion-pair-disjoint evaluation, it remained clearly above random expectation, supporting the transferability of the proposed descriptors to unseen fusion pairs. Breakpoint-centered validation further revealed increased local sequence complexity, altered short-range dependency structure, and modest but significant microhomology enrichment around fusion regions.\n\nSuch findings support an interpretable alignment-free framework where information-theoretic features provide predictive and biologically informative signals for gene fusion analysis.\n\nThe framework is available at: https://github.com/FLaTNNBio/EntropyFusionDNA\n\nGraphical Abstract\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=73 SRC=\"FIGDIR/small/728176v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (23K):\norg.highwire.dtl.DTLVardef@805fa3org.highwire.dtl.DTLVardef@6f6cdorg.highwire.dtl.DTLVardef@1352c8borg.highwire.dtl.DTLVardef@1ff780b_HPS_FORMAT_FIGEXP  M_FIG C_FIG HighlightsO_LIAlignment-free information-theoretic DNA descriptors detect gene fusions.\nC_LIO_LIResolved mutual-information features provide the strongest predictive signal.\nC_LIO_LITwo-stage screening enriches partner-gene prediction and breakpoint analysis.\nC_LI",
+    "author_corresponding": "Gerardo Benevento",
+    "author_corresponding_institution": "University of Salerno",
+    "authors": "Benevento, G.; Malandrino, D.; Ture, A.; Zaccagnino, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-30",
+    "doi": "10.64898/2026.05.27.728176",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/30/2026.05.27.728176.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Entropy Fusion DNA: Alignment-Free Gene Fusion Detection through Entropy and Mutual Information Descriptors",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Salerno",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Alignment-free entropy and mutual-information descriptors with KNN classify gene-fusion reads (AUROC 0.892) and aid partner and breakpoint prediction; code is…",
+  "title": "Entropy Fusion DNA: Alignment-Free Gene Fusion Detection through Entropy and Mutual Information Descriptors",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.27.728176"
+}

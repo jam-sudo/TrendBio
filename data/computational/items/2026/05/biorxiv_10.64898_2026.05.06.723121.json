@@ -1,0 +1,42 @@
+{
+  "abstract": "Drug-induced arrhythmias, particularly Torsades de Pointes (TdP), pose a significant risk to patient safety and can sometimes have life-threatening outcomes. They remain a major concern in drug development and regulation. Machine learning (ML) has become a powerful tool for analyzing complex biological and chemical datasets, enabling researchers to identify subtle patterns that differentiate safe compounds from those likely to cause dangerous cardiac effects. However, most existing in silico approaches do not sufficiently incorporate biological elements, relying heavily on chemical and structural properties or on computationally expensive simulations.\n\nHere, we introduce BioMADE, a novel ML framework that harnesses small-molecule-protein activity profiles from publicly available datasets to predict TdP risk without requiring exhaustive mechanistic annotation. Activity data from ChEMBL were used to train individual models for each gene, which predict activity values for any given compound. A curated set of arrhythmia-relevant genes was then used to construct a latent biological embedding (BioMADE embedding) for each molecule. We validated the performance of these features in distinguishing biological elements such as ATC3 class, showing superior classification performance compared with representations such as Molformer (lacks biological information) and MACCS (limited chemical properties) (0.85 AUROC vs 0.81 and 0.73, respectively). BioMADE representations served as input to a support vector machine classifier to discriminate TdP-inducing drugs from safe compounds.\n\nBioMADE achieved an AUROC of 0.89 in internal validation, indicating strong predictive performance. Against state-of-the-art models such as ADMEThyst, BioMADE achieved an AUROC of 0.74 on ADMEThysts validation set (vs. 0.72 for ADMEThyst). When we combined both approaches, the AUROC reached 0.77.\n\nThese results demonstrate that BioMADE provides a scalable, biology-informed, and generalizable approach for predicting drug-induced toxicities. By integrating protein activity profiles into toxicology modeling, our framework highlights the critical role of human biology in adverse drug reaction prediction, an aspect often overshadowed by purely chemical or structural descriptors.",
+  "authors": [
+    "Acitores Cortina, J. M.",
+    "Schut, M. C.",
+    "Tatonetti, N. P."
+  ],
+  "doi": "10.64898/2026.05.06.723121",
+  "first_seen": "2026-05-11",
+  "id": "biorxiv:10.64898/2026.05.06.723121",
+  "metadata": {
+    "abstract": "Drug-induced arrhythmias, particularly Torsades de Pointes (TdP), pose a significant risk to patient safety and can sometimes have life-threatening outcomes. They remain a major concern in drug development and regulation. Machine learning (ML) has become a powerful tool for analyzing complex biological and chemical datasets, enabling researchers to identify subtle patterns that differentiate safe compounds from those likely to cause dangerous cardiac effects. However, most existing in silico approaches do not sufficiently incorporate biological elements, relying heavily on chemical and structural properties or on computationally expensive simulations.\n\nHere, we introduce BioMADE, a novel ML framework that harnesses small-molecule-protein activity profiles from publicly available datasets to predict TdP risk without requiring exhaustive mechanistic annotation. Activity data from ChEMBL were used to train individual models for each gene, which predict activity values for any given compound. A curated set of arrhythmia-relevant genes was then used to construct a latent biological embedding (BioMADE embedding) for each molecule. We validated the performance of these features in distinguishing biological elements such as ATC3 class, showing superior classification performance compared with representations such as Molformer (lacks biological information) and MACCS (limited chemical properties) (0.85 AUROC vs 0.81 and 0.73, respectively). BioMADE representations served as input to a support vector machine classifier to discriminate TdP-inducing drugs from safe compounds.\n\nBioMADE achieved an AUROC of 0.89 in internal validation, indicating strong predictive performance. Against state-of-the-art models such as ADMEThyst, BioMADE achieved an AUROC of 0.74 on ADMEThysts validation set (vs. 0.72 for ADMEThyst). When we combined both approaches, the AUROC reached 0.77.\n\nThese results demonstrate that BioMADE provides a scalable, biology-informed, and generalizable approach for predicting drug-induced toxicities. By integrating protein activity profiles into toxicology modeling, our framework highlights the critical role of human biology in adverse drug reaction prediction, an aspect often overshadowed by purely chemical or structural descriptors.",
+    "author_corresponding": "Nicholas P Tatonetti",
+    "author_corresponding_institution": "Cedars-Sinai Medical Center",
+    "authors": "Acitores Cortina, J. M.; Schut, M. C.; Tatonetti, N. P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-11",
+    "doi": "10.64898/2026.05.06.723121",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/11/2026.05.06.723121.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BioMADE: Predicting Torsades de Pointes from molecular structures through biologically informed representations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Cedars-Sinai Medical Center",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "BioMADE: ML framework using ChEMBL per-gene activity profiles to build biology-informed molecular embeddings that predict Torsades de Pointes risk (AUROC 0.89…",
+  "title": "BioMADE: Predicting Torsades de Pointes from molecular structures through biologically informed representations",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.06.723121"
+}

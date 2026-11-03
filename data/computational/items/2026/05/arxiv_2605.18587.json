@@ -1,0 +1,34 @@
+{
+  "abstract": "Single-cell trajectory inference from destructive time-course snapshots is fundamentally ill-posed: neither cross-time cell correspondences nor continuous trajectories are observed, so the snapshot distributions alone do not uniquely determine the underlying dynamics. Existing optimal transport and flow-based methods typically couple cells by Euclidean proximity at observed clock times, which can misalign trajectories when development is asynchronous and cells sampled at the same experimental time occupy different latent pseudotime stages. We propose PACE, a trajectory inference framework that recovers geometry-consistent continuous transport dynamics from destructive time-course snapshots through three coupled components. First, PACE constructs a state- and time-dependent anisotropic Riemannian metric that assigns low transport cost along locally supported tangent directions while penalizing normal velocity components. Second, it alternates between refining cross-time couplings under the induced path-action cost and fitting endpoint-preserving neural bridges between adjacent snapshots. Third, it distills the learned bridge dynamics into a global continuous-time velocity field over cellular states. Across seven controlled and biological datasets covering nine held-out reconstruction experiments, PACE achieves the strongest overall reconstruction performance, reducing MMD, Wasserstein-1 distance, and Wasserstein-2 distance by 23.7% on average relative to the strongest competing baseline. PACE also improves RNA-velocity alignment by 15.4% on an embryoid body differentiation benchmark, without requiring explicit cell pairing, lineage tracing, or RNA-velocity supervision during training. Code is available at https://github.com/AI4Science-WestlakeU/PACE.",
+  "authors": [
+    "Chenglei Yu",
+    "Chuanrui Wang",
+    "Bangyan Liao",
+    "Tailin Wu"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-18",
+  "id": "arxiv:2605.18587",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.18587v4</ns0:id>\n    <ns0:title>PACE: Geometry-Aware Bridge Transport for Single-Cell Trajectory Inference</ns0:title>\n    <ns0:updated>2026-10-20T12:15:54Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.18587v4\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.18587v4\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Single-cell trajectory inference from destructive time-course snapshots is fundamentally ill-posed: neither cross-time cell correspondences nor continuous trajectories are observed, so the snapshot distributions alone do not uniquely determine the underlying dynamics. Existing optimal transport and flow-based methods typically couple cells by Euclidean proximity at observed clock times, which can misalign trajectories when development is asynchronous and cells sampled at the same experimental time occupy different latent pseudotime stages. We propose PACE, a trajectory inference framework that recovers geometry-consistent continuous transport dynamics from destructive time-course snapshots through three coupled components. First, PACE constructs a state- and time-dependent anisotropic Riemannian metric that assigns low transport cost along locally supported tangent directions while penalizing normal velocity components. Second, it alternates between refining cross-time couplings under the induced path-action cost and fitting endpoint-preserving neural bridges between adjacent snapshots. Third, it distills the learned bridge dynamics into a global continuous-time velocity field over cellular states. Across seven controlled and biological datasets covering nine held-out reconstruction experiments, PACE achieves the strongest overall reconstruction performance, reducing MMD, Wasserstein-1 distance, and Wasserstein-2 distance by 23.7% on average relative to the strongest competing baseline. PACE also improves RNA-velocity alignment by 15.4% on an embryoid body differentiation benchmark, without requiring explicit cell pairing, lineage tracing, or RNA-velocity supervision during training. Code is available at https://github.com/AI4Science-WestlakeU/PACE.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-18T16:03:56Z</ns0:published>\n    <ns1:comment>NeurIPS 2026. 32 pages, 12 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Chenglei Yu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chuanrui Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bangyan Liao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tailin Wu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-05-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "PACE infers single-cell trajectories from destructive time-course snapshots using a state- and time-dependent Riemannian metric, alternating cross-time…",
+  "title": "PACE: Geometry-Aware Bridge Transport for Single-Cell Trajectory Inference",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.18587v4"
+}

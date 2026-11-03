@@ -1,0 +1,31 @@
+{
+  "abstract": "Gene regulatory networks are routinely translated from Boolean update rules into large continuous ODE systems integrated numerically for attractor identification, sensitivity analysis, and control design. The reliability of that integration depends critically on the sigmoidal kernel representing regulation. This simulation study shows that the Hill function -- the near-universal choice -- is a generically unreliable kernel, while the logistic function is a robust replacement. Two failure modes are demonstrated. First, because the Hill function vanishes at zero input, bistable circuits acquire an absorbing off-state: with experimentally grounded \\textit{E. coli} galactose-operon autoregulation parameters, a Hill model stays trapped below the unstable separatrix, whereas the logistic model -- whose basal rate is strictly positive by construction -- escapes in about $44$~minutes through basal production alone, matching an analytical estimate of ${\\approx}58$~min. A saddle-node analysis characterises the bistable window via an explicit transcendental equation and identifies the threshold $λθ=2$ separating monostable from bistable regimes. Second, when the Hill exponent is non-integer -- as in dose-response fits -- the power law $x^n=e^{n\\ln x}$ turns complex-valued whenever a solver overshoots into negative concentrations. On an $80$-gene Boolean-derived benchmark with $n\\approx3.509$, the Hill solver is silently contaminated by complex values from $t\\approx52.64$, yielding smooth but spurious trajectories, whereas the logistic formulation completes $t\\in[0,200]$ without a single warning. Because the logistic vector field is globally Lipschitz with explicit constant, we further prove an a priori global-error bound of classical order -- a guarantee structurally unavailable to the Hill formulation.",
+  "authors": [
+    "Ismail Belgacem"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-01",
+  "id": "arxiv:2605.01056",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.MN",
+    "categories": [
+      "q-bio.MN",
+      "math.DS"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.01056v2</ns0:id>\n    <ns0:title>Numerical Reliability of Logistic Gene Regulatory Network Models: Preventing Expression Shutdown and Robust Integration of Boolean-Derived ODE Systems</ns0:title>\n    <ns0:updated>2026-06-16T21:24:26Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.01056v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.01056v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Gene regulatory networks are routinely translated from Boolean update rules into large continuous ODE systems integrated numerically for attractor identification, sensitivity analysis, and control design. The reliability of that integration depends critically on the sigmoidal kernel representing regulation. This simulation study shows that the Hill function -- the near-universal choice -- is a generically unreliable kernel, while the logistic function is a robust replacement. Two failure modes are demonstrated. First, because the Hill function vanishes at zero input, bistable circuits acquire an absorbing off-state: with experimentally grounded \\textit{E. coli} galactose-operon autoregulation parameters, a Hill model stays trapped below the unstable separatrix, whereas the logistic model -- whose basal rate is strictly positive by construction -- escapes in about $44$~minutes through basal production alone, matching an analytical estimate of ${\\approx}58$~min. A saddle-node analysis characterises the bistable window via an explicit transcendental equation and identifies the threshold $λθ=2$ separating monostable from bistable regimes. Second, when the Hill exponent is non-integer -- as in dose-response fits -- the power law $x^n=e^{n\\ln x}$ turns complex-valued whenever a solver overshoots into negative concentrations. On an $80$-gene Boolean-derived benchmark with $n\\approx3.509$, the Hill solver is silently contaminated by complex values from $t\\approx52.64$, yielding smooth but spurious trajectories, whereas the logistic formulation completes $t\\in[0,200]$ without a single warning. Because the logistic vector field is globally Lipschitz with explicit constant, we further prove an a priori global-error bound of classical order -- a guarantee structurally unavailable to the Hill formulation.</ns0:summary>\n    <ns0:category term=\"q-bio.MN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.DS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-01T19:44:15Z</ns0:published>\n    <ns1:comment>arXiv admin note: text overlap with arXiv:2512.14325</ns1:comment>\n    <ns1:primary_category term=\"q-bio.MN\" />\n    <ns0:author>\n      <ns0:name>Ismail Belgacem</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-05-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Simulation study showing Hill-function kernels in Boolean-derived gene regulatory ODE models cause absorbing off-states and complex-valued trajectories, while…",
+  "title": "Numerical Reliability of Logistic Gene Regulatory Network Models: Preventing Expression Shutdown and Robust Integration of Boolean-Derived ODE Systems",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.01056v2"
+}

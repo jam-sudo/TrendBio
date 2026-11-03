@@ -1,0 +1,32 @@
+{
+  "abstract": "Polygenic risk scores (PRSs) aggregate genetic effect estimates to predict disease susceptibility, yet clinical deployment often exposes raw genotype data to third-party compute infrastructure. Prior homomorphic-encryption approaches, still require trust in a designated evaluator. We present bioETH-PRS, a protocol that replaces that evaluator role with immutable smart contracts on a blockchain supporting Fully Homomorphic Encryption (fhEVM). Using the integer-exact TFHE scheme, bioETH-PRS computes the PRS dot product entirely within the encrypted domain, keeping both genotype dosage vectors and GWAS weight vectors hidden from external parties throughout execution. We introduce a three-step fixed-point quantisation scheme for representing signed GWAS weights as unsigned 64-bit integers, achieving machine-epsilon reconstruction accuracy on validated fixtures. A four-contract architecture separates data custody, model publication, computation, and output release, and supports both a classic chunked path and a streaming path, with the latter reducing mock-measured gas by 37%. An on-chain noisy output oracle emits an encrypted noisy-score handle and a publicly decryptable ternary category, reducing raw score exposure and probing risk. Prototype evaluation on real GWAS fixtures confirms linear gas scaling and suggests that the approach may be cost-competitive in low-gas deployment environments.",
+  "authors": [
+    "Kimon Antonios Provatas",
+    "Christos Galanopoulos",
+    "Ilias Georgakopoulos-Soares"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-20",
+  "id": "arxiv:2605.21634",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.21634v1</ns0:id>\n    <ns0:title>bioETH-PRS: Confidential Polygenic Risk Scoring without a Trusted Evaluator via Fully Homomorphic Encryption on a Programmable Blockchain</ns0:title>\n    <ns0:updated>2026-05-20T18:45:17Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.21634v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.21634v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Polygenic risk scores (PRSs) aggregate genetic effect estimates to predict disease susceptibility, yet clinical deployment often exposes raw genotype data to third-party compute infrastructure. Prior homomorphic-encryption approaches, still require trust in a designated evaluator. We present bioETH-PRS, a protocol that replaces that evaluator role with immutable smart contracts on a blockchain supporting Fully Homomorphic Encryption (fhEVM). Using the integer-exact TFHE scheme, bioETH-PRS computes the PRS dot product entirely within the encrypted domain, keeping both genotype dosage vectors and GWAS weight vectors hidden from external parties throughout execution. We introduce a three-step fixed-point quantisation scheme for representing signed GWAS weights as unsigned 64-bit integers, achieving machine-epsilon reconstruction accuracy on validated fixtures. A four-contract architecture separates data custody, model publication, computation, and output release, and supports both a classic chunked path and a streaming path, with the latter reducing mock-measured gas by 37%. An on-chain noisy output oracle emits an encrypted noisy-score handle and a publicly decryptable ternary category, reducing raw score exposure and probing risk. Prototype evaluation on real GWAS fixtures confirms linear gas scaling and suggests that the approach may be cost-competitive in low-gas deployment environments.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-20T18:45:17Z</ns0:published>\n    <ns1:comment>12 pages, 6 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Kimon Antonios Provatas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Christos Galanopoulos</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ilias Georgakopoulos-Soares</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-05-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "FHE-based blockchain protocol computes polygenic risk scores on encrypted genotypes and GWAS weights, removing the trusted evaluator.",
+  "title": "bioETH-PRS: Confidential Polygenic Risk Scoring without a Trusted Evaluator via Fully Homomorphic Encryption on a Programmable Blockchain",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.21634v1"
+}

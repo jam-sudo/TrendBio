@@ -1,0 +1,42 @@
+{
+  "abstract": "Single-cell foundation models (scFMs) have shown promise as transferable representations of cellular state, but recent zero-shot evaluations suggest that they do not consistently outperform simpler baselines. We asked whether this apparent limitation reflects an intrinsic weakness of scFMs or instead the difficulty of using them without task-specific adaptation. To test this, we fine-tuned two widely used scFMs, Geneformer and scGPT, on common tumour subtypes from renal, lung, and breast cancer, and compared them with a LightGBM baseline on within-domain validation cohorts and on out-of-domain rarer, unseen cancer subtypes. Across all three organs, the models achieved near-perfect within-domain discrimination (AUROC 0.98-1.00), but differences emerged under subtype shift. On chromophobe RCC, scGPT and Geneformer achieved AUROC 0.88 and 0.92 respectively versus 0.64 for LightGBM; on SCLC, Geneformer reached 1.00 versus 0.82 for LightGBM; and on TNBC, scGPT achieved 0.80 versus 0.49 for\n\nLightGBM. To determine whether this generalisation reflected meaningful adaptation rather than arbitrary feature drift, we applied Integrated Gradients, an interpretability technique, to the fine-tuned scFMs and SHAP to LightGBM. LightGBM showed highly stable gene-importance rankings across datasets, whereas the foundation models were substantially more context-sensitive. However, this flexibility was not random: all models converged on a shared within-domain core, while scFMs acquired larger rare-subtype-specific gene sets and pathway programmes during transfer. Pathway enrichment further supported the biological relevance of these attributed genes. Together, these results suggest that fine-tuned scFMs can bridge clinically relevant domain shifts in cancer single-cell analysis and that interpretability provides a practical route to distinguishing biologically grounded adaptation from rigid reuse of training-era rules.",
+  "authors": [
+    "Wallace, J.",
+    "Youssef, G.",
+    "Han, N."
+  ],
+  "doi": "10.64898/2026.04.28.721114",
+  "first_seen": "2026-05-01",
+  "id": "biorxiv:10.64898/2026.04.28.721114",
+  "metadata": {
+    "abstract": "Single-cell foundation models (scFMs) have shown promise as transferable representations of cellular state, but recent zero-shot evaluations suggest that they do not consistently outperform simpler baselines. We asked whether this apparent limitation reflects an intrinsic weakness of scFMs or instead the difficulty of using them without task-specific adaptation. To test this, we fine-tuned two widely used scFMs, Geneformer and scGPT, on common tumour subtypes from renal, lung, and breast cancer, and compared them with a LightGBM baseline on within-domain validation cohorts and on out-of-domain rarer, unseen cancer subtypes. Across all three organs, the models achieved near-perfect within-domain discrimination (AUROC 0.98-1.00), but differences emerged under subtype shift. On chromophobe RCC, scGPT and Geneformer achieved AUROC 0.88 and 0.92 respectively versus 0.64 for LightGBM; on SCLC, Geneformer reached 1.00 versus 0.82 for LightGBM; and on TNBC, scGPT achieved 0.80 versus 0.49 for\n\nLightGBM. To determine whether this generalisation reflected meaningful adaptation rather than arbitrary feature drift, we applied Integrated Gradients, an interpretability technique, to the fine-tuned scFMs and SHAP to LightGBM. LightGBM showed highly stable gene-importance rankings across datasets, whereas the foundation models were substantially more context-sensitive. However, this flexibility was not random: all models converged on a shared within-domain core, while scFMs acquired larger rare-subtype-specific gene sets and pathway programmes during transfer. Pathway enrichment further supported the biological relevance of these attributed genes. Together, these results suggest that fine-tuned scFMs can bridge clinically relevant domain shifts in cancer single-cell analysis and that interpretability provides a practical route to distinguishing biologically grounded adaptation from rigid reuse of training-era rules.",
+    "author_corresponding": "Namshik Han",
+    "author_corresponding_institution": "Milner Therapeutics Institute, University of Cambridge, Cambridge, United Kingdom",
+    "authors": "Wallace, J.; Youssef, G.; Han, N.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-01",
+    "doi": "10.64898/2026.04.28.721114",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/01/2026.04.28.721114.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Single-cell foundation models reveal context-sensitive cancer programmes under subtype shift",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Milner Therapeutics Institute, University of Cambridge, Cambridge, United Kingdom",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-05-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Fine-tuned single-cell foundation models (Geneformer, scGPT) outperform LightGBM under cancer subtype shift in RCC, SCLC and TNBC, with interpretability…",
+  "title": "Single-cell foundation models reveal context-sensitive cancer programmes under subtype shift",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.28.721114"
+}
