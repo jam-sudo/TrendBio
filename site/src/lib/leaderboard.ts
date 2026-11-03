@@ -1,0 +1,45 @@
+import { loadTopic } from "./data";
+import type { Day, Signals } from "./types";
+import type { PeriodRanked } from "./periods";
+
+export interface Stat { label: string; value: string | number; spoken?: string; context?: string }
+export interface LeaderboardTopic {
+  rank: number;
+  slug: string;
+  headline: string;
+  summary?: string;
+  category: string;
+  secondary_categories: string[];
+  stats: Stat[];
+  autoLabel?: boolean;
+}
+
+export function signalStats(signals: Signals): Stat[] {
+  const counts: Stat[] = [
+    { label: "preprints", value: signals.preprint, spoken: `${signals.preprint} preprint${signals.preprint === 1 ? "" : "s"}` },
+    { label: "published", value: signals.published, spoken: `${signals.published} published` },
+    { label: "code", value: signals.code, spoken: `${signals.code} tool${signals.code === 1 ? "" : "s"}` },
+    { label: "industry", value: signals.industry, spoken: `${signals.industry} industry` },
+  ].filter(({ value }) => value > 0);
+  if (signals.rise_ratio >= 1.5) counts.push({ label: "Rise", value: `↑ ${signals.rise_ratio.toFixed(1)}×`, context: "vs 4-wk avg", spoken: `↑ ${signals.rise_ratio.toFixed(1)}× vs 4-wk avg` });
+  return counts;
+}
+
+export function dailyRows(day: Day | null): LeaderboardTopic[] {
+  return (day?.ranked ?? []).map((topic) => ({ ...topic,
+    secondary_categories: loadTopic("computational", topic.slug)?.secondary_categories ?? [], stats: signalStats(topic.signals),
+  }));
+}
+
+export function periodRows(topics: PeriodRanked[]): LeaderboardTopic[] {
+  return topics.map((topic) => ({ ...topic,
+    headline: topic.headline || topic.label.replace(/\b\p{L}/gu, (letter) => letter.toUpperCase()),
+    autoLabel: !topic.headline,
+    stats: [
+      { label: "days ranked", value: topic.days_ranked },
+      { label: "best rank", value: topic.best_rank === null ? "—" : `#${topic.best_rank}` },
+      { label: "items", value: topic.items },
+      { label: "Rise", value: `${topic.rise.toFixed(1)}×` },
+    ],
+  }));
+}

@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
+import PeriodLinks from "../components/PeriodLinks.astro";
+import { dailyRows } from "../lib/leaderboard";
 import DayTopics from "../components/DayTopics.astro";
 import { latestDay } from "../lib/data";
 
@@ -13,5 +15,6 @@ const day = latestDay("computational");
     subtitle="bioRxiv, arXiv, PubMed, GitHub and industry."
     updated={day?.run.finished}
   />
-  <DayTopics day={day} />
+  <PeriodLinks current="day" />
+  <DayTopics day={day} topics={dailyRows(day)} />
 </Base>

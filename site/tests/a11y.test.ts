@@ -54,11 +54,12 @@ describe("built site accessibility and responsive layout", () => {
     await server?.stop();
   });
 
-  it.each(["dark", "light"].flatMap(theme => ["/", "/topic/protein-design-binders-a1b2/", "/topics/", "/archive/"].map(path => ({ theme, path }))))(
+  it.each(["dark", "light"].flatMap(theme => ["/", "/week/2026-W44/", "/topic/protein-design-binders-a1b2/", "/topics/", "/archive/"].map(path => ({ theme, path }))))(
     "$path in $theme has zero WCAG A/AA violations and accessible landmarks", async ({ theme, path }) => {
       await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
       const response = await page.goto(`http://127.0.0.1:${server!.port}${path}`);
       expect(response?.status()).toBe(200);
+      if (path.startsWith("/week/")) await page.locator("details").evaluate(details => details.setAttribute("open", ""));
       const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
       console.log(`axe ${theme} ${path}: ${violations.length} wcag2a/wcag2aa violations`);
       expect(violations).toEqual([]);
@@ -74,6 +75,19 @@ describe("built site accessibility and responsive layout", () => {
       if (path.startsWith("/topic/")) expect(await page.locator(".sparkline").getAttribute("aria-label")).toBeTruthy();
     }, 30_000,
   );
+
+  it("keeps weekly statistics visible and filters compact rows on mobile", async () => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(`http://127.0.0.1:${server!.port}/week/2026-W44/`);
+    await page.locator("details summary").click();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
+    expect(await page.locator("details .stat-row").first().isVisible()).toBe(true);
+    const chip = page.locator('[data-cat="tools-infra"]');
+    await chip.click();
+    const visible = page.locator("[data-topic-cats]:visible");
+    expect(await visible.count()).toBeGreaterThan(0);
+    expect(await visible.evaluateAll(rows => rows.every(row => row.getAttribute("data-topic-cats")!.split(" ").includes("tools-infra")))).toBe(true);
+  });
 
   it("switches themes from the keyboard and remembers the choice across pages", async () => {
     await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });

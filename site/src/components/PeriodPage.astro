@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import DayTopics from "./DayTopics.astro";
+import PeriodLinks from "./PeriodLinks.astro";
+import { loadPeriods, type RankedPeriod } from "../lib/period-data";
+import { periodRows } from "../lib/leaderboard";
+interface Props { kind: "week" | "month"; period: RankedPeriod }
+const { kind, period } = Astro.props;
+const data = loadPeriods();
+const periods = kind === "week" ? data.weeks : data.months;
+const index = periods.findIndex(({ id }) => id === period.id);
+const previous = periods[index + 1], next = periods[index - 1];
+---
+<Base title={`${period.label} — TrendBio`} lastRun={data.days[0]?.run.finished}>
+  <h1>{period.label}{period.soFar && <small> · so far</small>}</h1>
+  <nav class="period-navigation" aria-label={`${kind === "week" ? "Week" : "Month"} navigation`}>
+    {previous && <a href={`/${kind}/${previous.id}/`} rel="prev">← {previous.label}</a>}
+    <a href={`/${kind}/`}>All {kind === "week" ? "weeks" : "months"}</a>
+    {next && <a href={`/${kind}/${next.id}/`} rel="next">{next.label} →</a>}
+  </nav>
+  <PeriodLinks current={kind} />
+  <DayTopics topics={periodRows(period.topics)} period={kind} />
+</Base>
+<style>
+  .period-navigation { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-bottom: 1.5rem; font-size: var(--t3); }
+  small { color: var(--muted); white-space: nowrap; }
+</style>

@@ -1,32 +1,34 @@
 ---
 import CategoryChips from "./CategoryChips.astro";
 import TopicCard from "./TopicCard.astro";
-import { loadTaxonomy, loadTopic } from "../lib/data";
+import { loadTaxonomy } from "../lib/data";
 import type { Day } from "../lib/types";
+import type { LeaderboardTopic } from "../lib/leaderboard";
 import { readFileSync } from "node:fs";
 import { parse } from "yaml";
 
 interface Props {
-  day: Day | null;
+  topics: LeaderboardTopic[];
+  day?: Day | null;
+  period?: "week" | "month";
 }
 
-const { day } = Astro.props;
-const ranked = day?.ranked ?? [];
+const { day, topics: ranked, period } = Astro.props;
 const { featured_n, top_n } = parse(readFileSync("../config/scoring.yaml", "utf8"));
 const compact = ranked.filter((topic) => topic.rank > featured_n);
 const categories = loadTaxonomy("computational");
 const topicCategories = ranked.map((topic) => [
-  topic.category, ...(loadTopic("computational", topic.slug)?.secondary_categories ?? []),
+  topic.category, ...topic.secondary_categories,
 ]);
 const counts = Object.fromEntries(categories.map(({ slug }) => [
   slug, topicCategories.filter((slugs) => slugs.includes(slug)).length,
 ]));
 ---
 
-<div class="section-heading"><h2>Top {top_n}</h2><a href="/archive/">View all ›</a></div>
+<div class="section-heading"><h2>Top {top_n}</h2><a href={period ? `/${period}/` : "/archive/"}>View all ›</a></div>
 {day?.run.status === "degraded" && <p class="notice"><span class="badge">PARTIAL</span> Some sources or summaries were unavailable for this run.</p>}
 {day?.run.backfilled && <p class="notice"><span class="badge">BACKFILLED</span> Code and industry signals are partial for backfilled days.</p>}
-{ranked.length === 0 && <p class="notice"><span class="badge">QUIET DAY</span> Quiet day: no topic cleared the bar.</p>}
+{ranked.length === 0 && <p class="notice"><span class="badge">{period ? "QUIET PERIOD" : "QUIET DAY"}</span> {period ? "No topic history in this period." : "Quiet day: no topic cleared the bar."}</p>}
 <CategoryChips categories={categories} counts={counts} />
 <div class="topic-list">
   {ranked.filter((topic) => topic.rank <= featured_n).map((topic) => <TopicCard ranked={topic} featured={topic.rank === 1} />)}
@@ -34,7 +36,7 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 {compact.length > 0 && <details data-more-topics>
   <summary>Show {compact.length} more</summary>
   <div class="compact-list">
-    {compact.map((topic) => <TopicCard ranked={topic} compact />)}
+    {compact.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
   </div>
 </details>}
 
