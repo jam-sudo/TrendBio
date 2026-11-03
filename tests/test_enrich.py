@@ -473,3 +473,51 @@ def test_batch_ungrounded_summary_falls_back(tmp_path, item, taxonomy, caplog):
     assert results == {item.id: None}
     assert llm.fallback_reasons[item.id] == 'grounding'
     assert 'reason=grounding detail=47' in caplog.text
+
+
+def test_enrich_batch_reads_text_after_thinking_block(tmp_path, item, taxonomy, monkeypatch):
+    batches = FakeBatches(summary='Comparative pathogen genomics')
+    original_results = batches.results
+
+    def with_thinking(batch_id):
+        for row in original_results(batch_id):
+            row.result.message.content.insert(0, SimpleNamespace(type='thinking', thinking='Private reasoning'))
+            yield row
+
+    monkeypatch.setattr(batches, 'results', with_thinking)
+    monkeypatch.setattr('pipeline.llm.time.sleep', lambda _: None)
+    llm = LLM(SimpleNamespace(messages=SimpleNamespace(batches=batches)), Budget(tmp_path / 'spend.json', 50))
+    result = llm.enrich_batch([item], taxonomy, {}, poll_seconds=0)[item.id]
+    assert result.summary == 'Comparative pathogen genomics'
+    assert not llm.fallback_reasons
+    assert batches.requests[0][0]['params']['max_tokens'] == 1024
+
+
+@pytest.mark.parametrize('stop_reason', ['max_tokens', 'end_turn'])
+@pytest.mark.parametrize('thinking', [False, True])
+def test_enrich_batch_reports_stop_reason_when_no_text(tmp_path, item, taxonomy, monkeypatch, caplog,
+                                                      stop_reason, thinking):
+    batches = FakeBatches()
+    original_results = batches.results
+
+    def without_text(batch_id):
+        for row in original_results(batch_id):
+            row.result.message.stop_reason = stop_reason
+            row.result.message.content = [SimpleNamespace(type='thinking')] if thinking else []
+            yield row
+
+    monkeypatch.setattr(batches, 'results', without_text)
+    monkeypatch.setattr('pipeline.llm.time.sleep', lambda _: None)
+    llm = LLM(SimpleNamespace(messages=SimpleNamespace(batches=batches)), Budget(tmp_path / 'spend.json', 50))
+    assert llm.enrich_batch([item], taxonomy, {}, poll_seconds=0) == {item.id: None}
+    assert llm.fallback_reasons[item.id] == f'empty_output:{stop_reason}'
+    assert f'reason=empty_output:{stop_reason}' in caplog.text
+
+
+def test_enrich_prompt_excludes_routine_analysis(item, taxonomy):
+    from pipeline.llm import _messages
+
+    prompt = _messages(item, taxonomy, [])[0]['content']
+    assert 'hub-gene' in prompt and 'prognostic' in prompt
+    assert 'Positive examples (relevant: true)' in prompt
+    assert 'Negative examples (relevant: false)' in prompt

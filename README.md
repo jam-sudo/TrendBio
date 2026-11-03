@@ -14,6 +14,15 @@ successful output under `data/computational/`. Failed runs leave the last publis
 GitHub Actions builds and deploys the Astro site to Cloudflare Pages on every push to `main` via `.github/workflows/deploy.yml`.
 The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
+PubMed collects the computational-biology journals in `pubmed.journals` in full.
+Journals in `pubmed.journals_keyword_filtered` require a title or abstract match to
+`keywords`; no broad MeSH query is used. PubMed copies of bioRxiv and medRxiv
+preprints are excluded. Enrichment excludes routine public-data analyses such as
+hub-gene nomination and prognostic signatures unless they contribute a new method,
+tool, model, dataset, benchmark or resource. Enrichment failures retain relevance.
+The Top 5 allows at most `max_per_category` (default 2) topics per primary category,
+filling from other categories before allowing overflow when needed to fill five slots.
+
 GitHub discovery excludes forks and repos below `github.min_stars_for_discovery` (20 stars); explicit watchlist entries bypass these filters.
 Discovered repos with matching normalized descriptions and variant names, or identical descriptions and fewer than 50 stars, collapse to the most-starred copy; collection logs report `collapsed=<n>`.
 
@@ -30,6 +39,23 @@ Set optional `chain_until` (`YYYY-MM-01`) to automatically backfill previous mon
 Daily and backfill runs share a concurrency group to prevent overlapping writes.
 Their job limits are 30 and 350 minutes, respectively.
 The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5`, shares the `pipeline` concurrency group, and commits changed data with a 120-minute job limit.
+
+The manual maintenance workflow supports `restatus` (recompute stored run statuses
+without collection or LLM calls) and `reprocess` (apply current PubMed scope and
+rebuild clustering, ranking and synthesis from stored items). It shares the
+`pipeline` concurrency group, has a 350-minute limit, and rebases before pushing
+its committed output to `main`. `reprocess` requires whole months and automatically resumes
+an interrupted run with the same range and options while its checkpoint remains
+in the data directory. It retains items
+and existing embeddings, clears days and topic history in range, then rebuilds days
+chronologically. `--reenrich` replaces summaries, categories and relevance for every
+item via Batches; venue exclusions still apply. The hosted workflow enables
+reenrichment by default with `claude-haiku-5-5`; locally it is opt-in:
+
+```sh
+python -m pipeline restatus --domain computational --from 2026-10-01 --to 2026-10-31
+python -m pipeline reprocess --domain computational --from 2026-10-01 --to 2026-10-31 --reenrich --model claude-haiku-5-5
+```
 
 ## Operator notes
 

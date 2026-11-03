@@ -16,7 +16,7 @@ from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
 from pipeline.store import Store
-from pipeline.run import Deps, is_degraded, run_backfill, run_day
+from pipeline.run import Deps, is_degraded, run_backfill, run_day, run_reprocess
 from pipeline.__main__ import app
 
 
@@ -49,7 +49,7 @@ class FakeLLM:
         return Enrichment(summary=item.title, primary='structural', secondary=[],
                           relevant=item.id not in self.irrelevant_ids)
 
-    def enrich_batch(self, items, taxonomy, hints_by_id):
+    def enrich_batch(self, items, taxonomy, hints_by_id, model='claude-haiku-5-5'):
         self.batches.append([item.id for item in items])
         self.budget.record('claude-haiku-5-5', 100 * len(items), 20 * len(items), batch=True)
         return {item.id: Enrichment(summary=item.title, primary='structural', secondary=[],
@@ -928,3 +928,160 @@ def test_backfill_enrich_batch_sets_relevance_and_logs_count(ctx, caplog):
     message = next(record.getMessage() for record in caplog.records
                    if 'stage=enrich_batch event=end' in record.getMessage())
     assert 'irrelevant=1' in message
+
+
+def prepare_reprocess(ctx, monkeypatch):
+    # Fixture topics supply distinct, compatible vectors without any model download.
+    vectors = {id: topic.centroid for topic in ctx.store.all_topics()
+               for entry in topic.history for id in entry.item_ids}
+    for item in ctx.store.items_between(date.min, date.max):
+        ctx.store.put_embedding(item.id, np.array(vectors[item.id]))
+    monkeypatch.setattr(ctx.deps.embedder, 'embed', lambda _: pytest.fail('existing embeddings must be reused'))
+    return date(2026, 10, 1), date(2026, 10, 31)
+
+
+def test_reprocess_resets_range_and_reranks(ctx, monkeypatch, capsys, caplog):
+    import pipeline.run as runner
+    from pipeline.jsonio import day_path
+
+    start, end = prepare_reprocess(ctx, monkeypatch)
+    root = ctx.root / 'computational'
+    embeddings = tree(root / 'embeddings')
+    originals = {item.id: item for item in ctx.store.items_between(date.min, date.max)}
+    day_before = day_path(ctx.root, ctx.store.domain, end).read_bytes()
+    outside_day = day_path(ctx.root, ctx.store.domain, end + timedelta(days=1))
+    outside_bytes = outside_day.read_bytes()
+    topics = ctx.store.all_topics()
+    outside_history = {topic.slug: [entry for entry in topic.history if entry.date > end] for topic in topics}
+    deleted = topics[0].model_copy(deep=True, update={'slug': 'obsolete-topic'})
+    deleted.history = [entry for entry in deleted.history if start <= entry.date <= end]
+    ctx.store.put_topic(deleted)
+    checkpoint = root / '.backfill_state.json'
+    checkpoint.write_text('{}')
+    reset = runner.reset_derived
+    resets = []
+
+    def check_reset(store, first, last):
+        counts = reset(store, first, last)
+        resets.append(counts)
+        assert store.get_topic(deleted.slug) is None
+        assert store.get_day(end) is None and store.get_day(end + timedelta(days=1)) is not None
+        assert all(not first <= entry.date <= last for topic in store.all_topics() for entry in topic.history)
+        return counts
+
+    monkeypatch.setattr(runner, 'reset_derived', check_reset)
+    with caplog.at_level('INFO'):
+        run_reprocess('computational', start, end, ctx.store, ctx.deps)
+    assert len(resets) == 1 and resets[0]['topics_deleted'] == 1
+    assert day_path(ctx.root, ctx.store.domain, end).read_bytes() != day_before
+    assert ctx.store.get_day(end).ranked
+    assert outside_day.read_bytes() == outside_bytes
+    assert len(list((root / 'days').glob('2026-10-*.json'))) == 31
+    assert tree(root / 'embeddings') == embeddings
+    assert not checkpoint.exists() and not (root / '.reprocess_state.json').exists()
+    assert ctx.deps.llm.batches == [] and all(adapter.calls == [] for adapter in ctx.deps.adapters)
+    out_of_scope = 0
+    for item in ctx.store.items_between(date.min, date.max):
+        expected = originals.pop(item.id).model_copy(deep=True)
+        if item.source == 'pubmed':
+            expected.relevant = False
+            expected.metadata['relevance_reason'] = 'venue'
+            out_of_scope += 1
+        assert item == expected
+    assert not originals and out_of_scope > 0
+    for slug, history in outside_history.items():
+        assert [entry for entry in ctx.store.get_topic(slug).history if entry.date > end] == history
+    assert f'reprocess_summary days=31 reenriched=0 out_of_scope={out_of_scope}' in capsys.readouterr().out
+    for stage in ('pubmed_scope', 'reset', 'day', 'cluster', 'score_rank', 'synthesize'):
+        assert f'stage={stage} event=end' in caplog.text
+
+
+@pytest.mark.parametrize('start,end', [
+    (date(2026, 10, 2), date(2026, 10, 31)),
+    (date(2026, 10, 1), date(2026, 10, 30)),
+    (date(2026, 11, 1), date(2026, 10, 31)),
+])
+def test_reprocess_rejects_partial_months(ctx, start, end):
+    before = tree(ctx.root)
+    with pytest.raises(ValueError):
+        run_reprocess('computational', start, end, ctx.store, ctx.deps)
+    assert tree(ctx.root) == before
+
+
+def test_reprocess_reenriches_all_items_preserves_scope_and_resumes_days(ctx, monkeypatch, capsys):
+    import pipeline.run as runner
+
+    start, end = prepare_reprocess(ctx, monkeypatch)
+    root = ctx.root / 'computational'
+    embeddings = tree(root / 'embeddings')
+    items = ctx.store.items_between(start, end)
+    fallback = next(item for item in items if item.source == 'biorxiv')
+    routine = next(item for item in items if item.id != fallback.id and item.source == 'biorxiv')
+    ctx.deps.llm.irrelevant_ids.add(routine.id)
+    old_day = ctx.store.get_day(end)
+    old_day.run.source_status['pubmed'] = 'failed'
+    old_day.run.notes = [f'enrichment-fallback:{routine.id}', 'enrichment-fallback:biorxiv:outside-range']
+    ctx.store.put_day(old_day)
+    batches = ctx.deps.llm.enrich_batch
+    models = []
+
+    def enrich(items, taxonomy, hints, model):
+        models.append(model)
+        results = batches(items, taxonomy, hints)
+        results[fallback.id] = None
+        return results
+
+    monkeypatch.setattr(ctx.deps.llm, 'enrich_batch', enrich)
+    real_run = runner.run_day
+    days = []
+
+    def interrupted(domain, day, store, deps, **kwargs):
+        days.append(day)
+        if day == start + timedelta(days=1):
+            raise RuntimeError('interrupted')
+        return real_run(domain, day, store, deps, **kwargs)
+
+    monkeypatch.setattr(runner, 'run_day', interrupted)
+    with pytest.raises(RuntimeError, match='interrupted'):
+        run_reprocess('computational', start, end, ctx.store, ctx.deps, reenrich=True, model='custom-model')
+    state = json.loads((root / '.reprocess_state.json').read_text())
+    assert state['command'] == 'reprocess' and state['last_day'] == str(start)
+    assert state['reenriched'] == len(items)
+    assert models == ['custom-model']
+    assert set(ctx.deps.llm.batches[0]) == {item.id for item in items}
+    assert all(item.summary is not None for item in items)
+    assert ctx.store.get_item(fallback.id).relevant
+    assert not ctx.store.get_item(routine.id).relevant
+    assert all(not item.relevant and item.metadata['relevance_reason'] == 'venue'
+               for item in ctx.store.items_between(start, end) if item.source == 'pubmed')
+    before = tree(ctx.root)
+    with pytest.raises(ValueError, match='different range or options'):
+        run_reprocess('computational', start, end, ctx.store, ctx.deps)
+    assert tree(ctx.root) == before
+    monkeypatch.setattr(runner, 'run_day', real_run)
+    monkeypatch.setattr(runner, 'reset_derived', lambda *args: pytest.fail('must not reset completed days'))
+    run_reprocess('computational', start, end, ctx.store, ctx.deps, reenrich=True, model='custom-model')
+    assert len(ctx.deps.llm.batches) == 1
+    assert tree(root / 'embeddings') == embeddings
+    assert not (root / '.reprocess_state.json').exists()
+    assert f'reenriched={len(items)}' in capsys.readouterr().out
+    assert f'enrichment-fallback:{fallback.id}' in ctx.store.get_day(end).run.notes
+    assert f'enrichment-fallback:{routine.id}' not in ctx.store.get_day(end).run.notes
+    assert 'enrichment-fallback:biorxiv:outside-range' in ctx.store.get_day(end).run.notes
+    assert ctx.store.get_day(end).run.source_status['pubmed'] == 'failed'
+    for item in ctx.store.items_between(start, end):
+        if item.id != fallback.id:
+            assert item.summary == item.title and item.primary_category == 'structural'
+
+
+def test_cli_reprocess_passes_range_and_options(ctx, monkeypatch):
+    from unittest.mock import Mock
+
+    process = Mock()
+    monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
+    monkeypatch.setattr('pipeline.__main__.run_reprocess', process)
+    result = CliRunner().invoke(app, ['reprocess', '--from', '2026-10-01', '--to', '2026-10-31',
+                                     '--reenrich', '--model', 'custom-model', '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    assert process.call_args.args[:3] == ('computational', date(2026, 10, 1), date(2026, 10, 31))
+    assert process.call_args.kwargs == {'reenrich': True, 'model': 'custom-model'}

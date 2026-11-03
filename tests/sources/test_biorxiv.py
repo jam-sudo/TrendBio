@@ -78,7 +78,9 @@ def test_biorxiv_no_published_doi_or_posts(source_config, fixture_json, respx_mo
 def test_source_config_is_complete(source_config):
     from pipeline.config import load_taxonomy
     assert len(source_config['keywords']) >= 40
-    assert len(source_config['pubmed']['journals']) == 16
+    assert len(source_config['pubmed']['journals']) == 21
+    assert len(source_config['pubmed']['journals_keyword_filtered']) == 16
+    assert 'query' not in source_config['pubmed']
     assert len(source_config['github']['watchlist']) >= 15
     assert source_config['github']['top_n_per_topic'] == 50
     slugs = set(load_taxonomy('computational').slugs())

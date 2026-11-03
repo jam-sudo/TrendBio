@@ -106,6 +106,8 @@ def test_rank_returns_at_most_5(topic, sig, cfg):
     assert rank(scored[:2], cfg) == scored[:2]
     cfg.top_n = 2
     assert rank(scored, cfg) == scored[:2]
+    cfg.top_n = 0
+    assert rank(scored, cfg) == []
 
 
 @pytest.mark.parametrize('age, expected', [(13, 1.0), (14, 10 / 5)])
@@ -141,3 +143,28 @@ def test_components_scale_and_cap(sig):
     assert code_velocity(sig) == volume(100) == 1.0
     sig.published = sig.code = sig.industry = 1
     assert diversity(sig) == 1.0
+
+
+def test_rank_caps_two_per_category_and_backfills_with_other_categories(topic, sig, cfg, caplog):
+    categories = ['ml-ai'] * 4 + ['structural', 'genomics', 'tools-infra']
+    scored = score_topics([(topic.model_copy(update={'slug': str(i), 'category': category}), sig, 7)
+                           for i, category in enumerate(categories)], set(), cfg, TODAY)
+    with caplog.at_level('INFO'):
+        ranked = rank(scored, cfg)
+    assert [row[0].slug for row in ranked] == ['0', '1', '4', '5', '6']
+    assert 'stage=score_rank event=category_cap displaced=2' in caplog.text
+    assert 'stage=score_rank event=category_cap displaced=3' in caplog.text
+    cfg.max_per_category = 1
+    assert [row[0].slug for row in rank(scored, cfg)] == ['0', '1', '4', '5', '6']
+
+
+def test_rank_overflows_when_not_enough_categories(topic, sig, cfg, caplog):
+    categories = ['ml-ai'] * 5 + ['structural']
+    scored = score_topics([(topic.model_copy(update={'slug': str(i), 'category': category}), sig, 7)
+                           for i, category in enumerate(categories)], set(), cfg, TODAY)
+    with caplog.at_level('INFO'):
+        ranked = rank(scored, cfg)
+    assert [row[0].slug for row in ranked] == ['0', '1', '2', '3', '5']
+    assert 'displaced=4' in caplog.text
+    assert 'displaced=2' not in caplog.text and 'displaced=3' not in caplog.text
+    assert rank(scored[:4], cfg) == scored[:4]

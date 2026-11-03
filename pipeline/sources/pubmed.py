@@ -8,7 +8,31 @@ import xml.etree.ElementTree as ET
 import httpx
 
 from pipeline.models import Item, Source
-from pipeline.sources.base import collected, load_config, request
+from pipeline.sources.base import collected, load_config, matches_keywords, request
+
+
+def _journal_key(journal: str) -> str:
+    journal = journal.strip().casefold()
+    # EFetch returns full catalog titles even when ESearch accepts short names.
+    return {
+        'bioinformatics (oxford, england)': 'bioinformatics',
+        'science (new york, n.y.)': 'science',
+        'patterns (new york, n.y.)': 'patterns',
+        'proceedings of the national academy of sciences of the united states of america': 'pnas',
+        'database : the journal of biological databases and curation': 'database (oxford)',
+    }.get(journal, journal)
+
+
+def pubmed_in_scope(item: Item, cfg: dict) -> bool:
+    if item.source != 'pubmed':
+        return True
+    journal = _journal_key(item.metadata.get('journal', ''))
+    if journal.split(' :', 1)[0] in {'biorxiv', 'medrxiv'}:
+        return False
+    if journal in {_journal_key(name) for name in cfg['pubmed']['journals']}:
+        return True
+    return (journal in {_journal_key(name) for name in cfg['pubmed']['journals_keyword_filtered']}
+            and matches_keywords(item.title + '\n' + item.abstract, cfg['keywords']))
 
 
 def _text(node: ET.Element | None) -> str:
@@ -63,11 +87,9 @@ class PubmedAdapter:
     def fetch(self, start: date, end: date, client: httpx.Client) -> list[Item]:
         cfg = self.config['pubmed']
         auth = {'api_key': os.environ['NCBI_API_KEY']} if os.environ.get('NCBI_API_KEY') else {}
-        journals = ' OR '.join(f'"{journal}"[Journal]' for journal in cfg['journals'])
-        queries = [f'({journals})'] if journals else []
-        if cfg['query']:
-            queries.append(f"({cfg['query']})" + (f' NOT ({journals})' if journals else ''))
-        ids = list(dict.fromkeys(pmid for query in queries for pmid in self._search(query, start, end, client, auth)))
+        journals = ' OR '.join(f'"{journal}"[Journal]' for journal in dict.fromkeys(
+            cfg['journals'] + cfg['journals_keyword_filtered']))
+        ids = list(dict.fromkeys(self._search(f'({journals})', start, end, client, auth))) if journals else []
         items = []
         for offset in range(0, len(ids), 200):
             time.sleep(0.11 if auth else 0.34)
@@ -100,4 +122,4 @@ class PubmedAdapter:
                     summary=None, primary_category=None, published_doi=None, preprint_id=None,
                     metadata={'pmid': pmid, 'journal': journal, 'xml': ET.tostring(record, encoding='unicode')},
                 ))
-        return collected(self.name, items)
+        return collected(self.name, [item for item in items if pubmed_in_scope(item, self.config)])

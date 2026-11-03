@@ -27,9 +27,12 @@ from pipeline.enrich import enrich_items, first_sentence, hints_for
 from pipeline.llm import Enrichment, LLM
 from pipeline.models import Day, RankedTopic, RunInfo, Source
 from pipeline.score import rank, score_topics, signals_for
+from pipeline.sources.base import load_config
 from pipeline.sources.github import GithubAdapter, seed_star_history
+from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
 from pipeline.store import Store
 from pipeline.synthesize import synthesize_top
+from pipeline.wipe import reset_derived, validate_month_range
 
 
 logger = logging.getLogger(__name__)
@@ -176,6 +179,14 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                     if date.fromisoformat(chunk['start']) <= day and date.fromisoformat(chunk['end']) >= start:
                         source_status[chunk['source']] = 'failed'
                 notes.extend(state.get('notes', []))
+            checkpoint = store.root / domain / '.reprocess_state.json'
+            if checkpoint.exists():
+                state = json.loads(checkpoint.read_text(encoding='utf-8'))
+                if state['range']['from'] <= day.isoformat() <= state['range']['to']:
+                    original = state['runs'].get(day.isoformat(), {})
+                    source_status.update(original.get('source_status', {}))
+                    notes.extend(original.get('notes', []))
+                    notes.extend(state.get('notes', []))
             new_items = []
         else:
             collected_items = []
@@ -470,3 +481,100 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
     else:
         path.unlink()
         logger.info('stage=backfill event=complete range=%s..%s', start, end)
+
+
+def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps, *,
+                  reenrich: bool = False, model: str = 'claude-haiku-5-5') -> None:
+    validate_month_range(start, end)
+    if domain != store.domain:
+        raise ValueError('domain does not match store')
+    items = sorted(store.items_between(start, end), key=lambda item: item.id)
+    item_ids = {item.id for item in items}
+    path = store.root / domain / '.reprocess_state.json'
+    request = {'command': 'reprocess', 'range': {'from': str(start), 'to': str(end)},
+               'reenrich': reenrich, 'model': model}
+    if path.exists():
+        state = json.loads(path.read_text(encoding='utf-8'))
+        if any(state.get(key) != value for key, value in request.items()):
+            raise ValueError('unfinished reprocess checkpoint has different range or options')
+    else:
+        runs = {}
+        for result in store.all_days():
+            if start <= result.date <= end:
+                runs[str(result.date)] = {
+                    'source_status': result.run.source_status,
+                    'notes': [note for note in result.run.notes
+                              if not note.startswith('synthesis-fallback:')
+                              and not (reenrich and note.startswith('enrichment-fallback:')
+                                       and note.split(':', 1)[1] in item_ids)],
+                }
+        state = {**request, 'stage': 'scope', 'next_item': 0, 'last_day': None,
+                 'reenriched': 0, 'out_of_scope': 0, 'notes': [], 'runs': runs}
+        store._write(path, state)
+    source_cfg = next((adapter.config for adapter in deps.adapters
+                       if isinstance(adapter, PubmedAdapter)), None)
+    if source_cfg is None:
+        source_cfg = load_config()
+    if state['stage'] == 'scope':
+        with _stage('pubmed_scope', items=len(items), out_of_scope=0) as counts:
+            for item in items:
+                if not pubmed_in_scope(item, source_cfg):
+                    item.relevant = False
+                    item.metadata['relevance_reason'] = 'venue'
+                    store.put_item(item)
+                    counts['out_of_scope'] += 1
+                elif item.metadata.get('relevance_reason') == 'venue':
+                    item.metadata.pop('relevance_reason')
+                    item.relevant = True
+                    store.put_item(item)
+            state['out_of_scope'] = counts['out_of_scope']
+        state['stage'] = 'enrich' if reenrich else 'reset'
+        store._write(path, state)
+    if state['stage'] == 'enrich':
+        for offset in range(state['next_item'], len(items), 2_000):
+            chunk = items[offset:offset + 2_000]
+            hints = {item.id: hints_for(item, deps.hints_cfg) for item in chunk}
+            with _stage('enrich_batch', items=len(chunk), chunk=offset // 2_000 + 1, waited=0.0) as counts:
+                started = perf_counter()
+                try:
+                    results = deps.llm.enrich_batch(chunk, deps.taxonomy, hints, model=model)
+                finally:
+                    counts['waited'] = round(perf_counter() - started, 3)
+                reasons = getattr(deps.llm, 'fallback_reasons', {})
+                counts['fallback_reasons'] = dict(Counter(
+                    reasons.get(item.id, 'unknown') for item in chunk if results.get(item.id) is None
+                ))
+                counts['llm_fallbacks'] = sum(counts['fallback_reasons'].values())
+                for item in chunk:
+                    result = results.get(item.id)
+                    if result is None:
+                        result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
+                                            primary=next(iter(hints[item.id]), 'ml-ai'),
+                                            secondary=[], relevant=True)
+                        state['notes'].append(f'enrichment-fallback:{item.id}')
+                    item.summary, item.primary_category = result.summary, result.primary
+                    item.secondary_categories = result.secondary
+                    item.relevant = result.relevant and pubmed_in_scope(item, source_cfg)
+                    store.put_item(item)
+                counts['irrelevant'] = sum(not item.relevant for item in chunk)
+            state['next_item'] = offset + len(chunk)
+            state['reenriched'] = state['next_item']
+            store._write(path, state)
+        state['stage'] = 'reset'
+        store._write(path, state)
+    if state['stage'] == 'reset':
+        with _stage('reset') as counts:
+            counts.update(reset_derived(store, start, end))
+        state['stage'] = 'days'
+        store._write(path, state)
+    day = date.fromisoformat(state['last_day']) + timedelta(days=1) if state['last_day'] else start
+    while day <= end:
+        with _stage('day', day=day, topics=0, ranked=0) as counts:
+            result = run_day(domain, day, store, deps, backfill=True, skip_collect=True)
+            counts.update(topics=len(store.all_topics()), ranked=len(result.ranked))
+        state['last_day'] = str(day)
+        store._write(path, state)
+        day += timedelta(days=1)
+    print(f"reprocess_summary days={(end - start).days + 1} "
+          f"reenriched={state['reenriched']} out_of_scope={state['out_of_scope']}")
+    path.unlink()

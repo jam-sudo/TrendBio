@@ -18,7 +18,7 @@ from pipeline.config import load_scoring, load_taxonomy
 from pipeline.embed import Embedder
 from pipeline.llm import LLM
 from pipeline.jsonio import day_path
-from pipeline.run import Deps, _related, _stage, _staging, is_degraded, run_backfill, run_day
+from pipeline.run import Deps, _related, _stage, _staging, is_degraded, run_backfill, run_day, run_reprocess
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.biorxiv import BiorxivAdapter
@@ -27,7 +27,7 @@ from pipeline.sources.pubmed import PubmedAdapter
 from pipeline.sources.rss import RssAdapter
 from pipeline.store import Store
 from pipeline.synthesize import synthesize_top
-from pipeline.wipe import wipe as wipe_store
+from pipeline.wipe import validate_month_range, wipe as wipe_store
 
 
 app = typer.Typer(help='Collect, rank, and synthesize computational biology trends.', no_args_is_help=True)
@@ -98,6 +98,18 @@ def backfill(start: FromDate, end: ToDate, domain: Domain = 'computational',
     """Collect a historical range, batch-enrich it, then process days in order."""
     with _dependencies(domain, data_root) as deps:
         run_backfill(domain, start.date(), end.date(), Store(data_root, domain), deps, resume=resume)
+
+
+@app.command()
+def reprocess(start: FromDate, end: ToDate, domain: Domain = 'computational',
+              reenrich: Annotated[bool, typer.Option(help='Replace enrichment for every stored item.')] = False,
+              model: Annotated[str, typer.Option(help='Batch enrichment model.')] = 'claude-haiku-5-5',
+              data_root: DataRoot = Path('data')):
+    """Re-scope and rebuild whole months from stored items, resuming interrupted work."""
+    validate_month_range(start.date(), end.date())
+    with _dependencies(domain, data_root) as deps:
+        run_reprocess(domain, start.date(), end.date(), Store(data_root, domain), deps,
+                      reenrich=reenrich, model=model)
 
 
 @app.command()

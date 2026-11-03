@@ -31,6 +31,7 @@ class Scoring(BaseModel):
     continuity_threshold: float = 0.80
     window_days: int = 7
     top_n: int = 5
+    max_per_category: int = Field(default=2, ge=1)
     synthesis_max_items: int = Field(default=40, ge=1)
     monthly_ceiling_usd: float = 50.0
     degraded_fallback_min: int = 3
