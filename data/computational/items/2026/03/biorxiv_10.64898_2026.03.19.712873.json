@@ -1,0 +1,43 @@
+{
+  "abstract": "MotivationMost existing workflows for quantifying bacterial gene expression from RNA-seq data rely on mapping reads to a (single) reference transcriptome, typically ignoring strain-level variation. When samples contain unknown or mixed strains, these workflows may introduce reference bias and fail to accurately capture strain-specific gene expression. Pan-transcriptomic approaches address this issue by using pan-transcriptomes as references, but existing solutions require multiple steps for pan-transcriptome construction, indexing, and expression quantification.\n\nResultsWe introduce PanXpress, a unified framework for bacterial pantranscriptomics that performs pantranscriptome construction and indexing directly from genomic FASTA and GFF annotation files, alignment-free mapping of reads to genes from FASTQ samples, and gene expression quantification. The index, a multi-way Cuckoo hash table storing gapped k-mers with associated genes, preserves diversity on the k-mer level.\n\nUsing simulated RNA-seq data from a mixture of Pseudomonas aeruginosa strains, PanXpress achieves mapping recall comparable to alignment-based methods such as Bowtie2 with higher precision and obtains accurate gene expression and log fold change estimates. On real P. aeruginosa RNA-seq data, using PanXpress pantranscriptomic reference increases the proportion of mapped reads and discovered expressed genes. The index of PanXpress is smaller than that of other tools and it provides faster analysis with consistent results, compared to other tools (Salmon, Kallisto, Bowtie2). PanXpress is thus an accurate and efficient method for bacterial gene expression analysis in complex samples.\n\nAvailabilityPanXpress is available at https://gitlab.com/rahmannlab/panxpress.\n\nContactsven.rahmann@uni-saarland.de",
+  "authors": [
+    "Alves Ferreira, I.",
+    "Zentgraf, J.",
+    "Schmitz, J. E.",
+    "Rahmann, S."
+  ],
+  "doi": "10.64898/2026.03.19.712873",
+  "first_seen": "2026-03-20",
+  "id": "biorxiv:10.64898/2026.03.19.712873",
+  "metadata": {
+    "abstract": "MotivationMost existing workflows for quantifying bacterial gene expression from RNA-seq data rely on mapping reads to a (single) reference transcriptome, typically ignoring strain-level variation. When samples contain unknown or mixed strains, these workflows may introduce reference bias and fail to accurately capture strain-specific gene expression. Pan-transcriptomic approaches address this issue by using pan-transcriptomes as references, but existing solutions require multiple steps for pan-transcriptome construction, indexing, and expression quantification.\n\nResultsWe introduce PanXpress, a unified framework for bacterial pantranscriptomics that performs pantranscriptome construction and indexing directly from genomic FASTA and GFF annotation files, alignment-free mapping of reads to genes from FASTQ samples, and gene expression quantification. The index, a multi-way Cuckoo hash table storing gapped k-mers with associated genes, preserves diversity on the k-mer level.\n\nUsing simulated RNA-seq data from a mixture of Pseudomonas aeruginosa strains, PanXpress achieves mapping recall comparable to alignment-based methods such as Bowtie2 with higher precision and obtains accurate gene expression and log fold change estimates. On real P. aeruginosa RNA-seq data, using PanXpress pantranscriptomic reference increases the proportion of mapped reads and discovered expressed genes. The index of PanXpress is smaller than that of other tools and it provides faster analysis with consistent results, compared to other tools (Salmon, Kallisto, Bowtie2). PanXpress is thus an accurate and efficient method for bacterial gene expression analysis in complex samples.\n\nAvailabilityPanXpress is available at https://gitlab.com/rahmannlab/panxpress.\n\nContactsven.rahmann@uni-saarland.de",
+    "author_corresponding": "Sven Rahmann",
+    "author_corresponding_institution": "Saarland University",
+    "authors": "Alves Ferreira, I.; Zentgraf, J.; Schmitz, J. E.; Rahmann, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-20",
+    "doi": "10.64898/2026.03.19.712873",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/20/2026.03.19.712873.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "PanXpress: Gene expression quantification with a pan-transcriptomic gapped k-mer index",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Saarland University",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-03-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "PanXpress is an alignment-free bacterial pan-transcriptomic framework using gapped k-mer Cuckoo hash indexing for strain-aware gene expression quantification…",
+  "title": "PanXpress: Gene expression quantification with a pan-transcriptomic gapped k-mer index",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.19.712873"
+}

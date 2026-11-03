@@ -1,0 +1,42 @@
+{
+  "abstract": "We compare the efficacy and distributional effects of supervised fine-tuning (SFT) and reinforcement learning (RL) post-training for PlasmidGPT, a foundation model for whole-plasmid generation, using Group Relative Policy Optimization (GRPO) for the RL model. Using a biologically motivated reward function encoding functional annotations, length constraints, and repeat penalties, the RL model achieves a 71.6% quality-control pass rate across 8 prompts on 4,000 sequences, compared to 4.3% for the pretrained baseline and 11.0% for SFT. A five-model reward ablation identifies the cassette arrangement bonus, which rewards correct promoter [-&gt;] CDS [-&gt;] terminator ordering, as the critical reward component. Rejection-sampling baselines indicate that the gain is not recovered by sampling more heavily from the base model. Beyond directly optimized features, RL-generated sequences converge toward real plasmid distributions in 3-mer composition and minimum free energy density, neither of which is directly optimized by the reward function. Minimum free energy density independently converges to the real-plasmid regime under both SFT and RL despite these being parallel post-training paths. On a small curated hold-out set, RL improves continuation log-likelihood over the pretrained baseline on all 29 held-out sequences (mean {Delta} = +0.83 nats).",
+  "authors": [
+    "Thiel, M.",
+    "Cunningham, A.",
+    "Barnes, C. P."
+  ],
+  "doi": "10.64898/2026.03.24.713963",
+  "first_seen": "2026-03-26",
+  "id": "biorxiv:10.64898/2026.03.24.713963",
+  "metadata": {
+    "abstract": "We compare the efficacy and distributional effects of supervised fine-tuning (SFT) and reinforcement learning (RL) post-training for PlasmidGPT, a foundation model for whole-plasmid generation, using Group Relative Policy Optimization (GRPO) for the RL model. Using a biologically motivated reward function encoding functional annotations, length constraints, and repeat penalties, the RL model achieves a 71.6% quality-control pass rate across 8 prompts on 4,000 sequences, compared to 4.3% for the pretrained baseline and 11.0% for SFT. A five-model reward ablation identifies the cassette arrangement bonus, which rewards correct promoter [-&gt;] CDS [-&gt;] terminator ordering, as the critical reward component. Rejection-sampling baselines indicate that the gain is not recovered by sampling more heavily from the base model. Beyond directly optimized features, RL-generated sequences converge toward real plasmid distributions in 3-mer composition and minimum free energy density, neither of which is directly optimized by the reward function. Minimum free energy density independently converges to the real-plasmid regime under both SFT and RL despite these being parallel post-training paths. On a small curated hold-out set, RL improves continuation log-likelihood over the pretrained baseline on all 29 held-out sequences (mean {Delta} = +0.83 nats).",
+    "author_corresponding": "Chris P Barnes",
+    "author_corresponding_institution": "University College London",
+    "authors": "Thiel, M.; Cunningham, A.; Barnes, C. P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-26",
+    "doi": "10.64898/2026.03.24.713963",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/26/2026.03.24.713963.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Emergent Biological Realism in RL-Trained DNA Language Models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University College London",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Compares SFT and GRPO reinforcement learning post-training for PlasmidGPT, a whole-plasmid generative DNA language model, with a biologically motivated reward;…",
+  "title": "Emergent Biological Realism in RL-Trained DNA Language Models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.24.713963"
+}

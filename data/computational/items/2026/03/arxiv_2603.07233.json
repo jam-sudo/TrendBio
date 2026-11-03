@@ -1,0 +1,34 @@
+{
+  "abstract": "Predicting transcriptional responses to genetic perturbations is fundamental to functional genomics and therapeutic discovery. Recent deep learning models have shown promise in single-cell perturbation response prediction, but they typically generate each response in isolation, without explicitly leveraging related perturbations. We introduce PT-RAG (Perturbation-aware Two-stage Retrieval-Augmented Generation), a plug-in retrieval-and-conditioning module for generative cellular perturbation response. PT-RAG augments an existing perturbation-response backbone with learned access to related perturbation contexts. The key challenge is that relevance is not fixed in this setting: functionally related genes may elicit different effects across cell types. PT-RAG addresses this with a two-stage retrieval mechanism: GenePT-based semantic retrieval first identifies K candidate perturbations, after which a differentiable Gumbel-Softmax selector adaptively selects retrieved contexts conditioned on the control cell state, the query perturbation, and each candidate perturbation. We evaluate PT-RAG on two backbones, a STATE-style generator used as a frozen random reservoir and a fully trained scGPT, across cross-cell-type and cross-perturbation generalization tasks. PT-RAG consistently improves distributional similarity and often overall predictive quality; for example, on scGPT cross-cell-type results, the 2-Wasserstein distance drops by 5.9% relative to scGPT alone. The code to reproduce our experiments is available at https://github.com/difra100/PT-RAG_NIPS.",
+  "authors": [
+    "Andrea Giuseppe Di Francesco",
+    "Andrea Rubbi",
+    "Rishabh Jain",
+    "Pietro Liò"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-07",
+  "id": "arxiv:2603.07233",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.IR"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.07233v3</ns0:id>\n    <ns0:title>Differentiable Retrieval-Augmented Generation for Predicting Cellular Responses to Gene Perturbation</ns0:title>\n    <ns0:updated>2026-10-09T09:54:59Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.07233v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.07233v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Predicting transcriptional responses to genetic perturbations is fundamental to functional genomics and therapeutic discovery. Recent deep learning models have shown promise in single-cell perturbation response prediction, but they typically generate each response in isolation, without explicitly leveraging related perturbations. We introduce PT-RAG (Perturbation-aware Two-stage Retrieval-Augmented Generation), a plug-in retrieval-and-conditioning module for generative cellular perturbation response. PT-RAG augments an existing perturbation-response backbone with learned access to related perturbation contexts. The key challenge is that relevance is not fixed in this setting: functionally related genes may elicit different effects across cell types. PT-RAG addresses this with a two-stage retrieval mechanism: GenePT-based semantic retrieval first identifies K candidate perturbations, after which a differentiable Gumbel-Softmax selector adaptively selects retrieved contexts conditioned on the control cell state, the query perturbation, and each candidate perturbation. We evaluate PT-RAG on two backbones, a STATE-style generator used as a frozen random reservoir and a fully trained scGPT, across cross-cell-type and cross-perturbation generalization tasks. PT-RAG consistently improves distributional similarity and often overall predictive quality; for example, on scGPT cross-cell-type results, the 2-Wasserstein distance drops by 5.9% relative to scGPT alone. The code to reproduce our experiments is available at https://github.com/difra100/PT-RAG_NIPS.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.IR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-07T14:31:27Z</ns0:published>\n    <ns1:comment>Accepted to NeurIPS 2026 main track. 34 pages, 11 figures, 18 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Andrea Giuseppe Di Francesco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrea Rubbi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rishabh Jain</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pietro Liò</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-03-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "PT-RAG is a plug-in two-stage retrieval module that conditions generative single-cell perturbation response models on related perturbations, reducing…",
+  "title": "Differentiable Retrieval-Augmented Generation for Predicting Cellular Responses to Gene Perturbation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.07233v3"
+}

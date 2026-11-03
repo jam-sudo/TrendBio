@@ -1,0 +1,40 @@
+{
+  "abstract": "Standard autoencoders for single-cell transcriptomics learn latent spaces whose cluster structure emerges only post hoc through K-means or community detection, leaving cluster count and boundary quality uncontrolled during training. Here we ask whether imposing an adaptive nonparametric prior can shift this balance. We equip a feedforward autoen-coder with an online Dirichlet Process Mixture Model (DPMM) prior that refits cluster assignments throughout training and directly regularizes latent compactness and separation. Across 56 scRNA-seq datasets the DPMM prior produces a pronounced geometry- concordance trade-off : cluster compactness (ASW) improves by 127% and Davies-Bouldin overlap drops by 47%, but label-recovery metrics decline (NMI -17%, ARI -21%) and downstream kNN accuracy falls from 0.784 to 0.725. Wilcoxon signed-rank tests confirm that the geometry gains are significant with large Cliffs{delta} effects while concordance losses remain bounded and non-significant. A second-stage conditional-flow refinement (DPMM-FM) further improves projection fidelity (DRE 0.751, LSE 0.695, DREX 0.873) at additional concordance cost, revealing a three-tier operating regime: prior-free for label recovery, DPMM for manifold geometry, and DPMM-FM for visualization fidelity. Against 18 external baselines DPMM-Base wins 70.5% of core-metric comparisons (p<0.05). Gene Ontology enrichment confirms that geometry-improved latent components recover coherent biological programs. Rather than claiming universal superiority, this study characterizes the operating envelope of nonparametric mixture priors and identifies the task contexts-- trajectory analysis, manifold visualization, and program-level annotation--where adaptive geometric structure outweighs label-counting accuracy.",
+  "authors": [
+    "Fu, Z."
+  ],
+  "doi": "10.64898/2026.03.26.714611",
+  "first_seen": "2026-03-30",
+  "id": "biorxiv:10.64898/2026.03.26.714611",
+  "metadata": {
+    "abstract": "Standard autoencoders for single-cell transcriptomics learn latent spaces whose cluster structure emerges only post hoc through K-means or community detection, leaving cluster count and boundary quality uncontrolled during training. Here we ask whether imposing an adaptive nonparametric prior can shift this balance. We equip a feedforward autoen-coder with an online Dirichlet Process Mixture Model (DPMM) prior that refits cluster assignments throughout training and directly regularizes latent compactness and separation. Across 56 scRNA-seq datasets the DPMM prior produces a pronounced geometry- concordance trade-off : cluster compactness (ASW) improves by 127% and Davies-Bouldin overlap drops by 47%, but label-recovery metrics decline (NMI -17%, ARI -21%) and downstream kNN accuracy falls from 0.784 to 0.725. Wilcoxon signed-rank tests confirm that the geometry gains are significant with large Cliffs{delta} effects while concordance losses remain bounded and non-significant. A second-stage conditional-flow refinement (DPMM-FM) further improves projection fidelity (DRE 0.751, LSE 0.695, DREX 0.873) at additional concordance cost, revealing a three-tier operating regime: prior-free for label recovery, DPMM for manifold geometry, and DPMM-FM for visualization fidelity. Against 18 external baselines DPMM-Base wins 70.5% of core-metric comparisons (p<0.05). Gene Ontology enrichment confirms that geometry-improved latent components recover coherent biological programs. Rather than claiming universal superiority, this study characterizes the operating envelope of nonparametric mixture priors and identifies the task contexts-- trajectory analysis, manifold visualization, and program-level annotation--where adaptive geometric structure outweighs label-counting accuracy.",
+    "author_corresponding": "Zeyu Fu",
+    "author_corresponding_institution": "Third Military Medical University",
+    "authors": "Fu, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-30",
+    "doi": "10.64898/2026.03.26.714611",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/30/2026.03.26.714611.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Flow-Matching Refined Dirichlet Process Priors for Structurally Coherent Single-Cell Representation Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Third Military Medical University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-03-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Autoencoder for scRNA-seq with online Dirichlet Process Mixture prior improves cluster geometry (ASW, DB) but trades off label recovery; three-tier operating…",
+  "title": "Flow-Matching Refined Dirichlet Process Priors for Structurally Coherent Single-Cell Representation Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.26.714611"
+}

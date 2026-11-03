@@ -1,0 +1,44 @@
+{
+  "abstract": "In transcriptomics-driven drug discovery, upstream predictors of chemical-induced transcriptional profiles (CTPs) are typically trained with gene-wise objectives, whereas downstream interpretation relies on pathway-level, rank-based statistics such as Gene Set Enrichment Analysis (GSEA). This objective mismatch destabilizes pathway conclusions under prediction errors: small ranking perturbations can flip enrichment direction or distort pathway ordering. To bridge this gap, we present differentiable GSEA (dGSEA), a training-compatible surrogate that maps predicted gene-level scores to pathway enrichment with well-behaved gradients. Technically, dGSEA replaces discrete ranking operations with temperature-controlled soft sorting, smooth prefix accumulation, and differentiable extremum aggregation. Critically, to preserve the statistical semantics of classical GSEA, we introduce sign-specific robust permutation normalization (dNES) with optional{kappa} -calibration. For computational efficiency, a scalable Nystrom-window approximation (nyswin) reduces the quadratic bottleneck to near-linear complexity, enabling genome-scale evaluation. Empirically, across synthetic benchmarks and LINCS L1000 signatures, dGSEA matches classical GSEA accuracy with improved numerical stability. When incorporated as an auxiliary objective for SMILES-to-transcriptome prediction, dGSEA improves pathway-level agreement (macro correlation 0.257 [-&gt;] 0.306; sign accuracy 0.620 [-&gt;] 0.641) without compromising gene-level performance, providing a practical mechanism for pathway-aware optimization in transcriptomic prediction pipelines.",
+  "authors": [
+    "Li, S.",
+    "Ruan, Y.",
+    "Yang, X.",
+    "Wen, Z.",
+    "Saigo, H."
+  ],
+  "doi": "10.64898/2026.03.18.712610",
+  "first_seen": "2026-03-20",
+  "id": "biorxiv:10.64898/2026.03.18.712610",
+  "metadata": {
+    "abstract": "In transcriptomics-driven drug discovery, upstream predictors of chemical-induced transcriptional profiles (CTPs) are typically trained with gene-wise objectives, whereas downstream interpretation relies on pathway-level, rank-based statistics such as Gene Set Enrichment Analysis (GSEA). This objective mismatch destabilizes pathway conclusions under prediction errors: small ranking perturbations can flip enrichment direction or distort pathway ordering. To bridge this gap, we present differentiable GSEA (dGSEA), a training-compatible surrogate that maps predicted gene-level scores to pathway enrichment with well-behaved gradients. Technically, dGSEA replaces discrete ranking operations with temperature-controlled soft sorting, smooth prefix accumulation, and differentiable extremum aggregation. Critically, to preserve the statistical semantics of classical GSEA, we introduce sign-specific robust permutation normalization (dNES) with optional{kappa} -calibration. For computational efficiency, a scalable Nystrom-window approximation (nyswin) reduces the quadratic bottleneck to near-linear complexity, enabling genome-scale evaluation. Empirically, across synthetic benchmarks and LINCS L1000 signatures, dGSEA matches classical GSEA accuracy with improved numerical stability. When incorporated as an auxiliary objective for SMILES-to-transcriptome prediction, dGSEA improves pathway-level agreement (macro correlation 0.257 [-&gt;] 0.306; sign accuracy 0.620 [-&gt;] 0.641) without compromising gene-level performance, providing a practical mechanism for pathway-aware optimization in transcriptomic prediction pipelines.",
+    "author_corresponding": "Hiroto Saigo",
+    "author_corresponding_institution": "Kyushu University",
+    "authors": "Li, S.; Ruan, Y.; Yang, X.; Wen, Z.; Saigo, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-20",
+    "doi": "10.64898/2026.03.18.712610",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/20/2026.03.18.712610.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Differentiable Gene Set Enrichment Analysis for Pathway-Level Supervision in Transcriptomic Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Kyushu University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes differentiable GSEA (dGSEA), a soft-sorting surrogate with robust permutation normalization and Nystrom-window speedup, used as a pathway-level…",
+  "title": "Differentiable Gene Set Enrichment Analysis for Pathway-Level Supervision in Transcriptomic Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.18.712610"
+}

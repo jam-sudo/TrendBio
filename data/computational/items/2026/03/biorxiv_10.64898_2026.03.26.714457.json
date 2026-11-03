@@ -1,0 +1,40 @@
+{
+  "abstract": "Generating realistic single-cell transcriptomic profiles from structured biological descriptions would enable controlled simulation, data augmentation, and hypothesis-driven cell-state creation--yet no existing method combines text-cell alignment with conditional generation. We present CLOP-DiT, a modular three-stage pipeline: (1) a contrastive aligner (CLOP) maps BiomedBERT text embeddings and scGPT cell embeddings into a shared 512-dimensional space; (2) a conditional Diffusion Transformer (DiT) generates scGPT-compatible latent states via flow matching, steered by a five-field biological template (cell type, tissue, organism, marker genes, disease); and (3) a frozen scGPT decoder maps latents to gene expression. Across 69 cell types from 80 GEO datasets (220,304 cells), a high-fidelity regime (CFG = 2.0) achieves 36.9% KNN accuracy (25x chance) and 81.0% steering, while a high-diversity regime (CFG = 1.0) reaches diversity ratio 0.93 at 80.7% steering. Conditioning field ablation and swap-label permutation tests confirm that marker genes are the dominant steering signal (steering accuracy drops from 99.8% to 62.4% when only metadata fields are retained). Key limitations are identified transparently: in-distribution per-gene variance structure is well preserved (r = 0.98) but cross-dataset variance correlation drops to near zero, the discriminator AUC of 0.656 indicates residual distinguishability, and a pilot rare-cell augmentation study was negative. The modular architecture enables targeted remediation of each limitation without full retraining. CLOP-DiT establishes the feasibility of structured-metadata-conditioned single-cell generation and provides a composable framework for iterative improvement.\n\nSimple SummaryCLOP-DiT is a computational pipeline that generates synthetic single-cell gene expression profiles from structured biological descriptions (cell type, tissue, organism, marker genes, and disease context). It first learns to align text descriptions with real cell data in a shared mathematical space, then uses a diffusion model to generate new cell states matching a given description. The generated cells capture correct cell-type identity and marker gene patterns, but do not yet reproduce the full cell-to-cell variability seen in real single-cell experiments. This work demonstrates that text-guided single-cell generation is feasible as a proof of concept, opening directions for future simulation and hypothesis-generation tools in biology.",
+  "authors": [
+    "Fu, Z."
+  ],
+  "doi": "10.64898/2026.03.26.714457",
+  "first_seen": "2026-03-30",
+  "id": "biorxiv:10.64898/2026.03.26.714457",
+  "metadata": {
+    "abstract": "Generating realistic single-cell transcriptomic profiles from structured biological descriptions would enable controlled simulation, data augmentation, and hypothesis-driven cell-state creation--yet no existing method combines text-cell alignment with conditional generation. We present CLOP-DiT, a modular three-stage pipeline: (1) a contrastive aligner (CLOP) maps BiomedBERT text embeddings and scGPT cell embeddings into a shared 512-dimensional space; (2) a conditional Diffusion Transformer (DiT) generates scGPT-compatible latent states via flow matching, steered by a five-field biological template (cell type, tissue, organism, marker genes, disease); and (3) a frozen scGPT decoder maps latents to gene expression. Across 69 cell types from 80 GEO datasets (220,304 cells), a high-fidelity regime (CFG = 2.0) achieves 36.9% KNN accuracy (25x chance) and 81.0% steering, while a high-diversity regime (CFG = 1.0) reaches diversity ratio 0.93 at 80.7% steering. Conditioning field ablation and swap-label permutation tests confirm that marker genes are the dominant steering signal (steering accuracy drops from 99.8% to 62.4% when only metadata fields are retained). Key limitations are identified transparently: in-distribution per-gene variance structure is well preserved (r = 0.98) but cross-dataset variance correlation drops to near zero, the discriminator AUC of 0.656 indicates residual distinguishability, and a pilot rare-cell augmentation study was negative. The modular architecture enables targeted remediation of each limitation without full retraining. CLOP-DiT establishes the feasibility of structured-metadata-conditioned single-cell generation and provides a composable framework for iterative improvement.\n\nSimple SummaryCLOP-DiT is a computational pipeline that generates synthetic single-cell gene expression profiles from structured biological descriptions (cell type, tissue, organism, marker genes, and disease context). It first learns to align text descriptions with real cell data in a shared mathematical space, then uses a diffusion model to generate new cell states matching a given description. The generated cells capture correct cell-type identity and marker gene patterns, but do not yet reproduce the full cell-to-cell variability seen in real single-cell experiments. This work demonstrates that text-guided single-cell generation is feasible as a proof of concept, opening directions for future simulation and hypothesis-generation tools in biology.",
+    "author_corresponding": "Zeyu Fu",
+    "author_corresponding_institution": "Third Military Medical University",
+    "authors": "Fu, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-30",
+    "doi": "10.64898/2026.03.26.714457",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/30/2026.03.26.714457.source.xml",
+    "license": "cc_by",
+    "published": "10.1016/j.array.2026.100934",
+    "server": "bioRxiv",
+    "title": "CLOP-DiT: Structured-Metadata-Conditioned Single-Cell Latent Generation via Contrastive Language-Omics Pretraining and Diffusion Transformers",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Third Military Medical University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-03-30",
+  "published_doi": "10.1016/j.array.2026.100934",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "CLOP-DiT aligns BiomedBERT text with scGPT cell embeddings and uses a conditional diffusion transformer to generate single-cell expression from structured…",
+  "title": "CLOP-DiT: Structured-Metadata-Conditioned Single-Cell Latent Generation via Contrastive Language-Omics Pretraining and Diffusion Transformers",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.26.714457"
+}

@@ -1,0 +1,41 @@
+{
+  "abstract": "Controllable protein sequence generation remains a central challenge in computational protein design, as most existing approaches rely on retraining, classifier guidance, or architectural modification to impose conditioning. Here we introduce ProtNHF, a generative model that enables continuous, quantitative control over sequence-level properties through analytical bias functions applied exclusively at inference time. ProtNHF builds on neural Hamiltonian flows, where a lightweight Transformer-based potential energy function, inspired by ESM-2, is combined with an explicit kinetic term to define Hamiltonian dynamics in a continuous relaxation of protein sequence space. The model learns a symplectic transport map from a latent Gaussian distribution to protein sequence embeddings via deterministic leapfrog integration, enabling efficient and expressive sampling. In the unconditional setting, generated sequences achieve competitive quality as measured by ESM-2 pseudo-perplexity and AlphaFold2 pLDDT confidence scores. A key advantage of the Hamiltonian formulation is its additive energy structure, which permits external bias potentials to be incorporated directly into the Hamiltonian at inference time without modifying or retraining the learned model. This casts controllable generation in a classical molecular modeling paradigm, where desired properties are enforced by explicit energy shaping. We demonstrate smooth, predictable, and approximately monotonic control over amino acid composition and global properties such as net charge by introducing simple analytical bias terms, including residue-specific chemical potentials and harmonic constraints. The bias strength modulates the values of these properties in generated sequences continuously while preserving structural plausibility and diversity. ProtNHF thus provides a flexible base distribution that can be steered toward different compositional regimes using transparent, physically interpretable energy terms, establishing a general framework for inference-time programmable protein sequence generation.",
+  "authors": [
+    "Raghavan, B.",
+    "Rogers, D. M."
+  ],
+  "doi": "10.64898/2026.03.04.709305",
+  "first_seen": "2026-03-06",
+  "id": "biorxiv:10.64898/2026.03.04.709305",
+  "metadata": {
+    "abstract": "Controllable protein sequence generation remains a central challenge in computational protein design, as most existing approaches rely on retraining, classifier guidance, or architectural modification to impose conditioning. Here we introduce ProtNHF, a generative model that enables continuous, quantitative control over sequence-level properties through analytical bias functions applied exclusively at inference time. ProtNHF builds on neural Hamiltonian flows, where a lightweight Transformer-based potential energy function, inspired by ESM-2, is combined with an explicit kinetic term to define Hamiltonian dynamics in a continuous relaxation of protein sequence space. The model learns a symplectic transport map from a latent Gaussian distribution to protein sequence embeddings via deterministic leapfrog integration, enabling efficient and expressive sampling. In the unconditional setting, generated sequences achieve competitive quality as measured by ESM-2 pseudo-perplexity and AlphaFold2 pLDDT confidence scores. A key advantage of the Hamiltonian formulation is its additive energy structure, which permits external bias potentials to be incorporated directly into the Hamiltonian at inference time without modifying or retraining the learned model. This casts controllable generation in a classical molecular modeling paradigm, where desired properties are enforced by explicit energy shaping. We demonstrate smooth, predictable, and approximately monotonic control over amino acid composition and global properties such as net charge by introducing simple analytical bias terms, including residue-specific chemical potentials and harmonic constraints. The bias strength modulates the values of these properties in generated sequences continuously while preserving structural plausibility and diversity. ProtNHF thus provides a flexible base distribution that can be steered toward different compositional regimes using transparent, physically interpretable energy terms, establishing a general framework for inference-time programmable protein sequence generation.",
+    "author_corresponding": "David M. Rogers",
+    "author_corresponding_institution": "Oak Ridge National Laboratory",
+    "authors": "Raghavan, B.; Rogers, D. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-06",
+    "doi": "10.64898/2026.03.04.709305",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/06/2026.03.04.709305.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ProtNHF: Neural Hamiltonian Flows for Controllable Protein Sequence Generation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Oak Ridge National Laboratory",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-03-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "ProtNHF uses neural Hamiltonian flows with a Transformer potential inspired by ESM-2 to generate protein sequences, enabling inference-time control via…",
+  "title": "ProtNHF: Neural Hamiltonian Flows for Controllable Protein Sequence Generation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.04.709305"
+}

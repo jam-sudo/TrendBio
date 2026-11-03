@@ -1,0 +1,45 @@
+{
+  "abstract": "MotivationPangenome graphs are increasingly used in bioinformatics, ranging from environmental surveillance and crop improvement to the construction of population-scale human pangenomes. As these graphs grow in size, methods that scale efficiently become essential. A central task in pangenome analysis is the discovery of variation structures. In directed graphs, the most widely studied such structures, superbubbles, can be identified in linear time. Their canonical generalization to bidirected graphs, ultrabubbles, more accurately models DNA reverse complementarity. However, existing ultrabubble algorithms are quadratic in the worst case.\n\nResultsWe show that all ultrabubbles in a bidirected graph containing at least one tip or one cutvertex--a common property of pangenome graphs--can be computed in linear time. Our key contribution is a new linear-time orientation algorithm that transforms such a bidirected graph into a directed graph of the same size, in practice. Orientation conflicts are resolved by introducing auxiliary source or sink vertices. We prove that ultrabubbles in the original bidirected graph correspond to weak superbubbles in the resulting directed graph, enabling the use of existing lineartime algorithms. Our approach achieves speedups of up to 25xover the ultrabubble implementation in vg, and of more than 200x over BubbleGun, enabling scalable pangenome analyses. For example, on the v2.0 pangenome graph constructed by the Human Pangenome Reference Consortium from 232 individuals, after reading the input, our method completes in under 3 minutes, while vg requires more than one hour, and four times more RAM.\n\nAvailabilityOur method is implemented in the BubbleFinder tool github.com/algbio/BubbleFinder, via the new ultrabubbles subcommand.\n\nContactalexandru.tomescu@helsinki.fi",
+  "authors": [
+    "Harviainen, J.",
+    "Sena, F.",
+    "Moumard, C.",
+    "Politov, A.",
+    "Schmidt, S.",
+    "Tomescu, A. I."
+  ],
+  "doi": "10.64898/2026.03.28.714704",
+  "first_seen": "2026-03-31",
+  "id": "biorxiv:10.64898/2026.03.28.714704",
+  "metadata": {
+    "abstract": "MotivationPangenome graphs are increasingly used in bioinformatics, ranging from environmental surveillance and crop improvement to the construction of population-scale human pangenomes. As these graphs grow in size, methods that scale efficiently become essential. A central task in pangenome analysis is the discovery of variation structures. In directed graphs, the most widely studied such structures, superbubbles, can be identified in linear time. Their canonical generalization to bidirected graphs, ultrabubbles, more accurately models DNA reverse complementarity. However, existing ultrabubble algorithms are quadratic in the worst case.\n\nResultsWe show that all ultrabubbles in a bidirected graph containing at least one tip or one cutvertex--a common property of pangenome graphs--can be computed in linear time. Our key contribution is a new linear-time orientation algorithm that transforms such a bidirected graph into a directed graph of the same size, in practice. Orientation conflicts are resolved by introducing auxiliary source or sink vertices. We prove that ultrabubbles in the original bidirected graph correspond to weak superbubbles in the resulting directed graph, enabling the use of existing lineartime algorithms. Our approach achieves speedups of up to 25xover the ultrabubble implementation in vg, and of more than 200x over BubbleGun, enabling scalable pangenome analyses. For example, on the v2.0 pangenome graph constructed by the Human Pangenome Reference Consortium from 232 individuals, after reading the input, our method completes in under 3 minutes, while vg requires more than one hour, and four times more RAM.\n\nAvailabilityOur method is implemented in the BubbleFinder tool github.com/algbio/BubbleFinder, via the new ultrabubbles subcommand.\n\nContactalexandru.tomescu@helsinki.fi",
+    "author_corresponding": "Alexandru I Tomescu",
+    "author_corresponding_institution": "University of Helsinki",
+    "authors": "Harviainen, J.; Sena, F.; Moumard, C.; Politov, A.; Schmidt, S.; Tomescu, A. I.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-31",
+    "doi": "10.64898/2026.03.28.714704",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/31/2026.03.28.714704.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Scalable computation of ultrabubbles in pangenomes by orienting bidirected graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Helsinki",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-03-31",
+  "published_doi": "10.1093/bioinformatics/btag235",
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Linear-time orientation algorithm lets ultrabubbles in bidirected pangenome graphs be computed via weak superbubbles, achieving up to 25x speedup over vg and…",
+  "title": "Scalable computation of ultrabubbles in pangenomes by orienting bidirected graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.28.714704"
+}

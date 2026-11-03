@@ -1,0 +1,41 @@
+{
+  "abstract": "De novo peptide design methods traditionally couple generation to 3D structure prediction, limiting throughput to seconds or hours per candidate. Here we present LigandForge, a discrete diffusion model that generates binding peptide sequences in a single forward pass from receptor pocket geometry alone -- no structure prediction, inverse folding, or iterative refinement at inference. LigandForge produces over 700 sequences per second on a single GPU (peak >1,000), a throughput advantage exceeding 10,000-fold over BoltzGen and 1,000,000-fold over BindCraft.\n\nWe generated 490,691 peptides across 150 receptor targets and validated 16,475 by Boltz-2 structure prediction. DeltaForge, a Rust-based thermodynamic scoring engine calibrated against experimental binding data (Pearson r = 0.83 on the PPB-Affinity peptide benchmark), identified predicted sub-100 nM binders across 85 of 116 scored targets (73%), sub-10 nM across 62 (53%), and sub-1 nM across 35 (30%). In a five-target benchmark on historically difficult targets (TNF-, PD-L1, VEGF-A, IL-7R, HER2), LigandForge generated 150,000 candidates in 3.4 minutes on a single B200 GPU (732 seq/sec average, peak 1,190 seq/sec) and produced predicted sub-100 nM binders against all five targets (23 total from 576 folded structures), compared to 1 of 5 targets for BoltzGen (2 hits from 100 designs) and 0 for BindCraft (0 pipeline-accepted designs). DSSP analysis of 8,556 folded peptides revealed that LigandForge produces structurally diverse folds (69% helical, 9% {beta}-sheet, 4% mixed, 8% multi-domain, 10% coil) compared to the helix-dominated outputs of backbone-sampling methods (BoltzGen 77%, BindCraft 93% helical). LigandForge also generated peptides embedding within orthosteric pockets of aminergic GPCRs with no evolutionary precedent for peptide ligands, and natively targets heterodimeric and homomultimeric receptors including the CD8A-CD8B heterodimer (60.5% elite structural confidence, 19.5% simultaneous dual-chain engagement), the CD3D-CD3E signaling complex, and the KIT receptor tyrosine kinase homodimer in vacancy pairing mode (59% bivalent engagement of both receptor chains, per-chain {Delta}G [&le;] -15 kcal/mol{dagger}).\n\nThese results demonstrate that thermodynamic knowledge compiled into model weights during training can replace iterative structure prediction at inference, enabling a paradigm shift from structure-dependent optimization of individual candidates to structure-free exploration of sequence space at scale -- with comparable or superior predicted binding quality, broader structural diversity, and access to target classes beyond the reach of backbone-sampling methods.",
+  "authors": [
+    "Watson, A."
+  ],
+  "doi": "10.64898/2026.03.14.711748",
+  "first_seen": "2026-03-17",
+  "id": "biorxiv:10.64898/2026.03.14.711748",
+  "metadata": {
+    "abstract": "De novo peptide design methods traditionally couple generation to 3D structure prediction, limiting throughput to seconds or hours per candidate. Here we present LigandForge, a discrete diffusion model that generates binding peptide sequences in a single forward pass from receptor pocket geometry alone -- no structure prediction, inverse folding, or iterative refinement at inference. LigandForge produces over 700 sequences per second on a single GPU (peak >1,000), a throughput advantage exceeding 10,000-fold over BoltzGen and 1,000,000-fold over BindCraft.\n\nWe generated 490,691 peptides across 150 receptor targets and validated 16,475 by Boltz-2 structure prediction. DeltaForge, a Rust-based thermodynamic scoring engine calibrated against experimental binding data (Pearson r = 0.83 on the PPB-Affinity peptide benchmark), identified predicted sub-100 nM binders across 85 of 116 scored targets (73%), sub-10 nM across 62 (53%), and sub-1 nM across 35 (30%). In a five-target benchmark on historically difficult targets (TNF-, PD-L1, VEGF-A, IL-7R, HER2), LigandForge generated 150,000 candidates in 3.4 minutes on a single B200 GPU (732 seq/sec average, peak 1,190 seq/sec) and produced predicted sub-100 nM binders against all five targets (23 total from 576 folded structures), compared to 1 of 5 targets for BoltzGen (2 hits from 100 designs) and 0 for BindCraft (0 pipeline-accepted designs). DSSP analysis of 8,556 folded peptides revealed that LigandForge produces structurally diverse folds (69% helical, 9% {beta}-sheet, 4% mixed, 8% multi-domain, 10% coil) compared to the helix-dominated outputs of backbone-sampling methods (BoltzGen 77%, BindCraft 93% helical). LigandForge also generated peptides embedding within orthosteric pockets of aminergic GPCRs with no evolutionary precedent for peptide ligands, and natively targets heterodimeric and homomultimeric receptors including the CD8A-CD8B heterodimer (60.5% elite structural confidence, 19.5% simultaneous dual-chain engagement), the CD3D-CD3E signaling complex, and the KIT receptor tyrosine kinase homodimer in vacancy pairing mode (59% bivalent engagement of both receptor chains, per-chain {Delta}G [&le;] -15 kcal/mol{dagger}).\n\nThese results demonstrate that thermodynamic knowledge compiled into model weights during training can replace iterative structure prediction at inference, enabling a paradigm shift from structure-dependent optimization of individual candidates to structure-free exploration of sequence space at scale -- with comparable or superior predicted binding quality, broader structural diversity, and access to target classes beyond the reach of backbone-sampling methods.",
+    "author_corresponding": "Andre Watson",
+    "author_corresponding_institution": "Ligandal Inc.",
+    "authors": "Watson, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-17",
+    "doi": "10.64898/2026.03.14.711748",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/17/2026.03.14.711748.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Single-Pass Discrete Diffusion Predicts High-Affinity Peptide Binders at >1,000 Sequences per Second across 150 Receptor Targets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Ligandal Inc.",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-03-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "LigandForge: single-pass discrete diffusion generates receptor-binding peptides from pocket geometry at >1,000 seq/s; DeltaForge scores predicted binders…",
+  "title": "Single-Pass Discrete Diffusion Predicts High-Affinity Peptide Binders at >1,000 Sequences per Second across 150 Receptor Targets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.14.711748"
+}

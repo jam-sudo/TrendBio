@@ -1,0 +1,44 @@
+{
+  "abstract": "MotivationRNA-binding proteins (RBPs) regulate post-transcriptional processes, yet many remain undiscovered because RNA-binding activity often occurs outside canonical RNA-binding domains (RBDs), including within intrinsically disordered regions (IDRs) or through protein complexes. Computational methods can help identify novel RBPs, but approaches relying solely on sequence-derived features or ignoring the cellular interaction context are limited in capturing the complexity of RNA-binding behavior. To date, no framework rigorously integrates both sequence information and protein interaction context for RBP prediction.\n\nResultsWe introduce RIBEX, a multimodal framework that combines protein language model (pLM) embeddings with protein interactome topology to improve RBP prediction and interpretation. Specifically, we integrate sequence representations with graph-derived positional encodings (PE) from the human STRING protein-protein interaction (PPI) network. PE are computed using Personalized PageRank, reduced with principal component analysis, and fused with pooled sequence embeddings through FiLM conditioning, while Low-Rank Adaptation (LoRA) enables parameter-efficient task adaptation. Across both an annotation-based benchmark and experimental RNA Interactome Capture (RIC) dataset, PE consistently improves predictive performance, indicating that interactome topology provides complementary information beyond sequence features. LoRA adaptation of ESM2-650M further yields larger gains than simply scaling frozen backbone size. RIBEX outperforms state-of-the-art methods such as RBP-TSTL and HydRA, particularly on challenging subsets including proteins lacking canonical RBDs and those enriched in IDRs. For interpretability, we combine sequence-level computational alanine scanning with network-level positional-encoding ablation and inverse-PCA mapping, recovering known RNA-binding domains, IDR-associated contributions, and functional interactome communities linked to RBP predictions.",
+  "authors": [
+    "Firmani, S.",
+    "Steinbauer, F.",
+    "Kasneci, G.",
+    "Horlacher, M.",
+    "Marsico, A."
+  ],
+  "doi": "10.64898/2026.03.13.711639",
+  "first_seen": "2026-03-17",
+  "id": "biorxiv:10.64898/2026.03.13.711639",
+  "metadata": {
+    "abstract": "MotivationRNA-binding proteins (RBPs) regulate post-transcriptional processes, yet many remain undiscovered because RNA-binding activity often occurs outside canonical RNA-binding domains (RBDs), including within intrinsically disordered regions (IDRs) or through protein complexes. Computational methods can help identify novel RBPs, but approaches relying solely on sequence-derived features or ignoring the cellular interaction context are limited in capturing the complexity of RNA-binding behavior. To date, no framework rigorously integrates both sequence information and protein interaction context for RBP prediction.\n\nResultsWe introduce RIBEX, a multimodal framework that combines protein language model (pLM) embeddings with protein interactome topology to improve RBP prediction and interpretation. Specifically, we integrate sequence representations with graph-derived positional encodings (PE) from the human STRING protein-protein interaction (PPI) network. PE are computed using Personalized PageRank, reduced with principal component analysis, and fused with pooled sequence embeddings through FiLM conditioning, while Low-Rank Adaptation (LoRA) enables parameter-efficient task adaptation. Across both an annotation-based benchmark and experimental RNA Interactome Capture (RIC) dataset, PE consistently improves predictive performance, indicating that interactome topology provides complementary information beyond sequence features. LoRA adaptation of ESM2-650M further yields larger gains than simply scaling frozen backbone size. RIBEX outperforms state-of-the-art methods such as RBP-TSTL and HydRA, particularly on challenging subsets including proteins lacking canonical RBDs and those enriched in IDRs. For interpretability, we combine sequence-level computational alanine scanning with network-level positional-encoding ablation and inverse-PCA mapping, recovering known RNA-binding domains, IDR-associated contributions, and functional interactome communities linked to RBP predictions.",
+    "author_corresponding": "Samuele Firmani",
+    "author_corresponding_institution": "Helmholtz Munich",
+    "authors": "Firmani, S.; Steinbauer, F.; Kasneci, G.; Horlacher, M.; Marsico, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-17",
+    "doi": "10.64898/2026.03.13.711639",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/17/2026.03.13.711639.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RIBEX: Predicting and Explaining RNA Binding Across Structured and Intrinsically Disordered Regions (IDR)-rich Proteins",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Helmholtz Munich",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-17",
+  "published_doi": "10.1093/bioinformatics/btag471",
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "RIBEX fuses ESM2 protein language model embeddings with STRING PPI network positional encodings via FiLM and LoRA to predict RNA-binding proteins,…",
+  "title": "RIBEX: Predicting and Explaining RNA Binding Across Structured and Intrinsically Disordered Regions (IDR)-rich Proteins",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.13.711639"
+}

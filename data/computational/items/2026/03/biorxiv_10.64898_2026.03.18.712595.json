@@ -1,0 +1,46 @@
+{
+  "abstract": "Domain-peptide interactions mediate a significant fraction of cellular protein networks, yet accurately predicting their specificity remains challenging. Peptide motifs typically have short, fuzzy sequence profiles, and their interactions are often weak and transient, limiting the size, coverage, and quality of experimentally validated domain-peptide datasets. Since true non-binders are rarely known, constructing negative examples often introduces bias. While structure-based prediction methods can achieve high accuracy, they are computationally demanding and difficult to scale to the proteome level. We introduce CLIPepPI, a dual-encoder model that leverages contrastive learning to embed domains and peptides into a shared space directly from sequence. Both encoders are initialized from a protein language model (ESM-C) and fine-tuned using lightweight LoRA adapters, enabling parameter-efficient training on positive pairs alone. To overcome data scarcity, we augment [~]3K protein-peptide complexes from PPI3D with [~]150K domain-peptide pairs derived from protein-protein interfaces. CLIPepPI further injects structural information by marking interface residues in the domain sequence, thus guiding the encoders toward binding regions and linking sequence-level learning with structural context. Competitive performance is achieved across three independent benchmarks: domain-peptide complexes from PPI3D, large-scale phage-library data from ProP-PD, and a curated dataset of nuclear export signal (NES) sequences. We demonstrate scalability and generalization through two applications: (i) proteome-wide NES scanning, and (ii) variant-effect prediction, where score changes in domain-peptide interactions between wild-type and mutant sequences discriminate pathogenic from benign variants. Together, CLIPepPI offers a scalable, structure-informed model for predicting domain-peptide specificity and generating meaningful embeddings suited for large-scale proteomic analyses. CLIPepPI is available at: https://bio3d.cs.huji.ac.il/webserver/clipeppi/.",
+  "authors": [
+    "Hochner-Vilk, T.",
+    "Stein, D.",
+    "Schueler-Furman, O.",
+    "Raveh, B.",
+    "Chook, Y. M.",
+    "Schneidman-Duhovny, D."
+  ],
+  "doi": "10.64898/2026.03.18.712595",
+  "first_seen": "2026-03-20",
+  "id": "biorxiv:10.64898/2026.03.18.712595",
+  "metadata": {
+    "abstract": "Domain-peptide interactions mediate a significant fraction of cellular protein networks, yet accurately predicting their specificity remains challenging. Peptide motifs typically have short, fuzzy sequence profiles, and their interactions are often weak and transient, limiting the size, coverage, and quality of experimentally validated domain-peptide datasets. Since true non-binders are rarely known, constructing negative examples often introduces bias. While structure-based prediction methods can achieve high accuracy, they are computationally demanding and difficult to scale to the proteome level. We introduce CLIPepPI, a dual-encoder model that leverages contrastive learning to embed domains and peptides into a shared space directly from sequence. Both encoders are initialized from a protein language model (ESM-C) and fine-tuned using lightweight LoRA adapters, enabling parameter-efficient training on positive pairs alone. To overcome data scarcity, we augment [~]3K protein-peptide complexes from PPI3D with [~]150K domain-peptide pairs derived from protein-protein interfaces. CLIPepPI further injects structural information by marking interface residues in the domain sequence, thus guiding the encoders toward binding regions and linking sequence-level learning with structural context. Competitive performance is achieved across three independent benchmarks: domain-peptide complexes from PPI3D, large-scale phage-library data from ProP-PD, and a curated dataset of nuclear export signal (NES) sequences. We demonstrate scalability and generalization through two applications: (i) proteome-wide NES scanning, and (ii) variant-effect prediction, where score changes in domain-peptide interactions between wild-type and mutant sequences discriminate pathogenic from benign variants. Together, CLIPepPI offers a scalable, structure-informed model for predicting domain-peptide specificity and generating meaningful embeddings suited for large-scale proteomic analyses. CLIPepPI is available at: https://bio3d.cs.huji.ac.il/webserver/clipeppi/.",
+    "author_corresponding": "Dina Schneidman-Duhovny",
+    "author_corresponding_institution": "The Hebrew University of Jerusalem",
+    "authors": "Hochner-Vilk, T.; Stein, D.; Schueler-Furman, O.; Raveh, B.; Chook, Y. M.; Schneidman-Duhovny, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-20",
+    "doi": "10.64898/2026.03.18.712595",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/20/2026.03.18.712595.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CliPepPI: Scalable prediction of domain-peptide specificityusing contrastive learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The Hebrew University of Jerusalem",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "proteomics"
+  ],
+  "source": "biorxiv",
+  "summary": "CLIPepPI: a dual-encoder ESM-C model with LoRA adapters, trained contrastively on sequence to predict domain-peptide specificity and scan proteomes, with…",
+  "title": "CliPepPI: Scalable prediction of domain-peptide specificityusing contrastive learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.18.712595"
+}

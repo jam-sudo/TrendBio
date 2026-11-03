@@ -1,0 +1,40 @@
+{
+  "abstract": "BackgroundScalp electroencephalography (EEG) based seizure prediction plays a critical role in improving the quality of life for patients with drug-resistant epilepsy, offering the potential for real-time warnings and timely interventions. Despite its clinical significance and decades of research, the field still lacks an open benchmark with reproducible baselines and deployment-oriented event-level evaluation. Most prior work relies on the small and outdated Childrens Hospital Boston (CHB-MIT) dataset and reports window-level metrics only, leaving the false-alarm burden of a real warning system underspecified. In seizure prediction, the cost of false alarm is significantly high since patients may receive painful electrical stimulation to suppress seizure. Hence, false alarms per hour (FA/h) and partial AUC (pAUC) are the most deployment-relevant metrics, reflecting alarm burden and discriminability in the low-false-alarm operating region that a usable warning system can realistically tolerate. However, few studies have systematically reported such metrics. In addition, vision transformers event-level performance under deployable FA/h constraints remains underexplored, and newer backbones such as MambaVision have yet to be evaluated under this setting.\n\nMethodsIn this work, we introduce a reproducible 5-fold benchmark derived from the Temple University Hospital EEG Seizure Corpus (TUSZ) dataset, and evaluate models using a pseudo-real-time event pipeline, reporting event-level sensitivity, false alarms per hour (FA/h) and partial AUC (pAUC). All models are compared to random predictors for statistical validation. We benchmark pre-trained vision transformers (SegFormer and MambaVision) under three EEG-to-image encoding methods, including a self-proposed Temporal-Patchify encoding for SegFormer.\n\nResultsOur proposed Temporal-Patchify encoding method achieves state-of-the-art performance. We achieved 0.61 pAUC, which is 16.2% higher than the baseline Temporal-Tile SegFormer of Parani et al. The false-alarm burden (0.40{+/-}0.28 FA/h) is 44.4% lower than the Temporal-Tile SegFormer baseline while maintaining clinically usable sensitivity (60.7%{+/-}5.0%). We further perform statistical validation against a matched Poisson random predictor, confirming performance exceeds chance. Finally, we report end-to-end inference through-put up to 920 windows/s, confirming MambaVisions fastest inference speed, exceeding SegFormer by over 20%.\n\nConclusionsThis work bridges the gap between seizure prediction algorithms and clinically usable seizure prediction systems in real-world settings. Our findings indicate that pre-trained vision transformers, when coupled with appropriate EEG encoding methods, can achieve robust performance in low-false-alarm operating regimes, which is critical for real-world deployment. This benchmark and evaluation framework may facilitate more clinically meaningful and reproducible seizure prediction research.",
+  "authors": [
+    "Yin, Z.",
+    "Wang, S.",
+    "Moraros, J."
+  ],
+  "doi": "10.64898/2026.03.11.711230",
+  "first_seen": "2026-03-14",
+  "id": "biorxiv:10.64898/2026.03.11.711230",
+  "metadata": {
+    "abstract": "BackgroundScalp electroencephalography (EEG) based seizure prediction plays a critical role in improving the quality of life for patients with drug-resistant epilepsy, offering the potential for real-time warnings and timely interventions. Despite its clinical significance and decades of research, the field still lacks an open benchmark with reproducible baselines and deployment-oriented event-level evaluation. Most prior work relies on the small and outdated Childrens Hospital Boston (CHB-MIT) dataset and reports window-level metrics only, leaving the false-alarm burden of a real warning system underspecified. In seizure prediction, the cost of false alarm is significantly high since patients may receive painful electrical stimulation to suppress seizure. Hence, false alarms per hour (FA/h) and partial AUC (pAUC) are the most deployment-relevant metrics, reflecting alarm burden and discriminability in the low-false-alarm operating region that a usable warning system can realistically tolerate. However, few studies have systematically reported such metrics. In addition, vision transformers event-level performance under deployable FA/h constraints remains underexplored, and newer backbones such as MambaVision have yet to be evaluated under this setting.\n\nMethodsIn this work, we introduce a reproducible 5-fold benchmark derived from the Temple University Hospital EEG Seizure Corpus (TUSZ) dataset, and evaluate models using a pseudo-real-time event pipeline, reporting event-level sensitivity, false alarms per hour (FA/h) and partial AUC (pAUC). All models are compared to random predictors for statistical validation. We benchmark pre-trained vision transformers (SegFormer and MambaVision) under three EEG-to-image encoding methods, including a self-proposed Temporal-Patchify encoding for SegFormer.\n\nResultsOur proposed Temporal-Patchify encoding method achieves state-of-the-art performance. We achieved 0.61 pAUC, which is 16.2% higher than the baseline Temporal-Tile SegFormer of Parani et al. The false-alarm burden (0.40{+/-}0.28 FA/h) is 44.4% lower than the Temporal-Tile SegFormer baseline while maintaining clinically usable sensitivity (60.7%{+/-}5.0%). We further perform statistical validation against a matched Poisson random predictor, confirming performance exceeds chance. Finally, we report end-to-end inference through-put up to 920 windows/s, confirming MambaVisions fastest inference speed, exceeding SegFormer by over 20%.\n\nConclusionsThis work bridges the gap between seizure prediction algorithms and clinically usable seizure prediction systems in real-world settings. Our findings indicate that pre-trained vision transformers, when coupled with appropriate EEG encoding methods, can achieve robust performance in low-false-alarm operating regimes, which is critical for real-world deployment. This benchmark and evaluation framework may facilitate more clinically meaningful and reproducible seizure prediction research.",
+    "author_corresponding": "Shuihua Wang",
+    "author_corresponding_institution": "Xi'an Jiaotong-Liverpool University",
+    "authors": "Yin, Z.; Wang, S.; Moraros, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-14",
+    "doi": "10.64898/2026.03.11.711230",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/14/2026.03.11.711230.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Pre-trained Vision Transformers for Seizure Prediction: A Reproducible Baseline with Event-Based Evaluation and Statistical Validation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Xi'an Jiaotong-Liverpool University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "Reproducible TUSZ benchmark of pre-trained SegFormer and MambaVision for EEG seizure prediction with event-level FA/h and pAUC.",
+  "title": "Pre-trained Vision Transformers for Seizure Prediction: A Reproducible Baseline with Event-Based Evaluation and Statistical Validation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.11.711230"
+}

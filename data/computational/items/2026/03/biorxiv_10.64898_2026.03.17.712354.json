@@ -1,0 +1,44 @@
+{
+  "abstract": "Approximate membership query structures are used throughout sequence bioinformatics, from read screening and metagenomic classification to assembly, indexing, and error correction. Among them, Bloom filters remain the default choice. They are not the most efficient structures in either time or memory, but they provide an effective compromise between compactness, speed, simplicity, and dynamic insertions, which explains their widespread adoption in practice. Their main drawback is poor cache locality, since each query typically requires several random memory accesses. Blocked Bloom filters alleviate this issue by restricting accesses for any given element to a single memory block, but this usually comes with a loss in accuracy at fixed memory.\n\nIn this work, we introduce the Super Bloom Filter, a Bloom filter variant designed for streaming k-mer queries on biological sequences. Super Bloom uses minimizers to group adjacent k-mers into super-k-mers and assigns all k-mers of a group to the same memory block, thereby amortizing random accesses over consecutive k-mer queries and improving cache efficiency. We further combine this layout with the findere scheme, which reduces false positives by requiring consistent evidence across overlapping subwords. We provide a theoretical analysis of the construction of Super Bloom filters, showing how minimizer density controls the expected reduction in memory transfers, and derive a practical parameterization strategy linking memory budget, block size, collision overhead, and the number of hash functions to robust false-positive control.\n\nAcross a broad range of memory budgets and numbers of hash functions, Super Bloom consistently outperforms existing Bloom filter implementations, with several-fold time improvements. As a practical validation, we integrated it into a Rust reimplementation of BioBloom Tools, a sequence screening tool that builds filters from reference genomes and classifies reads through k-mer membership queries for applications such as host removal and contamination filtering. This replacement yields substantially faster indexing and querying than both the original C++ implementation and Rust variants based on Bloom filters and blocked Bloom filters. The findere scheme also reduces false positives by several orders of magnitude, with some configurations yielding no observed false positives among 109 random queried k-mers. Code is available at https://github.com/EtienneC-K/SuperBloom and https://github.com/Malfoy/SBB.",
+  "authors": [
+    "Conchon-Kerjan, E.",
+    "Rouze, T.",
+    "Robidou, L.",
+    "Ingels, F.",
+    "Limasset, A."
+  ],
+  "doi": "10.64898/2026.03.17.712354",
+  "first_seen": "2026-03-19",
+  "id": "biorxiv:10.64898/2026.03.17.712354",
+  "metadata": {
+    "abstract": "Approximate membership query structures are used throughout sequence bioinformatics, from read screening and metagenomic classification to assembly, indexing, and error correction. Among them, Bloom filters remain the default choice. They are not the most efficient structures in either time or memory, but they provide an effective compromise between compactness, speed, simplicity, and dynamic insertions, which explains their widespread adoption in practice. Their main drawback is poor cache locality, since each query typically requires several random memory accesses. Blocked Bloom filters alleviate this issue by restricting accesses for any given element to a single memory block, but this usually comes with a loss in accuracy at fixed memory.\n\nIn this work, we introduce the Super Bloom Filter, a Bloom filter variant designed for streaming k-mer queries on biological sequences. Super Bloom uses minimizers to group adjacent k-mers into super-k-mers and assigns all k-mers of a group to the same memory block, thereby amortizing random accesses over consecutive k-mer queries and improving cache efficiency. We further combine this layout with the findere scheme, which reduces false positives by requiring consistent evidence across overlapping subwords. We provide a theoretical analysis of the construction of Super Bloom filters, showing how minimizer density controls the expected reduction in memory transfers, and derive a practical parameterization strategy linking memory budget, block size, collision overhead, and the number of hash functions to robust false-positive control.\n\nAcross a broad range of memory budgets and numbers of hash functions, Super Bloom consistently outperforms existing Bloom filter implementations, with several-fold time improvements. As a practical validation, we integrated it into a Rust reimplementation of BioBloom Tools, a sequence screening tool that builds filters from reference genomes and classifies reads through k-mer membership queries for applications such as host removal and contamination filtering. This replacement yields substantially faster indexing and querying than both the original C++ implementation and Rust variants based on Bloom filters and blocked Bloom filters. The findere scheme also reduces false positives by several orders of magnitude, with some configurations yielding no observed false positives among 109 random queried k-mers. Code is available at https://github.com/EtienneC-K/SuperBloom and https://github.com/Malfoy/SBB.",
+    "author_corresponding": "Antoine Limasset",
+    "author_corresponding_institution": "Universite de Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL F-59000, Lille, France",
+    "authors": "Conchon-Kerjan, E.; Rouze, T.; Robidou, L.; Ingels, F.; Limasset, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-19",
+    "doi": "10.64898/2026.03.17.712354",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/19/2026.03.17.712354.source.xml",
+    "license": "cc_by",
+    "published": "10.1177/15578666261493564",
+    "server": "bioRxiv",
+    "title": "Super Bloom: Fast and precise filter for streaming k-mer queries",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universite de Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL F-59000, Lille, France",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-19",
+  "published_doi": "10.1177/15578666261493564",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Super Bloom Filter: a minimizer-grouped Bloom variant for streaming k-mer queries, with faster cache-efficient lookups and fewer false positives via findere;…",
+  "title": "Super Bloom: Fast and precise filter for streaming k-mer queries",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.17.712354"
+}

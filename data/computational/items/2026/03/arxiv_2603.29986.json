@@ -1,0 +1,31 @@
+{
+  "abstract": "Mathematical models of natural and man-made systems often have many adjustable parameters that must be estimated from multiple, potentially conflicting datasets. Rather than reporting a single best-fit parameter vector, it is often more informative to generate an ensemble of parameter sets that collectively map out the trade-offs among competing objectives. This paper presents ParetoEnsembles.jl, an open-source Julia package that generates such ensembles using Pareto Optimal Ensemble Techniques (POETs), a simulated-annealing-based algorithm that requires no gradient information. The implementation corrects the original dominance relation from weak to strict Pareto dominance, reduces the per-iteration ranking cost from $O(n^2 m)$ to $O(nm)$ through an incremental update scheme, and adds multi-chain parallel execution for improved front coverage. We demonstrate the package on a cell-free gene expression model fitted to experimental data and a blood coagulation cascade model with ten estimated rate constants and three objectives. A controlled synthetic-data study reveals parameter identifiability structure, with individual rate constants off by several-fold yet model predictions accurate to 7%. A five-replicate coverage analysis confirms that timing features are reliably covered while peak amplitude is systematically overconfident. Validation against published experimental thrombin generation data demonstrates that the ensemble predicts held-out conditions to within 10% despite inherent model approximation error. By making ensemble generation lightweight and accessible, ParetoEnsembles.jl aims to lower the barrier to routine uncertainty characterization in mechanistic modeling.",
+  "authors": [
+    "Jeffrey D. Varner"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-31",
+  "id": "arxiv:2603.29986",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.MS"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.29986v1</ns0:id>\n    <ns0:title>ParetoEnsembles.jl: A Julia Package for Multiobjective Parameter Estimation Using Pareto Optimal Ensemble Techniques</ns0:title>\n    <ns0:updated>2026-03-31T16:51:24Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.29986v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.29986v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Mathematical models of natural and man-made systems often have many adjustable parameters that must be estimated from multiple, potentially conflicting datasets. Rather than reporting a single best-fit parameter vector, it is often more informative to generate an ensemble of parameter sets that collectively map out the trade-offs among competing objectives. This paper presents ParetoEnsembles.jl, an open-source Julia package that generates such ensembles using Pareto Optimal Ensemble Techniques (POETs), a simulated-annealing-based algorithm that requires no gradient information. The implementation corrects the original dominance relation from weak to strict Pareto dominance, reduces the per-iteration ranking cost from $O(n^2 m)$ to $O(nm)$ through an incremental update scheme, and adds multi-chain parallel execution for improved front coverage. We demonstrate the package on a cell-free gene expression model fitted to experimental data and a blood coagulation cascade model with ten estimated rate constants and three objectives. A controlled synthetic-data study reveals parameter identifiability structure, with individual rate constants off by several-fold yet model predictions accurate to 7%. A five-replicate coverage analysis confirms that timing features are reliably covered while peak amplitude is systematically overconfident. Validation against published experimental thrombin generation data demonstrates that the ensemble predicts held-out conditions to within 10% despite inherent model approximation error. By making ensemble generation lightweight and accessible, ParetoEnsembles.jl aims to lower the barrier to routine uncertainty characterization in mechanistic modeling.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.MS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-31T16:51:24Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Jeffrey D. Varner</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-31",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Julia package ParetoEnsembles.jl generates multiobjective parameter ensembles via gradient-free POETs with strict dominance, incremental ranking, and parallel…",
+  "title": "ParetoEnsembles.jl: A Julia Package for Multiobjective Parameter Estimation Using Pareto Optimal Ensemble Techniques",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.29986v1"
+}

@@ -1,0 +1,44 @@
+{
+  "abstract": "BackgroundRNA regulation programs gene expression through sequence-encoded mechanisms--including RNA structure formation, protein binding, chemical modification, and RNA-RNA targeting--whose rules span nucleotide-scale motifs and longer-range context. RNA foundation models aim to learn transferable representations from large RNA corpora, but most rely on masked language modeling (MLM), where the model loss is computed on a small subset of positions and training relies on artificially corrupted inputs that are absent at downstream inference, introducing a pretraining-downstream discrepancy.\n\nResultsWe introduce RNAElectra, a single-nucleotide-resolution RNA foundation model pretrained on diverse non-coding RNAs from RNAcentral using ELECTRA-style replaced-token detection (RTD). RTD trains a discriminator with a loss defined over all input positions on realistically corrupted sequences, providing dense supervision that better aligns pretraining with sequence-to-function fine-tuning. RNAElectra combines nucleotide-resolution tokenization with an efficient attention design to capture local regulatory motifs and longer-range dependencies within a single reusable backbone. Using a unified, sequence-only fine-tuning pipeline without task-specific architectures or auxiliary inputs, RNAElectra demonstrates strong cross-task generalization across benchmarks and downstream evaluations spanning RNA structure and function, RNA-protein and RNA-RNA interactions, RNA modification landscapes, and quantitative regulatory readouts such as translation efficiency and mRNA stability, outperforming widely used RNA foundation model baselines on the majority of evaluated tasks. In addition to predictive performance, RNAElectra supports interpretability by enabling analysis of learned representations and sequence determinants underlying model predictions.\n\nConclusionRNAElectra establishes RTD pretraining as a practical alternative to MLM for RNA foundation modeling, coupling dense position-wise supervision with an efficient architecture to deliver broadly transferable RNA representations. This framework provides a reusable backbone for RNA regulatory prediction and supports sequence-level RNA engineering and design.",
+  "authors": [
+    "Ding, K.",
+    "Liu, L.",
+    "Parker, B.",
+    "Wen, J."
+  ],
+  "doi": "10.64898/2026.03.15.711950",
+  "first_seen": "2026-03-17",
+  "id": "biorxiv:10.64898/2026.03.15.711950",
+  "metadata": {
+    "abstract": "BackgroundRNA regulation programs gene expression through sequence-encoded mechanisms--including RNA structure formation, protein binding, chemical modification, and RNA-RNA targeting--whose rules span nucleotide-scale motifs and longer-range context. RNA foundation models aim to learn transferable representations from large RNA corpora, but most rely on masked language modeling (MLM), where the model loss is computed on a small subset of positions and training relies on artificially corrupted inputs that are absent at downstream inference, introducing a pretraining-downstream discrepancy.\n\nResultsWe introduce RNAElectra, a single-nucleotide-resolution RNA foundation model pretrained on diverse non-coding RNAs from RNAcentral using ELECTRA-style replaced-token detection (RTD). RTD trains a discriminator with a loss defined over all input positions on realistically corrupted sequences, providing dense supervision that better aligns pretraining with sequence-to-function fine-tuning. RNAElectra combines nucleotide-resolution tokenization with an efficient attention design to capture local regulatory motifs and longer-range dependencies within a single reusable backbone. Using a unified, sequence-only fine-tuning pipeline without task-specific architectures or auxiliary inputs, RNAElectra demonstrates strong cross-task generalization across benchmarks and downstream evaluations spanning RNA structure and function, RNA-protein and RNA-RNA interactions, RNA modification landscapes, and quantitative regulatory readouts such as translation efficiency and mRNA stability, outperforming widely used RNA foundation model baselines on the majority of evaluated tasks. In addition to predictive performance, RNAElectra supports interpretability by enabling analysis of learned representations and sequence determinants underlying model predictions.\n\nConclusionRNAElectra establishes RTD pretraining as a practical alternative to MLM for RNA foundation modeling, coupling dense position-wise supervision with an efficient architecture to deliver broadly transferable RNA representations. This framework provides a reusable backbone for RNA regulatory prediction and supports sequence-level RNA engineering and design.",
+    "author_corresponding": "Jiayu Wen",
+    "author_corresponding_institution": "Australian National University",
+    "authors": "Ding, K.; Liu, L.; Parker, B.; Wen, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-17",
+    "doi": "10.64898/2026.03.15.711950",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/17/2026.03.15.711950.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RNAElectra: An ELECTRA-Style RNA Foundation Model for RNA Regulatory Inference",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Australian National University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "RNAElectra is a nucleotide-resolution RNA foundation model pretrained on RNAcentral ncRNAs with ELECTRA-style replaced-token detection, outperforming MLM…",
+  "title": "RNAElectra: An ELECTRA-Style RNA Foundation Model for RNA Regulatory Inference",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.15.711950"
+}

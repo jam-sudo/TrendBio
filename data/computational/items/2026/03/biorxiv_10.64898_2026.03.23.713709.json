@@ -1,0 +1,43 @@
+{
+  "abstract": "BackgroundMixed-format lifestyle questionnaires contain both structured variables and free-text responses, but it remains unclear whether language-derived variables provide incremental predictive value beyond structured data, and under which representational condition. It was investigated whether variables derived from patient-reported free text improve ALS-versus-control classification beyond structured questionnaire data, and whether their value depends on how temporal information is represented.\n\nMethodsA leakage-free machine-learning pipeline was developed to classify ALS versus controls from questionnaire-derived data, including a schema-guided LLM-based text-to-table extraction and a compact longitudinal encoding strategy. Three feature configurations were compared: Pool1, containing structured baseline variables only; Pool2, adding compact summaries derived from first-time-point (T1) free-text responses; and Pool3, further incorporating compact descriptors of change between T1 and T2. Logistic Regression, linear Support Vector Classification, and Random Forest were evaluated using repeated stratified holdout (10 seeds) and repeated stratified 5-fold cross-validation. Final ablation analyses were performed to isolate the contribution of the compact text block and the compact temporal block.\n\nResultsAfter leakage correction, performance estimates became more conservative, indicating that previous results had been optimistic. In the final configuration, Pool3 achieved the best performance, with Random Forest reaching a holdout accuracy of 0.673, F1-weighted score of 0.666, and Matthews correlation coefficient of 0.323; cross-validated F1-weighted score and Matthews correlation coefficient were 0.654 and 0.312, respectively. Pool2 did not show a robust improvement over Pool1. Ablation analysis showed that removing the compact temporal block markedly reduced Pool3 performance, whereas removing the compact text block had little overall effect. These findings indicate that the primary value of language-based processing in small clinical cohorts lies not in static feature enrichment, but in enabling compact representations of longitudinal change.\n\nConclusionsIn this setting, the main predictive gain did not arise from static text-derived variables alone, but from representing questionnaire information as compact longitudinal change descriptors. These findings suggest that, in small clinical cohorts, the value of language-based processing may lie more in summarizing trajectories than in expanding static feature spaces.",
+  "authors": [
+    "Radlowski Nova, J.",
+    "Lopez-Carbonero, J. I.",
+    "Corrochano, S.",
+    "Ayala, J. L."
+  ],
+  "doi": "10.64898/2026.03.23.713709",
+  "first_seen": "2026-03-25",
+  "id": "biorxiv:10.64898/2026.03.23.713709",
+  "metadata": {
+    "abstract": "BackgroundMixed-format lifestyle questionnaires contain both structured variables and free-text responses, but it remains unclear whether language-derived variables provide incremental predictive value beyond structured data, and under which representational condition. It was investigated whether variables derived from patient-reported free text improve ALS-versus-control classification beyond structured questionnaire data, and whether their value depends on how temporal information is represented.\n\nMethodsA leakage-free machine-learning pipeline was developed to classify ALS versus controls from questionnaire-derived data, including a schema-guided LLM-based text-to-table extraction and a compact longitudinal encoding strategy. Three feature configurations were compared: Pool1, containing structured baseline variables only; Pool2, adding compact summaries derived from first-time-point (T1) free-text responses; and Pool3, further incorporating compact descriptors of change between T1 and T2. Logistic Regression, linear Support Vector Classification, and Random Forest were evaluated using repeated stratified holdout (10 seeds) and repeated stratified 5-fold cross-validation. Final ablation analyses were performed to isolate the contribution of the compact text block and the compact temporal block.\n\nResultsAfter leakage correction, performance estimates became more conservative, indicating that previous results had been optimistic. In the final configuration, Pool3 achieved the best performance, with Random Forest reaching a holdout accuracy of 0.673, F1-weighted score of 0.666, and Matthews correlation coefficient of 0.323; cross-validated F1-weighted score and Matthews correlation coefficient were 0.654 and 0.312, respectively. Pool2 did not show a robust improvement over Pool1. Ablation analysis showed that removing the compact temporal block markedly reduced Pool3 performance, whereas removing the compact text block had little overall effect. These findings indicate that the primary value of language-based processing in small clinical cohorts lies not in static feature enrichment, but in enabling compact representations of longitudinal change.\n\nConclusionsIn this setting, the main predictive gain did not arise from static text-derived variables alone, but from representing questionnaire information as compact longitudinal change descriptors. These findings suggest that, in small clinical cohorts, the value of language-based processing may lie more in summarizing trajectories than in expanding static feature spaces.",
+    "author_corresponding": "Jose L. Ayala",
+    "author_corresponding_institution": "Faculty of Computer Science, Department of Computer Architecture, Complutense University of Madrid, Madrid, Spain",
+    "authors": "Radlowski Nova, J.; Lopez-Carbonero, J. I.; Corrochano, S.; Ayala, J. L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-25",
+    "doi": "10.64898/2026.03.23.713709",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/25/2026.03.23.713709.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Compact longitudinal representations derived from mixed-format lifestyle questionnaires outperform static text-derived features for ALS-versus-control classification",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Faculty of Computer Science, Department of Computer Architecture, Complutense University of Madrid, Madrid, Spain",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "ML on ALS questionnaires: longitudinal change descriptors, not static free-text features, improve ALS-vs-control classification.",
+  "title": "Compact longitudinal representations derived from mixed-format lifestyle questionnaires outperform static text-derived features for ALS-versus-control classification",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.23.713709"
+}

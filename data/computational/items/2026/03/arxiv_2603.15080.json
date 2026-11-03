@@ -1,0 +1,33 @@
+{
+  "abstract": "Biomedical knowledge is fragmented across siloed databases---Reactome, STRING, Gene Ontology, ClinicalTrials.gov, DrugBank, DGIdb, SIDER, PubMed, ClinVar, ChEMBL, OpenTargets, and more. We present an open, reproducible biomedical knowledge graph ecosystem built on Samyama, a Rust-native graph database: three foundational graphs detailed end-to-end---Pathways KG (118,686 nodes, 834,785 edges), Clinical Trials KG (7,774,446 nodes, 26,973,997 edges), and Drug Interactions KG (32,726 nodes, 191,970 edges)---and their expansion into a 22-graph, 2-cohort merged biomedical store (328,130,739 nodes and 1,441,425,733 imported edges, including 295,000 synthetic OMOP CDM patients from Synthea). First, we describe a reproducible ETL and portable .sgsnap snapshot pattern where graphs load alone or compose into one store. Second, we analyze single-store cross-KG integration via query-time property joins and load-time identifier deduplication (--dedup-keys): across all 24 snapshots (Samyama-Graph v1.13.0), 328.1M nodes and 1.44B edges load in 2,269.1 s (37m 49s) within 366.5 GB peak RSS (254 B/edge), merging 132,511 cross-source entities across five audited keys (mondo_id,uniprot_id,go_id,drugbank_id,symbol)---87.8% of the 150,965 Bound A sound-identifier ceiling, with zero conflicting-ID refusals. On a frozen 81-query suite, 62 queries return results (17 data-gap empties, 2 timeouts); on an expanded 200-query oracle suite, 195 of 200 pass (97.5%). Third, we introduce schema-driven Model Context Protocol (MCP) server generation: on the 40-question BiomedQA benchmark over the 3-KG subset, domain-specific MCP tools achieve 98% accuracy vs. 85% for schema-aware text-to-Cypher and 75% for standalone GPT-4o, with zero schema errors.",
+  "authors": [
+    "Madhulatha Mandarapu",
+    "Sandeep Kunkunuru"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-16",
+  "id": "arxiv:2603.15080",
+  "metadata": {
+    "arxiv_primary_category": "cs.DB",
+    "categories": [
+      "cs.DB",
+      "cs.AI",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.15080v4</ns0:id>\n    <ns0:title>Open Biomedical Knowledge Graphs at Scale: Construction, Federation, and AI Agent Access with Samyama Graph Database</ns0:title>\n    <ns0:updated>2026-10-30T06:30:28Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.15080v4\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.15080v4\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Biomedical knowledge is fragmented across siloed databases---Reactome, STRING, Gene Ontology, ClinicalTrials.gov, DrugBank, DGIdb, SIDER, PubMed, ClinVar, ChEMBL, OpenTargets, and more. We present an open, reproducible biomedical knowledge graph ecosystem built on Samyama, a Rust-native graph database: three foundational graphs detailed end-to-end---Pathways KG (118,686 nodes, 834,785 edges), Clinical Trials KG (7,774,446 nodes, 26,973,997 edges), and Drug Interactions KG (32,726 nodes, 191,970 edges)---and their expansion into a 22-graph, 2-cohort merged biomedical store (328,130,739 nodes and 1,441,425,733 imported edges, including 295,000 synthetic OMOP CDM patients from Synthea). First, we describe a reproducible ETL and portable .sgsnap snapshot pattern where graphs load alone or compose into one store. Second, we analyze single-store cross-KG integration via query-time property joins and load-time identifier deduplication (--dedup-keys): across all 24 snapshots (Samyama-Graph v1.13.0), 328.1M nodes and 1.44B edges load in 2,269.1 s (37m 49s) within 366.5 GB peak RSS (254 B/edge), merging 132,511 cross-source entities across five audited keys (mondo_id,uniprot_id,go_id,drugbank_id,symbol)---87.8% of the 150,965 Bound A sound-identifier ceiling, with zero conflicting-ID refusals. On a frozen 81-query suite, 62 queries return results (17 data-gap empties, 2 timeouts); on an expanded 200-query oracle suite, 195 of 200 pass (97.5%). Third, we introduce schema-driven Model Context Protocol (MCP) server generation: on the 40-question BiomedQA benchmark over the 3-KG subset, domain-specific MCP tools achieve 98% accuracy vs. 85% for schema-aware text-to-Cypher and 75% for standalone GPT-4o, with zero schema errors.</ns0:summary>\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-16T10:36:13Z</ns0:published>\n    <ns1:comment>14 pages, 9 tables. v4 adds 22-KG + 2-cohort (328.1M nodes, 1.44B edges) single-store merge on Samyama-Graph v1.13.0, Bound A identifier soundness audit (132,511 merges), and 200-query oracle suite (195/200 pass). Code and benchmarks: https://github.com/samyama-ai/biomedqa</ns1:comment>\n    <ns1:primary_category term=\"cs.DB\" />\n    <ns0:author>\n      <ns0:name>Madhulatha Mandarapu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sandeep Kunkunuru</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Open biomedical knowledge graph ecosystem on the Rust graph database Samyama: reproducible ETL, merged 328M-node store, and schema-driven MCP server generation…",
+  "title": "Open Biomedical Knowledge Graphs at Scale: Construction, Federation, and AI Agent Access with Samyama Graph Database",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.15080v4"
+}

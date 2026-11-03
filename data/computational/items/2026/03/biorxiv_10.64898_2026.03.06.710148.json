@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationLong-read metagenomic sequencing improves assembly contiguity and enables genome-resolved analysis of complex microbial communities, but accurate taxonomic classification of long reads and assembled contigs remains challenging. Highly scalable k-mer-based classifiers such as Kraken2 frequently over-assign fine-rank taxonomic labels when applied to long-read data, producing high false positive classification rates driven by sparse or localized k-mer matches, particularly in microbiomes with extensive taxonomic novelty.\n\nResultsWe present Perseus, a lineage-aware confidence estimation framework for taxonomic classification that models the spatial distribution and hierarchical consistency of k-mer evidence along sequences. This formulation reframes taxonomic classification as a hierarchical confidence estimation problem rather than a single-rank prediction task. Perseus refines k-mer-level taxonomic signals from Kraken2 using a multi-headed convolutional neural network that estimates calibrated confidence scores for taxonomic correctness at each canonical rank. Using these estimates, Perseus confirms assignments, backs off to higher taxonomic ranks, or abstains when evidence is insufficient, prioritizing correctness and lineage consistency over overly specific assignments. Across simulations of taxonomic novelty and real-world metagenomic datasets, Perseus consistently and substantially reduces the false assignment rate while improving precision and lineage-consistent accuracy. These improvements are most pronounced for long reads and assembled contigs, where spatial context enables reliable discrimination between consistent taxonomic signal and spurious matches.\n\nAvailability and implementationPerseus integrates with existing Kraken2 workflows and is available at https://github.com/matnguyen/perseus.\n\nContactmnguye99@jh.edu, mschatz@cs.jhu.edu\n\nSupplementary informationSupplementary data are available online.",
+  "authors": [
+    "Nguyen, M.",
+    "Schatz, M."
+  ],
+  "doi": "10.64898/2026.03.06.710148",
+  "first_seen": "2026-03-08",
+  "id": "biorxiv:10.64898/2026.03.06.710148",
+  "metadata": {
+    "abstract": "MotivationLong-read metagenomic sequencing improves assembly contiguity and enables genome-resolved analysis of complex microbial communities, but accurate taxonomic classification of long reads and assembled contigs remains challenging. Highly scalable k-mer-based classifiers such as Kraken2 frequently over-assign fine-rank taxonomic labels when applied to long-read data, producing high false positive classification rates driven by sparse or localized k-mer matches, particularly in microbiomes with extensive taxonomic novelty.\n\nResultsWe present Perseus, a lineage-aware confidence estimation framework for taxonomic classification that models the spatial distribution and hierarchical consistency of k-mer evidence along sequences. This formulation reframes taxonomic classification as a hierarchical confidence estimation problem rather than a single-rank prediction task. Perseus refines k-mer-level taxonomic signals from Kraken2 using a multi-headed convolutional neural network that estimates calibrated confidence scores for taxonomic correctness at each canonical rank. Using these estimates, Perseus confirms assignments, backs off to higher taxonomic ranks, or abstains when evidence is insufficient, prioritizing correctness and lineage consistency over overly specific assignments. Across simulations of taxonomic novelty and real-world metagenomic datasets, Perseus consistently and substantially reduces the false assignment rate while improving precision and lineage-consistent accuracy. These improvements are most pronounced for long reads and assembled contigs, where spatial context enables reliable discrimination between consistent taxonomic signal and spurious matches.\n\nAvailability and implementationPerseus integrates with existing Kraken2 workflows and is available at https://github.com/matnguyen/perseus.\n\nContactmnguye99@jh.edu, mschatz@cs.jhu.edu\n\nSupplementary informationSupplementary data are available online.",
+    "author_corresponding": "Michael Schatz",
+    "author_corresponding_institution": "Johns Hopkins University",
+    "authors": "Nguyen, M.; Schatz, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-08",
+    "doi": "10.64898/2026.03.06.710148",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/08/2026.03.06.710148.source.xml",
+    "license": "cc_by_nc",
+    "published": "10.1093/bioinformatics/btag687",
+    "server": "bioRxiv",
+    "title": "Perseus: Lineage-Aware Refinement of Kraken2 Taxonomic Classification for Long Read Metagenomes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-08",
+  "published_doi": "10.1093/bioinformatics/btag687",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Perseus adds a multi-headed CNN confidence layer to Kraken2 to back off or abstain on long-read and contig taxonomic assignments, reducing false positives.",
+  "title": "Perseus: Lineage-Aware Refinement of Kraken2 Taxonomic Classification for Long Read Metagenomes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.06.710148"
+}

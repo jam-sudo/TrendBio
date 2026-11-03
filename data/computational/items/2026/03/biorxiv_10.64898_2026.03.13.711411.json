@@ -1,0 +1,47 @@
+{
+  "abstract": "SignificanceFluorescence-based Ca2+-imaging is a powerful tool for studying localized neuronal activity, including miniature Synaptic Calcium Transients, providing real-time insights into synaptic activity. These transients induce only subtle changes in the fluorescence signal, often barely above baseline, which poses a significant challenge for automated synaptic transient detection and segmentation.\n\nAimDetecting astronomical transients similarly requires efficient algorithms that will remain robust over a large field of view with varying noise properties. We leverage techniques used in astronomical transient detection for miniature Synaptic Calcium Transient detection in fluorescence microscopy.\n\nApproachWe present Astro-BEATS, an automatic miniature Synaptic Calcium Transient segmentation algorithm that incorporates image estimation and source-finding techniques used in astronomy and designed for Ca2+-imaging videos. Astro-BEATS uses the Rolling Hough Transform filament detector to construct an estimate of the expected (transient-free) fluorescence signal of both the dendritic foreground and the background. Subtracting this baseline signal yields difference images displaying transient signals. We use Density-Based Spatial Clustering of Applications with Noise to find sources clustered in spatial and temporal space.\n\nResultsAstro-BEATS outperforms current threshold-based approaches for synaptic Ca2+ transient detection and segmentation. The produced segmentation masks can be used to train a supervised deep learning algorithm for improved synaptic Ca2+ transient detection in Ca2+-imaging data. The speed of Astro-BEATS and its applicability to previously unseen datasets without re-optimization makes it particularly useful for generating training datasets for deep learning-based approaches.\n\nConclusionAstro-BEATS greatly reduces the time needed for the annotation of synaptic Ca2+ transient and removes the significant overhead of human expert annotation, enabling consistent analysis of new Ca2+-imaging datasets.",
+  "authors": [
+    "Fan, B.",
+    "Bilodeau, A.",
+    "Beaupre, F.",
+    "Wiesner, T.",
+    "Gagne, C.",
+    "Lavoie-Cardinal, F.",
+    "Hlozek, R."
+  ],
+  "doi": "10.64898/2026.03.13.711411",
+  "first_seen": "2026-03-17",
+  "id": "biorxiv:10.64898/2026.03.13.711411",
+  "metadata": {
+    "abstract": "SignificanceFluorescence-based Ca2+-imaging is a powerful tool for studying localized neuronal activity, including miniature Synaptic Calcium Transients, providing real-time insights into synaptic activity. These transients induce only subtle changes in the fluorescence signal, often barely above baseline, which poses a significant challenge for automated synaptic transient detection and segmentation.\n\nAimDetecting astronomical transients similarly requires efficient algorithms that will remain robust over a large field of view with varying noise properties. We leverage techniques used in astronomical transient detection for miniature Synaptic Calcium Transient detection in fluorescence microscopy.\n\nApproachWe present Astro-BEATS, an automatic miniature Synaptic Calcium Transient segmentation algorithm that incorporates image estimation and source-finding techniques used in astronomy and designed for Ca2+-imaging videos. Astro-BEATS uses the Rolling Hough Transform filament detector to construct an estimate of the expected (transient-free) fluorescence signal of both the dendritic foreground and the background. Subtracting this baseline signal yields difference images displaying transient signals. We use Density-Based Spatial Clustering of Applications with Noise to find sources clustered in spatial and temporal space.\n\nResultsAstro-BEATS outperforms current threshold-based approaches for synaptic Ca2+ transient detection and segmentation. The produced segmentation masks can be used to train a supervised deep learning algorithm for improved synaptic Ca2+ transient detection in Ca2+-imaging data. The speed of Astro-BEATS and its applicability to previously unseen datasets without re-optimization makes it particularly useful for generating training datasets for deep learning-based approaches.\n\nConclusionAstro-BEATS greatly reduces the time needed for the annotation of synaptic Ca2+ transient and removes the significant overhead of human expert annotation, enabling consistent analysis of new Ca2+-imaging datasets.",
+    "author_corresponding": "Renée Hložek",
+    "author_corresponding_institution": "Dunlap Institute for Astronomy and Astrophysics",
+    "authors": "Fan, B.; Bilodeau, A.; Beaupre, F.; Wiesner, T.; Gagne, C.; Lavoie-Cardinal, F.; Hlozek, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-17",
+    "doi": "10.64898/2026.03.13.711411",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/17/2026.03.13.711411.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Calcium transient detection and segmentation with the astronomically motivated algorithm for background estimation and transient segmentation (Astro-BEATS)",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Dunlap Institute for Astronomy and Astrophysics",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-03-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Astro-BEATS adapts astronomical transient detection (Rolling Hough Transform background estimation plus DBSCAN source finding) to segment miniature synaptic…",
+  "title": "Calcium transient detection and segmentation with the astronomically motivated algorithm for background estimation and transient segmentation (Astro-BEATS)",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.13.711411"
+}
