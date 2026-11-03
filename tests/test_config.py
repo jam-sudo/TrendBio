@@ -44,10 +44,17 @@ def test_scoring_defaults():
         "min_cluster_size": 3,
         "continuity_threshold": 0.80,
         "window_days": 7,
-        "top_n": 20,
-        "max_per_category": 5,
+        "top_n": 40,
+        "max_per_category": 8,
         "category_floor": 1,
         "featured_n": 5,
+        "display_open_n": 20,
+        "synthesis_tiers": [
+            {"to": 5, "model": "claude-opus-5-5"},
+            {"to": 20, "model": "claude-sonnet-5-5"},
+            {"to": 40, "model": "claude-haiku-5-5"},
+        ],
+        "backfill_synthesis_model": "claude-haiku-5-5",
         "synthesis_max_items": 40,
         "monthly_ceiling_usd": 50.0,
         "degraded_fallback_min": 3,
@@ -56,3 +63,14 @@ def test_scoring_defaults():
     }
     assert load_scoring().model_dump() == expected
     assert Scoring(weights=expected["weights"]).model_dump() == expected
+
+
+def test_scoring_rejects_invalid_tiers_and_display():
+    import pytest
+    from pydantic import ValidationError
+
+    for values in ({'synthesis_tiers': []}, {'synthesis_tiers': [{'to': 20, 'model': 'x'}]},
+                   {'synthesis_tiers': [{'to': 40, 'model': 'x'}, {'to': 5, 'model': 'x'}]},
+                   {'display_open_n': 4}):
+        with pytest.raises(ValidationError):
+            Scoring(weights={}, **values)

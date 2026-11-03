@@ -8,18 +8,19 @@ const readPage = (path: string) => readFileSync(`dist/${path}`, "utf8");
 const cards = (html: string) => [...html.matchAll(/<a\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map(([card]) => card);
 
 describe("built landing, day and archive pages", () => {
-  it("links twenty leaderboard rows and gives rank one a larger summary", () => {
+  it("links forty leaderboard rows with twenty open and gives rank one a larger summary", () => {
     const html = readPage("index.html");
     const rendered = cards(html);
     const day = latestDay("computational")!;
-    expect(rendered).toHaveLength(20);
-    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(20);
+    expect(rendered).toHaveLength(40);
+    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(40);
     expect(rendered[0]).toMatch(/class="[^"]*\bfeatured\b/);
     expect(html).toContain('class="topic-list"');
     expect(rendered.slice(0, 5).every((row) => row.includes('topic-card'))).toBe(true);
     const details = html.match(/<details\b[^>]*data-more-topics[^>]*>[\s\S]*?<\/details>/)![0];
-    expect(details).toContain('Show 15 more');
-    expect(cards(details)).toHaveLength(15);
+    expect(details).toContain('Show 20 more');
+    expect(cards(details)).toHaveLength(20);
+    expect(cards(html.replace(details, ""))).toHaveLength(20);
     expect(details).not.toMatch(/<details[^>]*\bopen\b/);
     day.ranked.forEach((topic, index) => {
       expect(rendered[index]).toContain(`href="/topic/${topic.slug}/"`);

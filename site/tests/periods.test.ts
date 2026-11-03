@@ -39,20 +39,20 @@ describe("period boundaries and selection", () => {
     expect(rankPeriod(topics, "2020-01-01", "2020-01-07", taxonomy)).toEqual([]);
   });
 
-  it("reserves each category, caps at five, takes twenty and uses stable tie breaks", () => {
+  it("reserves each category, caps at eight, takes forty and uses stable tie breaks", () => {
     const base = topics[0], entry = base.history[0];
-    const candidates = Array.from({ length: 40 }, (_, i) => ({ ...base, slug: `topic-${String(i).padStart(2, "0")}`,
-      category: `category-${Math.floor(i / 8)}`, history: [{ ...entry, date: "2026-10-26", rank: null,
+    const candidates = Array.from({ length: 60 }, (_, i) => ({ ...base, slug: `topic-${String(i).padStart(2, "0")}`,
+      category: `category-${Math.floor(i / 12)}`, history: [{ ...entry, date: "2026-10-26", rank: null,
         scores: { ...entry.scores, total: 100 - i }, item_ids: ["shared"] }],
     }));
     const ranked = rankPeriod(candidates, "2026-10-26", "2026-11-01", taxonomy);
-    expect(ranked).toHaveLength(20);
+    expect(ranked).toHaveLength(40);
     for (let category = 0; category < 5; category++) {
       const count = ranked.filter((topic) => topic.category === `category-${category}`).length;
       expect(count).toBeGreaterThanOrEqual(1);
-      expect(count).toBeLessThanOrEqual(5);
+      expect(count).toBeLessThanOrEqual(8);
     }
-    expect(ranked.map(({ rank }) => rank)).toEqual(Array.from({ length: 20 }, (_, i) => i + 1));
+    expect(ranked.map(({ rank }) => rank)).toEqual(Array.from({ length: 40 }, (_, i) => i + 1));
     const tied = candidates.slice(0, 4).map((topic, i) => ({ ...topic, history: [{ ...topic.history[0],
       rank: i === 0 ? null : 2, scores: { ...entry.scores, total: 10 }, item_ids: i > 1 ? ["a", "b"] : ["a"],
     }] }));
@@ -91,9 +91,12 @@ describe("built period pages", () => {
     expect(html).toMatch(new RegExp(`href="/${path.startsWith("week") ? "week/2026-W44" : "month/2026-11"}/" aria-current="page"`));
     const rows = html.match(/\bdata-topic-cats="/g) ?? [];
     expect(rows.length).toBeGreaterThan(5);
-    expect(rows.length).toBeLessThanOrEqual(20);
+    expect(rows.length).toBeLessThanOrEqual(40);
     const details = html.match(/<details\b[^>]*data-more-topics[^>]*>[\s\S]*?<\/details>/)![0];
-    expect(details.match(/\bdata-topic-cats="/g)).toHaveLength(rows.length - 5);
+    expect(details.match(/\bdata-topic-cats="/g)).toHaveLength(rows.length - 20);
+    expect(html.replace(details, "").match(/\bdata-topic-cats="/g)).toHaveLength(20);
+    expect(details).toContain(`Show ${rows.length - 20} more`);
+    if (path.startsWith("week")) expect(rows).toHaveLength(40);
     for (const label of ["days ranked", "best rank", "items", "Rise"]) expect(details).toContain(label);
     for (const [, slug] of html.matchAll(/href="\/topic\/([^/]+)\/"/g)) expect(() => page(`topic/${slug}`)).not.toThrow();
     expect(html).toContain("data-category-chips");

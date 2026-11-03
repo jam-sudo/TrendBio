@@ -11,19 +11,30 @@ from pipeline.score import Scores, Signals
 logger = logging.getLogger(__name__)
 
 
+def tier_model(rank: int, cfg: Scoring, backfill: bool, over_ceiling: bool) -> str:
+    if over_ceiling:
+        return 'claude-haiku-5-5'
+    if backfill:
+        return cfg.backfill_synthesis_model
+    return next(tier.model for tier in cfg.synthesis_tiers if tier.to >= rank)
+
+
 def synthesize_top(
     ranked: list[tuple[Topic, Signals, Scores]], items_by_topic: dict[str, list[Item]],
     llm: LLM, budget: Budget, cfg: Scoring, today: date, *, backfill: bool,
     model: str | None = None, skip_slugs: set[str] | None = None,
 ) -> tuple[list[Topic], str, list[str]]:
-    if model is None:
-        model = 'claude-haiku-5-5' if backfill or budget.over_ceiling() else 'claude-opus-5-5'
+    over_ceiling = budget.over_ceiling()
+    override = model if not over_ceiling else None
+    model = override or tier_model(1, cfg, backfill, over_ceiling)
     topics, notes = [], []
     for position, (topic, signals, _) in enumerate(ranked, 1):
         if skip_slugs and topic.slug in skip_slugs:
             topics.append(topic)
             continue
-        topic_model = model if position <= cfg.featured_n else 'claude-haiku-5-5'
+        topic_model = tier_model(position, cfg, backfill, over_ceiling)
+        if override:
+            topic_model = override if position <= cfg.featured_n else 'claude-haiku-5-5'
         previous = topic.synthesis if any(day.rank is not None and day.date < today
                                           for day in topic.history) else None
         items = items_by_topic[topic.slug]

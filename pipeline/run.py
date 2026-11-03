@@ -31,7 +31,7 @@ from pipeline.sources.base import load_config
 from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
 from pipeline.store import Store
-from pipeline.synthesize import synthesize_top
+from pipeline.synthesize import synthesize_top, tier_model
 from pipeline.wipe import reset_derived, validate_month_range
 
 
@@ -301,7 +301,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                       and previous.run.backfilled == backfill}
             if only_missing_synthesis:
                 cached = {topic.slug for topic, _, _ in ranked if topic.headline}
-        with _stage('synthesize', model='claude-haiku-5-5' if backfill or deps.budget.over_ceiling() else 'claude-opus-5-5') as counts:
+        with _stage('synthesize', model=tier_model(1, deps.cfg, backfill, deps.budget.over_ceiling())) as counts:
             _, model, synthesis_notes = synthesize_top(
                 ranked, items_by_topic,
                 deps.llm, deps.budget, deps.cfg, day, backfill=backfill, skip_slugs=cached,
@@ -311,8 +311,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 notes.extend(note for note in previous.run.notes if (
                     note.startswith('enrichment-fallback:') and note.split(':', 1)[1] in window_item_ids
                     or note.startswith('synthesis-fallback:') and note.split(':', 1)[1] in cached))
-                if ranked and all(topic.slug in cached for topic, _, _ in ranked[:deps.cfg.featured_n]):
-                    model = previous.run.synthesis_model
+                if ranked and ranked[0][0].slug in cached:
+                    model = ranked[0][0].synthesis_model or previous.run.synthesis_model
             counts['model'] = model
         with _stage('write'):
             ranks = {topic.slug: index for index, (topic, _, _) in enumerate(ranked, 1)}

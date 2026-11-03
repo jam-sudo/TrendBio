@@ -186,14 +186,15 @@ def test_rank_floor_includes_each_category_once(topic, sig, cfg):
     assert [row[0].slug for row in rank(scored, cfg)] == ['00', '25', '26']
 
 
-def test_rank_floor_then_fill_respects_cap(topic, sig, cfg):
+def test_rank_returns_up_to_40_with_floor_and_cap(topic, sig, cfg):
     from collections import Counter
 
-    categories = ['ml-ai'] * 12 + ['genomics'] * 12 + ['structural'] * 12 + ['single-cell'] * 12 + ['industry']
+    categories = ['ml-ai'] * 12 + ['genomics'] * 12 + ['structural'] * 12 + ['single-cell'] * 12 + ['tools-infra'] * 12 + ['industry']
     scored = score_topics([(topic.model_copy(update={'slug': f'{i:02}', 'category': category}), sig, 100 - i)
                            for i, category in enumerate(categories)], set(), cfg, TODAY)
     ranked = rank(scored, cfg)
     counts = Counter(row[0].category for row in ranked)
-    assert len(ranked) == 20
-    assert counts == {'ml-ai': 5, 'genomics': 5, 'structural': 5, 'single-cell': 4, 'industry': 1}
+    assert len(ranked) == 40
+    assert counts == {'ml-ai': 8, 'genomics': 8, 'structural': 8, 'single-cell': 8, 'tools-infra': 7, 'industry': 1}
     assert ranked[-1][0].category == 'industry'
+    assert len(rank(scored[:12], cfg)) == 8

@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Literal
 
 import yaml
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class Category(BaseModel):
@@ -19,6 +19,11 @@ class Taxonomy(BaseModel):
         return [category.slug for category in self.categories]
 
 
+class Tier(BaseModel):
+    to: int = Field(ge=1)
+    model: str = Field(min_length=1)
+
+
 class Scoring(BaseModel):
     weights: dict[str, float]
     yesterday_penalty: float = 0.05
@@ -30,15 +35,31 @@ class Scoring(BaseModel):
     min_cluster_size: int = 3
     continuity_threshold: float = 0.80
     window_days: int = 7
-    top_n: int = Field(default=20, ge=0)
-    max_per_category: int = Field(default=5, ge=1)
+    top_n: int = Field(default=40, ge=0)
+    max_per_category: int = Field(default=8, ge=1)
     category_floor: int = Field(default=1, ge=0)
     featured_n: int = Field(default=5, ge=0)
+    display_open_n: int = Field(default=20, ge=0)
+    synthesis_tiers: list[Tier] = [
+        Tier(to=5, model='claude-opus-5-5'),
+        Tier(to=20, model='claude-sonnet-5-5'),
+        Tier(to=40, model='claude-haiku-5-5'),
+    ]
+    backfill_synthesis_model: str = Field(default='claude-haiku-5-5', min_length=1)
     synthesis_max_items: int = Field(default=40, ge=1)
     monthly_ceiling_usd: float = 50.0
     degraded_fallback_min: int = 3
     degraded_fallback_rate: float = 0.2
     star_gain_threshold: int = 100
+
+    @model_validator(mode='after')
+    def validate_tiers(self):
+        bounds = [tier.to for tier in self.synthesis_tiers]
+        if not bounds or bounds != sorted(set(bounds)) or bounds[-1] < self.top_n:
+            raise ValueError('synthesis tiers must increase and cover top_n')
+        if self.display_open_n < self.featured_n:
+            raise ValueError('display_open_n must include featured_n')
+        return self
 
 
 def load_taxonomy(domain: str, root: Path = Path("config")) -> Taxonomy:

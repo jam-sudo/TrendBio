@@ -42,6 +42,26 @@ def build(root: Path) -> None:
         ("enzyme-design-0018", "Enzyme design", 6, "Enzyme design benchmarks compare functional predictions"),
         ("network-dynamics-0019", "Network dynamics", 7, "Network models compare dynamic pathway responses"),
         ("workflow-validation-0020", "Workflow validation", 9, "Workflow validation tools simplify reproducibility checks"),
+        ('long-read-assembly-0021', 'Long read assembly', 0, 'Long read assembly extend reproducible comparisons'),
+        ('rna-structure-0022', 'RNA structure prediction', 1, 'RNA structure prediction extend reproducible comparisons'),
+        ('peptide-search-0023', 'Peptide search', 2, 'Peptide search extend reproducible comparisons'),
+        ('lipidomics-atlases-0024', 'Lipidomics atlases', 3, 'Lipidomics atlases extend reproducible comparisons'),
+        ('enhancer-prediction-0025', 'Enhancer prediction', 4, 'Enhancer prediction extend reproducible comparisons'),
+        ('cell-lineage-0026', 'Cell lineage tracing', 5, 'Cell lineage tracing extend reproducible comparisons'),
+        ('antibody-design-0027', 'Antibody design', 6, 'Antibody design extend reproducible comparisons'),
+        ('signaling-networks-0028', 'Signaling networks', 7, 'Signaling networks extend reproducible comparisons'),
+        ('multimodal-models-0029', 'Multimodal biology models', 8, 'Multimodal biology models extend reproducible comparisons'),
+        ('workflow-provenance-0030', 'Workflow provenance', 9, 'Workflow provenance extend reproducible comparisons'),
+        ('research-automation-0031', 'Research automation platforms', 10, 'Research automation platforms extend reproducible comparisons'),
+        ('genome-imputation-0032', 'Genome imputation', 0, 'Genome imputation extend reproducible comparisons'),
+        ('isoform-quantification-0033', 'Isoform quantification', 1, 'Isoform quantification extend reproducible comparisons'),
+        ('protein-localization-0034', 'Protein localization', 2, 'Protein localization extend reproducible comparisons'),
+        ('metabolic-pathways-0035', 'Metabolic pathway inference', 3, 'Metabolic pathway inference extend reproducible comparisons'),
+        ('regulatory-elements-0036', 'Regulatory element maps', 4, 'Regulatory element maps extend reproducible comparisons'),
+        ('cell-type-annotation-0037', 'Cell type annotation', 5, 'Cell type annotation extend reproducible comparisons'),
+        ('protein-folding-0038', 'Protein folding models', 6, 'Protein folding models extend reproducible comparisons'),
+        ('disease-networks-0039', 'Disease network models', 7, 'Disease network models extend reproducible comparisons'),
+        ('benchmark-tools-0040', 'Benchmark tools', 9, 'Benchmark tools extend reproducible comparisons'),
     ]
     days = [date(2026, 10, 30) + timedelta(days=i) for i in range(3)]
     topics = []
@@ -130,13 +150,17 @@ def build(root: Path) -> None:
         elif topic_index < 15:
             pair = list(combinations(range(5), 2))[topic_index - 5]
             centroid = [float(1 / Decimal(2).sqrt()) if i in pair else 0.0 for i in range(5)]
-        else:
+        elif topic_index < 20:
             centroid = [-float(i == topic_index - 15) for i in range(5)]
+        else:
+            pair = list(combinations(range(5), 2))[(topic_index - 20) % 10]
+            centroid = [(-1 if topic_index < 30 or i == pair[1] else 1) * float(1 / Decimal(2).sqrt())
+                        if i in pair else 0.0 for i in range(5)]
         topics.append(Topic(
             slug=slug, label=label, category=category, secondary_categories=secondary,
             centroid=centroid, history=history,
             headline=headline, summary=f"Research, a toolkit, and a workflow announcement connect {label.lower()} to reproducible evaluation.",
-            synthesis=synthesis, synthesis_model="claude-opus-5-5" if topic_index < 5 else "claude-haiku-5-5", synthesized_on=days[-1],
+            synthesis=synthesis, synthesis_model="claude-opus-5-5" if topic_index < 5 else "claude-sonnet-5-5" if topic_index < 20 else "claude-haiku-5-5", synthesized_on=days[-1],
             item_one_liners={items[4].id: "Published evaluation with a linked preprint and shared analysis inputs."},
             related=[spec[0] for spec in specs if spec[0] != slug][:3],
         ))
