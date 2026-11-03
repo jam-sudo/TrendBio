@@ -1,0 +1,30 @@
+{
+  "abstract": "The comparison of short sequences to massive reference databases is a cornerstone of modern genomics, but it presents a significant scalability challenge. Traditional alignment tools rely on time- and memory-intensive pre-indexing of the reference, creating a substantial bottleneck for applications involving small query sets against terabase-scale data, such as CRISPR spacer analysis. Here we present IndelFreeAligner, a streaming, indel-free alignment tool that eliminates the preprocessing bottleneck. It operates in two modes: an indexed mode for larger query sets and a brute-force mode for maximum speed on small query sets. By processing reference sequences on-the-fly, IndelFreeAligner supports user-specified mismatch thresholds up to the full query length and maintains memory usage independent of total reference size. A novel MinHitsCalculator component uses Monte Carlo simulation to determine adaptive seed-hit thresholds for indexed mode. Benchmarks against Bowtie1 and BLAST+ demonstrate that IndelFreeAligner aligns a single query against a 4 Gbp reference in 1.7 seconds versus 17 minutes for Bowtie1 (including index construction at optimal thread count), a 607-fold speedup. Against RefSeq Bacteria (560 GB compressed), IndelFreeAligner completes a 10-query search in 12 minutes using 8 GB of RAM, while BLAST+ requires 3 hours and 17 minutes to build its database alone and 506 GB of RAM to query it. Indexed mode achieves 0% false negatives through 4 substitutions (99.84-99.90% mapped at 8-16); brute-force mode is exhaustive by design. IndelFreeAligner provides a scalable and efficient solution for alignment tasks that were previously computationally prohibitive. It is distributed open-source as part of BBTools (Bushnell, 2014).",
+  "authors": [
+    "Brian Bushnell"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-29",
+  "id": "arxiv:2607.27291",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.27291v1</ns0:id>\n    <ns0:title>IndelFreeAligner: A Streaming Aligner for Comprehensive Gapless Alignment Against Terabase-Scale References</ns0:title>\n    <ns0:updated>2026-07-29T15:01:52Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.27291v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.27291v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The comparison of short sequences to massive reference databases is a cornerstone of modern genomics, but it presents a significant scalability challenge. Traditional alignment tools rely on time- and memory-intensive pre-indexing of the reference, creating a substantial bottleneck for applications involving small query sets against terabase-scale data, such as CRISPR spacer analysis. Here we present IndelFreeAligner, a streaming, indel-free alignment tool that eliminates the preprocessing bottleneck. It operates in two modes: an indexed mode for larger query sets and a brute-force mode for maximum speed on small query sets. By processing reference sequences on-the-fly, IndelFreeAligner supports user-specified mismatch thresholds up to the full query length and maintains memory usage independent of total reference size. A novel MinHitsCalculator component uses Monte Carlo simulation to determine adaptive seed-hit thresholds for indexed mode. Benchmarks against Bowtie1 and BLAST+ demonstrate that IndelFreeAligner aligns a single query against a 4 Gbp reference in 1.7 seconds versus 17 minutes for Bowtie1 (including index construction at optimal thread count), a 607-fold speedup. Against RefSeq Bacteria (560 GB compressed), IndelFreeAligner completes a 10-query search in 12 minutes using 8 GB of RAM, while BLAST+ requires 3 hours and 17 minutes to build its database alone and 506 GB of RAM to query it. Indexed mode achieves 0% false negatives through 4 substitutions (99.84-99.90% mapped at 8-16); brute-force mode is exhaustive by design. IndelFreeAligner provides a scalable and efficient solution for alignment tasks that were previously computationally prohibitive. It is distributed open-source as part of BBTools (Bushnell, 2014).</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-29T15:01:52Z</ns0:published>\n    <ns1:comment>9 pages, 2 figures, 7 tables</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Brian Bushnell</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "IndelFreeAligner is a streaming, indel-free sequence aligner that avoids reference pre-indexing, benchmarked against Bowtie1 and BLAST+ on terabase-scale…",
+  "title": "IndelFreeAligner: A Streaming Aligner for Comprehensive Gapless Alignment Against Terabase-Scale References",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.27291v1"
+}

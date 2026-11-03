@@ -1,0 +1,33 @@
+{
+  "abstract": "Medication recommendation from electronic health records must balance predictive accuracy against the risk of adverse drug-drug interactions (DDIs) under polypharmacy. Existing safety-aware recommenders operate at one of two granularities: the drug code, which treats each medication as an indivisible token, or the molecular substructure, which is finer than pharmacological interaction knowledge is actually organized. We argue that the active ingredient is the missing granularity, and introduce GRAIN, a medication recommendation framework built around it.\n  GRAIN encodes longitudinal patient trajectories (diagnoses, procedures, past medications) with a selective state space backbone that handles long, irregular visit sequences in linear time. On top of it we introduce a joint objective unifying three knowledge sources aligned to a common medication vocabulary: a drug-level DDI graph, an ingredient-level DDI graph obtained by normalizing medication codes to active ingredients via RxNorm, and an EHR-derived co-prescription graph. A proportional controller adapts the accuracy-safety trade-off to the observed validation DDI rate rather than fixing it a priori.\n  Under strictly matched settings -- identical preprocessing, cohort, vocabulary, split, and evaluation code -- GRAIN improves over a re-implemented MambaHealth baseline on MIMIC-IV across all standard multi-label metrics (Jaccard 0.4488 to 0.4983, PRAUC 0.6911 to 0.7485, F1 0.5989 to 0.6453) while reducing the drug-level DDI rate from 0.1875 to 0.0948. We further define an ingredient-level DDI rate, a safety measure invisible to drug-code-level evaluation. The results indicate that ingredient-level normalization recovers predictive signal erased by code-level aggregation, and that it is complementary to, rather than in competition with, accurate sequence modeling.",
+  "authors": [
+    "Juao Fan",
+    "Jinhan Li",
+    "Shengxin Zhu"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-30",
+  "id": "arxiv:2608.00098",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.00098v1</ns0:id>\n    <ns0:title>GRAIN: Molecules Are Not the Right Granularity -- Active-Ingredient Modeling for Safe Medication Recommendation</ns0:title>\n    <ns0:updated>2026-07-30T18:13:30Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.00098v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.00098v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Medication recommendation from electronic health records must balance predictive accuracy against the risk of adverse drug-drug interactions (DDIs) under polypharmacy. Existing safety-aware recommenders operate at one of two granularities: the drug code, which treats each medication as an indivisible token, or the molecular substructure, which is finer than pharmacological interaction knowledge is actually organized. We argue that the active ingredient is the missing granularity, and introduce GRAIN, a medication recommendation framework built around it.\n  GRAIN encodes longitudinal patient trajectories (diagnoses, procedures, past medications) with a selective state space backbone that handles long, irregular visit sequences in linear time. On top of it we introduce a joint objective unifying three knowledge sources aligned to a common medication vocabulary: a drug-level DDI graph, an ingredient-level DDI graph obtained by normalizing medication codes to active ingredients via RxNorm, and an EHR-derived co-prescription graph. A proportional controller adapts the accuracy-safety trade-off to the observed validation DDI rate rather than fixing it a priori.\n  Under strictly matched settings -- identical preprocessing, cohort, vocabulary, split, and evaluation code -- GRAIN improves over a re-implemented MambaHealth baseline on MIMIC-IV across all standard multi-label metrics (Jaccard 0.4488 to 0.4983, PRAUC 0.6911 to 0.7485, F1 0.5989 to 0.6453) while reducing the drug-level DDI rate from 0.1875 to 0.0948. We further define an ingredient-level DDI rate, a safety measure invisible to drug-code-level evaluation. The results indicate that ingredient-level normalization recovers predictive signal erased by code-level aggregation, and that it is complementary to, rather than in competition with, accurate sequence modeling.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-30T18:13:30Z</ns0:published>\n    <ns1:comment>19 pages, 4 figures, 3 tables. Code available at [URL]</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Juao Fan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jinhan Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shengxin Zhu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "GRAIN models medications as active ingredients with a state-space model, improving MIMIC-IV recommendation accuracy and cutting drug-level DDI rate.",
+  "title": "GRAIN: Molecules Are Not the Right Granularity -- Active-Ingredient Modeling for Safe Medication Recommendation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.00098v1"
+}

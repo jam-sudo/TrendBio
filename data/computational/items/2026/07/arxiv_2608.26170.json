@@ -1,0 +1,31 @@
+{
+  "abstract": "Transcriptomic foundation models are increasingly used as reusable cell and gene representations, but validating them on new data under weak supervision and distribution shift is hard: standard comparisons conflate genuine representation signal with model capacity, row-identity artifacts, gains over strong task-specific baselines, and outcome rules chosen after seeing the test set. We introduce a pre-registered, final-test-once evaluation framework that locks the outcome rule, seeds, and target-gene-grouped splits before any test data are seen, and scores each frozen representation against a strong expression baseline, a matched-capacity Gaussian control, and a within-split row-identity (shuffle) control; only the per-cell embedding-extraction step is model-specific. Applying it to three architecturally distinct models-Geneformer, scGPT, and UCE-across two external Replogle Perturb-seq datasets (RPE1 and K562), all three clear the capacity and row-identity controls by a wide margin, yet none reliably beats the expression baseline: the strongest (Geneformer) exceeds it by at most about $0.03$ test $R^2$ and clears the pre-registered four-of-five-seed threshold in neither dataset, while scGPT and UCE fall below it. All three therefore land in the same pre-registered partial-replication category-a consistent cross-architecture outcome, even though the baseline-relative gap differs in sign and magnitude across models. These representations carry real structure beyond trivial controls but, under this weak magnitude label, do not transfer past a simple strong baseline; the locked framework is reusable for any frozen transcriptomic representation by swapping only the extraction step.",
+  "authors": [
+    "Mehrdad Shoeibi",
+    "Niloofar Yousefi"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-21",
+  "id": "arxiv:2608.26170",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.OT",
+    "categories": [
+      "q-bio.OT"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.26170v1</ns0:id>\n    <ns0:title>Pre-Registered External Evaluation Yields a Consistent Partial-Replication Category across Three Transcriptomic Foundation Models</ns0:title>\n    <ns0:updated>2026-07-21T20:12:11Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.26170v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.26170v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Transcriptomic foundation models are increasingly used as reusable cell and gene representations, but validating them on new data under weak supervision and distribution shift is hard: standard comparisons conflate genuine representation signal with model capacity, row-identity artifacts, gains over strong task-specific baselines, and outcome rules chosen after seeing the test set. We introduce a pre-registered, final-test-once evaluation framework that locks the outcome rule, seeds, and target-gene-grouped splits before any test data are seen, and scores each frozen representation against a strong expression baseline, a matched-capacity Gaussian control, and a within-split row-identity (shuffle) control; only the per-cell embedding-extraction step is model-specific. Applying it to three architecturally distinct models-Geneformer, scGPT, and UCE-across two external Replogle Perturb-seq datasets (RPE1 and K562), all three clear the capacity and row-identity controls by a wide margin, yet none reliably beats the expression baseline: the strongest (Geneformer) exceeds it by at most about $0.03$ test $R^2$ and clears the pre-registered four-of-five-seed threshold in neither dataset, while scGPT and UCE fall below it. All three therefore land in the same pre-registered partial-replication category-a consistent cross-architecture outcome, even though the baseline-relative gap differs in sign and magnitude across models. These representations carry real structure beyond trivial controls but, under this weak magnitude label, do not transfer past a simple strong baseline; the locked framework is reusable for any frozen transcriptomic representation by swapping only the extraction step.</ns0:summary>\n    <ns0:category term=\"q-bio.OT\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-21T20:12:11Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.OT\" />\n    <ns0:author>\n      <ns0:name>Mehrdad Shoeibi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Niloofar Yousefi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "arxiv",
+  "summary": "Pre-registered external evaluation of Geneformer, scGPT, and UCE on Replogle Perturb-seq (RPE1, K562): all beat controls but none reliably beats a strong…",
+  "title": "Pre-Registered External Evaluation Yields a Consistent Partial-Replication Category across Three Transcriptomic Foundation Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.26170v1"
+}

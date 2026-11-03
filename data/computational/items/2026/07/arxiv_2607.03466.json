@@ -1,0 +1,33 @@
+{
+  "abstract": "This study aims to predict Tumor, Node, and Metastasis (TNM) stage labels independently, with the Cancer Genome Atlas (TCGA) pathology report as the sixth shared task of SMM4H-HeaRD 2026. The problem is framed as three multi-label classification tasks. We explore both classical and deep learning approaches using Term Frequency-Inverse Document Frequency (TF-IDF) features and embeddings from ClinicalBERT, BioBERT, and PubMedBERT. These representations are used with Logistic Regression (LR), Light Gradient Boosting Machine (LightGBM), Feed-Forward Neural Networks (FFNN), and Wide Residual Networks (WRN). Our results show that individual embeddings perform similarly to the TNM label classification, while their combination improves its predictive ability. WRN achieves AUROC scores of 0.839 (T), 0.8502 (N), and 0.803 (M) with F1-scores of 0.622, 0.702, and 0.9337, respectively, for the training phase. LightGBM with TF-IDF performs best with AUROC scores of 0.9368 (T), 0.9524 (N), and 0.8311 (M) and F1-scores of 0.7559 (T), 0.7384 (N), and 0.7017 (M) during the training phase. Furthermore, the result of the Codabench for the test sets indicates a Macro-F1 score of 0.978, 0.957, and 0.879 for the T, N, and M categories respectively for test set 1; while test set 2 records a Macro-F1 score for T, N, and M is 0.807, 0.767, 1.0 respectively. However, performance declined during the evaluation phase of the test sets, a drop from 0.938 to 0.858 of test set 1 to 2, for the Macro-F1 score across all stages; suggesting limitations in model generalizability, sensitivity to class imbalance, and challenges in processing lengthy clinical documents. Although this study provides an efficient baseline model and a reproducible pipeline, further optimization and validation are required before it can be considered suitable for use in a real-world clinical setting.",
+  "authors": [
+    "Joseph Itopa Abubakar",
+    "Jorge Jarme",
+    "Favour Igwezeke",
+    "Mary Adewunmi"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-03",
+  "id": "arxiv:2607.03466",
+  "metadata": {
+    "arxiv_primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.03466v1</ns0:id>\n    <ns0:title>CaresAI at SMM4H-HeaRD 2026: Predicting TNM Staging</ns0:title>\n    <ns0:updated>2026-07-03T16:25:35Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.03466v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.03466v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>This study aims to predict Tumor, Node, and Metastasis (TNM) stage labels independently, with the Cancer Genome Atlas (TCGA) pathology report as the sixth shared task of SMM4H-HeaRD 2026. The problem is framed as three multi-label classification tasks. We explore both classical and deep learning approaches using Term Frequency-Inverse Document Frequency (TF-IDF) features and embeddings from ClinicalBERT, BioBERT, and PubMedBERT. These representations are used with Logistic Regression (LR), Light Gradient Boosting Machine (LightGBM), Feed-Forward Neural Networks (FFNN), and Wide Residual Networks (WRN). Our results show that individual embeddings perform similarly to the TNM label classification, while their combination improves its predictive ability. WRN achieves AUROC scores of 0.839 (T), 0.8502 (N), and 0.803 (M) with F1-scores of 0.622, 0.702, and 0.9337, respectively, for the training phase. LightGBM with TF-IDF performs best with AUROC scores of 0.9368 (T), 0.9524 (N), and 0.8311 (M) and F1-scores of 0.7559 (T), 0.7384 (N), and 0.7017 (M) during the training phase. Furthermore, the result of the Codabench for the test sets indicates a Macro-F1 score of 0.978, 0.957, and 0.879 for the T, N, and M categories respectively for test set 1; while test set 2 records a Macro-F1 score for T, N, and M is 0.807, 0.767, 1.0 respectively. However, performance declined during the evaluation phase of the test sets, a drop from 0.938 to 0.858 of test set 1 to 2, for the Macro-F1 score across all stages; suggesting limitations in model generalizability, sensitivity to class imbalance, and challenges in processing lengthy clinical documents. Although this study provides an efficient baseline model and a reproducible pipeline, further optimization and validation are required before it can be considered suitable for use in a real-world clinical setting.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-03T16:25:35Z</ns0:published>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns1:journal_ref>Association for Computational Linguistics 2026</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Joseph Itopa Abubakar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jorge Jarme</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Favour Igwezeke</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mary Adewunmi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Compares TF-IDF and biomedical BERT embeddings with LR, LightGBM, FFNN and WRN to predict TNM stage from TCGA pathology reports.",
+  "title": "CaresAI at SMM4H-HeaRD 2026: Predicting TNM Staging",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.03466v1"
+}

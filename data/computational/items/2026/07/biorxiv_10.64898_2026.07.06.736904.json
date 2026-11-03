@@ -1,0 +1,40 @@
+{
+  "abstract": "The rapid growth of biotechnology manufacturing for synthetic DNA and proteins has raised concerns that adversaries could exploit commercial synthesis pipelines to create biological weapons. Without effective safeguards, an attacker could seek regulated genetic sequences from synthesis providers; while synthetic DNA is not itself a pathogen or toxin, access to such sequences can lower barriers to downstream misuse, motivating robust order-time screening. To mitigate this risk, Biosecurity Screening Software (BSS) systems have been developed to flag potentially malicious synthesis orders. Here, we propose one of the first deterministic benchmarks for evaluating the robustness of Biosecurity Screening Software. Our framework enables systematic testing of BSS behaviors and potential on specific nucleic-acid sequences and on targeted regions of malicious genomes. Our framework allows for insights into what is being flagged as malicious in BSSs, leading to potential discussions if specific BSS is fit for a specific manufacturing pipeline. We additionally introduce a dataset of manipulated genomes derived from the HHS and USDA Select Agents and Toxins List. When evaluated on this dataset, SeqScreen flags 42% of the sequences as malicious, while Commec flags 10.2%. Across a range of manipulation strategies, we find that simple manipulations, such as padding sequences by adding a repeated nucleotides at 1.5 times the original length, perform nearly as well as more targeted methods, such as embedding malicious sequences within benign genomic context. Padding-based methods trail embedding-based methods by only 0.75 percentage points in average detection rate. Consistent with prior reports from BSS developers and studies, we observe a sharp drop in detection rate when input sequence length falls below a critical threshold, typically between 50 and 100 base pairs (bp). Under our threat model, this implies that an adversary can bypass most existing safeguards by splitting a target genome into fragments shorter than 50 bp. Fragment-level analysis further reveals that some toxin regions evade detection entirely by SeqScreen, while other malicious genomes remain detectable even when fragmented into 30-50 base-pair segments. We open-source this benchmark to support reproducible evaluation of BSS robustness and to inform the development of next-generation biosecurity screening tools (https://github.com/HenryCWong/DNAS-Bench). For ethical concerns we only open-source the framework while the data is available upon request.",
+  "authors": [
+    "Wong, H. C.",
+    "Kohno, T.",
+    "Nivala, J."
+  ],
+  "doi": "10.64898/2026.07.06.736904",
+  "first_seen": "2026-07-20",
+  "id": "biorxiv:10.64898/2026.07.06.736904",
+  "metadata": {
+    "abstract": "The rapid growth of biotechnology manufacturing for synthetic DNA and proteins has raised concerns that adversaries could exploit commercial synthesis pipelines to create biological weapons. Without effective safeguards, an attacker could seek regulated genetic sequences from synthesis providers; while synthetic DNA is not itself a pathogen or toxin, access to such sequences can lower barriers to downstream misuse, motivating robust order-time screening. To mitigate this risk, Biosecurity Screening Software (BSS) systems have been developed to flag potentially malicious synthesis orders. Here, we propose one of the first deterministic benchmarks for evaluating the robustness of Biosecurity Screening Software. Our framework enables systematic testing of BSS behaviors and potential on specific nucleic-acid sequences and on targeted regions of malicious genomes. Our framework allows for insights into what is being flagged as malicious in BSSs, leading to potential discussions if specific BSS is fit for a specific manufacturing pipeline. We additionally introduce a dataset of manipulated genomes derived from the HHS and USDA Select Agents and Toxins List. When evaluated on this dataset, SeqScreen flags 42% of the sequences as malicious, while Commec flags 10.2%. Across a range of manipulation strategies, we find that simple manipulations, such as padding sequences by adding a repeated nucleotides at 1.5 times the original length, perform nearly as well as more targeted methods, such as embedding malicious sequences within benign genomic context. Padding-based methods trail embedding-based methods by only 0.75 percentage points in average detection rate. Consistent with prior reports from BSS developers and studies, we observe a sharp drop in detection rate when input sequence length falls below a critical threshold, typically between 50 and 100 base pairs (bp). Under our threat model, this implies that an adversary can bypass most existing safeguards by splitting a target genome into fragments shorter than 50 bp. Fragment-level analysis further reveals that some toxin regions evade detection entirely by SeqScreen, while other malicious genomes remain detectable even when fragmented into 30-50 base-pair segments. We open-source this benchmark to support reproducible evaluation of BSS robustness and to inform the development of next-generation biosecurity screening tools (https://github.com/HenryCWong/DNAS-Bench). For ethical concerns we only open-source the framework while the data is available upon request.",
+    "author_corresponding": "Henry C Wong",
+    "author_corresponding_institution": "University of Washington",
+    "authors": "Wong, H. C.; Kohno, T.; Nivala, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-20",
+    "doi": "10.64898/2026.07.06.736904",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/20/2026.07.06.736904.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DNAS-Bench: Deterministic Nucleic Acid Screener Benchmarking",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Washington",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "The rapid growth of biotechnology manufacturing for synthetic DNA and proteins has raised concerns that adversaries could exploit commercial synthesis pipelines",
+  "title": "DNAS-Bench: Deterministic Nucleic Acid Screener Benchmarking",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.06.736904"
+}

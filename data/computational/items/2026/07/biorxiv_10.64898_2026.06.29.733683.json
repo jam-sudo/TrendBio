@@ -1,0 +1,41 @@
+{
+  "abstract": "Solvent accessible surface area (SASA) is widely used to describe protein stability, ligand binding, mutation effects, and protein-protein interfaces. As structural biology workloads expand to predicted-structure col-lections, trajectories, and large assemblies, SASA tools must combine reproducible calculation with high throughput, low memory use, and workflow-friendly input handling.\n\nWe present zsasa, a Zig-based SASA engine with command-line and Python interfaces. zsasa implements the established Shrake-Rupley and Lee-Richards algorithms, provides exact f64/f32 modes and an optional bitmask approximation, and supports batch and trajectory workflows, compressed structure inputs, and configurable atom classification including Chemical Component Dictionary (CCD)-based radii for non-standard components.\n\nIn matched Shrake-Rupley validation on 4,370 Escherichia coli AlphaFold Database structures, exact double-precision zsasa reproduced FreeSASA total SASA values to near numerical identity. In 10-thread batch benchmarks on the E. coli and 23,586-structure human AlphaFold collections, zsasa achieved a 2.94-fold speedup over a FreeSASA batch wrapper in exact f64 mode. In bitmask mode, zsasa reached up to a 9.70-fold speedup, using roughly 12.5% to 25% of the comparator peak memory. Trajectory benchmarks exceeded 1,000 frames/s at tens of megabytes of peak memory, and a 4.5-million-atom PDB stress-test file completed in less than 5 s. These results support zsasa as a practical tool for reproducible, low-memory generation of surface-derived structural features at large scale. zsasa is available under the MIT License at https://github.com/N283T/zsasa.",
+  "authors": [
+    "Nagae, T.",
+    "Tomii, K."
+  ],
+  "doi": "10.64898/2026.06.29.733683",
+  "first_seen": "2026-07-03",
+  "id": "biorxiv:10.64898/2026.06.29.733683",
+  "metadata": {
+    "abstract": "Solvent accessible surface area (SASA) is widely used to describe protein stability, ligand binding, mutation effects, and protein-protein interfaces. As structural biology workloads expand to predicted-structure col-lections, trajectories, and large assemblies, SASA tools must combine reproducible calculation with high throughput, low memory use, and workflow-friendly input handling.\n\nWe present zsasa, a Zig-based SASA engine with command-line and Python interfaces. zsasa implements the established Shrake-Rupley and Lee-Richards algorithms, provides exact f64/f32 modes and an optional bitmask approximation, and supports batch and trajectory workflows, compressed structure inputs, and configurable atom classification including Chemical Component Dictionary (CCD)-based radii for non-standard components.\n\nIn matched Shrake-Rupley validation on 4,370 Escherichia coli AlphaFold Database structures, exact double-precision zsasa reproduced FreeSASA total SASA values to near numerical identity. In 10-thread batch benchmarks on the E. coli and 23,586-structure human AlphaFold collections, zsasa achieved a 2.94-fold speedup over a FreeSASA batch wrapper in exact f64 mode. In bitmask mode, zsasa reached up to a 9.70-fold speedup, using roughly 12.5% to 25% of the comparator peak memory. Trajectory benchmarks exceeded 1,000 frames/s at tens of megabytes of peak memory, and a 4.5-million-atom PDB stress-test file completed in less than 5 s. These results support zsasa as a practical tool for reproducible, low-memory generation of surface-derived structural features at large scale. zsasa is available under the MIT License at https://github.com/N283T/zsasa.",
+    "author_corresponding": "Tsubasa Nagae",
+    "author_corresponding_institution": "Yokohama City University",
+    "authors": "Nagae, T.; Tomii, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-03",
+    "doi": "10.64898/2026.06.29.733683",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/03/2026.06.29.733683.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "zsasa: a Zig-based engine for high-throughput solvent accessible surface area at proteome scale",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Yokohama City University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "zsasa is a Zig-based SASA engine with CLI and Python interfaces, implementing Shrake-Rupley and Lee-Richards, validated against FreeSASA on AlphaFold…",
+  "title": "zsasa: a Zig-based engine for high-throughput solvent accessible surface area at proteome scale",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.29.733683"
+}

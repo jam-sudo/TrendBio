@@ -1,0 +1,42 @@
+{
+  "abstract": "Differential splicing workflows usually report a {Delta}PSI point estimate and a statistical score, but these outputs do not directly state whether the RNA-seq estimate is close enough to an orthogonal validation measurement. We developed BRAID as a post-processing calibration step for splicing analyses. BRAID estimates RNA-seq {Delta}PSI from rMATS inclusion and skipping counts, retains the upstream caller evidence, and adds a 95% interval whose width is calibrated from empirical RNA-seq-to-RT-PCR residuals using split conformal prediction. The packaged differential-splicing calibrator uses a residual half-width of q = 0.341, estimated from 162 RT-PCR-validated skipped-exon events. We evaluated BRAID on three RT-PCR validation datasets covering TRA2 knockdown, mouse cerebellum versus liver, and a prostate epithelial-to-mesenchymal comparison. On the pooled common set of 139 cassette-exon events, BRAID reached 0.971 RT-PCR coverage, whereas MAJIQ, betAS, and rMATS-derived intervals reached 0.518, 0.734, and 0.633, respectively. BRAID also had the lowest pooled interval score, 0.720, compared with 2.040 for MAJIQ, 1.414 for betAS, and 1.625 for rMATS. Applying the same residual calibration to other caller outputs brought MAJIQ, betAS, rMATS, and SUPPA2 {Delta}PSI estimates close to nominal RT-PCR coverage, indicating that the gain came from interval calibration rather than from a caller-specific point estimate. In a TRA2 positive-negative validation panel, using q as a hard rMATS effect-size cutoff reduced recall, whereas using q as an interval half-width improved RT-PCR coverage. Applied to a public DM1 skeletal-muscle rMATS table, BRAID reduced 967 large-effect significant events to 68 high-confidence interval-supported events and retained known DM1 and muscle-splicing signals. BRAID provides a practical calibrated reliability layer for RNA-seq splicing studies where downstream follow-up depends on the precision of reported {Delta}PSI estimates.",
+  "authors": [
+    "Park, J.",
+    "Kang, K."
+  ],
+  "doi": "10.64898/2026.07.02.736001",
+  "first_seen": "2026-07-07",
+  "id": "biorxiv:10.64898/2026.07.02.736001",
+  "metadata": {
+    "abstract": "Differential splicing workflows usually report a {Delta}PSI point estimate and a statistical score, but these outputs do not directly state whether the RNA-seq estimate is close enough to an orthogonal validation measurement. We developed BRAID as a post-processing calibration step for splicing analyses. BRAID estimates RNA-seq {Delta}PSI from rMATS inclusion and skipping counts, retains the upstream caller evidence, and adds a 95% interval whose width is calibrated from empirical RNA-seq-to-RT-PCR residuals using split conformal prediction. The packaged differential-splicing calibrator uses a residual half-width of q = 0.341, estimated from 162 RT-PCR-validated skipped-exon events. We evaluated BRAID on three RT-PCR validation datasets covering TRA2 knockdown, mouse cerebellum versus liver, and a prostate epithelial-to-mesenchymal comparison. On the pooled common set of 139 cassette-exon events, BRAID reached 0.971 RT-PCR coverage, whereas MAJIQ, betAS, and rMATS-derived intervals reached 0.518, 0.734, and 0.633, respectively. BRAID also had the lowest pooled interval score, 0.720, compared with 2.040 for MAJIQ, 1.414 for betAS, and 1.625 for rMATS. Applying the same residual calibration to other caller outputs brought MAJIQ, betAS, rMATS, and SUPPA2 {Delta}PSI estimates close to nominal RT-PCR coverage, indicating that the gain came from interval calibration rather than from a caller-specific point estimate. In a TRA2 positive-negative validation panel, using q as a hard rMATS effect-size cutoff reduced recall, whereas using q as an interval half-width improved RT-PCR coverage. Applied to a public DM1 skeletal-muscle rMATS table, BRAID reduced 967 large-effect significant events to 68 high-confidence interval-supported events and retained known DM1 and muscle-splicing signals. BRAID provides a practical calibrated reliability layer for RNA-seq splicing studies where downstream follow-up depends on the precision of reported {Delta}PSI estimates.",
+    "author_corresponding": "Keunsoo Kang",
+    "author_corresponding_institution": "Dankook University - Cheonan Campus",
+    "authors": "Park, J.; Kang, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-07",
+    "doi": "10.64898/2026.07.02.736001",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/07/2026.07.02.736001.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BRAID: RT-PCR-calibrated conformal intervals for splicing ΔPSI",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Dankook University - Cheonan Campus",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-07-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "BRAID calibrates RNA-seq splicing ΔPSI estimates with split conformal intervals from RT-PCR residuals, reaching 0.971 RT-PCR coverage on 139 cassette exons…",
+  "title": "BRAID: RT-PCR-calibrated conformal intervals for splicing ΔPSI",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.02.736001"
+}

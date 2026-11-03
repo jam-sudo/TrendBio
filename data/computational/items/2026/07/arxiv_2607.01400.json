@@ -1,0 +1,33 @@
+{
+  "abstract": "Deep multimodal brain-encoding models now predict fMRI responses to naturalistic video with high accuracy; whether their predicted neural signals also forecast behavioral engagement is unknown. We run TRIBE, the winning model of the 2025 Algonauts challenge (Llama-3.2 + V-JEPA 2 + Wav2Vec-BERT), on 48 YouTube videos and reduce its predicted cortical response to a per-second engagement curve, the global field power. Correlated against each video's \"most replayed\" heatmap, a proxy for re-watch, it shows no evidence of prediction: the pooled position-controlled partial correlation is +0.058 (95% CI [-0.04, 0.15]; t(47)=1.21, p=0.23), and not above simple loudness/motion baselines. The raw correlation is also near zero; the moderate values for music videos are an onset-replay artifact. The null holds across six cortical-network readouts, value/salience ROIs, and a permutation test; a supervised leave-one-video-out probe appears to reach r=0.47 but collapses to a temporal-shape artifact under a proper position control. Running the probe on TRIBE's input streams reveals at most a small, borderline visual-stream signal (matched vs. mismatched p=0.004-0.06) and none in audio, text, or the predicted cortex. The inter-subject-correlation readout, the closest prior positive result, is unavailable from the subject-averaged released model, so we fit our own per-subject encoders on the Algonauts fMRI (validated in-domain at r=0.15 and cross-domain, Friends-to-film, at r=0.10); the predicted ISC still does not track re-watch (r=-0.04, p=0.34). We bound rather than merely fail to reject the null: a Bayes factor gives moderate evidence for it (BF01=3.2), an equivalence test excludes effects above r=0.14, and the target's split-half reliability (0.82; ceiling r=0.9) rules out a noisy-label artifact. We release code, a video-ID manifest, and a heatmap-acquisition method robust to YouTube's SABR streaming.",
+  "authors": [
+    "Barada Sahu",
+    "Shivesh Pandey"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-01",
+  "id": "arxiv:2607.01400",
+  "metadata": {
+    "arxiv_primary_category": "cs.SE",
+    "categories": [
+      "cs.SE",
+      "cs.LG",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.01400v2</ns0:id>\n    <ns0:title>A global predicted-fMRI drive signal from TRIBE does not predict YouTube replay heatmaps</ns0:title>\n    <ns0:updated>2026-07-04T08:51:34Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.01400v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.01400v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Deep multimodal brain-encoding models now predict fMRI responses to naturalistic video with high accuracy; whether their predicted neural signals also forecast behavioral engagement is unknown. We run TRIBE, the winning model of the 2025 Algonauts challenge (Llama-3.2 + V-JEPA 2 + Wav2Vec-BERT), on 48 YouTube videos and reduce its predicted cortical response to a per-second engagement curve, the global field power. Correlated against each video's \"most replayed\" heatmap, a proxy for re-watch, it shows no evidence of prediction: the pooled position-controlled partial correlation is +0.058 (95% CI [-0.04, 0.15]; t(47)=1.21, p=0.23), and not above simple loudness/motion baselines. The raw correlation is also near zero; the moderate values for music videos are an onset-replay artifact. The null holds across six cortical-network readouts, value/salience ROIs, and a permutation test; a supervised leave-one-video-out probe appears to reach r=0.47 but collapses to a temporal-shape artifact under a proper position control. Running the probe on TRIBE's input streams reveals at most a small, borderline visual-stream signal (matched vs. mismatched p=0.004-0.06) and none in audio, text, or the predicted cortex. The inter-subject-correlation readout, the closest prior positive result, is unavailable from the subject-averaged released model, so we fit our own per-subject encoders on the Algonauts fMRI (validated in-domain at r=0.15 and cross-domain, Friends-to-film, at r=0.10); the predicted ISC still does not track re-watch (r=-0.04, p=0.34). We bound rather than merely fail to reject the null: a Bayes factor gives moderate evidence for it (BF01=3.2), an equivalence test excludes effects above r=0.14, and the target's split-half reliability (0.82; ceiling r=0.9) rules out a noisy-label artifact. We release code, a video-ID manifest, and a heatmap-acquisition method robust to YouTube's SABR streaming.</ns0:summary>\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-01T19:03:17Z</ns0:published>\n    <ns1:comment>12 pages, 2 figures. v2: adds equivalence and Bayes-factor bounds, split-half reliability ceiling, a supervised probe with proper position control, a per-input-stream dissociation, and ISC discussion. Code, video-ID manifest, and per-video results: https://github.com/mercurialsolo/tribe-replay-heatmaps</ns1:comment>\n    <ns1:primary_category term=\"cs.SE\" />\n    <ns0:author>\n      <ns0:name>Barada Sahu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shivesh Pandey</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "TRIBE's predicted fMRI engagement signal fails to predict YouTube replay heatmaps; Bayesian and equivalence tests support the null.",
+  "title": "A global predicted-fMRI drive signal from TRIBE does not predict YouTube replay heatmaps",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.01400v2"
+}

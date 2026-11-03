@@ -1,0 +1,35 @@
+{
+  "abstract": "Transport-based generative models, which learn a time-dependent vector field that moves noise to data, have become a dominant paradigm. However, these models typically do not explicitly encode the data distribution. Energy-based models (EBMs) instead represent the data distribution explicitly through a scalar energy landscape, which Energy Matching learns by combining transport learning with contrastive refinement. Its transport objective, however, fits energy gradients to stochastic targets, whose variance degrades the training signal at scale. We introduce Projected Energy Matching, which learns this landscape through a more stable route: we first train a time-independent transport teacher, then freeze it and fit the negative energy gradient to its predicted velocities. This projection replaces noisy transport targets with deterministic supervision, while contrastive refinement shapes the landscape near the data manifold. On CIFAR-10, gradient-noise analysis reveals a cleaner training signal, accompanied by faster convergence than Energy Matching at matched, teacher-free training budgets. In the latent space of CT volumes, our method enables 3D CT generation and achieves better FID scores than flow models. The learned scalar potential serves as a zero-shot prior for the ill-posed inverse problem of sparse-view cone-beam CT reconstruction. By making explicit energy landscapes practical at volumetric scale, this work opens a path to wider adoption of energy-based formulations, bringing their flexibility to high-dimensional generation and inverse problems.",
+  "authors": [
+    "Daniel Barco",
+    "Michal Balcerak",
+    "Suprosanna Shit",
+    "Chinmay Prabhakar",
+    "Philipp Denzel",
+    "Bjoern Menze",
+    "Frank-Peter Schilling"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-08",
+  "id": "arxiv:2607.07749",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.07749v2</ns0:id>\n    <ns0:title>Projected Energy Matching for Generative 3D Priors</ns0:title>\n    <ns0:updated>2026-09-28T12:14:20Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.07749v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.07749v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Transport-based generative models, which learn a time-dependent vector field that moves noise to data, have become a dominant paradigm. However, these models typically do not explicitly encode the data distribution. Energy-based models (EBMs) instead represent the data distribution explicitly through a scalar energy landscape, which Energy Matching learns by combining transport learning with contrastive refinement. Its transport objective, however, fits energy gradients to stochastic targets, whose variance degrades the training signal at scale. We introduce Projected Energy Matching, which learns this landscape through a more stable route: we first train a time-independent transport teacher, then freeze it and fit the negative energy gradient to its predicted velocities. This projection replaces noisy transport targets with deterministic supervision, while contrastive refinement shapes the landscape near the data manifold. On CIFAR-10, gradient-noise analysis reveals a cleaner training signal, accompanied by faster convergence than Energy Matching at matched, teacher-free training budgets. In the latent space of CT volumes, our method enables 3D CT generation and achieves better FID scores than flow models. The learned scalar potential serves as a zero-shot prior for the ill-posed inverse problem of sparse-view cone-beam CT reconstruction. By making explicit energy landscapes practical at volumetric scale, this work opens a path to wider adoption of energy-based formulations, bringing their flexibility to high-dimensional generation and inverse problems.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-08T10:25:21Z</ns0:published>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Daniel Barco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michal Balcerak</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Suprosanna Shit</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chinmay Prabhakar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Philipp Denzel</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bjoern Menze</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Frank-Peter Schilling</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-08",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Projected Energy Matching trains a frozen time-independent transport teacher and fits a scalar energy gradient to its velocities, yielding stabler EBM…",
+  "title": "Projected Energy Matching for Generative 3D Priors",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.07749v2"
+}

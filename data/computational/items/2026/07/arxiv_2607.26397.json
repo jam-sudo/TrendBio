@@ -1,0 +1,38 @@
+{
+  "abstract": "Enzyme function prediction is a hierarchical, knowledge-intensive form of protein function classification. Existing benchmarks expose an anomaly: general LLMs often get the coarse first level right, yet once asked for a complete EC number their accuracy at levels two through four drops to almost zero, while specialized models and tools stay usable. We propose EC-Reason-Bench, a training-free, diagnostic evaluation protocol built to answer two questions: why general LLMs score close to nothing on EC number prediction, and how much of that loss can be recovered without updating a single weight. We break enzyme classification ability into four orthogonal levers that can each be measured on their own: output structure, external knowledge, reasoning structure, and reasoning robustness. We test each lever with an inference-time method against a shared zero-shot baseline reproducing previously reported near-zero performance. Experiments with several strong reasoning LLMs yield four main findings. First, external knowledge is decisive and must precede reasoning: uniformly low closed-book performance rises sharply with open-book access, narrowing model gaps. Second, in closed-book settings, whether cascading and chain-of-thought help or hurt depends on a model's tendency to abstain. Third, once evidence is available the aggregate score of the best LLM setting is indistinguishable from simply voting the EC numbers of the nearest retrieved neighbors; that tie is an artifact of averaging, and it hides a large gain on adversarial evidence set against an equally large loss on multi-functional enzymes. Reasoning over evidence therefore acts as an arbiter of conflicting neighbors rather than as a source of knowledge, and no single-number leaderboard can see it. Fourth, accuracy obeys a law of homology availability.",
+  "authors": [
+    "Linyu Li",
+    "Zhi Jin",
+    "Yichi Zhang",
+    "Dongming Jin",
+    "Yuanpeng He",
+    "Huanyao Zhang",
+    "Xuan Zhang",
+    "Gadeng Luosang",
+    "Nyima Tashi"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-29",
+  "id": "arxiv:2607.26397",
+  "metadata": {
+    "arxiv_primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.26397v1</ns0:id>\n    <ns0:title>Knowledge before Reasoning: EC-Reason-Bench, a Training-Free Diagnostic Benchmark for LLM Enzyme Classification</ns0:title>\n    <ns0:updated>2026-07-29T02:16:09Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.26397v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.26397v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Enzyme function prediction is a hierarchical, knowledge-intensive form of protein function classification. Existing benchmarks expose an anomaly: general LLMs often get the coarse first level right, yet once asked for a complete EC number their accuracy at levels two through four drops to almost zero, while specialized models and tools stay usable. We propose EC-Reason-Bench, a training-free, diagnostic evaluation protocol built to answer two questions: why general LLMs score close to nothing on EC number prediction, and how much of that loss can be recovered without updating a single weight. We break enzyme classification ability into four orthogonal levers that can each be measured on their own: output structure, external knowledge, reasoning structure, and reasoning robustness. We test each lever with an inference-time method against a shared zero-shot baseline reproducing previously reported near-zero performance. Experiments with several strong reasoning LLMs yield four main findings. First, external knowledge is decisive and must precede reasoning: uniformly low closed-book performance rises sharply with open-book access, narrowing model gaps. Second, in closed-book settings, whether cascading and chain-of-thought help or hurt depends on a model's tendency to abstain. Third, once evidence is available the aggregate score of the best LLM setting is indistinguishable from simply voting the EC numbers of the nearest retrieved neighbors; that tie is an artifact of averaging, and it hides a large gain on adversarial evidence set against an equally large loss on multi-functional enzymes. Reasoning over evidence therefore acts as an arbiter of conflicting neighbors rather than as a source of knowledge, and no single-number leaderboard can see it. Fourth, accuracy obeys a law of homology availability.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-29T02:16:09Z</ns0:published>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name>Linyu Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhi Jin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yichi Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dongming Jin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuanpeng He</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Huanyao Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xuan Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gadeng Luosang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nyima Tashi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Training-free benchmark diagnosing LLM enzyme EC-number failures: external evidence is decisive, and reasoning mainly arbitrates neighbors.",
+  "title": "Knowledge before Reasoning: EC-Reason-Bench, a Training-Free Diagnostic Benchmark for LLM Enzyme Classification",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.26397v1"
+}

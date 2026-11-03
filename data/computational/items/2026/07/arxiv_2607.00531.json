@@ -1,0 +1,36 @@
+{
+  "abstract": "Scientific reasoning is an increasingly important capability of large language models, yet improving the robustness and efficiency of training such reasoning remains a key open challenge. We study this problem in instruction-based molecular optimization, where answer-only supervised fine-tuning (SFT) collapses multi-step reasoning and reinforcement learning with verifiable rewards (RLVR) suffers from sparse feedback. Reference-guided Policy Optimization mitigates both by anchoring policy updates to dataset-provided references, but its effectiveness is tightly coupled to reference quality: weak or misaligned references impose a performance ceiling. To overcome this ceiling, we propose active reasoning, a paradigm in which the policy actively decides, on a per-instance basis, when to imitate a reference and when to reinforce its own discoveries, while continuously upgrading what it imitates. We instantiate this paradigm as Active Group Relative Policy Optimization (Active-GRPO), realized through two coupled mechanisms: active imitate-reinforce and active referencing. The former performs imitation learning when the reference still outperforms the policy's own candidates, and shifts to self-improvement via reinforcement learning once the policy has generated molecules that surpass the reference. The latter continuously upgrades the reference itself by replacing it with the best policy-generated candidate discovered so far, progressively raising the imitation target and ensuring that reference guidance remains informative-rather than restrictive-throughout training. Across TOMG-Bench MOLOPT, Active-GRPO improves average SRxSim from 0.0959 for GRPO and 0.1665 for RePO to 0.1773 under matched three-seed evaluation, with statistically significant gains on LogP, MR, and QED.",
+  "authors": [
+    "Xuefeng Liu",
+    "Mingxuan Cao",
+    "Qinan Huang",
+    "Thomas Brettin",
+    "Rick Stevens",
+    "Le Cong"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-01",
+  "id": "arxiv:2607.00531",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "q-bio.BM",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.00531v1</ns0:id>\n    <ns0:title>Active-GRPO: Adaptive Imitation and Self-Improving Reasoning for Molecular Optimization</ns0:title>\n    <ns0:updated>2026-07-01T07:22:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.00531v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.00531v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Scientific reasoning is an increasingly important capability of large language models, yet improving the robustness and efficiency of training such reasoning remains a key open challenge. We study this problem in instruction-based molecular optimization, where answer-only supervised fine-tuning (SFT) collapses multi-step reasoning and reinforcement learning with verifiable rewards (RLVR) suffers from sparse feedback. Reference-guided Policy Optimization mitigates both by anchoring policy updates to dataset-provided references, but its effectiveness is tightly coupled to reference quality: weak or misaligned references impose a performance ceiling. To overcome this ceiling, we propose active reasoning, a paradigm in which the policy actively decides, on a per-instance basis, when to imitate a reference and when to reinforce its own discoveries, while continuously upgrading what it imitates. We instantiate this paradigm as Active Group Relative Policy Optimization (Active-GRPO), realized through two coupled mechanisms: active imitate-reinforce and active referencing. The former performs imitation learning when the reference still outperforms the policy's own candidates, and shifts to self-improvement via reinforcement learning once the policy has generated molecules that surpass the reference. The latter continuously upgrades the reference itself by replacing it with the best policy-generated candidate discovered so far, progressively raising the imitation target and ensuring that reference guidance remains informative-rather than restrictive-throughout training. Across TOMG-Bench MOLOPT, Active-GRPO improves average SRxSim from 0.0959 for GRPO and 0.1665 for RePO to 0.1773 under matched three-seed evaluation, with statistically significant gains on LogP, MR, and QED.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-01T07:22:46Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Xuefeng Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mingxuan Cao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qinan Huang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Thomas Brettin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rick Stevens</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Le Cong</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-01",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Active-GRPO switches between imitating references and self-improving RL for LLM reasoning in molecular optimization on TOMG-Bench.",
+  "title": "Active-GRPO: Adaptive Imitation and Self-Improving Reasoning for Molecular Optimization",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.00531v1"
+}

@@ -1,0 +1,43 @@
+{
+  "abstract": "Ribosomal RNA metabarcoding sits at the center of how we characterize microbial and eukaryotic communities in environmental samples, and long-read sequencing has made full-length small-subunit (SSU; 16S/18S) profiling routine. The broadly conserved primers that make rRNA such a convenient marker are also its liability: by design they co-amplify organellar (mitochondrial, chloroplast) and cross-domain SSU alongside the intended target. Left unsorted before taxonomic assignment, these passengers are systematically misclassified, and the error propagates straight into estimates of community composition and diversity. Reads must therefore be detected, extracted, and sorted by origin before they ever reach a classifier. We present SSUplex, an open-source tool that detects SSU rRNA, assigns each read to one of five origins (bacteria, archaea, eukaryota, mitochondria, chloroplast), and extracts the SSU region for downstream classification. SSUplex reimplements the extraction-and-origin logic of the widely used Metaxa2 in the Rust programming language, scans both strands, and ships as a single dependency-light binary suited to long-read (Oxford Nanopore, PacBio HiFi) and short-read data. Benchmarked against Metaxa2 on public data, SSUplex reproduces Metaxa2 origin calls on full-length reads (96.8% concordance) and matches its extraction speed on small inputs, then pulls away to run up to [~]3.4x faster with [~]35% lower peak memory at 200,000 reads, the per-sample scale a long-read amplicon run typically reaches. We are candid about a genuine, measured trade-off in the origin-ranking statistic, and we pinpoint the bacteria-versus-mitochondria boundary as the methods one intrinsically lower-confidence edge. For the now-common workflow in which origin-sorted reads are handed to a dedicated classifier rather than classified in place, SSUplex is a fast, reproducible, embeddable stand-in for Metaxa2s extraction role. Source code and a benchmark harness that regenerates every result from public data are available under the MIT license at https://github.com/ayobi/ssuplex.",
+  "authors": [
+    "O'Brien, A.",
+    "Vargas, J.",
+    "Acuna, I.",
+    "Parada, P."
+  ],
+  "doi": "10.64898/2026.07.02.736232",
+  "first_seen": "2026-07-05",
+  "id": "biorxiv:10.64898/2026.07.02.736232",
+  "metadata": {
+    "abstract": "Ribosomal RNA metabarcoding sits at the center of how we characterize microbial and eukaryotic communities in environmental samples, and long-read sequencing has made full-length small-subunit (SSU; 16S/18S) profiling routine. The broadly conserved primers that make rRNA such a convenient marker are also its liability: by design they co-amplify organellar (mitochondrial, chloroplast) and cross-domain SSU alongside the intended target. Left unsorted before taxonomic assignment, these passengers are systematically misclassified, and the error propagates straight into estimates of community composition and diversity. Reads must therefore be detected, extracted, and sorted by origin before they ever reach a classifier. We present SSUplex, an open-source tool that detects SSU rRNA, assigns each read to one of five origins (bacteria, archaea, eukaryota, mitochondria, chloroplast), and extracts the SSU region for downstream classification. SSUplex reimplements the extraction-and-origin logic of the widely used Metaxa2 in the Rust programming language, scans both strands, and ships as a single dependency-light binary suited to long-read (Oxford Nanopore, PacBio HiFi) and short-read data. Benchmarked against Metaxa2 on public data, SSUplex reproduces Metaxa2 origin calls on full-length reads (96.8% concordance) and matches its extraction speed on small inputs, then pulls away to run up to [~]3.4x faster with [~]35% lower peak memory at 200,000 reads, the per-sample scale a long-read amplicon run typically reaches. We are candid about a genuine, measured trade-off in the origin-ranking statistic, and we pinpoint the bacteria-versus-mitochondria boundary as the methods one intrinsically lower-confidence edge. For the now-common workflow in which origin-sorted reads are handed to a dedicated classifier rather than classified in place, SSUplex is a fast, reproducible, embeddable stand-in for Metaxa2s extraction role. Source code and a benchmark harness that regenerates every result from public data are available under the MIT license at https://github.com/ayobi/ssuplex.",
+    "author_corresponding": "Aaron O'Brien",
+    "author_corresponding_institution": "Universidad Andres Bello",
+    "authors": "O'Brien, A.; Vargas, J.; Acuna, I.; Parada, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-05",
+    "doi": "10.64898/2026.07.02.736232",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/05/2026.07.02.736232.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SSUplex: fast, both-strand extraction and origin-sorting of small-subunit rRNA for environmental DNA metabarcoding",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universidad Andres Bello",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "SSUplex is an open-source Rust tool that extracts and origin-sorts SSU rRNA reads (both strands) for metabarcoding, matching Metaxa2 concordance and running up…",
+  "title": "SSUplex: fast, both-strand extraction and origin-sorting of small-subunit rRNA for environmental DNA metabarcoding",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.02.736232"
+}

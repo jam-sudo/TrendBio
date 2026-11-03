@@ -1,0 +1,42 @@
+{
+  "abstract": "Expression -- whether an antibody can be produced at usable yield -- is one of the earliest and most expensive filters in therapeutic discovery. We present AINN-Express, a sequence-only predictor of VHH single-domain antibody (nanobody) expression built on AINN-P1, Ainnocences protein foundation model. AINN-Express encodes a VHH with a frozen AINN-P1 encoder and scores it with a lightweight gradient-boosted classifier: it takes only an amino-acid sequence, returns an expression probability, and needs no structure and no per-task model training. Under a leakage-safe, leave-program-out evaluation, AINN-Express reaches ROC-AUC 0.87 within known antibody programs and 0.81 on entirely new programs -- well above the majority baseline -- making it a practical tool for prioritizing candidates before wet-lab work. We further justify the encoder choice with a controlled, leakage-aware benchmark against general-purpose protein language models: on this task, AINN-P1 (167 M parameters) generalizes to unseen programs far better than a general-purpose ESM2 (650 M) -- 0.81 versus 0.68 new-program ROC-AUC -- and matches a domain-finetuned ESM2 (0.83) with no task-specific finetuning, at roughly one-quarter of the parameters. The gap is invisible under a random split, where all encoders score [~]0.88; only leave-program-out evaluation reveals that general-purpose embeddings largely encode program identity rather than transferable determinants of expression. Purpose-built representation quality, not parameter count, is what makes AINN-Express generalize.",
+  "authors": [
+    "Wang, R.",
+    "Jin, K.",
+    "Pan, L."
+  ],
+  "doi": "10.64898/2026.07.21.739256",
+  "first_seen": "2026-07-24",
+  "id": "biorxiv:10.64898/2026.07.21.739256",
+  "metadata": {
+    "abstract": "Expression -- whether an antibody can be produced at usable yield -- is one of the earliest and most expensive filters in therapeutic discovery. We present AINN-Express, a sequence-only predictor of VHH single-domain antibody (nanobody) expression built on AINN-P1, Ainnocences protein foundation model. AINN-Express encodes a VHH with a frozen AINN-P1 encoder and scores it with a lightweight gradient-boosted classifier: it takes only an amino-acid sequence, returns an expression probability, and needs no structure and no per-task model training. Under a leakage-safe, leave-program-out evaluation, AINN-Express reaches ROC-AUC 0.87 within known antibody programs and 0.81 on entirely new programs -- well above the majority baseline -- making it a practical tool for prioritizing candidates before wet-lab work. We further justify the encoder choice with a controlled, leakage-aware benchmark against general-purpose protein language models: on this task, AINN-P1 (167 M parameters) generalizes to unseen programs far better than a general-purpose ESM2 (650 M) -- 0.81 versus 0.68 new-program ROC-AUC -- and matches a domain-finetuned ESM2 (0.83) with no task-specific finetuning, at roughly one-quarter of the parameters. The gap is invisible under a random split, where all encoders score [~]0.88; only leave-program-out evaluation reveals that general-purpose embeddings largely encode program identity rather than transferable determinants of expression. Purpose-built representation quality, not parameter count, is what makes AINN-Express generalize.",
+    "author_corresponding": "Lurong Pan",
+    "author_corresponding_institution": "Ainnocence, Inc.",
+    "authors": "Wang, R.; Jin, K.; Pan, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-24",
+    "doi": "10.64898/2026.07.21.739256",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/24/2026.07.21.739256.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "AINN-Express: A Leakage-Aware, Sequence-Only Predictor of VHH Antibody Expression Built on the AINN-P1 Protein Foundation Model",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Ainnocence, Inc.",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Sequence-only VHH nanobody expression predictor using frozen AINN-P1 protein encoder with gradient-boosted classifier; leave-program-out ROC-AUC 0.81 on new…",
+  "title": "AINN-Express: A Leakage-Aware, Sequence-Only Predictor of VHH Antibody Expression Built on the AINN-P1 Protein Foundation Model",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.21.739256"
+}

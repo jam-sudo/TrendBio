@@ -1,0 +1,45 @@
+{
+  "abstract": "Predicting drug sensitivity across diverse cancer cell lines remains a fundamental challenge in precision oncology, particularly for data-scarce cell lines where per-cell-line models overfit and lookup-table approaches cannot generalise to unseen biological contexts. We present DL4DR, a Two-Tower Residual Late Fusion deep learning model that addresses this challenge through content-based, identity-free genomic conditioning. The Cell Line Tower encodes each cell line as a 3 x 139 x 139 genomic image - encoding gene expression, mutation severity, and copy-number variation as RGB channels - using a convolutional encoder that maps directly from biological content, never from a cell line ID. The Compound Tower combines three complementary molecular representations: D-MPNN graph message passing, ORNN octave convolutional image features, and an ECFP hard-memorization head that preserves activity-cliff resolution. Predictions are composed as a residual sum: f = fhard +{lambda} (zC) {middle dot} fresidual, where the learned gate{lambda} modulates how much interaction signal supplements the memorization baseline.\n\nEvaluated across 51 breast cancer cell lines (136,342 records), Residual Fusion outperforms the ECFP-Only baseline in 48/51 cell lines (94.1%), with {Delta}R2 > 0.02 in 26/51 (51.0%). On the leave-cell-line-out split - the decisive test of genomic generalisation - the mean {Delta}R2 = +0.016 across all 51 lines demonstrates that the genomic encoder learns transferable biological signal beyond cell line identity. External validation on 601 cell lines across 27 cancer tissue types (CellTiter-Glo dataset; 0 cell line overlap with training) achieves median R2 = 0.627, within the range of the internal random-split performance (R2 = 0.61-0.69), confirming pan-cancer generalisation. GradCAM interpretability on the Cell Line Tower recovers TP53 among the top-five cross-cell-line genomic activators (5/51 cell lines) alongside several uncharacterised candidate genes (e.g. FSIP2, 6/51) - without any prior pathway annotation - providing partial biological validation of the learned representation, while also indicating that a substantial share of the encoders top-ranked signal corresponds to genes with no current annotation as breast cancer drivers. Code and data are available at https://github.com/bayjuan5/DL4DR.",
+  "authors": [
+    "Huang, B.",
+    "Tasaka, L.",
+    "Li, J.",
+    "Islam, T.",
+    "Zhang, S."
+  ],
+  "doi": "10.64898/2026.07.03.736239",
+  "first_seen": "2026-07-08",
+  "id": "biorxiv:10.64898/2026.07.03.736239",
+  "metadata": {
+    "abstract": "Predicting drug sensitivity across diverse cancer cell lines remains a fundamental challenge in precision oncology, particularly for data-scarce cell lines where per-cell-line models overfit and lookup-table approaches cannot generalise to unseen biological contexts. We present DL4DR, a Two-Tower Residual Late Fusion deep learning model that addresses this challenge through content-based, identity-free genomic conditioning. The Cell Line Tower encodes each cell line as a 3 x 139 x 139 genomic image - encoding gene expression, mutation severity, and copy-number variation as RGB channels - using a convolutional encoder that maps directly from biological content, never from a cell line ID. The Compound Tower combines three complementary molecular representations: D-MPNN graph message passing, ORNN octave convolutional image features, and an ECFP hard-memorization head that preserves activity-cliff resolution. Predictions are composed as a residual sum: f = fhard +{lambda} (zC) {middle dot} fresidual, where the learned gate{lambda} modulates how much interaction signal supplements the memorization baseline.\n\nEvaluated across 51 breast cancer cell lines (136,342 records), Residual Fusion outperforms the ECFP-Only baseline in 48/51 cell lines (94.1%), with {Delta}R2 > 0.02 in 26/51 (51.0%). On the leave-cell-line-out split - the decisive test of genomic generalisation - the mean {Delta}R2 = +0.016 across all 51 lines demonstrates that the genomic encoder learns transferable biological signal beyond cell line identity. External validation on 601 cell lines across 27 cancer tissue types (CellTiter-Glo dataset; 0 cell line overlap with training) achieves median R2 = 0.627, within the range of the internal random-split performance (R2 = 0.61-0.69), confirming pan-cancer generalisation. GradCAM interpretability on the Cell Line Tower recovers TP53 among the top-five cross-cell-line genomic activators (5/51 cell lines) alongside several uncharacterised candidate genes (e.g. FSIP2, 6/51) - without any prior pathway annotation - providing partial biological validation of the learned representation, while also indicating that a substantial share of the encoders top-ranked signal corresponds to genes with no current annotation as breast cancer drivers. Code and data are available at https://github.com/bayjuan5/DL4DR.",
+    "author_corresponding": "Beibei Huang",
+    "author_corresponding_institution": "iMDLab",
+    "authors": "Huang, B.; Tasaka, L.; Li, J.; Islam, T.; Zhang, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-08",
+    "doi": "10.64898/2026.07.03.736239",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/08/2026.07.03.736239.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Residual Multi-Modal Learning for Pan-Breast-Cancer Drug Response Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "iMDLab",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "DL4DR, a two-tower residual late-fusion model, predicts breast cancer cell line drug response from genomic images and compound representations, with…",
+  "title": "Residual Multi-Modal Learning for Pan-Breast-Cancer Drug Response Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.03.736239"
+}

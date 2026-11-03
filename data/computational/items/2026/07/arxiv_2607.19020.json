@@ -1,0 +1,33 @@
+{
+  "abstract": "Clinical prediction models in intensive care degrade as data shift, and regulators such as the FDA ask developers to specify bounded update protocols in advance. Evaluations of such protocols assume that apparent drift reflects clinical practice rather than changes in how the database records care. We test whether update strategies can be evaluated on unaudited ICU data, and whether a parameter-bounded update gives up accuracy or attribution stability relative to full fine-tuning once the data are audited. We audit MIMIC-IV 3.1 (2008-2022) for recording artifacts and define a cleaning protocol. On the cleaned cohort, a label-free classifier two-sample test gates updates across three eras. We compare a bounded update, which retrains only treatment-context and fusion parameters, with full fine-tuning for two model families and two targets under a pre-specified non-inferiority margin of 0.015 AUROC, and measure attribution stability against the source model. In 2020-2022 about half of ICU stays have no input or procedure-event records, and a vasopressor ItemID migration makes the 2017-2019 label rate appear to fall when it actually rises. On the cleaned cohort, the gate detects drift in every era, including in physiology-only features, with no false alarms on null data. Bounded updating is non-inferior or superior in 10 of 12 primary cells, but this depends on the target, the model family and learning-rate tuning, and adaptation gains over never updating are small. At a shared learning rate, bounded updates keep physiological attributions more stable in neural models, clearly for vasopressor and less clearly for intubation; with separately tuned rates, full updates are more stable. Audits should precede update evaluation, and the update boundary should be chosen per target.",
+  "authors": [
+    "Fatema Ferdous Tamanna",
+    "K. M. Merajul Arefin",
+    "Md. Abdul Masud"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-21",
+  "id": "arxiv:2607.19020",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.IR",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.19020v5</ns0:id>\n    <ns0:title>Audit Before You Update: Recording Artifacts and the Limits of Bounded Model Updates in MIMIC-IV ICU Prediction</ns0:title>\n    <ns0:updated>2026-10-11T19:37:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.19020v5\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.19020v5\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Clinical prediction models in intensive care degrade as data shift, and regulators such as the FDA ask developers to specify bounded update protocols in advance. Evaluations of such protocols assume that apparent drift reflects clinical practice rather than changes in how the database records care. We test whether update strategies can be evaluated on unaudited ICU data, and whether a parameter-bounded update gives up accuracy or attribution stability relative to full fine-tuning once the data are audited. We audit MIMIC-IV 3.1 (2008-2022) for recording artifacts and define a cleaning protocol. On the cleaned cohort, a label-free classifier two-sample test gates updates across three eras. We compare a bounded update, which retrains only treatment-context and fusion parameters, with full fine-tuning for two model families and two targets under a pre-specified non-inferiority margin of 0.015 AUROC, and measure attribution stability against the source model. In 2020-2022 about half of ICU stays have no input or procedure-event records, and a vasopressor ItemID migration makes the 2017-2019 label rate appear to fall when it actually rises. On the cleaned cohort, the gate detects drift in every era, including in physiology-only features, with no false alarms on null data. Bounded updating is non-inferior or superior in 10 of 12 primary cells, but this depends on the target, the model family and learning-rate tuning, and adaptation gains over never updating are small. At a shared learning rate, bounded updates keep physiological attributions more stable in neural models, clearly for vasopressor and less clearly for intubation; with separately tuned rates, full updates are more stable. Audits should precede update evaluation, and the update boundary should be chosen per target.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.IR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-21T12:07:36Z</ns0:published>\n    <ns1:comment>Major revision: Added dataset temporal-validity audit, multi-era drift gating, non-inferiority testing for bounded updates, and procedural evaluations of XAI attribution stability across varied tuning setups</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Fatema Ferdous Tamanna</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>K. M. Merajul Arefin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Md. Abdul Masud</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Audits MIMIC-IV ICU records for artifacts, then compares bounded versus full fine-tuning of clinical prediction models under drift gating.",
+  "title": "Audit Before You Update: Recording Artifacts and the Limits of Bounded Model Updates in MIMIC-IV ICU Prediction",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.19020v5"
+}

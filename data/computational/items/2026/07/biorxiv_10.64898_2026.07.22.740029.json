@@ -1,0 +1,44 @@
+{
+  "abstract": "Background and ObjectiveSimulation of diffusion MRI signals from tissue microstructure is a fundamental problem in quantitative imaging, as it enables controlled study of how cellular architecture influences measured signals. However, physics-based simulations at clinically relevant scales are challenging due to a scale mismatch between imaging and histology: clinical diffusion MRI spans centimeter-scale fields of view with millimeter-scale voxels, whereas histology resolves structure at micrometer scales. Capturing voxel-wise signal formation therefore requires repeated simulations over heterogeneous microstructure, which becomes computationally and memory intensive in classical solvers. We propose a neural operator framework that amortizes this cost by learning local microstruc-ture-signal mappings once and applying them across large tissue regions.\n\nMethodsWe train a Fourier Neural Operator on finite-element simulations of histology-derived cell segmentations to predict magnetization fields from diffusivity and permeability maps. The model is embedded in a subdomain tiling strategy that enables scalable inference over whole-slide histology images. Unlike most conventional simulation pipelines, inference operates directly on regular grids derived from cell segmentations and does not require meshing.\n\nResultsThe proposed framework enables simulation of apparent diffusion coefficient maps over 2D liver histology spanning 28.224 mm x 18.144 mm. It achieves over 2,600-fold acceleration compared with CPU-based finite-element simulation, reducing runtime from an estimated 217 days to under 2 hours. The network yields mean relative signal errors of 0.34%-0.43% at high diffusion weighting and 0.03% at low diffusion weighting, with maximum errors below 5%. On manually segmented datasets with greater morphological variability, mean errors increased slightly to 1.37%-1.79%.\n\nConclusionsNeural operators enable computationally practical, mesh-free diffusion MRI simulation by amortizing expensive physics-based computation into a reusable operator applied across local sub-domains. This makes large-scale histology-based diffusion MRI modeling feasible while preserving high accuracy.",
+  "authors": [
+    "Kohler, I. A.",
+    "Goedicke, O.",
+    "Kuder, T. A.",
+    "Ladd, M. E.",
+    "Hesser, J."
+  ],
+  "doi": "10.64898/2026.07.22.740029",
+  "first_seen": "2026-07-27",
+  "id": "biorxiv:10.64898/2026.07.22.740029",
+  "metadata": {
+    "abstract": "Background and ObjectiveSimulation of diffusion MRI signals from tissue microstructure is a fundamental problem in quantitative imaging, as it enables controlled study of how cellular architecture influences measured signals. However, physics-based simulations at clinically relevant scales are challenging due to a scale mismatch between imaging and histology: clinical diffusion MRI spans centimeter-scale fields of view with millimeter-scale voxels, whereas histology resolves structure at micrometer scales. Capturing voxel-wise signal formation therefore requires repeated simulations over heterogeneous microstructure, which becomes computationally and memory intensive in classical solvers. We propose a neural operator framework that amortizes this cost by learning local microstruc-ture-signal mappings once and applying them across large tissue regions.\n\nMethodsWe train a Fourier Neural Operator on finite-element simulations of histology-derived cell segmentations to predict magnetization fields from diffusivity and permeability maps. The model is embedded in a subdomain tiling strategy that enables scalable inference over whole-slide histology images. Unlike most conventional simulation pipelines, inference operates directly on regular grids derived from cell segmentations and does not require meshing.\n\nResultsThe proposed framework enables simulation of apparent diffusion coefficient maps over 2D liver histology spanning 28.224 mm x 18.144 mm. It achieves over 2,600-fold acceleration compared with CPU-based finite-element simulation, reducing runtime from an estimated 217 days to under 2 hours. The network yields mean relative signal errors of 0.34%-0.43% at high diffusion weighting and 0.03% at low diffusion weighting, with maximum errors below 5%. On manually segmented datasets with greater morphological variability, mean errors increased slightly to 1.37%-1.79%.\n\nConclusionsNeural operators enable computationally practical, mesh-free diffusion MRI simulation by amortizing expensive physics-based computation into a reusable operator applied across local sub-domains. This makes large-scale histology-based diffusion MRI modeling feasible while preserving high accuracy.",
+    "author_corresponding": "Iris A. Kohler",
+    "author_corresponding_institution": "Heidelberg University",
+    "authors": "Kohler, I. A.; Goedicke, O.; Kuder, T. A.; Ladd, M. E.; Hesser, J.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-07-27",
+    "doi": "10.64898/2026.07.22.740029",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/27/2026.07.22.740029.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "From whole-slide histology to ADC maps: Fast diffusion MRI simulation with neural operators",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Heidelberg University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Fourier Neural Operator learns diffusion MRI signal formation from histology, giving 2,600-fold speedup for liver ADC maps.",
+  "title": "From whole-slide histology to ADC maps: Fast diffusion MRI simulation with neural operators",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.22.740029"
+}

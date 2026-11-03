@@ -1,0 +1,31 @@
+{
+  "abstract": "Pathology foundation models are reported to encode molecular programmes in tissue morphology, but the evidence is usually a cohort-wide ranked gene list rather than a prediction for a held-out patient. We rebuild such an analysis with the patient as the unit of evidence and ask which pipeline component carries signal.\n  Across 11 frozen backbones, four pre-specified gene programmes and 285 TCGA-BRCA patients with paired slides and RNA-seq (44 cells; GroupKFold by patient, all preprocessing fitted inside the fold), ridge regression on mean-pooled embeddings predicts held-out programme scores at Spearman rho = 0.25-0.56, UNI2 strongest on all four (immune 0.556). A matched permutation null gives raw p ~ 1e-4 at 10,000 permutations for every cell; Holm-adjusted p = 0.0044.\n  The signal is real but not uniformly morphological. Against competing models on the same patients and folds, embeddings beat tissue composition for ER/luminal, proliferation and immune (+0.280, +0.284, +0.479; p <= 0.003) but not basal, where compartment fractions alone reach 0.469 against the embedding's 0.493 (p = 0.77). Fifty-four interpretable cell-count features come within 0.043-0.085 on every programme.\n  The geometric machinery contributes nothing measurable, and we identify why: the geodesic graph selects neighbours by Euclidean nearest-neighbour search and only reweights edges already chosen, so the topology is Euclidean by construction (Riemannian minus Euclidean = +0.0010, 95% CI [-0.0007, +0.0029]). Applied consistently the geometry is worse (-0.0117). Ridge regression beats the graph-and-metric decoder by +0.097 (CI [+0.069, +0.127]). The driver-count metric common in this literature is near-uninformative here: 91.8% of random six-gene panels recover >=5/6 drivers.",
+  "authors": [
+    "Chimdi Walter Ndubuisi"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-31",
+  "id": "arxiv:2608.00105",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.00105v1</ns0:id>\n    <ns0:title>What Carries the Signal in Pathology Foundation-Model Atlases? A Patient-Level Controlled Benchmark in Breast Cancer</ns0:title>\n    <ns0:updated>2026-07-31T04:58:29Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.00105v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.00105v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Pathology foundation models are reported to encode molecular programmes in tissue morphology, but the evidence is usually a cohort-wide ranked gene list rather than a prediction for a held-out patient. We rebuild such an analysis with the patient as the unit of evidence and ask which pipeline component carries signal.\n  Across 11 frozen backbones, four pre-specified gene programmes and 285 TCGA-BRCA patients with paired slides and RNA-seq (44 cells; GroupKFold by patient, all preprocessing fitted inside the fold), ridge regression on mean-pooled embeddings predicts held-out programme scores at Spearman rho = 0.25-0.56, UNI2 strongest on all four (immune 0.556). A matched permutation null gives raw p ~ 1e-4 at 10,000 permutations for every cell; Holm-adjusted p = 0.0044.\n  The signal is real but not uniformly morphological. Against competing models on the same patients and folds, embeddings beat tissue composition for ER/luminal, proliferation and immune (+0.280, +0.284, +0.479; p &lt;= 0.003) but not basal, where compartment fractions alone reach 0.469 against the embedding's 0.493 (p = 0.77). Fifty-four interpretable cell-count features come within 0.043-0.085 on every programme.\n  The geometric machinery contributes nothing measurable, and we identify why: the geodesic graph selects neighbours by Euclidean nearest-neighbour search and only reweights edges already chosen, so the topology is Euclidean by construction (Riemannian minus Euclidean = +0.0010, 95% CI [-0.0007, +0.0029]). Applied consistently the geometry is worse (-0.0117). Ridge regression beats the graph-and-metric decoder by +0.097 (CI [+0.069, +0.127]). The driver-count metric common in this literature is near-uninformative here: 91.8% of random six-gene panels recover &gt;=5/6 drivers.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-31T04:58:29Z</ns0:published>\n    <ns1:comment>40 pages, 7 figures, 10 tables. Supplementary Information (16 pages) included as an ancillary file. Segmentation outputs obtained under the Aignostics Research Access Programme; OpenTME data at https://huggingface.co/datasets/Aignostics/OpenTME</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Chimdi Walter Ndubuisi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-31",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "arxiv",
+  "summary": "Patient-level controlled benchmark of 11 pathology foundation models on 285 TCGA-BRCA patients: embeddings predict held-out gene programmes (rho 0.25-0.56),…",
+  "title": "What Carries the Signal in Pathology Foundation-Model Atlases? A Patient-Level Controlled Benchmark in Breast Cancer",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.00105v1"
+}

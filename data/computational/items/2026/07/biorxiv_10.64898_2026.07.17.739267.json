@@ -1,0 +1,44 @@
+{
+  "abstract": "Gene-therapy design depends on identifying regulatory sequences that drive the right level, timing, and cell-type specificity of expression. Regulatory DNA models offer a way to prioritize such sequences computationally before committing candidates to biological testing. Biological validation involves DNA synthesis, cloning, cell culture, sequencing, and functional screening, so training compute is part of the same constrained discovery pipeline rather than an isolated modeling expense. Reducing the compute required to reach a target pretraining quality could shift time and budget toward larger candidate screens, additional assays, more cell contexts, and broader follow-up validation. Given that Adam-style optimizers are widely used for training genomic sequence models, we study whether Muon can provide a more compute-efficient alternative for regulatory DNA pretraining. We provide an in-depth analysis by training Transformer models (26M-420M parameters) on ENCODE cis-regulatory sequences with Adam and Muon while holding architecture, data, and non-optimizer hyperparameters fixed and varying optimizer family, norm-control scheme, learning rate, and model width. In the largest-scale matched-target comparison, Muon reaches Adam-matched perplexity targets with a median FLOP reduction of 35.4% and a median wall-clock time reduction of 38.5%. The analysis further shows that optimizer rankings depend on norm control: independent weight decay pairs more favorably with Muon than Hyperball in this setting. These findings indicate that optimizer update structure and norm-control choices are practical levers for reducing the training resources required to reach matched perplexity targets in regulatory DNA pretraining.",
+  "authors": [
+    "Doshi, V.",
+    "Bhide, M.",
+    "Singh, A.",
+    "Rathod, Y.",
+    "Sivakumar, A."
+  ],
+  "doi": "10.64898/2026.07.17.739267",
+  "first_seen": "2026-07-22",
+  "id": "biorxiv:10.64898/2026.07.17.739267",
+  "metadata": {
+    "abstract": "Gene-therapy design depends on identifying regulatory sequences that drive the right level, timing, and cell-type specificity of expression. Regulatory DNA models offer a way to prioritize such sequences computationally before committing candidates to biological testing. Biological validation involves DNA synthesis, cloning, cell culture, sequencing, and functional screening, so training compute is part of the same constrained discovery pipeline rather than an isolated modeling expense. Reducing the compute required to reach a target pretraining quality could shift time and budget toward larger candidate screens, additional assays, more cell contexts, and broader follow-up validation. Given that Adam-style optimizers are widely used for training genomic sequence models, we study whether Muon can provide a more compute-efficient alternative for regulatory DNA pretraining. We provide an in-depth analysis by training Transformer models (26M-420M parameters) on ENCODE cis-regulatory sequences with Adam and Muon while holding architecture, data, and non-optimizer hyperparameters fixed and varying optimizer family, norm-control scheme, learning rate, and model width. In the largest-scale matched-target comparison, Muon reaches Adam-matched perplexity targets with a median FLOP reduction of 35.4% and a median wall-clock time reduction of 38.5%. The analysis further shows that optimizer rankings depend on norm control: independent weight decay pairs more favorably with Muon than Hyperball in this setting. These findings indicate that optimizer update structure and norm-control choices are practical levers for reducing the training resources required to reach matched perplexity targets in regulatory DNA pretraining.",
+    "author_corresponding": "Viraj Doshi",
+    "author_corresponding_institution": "Origin Bio",
+    "authors": "Doshi, V.; Bhide, M.; Singh, A.; Rathod, Y.; Sivakumar, A.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-07-22",
+    "doi": "10.64898/2026.07.17.739267",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/22/2026.07.17.739267.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Muon Reduces the Training Cost of Regulatory DNA Transformers",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Origin Bio",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Compares Adam and Muon optimizers for pretraining regulatory DNA Transformers on ENCODE cis-regulatory sequences; Muon reaches matched perplexity with 35.4%…",
+  "title": "Muon Reduces the Training Cost of Regulatory DNA Transformers",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.17.739267"
+}

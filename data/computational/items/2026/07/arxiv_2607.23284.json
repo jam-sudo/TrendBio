@@ -1,0 +1,36 @@
+{
+  "abstract": "Automated sleep staging is increasingly used in large-scale studies to derive sleep-architecture endpoints: total sleep time, REM latency, sleep efficiency, and bout-duration statistics. Deep learning models achieve epoch-level accuracy approaching inter-rater agreement, yet often produce hypnograms that violate physiological invariants, such as rare transitions (e.g., direct Wake -> REM) or excessively fragmented sequences. Such violations can bias downstream sleep metrics, regardless of overall accuracy. We propose StageGuard, a plug-and-play, backbone-agnostic structured-inference framework that wraps any neural sleep-staging backbone with physiology-informed priors. StageGuard combines (1) a differentiable soft transition penalty that discourages physiologically rare transitions during training, and (2) a semi-Markov constrained decoder with a duration-augmented state space that jointly enforces transition penalties and minimum bout durations at inference. Unlike hard-prohibition methods, it admits rare transitions when emission evidence is overwhelming, leaving informative pathological events recoverable rather than blocked. StageGuard constrains staging outputs to satisfy known physiological priors rather than modeling sleep generatively. We quantify the validity gap using transition-violation rate (TVR) and fragmentation index (FI) and demonstrate that, across six backbones and four datasets, StageGuard reduces TVR to physiologically plausible levels and lowers FI by 56-62%, while maintaining or slightly improving classification accuracy. Crucially, improved constraint satisfaction translates into 59-79% lower error on derived sleep-architecture statistics not directly optimized by the method, and recovers the direction and effect size of expert-defined subgroup differences (OSA severity, age) more faithfully than the unconstrained baseline.",
+  "authors": [
+    "Juntang Wang",
+    "Yihan Wang",
+    "Hao Wu",
+    "Jiayu Gao",
+    "Shixin Xu",
+    "Dongmian Zou"
+  ],
+  "doi": "10.1145/3770855.3818916",
+  "first_seen": "2026-07-25",
+  "id": "arxiv:2607.23284",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.23284v1</ns0:id>\n    <ns0:title>StageGuard: Physiologically Constrained Sleep Staging</ns0:title>\n    <ns0:updated>2026-07-25T16:37:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.23284v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.23284v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Automated sleep staging is increasingly used in large-scale studies to derive sleep-architecture endpoints: total sleep time, REM latency, sleep efficiency, and bout-duration statistics. Deep learning models achieve epoch-level accuracy approaching inter-rater agreement, yet often produce hypnograms that violate physiological invariants, such as rare transitions (e.g., direct Wake -&gt; REM) or excessively fragmented sequences. Such violations can bias downstream sleep metrics, regardless of overall accuracy. We propose StageGuard, a plug-and-play, backbone-agnostic structured-inference framework that wraps any neural sleep-staging backbone with physiology-informed priors. StageGuard combines (1) a differentiable soft transition penalty that discourages physiologically rare transitions during training, and (2) a semi-Markov constrained decoder with a duration-augmented state space that jointly enforces transition penalties and minimum bout durations at inference. Unlike hard-prohibition methods, it admits rare transitions when emission evidence is overwhelming, leaving informative pathological events recoverable rather than blocked. StageGuard constrains staging outputs to satisfy known physiological priors rather than modeling sleep generatively. We quantify the validity gap using transition-violation rate (TVR) and fragmentation index (FI) and demonstrate that, across six backbones and four datasets, StageGuard reduces TVR to physiologically plausible levels and lowers FI by 56-62%, while maintaining or slightly improving classification accuracy. Crucially, improved constraint satisfaction translates into 59-79% lower error on derived sleep-architecture statistics not directly optimized by the method, and recovers the direction and effect size of expert-defined subgroup differences (OSA severity, age) more faithfully than the unconstrained baseline.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-25T16:37:46Z</ns0:published>\n    <ns1:comment>12 pages. Accepted at KDD 2026 (32nd ACM SIGKDD Conference), AI for Sciences track</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Juntang Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yihan Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hao Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiayu Gao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shixin Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dongmian Zou</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3770855.3818916</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3770855.3818916\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "StageGuard wraps any neural sleep-staging backbone with soft transition penalties and a semi-Markov decoder, cutting transition violations and fragmentation…",
+  "title": "StageGuard: Physiologically Constrained Sleep Staging",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.23284v1"
+}

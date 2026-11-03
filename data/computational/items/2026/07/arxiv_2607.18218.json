@@ -1,0 +1,60 @@
+{
+  "abstract": "Foundation models have emerged as a driving force in computational pathology, with the potential to transform cancer diagnosis, prognosis, and treatment selection by learning transferable representations from large-scale histopathology data. A growing landscape of pathology foundation models now spans diverse data sources, architectures, and downstream applications. However, most pretrained models operate only at the image-tile level, use restrictive licenses, and remain computationally expensive, limiting large-scale slide-level clinical and research use.\n  Here, we introduce GigaPath-Flash and GigaTIME-Flash, efficient models for whole-slide pathology AI and spatial proteomics prediction. GigaPath-Flash combines a 22M-parameter ViT-S tile encoder with a 21M-parameter LongNet slide encoder, both pretrained on large-scale real-world histopathology data. Its compact tile encoder is distilled from the billion-parameter GigaPath (ViT-g) teacher and shared by both models. GigaPath-Flash retains 97% of GigaPath's average slide-level performance with 50x less compute. GigaTIME-Flash extends this backbone to predict the tumor immune microenvironment directly from routine H&E images. It surpasses the original CNN-based GigaTIME in prediction quality while running 6x faster and using 8x less GPU memory.\n  Together with GigaPath and GigaTIME, these models form an open-weight, Apache-2.0-licensed family pretrained on large-scale real-world clinical data. By releasing all models and weights, we provide accessible building blocks for computational pathology, immuno-oncology, and precision health.",
+  "authors": [
+    "Naoto Usuyama",
+    "Jeya Maria Jose Valanarasu",
+    "Sicong Yao",
+    "Hanwen Xu",
+    "Jaspreet Bagga",
+    "Guanghui Qin",
+    "Robert E. Kramer",
+    "Cliff Wong",
+    "Soohee Lee",
+    "Hao Qiu",
+    "Theodore Zhengde Zhao",
+    "Racheli Ben Shimol",
+    "Angela Crabtree",
+    "Kevin Matlock",
+    "Eduardo Alejandro Lozano Garcia",
+    "Naiteek Sangani",
+    "Alberto Santamaria-Pang",
+    "Maximilian Rokuss",
+    "Yashna Hasija",
+    "Naisargi Manishkumar Patel",
+    "Jason Entenmann",
+    "Alexandra Q. Bartlett",
+    "Bill J. Wright",
+    "Bernard A. Fox",
+    "Brian Piening",
+    "Sheng Zhang",
+    "Sheng Wang",
+    "Tristan Naumann",
+    "Carlo Bifulco",
+    "Hoifung Poon"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-20",
+  "id": "arxiv:2607.18218",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.18218v2</ns0:id>\n    <ns0:title>GigaPath-Flash and GigaTIME-Flash: Efficient Pathology Foundation Models for Whole-Slide and Tumor Microenvironment Analysis</ns0:title>\n    <ns0:updated>2026-07-22T19:34:58Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.18218v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.18218v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Foundation models have emerged as a driving force in computational pathology, with the potential to transform cancer diagnosis, prognosis, and treatment selection by learning transferable representations from large-scale histopathology data. A growing landscape of pathology foundation models now spans diverse data sources, architectures, and downstream applications. However, most pretrained models operate only at the image-tile level, use restrictive licenses, and remain computationally expensive, limiting large-scale slide-level clinical and research use.\n  Here, we introduce GigaPath-Flash and GigaTIME-Flash, efficient models for whole-slide pathology AI and spatial proteomics prediction. GigaPath-Flash combines a 22M-parameter ViT-S tile encoder with a 21M-parameter LongNet slide encoder, both pretrained on large-scale real-world histopathology data. Its compact tile encoder is distilled from the billion-parameter GigaPath (ViT-g) teacher and shared by both models. GigaPath-Flash retains 97% of GigaPath's average slide-level performance with 50x less compute. GigaTIME-Flash extends this backbone to predict the tumor immune microenvironment directly from routine H&amp;E images. It surpasses the original CNN-based GigaTIME in prediction quality while running 6x faster and using 8x less GPU memory.\n  Together with GigaPath and GigaTIME, these models form an open-weight, Apache-2.0-licensed family pretrained on large-scale real-world clinical data. By releasing all models and weights, we provide accessible building blocks for computational pathology, immuno-oncology, and precision health.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-20T17:52:33Z</ns0:published>\n    <ns1:comment>Models: https://aka.ms/gigapath-flash (GigaPath-Flash) and https://aka.ms/gigatime-flash (GigaTIME-Flash)</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Naoto Usuyama</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jeya Maria Jose Valanarasu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sicong Yao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hanwen Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jaspreet Bagga</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guanghui Qin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Robert E. Kramer</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Cliff Wong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Soohee Lee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hao Qiu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Theodore Zhengde Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Racheli Ben Shimol</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Angela Crabtree</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kevin Matlock</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Eduardo Alejandro Lozano Garcia</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Naiteek Sangani</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alberto Santamaria-Pang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Maximilian Rokuss</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yashna Hasija</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Naisargi Manishkumar Patel</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jason Entenmann</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alexandra Q. Bartlett</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bill J. Wright</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bernard A. Fox</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Brian Piening</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sheng Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sheng Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tristan Naumann</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Carlo Bifulco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hoifung Poon</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Efficient pathology foundation models GigaPath-Flash and GigaTIME-Flash: distilled ViT-S tile and LongNet slide encoders predict tumor immune microenvironment…",
+  "title": "GigaPath-Flash and GigaTIME-Flash: Efficient Pathology Foundation Models for Whole-Slide and Tumor Microenvironment Analysis",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.18218v2"
+}

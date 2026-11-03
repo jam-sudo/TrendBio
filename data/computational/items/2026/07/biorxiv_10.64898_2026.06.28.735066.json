@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationMapping PacBio HiFi reads is a routine task and serves as a central step in many bioinformatics analyses. However, the most accurate long-read mappers have a high memory consumption and are slow. Some light-weight mappers have been proposed for faster runtime, but their accuracy is not comparable to state-of-the-art mappers. With the increasing number of available reference sequences, memory-efficient and fast methods for read mapping without the large accuracy drop are desired. A general trade-off with seed-chain-extend mappers is selecting a single, fixed seed size, which forces a compromise between sensitivity and specificity.\n\nResultsWe present synpact, a long-read mapper that uses several seed sizes (a hierarchy) constructed with Locally Consistent Parsing (LCP) over syncmers. A read is mapped by querying for matches at different levels, followed by sliding window voting. By storing only the coarse upper levels rather than the full hierarchy, the index holds several times fewer entries, while still handling errors by falling back from coarser to finer stored levels at query time. We benchmark synpact against popular long-read mappers on four genomes and different read lengths. For simulated PacBio HiFi data, synpact matches or approaches minimap2 accuracy with higher precision in most cases, while using roughly 5-13x less peak memory (e.g., [~]0.8 GB vs. [~]10.7 GB on human) and mapping faster on large or repetitive genomes (e.g., about 10 to 13 times faster than minimap2 on rye). On real HiFi reads synpact has high concordance with minimap2 across the four genomes, as opposed to the other lightweight long-read mappers. Availability and Implementation: synpact is written in Rust and is available at https://github.com/mahmudsami/synpact",
+  "authors": [
+    "Aydin, M. S.",
+    "Sahlin, K."
+  ],
+  "doi": "10.64898/2026.06.28.735066",
+  "first_seen": "2026-07-02",
+  "id": "biorxiv:10.64898/2026.06.28.735066",
+  "metadata": {
+    "abstract": "MotivationMapping PacBio HiFi reads is a routine task and serves as a central step in many bioinformatics analyses. However, the most accurate long-read mappers have a high memory consumption and are slow. Some light-weight mappers have been proposed for faster runtime, but their accuracy is not comparable to state-of-the-art mappers. With the increasing number of available reference sequences, memory-efficient and fast methods for read mapping without the large accuracy drop are desired. A general trade-off with seed-chain-extend mappers is selecting a single, fixed seed size, which forces a compromise between sensitivity and specificity.\n\nResultsWe present synpact, a long-read mapper that uses several seed sizes (a hierarchy) constructed with Locally Consistent Parsing (LCP) over syncmers. A read is mapped by querying for matches at different levels, followed by sliding window voting. By storing only the coarse upper levels rather than the full hierarchy, the index holds several times fewer entries, while still handling errors by falling back from coarser to finer stored levels at query time. We benchmark synpact against popular long-read mappers on four genomes and different read lengths. For simulated PacBio HiFi data, synpact matches or approaches minimap2 accuracy with higher precision in most cases, while using roughly 5-13x less peak memory (e.g., [~]0.8 GB vs. [~]10.7 GB on human) and mapping faster on large or repetitive genomes (e.g., about 10 to 13 times faster than minimap2 on rye). On real HiFi reads synpact has high concordance with minimap2 across the four genomes, as opposed to the other lightweight long-read mappers. Availability and Implementation: synpact is written in Rust and is available at https://github.com/mahmudsami/synpact",
+    "author_corresponding": "Kristoffer Sahlin",
+    "author_corresponding_institution": "Stockholm University",
+    "authors": "Aydin, M. S.; Sahlin, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-02",
+    "doi": "10.64898/2026.06.28.735066",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/02/2026.06.28.735066.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "synpact: accurate, memory-light PacBio HiFi read mapping via a hierarchy of locally-consistent syncmer blocks",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Stockholm University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "synpact is a memory-light PacBio HiFi read mapper using a hierarchy of LCP-over-syncmer seed levels with sliding-window voting; it approaches minimap2 accuracy…",
+  "title": "synpact: accurate, memory-light PacBio HiFi read mapping via a hierarchy of locally-consistent syncmer blocks",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.28.735066"
+}

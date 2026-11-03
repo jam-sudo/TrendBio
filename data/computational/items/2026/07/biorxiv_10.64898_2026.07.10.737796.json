@@ -1,0 +1,44 @@
+{
+  "abstract": "MotivationSignal-space nanopore mappers enable real-time mapping and filtering decisions directly from raw nanopore signals. However, existing signal-space mappers are built around linear references, and using a single representative reference can introduce reference bias when the sample diverges from that reference. Pangenome reference collections can reduce this bias by representing diversity across related reference sequences, but linear-reference signal mappers must treat each sequence as a separate target, redundantly storing shared sequences. Pangenome variation graphs provide a more compact representation by storing shared sequences once and encoding variants as alternative paths through the graph. Although sequence-to-graph mapping is well established for basecalled reads, existing signal-space methods do not directly use pangenome variation graphs.\n\nResultsWe present Panomap, the first signal-space mapper that operates on pangenome variation graphs. Panomap maps raw nanopore signals to graph references, allowing signal-space mapping to use pangenome diversity while representing shared sequences once. We evaluate Panomap in three settings. First, when a single reference already maps the sample well, Panomap preserves mapping accuracy as additional reference sequences are added to the reference collection, while state-of-the-art signal-space tools regress. Second, when the exact sample strain is absent from the reference collection, Panomap benefits from adding related assemblies from the same species to the pangenome reference. Third, using a highly polymorphic locus, we show that Panomap can map reads from alleles not represented in the reference collection by using related alleles in the pangenome, with the largest gains for more divergent alleles and for decisions made from short prefixes of the read signal. In addition, Panomaps graph index scales sublinearly with pangenome collection size. Together, these results show that Panomap brings population-aware reference representation into signal-space mapping.\n\nAvailability and ImplementationPanomap is open source and available at https://github.com/cornell-brg/panomap.\n\nContactps2229@cornell.edu",
+  "authors": [
+    "Shih, P. J.",
+    "Sanghani, Z.",
+    "Guarracino, A.",
+    "Gamaarachchi, H.",
+    "Batten, C."
+  ],
+  "doi": "10.64898/2026.07.10.737796",
+  "first_seen": "2026-07-11",
+  "id": "biorxiv:10.64898/2026.07.10.737796",
+  "metadata": {
+    "abstract": "MotivationSignal-space nanopore mappers enable real-time mapping and filtering decisions directly from raw nanopore signals. However, existing signal-space mappers are built around linear references, and using a single representative reference can introduce reference bias when the sample diverges from that reference. Pangenome reference collections can reduce this bias by representing diversity across related reference sequences, but linear-reference signal mappers must treat each sequence as a separate target, redundantly storing shared sequences. Pangenome variation graphs provide a more compact representation by storing shared sequences once and encoding variants as alternative paths through the graph. Although sequence-to-graph mapping is well established for basecalled reads, existing signal-space methods do not directly use pangenome variation graphs.\n\nResultsWe present Panomap, the first signal-space mapper that operates on pangenome variation graphs. Panomap maps raw nanopore signals to graph references, allowing signal-space mapping to use pangenome diversity while representing shared sequences once. We evaluate Panomap in three settings. First, when a single reference already maps the sample well, Panomap preserves mapping accuracy as additional reference sequences are added to the reference collection, while state-of-the-art signal-space tools regress. Second, when the exact sample strain is absent from the reference collection, Panomap benefits from adding related assemblies from the same species to the pangenome reference. Third, using a highly polymorphic locus, we show that Panomap can map reads from alleles not represented in the reference collection by using related alleles in the pangenome, with the largest gains for more divergent alleles and for decisions made from short prefixes of the read signal. In addition, Panomaps graph index scales sublinearly with pangenome collection size. Together, these results show that Panomap brings population-aware reference representation into signal-space mapping.\n\nAvailability and ImplementationPanomap is open source and available at https://github.com/cornell-brg/panomap.\n\nContactps2229@cornell.edu",
+    "author_corresponding": "Po Jui Shih",
+    "author_corresponding_institution": "Cornell University",
+    "authors": "Shih, P. J.; Sanghani, Z.; Guarracino, A.; Gamaarachchi, H.; Batten, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-11",
+    "doi": "10.64898/2026.07.10.737796",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/11/2026.07.10.737796.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Panomap: Unbiased Nanopore Signal Mapping with Pangenome Variation Graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Cornell University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Panomap is a signal-space nanopore mapper that maps raw signals to pangenome variation graphs, reducing reference bias and scaling sublinearly with collection…",
+  "title": "Panomap: Unbiased Nanopore Signal Mapping with Pangenome Variation Graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.10.737796"
+}

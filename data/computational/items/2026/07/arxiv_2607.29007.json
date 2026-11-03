@@ -1,0 +1,47 @@
+{
+  "abstract": "Brain-computer interfaces translate neural activity into device commands, yet their performance hinges on preprocessing that remains manual, expert-dependent and poorly reproducible. Large language model agents can automate scientific coding, but existing systems lack the modality coverage, raw-data isolation, experience accumulation and domain oversight that neural preprocessing requires. We introduce EasyBCI, a two-phase LLM agent that plans and executes preprocessing pipelines for six signal types. A Plan Agent profiles each recording into a text-only Data Fingerprint that never exposes raw data to the model and selects a literature-grounded operator sequence. An Execution Agent generates, runs and self-corrects code until quality criteria are met, while a quality-gated experience system retains validated strategies as reusable skills. A domain expert intervenes at two decision gates, retaining human judgement where undetected error can invalidate downstream analyses. Evaluation on EEG with a fixed linear classifier shows that all five EasyBCI backbones preserve more task-relevant separability than the manual pipeline. Under same-backbone comparison, EasyBCI outperforms general-purpose coding agents on both label schemes for four of five configurations. EasyBCI extends to five additional modalities spanning nearly three orders of magnitude in sampling rate, producing complete reproducible pipelines with recorded decision provenance. These results indicate that domain-specific orchestration can bring auditable preprocessing within reach of laboratories lacking dedicated expertise, illustrating design principles applicable to AI agents in other scientific domains.",
+  "authors": [
+    "Yu Zhu",
+    "Runkai Zhao",
+    "Zhimin Zhou",
+    "Jinyu Cai",
+    "Zhouheng Yao",
+    "Chutian Zhang",
+    "Peiyuan Li",
+    "Xiaoxing Zhang",
+    "Qihao Zheng",
+    "Jiamin Wu",
+    "Mianxin Liu",
+    "Chi Zhang",
+    "Bo Zhang",
+    "Bin Min",
+    "Lei Bai",
+    "Chengyu Li",
+    "Jingpeng Wu",
+    "Chunfeng Song"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-31",
+  "id": "arxiv:2607.29007",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.29007v3</ns0:id>\n    <ns0:title>EasyBCI Agent: Towards Universal Neural Data Preprocessing for Brain-Computer Interfaces</ns0:title>\n    <ns0:updated>2026-09-01T06:29:08Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.29007v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.29007v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Brain-computer interfaces translate neural activity into device commands, yet their performance hinges on preprocessing that remains manual, expert-dependent and poorly reproducible. Large language model agents can automate scientific coding, but existing systems lack the modality coverage, raw-data isolation, experience accumulation and domain oversight that neural preprocessing requires. We introduce EasyBCI, a two-phase LLM agent that plans and executes preprocessing pipelines for six signal types. A Plan Agent profiles each recording into a text-only Data Fingerprint that never exposes raw data to the model and selects a literature-grounded operator sequence. An Execution Agent generates, runs and self-corrects code until quality criteria are met, while a quality-gated experience system retains validated strategies as reusable skills. A domain expert intervenes at two decision gates, retaining human judgement where undetected error can invalidate downstream analyses. Evaluation on EEG with a fixed linear classifier shows that all five EasyBCI backbones preserve more task-relevant separability than the manual pipeline. Under same-backbone comparison, EasyBCI outperforms general-purpose coding agents on both label schemes for four of five configurations. EasyBCI extends to five additional modalities spanning nearly three orders of magnitude in sampling rate, producing complete reproducible pipelines with recorded decision provenance. These results indicate that domain-specific orchestration can bring auditable preprocessing within reach of laboratories lacking dedicated expertise, illustrating design principles applicable to AI agents in other scientific domains.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-31T04:07:58Z</ns0:published>\n    <ns1:comment>15 pages, 6 figures, 3 tables</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Yu Zhu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Runkai Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhimin Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jinyu Cai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhouheng Yao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chutian Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peiyuan Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaoxing Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qihao Zheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiamin Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mianxin Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chi Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bo Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bin Min</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lei Bai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chengyu Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingpeng Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chunfeng Song</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-31",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "EasyBCI is a two-phase LLM agent that automates reproducible neural signal preprocessing for brain-computer interfaces across six signal types, with expert…",
+  "title": "EasyBCI Agent: Towards Universal Neural Data Preprocessing for Brain-Computer Interfaces",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.29007v3"
+}

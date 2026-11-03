@@ -1,0 +1,41 @@
+{
+  "abstract": "Accurate prediction of Absorption, Distribution, Metabolism, Excretion, and Toxicity (ADMET) properties is a central challenge in early-stage drug discovery, where experimental determination remains costly and time-consuming. In this work, we propose a quantum-inspired preprocessing framework in which statistical dependencies among molecular descriptors are encoded into a parameterised many-body Hamiltonian, and the expectation values obtained by simulating its time evolution serve as additional inputs to a gradient-boosted ensemble model (CatBoost). Mutual information (MI) is used both to select the most informative descriptors and to set the coupling strengths of the Hamiltonian, so that the induced entanglement structure reflects empirically measured feature correlations; the evolution is realised with a short digitised-counterdiabatic schedule that generates a compact set of expectation-value features while keeping the circuit shallow. The resulting quantum-derived feature vectors are concatenated with the full MapLight descriptor set, concatenated ECFP, Avalon, and ErG fingerprints together with RDKit physicochemical properties, before training. We evaluate the pipeline on the AqSolDB aqueous solubility benchmark from the Therapeutics Data Commons (TDC) platform, achieving a mean absolute error (MAE) of 0.746 {+/-} 0.006 log(mol/L), which is within the reported error bars of the current top-performing model on the TDC leaderboard (MAE = 0.741 {+/-} 0.013). Ablation experiments show that the quantum-derived features match classical second-degree polynomial interaction features derived from the same MI-selected subset, while forming a far more compact representation (85 quantum features versus up to 4,950 polynomial terms, an approximately 58-fold reduction). SHapley Additive exPlanations (SHAP) analysis identifies the physicochemical drivers of solubility predictions, offering interpretable insight into model behaviour. These results demonstrate that MI-guided Hamiltonian feature extraction can reproduce the performance of strong classical interaction models on aqueous solubility while generating a compact, interpretable feature representation that is compatible with future quantum execution.",
+  "authors": [
+    "Mansour, B.",
+    "Rafaelyan, G."
+  ],
+  "doi": "10.64898/2026.06.30.735582",
+  "first_seen": "2026-07-05",
+  "id": "biorxiv:10.64898/2026.06.30.735582",
+  "metadata": {
+    "abstract": "Accurate prediction of Absorption, Distribution, Metabolism, Excretion, and Toxicity (ADMET) properties is a central challenge in early-stage drug discovery, where experimental determination remains costly and time-consuming. In this work, we propose a quantum-inspired preprocessing framework in which statistical dependencies among molecular descriptors are encoded into a parameterised many-body Hamiltonian, and the expectation values obtained by simulating its time evolution serve as additional inputs to a gradient-boosted ensemble model (CatBoost). Mutual information (MI) is used both to select the most informative descriptors and to set the coupling strengths of the Hamiltonian, so that the induced entanglement structure reflects empirically measured feature correlations; the evolution is realised with a short digitised-counterdiabatic schedule that generates a compact set of expectation-value features while keeping the circuit shallow. The resulting quantum-derived feature vectors are concatenated with the full MapLight descriptor set, concatenated ECFP, Avalon, and ErG fingerprints together with RDKit physicochemical properties, before training. We evaluate the pipeline on the AqSolDB aqueous solubility benchmark from the Therapeutics Data Commons (TDC) platform, achieving a mean absolute error (MAE) of 0.746 {+/-} 0.006 log(mol/L), which is within the reported error bars of the current top-performing model on the TDC leaderboard (MAE = 0.741 {+/-} 0.013). Ablation experiments show that the quantum-derived features match classical second-degree polynomial interaction features derived from the same MI-selected subset, while forming a far more compact representation (85 quantum features versus up to 4,950 polynomial terms, an approximately 58-fold reduction). SHapley Additive exPlanations (SHAP) analysis identifies the physicochemical drivers of solubility predictions, offering interpretable insight into model behaviour. These results demonstrate that MI-guided Hamiltonian feature extraction can reproduce the performance of strong classical interaction models on aqueous solubility while generating a compact, interpretable feature representation that is compatible with future quantum execution.",
+    "author_corresponding": "Basel Mansour Sr.",
+    "author_corresponding_institution": "TakaHuman LLC",
+    "authors": "Mansour, B.; Rafaelyan, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-05",
+    "doi": "10.64898/2026.06.30.735582",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/05/2026.06.30.735582.source.xml",
+    "license": "cc0",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ADMET Property Prediction with Quantum-Inspired Preprocessing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "TakaHuman LLC",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "MI-guided quantum-inspired Hamiltonian features match top TDC AqSolDB solubility MAE with 58-fold fewer interaction features.",
+  "title": "ADMET Property Prediction with Quantum-Inspired Preprocessing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.30.735582"
+}

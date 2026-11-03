@@ -1,0 +1,41 @@
+{
+  "abstract": "The rapid growth of biological data demands scalable yet robust phylogenetic methods. Distance-based approaches are widely adopted not only in alignment-based molecular phylogenetics but also in emerging applications involving alternative distance measures. Balanced minimum evolution (BME) is an important principle in distance-based phylogenetic inference. A heuristic for BME using a taxon addition strategy was developed and provided by the FastME package, producing accurate tree topologies compared with alternative methods. However, beyond the original FastME implementation, there has been little development aimed at scaling this algorithm to the size of modern datasets. We present a significantly redesigned implementation of the BME algorithm that substantially improves computational efficiency while preserving mathematical equivalence. The key algorithmic improvement is the replacement of recursive tree traversal with flattened, incrementally growing arrays representing tree topology, traversal order and node properties. This design reduces traversal overhead, improves memory locality, and enables parallelization of the BME algorithm for the first time. Benchmarks show that our implementation delivers multiple dozen-fold speedup while consuming half the memory of FastME on datasets with tens of thousands of taxa. It can effectively analyze datasets of over 100,000 taxa, which are prohibitive with FastME. In addition, this implementation compares favorably in both efficiency and solution quality with a modern implementation of neighbor joining (NJ), an alternative BME heuristic using an agglomerative clustering strategy. Our BME algorithm has been released as part of the open-source Python library scikit-bio. It substantially broadens access to BME-based phylogenetic inference at scale.",
+  "authors": [
+    "Tapo, C.",
+    "Zhu, Q."
+  ],
+  "doi": "10.64898/2026.07.27.740982",
+  "first_seen": "2026-07-29",
+  "id": "biorxiv:10.64898/2026.07.27.740982",
+  "metadata": {
+    "abstract": "The rapid growth of biological data demands scalable yet robust phylogenetic methods. Distance-based approaches are widely adopted not only in alignment-based molecular phylogenetics but also in emerging applications involving alternative distance measures. Balanced minimum evolution (BME) is an important principle in distance-based phylogenetic inference. A heuristic for BME using a taxon addition strategy was developed and provided by the FastME package, producing accurate tree topologies compared with alternative methods. However, beyond the original FastME implementation, there has been little development aimed at scaling this algorithm to the size of modern datasets. We present a significantly redesigned implementation of the BME algorithm that substantially improves computational efficiency while preserving mathematical equivalence. The key algorithmic improvement is the replacement of recursive tree traversal with flattened, incrementally growing arrays representing tree topology, traversal order and node properties. This design reduces traversal overhead, improves memory locality, and enables parallelization of the BME algorithm for the first time. Benchmarks show that our implementation delivers multiple dozen-fold speedup while consuming half the memory of FastME on datasets with tens of thousands of taxa. It can effectively analyze datasets of over 100,000 taxa, which are prohibitive with FastME. In addition, this implementation compares favorably in both efficiency and solution quality with a modern implementation of neighbor joining (NJ), an alternative BME heuristic using an agglomerative clustering strategy. Our BME algorithm has been released as part of the open-source Python library scikit-bio. It substantially broadens access to BME-based phylogenetic inference at scale.",
+    "author_corresponding": "Qiyun Zhu",
+    "author_corresponding_institution": "Arizona State University",
+    "authors": "Tapo, C.; Zhu, Q.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-29",
+    "doi": "10.64898/2026.07.27.740982",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/29/2026.07.27.740982.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Parallel and scalable balanced minimum evolution algorithm for large-scale phylogenetic inference",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Arizona State University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Redesigned, parallelized balanced minimum evolution (BME) algorithm using flattened arrays instead of recursion; multi-dozen-fold speedup over FastME and…",
+  "title": "Parallel and scalable balanced minimum evolution algorithm for large-scale phylogenetic inference",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.27.740982"
+}
