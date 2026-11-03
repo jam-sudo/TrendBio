@@ -1,0 +1,42 @@
+{
+  "abstract": "The increasing use of tumor sequencing has intensified the need for fast, traceable interpretation of genomic variants. General-purpose large language models can produce fluent answers, but unsupported statements, weak provenance, and stale knowledge limit their suitability for clinical genomics. We developed OncoGenRAG, a research framework that combines a parameter-efficiently fine-tuned BioBERT classifier with an entity-aware retrieval system over a curated, multi-source oncology knowledge base. The reported knowledge base contains 933 harmonized records derived from CIViC, ClinVar/dbSNP, Open Targets, UniProtKB/Swiss-Prot, Ensembl Variation, and linked PubMed literature. The classifier assigns one of five labels: Pathogenic, Likely Pathogenic, Variant of Uncertain Significance, Benign, or Oncogenic; the retrieval component ranks evidence records using subword TF-IDF similarity and explicit gene, variant, and cancer-type matches. A rejection rule suppresses answers when retrieval support is below a prespecified threshold. In the authors held-out evaluation, the classifier achieved 92.40% accuracy, 93.15% weighted precision, 92.40% weighted recall, and 92.65% weighted F1 score. In a separate benchmark of 100 clinical-style queries, OncoGenRAG achieved reported Precision@1 of 94.5%, Precision@3 of 96.8%, and 100% database grounding. No hallucinated answer was observed under the study operational definition, compared with a 41.0% no-hallucination rate for the ungrounded baseline. These results should be interpreted as internal validation rather than proof of universal safety because query construction, annotator agreement, class-specific performance, calibration, and external validation data were not available for independent analysis. OncoGenRAG provides a transparent design for evidence retrieval and abstention, but it is a research prototype and must not be used to select treatment without expert review.",
+  "authors": [
+    "Arif, A.",
+    "Filho, J. V. d. S."
+  ],
+  "doi": "10.64898/2026.08.20.746121",
+  "first_seen": "2026-08-22",
+  "id": "biorxiv:10.64898/2026.08.20.746121",
+  "metadata": {
+    "abstract": "The increasing use of tumor sequencing has intensified the need for fast, traceable interpretation of genomic variants. General-purpose large language models can produce fluent answers, but unsupported statements, weak provenance, and stale knowledge limit their suitability for clinical genomics. We developed OncoGenRAG, a research framework that combines a parameter-efficiently fine-tuned BioBERT classifier with an entity-aware retrieval system over a curated, multi-source oncology knowledge base. The reported knowledge base contains 933 harmonized records derived from CIViC, ClinVar/dbSNP, Open Targets, UniProtKB/Swiss-Prot, Ensembl Variation, and linked PubMed literature. The classifier assigns one of five labels: Pathogenic, Likely Pathogenic, Variant of Uncertain Significance, Benign, or Oncogenic; the retrieval component ranks evidence records using subword TF-IDF similarity and explicit gene, variant, and cancer-type matches. A rejection rule suppresses answers when retrieval support is below a prespecified threshold. In the authors held-out evaluation, the classifier achieved 92.40% accuracy, 93.15% weighted precision, 92.40% weighted recall, and 92.65% weighted F1 score. In a separate benchmark of 100 clinical-style queries, OncoGenRAG achieved reported Precision@1 of 94.5%, Precision@3 of 96.8%, and 100% database grounding. No hallucinated answer was observed under the study operational definition, compared with a 41.0% no-hallucination rate for the ungrounded baseline. These results should be interpreted as internal validation rather than proof of universal safety because query construction, annotator agreement, class-specific performance, calibration, and external validation data were not available for independent analysis. OncoGenRAG provides a transparent design for evidence retrieval and abstention, but it is a research prototype and must not be used to select treatment without expert review.",
+    "author_corresponding": "Amaan Arif",
+    "author_corresponding_institution": "Integral University, Lucknow, India",
+    "authors": "Arif, A.; Filho, J. V. d. S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-22",
+    "doi": "10.64898/2026.08.20.746121",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/22/2026.08.20.746121.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "OncoGenRAG: Evidence-Grounded Retrieval and BioBERT Classification for Precision Oncology Variant Interpretation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Integral University, Lucknow, India",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "OncoGenRAG pairs a fine-tuned BioBERT variant classifier with evidence retrieval over 933 oncology records (CIViC, ClinVar, Open Targets) and abstention;…",
+  "title": "OncoGenRAG: Evidence-Grounded Retrieval and BioBERT Classification for Precision Oncology Variant Interpretation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.20.746121"
+}

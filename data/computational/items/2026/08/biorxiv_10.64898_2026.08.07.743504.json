@@ -1,0 +1,43 @@
+{
+  "abstract": "Single cell RNA-sequencing (scRNA-Seq) data are typically represented as cell-by-gene count matrices, which capture the expression of each gene as detected in the sampled cells; often a heterogeneous population of multiple different cell types or cell states. Almost all scRNA-Seq analysis workflows have a gene selection step prior to applying clustering algorithms which helps remove genes with low variability and hence reduce the high-dimensional gene space. A de-facto method for achieving selection of highly variable genes (HVG) uses dispersion and mean expression scores to evaluate the variability of each individual gene. However, methods based on direct mean-to-variance relationship for gene selection often suffer from susceptibility to variance instability and arbitrary determination of the optimal number of genes to use in downstream analysis tasks, additionally, they often prioritize genes with low abundance but high variance. Here, we propose an innovative method for selecting highly variable genes that is not based on mean to variance ratios: \"Principal Genes (PG)\" method; it utilizes the rotations (or loadings) from Principal Component Analysis (PCA) to calculate a novel variability score per gene that we name \"Gene Principal Score (GPS)\". GPS helps evaluate the genes based on their contribution in the PCA rotations and hence ranks the genes according to their variability from highest to lowest variable genes. For efficient implementation we utilize Augmented Implicitly Restarted Lanczos Bidiagonalization methods to efficiently obtain Principal Components (PCs) associated with the largest variance. Genes with the highest GPS score, i.e. Principal Genes, can then be used for downstream analysis tasks, especially the clustering step. To test the performance of our highly variable gene identification method, we use several validation strategies, including clustering of labeled single cell RNA-Seq data (i.e. data with known  ground truth cell type labels). Furthermore, we measure the performance of our method against dispersion-based highly variable gene (HVG) selection approaches. We use several validation metrics, including sensitivity and adjusted rand index scores for clustering based on genes selected using our method against genes selected using HVG; and our validation datasets include six real labeled single cell RNA-Seq datasets. Our findings show that our new method, Principal Genes, is comparable and often favorable in performance in selecting highly variable genes and achieves ultra-fast gene selection from PCA results.",
+  "authors": [
+    "Kakwambi, E.",
+    "Nguyen, T.",
+    "Kapoor, S.",
+    "Marmar, M. R."
+  ],
+  "doi": "10.64898/2026.08.07.743504",
+  "first_seen": "2026-08-17",
+  "id": "biorxiv:10.64898/2026.08.07.743504",
+  "metadata": {
+    "abstract": "Single cell RNA-sequencing (scRNA-Seq) data are typically represented as cell-by-gene count matrices, which capture the expression of each gene as detected in the sampled cells; often a heterogeneous population of multiple different cell types or cell states. Almost all scRNA-Seq analysis workflows have a gene selection step prior to applying clustering algorithms which helps remove genes with low variability and hence reduce the high-dimensional gene space. A de-facto method for achieving selection of highly variable genes (HVG) uses dispersion and mean expression scores to evaluate the variability of each individual gene. However, methods based on direct mean-to-variance relationship for gene selection often suffer from susceptibility to variance instability and arbitrary determination of the optimal number of genes to use in downstream analysis tasks, additionally, they often prioritize genes with low abundance but high variance. Here, we propose an innovative method for selecting highly variable genes that is not based on mean to variance ratios: \"Principal Genes (PG)\" method; it utilizes the rotations (or loadings) from Principal Component Analysis (PCA) to calculate a novel variability score per gene that we name \"Gene Principal Score (GPS)\". GPS helps evaluate the genes based on their contribution in the PCA rotations and hence ranks the genes according to their variability from highest to lowest variable genes. For efficient implementation we utilize Augmented Implicitly Restarted Lanczos Bidiagonalization methods to efficiently obtain Principal Components (PCs) associated with the largest variance. Genes with the highest GPS score, i.e. Principal Genes, can then be used for downstream analysis tasks, especially the clustering step. To test the performance of our highly variable gene identification method, we use several validation strategies, including clustering of labeled single cell RNA-Seq data (i.e. data with known  ground truth cell type labels). Furthermore, we measure the performance of our method against dispersion-based highly variable gene (HVG) selection approaches. We use several validation metrics, including sensitivity and adjusted rand index scores for clustering based on genes selected using our method against genes selected using HVG; and our validation datasets include six real labeled single cell RNA-Seq datasets. Our findings show that our new method, Principal Genes, is comparable and often favorable in performance in selecting highly variable genes and achieves ultra-fast gene selection from PCA results.",
+    "author_corresponding": "Marmar R. Moussa",
+    "author_corresponding_institution": "University of Oklahoma",
+    "authors": "Kakwambi, E.; Nguyen, T.; Kapoor, S.; Marmar, M. R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-17",
+    "doi": "10.64898/2026.08.07.743504",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/17/2026.08.07.743504.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Principal Genes: A PCA-based approach to highly variable genes selection for scRNA-Seq analysis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Oklahoma",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-17",
+  "published_doi": "10.64898/2026.08.07.743504",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes Principal Genes, a PCA-loading-based gene selection method (GPS score) for highly variable genes in scRNA-Seq, outperforming or matching…",
+  "title": "Principal Genes: A PCA-based approach to highly variable genes selection for scRNA-Seq analysis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.07.743504"
+}

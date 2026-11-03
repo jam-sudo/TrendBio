@@ -1,0 +1,44 @@
+{
+  "abstract": "Single-cell atlases of the tumor-immune microenvironment have defined numerous fine-grained immune cell states, but each study uses its own nomenclature and procedure for annotating cell types. Transferring annotations from a reference atlas to a query dataset is complicated by both batch effects and by the presence of query populations that the reference does not contain. Here we present scDIVA, a semi-supervised deep generative model that adapts the Domain Invariant Variational Autoencoder to scRNA-seq for fine-grained tumor-immune label transfer. Three encoders disentangle each cells expression profile into separate latent subspaces for cell type, batch, and residual variation; a single decoder reconstructs the cells expression profile from all three latent embeddings, and auxiliary classifiers on the cell type and batch embeddings encourage each encoder to capture the respective source of variation; scDIVAs cell type embeddings are batch-invariant by construction rather than through explicit or adversarial correction. Benchmarked against four established reference-mapping approaches--Harmony/Symphony, scANVI with scArches, scPoli with scArches, and Seurat with label transfer--across six tumor-immune atlases spanning five cancer types, scDIVA achieved the highest mean macro-F1 in five of six atlases and the highest biological conservation scores. To detect query-enriched populations, we adapted the Milo differential abundance (DA) framework, added a directional test, corrected spatialFDR weighting, and parallelized neighborhood distances for atlas-scale data, and applied it to scDIVAs cell type embeddings with reference- versus-query membership as the condition. This design correctly identified cell types held out from the reference as OOR and flagged exhausted CD8 T cells from a tumor-immune atlas as OOR relative to a healthy pan-tissue immune reference; conversely, this procedure confirmed a conserved immune landscape between two independent colorectal cancer cohorts. scDIVA thus couples fine-grained annotation and integration with an FDR-controlled test for states the reference lacks, solving both tasks required for accurate label transfer in tumor-immune scRNA-seq atlases.",
+  "authors": [
+    "Rapolu, V.",
+    "Karbalayghareh, A.",
+    "Lee, B.",
+    "Wong, W.",
+    "Leslie, C. S."
+  ],
+  "doi": "10.64898/2026.08.07.743520",
+  "first_seen": "2026-08-17",
+  "id": "biorxiv:10.64898/2026.08.07.743520",
+  "metadata": {
+    "abstract": "Single-cell atlases of the tumor-immune microenvironment have defined numerous fine-grained immune cell states, but each study uses its own nomenclature and procedure for annotating cell types. Transferring annotations from a reference atlas to a query dataset is complicated by both batch effects and by the presence of query populations that the reference does not contain. Here we present scDIVA, a semi-supervised deep generative model that adapts the Domain Invariant Variational Autoencoder to scRNA-seq for fine-grained tumor-immune label transfer. Three encoders disentangle each cells expression profile into separate latent subspaces for cell type, batch, and residual variation; a single decoder reconstructs the cells expression profile from all three latent embeddings, and auxiliary classifiers on the cell type and batch embeddings encourage each encoder to capture the respective source of variation; scDIVAs cell type embeddings are batch-invariant by construction rather than through explicit or adversarial correction. Benchmarked against four established reference-mapping approaches--Harmony/Symphony, scANVI with scArches, scPoli with scArches, and Seurat with label transfer--across six tumor-immune atlases spanning five cancer types, scDIVA achieved the highest mean macro-F1 in five of six atlases and the highest biological conservation scores. To detect query-enriched populations, we adapted the Milo differential abundance (DA) framework, added a directional test, corrected spatialFDR weighting, and parallelized neighborhood distances for atlas-scale data, and applied it to scDIVAs cell type embeddings with reference- versus-query membership as the condition. This design correctly identified cell types held out from the reference as OOR and flagged exhausted CD8 T cells from a tumor-immune atlas as OOR relative to a healthy pan-tissue immune reference; conversely, this procedure confirmed a conserved immune landscape between two independent colorectal cancer cohorts. scDIVA thus couples fine-grained annotation and integration with an FDR-controlled test for states the reference lacks, solving both tasks required for accurate label transfer in tumor-immune scRNA-seq atlases.",
+    "author_corresponding": "Christina S Leslie",
+    "author_corresponding_institution": "Memorial Sloan Kettering Cancer Center",
+    "authors": "Rapolu, V.; Karbalayghareh, A.; Lee, B.; Wong, W.; Leslie, C. S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-17",
+    "doi": "10.64898/2026.08.07.743520",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/17/2026.08.07.743520.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "scDIVA: semi-supervised integration and fine-grained annotation of tumor-immune single-cell atlases",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Memorial Sloan Kettering Cancer Center",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-17",
+  "published_doi": "10.64898/2026.08.07.743520",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "scDIVA: a semi-supervised VAE with disentangled cell-type, batch, and residual latents for fine-grained tumor-immune scRNA-seq label transfer and…",
+  "title": "scDIVA: semi-supervised integration and fine-grained annotation of tumor-immune single-cell atlases",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.07.743520"
+}

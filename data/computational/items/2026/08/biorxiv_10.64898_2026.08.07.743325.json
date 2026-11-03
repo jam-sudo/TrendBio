@@ -1,0 +1,48 @@
+{
+  "abstract": "BackgroundZebrafish (Danio rerio) are a powerful vertebrate model for developmental toxicology and chemical safety assessment, yet large-scale transcriptomics in zebrafish remains limited by cost and data heterogeneity. Targeted transcriptomics offers a cost-effective alternative, but gene extrapolation methods tailored to zebrafish have not been systematically developed or evaluated.\n\nObjectivesWhile the S1500+ platform is widely used for toxicogenomics research with rat, mouse, and human cell lines as model systems, its use in zebrafish has been limited due to data scarcity and lack of suitable bioinformatics approaches for analysis of such data. To that end, we sought to (i) curate a large zebrafish transcriptomic training data resource, and (ii) evaluate multiple machine learning strategies for reconstructing unmeasured transcriptome-wide expression profiles for data originating from the zebrafish-specific reduced representation gene set (\"Zf S1500+\").\n\nMethodsWe assembled 14,924 zebrafish RNA-Seq samples covering 21,930 genes across 1,246 studies. Using the Zf S1500+ gene subset (3,062 genes), we trained and tested three extrapolation approaches: principal components regression (PCR), a locally weighted extension of PCR (PCR+), and a neural network mixture-of-experts model (NN-MoE). Model performance was assessed using mean absolute error (MAE), mean squared regression error (MSRE), and weighted variants of these metrics.\n\nResultsExtrapolation performance using the baseline approach was strongly influenced by tissue and developmental context, with within-tissue models outperforming cross-tissue models. Errors were lowest when training and testing were conducted within the same tissue or between developmentally related tissues. Both PCR+ and NN-MoE improved upon the baseline PCR approach, with NN-MoE reducing average MAE by [~]20% and MSRE by [~]17%. Importantly, extrapolation remained reliable for the majority of genes, even when limiting output to high-confidence predictions using an empirical MAE threshold.\n\nConclusionsWe demonstrate that targeted transcriptomics can be effectively extended to zebrafish, enabling robust transcriptome-wide extrapolation at reduced cost. The NN-MoE method provided the most substantial gains, highlighting the value of non-linear and ensemble modeling in heterogeneous datasets. These results establish a scalable framework for zebrafish toxicogenomics and suggest that accuracy will continue to improve with larger, better-annotated datasets, paving the way for broader application in chemical safety assessments.",
+  "authors": [
+    "Howard, B.",
+    "Mav, D.",
+    "Balik-Meisner, M.",
+    "Phadke, D.",
+    "Scholl, E.",
+    "Green, A.",
+    "Truong, L.",
+    "Tanguay, R.",
+    "Shah, R."
+  ],
+  "doi": "10.64898/2026.08.07.743325",
+  "first_seen": "2026-08-17",
+  "id": "biorxiv:10.64898/2026.08.07.743325",
+  "metadata": {
+    "abstract": "BackgroundZebrafish (Danio rerio) are a powerful vertebrate model for developmental toxicology and chemical safety assessment, yet large-scale transcriptomics in zebrafish remains limited by cost and data heterogeneity. Targeted transcriptomics offers a cost-effective alternative, but gene extrapolation methods tailored to zebrafish have not been systematically developed or evaluated.\n\nObjectivesWhile the S1500+ platform is widely used for toxicogenomics research with rat, mouse, and human cell lines as model systems, its use in zebrafish has been limited due to data scarcity and lack of suitable bioinformatics approaches for analysis of such data. To that end, we sought to (i) curate a large zebrafish transcriptomic training data resource, and (ii) evaluate multiple machine learning strategies for reconstructing unmeasured transcriptome-wide expression profiles for data originating from the zebrafish-specific reduced representation gene set (\"Zf S1500+\").\n\nMethodsWe assembled 14,924 zebrafish RNA-Seq samples covering 21,930 genes across 1,246 studies. Using the Zf S1500+ gene subset (3,062 genes), we trained and tested three extrapolation approaches: principal components regression (PCR), a locally weighted extension of PCR (PCR+), and a neural network mixture-of-experts model (NN-MoE). Model performance was assessed using mean absolute error (MAE), mean squared regression error (MSRE), and weighted variants of these metrics.\n\nResultsExtrapolation performance using the baseline approach was strongly influenced by tissue and developmental context, with within-tissue models outperforming cross-tissue models. Errors were lowest when training and testing were conducted within the same tissue or between developmentally related tissues. Both PCR+ and NN-MoE improved upon the baseline PCR approach, with NN-MoE reducing average MAE by [~]20% and MSRE by [~]17%. Importantly, extrapolation remained reliable for the majority of genes, even when limiting output to high-confidence predictions using an empirical MAE threshold.\n\nConclusionsWe demonstrate that targeted transcriptomics can be effectively extended to zebrafish, enabling robust transcriptome-wide extrapolation at reduced cost. The NN-MoE method provided the most substantial gains, highlighting the value of non-linear and ensemble modeling in heterogeneous datasets. These results establish a scalable framework for zebrafish toxicogenomics and suggest that accuracy will continue to improve with larger, better-annotated datasets, paving the way for broader application in chemical safety assessments.",
+    "author_corresponding": "Brian E Howard",
+    "author_corresponding_institution": "Sciome LLC",
+    "authors": "Howard, B.; Mav, D.; Balik-Meisner, M.; Phadke, D.; Scholl, E.; Green, A.; Truong, L.; Tanguay, R.; Shah, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-17",
+    "doi": "10.64898/2026.08.07.743325",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/17/2026.08.07.743325.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Leveraging Targeted Gene Sets and Neural Networks for Zebrafish Transcriptome Extrapolation in High-Throughput Toxicogenomics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Sciome LLC",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-08-17",
+  "published_doi": "10.64898/2026.08.07.743325",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Curates 14,924 zebrafish RNA-seq samples and compares PCR, locally weighted PCR, and a neural mixture-of-experts model to extrapolate transcriptome-wide…",
+  "title": "Leveraging Targeted Gene Sets and Neural Networks for Zebrafish Transcriptome Extrapolation in High-Throughput Toxicogenomics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.07.743325"
+}

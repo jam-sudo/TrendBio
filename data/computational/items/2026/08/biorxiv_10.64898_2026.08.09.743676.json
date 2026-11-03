@@ -1,0 +1,44 @@
+{
+  "abstract": "Genomic Foundation Models (GFMs) are increasingly used for large-scale sequence analysis and generation. Compared with frontier language models, GFMs are typically smaller and frequently operate on long genomic sequences, with evaluation often requiring preservation of biologically meaningful structure and sequence-level relationships. Although low-precision post-training quantization (PTQ) has shown substantial memory and throughput benefits for general-purpose language models, it remains unclear whether these benefits transfer to GFMs given their distinct model scales, sequence characteristics, and evaluation requirements.\n\nWe present an empirical case study of FP8 post-training quantization applied to GenomeOcean, a computationally efficient genomic foundation model with strong reported performance across diverse genomics tasks [Zhou et al., 2025]. Its range of model scales, from 100M to 4B parameters, provides a useful setting for examining how quantization effects vary with model size. We evaluate FP8 across two primary GFM inference regimes--embedding extraction and autoregressive generation--and assess its impact along two dimensions: biological fidelity relative to BF16 baselines and system-level efficiency in terms of throughput, memory usage, and energy efficiency.\n\nWe find that FP8 largely preserves biological fidelity across the evaluated scales and inference regimes, while reducing GPU memory footprint at 4B scale and improving energy efficiency during autoregressive generation. However, realized throughput gains remain substantially below FP8s theoretical 2x hardware ceiling, with a best-case improvement of 19.3% in autoregressive generation and benefits varying strongly by model scale and workload. Autoregressive generation shows the clearest gains, driven largely by KV-cache compression, whereas embedding extraction provides limited or negative throughput benefits at smaller model scales. We attribute this theory-practice gap to the interaction of model-scale effects, memory-system bottlenecks, and software-stack limitations. These findings highlight the need for workload-specific empirical evaluation before adopting low-precision inference in scientific foundation models.\n\nCode availabilityhttps://github.com/jgi-genomeocean/genomeocean_efficiency",
+  "authors": [
+    "Yu, M.",
+    "Egan, R.",
+    "Liu, F.",
+    "Wang, Z.",
+    "Shi, L."
+  ],
+  "doi": "10.64898/2026.08.09.743676",
+  "first_seen": "2026-08-18",
+  "id": "biorxiv:10.64898/2026.08.09.743676",
+  "metadata": {
+    "abstract": "Genomic Foundation Models (GFMs) are increasingly used for large-scale sequence analysis and generation. Compared with frontier language models, GFMs are typically smaller and frequently operate on long genomic sequences, with evaluation often requiring preservation of biologically meaningful structure and sequence-level relationships. Although low-precision post-training quantization (PTQ) has shown substantial memory and throughput benefits for general-purpose language models, it remains unclear whether these benefits transfer to GFMs given their distinct model scales, sequence characteristics, and evaluation requirements.\n\nWe present an empirical case study of FP8 post-training quantization applied to GenomeOcean, a computationally efficient genomic foundation model with strong reported performance across diverse genomics tasks [Zhou et al., 2025]. Its range of model scales, from 100M to 4B parameters, provides a useful setting for examining how quantization effects vary with model size. We evaluate FP8 across two primary GFM inference regimes--embedding extraction and autoregressive generation--and assess its impact along two dimensions: biological fidelity relative to BF16 baselines and system-level efficiency in terms of throughput, memory usage, and energy efficiency.\n\nWe find that FP8 largely preserves biological fidelity across the evaluated scales and inference regimes, while reducing GPU memory footprint at 4B scale and improving energy efficiency during autoregressive generation. However, realized throughput gains remain substantially below FP8s theoretical 2x hardware ceiling, with a best-case improvement of 19.3% in autoregressive generation and benefits varying strongly by model scale and workload. Autoregressive generation shows the clearest gains, driven largely by KV-cache compression, whereas embedding extraction provides limited or negative throughput benefits at smaller model scales. We attribute this theory-practice gap to the interaction of model-scale effects, memory-system bottlenecks, and software-stack limitations. These findings highlight the need for workload-specific empirical evaluation before adopting low-precision inference in scientific foundation models.\n\nCode availabilityhttps://github.com/jgi-genomeocean/genomeocean_efficiency",
+    "author_corresponding": "Lizhen Shi",
+    "author_corresponding_institution": "Northwestern University",
+    "authors": "Yu, M.; Egan, R.; Liu, F.; Wang, Z.; Shi, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-18",
+    "doi": "10.64898/2026.08.09.743676",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/18/2026.08.09.743676.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "FP8 Inference in Genomic Foundation Models: Theoretical vs. Realized Speedups on GenomeOcean",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Northwestern University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Empirical study of FP8 post-training quantization on the GenomeOcean genomic foundation model: biological fidelity largely preserved, but realized speedups…",
+  "title": "FP8 Inference in Genomic Foundation Models: Theoretical vs. Realized Speedups on GenomeOcean",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.09.743676"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Background. Deep-learning classifiers for the fungal internal transcribed spacer (ITS) report accuracies above 90% and are increasingly proposed for environmental metabarcoding. That application differs from the benchmarks in two ways: surveys sequence a primer- bounded subregion, most often ITS2, rather than the full-length reference sequences the models were trained and tested on, and much of what they recover belongs to genera absent from any reference. We tested whether the reported accuracies transfer. Design. Five methods were scored on the same 5,222 queries, one sequence per genus, at two loci: the full-length ITS record, and the ITS2 subregion of that identical record. The methods are the two pretrained deep-learning classifiers distributed with MycoAI, a convolutional network and a transformer sharing a training corpus of 5.23M sequences; two reference-based methods, best-hit alignment and SINTAX; and HiTaC, a hierarchical logistic regression over k-mer counts, which we fitted ourselves to the reference the other two consult. Queries were stratified by whether the query's genus lies in the pretrained models' label space, recovered from the distributed models themselves. A novel genus is one outside that label space, and outside the reference by the same rule, so no method here can return its correct name; seen genera are the rest (2.2). Results. The design favours the pretrained models, whose queries come from the public dataset they were trained on. Even so, on full-length ITS the other three methods exceed both of them at every rank and in both strata, best-hit alignment recovering the correct family for 92.3% of seen-genus queries against 77.9% and 76.5%. Restricting the identical records to ITS2 costs the reference-based methods under four percentage points of seen-genus family accuracy and costs the two pretrained models 49.6 and 58.0, reducing them to 28.3% and 18.5%; HiTaC refitted at that locus recovers 89.2%, so neither learned classification nor the amplicon is what fails. An ablation identifies the cause. Grafting each query's unaltered ITS2 between the flanking regions of a donor record from a different phylum returns the donor's family for 34.4% of queries in the convolutional model and 63.7% in the transformer, against the query's own for 4.2% and 0.8%, from a baseline near zero where no donor is present. The predictions therefore follow the flanking regions rather than the ITS2 barcode, which accounts for the collapse and predicts the same failure for any subregion amplicon. Compounding this, on ITS2 the classifiers' confidence score all but ceases to separate novel from seen genera (AUROC 0.541 and 0.503, the latter at chance, against 0.866 for alignment identity), and the convolutional model is in addition substantially overconfident there, so for that model the failure is not detectable from its own output at all. Recommendation. Reported accuracies for such models should specify the amplicon region of the evaluation, state the length distribution of the training corpus, and be accompanied by a same-query classical baseline.",
+  "authors": [
+    "O'Brien, A.",
+    "Parada, P."
+  ],
+  "doi": "10.64898/2026.07.29.741510",
+  "first_seen": "2026-08-04",
+  "id": "biorxiv:10.64898/2026.07.29.741510",
+  "metadata": {
+    "abstract": "Background. Deep-learning classifiers for the fungal internal transcribed spacer (ITS) report accuracies above 90% and are increasingly proposed for environmental metabarcoding. That application differs from the benchmarks in two ways: surveys sequence a primer- bounded subregion, most often ITS2, rather than the full-length reference sequences the models were trained and tested on, and much of what they recover belongs to genera absent from any reference. We tested whether the reported accuracies transfer. Design. Five methods were scored on the same 5,222 queries, one sequence per genus, at two loci: the full-length ITS record, and the ITS2 subregion of that identical record. The methods are the two pretrained deep-learning classifiers distributed with MycoAI, a convolutional network and a transformer sharing a training corpus of 5.23M sequences; two reference-based methods, best-hit alignment and SINTAX; and HiTaC, a hierarchical logistic regression over k-mer counts, which we fitted ourselves to the reference the other two consult. Queries were stratified by whether the query's genus lies in the pretrained models' label space, recovered from the distributed models themselves. A novel genus is one outside that label space, and outside the reference by the same rule, so no method here can return its correct name; seen genera are the rest (2.2). Results. The design favours the pretrained models, whose queries come from the public dataset they were trained on. Even so, on full-length ITS the other three methods exceed both of them at every rank and in both strata, best-hit alignment recovering the correct family for 92.3% of seen-genus queries against 77.9% and 76.5%. Restricting the identical records to ITS2 costs the reference-based methods under four percentage points of seen-genus family accuracy and costs the two pretrained models 49.6 and 58.0, reducing them to 28.3% and 18.5%; HiTaC refitted at that locus recovers 89.2%, so neither learned classification nor the amplicon is what fails. An ablation identifies the cause. Grafting each query's unaltered ITS2 between the flanking regions of a donor record from a different phylum returns the donor's family for 34.4% of queries in the convolutional model and 63.7% in the transformer, against the query's own for 4.2% and 0.8%, from a baseline near zero where no donor is present. The predictions therefore follow the flanking regions rather than the ITS2 barcode, which accounts for the collapse and predicts the same failure for any subregion amplicon. Compounding this, on ITS2 the classifiers' confidence score all but ceases to separate novel from seen genera (AUROC 0.541 and 0.503, the latter at chance, against 0.866 for alignment identity), and the convolutional model is in addition substantially overconfident there, so for that model the failure is not detectable from its own output at all. Recommendation. Reported accuracies for such models should specify the amplicon region of the evaluation, state the length distribution of the training corpus, and be accompanied by a same-query classical baseline.",
+    "author_corresponding": "Aaron O'Brien",
+    "author_corresponding_institution": "Universidad Andrés Bello",
+    "authors": "O'Brien, A.; Parada, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-04",
+    "doi": "10.64898/2026.07.29.741510",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/04/2026.07.29.741510.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Pretrained deep-learning ITS classifiers read the flanking regions, not the ITS2 barcode, and so fail on the amplicon that environmental fungal surveys sequence",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universidad Andrés Bello",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Pretrained deep-learning ITS classifiers fail on ITS2 amplicons: predictions follow flanking regions, not the barcode, collapsing family accuracy while…",
+  "title": "Pretrained deep-learning ITS classifiers read the flanking regions, not the ITS2 barcode, and so fail on the amplicon that environmental fungal surveys sequence",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.29.741510"
+}

@@ -1,0 +1,40 @@
+{
+  "abstract": "MotivationReference bias depresses variant detection in low-mappability regions, segmental duplications and the major histocompatibility complex (MHC) -- precisely the regions of greatest clinical relevance. Existing benchmarks rely on aggregate precision, recall and F1 metrics that obscure the absolute true-positive and false-positive counts that determine laboratory workload. No study has systematically evaluated IUPAC consensus references for short-read whole-genome sequencing (WGS) variant calling across Genome in a Bottle (GIAB) stratifications, multiple allele-frequency thresholds and multiple variant callers.\n\nResultsWe aligned 30x WGS from three GIAB samples to IUPAC consensus references (allele frequency [&ge;]10% and [&ge;]30%) using the ambiguity-aware aligner novoAlign, benchmarking against BWA-MEM/GRCh38 and novoAlign/GRCh38 baselines across BCFtools, FreeBayes and GATK HaplotypeCaller. SNV recall increased by 3.1-3.9 percentage points (pp) in low-mappability regions and 1.8-3.1 pp in segmental duplications; INDEL recall rose by 4.5-5.8 pp and 2.4-3.8 pp, respectively, with similar gains in the MHC and challenging medically relevant genes (CMRG). Decomposition analysis showed that the aligner change drove most INDEL gains, while IUPAC encoding contributed additional SNV-specific improvement. We introduce BurdenBench, an open-source framework that computes net benefit and region-size-normalised metrics directly from standard hap.py outputs, revealing divergent caller-specific trade-off profiles that are invisible to aggregate F1: FreeBayes showed the most favourable precision-recall balance in low-mappability regions, while GATK achieved positive net benefit in the MHC. A controlled comparison using an identical variant set showed severe recall and precision losses for SALT (a published SNP-aware dual-index aligner) across all three callers, supporting the value of preserving linear reference structure. Pan-human and population-specific consensuses performed within 0.2 pp of one another. All findings are descriptive and hypothesis-generating from three samples.\n\nAvailability and implementationTo mitigate potential bias associated with software developed by an authors employer, primary hap.py outputs and derived burden metrics were independently verified by co-authors with no affiliation to that employer. BurdenBench (v1.0.0) is implemented in Python (pandas, numpy; Python [&ge;]3.7) and freely available under the MIT licence at https://github.com/akzam/BurdenBench, including raw hap.py outputs and an audit trail enabling independent recomputation without a novoAlign licence. novoAlign and novoUtil (version 4, Novocraft Technologies) are commercial software with no-cost academic trial licences.\n\nContactleanne.dibbens@adelaide.edu.au\n\nSupplementary informationSupplementary tables, figures and methods are available online.",
+  "authors": [
+    "Saidin, A.",
+    "Ricos, M. G.",
+    "Dibbens, L. M."
+  ],
+  "doi": "10.64898/2026.08.12.744558",
+  "first_seen": "2026-08-21",
+  "id": "biorxiv:10.64898/2026.08.12.744558",
+  "metadata": {
+    "abstract": "MotivationReference bias depresses variant detection in low-mappability regions, segmental duplications and the major histocompatibility complex (MHC) -- precisely the regions of greatest clinical relevance. Existing benchmarks rely on aggregate precision, recall and F1 metrics that obscure the absolute true-positive and false-positive counts that determine laboratory workload. No study has systematically evaluated IUPAC consensus references for short-read whole-genome sequencing (WGS) variant calling across Genome in a Bottle (GIAB) stratifications, multiple allele-frequency thresholds and multiple variant callers.\n\nResultsWe aligned 30x WGS from three GIAB samples to IUPAC consensus references (allele frequency [&ge;]10% and [&ge;]30%) using the ambiguity-aware aligner novoAlign, benchmarking against BWA-MEM/GRCh38 and novoAlign/GRCh38 baselines across BCFtools, FreeBayes and GATK HaplotypeCaller. SNV recall increased by 3.1-3.9 percentage points (pp) in low-mappability regions and 1.8-3.1 pp in segmental duplications; INDEL recall rose by 4.5-5.8 pp and 2.4-3.8 pp, respectively, with similar gains in the MHC and challenging medically relevant genes (CMRG). Decomposition analysis showed that the aligner change drove most INDEL gains, while IUPAC encoding contributed additional SNV-specific improvement. We introduce BurdenBench, an open-source framework that computes net benefit and region-size-normalised metrics directly from standard hap.py outputs, revealing divergent caller-specific trade-off profiles that are invisible to aggregate F1: FreeBayes showed the most favourable precision-recall balance in low-mappability regions, while GATK achieved positive net benefit in the MHC. A controlled comparison using an identical variant set showed severe recall and precision losses for SALT (a published SNP-aware dual-index aligner) across all three callers, supporting the value of preserving linear reference structure. Pan-human and population-specific consensuses performed within 0.2 pp of one another. All findings are descriptive and hypothesis-generating from three samples.\n\nAvailability and implementationTo mitigate potential bias associated with software developed by an authors employer, primary hap.py outputs and derived burden metrics were independently verified by co-authors with no affiliation to that employer. BurdenBench (v1.0.0) is implemented in Python (pandas, numpy; Python [&ge;]3.7) and freely available under the MIT licence at https://github.com/akzam/BurdenBench, including raw hap.py outputs and an audit trail enabling independent recomputation without a novoAlign licence. novoAlign and novoUtil (version 4, Novocraft Technologies) are commercial software with no-cost academic trial licences.\n\nContactleanne.dibbens@adelaide.edu.au\n\nSupplementary informationSupplementary tables, figures and methods are available online.",
+    "author_corresponding": "Leanne Dibbens",
+    "author_corresponding_institution": "Adelaide University",
+    "authors": "Saidin, A.; Ricos, M. G.; Dibbens, L. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-21",
+    "doi": "10.64898/2026.08.12.744558",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/21/2026.08.12.744558.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "IUPAC Consensus References Improve Short-Read Variant Detection in Clinically Challenging Regions: A Stratified Benchmarking Study with BurdenBench",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Adelaide University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "MotivationReference bias depresses variant detection in low-mappability regions, segmental duplications and the major histocompatibility complex (MHC) -- precis",
+  "title": "IUPAC Consensus References Improve Short-Read Variant Detection in Clinically Challenging Regions: A Stratified Benchmarking Study with BurdenBench",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.12.744558"
+}

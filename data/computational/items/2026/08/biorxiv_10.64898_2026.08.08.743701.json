@@ -1,0 +1,43 @@
+{
+  "abstract": "In high-throughput single-cell transcriptomics (p {approx} 20,000 genes), performing double machine learning (DML) causal inference on q {approx} 5,000 target genes requires nuisance function fits that grow linearly with the number of targets (Kf cross-fitting folds, Kf = 5 or 10), far exceeding feasible computational budgets, especially with deep learning. We propose a Randomized Partition Strategy (RPS): randomly divide target genes into groups, share one background compression per group, reducing deep learning model training to q/m runs (m = group size) --- a factor of m savings. The cost of grouping is accuracy loss --- we prove that the cumulative deviation of the estimator follows a one-dimensional drift-free symmetric random walk, with diffusion variance growing linearly with group size and mean squared displacement equaling the mean squared error, so accuracy loss is predictable: m = 1 is always optimal, accuracy cost is monotonically increasing, and a small accuracy sacrifice yields m-fold compute savings. On GSE189050 SLE single-cell data (Memory B cells, n = 2120), both PCA and DL methods converge to the same conclusion, confirming the random walk mechanism is method-independent; an unexpected finding is that DL diffusion growth is only 16%, far slower than PCAs 7.4 times. This work provides a quantifiable theoretical foundation for compute strategy selection in single-cell high-dimensional causal inference.",
+  "authors": [
+    "Ye, W.",
+    "Jiang, X.",
+    "Shen, F."
+  ],
+  "doi": "10.64898/2026.08.08.743701",
+  "first_seen": "2026-08-10",
+  "id": "biorxiv:10.64898/2026.08.08.743701",
+  "metadata": {
+    "abstract": "In high-throughput single-cell transcriptomics (p {approx} 20,000 genes), performing double machine learning (DML) causal inference on q {approx} 5,000 target genes requires nuisance function fits that grow linearly with the number of targets (Kf cross-fitting folds, Kf = 5 or 10), far exceeding feasible computational budgets, especially with deep learning. We propose a Randomized Partition Strategy (RPS): randomly divide target genes into groups, share one background compression per group, reducing deep learning model training to q/m runs (m = group size) --- a factor of m savings. The cost of grouping is accuracy loss --- we prove that the cumulative deviation of the estimator follows a one-dimensional drift-free symmetric random walk, with diffusion variance growing linearly with group size and mean squared displacement equaling the mean squared error, so accuracy loss is predictable: m = 1 is always optimal, accuracy cost is monotonically increasing, and a small accuracy sacrifice yields m-fold compute savings. On GSE189050 SLE single-cell data (Memory B cells, n = 2120), both PCA and DL methods converge to the same conclusion, confirming the random walk mechanism is method-independent; an unexpected finding is that DL diffusion growth is only 16%, far slower than PCAs 7.4 times. This work provides a quantifiable theoretical foundation for compute strategy selection in single-cell high-dimensional causal inference.",
+    "author_corresponding": "Wei Ye",
+    "author_corresponding_institution": "Xiamen Susong Hospital, Xiamen, China",
+    "authors": "Ye, W.; Jiang, X.; Shen, F.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-08-10",
+    "doi": "10.64898/2026.08.08.743701",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/10/2026.08.08.743701.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Double Machine Learning with Multi-Gene Shared Backgroundfor Causal Inference in Single-Cell Data: Grouping Deviation Follows a Random Walk and the Accuracy-Compute Trade-Off",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Xiamen Susong Hospital, Xiamen, China",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes a Randomized Partition Strategy sharing background compressions across gene groups for double machine learning causal inference in single-cell data,…",
+  "title": "Double Machine Learning with Multi-Gene Shared Backgroundfor Causal Inference in Single-Cell Data: Grouping Deviation Follows a Random Walk and the Accuracy-Compute Trade-Off",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.08.743701"
+}

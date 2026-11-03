@@ -1,0 +1,36 @@
+{
+  "abstract": "Deep clustering models for single-cell RNA sequencing often assign cells through latent or centroid-based mechanisms that are difficult to inspect. We introduce scDNM-VAE (single-cell Dendritic Neuron Model Variational Autoencoder), a deep clustering framework that combines a variational autoencoder with a dendritic neuron-inspired head. Cluster assignments are governed by learnable signed synaptic weights and thresholds: the weight sign determines the direction of a gate's response to a latent coordinate, its magnitude controls steepness, and the weight-threshold pair determines the transition location. The trained clustering function can therefore be inspected directly without fitting a post-hoc explanation model.\n  We benchmark scDNM-VAE on four datasets spanning immune, cortical, cardiac, and hematopoietic cells against scVI followed by KMeans and an MLP-DEC ablation. scDNM-VAE performs better than scVI on PBMC3k, comparably on the Human Heart Cell Atlas and Paul15, and worse on Zeisel, while producing biologically coherent marker-gene signatures. Ablating each cluster's three highest-magnitude synaptic dimensions causes numerically greater reassignment than random-dimension ablation across all datasets, but the margins are modest and negligible on Zeisel. These results show that signed dendritic gating supports competitive clustering with a parameter-inspectable decision function, while indicating that decision-relevant information is distributed across the latent space.",
+  "authors": [
+    "Melih Agraz",
+    "Deniz Karapinar",
+    "Aysel Topsir",
+    "Qianying Cao",
+    "Erol Egrioglu",
+    "Gaurav Choudhary"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-18",
+  "id": "arxiv:2608.17228",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.17228v1</ns0:id>\n    <ns0:title>scDNM-VAE enables directly inspectable deep clustering of single-cell RNA-seq data through signed dendritic gating</ns0:title>\n    <ns0:updated>2026-08-18T00:33:42Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.17228v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.17228v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Deep clustering models for single-cell RNA sequencing often assign cells through latent or centroid-based mechanisms that are difficult to inspect. We introduce scDNM-VAE (single-cell Dendritic Neuron Model Variational Autoencoder), a deep clustering framework that combines a variational autoencoder with a dendritic neuron-inspired head. Cluster assignments are governed by learnable signed synaptic weights and thresholds: the weight sign determines the direction of a gate's response to a latent coordinate, its magnitude controls steepness, and the weight-threshold pair determines the transition location. The trained clustering function can therefore be inspected directly without fitting a post-hoc explanation model.\n  We benchmark scDNM-VAE on four datasets spanning immune, cortical, cardiac, and hematopoietic cells against scVI followed by KMeans and an MLP-DEC ablation. scDNM-VAE performs better than scVI on PBMC3k, comparably on the Human Heart Cell Atlas and Paul15, and worse on Zeisel, while producing biologically coherent marker-gene signatures. Ablating each cluster's three highest-magnitude synaptic dimensions causes numerically greater reassignment than random-dimension ablation across all datasets, but the margins are modest and negligible on Zeisel. These results show that signed dendritic gating supports competitive clustering with a parameter-inspectable decision function, while indicating that decision-relevant information is distributed across the latent space.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-18T00:33:42Z</ns0:published>\n    <ns1:comment>39 pages, 7 figures, 4 tables. Supplementary information available from the authors</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Melih Agraz</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Deniz Karapinar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aysel Topsir</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qianying Cao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Erol Egrioglu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gaurav Choudhary</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "scDNM-VAE pairs a VAE with a signed dendritic gating head for single-cell RNA-seq clustering, yielding inspectable assignments; competitive with scVI on…",
+  "title": "scDNM-VAE enables directly inspectable deep clustering of single-cell RNA-seq data through signed dendritic gating",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.17228v1"
+}

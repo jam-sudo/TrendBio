@@ -1,0 +1,45 @@
+{
+  "abstract": "Constructing interpretable disease models from longitudinal omics data is a central challenge in precision medicine. The goal is a low-dimensional representation in which a patient's position encodes their molecular state and clinical severity, and along which disease progression can be read directly. Existing dimensionality reduction methods (e.g., UMAP, Variational Autoencoders) fall short of this goal: they optimize a single generic objective and are blind to clinical labels and to the temporal ordering of measurements. Consequently, trajectory inference is typically applied after the fact to an embedding that was never optimized to reveal progression, decoupling the representation from disease dynamics. Manifold learning offers a natural route to such representations, and we build on Locally Linear Embedding (LLE) to preserve the local geometry of the omics data (i.e., keeping molecularly similar patients close together in the low-dimensional space). Geometry alone, however, yields a space that is faithful to molecular similarity yet uninformative about clinical severity and progression. We therefore recast the problem as multi-task learning: MT-LLE jointly optimizes five objectives: geometric reconstruction, supervised organization by clinical stage, embedding and phenotype forecasting, and clustering. Because naively combining such heterogeneous objectives induces gradient conflicts that distort the molecular geometry, an embedded reinforcement learning agent dynamically schedules their weights during training, establishing global geometry before refining clinical boundaries. Across two independent Chronic Obstructive Pulmonary Disease (COPD) cohorts (SPIROMICS and COPDGene), MT-LLE deliberately relaxes exact geometric reconstruction, by a modest margin, in exchange for substantial gains in clinical structure. On held-out patients, a linear model reads disease severity (GOLD stage, 0--4) from the MT-LLE embedding 35--40\\% more accurately than from standard dimensionality reduction (0.53 vs.\\ 0.38 F1-Macro). The gap is starker for progression: forecasting a patient's next-visit severity from their trajectory reaches 0.38 F1-Macro, while unsupervised baselines sit near zero (0.06--0.09 F1-Macro), a temporal signal those methods fail to capture. To test whether the reinforcement learning agent earns its place, we compared it against a fixed schedule that imposes the same ordering of objectives but cannot adapt during training; the learned agent outperforms it by 13--20\\% across clinical metrics, showing the gains come from adapting the weights to how training unfolds, not merely from ordering the objectives correctly, and at no cost to geometric fidelity. Beyond these quantitative gains, the manifold supports complementary analyses that surface structure invisible to standard staging: static phenotyping isolates subjects with active molecular pathology despite preserved lung function; trajectory inference maps two mechanistically distinct progression axes (inflammatory fibrosis and pan-immune activation); and kinematic analysis of each patient's speed and acceleration identifies subjects whose molecular trajectories accelerate ahead of detectable spirometric decline.",
+  "authors": [
+    "Hussein, S.",
+    "Konigsberg, I. R.",
+    "Kechris, K. J.",
+    "Bowler, R.",
+    "Banaei-Kashani, F."
+  ],
+  "doi": "10.64898/2026.08.24.746083",
+  "first_seen": "2026-08-27",
+  "id": "biorxiv:10.64898/2026.08.24.746083",
+  "metadata": {
+    "abstract": "Constructing interpretable disease models from longitudinal omics data is a central challenge in precision medicine. The goal is a low-dimensional representation in which a patient's position encodes their molecular state and clinical severity, and along which disease progression can be read directly. Existing dimensionality reduction methods (e.g., UMAP, Variational Autoencoders) fall short of this goal: they optimize a single generic objective and are blind to clinical labels and to the temporal ordering of measurements. Consequently, trajectory inference is typically applied after the fact to an embedding that was never optimized to reveal progression, decoupling the representation from disease dynamics. Manifold learning offers a natural route to such representations, and we build on Locally Linear Embedding (LLE) to preserve the local geometry of the omics data (i.e., keeping molecularly similar patients close together in the low-dimensional space). Geometry alone, however, yields a space that is faithful to molecular similarity yet uninformative about clinical severity and progression. We therefore recast the problem as multi-task learning: MT-LLE jointly optimizes five objectives: geometric reconstruction, supervised organization by clinical stage, embedding and phenotype forecasting, and clustering. Because naively combining such heterogeneous objectives induces gradient conflicts that distort the molecular geometry, an embedded reinforcement learning agent dynamically schedules their weights during training, establishing global geometry before refining clinical boundaries. Across two independent Chronic Obstructive Pulmonary Disease (COPD) cohorts (SPIROMICS and COPDGene), MT-LLE deliberately relaxes exact geometric reconstruction, by a modest margin, in exchange for substantial gains in clinical structure. On held-out patients, a linear model reads disease severity (GOLD stage, 0--4) from the MT-LLE embedding 35--40\\% more accurately than from standard dimensionality reduction (0.53 vs.\\ 0.38 F1-Macro). The gap is starker for progression: forecasting a patient's next-visit severity from their trajectory reaches 0.38 F1-Macro, while unsupervised baselines sit near zero (0.06--0.09 F1-Macro), a temporal signal those methods fail to capture. To test whether the reinforcement learning agent earns its place, we compared it against a fixed schedule that imposes the same ordering of objectives but cannot adapt during training; the learned agent outperforms it by 13--20\\% across clinical metrics, showing the gains come from adapting the weights to how training unfolds, not merely from ordering the objectives correctly, and at no cost to geometric fidelity. Beyond these quantitative gains, the manifold supports complementary analyses that surface structure invisible to standard staging: static phenotyping isolates subjects with active molecular pathology despite preserved lung function; trajectory inference maps two mechanistically distinct progression axes (inflammatory fibrosis and pan-immune activation); and kinematic analysis of each patient's speed and acceleration identifies subjects whose molecular trajectories accelerate ahead of detectable spirometric decline.",
+    "author_corresponding": "Sundous Hussein",
+    "author_corresponding_institution": "University of Colorado",
+    "authors": "Hussein, S.; Konigsberg, I. R.; Kechris, K. J.; Bowler, R.; Banaei-Kashani, F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-27",
+    "doi": "10.64898/2026.08.24.746083",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/27/2026.08.24.746083.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MT-LLE: Multi-Task Locally Linear Embedding for Interpretable Disease Modeling from Longitudinal Omics Data",
+    "type": "confirmatory results",
+    "version": "1"
+  },
+  "org": "University of Colorado",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "MT-LLE: a multi-task locally linear embedding with RL-scheduled objectives yields interpretable COPD disease manifolds from longitudinal omics, improving…",
+  "title": "MT-LLE: Multi-Task Locally Linear Embedding for Interpretable Disease Modeling from Longitudinal Omics Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.24.746083"
+}

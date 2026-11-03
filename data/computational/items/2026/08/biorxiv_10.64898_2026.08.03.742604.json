@@ -1,0 +1,40 @@
+{
+  "abstract": "Summarybcftools is the standard toolkit for handling VCF and BCF variant files, but it processes records on a single core; its --threads option speeds up only compression of the output, not the work done on variant records. Processing large call sets is therefore slow, and users often divide the genome and reassemble the results by hand. We present pbcftools, a Perl wrapper that does this automatically: it splits the genome into chunks, runs an ordinary bcftools command on each in parallel, and reassembles the outputs by a method suited to the data type. Across Linux servers, Windows/WSL2 workstations and Apple laptops, with bcftools 1.21 to 1.24, parallel output was identical to serial output for every command tested. On 1000 Genomes Phase 3 data, operations writing compressed VCF ran 10.8 to 21.1 times faster with 32 cores and up to 35.4 times with 64, those writing text 3.7 to 12.8 times, and merging 100 VCF files 19.2 times. pbcftools also runs on LSF and Slurm clusters.\n\nAvailability and implementationpbcftools is written in Perl (>= 5.16) and requires bcftools; local parallel execution also requires Perl module Parallel::ForkManager. It is released under the MIT license at https://github.com/zhangge-uc/pbcftools (DOI: 10.5281/zenodo.21780361).",
+  "authors": [
+    "Zhang, G."
+  ],
+  "doi": "10.64898/2026.08.03.742604",
+  "first_seen": "2026-08-09",
+  "id": "biorxiv:10.64898/2026.08.03.742604",
+  "metadata": {
+    "abstract": "Summarybcftools is the standard toolkit for handling VCF and BCF variant files, but it processes records on a single core; its --threads option speeds up only compression of the output, not the work done on variant records. Processing large call sets is therefore slow, and users often divide the genome and reassemble the results by hand. We present pbcftools, a Perl wrapper that does this automatically: it splits the genome into chunks, runs an ordinary bcftools command on each in parallel, and reassembles the outputs by a method suited to the data type. Across Linux servers, Windows/WSL2 workstations and Apple laptops, with bcftools 1.21 to 1.24, parallel output was identical to serial output for every command tested. On 1000 Genomes Phase 3 data, operations writing compressed VCF ran 10.8 to 21.1 times faster with 32 cores and up to 35.4 times with 64, those writing text 3.7 to 12.8 times, and merging 100 VCF files 19.2 times. pbcftools also runs on LSF and Slurm clusters.\n\nAvailability and implementationpbcftools is written in Perl (>= 5.16) and requires bcftools; local parallel execution also requires Perl module Parallel::ForkManager. It is released under the MIT license at https://github.com/zhangge-uc/pbcftools (DOI: 10.5281/zenodo.21780361).",
+    "author_corresponding": "Ge Zhang",
+    "author_corresponding_institution": "Cincinnati Children's Hospital Medical Center",
+    "authors": "Zhang, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-09",
+    "doi": "10.64898/2026.08.03.742604",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/09/2026.08.03.742604.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "pbcftools: parallel execution of bcftools for large variant call sets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Cincinnati Children's Hospital Medical Center",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "pbcftools is a Perl wrapper that parallelizes bcftools over genome chunks and reassembles outputs, giving identical results and 3.7-35x speedups on 1000…",
+  "title": "pbcftools: parallel execution of bcftools for large variant call sets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.03.742604"
+}

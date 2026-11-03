@@ -1,0 +1,43 @@
+{
+  "abstract": "Background: Affinity-maturation phage-display next-generation sequencing (NGS) yields more paired single-chain variable fragment clones than can be characterized experimentally, creating a fixed-budget prioritization problem. Read counts provide empirical support rather than direct affinity labels. We developed AbPACER (Antibody Parent-Aware Contextual Evidence Ranker), an affinity-label-blind neural ranker combining parent-relative mutation descriptors, frozen antibody-language-model context, and NGS evidence from related clones. AbPACER is campaign-adaptive rather than zero-shot: for each campaign, it is fitted to paired sequences and round-resolved R1-R3 counts before returning a 384-candidate assay list. We evaluated it in two retrospective phage-display campaigns and separately assessed its supervised mean-squared-error adaptation on AlphaSeq, denoted AbPACER-MSE. Results: From frozen top-5% candidate sets containing 16,323 Fas-associated factor 1 (FAF1) and 7,487 vascular endothelial growth factor receptor (VEGFR) clones, each method ranked the complete target-specific set and selected 384 candidates. In FAF1, AbPACER recovered 2.00 +/- 0.00 of seven retrospective panel clones, recovering two in every seed, compared with 1/7 by total count, 1.00 +/- 0.00 by Ens-Grad CNN, 1.67 +/- 1.15 by A2Binder-HL, and 1.33 +/- 0.58 by AbAffinity. In VEGFR, AbPACER recovered 2.33 +/- 0.58 of three panel clones, the highest observed learned-method mean, whereas total count recovered 3/3. No learned method was uniformly best at broader hypothetical budgets. On the public AlphaSeq common split of 11,670 fixed-test variants, AbPACER-MSE recovered 187.0 +/- 2.6 of the true top-384, closely matching AbAffinity (188.0 +/- 2.6) and exceeding A2Binder (175.7 +/- 6.4) and Ens-Grad CNN (154.0 +/- 6.1). AbPACER-MSE updated 1.378 million task-specific parameters, compared with 651.04 million for AbAffinity, and achieved Pearson 0.687 +/- 0.003 and Spearman 0.652 +/- 0.002. Conclusions: AbPACER provides a campaign-specific, parent-aware framework for fixed-budget prioritization from affinity-label-blind phage-display NGS data. At the 384-candidate endpoint, it showed the highest mean recovery among learned methods in both retrospective campaigns. AbPACER-MSE closely matched AbAffinity in true top-384 recovery while updating substantially fewer task-specific parameters. These results motivate prospective evaluation of sequence-conditioned reranking as a complement to count-based prioritization.",
+  "authors": [
+    "Chung, A. J.",
+    "Park, B. Y.",
+    "Park, E.-B.",
+    "Han, J.-H."
+  ],
+  "doi": "10.64898/2026.08.05.742956",
+  "first_seen": "2026-08-11",
+  "id": "biorxiv:10.64898/2026.08.05.742956",
+  "metadata": {
+    "abstract": "Background: Affinity-maturation phage-display next-generation sequencing (NGS) yields more paired single-chain variable fragment clones than can be characterized experimentally, creating a fixed-budget prioritization problem. Read counts provide empirical support rather than direct affinity labels. We developed AbPACER (Antibody Parent-Aware Contextual Evidence Ranker), an affinity-label-blind neural ranker combining parent-relative mutation descriptors, frozen antibody-language-model context, and NGS evidence from related clones. AbPACER is campaign-adaptive rather than zero-shot: for each campaign, it is fitted to paired sequences and round-resolved R1-R3 counts before returning a 384-candidate assay list. We evaluated it in two retrospective phage-display campaigns and separately assessed its supervised mean-squared-error adaptation on AlphaSeq, denoted AbPACER-MSE. Results: From frozen top-5% candidate sets containing 16,323 Fas-associated factor 1 (FAF1) and 7,487 vascular endothelial growth factor receptor (VEGFR) clones, each method ranked the complete target-specific set and selected 384 candidates. In FAF1, AbPACER recovered 2.00 +/- 0.00 of seven retrospective panel clones, recovering two in every seed, compared with 1/7 by total count, 1.00 +/- 0.00 by Ens-Grad CNN, 1.67 +/- 1.15 by A2Binder-HL, and 1.33 +/- 0.58 by AbAffinity. In VEGFR, AbPACER recovered 2.33 +/- 0.58 of three panel clones, the highest observed learned-method mean, whereas total count recovered 3/3. No learned method was uniformly best at broader hypothetical budgets. On the public AlphaSeq common split of 11,670 fixed-test variants, AbPACER-MSE recovered 187.0 +/- 2.6 of the true top-384, closely matching AbAffinity (188.0 +/- 2.6) and exceeding A2Binder (175.7 +/- 6.4) and Ens-Grad CNN (154.0 +/- 6.1). AbPACER-MSE updated 1.378 million task-specific parameters, compared with 651.04 million for AbAffinity, and achieved Pearson 0.687 +/- 0.003 and Spearman 0.652 +/- 0.002. Conclusions: AbPACER provides a campaign-specific, parent-aware framework for fixed-budget prioritization from affinity-label-blind phage-display NGS data. At the 384-candidate endpoint, it showed the highest mean recovery among learned methods in both retrospective campaigns. AbPACER-MSE closely matched AbAffinity in true top-384 recovery while updating substantially fewer task-specific parameters. These results motivate prospective evaluation of sequence-conditioned reranking as a complement to count-based prioritization.",
+    "author_corresponding": "Jae-Ho Han",
+    "author_corresponding_institution": "Korea University",
+    "authors": "Chung, A. J.; Park, B. Y.; Park, E.-B.; Han, J.-H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-11",
+    "doi": "10.64898/2026.08.05.742956",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/11/2026.08.05.742956.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "AbPACER: parent-aware, affinity-label-blind prioritization of affinity-matured scFv clones from phage-display NGS",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Korea University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "AbPACER, a parent-aware neural ranker using antibody language-model context and phage-display NGS counts, prioritizes affinity-matured scFv clones under a…",
+  "title": "AbPACER: parent-aware, affinity-label-blind prioritization of affinity-matured scFv clones from phage-display NGS",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.05.742956"
+}

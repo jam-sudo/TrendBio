@@ -1,0 +1,43 @@
+{
+  "abstract": "MicroRNAs (miRNAs) and small interfering RNAs (siRNAs) share Argonaute-mediated guide-target recognition, yet quantitative siRNA efficacy measurements are substantially scarcer and more costly to generate than miRNA-target interaction data. We therefore asked whether miRNA interaction data could provide transferable supervision for siRNA efficacy prediction. Here we present DuplexFM, a biologically grounded framework that uses sample-specific gates to integrate five evidence sources: pairing and sequence-context priors, duplex energetics, experimentally supervised mRNA accessibility, target-to-guide cross-attention, and contextual token-pair compatibility. The accessibility expert, trained on nucleotide-resolution icSHAPE measurements, achieved a held-out nucleotide-level Pearson correlation of 0.627 and evaluated accessibility at seed match and energy-supported candidate sites. On miRBench v7, three independently trained DuplexFM models achieved a macro APS of 0.873 (SD = 0.002), soft-voting increased this to 0.876 and yielded the highest APS on all four test sets. We then froze the miRNA-trained representation and trained only a lightweight residual head with 24 siRNA-specific descriptors. Transfer improved Pearson and Spearman correlations, AUPRC, and F1 over the descriptor-only baseline in all six evaluation settings. The ensemble achieved the highest Pearson and Spearman correlations in four settings, whereas OligoFormer remained stronger on Huesken and Takayuki. These findings show that experimentally grounded accessibility and miRNA-derived interaction representations provide complementary, transferable information, supporting a parameter-efficient route towards unified modeling of Argonaute-guided RNA regulation. Code and data are available at https://github.com/cbaiming/DuplexFM.",
+  "authors": [
+    "Chen, B.",
+    "Yin, J.",
+    "Fei, J.",
+    "Yang, M."
+  ],
+  "doi": "10.64898/2026.08.06.743413",
+  "first_seen": "2026-08-12",
+  "id": "biorxiv:10.64898/2026.08.06.743413",
+  "metadata": {
+    "abstract": "MicroRNAs (miRNAs) and small interfering RNAs (siRNAs) share Argonaute-mediated guide-target recognition, yet quantitative siRNA efficacy measurements are substantially scarcer and more costly to generate than miRNA-target interaction data. We therefore asked whether miRNA interaction data could provide transferable supervision for siRNA efficacy prediction. Here we present DuplexFM, a biologically grounded framework that uses sample-specific gates to integrate five evidence sources: pairing and sequence-context priors, duplex energetics, experimentally supervised mRNA accessibility, target-to-guide cross-attention, and contextual token-pair compatibility. The accessibility expert, trained on nucleotide-resolution icSHAPE measurements, achieved a held-out nucleotide-level Pearson correlation of 0.627 and evaluated accessibility at seed match and energy-supported candidate sites. On miRBench v7, three independently trained DuplexFM models achieved a macro APS of 0.873 (SD = 0.002), soft-voting increased this to 0.876 and yielded the highest APS on all four test sets. We then froze the miRNA-trained representation and trained only a lightweight residual head with 24 siRNA-specific descriptors. Transfer improved Pearson and Spearman correlations, AUPRC, and F1 over the descriptor-only baseline in all six evaluation settings. The ensemble achieved the highest Pearson and Spearman correlations in four settings, whereas OligoFormer remained stronger on Huesken and Takayuki. These findings show that experimentally grounded accessibility and miRNA-derived interaction representations provide complementary, transferable information, supporting a parameter-efficient route towards unified modeling of Argonaute-guided RNA regulation. Code and data are available at https://github.com/cbaiming/DuplexFM.",
+    "author_corresponding": "Baiming Chen",
+    "author_corresponding_institution": "The Chinese University of Hongkong, Shenzhen",
+    "authors": "Chen, B.; Yin, J.; Fei, J.; Yang, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-12",
+    "doi": "10.64898/2026.08.06.743413",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/12/2026.08.06.743413.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DuplexFM: Transferable small-RNA target representations link miRNA interactions to siRNA efficacy prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The Chinese University of Hongkong, Shenzhen",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "DuplexFM transfers miRNA-target interaction representations, with icSHAPE-trained accessibility, to siRNA efficacy prediction, improving correlation and F1…",
+  "title": "DuplexFM: Transferable small-RNA target representations link miRNA interactions to siRNA efficacy prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.06.743413"
+}

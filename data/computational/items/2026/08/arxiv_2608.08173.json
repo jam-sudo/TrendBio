@@ -1,0 +1,36 @@
+{
+  "abstract": "Longitudinal MRI enables sensitive measurement of structural brain change for studying aging and neurodegenerative disease. Deformable image registration is a key tool for estimating such change by computing a dense deformation that captures geometric differences between longitudinal scans. However, MRI scanners introduce geometric distortions that vary across acquisition systems and protocols, such as gradient non-linearity (GNL) distortion. Existing registration methods estimate a single field that conflates biological and technical effects, potentially biasing downstream morphometric measurements if distortions remain (partially) uncorrected. We propose $\\texttt{DisMorph}$, a registration framework trained entirely on synthetic data that explicitly decomposes longitudinal deformation into technical and anatomical transforms. It predicts two dense deformations, each encoding one effect. During training, a novel generative model synthesizes both effects separately to provide disentanglement supervision, while domain randomization promotes generalization across imaging protocols. We evaluate our method in three complementary settings. On simulated data with known ground truth, our method detects anatomical change more accurately and consistently than conventional registration. On real image pairs that differ only by GNL distortion, our method assigns most geometric change to the distortion field, demonstrating specificity in the absence of anatomical change. On longitudinal Alzheimer's disease (AD) pairs, our method detects anatomical change in AD-related brain structures while identifying residual distortion left after standard correction. By disentangling MRI-induced distortion from biological change in the longitudinal deformation, our method paves the way for more accurate longitudinal morphometry in clinical settings where maintaining acquisition consistency is challenging.",
+  "authors": [
+    "Jingru Fu",
+    "Kathleen E. Larson",
+    "Douglas N. Greve",
+    "Bruce Fischl",
+    "Malte Hoffmann"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-08",
+  "id": "arxiv:2608.08173",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "cs.AI",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.08173v1</ns0:id>\n    <ns0:title>$\\texttt{DisMorph}$: learning to disentangle technical distortions from true biological change</ns0:title>\n    <ns0:updated>2026-08-08T15:04:55Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.08173v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.08173v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Longitudinal MRI enables sensitive measurement of structural brain change for studying aging and neurodegenerative disease. Deformable image registration is a key tool for estimating such change by computing a dense deformation that captures geometric differences between longitudinal scans. However, MRI scanners introduce geometric distortions that vary across acquisition systems and protocols, such as gradient non-linearity (GNL) distortion. Existing registration methods estimate a single field that conflates biological and technical effects, potentially biasing downstream morphometric measurements if distortions remain (partially) uncorrected. We propose $\\texttt{DisMorph}$, a registration framework trained entirely on synthetic data that explicitly decomposes longitudinal deformation into technical and anatomical transforms. It predicts two dense deformations, each encoding one effect. During training, a novel generative model synthesizes both effects separately to provide disentanglement supervision, while domain randomization promotes generalization across imaging protocols. We evaluate our method in three complementary settings. On simulated data with known ground truth, our method detects anatomical change more accurately and consistently than conventional registration. On real image pairs that differ only by GNL distortion, our method assigns most geometric change to the distortion field, demonstrating specificity in the absence of anatomical change. On longitudinal Alzheimer's disease (AD) pairs, our method detects anatomical change in AD-related brain structures while identifying residual distortion left after standard correction. By disentangling MRI-induced distortion from biological change in the longitudinal deformation, our method paves the way for more accurate longitudinal morphometry in clinical settings where maintaining acquisition consistency is challenging.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-08T15:04:55Z</ns0:published>\n    <ns1:comment>11 pages, 6 figures, longitudinal morphometry, deformable registration, neuroimaging, domain randomization, gradient non-linearity distortion, accepted by the SASHIMI Workshop at MICCAI 2026</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Jingru Fu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kathleen E. Larson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Douglas N. Greve</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bruce Fischl</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Malte Hoffmann</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "DisMorph is a synthetic-data-trained registration framework that disentangles MRI gradient distortion from anatomical change in longitudinal brain deformation…",
+  "title": "$\\texttt{DisMorph}$: learning to disentangle technical distortions from true biological change",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.08173v1"
+}

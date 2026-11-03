@@ -1,0 +1,35 @@
+{
+  "abstract": "Protein language models (PLMs) have transferred the latest advances from natural language processing to computational biology. These models, trained on large corpora of protein sequence data, are widely used to translate amino acid sequences into latent-space embeddings, ready for use in diverse downstream tasks (DTs). By consensus, embeddings from the models' last layers are used, while the models' internal behavior remains poorly understood. We analyzed 13 PLMs across 15 DTs and 9 datasets to assess the value of embeddings from intermediate PLM layers. We trained probe models on embeddings from each layer, compared their performance, and showed that the last layers of PLMs rarely produced embeddings that led to the best results on downstream tasks. Furthermore, we identified a connection between how models learn a certain DT and the similarity between that DT and the pre-training objective. For example, for residue-level downstream tasks, we observed a steady increase in performance across almost all PLM layers, which we attributed to their similarity to most PLMs' pre-training objectives. To allow the community to capitalize on our findings, we provide PLMSommelier, a Python package that automatically identifies the best PLM layer for a given DT with ~98% accuracy and creates a truncated model using only the early layers up to the best-performing layer. This will help users save time and memory during inference and yield better predictive performance.",
+  "authors": [
+    "Roman Joeres",
+    "Ilya Senatorov",
+    "Anastasia Kolchina",
+    "Dietrich Klakow",
+    "Olga V. Kalinina"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-12",
+  "id": "arxiv:2608.12090",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.12090v4</ns0:id>\n    <ns0:title>Task- and dataset-specific information in protein language models</ns0:title>\n    <ns0:updated>2026-09-22T16:39:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.12090v4\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.12090v4\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Protein language models (PLMs) have transferred the latest advances from natural language processing to computational biology. These models, trained on large corpora of protein sequence data, are widely used to translate amino acid sequences into latent-space embeddings, ready for use in diverse downstream tasks (DTs). By consensus, embeddings from the models' last layers are used, while the models' internal behavior remains poorly understood. We analyzed 13 PLMs across 15 DTs and 9 datasets to assess the value of embeddings from intermediate PLM layers. We trained probe models on embeddings from each layer, compared their performance, and showed that the last layers of PLMs rarely produced embeddings that led to the best results on downstream tasks. Furthermore, we identified a connection between how models learn a certain DT and the similarity between that DT and the pre-training objective. For example, for residue-level downstream tasks, we observed a steady increase in performance across almost all PLM layers, which we attributed to their similarity to most PLMs' pre-training objectives. To allow the community to capitalize on our findings, we provide PLMSommelier, a Python package that automatically identifies the best PLM layer for a given DT with ~98% accuracy and creates a truncated model using only the early layers up to the best-performing layer. This will help users save time and memory during inference and yield better predictive performance.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-12T14:13:48Z</ns0:published>\n    <ns1:comment>36 pages, 14 figures, 10 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Roman Joeres</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ilya Senatorov</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anastasia Kolchina</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dietrich Klakow</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Olga V. Kalinina</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Analyzes 13 protein language models across 15 downstream tasks and 9 datasets, finding intermediate layers often beat last-layer embeddings; releases…",
+  "title": "Task- and dataset-specific information in protein language models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.12090v4"
+}

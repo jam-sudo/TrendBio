@@ -1,0 +1,42 @@
+{
+  "abstract": "Dynamic programming (DP) yields exact quadratic-time (O(NM)) pairwise sequence alignments. Static banding heuristics (O(NW)) fail catastrophically on low-identity (<30%), asymmetric insertions/deletions (indels), or extreme length ratios, dropping core-block Sum-of-Pairs (SP) score recovery to 20%-50%. Conversely, recent protein language model (PLM) aligners evaluate all N x M cells without search grid constraints. To bridge this gap, we introduce Adaptive-Banding Needleman-Wunsch (AB-NW), pruning the search space without sacrificing sequence alignment signal by leveraging PLM contextual representations to construct a confidence-adaptive DP corridor prior to fine-resolution DP while keeping downstream scoring unmodified. AB-NW downsamples residue embeddings, computes a coarse alignment, and sets per-row corridor bounds via normalized confidence metrics. Evaluated via JIT-compiled buffers, this reduces time complexity to O(NW_bar) and space to O(NW_max), where W_bar << M. Benchmarked across three PLM backbones (ESM2-8M, ESM2-35M, ProtBERT) across nine structural challenge categories, AB-NW recovers >98.9% of exact unconstrained alignment scores and core-block SP accuracy across static banding failure modes (Twilight Zone, Asymmetric Indels, Extreme Aspect Ratios) while eliminating 55.3%-78.8% of active DP cells. On large protein sequence matrices (N, M >= 3,700), AB-NW eliminates 87.6%-91.7% of cells, achieving speedups of 9.79x-13.30x (pure DP) and 1.73x-2.94x (end-to-end), reaching up to 18.12x on unbiased controls (p < 0.05 to p < 10^-15), making AB-NW practical for large-scale, high-throughput sequence alignment pipelines.",
+  "authors": [
+    "Shoaib, M.",
+    "Ali, W."
+  ],
+  "doi": "10.64898/2026.08.26.747234",
+  "first_seen": "2026-08-26",
+  "id": "biorxiv:10.64898/2026.08.26.747234",
+  "metadata": {
+    "abstract": "Dynamic programming (DP) yields exact quadratic-time (O(NM)) pairwise sequence alignments. Static banding heuristics (O(NW)) fail catastrophically on low-identity (<30%), asymmetric insertions/deletions (indels), or extreme length ratios, dropping core-block Sum-of-Pairs (SP) score recovery to 20%-50%. Conversely, recent protein language model (PLM) aligners evaluate all N x M cells without search grid constraints. To bridge this gap, we introduce Adaptive-Banding Needleman-Wunsch (AB-NW), pruning the search space without sacrificing sequence alignment signal by leveraging PLM contextual representations to construct a confidence-adaptive DP corridor prior to fine-resolution DP while keeping downstream scoring unmodified. AB-NW downsamples residue embeddings, computes a coarse alignment, and sets per-row corridor bounds via normalized confidence metrics. Evaluated via JIT-compiled buffers, this reduces time complexity to O(NW_bar) and space to O(NW_max), where W_bar << M. Benchmarked across three PLM backbones (ESM2-8M, ESM2-35M, ProtBERT) across nine structural challenge categories, AB-NW recovers >98.9% of exact unconstrained alignment scores and core-block SP accuracy across static banding failure modes (Twilight Zone, Asymmetric Indels, Extreme Aspect Ratios) while eliminating 55.3%-78.8% of active DP cells. On large protein sequence matrices (N, M >= 3,700), AB-NW eliminates 87.6%-91.7% of cells, achieving speedups of 9.79x-13.30x (pure DP) and 1.73x-2.94x (end-to-end), reaching up to 18.12x on unbiased controls (p < 0.05 to p < 10^-15), making AB-NW practical for large-scale, high-throughput sequence alignment pipelines.",
+    "author_corresponding": "Muhammad Shoaib",
+    "author_corresponding_institution": "University of Engineering and Technology Lahore",
+    "authors": "Shoaib, M.; Ali, W.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-26",
+    "doi": "10.64898/2026.08.26.747234",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/26/2026.08.26.747234.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Pruning the Search, Not the Signal: Adaptive-Banding Needleman-Wunsch via Protein Language Model Confidence",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Engineering and Technology Lahore",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "AB-NW prunes Needleman-Wunsch alignment using PLM-derived confidence corridors, retaining >98.9% exact scores while removing 55-92% of DP cells and speeding…",
+  "title": "Pruning the Search, Not the Signal: Adaptive-Banding Needleman-Wunsch via Protein Language Model Confidence",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.26.747234"
+}

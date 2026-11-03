@@ -1,0 +1,46 @@
+{
+  "abstract": "Reliable delineation of the head and tail of swine spermatozoa supports automated assessment of boar semen quality, from morphometric measurement to the quality control of insemination doses. In practice this relies on fluorescent staining, which adds chemistry, cost, and delay to every acquisition and labels only the nucleus. Recent work coupling imaging flow cytometry with machine learning has advanced rapidly, yet the segmentation stage still depends on a stained channel at inference and resolves the head alone. We present a supervised encoder decoder network that segments boar spermatozoa from brightfield images acquired on an Amnis ImageStream Mark II with no stain at inference. Training labels derive from the Hoechst 33342 nuclear channel (Ch7), recorded in registration with brightfield (Ch1); the dye serves only as an annotation source, and the network sees Ch1 alone. The best semantic segmentation model reaches a Dice coefficient of 0.940 on held-out cells. For comparison we evaluate a classical morphological pipeline, four further semantic segmentation models spanning three decoder families and two ImageNet-pretrained backbones, and two zero-shot pipelines built on the Segment Anything Model 2 (SAM 2), prompted either by a dilated box around the predicted head mask or by head and tail boxes emitted by a Gemma 4 Vision Language Model (VLM). The zero-shot route scores 0.637 against Ch7 but labels the tail, which the fluorescence protocol cannot. Cells scoring worst under the supervised model proved to be mostly registration failures rather than segmentation failures, as Ch7 is displaced relative to Ch1. Manual screening for this drift is infeasible at dataset scale, so we propose a flagging system that marks any Dice below 0.792, two standard deviations below the mean, and pairs it with a zero-shot pipeline in which a VLM l and SAM 2 cross-check the flagged cell before human review.",
+  "authors": [
+    "Park, J.",
+    "Ratka, M.",
+    "Biswas, A.",
+    "Shofner, I.",
+    "Kerns, K.",
+    "Sarkar, A."
+  ],
+  "doi": "10.64898/2026.08.07.743571",
+  "first_seen": "2026-08-17",
+  "id": "biorxiv:10.64898/2026.08.07.743571",
+  "metadata": {
+    "abstract": "Reliable delineation of the head and tail of swine spermatozoa supports automated assessment of boar semen quality, from morphometric measurement to the quality control of insemination doses. In practice this relies on fluorescent staining, which adds chemistry, cost, and delay to every acquisition and labels only the nucleus. Recent work coupling imaging flow cytometry with machine learning has advanced rapidly, yet the segmentation stage still depends on a stained channel at inference and resolves the head alone. We present a supervised encoder decoder network that segments boar spermatozoa from brightfield images acquired on an Amnis ImageStream Mark II with no stain at inference. Training labels derive from the Hoechst 33342 nuclear channel (Ch7), recorded in registration with brightfield (Ch1); the dye serves only as an annotation source, and the network sees Ch1 alone. The best semantic segmentation model reaches a Dice coefficient of 0.940 on held-out cells. For comparison we evaluate a classical morphological pipeline, four further semantic segmentation models spanning three decoder families and two ImageNet-pretrained backbones, and two zero-shot pipelines built on the Segment Anything Model 2 (SAM 2), prompted either by a dilated box around the predicted head mask or by head and tail boxes emitted by a Gemma 4 Vision Language Model (VLM). The zero-shot route scores 0.637 against Ch7 but labels the tail, which the fluorescence protocol cannot. Cells scoring worst under the supervised model proved to be mostly registration failures rather than segmentation failures, as Ch7 is displaced relative to Ch1. Manual screening for this drift is infeasible at dataset scale, so we propose a flagging system that marks any Dice below 0.792, two standard deviations below the mean, and pairs it with a zero-shot pipeline in which a VLM l and SAM 2 cross-check the flagged cell before human review.",
+    "author_corresponding": "Anwesha Sarkar",
+    "author_corresponding_institution": "Iowa State University",
+    "authors": "Park, J.; Ratka, M.; Biswas, A.; Shofner, I.; Kerns, K.; Sarkar, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-17",
+    "doi": "10.64898/2026.08.07.743571",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/17/2026.08.07.743571.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Extracting deep learning based morphology segmentation footprint for boar sperm cells",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Iowa State University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Supervised encoder-decoder segments boar sperm from unstained brightfield imaging flow cytometry, trained on Hoechst labels; Dice 0.940, with SAM 2 and VLM…",
+  "title": "Extracting deep learning based morphology segmentation footprint for boar sperm cells",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.07.743571"
+}

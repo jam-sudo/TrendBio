@@ -1,0 +1,42 @@
+{
+  "abstract": "Whole-body dual-energy X-ray absorptiometry (DXA) scans are routinely acquired to measure bone density and regional body composition, leaving their spatial structure largely unused. Here, we show that self-supervised learning (SSL) can convert raw DXA images into representations of systemic health. We introduce LeDXA, a vision model based on a joint-embedding predictive architecture (JEPA) that learns by predicting latent representations rather than reconstructing pixels. Trained from scratch on 11,540 unlabeled Human Phenotype Project scans, LeDXA was evaluated internally and on 47,400 external UK Biobank (UKBB) scans. It improved cross-cohort prediction of prevalent diseases and biomarkers beyond scanner-derived DXA measurements and DINOv3, a state-of-the-art general-purpose model, despite approximately 150,000-fold fewer training images and nearly 40-fold fewer parameters. Over a median 4.3-year UKBB follow-up, LeDXA improved incident disease prediction over tabular DXA measures, with the largest gains for hip and knee arthrosis and type 2 diabetes. For hip arthrosis, 66% of incident cases occurred in the highest-risk quartile versus 41% for tabular measures. Its representations predicted chronological age externally (r = 0.88; mean absolute error = 2.90 years), and the biological-age gap tracked broader disease burden and a 45% higher mortality hazard in the oldest-appearing quartile. The gap also decreased in women after starting hormone-replacement therapy, suggesting it may be modifiable. Genome-wide associations recovered mostly known body-composition and bone-density loci, and LeDXA embeddings were more heritable than DINOv3's. These findings reveal prognostic information in DXA images that conventional readouts discard, learnable with relatively little data and modest compute.",
+  "authors": [
+    "Gil Sasson",
+    "Zachary Levine",
+    "Smadar Shilo",
+    "Sarah Kohn",
+    "Guy Lutsker",
+    "Anastasia Godneva",
+    "Adam Gabet",
+    "David Krongauz",
+    "Adina Weinberger",
+    "Yann LeCun",
+    "Randall Balestriero",
+    "Eran Segal"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-03",
+  "id": "arxiv:2608.02208",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.02208v1</ns0:id>\n    <ns0:title>Self-supervised DXA representations encode multi-system disease risk, biological aging and heritability</ns0:title>\n    <ns0:updated>2026-08-03T13:33:04Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.02208v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.02208v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Whole-body dual-energy X-ray absorptiometry (DXA) scans are routinely acquired to measure bone density and regional body composition, leaving their spatial structure largely unused. Here, we show that self-supervised learning (SSL) can convert raw DXA images into representations of systemic health. We introduce LeDXA, a vision model based on a joint-embedding predictive architecture (JEPA) that learns by predicting latent representations rather than reconstructing pixels. Trained from scratch on 11,540 unlabeled Human Phenotype Project scans, LeDXA was evaluated internally and on 47,400 external UK Biobank (UKBB) scans. It improved cross-cohort prediction of prevalent diseases and biomarkers beyond scanner-derived DXA measurements and DINOv3, a state-of-the-art general-purpose model, despite approximately 150,000-fold fewer training images and nearly 40-fold fewer parameters. Over a median 4.3-year UKBB follow-up, LeDXA improved incident disease prediction over tabular DXA measures, with the largest gains for hip and knee arthrosis and type 2 diabetes. For hip arthrosis, 66% of incident cases occurred in the highest-risk quartile versus 41% for tabular measures. Its representations predicted chronological age externally (r = 0.88; mean absolute error = 2.90 years), and the biological-age gap tracked broader disease burden and a 45% higher mortality hazard in the oldest-appearing quartile. The gap also decreased in women after starting hormone-replacement therapy, suggesting it may be modifiable. Genome-wide associations recovered mostly known body-composition and bone-density loci, and LeDXA embeddings were more heritable than DINOv3's. These findings reveal prognostic information in DXA images that conventional readouts discard, learnable with relatively little data and modest compute.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-03T13:33:04Z</ns0:published>\n    <ns1:comment>Preprint Version</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Gil Sasson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zachary Levine</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Smadar Shilo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sarah Kohn</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guy Lutsker</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anastasia Godneva</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Adam Gabet</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>David Krongauz</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Adina Weinberger</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yann LeCun</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Randall Balestriero</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Eran Segal</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "LeDXA, a JEPA-based self-supervised model trained on DXA scans, yields representations predicting disease risk, biological aging and heritability beyond…",
+  "title": "Self-supervised DXA representations encode multi-system disease risk, biological aging and heritability",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.02208v1"
+}

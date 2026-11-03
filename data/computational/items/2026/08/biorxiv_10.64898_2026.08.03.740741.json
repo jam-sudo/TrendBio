@@ -1,0 +1,43 @@
+{
+  "abstract": "Single-cell differential expression (DE) reports changes in mature mRNA abundance, but the same fold-change can reflect faster synthesis or slower decay. Metabolic labeling resolves this ambiguity but is costly and cannot be applied retrospectively to the vast majority of published scRNA-seq. scATrans closes this gap using layers every standard pipeline already generates: from DE-selected genes, a reference-corrected unspliced residual annotates each change as transcription- or stabilization-weighted, with no additional experiment. Benchmarked against metabolic-labeling systems with independent kinetic ground truth, the residual separates the two mechanisms at matched mature abundance (ROC-AUC 0.68-0.74, full-length NASC-seq2 K562; 0.59-0.63, 3' scEU-seq RPE1); effect size scales with intron capture, not model complexity, and explicit kinetic fitting adds nothing over the static contrast. Per-gene, the residual recovers the classical bulk exon-intron contrast (EISA); what scATrans adds is the inference layer single-cell reanalysis actually needs--DE-defined membership, gene-structure correction, a capture-regime reliability pre-flight, induction-matched testing, and a permutation-calibrated program score--so that confident calls are reserved for where the data support them: gene programs, not single genes. Applied to standard 10x data with no labeling, scATrans recovers textbook post-transcriptional biology: a curated AU-rich-element program is called stabilization-weighted in LPS-stimulated PBMCs (confirmed by per-donor pseudobulk DE in an independent four-donor cohort), while a glucocorticoid-response program is called transcription-weighted in dexamethasone-treated A549 cells-- opposite mechanisms recovered from unlabeled counts. scATrans turns any spliced/unspliced-resolved DE table into a mechanism-typed one, retrospectively and at scale.\n\nAvailability and implementationscATrans requires Python [&ge;]3.9, interoperates with the scverse ecosystem (AnnData, Scanpy), and is released under the Apache-2.0 license. Install with pip install scatrans or from Bioconda. Documentation and tutorials: https://scatrans.readthedocs.io. Analyses in this manuscript use software version 0.10.9.",
+  "authors": [
+    "Li, Z.",
+    "James, A.",
+    "Li, S."
+  ],
+  "doi": "10.64898/2026.08.03.740741",
+  "first_seen": "2026-08-07",
+  "id": "biorxiv:10.64898/2026.08.03.740741",
+  "metadata": {
+    "abstract": "Single-cell differential expression (DE) reports changes in mature mRNA abundance, but the same fold-change can reflect faster synthesis or slower decay. Metabolic labeling resolves this ambiguity but is costly and cannot be applied retrospectively to the vast majority of published scRNA-seq. scATrans closes this gap using layers every standard pipeline already generates: from DE-selected genes, a reference-corrected unspliced residual annotates each change as transcription- or stabilization-weighted, with no additional experiment. Benchmarked against metabolic-labeling systems with independent kinetic ground truth, the residual separates the two mechanisms at matched mature abundance (ROC-AUC 0.68-0.74, full-length NASC-seq2 K562; 0.59-0.63, 3' scEU-seq RPE1); effect size scales with intron capture, not model complexity, and explicit kinetic fitting adds nothing over the static contrast. Per-gene, the residual recovers the classical bulk exon-intron contrast (EISA); what scATrans adds is the inference layer single-cell reanalysis actually needs--DE-defined membership, gene-structure correction, a capture-regime reliability pre-flight, induction-matched testing, and a permutation-calibrated program score--so that confident calls are reserved for where the data support them: gene programs, not single genes. Applied to standard 10x data with no labeling, scATrans recovers textbook post-transcriptional biology: a curated AU-rich-element program is called stabilization-weighted in LPS-stimulated PBMCs (confirmed by per-donor pseudobulk DE in an independent four-donor cohort), while a glucocorticoid-response program is called transcription-weighted in dexamethasone-treated A549 cells-- opposite mechanisms recovered from unlabeled counts. scATrans turns any spliced/unspliced-resolved DE table into a mechanism-typed one, retrospectively and at scale.\n\nAvailability and implementationscATrans requires Python [&ge;]3.9, interoperates with the scverse ecosystem (AnnData, Scanpy), and is released under the Apache-2.0 license. Install with pip install scatrans or from Bioconda. Documentation and tutorials: https://scatrans.readthedocs.io. Analyses in this manuscript use software version 0.10.9.",
+    "author_corresponding": "Zhao Li",
+    "author_corresponding_institution": "Department of Pathology, Johns Hopkins University",
+    "authors": "Li, Z.; James, A.; Li, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-07",
+    "doi": "10.64898/2026.08.03.740741",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/07/2026.08.03.740741.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "scATrans: annotating single-cell differential expression as transcription- or stabilization-weighted using unspliced RNA",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Pathology, Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "scATrans annotates single-cell DE genes as transcription- or stabilization-weighted using unspliced RNA residuals, benchmarked against metabolic labeling and…",
+  "title": "scATrans: annotating single-cell differential expression as transcription- or stabilization-weighted using unspliced RNA",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.03.740741"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Below 30% pairwise sequence identity, alignment-based methods struggle to reliably distinguish true homologs from chance, and enzyme function prediction degrades accordingly: on proteins in this regime, even advanced methods (CLEAN) achieves only 55.1% accuracy at full EC specificity on the CARE benchmark. To this end Protein Language Models (PLMs) have gained favor as alternatives. However, PLMs often encode only a subset of the biology, whereas the understanding of enzyme function requires among other things a combination of sequence, structure and functional-context simultaneously. In this work, we describe FuncSeek, a contrastive learning model which utilizes three diverse, complementary PLMs: ESM2 (to model evolutionary co-variation), ProstT5 (for bilingual sequence and structure embeddings), and ProteinBERT (for functional semantic similarities). Using SwissProt data, these 2816-D embeddings are labelled with Enzyme Commission numbers (EC) and are trained through a supervised contrastive head into a 256-D space. FuncSeek attains 64.6% nearest-neighbour EC4 accuracy on the CARE out-of-distribution benchmark set (ood30; proteins below 30% identity to training set), outperforming CLEAN (55.1%) and Diamond BLASTp (51.4%), and obtains 93.7% nearest-neighbour EC4 accuracy on the promiscuous, multi-functional enzymes benchmark (CLEAN, 69.4%). We also show that the learned representations transfer without retraining to the TrEMBL database, achieving 97.3% nearest-neighbour EC4 accuracy on an 8,031 BRENDA-validated enzyme set, never seen during training. Because only projected embeddings are stored in the target index, and function is inferred from an annotated reference set, we propose this paradigm for rapidly searching extremely large metagenomic databases, bypassing costly sequence alignment and annotation pipelines.",
+  "authors": [
+    "Cloete, L. J.",
+    "Patterton, H. G."
+  ],
+  "doi": "10.64898/2026.08.07.738656",
+  "first_seen": "2026-08-14",
+  "id": "biorxiv:10.64898/2026.08.07.738656",
+  "metadata": {
+    "abstract": "Below 30% pairwise sequence identity, alignment-based methods struggle to reliably distinguish true homologs from chance, and enzyme function prediction degrades accordingly: on proteins in this regime, even advanced methods (CLEAN) achieves only 55.1% accuracy at full EC specificity on the CARE benchmark. To this end Protein Language Models (PLMs) have gained favor as alternatives. However, PLMs often encode only a subset of the biology, whereas the understanding of enzyme function requires among other things a combination of sequence, structure and functional-context simultaneously. In this work, we describe FuncSeek, a contrastive learning model which utilizes three diverse, complementary PLMs: ESM2 (to model evolutionary co-variation), ProstT5 (for bilingual sequence and structure embeddings), and ProteinBERT (for functional semantic similarities). Using SwissProt data, these 2816-D embeddings are labelled with Enzyme Commission numbers (EC) and are trained through a supervised contrastive head into a 256-D space. FuncSeek attains 64.6% nearest-neighbour EC4 accuracy on the CARE out-of-distribution benchmark set (ood30; proteins below 30% identity to training set), outperforming CLEAN (55.1%) and Diamond BLASTp (51.4%), and obtains 93.7% nearest-neighbour EC4 accuracy on the promiscuous, multi-functional enzymes benchmark (CLEAN, 69.4%). We also show that the learned representations transfer without retraining to the TrEMBL database, achieving 97.3% nearest-neighbour EC4 accuracy on an 8,031 BRENDA-validated enzyme set, never seen during training. Because only projected embeddings are stored in the target index, and function is inferred from an annotated reference set, we propose this paradigm for rapidly searching extremely large metagenomic databases, bypassing costly sequence alignment and annotation pipelines.",
+    "author_corresponding": "Leendert J. Cloete",
+    "author_corresponding_institution": "Stellenbosch University",
+    "authors": "Cloete, L. J.; Patterton, H. G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-14",
+    "doi": "10.64898/2026.08.07.738656",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/14/2026.08.07.738656.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "FuncSeek: Multi-PLM contrastive learning for protein functional similarity search",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Stellenbosch University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "FuncSeek fuses ESM2, ProstT5 and ProteinBERT embeddings via supervised contrastive learning for enzyme EC-based functional similarity search, outperforming…",
+  "title": "FuncSeek: Multi-PLM contrastive learning for protein functional similarity search",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.07.738656"
+}

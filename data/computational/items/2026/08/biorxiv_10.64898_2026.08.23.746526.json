@@ -1,0 +1,49 @@
+{
+  "abstract": "Predicting cancer stage progression from omics data, and deriving molecular insight into the mechanisms driving it, remains a major challenge, owing in part to the lack of adequate longitudinal data and the interpretability limitations of current forecasting models. Large cancer datasets such as TCGA capture patient profiles cross-sectionally rather than longitudinally, complicating timely treatment decisions as tumors become more invasive. Deep neural networks typically used for forecasting, such as LSTMs, compound this problem by remaining largely opaque and offering clinicians no straightforward way to audit their predictions. Clear cell renal cell carcinoma (ccRCC) illustrates the clinical stakes of both challenges. Five-year survival falls from over 94% at stage I to 28% at stage IV, yet early-stage tumors are often managed under active surveillance, a strategy constrained by sparse molecular evidence of progression risk. Detecting progression in time, meanwhile, demands forecasts clinicians can interpret and trust, not black-box predictions. We address both challenges by combining generative and symbolic AI: a Variational Autoencoder trained on bulk RNA-Seq profiles of 530 TCGA ccRCC patients generates synthetic pseudo-time trajectories that overcome the absence of longitudinal data, while a symbolic rule-induction framework (ASAL) learns finite-state automata from these trajectories, encoding stage transition as human-readable Boolean conditions over gene expression, which a complex event forecasting system (Wayeb) converts into probabilistic forecasts of stage advancement. An independent XGBoost classifier trained on real patients (F1 score = 0.71-0.81) shows a gradual early-to-late probability shift along the synthetic trajectories, absent in non-progressing control trajectories. Pathway enrichment of those trajectories reveals stage-dependent changes in established kidney cancer-related processes, including the TCA cycle and DNA repair. Finally, our symbolic forecaster nearly matches an LSTM baseline (macro F1 = 0.928 vs. 0.964), while additionally offering an inspectable rule set and a probability distribution over transition timing rather than a single opaque score. This work shows that generative and symbolic AI, paired together, can turn cross-sectional cohorts into a transparent, forecast-oriented framework for modeling disease progression, demonstrated here in ccRCC.",
+  "authors": [
+    "Prol-Castelo, G.",
+    "Syrri, E.",
+    "Manginas, N.",
+    "Manginas, V.",
+    "Sanchez-Valle, J.",
+    "Katzouris, N.",
+    "Paliouras, G.",
+    "Valencia, A.",
+    "Cirillo, D."
+  ],
+  "doi": "10.64898/2026.08.23.746526",
+  "first_seen": "2026-08-26",
+  "id": "biorxiv:10.64898/2026.08.23.746526",
+  "metadata": {
+    "abstract": "Predicting cancer stage progression from omics data, and deriving molecular insight into the mechanisms driving it, remains a major challenge, owing in part to the lack of adequate longitudinal data and the interpretability limitations of current forecasting models. Large cancer datasets such as TCGA capture patient profiles cross-sectionally rather than longitudinally, complicating timely treatment decisions as tumors become more invasive. Deep neural networks typically used for forecasting, such as LSTMs, compound this problem by remaining largely opaque and offering clinicians no straightforward way to audit their predictions. Clear cell renal cell carcinoma (ccRCC) illustrates the clinical stakes of both challenges. Five-year survival falls from over 94% at stage I to 28% at stage IV, yet early-stage tumors are often managed under active surveillance, a strategy constrained by sparse molecular evidence of progression risk. Detecting progression in time, meanwhile, demands forecasts clinicians can interpret and trust, not black-box predictions. We address both challenges by combining generative and symbolic AI: a Variational Autoencoder trained on bulk RNA-Seq profiles of 530 TCGA ccRCC patients generates synthetic pseudo-time trajectories that overcome the absence of longitudinal data, while a symbolic rule-induction framework (ASAL) learns finite-state automata from these trajectories, encoding stage transition as human-readable Boolean conditions over gene expression, which a complex event forecasting system (Wayeb) converts into probabilistic forecasts of stage advancement. An independent XGBoost classifier trained on real patients (F1 score = 0.71-0.81) shows a gradual early-to-late probability shift along the synthetic trajectories, absent in non-progressing control trajectories. Pathway enrichment of those trajectories reveals stage-dependent changes in established kidney cancer-related processes, including the TCA cycle and DNA repair. Finally, our symbolic forecaster nearly matches an LSTM baseline (macro F1 = 0.928 vs. 0.964), while additionally offering an inspectable rule set and a probability distribution over transition timing rather than a single opaque score. This work shows that generative and symbolic AI, paired together, can turn cross-sectional cohorts into a transparent, forecast-oriented framework for modeling disease progression, demonstrated here in ccRCC.",
+    "author_corresponding": "Davide Cirillo",
+    "author_corresponding_institution": "Barcelona Supercomputing Center (BSC)",
+    "authors": "Prol-Castelo, G.; Syrri, E.; Manginas, N.; Manginas, V.; Sanchez-Valle, J.; Katzouris, N.; Paliouras, G.; Valencia, A.; Cirillo, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-26",
+    "doi": "10.64898/2026.08.23.746526",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/26/2026.08.23.746526.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Interpretable Forecasting of Kidney Cancer Progression via Generative AI and Symbolic Reasoning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Barcelona Supercomputing Center (BSC)",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "VAE-generated pseudo-time trajectories from TCGA ccRCC RNA-Seq feed symbolic rule induction and event forecasting, yielding interpretable stage-progression…",
+  "title": "Interpretable Forecasting of Kidney Cancer Progression via Generative AI and Symbolic Reasoning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.23.746526"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Proteins act through the company they keep. Which molecules occupy the same nanoscale neighborhood in intact tissue determines what can physically interact, and disease rearranges those neighborhoods before it changes anything a sequence records. That quantity (measured proximity between molecular species in unperturbed tissue) has never been acquired broadly enough to train on. Published colocalization arrives study by study and never accumulates into a graph. The measurement has to be made rather than collected.\n\nWe built ASCEND, a spatial computing platform that measures pairwise molecular proximity from expansion microscopy at molecular resolution in intact tissue, and applied it to 164 proteins across 37 imaged regions in five studies, spanning cultured neurons, isolated synapses and mouse cortex in disease and control. HI-JEPA is a representation trained on those measurements. Each protein is one embedding, trained to predict the embeddings of its measured neighbors in latent space; it never reconstructs its input and generates no negatives. A set of proteins measured in one neighborhood forms a configuration, which is the object the model perturbs and plans over.\n\nThe representation performs operations a sequence model cannot. It names a protein from the bare geometry of a microscopy point cloud, matched against 234,048 deposited structures, at top-1 accuracy 0.748 against a chance rate of 1.0 x 10-5. It predicts physical interaction between sequence-dissimilar proteins that were both withheld from training at AUC 0.908, where ESM-C 6B reaches 0.514 against partner-count-matched negatives. It recovers a held-out complex member in the top 100 of 13,447 candidates at recall 0.954, against 0.514 for a ranking built from complex frequency alone. Asked which partners a knockout disrupts, it recovers the experimentally observed ones at recall@100 0.640; asked the same question about a different protein, with the ranking rule and denominators unchanged, it recovers 0.028, so the answer follows the action.\n\nGiven 5xFAD mouse cortex with no disease label, no reward and no indication that amyloid is relevant, ranking 1,574 measured assemblies by their departure from wild type returns amyloid-{beta} bound to AMPA receptor subunits in nine of the top ten. Planning over the same configurations independently selects the same subunits (GluA2, GluA3, GluA4) and predicts that disrupting the PSD-95 scaffold worsens the configuration, both agreeing in sign with experiments the model never saw. Ablating the measured-proximity channel at training time degrades cross-scale partner recovery from median rank 14 to 68 while leaving navigation and within-scale dynamics intact; ablating the perturbation channel does the reverse. The cross-scale capability therefore comes from the measurement and not from having seen more data.\n\nThe intended application is target nomination in diseases where sequence and structure supply no starting point.\n\nNote: This is a capability report. The architecture, the training procedure and the acquisition protocol are proprietary and are not described. Section 4.2 gives the evaluation protocol behind every number reported.",
+  "authors": [
+    "Shihabi, R.",
+    "Karmali, S.",
+    "Vaughan, B.",
+    "Taraman, S.",
+    "Kellis, M."
+  ],
+  "doi": "10.64898/2026.08.14.744901",
+  "first_seen": "2026-08-14",
+  "id": "biorxiv:10.64898/2026.08.14.744901",
+  "metadata": {
+    "abstract": "Proteins act through the company they keep. Which molecules occupy the same nanoscale neighborhood in intact tissue determines what can physically interact, and disease rearranges those neighborhoods before it changes anything a sequence records. That quantity (measured proximity between molecular species in unperturbed tissue) has never been acquired broadly enough to train on. Published colocalization arrives study by study and never accumulates into a graph. The measurement has to be made rather than collected.\n\nWe built ASCEND, a spatial computing platform that measures pairwise molecular proximity from expansion microscopy at molecular resolution in intact tissue, and applied it to 164 proteins across 37 imaged regions in five studies, spanning cultured neurons, isolated synapses and mouse cortex in disease and control. HI-JEPA is a representation trained on those measurements. Each protein is one embedding, trained to predict the embeddings of its measured neighbors in latent space; it never reconstructs its input and generates no negatives. A set of proteins measured in one neighborhood forms a configuration, which is the object the model perturbs and plans over.\n\nThe representation performs operations a sequence model cannot. It names a protein from the bare geometry of a microscopy point cloud, matched against 234,048 deposited structures, at top-1 accuracy 0.748 against a chance rate of 1.0 x 10-5. It predicts physical interaction between sequence-dissimilar proteins that were both withheld from training at AUC 0.908, where ESM-C 6B reaches 0.514 against partner-count-matched negatives. It recovers a held-out complex member in the top 100 of 13,447 candidates at recall 0.954, against 0.514 for a ranking built from complex frequency alone. Asked which partners a knockout disrupts, it recovers the experimentally observed ones at recall@100 0.640; asked the same question about a different protein, with the ranking rule and denominators unchanged, it recovers 0.028, so the answer follows the action.\n\nGiven 5xFAD mouse cortex with no disease label, no reward and no indication that amyloid is relevant, ranking 1,574 measured assemblies by their departure from wild type returns amyloid-{beta} bound to AMPA receptor subunits in nine of the top ten. Planning over the same configurations independently selects the same subunits (GluA2, GluA3, GluA4) and predicts that disrupting the PSD-95 scaffold worsens the configuration, both agreeing in sign with experiments the model never saw. Ablating the measured-proximity channel at training time degrades cross-scale partner recovery from median rank 14 to 68 while leaving navigation and within-scale dynamics intact; ablating the perturbation channel does the reverse. The cross-scale capability therefore comes from the measurement and not from having seen more data.\n\nThe intended application is target nomination in diseases where sequence and structure supply no starting point.\n\nNote: This is a capability report. The architecture, the training procedure and the acquisition protocol are proprietary and are not described. Section 4.2 gives the evaluation protocol behind every number reported.",
+    "author_corresponding": "Ryan Shihabi",
+    "author_corresponding_institution": "Eratos Therapeutics",
+    "authors": "Shihabi, R.; Karmali, S.; Vaughan, B.; Taraman, S.; Kellis, M.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-08-20",
+    "doi": "10.64898/2026.08.14.744901",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/20/2026.08.14.744901.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "HI-JEPA: A World Model of Molecular Organization Learned from Measured Proximity",
+    "type": "new results",
+    "version": "2"
+  },
+  "org": "Eratos Therapeutics",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-08-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "Proteins act through the company they keep.",
+  "title": "HI-JEPA: A World Model of Molecular Organization Learned from Measured Proximity",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.14.744901"
+}

@@ -1,0 +1,33 @@
+{
+  "abstract": "We study whether the loss design of High-Fidelity Generative Image Compression (HiFiC), a GAN-based neural codec originally built for natural photographs, can be adapted to preserve biologically meaningful structure in Hi-C chromatin contact maps under lossy compression. Standard image compression, including HiFiC in its original form, optimizes for human visual perception; but a Hi-C contact map is normally distributed together with its numeric matrix file (.cool/.mcool), which downstream genomic analysis tools consume directly. Aggressive compression that looks acceptable to the eye can nonetheless blur or delete loops and topologically associating domain (TAD) boundaries that these tools depend on. We modify HiFiC's distortion term with a spatially-weighted MSE that up-weights biologically salient regions (loops, TAD boundaries, stripes, compartment structure) and add an insulation-score loss term that directly penalizes loss of TAD boundary sharpness. We describe a three-phase fine-tuning strategy that adapts a pretrained HiFiC checkpoint to the Hi-C domain without catastrophic forgetting. We evaluate the resulting system, HiFiC-G, using both conventional image-quality metrics (PSNR, SSIM) and genomics-domain preservation metrics (loop/TAD/compartment/stripe preservation percentage) across two cell lines. HiFiC-G preserves local structure, meaning stripes and TAD boundaries, substantially better than the metrics alone would suggest, while long-range A/B compartment structure remains poorly preserved; we show this gap tracks genomic scale and is consistent with a specific architectural cause, the fixed-size tiling that both HiFiC-G and the original HiFiC rely on for memory efficiency.",
+  "authors": [
+    "Andre Antonio Straton"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-19",
+  "id": "arxiv:2608.21446",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "cs.CV",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.21446v1</ns0:id>\n    <ns0:title>HiFiC-G: Adapting HiFiC for Hi-C Contact Matrices</ns0:title>\n    <ns0:updated>2026-08-19T13:08:18Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.21446v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.21446v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We study whether the loss design of High-Fidelity Generative Image Compression (HiFiC), a GAN-based neural codec originally built for natural photographs, can be adapted to preserve biologically meaningful structure in Hi-C chromatin contact maps under lossy compression. Standard image compression, including HiFiC in its original form, optimizes for human visual perception; but a Hi-C contact map is normally distributed together with its numeric matrix file (.cool/.mcool), which downstream genomic analysis tools consume directly. Aggressive compression that looks acceptable to the eye can nonetheless blur or delete loops and topologically associating domain (TAD) boundaries that these tools depend on. We modify HiFiC's distortion term with a spatially-weighted MSE that up-weights biologically salient regions (loops, TAD boundaries, stripes, compartment structure) and add an insulation-score loss term that directly penalizes loss of TAD boundary sharpness. We describe a three-phase fine-tuning strategy that adapts a pretrained HiFiC checkpoint to the Hi-C domain without catastrophic forgetting. We evaluate the resulting system, HiFiC-G, using both conventional image-quality metrics (PSNR, SSIM) and genomics-domain preservation metrics (loop/TAD/compartment/stripe preservation percentage) across two cell lines. HiFiC-G preserves local structure, meaning stripes and TAD boundaries, substantially better than the metrics alone would suggest, while long-range A/B compartment structure remains poorly preserved; we show this gap tracks genomic scale and is consistent with a specific architectural cause, the fixed-size tiling that both HiFiC-G and the original HiFiC rely on for memory efficiency.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-19T13:08:18Z</ns0:published>\n    <ns1:comment>13 pages, 3 figures, 2 tables. Bachelor's thesis project, Transilvania University of Brasov (UNITBV). Language editing and translation assistance provided using Claude (Anthropic)</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Andre Antonio Straton</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "epigenomics",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Adapts the HiFiC GAN image codec to Hi-C contact maps, using spatially weighted MSE and an insulation-score loss to preserve loops and TAD boundaries under…",
+  "title": "HiFiC-G: Adapting HiFiC for Hi-C Contact Matrices",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.21446v1"
+}

@@ -1,0 +1,33 @@
+{
+  "abstract": "Tumor progression is an inherently multiphysical phenomenon in which interstitial fluid dynamics, biochemical transport, and cellular mechanics interact across multiple spatiotemporal scales. Classical mesh-based solvers, although accurate, impose prohibitive computational costs for the repeated evaluations demanded by inverse parameter identification and future patient-specific predictive pipelines. In this work we introduce a Physics-Informed Neural Network (PINN) framework for a tractable chemo-fluidic continuum model of tumor growth that couples an advection-diffusion-reaction (ADR) equation for the tumor volume fraction with a quasi-static Darcy pressure equation for the interstitial fluid pressure. By intentionally decoupling the solid-mechanical equilibrium, we obtain a three-equation system whose gradient structure is stable under automatic differentiation, enabling robust deep-learning optimization. The network simultaneously learns both state variables from physics constraints alone (forward problem) and recovers hidden transport parameters from sparse, noisy synthetic measurements (Data-Assimilation PINN, DA-PINN, inverse problem). We verify the forward solver against a high-resolution finite-difference (FD) reference, achieving a mean absolute error below 0.002. For the inverse problem, starting from an initial permeability estimate of 0.08 (a factor of 4x above the true value of 0.02) with only 5% spatially sparse observations corrupted by 5% Gaussian noise, the DA-PINN recovers the permeability with a relative error below 5%. These results demonstrate that physics-informed deep learning constitutes a viable, computationally efficient route to multiphysics oncology modeling and lays the mathematical groundwork for future integration into clinical data assimilation pipelines.",
+  "authors": [
+    "Celia Taboada",
+    "Pedro Navas",
+    "Miguel Molinos"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-08",
+  "id": "arxiv:2608.10014",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "math.NA"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.10014v1</ns0:id>\n    <ns0:title>A Physics-Informed Neural Network Approach to Multiphysics Continuum Modeling of Cancer Growth via Chemo-fluid Coupling</ns0:title>\n    <ns0:updated>2026-08-08T11:17:43Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.10014v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.10014v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Tumor progression is an inherently multiphysical phenomenon in which interstitial fluid dynamics, biochemical transport, and cellular mechanics interact across multiple spatiotemporal scales. Classical mesh-based solvers, although accurate, impose prohibitive computational costs for the repeated evaluations demanded by inverse parameter identification and future patient-specific predictive pipelines. In this work we introduce a Physics-Informed Neural Network (PINN) framework for a tractable chemo-fluidic continuum model of tumor growth that couples an advection-diffusion-reaction (ADR) equation for the tumor volume fraction with a quasi-static Darcy pressure equation for the interstitial fluid pressure. By intentionally decoupling the solid-mechanical equilibrium, we obtain a three-equation system whose gradient structure is stable under automatic differentiation, enabling robust deep-learning optimization. The network simultaneously learns both state variables from physics constraints alone (forward problem) and recovers hidden transport parameters from sparse, noisy synthetic measurements (Data-Assimilation PINN, DA-PINN, inverse problem). We verify the forward solver against a high-resolution finite-difference (FD) reference, achieving a mean absolute error below 0.002. For the inverse problem, starting from an initial permeability estimate of 0.08 (a factor of 4x above the true value of 0.02) with only 5% spatially sparse observations corrupted by 5% Gaussian noise, the DA-PINN recovers the permeability with a relative error below 5%. These results demonstrate that physics-informed deep learning constitutes a viable, computationally efficient route to multiphysics oncology modeling and lays the mathematical groundwork for future integration into clinical data assimilation pipelines.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.NA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-08T11:17:43Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Celia Taboada</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pedro Navas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Miguel Molinos</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "PINN framework for chemo-fluid tumor growth model coupling ADR and Darcy equations; DA-PINN recovers permeability from sparse noisy data with under 5% error.",
+  "title": "A Physics-Informed Neural Network Approach to Multiphysics Continuum Modeling of Cancer Growth via Chemo-fluid Coupling",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.10014v1"
+}

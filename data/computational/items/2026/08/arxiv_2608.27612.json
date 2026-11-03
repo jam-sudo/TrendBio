@@ -1,0 +1,34 @@
+{
+  "abstract": "In neuroevolution, indirect encoding generates neural network connectivity from a compact genome rather than specifying each connection. ES-HyperNEAT automatically discovers where to place hidden nodes by examining CPPN output patterns: it recursively subdivides space using a quadtree, expanding regions where CPPN outputs show high variance. This adaptive approach discovers network topology without manual substrate specification, extending the fixed-grid HyperNEAT framework built on NEAT.\n  However, the quadtree resists tensorization. Each depth level depends on the parent's variance, forcing sequential evaluation. Different CPPNs produce different subdivision patterns, preventing batching. And variable leaf counts are incompatible with JAX's static shape requirement for JIT compilation. Our prior work confirmed these limits at depths exceeding 5, and a JAX reimplementation of the quadtree yielded only marginal speedup despite batched optimizations, motivating the eager reformulation presented here.\n  We present EMR-HyperNEAT, which evaluates all positions at all resolutions up front, then filters using the same variance criterion: ES-HyperNEAT's subdivide_if(var > $θ$) becomes eval_all(); filter(var > $θ$). This performs more CPPN queries than necessary, but all queries become independent and parallelizable across both cores and population members, reducing complexity from \\BigO($4^D$) to \\BigO($4^D/P$) across $P$ parallel cores. Recurrent substrate configurations become feasible through a connection type taxonomy. The experiments section validates 12-34$\\times$ on-device GPU speedup on XOR at depths 5-7, and empirically higher solve rates across benchmarks.",
+  "authors": [
+    "Romain Claret",
+    "Michael O'Neill",
+    "Paul Cotofrei",
+    "Kilian Stoffel"
+  ],
+  "doi": "10.1145/3795101.3805361",
+  "first_seen": "2026-08-27",
+  "id": "arxiv:2608.27612",
+  "metadata": {
+    "arxiv_primary_category": "cs.NE",
+    "categories": [
+      "cs.NE",
+      "cs.AI",
+      "cs.DC",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.27612v1</ns0:id>\n    <ns0:title>Tensor-Accelerated Eager Multi-Resolution Grids for Evolving Large-Scale Substrates</ns0:title>\n    <ns0:updated>2026-08-27T18:45:50Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.27612v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.27612v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>In neuroevolution, indirect encoding generates neural network connectivity from a compact genome rather than specifying each connection. ES-HyperNEAT automatically discovers where to place hidden nodes by examining CPPN output patterns: it recursively subdivides space using a quadtree, expanding regions where CPPN outputs show high variance. This adaptive approach discovers network topology without manual substrate specification, extending the fixed-grid HyperNEAT framework built on NEAT.\n  However, the quadtree resists tensorization. Each depth level depends on the parent's variance, forcing sequential evaluation. Different CPPNs produce different subdivision patterns, preventing batching. And variable leaf counts are incompatible with JAX's static shape requirement for JIT compilation. Our prior work confirmed these limits at depths exceeding 5, and a JAX reimplementation of the quadtree yielded only marginal speedup despite batched optimizations, motivating the eager reformulation presented here.\n  We present EMR-HyperNEAT, which evaluates all positions at all resolutions up front, then filters using the same variance criterion: ES-HyperNEAT's subdivide_if(var &gt; $θ$) becomes eval_all(); filter(var &gt; $θ$). This performs more CPPN queries than necessary, but all queries become independent and parallelizable across both cores and population members, reducing complexity from \\BigO($4^D$) to \\BigO($4^D/P$) across $P$ parallel cores. Recurrent substrate configurations become feasible through a connection type taxonomy. The experiments section validates 12-34$\\times$ on-device GPU speedup on XOR at depths 5-7, and empirically higher solve rates across benchmarks.</ns0:summary>\n    <ns0:category term=\"cs.NE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-27T18:45:50Z</ns0:published>\n    <ns1:comment>GECCO '26 Companion: Proceedings of the Genetic and Evolutionary Computation Conference Companion, Pages 533 - 536</ns1:comment>\n    <ns1:primary_category term=\"cs.NE\" />\n    <ns1:journal_ref>GECCO 2026 Companion: Proceedings of the Genetic and Evolutionary Computation Conference Companion</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Romain Claret</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael O'Neill</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Paul Cotofrei</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kilian Stoffel</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3795101.3805361</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3795101.3805361\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "In neuroevolution, indirect encoding generates neural network connectivity from a compact genome rather than specifying each connection.",
+  "title": "Tensor-Accelerated Eager Multi-Resolution Grids for Evolving Large-Scale Substrates",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.27612v1"
+}

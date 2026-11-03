@@ -1,0 +1,46 @@
+{
+  "abstract": "Metabolomics uses tandem mass spectrometry (MS/MS) data to gain structural insights of small molecules that play biological roles, generating datasets whose size and complexity demand systematic organisation. Molecular networking addresses this by representing MS/MS spectra as nodes and their pairwise similarity as edges, but its output is critically sensitive to user-defined parameters: similarity score cut-off, maximum component size, maximum links and minimum matching peaks. These parameters are routinely left at default values, which can either collapse interpretable molecular families into entangled \"hairballs\" or fragment them into disconnected singletons. In the absence of ground truth, no standardised framework exists to evaluate molecular networks or to assess whether their connections are robust to run-to-run variability present in metabolomic experiments. Here, we introduce arteMIS (Accelerated Ranking and Tuning using Multi-metric Interpretability across Scores), a framework for systematic parameter optimisation that uses Latin Hypercube Sampling to efficiently cover the four-dimensional parameter space and ranks candidate networks through a user-tuneable composite Z-score, combining topology- and chemistry-based metrics. This framework supports three complementary modes: global, seed, and target-class, adapting optimisation to fully unannotated datasets, curated subset of reference features or class-focused discovery, respectively. Benchmarking across four spectral libraries (~600 to ~13,000 spectra) and four scoring methods (Cosine, Modified Cosine, Spec2Vec, MS2DeepScore), we provide practical guidance for parameter selection as a function of scoring method and dataset size and show that optimal settings do not transfer between them. Top-ranked arteMIS configurations outperformed GNPS defaults in chemistry and topology metrics and produced networks with higher edge-stability under subsampling. Applied to actinobacteria and fungal samples, arteMIS rescued structurally meaningful families that remained fragmented under default settings. We conclude that arteMIS reframes molecular network construction from a default-driven step into a task-customisable optimisation.",
+  "authors": [
+    "Torres Ortega, L. R.",
+    "Charria Giron, E.",
+    "Huber, F.",
+    "Simone, M.",
+    "Sosio, M.",
+    "van der Hooft, J. J. J."
+  ],
+  "doi": "10.64898/2026.08.17.745252",
+  "first_seen": "2026-08-21",
+  "id": "biorxiv:10.64898/2026.08.17.745252",
+  "metadata": {
+    "abstract": "Metabolomics uses tandem mass spectrometry (MS/MS) data to gain structural insights of small molecules that play biological roles, generating datasets whose size and complexity demand systematic organisation. Molecular networking addresses this by representing MS/MS spectra as nodes and their pairwise similarity as edges, but its output is critically sensitive to user-defined parameters: similarity score cut-off, maximum component size, maximum links and minimum matching peaks. These parameters are routinely left at default values, which can either collapse interpretable molecular families into entangled \"hairballs\" or fragment them into disconnected singletons. In the absence of ground truth, no standardised framework exists to evaluate molecular networks or to assess whether their connections are robust to run-to-run variability present in metabolomic experiments. Here, we introduce arteMIS (Accelerated Ranking and Tuning using Multi-metric Interpretability across Scores), a framework for systematic parameter optimisation that uses Latin Hypercube Sampling to efficiently cover the four-dimensional parameter space and ranks candidate networks through a user-tuneable composite Z-score, combining topology- and chemistry-based metrics. This framework supports three complementary modes: global, seed, and target-class, adapting optimisation to fully unannotated datasets, curated subset of reference features or class-focused discovery, respectively. Benchmarking across four spectral libraries (~600 to ~13,000 spectra) and four scoring methods (Cosine, Modified Cosine, Spec2Vec, MS2DeepScore), we provide practical guidance for parameter selection as a function of scoring method and dataset size and show that optimal settings do not transfer between them. Top-ranked arteMIS configurations outperformed GNPS defaults in chemistry and topology metrics and produced networks with higher edge-stability under subsampling. Applied to actinobacteria and fungal samples, arteMIS rescued structurally meaningful families that remained fragmented under default settings. We conclude that arteMIS reframes molecular network construction from a default-driven step into a task-customisable optimisation.",
+    "author_corresponding": "Justin J.J. van der Hooft",
+    "author_corresponding_institution": "Wageningen University",
+    "authors": "Torres Ortega, L. R.; Charria Giron, E.; Huber, F.; Simone, M.; Sosio, M.; van der Hooft, J. J. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-21",
+    "doi": "10.64898/2026.08.17.745252",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/21/2026.08.17.745252.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Beyond the Default: Optimizing Molecular Networking with arteMIS",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Wageningen University",
+  "preprint_id": null,
+  "primary_category": "metabolomics",
+  "published_at": "2026-08-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "arteMIS is a Latin Hypercube-based framework that tunes molecular networking parameters for MS/MS metabolomics using a composite Z-score across four scoring…",
+  "title": "Beyond the Default: Optimizing Molecular Networking with arteMIS",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.17.745252"
+}

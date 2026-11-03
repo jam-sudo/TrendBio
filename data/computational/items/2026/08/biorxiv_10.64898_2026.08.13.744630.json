@@ -1,0 +1,42 @@
+{
+  "abstract": "Accurate normalization is essential for differential expression analysis of RNA-sequencing data. Popular normalization methods such as the median-of-ratios and trimmed mean of M-values do not leverage information from the experimental design. This may be inefficient in experiments with large-scale systematic expression changes or complex designs. Here, we introduce design-informed size factor estimation (disize), a normalization method that uses information from the experimental design to improve accuracy. disize uses a modified generalized linear mixed model to robustly distinguish between biological signal and sample-specific size factors. We also propose a mechanistically justified data-generating process for RNA-sequencing counts that is derived from previous models of transcription and sequencing. Through simulations based on this data-generating process and validating on true RNA-seq data, we show that disize recovers size factors more accurately than existing methods, particularly in challenging scenarios with low gene expression and a high proportion of differentially expressed genes; this in turn improves downstream analysis. disize provides a robust and accurate approach to normalization, highlighting the significant benefits of integrating experimental design information directly into normalization for transcriptomic datasets.\n\nAuthor summaryIn transcriptomic analysis, normalization adjusts for technical biases arising from library preparation and sequencing. Methods implemented in widely used packages like DESeq2 and edgeR ignore information in the experimental design during normalization.\n\nIncorporating information from the experimental design into a normalization method has the potential to yield more accurate results. To do this, we developed a new method, design-informed size factor estimation (disize), that uses a statistical model to jointly account for the biological signal defined by the design and the sample-specific batch effect. By separating the biological variation into its components, disize can more robustly estimate the batch effect. To validate our approach, we constructed a flexible simulation framework relying on a mechanistically justified data-generating process for RNA-seq data. Our benchmarks on both simulated and true RNA-seq data show that disize recovers the true size factors more accurately than existing methods, particularly in challenging scenarios with low counts or a high proportion of differentially expressed genes. This improved normalization yields more reliable downstream results in differential expression analysis.",
+  "authors": [
+    "Pocuca, T.",
+    "Pare, G.",
+    "Bolker, B. M."
+  ],
+  "doi": "10.64898/2026.08.13.744630",
+  "first_seen": "2026-08-22",
+  "id": "biorxiv:10.64898/2026.08.13.744630",
+  "metadata": {
+    "abstract": "Accurate normalization is essential for differential expression analysis of RNA-sequencing data. Popular normalization methods such as the median-of-ratios and trimmed mean of M-values do not leverage information from the experimental design. This may be inefficient in experiments with large-scale systematic expression changes or complex designs. Here, we introduce design-informed size factor estimation (disize), a normalization method that uses information from the experimental design to improve accuracy. disize uses a modified generalized linear mixed model to robustly distinguish between biological signal and sample-specific size factors. We also propose a mechanistically justified data-generating process for RNA-sequencing counts that is derived from previous models of transcription and sequencing. Through simulations based on this data-generating process and validating on true RNA-seq data, we show that disize recovers size factors more accurately than existing methods, particularly in challenging scenarios with low gene expression and a high proportion of differentially expressed genes; this in turn improves downstream analysis. disize provides a robust and accurate approach to normalization, highlighting the significant benefits of integrating experimental design information directly into normalization for transcriptomic datasets.\n\nAuthor summaryIn transcriptomic analysis, normalization adjusts for technical biases arising from library preparation and sequencing. Methods implemented in widely used packages like DESeq2 and edgeR ignore information in the experimental design during normalization.\n\nIncorporating information from the experimental design into a normalization method has the potential to yield more accurate results. To do this, we developed a new method, design-informed size factor estimation (disize), that uses a statistical model to jointly account for the biological signal defined by the design and the sample-specific batch effect. By separating the biological variation into its components, disize can more robustly estimate the batch effect. To validate our approach, we constructed a flexible simulation framework relying on a mechanistically justified data-generating process for RNA-seq data. Our benchmarks on both simulated and true RNA-seq data show that disize recovers the true size factors more accurately than existing methods, particularly in challenging scenarios with low counts or a high proportion of differentially expressed genes. This improved normalization yields more reliable downstream results in differential expression analysis.",
+    "author_corresponding": "Todd Pocuca",
+    "author_corresponding_institution": "McMaster University Faculty of Science",
+    "authors": "Pocuca, T.; Pare, G.; Bolker, B. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-22",
+    "doi": "10.64898/2026.08.13.744630",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/22/2026.08.13.744630.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Design-informed Size Factor Estimation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "McMaster University Faculty of Science",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-08-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "disize, a design-informed size factor normalization method for RNA-seq using a GLMM, outperforms median-of-ratios and TMM in recovering size factors,…",
+  "title": "Design-informed Size Factor Estimation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.13.744630"
+}

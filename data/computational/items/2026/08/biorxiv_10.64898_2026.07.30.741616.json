@@ -1,0 +1,44 @@
+{
+  "abstract": "Cytochrome P450 (CYP) enzymes metabolize roughly three-quarters of clinically used drugs, and genetic variation in these enzymes is a leading source of interindividual differences in drug response. Predicting a variant's functional effect is therefore critical, yet the consequences of most CYP variants remain unknown. Many state-of-the-art variant-effect predictors rest on a homology-based paradigm that scores variants by evolutionary conservation -- an assumption that pharmacogenes, including CYPs, violate. Focusing on human CYPs, we show that homology-based models fail systematically. AlphaMissense (AM) assigns variants to its \"ambiguous\" class at nearly twice the proteome-wide rate across six clinically important CYPs, and within that class its scores are essentially uninformative about measured CYP2C9 deep mutational scan (DMS) activity ({rho}=-0.130). Using catalytic activity and cellular abundance from the same CYP2C9 DMS, we show that AM is largely an abundance signal: it tracks activity well for destabilizing, low-abundance variants ({rho}=-0.568) but far more weakly for abundance-independent variants ({rho}=-0.357; Fisher r-to-z z=-8.99, p<1e-18). We further hypothesized that non-homology-based features (sequence position, substitution chemistry, distance to the substrate-recognition sites, and secondary structure) might account for where AM errs, but their explanatory power is weak. Using CYP2C9 DMS activity as ground truth, we built a k-nearest-neighbors model over ESM-2 embeddings and ensembled it with AM and ESM-2 masked marginal probability, raising the correlation between predicted and measured activity within the ambiguous class from {rho}=0.080 for AM alone to 0.399, and reaching an overall {rho}=0.721 that exceeds every out-of-the-box predictor we tested ({rho}=0.523 to 0.686). However, neither this improved ensemble model nor any other method agrees significantly with clinical annotations. Drawing on evidence that a variant's effect can depend on the drug, we hypothesize that substrate identity is the key missing feature in current models, and that predicting function for these multi-substrate enzymes may require redefining function as substrate-conditioned.",
+  "authors": [
+    "Xu, H.",
+    "Samori, I.",
+    "Nayar, G.",
+    "Altman, R. B."
+  ],
+  "doi": "10.64898/2026.07.30.741616",
+  "first_seen": "2026-08-05",
+  "id": "biorxiv:10.64898/2026.07.30.741616",
+  "metadata": {
+    "abstract": "Cytochrome P450 (CYP) enzymes metabolize roughly three-quarters of clinically used drugs, and genetic variation in these enzymes is a leading source of interindividual differences in drug response. Predicting a variant's functional effect is therefore critical, yet the consequences of most CYP variants remain unknown. Many state-of-the-art variant-effect predictors rest on a homology-based paradigm that scores variants by evolutionary conservation -- an assumption that pharmacogenes, including CYPs, violate. Focusing on human CYPs, we show that homology-based models fail systematically. AlphaMissense (AM) assigns variants to its \"ambiguous\" class at nearly twice the proteome-wide rate across six clinically important CYPs, and within that class its scores are essentially uninformative about measured CYP2C9 deep mutational scan (DMS) activity ({rho}=-0.130). Using catalytic activity and cellular abundance from the same CYP2C9 DMS, we show that AM is largely an abundance signal: it tracks activity well for destabilizing, low-abundance variants ({rho}=-0.568) but far more weakly for abundance-independent variants ({rho}=-0.357; Fisher r-to-z z=-8.99, p<1e-18). We further hypothesized that non-homology-based features (sequence position, substitution chemistry, distance to the substrate-recognition sites, and secondary structure) might account for where AM errs, but their explanatory power is weak. Using CYP2C9 DMS activity as ground truth, we built a k-nearest-neighbors model over ESM-2 embeddings and ensembled it with AM and ESM-2 masked marginal probability, raising the correlation between predicted and measured activity within the ambiguous class from {rho}=0.080 for AM alone to 0.399, and reaching an overall {rho}=0.721 that exceeds every out-of-the-box predictor we tested ({rho}=0.523 to 0.686). However, neither this improved ensemble model nor any other method agrees significantly with clinical annotations. Drawing on evidence that a variant's effect can depend on the drug, we hypothesize that substrate identity is the key missing feature in current models, and that predicting function for these multi-substrate enzymes may require redefining function as substrate-conditioned.",
+    "author_corresponding": "Russ B Altman",
+    "author_corresponding_institution": "Stanford University",
+    "authors": "Xu, H.; Samori, I.; Nayar, G.; Altman, R. B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-05",
+    "doi": "10.64898/2026.07.30.741616",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/05/2026.07.30.741616.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Homology-Based Variant-Effect Predictors Break Down on Cytochrome P450 Pharmacogenes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Stanford University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows homology-based variant-effect predictors like AlphaMissense fail on CYP pharmacogenes; a kNN ESM-2 ensemble improves CYP2C9 DMS activity prediction but…",
+  "title": "Homology-Based Variant-Effect Predictors Break Down on Cytochrome P450 Pharmacogenes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.30.741616"
+}
