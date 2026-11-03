@@ -1,0 +1,41 @@
+{
+  "abstract": "Motivation: Single-cell fate mapping at atlas scale is constrained by memory: in the tested CellRank 2.3.2 pip environment without the optional PETSc/SLEPc stack, the GPCCA estimator fell back--after a warning--to a dense Brandts Schur routine. Across three measured sizes, its peak memory was consistent with ~72 n^2 bytes, a model that back-calculates to ~405 GB [BACK-CALCULATED] for the 74,984-cell dataset studied here--beyond any consumer workstation. Results: We present scalable-fate (sfate), which computes absorption probabilities to annotation-defined target states--where 'fate probability' denotes absorption probability toward user-defined target states on a latent-space transition graph, conceptually related to Palantir-style diffusion-based Markov-chain fate modeling rather than a velocity-derived lineage probability--from latent-space kNN graphs via column-wise GMRES solves, without any Schur decomposition. Memory scaled linearly with cell number over four measured graph-construction tiers (R^2 = 0.9985; 4.03 GiB at 500,000 synthetic cells in 66.2 s); the 500k absorption solve did not converge under the default configuration, so the largest measured full-pipeline scale is the 75k real-data run (1.76 GiB). Solutions agree with float64 direct references within the prespecified 1e-5 tolerance at every tested configuration (production default L-inf = 1.74e-06; best tested configuration 3.21e-07, 31x below the threshold), and reproduce CellRank's fate probabilities when the transition kernel and terminal representative cells are held identical. On 75k mouse 5xFAD/Cd28-cKO microglia (Ayata et al., 2025; GEO: GSE296768), the full analysis ran at 1.76 GiB peak memory, returning a six-state annotation-defined absorption landscape where the archived CellRank analysis returned three comparable arms; a controlled 2x2 comparison identifies terminal-state selection as an important contributor to the cross-tool discrepancy. Availability: sfate is available at https://github.com/Ericleo-zeng/sfate (release v1.0.0, commit 5472f62; MIT license) and is archived at Zenodo (DOI: 10.5281/zenodo.22851715). The repository includes the source code, the validation suite (32 unit tests, deterministic under fixed seed), all benchmark and figure-generation scripts, the synthetic fixtures, and the records underlying every figure and table. Contact: Wei Zeng (ericleo_zeng@hotmail.com)",
+  "authors": [
+    "Zeng, W.",
+    "Shi, L."
+  ],
+  "doi": "10.64898/2026.09.19.752930",
+  "first_seen": "2026-09-25",
+  "id": "biorxiv:10.64898/2026.09.19.752930",
+  "metadata": {
+    "abstract": "Motivation: Single-cell fate mapping at atlas scale is constrained by memory: in the tested CellRank 2.3.2 pip environment without the optional PETSc/SLEPc stack, the GPCCA estimator fell back--after a warning--to a dense Brandts Schur routine. Across three measured sizes, its peak memory was consistent with ~72 n^2 bytes, a model that back-calculates to ~405 GB [BACK-CALCULATED] for the 74,984-cell dataset studied here--beyond any consumer workstation. Results: We present scalable-fate (sfate), which computes absorption probabilities to annotation-defined target states--where 'fate probability' denotes absorption probability toward user-defined target states on a latent-space transition graph, conceptually related to Palantir-style diffusion-based Markov-chain fate modeling rather than a velocity-derived lineage probability--from latent-space kNN graphs via column-wise GMRES solves, without any Schur decomposition. Memory scaled linearly with cell number over four measured graph-construction tiers (R^2 = 0.9985; 4.03 GiB at 500,000 synthetic cells in 66.2 s); the 500k absorption solve did not converge under the default configuration, so the largest measured full-pipeline scale is the 75k real-data run (1.76 GiB). Solutions agree with float64 direct references within the prespecified 1e-5 tolerance at every tested configuration (production default L-inf = 1.74e-06; best tested configuration 3.21e-07, 31x below the threshold), and reproduce CellRank's fate probabilities when the transition kernel and terminal representative cells are held identical. On 75k mouse 5xFAD/Cd28-cKO microglia (Ayata et al., 2025; GEO: GSE296768), the full analysis ran at 1.76 GiB peak memory, returning a six-state annotation-defined absorption landscape where the archived CellRank analysis returned three comparable arms; a controlled 2x2 comparison identifies terminal-state selection as an important contributor to the cross-tool discrepancy. Availability: sfate is available at https://github.com/Ericleo-zeng/sfate (release v1.0.0, commit 5472f62; MIT license) and is archived at Zenodo (DOI: 10.5281/zenodo.22851715). The repository includes the source code, the validation suite (32 unit tests, deterministic under fixed seed), all benchmark and figure-generation scripts, the synthetic fixtures, and the records underlying every figure and table. Contact: Wei Zeng (ericleo_zeng@hotmail.com)",
+    "author_corresponding": "Wei Zeng",
+    "author_corresponding_institution": "The Third School of Clinical Medicine, Southern Medical University",
+    "authors": "Zeng, W.; Shi, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-25",
+    "doi": "10.64898/2026.09.19.752930",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/25/2026.09.19.752930.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "sfate: Schur-free, target-conditioned absorption probabilities for scalable single-cell fate analysis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The Third School of Clinical Medicine, Southern Medical University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-09-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "sfate computes absorption probabilities to target states via column-wise GMRES on latent kNN graphs without Schur decomposition, cutting memory for 75k-cell…",
+  "title": "sfate: Schur-free, target-conditioned absorption probabilities for scalable single-cell fate analysis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.19.752930"
+}

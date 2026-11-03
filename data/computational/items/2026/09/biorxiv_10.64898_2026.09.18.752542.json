@@ -1,0 +1,43 @@
+{
+  "abstract": "Although protein toxins represent valuable pharmacological templates, predicting toxicity directly from primary sequences is inherently challenging because of their evolutionary dynamics. Active toxins and their benign homologues frequently share identical structural scaffolds and differ by only a few key residue substitutions, making global sequence similarity an unreliable indicator of function. Conventional predictors compound this challenge through flawed negative-set designs that sample non-toxic controls from arbitrary background proteins and reduce redundancy through identity-based clustering under random partitioning. This practice introduces global confounding shortcuts that inflate benchmark performance while failing to capture true functional boundaries. To address these limitations, we developed NeoToxPred, a sequence-only binary classifier that fine-tunes the pretrained ESM-C 600M protein language model end-to-end with a six-layer feed-forward classification head. Although the neural architecture is intentionally standard to ensure computational scalability, the core novelty of the framework lies in its rigorous training-data curation: (i) an orthologous negative set drawn from the same InterPro families under controlled taxonomic proximity to eliminate phylogenetic shortcuts, (ii) a length-stratified negative control set to eliminate sequence length as a predictive cue, and (iii) a strict family-disjoint splitting strategy to prevent performance inflation caused by pattern memorization. On held-out internal benchmarks, NeoToxPred achieved a Matthews correlation coefficient (MCC) of 0.897 and an F1-score of 0.949 on long sequences and an MCC of 0.869 on short peptides, decisively outperforming five recent predictors while maintaining stable performance across varying sequence lengths and evolutionary distances. In a genome-scale external validation using the previously unseen proteome of the redfin waspfish (Paracentropogon rubripinnis), NeoToxPred successfully recovered 11 of 16 empirically validated toxins without collapsing into a single-class prediction, whereas structure-dependent baselines identified substantially fewer positives. Computational alanine scanning further confirmed that the framework contextually localizes its predictions to functionally active residues. Taken together, these findings suggest that systematic negative-set design should be prioritized alongside algorithmic complexity in biological sequence classification.",
+  "authors": [
+    "Kim, S.",
+    "Kim, M.-S.",
+    "PARK, C."
+  ],
+  "doi": "10.64898/2026.09.18.752542",
+  "first_seen": "2026-09-24",
+  "id": "biorxiv:10.64898/2026.09.18.752542",
+  "metadata": {
+    "abstract": "Although protein toxins represent valuable pharmacological templates, predicting toxicity directly from primary sequences is inherently challenging because of their evolutionary dynamics. Active toxins and their benign homologues frequently share identical structural scaffolds and differ by only a few key residue substitutions, making global sequence similarity an unreliable indicator of function. Conventional predictors compound this challenge through flawed negative-set designs that sample non-toxic controls from arbitrary background proteins and reduce redundancy through identity-based clustering under random partitioning. This practice introduces global confounding shortcuts that inflate benchmark performance while failing to capture true functional boundaries. To address these limitations, we developed NeoToxPred, a sequence-only binary classifier that fine-tunes the pretrained ESM-C 600M protein language model end-to-end with a six-layer feed-forward classification head. Although the neural architecture is intentionally standard to ensure computational scalability, the core novelty of the framework lies in its rigorous training-data curation: (i) an orthologous negative set drawn from the same InterPro families under controlled taxonomic proximity to eliminate phylogenetic shortcuts, (ii) a length-stratified negative control set to eliminate sequence length as a predictive cue, and (iii) a strict family-disjoint splitting strategy to prevent performance inflation caused by pattern memorization. On held-out internal benchmarks, NeoToxPred achieved a Matthews correlation coefficient (MCC) of 0.897 and an F1-score of 0.949 on long sequences and an MCC of 0.869 on short peptides, decisively outperforming five recent predictors while maintaining stable performance across varying sequence lengths and evolutionary distances. In a genome-scale external validation using the previously unseen proteome of the redfin waspfish (Paracentropogon rubripinnis), NeoToxPred successfully recovered 11 of 16 empirically validated toxins without collapsing into a single-class prediction, whereas structure-dependent baselines identified substantially fewer positives. Computational alanine scanning further confirmed that the framework contextually localizes its predictions to functionally active residues. Taken together, these findings suggest that systematic negative-set design should be prioritized alongside algorithmic complexity in biological sequence classification.",
+    "author_corresponding": "Chungoo PARK",
+    "author_corresponding_institution": "Chonnam National University",
+    "authors": "Kim, S.; Kim, M.-S.; PARK, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-24",
+    "doi": "10.64898/2026.09.18.752542",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/24/2026.09.18.752542.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "NeoToxPred: a fine-tuned protein language model with orthologous and length-stratified negative controls for robust toxicity classification",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Chonnam National University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "proteomics",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "NeoToxPred fine-tunes ESM-C 600M with orthologous, length-stratified negatives and family-disjoint splits for sequence-only protein toxicity classification.",
+  "title": "NeoToxPred: a fine-tuned protein language model with orthologous and length-stratified negative controls for robust toxicity classification",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.18.752542"
+}

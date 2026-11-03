@@ -1,0 +1,36 @@
+{
+  "abstract": "Many DNA foundation models are pretrained by masking parts of a sequence and asking the model to reconstruct them. Standard masked pretraining exposes the encoder to special [MASK] tokens that are absent at inference, creating a mismatch between training and downstream use. The role of an explicit global sequence representation such as a [CLS] token and how it should be trained also remain poorly understood for DNA barcodes. We introduce BarcodeMAE+ and study model architecture, global [CLS] representation, and auxiliary pretraining objectives across arthropod COI (BIOSCAN-5M) and fungal ITS (UNITE+INSD) barcodes. Across both barcode regions, the encoder-decoder MAE-LM architecture outperforms its matched encoder-only counterpart in nearly all evaluated configurations, supporting MAE-LM as an effective architectural design for DNA barcode foundation models. A trained global [CLS] representation provides substantial additional gains: on BIOSCAN-5M, [CLS] accuracy increases from 47.53% without an auxiliary objective to 80.65% with cross-entropy genus classification. The best auxiliary objective is region-dependent: cross-entropy performs best on BIOSCAN-5M, whereas pairwise same-genus classification performs best on UNITE+INSD, reaching 73.19% on Yeast and 63.07% on Filamentous Fungi. BarcodeMAE+ outperforms published DNA foundation model baselines on BIOSCAN-5M and achieves the highest Yeast accuracy among the evaluated UNITE+INSD baselines using frozen encoder representations. Similarity-weighted softmax KNN voting further stabilizes accuracy as neighbourhood size increases. Overall, encoder-decoder masked pretraining and an explicitly trained global representation are strong design choices for DNA barcode foundation models, while the optimal objective for learning that representation depends on the biological domain.",
+  "authors": [
+    "Monireh Safari",
+    "Pablo Millan Arias",
+    "Scott C. Lowe",
+    "Lila Kari",
+    "Angel X. Chang",
+    "Graham W. Taylor"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-26",
+  "id": "arxiv:2609.35877",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.35877v1</ns0:id>\n    <ns0:title>BarcodeMAE+: Rethinking Masked Pretraining and Global Representations for DNA Barcode Foundation Models</ns0:title>\n    <ns0:updated>2026-09-26T22:15:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.35877v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.35877v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Many DNA foundation models are pretrained by masking parts of a sequence and asking the model to reconstruct them. Standard masked pretraining exposes the encoder to special [MASK] tokens that are absent at inference, creating a mismatch between training and downstream use. The role of an explicit global sequence representation such as a [CLS] token and how it should be trained also remain poorly understood for DNA barcodes. We introduce BarcodeMAE+ and study model architecture, global [CLS] representation, and auxiliary pretraining objectives across arthropod COI (BIOSCAN-5M) and fungal ITS (UNITE+INSD) barcodes. Across both barcode regions, the encoder-decoder MAE-LM architecture outperforms its matched encoder-only counterpart in nearly all evaluated configurations, supporting MAE-LM as an effective architectural design for DNA barcode foundation models. A trained global [CLS] representation provides substantial additional gains: on BIOSCAN-5M, [CLS] accuracy increases from 47.53% without an auxiliary objective to 80.65% with cross-entropy genus classification. The best auxiliary objective is region-dependent: cross-entropy performs best on BIOSCAN-5M, whereas pairwise same-genus classification performs best on UNITE+INSD, reaching 73.19% on Yeast and 63.07% on Filamentous Fungi. BarcodeMAE+ outperforms published DNA foundation model baselines on BIOSCAN-5M and achieves the highest Yeast accuracy among the evaluated UNITE+INSD baselines using frozen encoder representations. Similarity-weighted softmax KNN voting further stabilizes accuracy as neighbourhood size increases. Overall, encoder-decoder masked pretraining and an explicitly trained global representation are strong design choices for DNA barcode foundation models, while the optimal objective for learning that representation depends on the biological domain.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-26T22:15:40Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Monireh Safari</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pablo Millan Arias</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Scott C. Lowe</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lila Kari</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Angel X. Chang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Graham W. Taylor</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "BarcodeMAE+ studies encoder-decoder masked pretraining and trained [CLS] global representations for DNA barcode foundation models on arthropod COI and fungal…",
+  "title": "BarcodeMAE+: Rethinking Masked Pretraining and Global Representations for DNA Barcode Foundation Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.35877v1"
+}

@@ -1,0 +1,41 @@
+{
+  "abstract": "A cell-by-gene count matrix is the artifact of a single-cell RNA-seq experiment that is most often stored, shared, and reanalyzed. It is the output of a computation whose inputs are the sequenced molecules and a gene annotation, and while the molecules never change, the annotation is revised continually. Once the matrix has been produced, the evidence behind it can no longer be reinterpreted. Recovering that evidence means returning to raw reads or alignments that are large, costly to process, and frequently unavailable. We ask whether a concise representation of the molecules themselves can be extracted once and reused indefinitely, to quantify under any future annotation, to query and discover features that no annotation yet describes, and to pool evidence across cells and samples. Our starting observation is that the procedures that turn alignments into counts, gene assignment and UMI collapse, never read most of what an alignment file contains. They consume relations among molecules such as shared genomic geometry, shared placements, barcode identity, and the equality or near-equality of UMIs. We show that these relations form a statistic that is sufficient for such consumers, and we design a compact, seekable, content-authenticated archive that stores them while deferring every annotation-dependent decision to analysis time. Archives compose into content-addressed collections that route cohort queries to the molecules that can answer them without copying molecules. We implement these ideas in a tool called gravlax. Across four human 10x 3' datasets, gravlax archives require 11--18 bits per read and are 9.0--12.7x smaller than tag-preserving CRAM. Count matrices replayed from an archive deviate from direct STARsolo quantification by 0.24--0.75% of normalized UMI mass, whereas changing GENCODE v32 to v49 moves 2.12--4.64%, and quantification replay is 34--82x faster than STARsolo at matched thread budgets. A federated index over eight archives occupies 2.96% of their size, answers a 96-query junction panel 2.59x faster than the archives alone, and screens the cohort genome-wide for unannotated splice events that recur across donors in just 9 seconds. Because the molecules are retained, the archives also answer questions the matrix has discarded. An analysis of four peripheral-blood archives recovers a validated FYB1 immune-cell splicing switch, a cross-fitted fragment model appropriate for 3' chemistry reveals an eight-donor shift in NTRK2 terminal-isoform usage from astrocyte and neural-stem-cell populations to mature neurons, and pooling evidence across cells within the context of an expectation-maximization algorithm recovers 75--98% of withheld multi-gene molecule labels. Gravlax is open source, implemented in Rust, licensed under the BSD 3-clause license, and available at https://github.com/COMBINE-lab/gravlax.",
+  "authors": [
+    "Patro, R."
+  ],
+  "doi": "10.64898/2026.09.18.752708",
+  "first_seen": "2026-09-21",
+  "id": "biorxiv:10.64898/2026.09.18.752708",
+  "metadata": {
+    "abstract": "A cell-by-gene count matrix is the artifact of a single-cell RNA-seq experiment that is most often stored, shared, and reanalyzed. It is the output of a computation whose inputs are the sequenced molecules and a gene annotation, and while the molecules never change, the annotation is revised continually. Once the matrix has been produced, the evidence behind it can no longer be reinterpreted. Recovering that evidence means returning to raw reads or alignments that are large, costly to process, and frequently unavailable. We ask whether a concise representation of the molecules themselves can be extracted once and reused indefinitely, to quantify under any future annotation, to query and discover features that no annotation yet describes, and to pool evidence across cells and samples. Our starting observation is that the procedures that turn alignments into counts, gene assignment and UMI collapse, never read most of what an alignment file contains. They consume relations among molecules such as shared genomic geometry, shared placements, barcode identity, and the equality or near-equality of UMIs. We show that these relations form a statistic that is sufficient for such consumers, and we design a compact, seekable, content-authenticated archive that stores them while deferring every annotation-dependent decision to analysis time. Archives compose into content-addressed collections that route cohort queries to the molecules that can answer them without copying molecules. We implement these ideas in a tool called gravlax. Across four human 10x 3' datasets, gravlax archives require 11--18 bits per read and are 9.0--12.7x smaller than tag-preserving CRAM. Count matrices replayed from an archive deviate from direct STARsolo quantification by 0.24--0.75% of normalized UMI mass, whereas changing GENCODE v32 to v49 moves 2.12--4.64%, and quantification replay is 34--82x faster than STARsolo at matched thread budgets. A federated index over eight archives occupies 2.96% of their size, answers a 96-query junction panel 2.59x faster than the archives alone, and screens the cohort genome-wide for unannotated splice events that recur across donors in just 9 seconds. Because the molecules are retained, the archives also answer questions the matrix has discarded. An analysis of four peripheral-blood archives recovers a validated FYB1 immune-cell splicing switch, a cross-fitted fragment model appropriate for 3' chemistry reveals an eight-donor shift in NTRK2 terminal-isoform usage from astrocyte and neural-stem-cell populations to mature neurons, and pooling evidence across cells within the context of an expectation-maximization algorithm recovers 75--98% of withheld multi-gene molecule labels. Gravlax is open source, implemented in Rust, licensed under the BSD 3-clause license, and available at https://github.com/COMBINE-lab/gravlax.",
+    "author_corresponding": "Rob Patro",
+    "author_corresponding_institution": "University of Maryland",
+    "authors": "Patro, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-21",
+    "doi": "10.64898/2026.09.18.752708",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/21/2026.09.18.752708.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Gravlax: an annotation-independent molecular evidence archive for single-cell RNA-seq",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Maryland",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-21",
+  "published_doi": "10.64898/2026.09.18.752708",
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Gravlax: a compact, seekable, content-authenticated archive storing molecule-level evidence from scRNA-seq alignments, enabling annotation-independent…",
+  "title": "Gravlax: an annotation-independent molecular evidence archive for single-cell RNA-seq",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.18.752708"
+}

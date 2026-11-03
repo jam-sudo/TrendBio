@@ -1,0 +1,85 @@
+{
+  "abstract": "On the latest updates to our benchmark suite.",
+  "authors": [
+    "Arjun Banerjee"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-23",
+  "id": "rss:https://blog.latch.bio/p/continuous-benchmarks-for-biology",
+  "metadata": {
+    "author": "Arjun Banerjee",
+    "author_detail": {
+      "name": "Arjun Banerjee"
+    },
+    "authors": [
+      {
+        "name": "Arjun Banerjee"
+      }
+    ],
+    "content": [
+      {
+        "base": "",
+        "language": null,
+        "type": "text/html",
+        "value": "<p>Evaluations for agents in biology should not be stagnant, but rather <a href=\"https://x.com/ryan_marten/status/2080321791361527843\">continuously update as agentic capability and behavior changes over time.</a> After noticing increasing misaligned behavior across our benchmarks, we are releasing an updated version on <a href=\"http://benchmarks.bio\">benchmarks.bio</a> to ensure that our benchmarks test legitimate scientific reasoning. Below we will provide examples of the misalignment we observed, and our fixes to ensure these do not happen in the future.</p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!Psqf!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F362d6321-39ed-4be0-a697-4180a7a790f5_4368x2319.png\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"773\" src=\"https://substackcdn.com/image/fetch/$s_!Psqf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F362d6321-39ed-4be0-a697-4180a7a790f5_4368x2319.png\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div><p><strong>Updates to our newly released version include:</strong></p><div class=\"subscription-widget-wrap-editor\"><div class=\"subscription-widget show-subscribe\"><div class=\"preamble\"><p class=\"cta-caption\">Thanks for reading! Subscribe for free to receive new posts and support my work.</p></div><form class=\"subscription-widget-subscribe\"><input class=\"email-input\" name=\"email\" tabindex=\"-1\" type=\"email\" /><input class=\"button primary\" type=\"submit\" value=\"Subscribe\" /><div class=\"fake-input-wrapper\"><div class=\"fake-input\"></div><div class=\"fake-button\"></div></div></form></div></div><ul><li><p>Setting strict domain allow-lists for what internet domains agents may access, or turning off internet access altogether.</p><p>During our construction of our earlier benchmarks, we initially allowed complete internet access to replicate how scientists typically use agents. However, this unrestricted access to the internet led to increasingly misaligned behavior, which will be discussed in the next section. As such, we decided it was necessary to reduce and monitor what websites agents can browse, especially in our evaluations related to biosecurity.</p></li><li><p>Updating system prompts and task prompts to resemble natural, conversation-style language rather than stricter, more evaluation-esque instructions.</p></li><li><p>Performing additional anonymization of datasets, input files, and evaluations</p></li><li><p>Removing unnatural task completion instructions for agents, such as writing answers to specific files or echoing specific outputs.</p></li><li><p>Updating the sandboxes to more closely replicate research environments, such as more natural-sounding harness patches and proxy connections.</p></li><li><p>Adding live monitoring of model trajectories to ensure alignment of tool calls and model behavior, with immediate warnings for misaligned behavior.</p></li></ul><p>These changes helped dramatically reduce misaligned behavior. Prior to these updates, <strong>we observed some runs that displayed misaligned behavior in relation to internet access, including:</strong></p><ul><li><p>Substack Reading: DeepSeek v4.1 Flash, on an evaluation where we previously allowed unrestricted internet access, searched some of the most popular benchmarks and concluded the task shape matched the shape of some of our other released evals. It then performed a set of searches into an author of the repo and ended up reading poems on the Substack from a <em><strong>different</strong></em> Arjun Banerjee. After updating task shape, removing internet access, and adding live monitoring ability, this behavior is unlikely to occur again.</p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!3tVm!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F84e51b62-2779-4e0e-b412-ed339176d6bb_1892x1060.webp\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"816\" src=\"https://substackcdn.com/image/fetch/$s_!3tVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F84e51b62-2779-4e0e-b412-ed339176d6bb_1892x1060.webp\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div></li></ul><ul><li><p>Fabricated Identity: On an evaluation where we previously allowed internet access, the model attempted to query the NCBI E-utilities API. This API asks users to provide an email to monitor access. We observed many cases of fabricated emails across models tested, including <code>drg.researcher.2025@gmail.com</code> (8 times), <code>researcher@university.edu</code> (10 times), <code>researcher42@gmail.com</code> (3 times), and <code>test@example.com</code> (253 times). After removing internet access and live-monitoring tool calls, we do not expect this behavior to occur again.</p></li></ul><p><strong>We did not observe any substantial misaligned behavior after our updates</strong>, though some models suspected they were being evaluated and tried to probe the sandbox for a method to access the internet. None have succeeded so far.</p><p><strong>The updates generally dropped scores across the board</strong> on <a href=\"https://benchmarks.bio/\"><span>benchmarks.bio</span></a>, which we attribute to a decrease in behavior that shortcut proper biological reasoning, such as internet searches or threshold-hacking our verifiers. The average model lost about 3.6 percentage points per benchmark (median &#8722;2.3), and most of that comes from  EpiBench, which collapsed by roughly 15 points for essentially every model (10.1 points for Opus 5 on Pi to 20.4 for GPT-6 Astra on Codex). The decrease in performance on EpiBench results is likely due to increased amounts of data anonymization that hindered the model&#8217;s ability to use memorized or looked-up results.</p><p>Harnesses also played a role. Seven of the eight models we run on Pi score higher on v1 than they did on v0, gaining 0.6 points on average. However, Grok Build lost 2.3 points, Codex lost 0.7, and Claude Code finished nearly flat, at 0.1 points lower. Grok 4.6 is a good example of this dichotomy. On Pi it climbed from 44.8 to 47.8, while the same model on Grok Build fell from 48.2 to 45.9. We believe this is because Grok models with Grok Build tend to execute more web searches than Grok models with the Pi harness, rather than any form of misalignment. A lot of this decrease could be attributed to Grok with Grok Build being highly effective at gathering scientific information using the web search tool, and then us removing this ability from the model. On average, Anthropic models lost 3.1 percentage points, followed by OpenAI models losing 4.0, and SpaceXAI models losing 4.1.</p><p>As model behavior changes, we will continue to update every aspect of our benchmark environments, from the tasks to the sandbox, to ensure that biological reasoning is properly assessed. This process will not simply occur once, but rather will evolve as agentic systems evolve to ensure the fidelity of our benchmark suite. As models improve, so too will our benchmarks.</p><div class=\"subscription-widget-wrap-editor\"><div class=\"subscription-widget show-subscribe\"><div class=\"preamble\"><p class=\"cta-caption\">Thanks for reading! Subscribe for free to receive new posts and support my work.</p></div><form class=\"subscription-widget-subscribe\"><input class=\"email-input\" name=\"email\" tabindex=\"-1\" type=\"email\" /><input class=\"button primary\" type=\"submit\" value=\"Subscribe\" /><div class=\"fake-input-wrapper\"><div class=\"fake-input\"></div><div class=\"fake-button\"></div></div></form></div></div>"
+      }
+    ],
+    "feed_kind": "company",
+    "feed_name": "Latch Bio",
+    "feed_url": "https://blog.latch.bio/feed",
+    "guidislink": false,
+    "id": "https://blog.latch.bio/p/continuous-benchmarks-for-biology",
+    "link": "https://blog.latch.bio/p/continuous-benchmarks-for-biology",
+    "links": [
+      {
+        "href": "https://blog.latch.bio/p/continuous-benchmarks-for-biology",
+        "rel": "alternate",
+        "type": "text/html"
+      },
+      {
+        "href": "https://substack-post-media.s3.amazonaws.com/public/images/65b305ae-cfb0-4f40-8821-971ba6d89de3_4368x2319.png",
+        "length": "0",
+        "rel": "enclosure",
+        "type": "image/jpeg"
+      }
+    ],
+    "published": "Wed, 23 Sep 2026 22:08:24 GMT",
+    "published_parsed": [
+      2026,
+      9,
+      23,
+      22,
+      8,
+      24,
+      2,
+      266,
+      0
+    ],
+    "summary": "On the latest updates to our benchmark suite.",
+    "summary_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/html",
+      "value": "On the latest updates to our benchmark suite."
+    },
+    "title": "Continuous Benchmarks for Biology to Defend Against Misalignment",
+    "title_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/plain",
+      "value": "Continuous Benchmarks for Biology to Defend Against Misalignment"
+    }
+  },
+  "org": "Latch Bio",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "rss",
+  "summary": "On the latest updates to our benchmark suite.",
+  "title": "Continuous Benchmarks for Biology to Defend Against Misalignment",
+  "type": "industry",
+  "url": "https://blog.latch.bio/p/continuous-benchmarks-for-biology"
+}

@@ -1,0 +1,41 @@
+{
+  "abstract": "Tabular foundation models are used as off-the-shelf predictors for heterogeneous tabular tasks, but it remains unclear how they will perform on real genotype-to-phenotype tabular datasets, which carry unique challenges. One such challenge is ancestry-dependent non-stationarity in allele effect sizes (the effects of genetic variation on disease risk): the predictive contribution of a given genetic variant may change significantly across the ancestry spectrum. This is especially consequential for patients from ancestry groups that are underrepresented in existing datasets, because models that are unaware of this non-stationarity are more likely to perform poorly for them. The battery of synthetic tasks used to pretrain tabular foundation models does not capture this structure, and we show that it leads to systematic performance degradation. Using controlled hierarchical Gaussian-process stress tests, we demonstrate that both off-the-shelf TabICL and TabPFN are robust when ancestry dispersion in the data is low, but as dispersion grows, the latent ancestry-dependent non-stationarity of effect sizes becomes a first-order problem, and the predictive performance of both models deteriorates. We confirm the same pattern on All of Us (AoU) (a large biobank containing whole-genome sequencing and electronic health record (EHR) data spanning the ancestry spectrum) across an extensive panel of cancer phenotypes evaluated with the two leading tabular foundation models: TabICL and TabPFN. Holding the in-context training-set size, phenotype, and feature set fixed, ancestry-specific in-context tables, which are less dispersed in ancestry space, consistently outperform size-matched meta-ancestry tables, isolating ancestry dispersion as the driver of degradation. To address the failure without changing the base architecture, we construct two synthetic task families that explicitly encode ancestry-dependent effect drift and instruction-tune an off-the-shelf TabICL model on tasks sampled across both families. On held-out AoU evaluations covering cancer and respiratory disease phenotypes, the tuned model yields more stable performance across ancestry-distance bins and is especially strong in the bins farthest from the center of the in-context exemplars in ancestry space, that is, on subjects whose ancestry is most underrepresented among the provided exemplars. The paper contributes an evaluation protocol, a failure analysis, and two synthetic task families targeted at ancestry-dependent non-stationarity in precision-medicine tabular modeling.",
+  "authors": [
+    "Das, A.",
+    "Cui, Y."
+  ],
+  "doi": "10.64898/2026.09.25.754520",
+  "first_seen": "2026-09-28",
+  "id": "biorxiv:10.64898/2026.09.25.754520",
+  "metadata": {
+    "abstract": "Tabular foundation models are used as off-the-shelf predictors for heterogeneous tabular tasks, but it remains unclear how they will perform on real genotype-to-phenotype tabular datasets, which carry unique challenges. One such challenge is ancestry-dependent non-stationarity in allele effect sizes (the effects of genetic variation on disease risk): the predictive contribution of a given genetic variant may change significantly across the ancestry spectrum. This is especially consequential for patients from ancestry groups that are underrepresented in existing datasets, because models that are unaware of this non-stationarity are more likely to perform poorly for them. The battery of synthetic tasks used to pretrain tabular foundation models does not capture this structure, and we show that it leads to systematic performance degradation. Using controlled hierarchical Gaussian-process stress tests, we demonstrate that both off-the-shelf TabICL and TabPFN are robust when ancestry dispersion in the data is low, but as dispersion grows, the latent ancestry-dependent non-stationarity of effect sizes becomes a first-order problem, and the predictive performance of both models deteriorates. We confirm the same pattern on All of Us (AoU) (a large biobank containing whole-genome sequencing and electronic health record (EHR) data spanning the ancestry spectrum) across an extensive panel of cancer phenotypes evaluated with the two leading tabular foundation models: TabICL and TabPFN. Holding the in-context training-set size, phenotype, and feature set fixed, ancestry-specific in-context tables, which are less dispersed in ancestry space, consistently outperform size-matched meta-ancestry tables, isolating ancestry dispersion as the driver of degradation. To address the failure without changing the base architecture, we construct two synthetic task families that explicitly encode ancestry-dependent effect drift and instruction-tune an off-the-shelf TabICL model on tasks sampled across both families. On held-out AoU evaluations covering cancer and respiratory disease phenotypes, the tuned model yields more stable performance across ancestry-distance bins and is especially strong in the bins farthest from the center of the in-context exemplars in ancestry space, that is, on subjects whose ancestry is most underrepresented among the provided exemplars. The paper contributes an evaluation protocol, a failure analysis, and two synthetic task families targeted at ancestry-dependent non-stationarity in precision-medicine tabular modeling.",
+    "author_corresponding": "Yan Cui",
+    "author_corresponding_institution": "University of Tennessee Health Science Center",
+    "authors": "Das, A.; Cui, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-28",
+    "doi": "10.64898/2026.09.25.754520",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/28/2026.09.25.754520.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Where Tabular Foundation Models Falter on Genetic Data: Datasets That Expose and Provide a Path to Address the Gap",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Tennessee Health Science Center",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows tabular foundation models (TabICL, TabPFN) degrade on ancestry-dependent genotype-to-phenotype data in All of Us; proposes synthetic task families and…",
+  "title": "Where Tabular Foundation Models Falter on Genetic Data: Datasets That Expose and Provide a Path to Address the Gap",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.25.754520"
+}

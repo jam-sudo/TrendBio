@@ -1,0 +1,46 @@
+{
+  "abstract": "Rapid and accurate identification of viral sequences underpins clinical diagnostics, epidemiological surveillance, and the safety testing of biological products, yet the established alignment-based methods such as BLAST are inherently closed-set, with accuracy tied to how well a query is already represented in the reference database. Recent advances in genomic foundation models (GFMs) have enabled alignment-free approaches to sequence classification. However, their performance relative to traditional methods remains incompletely characterised. We evaluated GFMs, specifically the Nucleotide Transformer (NT) and DNABERT families, for viral sequence classification using a dataset derived from the Reference Viral Database (RVDB). Sequence embeddings were generated with mean, max, and CLS pooling, classified by nearest-neighbour search in an embedding index and compared with BLAST as a reference. Matching BLAST provided a particularly stringent benchmark here, because as a closed-set method it compares each query directly against the exact reference sequences it stores, whereas a foundation model must rely on representations shaped by broad, general-purpose pre-training. On sequences of standard length, the best model, NTv3-650M, reached an accuracy of 0.93, approaching the 0.97 achieved by BLAST. On long genomic sequences, evaluated on a much smaller test set, the difference narrowed further, with NTv3-650M reaching 0.95 against 0.98 for BLAST. Robustness analyses showed that all GFMs were markedly more sensitive to base masking than BLAST. Both methods indexed the same labelled reference sequences, and BLAST compared queries with them directly at the nucleotide level, so approaching it from frozen, general-purpose representations without any parameter update is a meaningful result. NTv3-650M emerged as the most promising candidate for further optimisation and deployment in bioinformatics applications.",
+  "authors": [
+    "Buzkova, V.",
+    "Dvorsky, B.",
+    "Komarkova, M.",
+    "Kollinova, K.",
+    "Krupicka, R.",
+    "Klempir, O."
+  ],
+  "doi": "10.64898/2026.09.25.754388",
+  "first_seen": "2026-09-28",
+  "id": "biorxiv:10.64898/2026.09.25.754388",
+  "metadata": {
+    "abstract": "Rapid and accurate identification of viral sequences underpins clinical diagnostics, epidemiological surveillance, and the safety testing of biological products, yet the established alignment-based methods such as BLAST are inherently closed-set, with accuracy tied to how well a query is already represented in the reference database. Recent advances in genomic foundation models (GFMs) have enabled alignment-free approaches to sequence classification. However, their performance relative to traditional methods remains incompletely characterised. We evaluated GFMs, specifically the Nucleotide Transformer (NT) and DNABERT families, for viral sequence classification using a dataset derived from the Reference Viral Database (RVDB). Sequence embeddings were generated with mean, max, and CLS pooling, classified by nearest-neighbour search in an embedding index and compared with BLAST as a reference. Matching BLAST provided a particularly stringent benchmark here, because as a closed-set method it compares each query directly against the exact reference sequences it stores, whereas a foundation model must rely on representations shaped by broad, general-purpose pre-training. On sequences of standard length, the best model, NTv3-650M, reached an accuracy of 0.93, approaching the 0.97 achieved by BLAST. On long genomic sequences, evaluated on a much smaller test set, the difference narrowed further, with NTv3-650M reaching 0.95 against 0.98 for BLAST. Robustness analyses showed that all GFMs were markedly more sensitive to base masking than BLAST. Both methods indexed the same labelled reference sequences, and BLAST compared queries with them directly at the nucleotide level, so approaching it from frozen, general-purpose representations without any parameter update is a meaningful result. NTv3-650M emerged as the most promising candidate for further optimisation and deployment in bioinformatics applications.",
+    "author_corresponding": "Ondrej Klempir",
+    "author_corresponding_institution": "Czech Technical University in Prague, Faculty of Biomedical Engineering",
+    "authors": "Buzkova, V.; Dvorsky, B.; Komarkova, M.; Kollinova, K.; Krupicka, R.; Klempir, O.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-28",
+    "doi": "10.64898/2026.09.25.754388",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/28/2026.09.25.754388.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Analyzing Genomic Foundation Models for Viral Sequence Identification",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Czech Technical University in Prague, Faculty of Biomedical Engineering",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks genomic foundation models (Nucleotide Transformer, DNABERT) against BLAST for viral sequence classification on RVDB; NTv3-650M reaches 0.93 vs BLAST…",
+  "title": "Analyzing Genomic Foundation Models for Viral Sequence Identification",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.25.754388"
+}

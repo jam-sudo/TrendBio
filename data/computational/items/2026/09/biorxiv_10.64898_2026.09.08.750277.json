@@ -1,0 +1,41 @@
+{
+  "abstract": "As genomic sequencing produces increasingly massive datasets, accurate local sequence alignment via the Smith-Waterman(SW) algorithm remains computationally prohibitive due to its space and quadratic time complexity O(mn). While parallelization addresses a path forward, existing MPI-based solutions present a critical bottleneck during the traceback phase, either omitting it entirely or gathering the entire direction matrix to a single root node, which severely limits scalability. To overcome this, we propose a fully distributed Message Passing Interface (MPI) implementation featuring a token passing traceback scheme. Our approach distributes the directional matrix across all participating ranks, reducing per-rank memory footprint from O(mn) to O(mn/p), thereby enabling the alignment of sequences far beyond the capacity of sequential or centralized parallel methods. We validate our method on real human DNA sequences (BRCA1, BRCA2, Titin, chr1, chr2) and synthetic datasets up to 50kx50k. Results demonstrate that this MPI implementation aligns 98kx98k real DNA (chr1xchr2) in 58.9160 seconds across 16 MPI processes, a task where the sequential baseline fails due to out-of-memory errors. We achieve best speedups on synthetic data of 19.30x (40kx40k, 16 MPI processes) and on real DNA data is 13.39x (BRCA1xTitin, 8 MPI processes), while capping per-rank memory for the largest dataset at just 573 MB. By enabling exact, memory-scalable alignment with fully distributed traceback on standard CPU MPI clusters, this work fills a critical gap in high-performance computational genomics.",
+  "authors": [
+    "Fatima, M.",
+    "Ali, W."
+  ],
+  "doi": "10.64898/2026.09.08.750277",
+  "first_seen": "2026-09-14",
+  "id": "biorxiv:10.64898/2026.09.08.750277",
+  "metadata": {
+    "abstract": "As genomic sequencing produces increasingly massive datasets, accurate local sequence alignment via the Smith-Waterman(SW) algorithm remains computationally prohibitive due to its space and quadratic time complexity O(mn). While parallelization addresses a path forward, existing MPI-based solutions present a critical bottleneck during the traceback phase, either omitting it entirely or gathering the entire direction matrix to a single root node, which severely limits scalability. To overcome this, we propose a fully distributed Message Passing Interface (MPI) implementation featuring a token passing traceback scheme. Our approach distributes the directional matrix across all participating ranks, reducing per-rank memory footprint from O(mn) to O(mn/p), thereby enabling the alignment of sequences far beyond the capacity of sequential or centralized parallel methods. We validate our method on real human DNA sequences (BRCA1, BRCA2, Titin, chr1, chr2) and synthetic datasets up to 50kx50k. Results demonstrate that this MPI implementation aligns 98kx98k real DNA (chr1xchr2) in 58.9160 seconds across 16 MPI processes, a task where the sequential baseline fails due to out-of-memory errors. We achieve best speedups on synthetic data of 19.30x (40kx40k, 16 MPI processes) and on real DNA data is 13.39x (BRCA1xTitin, 8 MPI processes), while capping per-rank memory for the largest dataset at just 573 MB. By enabling exact, memory-scalable alignment with fully distributed traceback on standard CPU MPI clusters, this work fills a critical gap in high-performance computational genomics.",
+    "author_corresponding": "Maryam Fatima",
+    "author_corresponding_institution": "University of Engineering and Technology, Lahore",
+    "authors": "Fatima, M.; Ali, W.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-14",
+    "doi": "10.64898/2026.09.08.750277",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/14/2026.09.08.750277.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A Scalable Distributed-Memory MPI Implementation of Smith-Waterman with Token-Passing Traceback",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Engineering and Technology, Lahore",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Distributed-memory MPI Smith-Waterman with token-passing traceback cuts per-rank memory to O(mn/p), aligning 98kx98k chr1xchr2 DNA in 58.9 s on 16 ranks.",
+  "title": "A Scalable Distributed-Memory MPI Implementation of Smith-Waterman with Token-Passing Traceback",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.08.750277"
+}

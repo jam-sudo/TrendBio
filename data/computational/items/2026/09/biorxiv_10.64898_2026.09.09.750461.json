@@ -1,0 +1,41 @@
+{
+  "abstract": "Biopharmaceutical companies routinely use forward screening to identify potential ligands for targets of biological consequence. Increasingly, they are also using reverse screening to proactively identify downstream off-target liabilities and new repurposing opportunities. Exhaustive reverse docking of one or a multitude of molecules across every characterized site is one approach, but the computational cost is often prohibitive. One molecule against 28,579 receptor sites takes 40.5 hours on twenty CPU cores. We present a method that puts a retrieval step in front of the docking. Every co-crystallized ligand in the Protein Data Bank is indexed by the 3-dimensional pharmacophore fingerprint it presents, together with the UniProt accessions it was solved against, and a query retrieves the sites belonging to its nearest neighbors. Fingerprints are predicted from two-dimensional structures with PharmCast, so a query is fingerprinted in 4 ms and searched against 27,797 indexed ligands in 40 ms. For a query molecule we take its 5 most similar indexed ligands and pool every protein those 5 were crystallized with, which averages 21.1 distinct proteins. Across 3,000 held-out molecules that pool contained the molecule's own known target 48.8 percent of the time. Docking those 21.1 proteins takes 108 s, against 40.5 hours for the full panel. Pooling the twenty-five most similar ligands instead gives 104.5 proteins and finds the target 60.8 percent of the time. To be indexed, a structure only has to establish which ligand sat in which protein. Holding the index to pocket-grade coordinates had been excluding whole receptor classes. Admitting X-ray at 2.5 [A] and cryo-EM at 4.0 [A] takes coverage from 3,670 target sites to 28,579. Two 2025 clinical molecules were cross-validated. Orforglipron returned the glucagon-like peptide 1 (GLP-1) receptor first of 27,797 ligands, through a non-identical analog at 0.901; daraxonrasib returned the KRAS and cyclophilin A tri-complex fourth, at 0.836. When run in batches the pipeline reverse screens about 96,000 molecules per hour on 1 core, roughly 2.3 million per day, so the retrieval step is practical even with a massive virtual library. The method is available at reversescreen.ai, which allows users the opportunity to screen molecules against the current index, returns the retrieved sites, and docks them individually. The index itself can be downloaded for confidential screening in a local environment. Keywords: reverse screening, target identification, pharmacophore fingerprint, molecular docking, polypharmacology, off-target prediction, virtual screening, repurposing",
+  "authors": [
+    "Muskal, S. M.",
+    "Nicola, G."
+  ],
+  "doi": "10.64898/2026.09.09.750461",
+  "first_seen": "2026-09-15",
+  "id": "biorxiv:10.64898/2026.09.09.750461",
+  "metadata": {
+    "abstract": "Biopharmaceutical companies routinely use forward screening to identify potential ligands for targets of biological consequence. Increasingly, they are also using reverse screening to proactively identify downstream off-target liabilities and new repurposing opportunities. Exhaustive reverse docking of one or a multitude of molecules across every characterized site is one approach, but the computational cost is often prohibitive. One molecule against 28,579 receptor sites takes 40.5 hours on twenty CPU cores. We present a method that puts a retrieval step in front of the docking. Every co-crystallized ligand in the Protein Data Bank is indexed by the 3-dimensional pharmacophore fingerprint it presents, together with the UniProt accessions it was solved against, and a query retrieves the sites belonging to its nearest neighbors. Fingerprints are predicted from two-dimensional structures with PharmCast, so a query is fingerprinted in 4 ms and searched against 27,797 indexed ligands in 40 ms. For a query molecule we take its 5 most similar indexed ligands and pool every protein those 5 were crystallized with, which averages 21.1 distinct proteins. Across 3,000 held-out molecules that pool contained the molecule's own known target 48.8 percent of the time. Docking those 21.1 proteins takes 108 s, against 40.5 hours for the full panel. Pooling the twenty-five most similar ligands instead gives 104.5 proteins and finds the target 60.8 percent of the time. To be indexed, a structure only has to establish which ligand sat in which protein. Holding the index to pocket-grade coordinates had been excluding whole receptor classes. Admitting X-ray at 2.5 [A] and cryo-EM at 4.0 [A] takes coverage from 3,670 target sites to 28,579. Two 2025 clinical molecules were cross-validated. Orforglipron returned the glucagon-like peptide 1 (GLP-1) receptor first of 27,797 ligands, through a non-identical analog at 0.901; daraxonrasib returned the KRAS and cyclophilin A tri-complex fourth, at 0.836. When run in batches the pipeline reverse screens about 96,000 molecules per hour on 1 core, roughly 2.3 million per day, so the retrieval step is practical even with a massive virtual library. The method is available at reversescreen.ai, which allows users the opportunity to screen molecules against the current index, returns the retrieved sites, and docks them individually. The index itself can be downloaded for confidential screening in a local environment. Keywords: reverse screening, target identification, pharmacophore fingerprint, molecular docking, polypharmacology, off-target prediction, virtual screening, repurposing",
+    "author_corresponding": "Steven M. Muskal",
+    "author_corresponding_institution": "Eidogen-Sertanty, Inc.",
+    "authors": "Muskal, S. M.; Nicola, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-15",
+    "doi": "10.64898/2026.09.09.750461",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/15/2026.09.09.750461.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ReverseScreen.ai: Pharmacophore-Guided Reverse Screening Across the Growing Co-Complex Proteome",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Eidogen-Sertanty, Inc.",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-09-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Pharmacophore-fingerprint retrieval over PDB co-crystal ligands prefilters reverse docking, cutting 40.5 h panels to ~108 s with ~49% target recall.",
+  "title": "ReverseScreen.ai: Pharmacophore-Guided Reverse Screening Across the Growing Co-Complex Proteome",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.09.750461"
+}

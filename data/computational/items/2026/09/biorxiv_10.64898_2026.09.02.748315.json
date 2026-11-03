@@ -1,0 +1,42 @@
+{
+  "abstract": "Context-specific genome-scale metabolic modeling begins with scoring which of the approximately 10,600 human reactions are active in a patient's tumor. Methods in this literature are routinely benchmarked against activity labels obtained by thresholding the same transcriptomic matrix that is supplied to the model as input. We report a self-audit of our own graph attention scorer, MetaGNN, evaluated on TCGA colorectal (n=624), breast (n=1,095) and lung adenocarcinoma (n=517) cohorts, in which two independent failure modes produced a near-ceiling benchmark score and a positive architectural result, neither of which survived inspection. First, under expression-thresholded supervision the framework reaches AUROC 0.9864 +/- 0.0008 on TCGA-BRCA. That figure partitions into 5,925 reactions whose labels are a deterministic threshold of the model's own input, where ranking by the cohort-mean input alone gives AUROC 1.000; and 4,675 reactions whose stored labels we reproduce bit for bit from a seeded pseudo-random number generator, where the model nonetheless reaches 0.9291 +/- 0.0030 by memorizing a patient-invariant label vector that patient-level splitting leaves fully visible during training. Second, on the cohort supervised independently of the input, the archived models never received patient data at all. Their released feature tensors are uniformly zero, and independently trained models show no agreement on which patient deviates where (|r| <= 0.004 on per-patient output residuals, against r = +0.32 between output and input residuals on expression-bearing reactions for a model with verified features). A dispersion ratio comparing between-patient output spread against Monte Carlo Dropout sampling spread sits at 1.02 to 1.03 for all three configurations, against a no-signal null of 1.02 and 2.44 for the verified model. We therefore withdraw a +0.105 AUROC gain attributed to relational edges in an earlier draft of this work. Retraining on rebuilt, verified features gives AUROC 0.5800 +/- 0.0017, below both the raw-expression baseline of 0.6342 +/- 0.0058 that we establish for this cohort and an information-free indicator baseline of 0.6085. Zero-shot transfer of the BRCA model is at or below chance on METABRIC microarray (0.4926 +/- 0.0113, n=200) and on same-platform CPTAC-BRCA RNA-seq (0.4986, n=106). We release the code, the curated colorectal cohort, a script that replays the label vector from its generating seed, and the screening checks we now run before reporting any score. Source code: https://github.com/thiptanawat/MetaGNN-Framework (MIT).",
+  "authors": [
+    "Phongwattana, T.",
+    "Chan, J. H."
+  ],
+  "doi": "10.64898/2026.09.02.748315",
+  "first_seen": "2026-09-07",
+  "id": "biorxiv:10.64898/2026.09.02.748315",
+  "metadata": {
+    "abstract": "Context-specific genome-scale metabolic modeling begins with scoring which of the approximately 10,600 human reactions are active in a patient's tumor. Methods in this literature are routinely benchmarked against activity labels obtained by thresholding the same transcriptomic matrix that is supplied to the model as input. We report a self-audit of our own graph attention scorer, MetaGNN, evaluated on TCGA colorectal (n=624), breast (n=1,095) and lung adenocarcinoma (n=517) cohorts, in which two independent failure modes produced a near-ceiling benchmark score and a positive architectural result, neither of which survived inspection. First, under expression-thresholded supervision the framework reaches AUROC 0.9864 +/- 0.0008 on TCGA-BRCA. That figure partitions into 5,925 reactions whose labels are a deterministic threshold of the model's own input, where ranking by the cohort-mean input alone gives AUROC 1.000; and 4,675 reactions whose stored labels we reproduce bit for bit from a seeded pseudo-random number generator, where the model nonetheless reaches 0.9291 +/- 0.0030 by memorizing a patient-invariant label vector that patient-level splitting leaves fully visible during training. Second, on the cohort supervised independently of the input, the archived models never received patient data at all. Their released feature tensors are uniformly zero, and independently trained models show no agreement on which patient deviates where (|r| <= 0.004 on per-patient output residuals, against r = +0.32 between output and input residuals on expression-bearing reactions for a model with verified features). A dispersion ratio comparing between-patient output spread against Monte Carlo Dropout sampling spread sits at 1.02 to 1.03 for all three configurations, against a no-signal null of 1.02 and 2.44 for the verified model. We therefore withdraw a +0.105 AUROC gain attributed to relational edges in an earlier draft of this work. Retraining on rebuilt, verified features gives AUROC 0.5800 +/- 0.0017, below both the raw-expression baseline of 0.6342 +/- 0.0058 that we establish for this cohort and an information-free indicator baseline of 0.6085. Zero-shot transfer of the BRCA model is at or below chance on METABRIC microarray (0.4926 +/- 0.0113, n=200) and on same-platform CPTAC-BRCA RNA-seq (0.4986, n=106). We release the code, the curated colorectal cohort, a script that replays the label vector from its generating seed, and the screening checks we now run before reporting any score. Source code: https://github.com/thiptanawat/MetaGNN-Framework (MIT).",
+    "author_corresponding": "Jonathan H. Chan",
+    "author_corresponding_institution": "King Mongkut's University of Technology Thonburi",
+    "authors": "Phongwattana, T.; Chan, J. H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-07",
+    "doi": "10.64898/2026.09.02.748315",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/07/2026.09.02.748315.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmark validity in graph neural network scoring of metabolic reaction activity on Recon3D: detecting label leakage, memorized noise and input-invariant models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "King Mongkut's University of Technology Thonburi",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Self-audit of a GNN metabolic reaction scorer (MetaGNN, Recon3D) finds label leakage, memorized noise and unverified features inflating benchmarks; corrected…",
+  "title": "Benchmark validity in graph neural network scoring of metabolic reaction activity on Recon3D: detecting label leakage, memorized noise and input-invariant models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.02.748315"
+}

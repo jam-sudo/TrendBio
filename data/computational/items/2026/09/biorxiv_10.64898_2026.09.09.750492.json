@@ -1,0 +1,41 @@
+{
+  "abstract": "Language models for cancer clinical reports carry two blind spots. They read each report in isolation, ignoring how a patients disease changes across visits, and they are evaluated only on cancer types present in their training data. We present the Hierarchical Temporal Transformer (HTT), a two-level architecture that addresses both. Level 1 encodes each report with BiomedBERT adapted by low-rank adaptation (LoRA). Level 2 is a temporal transformer that reads a patients full report sequence using a continuous-time positional encoding built from the measured number of days between visits, with learnable cancer-type embeddings supplying per-family conditioning. Two experiments test the two capabilities separately, since no fully open corpus contains longitudinal reports for many cancer types. On a controlled synthetic corpus of sequential radiology reports, in which progression phrases are inserted from templated trajectories, HTT reaches a validation AUROC of 0.942 against 0.881 for a single-report baseline and transfers to held-out pancreatic cancer at 0.995 against 0.949 while the two models are indistinguishable on a 60-patient test set. On 4,786 real pathology reports from the TCGA-Reports corpus spanning 14 cancer types HTT predicts tumor grade for three types withheld entirely from training, reaching AUROC 1.000 on thyroid carcinoma, 0.960 on sarcoma and 0.808 on lung squamous cell carcinoma. The mean held-out AUROC of 0.923 equals the in-distribution test AUROC of 0.923, so transfer to unseen cancer families incurred no measurable penalty. Ablation on the real corpus shows that the transfer is carried by the pre-trained encoder rather than by the temporal components, which, with one report per patient, contribute 0.39 AUROC points. Grade-related pathological language therefore appears to be learnable in a cancer-type agnostic way, which points toward unified cancer NLP systems that require no per-type retraining.",
+  "authors": [
+    "Brimo, N.",
+    "Anand, R.",
+    "Harb, H.",
+    "Serdaroglu, D. C."
+  ],
+  "doi": "10.64898/2026.09.09.750492",
+  "first_seen": "2026-09-15",
+  "id": "biorxiv:10.64898/2026.09.09.750492",
+  "metadata": {
+    "abstract": "Language models for cancer clinical reports carry two blind spots. They read each report in isolation, ignoring how a patients disease changes across visits, and they are evaluated only on cancer types present in their training data. We present the Hierarchical Temporal Transformer (HTT), a two-level architecture that addresses both. Level 1 encodes each report with BiomedBERT adapted by low-rank adaptation (LoRA). Level 2 is a temporal transformer that reads a patients full report sequence using a continuous-time positional encoding built from the measured number of days between visits, with learnable cancer-type embeddings supplying per-family conditioning. Two experiments test the two capabilities separately, since no fully open corpus contains longitudinal reports for many cancer types. On a controlled synthetic corpus of sequential radiology reports, in which progression phrases are inserted from templated trajectories, HTT reaches a validation AUROC of 0.942 against 0.881 for a single-report baseline and transfers to held-out pancreatic cancer at 0.995 against 0.949 while the two models are indistinguishable on a 60-patient test set. On 4,786 real pathology reports from the TCGA-Reports corpus spanning 14 cancer types HTT predicts tumor grade for three types withheld entirely from training, reaching AUROC 1.000 on thyroid carcinoma, 0.960 on sarcoma and 0.808 on lung squamous cell carcinoma. The mean held-out AUROC of 0.923 equals the in-distribution test AUROC of 0.923, so transfer to unseen cancer families incurred no measurable penalty. Ablation on the real corpus shows that the transfer is carried by the pre-trained encoder rather than by the temporal components, which, with one report per patient, contribute 0.39 AUROC points. Grade-related pathological language therefore appears to be learnable in a cancer-type agnostic way, which points toward unified cancer NLP systems that require no per-type retraining.",
+    "author_corresponding": "Hassan Harb",
+    "author_corresponding_institution": "Argonne National Laboratory",
+    "authors": "Brimo, N.; Anand, R.; Harb, H.; Serdaroglu, D. C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-15",
+    "doi": "10.64898/2026.09.09.750492",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/15/2026.09.09.750492.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Hierarchical temporal transformer for cancer grade prediction and cross cancer transfer learning from pathology reports",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Argonne National Laboratory",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "Language models for cancer clinical reports carry two blind spots.",
+  "title": "Hierarchical temporal transformer for cancer grade prediction and cross cancer transfer learning from pathology reports",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.09.750492"
+}

@@ -1,0 +1,34 @@
+{
+  "abstract": "Although $\\mathbb{E}[\\mathrm{dropout}(x)] = x$, here we show that $\\mathbb{E}[\\mathrm{LayerNorm}(\\mathrm{dropout}(x))]$ is not equal to $\\mathrm{LayerNorm}(x)$. Accordingly, the pattern of a Dropout layer followed by a LayerNorm, which is common to many AlphaFold2-based protein structure predictors, produces a systematic bias at evaluation time that can hamper performance. To address this, we derive a closed-form, first-order correction for this gap, which we call a Dropout-LayerNorm Correction (DLC). DLC empirically matches the performance boost of large Monte Carlo dropout ensembles. We evaluate its effect across nine protein structure models (ESMFold, OpenFold, ABB3, FlashABB, Ibex, NbForge, Genie1, Genie2, Genie3) on both paired and single-chain antibody structures as well as one protein-ligand docking model (QuickBind). The correction is computationally negligible and improves accuracy in all ten models tested ($\\sim0.3\\%-13\\%$), with a modest but consistent improvement in ESMFold and OpenFold and a substantial improvement in antibody-specific models. This work identifies the mathematical consequence of chaining together Dropout and LayerNorm and provides a free, principled adjustment to improve the evaluation performance of many pretrained models. Code to reproduce the experiments is available at https://github.com/oxpig/DLC.",
+  "authors": [
+    "Isaac Ellmen",
+    "David Errington",
+    "Matthew I. J. Raybould",
+    "Charlotte M. Deane"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-25",
+  "id": "arxiv:2609.32062",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.BM",
+    "categories": [
+      "q-bio.BM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.32062v1</ns0:id>\n    <ns0:title>Correcting the Dropout-LayerNorm Expectation Gap Improves Protein Structure Models</ns0:title>\n    <ns0:updated>2026-09-25T22:53:34Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.32062v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.32062v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Although $\\mathbb{E}[\\mathrm{dropout}(x)] = x$, here we show that $\\mathbb{E}[\\mathrm{LayerNorm}(\\mathrm{dropout}(x))]$ is not equal to $\\mathrm{LayerNorm}(x)$. Accordingly, the pattern of a Dropout layer followed by a LayerNorm, which is common to many AlphaFold2-based protein structure predictors, produces a systematic bias at evaluation time that can hamper performance. To address this, we derive a closed-form, first-order correction for this gap, which we call a Dropout-LayerNorm Correction (DLC). DLC empirically matches the performance boost of large Monte Carlo dropout ensembles. We evaluate its effect across nine protein structure models (ESMFold, OpenFold, ABB3, FlashABB, Ibex, NbForge, Genie1, Genie2, Genie3) on both paired and single-chain antibody structures as well as one protein-ligand docking model (QuickBind). The correction is computationally negligible and improves accuracy in all ten models tested ($\\sim0.3\\%-13\\%$), with a modest but consistent improvement in ESMFold and OpenFold and a substantial improvement in antibody-specific models. This work identifies the mathematical consequence of chaining together Dropout and LayerNorm and provides a free, principled adjustment to improve the evaluation performance of many pretrained models. Code to reproduce the experiments is available at https://github.com/oxpig/DLC.</ns0:summary>\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-25T22:53:34Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.BM\" />\n    <ns0:author>\n      <ns0:name>Isaac Ellmen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>David Errington</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Matthew I. J. Raybould</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Charlotte M. Deane</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-09-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Derives a closed-form first-order correction (DLC) for the Dropout-LayerNorm expectation gap, improving accuracy of ten protein structure and docking models at…",
+  "title": "Correcting the Dropout-LayerNorm Expectation Gap Improves Protein Structure Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.32062v1"
+}

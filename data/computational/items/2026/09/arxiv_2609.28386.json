@@ -1,0 +1,31 @@
+{
+  "abstract": "Tokenization is a central design choice in genomic language models, yet most deoxyribonucleic acid (DNA) tokenizers use characters, fixed-length k-mers, or frequency-derived subwords without explicitly using prior information about the specificity of DNA-binding regulatory factors. We introduce Motif-Vocab, a biologically informed tokenizer that scans both DNA strands for statistically calibrated motif matches, emits transcription-factor (TF) identity tokens, and applies nucleotide, $k$-mer, or byte-pair encoding (BPE) to unmatched sequence. Motif-specific null distributions put position-weight matrices (PWMs) of different lengths and degeneracy on a common significance scale; deterministic overlap rules make the representation reproducible. In controlled Bidirectional Encoder Representations from Transformers (BERT) pretraining on two billion base pairs, real motif libraries outperform randomized-motif controls on 54 of 55 in-scope downstream tasks. On a motif-disjoint recognition task derived from DART-Eval Task 2, TF-specific tokens improve macro-F1 by 0.040 over a position-matched generic motif token and by 0.033 over a matched no-motif tokenizer (95\\% bootstrap confidence interval: 0.027--0.038). Motif tokens also receive stronger attribution and produce larger occlusion effects than shuffled controls. Dense no-motif tokenizers remain strong general-purpose baselines, including a near-tie on the five-task BERT-base panel. Thus, Motif-Vocab is not a universal accuracy replacement; it is a targeted, interpretable inductive bias for motif-sensitive genomic modeling.",
+  "authors": [
+    "Liangyu Li",
+    "Michael White"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-23",
+  "id": "arxiv:2609.28386",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.28386v1</ns0:id>\n    <ns0:title>Motif-Vocab: StatisticallyCalibrated Transcription-Factor-Identity Tokenization forGenomic Language Models</ns0:title>\n    <ns0:updated>2026-09-23T16:58:41Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.28386v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.28386v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Tokenization is a central design choice in genomic language models, yet most deoxyribonucleic acid (DNA) tokenizers use characters, fixed-length k-mers, or frequency-derived subwords without explicitly using prior information about the specificity of DNA-binding regulatory factors. We introduce Motif-Vocab, a biologically informed tokenizer that scans both DNA strands for statistically calibrated motif matches, emits transcription-factor (TF) identity tokens, and applies nucleotide, $k$-mer, or byte-pair encoding (BPE) to unmatched sequence. Motif-specific null distributions put position-weight matrices (PWMs) of different lengths and degeneracy on a common significance scale; deterministic overlap rules make the representation reproducible. In controlled Bidirectional Encoder Representations from Transformers (BERT) pretraining on two billion base pairs, real motif libraries outperform randomized-motif controls on 54 of 55 in-scope downstream tasks. On a motif-disjoint recognition task derived from DART-Eval Task 2, TF-specific tokens improve macro-F1 by 0.040 over a position-matched generic motif token and by 0.033 over a matched no-motif tokenizer (95\\% bootstrap confidence interval: 0.027--0.038). Motif tokens also receive stronger attribution and produce larger occlusion effects than shuffled controls. Dense no-motif tokenizers remain strong general-purpose baselines, including a near-tie on the five-task BERT-base panel. Thus, Motif-Vocab is not a universal accuracy replacement; it is a targeted, interpretable inductive bias for motif-sensitive genomic modeling.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-23T16:58:41Z</ns0:published>\n    <ns1:comment>9 pages, 4 figures, submitted to the Forty-First AAAI Conference on Artificial Intelligence (AAAI-27)</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Liangyu Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael White</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-09-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Motif-Vocab tokenizes DNA by scanning both strands for statistically calibrated TF motif matches, emitting TF-identity tokens for genomic language models;…",
+  "title": "Motif-Vocab: StatisticallyCalibrated Transcription-Factor-Identity Tokenization forGenomic Language Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.28386v1"
+}

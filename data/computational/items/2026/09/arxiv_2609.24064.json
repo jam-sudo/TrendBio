@@ -1,0 +1,36 @@
+{
+  "abstract": "New Guinea is the world's richest island flora (~2,856 orchid species), yet most species are represented by only a handful of photographs, far fewer than direct species-level classification requires. Methods for fine-grained identification in such species-rich, data-poor floras are needed, and it remains unclear which backbone architecture and pretraining strategy best support them. We built a two-stage system that first predicts the genus of a query photograph, then retrieves visually similar reference images of candidate species using FAISS. We compared four pretrained backbones -- two Vision Transformers (ViTs; DINOv2, BioCLIP 2) and two CNNs (ConvNeXt V2-L, EfficientNetV2-L) -- fine-tuned under an identical protocol on a fixed, species-stratified partition of 16,701 photographs spanning 120 genera and 1,350 species, assessing accuracy, calibration, error structure, species retrieval, and open-set detection of novel genera. DINOv2 attained the best genus performance (macro top-1 66.9%, 95% CI 63.7-70.6; global top-1 88.9%); both ViTs outranked both CNNs, and general-purpose self-supervised pretraining (DINOv2) outperformed domain-matched biological pretraining (BioCLIP 2) by 7.1 points of macro top-1. Errors concentrated on two abundant genera acting as error attractors. DINOv2 embeddings achieved species Recall@5 of 86.6% and genus Recall@5 of 98.7%; temperature scaling reduced every backbone's Expected Calibration Error to about 0.03; and a distance-based open-set gate flagged unseen genera (mean AUROC 0.958). A self-supervised Vision-Transformer backbone combined with embedding retrieval is an effective, deployable strategy for fine-grained identification in species-rich, data-poor floras. The system is released as an open web application (the New Guinea Orchid Identifier), offering a practical template for other hyperdiverse, under-documented taxa.",
+  "authors": [
+    "Reza Saputra",
+    "Diah Harnoni Apriyanti",
+    "André Schuiteman",
+    "Kurt Metzger",
+    "Ashley Field",
+    "Katharina Nargar",
+    "William Edwards"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-21",
+  "id": "arxiv:2609.24064",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.24064v1</ns0:id>\n    <ns0:title>Vision Transformers versus convolutional neural networks for fine-grained orchid genus identification in a species-rich, data-poor flora: a controlled benchmark on the Orchidaceae of New Guinea</ns0:title>\n    <ns0:updated>2026-09-21T03:39:10Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.24064v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.24064v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>New Guinea is the world's richest island flora (~2,856 orchid species), yet most species are represented by only a handful of photographs, far fewer than direct species-level classification requires. Methods for fine-grained identification in such species-rich, data-poor floras are needed, and it remains unclear which backbone architecture and pretraining strategy best support them. We built a two-stage system that first predicts the genus of a query photograph, then retrieves visually similar reference images of candidate species using FAISS. We compared four pretrained backbones -- two Vision Transformers (ViTs; DINOv2, BioCLIP 2) and two CNNs (ConvNeXt V2-L, EfficientNetV2-L) -- fine-tuned under an identical protocol on a fixed, species-stratified partition of 16,701 photographs spanning 120 genera and 1,350 species, assessing accuracy, calibration, error structure, species retrieval, and open-set detection of novel genera. DINOv2 attained the best genus performance (macro top-1 66.9%, 95% CI 63.7-70.6; global top-1 88.9%); both ViTs outranked both CNNs, and general-purpose self-supervised pretraining (DINOv2) outperformed domain-matched biological pretraining (BioCLIP 2) by 7.1 points of macro top-1. Errors concentrated on two abundant genera acting as error attractors. DINOv2 embeddings achieved species Recall@5 of 86.6% and genus Recall@5 of 98.7%; temperature scaling reduced every backbone's Expected Calibration Error to about 0.03; and a distance-based open-set gate flagged unseen genera (mean AUROC 0.958). A self-supervised Vision-Transformer backbone combined with embedding retrieval is an effective, deployable strategy for fine-grained identification in species-rich, data-poor floras. The system is released as an open web application (the New Guinea Orchid Identifier), offering a practical template for other hyperdiverse, under-documented taxa.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-21T03:39:10Z</ns0:published>\n    <ns1:comment>24 pages, 7 figures, 4 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Reza Saputra</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Diah Harnoni Apriyanti</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>André Schuiteman</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kurt Metzger</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ashley Field</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Katharina Nargar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>William Edwards</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "New Guinea is the world's richest island flora (~2,856 orchid species), yet most species are represented by only a handful of photographs, far fewer than direct",
+  "title": "Vision Transformers versus convolutional neural networks for fine-grained orchid genus identification in a species-rich, data-poor flora: a controlled benchmark on the Orchidaceae of New Guinea",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.24064v1"
+}

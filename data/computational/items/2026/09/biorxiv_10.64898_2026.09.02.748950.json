@@ -1,0 +1,40 @@
+{
+  "abstract": "We introduce Bravais Lattice Sampling (BLS), a two-phase method for detecting connected high-density regions in three-dimensional space. BLS places probe sites on a Bravais lattice scaled to the expected nearest-neighbour distance dNN of the target structures, then recovers cluster boundaries by depth-first expansion seeded only from occupied probes, replacing the exhaustive raster scan that conventional connected-component labelling uses to discover seeds. The spacing between probe sites is set from the covering radius of the lattice, which is what allows the method to state in advance the size below which a cluster may escape detection. The second phase, an expansion refinement activated only on probes that return an occupied voxel, verifies every edge, so the components returned are true connected components. BLS versatility allows for selection of different Bravais lattice unit cells to match the target structure; for amorphous, non-crystalline shapes, BLS can default to a simple face-centred cubic unit cell, where the expected minimum cluster size is the only parameter that needs to be set. The current BLS implementation has been developed as a post-processing tool for molecular dynamics trajectories, and was tested for searching water ice clusters of different morphologies. BLS returns component counts and maximum cluster sizes identical to exhaustive-labeller algorithms, with 100% recall; it runs at about 0.94 times the cost of depth-first search, and at 0.84 to 0.90 times the cost of the fastest other labeller in our benchmark set. This algorithm, although implemented by us for molecular dynamics applications, could be of interest in other domain areas where searching for high-density elements in 3D space is relevant.",
+  "authors": [
+    "Carrascoza, F."
+  ],
+  "doi": "10.64898/2026.09.02.748950",
+  "first_seen": "2026-09-03",
+  "id": "biorxiv:10.64898/2026.09.02.748950",
+  "metadata": {
+    "abstract": "We introduce Bravais Lattice Sampling (BLS), a two-phase method for detecting connected high-density regions in three-dimensional space. BLS places probe sites on a Bravais lattice scaled to the expected nearest-neighbour distance dNN of the target structures, then recovers cluster boundaries by depth-first expansion seeded only from occupied probes, replacing the exhaustive raster scan that conventional connected-component labelling uses to discover seeds. The spacing between probe sites is set from the covering radius of the lattice, which is what allows the method to state in advance the size below which a cluster may escape detection. The second phase, an expansion refinement activated only on probes that return an occupied voxel, verifies every edge, so the components returned are true connected components. BLS versatility allows for selection of different Bravais lattice unit cells to match the target structure; for amorphous, non-crystalline shapes, BLS can default to a simple face-centred cubic unit cell, where the expected minimum cluster size is the only parameter that needs to be set. The current BLS implementation has been developed as a post-processing tool for molecular dynamics trajectories, and was tested for searching water ice clusters of different morphologies. BLS returns component counts and maximum cluster sizes identical to exhaustive-labeller algorithms, with 100% recall; it runs at about 0.94 times the cost of depth-first search, and at 0.84 to 0.90 times the cost of the fastest other labeller in our benchmark set. This algorithm, although implemented by us for molecular dynamics applications, could be of interest in other domain areas where searching for high-density elements in 3D space is relevant.",
+    "author_corresponding": "Francisco Carrascoza",
+    "author_corresponding_institution": "Poznan University of Technology",
+    "authors": "Carrascoza, F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-03",
+    "doi": "10.64898/2026.09.02.748950",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/03/2026.09.02.748950.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Bravais Lattice Sampling: Geometry-Guided Sparse Probing for Connected-Component Detection in 3D Discretized Spaces",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Poznan University of Technology",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Bravais Lattice Sampling: a two-phase sparse-probing method for connected-component detection in 3D space, tested as a post-processing tool on molecular…",
+  "title": "Bravais Lattice Sampling: Geometry-Guided Sparse Probing for Connected-Component Detection in 3D Discretized Spaces",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.02.748950"
+}

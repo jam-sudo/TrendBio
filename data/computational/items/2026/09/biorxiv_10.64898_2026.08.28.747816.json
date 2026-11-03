@@ -1,0 +1,45 @@
+{
+  "abstract": "Enzyme turnover numbers (kcat) are essential for kinetic models and enzyme-constrained genome-scale metabolic models (ecGEMs), but measured values are sparse and therefore increasingly estimated using machine learning (ML). Although these predictors are commonly evaluated by global regression metrics, their practical utility depends on how errors propagate through downstream models. We benchmarked six current kcat predictors on a curated BRENDA-derived dataset and five of them on EnzyExtract. To assess the influence of training-set proximity, we compared each benchmark dataset with the available training data for each predictor. We then used the predicted kcat values to parameterize ecGEMs of Saccharomyces cerevisiae and evaluated growth predictions across 19 conditions. We find that benchmark accuracy is moderate even on the BRENDA-derived dataset and drops sharply on EnzyExtract, where all predictors achieve R2 values of 0.20 or lower. This decline is accompanied by substantially lower overlap between the benchmark and training datasets, with exact sequence matches ranging from 24% to 78% for BRENDA, compared with 9% to 26% for EnzyExtract. However, that overlap alone does not explain differences in generalization across predictors. Moreover, downstream performance is also not explained by benchmark ranking. Across 19 conditions, none of the tool-specific ecGEMs consistently reproduces the experimentally observed variation in growth. In glucose minimal medium, the weakest benchmark performer yields the most accurate growth prediction in the downstream ecGEMs, whereas higher-ranked predictors produce larger deviations in growth. We trace this mismatch to localized errors at high-leverage positions in yeast's metabolic network, where underpredicted mitochondrial ADP/ATP carrier turnover numbers restrict adenine nucleotide exchange and impose an apparent limitation on cytosolic ATP supply. Relaxing this constraint shifts predicted growth toward the experimental reference. Thus, ML-derived kcat values can affect not only quantitative growth predictions but also the phenotype a mechanistic model appears to identify. These results argue for application-driven validation of biological parameter predictors in the downstream systems they are intended to support.",
+  "authors": [
+    "Rimon Martinez, M. J.",
+    "Lottermoser, J.",
+    "Bouillon, A. T. C.",
+    "Vranken, W. F.",
+    "Zehetner, L.",
+    "Zanghellini, J."
+  ],
+  "doi": "10.64898/2026.08.28.747816",
+  "first_seen": "2026-09-03",
+  "id": "biorxiv:10.64898/2026.08.28.747816",
+  "metadata": {
+    "abstract": "Enzyme turnover numbers (kcat) are essential for kinetic models and enzyme-constrained genome-scale metabolic models (ecGEMs), but measured values are sparse and therefore increasingly estimated using machine learning (ML). Although these predictors are commonly evaluated by global regression metrics, their practical utility depends on how errors propagate through downstream models. We benchmarked six current kcat predictors on a curated BRENDA-derived dataset and five of them on EnzyExtract. To assess the influence of training-set proximity, we compared each benchmark dataset with the available training data for each predictor. We then used the predicted kcat values to parameterize ecGEMs of Saccharomyces cerevisiae and evaluated growth predictions across 19 conditions. We find that benchmark accuracy is moderate even on the BRENDA-derived dataset and drops sharply on EnzyExtract, where all predictors achieve R2 values of 0.20 or lower. This decline is accompanied by substantially lower overlap between the benchmark and training datasets, with exact sequence matches ranging from 24% to 78% for BRENDA, compared with 9% to 26% for EnzyExtract. However, that overlap alone does not explain differences in generalization across predictors. Moreover, downstream performance is also not explained by benchmark ranking. Across 19 conditions, none of the tool-specific ecGEMs consistently reproduces the experimentally observed variation in growth. In glucose minimal medium, the weakest benchmark performer yields the most accurate growth prediction in the downstream ecGEMs, whereas higher-ranked predictors produce larger deviations in growth. We trace this mismatch to localized errors at high-leverage positions in yeast's metabolic network, where underpredicted mitochondrial ADP/ATP carrier turnover numbers restrict adenine nucleotide exchange and impose an apparent limitation on cytosolic ATP supply. Relaxing this constraint shifts predicted growth toward the experimental reference. Thus, ML-derived kcat values can affect not only quantitative growth predictions but also the phenotype a mechanistic model appears to identify. These results argue for application-driven validation of biological parameter predictors in the downstream systems they are intended to support.",
+    "author_corresponding": "Jürgen Zanghellini",
+    "author_corresponding_institution": "University of Vienna",
+    "authors": "Rimon Martinez, M. J.; Lottermoser, J.; Bouillon, A. T. C.; Vranken, W. F.; Zehetner, L.; Zanghellini, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-03",
+    "doi": "10.64898/2026.08.28.747816",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/03/2026.08.28.747816.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Beyond benchmark accuracy: machine-learning turnover-number predictors require system-level validation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Vienna",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-09-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks six ML kcat predictors on BRENDA and EnzyExtract; accuracy drops sharply on EnzyExtract, and tool-specific yeast ecGEMs fail to reproduce growth…",
+  "title": "Beyond benchmark accuracy: machine-learning turnover-number predictors require system-level validation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.28.747816"
+}

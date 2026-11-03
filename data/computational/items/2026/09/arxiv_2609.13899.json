@@ -1,0 +1,31 @@
+{
+  "abstract": "The BabyLM challenge measures how much language a model can learn from developmentally-plausible, child-scale data rather than internet-scale corpora, yet prior language models forgo the biological constraints of the neural circuitry that acquires human language: spiking neurons separated into excitatory and inhibitory populations wired by a recurrent lateral connectome. This paper presents URCHIN (Unified Recurrent Connectome with Horizontal Integrate-and-fire Neurons), which applies the Parallelized Hierarchical Connectome Spiking State-space Model (PHCSSM) to language modeling: leaky integrate-and-fire neurons coupled by a Dale's-law lateral connectome resolve each token through a multi-transmission loop that recirculates activity to a fixed point. The instantiation is deliberately minimal: a single horizontal layer of 128 neurons, no attention, and 4.23M parameters. Two implementations share one set of weights and produce identical benchmark scores, so URCHIN is trained once and deployed either way with no conversion step: a parallel state-space model (SSM) scan that is GPU-efficient for training, or an event-driven recurrent spiking neural network (RSNN) with constant-cost inference for CPU or neuromorphic edge deployment. Across all three BabyLM tracks (Strict-100M, Strict-Small, and Multilingual), URCHIN offers a biologically plausible, efficient, and directly deployable reference point.",
+  "authors": [
+    "Po-Han Chiang"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-12",
+  "id": "arxiv:2609.13899",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.NC",
+    "categories": [
+      "q-bio.NC",
+      "cs.CL"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.13899v1</ns0:id>\n    <ns0:title>URCHIN: A Horizontal Spiking Language Model for Data-Constrained Pretraining</ns0:title>\n    <ns0:updated>2026-09-12T12:06:01Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.13899v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.13899v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The BabyLM challenge measures how much language a model can learn from developmentally-plausible, child-scale data rather than internet-scale corpora, yet prior language models forgo the biological constraints of the neural circuitry that acquires human language: spiking neurons separated into excitatory and inhibitory populations wired by a recurrent lateral connectome. This paper presents URCHIN (Unified Recurrent Connectome with Horizontal Integrate-and-fire Neurons), which applies the Parallelized Hierarchical Connectome Spiking State-space Model (PHCSSM) to language modeling: leaky integrate-and-fire neurons coupled by a Dale's-law lateral connectome resolve each token through a multi-transmission loop that recirculates activity to a fixed point. The instantiation is deliberately minimal: a single horizontal layer of 128 neurons, no attention, and 4.23M parameters. Two implementations share one set of weights and produce identical benchmark scores, so URCHIN is trained once and deployed either way with no conversion step: a parallel state-space model (SSM) scan that is GPU-efficient for training, or an event-driven recurrent spiking neural network (RSNN) with constant-cost inference for CPU or neuromorphic edge deployment. Across all three BabyLM tracks (Strict-100M, Strict-Small, and Multilingual), URCHIN offers a biologically plausible, efficient, and directly deployable reference point.</ns0:summary>\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-12T12:06:01Z</ns0:published>\n    <ns1:comment>12 pages, 2 figures, 6 tables. Accepted to the BabyLM Challenge 2026 (BabyLM Workshop, EMNLP 2026)</ns1:comment>\n    <ns1:primary_category term=\"q-bio.NC\" />\n    <ns0:author>\n      <ns0:name>Po-Han Chiang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-12",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "URCHIN: a 4.23M-parameter spiking language model with Dale's-law lateral connectome, trained on BabyLM child-scale data with parallel SSM and event-driven RSNN…",
+  "title": "URCHIN: A Horizontal Spiking Language Model for Data-Constrained Pretraining",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.13899v1"
+}

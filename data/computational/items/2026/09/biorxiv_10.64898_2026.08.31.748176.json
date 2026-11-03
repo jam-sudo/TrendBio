@@ -1,0 +1,50 @@
+{
+  "abstract": "Most genomic foundation models are pretrained on independent linear assemblies and therefore do not explicitly represent population-level segment sharing or local graph connectivity. We developed TomatoPGFM, a graph-conditioned model pretrained on 54.65 Gb of sequence from 66 tomato (Solanum spp.) accessions. Sequence tokens were conditioned on pangenome node attributes and local adjacency, and the model was optimised using masked language modelling and graph-feature reconstruction. To evaluate model responses to graph-conditioned input, we compared aligned, shuffled and disabled graph inputs in 25,000 windows from the training panel. Sequence-aligned graph input produced lower masked language modelling loss than graph-off at all five curriculum stages in both training-panel strata, while the shuffled perturbation generally yielded intermediate losses. We then assessed sequence-only transfer in Solanum sitiens LA1974 and S. lycopersicum MicroTom, neither of which was used for graph construction or pretraining. Frozen-probe AUROC values for gene-versus-intergenic and coding-sequence-versus-intergenic classification ranged from 0.8489 to 0.9593. TomatoPGFM produced higher AUROC point estimates than DNABERT-2 in all four comparisons. Enabling the zero-feature GraphAdapter pathway with adjacency messaging disabled changed throughput by less than 1% at 512-2,048 positions under the tested configuration. Together, these results show that TomatoPGFM responds consistently to sequence-aligned pangenome context in training-panel sequences and provides informative sequence representations for genic-region classification in accessions excluded from graph construction and pretraining.",
+  "authors": [
+    "Han, J.",
+    "yushan, t.",
+    "Wang, J.",
+    "Yang, H.",
+    "Zhao, J.",
+    "Jiang, F.",
+    "Jia, C.",
+    "Yang, T.",
+    "Wang, B.",
+    "Zhang, C.",
+    "Yu, Q."
+  ],
+  "doi": "10.64898/2026.08.31.748176",
+  "first_seen": "2026-09-01",
+  "id": "biorxiv:10.64898/2026.08.31.748176",
+  "metadata": {
+    "abstract": "Most genomic foundation models are pretrained on independent linear assemblies and therefore do not explicitly represent population-level segment sharing or local graph connectivity. We developed TomatoPGFM, a graph-conditioned model pretrained on 54.65 Gb of sequence from 66 tomato (Solanum spp.) accessions. Sequence tokens were conditioned on pangenome node attributes and local adjacency, and the model was optimised using masked language modelling and graph-feature reconstruction. To evaluate model responses to graph-conditioned input, we compared aligned, shuffled and disabled graph inputs in 25,000 windows from the training panel. Sequence-aligned graph input produced lower masked language modelling loss than graph-off at all five curriculum stages in both training-panel strata, while the shuffled perturbation generally yielded intermediate losses. We then assessed sequence-only transfer in Solanum sitiens LA1974 and S. lycopersicum MicroTom, neither of which was used for graph construction or pretraining. Frozen-probe AUROC values for gene-versus-intergenic and coding-sequence-versus-intergenic classification ranged from 0.8489 to 0.9593. TomatoPGFM produced higher AUROC point estimates than DNABERT-2 in all four comparisons. Enabling the zero-feature GraphAdapter pathway with adjacency messaging disabled changed throughput by less than 1% at 512-2,048 positions under the tested configuration. Together, these results show that TomatoPGFM responds consistently to sequence-aligned pangenome context in training-panel sequences and provides informative sequence representations for genic-region classification in accessions excluded from graph construction and pretraining.",
+    "author_corresponding": "Qinghui Yu",
+    "author_corresponding_institution": "Key Laboratory of Genome Research and Genetic Improvement of Xinjiang Characteristic Fruits and Vegetables, Institute of Fruits and Vegetables, Xinjiang Academy",
+    "authors": "Han, J.; yushan, t.; Wang, J.; Yang, H.; Zhao, J.; Jiang, F.; Jia, C.; Yang, T.; Wang, B.; Zhang, C.; Yu, Q.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-01",
+    "doi": "10.64898/2026.08.31.748176",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/01/2026.08.31.748176.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TomatoPGFM: A graph-conditioned foundation model for tomato pangenomes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Key Laboratory of Genome Research and Genetic Improvement of Xinjiang Characteristic Fruits and Vegetables, Institute of Fruits and Vegetables, Xinjiang Academy",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "TomatoPGFM is a graph-conditioned genomic foundation model pretrained on tomato pangenome sequence, showing lower MLM loss with aligned graph input and AUROC…",
+  "title": "TomatoPGFM: A graph-conditioned foundation model for tomato pangenomes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.31.748176"
+}

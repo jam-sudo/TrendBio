@@ -1,0 +1,34 @@
+{
+  "abstract": "Genome foundation models are most useful where sequences are generated, yet the largest models need datacenter accelerators and a place to send private DNA. We ask whether a 15-billion-parameter genome mixture-of-experts (MoE) model can instead run on volunteers' web browsers, with the experts spread across many untrusted devices, without changing its predictions and without revealing the sequence to any single device. We build a system in which a trusted coordinator runs attention and routing while browser workers run every expert feed-forward network through hand-written WebGPU kernels, and we protect the expert inputs with real-valued Lagrange coded computing: each worker receives only a Gaussian-padded share, computes the expert's linear maps, and the coordinator decodes from any two of three workers. On GenomeOcean-MoE (8 experts, top-2 routing, 24 layers), the browser path matches native llama.cpp at every quantization level, the distributed path stays at the BF16 numerical noise floor (KL 0.0036 nats per token), and an unfitted latency model predicts decode time within 0.74% (median) under emulated wide-area links. We first show that plaintext expert inputs are not private: a probe recovers the token from a single vector at every depth, and one worker can identify the source genome from 300 unordered tokens with 92% accuracy. With coded experts, an adaptive attacker trained on shares falls to the most-frequent-token baseline, one worker's information about each token is bounded below one bit per forward pass, and the fidelity cost stays below the BF16 noise floor; in Chrome, coded decoding runs at 220 to 376 ms per token, depending on how much of the routing is hidden, and continues without replicas when a worker fails.",
+  "authors": [
+    "Guang Yang",
+    "Fengchen Liu"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-27",
+  "id": "arxiv:2609.35882",
+  "metadata": {
+    "arxiv_primary_category": "cs.CR",
+    "categories": [
+      "cs.CR",
+      "cs.LG",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.35882v2</ns0:id>\n    <ns0:title>GenomeOcean Anywhere: Private WebGPU Inference for Genome MoEs</ns0:title>\n    <ns0:updated>2026-10-01T22:14:29Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.35882v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.35882v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Genome foundation models are most useful where sequences are generated, yet the largest models need datacenter accelerators and a place to send private DNA. We ask whether a 15-billion-parameter genome mixture-of-experts (MoE) model can instead run on volunteers' web browsers, with the experts spread across many untrusted devices, without changing its predictions and without revealing the sequence to any single device. We build a system in which a trusted coordinator runs attention and routing while browser workers run every expert feed-forward network through hand-written WebGPU kernels, and we protect the expert inputs with real-valued Lagrange coded computing: each worker receives only a Gaussian-padded share, computes the expert's linear maps, and the coordinator decodes from any two of three workers. On GenomeOcean-MoE (8 experts, top-2 routing, 24 layers), the browser path matches native llama.cpp at every quantization level, the distributed path stays at the BF16 numerical noise floor (KL 0.0036 nats per token), and an unfitted latency model predicts decode time within 0.74% (median) under emulated wide-area links. We first show that plaintext expert inputs are not private: a probe recovers the token from a single vector at every depth, and one worker can identify the source genome from 300 unordered tokens with 92% accuracy. With coded experts, an adaptive attacker trained on shares falls to the most-frequent-token baseline, one worker's information about each token is bounded below one bit per forward pass, and the fidelity cost stays below the BF16 noise floor; in Chrome, coded decoding runs at 220 to 376 ms per token, depending on how much of the routing is hidden, and continues without replicas when a worker fails.</ns0:summary>\n    <ns0:category term=\"cs.CR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-27T00:21:26Z</ns0:published>\n    <ns1:comment>Withdrawn by the authors pending an institutional intellectual property review</ns1:comment>\n    <ns1:primary_category term=\"cs.CR\" />\n    <ns0:author>\n      <ns0:name>Guang Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fengchen Liu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Runs a 15B genome MoE model across browser WebGPU workers using Lagrange coded computing to protect DNA inputs; matches native outputs with KL 0.0036…",
+  "title": "GenomeOcean Anywhere: Private WebGPU Inference for Genome MoEs",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.35882v2"
+}

@@ -1,0 +1,34 @@
+{
+  "abstract": "Transformers process tokens without any inherent notion of order, making positional encoding a fundamental requirement rather than an architectural refinement. Rotary Position Embedding (RoPE) has become the default positional encoding in modern language models, yet it is heavily biased toward nearby tokens. Existing alternatives have been evaluated under different settings, leaving the literature fragmented and without a clear replacement. We bring structure to this landscape by examining a specific weakness of RoPE: its slow frequency bands, whose wavelengths exceed the training context and expose models to unseen angles during extrapolation. We therefore introduce Data aware RoPE (DaRoPE), which preserves standard RoPE on the fast bands but replaces absolute position on the slow bands with bounded coordinates learned from contextual representations. Therefore, the slow-band geometry depends on the data rather than only on positional distance. We compare representative encodings under matched conditions across synthetic tasks, symbolic music, genomics, neural signals, and language models spanning 124M to 50B parameters. Across these experiments, DaRoPE leads on non-text benchmarks, mitigates recency bias, while remaining best or on par in language modeling and length extrapolation. Moreover, the learned coordinates also make the mechanism interpretable, revealing how attention layers leverage contextual information beyond token distance. Together, these results support DaRoPE as the best overall default among the evaluated methods, when there is no domain-specific reasons to prefer another.",
+  "authors": [
+    "Jarod Lévy",
+    "Mathurin Videau",
+    "Jad Yehya",
+    "Jean-Rémi King",
+    "Stéphane d'Ascoli",
+    "Thomas Moreau"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-28",
+  "id": "arxiv:2609.34556",
+  "metadata": {
+    "arxiv_primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.34556v2</ns0:id>\n    <ns0:title>RoPE is Dead, Long Live RoPE: Towards Scalable Data-aware Positional Encodings</ns0:title>\n    <ns0:updated>2026-10-03T07:29:50Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.34556v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.34556v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Transformers process tokens without any inherent notion of order, making positional encoding a fundamental requirement rather than an architectural refinement. Rotary Position Embedding (RoPE) has become the default positional encoding in modern language models, yet it is heavily biased toward nearby tokens. Existing alternatives have been evaluated under different settings, leaving the literature fragmented and without a clear replacement. We bring structure to this landscape by examining a specific weakness of RoPE: its slow frequency bands, whose wavelengths exceed the training context and expose models to unseen angles during extrapolation. We therefore introduce Data aware RoPE (DaRoPE), which preserves standard RoPE on the fast bands but replaces absolute position on the slow bands with bounded coordinates learned from contextual representations. Therefore, the slow-band geometry depends on the data rather than only on positional distance. We compare representative encodings under matched conditions across synthetic tasks, symbolic music, genomics, neural signals, and language models spanning 124M to 50B parameters. Across these experiments, DaRoPE leads on non-text benchmarks, mitigates recency bias, while remaining best or on par in language modeling and length extrapolation. Moreover, the learned coordinates also make the mechanism interpretable, revealing how attention layers leverage contextual information beyond token distance. Together, these results support DaRoPE as the best overall default among the evaluated methods, when there is no domain-specific reasons to prefer another.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-28T08:14:18Z</ns0:published>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name>Jarod Lévy</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mathurin Videau</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jad Yehya</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jean-Rémi King</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Stéphane d'Ascoli</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Thomas Moreau</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-28",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Proposes DaRoPE, a data-aware rotary positional encoding that replaces slow-band absolute positions with learned contextual coordinates; evaluated on genomics,…",
+  "title": "RoPE is Dead, Long Live RoPE: Towards Scalable Data-aware Positional Encodings",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.34556v2"
+}

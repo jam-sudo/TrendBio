@@ -1,0 +1,47 @@
+{
+  "abstract": "Single-cell foundation models are increasingly adopted for downstream applications such as cell-type prediction. However, these predictions are often utilized without assessing their reliability, or by relying on a simple cutoff applied to the maximum softmax probability (MSP) derived from the classifier. This raises a critical question: can raw MSP be trusted as a reliable measure of confidence on unseen data (target) exhibiting diverse technical and biological variations? To address this, we introduce an audit framework to systematically evaluate the confidence estimates derived from the training set (source) against the realities of the target test set. We demonstrate that raw MSP fundamentally fails to represent true confidence when applied to target datasets. By decomposing the confidence gap between source and target data, we reveal that these discrepancies stem from a combination of rank-ordering errors and systemic probability drift. We further show that the drift can be successfully recalibrated by leveraging a small subset of labeled target data. While this recalibration improves the reliability of automated acceptance, it inherently introduces a trade-off by increasing the volume of cells requiring manual review. Ultimately, our framework establishes that the safe deployment of these models necessitates target-specific confidence adjustment using representative local labels.",
+  "authors": [
+    "Weng, G.",
+    "Zhu, D.",
+    "Zhao, Y.",
+    "Martin, P. C.",
+    "Kim, H.",
+    "Jung, J.",
+    "Nam, G.-H.",
+    "Won, K. J."
+  ],
+  "doi": "10.64898/2026.08.31.748446",
+  "first_seen": "2026-09-04",
+  "id": "biorxiv:10.64898/2026.08.31.748446",
+  "metadata": {
+    "abstract": "Single-cell foundation models are increasingly adopted for downstream applications such as cell-type prediction. However, these predictions are often utilized without assessing their reliability, or by relying on a simple cutoff applied to the maximum softmax probability (MSP) derived from the classifier. This raises a critical question: can raw MSP be trusted as a reliable measure of confidence on unseen data (target) exhibiting diverse technical and biological variations? To address this, we introduce an audit framework to systematically evaluate the confidence estimates derived from the training set (source) against the realities of the target test set. We demonstrate that raw MSP fundamentally fails to represent true confidence when applied to target datasets. By decomposing the confidence gap between source and target data, we reveal that these discrepancies stem from a combination of rank-ordering errors and systemic probability drift. We further show that the drift can be successfully recalibrated by leveraging a small subset of labeled target data. While this recalibration improves the reliability of automated acceptance, it inherently introduces a trade-off by increasing the volume of cells requiring manual review. Ultimately, our framework establishes that the safe deployment of these models necessitates target-specific confidence adjustment using representative local labels.",
+    "author_corresponding": "Kyoung Jae Won",
+    "author_corresponding_institution": "Department of Computational Biomedicine, Cedars-Sinai Medical Center, Los Angeles, CA 90069, USA",
+    "authors": "Weng, G.; Zhu, D.; Zhao, Y.; Martin, P. C.; Kim, H.; Jung, J.; Nam, G.-H.; Won, K. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-04",
+    "doi": "10.64898/2026.08.31.748446",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/04/2026.08.31.748446.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Cross-domain confidence reliability and remappability of frozen single-cell representations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computational Biomedicine, Cedars-Sinai Medical Center, Los Angeles, CA 90069, USA",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-09-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Audits softmax-confidence reliability of frozen single-cell foundation models under source-to-target shift, showing raw MSP misleads and recalibration with…",
+  "title": "Cross-domain confidence reliability and remappability of frozen single-cell representations",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.31.748446"
+}

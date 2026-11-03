@@ -1,0 +1,33 @@
+{
+  "abstract": "Scientific measurements such as single-cell RNA (scRNA) sequencing often take the form of nonnegative integer counts, whereas continuous-state diffusion models approximate this discrete structure using continuous coordinates. Building on stochastic chemical reaction networks (CRNs), a class of count-native Markov jump processes, we introduce CRNDiff, a structured framework that combines count-space diffusion with inference-time conditioning on rare subpopulations. An independent birth--death instantiation yields a closed-form transition kernel for forward noising. This kernel enables reverse sampling via forward-filtering backward-sampling (FFBS) and supports data-driven selection of the terminal noising time, eliminating the need for a validation sweep. This tractability also lets us introduce tilted Feynman--Kac (FK) steering, a method for sampling target subpopulations from a frozen generator without retraining. By tilting posterior marginals before FK particle correction, steering mitigates importance-weight concentration when the target population is rare. Using scRNA-seq data from the human heart cell atlas, we test the ability of CRNDiff to generate cell-type-specific distributions. Across the three evaluated target populations, CRNDiff achieves the highest conditional fidelity among the evaluated generative models, with larger mean purity margins for rarer target populations. Generated cells preserve marker-level differential-expression structure. Replacing real training cells for the target classes with generated cells yields downstream classification performance approaching that of the real-data reference.",
+  "authors": [
+    "Yuxuan Qiu",
+    "Praful Gagrani",
+    "Tetsuya J Kobayashi"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-25",
+  "id": "arxiv:2609.31149",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.31149v1</ns0:id>\n    <ns0:title>CRNDiff: Count-Native Diffusion Framework via Chemical Reaction Networks</ns0:title>\n    <ns0:updated>2026-09-25T11:41:21Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.31149v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.31149v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Scientific measurements such as single-cell RNA (scRNA) sequencing often take the form of nonnegative integer counts, whereas continuous-state diffusion models approximate this discrete structure using continuous coordinates. Building on stochastic chemical reaction networks (CRNs), a class of count-native Markov jump processes, we introduce CRNDiff, a structured framework that combines count-space diffusion with inference-time conditioning on rare subpopulations. An independent birth--death instantiation yields a closed-form transition kernel for forward noising. This kernel enables reverse sampling via forward-filtering backward-sampling (FFBS) and supports data-driven selection of the terminal noising time, eliminating the need for a validation sweep. This tractability also lets us introduce tilted Feynman--Kac (FK) steering, a method for sampling target subpopulations from a frozen generator without retraining. By tilting posterior marginals before FK particle correction, steering mitigates importance-weight concentration when the target population is rare. Using scRNA-seq data from the human heart cell atlas, we test the ability of CRNDiff to generate cell-type-specific distributions. Across the three evaluated target populations, CRNDiff achieves the highest conditional fidelity among the evaluated generative models, with larger mean purity margins for rarer target populations. Generated cells preserve marker-level differential-expression structure. Replacing real training cells for the target classes with generated cells yields downstream classification performance approaching that of the real-data reference.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-25T11:41:21Z</ns0:published>\n    <ns1:comment>28 pages, 9 figures, 10 tables. Under review as a conference paper at ICLR 2027</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Yuxuan Qiu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Praful Gagrani</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tetsuya J Kobayashi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "CRNDiff applies count-native diffusion via chemical reaction networks to scRNA-seq counts, using closed-form birth-death kernels, FFBS sampling, and tilted…",
+  "title": "CRNDiff: Count-Native Diffusion Framework via Chemical Reaction Networks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.31149v1"
+}
