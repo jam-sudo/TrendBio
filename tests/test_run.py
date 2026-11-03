@@ -424,12 +424,31 @@ def test_backfill_chunks_dates_and_preserves_publication_day(ctx, monkeypatch):
     assert all(len(batch) <= 2000 for batch in ctx.deps.llm.batches)
 
 
+@pytest.mark.parametrize('setting', [{}, {'history_seeding': False}])
+def test_backfill_skips_disabled_github_history(ctx, monkeypatch, caplog, setting):
+    from pipeline.sources.github import GithubAdapter
+
+    caplog.set_level('INFO', logger='pipeline.run')
+    github = GithubAdapter({'github': {'watchlist': ['org/watchlist'], **setting}})
+    github.fetch = lambda *args: []
+    ctx.deps.adapters.append(github)
+    before = ctx.store.star_counts()
+    monkeypatch.setattr('pipeline.run.seed_star_history',
+                        lambda *args: pytest.fail('disabled history seeding must not run'))
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    messages = [record.getMessage() for record in caplog.records if 'stage=github' in record.getMessage()]
+    assert messages == ['stage=github_history event=skipped reason=disabled_in_config']
+    assert ctx.store.star_counts() == before
+    assert ctx.store.get_day(TODAY).run.status == 'ok'
+
+
 def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeypatch, caplog):
     caplog.set_level('INFO', logger='pipeline.run')
     import pipeline.run as runner
     from pipeline.sources.github import GithubAdapter
 
-    github = GithubAdapter({'github': {'watchlist': ['org/watchlist']}}, star_gain_threshold=100)
+    github = GithubAdapter({'github': {'watchlist': ['org/watchlist'], 'history_seeding': True}},
+                           star_gain_threshold=100)
     github.fetch = lambda *args: []
     github.repo_cache = {'repos': {'org/topic': {'full_name': 'org/topic', 'stargazers_count': 30}}}
     ctx.deps.adapters.append(github)
@@ -449,6 +468,34 @@ def test_backfill_seeds_long_github_history_and_daily_run_prunes_it(ctx, monkeyp
     github.observations = dict.fromkeys(fetched, 31)
     run_day('computational', TODAY + timedelta(days=1), ctx.store, ctx.deps)
     assert ctx.store.star_counts() == dict.fromkeys(fetched, history[1:] + [(TODAY + timedelta(days=1), 31)])
+
+
+@pytest.mark.parametrize('statuses', [(401, 401, 401), (403, 403, 403), (404, 404, 404), (401, 403, 404)])
+def test_backfill_stops_unavailable_github_history(ctx, caplog, statuses):
+    from pipeline.sources.github import GithubAdapter
+
+    repos = [f'org/repo-{i}' for i in range(4)]
+    github = GithubAdapter({'github': {'watchlist': repos, 'history_seeding': True}})
+    github.fetch = lambda *args: []
+    ctx.deps.adapters.append(github)
+    paths = []
+    failures = iter(statuses)
+
+    def respond(request):
+        paths.append(request.url.path)
+        if request.url.path.endswith('/stargazers'):
+            return httpx.Response(next(failures), headers={'X-RateLimit-Remaining': '4863'})
+        return httpx.Response(200, json={'stargazers_count': 10})
+
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        ctx.deps.client = client
+        run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+        assert client.event_hooks['response'] == []
+    assert paths == [path for repo in repos[:3]
+                     for path in (f'/repos/{repo}', f'/repos/{repo}/stargazers')]
+    warnings = [record.getMessage() for record in caplog.records if record.levelname == 'WARNING']
+    assert warnings == [f'stage=github_history event=stopped reason=endpoint_unavailable status={statuses[-1]}']
+    assert ctx.store.get_day(TODAY).run.status == 'ok'
 
 
 def test_stage_logs_have_timings_and_counts_without_item_content(ctx, caplog):
@@ -645,7 +692,8 @@ def test_backfill_stage_logs_and_fallback_reasons(ctx, caplog):
 def test_github_history_failure_does_not_degrade_day(ctx, monkeypatch, caplog, status):
     from pipeline.sources.github import GithubAdapter
 
-    github = GithubAdapter({'github': {'watchlist': ['org/bad', 'org/good']}})
+    caplog.set_level('DEBUG', logger='pipeline.sources.github')
+    github = GithubAdapter({'github': {'watchlist': ['org/bad', 'org/good'], 'history_seeding': True}})
     code = ctx.items[0].model_copy(update={
         'id': 'github:org/good', 'source': 'github', 'type': 'code', 'title': 'org/good',
     })
@@ -717,7 +765,7 @@ def test_resynthesize_updates_topic_and_day(ctx, monkeypatch):
 def test_github_history_seeding_caps_discovery_and_keeps_watchlist(ctx, monkeypatch):
     from pipeline.sources.github import GithubAdapter
 
-    github = GithubAdapter({'github': {'watchlist': ['org/watch', 'org/104']}})
+    github = GithubAdapter({'github': {'watchlist': ['org/watch', 'org/104'], 'history_seeding': True}})
     github.fetch = lambda *args: []
     github.repo_cache = {'repos': {f'org/{i}': {'full_name': f'org/{i}', 'stargazers_count': i}
                                   for i in range(105)}}

@@ -285,3 +285,25 @@ def test_github_history_stops_when_rate_limit_low(status, stop_at, caplog):
     assert 'stage=github_history event=stopped remaining=199' in caplog.text
     if status != 200:
         assert f'repo=org/partial status={status}' in caplog.text
+
+
+@pytest.mark.parametrize('interruption', [200, 400])
+def test_github_history_unavailable_count_resets(interruption, caplog):
+    from pipeline.sources.github import seed_star_history
+
+    statuses = iter([403, 403, interruption, 403, 403, 403])
+    paths = []
+
+    def respond(request):
+        paths.append(request.url.path)
+        if request.url.path.endswith('/stargazers'):
+            return httpx.Response(next(statuses), json=[{'starred_at': '2026-10-01T12:00:00Z'}])
+        return httpx.Response(200, json={'stargazers_count': 1})
+
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        histories = seed_star_history([f'org/{i}' for i in range(7)], client)
+    assert paths == [path for i in range(6) for path in (f'/repos/org/{i}', f'/repos/org/{i}/stargazers')]
+    assert histories == ({'org/2': [(date(2026, 10, 1), 1)]} if interruption == 200 else {})
+    warnings = [record.getMessage() for record in caplog.records if record.levelname == 'WARNING']
+    assert len(warnings) == (1 if interruption == 200 else 2)
+    assert warnings[-1] == 'stage=github_history event=stopped reason=endpoint_unavailable status=403'

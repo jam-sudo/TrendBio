@@ -369,7 +369,9 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                     state['failed_chunks'].append(chunk)
                 counts['source_status'] = 'failed'
             else:
-                if isinstance(adapter, GithubAdapter):
+                if isinstance(adapter, GithubAdapter) and not adapter.config['github'].get('history_seeding', False):
+                    logger.info('stage=github_history event=skipped reason=disabled_in_config')
+                elif isinstance(adapter, GithubAdapter):
                     discovered = sorted(adapter.repo_cache.get('repos', {}).values(),
                                         key=lambda repo: (-repo['stargazers_count'], repo['full_name']))
                     repos = list(dict.fromkeys(adapter.config['github']['watchlist'] + [

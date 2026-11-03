@@ -87,6 +87,7 @@ def seed_star_history(repos: list[str], client: httpx.Client) -> dict[str, list[
     """Best-effort seeding; discard incomplete histories and reserve API capacity."""
     histories = {}
     remaining = None
+    unavailable = 0
 
     def check_rate_limit(response):
         nonlocal remaining
@@ -101,11 +102,20 @@ def seed_star_history(repos: list[str], client: httpx.Client) -> dict[str, list[
         for repo in repos:
             try:
                 history = fetch_star_history(repo, client)
+                unavailable = 0
                 if history:
                     histories[repo] = history
             except Exception as error:
                 response = getattr(error, 'response', None)
-                if not isinstance(error, _HistoryRateLimit) or response.is_error:
+                if isinstance(error, httpx.HTTPStatusError) and response.status_code in (401, 403, 404):
+                    unavailable += 1
+                    if unavailable == 3:
+                        logger.warning('stage=github_history event=stopped reason=endpoint_unavailable status=%s',
+                                       response.status_code)
+                        break
+                    logger.debug('stage=github_history event=failed repo=%s status=%s', repo, response.status_code)
+                elif not isinstance(error, _HistoryRateLimit) or response.is_error:
+                    unavailable = 0
                     logger.warning('stage=github_history event=failed repo=%s status=%s error=%s',
                                    repo, response.status_code if response is not None else 'unknown',
                                    type(error).__name__)
