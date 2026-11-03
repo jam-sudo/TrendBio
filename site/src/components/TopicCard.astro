@@ -1,38 +1,43 @@
 ---
 import SignalLine from "./SignalLine.astro";
 import { loadTaxonomy, loadTopic } from "../lib/data";
+import { categoryStyle, rankMedal } from "../lib/categories";
 import type { RankedTopic } from "../lib/types";
-
-interface Props {
-  ranked: RankedTopic;
-  span2: boolean;
-}
-
-const { ranked, span2 } = Astro.props;
+interface Props { ranked: RankedTopic; featured: boolean }
+const { ranked, featured } = Astro.props;
 const category = loadTaxonomy("computational").find(({ slug }) => slug === ranked.category);
 const secondary = loadTopic("computational", ranked.slug)?.secondary_categories ?? [];
+const identity = categoryStyle(ranked.category);
 ---
-
-<a class:list={["topic-card", { span2 }]} href={`/topic/${ranked.slug}/`}
-  data-topic-cats={[ranked.category, ...secondary].join(" ")}>
-  <p class="rank-category">#{ranked.rank} · {category?.label ?? ranked.category}</p>
-  <h2>{ranked.headline}</h2>
-  {span2 && <p>{ranked.summary}</p>}
+<a class:list={["topic-card", { featured }]} href={`/topic/${ranked.slug}/`}
+  style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
+  <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
+  <span class="category-tile" aria-hidden="true">{identity.emoji}</span>
+  <div class="topic-copy">
+    <p class="rank-category">{category?.label ?? ranked.category}</p>
+    <h2>{ranked.headline}</h2>
+    <p class="summary">{ranked.summary}</p>
+  </div>
   <SignalLine signals={ranked.signals} />
 </a>
-
 <style>
-  .topic-card {
-    border: 1px solid var(--border);
-    padding: 1.5rem;
-    min-width: 0;
-    overflow-wrap: anywhere;
-    text-decoration: none;
+  .topic-card { position: relative; display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) auto; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); padding: 1.25rem; min-width: 0; overflow-wrap: anywhere; text-decoration: none; }
+  .topic-card:hover { border-color: var(--muted); }
+  .rank { text-align: center; }
+  .rank-category { width: fit-content; font-size: 9px; font-weight: 700; color: var(--fg); background: oklch(var(--tile-lightness) 0.06 var(--category-hue)); padding: 2px 8px; border-radius: 4px; margin: 0 0 0.5rem; }
+  h2 { margin: 0 0 0.375rem; }
+  .summary { font-size: var(--t3); color: var(--muted); margin: 0; }
+  .featured .summary { font-size: var(--t2); }
+  @media (max-width: 800px) {
+    .topic-card { grid-template-columns: 24px 36px minmax(0, 1fr); gap: 0.75rem; padding: 1rem; }
+    .topic-card :global(.signal-line) { grid-column: 3; }
   }
-  .topic-card:hover { border-color: var(--accent); }
-  .rank-category { font-size: var(--t3); color: var(--muted); margin-bottom: 0.5rem; }
-  h2 { margin: 0 0 0.75rem; letter-spacing: -0.02em; }
-  @media (min-width: 641px) {
-    .span2 { grid-column: 1 / 3; }
+  @media (max-width: 480px) {
+    .topic-card { grid-template-columns: 24px 36px minmax(0, 1fr); align-items: start; }
+    .topic-copy { grid-column: 1 / -1; }
+    .rank-category { position: absolute; top: 1rem; right: 1rem; max-width: calc(100% - 110px); margin: 0; }
+    .topic-card :global(.signal-line) { grid-column: 1 / -1; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+    .rank { align-self: center; }
+    .category-tile { grid-column: 2; }
   }
 </style>

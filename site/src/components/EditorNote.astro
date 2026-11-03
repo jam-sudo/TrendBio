@@ -4,12 +4,13 @@ const { html } = Astro.props;
 ---
 
 {html !== null && <aside aria-labelledby="editor-note-heading">
+  <span class="category-tile" aria-hidden="true">📝</span>
   <h2 id="editor-note-heading">Editor's note</h2>
   <div set:html={html} />
 </aside>}
 
 <style>
-  aside { border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 5%, var(--bg)); padding: 1rem 1.5rem; margin-block: 2rem; }
-  h2 { margin-top: 0; }
+  aside { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 1rem 1.5rem; margin-block: 2rem; }
+  h2 { display: inline-block; margin: 0 0 1rem 0.5rem; }
   aside :global(p:last-child) { margin-bottom: 0; }
 </style>

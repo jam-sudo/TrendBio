@@ -1,11 +1,13 @@
 ---
+interface Props { staticMark?: boolean }
+const { staticMark = false } = Astro.props;
 const points = Array.from({ length: 21 }, (_, index) => ({
   y: 20 + index * 10,
   phase: index / 10,
 }));
 ---
 
-<svg class="helix" viewBox="0 0 360 240" aria-hidden="true" focusable="false">
+<svg class={staticMark ? "logo-mark" : "helix"} viewBox={staticMark ? "100 0 160 240" : "0 0 360 240"} aria-hidden="true" focusable="false">
   {[0, 1].map((strand) => (
     <g class={strand === 0 ? "helix-accent" : "helix-ink"}>
       {points.map(({ y, phase }) => (
@@ -19,7 +21,9 @@ const points = Array.from({ length: 21 }, (_, index) => ({
 </svg>
 
 <style is:inline>
-  .helix { width: 100%; height: 100%; opacity: 0.55; }
+  .helix { width: 100%; height: 100%; opacity: 0.10; }
+  .logo-mark { width: 20px; height: 20px; }
+  .logo-mark circle { transform: translateX(var(--offset)); }
   .helix-accent { fill: var(--accent); }
   .helix-ink { fill: var(--fg); }
   .helix circle { transform: translateX(var(--offset)); }

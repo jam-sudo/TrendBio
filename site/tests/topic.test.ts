@@ -27,7 +27,9 @@ describe("built topic pages", () => {
     const positions = content.map((text) => article.indexOf(text));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
-    expect(html).toContain("max-width:680px");
+    const styles = [...html.matchAll(/<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"/g)]
+      .map(([, href]) => readFileSync(`dist${href}`, "utf8")).join("\n");
+    expect(styles).toContain("max-width:720px");
   });
 
   it("renders 56 dated sparkline bars including unranked days and highlights the latest day", () => {

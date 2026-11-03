@@ -19,17 +19,16 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 ]));
 ---
 
+<div class="section-heading"><h2>Top 5</h2><a href="/topics/">View all ›</a></div>
+{day?.run.status === "degraded" && <p class="notice"><span class="badge">PARTIAL</span> Some sources or summaries were unavailable for this run.</p>}
+{day?.run.backfilled && <p class="notice"><span class="badge">BACKFILLED</span> Code and industry signals are partial for backfilled days.</p>}
+{ranked.length === 0 && <p class="notice"><span class="badge">QUIET DAY</span> Quiet day: no topic cleared the bar.</p>}
 <CategoryChips categories={categories} counts={counts} />
-{day?.run.status === "degraded" && <p>Some sources or summaries were unavailable for this run.</p>}
-{day?.run.backfilled && <p>Code and industry signals are partial for backfilled days.</p>}
-{ranked.length === 0 && <p>Quiet day: no topic cleared the bar.</p>}
-<div class="topic-grid">
-  {ranked.map((topic) => <TopicCard ranked={topic} span2={topic.rank === 1} />)}
+<div class="topic-list">
+  {ranked.map((topic) => <TopicCard ranked={topic} featured={topic.rank === 1} />)}
 </div>
 
 <style>
-  .topic-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-  @media (min-width: 641px) {
-    .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
+  .topic-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .notice { font-size: var(--t3); color: var(--muted); margin-bottom: 1rem; }
 </style>

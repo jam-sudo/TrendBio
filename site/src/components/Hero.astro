@@ -10,25 +10,16 @@ const { title, subtitle } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <div>
-    <h1 id="hero-title">{title}</h1>
-    <p>{subtitle}</p>
-  </div>
-  <Helix />
+  <a class="wordmark" href="/"><Helix staticMark />TrendBio</a>
+  <h1 id="hero-title">{title}</h1>
+  <p>{subtitle}</p>
+  <div class="hero-art"><Helix /></div>
 </section>
 
 <style>
-  .hero {
-    height: min(34vh, 320px);
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  h1 { margin: 0 0 1rem; max-width: 24ch; }
-  p { color: var(--muted); font-size: var(--t3); margin: 0; }
-  @media (max-width: 640px) {
-    h1 { font-size: var(--t2); }
-  }
+  .hero { position: relative; padding: 0 0 0.5rem; text-align: center; }
+  .wordmark { margin-bottom: 1.5rem; }
+  h1 { position: relative; z-index: 1; max-width: 30ch; margin: 0 auto 1rem; }
+  p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; }
+  .hero-art { position: absolute; pointer-events: none; right: 0; top: 0; width: 28%; height: 100%; }
 </style>

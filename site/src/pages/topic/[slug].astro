@@ -1,4 +1,5 @@
 ---
+import { categoryStyle, rankMedal } from "../../lib/categories";
 import Base from "../../layouts/Base.astro";
 import SignalBadges from "../../components/SignalBadges.astro";
 import Sparkline from "../../components/Sparkline.astro";
@@ -20,13 +21,14 @@ const ranked = history.filter((entry) => entry.rank !== null);
 const latestRanked = ranked[0];
 const category = loadTaxonomy(domain).find(({ slug }) => slug === topic.category)?.label ?? topic.category;
 const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
+const identity = categoryStyle(topic.category);
 const headline = topic.headline ?? topic.label;
 ---
 
 <Base title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
   <article class="prose">
     {latestRanked && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
-    <p class="rank-category">{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</p>
+    <p class="rank-category" style={`--category-hue: ${identity.hue}`}><span class="category-tile" aria-hidden="true">{identity.emoji}</span> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>
     <h1>{headline}</h1>
     {latestEntry && <SignalBadges signals={latestEntry.signals} />}
     <Sparkline history={topic.history} />
@@ -40,7 +42,10 @@ const headline = topic.headline ?? topic.label;
     </section>}
     <section id="topic-history" aria-labelledby="history-heading">
       <h2 id="history-heading">Topic history</h2>
-      <ul>{ranked.map((entry) => <li><a href={`/day/${entry.date}/`}>{entry.date} · #{entry.rank}</a></li>)}</ul>
+      <table>
+        <thead><tr><th scope="col">Date</th><th scope="col">Rank</th></tr></thead>
+        <tbody>{ranked.map((entry) => <tr><td><a href={`/day/${entry.date}/`} aria-label={`${entry.date} · #${entry.rank}`}><time datetime={entry.date}>{entry.date}</time></a></td><td><span aria-hidden="true">{rankMedal(entry.rank!)}</span><span class="sr-only">#{entry.rank}</span></td></tr>)}</tbody>
+      </table>
     </section>
   </article>
 </Base>
@@ -48,7 +53,7 @@ const headline = topic.headline ?? topic.label;
 <style>
   article { overflow-wrap: anywhere; }
   nav { margin-bottom: 1.5rem; font-size: var(--t3); }
-  .rank-category { margin-bottom: 0.5rem; color: var(--muted); font-size: var(--t3); }
+  .rank-category { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; color: var(--muted); font-size: var(--t3); }
   h1 { margin-top: 0; }
   section { margin-top: 2.5rem; }
 </style>
