@@ -1,28 +1,70 @@
 ---
 import Base from "../layouts/Base.astro";
-import { loadDays, loadTaxonomy } from "../lib/data";
+import { loadDays } from "../lib/data";
+import { categoryStyle } from "../lib/categories";
 import CategoryIcon from "../components/CategoryIcon.astro";
-const categories = loadTaxonomy("computational");
+
 const days = loadDays("computational");
+const byDate = new Map(days.map((day) => [day.date, day]));
+const months = [...new Set(days.map((day) => day.date.slice(0, 7)))].map((month) => {
+  const first = new Date(`${month}-01T00:00:00Z`);
+  const count = new Date(Date.UTC(first.getUTCFullYear(), first.getUTCMonth() + 1, 0)).getUTCDate();
+  return {
+    month,
+    label: first.toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" }),
+    chip: first.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" }),
+    offset: (first.getUTCDay() + 6) % 7,
+    dates: Array.from({ length: count }, (_, index) => `${month}-${String(index + 1).padStart(2, "0")}`),
+  };
+});
 ---
 <Base title="Archive — TrendBio" lastRun={days[0]?.run.finished}>
   <h1>Archive</h1>
-  <table class="archive">
-    <thead><tr><th scope="col">Date</th><th scope="col">Top 5 topics</th></tr></thead>
-    <tbody>{days.map((day) => <tr>
-      <th scope="row"><a href={`/day/${day.date}/`}><time datetime={day.date}>{day.date}</time></a></th>
-      <td><ol>{day.ranked.map((topic) => <li><a href={`/topic/${topic.slug}/`}><CategoryIcon slug={topic.category} size={16} /><span class="sr-only">{categories.find(({ slug }) => slug === topic.category)?.label ?? topic.category}: </span> {topic.headline}</a></li>)}</ol>
-        {day.ranked.length === 0 && <span class="quiet">Quiet day: no topic cleared the bar.</span>}
-      </td>
-    </tr>)}</tbody>
-  </table>
+  <nav class="month-nav" aria-label="Archive months">
+    {months.map(({ month, chip }) => <a href={`#month-${month}`}>{chip}</a>)}
+  </nav>
+  {months.map(({ month, label, offset, dates }) => <section class="archive-month" id={`month-${month}`} aria-labelledby={`heading-${month}`}>
+    <h2 id={`heading-${month}`}>{label}</h2>
+    <p class="mobile-note">Tap a day for its top 5</p>
+    <div class="calendar">
+      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((weekday) => <span class="weekday" aria-hidden="true">{weekday}</span>)}
+      {Array.from({ length: offset }, () => <span aria-hidden="true" />)}
+      {dates.map((date, index) => {
+        const day = byDate.get(date);
+        const top = day?.ranked.find((topic) => topic.rank === 1);
+        return day ? <a class="calendar-day" href={`/day/${date}/`} aria-label={`${date}: ${top?.headline ?? "quiet"}`}
+          style={top ? `--category-hue: ${categoryStyle(top.category).hue}` : undefined}>
+          <span class="day-heading"><time datetime={date}>{index + 1}</time>{top && <CategoryIcon slug={top.category} size={16} />}</span>
+          {top ? <span class="headline">{top.headline}</span> : <span class="quiet">quiet</span>}
+          {(day.run.status === "degraded" || day.run.backfilled) && <span class="badge day-badge">{day.run.backfilled ? "BACKFILLED" : "PARTIAL"}</span>}
+        </a> : <div class="calendar-day missing"><time datetime={date}>{index + 1}</time></div>;
+      })}
+    </div>
+  </section>)}
 </Base>
 <style>
-  th[scope="row"] { white-space: nowrap; width: 150px; }
-  ol { padding: 0; margin: 0; list-style: none; }
-  li + li { margin-top: 0.75rem; }
-  li a { text-decoration: none; }
-  li a:hover { text-decoration: underline; }
+  .month-nav { display: flex; gap: 0.5rem; overflow-x: auto; padding: 4px; margin: -4px -4px 2rem; }
+  .month-nav a { flex-shrink: 0; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--card); padding: 0.375rem 0.75rem; font-size: var(--t3); text-decoration: none; }
+  .month-nav a:hover, .month-nav a:focus-visible, a.calendar-day:hover, a.calendar-day:focus-visible { border-color: var(--muted); }
+  .archive-month { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+  h2 { margin: 0 0 1rem; }
+  .mobile-note { display: none; }
+  .calendar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.5rem; }
+  .weekday { color: var(--muted); font-size: var(--t3); padding: 0 0.625rem 0.25rem; }
+  .calendar-day { min-width: 0; min-height: 112px; padding: 0.625rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: oklch(var(--tint-lightness) 0.015 var(--category-hue, 0)); text-decoration: none; }
+  .day-heading { display: flex; justify-content: space-between; align-items: center; gap: 2px; margin-bottom: 0.375rem; }
+  .day-heading time { font-weight: 700; }
+  .headline { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font-size: var(--t3); line-height: 1.4; }
   .quiet { color: var(--muted); font-size: var(--t3); }
-  @media (max-width: 640px) { th[scope="row"] { width: auto; } td { padding-left: 0.75rem; } }
+  .day-badge { display: block; width: fit-content; margin-top: 0.375rem; padding-inline: 4px; }
+  .missing { color: var(--muted); background: none; border-color: transparent; }
+  @media (max-width: 640px) {
+    h2 { margin-bottom: 0.25rem; }
+    .mobile-note { display: block; color: var(--muted); font-size: var(--t3); margin: 0 0 1rem; }
+    .calendar { gap: 4px; }
+    .weekday { padding: 0 0 0.25rem; text-align: center; }
+    .calendar-day { min-height: 48px; padding: 4px; }
+    .day-heading { margin: 0; }
+    .headline, .quiet, .day-badge { display: none; }
+  }
 </style>

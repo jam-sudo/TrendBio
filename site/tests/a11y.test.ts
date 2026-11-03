@@ -136,6 +136,30 @@ describe("built site accessibility and responsive layout", () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
   });
 
+  it("aligns calendar weekdays and keeps mobile cells compact", async () => {
+    await page.goto(`http://127.0.0.1:${server!.port}/archive/`);
+    const october = page.locator("#month-2026-10");
+    const november = page.locator("#month-2026-11");
+    const thursday = (await october.locator(".weekday").nth(3).boundingBox())!;
+    const octoberFirst = (await october.locator('.missing:has(time[datetime="2026-10-01"])').boundingBox())!;
+    expect(octoberFirst.x).toBe(thursday.x);
+    const sunday = (await november.locator(".weekday").nth(6).boundingBox())!;
+    const novemberFirst = page.locator('a[href="/day/2026-11-01/"]');
+    expect((await novemberFirst.boundingBox())!.x).toBe(sunday.x);
+    expect(await novemberFirst.locator(".headline").evaluate(el => getComputedStyle(el).webkitLineClamp)).toBe("2");
+    await novemberFirst.focus();
+    expect(await novemberFirst.evaluate(el => getComputedStyle(el).outlineStyle)).toBe("solid");
+    await page.setViewportSize({ width: 375, height: 812 });
+    expect(await page.locator(".headline:visible, .day-badge:visible, .quiet:visible").count()).toBe(0);
+    expect(await page.locator(".mobile-note:visible").count()).toBe(2);
+    expect(await novemberFirst.locator("svg:visible").count()).toBe(1);
+    expect((await novemberFirst.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    expect(await page.locator(".month-nav").evaluate(el => getComputedStyle(el).overflowX)).toBe("auto");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
+    await novemberFirst.click();
+    expect(new URL(page.url()).pathname).toBe("/day/2026-11-01/");
+  });
+
   it("uses equal-width leaderboard rows at 1280px", async () => {
     await page.goto(`http://127.0.0.1:${server!.port}/`);
     const cards = page.locator("[data-topic-cats]");

@@ -41,18 +41,30 @@ describe("built landing, day and archive pages", () => {
     expect(html).not.toContain("Some sources or summaries were unavailable for this run.");
   });
 
-  it("lists all four dates newest first with each day's topic links", () => {
+  it("renders monthly calendars with only the top topic and links to each full day", () => {
     const html = readPage("archive/index.html");
-    const days = loadDays("computational");
-    expect([...html.matchAll(/href="\/day\/(\d{4}-\d{2}-\d{2})\/"/g)].map((match) => match[1]))
-      .toEqual(["2026-11-01", "2026-10-31", "2026-10-30", "2026-10-29"]);
-    for (const day of days) {
-      for (const topic of day.ranked) {
-        expect(html).toContain(`href="/topic/${topic.slug}/"`);
-        expect(html).toContain(topic.headline);
-      }
+    const sections = [...html.matchAll(/<section\b[^>]*class="archive-month"[^>]*>[\s\S]*?<\/section>/g)].map(([section]) => section);
+    expect(sections).toHaveLength(2);
+    expect(sections[0]).toContain("November 2026");
+    expect(sections[1]).toContain("October 2026");
+    expect(html).toContain('href="#month-2026-11"');
+    expect(html).toContain('href="#month-2026-10"');
+    const cells = [...html.matchAll(/<a\b[^>]*href="\/day\/(\d{4}-\d{2}-\d{2})\/"[^>]*>[\s\S]*?<\/a>/g)];
+    expect(cells.map(([, date]) => date)).toEqual(["2026-11-01", "2026-10-29", "2026-10-30", "2026-10-31"]);
+    for (const day of loadDays("computational")) {
+      const cell = cells.find(([, date]) => date === day.date)![0];
+      const top = day.ranked.find(({ rank }) => rank === 1);
+      expect(cell).toContain(`aria-label="${day.date}: ${top?.headline ?? "quiet"}"`);
+      expect(cell).toContain(top?.headline ?? "quiet");
+      if (top) expect(cell).toMatch(/<svg[^>]*width="16"/);
+      for (const topic of day.ranked.filter(({ rank }) => rank !== 1)) expect(cell).not.toContain(topic.headline);
     }
-    expect(html.match(/href="\/topic\//g)).toHaveLength(15);
+    expect(cells.find(([, date]) => date === "2026-10-30")![0]).toContain("BACKFILLED");
+    expect(html).not.toContain('href="/day/2026-10-28/"');
+    expect(html).toContain('datetime="2026-10-28"');
+    expect(html).not.toContain('href="/topic/');
+    expect(html).not.toContain("<table");
+    expect(readPage("index.html")).toMatch(/href="\/archive\/"[^>]*>View all/);
   });
 
   it("renders degraded notices and signal count/rise boundaries on both landing and day pages", () => {
@@ -64,15 +76,27 @@ describe("built landing, day and archive pages", () => {
       const day = latestDay("computational")!;
       day.run.status = "degraded";
       day.run.backfilled = true;
+      day.ranked.find(({ rank }) => rank === 2)!.headline = "Unique November rank-two headline";
       day.ranked[0].signals = { preprint: 7, published: 2, code: 2, industry: 1, rise_ratio: 4, star_gain_7d: 0 };
       day.ranked[1].signals = { preprint: 1, published: 0, code: 1, industry: 0, rise_ratio: 1.49, star_gain_7d: 0 };
       day.ranked[2].signals = { preprint: 0, published: 0, code: 0, industry: 0, rise_ratio: 1.5, star_gain_7d: 0 };
       day.ranked[3].signals = { preprint: 0, published: 0, code: 0, industry: 0, rise_ratio: 0, star_gain_7d: 0 };
       writeFileSync(join(data, `computational/days/${day.date}.json`), JSON.stringify(day));
+      const partial = loadDays("computational").find(({ date }) => date === "2026-10-31")!;
+      partial.run.status = "degraded";
+      partial.run.backfilled = false;
+      writeFileSync(join(data, `computational/days/${partial.date}.json`), JSON.stringify(partial));
       const output = join(temporary, "dist");
       execFileSync(process.execPath, ["node_modules/astro/astro.js", "build", "--outDir", output], {
         env: { ...process.env, TRENDBIO_DATA_ROOT: data },
       });
+      const archive = readFileSync(join(output, "archive/index.html"), "utf8");
+      const cell = archive.match(new RegExp(`<a\\b[^>]*href="/day/${day.date}/"[^>]*>[\\s\\S]*?</a>`))![0];
+      expect(cell).toContain(day.ranked.find(({ rank }) => rank === 1)!.headline);
+      expect(archive).not.toContain("Unique November rank-two headline");
+      expect(cell).not.toContain("PARTIAL");
+      expect(archive.match(/<a\b[^>]*href="\/day\/2026-10-31\/"[^>]*>[\s\S]*?<\/a>/)![0]).toContain("PARTIAL");
+      expect(cell).toContain("BACKFILLED");
       for (const page of ["index.html", `day/${day.date}/index.html`]) {
         const html = readFileSync(join(output, page), "utf8");
         expect(html).toContain("Some sources or summaries were unavailable for this run.");
