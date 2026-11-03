@@ -2,6 +2,7 @@
 import "@fontsource/inconsolata/400.css";
 import "@fontsource/inconsolata/700.css";
 import "../styles/global.css";
+import { formatEastern } from "../lib/time";
 
 interface Props {
   title?: string;
@@ -12,9 +13,10 @@ const { title = "TrendBio", lastRun } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>let t;try{t=localStorage.getItem('trendbio-theme')}catch{}document.documentElement.dataset.theme=/^(dark|light)$/.test(t)?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
   </head>
@@ -28,14 +30,18 @@ const { title = "TrendBio", lastRun } = Astro.props;
           <a href="/topics">Topics</a>
           <a href="/archive">Archive</a>
           <a href="/about">About</a>
+          <button id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">Theme <span aria-hidden="true">☾</span></button>
         </div>
       </nav>
     </header>
+    <script is:inline>
+      (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
+    </script>
     <main id="main"><slot /></main>
     <footer>
       <p>Auto-curated from bioRxiv, arXiv, PubMed, GitHub and industry sources. Summaries are machine-generated.</p>
       <p><a href="/about">How this works</a></p>
-      {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{lastRun}</time></p>}
+      {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>
   </body>
 </html>

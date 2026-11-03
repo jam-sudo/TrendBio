@@ -54,12 +54,13 @@ describe("built site accessibility and responsive layout", () => {
     await server?.stop();
   });
 
-  it.each(["/", "/topic/protein-design-binders-a1b2/", "/topics/", "/archive/"])(
-    "%s has zero WCAG A/AA violations and accessible landmarks", async (path) => {
+  it.each(["dark", "light"].flatMap(theme => ["/", "/topic/protein-design-binders-a1b2/", "/topics/", "/archive/"].map(path => ({ theme, path }))))(
+    "$path in $theme has zero WCAG A/AA violations and accessible landmarks", async ({ theme, path }) => {
+      await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
       const response = await page.goto(`http://127.0.0.1:${server!.port}${path}`);
       expect(response?.status()).toBe(200);
       const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
-      console.log(`axe ${path}: ${violations.length} wcag2a/wcag2aa violations`);
+      console.log(`axe ${theme} ${path}: ${violations.length} wcag2a/wcag2aa violations`);
       expect(violations).toEqual([]);
       for (const selector of ["header", "header nav[aria-label]", "main#main", "footer", "h1"]) {
         expect(await page.locator(selector).count(), selector).toBe(1);
@@ -74,9 +75,50 @@ describe("built site accessibility and responsive layout", () => {
     }, 30_000,
   );
 
+  it("switches themes from the keyboard and remembers the choice across pages", async () => {
+    await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
+    await page.goto(`http://127.0.0.1:${server!.port}/`);
+    const toggle = page.locator("#theme-toggle");
+    expect(await page.locator("html").getAttribute("data-theme")).toBe("dark");
+    expect(await toggle.getAttribute("aria-label")).toBe("Switch to light theme");
+    expect(await toggle.getAttribute("aria-pressed")).toBe("false");
+    expect(await page.locator(".helix-flow").evaluate(el => getComputedStyle(el).animationName)).toBe("none");
+    await toggle.focus();
+    await page.keyboard.press("Enter");
+    expect(await page.locator("html").getAttribute("data-theme")).toBe("light");
+    expect(await toggle.getAttribute("aria-label")).toBe("Switch to dark theme");
+    expect(await toggle.getAttribute("aria-pressed")).toBe("true");
+    expect(await page.evaluate(() => localStorage.getItem("trendbio-theme"))).toBe("light");
+    await page.locator('.nav-links a[href="/topics"]').click();
+    expect(await page.locator("html").getAttribute("data-theme")).toBe("light");
+    await page.locator("#theme-toggle").focus();
+    await page.keyboard.press("Space");
+    expect(await page.locator("html").getAttribute("data-theme")).toBe("dark");
+  });
+
+  it("fills the topic column with the sparkline at both viewport sizes", async () => {
+    for (const width of [1280, 375]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(`http://127.0.0.1:${server!.port}/topic/protein-design-binders-a1b2/`);
+      const column = (await page.locator("article.prose").boundingBox())!;
+      const chart = (await page.locator(".sparkline").boundingBox())!;
+      expect(chart.x).toBe(column.x);
+      expect(chart.width).toBe(column.width);
+      const bars = page.locator(".sparkline rect");
+      const first = (await bars.first().boundingBox())!, last = (await bars.last().boundingBox())!;
+      expect(first.x).toBeCloseTo(chart.x, 1);
+      expect(last.x + last.width).toBeCloseTo(chart.x + chart.width, 1);
+    }
+  });
+
   it("stacks cards and scrolls a single unwrapped chip row at 375px", async () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(`http://127.0.0.1:${server!.port}/`);
+    const nav = await page.locator(".nav-links").boundingBox();
+    expect(nav!.height).toBeLessThan(40);
+    const title = (await page.locator("#hero-title").boundingBox())!;
+    const art = (await page.locator(".hero-art").boundingBox())!;
+    expect(art.y).toBeGreaterThan(title.y + title.height);
     const cards = page.locator("[data-topic-cats]");
     const first = (await cards.nth(0).boundingBox())!;
     const second = (await cards.nth(1).boundingBox())!;

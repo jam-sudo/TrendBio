@@ -1,4 +1,4 @@
-:root {
+:root, [data-theme="dark"] {
   color-scheme: dark;
   --bg: oklch(14.5% 0 0);
   --card: oklch(20.5% 0 0);
@@ -24,23 +24,21 @@
   color: var(--fg);
   background: var(--bg);
 }
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --bg: #fafafa;
-    --card: #ffffff;
-    --raised: #f1f1f1;
-    --border: rgba(0,0,0,.10);
-    --fg: #111;
-    --muted: #595959;
-    --accent: #222;
-    --up: #087044;
-    --down: #b82e31;
-    --tint-lightness: 98%;
-    --tile-lightness: 92%;
-    --badge-fg: #6e420a;
-    --badge-bg: #f9e9cc;
-  }
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fafafa;
+  --card: #ffffff;
+  --raised: #f1f1f1;
+  --border: rgba(0,0,0,.10);
+  --fg: #111;
+  --muted: #595959;
+  --accent: #222;
+  --up: #087044;
+  --down: #b82e31;
+  --tint-lightness: 98%;
+  --tile-lightness: 92%;
+  --badge-fg: #6e420a;
+  --badge-bg: #f9e9cc;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -57,6 +55,7 @@ header { padding-block: 2rem 0; text-align: center; }
 header nav { display: flex; justify-content: center; margin-top: 1rem; }
 .nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
 .nav-links a { text-decoration: none; }
+#theme-toggle { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.15rem 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--card); color: var(--fg); font: inherit; cursor: pointer; }
 .nav-links a:hover { text-decoration: underline; }
 .nav-links a + a::before { content: "·"; margin-right: 0.75rem; color: var(--muted); }
 .wordmark { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; text-decoration: none; }
@@ -83,4 +82,9 @@ th { font-size: var(--t3); color: var(--muted); font-weight: 400; }
 th, td { padding: 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
 th:first-child, td:first-child { padding-left: 0; }
 th:last-child, td:last-child { padding-right: 0; }
-@media (max-width: 640px) { :root { --t1: 32px; } main { padding-block: 2rem; } }
+@media (max-width: 640px) {
+  :root { --t1: 32px; }
+  main { padding-block: 2rem; }
+  .nav-links { gap: 0.5rem; }
+  .nav-links a + a::before { margin-right: 0.5rem; }
+}
