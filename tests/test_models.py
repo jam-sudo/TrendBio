@@ -169,7 +169,7 @@ def test_fixtures_validate(fixtures_root):
         assert day.domain == "computational"
         if day.date == date(2026, 10, 29):
             assert day.ranked == []
-            assert day.run.status == "ok"
+            assert day.run.status == "degraded"
             assert day.run.backfilled is True
             continue
         assert [row.rank for row in day.ranked] == [1, 2, 3, 4, 5]
