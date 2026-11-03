@@ -1,0 +1,44 @@
+{
+  "abstract": "Antigen-specific antibody retrieval aims to rank candidate antibodies for a target antigen, providing an early virtual-screening step before structural modeling or experimental validation. Existing sequence-based antibody-antigen interaction studies often formulate the problem as pairwise binding prediction, and random or non-clustered evaluations can over-estimate generalization when related antigens appear across training and test data. We study a strict antigen-cluster out-of-distribution (OOD) retrieval setting in which test antigens come from sequence clusters unseen during training. This setting is difficult because binding is driven by local epitope-CDR complementarity, while available databases mainly contain observed positive complexes and lack reliable negative labels for unlabeled candidates. We propose Ab-CASLR, an antibody CDR-aware slot late-interaction retriever that encodes antigens with ESM-2, encodes antibodies with IgBert, constrains antibody-side latent slots to complementarity-determining regions (CDRs), and scores local slot compatibility instead of single-vector global similarity. On a strict OOD benchmark with 849 antigen queries and 869 candidate antibodies, the model achieves 7.42% Hits@10, outperforming k-mer homology transfer at 5.53% Hits@10 and yielding 6.28-fold enrichment over exact random screening at K = 10. Ablations and diagnostics show that CDR-constrained antibody slots remain diverse, whereas antigen-side latent slots collapse into similar summaries. These results support CDR-aware local antibody representation as a useful inductive bias for early binder recovery under strict OOD evaluation, while antigen-side epitope grounding remains unresolved.",
+  "authors": [
+    "Liu, P.",
+    "Pan, M.",
+    "Yan, C.",
+    "Li, F.",
+    "Zhang, J."
+  ],
+  "doi": "10.64898/2026.06.30.735486",
+  "first_seen": "2026-07-03",
+  "id": "biorxiv:10.64898/2026.06.30.735486",
+  "metadata": {
+    "abstract": "Antigen-specific antibody retrieval aims to rank candidate antibodies for a target antigen, providing an early virtual-screening step before structural modeling or experimental validation. Existing sequence-based antibody-antigen interaction studies often formulate the problem as pairwise binding prediction, and random or non-clustered evaluations can over-estimate generalization when related antigens appear across training and test data. We study a strict antigen-cluster out-of-distribution (OOD) retrieval setting in which test antigens come from sequence clusters unseen during training. This setting is difficult because binding is driven by local epitope-CDR complementarity, while available databases mainly contain observed positive complexes and lack reliable negative labels for unlabeled candidates. We propose Ab-CASLR, an antibody CDR-aware slot late-interaction retriever that encodes antigens with ESM-2, encodes antibodies with IgBert, constrains antibody-side latent slots to complementarity-determining regions (CDRs), and scores local slot compatibility instead of single-vector global similarity. On a strict OOD benchmark with 849 antigen queries and 869 candidate antibodies, the model achieves 7.42% Hits@10, outperforming k-mer homology transfer at 5.53% Hits@10 and yielding 6.28-fold enrichment over exact random screening at K = 10. Ablations and diagnostics show that CDR-constrained antibody slots remain diverse, whereas antigen-side latent slots collapse into similar summaries. These results support CDR-aware local antibody representation as a useful inductive bias for early binder recovery under strict OOD evaluation, while antigen-side epitope grounding remains unresolved.",
+    "author_corresponding": "Jianbing Zhang",
+    "author_corresponding_institution": "Nanjing University",
+    "authors": "Liu, P.; Pan, M.; Yan, C.; Li, F.; Zhang, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-03",
+    "doi": "10.64898/2026.06.30.735486",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/03/2026.06.30.735486.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Strict OOD Antigen-to-Antibody Retrieval with CDR-Aware Slot Late Interaction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Nanjing University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Ab-CASLR, a CDR-aware slot late-interaction retriever (ESM-2 antigen, IgBert antibody encoders) for strict antigen-cluster OOD antibody retrieval; 7.42%…",
+  "title": "Strict OOD Antigen-to-Antibody Retrieval with CDR-Aware Slot Late Interaction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.30.735486"
+}

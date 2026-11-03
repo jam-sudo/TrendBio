@@ -1,0 +1,32 @@
+{
+  "abstract": "Reliable analysis of bird vocalisations in passive acoustic monitoring requires models handling multiple, imbalanced annotation targets. We extend BirdCallNet for joint species and call-type classification on the long-tailed WiWa dataset and investigate how task-loss balancing interacts with pretrained representations and adaptation depth. We evaluate four bird-domain encoders, ConvNeXtBS, EAT, BirdMAE, and ProtoCLR, with separate species and call-type heads under linear probing, attentive probing, and full fine-tuning. A manually tuned fixed objective is compared with homoscedastic uncertainty weighting and Dynamic Weight Averaging across all three adaptation regimes, while GradNorm is evaluated only under full fine-tuning.\n  Results indicate that the factorised multi-task formulation yields the most consistent improvements over the combined single-task baseline for call-type recognition, while its effect on species recognition depends on the adaptation regime. Full fine-tuning is not consistently optimal: ConvNeXtBS achieves the highest mean species performance under linear probing, whereas BirdMAE provides the strongest call-type performance under attentive probing. Adaptive weighting benefits species recognition more consistently than call-type recognition. Uncertainty weighting is particularly effective for species recognition under attentive probing, whereas Dynamic Weight Averaging is generally stronger for the same task under full fine-tuning. GradNorm achieves competitive call-type performance for selected backbones but consistently underperforms other weighting strategies for species recognition and incurs higher computational and memory costs. Overall, the preferred loss-balancing strategy depends on the backbone, adaptation regime, and target task, while frozen-backbone adaptation can provide a more favourable performance-efficiency trade-off than end-to-end fine-tuning.",
+  "authors": [
+    "Paria Vali Zadeh",
+    "Sven Tomforde"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-03",
+  "id": "arxiv:2607.03304",
+  "metadata": {
+    "arxiv_primary_category": "cs.SD",
+    "categories": [
+      "cs.SD",
+      "cs.LG",
+      "eess.AS",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.03304v1</ns0:id>\n    <ns0:title>Adaptive Loss Balancing for Multi-Task Bioacoustic Classification of Bird Species and Call Types</ns0:title>\n    <ns0:updated>2026-07-03T13:16:30Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.03304v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.03304v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Reliable analysis of bird vocalisations in passive acoustic monitoring requires models handling multiple, imbalanced annotation targets. We extend BirdCallNet for joint species and call-type classification on the long-tailed WiWa dataset and investigate how task-loss balancing interacts with pretrained representations and adaptation depth. We evaluate four bird-domain encoders, ConvNeXtBS, EAT, BirdMAE, and ProtoCLR, with separate species and call-type heads under linear probing, attentive probing, and full fine-tuning. A manually tuned fixed objective is compared with homoscedastic uncertainty weighting and Dynamic Weight Averaging across all three adaptation regimes, while GradNorm is evaluated only under full fine-tuning.\n  Results indicate that the factorised multi-task formulation yields the most consistent improvements over the combined single-task baseline for call-type recognition, while its effect on species recognition depends on the adaptation regime. Full fine-tuning is not consistently optimal: ConvNeXtBS achieves the highest mean species performance under linear probing, whereas BirdMAE provides the strongest call-type performance under attentive probing. Adaptive weighting benefits species recognition more consistently than call-type recognition. Uncertainty weighting is particularly effective for species recognition under attentive probing, whereas Dynamic Weight Averaging is generally stronger for the same task under full fine-tuning. GradNorm achieves competitive call-type performance for selected backbones but consistently underperforms other weighting strategies for species recognition and incurs higher computational and memory costs. Overall, the preferred loss-balancing strategy depends on the backbone, adaptation regime, and target task, while frozen-backbone adaptation can provide a more favourable performance-efficiency trade-off than end-to-end fine-tuning.</ns0:summary>\n    <ns0:category term=\"cs.SD\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.AS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-03T13:16:30Z</ns0:published>\n    <ns1:comment>30 pages, 4 figures, 4 tables. Submitted to Lecture Notes in Artificial Intelligence (LNAI). Extended version of the ICAART 2026 paper \"BirdCallNet: Joint Species and Call-Type Classification.\"</ns1:comment>\n    <ns1:primary_category term=\"cs.SD\" />\n    <ns0:author>\n      <ns0:name>Paria Vali Zadeh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sven Tomforde</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-03",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Compares fixed, uncertainty-weighted, DWA and GradNorm loss balancing for joint bird species and call-type classification across four bird-domain encoders and…",
+  "title": "Adaptive Loss Balancing for Multi-Task Bioacoustic Classification of Bird Species and Call Types",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.03304v1"
+}

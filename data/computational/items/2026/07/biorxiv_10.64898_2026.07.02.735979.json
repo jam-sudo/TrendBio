@@ -1,0 +1,41 @@
+{
+  "abstract": "MotivationChimeric metagenome-assembled genomes (MAGs) that pool DNA from multiple organisms contaminate downstream analyses. Marker-gene tools such as CheckM2 miss low-level chimerism, and DNA foundation models have been proposed as a sequence-composition alternative, but whether large autoregressive models (Evo2, 7B parameters) outperform smaller contrastive models (DNABERT-S, 117M) has not been rigorously tested.\n\nResultsOn 131 MAGs from CAMI2 Nanopore (21 samples, 32 true chimeras), an Evo2 embedding-distance detector achieved high recall (0.84) but low precision (0.34, F1 0.49 [95% CI 0.37-0.60]), producing 52 false positives. Systematic diagnosis revealed convergent multi-factor bias: cross-sample same-species redundancy (50%), low coverage (76% FP at <11x coverage), AT-rich GC (95% FP at GC<0.62), and concentration in Pseudomonas_E/Rhizobium genera. DNABERT-S alone reached F1 0.61 [0.46-0.74] with only 11 false positives, showing no such bias despite 60x fewer parameters. Their errors were largely independent: 87% of Evo2s false positives were correctly rejected by DNABERT-S, while 36% of DNABERT-Ss false positives were rejected by Evo2. Their union at tuned thresholds (Evo2 > 43.96 OR DNABERT-S > 1.80) achieved in-sample F1 0.65 [0.49-0.79] with 7 false positives, and held-out test F1 0.57 with lowest cross-validation variance ({sigma}=0.05 vs 0.09-0.11 for single models). Ensemble improvement over single models is most robust in precision (0.73 vs 0.34, non-overlapping CIs), while F1 gains are marginal given sample size. On real Nanopore data (ZymoBIOMICS D6331), the tuned threshold transferred without false positives, though well-defined mock communities bin cleanly and reveal a strain-level detection floor for sequence-embedding methods. Training objective and cross-architecture complementarity matter more than parameter scale.\n\nAvailabilityhttps://github.com/sunsungkim04-sys/evo2-mag.\n\nContact2023024947@knu.ac.kr",
+  "authors": [
+    "MinSeo, K.",
+    "Jae-Ho, S."
+  ],
+  "doi": "10.64898/2026.07.02.735979",
+  "first_seen": "2026-07-07",
+  "id": "biorxiv:10.64898/2026.07.02.735979",
+  "metadata": {
+    "abstract": "MotivationChimeric metagenome-assembled genomes (MAGs) that pool DNA from multiple organisms contaminate downstream analyses. Marker-gene tools such as CheckM2 miss low-level chimerism, and DNA foundation models have been proposed as a sequence-composition alternative, but whether large autoregressive models (Evo2, 7B parameters) outperform smaller contrastive models (DNABERT-S, 117M) has not been rigorously tested.\n\nResultsOn 131 MAGs from CAMI2 Nanopore (21 samples, 32 true chimeras), an Evo2 embedding-distance detector achieved high recall (0.84) but low precision (0.34, F1 0.49 [95% CI 0.37-0.60]), producing 52 false positives. Systematic diagnosis revealed convergent multi-factor bias: cross-sample same-species redundancy (50%), low coverage (76% FP at <11x coverage), AT-rich GC (95% FP at GC<0.62), and concentration in Pseudomonas_E/Rhizobium genera. DNABERT-S alone reached F1 0.61 [0.46-0.74] with only 11 false positives, showing no such bias despite 60x fewer parameters. Their errors were largely independent: 87% of Evo2s false positives were correctly rejected by DNABERT-S, while 36% of DNABERT-Ss false positives were rejected by Evo2. Their union at tuned thresholds (Evo2 > 43.96 OR DNABERT-S > 1.80) achieved in-sample F1 0.65 [0.49-0.79] with 7 false positives, and held-out test F1 0.57 with lowest cross-validation variance ({sigma}=0.05 vs 0.09-0.11 for single models). Ensemble improvement over single models is most robust in precision (0.73 vs 0.34, non-overlapping CIs), while F1 gains are marginal given sample size. On real Nanopore data (ZymoBIOMICS D6331), the tuned threshold transferred without false positives, though well-defined mock communities bin cleanly and reveal a strain-level detection floor for sequence-embedding methods. Training objective and cross-architecture complementarity matter more than parameter scale.\n\nAvailabilityhttps://github.com/sunsungkim04-sys/evo2-mag.\n\nContact2023024947@knu.ac.kr",
+    "author_corresponding": "Kim MinSeo",
+    "author_corresponding_institution": "Department of Applied Biosciences, Kyungpook National University, Daegu 41566, Republic of Korea",
+    "authors": "MinSeo, K.; Jae-Ho, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-07",
+    "doi": "10.64898/2026.07.02.735979",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/07/2026.07.02.735979.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Cross-architecture ensembling of DNA foundation models improves the precision and stability of chimera detection in long-read metagenomic bins",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Applied Biosciences, Kyungpook National University, Daegu 41566, Republic of Korea",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Compares Evo2 (7B) and DNABERT-S (117M) embeddings for detecting chimeric MAGs in CAMI2 Nanopore data; a threshold-tuned union ensemble raises MAG chimera…",
+  "title": "Cross-architecture ensembling of DNA foundation models improves the precision and stability of chimera detection in long-read metagenomic bins",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.02.735979"
+}

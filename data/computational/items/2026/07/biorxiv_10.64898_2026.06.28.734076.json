@@ -1,0 +1,45 @@
+{
+  "abstract": "MotivationAntimicrobial resistance (AMR) has been identified as a top global public health threat. Accurate AMR phenotype prediction from whole-genome sequencing data is an essential tool for accelerating clinical decision-making and mitigating resistance spread. Although many previous works have explored the use of tree-based machine learning (ML) models to predict resistance, the field lacks a systematic evaluation of the training pipeline across a variety of pathogenic species and antibiotics.\n\nResultsUsing nine clinically relevant species-antibiotic combinations from the NCBI antimicrobial susceptibility testing database, we present a detailed analysis of the ML pipeline and identify key factors affecting model performance and evaluation. We begin by relabelling all isolates using current CLSI minimum inhibitory concentration breakpoints to resolve inconsistencies and increase available data, resulting in up to a 19% label swap and 56% data enlargement per species- antibiotic combination. We identify several key training parameters including k-mer length, which can increase classification F1 scores by over 20 points compared to commonly used k-values, feature matrix truncation, which can induce polynomial time reductions with limited performance reduction, and ML model class. By comparing 5-fold cross-validation with evaluation on an unseen clinical dataset, we show that random cross-validation splits--often criticized as overly optimistic--can act as a strong proxy for downstream clinical performance, yielding closer F1 scores than phylogeny-aware splits in all cases. We finally present an interpretability study which shows that over 95% of k-mers used by our models are associated with identifiable genomic features. Our results highlight the importance of feature design, evaluation protocol, and biological analysis in genomic AMR prediction, and support tree-based models as a robust and interpretable method.\n\nAvailability and implementationPython code is made freely available: https://github.com/chandar-lab/amr-pred",
+  "authors": [
+    "Aselstyne, A.",
+    "Karthik, E. N.",
+    "El Azami, M.",
+    "Pogorelcnik, R.",
+    "Fournier, Q.",
+    "Chandar, S."
+  ],
+  "doi": "10.64898/2026.06.28.734076",
+  "first_seen": "2026-07-08",
+  "id": "biorxiv:10.64898/2026.06.28.734076",
+  "metadata": {
+    "abstract": "MotivationAntimicrobial resistance (AMR) has been identified as a top global public health threat. Accurate AMR phenotype prediction from whole-genome sequencing data is an essential tool for accelerating clinical decision-making and mitigating resistance spread. Although many previous works have explored the use of tree-based machine learning (ML) models to predict resistance, the field lacks a systematic evaluation of the training pipeline across a variety of pathogenic species and antibiotics.\n\nResultsUsing nine clinically relevant species-antibiotic combinations from the NCBI antimicrobial susceptibility testing database, we present a detailed analysis of the ML pipeline and identify key factors affecting model performance and evaluation. We begin by relabelling all isolates using current CLSI minimum inhibitory concentration breakpoints to resolve inconsistencies and increase available data, resulting in up to a 19% label swap and 56% data enlargement per species- antibiotic combination. We identify several key training parameters including k-mer length, which can increase classification F1 scores by over 20 points compared to commonly used k-values, feature matrix truncation, which can induce polynomial time reductions with limited performance reduction, and ML model class. By comparing 5-fold cross-validation with evaluation on an unseen clinical dataset, we show that random cross-validation splits--often criticized as overly optimistic--can act as a strong proxy for downstream clinical performance, yielding closer F1 scores than phylogeny-aware splits in all cases. We finally present an interpretability study which shows that over 95% of k-mers used by our models are associated with identifiable genomic features. Our results highlight the importance of feature design, evaluation protocol, and biological analysis in genomic AMR prediction, and support tree-based models as a robust and interpretable method.\n\nAvailability and implementationPython code is made freely available: https://github.com/chandar-lab/amr-pred",
+    "author_corresponding": "Alex Aselstyne",
+    "author_corresponding_institution": "Polytechnique Montreal",
+    "authors": "Aselstyne, A.; Karthik, E. N.; El Azami, M.; Pogorelcnik, R.; Fournier, Q.; Chandar, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-08",
+    "doi": "10.64898/2026.06.28.734076",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/08/2026.06.28.734076.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A systematic analysis of machine learning pipelines for robust antimicrobial resistance prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Polytechnique Montreal",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Systematic evaluation of tree-based ML pipelines for genomic AMR prediction across nine species-antibiotic pairs, covering k-mer length, relabelling, and CV…",
+  "title": "A systematic analysis of machine learning pipelines for robust antimicrobial resistance prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.28.734076"
+}

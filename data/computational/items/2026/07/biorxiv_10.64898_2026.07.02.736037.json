@@ -1,0 +1,41 @@
+{
+  "abstract": "DNA foundation models are trained to predict the likelihood of natural sequences, but the calibration between such likelihood scores and laboratory fitness or directly measured molecular phenotypes depends strongly on gene context, sequence divergence from wild-type, and selection regime. We apply zero-shot variant scoring with Evo2 7B ({Delta}LLR, the change in pseudo-log-likelihood between mutant and reference windows) to five E. coli datasets and quantify this context-dependent calibration map.\n\nCalibration is strong in two settings. In the Firnberg 2014 deep mutational scan of TEM-1 {beta}-lactamase (13,027 nucleotide-level variants; plasmid-borne enzyme under band-pass ampicillin selection), Evo2 {Delta}LLR tracks measured fitness at Spearman {rho} = 0.545 (95% CI 0.532-0.557; SNV {rho} = 0.606, indel {rho} = 0.521). In the Tenaillon 2012 thermal-evolution dataset, type-stratified, window-tuned scoring reaches Insertion AUROC 0.882 (W = 2,048 bp) and Deletion AUROC 0.846 (W = 4,096 bp). Calibration is decisively absent in the same organism: the Ireland 2020 RegSeq promoter MPRA gives{rho} = 0.011 (95% CI 0.003-0.019; n = 64,665), flat even after -10/-35 mechanism stratification, and the Dewachter 2023 chromosomal-essentials scan (fabZ/lpxC/murA) gives{rho} = 0.041 (95% CI 0.025-0.058). The Papkou 2023 folA combinatorial landscape sits between, at{rho} = 0.237, with a sweep that falls monotonically from {rho} = 0.575 at two mutations from wild-type to {rho} = 0.065 at nine.\n\nPooling per-gene and per-divergence correlations, we fit calibration as an explicit function{rho} = f(sequence divergence from WT, variant context): weighted regression gives a negative divergence coefficient and a negative regulatory-context coefficient (both in the predicted direction; R2 = 0.49) -- an explicit, if illustrative, fit rather than a metaphor. We further test -- and find unsupported -- the intuitive explanation for the residual TEM-1 vs. essentials gap: across five genes the chromosomal essentials are more represented than TEM-1 by raw public-database deposition count yet calibrate far worse (calibration does not track deposition count; if anything, inversely), so simple training over-representation does not explain the gap. Deposited variant diversity is a candidate but remains untested.\n\nWe therefore reframe Evo2 not as a fitness predictor but as a likelihood predictor whose calibration with fitness is context-dependent. The deliverable is not a DMS pre-screen tool but a quantitative lookup table of when, where, and why the likelihood- fitness gap closes (training-rich plasmid CDS under stringent selection) or opens (chromosomal essentials, native promoter regulatory variants). Even within a single organism, plasmid vs. chromosomal context and strong vs. weak selection yield qualitatively different calibration regimes -- the central finding.",
+  "authors": [
+    "MinSeo, K.",
+    "Shin, J.-H."
+  ],
+  "doi": "10.64898/2026.07.02.736037",
+  "first_seen": "2026-07-03",
+  "id": "biorxiv:10.64898/2026.07.02.736037",
+  "metadata": {
+    "abstract": "DNA foundation models are trained to predict the likelihood of natural sequences, but the calibration between such likelihood scores and laboratory fitness or directly measured molecular phenotypes depends strongly on gene context, sequence divergence from wild-type, and selection regime. We apply zero-shot variant scoring with Evo2 7B ({Delta}LLR, the change in pseudo-log-likelihood between mutant and reference windows) to five E. coli datasets and quantify this context-dependent calibration map.\n\nCalibration is strong in two settings. In the Firnberg 2014 deep mutational scan of TEM-1 {beta}-lactamase (13,027 nucleotide-level variants; plasmid-borne enzyme under band-pass ampicillin selection), Evo2 {Delta}LLR tracks measured fitness at Spearman {rho} = 0.545 (95% CI 0.532-0.557; SNV {rho} = 0.606, indel {rho} = 0.521). In the Tenaillon 2012 thermal-evolution dataset, type-stratified, window-tuned scoring reaches Insertion AUROC 0.882 (W = 2,048 bp) and Deletion AUROC 0.846 (W = 4,096 bp). Calibration is decisively absent in the same organism: the Ireland 2020 RegSeq promoter MPRA gives{rho} = 0.011 (95% CI 0.003-0.019; n = 64,665), flat even after -10/-35 mechanism stratification, and the Dewachter 2023 chromosomal-essentials scan (fabZ/lpxC/murA) gives{rho} = 0.041 (95% CI 0.025-0.058). The Papkou 2023 folA combinatorial landscape sits between, at{rho} = 0.237, with a sweep that falls monotonically from {rho} = 0.575 at two mutations from wild-type to {rho} = 0.065 at nine.\n\nPooling per-gene and per-divergence correlations, we fit calibration as an explicit function{rho} = f(sequence divergence from WT, variant context): weighted regression gives a negative divergence coefficient and a negative regulatory-context coefficient (both in the predicted direction; R2 = 0.49) -- an explicit, if illustrative, fit rather than a metaphor. We further test -- and find unsupported -- the intuitive explanation for the residual TEM-1 vs. essentials gap: across five genes the chromosomal essentials are more represented than TEM-1 by raw public-database deposition count yet calibrate far worse (calibration does not track deposition count; if anything, inversely), so simple training over-representation does not explain the gap. Deposited variant diversity is a candidate but remains untested.\n\nWe therefore reframe Evo2 not as a fitness predictor but as a likelihood predictor whose calibration with fitness is context-dependent. The deliverable is not a DMS pre-screen tool but a quantitative lookup table of when, where, and why the likelihood- fitness gap closes (training-rich plasmid CDS under stringent selection) or opens (chromosomal essentials, native promoter regulatory variants). Even within a single organism, plasmid vs. chromosomal context and strong vs. weak selection yield qualitatively different calibration regimes -- the central finding.",
+    "author_corresponding": "Kim MinSeo",
+    "author_corresponding_institution": "Department of Applied Biosciences, Kyungpook National University, Daegu 41566, Republic of Korea",
+    "authors": "MinSeo, K.; Shin, J.-H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-03",
+    "doi": "10.64898/2026.07.02.736037",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/03/2026.07.02.736037.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Context-dependent calibration of Evo2 likelihood with bacterial fitness: a quantitative characterization across five E. coli datasets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Applied Biosciences, Kyungpook National University, Daegu 41566, Republic of Korea",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Evo2 7B zero-shot likelihood scores calibrate with E. coli fitness strongly for plasmid TEM-1 and thermal-evolution data but not for promoters or chromosomal…",
+  "title": "Context-dependent calibration of Evo2 likelihood with bacterial fitness: a quantitative characterization across five E. coli datasets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.02.736037"
+}

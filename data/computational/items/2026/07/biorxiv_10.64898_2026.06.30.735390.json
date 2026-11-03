@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundThree-dimensional reconstruction from serial spatial-transcriptomics (ST) sections requires registering adjacent slices, but physical sectioning introduces tears -- discontinuous, non-isometric deformations. Leading methods rely on priors that tears strain: PASTE/PASTE2 use Fused Gromov-Wasserstein optimal transport (OT), which assumes near-isometric preservation of within-slice distances, while STalign and CODA use diffeomorphic (LDDMM) mapping, which cannot change tissue topology. Learned-deformation ST methods are emerging (STaCker, INST-Align), but OT/diffeomorphic behaviour under tearing has not been systematically characterised.\n\nMethodsOn the spatialLIBD human DLPFC Visium dataset (Maynard et al., 2021; 3 donors), we build a controlled benchmark -- known smooth warps, single-block rigid tears (expression unchanged), and an identity self-control -- at severities of 0-8 spot pitches, scored against an approximate array-position ground truth ([~]8 px residual). We evaluate three unsupervised incumbents -- PASTE2 (OT, over five warp seeds), STalign (diffeomorphic LDDMM), and GPSA (Gaussian-process warp) -- add a magnitude-matched smooth control, and test a minimal graph model, Sutura (per-slice graph encoder [-&gt;]cross-attention correspondence [-&gt;] per-spot displacement; spatial coupling is local kNN message passing only, no explicit smoothness penalty). Sutura is trained supervised on each tissues ground truth; all baselines are unsupervised. Generalisation is assessed by leave-one-donor-out across all three donors.\n\nResultsOT registration is robust to smooth warps but degrades reproducibly under tearing: nearest-correspondence (argmax) error 722 {+/-} 5 [-&gt;]855 {+/-} 27 px and layer accuracy 64.9% [-&gt;] 60.5% (mean {+/-} 95% CI, 5 seeds). The effect is not merely displacement magnitude: at a matched mean displacement ( [~]2000 px), a smooth warp costs 769 px / 60.2% accuracy whereas a tear costs 863 px / 57.5% -- an extra [~]100 px and [~]3 points attributable to the discontinuity. STalign (LDDMM) and GPSA (GP warp) both collapse at severe tears (866 px and 931 px respectively), confirming tear-collapse is field-wide across three independent method families. Trained and evaluated on the same donor, Sutura fits torn-tissue correspondence to a median 99 [-&gt;]106 px (5-seed), but under leave-one-donor-out is 1236 {+/-}2[-&gt;] 1584 {+/-} 52 px -- [~]1.8-3.6x worse than PASTE2 on every unseen donor. A contrastive correspondence loss halves the gap on two of three donors (to 816[-&gt;]949 and 749[-&gt;] 826 px, [~]1.1-1.2x PASTE2 at worst-case tear) but is modest on the third and never surpasses PASTE2.\n\nConclusionTearing is a real, magnitude-controlled failure mode of all three incumbent method classes. A learned model fits it in-sample but donor-invariant generalisation remains open. The contrastive fix roughly halves the held-out gap on two of three donors and nears PASTE2 at worst-case tear, but does not surpass it: donor-invariance is improved, not solved. The durable contribution is the benchmark, the characterisation across three method families, and an honest negative with a diagnosed mechanism.",
+  "authors": [
+    "Maniar, R. K.",
+    "Lee, S. G.",
+    "Lee, S. S."
+  ],
+  "doi": "10.64898/2026.06.30.735390",
+  "first_seen": "2026-07-05",
+  "id": "biorxiv:10.64898/2026.06.30.735390",
+  "metadata": {
+    "abstract": "BackgroundThree-dimensional reconstruction from serial spatial-transcriptomics (ST) sections requires registering adjacent slices, but physical sectioning introduces tears -- discontinuous, non-isometric deformations. Leading methods rely on priors that tears strain: PASTE/PASTE2 use Fused Gromov-Wasserstein optimal transport (OT), which assumes near-isometric preservation of within-slice distances, while STalign and CODA use diffeomorphic (LDDMM) mapping, which cannot change tissue topology. Learned-deformation ST methods are emerging (STaCker, INST-Align), but OT/diffeomorphic behaviour under tearing has not been systematically characterised.\n\nMethodsOn the spatialLIBD human DLPFC Visium dataset (Maynard et al., 2021; 3 donors), we build a controlled benchmark -- known smooth warps, single-block rigid tears (expression unchanged), and an identity self-control -- at severities of 0-8 spot pitches, scored against an approximate array-position ground truth ([~]8 px residual). We evaluate three unsupervised incumbents -- PASTE2 (OT, over five warp seeds), STalign (diffeomorphic LDDMM), and GPSA (Gaussian-process warp) -- add a magnitude-matched smooth control, and test a minimal graph model, Sutura (per-slice graph encoder [-&gt;]cross-attention correspondence [-&gt;] per-spot displacement; spatial coupling is local kNN message passing only, no explicit smoothness penalty). Sutura is trained supervised on each tissues ground truth; all baselines are unsupervised. Generalisation is assessed by leave-one-donor-out across all three donors.\n\nResultsOT registration is robust to smooth warps but degrades reproducibly under tearing: nearest-correspondence (argmax) error 722 {+/-} 5 [-&gt;]855 {+/-} 27 px and layer accuracy 64.9% [-&gt;] 60.5% (mean {+/-} 95% CI, 5 seeds). The effect is not merely displacement magnitude: at a matched mean displacement ( [~]2000 px), a smooth warp costs 769 px / 60.2% accuracy whereas a tear costs 863 px / 57.5% -- an extra [~]100 px and [~]3 points attributable to the discontinuity. STalign (LDDMM) and GPSA (GP warp) both collapse at severe tears (866 px and 931 px respectively), confirming tear-collapse is field-wide across three independent method families. Trained and evaluated on the same donor, Sutura fits torn-tissue correspondence to a median 99 [-&gt;]106 px (5-seed), but under leave-one-donor-out is 1236 {+/-}2[-&gt;] 1584 {+/-} 52 px -- [~]1.8-3.6x worse than PASTE2 on every unseen donor. A contrastive correspondence loss halves the gap on two of three donors (to 816[-&gt;]949 and 749[-&gt;] 826 px, [~]1.1-1.2x PASTE2 at worst-case tear) but is modest on the third and never surpasses PASTE2.\n\nConclusionTearing is a real, magnitude-controlled failure mode of all three incumbent method classes. A learned model fits it in-sample but donor-invariant generalisation remains open. The contrastive fix roughly halves the held-out gap on two of three donors and nears PASTE2 at worst-case tear, but does not surpass it: donor-invariance is improved, not solved. The durable contribution is the benchmark, the characterisation across three method families, and an honest negative with a diagnosed mechanism.",
+    "author_corresponding": "Rushil Kartik Maniar",
+    "author_corresponding_institution": "Sutura Genomics, Inc.",
+    "authors": "Maniar, R. K.; Lee, S. G.; Lee, S. S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-05",
+    "doi": "10.64898/2026.06.30.735390",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/05/2026.06.30.735390.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Tissue tearing degrades optimal-transport and diffeomorphic registration of spatial transcriptomics beyond displacement magnitude: a multi-seed deformation benchmark and a supervised graph cross-attention proof-of-concept.",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Sutura Genomics, Inc.",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-07-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks spatial transcriptomics slice registration under tissue tearing: OT (PASTE2), diffeomorphic (STalign) and GP (GPSA) methods all degrade; a…",
+  "title": "Tissue tearing degrades optimal-transport and diffeomorphic registration of spatial transcriptomics beyond displacement magnitude: a multi-seed deformation benchmark and a supervised graph cross-attention proof-of-concept.",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.30.735390"
+}

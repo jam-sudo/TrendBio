@@ -1,0 +1,30 @@
+{
+  "abstract": "Designing protein sequences that bind specific ligands benefits from an inverse-folding model conditioned on full ligand geometry. We present UMA-Inverse, which replaces the sparse graph backbone of LigandMPNN with a dense pair-representation encoder: a six-block PairMixer (triangle multiplication, no triangle self-attention or sequence track) refines all residue-residue and residue-ligand atom pairs, supervised by an auxiliary distogram objective, and an autoregressive decoder attends over ligand atoms through a learned, position-specific readout of the pair tensor. The model is compact ($\\sim$3.3 M parameters). On the LigandMPNN test splits it reaches 56.1%/55.1%/35.3% interface recovery (small-molecule/metal/nucleotide). It trails LigandMPNN, but by less than the published numbers suggest: re-run under our identical protocol, LigandMPNN scores 59.8/64.4/53.3 (vs. published 63.3/77.5/50.5). In a pocket-fixed setting the redesigns are confidently folded and ligand-binding-competent under Boltz-2 cofolding, again modestly behind LigandMPNN. Its distinctive property is representational: the dense encoder propagates ligand identity to residues far beyond the interface, where LigandMPNN's signal decays. We offer UMA-Inverse as a compact baseline for ligand-conditioned inverse folding that trails LigandMPNN in accuracy, together with a characterization of how a dense all-pairs encoder distributes ligand information.",
+  "authors": [
+    "William Sobolewski"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-08",
+  "id": "arxiv:2607.07866",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.BM",
+    "categories": [
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.07866v1</ns0:id>\n    <ns0:title>UMA-Inverse: Ligand-Conditioned Protein Inverse Folding with a Distogram-Supervised Dense Pair Encoder</ns0:title>\n    <ns0:updated>2026-07-08T19:01:27Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.07866v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.07866v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Designing protein sequences that bind specific ligands benefits from an inverse-folding model conditioned on full ligand geometry. We present UMA-Inverse, which replaces the sparse graph backbone of LigandMPNN with a dense pair-representation encoder: a six-block PairMixer (triangle multiplication, no triangle self-attention or sequence track) refines all residue-residue and residue-ligand atom pairs, supervised by an auxiliary distogram objective, and an autoregressive decoder attends over ligand atoms through a learned, position-specific readout of the pair tensor. The model is compact ($\\sim$3.3 M parameters). On the LigandMPNN test splits it reaches 56.1%/55.1%/35.3% interface recovery (small-molecule/metal/nucleotide). It trails LigandMPNN, but by less than the published numbers suggest: re-run under our identical protocol, LigandMPNN scores 59.8/64.4/53.3 (vs. published 63.3/77.5/50.5). In a pocket-fixed setting the redesigns are confidently folded and ligand-binding-competent under Boltz-2 cofolding, again modestly behind LigandMPNN. Its distinctive property is representational: the dense encoder propagates ligand identity to residues far beyond the interface, where LigandMPNN's signal decays. We offer UMA-Inverse as a compact baseline for ligand-conditioned inverse folding that trails LigandMPNN in accuracy, together with a characterization of how a dense all-pairs encoder distributes ligand information.</ns0:summary>\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-08T19:01:27Z</ns0:published>\n    <ns1:comment>16 pages, 5 figures. Code, trained weights, and an interactive demo at https://github.com/WSobo/UMA-Inverse</ns1:comment>\n    <ns1:primary_category term=\"q-bio.BM\" />\n    <ns0:author>\n      <ns0:name>William Sobolewski</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-07-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "UMA-Inverse: compact dense pair-encoder inverse-folding model for ligand-conditioned protein design; trails LigandMPNN on interface recovery but propagates…",
+  "title": "UMA-Inverse: Ligand-Conditioned Protein Inverse Folding with a Distogram-Supervised Dense Pair Encoder",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.07866v1"
+}

@@ -1,0 +1,41 @@
+{
+  "abstract": "Protein function prediction traditionally relies on structured gene ontology (GO) labels or multi-label classifiers. However, these labels or classifiers cannot flexibly describe molecular function, biological process, cellular component, and free-text functional narratives in a single output. In comparison, generation-based approaches offer an intuitive paradigm for flexible free-text protein annotation, with large language models (LLMs) as a representative method for protein-text modeling. Recent efforts on utilizing LLMs for protein semantic understanding and annotation generation have adopted sequence-only encoding or sequence-text contrastive alignment paradigms, yet without explicit consideration of three-dimensional structural information. To address these limitations in current protein function prediction methods, we present ProtBLIP2-SST, a two-stage framework built on the BLIP2 model architecture that bridges protein sequence, structure, and text for open-ended protein functional caption generation. Specifically, we first integrate sequence and structure information through SaProt, a protein language model (PLM) with a structure-aware vocabulary that fuses residue tokens with Foldseek-derived 3Di structural tokens. To empower the LLM to understand protein semantics, we employ a Q-Former (a querying transformer in BLIP2) with learnable query tokens as the cross-modal projector to align protein features from the frozen SaProt encoder and text features from a frozen BiomedBERT via protein-text contrasting, protein-text matching, and protein captioning objectives. After alignment, the protein features are linearly projected and prepended to the prompt embeddings of the LLM for protein captioning fine-tuning with LoRA. Trained on 441k protein-text pairs from Swiss-Prot with corresponding structures from the AlphaFold Database, our ProtBLIP2-SST outperforms sequence-only and sequence-text alignment baselines on protein captioning metrics, with ablation studies demonstrating the effectiveness of integrating structure with sequence information for improved protein understanding. Through a unified two-stage alignment-and-generation pipeline, ProtBLIP2-SST integrates protein sequence and structural information, overcomes the rigidity of traditional GO-centric classification, generating open-ended captions that jointly describe molecular function, subcellular location, and homology context in one single output.",
+  "authors": [
+    "Chen, Z.",
+    "Luo, Q."
+  ],
+  "doi": "10.64898/2026.07.10.737551",
+  "first_seen": "2026-07-12",
+  "id": "biorxiv:10.64898/2026.07.10.737551",
+  "metadata": {
+    "abstract": "Protein function prediction traditionally relies on structured gene ontology (GO) labels or multi-label classifiers. However, these labels or classifiers cannot flexibly describe molecular function, biological process, cellular component, and free-text functional narratives in a single output. In comparison, generation-based approaches offer an intuitive paradigm for flexible free-text protein annotation, with large language models (LLMs) as a representative method for protein-text modeling. Recent efforts on utilizing LLMs for protein semantic understanding and annotation generation have adopted sequence-only encoding or sequence-text contrastive alignment paradigms, yet without explicit consideration of three-dimensional structural information. To address these limitations in current protein function prediction methods, we present ProtBLIP2-SST, a two-stage framework built on the BLIP2 model architecture that bridges protein sequence, structure, and text for open-ended protein functional caption generation. Specifically, we first integrate sequence and structure information through SaProt, a protein language model (PLM) with a structure-aware vocabulary that fuses residue tokens with Foldseek-derived 3Di structural tokens. To empower the LLM to understand protein semantics, we employ a Q-Former (a querying transformer in BLIP2) with learnable query tokens as the cross-modal projector to align protein features from the frozen SaProt encoder and text features from a frozen BiomedBERT via protein-text contrasting, protein-text matching, and protein captioning objectives. After alignment, the protein features are linearly projected and prepended to the prompt embeddings of the LLM for protein captioning fine-tuning with LoRA. Trained on 441k protein-text pairs from Swiss-Prot with corresponding structures from the AlphaFold Database, our ProtBLIP2-SST outperforms sequence-only and sequence-text alignment baselines on protein captioning metrics, with ablation studies demonstrating the effectiveness of integrating structure with sequence information for improved protein understanding. Through a unified two-stage alignment-and-generation pipeline, ProtBLIP2-SST integrates protein sequence and structural information, overcomes the rigidity of traditional GO-centric classification, generating open-ended captions that jointly describe molecular function, subcellular location, and homology context in one single output.",
+    "author_corresponding": "Qiong Luo",
+    "author_corresponding_institution": "The Hong Kong University of Science and Technology",
+    "authors": "Chen, Z.; Luo, Q.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-12",
+    "doi": "10.64898/2026.07.10.737551",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/12/2026.07.10.737551.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ProtBLIP2-SST: Protein Function Prediction via BLIP2 with Sequence, Structure, and Text",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The Hong Kong University of Science and Technology",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "ProtBLIP2-SST fuses SaProt sequence-structure tokens with a BLIP2 Q-Former and LLM to generate free-text protein function captions, outperforming sequence-only…",
+  "title": "ProtBLIP2-SST: Protein Function Prediction via BLIP2 with Sequence, Structure, and Text",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.10.737551"
+}

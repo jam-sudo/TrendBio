@@ -1,0 +1,42 @@
+{
+  "abstract": "Downstream use of genomic foundation models follows one of three conventions: aggregating representations across all layers (Pearce et al., 2026), defaulting to the last hidden state as a fixed feature extractor (Dalla-Torre et al., 2024), or picking a single intermediate layer via mechanistic-interpretability tooling (Brixi et al., 2026). None of these examines which layer a joint classifier actually relies on. We probe this question with a minimal training-free scalar, ||{Delta}h{ell}||2, defined as the L2 norm of the per-layer hidden-state shift at the variant token. We evaluate it on 8,008 ClinVar (Landrum et al., 2018) single-nucleotide variants in NT-v2 500M (Dalla-Torre et al., 2024), a masked language model (MLM), and Evo 2 7B (Brixi et al., 2026), a causal language model (CLM) with a hyena/attention hybrid. In both models the layer with peak single-feature AUROC (the representative layer) is not the layer a joint multi-layer classifier most depends on (the load-bearing layer, identified by leave-one-layer-out ablation drop and concordant with |SHAP| (Lundberg & Lee, 2017)). Representative layers sit mid-network in both models, whereas load-bearing depth lies at opposite ends of the depth axis: mid-shallow in the MLM, and deep in the CLM hybrid. The dissociation has direct downstream consequences. In NT-v2, a 1-dimensional mid-layer scalar exceeds the canonical 1024-dimensional last-layer mean-pool base-line by +0.049 AUROC. In Evo 2, the 4096-dimensional mean-pool is competitive with the joint ||{Delta}h{ell}||2 feature, so standard last-layer pooling leaves variant-relevant signal untapped specifically in MLM-based pipelines.",
+  "authors": [
+    "Cho, Y.",
+    "Kim, M. S.",
+    "Kim, S."
+  ],
+  "doi": "10.64898/2026.07.16.739040",
+  "first_seen": "2026-07-21",
+  "id": "biorxiv:10.64898/2026.07.16.739040",
+  "metadata": {
+    "abstract": "Downstream use of genomic foundation models follows one of three conventions: aggregating representations across all layers (Pearce et al., 2026), defaulting to the last hidden state as a fixed feature extractor (Dalla-Torre et al., 2024), or picking a single intermediate layer via mechanistic-interpretability tooling (Brixi et al., 2026). None of these examines which layer a joint classifier actually relies on. We probe this question with a minimal training-free scalar, ||{Delta}h{ell}||2, defined as the L2 norm of the per-layer hidden-state shift at the variant token. We evaluate it on 8,008 ClinVar (Landrum et al., 2018) single-nucleotide variants in NT-v2 500M (Dalla-Torre et al., 2024), a masked language model (MLM), and Evo 2 7B (Brixi et al., 2026), a causal language model (CLM) with a hyena/attention hybrid. In both models the layer with peak single-feature AUROC (the representative layer) is not the layer a joint multi-layer classifier most depends on (the load-bearing layer, identified by leave-one-layer-out ablation drop and concordant with |SHAP| (Lundberg & Lee, 2017)). Representative layers sit mid-network in both models, whereas load-bearing depth lies at opposite ends of the depth axis: mid-shallow in the MLM, and deep in the CLM hybrid. The dissociation has direct downstream consequences. In NT-v2, a 1-dimensional mid-layer scalar exceeds the canonical 1024-dimensional last-layer mean-pool base-line by +0.049 AUROC. In Evo 2, the 4096-dimensional mean-pool is competitive with the joint ||{Delta}h{ell}||2 feature, so standard last-layer pooling leaves variant-relevant signal untapped specifically in MLM-based pipelines.",
+    "author_corresponding": "Sangwoo Kim",
+    "author_corresponding_institution": "Department of Biomedical Systems Informatics, Yonsei University College of Medicine",
+    "authors": "Cho, Y.; Kim, M. S.; Kim, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-21",
+    "doi": "10.64898/2026.07.16.739040",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/21/2026.07.16.739040.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Representative vs. Load-bearing Layers: A Dissociation in Genomic Foundation Models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Biomedical Systems Informatics, Yonsei University College of Medicine",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Training-free hidden-shift norm shows genomic FM layers dissociate; mid-layer beats last-layer pooling on ClinVar variants.",
+  "title": "Representative vs. Load-bearing Layers: A Dissociation in Genomic Foundation Models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.16.739040"
+}

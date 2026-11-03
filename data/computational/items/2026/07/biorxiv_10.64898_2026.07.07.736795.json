@@ -1,0 +1,44 @@
+{
+  "abstract": "BackgroundGenomic foundation models can dramatically accelerate biological research by learning general-purpose representations of genomic data that transfer across tasks, enabling researchers to predict variant effects, regulatory elements, and molecular function, among others. To safeguard against potential biosecurity threats and malicious misuse of open-weight models, a common strategy involves excluding human-infecting viral genomes from the models training corpora. This strategy, however, can be easily circumvented by fine-tuning models on abundantly available viral data. Weight-locking with spectral deformation has been proposed as a potential method to prevent fine-tuning of neural networks, but has not been systematically evaluated in biological AI models.\n\nMethodsWe applied spectral deformation locking to the Evo-1-8k-base genomic foundation model and evaluated a panel of attack configurations spanning naive fine-tuning, low-rank adaptation (LoRA), a simple inserted-layer bypass baseline, and a white-box singular value decomposition (SVD)-chain factorisation at chain lengths k [isin] {2, 3, 5}. Recovered virological capability was quantified on three Human Virome Understanding Evaluation (HVUE) tasks.\n\nResultsThe lock defended against the naive attacker by either standard pipeline. Naive full fine-tuning under the strong lock drove downstream virological capability significantly below the pretrained baseline on pathogenicity and host tropism, converting the attack into a capability loss rather than a gain, while naive low-rank adaptation neither moved held-out perplexity (PPL) nor recovered downstream capability above pretrained. Thus, we conclude that by neither route does the naive attacker reach the gain achieved by fine-tuning an unlocked model. Consistent with previous results in non-biological models, an informed attacker who implements the SVD-chain construction does recover capability on pathogenicity prediction, at the cost of increased computational requirements for the fine-tuning process.\n\nAvailabilityhttps://github.com/Georgakopoulos-Soares-lab/glm-locking.",
+  "authors": [
+    "Karatzikos, A.",
+    "Vasilopoulou, A.",
+    "Chan, C.",
+    "Mouratidis, I.",
+    "Georgakopoulos-Soares, I."
+  ],
+  "doi": "10.64898/2026.07.07.736795",
+  "first_seen": "2026-07-10",
+  "id": "biorxiv:10.64898/2026.07.07.736795",
+  "metadata": {
+    "abstract": "BackgroundGenomic foundation models can dramatically accelerate biological research by learning general-purpose representations of genomic data that transfer across tasks, enabling researchers to predict variant effects, regulatory elements, and molecular function, among others. To safeguard against potential biosecurity threats and malicious misuse of open-weight models, a common strategy involves excluding human-infecting viral genomes from the models training corpora. This strategy, however, can be easily circumvented by fine-tuning models on abundantly available viral data. Weight-locking with spectral deformation has been proposed as a potential method to prevent fine-tuning of neural networks, but has not been systematically evaluated in biological AI models.\n\nMethodsWe applied spectral deformation locking to the Evo-1-8k-base genomic foundation model and evaluated a panel of attack configurations spanning naive fine-tuning, low-rank adaptation (LoRA), a simple inserted-layer bypass baseline, and a white-box singular value decomposition (SVD)-chain factorisation at chain lengths k [isin] {2, 3, 5}. Recovered virological capability was quantified on three Human Virome Understanding Evaluation (HVUE) tasks.\n\nResultsThe lock defended against the naive attacker by either standard pipeline. Naive full fine-tuning under the strong lock drove downstream virological capability significantly below the pretrained baseline on pathogenicity and host tropism, converting the attack into a capability loss rather than a gain, while naive low-rank adaptation neither moved held-out perplexity (PPL) nor recovered downstream capability above pretrained. Thus, we conclude that by neither route does the naive attacker reach the gain achieved by fine-tuning an unlocked model. Consistent with previous results in non-biological models, an informed attacker who implements the SVD-chain construction does recover capability on pathogenicity prediction, at the cost of increased computational requirements for the fine-tuning process.\n\nAvailabilityhttps://github.com/Georgakopoulos-Soares-lab/glm-locking.",
+    "author_corresponding": "Ilias Georgakopoulos-Soares",
+    "author_corresponding_institution": "The University of Texas at Austin",
+    "authors": "Karatzikos, A.; Vasilopoulou, A.; Chan, C.; Mouratidis, I.; Georgakopoulos-Soares, I.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-10",
+    "doi": "10.64898/2026.07.07.736795",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/10/2026.07.07.736795.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Safeguarding open-weight genomic foundation models through weight locking",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Texas at Austin",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Tests spectral weight-locking on the Evo-1-8k genomic foundation model against naive and SVD-chain fine-tuning attacks on viral tasks.",
+  "title": "Safeguarding open-weight genomic foundation models through weight locking",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.07.736795"
+}

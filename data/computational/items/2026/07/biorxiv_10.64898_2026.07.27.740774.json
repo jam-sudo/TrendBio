@@ -1,0 +1,45 @@
+{
+  "abstract": "Structure-based scoring functions leveraging machine learning have recently demonstrated superior performance over classical scoring functions, particularly on virtual screening benchmarks. However, due to the fundamental differences between their underlying model principles and architectures, it remains unclear to what extent performance stems from an understanding of molecular binding or from exploitation of systemic biases. Thus, disentangling the factors underlying benchmark performance is essential for determining whether a scoring function will generalize to novel chemical space and succeed in prospective drug discovery.\n\nTo address this need, we present a case study investigating the nature and impact of systemic biases on benchmark comparisons between different scoring function paradigms. By systematically analyzing the evaluation workflows of prominent models, we reveal  pocket bias, a form of spatial coordinate frame leakage arising from static binding pocket extraction, which artificially inflates benchmark performance. To progressively eliminate these sources of bias, we benchmarked two selected graph neural network scoring functions against two minmalist machine learning models and a classical scoring function under four increasingly stringent evaluation levels, successively removing pocket bias, reducing structural data leakage, and finally evaluating on out-of-distribution (OOD) protein targets.\n\nUpon removal of pocket bias and structural data leakage, the performance of all machine learning models dropped substantially. When evaluated on out-of-distribution protein families, the classical baseline AutoDock Vina outperformed the machine learning models in five of seven virtual screening tasks and dominated the docking power evaluation.\n\nOur findings indicate that benchmark performance can be heavily shaped by evaluation design and dataset artifacts, potentially overshadowing algorithmic improvements. While the tested machine learning models remain heavily dependent on encountering familiar data distributions to achieve competitive results, AutoDock Vina demonstrated superior generalization capacity on OOD targets. This work underscores the critical need for rigorous, artifact-free benchmarking protocols to guide the development of truly prospective machine learning models for virtual screening.",
+  "authors": [
+    "Graber, D.",
+    "Kopko, J.",
+    "Stockinger, P.",
+    "Nakandalage, R.",
+    "Kuhn, B.",
+    "Mishra, S."
+  ],
+  "doi": "10.64898/2026.07.27.740774",
+  "first_seen": "2026-07-30",
+  "id": "biorxiv:10.64898/2026.07.27.740774",
+  "metadata": {
+    "abstract": "Structure-based scoring functions leveraging machine learning have recently demonstrated superior performance over classical scoring functions, particularly on virtual screening benchmarks. However, due to the fundamental differences between their underlying model principles and architectures, it remains unclear to what extent performance stems from an understanding of molecular binding or from exploitation of systemic biases. Thus, disentangling the factors underlying benchmark performance is essential for determining whether a scoring function will generalize to novel chemical space and succeed in prospective drug discovery.\n\nTo address this need, we present a case study investigating the nature and impact of systemic biases on benchmark comparisons between different scoring function paradigms. By systematically analyzing the evaluation workflows of prominent models, we reveal  pocket bias, a form of spatial coordinate frame leakage arising from static binding pocket extraction, which artificially inflates benchmark performance. To progressively eliminate these sources of bias, we benchmarked two selected graph neural network scoring functions against two minmalist machine learning models and a classical scoring function under four increasingly stringent evaluation levels, successively removing pocket bias, reducing structural data leakage, and finally evaluating on out-of-distribution (OOD) protein targets.\n\nUpon removal of pocket bias and structural data leakage, the performance of all machine learning models dropped substantially. When evaluated on out-of-distribution protein families, the classical baseline AutoDock Vina outperformed the machine learning models in five of seven virtual screening tasks and dominated the docking power evaluation.\n\nOur findings indicate that benchmark performance can be heavily shaped by evaluation design and dataset artifacts, potentially overshadowing algorithmic improvements. While the tested machine learning models remain heavily dependent on encountering familiar data distributions to achieve competitive results, AutoDock Vina demonstrated superior generalization capacity on OOD targets. This work underscores the critical need for rigorous, artifact-free benchmarking protocols to guide the development of truly prospective machine learning models for virtual screening.",
+    "author_corresponding": "Siddhartha Mishra",
+    "author_corresponding_institution": "Seminar for Applied Mathematics, Department of Mathematics and ETH AI Center, ETH Zurich, 8092 Zurich, Switzerland",
+    "authors": "Graber, D.; Kopko, J.; Stockinger, P.; Nakandalage, R.; Kuhn, B.; Mishra, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-30",
+    "doi": "10.64898/2026.07.27.740774",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/30/2026.07.27.740774.source.xml",
+    "license": "cc_by_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "How Bias Shapes the Leaderboard: Scoring Function Performance Under Scrutiny",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Seminar for Applied Mathematics, Department of Mathematics and ETH AI Center, ETH Zurich, 8092 Zurich, Switzerland",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-07-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Case study showing pocket bias and structural leakage inflate ML scoring-function benchmarks; after removal, ML models drop and AutoDock Vina generalizes…",
+  "title": "How Bias Shapes the Leaderboard: Scoring Function Performance Under Scrutiny",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.27.740774"
+}

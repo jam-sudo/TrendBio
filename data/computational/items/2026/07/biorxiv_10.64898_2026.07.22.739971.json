@@ -1,0 +1,43 @@
+{
+  "abstract": "Inferring \"whether a change in the expression of a given gene causally affects the disease state\" from observational single-cell transcriptomic data is one of the central problems in single-cell biology. The difficulty lies in confounding: cell state, batch, cell cycle, and the co-expression of other genes may all simultaneously influence the target gene (treatment variable T) and the disease label (outcome variable Y), so that naive correlation analysis cannot distinguish causation from covariation. Double machine learning (DML), via orthogonal scores and cross-fitting, allows machine learning to estimate high-dimensional nuisance functions, thereby addressing the causal inference problem in high-dimensional data. Constrained by computational resources, this study takes a small-sample dataset with p{approx}n (2,120 cells, 1,999 background genes) as the experimental testbed and systematically compares three nuisance function construction strategies under this critical condition; strategies for the n>>p regime are then addressed by theoretical argument. Using systemic lupus erythematosus (SLE) peripheral blood memory B cells (GSE189050, 2,120 cells), we construct a three nuisance function construction strategies x (in-sample / cross-fitting) 2x3 factorial experiment and compare them in terms of resolution, biological plausibility, stability, and deconfounding ability in causal effect estimation. The three strategies are: (S1) direct linear nuisance regression on the high-dimensional background genes without dimensionality reduction; (S2) learning a shared low-dimensional representation with an unsupervised autoencoder, with the treatment and outcome residuals sharing that representation; (S3) fitting the treatment and outcome with two independent deep networks.\n\nThe results yield a clear three-part pattern with mechanistic meaning: (1) both modes of S1 fail; (2) S2 achieves the optimum in-sample and requires no cross-fitting; (3) S3 is \"rescued\" under cross-fitting and becomes effective. We explain this pattern starting from the convergence rate condition of DML (Sec.5 Theoretical Foundations) and give the applicability boundaries of the two strategies: S2 (shared unsupervised deep learning) achieves estimation quality comparable to standard cross-fitted DML at a tiny fraction of the computational cost, making it a feasible scheme for large-scale screening; S3 (dual networks + cross-fitting), as the standard DML recipe, can serve as a broad-spectrum reference control for S2 results.",
+  "authors": [
+    "Ye, W.",
+    "Jiang, X.",
+    "Shen, F."
+  ],
+  "doi": "10.64898/2026.07.22.739971",
+  "first_seen": "2026-07-26",
+  "id": "biorxiv:10.64898/2026.07.22.739971",
+  "metadata": {
+    "abstract": "Inferring \"whether a change in the expression of a given gene causally affects the disease state\" from observational single-cell transcriptomic data is one of the central problems in single-cell biology. The difficulty lies in confounding: cell state, batch, cell cycle, and the co-expression of other genes may all simultaneously influence the target gene (treatment variable T) and the disease label (outcome variable Y), so that naive correlation analysis cannot distinguish causation from covariation. Double machine learning (DML), via orthogonal scores and cross-fitting, allows machine learning to estimate high-dimensional nuisance functions, thereby addressing the causal inference problem in high-dimensional data. Constrained by computational resources, this study takes a small-sample dataset with p{approx}n (2,120 cells, 1,999 background genes) as the experimental testbed and systematically compares three nuisance function construction strategies under this critical condition; strategies for the n>>p regime are then addressed by theoretical argument. Using systemic lupus erythematosus (SLE) peripheral blood memory B cells (GSE189050, 2,120 cells), we construct a three nuisance function construction strategies x (in-sample / cross-fitting) 2x3 factorial experiment and compare them in terms of resolution, biological plausibility, stability, and deconfounding ability in causal effect estimation. The three strategies are: (S1) direct linear nuisance regression on the high-dimensional background genes without dimensionality reduction; (S2) learning a shared low-dimensional representation with an unsupervised autoencoder, with the treatment and outcome residuals sharing that representation; (S3) fitting the treatment and outcome with two independent deep networks.\n\nThe results yield a clear three-part pattern with mechanistic meaning: (1) both modes of S1 fail; (2) S2 achieves the optimum in-sample and requires no cross-fitting; (3) S3 is \"rescued\" under cross-fitting and becomes effective. We explain this pattern starting from the convergence rate condition of DML (Sec.5 Theoretical Foundations) and give the applicability boundaries of the two strategies: S2 (shared unsupervised deep learning) achieves estimation quality comparable to standard cross-fitted DML at a tiny fraction of the computational cost, making it a feasible scheme for large-scale screening; S3 (dual networks + cross-fitting), as the standard DML recipe, can serve as a broad-spectrum reference control for S2 results.",
+    "author_corresponding": "Wei Ye",
+    "author_corresponding_institution": "Xiamen Susong Hospital",
+    "authors": "Ye, W.; Jiang, X.; Shen, F.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-07-26",
+    "doi": "10.64898/2026.07.22.739971",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/26/2026.07.22.739971.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Comparison of nuisance function construction strategies for double machine learning causal inference in single-cell transcriptomics: shared unsupervised deep learning does not require cross-fitting",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Xiamen Susong Hospital",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-07-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Compares three nuisance-function strategies for double machine learning causal inference of gene-disease effects in single-cell data (SLE B cells, 2,120…",
+  "title": "Comparison of nuisance function construction strategies for double machine learning causal inference in single-cell transcriptomics: shared unsupervised deep learning does not require cross-fitting",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.22.739971"
+}

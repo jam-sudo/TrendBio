@@ -1,0 +1,40 @@
+{
+  "abstract": "AO_SCPLOWBSTRACTC_SCPLOWSpatial transcriptomics enables the study of gene expression within its native tissue context, providing critical insights into cellular organization and microenvironment-driven biological processes. A key challenge in this field is spatial domain identification, which aims to partition tissue into coherent regions by jointly leveraging gene expression and spatial information. Existing approaches are predominantly based on Graph Neural Networks (GNNs), and approach based on Transformers particularly, Bidirectional Encoder Reppresentation Transformer (BERT) model for modelling both local and long-range dependencies remains largely unexplored.\n\nIn this work, we propose BERT for Spatial Transcriptomics (BertST), a transformer-based framework that reformulates spatial transcriptomics as a graph-to-text representation learning problem. Building upon the BERTwalk paradigm, we construct a task-specific multi-graph representation integrating spatial adjacency, pruned gene-expression similarity, and a fully connected gene-expression graph. This design enables the modelling of both local spatial structure and global molecular relationships. Random walks over these graphs are treated as sequences, allowing a BERT model to learn contextualised node embeddings.\n\nTo further enhance representation quality, we introduce a hierarchical multi-graph propagation strategy, where embedding refinement is performed sequentially: first on the fully connected graph to capture global structure, followed by the pruned graph to refine molecular relationships, and finally on the spatial graph to enforce local smoothness. This ordering ensures that global information is effectively distributed and progressively constrained by biologically meaningful neighbourhoods.\n\nWe also improve computational efficiency by leveraging PecanPy, a fast and scalable implementation of node2vec, enabling efficient random walk generation on dense graphs. Experimental results on multiple 10x Visium datasets, including DLPFC and Human Breast Cancer, demonstrate that BertST consistently outperforms or matches GNN-based methods such as ConST, CCST, and SpaceFlow in terms of Adjusted Rand Index (ARI) and Adjusted Mutual Information (AMI).\n\nOverall, BertST highlights the potential of transformer-based architectures for spatial omics analysis by effectively capturing both local and long-range spatial-molecular dependencies, offering a promising alternative to traditional graph-based methods.",
+  "authors": [
+    "Nnadi, G. O."
+  ],
+  "doi": "10.64898/2026.07.04.736527",
+  "first_seen": "2026-07-09",
+  "id": "biorxiv:10.64898/2026.07.04.736527",
+  "metadata": {
+    "abstract": "AO_SCPLOWBSTRACTC_SCPLOWSpatial transcriptomics enables the study of gene expression within its native tissue context, providing critical insights into cellular organization and microenvironment-driven biological processes. A key challenge in this field is spatial domain identification, which aims to partition tissue into coherent regions by jointly leveraging gene expression and spatial information. Existing approaches are predominantly based on Graph Neural Networks (GNNs), and approach based on Transformers particularly, Bidirectional Encoder Reppresentation Transformer (BERT) model for modelling both local and long-range dependencies remains largely unexplored.\n\nIn this work, we propose BERT for Spatial Transcriptomics (BertST), a transformer-based framework that reformulates spatial transcriptomics as a graph-to-text representation learning problem. Building upon the BERTwalk paradigm, we construct a task-specific multi-graph representation integrating spatial adjacency, pruned gene-expression similarity, and a fully connected gene-expression graph. This design enables the modelling of both local spatial structure and global molecular relationships. Random walks over these graphs are treated as sequences, allowing a BERT model to learn contextualised node embeddings.\n\nTo further enhance representation quality, we introduce a hierarchical multi-graph propagation strategy, where embedding refinement is performed sequentially: first on the fully connected graph to capture global structure, followed by the pruned graph to refine molecular relationships, and finally on the spatial graph to enforce local smoothness. This ordering ensures that global information is effectively distributed and progressively constrained by biologically meaningful neighbourhoods.\n\nWe also improve computational efficiency by leveraging PecanPy, a fast and scalable implementation of node2vec, enabling efficient random walk generation on dense graphs. Experimental results on multiple 10x Visium datasets, including DLPFC and Human Breast Cancer, demonstrate that BertST consistently outperforms or matches GNN-based methods such as ConST, CCST, and SpaceFlow in terms of Adjusted Rand Index (ARI) and Adjusted Mutual Information (AMI).\n\nOverall, BertST highlights the potential of transformer-based architectures for spatial omics analysis by effectively capturing both local and long-range spatial-molecular dependencies, offering a promising alternative to traditional graph-based methods.",
+    "author_corresponding": "Gospel Ozioma Nnadi",
+    "author_corresponding_institution": "Department of Computer Science, University of Verona.",
+    "authors": "Nnadi, G. O.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-09",
+    "doi": "10.64898/2026.07.04.736527",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/09/2026.07.04.736527.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BertST: BERT-based Spatial Domain Identification in Patient Data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computer Science, University of Verona.",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-07-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "BertST applies a BERT transformer to spatial transcriptomics domain identification, learning node embeddings from random walks over multi-graphs; it matches or…",
+  "title": "BertST: BERT-based Spatial Domain Identification in Patient Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.04.736527"
+}

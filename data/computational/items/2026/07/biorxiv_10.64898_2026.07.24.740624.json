@@ -1,0 +1,48 @@
+{
+  "abstract": "Cerebral microbleeds (CMBs) are established imaging biomarkers of cerebral small vessel disease and are a defining feature of cerebral amyloid angiopathy (CAA), yet their automated detection in susceptibility-weighted imaging (SWI) remains challenging due to high false-positive rates from vessel cross-sections, iron and calcium deposits, and other hypointense mimics. We present a fully automated, three-stage cascade pipeline that combines subject-adaptive unsupervised candidate generation with two successive lightweight 3D ResNet classifiers, trained with only human-in-the-loop quality-assurance (QA) labels (yes/no per candidate) rather than dense voxel-wise segmentation masks. The candidate generation stage is performed by fitting a Gaussian Mixture Model (GMM) to each subjects SWI intensity histogram to define an adaptive low-intensity threshold, followed by anatomical masking to exclude physiologically irrelevant regions (image edges, ventricles/CSF/choroid plexus, and cerebellum), and filters candidates by size and sphericity. The model was trained and evaluated across a nested 3x5-fold cross-validation on N = 30 subjects from a publicly available labeled microbleed dataset and a CAA cohort (11,424 CMB candidate lesions) with data augmentation during training. Stage A classifies all geometric candidates as CMB or non-CMB and Stage B refines the predicted positives to suppress false positives (cascade AUC = 0.9587, sensitivity = 0.712, specificity = 0.975, PPV = 0.676, F1 = 0.693). The cascade reduces Stage A false positives by 76.8% (888/1,157 false positives eliminated) while retaining competitive sensitivity. Inference was performed on 141 SWI scans, detecting a mean 40.3 CMBs per scan and being preferred for use in 85% of high CMB cases, as evaluated by a blinded neurologist. The inference pipeline outputs binary CMB segmentation NIfTI images and radiologist-ready QA visualizations.",
+  "authors": [
+    "Bogdanov, S.",
+    "Rudravaram, G.",
+    "Saunders, A. M.",
+    "Kim, M. E.",
+    "LeFevre, J.",
+    "Charles, J.",
+    "Jain, S.",
+    "Schrag, M. S.",
+    "Landman, B. A."
+  ],
+  "doi": "10.64898/2026.07.24.740624",
+  "first_seen": "2026-07-28",
+  "id": "biorxiv:10.64898/2026.07.24.740624",
+  "metadata": {
+    "abstract": "Cerebral microbleeds (CMBs) are established imaging biomarkers of cerebral small vessel disease and are a defining feature of cerebral amyloid angiopathy (CAA), yet their automated detection in susceptibility-weighted imaging (SWI) remains challenging due to high false-positive rates from vessel cross-sections, iron and calcium deposits, and other hypointense mimics. We present a fully automated, three-stage cascade pipeline that combines subject-adaptive unsupervised candidate generation with two successive lightweight 3D ResNet classifiers, trained with only human-in-the-loop quality-assurance (QA) labels (yes/no per candidate) rather than dense voxel-wise segmentation masks. The candidate generation stage is performed by fitting a Gaussian Mixture Model (GMM) to each subjects SWI intensity histogram to define an adaptive low-intensity threshold, followed by anatomical masking to exclude physiologically irrelevant regions (image edges, ventricles/CSF/choroid plexus, and cerebellum), and filters candidates by size and sphericity. The model was trained and evaluated across a nested 3x5-fold cross-validation on N = 30 subjects from a publicly available labeled microbleed dataset and a CAA cohort (11,424 CMB candidate lesions) with data augmentation during training. Stage A classifies all geometric candidates as CMB or non-CMB and Stage B refines the predicted positives to suppress false positives (cascade AUC = 0.9587, sensitivity = 0.712, specificity = 0.975, PPV = 0.676, F1 = 0.693). The cascade reduces Stage A false positives by 76.8% (888/1,157 false positives eliminated) while retaining competitive sensitivity. Inference was performed on 141 SWI scans, detecting a mean 40.3 CMBs per scan and being preferred for use in 85% of high CMB cases, as evaluated by a blinded neurologist. The inference pipeline outputs binary CMB segmentation NIfTI images and radiologist-ready QA visualizations.",
+    "author_corresponding": "Sam Bogdanov",
+    "author_corresponding_institution": "Vanderbilt University",
+    "authors": "Bogdanov, S.; Rudravaram, G.; Saunders, A. M.; Kim, M. E.; LeFevre, J.; Charles, J.; Jain, S.; Schrag, M. S.; Landman, B. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-28",
+    "doi": "10.64898/2026.07.24.740624",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/28/2026.07.24.740624.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A geometric-to-neural cascade for cerebral microbleed detection in susceptibility-weighted MRI",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Vanderbilt University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Three-stage cascade for cerebral microbleed detection in SWI MRI: GMM adaptive thresholding, then two 3D ResNet classifiers trained on QA labels; AUC 0.9587,…",
+  "title": "A geometric-to-neural cascade for cerebral microbleed detection in susceptibility-weighted MRI",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.24.740624"
+}

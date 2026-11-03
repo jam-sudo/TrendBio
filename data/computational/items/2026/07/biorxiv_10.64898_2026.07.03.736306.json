@@ -1,0 +1,45 @@
+{
+  "abstract": "Genomic search engines such as Logan-Search index petabytes of sequencing data as large binary matrices, called k-mer matrices, where each row encodes the presence of a k-mer across thousands to millions of genomic samples. Logan-Search contains a petabyte of binary matrices, and storing them is expensive, yet compression must not prevent fast random access to any matrix row at query time.\n\nWe present kmcomp, a lossless compression method for k-mer matrices that satisfies these competing requirements. Block compression partitions the matrix into fixed-size row blocks, each compressed independently; block start positions are stored in an Elias-Fano encoded array, enabling O(1) random access to any block. To improve compressibility without introducing additional decompression steps, we introduce the{pi} -compression: a column reordering that groups similar samples together by solving the Traveling Salesman Problem via a nearest-neighbor heuristic. We accelerate this heuristic with a novel variant of the vantage-point tree, the masked vp-tree, which dynamically prunes nearest-neighbor search space.\n\nOn three (meta)genomic datasets, kmcomp achieves compression ratios of 1.3 to 5.4;{pi} -compression further improves these to 1.5 to 51.3. Applied to the Logan-Search petabyte-scale index, compression reduces storage by approximately half, and{pi} -compression adds a further 13% gain. Query overhead remains modest: queries of hundreds of nucleotides incur an absolute latency increase of{approx} 100 ms, and highly compressed indexes can match uncompressed query times thanks to reduced disk reads.",
+  "authors": [
+    "Regnier, A.",
+    "Lemane, T.",
+    "Bellenous, S.",
+    "Chikhi, R.",
+    "Peterlongo, P."
+  ],
+  "doi": "10.64898/2026.07.03.736306",
+  "first_seen": "2026-07-08",
+  "id": "biorxiv:10.64898/2026.07.03.736306",
+  "metadata": {
+    "abstract": "Genomic search engines such as Logan-Search index petabytes of sequencing data as large binary matrices, called k-mer matrices, where each row encodes the presence of a k-mer across thousands to millions of genomic samples. Logan-Search contains a petabyte of binary matrices, and storing them is expensive, yet compression must not prevent fast random access to any matrix row at query time.\n\nWe present kmcomp, a lossless compression method for k-mer matrices that satisfies these competing requirements. Block compression partitions the matrix into fixed-size row blocks, each compressed independently; block start positions are stored in an Elias-Fano encoded array, enabling O(1) random access to any block. To improve compressibility without introducing additional decompression steps, we introduce the{pi} -compression: a column reordering that groups similar samples together by solving the Traveling Salesman Problem via a nearest-neighbor heuristic. We accelerate this heuristic with a novel variant of the vantage-point tree, the masked vp-tree, which dynamically prunes nearest-neighbor search space.\n\nOn three (meta)genomic datasets, kmcomp achieves compression ratios of 1.3 to 5.4;{pi} -compression further improves these to 1.5 to 51.3. Applied to the Logan-Search petabyte-scale index, compression reduces storage by approximately half, and{pi} -compression adds a further 13% gain. Query overhead remains modest: queries of hundreds of nucleotides incur an absolute latency increase of{approx} 100 ms, and highly compressed indexes can match uncompressed query times thanks to reduced disk reads.",
+    "author_corresponding": "Alix Regnier",
+    "author_corresponding_institution": "Inria Centre at the University of Rennes",
+    "authors": "Regnier, A.; Lemane, T.; Bellenous, S.; Chikhi, R.; Peterlongo, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-08",
+    "doi": "10.64898/2026.07.03.736306",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/08/2026.07.03.736306.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Lossless compression of k-mer matrices enabling random row access",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Inria Centre at the University of Rennes",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "kmcomp: lossless block compression of k-mer matrices with O(1) row access, plus column reordering via TSP heuristic; halves Logan-Search petabyte index storage.",
+  "title": "Lossless compression of k-mer matrices enabling random row access",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.03.736306"
+}

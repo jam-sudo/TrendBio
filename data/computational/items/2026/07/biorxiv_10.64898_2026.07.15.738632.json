@@ -1,0 +1,42 @@
+{
+  "abstract": "Gene co-expression analyses identify \"good\" modules by a correlation criterion. However, standard pipelines detect modules with greedy algorithms that optimize other quantities and only measure correlation afterwards. We present a method called Genetic Clustering by Metric(GCM hereafter), an open-source Python tool that closes this gap by treating module detection as maximum-likelihood inference and solving it globally. In GCM, the correlation objective is, up to a constant and the sample-size factor, the profile log-likelihood of an explicit generative model: a block-diagonal one-factor Gaussian in which each module is a single regulator with equal-magnitude {+/-} loadings. This bases model selection on a principled footing through a genuine BIC/AIC in correlation space. GCM maximizes this likelihood with a memetic genetic algorithm: a population-based search hybridized with a greedy local refinement that reassigns genes after the fact, a move the agglomerative clustering at the core of co-expression pipelines cannot make. Across a replicated noise sweep, GCM reproducibly surpasses hierarchical correlation clustering and k-means with the lowest variance, and an ablation shows the local-search step is responsible; the advantage persists when the number of modules is unknown and when unstructured genes must be ignored. GCM faithfully optimizes geometric indices on the Iris benchmark dataset. For a breast-cancer RNA-seq it recovers coherent modules that predict tumor-versus-normal status. GCM depends only on NumPy and SciPy and exposes one swappable-metric interface with single- and multi-objective modes.\n\nAuthor summaryWhen biologists group genes by how similarly they are expressed, they usually run a standard clustering method and then score the result with a separate quality measure. The method, however, was never trying to do well on that measure because it optimizes its own internal objective. We built a tool, GCM, that removes this gap: the user picks the quality measure they actually care about, and the tool searches directly for the grouping that scores best on it. The search is performed by a genetic algorithm, a population-based optimizer that mixes and mutates candidate groupings over many generations. GCM includes a purpose-built score for \"modules\" of co-expressed genes, as well as several widely used geometric scores, and it can balance two competing scores at once to choose how many groups the data support. We show on synthetic data with a known answer, on a textbook dataset, and on real expression data that the tool recovers the intended structure and lets researchers make explicit, and optimize for, their own definition of a good cluster.",
+  "authors": [
+    "Madrigal-Roca, L. J.",
+    "Kelly, J. K."
+  ],
+  "doi": "10.64898/2026.07.15.738632",
+  "first_seen": "2026-07-20",
+  "id": "biorxiv:10.64898/2026.07.15.738632",
+  "metadata": {
+    "abstract": "Gene co-expression analyses identify \"good\" modules by a correlation criterion. However, standard pipelines detect modules with greedy algorithms that optimize other quantities and only measure correlation afterwards. We present a method called Genetic Clustering by Metric(GCM hereafter), an open-source Python tool that closes this gap by treating module detection as maximum-likelihood inference and solving it globally. In GCM, the correlation objective is, up to a constant and the sample-size factor, the profile log-likelihood of an explicit generative model: a block-diagonal one-factor Gaussian in which each module is a single regulator with equal-magnitude {+/-} loadings. This bases model selection on a principled footing through a genuine BIC/AIC in correlation space. GCM maximizes this likelihood with a memetic genetic algorithm: a population-based search hybridized with a greedy local refinement that reassigns genes after the fact, a move the agglomerative clustering at the core of co-expression pipelines cannot make. Across a replicated noise sweep, GCM reproducibly surpasses hierarchical correlation clustering and k-means with the lowest variance, and an ablation shows the local-search step is responsible; the advantage persists when the number of modules is unknown and when unstructured genes must be ignored. GCM faithfully optimizes geometric indices on the Iris benchmark dataset. For a breast-cancer RNA-seq it recovers coherent modules that predict tumor-versus-normal status. GCM depends only on NumPy and SciPy and exposes one swappable-metric interface with single- and multi-objective modes.\n\nAuthor summaryWhen biologists group genes by how similarly they are expressed, they usually run a standard clustering method and then score the result with a separate quality measure. The method, however, was never trying to do well on that measure because it optimizes its own internal objective. We built a tool, GCM, that removes this gap: the user picks the quality measure they actually care about, and the tool searches directly for the grouping that scores best on it. The search is performed by a genetic algorithm, a population-based optimizer that mixes and mutates candidate groupings over many generations. GCM includes a purpose-built score for \"modules\" of co-expressed genes, as well as several widely used geometric scores, and it can balance two competing scores at once to choose how many groups the data support. We show on synthetic data with a known answer, on a textbook dataset, and on real expression data that the tool recovers the intended structure and lets researchers make explicit, and optimize for, their own definition of a good cluster.",
+    "author_corresponding": "Luis  J. Madrigal-Roca",
+    "author_corresponding_institution": "The University of Kansas",
+    "authors": "Madrigal-Roca, L. J.; Kelly, J. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-20",
+    "doi": "10.64898/2026.07.15.738632",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/20/2026.07.15.738632.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "GCM: metric-guided clustering by genetic algorithm for correlation-defined modules",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Kansas",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-07-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "GCM is an open-source Python tool that clusters co-expressed genes by globally maximizing a correlation-based likelihood via a memetic genetic algorithm,…",
+  "title": "GCM: metric-guided clustering by genetic algorithm for correlation-defined modules",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.15.738632"
+}

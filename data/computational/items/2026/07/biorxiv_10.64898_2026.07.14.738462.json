@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationDeep learning classifiers for medical image analysis typically function as black boxes, disclosing neither the image features underlying their predictions nor the reasoning by which individual decisions are reached. Peripheral blood cell classification exemplifies this challenge: experienced laboratory professionals identify cell types through structured morphological criteria--nucleus shape, chromatin texture, nucleus-to-cytoplasm ratio, granularity, and staining properties--yet existing automated systems cannot express their reasoning in these same terms, impeding clinical audit and verification.\n\nResultsWe present a two-stage interpretable pipeline that addresses both levels of opacity. In the first stage, a frozen domain-adapted vision-language model (ConceptCLIP) projects each cell image onto a 70-dimensional vector of morphological concept scores via zero-shot cosine similarity, eliminating the need for per-image concept annotations. In the second stage, a Soft Decision Tree (SDT) classifies cells solely on these concept scores, producing a deterministic, concept-based decision path for each prediction. On BloodMNIST (eight cell types, 3,421 test images), the full pipeline achieves 94.86% test accuracy--approximately 3 percentage points below the black-box ceiling--while providing fully traceable decision logic. Post-training histological annotation confirms that the learned routing logic aligns with established hematological morphology criteria and reveals an emergent separation of immature granulocyte subtypes (promyelocyte versus metamyelocyte) without subtype supervision, demonstrating that concept-based decision trees can recover clinically meaningful distinctions beyond the granularity of the training labels.\n\nAvailability and implementationThe source code, trained SDT weights, precomputed concept score data, and inference scripts are publicly available at https://github.com/aquamarineaqua/CLIP-CBM-SoftDecisionTree.",
+  "authors": [
+    "Chen, K.",
+    "Hu, T."
+  ],
+  "doi": "10.64898/2026.07.14.738462",
+  "first_seen": "2026-07-20",
+  "id": "biorxiv:10.64898/2026.07.14.738462",
+  "metadata": {
+    "abstract": "MotivationDeep learning classifiers for medical image analysis typically function as black boxes, disclosing neither the image features underlying their predictions nor the reasoning by which individual decisions are reached. Peripheral blood cell classification exemplifies this challenge: experienced laboratory professionals identify cell types through structured morphological criteria--nucleus shape, chromatin texture, nucleus-to-cytoplasm ratio, granularity, and staining properties--yet existing automated systems cannot express their reasoning in these same terms, impeding clinical audit and verification.\n\nResultsWe present a two-stage interpretable pipeline that addresses both levels of opacity. In the first stage, a frozen domain-adapted vision-language model (ConceptCLIP) projects each cell image onto a 70-dimensional vector of morphological concept scores via zero-shot cosine similarity, eliminating the need for per-image concept annotations. In the second stage, a Soft Decision Tree (SDT) classifies cells solely on these concept scores, producing a deterministic, concept-based decision path for each prediction. On BloodMNIST (eight cell types, 3,421 test images), the full pipeline achieves 94.86% test accuracy--approximately 3 percentage points below the black-box ceiling--while providing fully traceable decision logic. Post-training histological annotation confirms that the learned routing logic aligns with established hematological morphology criteria and reveals an emergent separation of immature granulocyte subtypes (promyelocyte versus metamyelocyte) without subtype supervision, demonstrating that concept-based decision trees can recover clinically meaningful distinctions beyond the granularity of the training labels.\n\nAvailability and implementationThe source code, trained SDT weights, precomputed concept score data, and inference scripts are publicly available at https://github.com/aquamarineaqua/CLIP-CBM-SoftDecisionTree.",
+    "author_corresponding": "Kai Chen",
+    "author_corresponding_institution": "Queen's University",
+    "authors": "Chen, K.; Hu, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-20",
+    "doi": "10.64898/2026.07.14.738462",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/20/2026.07.14.738462.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Interpretable Peripheral Blood Cell Classification via Vision-Language Concept Bottleneck and Soft Decision Tree",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Queen's University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Two-stage interpretable pipeline: frozen ConceptCLIP yields 70 morphological concept scores per blood cell image, and a soft decision tree classifies…",
+  "title": "Interpretable Peripheral Blood Cell Classification via Vision-Language Concept Bottleneck and Soft Decision Tree",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.14.738462"
+}

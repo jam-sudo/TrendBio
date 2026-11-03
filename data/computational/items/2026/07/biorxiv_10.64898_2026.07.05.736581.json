@@ -1,0 +1,44 @@
+{
+  "abstract": "Heterogeneous biomedical knowledge networks (hetnets) integrate disparate data types, drugs, genes, diseases, and pathways, across independent sources; Hetionet (https://het.io) is a widely used example. A standard approach for assessing connectivity significance is XSwap, which permutes the hetnet P times and fits a gamma-hurdle null model to the degree-weighted path count (DWPC), pooling permuted values across pairs with matching source and target degrees to increase the effective sample size. This permutation approach has been highly successful in practice, but it faces four practical constraints in large graphs: (1) a finite resolution for the smallest reportable p-values, (2) computational cost that grows prohibitive at path lengths L [&ge;] 4 or 5, (3) a variance model (Var {propto} {micro}2) that departs from the configuration-model form (1 +{kappa} ){micro}, and (4) O(P 10m L) runtime. To complement this approach, we present HetNetEX (Heterogeneous Network EXact inference), which computes the null DWPC distribution analytically from degree sequences using the configuration model in O(Ln) time. In simulations at P = 200 across L = 1-4, HetNetEX achieves Spearman{rho} > 0.96 concordance with XSwap rankings while being >10,000x faster and providing analytical p-values without a resolution ceiling. High-degree pairs show larger XSwap sampling error than low-degree pairs, reflecting the finite-sample nature of permutation that analytical computation avoids.",
+  "authors": [
+    "Ghosh, T.",
+    "Gillenwater, L. A.",
+    "Greene, C. S.",
+    "Costello, J. C."
+  ],
+  "doi": "10.64898/2026.07.05.736581",
+  "first_seen": "2026-07-06",
+  "id": "biorxiv:10.64898/2026.07.05.736581",
+  "metadata": {
+    "abstract": "Heterogeneous biomedical knowledge networks (hetnets) integrate disparate data types, drugs, genes, diseases, and pathways, across independent sources; Hetionet (https://het.io) is a widely used example. A standard approach for assessing connectivity significance is XSwap, which permutes the hetnet P times and fits a gamma-hurdle null model to the degree-weighted path count (DWPC), pooling permuted values across pairs with matching source and target degrees to increase the effective sample size. This permutation approach has been highly successful in practice, but it faces four practical constraints in large graphs: (1) a finite resolution for the smallest reportable p-values, (2) computational cost that grows prohibitive at path lengths L [&ge;] 4 or 5, (3) a variance model (Var {propto} {micro}2) that departs from the configuration-model form (1 +{kappa} ){micro}, and (4) O(P 10m L) runtime. To complement this approach, we present HetNetEX (Heterogeneous Network EXact inference), which computes the null DWPC distribution analytically from degree sequences using the configuration model in O(Ln) time. In simulations at P = 200 across L = 1-4, HetNetEX achieves Spearman{rho} > 0.96 concordance with XSwap rankings while being >10,000x faster and providing analytical p-values without a resolution ceiling. High-degree pairs show larger XSwap sampling error than low-degree pairs, reflecting the finite-sample nature of permutation that analytical computation avoids.",
+    "author_corresponding": "Tusharkanti Ghosh",
+    "author_corresponding_institution": "Colorado School of Public Health, University of Colorado Anschutz Medical Campus",
+    "authors": "Ghosh, T.; Gillenwater, L. A.; Greene, C. S.; Costello, J. C.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-07-06",
+    "doi": "10.64898/2026.07.05.736581",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/06/2026.07.05.736581.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "HetNetEX: Exact Asymptotic Inference in Heterogeneous Biomedical Knowledge Graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Colorado School of Public Health, University of Colorado Anschutz Medical Campus",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-07-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "HetNetEX computes null degree-weighted path count distributions analytically via the configuration model in O(Ln) time, matching XSwap rankings (Spearman…",
+  "title": "HetNetEX: Exact Asymptotic Inference in Heterogeneous Biomedical Knowledge Graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.05.736581"
+}

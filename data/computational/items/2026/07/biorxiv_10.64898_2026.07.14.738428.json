@@ -1,0 +1,42 @@
+{
+  "abstract": "Elastic Network Models (ENMs), particularly the Gaussian Network Model (GNM) and its distance-weighted variant (mENM), predict per-residue protein flexibility from C contact graphs at low computational cost. Their central limitation is the assumption of uniform spring constants, which ignores the chemical identity, burial depth, and evolutionary conservation of individual residue contacts. We introduce the Learnable Graph Network Model (LGNM), a heterogeneous ENM in which per-edge spring constants{theta} ij = fi {middle dot} fj {middle dot} (dc/rij)2 are parameterised by per-residue flexibility coefficients {fi} predicted by a physics-constrained Graph Neural Network (GNN). The GNN is trained on molecular dynamics (MD)-derived root-mean-square fluctuation (RMSF) profiles from 413 proteins in the ATLAS database, using fold-disjoint CATH superfamily splits. The learning objective is an instance of the Quantum Neural PDE (QNPDE) Hamiltonian learning framework, with K = 3 operator types enabling an O(K) quantum gradient versus O (N3) classical pseudo-inversion. On 91 held-out test proteins, LGNM achieves mean per-protein Pearson correlation r = 0.8549{+/-} 0.1055, versus r = 0.8024 {+/-} 0.1167 for mENM ({Delta}r = +0.0525; 77/91 proteins improved). The implementation of this methedology is aviliable at https://lgnm.compbiosysnbu.in/ allowing researchers to evaluate flexibility and downstream processses.",
+  "authors": [
+    "Sharma, B.",
+    "Sarkar, C."
+  ],
+  "doi": "10.64898/2026.07.14.738428",
+  "first_seen": "2026-07-20",
+  "id": "biorxiv:10.64898/2026.07.14.738428",
+  "metadata": {
+    "abstract": "Elastic Network Models (ENMs), particularly the Gaussian Network Model (GNM) and its distance-weighted variant (mENM), predict per-residue protein flexibility from C contact graphs at low computational cost. Their central limitation is the assumption of uniform spring constants, which ignores the chemical identity, burial depth, and evolutionary conservation of individual residue contacts. We introduce the Learnable Graph Network Model (LGNM), a heterogeneous ENM in which per-edge spring constants{theta} ij = fi {middle dot} fj {middle dot} (dc/rij)2 are parameterised by per-residue flexibility coefficients {fi} predicted by a physics-constrained Graph Neural Network (GNN). The GNN is trained on molecular dynamics (MD)-derived root-mean-square fluctuation (RMSF) profiles from 413 proteins in the ATLAS database, using fold-disjoint CATH superfamily splits. The learning objective is an instance of the Quantum Neural PDE (QNPDE) Hamiltonian learning framework, with K = 3 operator types enabling an O(K) quantum gradient versus O (N3) classical pseudo-inversion. On 91 held-out test proteins, LGNM achieves mean per-protein Pearson correlation r = 0.8549{+/-} 0.1055, versus r = 0.8024 {+/-} 0.1167 for mENM ({Delta}r = +0.0525; 77/91 proteins improved). The implementation of this methedology is aviliable at https://lgnm.compbiosysnbu.in/ allowing researchers to evaluate flexibility and downstream processses.",
+    "author_corresponding": "Chiranjib Sarkar",
+    "author_corresponding_institution": "University of North Bengal",
+    "authors": "Sharma, B.; Sarkar, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-07-20",
+    "doi": "10.64898/2026.07.14.738428",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/07/20/2026.07.14.738428.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Learnable Graph Network Model (LGNM): A Physics Constrained Graph Neural Network with Quantum Hamiltonian Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of North Bengal",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-07-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "LGNM, a physics-constrained GNN that learns per-residue flexibility to parameterise heterogeneous elastic network spring constants, improves RMSF prediction…",
+  "title": "Learnable Graph Network Model (LGNM): A Physics Constrained Graph Neural Network with Quantum Hamiltonian Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.14.738428"
+}

@@ -1,0 +1,35 @@
+{
+  "abstract": "Comparing phylogenetic tree topologies is essential for understanding epidemic dynamics, yet biologically meaningful distances such as the Subtree Prune and Regraft (SPR) distance are NP-hard to compute and intractable on large datasets. We investigate whether a Graph Neural Network (GNN) can approximate SPR distances in near-constant time per comparison after training. Our contributions are fourfold. First, we build and publicly release a dataset of 864 phylogenetic trees inferred with UPGMA and Neighbor-Joining over four bacterial species, spanning up to 9{,}500 isolates, together with 388 labelled tree pairs. Second, we establish a reproducible pre-processing pipeline including midpoint re-rooting, which reduces tree depth and supplies the rooting required for exact distance computation and for the model's root-based features. Third, we validate the supervision target: on small trees, where exact SPR is tractable, the unrooted phangorn::SPR.dist heuristic correlates almost perfectly with the exact rooted distance computed by rspr (Pearson $0.98$--$0.99$), making it an excellent monotonic surrogate. Lastly, we train a Siamese Graph Isomorphism Network (GIN) regressor. In-distribution, i.e., held-out trees from the same species and size range as training, it explains roughly 87--90% of the variance ($R^2 \\approx 0.87$ on a held-out split; $0.90 \\pm 0.19$ under stratified cross-validation), with about four times lower error than a mean-predictor baseline, and shows partial transfer to unseen species ($R^2 \\approx 0.37$). Its main limitation is extrapolation to trees larger than those seen in training, where accuracy collapses. The released dataset and the validated heuristic versus exact relationship provide a reproducible basis for scaling learned SPR approximation.",
+  "authors": [
+    "Renata Martins Castanheira",
+    "Miguel Bugalho",
+    "Cátia Vaz"
+  ],
+  "doi": null,
+  "first_seen": "2026-07-17",
+  "id": "arxiv:2607.18311",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.PE",
+    "categories": [
+      "q-bio.PE",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.18311v1</ns0:id>\n    <ns0:title>Approximating SPR Distance Between Phylogenetic Trees with Graph Neural Networks</ns0:title>\n    <ns0:updated>2026-07-17T16:25:07Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.18311v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.18311v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Comparing phylogenetic tree topologies is essential for understanding epidemic dynamics, yet biologically meaningful distances such as the Subtree Prune and Regraft (SPR) distance are NP-hard to compute and intractable on large datasets. We investigate whether a Graph Neural Network (GNN) can approximate SPR distances in near-constant time per comparison after training. Our contributions are fourfold. First, we build and publicly release a dataset of 864 phylogenetic trees inferred with UPGMA and Neighbor-Joining over four bacterial species, spanning up to 9{,}500 isolates, together with 388 labelled tree pairs. Second, we establish a reproducible pre-processing pipeline including midpoint re-rooting, which reduces tree depth and supplies the rooting required for exact distance computation and for the model's root-based features. Third, we validate the supervision target: on small trees, where exact SPR is tractable, the unrooted phangorn::SPR.dist heuristic correlates almost perfectly with the exact rooted distance computed by rspr (Pearson $0.98$--$0.99$), making it an excellent monotonic surrogate. Lastly, we train a Siamese Graph Isomorphism Network (GIN) regressor. In-distribution, i.e., held-out trees from the same species and size range as training, it explains roughly 87--90% of the variance ($R^2 \\approx 0.87$ on a held-out split; $0.90 \\pm 0.19$ under stratified cross-validation), with about four times lower error than a mean-predictor baseline, and shows partial transfer to unseen species ($R^2 \\approx 0.37$). Its main limitation is extrapolation to trees larger than those seen in training, where accuracy collapses. The released dataset and the validated heuristic versus exact relationship provide a reproducible basis for scaling learned SPR approximation.</ns0:summary>\n    <ns0:category term=\"q-bio.PE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-07-17T16:25:07Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.PE\" />\n    <ns0:author>\n      <ns0:name>Renata Martins Castanheira</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Miguel Bugalho</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Cátia Vaz</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-07-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Trains a Siamese GIN regressor to approximate SPR distances between phylogenetic trees (R² ≈ 0.87 held-out), releases a 864-tree dataset, and validates the…",
+  "title": "Approximating SPR Distance Between Phylogenetic Trees with Graph Neural Networks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.18311v1"
+}
