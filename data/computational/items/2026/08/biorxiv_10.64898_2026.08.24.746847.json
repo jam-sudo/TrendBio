@@ -1,0 +1,42 @@
+{
+  "abstract": "Background. Reference catalogs such as GENCODE capture most stably expressed mammalian genes but may not include condition-restricted or low-abundance transcripts. Reads supporting unannotated intergenic splice junctions are generally absent from annotation-restricted gene-count matrices; transcript assemblers may reconstruct a subset as novel models, but those models are typically handled separately from the annotated gene-count universe. TxNova is a lightweight command-line tool that directly indexes these unannotated splices from existing BAM files - without an external assembler, gffcompare, or workflow manager - yielding candidate leads for bench validation rather than standalone discovery claims. Methods. TxNova retains CIGAR N junctions from STAR/HISAT2 BAM files that recur in >= 2 samples and are absent from a comprehensive annotation, clusters them into residual loci, and counts each locus alongside annotated genes in a unified matrix. Structure gates - canonical splice motif, same-strand distance, coverage valley, bridging-junction absence, minimum length - remove likely artifacts to yield structure-pass models. An optional contrast filter retains loci detected in treatment but nearly silent in control. Results. A residual splice is a recurrent, unannotated CIGAR N junction that does not overlap any annotated gene body; intronic and antisense channels are out of scope. Across four published mouse treatment arms (GSE221720, GSE166522, GSE157460, GSE193335), harvest catalogs yielded 464, 657, 789, and 594 loci. On GSE221720, 45% of loci (209/464) shared an exact intron with another series, versus 0.074% for excluded junctions; a coordinate-placement control yielded 0/5,000 matches for length-matched intergenic decoys. Masked-gene recovery reached 87.6% (176/201) overall and 99.4% (176/177) among genes with a leak junction - sensitivity rather than precision estimates. An optional contrast provides a presence/absence screen on interval TPM. Residual models are partial reconstructions requiring cloning, RACE, or targeted proteomics for confirmation. Conclusions. TxNova produces a reproducible intergenic residual-locus catalog from existing BAM files, with four downloadable mouse injury/infection catalogs. Cross-series recurrence and coordinate-based null controls support reproducibility above simple placement backgrounds but do not by themselves establish biological validity. The optional contrast step offers a practical screen for candidate leads warranting experimental validation.",
+  "authors": [
+    "Li, Z.",
+    "James, A.",
+    "Li, S."
+  ],
+  "doi": "10.64898/2026.08.24.746847",
+  "first_seen": "2026-08-25",
+  "id": "biorxiv:10.64898/2026.08.24.746847",
+  "metadata": {
+    "abstract": "Background. Reference catalogs such as GENCODE capture most stably expressed mammalian genes but may not include condition-restricted or low-abundance transcripts. Reads supporting unannotated intergenic splice junctions are generally absent from annotation-restricted gene-count matrices; transcript assemblers may reconstruct a subset as novel models, but those models are typically handled separately from the annotated gene-count universe. TxNova is a lightweight command-line tool that directly indexes these unannotated splices from existing BAM files - without an external assembler, gffcompare, or workflow manager - yielding candidate leads for bench validation rather than standalone discovery claims. Methods. TxNova retains CIGAR N junctions from STAR/HISAT2 BAM files that recur in >= 2 samples and are absent from a comprehensive annotation, clusters them into residual loci, and counts each locus alongside annotated genes in a unified matrix. Structure gates - canonical splice motif, same-strand distance, coverage valley, bridging-junction absence, minimum length - remove likely artifacts to yield structure-pass models. An optional contrast filter retains loci detected in treatment but nearly silent in control. Results. A residual splice is a recurrent, unannotated CIGAR N junction that does not overlap any annotated gene body; intronic and antisense channels are out of scope. Across four published mouse treatment arms (GSE221720, GSE166522, GSE157460, GSE193335), harvest catalogs yielded 464, 657, 789, and 594 loci. On GSE221720, 45% of loci (209/464) shared an exact intron with another series, versus 0.074% for excluded junctions; a coordinate-placement control yielded 0/5,000 matches for length-matched intergenic decoys. Masked-gene recovery reached 87.6% (176/201) overall and 99.4% (176/177) among genes with a leak junction - sensitivity rather than precision estimates. An optional contrast provides a presence/absence screen on interval TPM. Residual models are partial reconstructions requiring cloning, RACE, or targeted proteomics for confirmation. Conclusions. TxNova produces a reproducible intergenic residual-locus catalog from existing BAM files, with four downloadable mouse injury/infection catalogs. Cross-series recurrence and coordinate-based null controls support reproducibility above simple placement backgrounds but do not by themselves establish biological validity. The optional contrast step offers a practical screen for candidate leads warranting experimental validation.",
+    "author_corresponding": "Zhao Li",
+    "author_corresponding_institution": "Department of Pathology, Johns Hopkins University",
+    "authors": "Li, Z.; James, A.; Li, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-25",
+    "doi": "10.64898/2026.08.24.746847",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/25/2026.08.24.746847.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TxNova: recovery of recurrent unannotated intergenic splice loci from existing bulk RNA-seq alignments",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Pathology, Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "TxNova: a lightweight CLI that recovers recurrent unannotated intergenic splice junctions from existing STAR/HISAT2 BAMs into a unified residual-locus count…",
+  "title": "TxNova: recovery of recurrent unannotated intergenic splice loci from existing bulk RNA-seq alignments",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.24.746847"
+}

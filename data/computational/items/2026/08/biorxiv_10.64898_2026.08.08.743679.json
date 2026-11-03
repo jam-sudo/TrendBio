@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundHighly variable gene (HVG) selection begins almost every single-cell RNA-seq analysis. While ranking formulas have been compared extensively, the integer gene budget at which any ranking must be truncated is typically left to the user and habitually fixed near 2,000. Relying on such a convention carries hidden costs--lists that are too short erase subtle structure, whereas lists that are too long add noise and computational overhead. Moreover, because global rankings measure variance across all cells, markers for rare populations often lose the \"variance vote count\" to dominant bulk variation, leading to an unfair feature allocation at the hard cutoff. Whether this convention is defensible, and whether the budget and tail can be set from data without disturbing the ranking, has not been examined systematically.\n\nResultsUnder a frozen seurat_v3 ranking, k-sweeps across 18 labeled datasets show that n = 2,000 is ARI-optimal on 1 of 18 datasets and that the best available budget is worth a mean ARI gain of +0.033 over it, establishing cardinality as a real and largely unexploited design axis. We present scFair, a Scanpy-compatible HVG layer that automates list length alone: geometry-aware auto_n sets a base size k from multi-seed density and stability features of an intermediate embedding (trading a modest, intentional compute increase for a safer data-driven default), and a same-rank append step acts as a conservative safeguard against cutoff unfairness by adding a short near-miss tail. The ranking is never recomputed or reweighted. On the 18-dataset panel, the default path improved Leiden-label agreement over HVG@2000 (median {Delta}ARI = +0.016; 13/5; Wilcoxon P = 0.0077) and outperformed the neighborhood-based selector triku at author defaults on 15/18 datasets (median +0.024; P = 0.004), while triku did not improve on HVG@2000. Controls locate the effect: cell-number-only rules do not beat HVG@2000, an FDR-chosen length imposed on the frozen ranking is flat, and a fixed HVG@2200 default is not a general substitute because it cannot produce the short lists that compact matrices call for.\n\nConclusionsA fixed budget near 2,000 HVGs is frequently suboptimal, and list cardinality is a separable design axis that can be automated without changing the ranking formula. Effect sizes are modest, the short-list branch rests on four datasets, and rule thresholds were developed with partial overlap to the evaluation panel.",
+  "authors": [
+    "Li, Z.",
+    "James, A. W.",
+    "Li, S."
+  ],
+  "doi": "10.64898/2026.08.08.743679",
+  "first_seen": "2026-08-18",
+  "id": "biorxiv:10.64898/2026.08.08.743679",
+  "metadata": {
+    "abstract": "BackgroundHighly variable gene (HVG) selection begins almost every single-cell RNA-seq analysis. While ranking formulas have been compared extensively, the integer gene budget at which any ranking must be truncated is typically left to the user and habitually fixed near 2,000. Relying on such a convention carries hidden costs--lists that are too short erase subtle structure, whereas lists that are too long add noise and computational overhead. Moreover, because global rankings measure variance across all cells, markers for rare populations often lose the \"variance vote count\" to dominant bulk variation, leading to an unfair feature allocation at the hard cutoff. Whether this convention is defensible, and whether the budget and tail can be set from data without disturbing the ranking, has not been examined systematically.\n\nResultsUnder a frozen seurat_v3 ranking, k-sweeps across 18 labeled datasets show that n = 2,000 is ARI-optimal on 1 of 18 datasets and that the best available budget is worth a mean ARI gain of +0.033 over it, establishing cardinality as a real and largely unexploited design axis. We present scFair, a Scanpy-compatible HVG layer that automates list length alone: geometry-aware auto_n sets a base size k from multi-seed density and stability features of an intermediate embedding (trading a modest, intentional compute increase for a safer data-driven default), and a same-rank append step acts as a conservative safeguard against cutoff unfairness by adding a short near-miss tail. The ranking is never recomputed or reweighted. On the 18-dataset panel, the default path improved Leiden-label agreement over HVG@2000 (median {Delta}ARI = +0.016; 13/5; Wilcoxon P = 0.0077) and outperformed the neighborhood-based selector triku at author defaults on 15/18 datasets (median +0.024; P = 0.004), while triku did not improve on HVG@2000. Controls locate the effect: cell-number-only rules do not beat HVG@2000, an FDR-chosen length imposed on the frozen ranking is flat, and a fixed HVG@2200 default is not a general substitute because it cannot produce the short lists that compact matrices call for.\n\nConclusionsA fixed budget near 2,000 HVGs is frequently suboptimal, and list cardinality is a separable design axis that can be automated without changing the ranking formula. Effect sizes are modest, the short-list branch rests on four datasets, and rule thresholds were developed with partial overlap to the evaluation panel.",
+    "author_corresponding": "Zhao Li",
+    "author_corresponding_institution": "Department of Pathology, Johns Hopkins University",
+    "authors": "Li, Z.; James, A. W.; Li, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-18",
+    "doi": "10.64898/2026.08.08.743679",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/18/2026.08.08.743679.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "scFair: Geometry-Aware Gene Budgets and Same-Rank Extension for Highly Variable Gene Selection",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Pathology, Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "scFair automates HVG list length via geometry-aware auto_n and a same-rank tail append; across 18 scRNA-seq datasets it modestly improves Leiden ARI over…",
+  "title": "scFair: Geometry-Aware Gene Budgets and Same-Rank Extension for Highly Variable Gene Selection",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.08.743679"
+}

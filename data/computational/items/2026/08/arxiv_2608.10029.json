@@ -1,0 +1,34 @@
+{
+  "abstract": "Many computational problems possess the following three features: (1) the problem could be solved efficiently if a linear operator could be diagonalized, (2) direct diagonalization is infeasible due to scale, but, (3) the operator is known to commute with a permutation since the problem is (a) symmetric with respect to a change of coordinates, or (b) the operator is block circulant. For example, high-resolution template matching demands repeated convolution of large, high resolution images with an exhaustive list of related templates. The associated linear operator could be compressed, via a low rank approximation, if diagonalized. The required decomposition expensive, but, the entire problem is symmetric to in-plane rotations. In these cases, the eigenfunctions are constrained by the symmetry. These constraints allow efficient decomposition. We illustrate a parallelized algorithm that allows fast diagonalization of any block-circulant matrix. When the index space can be partitioned into $l$ classes of $m$ interchangeable elements, the algorithm reduces storage costs by a factor of $m$ and, if $w$ workers are available, the algorithm demands $\\mathcal{O}(l^2m\\log(m)/w) + \\mathcal{O}(ml^3/w)$ floating point operations per worker yielding a $m^2$ speedup. We use this procedure to decompose a high precision template matching matrix. We compare runtime on a reduced problem, where the fast procedure ran 205 times faster per recovered feature, for 22.5 times as many features. On a typical template matching matrix, the decomposition required 25 times less time than computing the matrix entries. We also demonstrate decomposition of a $\\sim$30 times larger matrix that covers the complete set of possible projections represented in a cryo-EM image at 2~Å resolution in 14 minutes. This procedure is more stable and allows recovery of in-plane rotations to arbitrary precision.",
+  "authors": [
+    "Matthew Giammar",
+    "Bronwyn Lucas",
+    "Alexander Strang"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-09",
+  "id": "arxiv:2608.10029",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "math.NA"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.10029v1</ns0:id>\n    <ns0:title>A fast diagonalization algorithm to enable singular value decomposition of large matrices for efficient template matching</ns0:title>\n    <ns0:updated>2026-08-09T22:39:33Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.10029v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.10029v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Many computational problems possess the following three features: (1) the problem could be solved efficiently if a linear operator could be diagonalized, (2) direct diagonalization is infeasible due to scale, but, (3) the operator is known to commute with a permutation since the problem is (a) symmetric with respect to a change of coordinates, or (b) the operator is block circulant. For example, high-resolution template matching demands repeated convolution of large, high resolution images with an exhaustive list of related templates. The associated linear operator could be compressed, via a low rank approximation, if diagonalized. The required decomposition expensive, but, the entire problem is symmetric to in-plane rotations. In these cases, the eigenfunctions are constrained by the symmetry. These constraints allow efficient decomposition. We illustrate a parallelized algorithm that allows fast diagonalization of any block-circulant matrix. When the index space can be partitioned into $l$ classes of $m$ interchangeable elements, the algorithm reduces storage costs by a factor of $m$ and, if $w$ workers are available, the algorithm demands $\\mathcal{O}(l^2m\\log(m)/w) + \\mathcal{O}(ml^3/w)$ floating point operations per worker yielding a $m^2$ speedup. We use this procedure to decompose a high precision template matching matrix. We compare runtime on a reduced problem, where the fast procedure ran 205 times faster per recovered feature, for 22.5 times as many features. On a typical template matching matrix, the decomposition required 25 times less time than computing the matrix entries. We also demonstrate decomposition of a $\\sim$30 times larger matrix that covers the complete set of possible projections represented in a cryo-EM image at 2~Å resolution in 14 minutes. This procedure is more stable and allows recovery of in-plane rotations to arbitrary precision.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.NA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-09T22:39:33Z</ns0:published>\n    <ns1:comment>14 pages main text, 5 figures main text, 5 pages SI, 3 SI figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Matthew Giammar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bronwyn Lucas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alexander Strang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Parallelized algorithm for fast diagonalization of block-circulant matrices, enabling low-rank SVD of large template-matching operators applied to cryo-EM…",
+  "title": "A fast diagonalization algorithm to enable singular value decomposition of large matrices for efficient template matching",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.10029v1"
+}

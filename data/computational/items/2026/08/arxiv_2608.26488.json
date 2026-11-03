@@ -1,0 +1,34 @@
+{
+  "abstract": "Updating a graph by inserting or replacing nodes while preserving semantics and reusing existing structure is a recurring computational problem. In population genetics, this problem arises in the genotype representation graph (GRG), a directed acyclic graph that losslessly encodes phased genetic variation across hundreds of thousands of samples by sharing subgraph structure for individual mutations. In a GRG, each mutation's carrier set is implicitly encoded as the set of leaf nodes reachable from the node it is assigned to. Updating a mutation is therefore a structural editing problem, and current approaches remap mutations individually.\n  This paper introduces a batched mutation-remapping algorithm that replaces independent reuse-aware traversals with a single shared reverse-topological pass, identifying reuse candidates for an entire batch at once. The pass propagates compact bit-parallel per-mutation state and uses an adaptive sparse/dense carrier set representation spanning rare-to-common variant densities. Batching is the memory-scalable complement to split-based parallelism, which instead replicates graph and traversal state per worker. Our remapping is evaluated on a controlled update workload and on end-to-end allele polarization, a bulk carrier set update that is common in population genetic analysis. Our approach is up to 10.5$\\times$ faster than independent remapping while preserving exact carrier-set semantics.",
+  "authors": [
+    "Aaron Li",
+    "Yifan Li",
+    "Drew DeHaas",
+    "Giulia Guidi"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-27",
+  "id": "arxiv:2608.26488",
+  "metadata": {
+    "arxiv_primary_category": "cs.DS",
+    "categories": [
+      "cs.DS",
+      "q-bio.PE"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.26488v2</ns0:id>\n    <ns0:title>Cheaper by the Batch: Shared Traversal for Genotype Graph Editing</ns0:title>\n    <ns0:updated>2026-09-27T20:51:59Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.26488v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.26488v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Updating a graph by inserting or replacing nodes while preserving semantics and reusing existing structure is a recurring computational problem. In population genetics, this problem arises in the genotype representation graph (GRG), a directed acyclic graph that losslessly encodes phased genetic variation across hundreds of thousands of samples by sharing subgraph structure for individual mutations. In a GRG, each mutation's carrier set is implicitly encoded as the set of leaf nodes reachable from the node it is assigned to. Updating a mutation is therefore a structural editing problem, and current approaches remap mutations individually.\n  This paper introduces a batched mutation-remapping algorithm that replaces independent reuse-aware traversals with a single shared reverse-topological pass, identifying reuse candidates for an entire batch at once. The pass propagates compact bit-parallel per-mutation state and uses an adaptive sparse/dense carrier set representation spanning rare-to-common variant densities. Batching is the memory-scalable complement to split-based parallelism, which instead replicates graph and traversal state per worker. Our remapping is evaluated on a controlled update workload and on end-to-end allele polarization, a bulk carrier set update that is common in population genetic analysis. Our approach is up to 10.5$\\times$ faster than independent remapping while preserving exact carrier-set semantics.</ns0:summary>\n    <ns0:category term=\"cs.DS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.PE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-27T00:23:13Z</ns0:published>\n    <ns1:primary_category term=\"cs.DS\" />\n    <ns0:author>\n      <ns0:name>Aaron Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yifan Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Drew DeHaas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Giulia Guidi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-08-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Batched mutation-remapping algorithm for genotype representation graphs uses one shared reverse-topological pass, up to 10.5x faster than independent remapping…",
+  "title": "Cheaper by the Batch: Shared Traversal for Genotype Graph Editing",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.26488v2"
+}

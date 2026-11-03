@@ -1,0 +1,44 @@
+{
+  "abstract": "Missense pathogenicity predictors are routinely benchmarked against ClinVar, whose labels are strongly structured by gene: genes under diagnostic scrutiny accumulate pathogenic submissions while incidentally sequenced genes accumulate benign ones. We asked how much of a benchmark score this structure alone can produce. On 197,904 ClinVar missense variants validated against UniProt canonical sequences, a null model using no variant-level information, scoring each variant only by the pathogenic fraction of its own gene, reaches an area under the receiver operating characteristic curve (AUROC) of 0.921 under a random 10-fold split. On a common intersection of 169,989 variants, four current predictors exceed it by only 0.036 to 0.044. The inflation is not uniform, so it does not cancel when predictors are compared: under within-gene evaluation the ranking inverts, AlphaMissense rising from third to first and gMVP falling to third (p < 0.0001). The inversion survives removal of ceiling genes and replicates on an independently curated benchmark. Because both rankings derive from the same ClinVar labels, we arbitrated between them using data with no gene-level structure: agreement with 47 human deep mutational scanning assays matches the within-gene ranking and inverts the conventional one (p = 0.027, 0.0023). Across twenty-two dbNSFP predictors scored on one common intersection of 112,248 variants, with each tool's exposure to clinical labels registered before any score was extracted, predictors never trained on such labels sit 0.051 AUROC behind supervised ones globally but only 0.026 behind within genes (difference +0.025 [+0.023, +0.027], p < 0.0001). Leave-one-out correction, the standard remedy, is worth 0.002 AUROC. Much of ClinVar benchmark performance reflects gene identity rather than variant effect, and the distortion changes which predictor a benchmark ranks first, in a direction experimental data contradicts. We release genenull, a single-file implementation, so reporting this baseline costs one function call.",
+  "authors": [
+    "Arnoult, D.",
+    "Harrizi, S.",
+    "Nait Irahal, I.",
+    "Mostafa, K."
+  ],
+  "doi": "10.64898/2026.08.21.746180",
+  "first_seen": "2026-08-24",
+  "id": "biorxiv:10.64898/2026.08.21.746180",
+  "metadata": {
+    "abstract": "Missense pathogenicity predictors are routinely benchmarked against ClinVar, whose labels are strongly structured by gene: genes under diagnostic scrutiny accumulate pathogenic submissions while incidentally sequenced genes accumulate benign ones. We asked how much of a benchmark score this structure alone can produce. On 197,904 ClinVar missense variants validated against UniProt canonical sequences, a null model using no variant-level information, scoring each variant only by the pathogenic fraction of its own gene, reaches an area under the receiver operating characteristic curve (AUROC) of 0.921 under a random 10-fold split. On a common intersection of 169,989 variants, four current predictors exceed it by only 0.036 to 0.044. The inflation is not uniform, so it does not cancel when predictors are compared: under within-gene evaluation the ranking inverts, AlphaMissense rising from third to first and gMVP falling to third (p < 0.0001). The inversion survives removal of ceiling genes and replicates on an independently curated benchmark. Because both rankings derive from the same ClinVar labels, we arbitrated between them using data with no gene-level structure: agreement with 47 human deep mutational scanning assays matches the within-gene ranking and inverts the conventional one (p = 0.027, 0.0023). Across twenty-two dbNSFP predictors scored on one common intersection of 112,248 variants, with each tool's exposure to clinical labels registered before any score was extracted, predictors never trained on such labels sit 0.051 AUROC behind supervised ones globally but only 0.026 behind within genes (difference +0.025 [+0.023, +0.027], p < 0.0001). Leave-one-out correction, the standard remedy, is worth 0.002 AUROC. Much of ClinVar benchmark performance reflects gene identity rather than variant effect, and the distortion changes which predictor a benchmark ranks first, in a direction experimental data contradicts. We release genenull, a single-file implementation, so reporting this baseline costs one function call.",
+    "author_corresponding": "Damien Arnoult",
+    "author_corresponding_institution": "INSERMU1014",
+    "authors": "Arnoult, D.; Harrizi, S.; Nait Irahal, I.; Mostafa, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-24",
+    "doi": "10.64898/2026.08.21.746180",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/24/2026.08.21.746180.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Gene identity, not variant effect, dominates ClinVar benchmarks of missense pathogenicity predictors",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "INSERMU1014",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows a gene-only null model reaches AUROC 0.921 on ClinVar missense benchmarks, inflating predictor rankings; within-gene evaluation inverts order, agreeing…",
+  "title": "Gene identity, not variant effect, dominates ClinVar benchmarks of missense pathogenicity predictors",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.21.746180"
+}

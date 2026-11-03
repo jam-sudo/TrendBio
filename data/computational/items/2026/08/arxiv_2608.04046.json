@@ -1,0 +1,33 @@
+{
+  "abstract": "Survival analysis is an established framework for analyzing time-to-event data, yet many clinical machine learning studies still binarize the outcome before model training. This practice excludes censored patients, collapses temporal information into a single threshold, and can affect which features are selected as prognostically relevant. We examine the cost of this binarization in the context of Bayesian network (BN) feature selection, using two recent publications as case studies: one that applies BN-based feature selection to a head-and-neck cancer cohort and a second surgical cohort study that, while not BN-based, likewise binarizes its survival endpoint. We replace the binary scoring function with the Cox partial log-likelihood for feature-to-outcome edges, a modification we call the Survival-Aware Bayesian network, and recover prognostic features that binarization misses. Our ablation experiment confirms that the improvement is driven by the time-to-event scoring formulation rather than by retaining more patients. The results generalize across five endpoint-cohort combinations in head-and-neck cancer and extend to three further cancer types (breast, colorectal, and kidney). We propose that clinical studies with survival outcomes should use time-to-event methods by default, as binarization discards the prognostic signal retained by survival analysis.",
+  "authors": [
+    "Shashank Yadav",
+    "David M. Routman",
+    "Andrew Y. K. Foong"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-04",
+  "id": "arxiv:2608.04046",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.04046v1</ns0:id>\n    <ns0:title>The Cost of Binarizing Survival Outcomes in Clinical Prognostic Modeling</ns0:title>\n    <ns0:updated>2026-08-04T06:56:24Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.04046v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.04046v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Survival analysis is an established framework for analyzing time-to-event data, yet many clinical machine learning studies still binarize the outcome before model training. This practice excludes censored patients, collapses temporal information into a single threshold, and can affect which features are selected as prognostically relevant. We examine the cost of this binarization in the context of Bayesian network (BN) feature selection, using two recent publications as case studies: one that applies BN-based feature selection to a head-and-neck cancer cohort and a second surgical cohort study that, while not BN-based, likewise binarizes its survival endpoint. We replace the binary scoring function with the Cox partial log-likelihood for feature-to-outcome edges, a modification we call the Survival-Aware Bayesian network, and recover prognostic features that binarization misses. Our ablation experiment confirms that the improvement is driven by the time-to-event scoring formulation rather than by retaining more patients. The results generalize across five endpoint-cohort combinations in head-and-neck cancer and extend to three further cancer types (breast, colorectal, and kidney). We propose that clinical studies with survival outcomes should use time-to-event methods by default, as binarization discards the prognostic signal retained by survival analysis.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-04T06:56:24Z</ns0:published>\n    <ns1:comment>Accepted to Machine Learning for Healthcare (MLHC) Conference 2026</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Shashank Yadav</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>David M. Routman</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrew Y. K. Foong</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Shows binarizing survival outcomes discards prognostic signal; proposes Survival-Aware Bayesian network using Cox partial log-likelihood for feature selection…",
+  "title": "The Cost of Binarizing Survival Outcomes in Clinical Prognostic Modeling",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.04046v1"
+}

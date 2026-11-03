@@ -1,0 +1,34 @@
+{
+  "abstract": "Masked discrete diffusion models perform strongly on text, code, and biological sequences, but their training objective rewards only naturalness, and retraining the generator for every new reward is expensive. Inference-time steering of a frozen model either guides the sampler by the reward gradient or searches over several trajectories, and recent samplers combine the two. Such combinations are assembled as pipelines that leave three choices at their defaults: a guidance estimate resting on one Gumbel draw per sample, a reward tilting placed without reference to the distribution the combination then targets, and a selection temperature held fixed although the spread of per-step rewards drifts. We identify that distribution and settle the three choices against it. We therefore propose Variance-reduced Guidance and Adaptive Selection (VGAS), a simple yet effective inference-time framework that reduces the variance of the guidance estimate for both reward types, applies the reward tilting in the clean-token logits, where the pretrained schedule is preserved, and sets the selection temperature per step. Across regulatory DNA, protein and small-molecule benchmarks, VGAS attains the best training-free reward and matches or surpasses a reward-fine-tuned generator.",
+  "authors": [
+    "Kwanyoung Kim"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-27",
+  "id": "arxiv:2608.26585",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.CE",
+      "q-bio.QM",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.26585v2</ns0:id>\n    <ns0:title>VGAS: Variance-Reduced Guidance and Adaptive Selection for Training-Free Reward Alignment in Discrete Diffusion</ns0:title>\n    <ns0:updated>2026-09-17T13:29:44Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.26585v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.26585v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Masked discrete diffusion models perform strongly on text, code, and biological sequences, but their training objective rewards only naturalness, and retraining the generator for every new reward is expensive. Inference-time steering of a frozen model either guides the sampler by the reward gradient or searches over several trajectories, and recent samplers combine the two. Such combinations are assembled as pipelines that leave three choices at their defaults: a guidance estimate resting on one Gumbel draw per sample, a reward tilting placed without reference to the distribution the combination then targets, and a selection temperature held fixed although the spread of per-step rewards drifts. We identify that distribution and settle the three choices against it. We therefore propose Variance-reduced Guidance and Adaptive Selection (VGAS), a simple yet effective inference-time framework that reduces the variance of the guidance estimate for both reward types, applies the reward tilting in the clean-token logits, where the pretrained schedule is preserved, and sets the selection temperature per step. Across regulatory DNA, protein and small-molecule benchmarks, VGAS attains the best training-free reward and matches or surpasses a reward-fine-tuned generator.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-27T03:53:59Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Kwanyoung Kim</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "VGAS: a training-free inference-time framework for masked discrete diffusion that reduces guidance variance, tilts clean-token logits, and adapts selection…",
+  "title": "VGAS: Variance-Reduced Guidance and Adaptive Selection for Training-Free Reward Alignment in Discrete Diffusion",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.26585v2"
+}

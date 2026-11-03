@@ -1,0 +1,43 @@
+{
+  "abstract": "Background. A synonymous variant leaves the protein unchanged, so a classifier that still separates pathogenic from benign examples must be reading something beyond the protein. Such variants test cleanly what a codon-level model adds to a protein-level one. Methods. We assembled SynPath, a benchmark of ClinVar synonymous variants, and scored frozen representations under two splitting protocols. Under gene-held-out folds whole genes are withheld, and each coding-sequence model is compared against a position-matched control. Results. The models were not trained for this task, so these numbers describe transfer, not designed performance. Random splitting flatters every representation. Once whole genes are held out, they fall into a narrow band near chance, the best at 0.58, and low-rank fine-tuning does not restore the random-split level. A feature that reads no sequence, only the distance from the variant to the nearest exon junction, reaches 0.84 under the same folds, above every neural representation tested. In a protein model the variant-specific component is zero by construction, because both alleles present the same input. In coding-sequence models only the response vector, the difference between the alternate and reference embeddings, keeps signal on unseen genes and beats its position-matched control. Conclusions. Synonymous-variant pathogenicity is predictable mainly from gene identity and from position. Only a small part reflects the variant itself, and only in models that read the coding sequence. Benchmarks judged on random splits will overstate what these models have learned.",
+  "authors": [
+    "Liang, Y.",
+    "Zhu, W.",
+    "Liang, H.",
+    "Pan, X."
+  ],
+  "doi": "10.64898/2026.08.12.744371",
+  "first_seen": "2026-08-18",
+  "id": "biorxiv:10.64898/2026.08.12.744371",
+  "metadata": {
+    "abstract": "Background. A synonymous variant leaves the protein unchanged, so a classifier that still separates pathogenic from benign examples must be reading something beyond the protein. Such variants test cleanly what a codon-level model adds to a protein-level one. Methods. We assembled SynPath, a benchmark of ClinVar synonymous variants, and scored frozen representations under two splitting protocols. Under gene-held-out folds whole genes are withheld, and each coding-sequence model is compared against a position-matched control. Results. The models were not trained for this task, so these numbers describe transfer, not designed performance. Random splitting flatters every representation. Once whole genes are held out, they fall into a narrow band near chance, the best at 0.58, and low-rank fine-tuning does not restore the random-split level. A feature that reads no sequence, only the distance from the variant to the nearest exon junction, reaches 0.84 under the same folds, above every neural representation tested. In a protein model the variant-specific component is zero by construction, because both alleles present the same input. In coding-sequence models only the response vector, the difference between the alternate and reference embeddings, keeps signal on unseen genes and beats its position-matched control. Conclusions. Synonymous-variant pathogenicity is predictable mainly from gene identity and from position. Only a small part reflects the variant itself, and only in models that read the coding sequence. Benchmarks judged on random splits will overstate what these models have learned.",
+    "author_corresponding": "Huiying Liang",
+    "author_corresponding_institution": "Intelligent Medicine Institute, Shanghai Medical College, Fudan University, Shanghai 200032, China",
+    "authors": "Liang, Y.; Zhu, W.; Liang, H.; Pan, X.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-18",
+    "doi": "10.64898/2026.08.12.744371",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/18/2026.08.12.744371.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A leakage-controlled benchmark shows apparent codon-language-model advantages in synonymous-variant prediction are evaluation artifacts",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Intelligent Medicine Institute, Shanghai Medical College, Fudan University, Shanghai 200032, China",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmark of ClinVar synonymous variants shows codon-model gains vanish under gene-held-out splits; exon-junction distance alone outperforms neural…",
+  "title": "A leakage-controlled benchmark shows apparent codon-language-model advantages in synonymous-variant prediction are evaluation artifacts",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.12.744371"
+}

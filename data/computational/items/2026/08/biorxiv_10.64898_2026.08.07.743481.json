@@ -1,0 +1,44 @@
+{
+  "abstract": "Predicting cellular responses to genetic perturbations is central to understanding gene function and prioritizing therapeutic targets, but experimental screens cannot exhaustively cover genes, cell types, and perturbation combinations. Recent benchmarks have shown that simple baselines can match or outperform substantially more complex models, suggesting that informative biological priors may be as important as model capacity. Here we present SLIM, a lightweight extension of the bilinear model of Ahlmann-Eltze et al. SLIM represents perturbations with 64-dimensional embeddings derived from the STRING protein network and predicts mean transcriptional responses through a closed-form ridge-regression estimator. It then constructs single-cell populations by retrieving training cells and rescaling each gene to match the predicted mean. We evaluated SLIM against four deep learning models and two simple baselines on four single-gene perturbation datasets and one combinatorial perturbation dataset. Across these within-dataset benchmarks, SLIM achieved competitive mean-response accuracy, ranked first in eight of twelve single-gene dataset-metric comparisons, and produced substantially lower maximum mean discrepancy values than the evaluated alternatives. The model has 640 trainable parameters and fitted each benchmark dataset in under 10 seconds on a CPU. These results show that compact biological representations can support accurate and computationally efficient perturbation prediction. Code is available at https://github.com/RasmussenLab/SLIM.\n\nKey PointsO_LISLIM combines a closed-form bilinear predictor with STRING-derived perturbation embeddings.\nC_LIO_LIAcross five within-dataset benchmarks, SLIM achieved competitive mean-response prediction with only 640 trainable parameters.\nC_LIO_LISLIM builds cell populations by rescaling retrieved training cells to the predicted mean, so they inherit realistic cell-to-cell variation and gene-gene covariation.\nC_LIO_LIThe results highlight the importance of perturbation representations and population-construction procedures in low-data benchmarks.\nC_LIO_LISLIM fits each benchmark dataset in under 10 seconds on a standard CPU.\nC_LI",
+  "authors": [
+    "Hu, D.",
+    "Pielies Avelli, M.",
+    "Jensen, L. J.",
+    "Rasmussen, S."
+  ],
+  "doi": "10.64898/2026.08.07.743481",
+  "first_seen": "2026-08-07",
+  "id": "biorxiv:10.64898/2026.08.07.743481",
+  "metadata": {
+    "abstract": "Predicting cellular responses to genetic perturbations is central to understanding gene function and prioritizing therapeutic targets, but experimental screens cannot exhaustively cover genes, cell types, and perturbation combinations. Recent benchmarks have shown that simple baselines can match or outperform substantially more complex models, suggesting that informative biological priors may be as important as model capacity. Here we present SLIM, a lightweight extension of the bilinear model of Ahlmann-Eltze et al. SLIM represents perturbations with 64-dimensional embeddings derived from the STRING protein network and predicts mean transcriptional responses through a closed-form ridge-regression estimator. It then constructs single-cell populations by retrieving training cells and rescaling each gene to match the predicted mean. We evaluated SLIM against four deep learning models and two simple baselines on four single-gene perturbation datasets and one combinatorial perturbation dataset. Across these within-dataset benchmarks, SLIM achieved competitive mean-response accuracy, ranked first in eight of twelve single-gene dataset-metric comparisons, and produced substantially lower maximum mean discrepancy values than the evaluated alternatives. The model has 640 trainable parameters and fitted each benchmark dataset in under 10 seconds on a CPU. These results show that compact biological representations can support accurate and computationally efficient perturbation prediction. Code is available at https://github.com/RasmussenLab/SLIM.\n\nKey PointsO_LISLIM combines a closed-form bilinear predictor with STRING-derived perturbation embeddings.\nC_LIO_LIAcross five within-dataset benchmarks, SLIM achieved competitive mean-response prediction with only 640 trainable parameters.\nC_LIO_LISLIM builds cell populations by rescaling retrieved training cells to the predicted mean, so they inherit realistic cell-to-cell variation and gene-gene covariation.\nC_LIO_LIThe results highlight the importance of perturbation representations and population-construction procedures in low-data benchmarks.\nC_LIO_LISLIM fits each benchmark dataset in under 10 seconds on a standard CPU.\nC_LI",
+    "author_corresponding": "Simon Rasmussen",
+    "author_corresponding_institution": "Novo Nordisk Foundation Center for Basic Metabolic Research, Faculty of Health and Medical Sciences, University of Copenhagen, Copenhagen, Denmark",
+    "authors": "Hu, D.; Pielies Avelli, M.; Jensen, L. J.; Rasmussen, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-07",
+    "doi": "10.64898/2026.08.07.743481",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/07/2026.08.07.743481.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SLIM: A small linear model with STRING embeddings for single-cell genetic perturbation prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Novo Nordisk Foundation Center for Basic Metabolic Research, Faculty of Health and Medical Sciences, University of Copenhagen, Copenhagen, Denmark",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "SLIM: a 640-parameter linear model using STRING protein-network embeddings and ridge regression to predict single-cell transcriptional responses to genetic…",
+  "title": "SLIM: A small linear model with STRING embeddings for single-cell genetic perturbation prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.07.743481"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundN6,2-O-dimethyladenosine (m6Am) is a cap-proximal mRNA modification deposited by PCIF1 at the first transcribed nucleotide of eukaryotic mRNAs. Knowing where m6Am sites sit across the transcriptome would help explain how cells tune mRNA stability and translation, but current computational predictors typically depend on a single sequence representation and do not jointly model the semantic, sequential, and structural signals carried by an RNA sequence.\n\nResultsWe present TriTower-m6Am, a triple-tower architecture that combines three representations: semantic (RNA-FM with BellPooling), sequential (One-Hot BiLSTM), and structural (RGCN with three typed edges). On an independent test set of 640 sequences, TriTower-m6Am reaches AUC = 0.776, MCC = 0.440, and SN = 0.888, against DTC-m6Ams AUC = 0.765, MCC = 0.411, and SN = 0.800. The 8.8 percentage-point gain in sensitivity means that, for every 100 real m6Am sites, the model recovers roughly 9 additional sites missed by the previous best method. Among the three towers, RGCN alone gives the strongest single signal, and the AUC-weighted ensemble raises sensitivity from the 0.55-0.76 band of the standalone towers to 0.89. Ablating the RGCN edge types shows that backbone connectivity accounts for most of the structural signal.\n\nConclusionsCombining semantic, sequential, and structural views of the same RNA sequence improves m6Am prediction beyond what any single representation achieves. Because each towers contribution to the final prediction is a readable voting weight rather than a hidden parameter, the model is not a black box: a user can read off which tower drove a given prediction and trace it back to the corresponding representation, without running a separate post-hoc explainer. The same design pattern can be transferred to other RNA modification site prediction tasks.\n\nAuthor summaryPredicting where m6Am modifications occur on messenger RNA is important for understanding how cells regulate transcript stability and translation. Existing computational methods typically encode the RNA sequence in a single way, such as k-mer counts or a one-hot code, and treat the model as a black box that emits a prediction without explaining which features drove it. We built TriTower-m6Am to address both limitations. Our model combines three independent encoders--a pretrained RNA language model for semantic patterns, a bidirectional LSTM for local nucleotide order, and a relational graph convolutional network for the structural fold--and fuses their outputs by AUC-weighted voting, so the contribution of each tower to a given prediction is a readable number rather than a hidden parameter. On an independent benchmark the ensemble improves sensitivity by 8.8 percentage points over the prior best method, and ablating the graphs edge types reveals that linear backbone connectivity, rather than long-range base-pairing, carries most of the structural signal. The same triple-tower pattern can be transferred to other RNA modification site prediction tasks.",
+  "authors": [
+    "Xiong, K.",
+    "Jia, J."
+  ],
+  "doi": "10.64898/2026.08.13.744628",
+  "first_seen": "2026-08-17",
+  "id": "biorxiv:10.64898/2026.08.13.744628",
+  "metadata": {
+    "abstract": "BackgroundN6,2-O-dimethyladenosine (m6Am) is a cap-proximal mRNA modification deposited by PCIF1 at the first transcribed nucleotide of eukaryotic mRNAs. Knowing where m6Am sites sit across the transcriptome would help explain how cells tune mRNA stability and translation, but current computational predictors typically depend on a single sequence representation and do not jointly model the semantic, sequential, and structural signals carried by an RNA sequence.\n\nResultsWe present TriTower-m6Am, a triple-tower architecture that combines three representations: semantic (RNA-FM with BellPooling), sequential (One-Hot BiLSTM), and structural (RGCN with three typed edges). On an independent test set of 640 sequences, TriTower-m6Am reaches AUC = 0.776, MCC = 0.440, and SN = 0.888, against DTC-m6Ams AUC = 0.765, MCC = 0.411, and SN = 0.800. The 8.8 percentage-point gain in sensitivity means that, for every 100 real m6Am sites, the model recovers roughly 9 additional sites missed by the previous best method. Among the three towers, RGCN alone gives the strongest single signal, and the AUC-weighted ensemble raises sensitivity from the 0.55-0.76 band of the standalone towers to 0.89. Ablating the RGCN edge types shows that backbone connectivity accounts for most of the structural signal.\n\nConclusionsCombining semantic, sequential, and structural views of the same RNA sequence improves m6Am prediction beyond what any single representation achieves. Because each towers contribution to the final prediction is a readable voting weight rather than a hidden parameter, the model is not a black box: a user can read off which tower drove a given prediction and trace it back to the corresponding representation, without running a separate post-hoc explainer. The same design pattern can be transferred to other RNA modification site prediction tasks.\n\nAuthor summaryPredicting where m6Am modifications occur on messenger RNA is important for understanding how cells regulate transcript stability and translation. Existing computational methods typically encode the RNA sequence in a single way, such as k-mer counts or a one-hot code, and treat the model as a black box that emits a prediction without explaining which features drove it. We built TriTower-m6Am to address both limitations. Our model combines three independent encoders--a pretrained RNA language model for semantic patterns, a bidirectional LSTM for local nucleotide order, and a relational graph convolutional network for the structural fold--and fuses their outputs by AUC-weighted voting, so the contribution of each tower to a given prediction is a readable number rather than a hidden parameter. On an independent benchmark the ensemble improves sensitivity by 8.8 percentage points over the prior best method, and ablating the graphs edge types reveals that linear backbone connectivity, rather than long-range base-pairing, carries most of the structural signal. The same triple-tower pattern can be transferred to other RNA modification site prediction tasks.",
+    "author_corresponding": "Jianhua Jia",
+    "author_corresponding_institution": "Jingdezhen Ceramic Institute",
+    "authors": "Xiong, K.; Jia, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-17",
+    "doi": "10.64898/2026.08.13.744628",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/17/2026.08.13.744628.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TriTower-m6Am: a triple-tower heterogeneous deep learning architecture integrating semantic, sequential, and structural information for N6,2-O-dimethyladenosine site prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Jingdezhen Ceramic Institute",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "TriTower-m6Am fuses RNA-FM semantic, BiLSTM sequential, and RGCN structural encoders via AUC-weighted voting to predict m6Am sites; reports AUC 0.776 and…",
+  "title": "TriTower-m6Am: a triple-tower heterogeneous deep learning architecture integrating semantic, sequential, and structural information for N6,2-O-dimethyladenosine site prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.13.744628"
+}

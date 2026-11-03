@@ -1,0 +1,41 @@
+{
+  "abstract": "Single-cell foundation models (scFMs) represent each cell using sequences of gene-associated tokens, making embedding extraction increasingly costly as the number of cells and expressed genes grows. Existing input policies typically rely on fixed input budgets, with retained genes determined by random subsampling, model-native ranking, or a fixed dataset-level highly variable gene (HVG) panel. However, they do not jointly determine, for each cell, which genes to retain and how many tokens to allocate. We introduce AdaGeneBudget, a training-free gene-token selection method that combines each gene's expression with reference-derived inverse detection frequency and retains the shortest ranked prefix that captures a target fraction of the cell's expression-specificity score mass. The resulting cell-specific budget is bounded by predefined minimum and maximum lengths, requires no cell-type labels, and leaves the pretrained backbone unchanged. We evaluated AdaGeneBudget in a frozen-backbone inference setting using pretrained scGPT and Geneformer models on Kang and PBMC reference-mapping tasks, with an additional scPRINT comparison against its official HVG policy and an expressed-only HVG control. Across four scGPT and Geneformer backbone-dataset pairs, AdaGeneBudget substantially reduced mean gene-token counts and peak GPU memory while increasing embedding-extraction throughput by up to 4.63x. Despite this compression, it preserved native-level aggregate annotation utility and consistently outperformed token-matched random selection. AdaGeneBudget also preserved fine-grained and low-support cell identities and retained lineage-marker programs and stimulation-associated pathway genes under compression. In scPRINT, both HVG controls achieved higher annotation macro-F1, whereas AdaGeneBudget more faithfully preserved the stimulation-induced embedding direction. These results establish biologically informed, cell-adaptive gene-token allocation as a practical complement to architectural and systems-level efficiency methods for applying existing scFMs to new datasets. They also suggest a cell-adaptive input-allocation principle for future models operating under finite token budgets.",
+  "authors": [
+    "Kim, D.",
+    "Hwang, U."
+  ],
+  "doi": "10.64898/2026.08.06.743174",
+  "first_seen": "2026-08-12",
+  "id": "biorxiv:10.64898/2026.08.06.743174",
+  "metadata": {
+    "abstract": "Single-cell foundation models (scFMs) represent each cell using sequences of gene-associated tokens, making embedding extraction increasingly costly as the number of cells and expressed genes grows. Existing input policies typically rely on fixed input budgets, with retained genes determined by random subsampling, model-native ranking, or a fixed dataset-level highly variable gene (HVG) panel. However, they do not jointly determine, for each cell, which genes to retain and how many tokens to allocate. We introduce AdaGeneBudget, a training-free gene-token selection method that combines each gene's expression with reference-derived inverse detection frequency and retains the shortest ranked prefix that captures a target fraction of the cell's expression-specificity score mass. The resulting cell-specific budget is bounded by predefined minimum and maximum lengths, requires no cell-type labels, and leaves the pretrained backbone unchanged. We evaluated AdaGeneBudget in a frozen-backbone inference setting using pretrained scGPT and Geneformer models on Kang and PBMC reference-mapping tasks, with an additional scPRINT comparison against its official HVG policy and an expressed-only HVG control. Across four scGPT and Geneformer backbone-dataset pairs, AdaGeneBudget substantially reduced mean gene-token counts and peak GPU memory while increasing embedding-extraction throughput by up to 4.63x. Despite this compression, it preserved native-level aggregate annotation utility and consistently outperformed token-matched random selection. AdaGeneBudget also preserved fine-grained and low-support cell identities and retained lineage-marker programs and stimulation-associated pathway genes under compression. In scPRINT, both HVG controls achieved higher annotation macro-F1, whereas AdaGeneBudget more faithfully preserved the stimulation-induced embedding direction. These results establish biologically informed, cell-adaptive gene-token allocation as a practical complement to architectural and systems-level efficiency methods for applying existing scFMs to new datasets. They also suggest a cell-adaptive input-allocation principle for future models operating under finite token budgets.",
+    "author_corresponding": "Uiwon Hwang",
+    "author_corresponding_institution": "Ewha Womans University",
+    "authors": "Kim, D.; Hwang, U.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-12",
+    "doi": "10.64898/2026.08.06.743174",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/12/2026.08.06.743174.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "AdaGeneBudget: Cell-Adaptive Gene-Token Allocation for Efficient Single-Cell Foundation Models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Ewha Womans University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Training-free, cell-adaptive gene-token selection for single-cell foundation models (scGPT, Geneformer, scPRINT) cuts token counts and GPU memory, with up to…",
+  "title": "AdaGeneBudget: Cell-Adaptive Gene-Token Allocation for Efficient Single-Cell Foundation Models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.06.743174"
+}

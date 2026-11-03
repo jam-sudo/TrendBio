@@ -1,0 +1,43 @@
+{
+  "abstract": "The microbiome plays a significant role in the development and progression of many diseases, yet extracting interpretable insights from multi-omics data remains challenging. Existing approaches face a recurring practical trade-off: deep learning methods achieve high predictive performance but lack uncertainty quantification, whereas probabilistic methods provide interpretable results but require data-type-specific likelihood functions that limit generalization across diverse omics modalities. Here, we introduce DBayesCM (Deep Bayesian Clustering for Multi-omics), which combines deep learning modeling with Bayesian nonparametric methods. DBayesCM employs separate encoders to project microbiome and host omics data into a shared latent space, where an infinite mixture model with a Dirichlet process prior determines the number of clusters automatically while quantifying the uncertainty of each samples assignment. Spike-and-slab priors identify discriminative features, and a Bayesian neural network estimates probabilistic co-occurrence between microbial species and host omics features. To isolate the effect of latent geometry, we evaluate two variants that are identical except for their latent space: DBayesCM-vMF constrains the latent to the unit hypersphere and applies a von Mises-Fisher mixture, while DBayesCM-GMM uses a Euclidean latent space and a Gaussian mixture. On simulated data, the hyperspherical variant recovered the correct number of clusters, whereas the Euclidean variant over-segmented, demonstrating that the latent geometry affects cluster recovery. Applied to colon, breast, and kidney cancer cohorts spanning metagenomics, host metabolomics, RNA-seq, and miRNA data, and to an obstructive sleep apnea model, DBayesCM ranked consistently among the existing methods while uniquely combining data-driven cluster-number determination, sample-level uncertainty, and interpretable feature selection within a single framework. DBayesCM reveals conditional probabilistic co-occurrence between core microbial species and host omics features, enabling uncertainty-aware exploration of microbiome-host relationships across diverse diseases.",
+  "authors": [
+    "Dang, T.",
+    "Lysenko, A.",
+    "Tsunoda, T."
+  ],
+  "doi": "10.64898/2026.07.28.741374",
+  "first_seen": "2026-08-01",
+  "id": "biorxiv:10.64898/2026.07.28.741374",
+  "metadata": {
+    "abstract": "The microbiome plays a significant role in the development and progression of many diseases, yet extracting interpretable insights from multi-omics data remains challenging. Existing approaches face a recurring practical trade-off: deep learning methods achieve high predictive performance but lack uncertainty quantification, whereas probabilistic methods provide interpretable results but require data-type-specific likelihood functions that limit generalization across diverse omics modalities. Here, we introduce DBayesCM (Deep Bayesian Clustering for Multi-omics), which combines deep learning modeling with Bayesian nonparametric methods. DBayesCM employs separate encoders to project microbiome and host omics data into a shared latent space, where an infinite mixture model with a Dirichlet process prior determines the number of clusters automatically while quantifying the uncertainty of each samples assignment. Spike-and-slab priors identify discriminative features, and a Bayesian neural network estimates probabilistic co-occurrence between microbial species and host omics features. To isolate the effect of latent geometry, we evaluate two variants that are identical except for their latent space: DBayesCM-vMF constrains the latent to the unit hypersphere and applies a von Mises-Fisher mixture, while DBayesCM-GMM uses a Euclidean latent space and a Gaussian mixture. On simulated data, the hyperspherical variant recovered the correct number of clusters, whereas the Euclidean variant over-segmented, demonstrating that the latent geometry affects cluster recovery. Applied to colon, breast, and kidney cancer cohorts spanning metagenomics, host metabolomics, RNA-seq, and miRNA data, and to an obstructive sleep apnea model, DBayesCM ranked consistently among the existing methods while uniquely combining data-driven cluster-number determination, sample-level uncertainty, and interpretable feature selection within a single framework. DBayesCM reveals conditional probabilistic co-occurrence between core microbial species and host omics features, enabling uncertainty-aware exploration of microbiome-host relationships across diverse diseases.",
+    "author_corresponding": "Tung Dang Sr.",
+    "author_corresponding_institution": "Graduate School of Science, The University of Tokyo",
+    "authors": "Dang, T.; Lysenko, A.; Tsunoda, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-01",
+    "doi": "10.64898/2026.07.28.741374",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/01/2026.07.28.741374.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A hyperspherical deep Bayesian model for interpretable clustering and relationship prediction in microbiome multi-omics integration",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Graduate School of Science, The University of Tokyo",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "DBayesCM couples deep encoders with Bayesian nonparametrics (Dirichlet process, spike-and-slab, BNN) to cluster microbiome-host multi-omics with uncertainty;…",
+  "title": "A hyperspherical deep Bayesian model for interpretable clustering and relationship prediction in microbiome multi-omics integration",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.28.741374"
+}

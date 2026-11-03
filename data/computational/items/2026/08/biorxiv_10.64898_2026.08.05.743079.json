@@ -1,0 +1,41 @@
+{
+  "abstract": "Post-translational modifications (PTMs) are chemical changes added to proteins after translation. These changes affect protein function and regulation, and their disruption is linked to disease-associated mechanisms. Because experimentally validating all possible modification sites is impractical, many computational predictors have been developed for PTM site prediction. In this work, we study whether a shared model can represent common residue-background patterns while learning modification-specific background-to-positive offsets. This framing is especially relevant for residues such as lysine (K), which can be acetylated, ubiquitinated, methylated, or sumoylated depending on the surrounding protein context. We propose an anchor-guided rectified flow matching framework for multi-type PTM site prediction from protein language model embeddings. For each PTM--residue pair, the model builds residue-background anchors from PTM-compatible unannotated residues and positive anchors from experimentally annotated modified residues. Given a candidate residue and target modification type, the model compares the residue embedding with these anchor sets and uses a rectified flow module to estimate a modification-conditioned background-to-positive offset. This offset is combined with anchor-based features and used for site scoring. We evaluate the framework on a dbPTM-derived benchmark covering six commonly studied PTMs: phosphorylation, acetylation, ubiquitination, methylation, sumoylation, and N-linked glycosylation. In the shared-model setting, our approach achieves a macro AUPRC of 0.4195, improving over the gated multi-anchor baseline of 0.4154, while independently trained per-modification models achieve 0.4353. These results suggest that multi-type PTM prediction can be modeled within a single shared framework by combining residue-background anchors with modification-conditioned offset features.",
+  "authors": [
+    "Pokharel, S.",
+    "Bhusal, B."
+  ],
+  "doi": "10.64898/2026.08.05.743079",
+  "first_seen": "2026-08-11",
+  "id": "biorxiv:10.64898/2026.08.05.743079",
+  "metadata": {
+    "abstract": "Post-translational modifications (PTMs) are chemical changes added to proteins after translation. These changes affect protein function and regulation, and their disruption is linked to disease-associated mechanisms. Because experimentally validating all possible modification sites is impractical, many computational predictors have been developed for PTM site prediction. In this work, we study whether a shared model can represent common residue-background patterns while learning modification-specific background-to-positive offsets. This framing is especially relevant for residues such as lysine (K), which can be acetylated, ubiquitinated, methylated, or sumoylated depending on the surrounding protein context. We propose an anchor-guided rectified flow matching framework for multi-type PTM site prediction from protein language model embeddings. For each PTM--residue pair, the model builds residue-background anchors from PTM-compatible unannotated residues and positive anchors from experimentally annotated modified residues. Given a candidate residue and target modification type, the model compares the residue embedding with these anchor sets and uses a rectified flow module to estimate a modification-conditioned background-to-positive offset. This offset is combined with anchor-based features and used for site scoring. We evaluate the framework on a dbPTM-derived benchmark covering six commonly studied PTMs: phosphorylation, acetylation, ubiquitination, methylation, sumoylation, and N-linked glycosylation. In the shared-model setting, our approach achieves a macro AUPRC of 0.4195, improving over the gated multi-anchor baseline of 0.4154, while independently trained per-modification models achieve 0.4353. These results suggest that multi-type PTM prediction can be modeled within a single shared framework by combining residue-background anchors with modification-conditioned offset features.",
+    "author_corresponding": "Suresh Pokharel",
+    "author_corresponding_institution": "Rochester Institute of Technology",
+    "authors": "Pokharel, S.; Bhusal, B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-11",
+    "doi": "10.64898/2026.08.05.743079",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/11/2026.08.05.743079.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Learning Shared Residue Backgrounds and Modification-Specific Offsets for PTM Site Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Rochester Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes an anchor-guided rectified flow matching framework for multi-type PTM site prediction from protein language model embeddings, evaluated on six PTMs in…",
+  "title": "Learning Shared Residue Backgrounds and Modification-Specific Offsets for PTM Site Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.05.743079"
+}

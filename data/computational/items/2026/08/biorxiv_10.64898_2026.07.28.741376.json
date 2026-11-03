@@ -1,0 +1,45 @@
+{
+  "abstract": "Head-to-tail (H2T) cyclized peptides are an increasingly important modality in drug discovery, combining high target affinity and selectivity with metabolic sta-bility. Because their underlying chemistry is still that of a linear amino-acid chain, their linear sequence representation is the native input format of main- stream sequence generative models now driving de novo peptide design (Slough et al., 2018; Rettie et al., 2025a;b). Discovering the conserved motifs responsible for a family's function across a library of such candidates requires a multiple sequence alignment (MSA). Because a cyclic peptide can be linearised at any residue, the alignment must additionally solve for the unknown rotation of each sequence, which is the multiple circular sequence alignment (MCSA) problem. However, leading MCSA heuristics (e.g. Ayad & Pissis, 2017) were tuned for the genomic regime (a few tens of long sequences) and become prohibitively slow on the cyclic peptide library regime (hundreds to thousands of shorter sequences). We close this gap by identifying quality-preserving optimisation opportunities, notably the library-scale preset tailored to short-sequence inputs (algorithmic details in Appendix A), and by adding an orthogonal multi-core and SIMD backend for further performance tuning, which gives near-linear thread scaling on the pairwise-comparison stage. We validate the pipeline on a library of 1,000 H2T cyclized peptides of length 18 targeting the oncoprotein Mouse double minute 2 human homolog (MDM2) produced by an internal peptide-design engine. In this practical setup, the optimised MCSA recovers the underlying positional motif of MDM2 binders at the same fidelity as the original MCSA implementation while running over 650x faster. Our optimised MCSA tool thus enables library-scale cyclic peptide sequence alignment and is publicly available at https://github.com/IVB-Generative-Biology/mars-turbo.",
+  "authors": [
+    "Yuan, Y.",
+    "Li, Z.",
+    "Hu, K.",
+    "Pan, P.",
+    "He, F."
+  ],
+  "doi": "10.64898/2026.07.28.741376",
+  "first_seen": "2026-08-01",
+  "id": "biorxiv:10.64898/2026.07.28.741376",
+  "metadata": {
+    "abstract": "Head-to-tail (H2T) cyclized peptides are an increasingly important modality in drug discovery, combining high target affinity and selectivity with metabolic sta-bility. Because their underlying chemistry is still that of a linear amino-acid chain, their linear sequence representation is the native input format of main- stream sequence generative models now driving de novo peptide design (Slough et al., 2018; Rettie et al., 2025a;b). Discovering the conserved motifs responsible for a family's function across a library of such candidates requires a multiple sequence alignment (MSA). Because a cyclic peptide can be linearised at any residue, the alignment must additionally solve for the unknown rotation of each sequence, which is the multiple circular sequence alignment (MCSA) problem. However, leading MCSA heuristics (e.g. Ayad & Pissis, 2017) were tuned for the genomic regime (a few tens of long sequences) and become prohibitively slow on the cyclic peptide library regime (hundreds to thousands of shorter sequences). We close this gap by identifying quality-preserving optimisation opportunities, notably the library-scale preset tailored to short-sequence inputs (algorithmic details in Appendix A), and by adding an orthogonal multi-core and SIMD backend for further performance tuning, which gives near-linear thread scaling on the pairwise-comparison stage. We validate the pipeline on a library of 1,000 H2T cyclized peptides of length 18 targeting the oncoprotein Mouse double minute 2 human homolog (MDM2) produced by an internal peptide-design engine. In this practical setup, the optimised MCSA recovers the underlying positional motif of MDM2 binders at the same fidelity as the original MCSA implementation while running over 650x faster. Our optimised MCSA tool thus enables library-scale cyclic peptide sequence alignment and is publicly available at https://github.com/IVB-Generative-Biology/mars-turbo.",
+    "author_corresponding": "Kaiqiang Hu",
+    "author_corresponding_institution": "Pharmaron Beijing Co., Ltd.",
+    "authors": "Yuan, Y.; Li, Z.; Hu, K.; Pan, P.; He, F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-01",
+    "doi": "10.64898/2026.07.28.741376",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/01/2026.07.28.741376.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Optimized Multiple Circular Sequence Alignment for Cyclic Peptide Motif Discovery",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Pharmaron Beijing Co., Ltd.",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Optimized multiple circular sequence alignment tool for cyclic peptide libraries; retains motif-recovery fidelity on 1,000 MDM2-targeting peptides while…",
+  "title": "Optimized Multiple Circular Sequence Alignment for Cyclic Peptide Motif Discovery",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.07.28.741376"
+}

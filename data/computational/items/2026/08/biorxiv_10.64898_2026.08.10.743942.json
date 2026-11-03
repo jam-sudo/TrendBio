@@ -1,0 +1,43 @@
+{
+  "abstract": "UniPert-G2CP (Li et al., Cell, 2026) bridges genetic and chemical screens from molecular representation to phenotype modeling across five cancer cell lines [1]. Here we extend this architecture to 162 cell lines, 32,039 compounds, and genome-wide output (12,328 genes), and find that the resulting prediction platform reveals a striking performance divide: normal and primary cell lines achieve substantially higher prediction fidelity (mean per-cell-line Pearson Correlation Coefficient (PCC) = 0.480, median 0.502) than cancer lines (0.296, median 0.324; Mann-Whitney p = 3.93e-11), identifying cancer cell line heterogeneity as a primary bottleneck for virtual perturbation screening at scale.\n\nTo understand the sources of this divide, we analyzed per-cell-line performance, genome-wide directional accuracy, mechanism-clustering (SMD), and compound-protein interaction (CPI) enrichment. Directional accuracy on top-5% effect-size genes reaches 73.8% (genome-wide 60.8%), with pathway-dependent recovery: of four literature-supported perturbation-gene pairs queried across three cell lines, two were recapitulated (dexamethasone-TSC22D3/NFKBIA/FKBP5; bortezomib-BAG3/DNAJB1/HSPA1A), one was absent (CD36 depletion-PPARG/CEBPA in ASC), and one was partially recapitulated (metformin-SLC7A5 in HEPG2). Mechanism-clustering SMD of the learned embedding reached 1.636 (vs. original 1.85; 88.5% retention at 32x cell-line coverage), exceeding the ECFP4 fingerprint baseline (1.613), while self-consistency Mantel rho=0.852 confirmed the model retains compound mechanism structure internally.\n\nOverall held-out performance: genetic perturbation PCC=0.442 (978-gene subset); novel drug PCC=0.3047 (genome-wide). Analysis of CPI enrichment reveals that training-data overlap inflates apparent performance: 54.9% of Touchstone evaluation pairs overlap with our ChEMBL-derived training CPI pairs, reducing effective EF from 139 to 109 at top 0.5% yet remaining far above random (1.0).\n\nThese findings establish the first large-scale characterization of cell-type-dependent generalization in perturbation-to-phenotype prediction. The observed performance stratification between normal and cancer lines generates testable hypotheses for why virtual cell models degrade on heterogeneous cancer contexts, and provides a diagnostic framework for identifying where and why such models fail--informing future architecture improvements targeting the CPI vocabulary gap, protein encoder design, and cell-type-aware training strategies.",
+  "authors": [
+    "Wei, K.",
+    "Zhan, L.",
+    "Qi, C."
+  ],
+  "doi": "10.64898/2026.08.10.743942",
+  "first_seen": "2026-08-18",
+  "id": "biorxiv:10.64898/2026.08.10.743942",
+  "metadata": {
+    "abstract": "UniPert-G2CP (Li et al., Cell, 2026) bridges genetic and chemical screens from molecular representation to phenotype modeling across five cancer cell lines [1]. Here we extend this architecture to 162 cell lines, 32,039 compounds, and genome-wide output (12,328 genes), and find that the resulting prediction platform reveals a striking performance divide: normal and primary cell lines achieve substantially higher prediction fidelity (mean per-cell-line Pearson Correlation Coefficient (PCC) = 0.480, median 0.502) than cancer lines (0.296, median 0.324; Mann-Whitney p = 3.93e-11), identifying cancer cell line heterogeneity as a primary bottleneck for virtual perturbation screening at scale.\n\nTo understand the sources of this divide, we analyzed per-cell-line performance, genome-wide directional accuracy, mechanism-clustering (SMD), and compound-protein interaction (CPI) enrichment. Directional accuracy on top-5% effect-size genes reaches 73.8% (genome-wide 60.8%), with pathway-dependent recovery: of four literature-supported perturbation-gene pairs queried across three cell lines, two were recapitulated (dexamethasone-TSC22D3/NFKBIA/FKBP5; bortezomib-BAG3/DNAJB1/HSPA1A), one was absent (CD36 depletion-PPARG/CEBPA in ASC), and one was partially recapitulated (metformin-SLC7A5 in HEPG2). Mechanism-clustering SMD of the learned embedding reached 1.636 (vs. original 1.85; 88.5% retention at 32x cell-line coverage), exceeding the ECFP4 fingerprint baseline (1.613), while self-consistency Mantel rho=0.852 confirmed the model retains compound mechanism structure internally.\n\nOverall held-out performance: genetic perturbation PCC=0.442 (978-gene subset); novel drug PCC=0.3047 (genome-wide). Analysis of CPI enrichment reveals that training-data overlap inflates apparent performance: 54.9% of Touchstone evaluation pairs overlap with our ChEMBL-derived training CPI pairs, reducing effective EF from 139 to 109 at top 0.5% yet remaining far above random (1.0).\n\nThese findings establish the first large-scale characterization of cell-type-dependent generalization in perturbation-to-phenotype prediction. The observed performance stratification between normal and cancer lines generates testable hypotheses for why virtual cell models degrade on heterogeneous cancer contexts, and provides a diagnostic framework for identifying where and why such models fail--informing future architecture improvements targeting the CPI vocabulary gap, protein encoder design, and cell-type-aware training strategies.",
+    "author_corresponding": "Kai-rui Wei",
+    "author_corresponding_institution": "Xinjiang Medical University",
+    "authors": "Wei, K.; Zhan, L.; Qi, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-18",
+    "doi": "10.64898/2026.08.10.743942",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/18/2026.08.10.743942.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Cancer Cell Line Heterogeneity Imposes a Primary Bottleneck for Virtual Perturbation Screening at Scale",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Xinjiang Medical University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Extends UniPert-G2CP to 162 cell lines and 32,039 compounds; normal lines predict better than cancer lines (PCC 0.480 vs 0.296), flagging cancer heterogeneity…",
+  "title": "Cancer Cell Line Heterogeneity Imposes a Primary Bottleneck for Virtual Perturbation Screening at Scale",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.10.743942"
+}

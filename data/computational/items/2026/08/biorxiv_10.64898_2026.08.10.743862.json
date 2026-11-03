@@ -1,0 +1,44 @@
+{
+  "abstract": "Network centrality is the workhorse of gene prioritisation, yet what a ranking omits is rarely audited. Scoring each selection against an annotation-count-matched maximum-entropy reference--asking whether a selected gene set covers the genomes functional space or collapses it-reveals that the criterion in standard use has a measurable blind spot in exactly the class it is meant to surface. Degree, the most widely used criterion, returns the cross-module bridges that are also locally dominant--connector hubs--and omits the non-hub connectors: where 26% of the genome occupies these coordinating roles, a degree-ranked list holds 18% and an EDVS-ranked list 55%, and degrees top-1% collapses functional coverage below the reference on all five networks tested. We repurpose EDVS (Entropy of Degree-Vector Sums), an information-theoretic diversity measure, as an annotation-free, partition-free centrality that recovers this omitted class. The coverage it preserves is carried by cross-module participation P, which cannot be computed without a community partition; EDVS matches P-level coverage on all five networks using none, and retains 0.84 of its selection under edge perturbation that leaves partition-based selections at 0.21-0.46. The deficit is general: the collapse holds in the same direction on the two networks built without functional annotation (0.5-1.1 bit; co-expression, physical interaction) as on the three supervised by it (1.6-3.3 bit; RiceNet, AraNet, STRING), so supervision amplifies it rather than creates it. The remedy is bounded: EDVS ceases to preserve coverage on the sparse physical-interaction network. And the class EDVS isolates is organizational, not an importance signal: pre-registered probes--essentiality, transcription-factor identity, tissue-specificity, date/party-hub character, phenotype co-localisation--return null or reversed throughout. The conclusive ones are equivalent to their degree-matched nulls within {+/-}5 percentage points (demonstrated, not merely undetected), and the classical coupling of centrality to importance itself holds only network-dependently.\n\nAuthor SummaryGenes rarely act alone: many diseases and agricultural traits are shaped by genes that coordinate several biological processes rather than specialising in one. The standard way to find such genes in a network of gene interactions is to count each genes connections--its \"centrality\"--and rank genes by that count. We show this standard approach has a blind spot: it favours genes that dominate one process over genes that quietly bridge several processes without dominating any, and this blind spot appears across rice, thale cress, and yeast gene networks. We repurpose a diversity measure from an unrelated field (originally used to compare citation patterns) as a new way to rank genes that finds these bridging genes from network structure alone, without needing gene-function annotations--which are themselves incomplete and biased toward well-studied genes--or a prior, unstable step of splitting the network into modules. We are careful to show where the new approach also falls short: on sparse, noisy networks it stops working, and the genes it recovers are not shown to be more biologically important than other genes, only differently positioned. What that position is for is a question this work leaves open.",
+  "authors": [
+    "Qun, Z.",
+    "Huaizheng, Z.",
+    "Yuxin, Z.",
+    "Jieying, B.",
+    "Tan, S."
+  ],
+  "doi": "10.64898/2026.08.10.743862",
+  "first_seen": "2026-08-21",
+  "id": "biorxiv:10.64898/2026.08.10.743862",
+  "metadata": {
+    "abstract": "Network centrality is the workhorse of gene prioritisation, yet what a ranking omits is rarely audited. Scoring each selection against an annotation-count-matched maximum-entropy reference--asking whether a selected gene set covers the genomes functional space or collapses it-reveals that the criterion in standard use has a measurable blind spot in exactly the class it is meant to surface. Degree, the most widely used criterion, returns the cross-module bridges that are also locally dominant--connector hubs--and omits the non-hub connectors: where 26% of the genome occupies these coordinating roles, a degree-ranked list holds 18% and an EDVS-ranked list 55%, and degrees top-1% collapses functional coverage below the reference on all five networks tested. We repurpose EDVS (Entropy of Degree-Vector Sums), an information-theoretic diversity measure, as an annotation-free, partition-free centrality that recovers this omitted class. The coverage it preserves is carried by cross-module participation P, which cannot be computed without a community partition; EDVS matches P-level coverage on all five networks using none, and retains 0.84 of its selection under edge perturbation that leaves partition-based selections at 0.21-0.46. The deficit is general: the collapse holds in the same direction on the two networks built without functional annotation (0.5-1.1 bit; co-expression, physical interaction) as on the three supervised by it (1.6-3.3 bit; RiceNet, AraNet, STRING), so supervision amplifies it rather than creates it. The remedy is bounded: EDVS ceases to preserve coverage on the sparse physical-interaction network. And the class EDVS isolates is organizational, not an importance signal: pre-registered probes--essentiality, transcription-factor identity, tissue-specificity, date/party-hub character, phenotype co-localisation--return null or reversed throughout. The conclusive ones are equivalent to their degree-matched nulls within {+/-}5 percentage points (demonstrated, not merely undetected), and the classical coupling of centrality to importance itself holds only network-dependently.\n\nAuthor SummaryGenes rarely act alone: many diseases and agricultural traits are shaped by genes that coordinate several biological processes rather than specialising in one. The standard way to find such genes in a network of gene interactions is to count each genes connections--its \"centrality\"--and rank genes by that count. We show this standard approach has a blind spot: it favours genes that dominate one process over genes that quietly bridge several processes without dominating any, and this blind spot appears across rice, thale cress, and yeast gene networks. We repurpose a diversity measure from an unrelated field (originally used to compare citation patterns) as a new way to rank genes that finds these bridging genes from network structure alone, without needing gene-function annotations--which are themselves incomplete and biased toward well-studied genes--or a prior, unstable step of splitting the network into modules. We are careful to show where the new approach also falls short: on sparse, noisy networks it stops working, and the genes it recovers are not shown to be more biologically important than other genes, only differently positioned. What that position is for is a question this work leaves open.",
+    "author_corresponding": "Qun Zhao",
+    "author_corresponding_institution": "Chinese Academy of Agricultural Sciences",
+    "authors": "Qun, Z.; Huaizheng, Z.; Yuxin, Z.; Jieying, B.; Tan, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-21",
+    "doi": "10.64898/2026.08.10.743862",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/21/2026.08.10.743862.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Degree-ranked gene lists omit the cross-module connectors, and a partition-free centrality recovers them",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Chinese Academy of Agricultural Sciences",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-08-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows degree-ranked gene lists miss cross-module connector genes; proposes partition-free EDVS centrality that recovers them, tested on five plant and yeast…",
+  "title": "Degree-ranked gene lists omit the cross-module connectors, and a partition-free centrality recovers them",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.10.743862"
+}

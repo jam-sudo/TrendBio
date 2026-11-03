@@ -1,0 +1,41 @@
+{
+  "abstract": "Machine learning models for protein properties are usually reported by a single accuracy figure, which says how a model behaves on average but not whether to act on any one prediction, especially for a protein unlike anything in the training set. That gap is both a black box problem and an out-of-distribution problem, and it is worst exactly where discovery work happens, on sequences the model has not seen. We present ProtTrust-XAI, a framework that scores each prediction by ensemble consensus and by the structural coherence of its own attribution, and separately tracks a third signal, distance from the training distribution, to catch cases the first two cannot see. We demonstrate it on per-protein thermostability, training a relational graph convolutional network on melting temperatures for over 20,000 proteins using AlphaFold-derived contact graphs and frozen protein language model embeddings. On family-level held-out proteins the model reaches a Spearman correlation of 0.65 and a mean absolute error of 4.1{degrees}C, and predictions the framework labels most trustworthy fall to 3.0{degrees}C, below the assays own reproducibility floor, so a practitioner can act on the label with the same confidence as on the measurement itself. Applying the framework across the full dataset also exposes two representational blind spots, one around cofactor chemistry and one around membrane proteins, each with a distinct mechanistic explanation that points to a specific fix. Transferred to plastic-degrading enzymes at low sequence identity to the training data, absolute predictions collapse while the ranking survives, and a controlled ablation shows this is a general property of distribution shift rather than something particular to that external set. The same transfer identifies where the distance-based signal itself needs recalibrating before deployment, which is a diagnosis the framework produces about itself and not a hidden failure. The result is a practical rule. Inside a models competence domain, trust its labels. Outside it, trust its ranking. A model that reports its own limits, rather than only its average accuracy, is one an experimentalist can actually build on.",
+  "authors": [
+    "Onawole, A.",
+    "Adegoke, R."
+  ],
+  "doi": "10.64898/2026.08.01.742252",
+  "first_seen": "2026-08-06",
+  "id": "biorxiv:10.64898/2026.08.01.742252",
+  "metadata": {
+    "abstract": "Machine learning models for protein properties are usually reported by a single accuracy figure, which says how a model behaves on average but not whether to act on any one prediction, especially for a protein unlike anything in the training set. That gap is both a black box problem and an out-of-distribution problem, and it is worst exactly where discovery work happens, on sequences the model has not seen. We present ProtTrust-XAI, a framework that scores each prediction by ensemble consensus and by the structural coherence of its own attribution, and separately tracks a third signal, distance from the training distribution, to catch cases the first two cannot see. We demonstrate it on per-protein thermostability, training a relational graph convolutional network on melting temperatures for over 20,000 proteins using AlphaFold-derived contact graphs and frozen protein language model embeddings. On family-level held-out proteins the model reaches a Spearman correlation of 0.65 and a mean absolute error of 4.1{degrees}C, and predictions the framework labels most trustworthy fall to 3.0{degrees}C, below the assays own reproducibility floor, so a practitioner can act on the label with the same confidence as on the measurement itself. Applying the framework across the full dataset also exposes two representational blind spots, one around cofactor chemistry and one around membrane proteins, each with a distinct mechanistic explanation that points to a specific fix. Transferred to plastic-degrading enzymes at low sequence identity to the training data, absolute predictions collapse while the ranking survives, and a controlled ablation shows this is a general property of distribution shift rather than something particular to that external set. The same transfer identifies where the distance-based signal itself needs recalibrating before deployment, which is a diagnosis the framework produces about itself and not a hidden failure. The result is a practical rule. Inside a models competence domain, trust its labels. Outside it, trust its ranking. A model that reports its own limits, rather than only its average accuracy, is one an experimentalist can actually build on.",
+    "author_corresponding": "Abdulmujeeb Onawole",
+    "author_corresponding_institution": "The University of Queensland",
+    "authors": "Onawole, A.; Adegoke, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-06",
+    "doi": "10.64898/2026.08.01.742252",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/06/2026.08.01.742252.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Mapping the Competence Boundary of a Protein Property Model: A Case Study on Plastic-Degrading Enzymes using ProtTrust-XAI",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Queensland",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "ProtTrust-XAI scores per-prediction trust in a protein thermostability GNN via ensemble consensus, attribution coherence, and distance from training data;…",
+  "title": "Mapping the Competence Boundary of a Protein Property Model: A Case Study on Plastic-Degrading Enzymes using ProtTrust-XAI",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.01.742252"
+}

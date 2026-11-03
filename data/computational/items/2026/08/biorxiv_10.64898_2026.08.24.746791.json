@@ -1,0 +1,44 @@
+{
+  "abstract": "Post-translational modifications (PTMs) regulate protein function, making accurate residue-level PTM prediction essential for understanding cellular mechanisms and disease pathways. While decoder-only protein language models (PLMs) pretrained with the causal language modeling (CLM) objective have driven breakthroughs across various bioinformatics tasks, their potential for PTM prediction remains largely underexplored. CLM-based PLMs that rely on Byte-Pair Encoding (BPE) for tokenization, such as ProtGPT2, introduce intra-token label collision by merging multiple amino acids with conflicting labels into a single token, creating a major bottleneck for residue-level tasks. To overcome this, we propose TaHL-PTM (Target-Hooked Low-rank adaptation for PTM prediction), a novel framework that integrates target-hooked tokenization with site-directed discriminative LoRA fine-tuning. Target-hooked tokenization constrains tokenization around the candidate residue using dedicated marker tokens to eliminate intra-token label collision while preserving the surrounding sequence context, whereas the proposed discriminative objective repurposes the standard generative CLM objective for residue-level PTM classification by directly optimizing the separation between modified and unmodified sites. We benchmark TaHL-PTM across six distinct PTM tasks on ProtGPT2 and ProGen2 models. TaHL-PTM consistently improves MCC, with the largest gain of up to +0.11 for tyrosine phosphorylation (0.34 to 0.45), alongside improvements in F1, AUROC, and AUPR. Performance gains are more pronounced for collision-affected samples, validating the effectiveness of target-hooked tokenization, while consistent improvements across both BPE-based and per-residue-based causal PLMs demonstrate that the proposed framework generalizes across models with different pretraining tokenization schemes.",
+  "authors": [
+    "Prasain, B.",
+    "Pratyush, P.",
+    "Schulze, S.",
+    "KC, D. B."
+  ],
+  "doi": "10.64898/2026.08.24.746791",
+  "first_seen": "2026-08-27",
+  "id": "biorxiv:10.64898/2026.08.24.746791",
+  "metadata": {
+    "abstract": "Post-translational modifications (PTMs) regulate protein function, making accurate residue-level PTM prediction essential for understanding cellular mechanisms and disease pathways. While decoder-only protein language models (PLMs) pretrained with the causal language modeling (CLM) objective have driven breakthroughs across various bioinformatics tasks, their potential for PTM prediction remains largely underexplored. CLM-based PLMs that rely on Byte-Pair Encoding (BPE) for tokenization, such as ProtGPT2, introduce intra-token label collision by merging multiple amino acids with conflicting labels into a single token, creating a major bottleneck for residue-level tasks. To overcome this, we propose TaHL-PTM (Target-Hooked Low-rank adaptation for PTM prediction), a novel framework that integrates target-hooked tokenization with site-directed discriminative LoRA fine-tuning. Target-hooked tokenization constrains tokenization around the candidate residue using dedicated marker tokens to eliminate intra-token label collision while preserving the surrounding sequence context, whereas the proposed discriminative objective repurposes the standard generative CLM objective for residue-level PTM classification by directly optimizing the separation between modified and unmodified sites. We benchmark TaHL-PTM across six distinct PTM tasks on ProtGPT2 and ProGen2 models. TaHL-PTM consistently improves MCC, with the largest gain of up to +0.11 for tyrosine phosphorylation (0.34 to 0.45), alongside improvements in F1, AUROC, and AUPR. Performance gains are more pronounced for collision-affected samples, validating the effectiveness of target-hooked tokenization, while consistent improvements across both BPE-based and per-residue-based causal PLMs demonstrate that the proposed framework generalizes across models with different pretraining tokenization schemes.",
+    "author_corresponding": "Dukka B KC",
+    "author_corresponding_institution": "Rochester Institute of Technology",
+    "authors": "Prasain, B.; Pratyush, P.; Schulze, S.; KC, D. B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-27",
+    "doi": "10.64898/2026.08.24.746791",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/27/2026.08.24.746791.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TaHL-PTM: Post-Translational Modification Prediction in Proteins via Target-Hooked Discriminative Fine-Tuning of Decoder-only Protein Language Models",
+    "type": "confirmatory results",
+    "version": "1"
+  },
+  "org": "Rochester Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "proteomics"
+  ],
+  "source": "biorxiv",
+  "summary": "TaHL-PTM uses target-hooked tokenization and discriminative LoRA fine-tuning of decoder-only protein language models to improve residue-level PTM prediction,…",
+  "title": "TaHL-PTM: Post-Translational Modification Prediction in Proteins via Target-Hooked Discriminative Fine-Tuning of Decoder-only Protein Language Models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.24.746791"
+}

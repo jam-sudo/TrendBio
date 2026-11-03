@@ -1,0 +1,42 @@
+{
+  "abstract": "The 5' untranslated region (5' UTR) shapes translation initiation, so its design is central to mRNA therapeutics and to improving protein-production cell lines. Deep-learning models that predict translation efficiency, measured as mean ribosome load (MRL), from the 5' UTR sequence have been combined with genetic algorithms (GAs) for sequence optimization. However, optimizing against a model trained on offline data risks reward hacking that exploits the models estimation error outside the training distribution, yielding sequences that score highly in prediction yet fail to perform in the wet lab. Yet for 5' UTR design, few studies have systematically examined which region should be treated as untrustworthy (the definition of out-of-distribution, OOD) or which constraints keep the search away from it.\n\nWe present a constrained optimization that keeps candidates within a trust region where the predictors validated accuracy holds; here \"reliable\" denotes keeping candidates within the training distribution over which prediction has been validated, not a guarantee of measured performance. As the OOD score, we compare the k-nearest-neighbor (KNN) distance in the predictors embedding space against a pseudo-perplexity (PPPL) from the encoder and LM head, and show that for nucleotide sequences--whose vocabulary is small--PPPL fails to separate in- vs out-of-distribution, whereas the KNN distance is an effective OOD score that can define a trust region even from unlabeled native UTR sequences. Using the KNN distance as a hard GA constraint keeps all candidates inside the trust region while maintaining predicted MRL: under unconstrained optimization most final-generation candidates (72-96% across seeds) left the trust region (self-KNN p95), whereas the hard constraint holds predicted MRL at the unconstrained level and yields about 4.3x more selectable low-risk candidates than post-hoc filtering of the unconstrained output. Comparing an output extrapolation guard, reference-sequence similarity and structural accessibility (RNAplfold), we find that the guard and the similarity constraint also suppress OOD as a side effect, whereas making accessibility a secondary objective broadens the search without suppressing OOD.",
+  "authors": [
+    "Yamaguchi, R.",
+    "Mori, C.",
+    "Inoue, S."
+  ],
+  "doi": "10.64898/2026.08.03.742388",
+  "first_seen": "2026-08-07",
+  "id": "biorxiv:10.64898/2026.08.03.742388",
+  "metadata": {
+    "abstract": "The 5' untranslated region (5' UTR) shapes translation initiation, so its design is central to mRNA therapeutics and to improving protein-production cell lines. Deep-learning models that predict translation efficiency, measured as mean ribosome load (MRL), from the 5' UTR sequence have been combined with genetic algorithms (GAs) for sequence optimization. However, optimizing against a model trained on offline data risks reward hacking that exploits the models estimation error outside the training distribution, yielding sequences that score highly in prediction yet fail to perform in the wet lab. Yet for 5' UTR design, few studies have systematically examined which region should be treated as untrustworthy (the definition of out-of-distribution, OOD) or which constraints keep the search away from it.\n\nWe present a constrained optimization that keeps candidates within a trust region where the predictors validated accuracy holds; here \"reliable\" denotes keeping candidates within the training distribution over which prediction has been validated, not a guarantee of measured performance. As the OOD score, we compare the k-nearest-neighbor (KNN) distance in the predictors embedding space against a pseudo-perplexity (PPPL) from the encoder and LM head, and show that for nucleotide sequences--whose vocabulary is small--PPPL fails to separate in- vs out-of-distribution, whereas the KNN distance is an effective OOD score that can define a trust region even from unlabeled native UTR sequences. Using the KNN distance as a hard GA constraint keeps all candidates inside the trust region while maintaining predicted MRL: under unconstrained optimization most final-generation candidates (72-96% across seeds) left the trust region (self-KNN p95), whereas the hard constraint holds predicted MRL at the unconstrained level and yields about 4.3x more selectable low-risk candidates than post-hoc filtering of the unconstrained output. Comparing an output extrapolation guard, reference-sequence similarity and structural accessibility (RNAplfold), we find that the guard and the similarity constraint also suppress OOD as a side effect, whereas making accessibility a secondary objective broadens the search without suppressing OOD.",
+    "author_corresponding": "Ryohei Yamaguchi",
+    "author_corresponding_institution": "AGC Inc.",
+    "authors": "Yamaguchi, R.; Mori, C.; Inoue, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-07",
+    "doi": "10.64898/2026.08.03.742388",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/07/2026.08.03.742388.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Distribution-Constrained Optimization for Reliable ML-Guided 5'UTR Sequence Design",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "AGC Inc.",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Constrains genetic-algorithm 5' UTR design to a KNN-distance trust region in predictor embedding space, reducing out-of-distribution candidates while keeping…",
+  "title": "Distribution-Constrained Optimization for Reliable ML-Guided 5'UTR Sequence Design",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.03.742388"
+}

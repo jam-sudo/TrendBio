@@ -1,0 +1,32 @@
+{
+  "abstract": "What happens when you teach an LLM-based agent the scientific method?\n  Motivation: Scientific discovery emerges from cycles of hypothesis, implementation, empirical testing, and feedback. Can this process be automated? We approach automated algorithm design through the lens of the scientific method, where an LLM-based agent goes through each step of the process in an ordered, iterative fashion.\n  Results: We present The Little Scientist, a framework in which a \"Scientist agent\" works inside an evaluation environment that benchmarks its code and returns structured per-instance diagnostics. When the Scientist plateaus at a local optimum, a \"Kuhn agent\" injects a paradigm-shifting conjecture paired with a cross-disciplinary inspiration, forcing exploration of a different region of the LLM's latent space. We demonstrate the framework on two problems that require fundamentally different modes of discovery. For protein fitness prediction, the Scientist discovered Delta V, an ensemble calibration strategy that ranks first on the ProteinGym DMS Substitutions Zero-Shot leaderboard across all five official evaluation metrics, exceeding the #2 model (VenusREM) by +0.033 mean Spearman correlation across 217 DMS assays. For DNA motif discovery, the Scientist wrote an algorithm from scratch--DALE (Dual-seed Algorithm for Latent Enumeration)--that outperforms STREME (the default in the MEME Suite) across 132 ENCODE transcription factors (mean AUROC 0.842 vs. 0.803, Wilcoxon p < 10^{-6}) while running 11x faster. This demonstrates that the framework can produce genuinely novel algorithms, not just optimize existing components. Together, these results show that an LLM agent stepping through the scientific method can discover both new algorithms and new ensemble strategies that outperform prior solutions. The entire research program consumed 704M tokens on a single virtual machine with no GPUs",
+  "authors": [
+    "Travis Smith"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-16",
+  "id": "arxiv:2608.16951",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.MA"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.16951v1</ns0:id>\n    <ns0:title>The Little Scientist: LLM Agent-Driven Discovery via the Scientific Method</ns0:title>\n    <ns0:updated>2026-08-16T01:32:45Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.16951v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.16951v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>What happens when you teach an LLM-based agent the scientific method?\n  Motivation: Scientific discovery emerges from cycles of hypothesis, implementation, empirical testing, and feedback. Can this process be automated? We approach automated algorithm design through the lens of the scientific method, where an LLM-based agent goes through each step of the process in an ordered, iterative fashion.\n  Results: We present The Little Scientist, a framework in which a \"Scientist agent\" works inside an evaluation environment that benchmarks its code and returns structured per-instance diagnostics. When the Scientist plateaus at a local optimum, a \"Kuhn agent\" injects a paradigm-shifting conjecture paired with a cross-disciplinary inspiration, forcing exploration of a different region of the LLM's latent space. We demonstrate the framework on two problems that require fundamentally different modes of discovery. For protein fitness prediction, the Scientist discovered Delta V, an ensemble calibration strategy that ranks first on the ProteinGym DMS Substitutions Zero-Shot leaderboard across all five official evaluation metrics, exceeding the #2 model (VenusREM) by +0.033 mean Spearman correlation across 217 DMS assays. For DNA motif discovery, the Scientist wrote an algorithm from scratch--DALE (Dual-seed Algorithm for Latent Enumeration)--that outperforms STREME (the default in the MEME Suite) across 132 ENCODE transcription factors (mean AUROC 0.842 vs. 0.803, Wilcoxon p &lt; 10^{-6}) while running 11x faster. This demonstrates that the framework can produce genuinely novel algorithms, not just optimize existing components. Together, these results show that an LLM agent stepping through the scientific method can discover both new algorithms and new ensemble strategies that outperform prior solutions. The entire research program consumed 704M tokens on a single virtual machine with no GPUs</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.MA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-16T01:32:45Z</ns0:published>\n    <ns1:comment>Code: https://github.com/travis42/little-scientist-dale and https://github.com/travis42/little-scientist-delta-v (Apache 2.0)</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Travis Smith</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "LLM agent framework automates algorithm design via the scientific method, yielding a top ProteinGym fitness ensemble and DALE, a faster DNA motif algorithm…",
+  "title": "The Little Scientist: LLM Agent-Driven Discovery via the Scientific Method",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.16951v1"
+}

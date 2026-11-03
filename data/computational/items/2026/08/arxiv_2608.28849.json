@@ -1,0 +1,31 @@
+{
+  "abstract": "Batch integration is a central preprocessing step in single-cell genomics, where datasets collected across experiments, donors, and protocols must be combined despite pervasive technical batch effects. The leading integration methods produce a shared low-dimensional embedding, which discards the corrected gene-expression values that downstream differential-expression, biomarker, and other analyses depend on. The feature-space (expression-correcting) methods that do preserve genes typically align the marginal expression distributions of batches and thereby risk erasing genuine biological variation whenever cell-type composition differs across batches, i.e. whenever batch effect and biological signal are confounded. We recast single-cell batch integration as confounded domain adaptation and apply ConDo, a method that matches conditional expression distributions given the cell-type annotation rather than marginal distributions. To extend ConDo's pairwise source-to-target adapter to the many-batch setting, we introduce an agglomerative compatibility-graph integrator: batches are nodes connected when they share a cell type, and we greedily merge each best-scoring neighbor into a growing reference by fitting one ConDo adapter. On the Open Problems Batch Integration Benchmark, ConDo is the strongest feature-space integrator, ranking first among feature methods on five of six datasets. Furthermore, it is competitive with or better than deep embedding methods on the overall score, ranking first across all methods on four of six datasets while returning corrected expression rather than an opaque embedding.",
+  "authors": [
+    "Calvin McCarter"
+  ],
+  "doi": null,
+  "first_seen": "2026-08-28",
+  "id": "arxiv:2608.28849",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2608.28849v1</ns0:id>\n    <ns0:title>Confounder-Aware Feature Correction for Single-Cell Batch Integration</ns0:title>\n    <ns0:updated>2026-08-28T20:41:24Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2608.28849v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2608.28849v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Batch integration is a central preprocessing step in single-cell genomics, where datasets collected across experiments, donors, and protocols must be combined despite pervasive technical batch effects. The leading integration methods produce a shared low-dimensional embedding, which discards the corrected gene-expression values that downstream differential-expression, biomarker, and other analyses depend on. The feature-space (expression-correcting) methods that do preserve genes typically align the marginal expression distributions of batches and thereby risk erasing genuine biological variation whenever cell-type composition differs across batches, i.e. whenever batch effect and biological signal are confounded. We recast single-cell batch integration as confounded domain adaptation and apply ConDo, a method that matches conditional expression distributions given the cell-type annotation rather than marginal distributions. To extend ConDo's pairwise source-to-target adapter to the many-batch setting, we introduce an agglomerative compatibility-graph integrator: batches are nodes connected when they share a cell type, and we greedily merge each best-scoring neighbor into a growing reference by fitting one ConDo adapter. On the Open Problems Batch Integration Benchmark, ConDo is the strongest feature-space integrator, ranking first among feature methods on five of six datasets. Furthermore, it is competitive with or better than deep embedding methods on the overall score, ranking first across all methods on four of six datasets while returning corrected expression rather than an opaque embedding.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-08-28T20:41:24Z</ns0:published>\n    <ns1:comment>Accepted as a non-archival poster at MLCB 2026</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Calvin McCarter</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes ConDo, a conditional-distribution domain adaptation method for single-cell batch correction that preserves corrected gene expression, with an…",
+  "title": "Confounder-Aware Feature Correction for Single-Cell Batch Integration",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2608.28849v1"
+}

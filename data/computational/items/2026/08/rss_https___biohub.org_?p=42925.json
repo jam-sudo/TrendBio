@@ -1,0 +1,85 @@
+{
+  "abstract": "<p>Tumors are patchworks of distinct malignant cell states, each with its own survival strategy. With AI, Biohub scientists are discovering drug combinations that defeat them all at once.</p>\n<p>The post <a href=\"https://biohub.org/blog/cancer-drug-combinations-ai/\">Why one drug isn&#8217;t enough: AI reveals cancer’s secret weapon – and how to beat it</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>",
+  "authors": [],
+  "doi": null,
+  "first_seen": "2026-08-26",
+  "id": "rss:https://biohub.org/?p=42925",
+  "metadata": {
+    "author": "jrichmond@contractor.chanzuckerberg.com",
+    "author_detail": {
+      "email": "jrichmond@contractor.chanzuckerberg.com"
+    },
+    "authors": [
+      {
+        "email": "jrichmond@contractor.chanzuckerberg.com"
+      }
+    ],
+    "content": [
+      {
+        "base": "",
+        "language": null,
+        "type": "text/html",
+        "value": "<p class=\"wp-block-paragraph\">Cancer treatments often show early promise: tumors shrink and symptoms ease. But in many cases, the disease comes roaring back, driven by treatment-resistant cells. Part of what makes cancer so difficult to cure is that cells within a tumor are not cookie-cutter – they vary widely.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Cancer cells within a tumor exist in multiple distinct malignant states, a property called &#8220;heterogeneity.&#8221; These states can also switch into one another, a property called &#8220;plasticity&#8221; — like a phone moving between airplane mode, power-saving mode, or full-performance mode. The cells share the same lineage and DNA, yet may develop into different states depending on which regulatory proteins are active in each cell, much like the normal cells in our body can have widely different states and yet carry the same DNA. Drugs used to treat a tumor are often effective only for a few of the specific states, so cells in other states remain and repopulate, making the tumor difficult to eradicate.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Researchers at Biohub and collaborators from Columbia University and other institutions have developed a novel AI-based system to model how individual cells within a tumor behave and interact with drugs. The work, published in a pair of papers in <em>Nature Genetics</em>, supports a new hypothesis the team calls &#8220;cancer quantum biology&#8221; — that tumors of the same type have virtually identical sets of cell states across patients, and that those states interact in ways that defeat treatment. In the pancreatic cancer study, the team showed that cancer cell states can spontaneously reprogram themselves into one another, allowing tumors to evade drugs targeting any single state. In the Diffuse Midline Glioma (DMG) study, the team went further: using AI to predict drugs that target each individual state, validating those predictions experimentally, and showing that drug combinations targeting multiple states simultaneously produced synergistic effects, doubling the survival achieved by individual drugs.</p>\n\n\n\n<p class=\"wp-block-paragraph\">The method worked across two difficult-to-treat cancers: pancreatic ductal adenocarcinoma, the most common type of pancreatic cancer, and DMG, a rare brain tumor that occurs most frequently in children between the ages of five and 10. “These tumors often kill the patient within nine months,” says study co-author Andrea Califano, head of Biohub, New York. </p>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\">\n<p class=\"has-text-align-center wp-block-paragraph\">“There is a desperate need for new ways to target these malignancies.”</p>\n</blockquote>\n\n\n\n<p class=\"wp-block-paragraph\">The work, published in a pair of papers in <em>Nature Genetics</em> (<a href=\"https://www.nature.com/articles/s41588-026-02550-w\" rel=\"noreferrer noopener\" target=\"_blank\">April 2026</a> and <a href=\"https://www.nature.com/articles/s41588-026-02714-8\" rel=\"noreferrer noopener\" target=\"_blank\">August 2026</a>), represents the first time researchers have successfully shown that cancer cell states and their vulnerabilities, known as “Master Regulators,” are ultraconserved across patients and predicted drugs that target them in each of the coexisting cancer cell states, leading to effective combination therapies.</p>\n\n\n\n<p class=\"wp-block-paragraph\">A central Biohub goal is understanding how to <a href=\"https://biohub.org/immune-cell-reprogramming/\">engineer immune cells</a> to detect cancer as it arises, and to precisely target diseased cells as early as possible. Tumors themselves are exceptional immune-cell engineers, leveraging various cell states to create microenvironments that ward off immune attacks. By mapping the regulatory proteins that govern these cell states, the new research brings the field closer to this goal — and the authors had previously shown that targeting the Master Regulators of a tumor greatly improves response to immunotherapy.</p>\n\n\n\n<figure class=\"wp-block-image size-large\"><img alt=\"Tumor tissue color-coded by MAPK activity, showing mostly MAPK-low cells in teal with scattered MAPK-high cells in orange.\" class=\"wp-image-42990\" height=\"538\" src=\"https://biohub.org/wp-content/uploads/sites/32/2026/08/figure-2-panel-b-mapk-pathway-activity.png?w=1024\" width=\"1024\" /><figcaption class=\"wp-element-caption\" id=\"video-caption-6ae9612de791b\">The same tumor section, now color-coded by MAPK pathway activity rather than cell lineage — teal marks the MAPK-low cells that make up most of the tumor, while orange marks the rarer MAPK-high cells clustered nearby.</figcaption></figure>\n\n\n\n<h2 class=\"wp-block-heading\">How AI maps a tumor&#8217;s hidden complexity</h2>\n\n\n\n<p class=\"wp-block-paragraph\">First, the researchers needed to map how many and what types of cell states were present in each form of cancer. They did this by tracking which Master Regulator proteins governed the state of each single cell. Using single-cell RNA sequencing data from patient tumors, researchers identified these Master Regulators with two state-of-the-art AI-based algorithms developed in Califano’s lab and now used across Biohub to analyze single-cell data: ARACNe and VIPER/metaVIPER.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">By combining network modeling with computational analysis, these tools make it possible to determine how individual cells maintain different states within a tumor. ARACNe reconstructs gene-regulatory networks by identifying direct links between transcription factors and their target genes. It uses information theory, a branch of mathematics, to produce a map of how the cell is controlled. VIPER then identifies the cell’s master regulators — proteins that control a cell’s behavior and regulate which state it is in — based on the differential expression of their target genes.</p>\n\n\n\n<p class=\"wp-block-paragraph\">The team found that the same malignant cell states were virtually identically conserved across all patients in multiple cohorts representing the same tumor: across cohorts representing more than a hundred pancreatic cancer patients and fourteen diffuse midline gliomas. Though the fraction of cells in each state varied, every patient with glioma, for example, had cells in the same seven states. In pancreatic cancer, virtually all cells with high-quality data fell into the same six cell states.</p>\n\n\n\n<p class=\"wp-block-paragraph\">This was a significant finding — and a clarifying one. The field has long assumed that the internal variety of tumors was essentially limitless and different in every person, driving the push toward personalized medicine. This work suggests the opposite may be closer to the truth.</p>\n\n\n\n<figure class=\"wp-block-image size-large\"><img alt=\"Histology image of a glandular tumor with malignant cell states in red and green against magenta stroma.\" class=\"wp-image-42991\" height=\"538\" src=\"https://biohub.org/wp-content/uploads/sites/32/2026/08/figure-2-panel-a-tumor-cell-states_d7505f.png?w=1024\" width=\"1024\" /><figcaption class=\"wp-element-caption\" id=\"video-caption-6ae9612de7dc1\">A glandular tumor structure with coexisting malignant cell states mapped in red and green, set against the surrounding stroma (magenta) — showing how different cancer cell populations organize into specific regions of the tissue.</figcaption></figure>\n\n\n\n<h2 class=\"wp-block-heading\">From map to medicine</h2>\n\n\n\n<p class=\"wp-block-paragraph\">With the cell states and their master regulators now known, it was time to test approved drugs to see which might work against each tumor cell state. For this step, the team focused on DMG.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">They screened 372 clinically relevant oncology drugs and analyzed how the cells responded to each drug after 24 hours. Instead of simply measuring whether cells died, the researchers analyzed how each drug changed the activity of master regulators within the cells, revealing whether a drug disrupted the regulatory networks that maintain specific tumor cell states.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">The team then fed these drug profiles into two other clinical-grade computational tools—OncoTarget and OncoTreat—that predict which drugs can best switch off the master regulators that keep each tumor cell state alive. One of these network-based algorithms identifies drugs that directly inhibit a key regulator, and the other flags those that can reverse the broader regulatory program sustaining a given cell state.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Both have been tested in a <a href=\"https://pubmed.ncbi.nlm.nih.gov/37061969/\" rel=\"noreferrer noopener\" target=\"_blank\">large preclinical study</a> and are <a href=\"https://www.pathology.columbia.edu/diagnostic-specialties/personalized-genomic-medicine/oncology-testing/darwin-oncotarget-tm-oncotreat\" rel=\"noreferrer noopener\" target=\"_blank\">now being applied clinically</a> to guide cancer treatment. Using these technologies, the team systematically identified drugs capable of reversing individual cell states in DMG, achieving roughly 90% predictive accuracy and specificity in single-cell state depletion assays, which measure the proportion of cells remaining in a specific state after treatment.&nbsp;</p>\n\n\n\n<figure class=\"wp-block-image size-large\"><img alt=\"Same tumor gland as Panel C, recolored by MAPK activity, with MAPK-high cells in orange near the gland edge.\" class=\"wp-image-42992\" height=\"538\" src=\"https://biohub.org/wp-content/uploads/sites/32/2026/08/figure-2-panel-d-mapk-pathway-activity.png?w=1024\" width=\"1024\" /><figcaption class=\"wp-element-caption\" id=\"video-caption-6ae9612de8346\">The same tumor structure, now color-coded by MAPK pathway activity — teal marks the dominant MAPK-low population, while small clusters of MAPK-high cells (orange) appear near the gland&#8217;s edge.</figcaption></figure>\n\n\n\n<h2 class=\"wp-block-heading\">Putting predictions to the test</h2>\n\n\n\n<p class=\"wp-block-paragraph\">Next, those drug predictions needed to be validated. In a mouse model of DMG, in which the tumor was under the skin, eight out of nine drugs tested precisely depleted the predicted target states. “That is pretty remarkable, because we started with 372 possible drugs, virtually all those that are currently clinically relevant in oncology,” says Califano.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">With that success, the team then started combining drugs to target two states at once, and found that some drug combinations increased survival. Across these experiments, four out of six drug combinations tested showed much stronger benefit than single-drug treatments.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">The team then tested the drugs in a second mouse model, in which the tumor was in the brain. Here, they noticed a clear pattern: When a drug depleted one cell state, other, non-targeted states became more dominant, meaning that the tumors shifted toward cells that were able to survive the treatment, the very nature of drug resistance. Drug combinations were tested in DMG orthotopic models.</p>\n\n\n\n<p class=\"wp-block-paragraph\">This confirms why combination therapy is often needed across various cancers – eliminating only one cell state allows the others to take over.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">In the case of DMG, a combination of two drugs, avapritinib and ruxolitinib, offered the greatest survival gains. While FDA-approved for other conditions, these drugs have not previously been used to treat DMG.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">To directly apply their findings to human health, the Biohub team is now working with partners to build a clinical trial for the newly discovered DMG drug regimen. “Targeting different cell states simultaneously or sequentially would appear to be the only way forward,” says Califano. “Every tumor we’ve seen is made up of multiple states, and unless you hit more than one at a time, the cancer finds a way back.”</p>\n<p>The post <a href=\"https://biohub.org/blog/cancer-drug-combinations-ai/\">Why one drug isn&#8217;t enough: AI reveals cancer’s secret weapon – and how to beat it</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>"
+      }
+    ],
+    "feed_kind": "company",
+    "feed_name": "Chan Zuckerberg Biohub",
+    "feed_url": "https://biohub.org/feed/",
+    "guidislink": false,
+    "id": "https://biohub.org/?p=42925",
+    "link": "https://biohub.org/blog/cancer-drug-combinations-ai/",
+    "links": [
+      {
+        "href": "https://biohub.org/blog/cancer-drug-combinations-ai/",
+        "rel": "alternate",
+        "type": "text/html"
+      }
+    ],
+    "post-id": "42925",
+    "published": "Wed, 26 Aug 2026 09:00:00 +0000",
+    "published_parsed": [
+      2026,
+      8,
+      26,
+      9,
+      0,
+      0,
+      2,
+      238,
+      0
+    ],
+    "summary": "<p>Tumors are patchworks of distinct malignant cell states, each with its own survival strategy. With AI, Biohub scientists are discovering drug combinations that defeat them all at once.</p>\n<p>The post <a href=\"https://biohub.org/blog/cancer-drug-combinations-ai/\">Why one drug isn&#8217;t enough: AI reveals cancer’s secret weapon – and how to beat it</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>",
+    "summary_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/html",
+      "value": "<p>Tumors are patchworks of distinct malignant cell states, each with its own survival strategy. With AI, Biohub scientists are discovering drug combinations that defeat them all at once.</p>\n<p>The post <a href=\"https://biohub.org/blog/cancer-drug-combinations-ai/\">Why one drug isn&#8217;t enough: AI reveals cancer’s secret weapon – and how to beat it</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>"
+    },
+    "tags": [
+      {
+        "label": null,
+        "scheme": null,
+        "term": "Immune cell reprogramming"
+      }
+    ],
+    "title": "Why one drug isn’t enough: AI reveals cancer’s secret weapon – and how to beat it",
+    "title_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/plain",
+      "value": "Why one drug isn’t enough: AI reveals cancer’s secret weapon – and how to beat it"
+    }
+  },
+  "org": "Chan Zuckerberg Biohub",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-08-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "rss",
+  "summary": "<p>Tumors are patchworks of distinct malignant cell states, each with its own survival strategy.",
+  "title": "Why one drug isn’t enough: AI reveals cancer’s secret weapon – and how to beat it",
+  "type": "industry",
+  "url": "https://biohub.org/blog/cancer-drug-combinations-ai/"
+}

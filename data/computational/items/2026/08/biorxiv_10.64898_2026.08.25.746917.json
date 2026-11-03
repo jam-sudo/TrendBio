@@ -1,0 +1,42 @@
+{
+  "abstract": "Single-cell RNA sequencing (scRNA-seq) profiles transcriptomes at high resolution but discards the spatial context of cells within a tissue -- information that is essential for studying intercellular mechanisms and tissue architecture. Spatial transcriptomics (ST) retains coordinates but, depending on the assay, trades this off against gene-panel breadth, spatial resolution, or cost. We present G2T (Gene-to-Tissue), a generative deep learning model that reassembles a tissue from gene expression -- its only observed input -- by predicting the matrix of pairwise distances between cells in a learned embedding space. G2T uses an attention-based Transformer with an Euclidean-Distance-Matrix (EDM) output head and is trained with conditional flow matching: the network learns to denoise corrupted cell positions, conditioned on the slice's gene expression, by predicting per-cell embeddings whose pairwise squared distances match the ground-truth distance matrix. At inference, a fast locally-optimal-block (LOBPCG) multidimensional scaling step turns the predicted distance matrix into 2-D coordinates. On a published MERFISH mouse primary motor cortex benchmark, G2T improves over the previous state-of-the-art method, LUNA, across all three standard metrics -- Spearman correlation of pairwise-distance ranks, Contact F1, and per-cell-class Sum RSSD -- and even larger relative gains on the mouse central-nervous-system scRNA-seq atlas, evaluated against an imputed spatial reference (STARmap PLUS-integrated locations, not measured coordinates). By predicting this geometry in a higher-dimensional embedding space rather than regressing 2-D coordinates, G2T relaxes the 2-D output parameterisation of prior diffusion-based methods and yields a compact, scalable building block for reconstructing tissue from dissociated cells, enabling downstream spatial niche and cell-cell communication analysis.",
+  "authors": [
+    "Birk, S.",
+    "Theis, F. J.",
+    "Lotfollahi, M."
+  ],
+  "doi": "10.64898/2026.08.25.746917",
+  "first_seen": "2026-08-28",
+  "id": "biorxiv:10.64898/2026.08.25.746917",
+  "metadata": {
+    "abstract": "Single-cell RNA sequencing (scRNA-seq) profiles transcriptomes at high resolution but discards the spatial context of cells within a tissue -- information that is essential for studying intercellular mechanisms and tissue architecture. Spatial transcriptomics (ST) retains coordinates but, depending on the assay, trades this off against gene-panel breadth, spatial resolution, or cost. We present G2T (Gene-to-Tissue), a generative deep learning model that reassembles a tissue from gene expression -- its only observed input -- by predicting the matrix of pairwise distances between cells in a learned embedding space. G2T uses an attention-based Transformer with an Euclidean-Distance-Matrix (EDM) output head and is trained with conditional flow matching: the network learns to denoise corrupted cell positions, conditioned on the slice's gene expression, by predicting per-cell embeddings whose pairwise squared distances match the ground-truth distance matrix. At inference, a fast locally-optimal-block (LOBPCG) multidimensional scaling step turns the predicted distance matrix into 2-D coordinates. On a published MERFISH mouse primary motor cortex benchmark, G2T improves over the previous state-of-the-art method, LUNA, across all three standard metrics -- Spearman correlation of pairwise-distance ranks, Contact F1, and per-cell-class Sum RSSD -- and even larger relative gains on the mouse central-nervous-system scRNA-seq atlas, evaluated against an imputed spatial reference (STARmap PLUS-integrated locations, not measured coordinates). By predicting this geometry in a higher-dimensional embedding space rather than regressing 2-D coordinates, G2T relaxes the 2-D output parameterisation of prior diffusion-based methods and yields a compact, scalable building block for reconstructing tissue from dissociated cells, enabling downstream spatial niche and cell-cell communication analysis.",
+    "author_corresponding": "Mo Lotfollahi",
+    "author_corresponding_institution": "Wellcome Sanger Institute, Wellcome Genome Campus, UK; Cambridge Stem Cell Institute, University of Cambridge, UK",
+    "authors": "Birk, S.; Theis, F. J.; Lotfollahi, M.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-08-28",
+    "doi": "10.64898/2026.08.25.746917",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/28/2026.08.25.746917.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "G2T: Tissue Reconstruction from Gene Expression via Embedding-Distance Flow Matching",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Wellcome Sanger Institute, Wellcome Genome Campus, UK; Cambridge Stem Cell Institute, University of Cambridge, UK",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "G2T reconstructs tissue spatial layout from gene expression alone via flow-matching prediction of cell embedding distances, outperforming LUNA on MERFISH and…",
+  "title": "G2T: Tissue Reconstruction from Gene Expression via Embedding-Distance Flow Matching",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.25.746917"
+}

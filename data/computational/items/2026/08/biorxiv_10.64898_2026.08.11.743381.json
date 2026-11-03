@@ -1,0 +1,41 @@
+{
+  "abstract": "Methods for predicting cryptic binding sites are compared almost exclusively on top-n recovery, a number that conflates two independent abilities: proposing a candidate at the right location, and ranking it highly enough to be seen. We separate them by retaining the per-candidate overlap of every proposal, rather than only the top five, for four structurally different detectors spanning 2009 to 2026, across the CryptoBench benchmark. The separation is large and it reorders the field. On the designated test fold of 178 structures, fpocket, a purely geometric method from 2009, proposes a qualifying candidate for 74.2% of targets, the highest coverage of any tool tested, yet surfaces one in its top five for only 43.8%. P2Rank proposes qualifying candidates for 66.3% and surfaces 63.5%, and IF-SitePred, a 2024 method built on protein language model embeddings, proposes 70.8% and surfaces 61.8%. Coverage across tools varies by 8 points while conversion, the share of a tools own coverage that reaches the top five, varies from 59% to 96%. Unioning the four detectors reaches 92.1% coverage, and only 7.9% of cryptic sites are invisible to all of them. The fields headroom is therefore predominantly in ranking and in combination, not in detection: perfect ranking of a single tools existing proposals would reach 74.2%, and of the union 92.1%, against the 66.3% currently achieved. We show the practical consequence is governed by candidate budget. Added coverage converts to recovery at about 85% while a structure carries fewer than roughly fifteen candidates and at about 51% above it, which explains a series of interventions that raised coverage and returned nothing. Working within that budget, proposing pockets from a protein language model at locations where geometry finds no concavity improves single-structure recovery by 8.5% (95% CI +4.0 to +13.6) on test-fold data, and lets a five-conformer ensemble match a twenty-conformer one at a third of the wall clock. We release per-candidate overlaps for all tools so that coverage and conversion can be reported separately without re-running any method.",
+  "authors": [
+    "Moore, C. W."
+  ],
+  "doi": "10.64898/2026.08.11.743381",
+  "first_seen": "2026-08-11",
+  "id": "biorxiv:10.64898/2026.08.11.743381",
+  "metadata": {
+    "abstract": "Methods for predicting cryptic binding sites are compared almost exclusively on top-n recovery, a number that conflates two independent abilities: proposing a candidate at the right location, and ranking it highly enough to be seen. We separate them by retaining the per-candidate overlap of every proposal, rather than only the top five, for four structurally different detectors spanning 2009 to 2026, across the CryptoBench benchmark. The separation is large and it reorders the field. On the designated test fold of 178 structures, fpocket, a purely geometric method from 2009, proposes a qualifying candidate for 74.2% of targets, the highest coverage of any tool tested, yet surfaces one in its top five for only 43.8%. P2Rank proposes qualifying candidates for 66.3% and surfaces 63.5%, and IF-SitePred, a 2024 method built on protein language model embeddings, proposes 70.8% and surfaces 61.8%. Coverage across tools varies by 8 points while conversion, the share of a tools own coverage that reaches the top five, varies from 59% to 96%. Unioning the four detectors reaches 92.1% coverage, and only 7.9% of cryptic sites are invisible to all of them. The fields headroom is therefore predominantly in ranking and in combination, not in detection: perfect ranking of a single tools existing proposals would reach 74.2%, and of the union 92.1%, against the 66.3% currently achieved. We show the practical consequence is governed by candidate budget. Added coverage converts to recovery at about 85% while a structure carries fewer than roughly fifteen candidates and at about 51% above it, which explains a series of interventions that raised coverage and returned nothing. Working within that budget, proposing pockets from a protein language model at locations where geometry finds no concavity improves single-structure recovery by 8.5% (95% CI +4.0 to +13.6) on test-fold data, and lets a five-conformer ensemble match a twenty-conformer one at a third of the wall clock. We release per-candidate overlaps for all tools so that coverage and conversion can be reported separately without re-running any method.",
+    "author_corresponding": "Clayton W. Moore",
+    "author_corresponding_institution": "Texas A and M",
+    "authors": "Moore, C. W.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-20",
+    "doi": "10.64898/2026.08.11.743381",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/20/2026.08.11.743381.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Cryptic binding sites are detected but not ranked: coverage, conversion, and the limits of detector consensus",
+    "type": "new results",
+    "version": "2"
+  },
+  "org": "Texas A and M",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-08-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Separates coverage from ranking for cryptic binding site detectors on CryptoBench; fpocket covers 74.2% but tops-5 only 43.8%, and the union reaches 92.1%…",
+  "title": "Cryptic binding sites are detected but not ranked: coverage, conversion, and the limits of detector consensus",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.11.743381"
+}

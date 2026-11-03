@@ -1,0 +1,45 @@
+{
+  "abstract": "Spatially-resolved transcriptomics (SRT) measures gene expression at single-cell resolution while preserving each cells spatial location, enabling the joint study of cell identity and cellular niche, the recurring microenvironment that organises tissue function. Existing representation-learning methods typically capture only one of these axes at a time. We present SQUINT, a graph vector-quantized variational autoencoder (VQ-VAE) that learns two disjoint codebooks per cell from a shared architecture: a cell codebook quantising the per-cell embedding before neighbourhood aggregation, biased toward cell-intrinsic identity, and a niche codebook quantising the embedding after graph neural network (GNN) aggregation, biased toward spatial context. Both use residual vector quantization, giving a coarse-to-fine discrete-token hierarchy. SQUINT is trained with per-branch negative-binomial reconstruction objectives and three domain-motivated components that we show are crucial: a within-section cosine adjacency loss that anchors the niche codes in the spatial graph, a cross-section contrastive loss on the cell latents that aligns transcriptomically matched cells, and a decoder section covariate that absorbs batch effects. Across three datasets spanning four spatial assays (STARmap, MERFISH, CosMx, Xenium) and four tasks - niche identification, cell-type identification, cross-section integration, and spatial gene-expression imputation in held-out regions - SQUINT outperforms or is competitive with strong baselines on identification and achieves the most faithful cross-section integration. The resulting discrete vocabulary makes tissues directly consumable by transformer-style foundation models and enables one-step query-to-reference atlas mapping via code-distribution similarity, which we demonstrate on a CosMx human non-small-cell lung cancer cohort.",
+  "authors": [
+    "Birk, S.",
+    "Merchant, A.",
+    "Vahidi, A.",
+    "Theis, F. J.",
+    "Lotfollahi, M."
+  ],
+  "doi": "10.64898/2026.08.07.743490",
+  "first_seen": "2026-08-17",
+  "id": "biorxiv:10.64898/2026.08.07.743490",
+  "metadata": {
+    "abstract": "Spatially-resolved transcriptomics (SRT) measures gene expression at single-cell resolution while preserving each cells spatial location, enabling the joint study of cell identity and cellular niche, the recurring microenvironment that organises tissue function. Existing representation-learning methods typically capture only one of these axes at a time. We present SQUINT, a graph vector-quantized variational autoencoder (VQ-VAE) that learns two disjoint codebooks per cell from a shared architecture: a cell codebook quantising the per-cell embedding before neighbourhood aggregation, biased toward cell-intrinsic identity, and a niche codebook quantising the embedding after graph neural network (GNN) aggregation, biased toward spatial context. Both use residual vector quantization, giving a coarse-to-fine discrete-token hierarchy. SQUINT is trained with per-branch negative-binomial reconstruction objectives and three domain-motivated components that we show are crucial: a within-section cosine adjacency loss that anchors the niche codes in the spatial graph, a cross-section contrastive loss on the cell latents that aligns transcriptomically matched cells, and a decoder section covariate that absorbs batch effects. Across three datasets spanning four spatial assays (STARmap, MERFISH, CosMx, Xenium) and four tasks - niche identification, cell-type identification, cross-section integration, and spatial gene-expression imputation in held-out regions - SQUINT outperforms or is competitive with strong baselines on identification and achieves the most faithful cross-section integration. The resulting discrete vocabulary makes tissues directly consumable by transformer-style foundation models and enables one-step query-to-reference atlas mapping via code-distribution similarity, which we demonstrate on a CosMx human non-small-cell lung cancer cohort.",
+    "author_corresponding": "Mo Lotfollahi",
+    "author_corresponding_institution": "Wellcome Sanger Institute, Wellcome Genome Campus, Hinxton, Cambridge, UK; Cambridge Center for AI in Medicine, University of Cambridge, Cambridge, UK; Cambridg",
+    "authors": "Birk, S.; Merchant, A.; Vahidi, A.; Theis, F. J.; Lotfollahi, M.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-08-17",
+    "doi": "10.64898/2026.08.07.743490",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/17/2026.08.07.743490.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Learning Discrete Cell and Niche Codes from Spatial Transcriptomics Using Dual Residual Vector Quantization",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Wellcome Sanger Institute, Wellcome Genome Campus, Hinxton, Cambridge, UK; Cambridge Center for AI in Medicine, University of Cambridge, Cambridge, UK; Cambridg",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-08-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "SQUINT, a graph VQ-VAE with dual residual vector-quantized codebooks, learns discrete cell-identity and spatial-niche codes from spatial transcriptomics across…",
+  "title": "Learning Discrete Cell and Niche Codes from Spatial Transcriptomics Using Dual Residual Vector Quantization",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.07.743490"
+}

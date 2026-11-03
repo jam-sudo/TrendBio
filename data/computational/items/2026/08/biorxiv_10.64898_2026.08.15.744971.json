@@ -1,0 +1,42 @@
+{
+  "abstract": "MinHash-based genome comparison is governed by two statistical constraints: a noise floor on k-mer size, controlling chance collisions between unrelated sequences, and a precision floor on sketch size, controlling uncertainty in the estimated Jaccard similarity. These constraints are best characterized for fixed-size bottom-sketch MinHash, the classical construction underlying tools such as Mash and still the standard basis for comparing genomes of similar size. Nevertheless, while, the noise floor has an established closed-form solution, sketch size is commonly selected using fixed defaults or heuristic choices independent of genome length and target precision. Moreover, recent work on scaled (FracMinHash) sketching has highlighted the difficulty of obtaining an analogous closed-form confidence interval for the Jaccard similarity. Here, we show that under the fixed-size bottom-sketch MinHash model, the shared-hash count follows a binomial model, which lets classical proportion-estimation theory be applied directly. Combining this with Fofanov's k-selection criterion and the exact identity-Jaccard relationship yields a single closed-form design rule, s* (L, {rho}* , ), that unifies the noise and precision floors into one operating envelope. The resulting design rule was validated against exact Clopper-Pearson interval inversion, idealized binomial sampling, realistic overlapping k-mer simulation and 54 bacterial genome pairs spanning species-to-order taxonomic levels. In realistic simulations, empirical coverage remained within 1-3 percentage points of the idealized reference in 14 of 15 tested cells. In real genomes, the classical identity-Jaccard relationship showed increasing positive bias with taxonomic divergence, from a median of -1.4% within species to +27% at genus and +77% at family level. We further show that s* (L) is not smooth in genome length but a discontinuous, previously unreported staircase caused by the ceiling function used for k-mer selection, with practical consequences concentrated at specific genome-size boundaries.",
+  "authors": [
+    "Ebou, A. E. T.",
+    "KOUA, D. K."
+  ],
+  "doi": "10.64898/2026.08.15.744971",
+  "first_seen": "2026-08-20",
+  "id": "biorxiv:10.64898/2026.08.15.744971",
+  "metadata": {
+    "abstract": "MinHash-based genome comparison is governed by two statistical constraints: a noise floor on k-mer size, controlling chance collisions between unrelated sequences, and a precision floor on sketch size, controlling uncertainty in the estimated Jaccard similarity. These constraints are best characterized for fixed-size bottom-sketch MinHash, the classical construction underlying tools such as Mash and still the standard basis for comparing genomes of similar size. Nevertheless, while, the noise floor has an established closed-form solution, sketch size is commonly selected using fixed defaults or heuristic choices independent of genome length and target precision. Moreover, recent work on scaled (FracMinHash) sketching has highlighted the difficulty of obtaining an analogous closed-form confidence interval for the Jaccard similarity. Here, we show that under the fixed-size bottom-sketch MinHash model, the shared-hash count follows a binomial model, which lets classical proportion-estimation theory be applied directly. Combining this with Fofanov's k-selection criterion and the exact identity-Jaccard relationship yields a single closed-form design rule, s* (L, {rho}* , ), that unifies the noise and precision floors into one operating envelope. The resulting design rule was validated against exact Clopper-Pearson interval inversion, idealized binomial sampling, realistic overlapping k-mer simulation and 54 bacterial genome pairs spanning species-to-order taxonomic levels. In realistic simulations, empirical coverage remained within 1-3 percentage points of the idealized reference in 14 of 15 tested cells. In real genomes, the classical identity-Jaccard relationship showed increasing positive bias with taxonomic divergence, from a median of -1.4% within species to +27% at genus and +77% at family level. We further show that s* (L) is not smooth in genome length but a discontinuous, previously unreported staircase caused by the ceiling function used for k-mer selection, with practical consequences concentrated at specific genome-size boundaries.",
+    "author_corresponding": "Anicet E. T. Ebou",
+    "author_corresponding_institution": "Institut National Polytechnique Félix Houphouët-Boigny",
+    "authors": "Ebou, A. E. T.; KOUA, D. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-08-20",
+    "doi": "10.64898/2026.08.15.744971",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/08/20/2026.08.15.744971.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "How do noise and precision contraints jointly determine the minimum sketch size for fixed-size MinHash Jaccard estimation?",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institut National Polytechnique Félix Houphouët-Boigny",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-08-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Derives a closed-form fixed-size bottom-sketch MinHash design rule s*(L) unifying k-mer noise and Jaccard precision floors, validated on simulations and 54…",
+  "title": "How do noise and precision contraints jointly determine the minimum sketch size for fixed-size MinHash Jaccard estimation?",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.08.15.744971"
+}
