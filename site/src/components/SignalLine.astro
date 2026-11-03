@@ -1,22 +1,20 @@
 ---
 import type { Signals } from "../lib/types";
-
-interface Props {
-  signals: Signals;
-}
-
+interface Props { signals: Signals }
 const { signals } = Astro.props;
-const parts = [
-  signals.preprint && `${signals.preprint} preprint${signals.preprint === 1 ? "" : "s"}`,
-  signals.published && `${signals.published} published`,
-  signals.code && `${signals.code} tool${signals.code === 1 ? "" : "s"}`,
-  signals.industry && `${signals.industry} industry`,
-  signals.rise_ratio >= 1.5 && `↑ ${signals.rise_ratio.toFixed(1)}× vs 4-wk avg`,
-].filter(Boolean);
+const counts = [
+  { label: "preprints", value: signals.preprint, spoken: `${signals.preprint} preprint${signals.preprint === 1 ? "" : "s"}` },
+  { label: "published", value: signals.published, spoken: `${signals.published} published` },
+  { label: "code", value: signals.code, spoken: `${signals.code} tool${signals.code === 1 ? "" : "s"}` },
+  { label: "industry", value: signals.industry, spoken: `${signals.industry} industry` },
+].filter(({ value }) => value > 0);
+const rising = signals.rise_ratio >= 1.5;
+const spoken = [...counts.map(({ spoken }) => spoken), ...(rising ? [`↑ ${signals.rise_ratio.toFixed(1)}× vs 4-wk avg`] : [])].join(" · ");
 ---
-
-{parts.length > 0 && <p class="signal-line">{parts.join(" · ")}</p>}
-
-<style>
-  .signal-line { margin: 0; color: var(--muted); font-size: var(--t3); }
-</style>
+{spoken && <div class="signal-line">
+  <span class="sr-only">{spoken}</span>
+  <div class="stat-row" aria-hidden="true">
+    {counts.map(({ label, value }) => <span class="stat"><span class="stat-label">{label}</span><span class="stat-value">{value}</span></span>)}
+    {rising && <span class="stat rise"><span class="stat-label">Rise</span><span class="stat-value">↑ {signals.rise_ratio.toFixed(1)}×</span><span class="stat-context">vs 4-wk avg</span></span>}
+  </div>
+</div>}

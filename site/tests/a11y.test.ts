@@ -94,12 +94,13 @@ describe("built site accessibility and responsive layout", () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
   });
 
-  it("spans both columns with the first card at 1280px", async () => {
+  it("uses equal-width leaderboard rows at 1280px", async () => {
     await page.goto(`http://127.0.0.1:${server!.port}/`);
     const cards = page.locator("[data-topic-cats]");
     const first = (await cards.nth(0).boundingBox())!;
     const second = (await cards.nth(1).boundingBox())!;
-    expect(first.width).toBeGreaterThan(1.5 * second.width);
+    expect(first.width).toBe(second.width);
+    expect(second.y).toBeGreaterThan(first.y + first.height);
   });
 
   it("updates chip pressed states and filters cards from the keyboard", async () => {

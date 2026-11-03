@@ -16,6 +16,6 @@ const { day } = Astro.props;
 ---
 
 <Base title={`${day.date} — TrendBio`} lastRun={day.run.finished}>
-  <h1><time datetime={day.date}>{day.date}</time></h1>
+  <h1 class="day-title"><time datetime={day.date}>{day.date}</time></h1>
   <DayTopics day={day} />
 </Base>

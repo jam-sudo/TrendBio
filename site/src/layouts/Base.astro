@@ -1,4 +1,6 @@
 ---
+import "@fontsource/inconsolata/400.css";
+import "@fontsource/inconsolata/700.css";
 import "../styles/global.css";
 
 interface Props {
@@ -19,8 +21,8 @@ const { title = "TrendBio", lastRun } = Astro.props;
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header>
+      {Astro.slots.has("hero") ? <slot name="hero" /> : <a class="wordmark" href="/">TrendBio</a>}
       <nav aria-label="Main navigation">
-        <a class="wordmark" href="/">TrendBio</a>
         <div class="nav-links">
           <a href="/">Today</a>
           <a href="/topics">Topics</a>

@@ -1,4 +1,5 @@
 ---
+import { categoryStyle } from "../lib/categories";
 import type { Category } from "../lib/data";
 
 interface Props {
@@ -12,8 +13,8 @@ const { categories, counts } = Astro.props;
 <div class="category-chips" role="group" aria-label="Topic categories" data-category-chips>
   <button type="button" data-cat="all" aria-pressed="true">All</button>
   {categories.map(({ slug, label }) => (
-    <button type="button" data-cat={slug} aria-pressed="false" disabled={!counts[slug]}>
-      {label}
+    <button type="button" data-cat={slug} aria-pressed="false" disabled={!counts[slug]} style={`--category-hue: ${categoryStyle(slug).hue}`}>
+      <span aria-hidden="true">{categoryStyle(slug).emoji}</span> {label}
     </button>
   ))}
 </div>
@@ -60,10 +61,10 @@ const { categories, counts } = Astro.props;
     font: inherit;
     font-size: var(--t3);
     color: var(--fg);
-    background: var(--bg);
+    background: oklch(var(--tint-lightness) 0.015 var(--category-hue, 0));
     cursor: pointer;
   }
-  button[aria-pressed="true"] { border-color: var(--accent); font-weight: 700; }
-  button:disabled { color: var(--muted); cursor: default; }
+  button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--bg); font-weight: 700; }
+  button:disabled { opacity: 0.4; cursor: default; }
   button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 </style>

@@ -8,19 +8,18 @@ const readPage = (path: string) => readFileSync(`dist/${path}`, "utf8");
 const cards = (html: string) => [...html.matchAll(/<a\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map(([card]) => card);
 
 describe("built landing, day and archive pages", () => {
-  it("links five cards and gives only rank one the wide layout and summary", () => {
+  it("links five leaderboard rows and gives rank one a larger summary", () => {
     const html = readPage("index.html");
     const rendered = cards(html);
     const day = latestDay("computational")!;
     expect(rendered).toHaveLength(5);
     expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(5);
-    expect(rendered[0]).toMatch(/class="[^"]*\bspan2\b/);
-    expect(html).toMatch(/grid-column:\s*1\s*\/\s*3/);
-    expect(html).toMatch(/min-width:\s*641px/);
+    expect(rendered[0]).toMatch(/class="[^"]*\bfeatured\b/);
+    expect(html).toContain('class="topic-list"');
     day.ranked.forEach((topic, index) => {
       expect(rendered[index]).toContain(`href="/topic/${topic.slug}/"`);
       expect(rendered[index]).toContain(topic.headline);
-      expect(rendered[index].includes(topic.summary)).toBe(topic.rank === 1);
+      expect(rendered[index]).toContain(topic.summary);
     });
   });
 
