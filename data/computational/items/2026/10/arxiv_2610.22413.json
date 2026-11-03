@@ -1,0 +1,44 @@
+{
+  "abstract": "Promptable segmentation models turn one 3D bounding box into an instance mask. Box placement therefore limits how fast microscopy volumes with thousands of objects are annotated. Each box must be checked in several synchronized viewers, but napari-bbox shares no state between viewers. An edit must update every viewer and slows down with more boxes. napari-TurboBox instead holds one shared copy of the boxes for all viewers. In a four-viewer layout, napari-TurboBox needs a few milliseconds per mouse move to update the three slice viewers up to $10^4$ boxes. The same update in napari-bbox leaves the 33 ms budget beyond about $10^3$ boxes and takes 159 ms at $10^4$. Boxes stay axis-aligned and export to COCO and YOLO as per-slice 2D boxes.\n  napari-TurboBox is a pure-Python plugin for napari 0.6.6 to 0.9. The code is available at https://github.com/N-Friederich/napari-turbobox under the Apache 2.0 licence, and version 0.1.0 is archived at https://doi.org/10.5281/zenodo.23090828 on Zenodo.",
+  "authors": [
+    "Nils Friederich",
+    "Philip Kohle",
+    "Maximilian Beichter",
+    "Mona Wellhäusser",
+    "Marcel Stahl",
+    "Pascal Zwick",
+    "Angelo Jovin Yamachui Sitcheu",
+    "Thomas Lautenschlager",
+    "David Exler",
+    "Linus Schilpp",
+    "Stephan Allgeier",
+    "Andreas Specker",
+    "Lennart Hilbert",
+    "Ralf Mikut"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-14",
+  "id": "arxiv:2610.22413",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.22413v1</ns0:id>\n    <ns0:title>napari-TurboBox: Interactive Multi-Viewer Bounding Box Annotation for AI-Guided Volumetric Bioimaging</ns0:title>\n    <ns0:updated>2026-10-14T21:04:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.22413v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.22413v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Promptable segmentation models turn one 3D bounding box into an instance mask. Box placement therefore limits how fast microscopy volumes with thousands of objects are annotated. Each box must be checked in several synchronized viewers, but napari-bbox shares no state between viewers. An edit must update every viewer and slows down with more boxes. napari-TurboBox instead holds one shared copy of the boxes for all viewers. In a four-viewer layout, napari-TurboBox needs a few milliseconds per mouse move to update the three slice viewers up to $10^4$ boxes. The same update in napari-bbox leaves the 33 ms budget beyond about $10^3$ boxes and takes 159 ms at $10^4$. Boxes stay axis-aligned and export to COCO and YOLO as per-slice 2D boxes.\n  napari-TurboBox is a pure-Python plugin for napari 0.6.6 to 0.9. The code is available at https://github.com/N-Friederich/napari-turbobox under the Apache 2.0 licence, and version 0.1.0 is archived at https://doi.org/10.5281/zenodo.23090828 on Zenodo.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-14T21:04:46Z</ns0:published>\n    <ns1:comment>6 pages, 3 figures</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Nils Friederich</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Philip Kohle</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Maximilian Beichter</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mona Wellhäusser</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Marcel Stahl</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pascal Zwick</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Angelo Jovin Yamachui Sitcheu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Thomas Lautenschlager</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>David Exler</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Linus Schilpp</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Stephan Allgeier</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andreas Specker</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lennart Hilbert</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ralf Mikut</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "napari-TurboBox is a Python napari plugin sharing one box state across viewers for fast 3D bounding-box annotation of microscopy volumes, reaching ms updates…",
+  "title": "napari-TurboBox: Interactive Multi-Viewer Bounding Box Annotation for AI-Guided Volumetric Bioimaging",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.22413v1"
+}

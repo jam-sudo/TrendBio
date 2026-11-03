@@ -1,0 +1,46 @@
+{
+  "abstract": "Background and Objective: Prescribing multiple drugs simultaneously, known as polypharmacy, is increasingly common in managing chronic diseases such as diabetes and cardiovascular conditions. Studies show that roughly 40% of elderly patients are on five or more medications, putting them at significant risk of adverse drug-drug interactions (DDIs) [1]. While computational methods based on Graph Neural Networks (GNNs) have shown strong potential for predicting these interactions from a drugs molecular structure, most existing models are limited in two important ways: they rely on attention mechanisms that cannot adapt to the unique context of each atom in a molecule, and they only predict whether an interaction exists rather than how dangerous it might be. Methods: We propose HMVA-DDI, a two-stage deep learning framework that addresses both shortcomings. In the first stage, our model predicts whether two drugs will interact. If it detects an interaction, the second stage classifies it into one of three clinical severity levels: minor, moderate, or major. To better capture molecular structure, we replace the standard attention mechanism with a more powerful version called Graph Attention Network v2 (GATv2), which considers each atoms specific context when learning its representation. We also introduce a technique to prevent information loss in deeper network layers, and we tailor the input features separately for each prediction task. Results: Evaluated on two standard benchmarks, DrugBank 5.0.3 [2] and DDInter [3], HMVA-DDI achieves an AUROC of 0.9819 and AUPRC of 0.9759 on binary interaction detection, a marked improvement over the baseline. For severity classification, our best model variant (qcSvr4) reaches an overall AUROC of 0.9444, with a particularly large improvement in detecting low-severity (Minor) interactions, a historically difficult class. Conclusion: HMVA-DDI bridges the gap between computational drug research and clinical usefulness by not only predicting interactions accurately but also indicating interaction severity. This two-level system can help healthcare professionals prioritize warnings, reducing the alert fatigue problem where doctors are overwhelmed by too many non-critical notifications.",
+  "authors": [
+    "Hati, B.",
+    "Bhat, R.",
+    "Kudari, Z. D.",
+    "Kaira, V. S.",
+    "P, S. S.",
+    "Gnana Sekaran, J."
+  ],
+  "doi": "10.64898/2026.09.25.754374",
+  "first_seen": "2026-10-01",
+  "id": "biorxiv:10.64898/2026.09.25.754374",
+  "metadata": {
+    "abstract": "Background and Objective: Prescribing multiple drugs simultaneously, known as polypharmacy, is increasingly common in managing chronic diseases such as diabetes and cardiovascular conditions. Studies show that roughly 40% of elderly patients are on five or more medications, putting them at significant risk of adverse drug-drug interactions (DDIs) [1]. While computational methods based on Graph Neural Networks (GNNs) have shown strong potential for predicting these interactions from a drugs molecular structure, most existing models are limited in two important ways: they rely on attention mechanisms that cannot adapt to the unique context of each atom in a molecule, and they only predict whether an interaction exists rather than how dangerous it might be. Methods: We propose HMVA-DDI, a two-stage deep learning framework that addresses both shortcomings. In the first stage, our model predicts whether two drugs will interact. If it detects an interaction, the second stage classifies it into one of three clinical severity levels: minor, moderate, or major. To better capture molecular structure, we replace the standard attention mechanism with a more powerful version called Graph Attention Network v2 (GATv2), which considers each atoms specific context when learning its representation. We also introduce a technique to prevent information loss in deeper network layers, and we tailor the input features separately for each prediction task. Results: Evaluated on two standard benchmarks, DrugBank 5.0.3 [2] and DDInter [3], HMVA-DDI achieves an AUROC of 0.9819 and AUPRC of 0.9759 on binary interaction detection, a marked improvement over the baseline. For severity classification, our best model variant (qcSvr4) reaches an overall AUROC of 0.9444, with a particularly large improvement in detecting low-severity (Minor) interactions, a historically difficult class. Conclusion: HMVA-DDI bridges the gap between computational drug research and clinical usefulness by not only predicting interactions accurately but also indicating interaction severity. This two-level system can help healthcare professionals prioritize warnings, reducing the alert fatigue problem where doctors are overwhelmed by too many non-critical notifications.",
+    "author_corresponding": "Jaiganesh Gnana Sekaran",
+    "author_corresponding_institution": "Qclairvoyance Quantum Labs Pvt Ltd",
+    "authors": "Hati, B.; Bhat, R.; Kudari, Z. D.; Kaira, V. S.; P, S. S.; Gnana Sekaran, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-01",
+    "doi": "10.64898/2026.09.25.754374",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/01/2026.09.25.754374.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "HMVA-DDI: A Hierarchical Multi-View Attention Network for Drug-Drug Interaction and Severity Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Qclairvoyance Quantum Labs Pvt Ltd",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "HMVA-DDI is a two-stage GATv2-based graph network that predicts drug-drug interactions and their clinical severity, reporting AUROC 0.9819 on DrugBank and…",
+  "title": "HMVA-DDI: A Hierarchical Multi-View Attention Network for Drug-Drug Interaction and Severity Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.25.754374"
+}

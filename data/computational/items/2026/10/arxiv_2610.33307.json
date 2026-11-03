@@ -1,0 +1,32 @@
+{
+  "abstract": "Random Forest--based selectors such as Boruta depend on tree depth, yet Boruta's most used implementation, BorutaPy, recommends depths of 3 to 7 without published evidence. We tested the effect of depth using pan-cancer data from The Cancer Genome Atlas (10,469 tumors, 33 cancer types) and breast cancer PAM50 subtyping (981 tumors, 5 subtypes). Label-dependent steps were fitted inside training folds, effects were measured against seed-to-seed variation, and each task had a locked test set. In pan-cancer data, depth 5 changed the selection far more than a new seed did: the top-500 Jaccard overlap with unlimited depth was 0.37, against 0.84 (depth 5) and 0.93 (unlimited) between seeds. Depth-5 trees confirmed 472 instead of 1,659 genes, covered fewer large-class markers (16% vs 62%) and gave less accurate 50-gene panels (balanced accuracy 0.809 vs 0.889). The effect vanished once the cap reached 61 to 76% of the median depth of unrestricted trees, a depth set mainly by the number of classes, not sample size. In PAM50 subtyping (median depth 12) the effect was small, and leaving depth uncapped cost no accuracy in either task. The effect replicated in a second cross-validation repeat and under permutation importance. About a third of pre-filtered candidates correlated within class with the number of detected genes, a sample-quality measure; a within-class filter removed them without loss of test accuracy (0.943 vs 0.942 balanced accuracy, 1,000 genes). We recommend uncapped trees, or a cap above 75% of the realized median depth, and a within-class quality filter before Boruta.",
+  "authors": [
+    "Tareque Mohmud Chowdhury",
+    "Abu Raihan Mostofa Kamal"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-23",
+  "id": "arxiv:2610.33307",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.33307v3</ns0:id>\n    <ns0:title>Tree Depth and Sample-Quality-Associated Features: Two Hidden Factors in Boruta Selection for RNA-Seq Data Classification</ns0:title>\n    <ns0:updated>2026-10-29T07:56:13Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.33307v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.33307v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Random Forest--based selectors such as Boruta depend on tree depth, yet Boruta's most used implementation, BorutaPy, recommends depths of 3 to 7 without published evidence. We tested the effect of depth using pan-cancer data from The Cancer Genome Atlas (10,469 tumors, 33 cancer types) and breast cancer PAM50 subtyping (981 tumors, 5 subtypes). Label-dependent steps were fitted inside training folds, effects were measured against seed-to-seed variation, and each task had a locked test set. In pan-cancer data, depth 5 changed the selection far more than a new seed did: the top-500 Jaccard overlap with unlimited depth was 0.37, against 0.84 (depth 5) and 0.93 (unlimited) between seeds. Depth-5 trees confirmed 472 instead of 1,659 genes, covered fewer large-class markers (16% vs 62%) and gave less accurate 50-gene panels (balanced accuracy 0.809 vs 0.889). The effect vanished once the cap reached 61 to 76% of the median depth of unrestricted trees, a depth set mainly by the number of classes, not sample size. In PAM50 subtyping (median depth 12) the effect was small, and leaving depth uncapped cost no accuracy in either task. The effect replicated in a second cross-validation repeat and under permutation importance. About a third of pre-filtered candidates correlated within class with the number of detected genes, a sample-quality measure; a within-class filter removed them without loss of test accuracy (0.943 vs 0.942 balanced accuracy, 1,000 genes). We recommend uncapped trees, or a cap above 75% of the realized median depth, and a within-class quality filter before Boruta.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-23T21:19:50Z</ns0:published>\n    <ns1:comment>19 Pages, 6 Figures, 4 Tables</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Tareque Mohmud Chowdhury</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abu Raihan Mostofa Kamal</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Tests how Random Forest depth caps in Boruta feature selection alter gene selection on TCGA RNA-seq pan-cancer and PAM50 data, and proposes a within-class…",
+  "title": "Tree Depth and Sample-Quality-Associated Features: Two Hidden Factors in Boruta Selection for RNA-Seq Data Classification",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.33307v3"
+}

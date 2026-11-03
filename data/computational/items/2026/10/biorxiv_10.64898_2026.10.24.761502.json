@@ -1,0 +1,42 @@
+{
+  "abstract": "Background. Sequence-to-contact-map models are trained with pixel-wise losses, although the features of interest (insulation, domain boundaries, loops) are summaries of the map. Insulationbased losses help Hi-C resolution enhancement. No pre-specified test has asked whether they improve sequence-based prediction, judged against annotations independent of the training data. Proposed study. HiFold-Mamba predicts 448 x 448 maps at 2,048 bp from 1,048,576 bp of DNA on the DNALongBench contact-map task. Every component is reverse-complement-equivariant: convolutional tower, bidirectional Mamba blocks, multi-scale mixer and symmetric pairwise head. We pre-register three hypotheses: >> H1: it exceeds each of three trained baselines (reproduced Akita, a parameter-matched Transformer and a parameter-matched CNN) by [&ge;]0.01 stratum-adjusted correlation (SCC). >> H2: an insulation and boundary loss, computed from the predicted map with the operator used on the observed map, improves boundary AUROC and loop AP against independent 4DN boundary calls and ENCODE CTCF ChIA-PET loops, at equal training steps and without loss of SCC. >> H3: pretraining plus few-shot adaptation beats training from scratch on four held-out cell lines.Tests use a paired bootstrap over 237 one-megabase test blocks (one-sided  = 0.025). Pilot data. >> Verification. The benchmark target, the window coordinates and the networks equivariance were verified. >> Locus-shared reference. Copying other cell lines measured maps at the same locus matches published Akita on the benchmarks SCC (0.227 vs. 0.230). >> SCC weightings. Two weightings in common use weight distance strata in opposite directions and agree only moderately ({rho} = 0.54). >> Comparison rule. In simulations calibrated on the pilot data, a per-block-best comparison against several baselines has no power. We therefore test against each baseline, which gives [&ge;] 90 % power at a true gain of 0.02 when between-model correlation is [&ge;] 0.95. >> H2 positive control. On validation windows, observed maps recover the independent boundaries (AUROC 0.61 - 0.91) and loops (0.86 - 0.90). This fixed the insulation window and showed that these annotations are largely shared across cell types.",
+  "authors": [
+    "Malekpouri, M.",
+    "Lotfi, S."
+  ],
+  "doi": "10.64898/2026.10.24.761502",
+  "first_seen": "2026-10-30",
+  "id": "biorxiv:10.64898/2026.10.24.761502",
+  "metadata": {
+    "abstract": "Background. Sequence-to-contact-map models are trained with pixel-wise losses, although the features of interest (insulation, domain boundaries, loops) are summaries of the map. Insulationbased losses help Hi-C resolution enhancement. No pre-specified test has asked whether they improve sequence-based prediction, judged against annotations independent of the training data. Proposed study. HiFold-Mamba predicts 448 x 448 maps at 2,048 bp from 1,048,576 bp of DNA on the DNALongBench contact-map task. Every component is reverse-complement-equivariant: convolutional tower, bidirectional Mamba blocks, multi-scale mixer and symmetric pairwise head. We pre-register three hypotheses: >> H1: it exceeds each of three trained baselines (reproduced Akita, a parameter-matched Transformer and a parameter-matched CNN) by [&ge;]0.01 stratum-adjusted correlation (SCC). >> H2: an insulation and boundary loss, computed from the predicted map with the operator used on the observed map, improves boundary AUROC and loop AP against independent 4DN boundary calls and ENCODE CTCF ChIA-PET loops, at equal training steps and without loss of SCC. >> H3: pretraining plus few-shot adaptation beats training from scratch on four held-out cell lines.Tests use a paired bootstrap over 237 one-megabase test blocks (one-sided  = 0.025). Pilot data. >> Verification. The benchmark target, the window coordinates and the networks equivariance were verified. >> Locus-shared reference. Copying other cell lines measured maps at the same locus matches published Akita on the benchmarks SCC (0.227 vs. 0.230). >> SCC weightings. Two weightings in common use weight distance strata in opposite directions and agree only moderately ({rho} = 0.54). >> Comparison rule. In simulations calibrated on the pilot data, a per-block-best comparison against several baselines has no power. We therefore test against each baseline, which gives [&ge;] 90 % power at a true gain of 0.02 when between-model correlation is [&ge;] 0.95. >> H2 positive control. On validation windows, observed maps recover the independent boundaries (AUROC 0.61 - 0.91) and loops (0.86 - 0.90). This fixed the insulation window and showed that these annotations are largely shared across cell types.",
+    "author_corresponding": "Mohammad Malekpouri",
+    "author_corresponding_institution": "IAU",
+    "authors": "Malekpouri, M.; Lotfi, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-30",
+    "doi": "10.64898/2026.10.24.761502",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/30/2026.10.24.761502.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Does a map-level insulation constraint improve sequence-based prediction of 3D genome folding? A Stage 1 Registered Report with a reverse-complement-equivariant state-space model (HiFold-Mamba)",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "IAU",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "epigenomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Stage 1 registered report proposing HiFold-Mamba, a reverse-complement-equivariant state-space model predicting 3D genome contact maps from DNA, with…",
+  "title": "Does a map-level insulation constraint improve sequence-based prediction of 3D genome folding? A Stage 1 Registered Report with a reverse-complement-equivariant state-space model (HiFold-Mamba)",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.24.761502"
+}

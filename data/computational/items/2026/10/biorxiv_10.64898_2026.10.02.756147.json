@@ -1,0 +1,44 @@
+{
+  "abstract": "BackgroundSecondary haplotigs retained in a primary assembly inflate genome size and duplicate gene content, and their removal remains a necessary curation step for heterozygous diploid genomes. HapSolo (Solares et al. 2021) treats this step as an optimization problem: it searches three pairwise alignment thresholds (percent identity, query coverage, and the ratio of aligned query to aligned reference length) to minimize a cost defined over single-copy, duplicated, and missing conserved orthologs. The original implementation depended on a separate BUSCO v3 run for every contig, on Python 2.7 and pandas in its inner loop, on a single randomized forward-walk optimizer, and on OrthoDB v9 lineage datasets that are no longer distributed.\n\nResultsHere we report HapSolo2, a reimplementation that replaces the per-contig BUSCO step with miniprot-based ortholog classification against OrthoDB v9, v10, or v12.2 lineage datasets, adds steepest descent and simulated annealing to the original random forward walk, and evaluates all walkers in batched CuPy array operations on a single GPU. On an avocado assembly of 5,122 contigs scored against 1,440 orthologs, 100,000 iterations of random walk and steepest descent ran 5.6- and 7.6-fold faster on one NVIDIA RTX A6000 than on 10 CPU processes. Across 45 runs on four diploid assemblies (Anopheles funestus, Persea americana, Vitis vinifera, and Amblyraja radi-ata; 212 Mb to 3.2 Gb) and three OrthoDB releases, the three optimizers reached best costs within 1.8% of one another. Independent assessment with BUSCO v6.1 showed that HapSolo2 reduced duplicated orthologs from 52.0% to 5.6% in P. americana, from 17.9% to 10.4% in V. vinifera, and from 7.8% to 2.8% in A. funestus, with completeness decreasing by at most 1.3 percentage points. On the avocado assembly, HapSolo2 reduced the cost reached by the original HapSolo from 0.2200 to 0.1036 and raised contig N50 from 3,366 kb to 4,608 kb.\n\nConclusionsHapSolo2 makes ortholog-guided haplotig removal practical in minutes on a single workstation, independent of a BUSCO installation, and reproducible across OrthoDB releases. It is distributed as an installable Python package with a unified command-line pipeline, an assembly statistics and plotting tool, an Apptainer container, and archived copies of the legacy ortholog datasets.",
+  "authors": [
+    "Yin, J.",
+    "Agrawal, M.",
+    "Goel, P.",
+    "Solares, E. A."
+  ],
+  "doi": "10.64898/2026.10.02.756147",
+  "first_seen": "2026-10-08",
+  "id": "biorxiv:10.64898/2026.10.02.756147",
+  "metadata": {
+    "abstract": "BackgroundSecondary haplotigs retained in a primary assembly inflate genome size and duplicate gene content, and their removal remains a necessary curation step for heterozygous diploid genomes. HapSolo (Solares et al. 2021) treats this step as an optimization problem: it searches three pairwise alignment thresholds (percent identity, query coverage, and the ratio of aligned query to aligned reference length) to minimize a cost defined over single-copy, duplicated, and missing conserved orthologs. The original implementation depended on a separate BUSCO v3 run for every contig, on Python 2.7 and pandas in its inner loop, on a single randomized forward-walk optimizer, and on OrthoDB v9 lineage datasets that are no longer distributed.\n\nResultsHere we report HapSolo2, a reimplementation that replaces the per-contig BUSCO step with miniprot-based ortholog classification against OrthoDB v9, v10, or v12.2 lineage datasets, adds steepest descent and simulated annealing to the original random forward walk, and evaluates all walkers in batched CuPy array operations on a single GPU. On an avocado assembly of 5,122 contigs scored against 1,440 orthologs, 100,000 iterations of random walk and steepest descent ran 5.6- and 7.6-fold faster on one NVIDIA RTX A6000 than on 10 CPU processes. Across 45 runs on four diploid assemblies (Anopheles funestus, Persea americana, Vitis vinifera, and Amblyraja radi-ata; 212 Mb to 3.2 Gb) and three OrthoDB releases, the three optimizers reached best costs within 1.8% of one another. Independent assessment with BUSCO v6.1 showed that HapSolo2 reduced duplicated orthologs from 52.0% to 5.6% in P. americana, from 17.9% to 10.4% in V. vinifera, and from 7.8% to 2.8% in A. funestus, with completeness decreasing by at most 1.3 percentage points. On the avocado assembly, HapSolo2 reduced the cost reached by the original HapSolo from 0.2200 to 0.1036 and raised contig N50 from 3,366 kb to 4,608 kb.\n\nConclusionsHapSolo2 makes ortholog-guided haplotig removal practical in minutes on a single workstation, independent of a BUSCO installation, and reproducible across OrthoDB releases. It is distributed as an installable Python package with a unified command-line pipeline, an assembly statistics and plotting tool, an Apptainer container, and archived copies of the legacy ortholog datasets.",
+    "author_corresponding": "Edwin A. Solares",
+    "author_corresponding_institution": "Halicioglu Data Science Institute, University of California San Diego; ESB AI Lab Corporation",
+    "authors": "Yin, J.; Agrawal, M.; Goel, P.; Solares, E. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-08",
+    "doi": "10.64898/2026.10.02.756147",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/08/2026.10.02.756147.source.xml",
+    "license": "cc_by_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "HapSolo2: GPU-accelerated optimization for removing secondary haplotigs from diploid genome assemblies",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Halicioglu Data Science Institute, University of California San Diego; ESB AI Lab Corporation",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-10-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "HapSolo2 is a GPU-accelerated reimplementation of ortholog-guided haplotig removal for diploid assemblies, using miniprot classification and multiple…",
+  "title": "HapSolo2: GPU-accelerated optimization for removing secondary haplotigs from diploid genome assemblies",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.02.756147"
+}

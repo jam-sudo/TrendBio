@@ -1,0 +1,41 @@
+{
+  "abstract": "Motivation: LLM agents increasingly draft functional interpretations of gene lists, but can cite Gene Ontology (GO) terms that no current enrichment backend returned for that list, and can pair real GO accessions with fabricated labels. Results: We present GroundAnnot, a client for PANTHER, Enrichr, and g:Profiler that returns a closed vocabulary of GO term IDs and their backend labels, and enforces two contracts: Contract A (no ID or label outside the backend payload) and Contract B (no enrichment claim outside the backend's significant set). Across three open-weight models (Qwen2.5-7B local; Qwen3.8-27B and GPT-OSS-120B via Groq) on six curated disease gene lists, mean valid-enriched rates were 15.3%, 20.1%, and 35.1%. All unsupported IDs were real GO terms classified by QuickGO as wrong-biology, obsolete, or wrong-branch (zero fabricated accessions). A distinct failure mode emerged: for the Alzheimer's gene list, the local 7B model paired every one of its ten stable picks with a label that does not match the current GO term for that accession (10/10 mismatches), producing a coherent synaptic-signalling narrative that the IDs do not support. Mean overlap with the backends' FDR top-10 union was 0.33-0.67/10. On 50 MSigDB Hallmark gene sets, the strongest model named the defining pathway in 21/44 (47.7%) directly named cases. When an enriched shortlist was placed in the prompt, all three models complied fully (60/60 for each model; 180/180 overall), showing that a bounded vocabulary removes these output classes when the downstream agent is required to use it.",
+  "authors": [
+    "Malima, M. B."
+  ],
+  "doi": "10.64898/2026.09.27.754741",
+  "first_seen": "2026-10-02",
+  "id": "biorxiv:10.64898/2026.09.27.754741",
+  "metadata": {
+    "abstract": "Motivation: LLM agents increasingly draft functional interpretations of gene lists, but can cite Gene Ontology (GO) terms that no current enrichment backend returned for that list, and can pair real GO accessions with fabricated labels. Results: We present GroundAnnot, a client for PANTHER, Enrichr, and g:Profiler that returns a closed vocabulary of GO term IDs and their backend labels, and enforces two contracts: Contract A (no ID or label outside the backend payload) and Contract B (no enrichment claim outside the backend's significant set). Across three open-weight models (Qwen2.5-7B local; Qwen3.8-27B and GPT-OSS-120B via Groq) on six curated disease gene lists, mean valid-enriched rates were 15.3%, 20.1%, and 35.1%. All unsupported IDs were real GO terms classified by QuickGO as wrong-biology, obsolete, or wrong-branch (zero fabricated accessions). A distinct failure mode emerged: for the Alzheimer's gene list, the local 7B model paired every one of its ten stable picks with a label that does not match the current GO term for that accession (10/10 mismatches), producing a coherent synaptic-signalling narrative that the IDs do not support. Mean overlap with the backends' FDR top-10 union was 0.33-0.67/10. On 50 MSigDB Hallmark gene sets, the strongest model named the defining pathway in 21/44 (47.7%) directly named cases. When an enriched shortlist was placed in the prompt, all three models complied fully (60/60 for each model; 180/180 overall), showing that a bounded vocabulary removes these output classes when the downstream agent is required to use it.",
+    "author_corresponding": "Maano Bryton Malima",
+    "author_corresponding_institution": "South African Medical Research Council",
+    "authors": "Malima, M. B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-02",
+    "doi": "10.64898/2026.09.27.754741",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/02/2026.09.27.754741.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "GroundAnnot: a closed-vocabulary contract for grounding LLM gene-set annotation in live enrichment backends",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "South African Medical Research Council",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "GroundAnnot constrains LLM gene-set annotation to a closed vocabulary of GO terms returned by PANTHER, Enrichr, and g:Profiler, reducing unsupported IDs and…",
+  "title": "GroundAnnot: a closed-vocabulary contract for grounding LLM gene-set annotation in live enrichment backends",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.27.754741"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Machine learning benchmarks often treat image files as independent observations, although multiple files may represent repeated views or other related samples. Prior work has shown that non-independent partitioning can inflate model performance, but the sensitivity of a biomedical benchmark to progressively increasing train-test relatedness is less often quantified. Here, we quantified how apparent classification performance changes when recoverable sample groups are progressively allowed to cross training, validation, and test partitions. Using source structure and filenames, we reconstructed analysis groups in a microscopy corpus compiled from multiple sources and generated five class stratified partitioning conditions, ranging from an intact group reference to random assignment of individual files. We applied the same training recipe within each model family to 129,173 images spanning 14 classes of blood cells and hematopoietic cell states. For a pretrained Vision Transformer, random assignment of individual files increased the mean test macro F1 from 0.853 to 0.977 and accuracy from 0.851 to 0.990 relative to the intact group reference. Apparent performance increased progressively across the intermediate conditions. The endpoint pattern also appeared with a ResNet-50 backbone, and the largest apparent gains occurred in immature granulocytic and blast classes. A descriptive analysis within the random assignment condition further showed higher scores among test images that had another member of the same group in the training set, although the exposed and unexposed subsets were not exchangeable. The grouping workflow, exact split definitions, code, and compact result files are released as HSD-Bench to support reproducible evaluation of hidden sample dependence.",
+  "authors": [
+    "Vasinkova, M.",
+    "Jochymek, L.",
+    "Gajdos, P."
+  ],
+  "doi": "10.64898/2026.10.01.755883",
+  "first_seen": "2026-10-08",
+  "id": "biorxiv:10.64898/2026.10.01.755883",
+  "metadata": {
+    "abstract": "Machine learning benchmarks often treat image files as independent observations, although multiple files may represent repeated views or other related samples. Prior work has shown that non-independent partitioning can inflate model performance, but the sensitivity of a biomedical benchmark to progressively increasing train-test relatedness is less often quantified. Here, we quantified how apparent classification performance changes when recoverable sample groups are progressively allowed to cross training, validation, and test partitions. Using source structure and filenames, we reconstructed analysis groups in a microscopy corpus compiled from multiple sources and generated five class stratified partitioning conditions, ranging from an intact group reference to random assignment of individual files. We applied the same training recipe within each model family to 129,173 images spanning 14 classes of blood cells and hematopoietic cell states. For a pretrained Vision Transformer, random assignment of individual files increased the mean test macro F1 from 0.853 to 0.977 and accuracy from 0.851 to 0.990 relative to the intact group reference. Apparent performance increased progressively across the intermediate conditions. The endpoint pattern also appeared with a ResNet-50 backbone, and the largest apparent gains occurred in immature granulocytic and blast classes. A descriptive analysis within the random assignment condition further showed higher scores among test images that had another member of the same group in the training set, although the exposed and unexposed subsets were not exchangeable. The grouping workflow, exact split definitions, code, and compact result files are released as HSD-Bench to support reproducible evaluation of hidden sample dependence.",
+    "author_corresponding": "Markéta Vašinková",
+    "author_corresponding_institution": "VSB-Technical University of Ostrava Faculty of Electrical Engineering and Computer Science: Vysoka Skola Banska-Technicka Univerzita Ostrava Fakulta Elektrotech",
+    "authors": "Vasinkova, M.; Jochymek, L.; Gajdos, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-08",
+    "doi": "10.64898/2026.10.01.755883",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/08/2026.10.01.755883.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Quantifying performance inflation from hidden sample dependence in biomedical image classification benchmarks",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "VSB-Technical University of Ostrava Faculty of Electrical Engineering and Computer Science: Vysoka Skola Banska-Technicka Univerzita Ostrava Fakulta Elektrotech",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows that random file-level splits inflate apparent performance of biomedical blood-cell image classifiers (ViT macro F1 0.853 to 0.977) versus group-intact…",
+  "title": "Quantifying performance inflation from hidden sample dependence in biomedical image classification benchmarks",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.01.755883"
+}

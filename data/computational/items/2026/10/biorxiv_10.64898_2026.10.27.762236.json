@@ -1,0 +1,52 @@
+{
+  "abstract": "We introduce MutQA, a dataset of 330,387 citation-grounded question-answer (QA) pairs linking genetic mutations to their functional consequences as described in the biomedical literature. Each record pairs a protein-coding mutation with a natural-language question and an evidence-backed answer anchored to sentences in one of 27,442 open-access PubMed Central articles, spanning 6,620 genes and 125,593 gene-variant pairs. The dataset is constructed using CrossValQA, a framework that enforces information isolation between independent LLMs: one model generates QA pairs from an article, a second model answers the same question without access to the first model's response, and a third model judges whether each model's rationale supports the other's answer, so that retained QA pairs are reproducible from the source text rather than hallucinated. Of 401,406 audited QA pairs, 82.7% pass both directions of this cross-validation; those with a recoverable reference protein sequence form the released benchmark. In a 999-pair stratified audit, two expert annotators agree exactly on 86.4% of cross-validated QA pairs (95% CI 83.7-89.0; n = 638), a tier in which about 90% of ratings are \"correct\". Individual LLM judges agree with individual annotators at a comparable 87.0% on this tier but far less on QA pairs that fail cross-validation. Fine-tuning MutaPLM on MutQA nearly doubles its mean LLM-judge score for question-conditioned mutation-effect answering (1.45 to 2.82 on a 0-5 scale) and improves mutation-recovery accuracy from effect descriptions from 19.4% to 32.1%. Providing variant-matched MutQA retrieval context, without fine-tuning, improves strict answer accuracy across four LLM families by 20.0-28.6 percentage points, demonstrating the framework's ability to improve the reliability of LLM answers. We also apply CrossValQA to proteomics, providing a proof of concept for its use beyond mutation-specific QA. We release the dataset, construction framework, and evaluation code.",
+  "authors": [
+    "McCourt, R.",
+    "Arredondo, D.",
+    "Macaulay, O.",
+    "Poshiya, S.",
+    "Edeh, O.",
+    "Virupakshappa, K.",
+    "Nguyen Bach, M.",
+    "Almeida Ruiz, E.",
+    "Hu, Y.",
+    "Tafoya, L. E.",
+    "Hudgens, D. P.",
+    "Kundnani, D.",
+    "Sahu, A."
+  ],
+  "doi": "10.64898/2026.10.27.762236",
+  "first_seen": "2026-10-29",
+  "id": "biorxiv:10.64898/2026.10.27.762236",
+  "metadata": {
+    "abstract": "We introduce MutQA, a dataset of 330,387 citation-grounded question-answer (QA) pairs linking genetic mutations to their functional consequences as described in the biomedical literature. Each record pairs a protein-coding mutation with a natural-language question and an evidence-backed answer anchored to sentences in one of 27,442 open-access PubMed Central articles, spanning 6,620 genes and 125,593 gene-variant pairs. The dataset is constructed using CrossValQA, a framework that enforces information isolation between independent LLMs: one model generates QA pairs from an article, a second model answers the same question without access to the first model's response, and a third model judges whether each model's rationale supports the other's answer, so that retained QA pairs are reproducible from the source text rather than hallucinated. Of 401,406 audited QA pairs, 82.7% pass both directions of this cross-validation; those with a recoverable reference protein sequence form the released benchmark. In a 999-pair stratified audit, two expert annotators agree exactly on 86.4% of cross-validated QA pairs (95% CI 83.7-89.0; n = 638), a tier in which about 90% of ratings are \"correct\". Individual LLM judges agree with individual annotators at a comparable 87.0% on this tier but far less on QA pairs that fail cross-validation. Fine-tuning MutaPLM on MutQA nearly doubles its mean LLM-judge score for question-conditioned mutation-effect answering (1.45 to 2.82 on a 0-5 scale) and improves mutation-recovery accuracy from effect descriptions from 19.4% to 32.1%. Providing variant-matched MutQA retrieval context, without fine-tuning, improves strict answer accuracy across four LLM families by 20.0-28.6 percentage points, demonstrating the framework's ability to improve the reliability of LLM answers. We also apply CrossValQA to proteomics, providing a proof of concept for its use beyond mutation-specific QA. We release the dataset, construction framework, and evaluation code.",
+    "author_corresponding": "Avinash Sahu",
+    "author_corresponding_institution": "University of New Mexico Cancer Center",
+    "authors": "McCourt, R.; Arredondo, D.; Macaulay, O.; Poshiya, S.; Edeh, O.; Virupakshappa, K.; Nguyen Bach, M.; Almeida Ruiz, E.; Hu, Y.; Tafoya, L. E.; Hudgens, D. P.; Kundnani, D.; Sahu, A.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-10-29",
+    "doi": "10.64898/2026.10.27.762236",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/29/2026.10.27.762236.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MutQA: A Cross-Validated Q&A Dataset for Genetic Mutations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of New Mexico Cancer Center",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "MutQA: 330,387 citation-grounded QA pairs linking protein-coding mutations to functional effects from PubMed Central, built via CrossValQA cross-validation…",
+  "title": "MutQA: A Cross-Validated Q&A Dataset for Genetic Mutations",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.27.762236"
+}

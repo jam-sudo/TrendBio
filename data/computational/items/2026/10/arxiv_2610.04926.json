@@ -1,0 +1,30 @@
+{
+  "abstract": "Near-perfect classification of small clinical datasets can hinge on preprocessing, data leakage, missing-data handling, and the evaluation sample. We reproduced a published chronic kidney disease (CKD) classification study on the UCI CKD dataset (400 records, 24 predictors) under explicit leakage controls. A stratified 70:30 development-holdout partition was fixed before any learned preprocessing; imputation, encoding, scaling, supervised feature selection, and PCA were fitted only within training folds. Nine classifiers, three feature representations, and three missing-data strategies were compared by 5x3 repeated stratified cross-validation and ranked on training cross-validation only (ties reported); a frozen set of finalists was evaluated once on the holdout (discrimination, calibration, Brier score), treated as a locked historical internal sample. Ablation, grouped SHAP values, three further seeds, and post hoc sensitivity analyses examined robustness. The top-ranked selected-feature pipeline (KNN imputation, Extra Trees) reached a repeated cross-validation accuracy of 0.9869 and a holdout accuracy of 0.9833 (exact 95% interval 0.9411-0.9980). PCA (27 components, 95.96% of variance) gave only a marginal, seed-dependent advantage over interpretable original-feature representations, and several pipelines were statistically indistinguishable. Nested resampling of the selection procedure gave an outer accuracy of 0.9845, 0.0095 below the top-ranked pipeline on the same folds; missingness indicators alone yielded a ROC area of 0.85-0.88, and removing renal, urinary, and hematologic fields cut accuracy to 0.89. High internal performance persisted after leakage controls but appears driven largely by clinically proximal laboratory and urinalysis variables and CKD-associated missingness; it is not clinical validation, and external, prospective evaluation remains necessary.",
+  "authors": [
+    "Lening Yang",
+    "Yichuan Zhao"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-04",
+  "id": "arxiv:2610.04926",
+  "metadata": {
+    "arxiv_primary_category": "stat.AP",
+    "categories": [
+      "stat.AP",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.04926v1</ns0:id>\n    <ns0:title>Reproducibility and Leakage-Controlled Evaluation of Machine-Learning Models for Chronic Kidney Disease Classification</ns0:title>\n    <ns0:updated>2026-10-04T04:10:01Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.04926v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.04926v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Near-perfect classification of small clinical datasets can hinge on preprocessing, data leakage, missing-data handling, and the evaluation sample. We reproduced a published chronic kidney disease (CKD) classification study on the UCI CKD dataset (400 records, 24 predictors) under explicit leakage controls. A stratified 70:30 development-holdout partition was fixed before any learned preprocessing; imputation, encoding, scaling, supervised feature selection, and PCA were fitted only within training folds. Nine classifiers, three feature representations, and three missing-data strategies were compared by 5x3 repeated stratified cross-validation and ranked on training cross-validation only (ties reported); a frozen set of finalists was evaluated once on the holdout (discrimination, calibration, Brier score), treated as a locked historical internal sample. Ablation, grouped SHAP values, three further seeds, and post hoc sensitivity analyses examined robustness. The top-ranked selected-feature pipeline (KNN imputation, Extra Trees) reached a repeated cross-validation accuracy of 0.9869 and a holdout accuracy of 0.9833 (exact 95% interval 0.9411-0.9980). PCA (27 components, 95.96% of variance) gave only a marginal, seed-dependent advantage over interpretable original-feature representations, and several pipelines were statistically indistinguishable. Nested resampling of the selection procedure gave an outer accuracy of 0.9845, 0.0095 below the top-ranked pipeline on the same folds; missingness indicators alone yielded a ROC area of 0.85-0.88, and removing renal, urinary, and hematologic fields cut accuracy to 0.89. High internal performance persisted after leakage controls but appears driven largely by clinically proximal laboratory and urinalysis variables and CKD-associated missingness; it is not clinical validation, and external, prospective evaluation remains necessary.</ns0:summary>\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-04T04:10:01Z</ns0:published>\n    <ns1:comment>16 pages, 9 figures</ns1:comment>\n    <ns1:primary_category term=\"stat.AP\" />\n    <ns0:author>\n      <ns0:name>Lening Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yichuan Zhao</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-04",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Leakage-controlled reproduction of an ML study classifying chronic kidney disease on the 400-record UCI dataset; high accuracy persists but is driven by…",
+  "title": "Reproducibility and Leakage-Controlled Evaluation of Machine-Learning Models for Chronic Kidney Disease Classification",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.04926v1"
+}

@@ -1,0 +1,43 @@
+{
+  "abstract": "Oxford Nanopore Technologies (ONT) sequencing is widely used in bacterial genomics, particularly for reference-based variant calling and de novo assembly. Both analyses routinely start with quality control (QC) preprocessing, but as ONT basecalling accuracy has improved, its necessity and downstream trade-offs remain poorly defined. We benchmarked 17 preprocessing combinations, built from three adapter trimmers (Dorado, Porechop_ABI, Barbell) and three quality-based processing tools (Filtlong, Chopper, SeqKit) with untrimmed and unprocessed controls, plus Fastplong, which performs both. Each combination was evaluated across 13 bacterial isolates at 100x and 20x depth under the HAC and SUP basecalling models. Variant calling was assessed by F1 score. Assemblies were scored on sequence accuracy, contiguity, replicon recovery and residual adapter contamination, then aggregated into a weighted arithmetic mean using weights from a survey of the microbial genomics community. With SUP basecalling, raw reads with no trimming or quality-based processing produced accurate SNP calls and outperformed several pipelines that applied both operations; adapter trimming alone left SNP accuracy unchanged. Subsetting reads by combined length and quality with Filtlong gave the highest SNP F1 scores at both depths, except with Barbell at 20x, where it ranked second lowest. As is often the case in benchmarking studies, assembly results involved trade-offs, and the best tool depends on which aspects of performance matter most for a given use. Filtlong produced the lowest error rates, but every Filtlong pipeline lost three small plasmids at both depths. Barbell trimming raised error rates and reduced contiguity at 20x, while skipping adapter trimming left residual adapter and barcode sequences in assemblies. Under the community-derived weights, Porechop_ABI followed by Chopper had the highest overall score at both depths, without winning any single metric. QC tool choice should therefore be guided by the downstream analysis goal rather than applied indiscriminately across all workflows.",
+  "authors": [
+    "Furqon, A. D. C.",
+    "Wick, R. R.",
+    "Roberts, L. W.",
+    "Hall, M. B."
+  ],
+  "doi": "10.64898/2026.10.12.758701",
+  "first_seen": "2026-10-16",
+  "id": "biorxiv:10.64898/2026.10.12.758701",
+  "metadata": {
+    "abstract": "Oxford Nanopore Technologies (ONT) sequencing is widely used in bacterial genomics, particularly for reference-based variant calling and de novo assembly. Both analyses routinely start with quality control (QC) preprocessing, but as ONT basecalling accuracy has improved, its necessity and downstream trade-offs remain poorly defined. We benchmarked 17 preprocessing combinations, built from three adapter trimmers (Dorado, Porechop_ABI, Barbell) and three quality-based processing tools (Filtlong, Chopper, SeqKit) with untrimmed and unprocessed controls, plus Fastplong, which performs both. Each combination was evaluated across 13 bacterial isolates at 100x and 20x depth under the HAC and SUP basecalling models. Variant calling was assessed by F1 score. Assemblies were scored on sequence accuracy, contiguity, replicon recovery and residual adapter contamination, then aggregated into a weighted arithmetic mean using weights from a survey of the microbial genomics community. With SUP basecalling, raw reads with no trimming or quality-based processing produced accurate SNP calls and outperformed several pipelines that applied both operations; adapter trimming alone left SNP accuracy unchanged. Subsetting reads by combined length and quality with Filtlong gave the highest SNP F1 scores at both depths, except with Barbell at 20x, where it ranked second lowest. As is often the case in benchmarking studies, assembly results involved trade-offs, and the best tool depends on which aspects of performance matter most for a given use. Filtlong produced the lowest error rates, but every Filtlong pipeline lost three small plasmids at both depths. Barbell trimming raised error rates and reduced contiguity at 20x, while skipping adapter trimming left residual adapter and barcode sequences in assemblies. Under the community-derived weights, Porechop_ABI followed by Chopper had the highest overall score at both depths, without winning any single metric. QC tool choice should therefore be guided by the downstream analysis goal rather than applied indiscriminately across all workflows.",
+    "author_corresponding": "Michael B Hall",
+    "author_corresponding_institution": "The University of Queensland",
+    "authors": "Furqon, A. D. C.; Wick, R. R.; Roberts, L. W.; Hall, M. B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-16",
+    "doi": "10.64898/2026.10.12.758701",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/16/2026.10.12.758701.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Evaluating Nanopore read trimming and quality filtering in bacterial genomics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Queensland",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks 17 ONT read trimming and quality-filtering pipelines on 13 bacterial isolates; raw reads gave accurate SNPs, Filtlong best SNP F1, and assembly…",
+  "title": "Evaluating Nanopore read trimming and quality filtering in bacterial genomics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.12.758701"
+}

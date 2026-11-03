@@ -1,0 +1,32 @@
+{
+  "abstract": "Repeatedly sampling short sequence windows from a human pangenome requires an access representation as well as compression. panvram stores each assembly as a reference-relative block archive and pools these archives on a GPU. For 558 haplotype assemblies, the default q4k representation occupies 16.642 GB of persistent pools including the decoded reference; a packed-reference, compact-directory representation occupies 11.634 GB. These quantities are not peak application memory. In the C1 experiment, default and fully compact forms delivered 743,271 and 736,762 windows/s; a separate public Colab run delivered 741,931 and 680,760 windows/s. All are batch API measurements and must not be pooled as repeated trials of an identical environment. Full-decoding checks compared reconstructed FASTA checksums with the manifest. On the CPU, the M6 shuffled-window workload at the same cohort cardinality reported 26 requests/s for AGC and 145,222 requests/s for refrel3 q4k. This comparison concerns one-thread requests of 4 KiB on the recorded warm-cache workload, not all genome-access patterns. AGC provides the smaller incremental archive: 5.40 MB/assembly versus 13.04 MB/assembly for refrel3 q16k, with different exclusions; the size pair is not the same refrel3 configuration as the q4k timing pair. We derive an expected-work expression for fixed independent granules and distinguish it from an empirical median-latency predictor. Cohort-scale counter and DRAM measurements motivate a locality hypothesis, but do not establish a causal per-miss latency or independently reproduce a model-failure verdict. The window-cost verdict at N=558 is published with its harness and raw timings.",
+  "authors": [
+    "Yakiv Shavidze"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-18",
+  "id": "arxiv:2610.25149",
+  "metadata": {
+    "arxiv_primary_category": "cs.DC",
+    "categories": [
+      "cs.DC",
+      "cs.PF",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.25149v1</ns0:id>\n    <ns0:title>panvram: GPU-resident random access to a human pangenome cohort</ns0:title>\n    <ns0:updated>2026-10-18T10:06:53Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.25149v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.25149v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Repeatedly sampling short sequence windows from a human pangenome requires an access representation as well as compression. panvram stores each assembly as a reference-relative block archive and pools these archives on a GPU. For 558 haplotype assemblies, the default q4k representation occupies 16.642 GB of persistent pools including the decoded reference; a packed-reference, compact-directory representation occupies 11.634 GB. These quantities are not peak application memory. In the C1 experiment, default and fully compact forms delivered 743,271 and 736,762 windows/s; a separate public Colab run delivered 741,931 and 680,760 windows/s. All are batch API measurements and must not be pooled as repeated trials of an identical environment. Full-decoding checks compared reconstructed FASTA checksums with the manifest. On the CPU, the M6 shuffled-window workload at the same cohort cardinality reported 26 requests/s for AGC and 145,222 requests/s for refrel3 q4k. This comparison concerns one-thread requests of 4 KiB on the recorded warm-cache workload, not all genome-access patterns. AGC provides the smaller incremental archive: 5.40 MB/assembly versus 13.04 MB/assembly for refrel3 q16k, with different exclusions; the size pair is not the same refrel3 configuration as the q4k timing pair. We derive an expected-work expression for fixed independent granules and distinguish it from an empirical median-latency predictor. Cohort-scale counter and DRAM measurements motivate a locality hypothesis, but do not establish a causal per-miss latency or independently reproduce a model-failure verdict. The window-cost verdict at N=558 is published with its harness and raw timings.</ns0:summary>\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.PF\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-18T10:06:53Z</ns0:published>\n    <ns1:comment>7 pages. Code, harnesses and logs: https://github.com/yasha1971-coder/panvram (commit 8f8e9e1); evidence archive DOI 10.5281/zenodo.23449044</ns1:comment>\n    <ns1:primary_category term=\"cs.DC\" />\n    <ns0:author>\n      <ns0:name>Yakiv Shavidze</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "panvram stores pangenome assemblies as reference-relative archives pooled on GPU, reporting ~743k windows/s batch random access across 558 haplotypes and CPU…",
+  "title": "panvram: GPU-resident random access to a human pangenome cohort",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.25149v1"
+}

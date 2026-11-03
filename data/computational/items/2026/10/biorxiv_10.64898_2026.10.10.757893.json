@@ -1,0 +1,43 @@
+{
+  "abstract": "Long-read RNA sequencing (lrRNA-seq) has transformed transcriptomics by enabling full-length isoform resolution, yet transcript quantification remains confounded by platform-dependent length biases and tool choices. While a quantification normalization step is common in short-read RNA-seq, this has not yet been extended to lrRNA-seq and the field lacks a systematic analysis of normalization strategies applied to long reads data. Here, we systematically benchmarked quantification pipelines and downstream normalization strategies across Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT) platforms. Using synthetic spike-in controls (SIRVs and ERCC) alongside matched Illumina short-read benchmarks across mouse tissues and human cell models, we evaluated five normalization methods (CPM, TPM, CQN, EDASeq, and Scaled Median Ratio) across five quantification workflows (Bambu, FLAIR, IsoQuant, Oarfish, and Kallisto). Our framework assessed PacBio Iso-Seq and Kinnex protocols together with ONT cDNA and direct RNA (dRNA) sequencing datasets. We demonstrate that standard Transcripts Per Million (TPM) scaling counteracts short-molecule depletion in PacBio datasets, but severely distorts Nanopore expression estimates. For Nanopore libraries, covariate-aware normalizations (CQN and EDASeq) mitigate length bias without TPM's over-correction penalty. Conversely, relative median ratio normalization (SMR) degrades accuracy and introduces noise in low-variability biological samples. Across computational tools, FLAIR minimized absolute error on short SIRVs, while reference-restricted quantifiers (Oarfish and Kallisto) consistently outperformed transcript reconstruction tools in short-read validation. These findings show that quantification normalization should be applied to lrRNA-seq data and establish platform-specific guidelines for long-read transcriptomics.",
+  "authors": [
+    "Paniagua, A.",
+    "Jetzinger, F.",
+    "Tarazona, S.",
+    "Conesa, A."
+  ],
+  "doi": "10.64898/2026.10.10.757893",
+  "first_seen": "2026-10-15",
+  "id": "biorxiv:10.64898/2026.10.10.757893",
+  "metadata": {
+    "abstract": "Long-read RNA sequencing (lrRNA-seq) has transformed transcriptomics by enabling full-length isoform resolution, yet transcript quantification remains confounded by platform-dependent length biases and tool choices. While a quantification normalization step is common in short-read RNA-seq, this has not yet been extended to lrRNA-seq and the field lacks a systematic analysis of normalization strategies applied to long reads data. Here, we systematically benchmarked quantification pipelines and downstream normalization strategies across Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT) platforms. Using synthetic spike-in controls (SIRVs and ERCC) alongside matched Illumina short-read benchmarks across mouse tissues and human cell models, we evaluated five normalization methods (CPM, TPM, CQN, EDASeq, and Scaled Median Ratio) across five quantification workflows (Bambu, FLAIR, IsoQuant, Oarfish, and Kallisto). Our framework assessed PacBio Iso-Seq and Kinnex protocols together with ONT cDNA and direct RNA (dRNA) sequencing datasets. We demonstrate that standard Transcripts Per Million (TPM) scaling counteracts short-molecule depletion in PacBio datasets, but severely distorts Nanopore expression estimates. For Nanopore libraries, covariate-aware normalizations (CQN and EDASeq) mitigate length bias without TPM's over-correction penalty. Conversely, relative median ratio normalization (SMR) degrades accuracy and introduces noise in low-variability biological samples. Across computational tools, FLAIR minimized absolute error on short SIRVs, while reference-restricted quantifiers (Oarfish and Kallisto) consistently outperformed transcript reconstruction tools in short-read validation. These findings show that quantification normalization should be applied to lrRNA-seq data and establish platform-specific guidelines for long-read transcriptomics.",
+    "author_corresponding": "Ana Conesa",
+    "author_corresponding_institution": "Institute for Integrative Systems Biology (I2SysBio), Spanish National Research Council (CSIC), Paterna, Spain",
+    "authors": "Paniagua, A.; Jetzinger, F.; Tarazona, S.; Conesa, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-15",
+    "doi": "10.64898/2026.10.10.757893",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/15/2026.10.10.757893.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Systematic evaluation of transcript normalization methods and quantification pipelines across long-read sequencing platforms",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institute for Integrative Systems Biology (I2SysBio), Spanish National Research Council (CSIC), Paterna, Spain",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-10-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks five normalization methods and five quantification tools across PacBio and Nanopore long-read RNA-seq using SIRV/ERCC spike-ins, yielding…",
+  "title": "Systematic evaluation of transcript normalization methods and quantification pipelines across long-read sequencing platforms",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.10.757893"
+}

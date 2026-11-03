@@ -1,0 +1,42 @@
+{
+  "abstract": "Invasion is an early step in the metastatic spread of triple-negative breast cancer (TNBC), yet cells within a single tumour or cell line differ in their capacity to invade, and it is unclear which transcriptional features distinguish cells that invade from those that do not. We re-analysed the public single-cell RNA-sequencing dataset GSE329526, in which ClonMapper-barcoded MDA-MB-231 cells were separated in a transwell assay into invasive (five samples, 6,289 cells) and non-invasive (five samples, 5,983 cells) fractions and compared with the parental population (one sample, 3,022 cells). An initial cell-level analysis combined Wilcoxon differential expression, an XGBoost classifier with a random cell split, SHapley Additive exPlanations (SHAP) and Enrichr over-representation analysis. Because cells from the same sample are not independent, we then repeated the analysis at the sample level, using differential expression on sample means (five versus five), XGBoost with cross-validation that held out whole samples, a quality-control-metric baseline model, SHAP on held-out samples and rank-based gene-set enrichment analysis (GSEA). At the sample level, 6,651 of 11,727 tested genes differed between invasive and non-invasive samples (false discovery rate [FDR] < 0.05), including the ten top-ranked cell-level genes such as PHLDA2, ANTXR2, VIM and HMGA1 (FDR 0.0007 to 0.0022) and the epithelial-to-mesenchymal transition (EMT) regulators TGFBR2, JAG1, SDCBP and WWTR1. With whole samples held out, XGBoost distinguished invasive from non-invasive cells with an area under the ROC curve (AUC) of 0.92 (range across folds 0.89 to 0.95); removing ribosomal and mitochondrial genes did not change performance (AUC 0.92), whereas a model using only four quality-control metrics reached 0.63, and every held-out invasive sample received a higher mean predicted probability of invasion (0.74 to 0.79) than every non-invasive sample (0.20 to 0.28). On held-out samples, SHAP ranked inflammatory and stress-response genes highest (CCL2, LGALS12, DUSP1, CXCL3, KYNU, CXCL2), and GSEA showed higher KRAS signalling (normalised enrichment score [NES] 2.30, FDR 0.001) and E2F targets (NES 1.62, FDR 0.038) and lower interferon-alpha and interferon-gamma responses (NES -1.97 and -1.65; FDR 0.001 and 0.019) in invasive samples. The ribosomal genes that dominated the original SHAP ranking were absent from the held-out ranking. Invasive MDA-MB-231 cells therefore carry a transcriptional state that is reproducible across independent transwell samples and involves EMT-related, inflammatory and proliferative programmes. Limitations include a single cell line, sequencing of the invasive and non-invasive populations in separate libraries and the absence of external validation; the candidate genes reported here are hypotheses that require confirmation in independent experiments and patient material.",
+  "authors": [
+    "Huda, T.",
+    "BISWAS, S."
+  ],
+  "doi": "10.64898/2026.10.23.761315",
+  "first_seen": "2026-10-27",
+  "id": "biorxiv:10.64898/2026.10.23.761315",
+  "metadata": {
+    "abstract": "Invasion is an early step in the metastatic spread of triple-negative breast cancer (TNBC), yet cells within a single tumour or cell line differ in their capacity to invade, and it is unclear which transcriptional features distinguish cells that invade from those that do not. We re-analysed the public single-cell RNA-sequencing dataset GSE329526, in which ClonMapper-barcoded MDA-MB-231 cells were separated in a transwell assay into invasive (five samples, 6,289 cells) and non-invasive (five samples, 5,983 cells) fractions and compared with the parental population (one sample, 3,022 cells). An initial cell-level analysis combined Wilcoxon differential expression, an XGBoost classifier with a random cell split, SHapley Additive exPlanations (SHAP) and Enrichr over-representation analysis. Because cells from the same sample are not independent, we then repeated the analysis at the sample level, using differential expression on sample means (five versus five), XGBoost with cross-validation that held out whole samples, a quality-control-metric baseline model, SHAP on held-out samples and rank-based gene-set enrichment analysis (GSEA). At the sample level, 6,651 of 11,727 tested genes differed between invasive and non-invasive samples (false discovery rate [FDR] < 0.05), including the ten top-ranked cell-level genes such as PHLDA2, ANTXR2, VIM and HMGA1 (FDR 0.0007 to 0.0022) and the epithelial-to-mesenchymal transition (EMT) regulators TGFBR2, JAG1, SDCBP and WWTR1. With whole samples held out, XGBoost distinguished invasive from non-invasive cells with an area under the ROC curve (AUC) of 0.92 (range across folds 0.89 to 0.95); removing ribosomal and mitochondrial genes did not change performance (AUC 0.92), whereas a model using only four quality-control metrics reached 0.63, and every held-out invasive sample received a higher mean predicted probability of invasion (0.74 to 0.79) than every non-invasive sample (0.20 to 0.28). On held-out samples, SHAP ranked inflammatory and stress-response genes highest (CCL2, LGALS12, DUSP1, CXCL3, KYNU, CXCL2), and GSEA showed higher KRAS signalling (normalised enrichment score [NES] 2.30, FDR 0.001) and E2F targets (NES 1.62, FDR 0.038) and lower interferon-alpha and interferon-gamma responses (NES -1.97 and -1.65; FDR 0.001 and 0.019) in invasive samples. The ribosomal genes that dominated the original SHAP ranking were absent from the held-out ranking. Invasive MDA-MB-231 cells therefore carry a transcriptional state that is reproducible across independent transwell samples and involves EMT-related, inflammatory and proliferative programmes. Limitations include a single cell line, sequencing of the invasive and non-invasive populations in separate libraries and the absence of external validation; the candidate genes reported here are hypotheses that require confirmation in independent experiments and patient material.",
+    "author_corresponding": "Tanjidul Huda",
+    "author_corresponding_institution": "UNIVERSITY OF DELHI",
+    "authors": "Huda, T.; BISWAS, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-27",
+    "doi": "10.64898/2026.10.23.761315",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/27/2026.10.23.761315.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Integrative Single-Cell Transcriptomics and Explainable AI for Disease Mechanism and Biomarker Discovery in Triple-Negative Breast Cancer",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "UNIVERSITY OF DELHI",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-10-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Re-analysis of public scRNA-seq of MDA-MB-231 transwell fractions; sample-level XGBoost with held-out samples (AUC 0.92) and SHAP/GSEA highlight EMT and…",
+  "title": "Integrative Single-Cell Transcriptomics and Explainable AI for Disease Mechanism and Biomarker Discovery in Triple-Negative Breast Cancer",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.23.761315"
+}

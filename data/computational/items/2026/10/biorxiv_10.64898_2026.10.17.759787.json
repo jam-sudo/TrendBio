@@ -1,0 +1,43 @@
+{
+  "abstract": "Antibody engineering campaigns must prioritise variants from large combinatorial libraries under limited assay budgets. We present a Gaussian process (GP) active-learning benchmark for antibody-antigen binding affinity prediction across eight public AbBiBench assays spanning influenza hemagglutinin antibodies CR6261 and CR9114 and AAYL-series scFv libraries against the SARS-CoV-2 Spike HR2 peptide. The framework embeds variable heavy and light (VH/VL) sequences with ESM-2 650M, trains GP surrogates over compressed protein-language-model representations, and evaluates kernel, acquisition, representation, classical featurisation, and labelling-budget choices under a unified budget of 10\\% of each full pool with a label-blind seed and a fixed held-out evaluation split. Across the benchmark, Tanimoto+UCB has the highest mean Recall@2\\% point estimate among tested kernel-acquisition configurations, achieving \\textbf{57.8\\%} mean Recall@2\\% across five random seeds (68.3\\% when scored against the acquisition-eligible pool), compared with 9.6\\% for random selection -- a gap that is significant by a paired Wilcoxon test across datasets ($p=0.0078$); its point estimate is not significantly different from RQ+UCB or Tanimoto+EI at five seeds. We adopt the continuous Tanimoto kernel of \\citet{gessner2024}. The same configuration recovers the largest fractions of top binders in the influenza libraries (74.2\\% on \\texttt{3gbn\\_h1}, 82.7\\% on \\texttt{3gbn\\_h9}, and 84.9\\% on \\texttt{4fqi\\_h3}) while exposing harder AAYL combinatorial landscapes where recall remains lower and more variable. An additional three-seed representation ablation, run under the original protocol and not repeated after the evaluation corrections, ranked ESM-2 650M highest (mean Recall@2\\% 0.673 $\\pm$ 0.28) among ProtBert, AntiBERTy, AbLang2, ProGen2, and classical encodings. On BindingGYM, the same configuration matches or exceeds ALLM-Ab on two of three datasets using the 100-sample held-out test metric. Structure-mapped Integrated Gradients and KernelSHAP analyses recover CDR-region attribution patterns consistent with contact-derived paratope geometry, though threshold-free (AUROC) analysis shows this qualitative agreement is not matched by strong residue-level discrimination. These results support Tanimoto-kernel GP active learning as a simple, reproducible strategy for label-efficient antibody affinity optimisation with qualitative structural validation.",
+  "authors": [
+    "Krishna, C. S.",
+    "Singh, H.",
+    "Srivastava, S. P.",
+    "SINGH, R. K."
+  ],
+  "doi": "10.64898/2026.10.17.759787",
+  "first_seen": "2026-10-22",
+  "id": "biorxiv:10.64898/2026.10.17.759787",
+  "metadata": {
+    "abstract": "Antibody engineering campaigns must prioritise variants from large combinatorial libraries under limited assay budgets. We present a Gaussian process (GP) active-learning benchmark for antibody-antigen binding affinity prediction across eight public AbBiBench assays spanning influenza hemagglutinin antibodies CR6261 and CR9114 and AAYL-series scFv libraries against the SARS-CoV-2 Spike HR2 peptide. The framework embeds variable heavy and light (VH/VL) sequences with ESM-2 650M, trains GP surrogates over compressed protein-language-model representations, and evaluates kernel, acquisition, representation, classical featurisation, and labelling-budget choices under a unified budget of 10\\% of each full pool with a label-blind seed and a fixed held-out evaluation split. Across the benchmark, Tanimoto+UCB has the highest mean Recall@2\\% point estimate among tested kernel-acquisition configurations, achieving \\textbf{57.8\\%} mean Recall@2\\% across five random seeds (68.3\\% when scored against the acquisition-eligible pool), compared with 9.6\\% for random selection -- a gap that is significant by a paired Wilcoxon test across datasets ($p=0.0078$); its point estimate is not significantly different from RQ+UCB or Tanimoto+EI at five seeds. We adopt the continuous Tanimoto kernel of \\citet{gessner2024}. The same configuration recovers the largest fractions of top binders in the influenza libraries (74.2\\% on \\texttt{3gbn\\_h1}, 82.7\\% on \\texttt{3gbn\\_h9}, and 84.9\\% on \\texttt{4fqi\\_h3}) while exposing harder AAYL combinatorial landscapes where recall remains lower and more variable. An additional three-seed representation ablation, run under the original protocol and not repeated after the evaluation corrections, ranked ESM-2 650M highest (mean Recall@2\\% 0.673 $\\pm$ 0.28) among ProtBert, AntiBERTy, AbLang2, ProGen2, and classical encodings. On BindingGYM, the same configuration matches or exceeds ALLM-Ab on two of three datasets using the 100-sample held-out test metric. Structure-mapped Integrated Gradients and KernelSHAP analyses recover CDR-region attribution patterns consistent with contact-derived paratope geometry, though threshold-free (AUROC) analysis shows this qualitative agreement is not matched by strong residue-level discrimination. These results support Tanimoto-kernel GP active learning as a simple, reproducible strategy for label-efficient antibody affinity optimisation with qualitative structural validation.",
+    "author_corresponding": "RAJEEV  KUMAR SINGH",
+    "author_corresponding_institution": "Shiv Nadar University, Delhi-NCR",
+    "authors": "Krishna, C. S.; Singh, H.; Srivastava, S. P.; SINGH, R. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-22",
+    "doi": "10.64898/2026.10.17.759787",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/22/2026.10.17.759787.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Active Learning framework for Antibody Binding Affinity Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Shiv Nadar University, Delhi-NCR",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks Gaussian-process active learning with ESM-2 embeddings and Tanimoto kernels for antibody affinity prediction across AbBiBench assays; Tanimoto+UCB…",
+  "title": "Active Learning framework for Antibody Binding Affinity Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.17.759787"
+}
