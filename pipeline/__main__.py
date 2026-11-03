@@ -1,5 +1,6 @@
 """Command-line entry points for the TrendBio pipeline."""
 
+import json
 import logging
 import os
 import sys
@@ -16,6 +17,7 @@ from pipeline.budget import Budget
 from pipeline.config import load_scoring, load_taxonomy
 from pipeline.embed import Embedder
 from pipeline.llm import LLM
+from pipeline.jsonio import day_path
 from pipeline.run import Deps, _related, _stage, _staging, is_degraded, run_backfill, run_day
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
@@ -107,6 +109,38 @@ def wipe(start: FromDate, end: ToDate, domain: Domain = 'computational',
 
 
 @app.command()
+def restatus(start: FromDate, end: ToDate, domain: Domain = 'computational',
+             data_root: DataRoot = Path('data')):
+    """Recompute stored run statuses without collection or LLM calls."""
+    if start > end:
+        raise typer.BadParameter('start must not be after end')
+    cfg = load_scoring()
+    store = Store(data_root, domain)
+    budget = Budget(data_root / domain / 'llm_spend.json', cfg.monthly_ceiling_usd)
+    days = degraded_days = 0
+    day = start.date()
+    while day <= end.date():
+        result = store.get_day(day)
+        if result is not None:
+            window = store.items_between(day - timedelta(days=cfg.window_days - 1), day)
+            degraded = is_degraded(
+                result.run.notes, result.run.source_status,
+                window_item_ids={item.id for item in window}, cfg=cfg,
+                over_ceiling=budget.month_spend_usd(result.run.finished.strftime('%Y-%m')) > cfg.monthly_ceiling_usd,
+            )
+            status = 'degraded' if degraded else 'ok'
+            if result.run.status != status:
+                path = day_path(data_root, domain, day)
+                payload = json.loads(path.read_text(encoding='utf-8'))
+                payload['run']['status'] = status
+                store._write(path, payload)
+            days += 1
+            degraded_days += degraded
+        day += timedelta(days=1)
+    typer.echo(f'restatus days={days} degraded={degraded_days} ok={days - degraded_days}')
+
+
+@app.command()
 def resynthesize(start: FromDate, end: ToDate, model: Annotated[str, typer.Option()],
                  domain: Domain = 'computational', data_root: DataRoot = Path('data')):
     """Replace synthesis for existing ranked topics using the requested model."""
@@ -141,11 +175,10 @@ def resynthesize(start: FromDate, end: ToDate, model: Annotated[str, typer.Optio
                     result.run.notes = sorted(set([
                         note for note in result.run.notes if not note.startswith('synthesis-fallback:')
                     ] + notes))
-                    attempted = len(staged.items_between(day - timedelta(days=deps.cfg.window_days - 1), day))
+                    window = staged.items_between(day - timedelta(days=deps.cfg.window_days - 1), day)
                     degraded = is_degraded(result.run.notes, result.run.source_status,
-                                           backfill=result.run.backfilled,
                                            over_ceiling=staged_deps.budget.over_ceiling(),
-                                           attempted=attempted, cfg=deps.cfg)
+                                           window_item_ids={item.id for item in window}, cfg=deps.cfg)
                     result.run.status = 'degraded' if degraded else 'ok'
                     staged.put_day(result)
                 day += timedelta(days=1)

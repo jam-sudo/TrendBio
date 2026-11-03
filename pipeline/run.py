@@ -146,13 +146,14 @@ def _related(topics) -> None:
         topic.related = [topics[j].slug for j in neighbors[:3]]
 
 
-def is_degraded(notes: list[str], source_status: dict[str, str], *, backfill: bool,
-                over_ceiling: bool, attempted: int, cfg: Scoring) -> bool:
-    count = sum(note.startswith('enrichment-fallback:') for note in set(notes))
+def is_degraded(notes: list[str], source_status: dict[str, str], *,
+                over_ceiling: bool, window_item_ids: set[str], cfg: Scoring) -> bool:
+    count = sum(note.startswith('enrichment-fallback:') and note.split(':', 1)[1] in window_item_ids
+                for note in set(notes))
+    attempted = len(window_item_ids)
     return ((count > cfg.degraded_fallback_min and count > cfg.degraded_fallback_rate * attempted)
             or any(note.startswith('synthesis-fallback:') for note in notes)
             or any(source_status.get(name) == 'failed' for name in ('biorxiv', 'arxiv', 'pubmed'))
-            or (not backfill and source_status.get('github') == 'failed')
             or over_ceiling)
 
 
@@ -222,7 +223,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             counts['irrelevant'] = irrelevant
         with _stage('embed', items=0) as counts:
             window = sorted(store.items_between(start, day), key=lambda item: item.id)
-            attempted = len(window)
+            window_item_ids = {item.id for item in window}
             window = [item for item in window if item.relevant]
             missing = []
             for item in window:
@@ -294,7 +295,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             notes.extend(synthesis_notes)
             if previous:
                 notes.extend(note for note in previous.run.notes if (
-                    note.startswith('enrichment-fallback:') and note.split(':', 1)[1] in items_by_id
+                    note.startswith('enrichment-fallback:') and note.split(':', 1)[1] in window_item_ids
                     or note.startswith('synthesis-fallback:') and note.split(':', 1)[1] in cached))
                 if ranked and len(cached) == len(ranked):
                     model = previous.run.synthesis_model
@@ -307,9 +308,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             _related(list(topics.values()))
             for topic in topics.values():
                 store.put_topic(topic)
-            degraded = is_degraded(notes, source_status, backfill=backfill,
+            degraded = is_degraded(notes, source_status,
                                    over_ceiling=deps.budget.over_ceiling(),
-                                   attempted=attempted, cfg=deps.cfg)
+                                   window_item_ids=window_item_ids, cfg=deps.cfg)
             result = Day(domain=domain, date=day, ranked=[RankedTopic(
                 slug=topic.slug, rank=index, headline=topic.headline or topic.label.title(),
                 summary=topic.summary or '', category=topic.category, signals=signals, scores=scores,

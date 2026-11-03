@@ -55,3 +55,27 @@ def test_bad_feed_is_failure(source_config,respx_mock):
     respx_mock.get('https://example.org/feed').respond(text='<html>Not a feed</html>')
     with httpx.Client() as client, pytest.raises(ValueError):
         RssAdapter(source_config).fetch(date(2026,1,1),date(2026,12,31),client)
+
+
+@pytest.mark.parametrize('status', [200, 404])
+def test_bad_feed_keeps_other_feeds(source_config, fixture_text, respx_mock, caplog, status):
+    source_config['rss']['feeds'] = [
+        {'name': 'broken', 'url': 'https://example.org/bad', 'kind': 'company'},
+        {'name': 'insitro', 'url': 'https://example.org/good', 'kind': 'company'},
+    ]
+    respx_mock.get('https://example.org/bad').respond(status, text='<html>Not a feed</html>')
+    respx_mock.get('https://example.org/good').respond(text=fixture_text('rss.xml'))
+    with httpx.Client() as client:
+        items = RssAdapter(source_config).fetch(date(2026, 10, 1), date(2026, 10, 31), client)
+    assert len(items) == 3
+    assert 'feed=broken' in caplog.text
+    assert ('ValueError' if status == 200 else 'HTTPStatusError') in caplog.text
+
+
+def test_successful_feed_without_historical_items_is_not_failure(source_config, fixture_text, respx_mock):
+    source_config['rss']['feeds'] = [
+        {'name': 'insitro', 'url': 'https://example.org/feed', 'kind': 'company'},
+    ]
+    respx_mock.get('https://example.org/feed').respond(text=fixture_text('rss.xml'))
+    with httpx.Client() as client:
+        assert RssAdapter(source_config).fetch(date(2020, 1, 1), date(2020, 1, 31), client) == []

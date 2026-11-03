@@ -165,29 +165,29 @@ def test_dry_run_leaves_data_untouched(ctx, capsys):
 def test_enrichment_fallback_threshold(count, attempted, expected):
     notes = [f'enrichment-fallback:{i}' for i in range(count)]
     sources = dict.fromkeys(('biorxiv', 'arxiv', 'pubmed', 'github', 'rss'), 'ok')
-    assert is_degraded(notes, sources, backfill=False, over_ceiling=False,
-                       attempted=attempted, cfg=load_scoring()) is expected
+    assert is_degraded(notes, sources, over_ceiling=False,
+                       window_item_ids={str(i) for i in range(attempted)}, cfg=load_scoring()) is expected
 
 
 def test_synthesis_fallback_always_degrades():
-    assert is_degraded(['synthesis-fallback:topic'], {}, backfill=False,
-                       over_ceiling=False, attempted=1000, cfg=load_scoring())
+    assert is_degraded(['synthesis-fallback:topic'], {},
+                       over_ceiling=False, window_item_ids=set(), cfg=load_scoring())
 
 
 def test_paper_source_failure_always_degrades():
-    assert is_degraded([], {'pubmed': 'failed'}, backfill=True,
-                       over_ceiling=False, attempted=1000, cfg=load_scoring())
+    assert is_degraded([], {'pubmed': 'failed'},
+                       over_ceiling=False, window_item_ids=set(), cfg=load_scoring())
 
 
 @pytest.mark.parametrize('copies', [2, 5])
 def test_duplicate_fallback_notes_count_once(copies):
-    assert not is_degraded(['enrichment-fallback:x'] * copies, {}, backfill=False,
-                           over_ceiling=False, attempted=10, cfg=load_scoring())
+    assert not is_degraded(['enrichment-fallback:x'] * copies, {},
+                           over_ceiling=False, window_item_ids={'x'}, cfg=load_scoring())
 
 
 def test_budget_over_ceiling_always_degrades():
-    assert is_degraded([], {}, backfill=True, over_ceiling=True,
-                       attempted=1000, cfg=load_scoring())
+    assert is_degraded([], {}, over_ceiling=True,
+                       window_item_ids=set(), cfg=load_scoring())
 
 
 @pytest.mark.parametrize('synthesis_fallback', [False, True])
@@ -366,6 +366,7 @@ def test_cli_resynthesize_uses_threshold_rule(ctx, monkeypatch):
     day = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True)
     day.run.status = 'degraded'
     day.run.notes = [f'enrichment-fallback:{item.id}' for item in ctx.items[:2]]
+    day.run.notes += [f'enrichment-fallback:outside-{i}' for i in range(60)]
     ctx.store.put_day(day)
     monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
     result = CliRunner().invoke(app, ['resynthesize', '--domain', 'computational',
@@ -374,7 +375,7 @@ def test_cli_resynthesize_uses_threshold_rule(ctx, monkeypatch):
     assert result.exit_code == 0, result.output
     refreshed = ctx.store.get_day(TODAY)
     assert refreshed.run.status == 'ok'
-    assert refreshed.run.notes == day.run.notes
+    assert refreshed.run.notes == sorted(day.run.notes)
 
 
 def test_cli_redacts_secret_exception_messages(ctx, monkeypatch):
@@ -777,13 +778,104 @@ def test_github_history_seeding_caps_discovery_and_keeps_watchlist(ctx, monkeypa
 
 
 @pytest.mark.parametrize('source,backfill,expected', [
-    ('github', False, 'degraded'), ('github', True, 'ok'), ('rss', False, 'ok'),
+    ('github', False, 'ok'), ('github', True, 'ok'), ('rss', False, 'ok'),
+    ('rss', True, 'ok'),
 ])
-def test_only_daily_github_collection_failure_degrades_day(ctx, source, backfill, expected):
+def test_nonpaper_collection_failure_does_not_degrade_day(ctx, source, backfill, expected):
     ctx.deps.adapters.append(FakeAdapter(source, error=RuntimeError('offline')))
     result = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=backfill)
     assert result.run.source_status[source] == 'failed'
     assert result.run.status == expected
+
+
+@pytest.mark.parametrize('window_size', [20, 40, 1400])
+def test_backfill_day_counts_only_window_fallbacks(ctx, monkeypatch, window_size):
+    window = [ctx.items[0].model_copy(update={
+        'id': f'biorxiv:window-{i}', 'relevant': False,
+    }) for i in range(window_size)]
+    notes = [f'enrichment-fallback:{item.id}' for item in window[:5]]
+    notes += [f'enrichment-fallback:biorxiv:outside-{i}' for i in range(55)]
+    ctx.store._write(ctx.root / 'computational/.backfill_state.json', {
+        'done_sources': ['biorxiv', 'arxiv', 'pubmed'], 'failed_chunks': [], 'notes': notes,
+    })
+    monkeypatch.setattr(Store, 'items_between', lambda self, start, end: window)
+    result = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True, skip_collect=True)
+    assert result.run.status == ('degraded' if window_size == 20 else 'ok')
+
+
+@pytest.mark.parametrize('source', ['rss', 'github'])
+def test_rss_failure_does_not_degrade(source):
+    assert not is_degraded([], {source: 'failed'}, over_ceiling=False,
+                           window_item_ids=set(), cfg=load_scoring())
+
+
+@pytest.mark.parametrize('source', ['biorxiv', 'arxiv', 'pubmed'])
+def test_paper_source_failure_degrades(source):
+    assert is_degraded([], {source: 'failed'}, over_ceiling=False,
+                       window_item_ids=set(), cfg=load_scoring())
+
+
+def test_backfilled_day_source_status_reflects_chunks(ctx):
+    ctx.deps.adapters += [FakeAdapter('rss'), FakeAdapter('github')]
+    run_backfill('computational', TODAY, TODAY, ctx.store, ctx.deps, resume=False)
+    assert ctx.store.get_day(TODAY).run.source_status == dict.fromkeys(
+        ['biorxiv', 'arxiv', 'pubmed', 'rss', 'github'], 'ok')
+
+
+def test_backfilled_day_failures_are_limited_to_affected_windows(ctx):
+    ctx.store._write(ctx.root / 'computational/.backfill_state.json', {
+        'done_sources': ['biorxiv', 'arxiv', 'rss'],
+        'failed_chunks': [{'source': 'arxiv', 'start': str(TODAY), 'end': str(TODAY)}],
+    })
+    for offset in [0, 6, 7]:
+        result = run_day('computational', TODAY + timedelta(days=offset), ctx.store, ctx.deps,
+                         backfill=True, skip_collect=True)
+        assert result.run.source_status == {
+            'biorxiv': 'ok', 'arxiv': 'failed' if offset <= 6 else 'ok',
+            'rss': 'ok', 'pubmed': 'skipped', 'github': 'skipped',
+        }
+
+
+def test_restatus_rewrites_only_status(ctx):
+    for offset in [0, 1]:
+        day = run_day('computational', TODAY + timedelta(days=offset), ctx.store, ctx.deps, backfill=True)
+        day.run.status = 'degraded'
+        day.run.source_status['rss'] = 'failed'
+        day.run.notes = [f'enrichment-fallback:outside-{i}' for i in range(60)]
+        if offset:
+            day.run.notes.append('synthesis-fallback:topic')
+        ctx.store.put_day(day)
+    before = tree(ctx.root)
+    result = CliRunner().invoke(app, ['restatus', '--domain', 'computational',
+                                    '--from', str(TODAY), '--to', str(TODAY + timedelta(days=2)),
+                                    '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    assert result.output.strip() == 'restatus days=2 degraded=1 ok=1'
+    path = f'computational/days/{TODAY}.json'
+    before[path] = before[path].replace(b'"status": "degraded"', b'"status": "ok"')
+    assert tree(ctx.root) == before
+
+
+def test_restatus_preserves_budget_degradation(ctx):
+    day = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True)
+    day.run.status = 'degraded'
+    ctx.store.put_day(day)
+    ctx.store._write(ctx.deps.budget.path, {day.run.finished.strftime('%Y-%m'): 51})
+    before = tree(ctx.root)
+    result = CliRunner().invoke(app, ['restatus', '--from', str(TODAY), '--to', str(TODAY),
+                                    '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    assert result.output.strip() == 'restatus days=1 degraded=1 ok=0'
+    assert tree(ctx.root) == before
+
+
+def test_restatus_rejects_reversed_range(ctx):
+    before = tree(ctx.root)
+    result = CliRunner().invoke(app, ['restatus', '--from', str(TODAY),
+                                    '--to', str(TODAY - timedelta(days=1)),
+                                    '--data-root', str(ctx.root)])
+    assert result.exit_code != 0
+    assert tree(ctx.root) == before
 
 
 @pytest.mark.parametrize('backfill', [False, True])
