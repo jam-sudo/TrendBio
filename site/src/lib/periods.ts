@@ -1,5 +1,9 @@
+import { readFileSync } from "node:fs";
+import { parse } from "yaml";
 import type { Category } from "./data";
 import type { Day, Topic, TopicDay } from "./types";
+
+const { top_n, max_per_category, category_floor } = parse(readFileSync("../config/scoring.yaml", "utf8"));
 
 const DAY = 86_400_000;
 const dateString = (date: Date) => date.toISOString().slice(0, 10);
@@ -106,13 +110,13 @@ export function rankPeriod(topics: Topic[] | HistoryIndex, start: string, end: s
   const selected = new Set<string>();
   // Reserve each represented category before filling remaining places, as in the daily ranking.
   for (const topic of sorted) {
-    if (selected.size < 20 && !counts.get(topic.category)) {
+    if (selected.size < top_n && (counts.get(topic.category) ?? 0) < Math.min(category_floor, max_per_category)) {
       selected.add(topic.slug);
-      counts.set(topic.category, 1);
+      counts.set(topic.category, (counts.get(topic.category) ?? 0) + 1);
     }
   }
   for (const topic of sorted) {
-    if (selected.size < 20 && !selected.has(topic.slug) && (counts.get(topic.category) ?? 0) < 5) {
+    if (selected.size < top_n && !selected.has(topic.slug) && (counts.get(topic.category) ?? 0) < max_per_category) {
       selected.add(topic.slug);
       counts.set(topic.category, (counts.get(topic.category) ?? 0) + 1);
     }

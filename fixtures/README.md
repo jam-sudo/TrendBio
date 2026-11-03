@@ -5,14 +5,16 @@ research or collected source responses. All evidence links use `example.org`;
 names, identifiers, descriptions, signals, and model provenance are illustrative.
 No network requests or LLM calls generate this dataset.
 
-- `data/computational/days/`: October 30–November 1, 2026, five ranked topics each.
+- `data/computational/days/`: October 30–31, 2026 have five ranked topics each; November 1 has 40.
+  October 29 is a quiet day.
   October 30 is backfilled and records `claude-haiku-5-5`; the other days record
   `claude-opus-5-5`.
-- `data/computational/topics/`: five topics, with all four evidence types.
+- `data/computational/topics/`: 40 ranked topics plus one never-ranked topic, with all four evidence types.
+  November 1 syntheses illustrate Opus for ranks 1–5, Sonnet for 6–20, and Haiku for 21–40.
   `protein-design-binders-a1b2` has 70 consecutive history entries from August 24
   to November 1, including unranked days and a return to the rankings. Its ranks
   on the three day pages are 1, 1, and 2. Empty windows have zero counts.
-- `data/computational/items/YYYY/MM/`: 40 items across all five sources. Each
+- `data/computational/items/YYYY/MM/`: 320 items across all five sources. Each
   topic has a linked preprint/published pair counted once as published. Paths use
   `first_seen`, with both `:` and `/` in the ID replaced by `_`.
 - `notes/`: one editor note and one deliberate orphan, `nonexistent-topic-zzzz`.

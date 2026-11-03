@@ -3,7 +3,7 @@
 ## What this is
 
 TrendBio tracks computational biology research, tools, and industry news.
-It clusters related evidence into a daily ranked Top 20 with linked sources and
+It clusters related evidence into a daily ranked Top 40 with linked sources and
 machine-generated syntheses for readers familiar with the field.
 
 ## How the pipeline runs
@@ -20,11 +20,14 @@ Journals in `pubmed.journals_keyword_filtered` require a title or abstract match
 preprints are excluded. Enrichment excludes routine public-data analyses such as
 hub-gene nomination and prognostic signatures unless they contribute a new method,
 tool, model, dataset, benchmark or resource. Enrichment failures retain relevance.
-The Top 20 reserves `category_floor` (default 1) topic per represented primary category,
-then fills by score up to `max_per_category` (default 5) per category; sparse days can have fewer than 20.
+The Top 40 reserves `category_floor` (default 1) topic per represented primary category,
+then fills by score up to `max_per_category` (default 8) per category; sparse days can have fewer than 40.
 The selected topics are ranked by score. The first `featured_n` (default 5) get full rows
-and Opus synthesis; ranks 6–20 get compact rows and Haiku synthesis. Backfill and
-budget-ceiling rules still switch the featured tier to Haiku.
+and Opus synthesis; ranks 6–20 get compact rows and Sonnet synthesis, and ranks 21–40
+get compact rows and Haiku synthesis. The first `display_open_n` (default 20) rows
+are visible; “Show more” reveals the rest. `synthesis_tiers` sets the model boundaries.
+Backfill and reprocessed history use `backfill_synthesis_model` (Haiku) for every tier;
+over-ceiling runs always use Haiku.
 
 GitHub discovery excludes forks and repos below `github.min_stars_for_discovery` (20 stars); explicit watchlist entries bypass these filters.
 Discovered repos with matching normalized descriptions and variant names, or identical descriptions and fewer than 50 stars, collapse to the most-starred copy; collection logs report `collapsed=<n>`.
@@ -41,7 +44,7 @@ Historical star velocity is unavailable because GitHub restricted the stargazers
 Set optional `chain_until` (`YYYY-MM-01`) to automatically backfill previous months through that month, inclusive, after each successful run; failures stop the chain.
 Daily and backfill runs share a concurrency group to prevent overlapping writes.
 Their job limits are 30 and 350 minutes, respectively.
-The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5` for the featured tier and always Haiku for ranks 6–20, shares the `pipeline` concurrency group, and commits changed data with a 120-minute job limit.
+The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5` for the featured tier and always Haiku for ranks 6–40, shares the `pipeline` concurrency group, and commits changed data with a 120-minute job limit.
 
 The manual maintenance workflow supports `restatus` (recompute stored run statuses
 without collection or LLM calls) and `reprocess` (apply current PubMed scope and
@@ -82,9 +85,9 @@ Hosted dry run on 2026-11-02 (GitHub Actions `ubuntu-latest`, 7-day window, 1,19
 | Estimated cost | USD 0.43 for the run; a steady-state day (~170 new items) is lower, so roughly USD 10-15/month |
 | Enrichment fallbacks | 10 of 1,196 (5 `refusal:bio`, 4 `empty_output`, 1 `validation`) |
 
-Planning estimate for Top 20: 5 Opus + 15 Haiku syntheses/day ≈ USD 0.60/day
-(about USD 18/month), within the USD 50 monthly ceiling; actual usage depends on
-evidence length. The existing over-ceiling rule is unchanged.
+Planning estimate for Top 40: 5 Opus + 15 Sonnet + 20 Haiku syntheses/day ≈ USD 0.50/day
+(about USD 15/month), within the USD 50 monthly ceiling; actual usage depends on
+evidence length. History stays on Haiku for cost control.
 
 ## Run locally
 

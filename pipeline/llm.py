@@ -151,7 +151,7 @@ class LLM:
         ])
         for attempt in range(2):
             result = self._parse(Synthesis, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
-                                 entity_id=topic.slug, fallbacks=model == 'claude-opus-5-5')
+                                 entity_id=topic.slug, fallbacks=model in {'claude-opus-5-5', 'claude-sonnet-5-5'})
             if result is None:
                 return None
             bad = grounding.unsupported('\n'.join([

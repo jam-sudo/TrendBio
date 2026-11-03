@@ -215,34 +215,38 @@ describe("built site accessibility and responsive layout", () => {
     expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
     await page.keyboard.press("Home");
     expect(await all.getAttribute("aria-pressed")).toBe("true");
-    expect(await visible.count()).toBe(20);
+    expect(await visible.count()).toBe(40);
   }, 30_000);
 
-  it("opens compact rows natively and reveals a category present only at rank twelve", async () => {
+  it("opens compact rows natively and reveals a category present only in the collapsed rows", async () => {
     await page.goto(`http://127.0.0.1:${server!.port}/`);
     const details = page.locator('[data-more-topics]');
-    expect(await page.locator('[data-topic-cats]:visible').count()).toBe(5);
+    expect(await page.locator('[data-topic-cats]:visible').count()).toBe(20);
     await details.locator('summary').focus();
     await page.keyboard.press('Enter');
     expect(await details.evaluate((el) => (el as HTMLDetailsElement).open)).toBe(true);
-    expect(await page.locator('[data-topic-cats]:visible').count()).toBe(20);
+    expect(await page.locator('[data-topic-cats]:visible').count()).toBe(40);
     for (const width of [1280, 375]) {
       await page.setViewportSize({ width, height: 900 });
       const heights = await page.locator('.compact-row').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
-      expect(heights).toEqual(Array(15).fill(40));
+      expect(heights).toEqual(Array(35).fill(40));
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     }
     expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);
     await details.locator('summary').focus();
     await page.keyboard.press('Space');
     expect(await details.evaluate((el) => (el as HTMLDetailsElement).open)).toBe(false);
+    // Simulate a category whose only match is below the visible cutoff.
+    await page.locator('[data-topic-cats]').evaluateAll(rows => rows.forEach((row, index) => {
+      row.setAttribute('data-topic-cats', index === 20 ? 'industry' : 'genomics');
+    }));
     const industry = page.locator('[data-cat="industry"]');
     expect(await industry.isEnabled()).toBe(true);
     await industry.click();
     expect(await details.evaluate((el) => (el as HTMLDetailsElement).open)).toBe(true);
     const visible = page.locator('[data-topic-cats]:visible');
     expect(await visible.count()).toBe(1);
-    expect(await visible.locator('.rank').textContent()).toBe('Rank 12');
-    expect(await visible.getAttribute('href')).toBe('/topic/industry-platforms-0012/');
+    expect(await visible.locator('.rank').textContent()).toBe('Rank 21');
+    expect(await visible.getAttribute('href')).toBe('/topic/long-read-assembly-0021/');
   }, 30_000);
 });

@@ -1111,13 +1111,13 @@ def test_reprocess_only_missing_preserves_synthesis_without_enrichment(ctx, monk
     monkeypatch.setattr(ctx.deps.llm, 'synthesize', capture)
     run_reprocess('computational', start, end, ctx.store, ctx.deps,
                   reenrich=False, only_missing_synthesis=True)
-    assert len(called) == len(set(called)) == 15
+    assert len(called) == len(set(called)) == 35
     assert not set(called) & preserved.keys()
     for slug, fields in preserved.items():
         topic = ctx.store.get_topic(slug)
         assert (topic.label, topic.headline, topic.summary, topic.synthesis,
                 topic.synthesis_model, topic.synthesized_on, topic.item_one_liners) == fields
-    assert len(ctx.store.get_day(end).ranked) == 20
+    assert len(ctx.store.get_day(end).ranked) == 40
     assert all(adapter.calls == [] for adapter in ctx.deps.adapters)
 
 

@@ -101,7 +101,7 @@ describe("built topic pages", () => {
     const ranked = allTopics(domain).filter((entry) => entry.history.some((day) => day.rank !== null));
     expect(rankedTopics(domain)).toEqual(ranked);
     expect(rankedTopics("missing-domain")).toEqual([]);
-    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(20);
+    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(40);
     expect([...html.matchAll(/href="\/topic\/([^/]+)\/"/g)].map((match) => match[1]))
       .toEqual(ranked.map((entry) => entry.slug));
     for (const entry of ranked) {
@@ -110,7 +110,7 @@ describe("built topic pages", () => {
       expect(html).toContain(`href="/topic/${entry.slug}/"`);
     }
     expect(html).toContain("data-category-chips");
-    expect(html.match(/datetime="2026-11-01"/g)).toHaveLength(20);
+    expect(html.match(/datetime="2026-11-01"/g)).toHaveLength(40);
     expect(html).not.toContain(neverRankedSlug);
     expect(html).not.toContain(loadTopic(domain, neverRankedSlug)!.label);
     expect(existsSync(`dist/topic/${neverRankedSlug}`)).toBe(true);
@@ -167,7 +167,7 @@ describe("built topic pages", () => {
       const index = readFileSync(join(output, "topics/index.html"), "utf8");
       const links = [...index.matchAll(/href="\/topic\/([^/]+)\/"/g)].map((match) => match[1]);
       expect(links.at(-1)).toBe(other.slug);
-      expect(links).toHaveLength(20);
+      expect(links).toHaveLength(40);
       expect(links).not.toContain(neverRankedSlug);
     } finally {
       rmSync(temporary, { recursive: true, force: true });

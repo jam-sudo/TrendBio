@@ -10,7 +10,7 @@ from pipeline.budget import Budget
 from pipeline.config import load_scoring
 from pipeline.llm import LLM, Synthesis
 from pipeline.models import Item, Scores, Signals, Topic, TopicDay
-from pipeline.synthesize import synthesize_top
+from pipeline.synthesize import synthesize_top, tier_model
 
 
 TODAY = date(2026, 11, 2)
@@ -328,26 +328,27 @@ def test_previous_synthesis_is_not_grounding_source(context):
 
 @pytest.mark.parametrize('backfill,over_ceiling,override', [
     (False, False, None), (True, False, None), (False, True, None),
-    (True, False, 'claude-opus-5-5'),
+    (True, False, 'claude-opus-5-5'), (False, False, 'claude-haiku-5-5'),
+    (True, True, 'claude-opus-5-5'),
 ])
-def test_top_twenty_uses_featured_model_and_haiku_tail(context, backfill, over_ceiling, override):
+def test_top_forty_uses_synthesis_tiers(context, backfill, over_ceiling, override):
     ctx = context
     if over_ceiling:
         ctx.budget.record('claude-opus-5-5', 20_000_000, 0)
     ranked = [(ctx.topic.model_copy(deep=True, update={'slug': str(i)}), ctx.sig, ctx.scores)
-              for i in range(20)]
+              for i in range(40)]
     topics, model, notes = synthesize_top(
         ranked, {row[0].slug: [ctx.item] for row in ranked}, ctx.llm, ctx.budget,
         load_scoring(), TODAY, backfill=backfill, model=override,
     )
-    featured = override or ('claude-haiku-5-5' if backfill or over_ceiling else 'claude-opus-5-5')
+    featured = 'claude-haiku-5-5' if over_ceiling else override or ('claude-haiku-5-5' if backfill else 'claude-opus-5-5')
     assert model == featured
-    assert [topic.synthesis_model for topic in topics] == [featured] * 5 + ['claude-haiku-5-5'] * 15
+    assert [topic.synthesis_model for topic in topics] == [featured] * 5 + [('claude-haiku-5-5' if backfill or over_ceiling or override else 'claude-sonnet-5-5')] * 15 + ['claude-haiku-5-5'] * 20
     assert all(topic.headline and topic.summary and topic.label and topic.synthesis for topic in topics)
     assert notes == []
 
 
-def test_skipping_cached_featured_topics_keeps_tail_on_haiku(context):
+def test_skipping_cached_topics_preserves_rank_tiers(context):
     ctx = context
     cfg = load_scoring().model_copy(update={'featured_n': 2})
     ranked = [(ctx.topic.model_copy(deep=True, update={'slug': str(i)}), ctx.sig, ctx.scores)
@@ -359,5 +360,37 @@ def test_skipping_cached_featured_topics_keeps_tail_on_haiku(context):
     )
     assert model == 'claude-opus-5-5'
     assert [topic.model_dump() for topic in topics[:2]] == before
-    assert ctx.beta.calls == []
-    assert len(ctx.plain.calls) == 2
+    assert len(ctx.beta.calls) == 2
+    assert ctx.plain.calls == []
+
+
+@pytest.mark.parametrize('rank,model', [(1, 'opus'), (5, 'opus'), (6, 'sonnet'),
+                                        (20, 'sonnet'), (21, 'haiku'), (40, 'haiku')])
+def test_tier_model_by_rank(rank, model):
+    assert tier_model(rank, load_scoring(), False, False) == f'claude-{model}-5-5'
+
+
+def test_tier_model_backfill_and_ceiling_override():
+    cfg = load_scoring()
+    for rank in range(1, 41):
+        assert tier_model(rank, cfg, True, False) == 'claude-haiku-5-5'
+        assert tier_model(rank, cfg, False, True) == 'claude-haiku-5-5'
+    cfg.backfill_synthesis_model = 'claude-sonnet-5-5'
+    assert tier_model(1, cfg, True, False) == 'claude-sonnet-5-5'
+    assert tier_model(1, cfg, True, True) == 'claude-haiku-5-5'
+
+
+def test_sonnet_uses_sdk_beta_fallback_with_opus_limits(context):
+    import inspect
+    from anthropic.resources.beta.messages import Messages
+
+    ctx = context
+    ctx.llm.synthesize(ctx.topic, [ctx.item], ctx.sig, None, 'claude-sonnet-5-5')
+    call = ctx.beta.calls[0]
+    inspect.signature(Messages.parse).bind(None, **call)
+    assert call['fallbacks'] == 'default'
+    assert call['betas'] == ['server-side-fallback-2026-07-01']
+    assert call['max_tokens'] == 4096
+    assert call['output_config'] == {'effort': 'high'}
+    assert ctx.plain.calls == []
+    assert ctx.budget.month_spend_usd() == pytest.approx(0.0004)

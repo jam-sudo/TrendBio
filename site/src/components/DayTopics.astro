@@ -14,8 +14,9 @@ interface Props {
 }
 
 const { day, topics: ranked, period } = Astro.props;
-const { featured_n, top_n } = parse(readFileSync("../config/scoring.yaml", "utf8"));
-const compact = ranked.filter((topic) => topic.rank > featured_n);
+const { featured_n, display_open_n, top_n } = parse(readFileSync("../config/scoring.yaml", "utf8"));
+const compact = ranked.filter((topic) => topic.rank > featured_n && topic.rank <= display_open_n);
+const more = ranked.filter((topic) => topic.rank > display_open_n);
 const categories = loadTaxonomy("computational");
 const topicCategories = ranked.map((topic) => [
   topic.category, ...topic.secondary_categories,
@@ -33,15 +34,19 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 <div class="topic-list">
   {ranked.filter((topic) => topic.rank <= featured_n).map((topic) => <TopicCard ranked={topic} featured={topic.rank === 1} />)}
 </div>
-{compact.length > 0 && <details data-more-topics>
-  <summary>Show {compact.length} more</summary>
+{compact.length > 0 && <div class="compact-list open-list">
+  {compact.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
+</div>}
+{more.length > 0 && <details data-more-topics>
+  <summary>Show {more.length} more</summary>
   <div class="compact-list">
-    {compact.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
+    {more.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
   </div>
 </details>}
 
 <style>
   .topic-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .open-list { margin-top: 0.5rem; }
   details { margin-top: 1rem; }
   summary { cursor: pointer; padding: 0.75rem 0; font-size: var(--t3); }
   .compact-list { display: flex; flex-direction: column; gap: 4px; }
