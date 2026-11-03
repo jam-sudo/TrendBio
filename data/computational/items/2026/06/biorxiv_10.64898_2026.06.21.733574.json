@@ -1,0 +1,42 @@
+{
+  "abstract": "Biosynthetic gene clusters (BGCs) encode enzymatic pathways for natural products with pharmaceutical potential, yet prioritizing candidates from fragmented environmental DNA (eDNA) assemblies remains computationally challenging. We present BGC-QDR (Biosynthetic Gene Cluster Quantum Discovery and Ranking), an open-source pipeline that integrates input quality control, Prodigal ORF prediction, Pfam HMM domain annotation, rule-based BGC classification, MiBIG 4.0 novelty assessment, and variational quantum classifier (VQC) ranking via PennyLane. BGC-QDR is designed as a quantum-assisted ranking framework for biologically informed BGC prioritization, not as a claim of quantum computational advantage over classical machine learning.\n\nWe evaluate the pipeline on MiBIG 4.0 (2,636 annotated BGCs) using a 20-dimensional biosynthetic feature vector and stratified 10-fold cross-validation. The integrated VQC (6 qubits x 3 layers, 54 parameters) achieves accuracy of 0.789 {+/-} 0.076 and ROC-AUC of 0.835 {+/-} 0.057. Random Forest achieves the highest ROC-AUC (0.898 {+/-} 0.032), followed by Logistic Regression (0.874 {+/-} 0.020) and MLP (0.872 {+/-} 0.024). Wilcoxon signed-rank tests on per-fold AUC scores show that VQC ROC-AUC is significantly lower than Random Forest (p = 0.0098) and Logistic Regression (p = 0.037) at  = 0.05, with no significant difference versus MLP (p = 0.064). Architecture ablation identifies 4 qubits x 3 layers as the best VQC configuration on hold-out validation (AUC = 0.737). Feature importance analysis highlights peptidyl carrier protein domains, cluster length, and module count as dominant predictors. BGC-QDR provides a reproducible, end-to-end workflow for eDNA-derived BGC discovery with integrated novelty scoring and quantum-assisted candidate ranking. The complete BGC-QDR source code, benchmark datasets, and reproduction instructions are publicly available at: Abhishekmishra2808/BGC-PIPELINE",
+  "authors": [
+    "Mishra, A.",
+    "Rai, A."
+  ],
+  "doi": "10.64898/2026.06.21.733574",
+  "first_seen": "2026-06-25",
+  "id": "biorxiv:10.64898/2026.06.21.733574",
+  "metadata": {
+    "abstract": "Biosynthetic gene clusters (BGCs) encode enzymatic pathways for natural products with pharmaceutical potential, yet prioritizing candidates from fragmented environmental DNA (eDNA) assemblies remains computationally challenging. We present BGC-QDR (Biosynthetic Gene Cluster Quantum Discovery and Ranking), an open-source pipeline that integrates input quality control, Prodigal ORF prediction, Pfam HMM domain annotation, rule-based BGC classification, MiBIG 4.0 novelty assessment, and variational quantum classifier (VQC) ranking via PennyLane. BGC-QDR is designed as a quantum-assisted ranking framework for biologically informed BGC prioritization, not as a claim of quantum computational advantage over classical machine learning.\n\nWe evaluate the pipeline on MiBIG 4.0 (2,636 annotated BGCs) using a 20-dimensional biosynthetic feature vector and stratified 10-fold cross-validation. The integrated VQC (6 qubits x 3 layers, 54 parameters) achieves accuracy of 0.789 {+/-} 0.076 and ROC-AUC of 0.835 {+/-} 0.057. Random Forest achieves the highest ROC-AUC (0.898 {+/-} 0.032), followed by Logistic Regression (0.874 {+/-} 0.020) and MLP (0.872 {+/-} 0.024). Wilcoxon signed-rank tests on per-fold AUC scores show that VQC ROC-AUC is significantly lower than Random Forest (p = 0.0098) and Logistic Regression (p = 0.037) at  = 0.05, with no significant difference versus MLP (p = 0.064). Architecture ablation identifies 4 qubits x 3 layers as the best VQC configuration on hold-out validation (AUC = 0.737). Feature importance analysis highlights peptidyl carrier protein domains, cluster length, and module count as dominant predictors. BGC-QDR provides a reproducible, end-to-end workflow for eDNA-derived BGC discovery with integrated novelty scoring and quantum-assisted candidate ranking. The complete BGC-QDR source code, benchmark datasets, and reproduction instructions are publicly available at: Abhishekmishra2808/BGC-PIPELINE",
+    "author_corresponding": "Abhishek Mishra",
+    "author_corresponding_institution": "Bhagwan Parshuram Institute of Technology",
+    "authors": "Mishra, A.; Rai, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-25",
+    "doi": "10.64898/2026.06.21.733574",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/25/2026.06.21.733574.source.xml",
+    "license": "cc0_ng",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BGC-QDR: A Quantum-Assisted Pipeline for Biosynthetic Gene Cluster Discovery and Ranking from Environmental DNA",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Bhagwan Parshuram Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Open-source eDNA biosynthetic gene cluster pipeline; variational quantum classifier ranks candidates but trails Random Forest on MiBIG 4.0.",
+  "title": "BGC-QDR: A Quantum-Assisted Pipeline for Biosynthetic Gene Cluster Discovery and Ranking from Environmental DNA",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.21.733574"
+}

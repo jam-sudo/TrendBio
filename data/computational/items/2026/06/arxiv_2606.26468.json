@@ -1,0 +1,43 @@
+{
+  "abstract": "Graph-based representations of genome sequences have emerged as a powerful approach for representing massive genomic databases in an expressive and efficient way. Despite their benefits, analysis on large-scale genome graphs incurs significant data movement overhead from the storage system due to accessing large amounts of low-reuse data. Processing data directly inside the storage device can be a fundamental solution for mitigating this overhead. However, none of the existing tools for graph-based genome analysis can be efficiently used inside the storage system due to the limited internal hardware resources in modern SSDs. At the same time, prior storage-centric systems developed for (i) traditional, linear non-graph-based genome analysis or (ii) conventional, non-genomic graph analysis are not suitable for the unique data structures and access patterns of graph-based genome analysis.\n  We propose GRAINS, the first system for analysis with large-scale genome graphs in storage. Through our detailed examination of typical analysis pipelines that operate on genome graphs, we perform storage-aware algorithm-architecture co-design to (i) make these pipelines more storage-friendly and (ii) further improve performance, energy-efficiency, and cost via in-storage and in-flash processing. GRAINS's co-design is based on three key aspects. First, we propose a new batching and execution flow, based on unique features of genome graphs. Second, via in-flash and in-storage processing, we avoid transferring low-reused flash pages. Third, to leverage the full parallelism of flash dies, we design an effective, yet lightweight, scheduling technique, enabled by re-purposing the existing SSD structures. GRAINS provides 2.7x-47.8x speedup (4.4x-31.6x energy reduction) over the state-of-the-art software baselines, and 1.5x-17.0x speedup (3.1x-20.7x energy reduction) over a hardware-accelerated baseline.",
+  "authors": [
+    "Nika Mansouri Ghiasi",
+    "Harun Mustafa",
+    "Talu Güloglu",
+    "Rakesh Nadig",
+    "Konstantina Koliogeorgi",
+    "Susana Rebolledo Ruiz",
+    "Marc Rautmann",
+    "Furkan Eris",
+    "Mohammad Sadrosadati",
+    "Jisung Park",
+    "Onur Mutlu"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-25",
+  "id": "arxiv:2606.26468",
+  "metadata": {
+    "arxiv_primary_category": "cs.AR",
+    "categories": [
+      "cs.AR",
+      "cs.DC",
+      "q-bio.GN",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.26468v1</ns0:id>\n    <ns0:title>GRAINS: Storage-Aware Algorithm-Architecture Co-Design Enabling High-Performance and Low-Cost Graph-Based Genome Analysis</ns0:title>\n    <ns0:updated>2026-06-25T00:02:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.26468v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.26468v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Graph-based representations of genome sequences have emerged as a powerful approach for representing massive genomic databases in an expressive and efficient way. Despite their benefits, analysis on large-scale genome graphs incurs significant data movement overhead from the storage system due to accessing large amounts of low-reuse data. Processing data directly inside the storage device can be a fundamental solution for mitigating this overhead. However, none of the existing tools for graph-based genome analysis can be efficiently used inside the storage system due to the limited internal hardware resources in modern SSDs. At the same time, prior storage-centric systems developed for (i) traditional, linear non-graph-based genome analysis or (ii) conventional, non-genomic graph analysis are not suitable for the unique data structures and access patterns of graph-based genome analysis.\n  We propose GRAINS, the first system for analysis with large-scale genome graphs in storage. Through our detailed examination of typical analysis pipelines that operate on genome graphs, we perform storage-aware algorithm-architecture co-design to (i) make these pipelines more storage-friendly and (ii) further improve performance, energy-efficiency, and cost via in-storage and in-flash processing. GRAINS's co-design is based on three key aspects. First, we propose a new batching and execution flow, based on unique features of genome graphs. Second, via in-flash and in-storage processing, we avoid transferring low-reused flash pages. Third, to leverage the full parallelism of flash dies, we design an effective, yet lightweight, scheduling technique, enabled by re-purposing the existing SSD structures. GRAINS provides 2.7x-47.8x speedup (4.4x-31.6x energy reduction) over the state-of-the-art software baselines, and 1.5x-17.0x speedup (3.1x-20.7x energy reduction) over a hardware-accelerated baseline.</ns0:summary>\n    <ns0:category term=\"cs.AR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-25T00:02:03Z</ns0:published>\n    <ns1:comment>To appear in ISCA 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.AR\" />\n    <ns0:author>\n      <ns0:name>Nika Mansouri Ghiasi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Harun Mustafa</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Talu Güloglu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rakesh Nadig</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Konstantina Koliogeorgi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Susana Rebolledo Ruiz</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Marc Rautmann</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Furkan Eris</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mohammad Sadrosadati</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jisung Park</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Onur Mutlu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "GRAINS runs genome-graph analysis inside SSDs via storage-aware co-design, reporting 2.7x-47.8x speedup over software baselines.",
+  "title": "GRAINS: Storage-Aware Algorithm-Architecture Co-Design Enabling High-Performance and Low-Cost Graph-Based Genome Analysis",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.26468v1"
+}

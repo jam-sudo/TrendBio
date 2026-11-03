@@ -1,0 +1,47 @@
+{
+  "abstract": "BackgroundCorrelation is the dominant input to co-expression module discovery and miRNA-target inference. Both rely on an implicit assumption: a Pearson coefficient pooled across heterogeneous samples, whether tissues, cancer types, or cell types, estimates one biologically meaningful quantity. Simpsons paradox makes this assumption fragile in principle, since between- group mean shifts can dominate or reverse within-group associations. How often this happens in real transcriptomic data has not been quantified.\n\nResultsAcross 8,890 TCGA tumors from 31 cancer cohorts and 23,170,038 miRNA-mRNA pairs, 94.8% of pairs showed both positive and negative within-cohort correlations. Restricting to the high-variance domain of one million pairs, 13.3% of pooled correlations with |rglobal|[&ge;]0.2 reversed against the within-cohort majority at sign tolerance{varepsilon} = 0.05. Heterogeneity was the rule rather than the exception (median I2 = 0.86, IQR 0.80-0.90), and 99.5% of pairs rejected equal correlation across cohorts at FDR < 0.05. Of 692,770 experimentally validated miRTarBase v10 targets measurable in our data, only 0.9% were uniformly negative across cohorts. The pattern recurred across modalities. In GTEx, 21.0% of pooled signs disagreed with the tissue majority, and 23.5% of pairs flipped sign after tissue-mean removal. In 10x PBMC scRNA-seq, 13.1% of gene-gene correlations flipped after cell-type-mean removal; in CITE-seq, 37.9% of protein-RNA pairs flipped under a joint WNN partition of cells. Refining context reduced reversal, though by how much depended on the partition: within BRCA, 5.5% of pairs reversed under molecular PAM50 subtypes versus 0.35% under clinical IHC receptor status, and refining T cells into transcriptome-defined subtypes cut PBMC reversal from 11.8% to 0.13%.\n\nConclusionsA single pooled correlation coefficient can invert direction relative to its within-context constituents at rates that are not negligible. Correlations should be reported with their context: the within-context distribution, a heterogeneity statistic, and a diagnostic that separates between-context mean shifts from within-context association. We provide a small R interface that computes these summaries.",
+  "authors": [
+    "Asiaee, A.",
+    "Bombina, P.",
+    "McGee, R. L.",
+    "Reed, J.",
+    "Abrams, Z. B.",
+    "Abruzzo, L. V.",
+    "Coombes, K. R."
+  ],
+  "doi": "10.64898/2026.06.23.733936",
+  "first_seen": "2026-06-29",
+  "id": "biorxiv:10.64898/2026.06.23.733936",
+  "metadata": {
+    "abstract": "BackgroundCorrelation is the dominant input to co-expression module discovery and miRNA-target inference. Both rely on an implicit assumption: a Pearson coefficient pooled across heterogeneous samples, whether tissues, cancer types, or cell types, estimates one biologically meaningful quantity. Simpsons paradox makes this assumption fragile in principle, since between- group mean shifts can dominate or reverse within-group associations. How often this happens in real transcriptomic data has not been quantified.\n\nResultsAcross 8,890 TCGA tumors from 31 cancer cohorts and 23,170,038 miRNA-mRNA pairs, 94.8% of pairs showed both positive and negative within-cohort correlations. Restricting to the high-variance domain of one million pairs, 13.3% of pooled correlations with |rglobal|[&ge;]0.2 reversed against the within-cohort majority at sign tolerance{varepsilon} = 0.05. Heterogeneity was the rule rather than the exception (median I2 = 0.86, IQR 0.80-0.90), and 99.5% of pairs rejected equal correlation across cohorts at FDR < 0.05. Of 692,770 experimentally validated miRTarBase v10 targets measurable in our data, only 0.9% were uniformly negative across cohorts. The pattern recurred across modalities. In GTEx, 21.0% of pooled signs disagreed with the tissue majority, and 23.5% of pairs flipped sign after tissue-mean removal. In 10x PBMC scRNA-seq, 13.1% of gene-gene correlations flipped after cell-type-mean removal; in CITE-seq, 37.9% of protein-RNA pairs flipped under a joint WNN partition of cells. Refining context reduced reversal, though by how much depended on the partition: within BRCA, 5.5% of pairs reversed under molecular PAM50 subtypes versus 0.35% under clinical IHC receptor status, and refining T cells into transcriptome-defined subtypes cut PBMC reversal from 11.8% to 0.13%.\n\nConclusionsA single pooled correlation coefficient can invert direction relative to its within-context constituents at rates that are not negligible. Correlations should be reported with their context: the within-context distribution, a heterogeneity statistic, and a diagnostic that separates between-context mean shifts from within-context association. We provide a small R interface that computes these summaries.",
+    "author_corresponding": "Amir Asiaee",
+    "author_corresponding_institution": "Vanderbilt University Medical Center",
+    "authors": "Asiaee, A.; Bombina, P.; McGee, R. L.; Reed, J.; Abrams, Z. B.; Abruzzo, L. V.; Coombes, K. R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-29",
+    "doi": "10.64898/2026.06.23.733936",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/29/2026.06.23.733936.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Context-dependent correlations mislead transcriptomic network inference in bulk and single-cell data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Vanderbilt University Medical Center",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-06-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "Pooled correlations in TCGA, GTEx, and scRNA/CITE-seq data often reverse sign versus within-context associations; proposes reporting context-level…",
+  "title": "Context-dependent correlations mislead transcriptomic network inference in bulk and single-cell data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.23.733936"
+}

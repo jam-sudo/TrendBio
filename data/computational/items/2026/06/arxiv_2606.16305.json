@@ -1,0 +1,35 @@
+{
+  "abstract": "This paper addresses real-time state estimation for a nine-compartment nonlinear COVID-19 epidemic model with two co-circulating strains, a super-spreader subpopulation, vaccination with waning immunity, hospitalization, and mortality. Time-varying transmission and vaccination rates are known inputs from a companion calibration, leaving the reconstruction of all nine states from three routinely reported observables: hospitalizations H, fatalities F, and vaccinated stock V. The contributions are theoretical rather than in the filter recursion. First, a Lie-derivative observability analysis yields, via a six-step derivation, the closed-form determinant |det(O9)| = delta_w * gamma_a^2 * kappa * rho2 * w1^2 * (delta_i - delta_p)^2 * |r1 - r2|, showing the level-2 codistribution is rank-deficient at the calibrated symmetric parameters (delta_i = delta_p, r1 = r2); the third Lie derivative restores full rank 9, with r2 the symmetry-breaking parameter. Second, an EKF is designed on the Euler-discretized dynamics with a closed-form 9x9 Jacobian and Joseph covariance update. Third, local exponential mean-square boundedness of the error is proved as a full theorem via the Reif-Gunther-Yaz-Unbehauen hypotheses, exploiting the bilinear drift and linear output to obtain a global-radius quadratic remainder bound that extends to bilinear-drift, linear-output systems. Fourth, the noise covariances are designed from calibration residuals and assessed by NEES and innovation-whiteness tests. All experiments use synthetic measurements from the calibrated model, so reported RMSE values (0.07%-2.72%) are methodology benchmarks, not predictive accuracy. A parameter-mismatch study shows measured and directly-coupled channels stay accurate under model error up to +/-30% while indirectly observed states degrade gracefully. The framework provides the state-feedback basis for future Model Predictive Control.",
+  "authors": [
+    "Lokman Rachid Melhani",
+    "Antonino Sferlazza",
+    "Dominique Persano Adorno",
+    "Filippo D'Ippolito",
+    "Antonino Lo Burgio",
+    "Alberto Firenze"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-15",
+  "id": "arxiv:2606.16305",
+  "metadata": {
+    "arxiv_primary_category": "math.OC",
+    "categories": [
+      "math.OC",
+      "eess.SY",
+      "q-bio.PE"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.16305v1</ns0:id>\n    <ns0:title>Extended Kalman Filter-Based State Estimation for a Nine-Compartment Nonlinear Epidemic Model -- Convergence Analysis and In-Silico Benchmark Calibrated on the COVID-19 Third Wave in Italy</ns0:title>\n    <ns0:updated>2026-06-15T07:09:06Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.16305v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.16305v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>This paper addresses real-time state estimation for a nine-compartment nonlinear COVID-19 epidemic model with two co-circulating strains, a super-spreader subpopulation, vaccination with waning immunity, hospitalization, and mortality. Time-varying transmission and vaccination rates are known inputs from a companion calibration, leaving the reconstruction of all nine states from three routinely reported observables: hospitalizations H, fatalities F, and vaccinated stock V. The contributions are theoretical rather than in the filter recursion. First, a Lie-derivative observability analysis yields, via a six-step derivation, the closed-form determinant |det(O9)| = delta_w * gamma_a^2 * kappa * rho2 * w1^2 * (delta_i - delta_p)^2 * |r1 - r2|, showing the level-2 codistribution is rank-deficient at the calibrated symmetric parameters (delta_i = delta_p, r1 = r2); the third Lie derivative restores full rank 9, with r2 the symmetry-breaking parameter. Second, an EKF is designed on the Euler-discretized dynamics with a closed-form 9x9 Jacobian and Joseph covariance update. Third, local exponential mean-square boundedness of the error is proved as a full theorem via the Reif-Gunther-Yaz-Unbehauen hypotheses, exploiting the bilinear drift and linear output to obtain a global-radius quadratic remainder bound that extends to bilinear-drift, linear-output systems. Fourth, the noise covariances are designed from calibration residuals and assessed by NEES and innovation-whiteness tests. All experiments use synthetic measurements from the calibrated model, so reported RMSE values (0.07%-2.72%) are methodology benchmarks, not predictive accuracy. A parameter-mismatch study shows measured and directly-coupled channels stay accurate under model error up to +/-30% while indirectly observed states degrade gracefully. The framework provides the state-feedback basis for future Model Predictive Control.</ns0:summary>\n    <ns0:category term=\"math.OC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SY\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.PE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-15T07:09:06Z</ns0:published>\n    <ns1:comment>Companion paper to arXiv:2606.07413. Submitted to ISA Transactions. 9 figures</ns1:comment>\n    <ns1:primary_category term=\"math.OC\" />\n    <ns0:author>\n      <ns0:name>Lokman Rachid Melhani</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Antonino Sferlazza</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dominique Persano Adorno</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Filippo D'Ippolito</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Antonino Lo Burgio</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alberto Firenze</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-06-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "EKF state estimation for a nine-compartment COVID-19 model: observability analysis, convergence proof, and synthetic-data benchmark.",
+  "title": "Extended Kalman Filter-Based State Estimation for a Nine-Compartment Nonlinear Epidemic Model -- Convergence Analysis and In-Silico Benchmark Calibrated on the COVID-19 Third Wave in Italy",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.16305v1"
+}

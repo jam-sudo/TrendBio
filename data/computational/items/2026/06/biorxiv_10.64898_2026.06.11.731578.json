@@ -1,0 +1,38 @@
+{
+  "abstract": "Bioinformatics analyses depend on workflow engines to coordinate dozens of computational tools across complex dependency chains. The most widely adopted engines--Snakemake, Nextflow, the Common Workflow Language (CWL), and the Workflow Description Language (WDL)--run on interpreted or just-in-time (JIT) compiled language runtimes, incurring hundreds of milliseconds of startup latency and providing no compile-time safety guarantees from the host language. We developed oxo-flow, a workflow engine written in Rust that compiles to a single native binary. On an Apple M5 processor, oxo-flow parses, validates, and dry-runs a production-scale workflow in roughly 22 milliseconds--before Snakemake or Nextflow have finished loading their runtime environments. Peak memory usage is 16 megabytes, representing six- to seven-fold reductions relative to Snakemake and Nextflow. Dry-run latency is essentially independent of workflow size: a hundred-fold increase in rule count adds approximately 0.4 milliseconds. oxo-flow integrates 31 command-line tools, a REST interface with 60 endpoints, an embedded web application, and native cluster submission into a single 10-megabyte binary. It provides per-rule environment isolation across seven backends, checkpoint-based fault tolerance with cryptographic output verification, and a formal installation and operational qualification protocol for regulated laboratory environments. Ten curated workflows and three demonstration pipeline repositories are available. oxo-flow is freely available under Apache License 2.0 at https://github.com/Traitome/oxo-flow.",
+  "authors": [
+    "Wang, S."
+  ],
+  "doi": "10.64898/2026.06.11.731578",
+  "first_seen": "2026-06-15",
+  "id": "biorxiv:10.64898/2026.06.11.731578",
+  "metadata": {
+    "abstract": "Bioinformatics analyses depend on workflow engines to coordinate dozens of computational tools across complex dependency chains. The most widely adopted engines--Snakemake, Nextflow, the Common Workflow Language (CWL), and the Workflow Description Language (WDL)--run on interpreted or just-in-time (JIT) compiled language runtimes, incurring hundreds of milliseconds of startup latency and providing no compile-time safety guarantees from the host language. We developed oxo-flow, a workflow engine written in Rust that compiles to a single native binary. On an Apple M5 processor, oxo-flow parses, validates, and dry-runs a production-scale workflow in roughly 22 milliseconds--before Snakemake or Nextflow have finished loading their runtime environments. Peak memory usage is 16 megabytes, representing six- to seven-fold reductions relative to Snakemake and Nextflow. Dry-run latency is essentially independent of workflow size: a hundred-fold increase in rule count adds approximately 0.4 milliseconds. oxo-flow integrates 31 command-line tools, a REST interface with 60 endpoints, an embedded web application, and native cluster submission into a single 10-megabyte binary. It provides per-rule environment isolation across seven backends, checkpoint-based fault tolerance with cryptographic output verification, and a formal installation and operational qualification protocol for regulated laboratory environments. Ten curated workflows and three demonstration pipeline repositories are available. oxo-flow is freely available under Apache License 2.0 at https://github.com/Traitome/oxo-flow.",
+    "author_corresponding": "Shixiang Wang",
+    "author_corresponding_institution": "School of Life Sciences, Central South University",
+    "authors": "Wang, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-15",
+    "doi": "10.64898/2026.06.11.731578",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/15/2026.06.11.731578.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "oxo-flow: compiled, memory-safe bioinformatics workflow orchestration",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "School of Life Sciences, Central South University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "Bioinformatics analyses depend on workflow engines to coordinate dozens of computational tools across complex dependency chains.",
+  "title": "oxo-flow: compiled, memory-safe bioinformatics workflow orchestration",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.11.731578"
+}

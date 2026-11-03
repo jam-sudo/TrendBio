@@ -1,0 +1,41 @@
+{
+  "abstract": "Approximate Bayesian computation sequential Monte Carlo (ABC-SMC) propagates its particles with a perturbation kernel, and with the standard Normal kernel it degrades sharply as the parameter dimension grows, a failure usually attributed to dimension itself. We show instead that it is governed by the quality of the summary statistics, with dimension entering only through a separate and milder mechanism, and that the two must act together for the Normal kernel to break. The first ingredient is covariance overinflation: the kernel covariance, estimated from the particle cloud, overshoots the true posterior covariance by a factor set by information loss in the summary statistics. We derive this overscaling factor in closed form for a Gaussian model with sufficient statistics and show that it stays modest at any dimension, shrinking toward its baseline value as the tolerance tightens; the extreme values seen in practice (of order 103) are a signature of insufficient summaries, not of dimension. The second ingredient is perturbation overconcentration: the normalised Normal step size concentrates around one as the dimension grows, so every proposal overshoots by the same factor. Either ingredient alone is harmless; only their combination breaks the Normal kernel. A Cauchy kernel (multivariate t with one degree of freedom) removes the concentration, keeping a positive acceptance rate under arbitrary overscaling at a bounded worst-case cost of 1.87x in expected squared jump distance. In a Metropolis-Hastings framework we derive closed-form acceptance rates for both kernels that illustrate the advantage of the Cauchy kernel in this limit. A series of full ABC-SMC computational experiments on five problems at d = 12, including a hierarchical gene-expression model, show the Cauchy reducing the sliced Wasserstein distance to the reference posterior by factors of up to 50 with the same simulation budget. Since the summary statistics are commonly insufficient for the models that require ABC, overinflation is structural and the Cauchy perturbation kernel is the right default for problems in higher dimensions.",
+  "authors": [
+    "Sturrock, M.",
+    "Shahrezaei, V."
+  ],
+  "doi": "10.64898/2026.06.24.734205",
+  "first_seen": "2026-06-25",
+  "id": "biorxiv:10.64898/2026.06.24.734205",
+  "metadata": {
+    "abstract": "Approximate Bayesian computation sequential Monte Carlo (ABC-SMC) propagates its particles with a perturbation kernel, and with the standard Normal kernel it degrades sharply as the parameter dimension grows, a failure usually attributed to dimension itself. We show instead that it is governed by the quality of the summary statistics, with dimension entering only through a separate and milder mechanism, and that the two must act together for the Normal kernel to break. The first ingredient is covariance overinflation: the kernel covariance, estimated from the particle cloud, overshoots the true posterior covariance by a factor set by information loss in the summary statistics. We derive this overscaling factor in closed form for a Gaussian model with sufficient statistics and show that it stays modest at any dimension, shrinking toward its baseline value as the tolerance tightens; the extreme values seen in practice (of order 103) are a signature of insufficient summaries, not of dimension. The second ingredient is perturbation overconcentration: the normalised Normal step size concentrates around one as the dimension grows, so every proposal overshoots by the same factor. Either ingredient alone is harmless; only their combination breaks the Normal kernel. A Cauchy kernel (multivariate t with one degree of freedom) removes the concentration, keeping a positive acceptance rate under arbitrary overscaling at a bounded worst-case cost of 1.87x in expected squared jump distance. In a Metropolis-Hastings framework we derive closed-form acceptance rates for both kernels that illustrate the advantage of the Cauchy kernel in this limit. A series of full ABC-SMC computational experiments on five problems at d = 12, including a hierarchical gene-expression model, show the Cauchy reducing the sliced Wasserstein distance to the reference posterior by factors of up to 50 with the same simulation budget. Since the summary statistics are commonly insufficient for the models that require ABC, overinflation is structural and the Cauchy perturbation kernel is the right default for problems in higher dimensions.",
+    "author_corresponding": "Marc Sturrock",
+    "author_corresponding_institution": "Royal College of Surgeons in Ireland",
+    "authors": "Sturrock, M.; Shahrezaei, V.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-06-25",
+    "doi": "10.64898/2026.06.24.734205",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/25/2026.06.24.734205.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Overinflation and overconcentration: why Cauchy perturbation kernels are the right choice for ABC-SMC",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Royal College of Surgeons in Ireland",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows ABC-SMC failure with Normal perturbation kernels stems from summary-statistic information loss (covariance overinflation) plus dimension-driven step…",
+  "title": "Overinflation and overconcentration: why Cauchy perturbation kernels are the right choice for ABC-SMC",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.24.734205"
+}

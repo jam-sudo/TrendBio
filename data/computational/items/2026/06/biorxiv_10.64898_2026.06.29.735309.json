@@ -1,0 +1,41 @@
+{
+  "abstract": "Accurate prediction of protein-ligand binding affinity is a crucial goal in structure-based drug discovery, with the potential to significantly shorten development timelines. Recently, a new wave of machine learning models based on co-folding, such as Boltz-2 and IsoDDE, has demonstrated performance that matches or exceeds that of gold-standard physics-based methods like Free Energy Perturbation (FEP). This paper provides a critical assessment of these claims, revealing that current benchmarks are heavily influenced by data leakage, and proposes a new benchmark that explicitly controls for data leakage.\n\nWe demonstrate that splitting by protein-sequence identity is inherently insufficient to prevent data leakage due to \"target mirroring,\" in which homologous proteins with low overall sequence identity still exhibit highly correlated binding profiles. Our meta-analysis of documents in the ChEMBL 36 database identifies more than 6,000 such assay pairs and finds that leakage persists for sequence-identity thresholds as low as 0.2, well below the values commonly used in benchmarks today. Additionally, we show that a ligand-only baseline model, which lacks protein structural information, achieves surprisingly high performance on the FEP+ 4 and OpenFE benchmarks (r = 0.66 and r = 0.36, respectively).\n\nOur results indicate that current benchmarks tend to reward models for memorizing training data and exploiting localized leakage rather than truly learning biophysical principles. To address this issue, we propose the Novelty-Tiered Affinity Benchmark, in which the test data is partitioned into ligand novelty tiers. In the most challenging tier (Tanimoto similarity < 0.35), ligand-only models perform notably worse (r = 0.14), offering a clear baseline for evaluating genuine generalization. We argue that the field must move beyond sequence-based splits to ensure that AI-driven discovery translates into successful prospective laboratory research.",
+  "authors": [
+    "Mattsson, B.",
+    "Walters, W."
+  ],
+  "doi": "10.64898/2026.06.29.735309",
+  "first_seen": "2026-06-30",
+  "id": "biorxiv:10.64898/2026.06.29.735309",
+  "metadata": {
+    "abstract": "Accurate prediction of protein-ligand binding affinity is a crucial goal in structure-based drug discovery, with the potential to significantly shorten development timelines. Recently, a new wave of machine learning models based on co-folding, such as Boltz-2 and IsoDDE, has demonstrated performance that matches or exceeds that of gold-standard physics-based methods like Free Energy Perturbation (FEP). This paper provides a critical assessment of these claims, revealing that current benchmarks are heavily influenced by data leakage, and proposes a new benchmark that explicitly controls for data leakage.\n\nWe demonstrate that splitting by protein-sequence identity is inherently insufficient to prevent data leakage due to \"target mirroring,\" in which homologous proteins with low overall sequence identity still exhibit highly correlated binding profiles. Our meta-analysis of documents in the ChEMBL 36 database identifies more than 6,000 such assay pairs and finds that leakage persists for sequence-identity thresholds as low as 0.2, well below the values commonly used in benchmarks today. Additionally, we show that a ligand-only baseline model, which lacks protein structural information, achieves surprisingly high performance on the FEP+ 4 and OpenFE benchmarks (r = 0.66 and r = 0.36, respectively).\n\nOur results indicate that current benchmarks tend to reward models for memorizing training data and exploiting localized leakage rather than truly learning biophysical principles. To address this issue, we propose the Novelty-Tiered Affinity Benchmark, in which the test data is partitioned into ligand novelty tiers. In the most challenging tier (Tanimoto similarity < 0.35), ligand-only models perform notably worse (r = 0.14), offering a clear baseline for evaluating genuine generalization. We argue that the field must move beyond sequence-based splits to ensure that AI-driven discovery translates into successful prospective laboratory research.",
+    "author_corresponding": "Björn Mattsson",
+    "author_corresponding_institution": "Enlace Bio",
+    "authors": "Mattsson, B.;Walters, W.",
+    "biorxiv_category": "molecular biology",
+    "category": "Molecular Biology",
+    "date": "2026-06-30",
+    "doi": "10.64898/2026.06.29.735309",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/30/2026.06.29.735309.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Identifying and Addressing Systematic Data Leakage in Protein-Ligand Affinity Benchmarks",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Enlace Bio",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-06-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows that protein-ligand affinity benchmarks leak data via target mirroring across homologs, and proposes a Novelty-Tiered Affinity Benchmark with…",
+  "title": "Identifying and Addressing Systematic Data Leakage in Protein-Ligand Affinity Benchmarks",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.29.735309"
+}

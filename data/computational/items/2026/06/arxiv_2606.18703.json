@@ -1,0 +1,35 @@
+{
+  "abstract": "Pretrained biological language models expose per-token probability distributions through masked-token prediction, providing the likelihood interface central to sequence design, variant scoring, and mechanistic interpretation. Yet these distributions are learned from broad unlabeled corpora and are not naturally conditioned on task-specific biological contexts such as interaction partners, cellular environments, or therapeutic interventions. Existing contextual matching methods often distort this interface through pooled embeddings, contrastive latent spaces, or task-specific prediction heads. We introduce LOGICA (Logit-space Contrastive Alignment), a framework for context-conditioned prediction that performs contrastive learning directly in output-logit space. Using gated cross-modal adapters compatible with each model's native token head, LOGICA preserves the pretrained likelihood interface and converts contextualized token log-likelihoods into matching scores. Alignment is defined through context-sensitive token probabilities rather than proximity in a shared embedding space, enabling learning from sparse paired data across models with distinct vocabularies, without a shared tokenizer or decoder. LOGICA is particularly effective for mutation-local variant ranking, where comparisons reduce to context-conditioned likelihoods of mutant tokens at perturbed sites. Across protein--ligand binding, TCR--peptide activity, and drug-conditioned resistance prediction, LOGICA improves over prior state-of-the-art methods, including matched latent-contrastive and conditional MLM baselines, while retaining a token-level interface for interpretation and generation. On held-out-gene single-mutation drug-resistance prediction, LOGICA improves AUC from near-random latent-space baselines of $\\sim$0.55 to $\\sim$0.65.",
+  "authors": [
+    "Yanjun Shao",
+    "Yundi Chen",
+    "Yashvi Patel",
+    "Aurelien Pelissier",
+    "María Rodríguez Martínez"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-17",
+  "id": "arxiv:2606.18703",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.18703v1</ns0:id>\n    <ns0:title>Contextualizing Biological Language Models across Modalities via Logit-Space Contrastive Alignment</ns0:title>\n    <ns0:updated>2026-06-17T05:30:47Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.18703v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.18703v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Pretrained biological language models expose per-token probability distributions through masked-token prediction, providing the likelihood interface central to sequence design, variant scoring, and mechanistic interpretation. Yet these distributions are learned from broad unlabeled corpora and are not naturally conditioned on task-specific biological contexts such as interaction partners, cellular environments, or therapeutic interventions. Existing contextual matching methods often distort this interface through pooled embeddings, contrastive latent spaces, or task-specific prediction heads. We introduce LOGICA (Logit-space Contrastive Alignment), a framework for context-conditioned prediction that performs contrastive learning directly in output-logit space. Using gated cross-modal adapters compatible with each model's native token head, LOGICA preserves the pretrained likelihood interface and converts contextualized token log-likelihoods into matching scores. Alignment is defined through context-sensitive token probabilities rather than proximity in a shared embedding space, enabling learning from sparse paired data across models with distinct vocabularies, without a shared tokenizer or decoder. LOGICA is particularly effective for mutation-local variant ranking, where comparisons reduce to context-conditioned likelihoods of mutant tokens at perturbed sites. Across protein--ligand binding, TCR--peptide activity, and drug-conditioned resistance prediction, LOGICA improves over prior state-of-the-art methods, including matched latent-contrastive and conditional MLM baselines, while retaining a token-level interface for interpretation and generation. On held-out-gene single-mutation drug-resistance prediction, LOGICA improves AUC from near-random latent-space baselines of $\\sim$0.55 to $\\sim$0.65.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-17T05:30:47Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Yanjun Shao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yundi Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yashvi Patel</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aurelien Pelissier</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>María Rodríguez Martínez</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "LOGICA performs contrastive alignment in output-logit space of biological language models, using gated cross-modal adapters to condition token likelihoods on…",
+  "title": "Contextualizing Biological Language Models across Modalities via Logit-Space Contrastive Alignment",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.18703v1"
+}

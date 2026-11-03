@@ -1,0 +1,31 @@
+{
+  "abstract": "Scene Graph Generation (SGG) requires relational reasoning over objects and their interactions, but performance is constrained by long-tail predicate imbalance. Classical SGG models rely on dataset statistics, leading to biased predictions toward frequent relations rather than fine-grained semantic predicates. Although debiasing improves mean recall, predicate classification in existing frameworks still relies on high-dimensional classical decision modules with high parameter overhead. This work introduces a resource-efficient hybrid quantum predicate classifier for SGG by replacing the classical predicate head in the CFEN with a QP-Head trained using class-balanced WCE. To the best of our knowledge, this work is among the first evaluations of a hybrid quantum architecture for scene graph predicate classification on Visual Genome 150. We evaluate the impact of qubit count, encoding strategy, entangling topology, and circuit depth. Under a 4-qubit configuration using Amplitude Embedding and Strongly Entangling Layers, the QP-Head projects 4096-dimensional pair features into a 16-dimensional quantum input while using 96 trainable quantum parameters. Operating within this compressed representation space under WCE training, it achieves strong long-tail recognition, reaching a peak mR@100 of 57.25% compared to the 41.1% mR@100 reported in the CFEN baseline under standard training. Protocol-matched ablations indicate that the primary advantage of the quantum head lies in extreme representational compactness rather than an accuracy gain over full-dimensional weighted classical heads: it achieves global recall within 0.19pp of the 2048-dimensional WCE classical baseline while operating from a 128x smaller head feature space. Scaling to 8 qubits maintains robust long-tail performance (55.38% mR@100 with 384 quantum parameters), while depth analysis highlights expressibility-latency trade-offs.",
+  "authors": [
+    "Prerana Ramkumar",
+    "Nouhaila Innan",
+    "Muhammad Shafique"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-03",
+  "id": "arxiv:2606.04689",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.04689v2</ns0:id>\n    <ns0:title>QPredSGG: Hybrid Quantum Predicate Learning for Long-Tailed Scene Graph Generation</ns0:title>\n    <ns0:updated>2026-10-24T08:12:43Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.04689v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.04689v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Scene Graph Generation (SGG) requires relational reasoning over objects and their interactions, but performance is constrained by long-tail predicate imbalance. Classical SGG models rely on dataset statistics, leading to biased predictions toward frequent relations rather than fine-grained semantic predicates. Although debiasing improves mean recall, predicate classification in existing frameworks still relies on high-dimensional classical decision modules with high parameter overhead. This work introduces a resource-efficient hybrid quantum predicate classifier for SGG by replacing the classical predicate head in the CFEN with a QP-Head trained using class-balanced WCE. To the best of our knowledge, this work is among the first evaluations of a hybrid quantum architecture for scene graph predicate classification on Visual Genome 150. We evaluate the impact of qubit count, encoding strategy, entangling topology, and circuit depth. Under a 4-qubit configuration using Amplitude Embedding and Strongly Entangling Layers, the QP-Head projects 4096-dimensional pair features into a 16-dimensional quantum input while using 96 trainable quantum parameters. Operating within this compressed representation space under WCE training, it achieves strong long-tail recognition, reaching a peak mR@100 of 57.25% compared to the 41.1% mR@100 reported in the CFEN baseline under standard training. Protocol-matched ablations indicate that the primary advantage of the quantum head lies in extreme representational compactness rather than an accuracy gain over full-dimensional weighted classical heads: it achieves global recall within 0.19pp of the 2048-dimensional WCE classical baseline while operating from a 128x smaller head feature space. Scaling to 8 qubits maintains robust long-tail performance (55.38% mR@100 with 384 quantum parameters), while depth analysis highlights expressibility-latency trade-offs.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-03T10:15:56Z</ns0:published>\n    <ns1:comment>Accepted at the 38th IEEE International Conference on Tools with Artificial Intelligence (ICTAI) 2026</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Prerana Ramkumar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nouhaila Innan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Muhammad Shafique</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-03",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Hybrid quantum predicate classifier (QP-Head) replaces the classical predicate head in CFEN for long-tailed scene graph generation on Visual Genome 150,…",
+  "title": "QPredSGG: Hybrid Quantum Predicate Learning for Long-Tailed Scene Graph Generation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.04689v2"
+}

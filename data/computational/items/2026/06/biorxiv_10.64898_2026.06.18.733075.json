@@ -1,0 +1,41 @@
+{
+  "abstract": "Reported peptide-MHC (pMHC) AUROCs of 0.85-0.95 overstate generalization to unseen alleles: because immunopeptidome data are dense on a few well-studied alleles and sparse on the rest, training and test sets come to share near-identical alleles, so the numbers partly reflect interpolation rather than extrapolation to new MHC grooves. This is a property of the data, not of any one method. We assembled an open, harmonized corpus of 5.8 million experimental measurements across both HLA classes and use it to control the leakage explicitly: alleles held out at the sequence and cluster level, peptide-disjoint splits, and provenance-matched negatives. On strictly novel alleles, generalization is in the high 0.7s rather than the 0.9s a conventional split returns. Against this benchmark we trained a predictor that spans both classes in one model and factors presentation into a peptide-only ligand-likeness term and an allele-specific term; it exceeds eight published predictors by per-allele {Delta}AUROC = +0.22 to +0.37 (p < 10-9), most on the least-studied genes. Corpus, benchmark, and model are released.\n\nAuthor summaryOur immune cells display protein fragments on the cell surface, held by molecules (the human leukocyte antigens, or HLAs) that vary from person to person. Predicting which fragments a given HLA displays matters for cancer vaccines, transplant matching, and the safety of engineered therapies, and many computational tools now do it well. Most available data come from a few common HLAs, so test cases tend to resemble training cases, and the published accuracy looks better than it really is for the rare HLAs that matter most in the clinic. We assembled a large, openly shared collection of experimental measurements across both major HLA classes and used it to test prediction more directly, holding out HLAs that are sequence-distant from those in training. Accuracy on these is measurable but lower than the usual figures suggest. We also built a predictor that handles both HLA classes in one model and gains most relative to existing tools on the rare HLAs where they are weakest. The data, benchmark, and model are available for the same test.",
+  "authors": [
+    "Mysore, V."
+  ],
+  "doi": "10.64898/2026.06.18.733075",
+  "first_seen": "2026-06-23",
+  "id": "biorxiv:10.64898/2026.06.18.733075",
+  "metadata": {
+    "abstract": "Reported peptide-MHC (pMHC) AUROCs of 0.85-0.95 overstate generalization to unseen alleles: because immunopeptidome data are dense on a few well-studied alleles and sparse on the rest, training and test sets come to share near-identical alleles, so the numbers partly reflect interpolation rather than extrapolation to new MHC grooves. This is a property of the data, not of any one method. We assembled an open, harmonized corpus of 5.8 million experimental measurements across both HLA classes and use it to control the leakage explicitly: alleles held out at the sequence and cluster level, peptide-disjoint splits, and provenance-matched negatives. On strictly novel alleles, generalization is in the high 0.7s rather than the 0.9s a conventional split returns. Against this benchmark we trained a predictor that spans both classes in one model and factors presentation into a peptide-only ligand-likeness term and an allele-specific term; it exceeds eight published predictors by per-allele {Delta}AUROC = +0.22 to +0.37 (p < 10-9), most on the least-studied genes. Corpus, benchmark, and model are released.\n\nAuthor summaryOur immune cells display protein fragments on the cell surface, held by molecules (the human leukocyte antigens, or HLAs) that vary from person to person. Predicting which fragments a given HLA displays matters for cancer vaccines, transplant matching, and the safety of engineered therapies, and many computational tools now do it well. Most available data come from a few common HLAs, so test cases tend to resemble training cases, and the published accuracy looks better than it really is for the rare HLAs that matter most in the clinic. We assembled a large, openly shared collection of experimental measurements across both major HLA classes and used it to test prediction more directly, holding out HLAs that are sequence-distant from those in training. Accuracy on these is measurable but lower than the usual figures suggest. We also built a predictor that handles both HLA classes in one model and gains most relative to existing tools on the rare HLAs where they are weakest. The data, benchmark, and model are available for the same test.",
+    "author_corresponding": "Venkatesh Mysore",
+    "author_corresponding_institution": "Aikium Inc.",
+    "authors": "Mysore, V.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-23",
+    "doi": "10.64898/2026.06.18.733075",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/23/2026.06.18.733075.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Measuring peptide-MHC generalization to unseen alleles across both HLA classes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Aikium Inc.",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows peptide-MHC AUROCs overstate generalization to unseen HLA alleles; releases a 5.8M-measurement harmonized corpus, leakage-controlled benchmark, and a…",
+  "title": "Measuring peptide-MHC generalization to unseen alleles across both HLA classes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.18.733075"
+}

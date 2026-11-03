@@ -1,0 +1,47 @@
+{
+  "abstract": "Public biomedical repositories hold substantial reuse potential, but inconsistent metadata routinely blocks integration across studies. Recent LLM-based harmonization approaches address scale but suffer from non-determinism, hallucinated ontology terms, and, in their highest-accuracy configurations, dependence on proprietary APIs or labeled fine-tuning data. A more fundamental concern is that LLM accuracies on widely-used public benchmarks may substantially inflate transferable capability: under a contamination-controlled evaluation protocol we developed, the apparent LLM-only advantage on the GDC schema-mapping benchmark is inverted and three out of five LLMs recovers 80-100% of GDC identifiers from zero-schema context, suggesting direct memorization. Building on this insight, we present MetaHarmonizer, an automated metadata harmonization system designed to be robust by construction: SchemaMapper aligns attribute names across schemas, and OntologyMapper standardizes values to controlled vocabularies. Both modules implement a multi-stage cascade that escalates to more resource-intensive methods only when earlier stages fall short, with all candidates grounded in pre-defined controlled vocabularies to preclude hallucinated outputs and LLMs used only as bounded preprocessing components rather than inference-time dependencies. On the GDC schema-matching benchmark, SchemaMapper with the deployment-optimized LLM-generated alias dictionary achieved 71.6% Top-1 accuracy and the higher Recall@GT than Magneto bipartite variants, recovering significantly more ground-truth mappings; with the best performing alias dictionary, it reached the highest Top-1/Top-5/Recall@GT, and also matched the best Magneto reranker (fine-tuned LLM-reranker) on MRR; and it also outperforms LLM-only performance under contamination-controlled conditions. On four EFO benchmarks, OntologyMapper achieved 77.9-95.5% Top-1 accuracy, outperforming text2term by up to 16.4 pp and direct LLM inference (against the smaller corpus) by 19.2 pp because memorization is not a viable shortcut for this task. Across both modules, calibrated confidence scores separate correct from incorrect predictions (AUC 0.73-0.94), enabling principled human-in-the-loop triage. Inference is fully local, deterministic, and computationally efficient - seconds on schema mapping and under a minute for ontology mapping of up to [~]7,000 terms against the pre-indexed 33,230-term corpus. Released as a Python package with a domain-agnostic architecture, MetaHarmonizer provides a scalable foundation for improving the FAIRness of biomedical data and enabling cross-study integration, alongside an evaluation methodology applicable to any LLM-augmented bioinformatics benchmark built on public benchmarks.",
+  "authors": [
+    "Li, C.",
+    "Dahl, A.",
+    "Gravel-Pucillo, K. D.",
+    "Long, K.",
+    "Waters, M.",
+    "de Bruijin, I.",
+    "Davis, S.",
+    "Oh, S."
+  ],
+  "doi": "10.64898/2026.06.13.732088",
+  "first_seen": "2026-06-17",
+  "id": "biorxiv:10.64898/2026.06.13.732088",
+  "metadata": {
+    "abstract": "Public biomedical repositories hold substantial reuse potential, but inconsistent metadata routinely blocks integration across studies. Recent LLM-based harmonization approaches address scale but suffer from non-determinism, hallucinated ontology terms, and, in their highest-accuracy configurations, dependence on proprietary APIs or labeled fine-tuning data. A more fundamental concern is that LLM accuracies on widely-used public benchmarks may substantially inflate transferable capability: under a contamination-controlled evaluation protocol we developed, the apparent LLM-only advantage on the GDC schema-mapping benchmark is inverted and three out of five LLMs recovers 80-100% of GDC identifiers from zero-schema context, suggesting direct memorization. Building on this insight, we present MetaHarmonizer, an automated metadata harmonization system designed to be robust by construction: SchemaMapper aligns attribute names across schemas, and OntologyMapper standardizes values to controlled vocabularies. Both modules implement a multi-stage cascade that escalates to more resource-intensive methods only when earlier stages fall short, with all candidates grounded in pre-defined controlled vocabularies to preclude hallucinated outputs and LLMs used only as bounded preprocessing components rather than inference-time dependencies. On the GDC schema-matching benchmark, SchemaMapper with the deployment-optimized LLM-generated alias dictionary achieved 71.6% Top-1 accuracy and the higher Recall@GT than Magneto bipartite variants, recovering significantly more ground-truth mappings; with the best performing alias dictionary, it reached the highest Top-1/Top-5/Recall@GT, and also matched the best Magneto reranker (fine-tuned LLM-reranker) on MRR; and it also outperforms LLM-only performance under contamination-controlled conditions. On four EFO benchmarks, OntologyMapper achieved 77.9-95.5% Top-1 accuracy, outperforming text2term by up to 16.4 pp and direct LLM inference (against the smaller corpus) by 19.2 pp because memorization is not a viable shortcut for this task. Across both modules, calibrated confidence scores separate correct from incorrect predictions (AUC 0.73-0.94), enabling principled human-in-the-loop triage. Inference is fully local, deterministic, and computationally efficient - seconds on schema mapping and under a minute for ontology mapping of up to [~]7,000 terms against the pre-indexed 33,230-term corpus. Released as a Python package with a domain-agnostic architecture, MetaHarmonizer provides a scalable foundation for improving the FAIRness of biomedical data and enabling cross-study integration, alongside an evaluation methodology applicable to any LLM-augmented bioinformatics benchmark built on public benchmarks.",
+    "author_corresponding": "Sehyun Oh",
+    "author_corresponding_institution": "Institute for Implementation Science in Population Health, City University of New York School of Public Health, New York, NY, USA",
+    "authors": "Li, C.; Dahl, A.; Gravel-Pucillo, K. D.; Long, K.; Waters, M.; de Bruijin, I.; Davis, S.; Oh, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-17",
+    "doi": "10.64898/2026.06.13.732088",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/17/2026.06.13.732088.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MetaHarmonizer: robust biomedical metadata harmonization and a contamination control for inflated LLM performance on public benchmarks",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institute for Implementation Science in Population Health, City University of New York School of Public Health, New York, NY, USA",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "MetaHarmonizer: deterministic, ontology-grounded metadata harmonization (SchemaMapper, OntologyMapper) with a contamination-controlled LLM benchmark protocol…",
+  "title": "MetaHarmonizer: robust biomedical metadata harmonization and a contamination control for inflated LLM performance on public benchmarks",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.13.732088"
+}

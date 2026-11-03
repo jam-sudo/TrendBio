@@ -1,0 +1,46 @@
+{
+  "abstract": "Current pangenome construction methods rely largely on nucleotide or protein sequence alignment, limiting their ability to detect remote orthologs and semantic relations. We introduce a novel method that leverages protein language model embeddings to capture functional and semantic relationships beyond sequence similarity. Our approach employs approximate nearest-neighbor search coupled with a clustering step utilizing HDBSCAN, DBSCAN, or weighted single-linkage clustering with multiple similarity thresholds. The method utilizes GPU acceleration, dynamic batching, and ONNX optimization to scale approximately linearly with the number of proteins, enabling the analysis of datasets containing millions of proteins. We evaluated our approach on a randomly sampled subset of OrthoDB and the CAFA5 dataset, benchmarking it against SCARAP. SCARAP is a recently published tool with similar performance to a variety of other common tools for computing pangenomics. Our benchmarking demonstrates that our method produces more specific clusters than SCARAP across both datasets. SCARAP excelled in term consistency within clusters on the OrthoDB dataset, where labels are inferred with sequence alignment (using MMseqs2). Both methods face a significant degradation in term consistency when transitioning to the experimentally validated CAFA5 dataset, ultimately resulting in similar term consistency scores for both approaches. Crucially, our approach yields superior cluster quality on both datasets and significantly outperforms SCARAP across all metrics of functional consistency and coherence on the experimental CAFA5 dataset. Finally, we demonstrate the methods scalability and utility by characterizing the pangenome of 1,034 Streptomyces genomes. The pipeline is available for use at our GitHub: https://github.com/jakob949/pan_genome",
+  "authors": [
+    "Larsen, N. J.",
+    "Charusanti, P.",
+    "Webel, H.",
+    "Ohl, L.",
+    "Blin, K.",
+    "Frellsen, J."
+  ],
+  "doi": "10.64898/2026.06.04.730042",
+  "first_seen": "2026-06-06",
+  "id": "biorxiv:10.64898/2026.06.04.730042",
+  "metadata": {
+    "abstract": "Current pangenome construction methods rely largely on nucleotide or protein sequence alignment, limiting their ability to detect remote orthologs and semantic relations. We introduce a novel method that leverages protein language model embeddings to capture functional and semantic relationships beyond sequence similarity. Our approach employs approximate nearest-neighbor search coupled with a clustering step utilizing HDBSCAN, DBSCAN, or weighted single-linkage clustering with multiple similarity thresholds. The method utilizes GPU acceleration, dynamic batching, and ONNX optimization to scale approximately linearly with the number of proteins, enabling the analysis of datasets containing millions of proteins. We evaluated our approach on a randomly sampled subset of OrthoDB and the CAFA5 dataset, benchmarking it against SCARAP. SCARAP is a recently published tool with similar performance to a variety of other common tools for computing pangenomics. Our benchmarking demonstrates that our method produces more specific clusters than SCARAP across both datasets. SCARAP excelled in term consistency within clusters on the OrthoDB dataset, where labels are inferred with sequence alignment (using MMseqs2). Both methods face a significant degradation in term consistency when transitioning to the experimentally validated CAFA5 dataset, ultimately resulting in similar term consistency scores for both approaches. Crucially, our approach yields superior cluster quality on both datasets and significantly outperforms SCARAP across all metrics of functional consistency and coherence on the experimental CAFA5 dataset. Finally, we demonstrate the methods scalability and utility by characterizing the pangenome of 1,034 Streptomyces genomes. The pipeline is available for use at our GitHub: https://github.com/jakob949/pan_genome",
+    "author_corresponding": "Kai Blin",
+    "author_corresponding_institution": "Technical University of Denmark",
+    "authors": "Larsen, N. J.; Charusanti, P.; Webel, H.; Ohl, L.; Blin, K.; Frellsen, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-06",
+    "doi": "10.64898/2026.06.04.730042",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/06/2026.06.04.730042.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Using protein language models for pangenome construction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Technical University of Denmark",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-06-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes pangenome construction using protein language model embeddings with ANN search and clustering, outperforming SCARAP on OrthoDB and CAFA5 and scaling…",
+  "title": "Using protein language models for pangenome construction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.04.730042"
+}

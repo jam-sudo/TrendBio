@@ -1,0 +1,43 @@
+{
+  "abstract": "High-throughput chromatin accessibility assays such as bulk and single-cell ATAC-seq have generated large collections of processed signal tracks in bigWig format, which are widely used for visualisation, data integration, and Machine Learning (ML)-based analyses. Despite their central role, systematic quality control (QC) frameworks operating directly at the level of bigWig signal tracks remain underdeveloped. This gap limits the ability to assess data reliability and hampers robust downstream analyses.\n\nHere, we present a biologically grounded QC framework for chromatin accessibility bigWig files that integrates peak-level information, background noise estimation, and recovery of stable genomic reference features. Using an ML-based peak caller (LanceOtron), we derive complementary quality metrics capturing signal structure and signal-to-noise properties. We further define constant promoter and CTCF regions as internal biological controls and show that their recovery provides a sensitive measure of data quality across diverse cellular contexts.\n\nWe apply this framework to a collection of 502 human chromatin accessibility bigWig tracks spanning a wide range of tissues and cell types. The proposed metrics capture related but non-redundant aspects of signal quality and motivate the use of constant promoter and CTCF recovery as biologically meaningful targets. An XGBoost model trained on LanceOtron-derived features accurately predicts recovery of these stable genomic elements on held-out data (R2 = 0.97), yielding a continuous and interpretable quality score. Feature importance analysis using SHAP values highlights that model decisions are driven by biologically relevant signal properties rather than arbitrary heuristics. Quantile-based stratification of the quality score is further supported by clear qualitative differences in genome browser visualisations.\n\nTogether, this work provides a principled and extensible frame-work for assessing the quality of chromatin accessibility bigWig tracks, enabling more reliable data integration and supporting downstream ML applications in regulatory genomics.",
+  "authors": [
+    "Sanders, E.",
+    "Riva, S. G.",
+    "Hughes, J. R."
+  ],
+  "doi": "10.64898/2026.06.05.730303",
+  "first_seen": "2026-06-07",
+  "id": "biorxiv:10.64898/2026.06.05.730303",
+  "metadata": {
+    "abstract": "High-throughput chromatin accessibility assays such as bulk and single-cell ATAC-seq have generated large collections of processed signal tracks in bigWig format, which are widely used for visualisation, data integration, and Machine Learning (ML)-based analyses. Despite their central role, systematic quality control (QC) frameworks operating directly at the level of bigWig signal tracks remain underdeveloped. This gap limits the ability to assess data reliability and hampers robust downstream analyses.\n\nHere, we present a biologically grounded QC framework for chromatin accessibility bigWig files that integrates peak-level information, background noise estimation, and recovery of stable genomic reference features. Using an ML-based peak caller (LanceOtron), we derive complementary quality metrics capturing signal structure and signal-to-noise properties. We further define constant promoter and CTCF regions as internal biological controls and show that their recovery provides a sensitive measure of data quality across diverse cellular contexts.\n\nWe apply this framework to a collection of 502 human chromatin accessibility bigWig tracks spanning a wide range of tissues and cell types. The proposed metrics capture related but non-redundant aspects of signal quality and motivate the use of constant promoter and CTCF recovery as biologically meaningful targets. An XGBoost model trained on LanceOtron-derived features accurately predicts recovery of these stable genomic elements on held-out data (R2 = 0.97), yielding a continuous and interpretable quality score. Feature importance analysis using SHAP values highlights that model decisions are driven by biologically relevant signal properties rather than arbitrary heuristics. Quantile-based stratification of the quality score is further supported by clear qualitative differences in genome browser visualisations.\n\nTogether, this work provides a principled and extensible frame-work for assessing the quality of chromatin accessibility bigWig tracks, enabling more reliable data integration and supporting downstream ML applications in regulatory genomics.",
+    "author_corresponding": "Simone G Riva",
+    "author_corresponding_institution": "Univeristy of Oxford",
+    "authors": "Sanders, E.; Riva, S. G.; Hughes, J. R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-07",
+    "doi": "10.64898/2026.06.05.730303",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/07/2026.06.05.730303.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Learning quality scores for chromatin accessibility bigWig tracks using Machine Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Univeristy of Oxford",
+  "preprint_id": null,
+  "primary_category": "epigenomics",
+  "published_at": "2026-06-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Presents an ML-based QC framework for chromatin accessibility bigWig tracks using LanceOtron peak-derived features and an XGBoost quality score predicting…",
+  "title": "Learning quality scores for chromatin accessibility bigWig tracks using Machine Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.05.730303"
+}

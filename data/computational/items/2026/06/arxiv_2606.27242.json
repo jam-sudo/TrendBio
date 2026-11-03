@@ -1,0 +1,30 @@
+{
+  "abstract": "Training-free source selection for LLM families with shared vocabularies arises in scientific string domains such as SMILES, protein, and genomic sequences, where candidate corpora share a tokenizer but differ in prediction targets. This creates an activation-dark regime: representation-similarity metrics can be uninformative without assumptions about label-conditioned error geometry, while classical update-geometry metrics are computationally prohibitive at vocabulary scale. We show that, in a shared-output head setting, representation metrics (e.g., CKA) are non-identifiable for transfer; models can share identical representations yet have orthogonal head updates. The key identity is that head Fisher alignment is exactly a cosine between kernel mean embeddings in the joint activation-error space, exposing activation, error, and coupling factors rather than requiring a materialized Fisher matrix. FisherSketch estimates this cosine directly in a single streaming pass, making K=128,256 head Fisher alignment practical with a 16 KB task signature (m=4096) and a 192 KB per-task streaming state, small enough to store next to a model hash, but encoding transfer-relevant update structure. Beyond source selection, the same signatures and marginals provide a diagnostic instrument for studying whether LLM task similarity is driven by activations, errors, or their coupling; shared-parameter and internal-layer validations, together with Llama-3.1-8B verbalizer-shift experiments, show that FisherSketch remains informative when activation similarity cannot distinguish tasks.",
+  "authors": [
+    "John Sweeney"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-25",
+  "id": "arxiv:2606.27242",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.CL",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.27242v1</ns0:id>\n    <ns0:title>The Geometry of Updates: Fisher Alignment at Vocabulary Scale</ns0:title>\n    <ns0:updated>2026-06-25T16:30:27Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.27242v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.27242v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Training-free source selection for LLM families with shared vocabularies arises in scientific string domains such as SMILES, protein, and genomic sequences, where candidate corpora share a tokenizer but differ in prediction targets. This creates an activation-dark regime: representation-similarity metrics can be uninformative without assumptions about label-conditioned error geometry, while classical update-geometry metrics are computationally prohibitive at vocabulary scale. We show that, in a shared-output head setting, representation metrics (e.g., CKA) are non-identifiable for transfer; models can share identical representations yet have orthogonal head updates. The key identity is that head Fisher alignment is exactly a cosine between kernel mean embeddings in the joint activation-error space, exposing activation, error, and coupling factors rather than requiring a materialized Fisher matrix. FisherSketch estimates this cosine directly in a single streaming pass, making K=128,256 head Fisher alignment practical with a 16 KB task signature (m=4096) and a 192 KB per-task streaming state, small enough to store next to a model hash, but encoding transfer-relevant update structure. Beyond source selection, the same signatures and marginals provide a diagnostic instrument for studying whether LLM task similarity is driven by activations, errors, or their coupling; shared-parameter and internal-layer validations, together with Llama-3.1-8B verbalizer-shift experiments, show that FisherSketch remains informative when activation similarity cannot distinguish tasks.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-25T16:30:27Z</ns0:published>\n    <ns1:comment>Accepted at the 43rd International Conference on Machine Learning (ICML 2026), PMLR 306. 64 pages total (main paper plus appendix), 4 figures, 29 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns1:journal_ref>Proceedings of the 43rd International Conference on Machine Learning, PMLR 306:117826-117889, 2026</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>John Sweeney</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-25",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "FisherSketch streams a cosine estimate of head Fisher alignment for training-free LLM source selection under shared vocabularies.",
+  "title": "The Geometry of Updates: Fisher Alignment at Vocabulary Scale",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.27242v1"
+}

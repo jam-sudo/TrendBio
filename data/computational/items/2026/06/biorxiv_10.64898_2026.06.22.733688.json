@@ -1,0 +1,43 @@
+{
+  "abstract": "Variant effect prediction (VEP) models can be used to select promising novel enzymes from a pool of candidates. Most supervised VEP models are framed as regression tasks, placing more emphasis on getting the predicted quantities correct than on the relative comparison of individual candidates. Preferential or contrastive models may better align with the goal of selection, or acquisition, especially when informed by predictive uncertainty. Here, we introduce a probabilistic preferential learning model based on the Kermut Gaussian process (PKermut) that we designed with the ambition to increase the hit rate among selected variants. We benchmark PKermut against established models, including the original Kermut, the RITA regressor, and an augmented Potts model, on 69 curated ProteinGym datasets across various assay categories.\n\nTo evaluate acquisition performance, we propose a novel quantile cross-validation scheme that ensures the evaluation of a models ability to extrapolate by reserving high-performing variants exclusively for the test set. We assess models using Spearman correlation and evaluate their acquisition performance using five different acquisition functions, encompassing both uncertainty-aware and unaware strategies.\n\nOur experimental results indicate that uncertainty estimates improve the acquisition ability of our models, and that strategies that reward uncertainty generally result in better outcomes than those that do not on single-mutation variant datasets. We observe that PKermuts Spearman scores and ability to acquire improved variants are greatly affected by the number of variant comparisons sampled in the training set. Kermut achieves the highest Spearman correlation in 54/69 datasets (78%), compared to 12/69 (17%) for PKermut. For acquisition performance, Kermut leads in 44/69 datasets (64%), while PKermut leads in 15/69 (22%). While at this stage PKermut is not a recommended alternative to Kermut, its contrastive nature offers several conceptual opportunities. We share our findings to inspire further development aimed at improving the alignment between training objectives of VEP models and their downstream application in protein engineering.",
+  "authors": [
+    "van der Flier, F. J.",
+    "de Ridder, D.",
+    "Probst, D.",
+    "Redestig, H."
+  ],
+  "doi": "10.64898/2026.06.22.733688",
+  "first_seen": "2026-06-26",
+  "id": "biorxiv:10.64898/2026.06.22.733688",
+  "metadata": {
+    "abstract": "Variant effect prediction (VEP) models can be used to select promising novel enzymes from a pool of candidates. Most supervised VEP models are framed as regression tasks, placing more emphasis on getting the predicted quantities correct than on the relative comparison of individual candidates. Preferential or contrastive models may better align with the goal of selection, or acquisition, especially when informed by predictive uncertainty. Here, we introduce a probabilistic preferential learning model based on the Kermut Gaussian process (PKermut) that we designed with the ambition to increase the hit rate among selected variants. We benchmark PKermut against established models, including the original Kermut, the RITA regressor, and an augmented Potts model, on 69 curated ProteinGym datasets across various assay categories.\n\nTo evaluate acquisition performance, we propose a novel quantile cross-validation scheme that ensures the evaluation of a models ability to extrapolate by reserving high-performing variants exclusively for the test set. We assess models using Spearman correlation and evaluate their acquisition performance using five different acquisition functions, encompassing both uncertainty-aware and unaware strategies.\n\nOur experimental results indicate that uncertainty estimates improve the acquisition ability of our models, and that strategies that reward uncertainty generally result in better outcomes than those that do not on single-mutation variant datasets. We observe that PKermuts Spearman scores and ability to acquire improved variants are greatly affected by the number of variant comparisons sampled in the training set. Kermut achieves the highest Spearman correlation in 54/69 datasets (78%), compared to 12/69 (17%) for PKermut. For acquisition performance, Kermut leads in 44/69 datasets (64%), while PKermut leads in 15/69 (22%). While at this stage PKermut is not a recommended alternative to Kermut, its contrastive nature offers several conceptual opportunities. We share our findings to inspire further development aimed at improving the alignment between training objectives of VEP models and their downstream application in protein engineering.",
+    "author_corresponding": "Henning Redestig",
+    "author_corresponding_institution": "International Flavors & Fragrances",
+    "authors": "van der Flier, F. J.; de Ridder, D.; Probst, D.; Redestig, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-26",
+    "doi": "10.64898/2026.06.22.733688",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/26/2026.06.22.733688.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Acquiring Improved Protein Variants With Probabilistic Preferential Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "International Flavors & Fragrances",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces PKermut, a probabilistic preferential Gaussian process for selecting protein variants; it trails Kermut on 69 ProteinGym datasets.",
+  "title": "Acquiring Improved Protein Variants With Probabilistic Preferential Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.22.733688"
+}

@@ -1,0 +1,87 @@
+{
+  "abstract": "Access the Latch platform using Claude Code, Codex, or any agent",
+  "authors": [
+    "Anirudh Narsipur"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-30",
+  "id": "rss:https://blog.latch.bio/p/latch-mcp-agent-native-data-infrastructure",
+  "metadata": {
+    "author": "Anirudh Narsipur",
+    "author_detail": {
+      "name": "Anirudh Narsipur"
+    },
+    "authors": [
+      {
+        "name": "Anirudh Narsipur"
+      }
+    ],
+    "content": [
+      {
+        "base": "",
+        "language": null,
+        "type": "text/html",
+        "value": "<p>AI for biology requires agent-native infrastructure: systems where agents can store, process, and visualize large molecular datasets from the interfaces scientists already use. Biological tasks downstream of large spatial, single-cell, or proteomics assays require agents to dispatch bioinformatics tool calls and interleave results with text and plots in a chat interface.</p><p>These tools often require substantial computing resources, so deployments must be reliable, especially as data volumes from modern assays increase. Workflow time and cost can quickly inflate from retries and incorrect results, especially from tool calls that take hours to days. They should also be curated with appropriate parameters and agent-readable documentation, ideally provided by the original assay developer, to facilitate correct use across many complex scientific contexts.</p><p>At Latch, we&#8217;ve seen customers of our Solution Provider partners, like TakaraBio, Vizgen, and AtlasXOmics, use both the Latch Agent and external harnesses like Claude Code or Cursor to accelerate analysis of their data. While Latch users can already use our SDK to programmatically interact with the platform, this limits interaction to desktop environments with a configured shell environment.</p><p>Today we&#8217;re launching the <a href=\"https://wiki.latch.bio/agent/latch-mcp\">Latch MCP</a>, a remote MCP server that allows you to securely connect your favorite agent harness to the Latch platform and leverage verified bioinformatics tools built and maintained by kit and machine providers. Agents can navigate data on the Latch platform and launch existing deployments of validated bioinformatics workflows to analyze data.</p><p>The Latch MCP is also available via the <a href=\"https://claude.com/connectors\">Claude connectors directory </a>- an Anthropic-verified and reviewed catalog of MCP servers - allowing you to use the Latch MCP across all Claude products, including <a href=\"https://www.anthropic.com/news/claude-science-ai-workbench\">Claude Science</a>, Anthropic&#8217;s newly launched AI workbench for scientists.</p><h2 style=\"text-align: justify;\">Using the Latch MCP</h2><div class=\"native-video-embed\"></div><p style=\"text-align: justify;\"></p><p>To showcase how scientists can use the Latch MCP, we&#8217;ll walk through an example: analyzing a <a href=\"https://www.takarabio.com/learning-centers/spatial-omics/trekker-resources?srsltid=AfmBOopd6ts55sHLWb4XG922rUh_h4mPgRa7h7ClC3uNwY4mZJs7tlzV\">Takara Trekker</a> experiment to study spatial patterning in the mouse brain. Trekker enables<strong> </strong><em>true</em> single-cell spatial mapping by directly diffusing spatial barcodes to individual cell nuclei, eliminating the need for post-processing to resolve cellular identities.</p><p>A single experiment can generate several gigabytes of data per sample. As the number of samples grows, that quickly outpaces the limits of a scientist&#8217;s personal computer. Further, configuring a bioinformatics pipeline to take raw sample FASTQs all the way to a cleaned h5AD is no trivial task. With the Latch MCP server in Claude, scientists can simply point to their dataset and ask in plain language: &#8220;Launch the Trekker pipeline workflow on my mouse U_C dataset.&#8221; Claude can then access preconfigured, gold-standard pipelines published on Latch by Takara&#8217;s bioinformaticians and launch the workflow directly. Scientists can follow the Latch Workflow link to monitor progress or ask Claude to track the workflow status itself. </p><div class=\"native-video-embed\"></div><p></p><p>Once the pipeline finishes, scientists can then continue analysis using the Latch Agent. For example, the above video showcases using the h5AD viewer embedded in Latch Agent to visualize a larger Trekker mouse brain dataset.  Alternatively, scientists can ask Claude to carry out further downstream analyses. Claude can access Latch Data, a cloud-based filesystem, to find the relevant result files. From there, Claude or any other agent can draw upon a rich library of verified spatial workflows:</p><ul><li><p>NVIDIA RAPIDS for GPU-accelerated preprocessing</p></li><li><p>Cell2location or RCTD for cell-type deconvolution</p></li><li><p>BANKSY for spatial clustering</p></li><li><p>And more</p></li></ul><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!Ba3B!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62439fe5-938b-4a35-b508-e7174e8dcd14_2000x1147.png\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"835\" src=\"https://substackcdn.com/image/fetch/$s_!Ba3B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62439fe5-938b-4a35-b508-e7174e8dcd14_2000x1147.png\" title=\"\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a><figcaption class=\"image-caption\">Latch natively supports running any Nextflow pipeline including the nf-core library as well as pipelines from solution providers such as TakaraBio, Vizgen and AtlasXOmics</figcaption></figure></div><h2>Try It</h2><p>You can now use the Latch MCP with any AI agent that supports MCP integration (<a href=\"https://wiki.latch.bio/agent/latch-mcp\">setup instructions here</a>).</p>"
+      }
+    ],
+    "feed_kind": "company",
+    "feed_name": "Latch Bio",
+    "feed_url": "https://blog.latch.bio/feed",
+    "guidislink": false,
+    "id": "https://blog.latch.bio/p/latch-mcp-agent-native-data-infrastructure",
+    "link": "https://blog.latch.bio/p/latch-mcp-agent-native-data-infrastructure",
+    "links": [
+      {
+        "href": "https://blog.latch.bio/p/latch-mcp-agent-native-data-infrastructure",
+        "rel": "alternate",
+        "type": "text/html"
+      },
+      {
+        "href": "https://substackcdn.com/image/fetch/$s_!Ba3B!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62439fe5-938b-4a35-b508-e7174e8dcd14_2000x1147.png",
+        "length": "0",
+        "rel": "enclosure",
+        "type": "image/jpeg"
+      }
+    ],
+    "published": "Tue, 30 Jun 2026 18:27:16 GMT",
+    "published_parsed": [
+      2026,
+      6,
+      30,
+      18,
+      27,
+      16,
+      1,
+      181,
+      0
+    ],
+    "summary": "Access the Latch platform using Claude Code, Codex, or any agent",
+    "summary_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/html",
+      "value": "Access the Latch platform using Claude Code, Codex, or any agent"
+    },
+    "title": "Latch MCP: Agent-Native Data Infrastructure",
+    "title_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/plain",
+      "value": "Latch MCP: Agent-Native Data Infrastructure"
+    }
+  },
+  "org": "Latch Bio",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-30",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "rss",
+  "summary": "Describes Latch MCP, an agent-native data infrastructure layer letting AI agents such as Claude Code or Codex access the Latch bioinformatics platform.",
+  "title": "Latch MCP: Agent-Native Data Infrastructure",
+  "type": "industry",
+  "url": "https://blog.latch.bio/p/latch-mcp-agent-native-data-infrastructure"
+}

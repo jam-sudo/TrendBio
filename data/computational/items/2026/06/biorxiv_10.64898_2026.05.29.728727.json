@@ -1,0 +1,46 @@
+{
+  "abstract": "Circulating tumor DNA (ctDNA) is a promising biomarker for cancer detection, but low tumor burden makes it difficult to distinguish true signal from background noise.\n\nTo aggregate and better evaluate weak mutational signals, we propose PyDREAMS, which incorporates both single-nucleotide variants (SNVs) and insertion and deletions (indels) for ctDNA detection and quantification. To distinguish signal from noise, a neural network background error model is learned from healthy controls. It captures the joint effects of cell-free DNA (cfDNA)-specific lesions and sequencing errors, accounting for both genomic context and read-level features. Finally, a statistical test is used to evaluate the presence of mutational signals. We evaluate the method in a tumor-informed setting, using cohorts of colorectal cancer samples with deep targeted plasma cfDNA sequencing across 12 cancer driver genes.\n\nWe trained PyDREAMS on 46 healthy controls, with feature analysis revealing that both SNV and indel error rates were lowest at mononucleosomal fragment lengths, suggesting that nucleosomes protect cfDNA and reduce lesion accumulation during circulation and sample handling. In the validation cohort, combining SNVs with indels improved detection, with indels contributing approximately 1.5-fold more evidence per mutation than SNVs. On a test cohort of 209 stage I-III colorectal cancer (CRC) patients and 24 healthy controls, PyDREAMS outperformed a Shearwater-based caller (AUC 0.917 vs 0.909). In stage III post-operative (post-OP) samples (n = 26), where ctDNA was expected only in non-cured patients, PyDREAMS detected ctDNA in 5 patients, including 3/9 with later recurrence, while Shearwater detected none.\n\nTogether, these results show that PyDREAMS improves evaluation of ultra-low-frequency tumor signals through unified read-level modelling of SNV and indel background error.",
+  "authors": [
+    "Diekema, M. H.",
+    "Rasmussen, M. H.",
+    "Drue, S. O.",
+    "Frydendahl, A.",
+    "Andersen, C. L.",
+    "Pedersen, J."
+  ],
+  "doi": "10.64898/2026.05.29.728727",
+  "first_seen": "2026-06-02",
+  "id": "biorxiv:10.64898/2026.05.29.728727",
+  "metadata": {
+    "abstract": "Circulating tumor DNA (ctDNA) is a promising biomarker for cancer detection, but low tumor burden makes it difficult to distinguish true signal from background noise.\n\nTo aggregate and better evaluate weak mutational signals, we propose PyDREAMS, which incorporates both single-nucleotide variants (SNVs) and insertion and deletions (indels) for ctDNA detection and quantification. To distinguish signal from noise, a neural network background error model is learned from healthy controls. It captures the joint effects of cell-free DNA (cfDNA)-specific lesions and sequencing errors, accounting for both genomic context and read-level features. Finally, a statistical test is used to evaluate the presence of mutational signals. We evaluate the method in a tumor-informed setting, using cohorts of colorectal cancer samples with deep targeted plasma cfDNA sequencing across 12 cancer driver genes.\n\nWe trained PyDREAMS on 46 healthy controls, with feature analysis revealing that both SNV and indel error rates were lowest at mononucleosomal fragment lengths, suggesting that nucleosomes protect cfDNA and reduce lesion accumulation during circulation and sample handling. In the validation cohort, combining SNVs with indels improved detection, with indels contributing approximately 1.5-fold more evidence per mutation than SNVs. On a test cohort of 209 stage I-III colorectal cancer (CRC) patients and 24 healthy controls, PyDREAMS outperformed a Shearwater-based caller (AUC 0.917 vs 0.909). In stage III post-operative (post-OP) samples (n = 26), where ctDNA was expected only in non-cured patients, PyDREAMS detected ctDNA in 5 patients, including 3/9 with later recurrence, while Shearwater detected none.\n\nTogether, these results show that PyDREAMS improves evaluation of ultra-low-frequency tumor signals through unified read-level modelling of SNV and indel background error.",
+    "author_corresponding": "Mathilde Hartvig Diekema",
+    "author_corresponding_institution": "Aarhus University",
+    "authors": "Diekema, M. H.; Rasmussen, M. H.; Drue, S. O.; Frydendahl, A.; Andersen, C. L.; Pedersen, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-02",
+    "doi": "10.64898/2026.05.29.728727",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/02/2026.05.29.728727.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SNV and indel error modeling of deep targeted cell-free DNA sequencing data for sensitive detection of circulating tumor DNA in colorectal cancer",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Aarhus University",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-06-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "PyDREAMS jointly models SNV and indel background error in deep targeted cfDNA sequencing using a neural error model trained on healthy controls, improving…",
+  "title": "SNV and indel error modeling of deep targeted cell-free DNA sequencing data for sensitive detection of circulating tumor DNA in colorectal cancer",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.29.728727"
+}

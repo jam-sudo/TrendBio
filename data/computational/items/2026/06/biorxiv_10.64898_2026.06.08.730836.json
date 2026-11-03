@@ -1,0 +1,42 @@
+{
+  "abstract": "Estimating diversity properties of discrete distributions from a small observed sample is a fundamental problem in algorithmic statistics that has applications in many fields, in particular bioinformatics, but also in ecology or linguistics. The two most common diversity measures are the number of distinct elements in a multiset, also referred to as \"species richness\" in ecology or \"alpha diversity\" in microbial analysis, and the Shannon entropy, also referred to as \"evenness\". Estimating these properties from a small sample is particularly challenging for distributions with many rare elements. Thus, many estimators have been proposed in the past that, in practice, work well for different types of distributions.\n\nWe present DivQuant, an optimization-based, extrapolating richness and entropy estimator with three contributions. First, we formulate the upsampling problem as a convex quadratic program with a Neyman{chi} 2 objective. Unlike the linear program of its predecessor RichnEst, DivQuant admits confidence intervals via{chi} 2 test inversion that are empirically well-calibrated. Second, we replace RichnEsts fixed-threshold fingerprint truncation with the rare/abundant fingerprint split of Valiant and Valiant, which strongly reduces problem size and preserves enough degrees of freedom for the confidence-interval program to remain valid and feasible. Third, we plug the optimal population fingerprint returned by the program into Shannons entropy formula to obtain an entropy estimate. DivQuant attains close-to-nominal 95% confidence intervals in essentially all tested regimes, including six simulated distribution families, Tara Oceans microbiome data, and 10X Genomics scRNA-seq data, while competing state-of-the-art methods (RichnEst, iNext, PreSeq) miss the true richness in up to 80% of instances, well above the nominal 5%. In addition, DivQuant outperforms classical asymptotic entropy estimators (Miller-Madow, CAE) and the extrapolating iNext estimator.\n\nRunning times remain competitive, with DivQuant typically completing in seconds. DivQuant is available as a command-line tool at https://gitlab.com/rahmannlab/divquant.\n\n2012 ACM Subject ClassificationMathematics of computing[-&gt;] Probability and statistics; Mathematics of computing[-&gt;] Linear programming; Mathematics of computing[-&gt;] Quadratic programming; Applied computing[-&gt;] Bioinformatics",
+  "authors": [
+    "Schmitz, J. E.",
+    "Rahmann, S."
+  ],
+  "doi": "10.64898/2026.06.08.730836",
+  "first_seen": "2026-06-11",
+  "id": "biorxiv:10.64898/2026.06.08.730836",
+  "metadata": {
+    "abstract": "Estimating diversity properties of discrete distributions from a small observed sample is a fundamental problem in algorithmic statistics that has applications in many fields, in particular bioinformatics, but also in ecology or linguistics. The two most common diversity measures are the number of distinct elements in a multiset, also referred to as \"species richness\" in ecology or \"alpha diversity\" in microbial analysis, and the Shannon entropy, also referred to as \"evenness\". Estimating these properties from a small sample is particularly challenging for distributions with many rare elements. Thus, many estimators have been proposed in the past that, in practice, work well for different types of distributions.\n\nWe present DivQuant, an optimization-based, extrapolating richness and entropy estimator with three contributions. First, we formulate the upsampling problem as a convex quadratic program with a Neyman{chi} 2 objective. Unlike the linear program of its predecessor RichnEst, DivQuant admits confidence intervals via{chi} 2 test inversion that are empirically well-calibrated. Second, we replace RichnEsts fixed-threshold fingerprint truncation with the rare/abundant fingerprint split of Valiant and Valiant, which strongly reduces problem size and preserves enough degrees of freedom for the confidence-interval program to remain valid and feasible. Third, we plug the optimal population fingerprint returned by the program into Shannons entropy formula to obtain an entropy estimate. DivQuant attains close-to-nominal 95% confidence intervals in essentially all tested regimes, including six simulated distribution families, Tara Oceans microbiome data, and 10X Genomics scRNA-seq data, while competing state-of-the-art methods (RichnEst, iNext, PreSeq) miss the true richness in up to 80% of instances, well above the nominal 5%. In addition, DivQuant outperforms classical asymptotic entropy estimators (Miller-Madow, CAE) and the extrapolating iNext estimator.\n\nRunning times remain competitive, with DivQuant typically completing in seconds. DivQuant is available as a command-line tool at https://gitlab.com/rahmannlab/divquant.\n\n2012 ACM Subject ClassificationMathematics of computing[-&gt;] Probability and statistics; Mathematics of computing[-&gt;] Linear programming; Mathematics of computing[-&gt;] Quadratic programming; Applied computing[-&gt;] Bioinformatics",
+    "author_corresponding": "Sven Rahmann",
+    "author_corresponding_institution": "Saarland University",
+    "authors": "Schmitz, J. E.; Rahmann, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-11",
+    "doi": "10.64898/2026.06.08.730836",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/11/2026.06.08.730836.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DivQuant: Estimation of Species Richness and Entropy from Small Samples",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Saarland University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "DivQuant: a convex quadratic-program extrapolating estimator of species richness and Shannon entropy from small samples, with chi-squared confidence intervals;…",
+  "title": "DivQuant: Estimation of Species Richness and Entropy from Small Samples",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.08.730836"
+}

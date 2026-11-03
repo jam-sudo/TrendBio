@@ -1,0 +1,48 @@
+{
+  "abstract": "The rise of antibiotic resistance necessitates the discovery of antibacterial compounds with novel mechanisms of action (MoAs). Recent machine learning approaches have shown promise in antibacterial compound discovery, but often identify derivatives of known antibiotic classes rather than mechanistically novel compounds. Previous approaches applied Tanimoto similarity filters at the end of screening pipelines, but this method has substantial drawbacks: Tanimoto similarity can be misleading in chemical space, and post-hoc filtering does not influence what activity models learn to prioritize. Here, we present a machine learning pipeline that addresses chemical novelty upfront by employing an XGBoost-based MoA classifier to explicitly prioritize compounds predicted to have mechanisms distinct from known antibiotic classes, combined with graph neural networks for antibacterial activity and toxicity prediction. Applied to the Zinc20 database, our approach successfully identified non-toxic antibacterial compounds structurally distinct from known antibiotics. Notably, the majority of these hits exhibited membrane-targeting activity with selectivity for bacterial cells over mammalian cells, suggesting potential for next-generation membrane-active antibiotics. However, we did not identify compounds with novel protein targets. Systematic analysis revealed that this limitation stems from mechanistic bias in training data rather than model architecture. Specifically, our activity model learned to preferentially score compounds similar to specific groups in the training data, thus overrepresenting certain MoA classes including membrane-active compounds. Even substantial model architecture and training data enhancements did not overcome this constraint. Our findings demonstrate that the primary bottleneck for discovering mechanistically novel antibiotics is the scarcity of diverse, mechanistically-annotated training data. This work provides both a methodological framework for mechanism-aware screening and critical insights into data requirements for genuinely novel antibiotic discovery.",
+  "authors": [
+    "Chain, C.",
+    "Ghaffari, S.",
+    "Belakaria, S.",
+    "Sheehan, J. P.",
+    "Irani, I.",
+    "Wu, C.-Y.",
+    "Kim, H.",
+    "Engelhardt, B. E.",
+    "Gitai, Z. E."
+  ],
+  "doi": "10.64898/2026.06.08.730938",
+  "first_seen": "2026-06-11",
+  "id": "biorxiv:10.64898/2026.06.08.730938",
+  "metadata": {
+    "abstract": "The rise of antibiotic resistance necessitates the discovery of antibacterial compounds with novel mechanisms of action (MoAs). Recent machine learning approaches have shown promise in antibacterial compound discovery, but often identify derivatives of known antibiotic classes rather than mechanistically novel compounds. Previous approaches applied Tanimoto similarity filters at the end of screening pipelines, but this method has substantial drawbacks: Tanimoto similarity can be misleading in chemical space, and post-hoc filtering does not influence what activity models learn to prioritize. Here, we present a machine learning pipeline that addresses chemical novelty upfront by employing an XGBoost-based MoA classifier to explicitly prioritize compounds predicted to have mechanisms distinct from known antibiotic classes, combined with graph neural networks for antibacterial activity and toxicity prediction. Applied to the Zinc20 database, our approach successfully identified non-toxic antibacterial compounds structurally distinct from known antibiotics. Notably, the majority of these hits exhibited membrane-targeting activity with selectivity for bacterial cells over mammalian cells, suggesting potential for next-generation membrane-active antibiotics. However, we did not identify compounds with novel protein targets. Systematic analysis revealed that this limitation stems from mechanistic bias in training data rather than model architecture. Specifically, our activity model learned to preferentially score compounds similar to specific groups in the training data, thus overrepresenting certain MoA classes including membrane-active compounds. Even substantial model architecture and training data enhancements did not overcome this constraint. Our findings demonstrate that the primary bottleneck for discovering mechanistically novel antibiotics is the scarcity of diverse, mechanistically-annotated training data. This work provides both a methodological framework for mechanism-aware screening and critical insights into data requirements for genuinely novel antibiotic discovery.",
+    "author_corresponding": "Zemer E Gitai",
+    "author_corresponding_institution": "Princeton University",
+    "authors": "Chain, C.; Ghaffari, S.; Belakaria, S.; Sheehan, J. P.; Irani, I.; Wu, C.-Y.; Kim, H.; Engelhardt, B. E.; Gitai, Z. E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-11",
+    "doi": "10.64898/2026.06.08.730938",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/11/2026.06.08.730938.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Machine Learning-Guided Discovery of Bacterial-Selective Membrane-Active Compounds Reveals Mechanistic Bias in Antibiotic Training Datasets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Princeton University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "XGBoost MoA and GNN pipeline screens Zinc20 for non-toxic, membrane-active antibacterials; training bias blocks novel-target hits.",
+  "title": "Machine Learning-Guided Discovery of Bacterial-Selective Membrane-Active Compounds Reveals Mechanistic Bias in Antibiotic Training Datasets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.08.730938"
+}

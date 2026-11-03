@@ -1,0 +1,42 @@
+{
+  "abstract": "Phylogenetic reconstruction is a fundamental problem in comparative genomics. As a theoretical problem in rearrangement studies, this has been modelled as the Small Parsimony Problem (SPP), in which ancestral genome structures have to be determined minimizing the number of rearrangement events occurring throughout the phylogeny. This problem is of significant interest in microbial and cancer genomics, due to the prevalence and clinical importance of rearrangement events.\n\nGenome structures in this problem are expressed as sequences of markers, which are themselves oriented sequence features (such as genes) that abstract from non-structural variations. Recent research has focused on the problem under the natural genomes model, in which arbitrary variations in copy number of markers are allowed. Natural genomes are often studied under the DCJ-indel model, a model which has already been successfully applied to plasmid data. There also exist ILP solutions to a variant of the Small Parsimony Problem under the DCJ-indel model. However, these solutions are limited in their applicability, as they make some critical simplifications for tractability purposes: ancestral marker frequencies and precomputed putative ancestral adjancencies, with their predicted likelihoods, are assumed as input.\n\nThis creates multiple problems from both a theoretical and practical perspective. Firstly, this simplification means that not the full state space is searched for a solution, but rather only the subset of genomes with the precomputed putative adjacencies, meaning an optimal solution to the exact SPP is not guaranteed. Secondly, marker frequencies are given externally, without any theoretical guarantees. Thirdly, the method used to precompute adjacencies relies on gene trees, which requires the use of genes as markers, when gene annotation is often unreliable, especially in regions with a lot of rearrangement. Additionally, this restricts the applicability of the approach to sets of genomes that are both divergent and large enough to be able to produce informative gene trees. This is, for example, rarely the case for plasmids, where nucleotide mutations are rarer than rearrangements and genomes are small.\n\nHence, we revisit the problem to solve the exact SPP by introducing a cost to indel operations, which allows us to compute ranges of marker frequencies and derive theoretical results, that allow us to reduce the solution space that the ILP searches without sacrificing optimality. We show that this makes the problem tractable for the case of small and recently related genomes, first on simulated genomes, and then on a set of pathogenic plasmids which represent a realistic use case for the method.",
+  "authors": [
+    "Bohnenkaemper, L.",
+    "Frolova, D."
+  ],
+  "doi": "10.64898/2026.06.23.733974",
+  "first_seen": "2026-06-28",
+  "id": "biorxiv:10.64898/2026.06.23.733974",
+  "metadata": {
+    "abstract": "Phylogenetic reconstruction is a fundamental problem in comparative genomics. As a theoretical problem in rearrangement studies, this has been modelled as the Small Parsimony Problem (SPP), in which ancestral genome structures have to be determined minimizing the number of rearrangement events occurring throughout the phylogeny. This problem is of significant interest in microbial and cancer genomics, due to the prevalence and clinical importance of rearrangement events.\n\nGenome structures in this problem are expressed as sequences of markers, which are themselves oriented sequence features (such as genes) that abstract from non-structural variations. Recent research has focused on the problem under the natural genomes model, in which arbitrary variations in copy number of markers are allowed. Natural genomes are often studied under the DCJ-indel model, a model which has already been successfully applied to plasmid data. There also exist ILP solutions to a variant of the Small Parsimony Problem under the DCJ-indel model. However, these solutions are limited in their applicability, as they make some critical simplifications for tractability purposes: ancestral marker frequencies and precomputed putative ancestral adjancencies, with their predicted likelihoods, are assumed as input.\n\nThis creates multiple problems from both a theoretical and practical perspective. Firstly, this simplification means that not the full state space is searched for a solution, but rather only the subset of genomes with the precomputed putative adjacencies, meaning an optimal solution to the exact SPP is not guaranteed. Secondly, marker frequencies are given externally, without any theoretical guarantees. Thirdly, the method used to precompute adjacencies relies on gene trees, which requires the use of genes as markers, when gene annotation is often unreliable, especially in regions with a lot of rearrangement. Additionally, this restricts the applicability of the approach to sets of genomes that are both divergent and large enough to be able to produce informative gene trees. This is, for example, rarely the case for plasmids, where nucleotide mutations are rarer than rearrangements and genomes are small.\n\nHence, we revisit the problem to solve the exact SPP by introducing a cost to indel operations, which allows us to compute ranges of marker frequencies and derive theoretical results, that allow us to reduce the solution space that the ILP searches without sacrificing optimality. We show that this makes the problem tractable for the case of small and recently related genomes, first on simulated genomes, and then on a set of pathogenic plasmids which represent a realistic use case for the method.",
+    "author_corresponding": "Daria Frolova",
+    "author_corresponding_institution": "Department of Computational Biology, University of Lausanne, Lausanne, Switzerland",
+    "authors": "Bohnenkaemper, L.; Frolova, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-28",
+    "doi": "10.64898/2026.06.23.733974",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/28/2026.06.23.733974.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Towards a Unified Exact Solution of Rearrangement Small Parsimony for Natural Genomes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computational Biology, University of Lausanne, Lausanne, Switzerland",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-06-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Exact small parsimony solver for ancestral genome reconstruction under the DCJ-indel model, using an ILP with indel costs and theoretical bounds to shrink the…",
+  "title": "Towards a Unified Exact Solution of Rearrangement Small Parsimony for Natural Genomes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.23.733974"
+}

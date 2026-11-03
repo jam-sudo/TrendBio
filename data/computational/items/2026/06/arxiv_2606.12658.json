@@ -1,0 +1,33 @@
+{
+  "abstract": "Physics-Informed Neural Networks (PINNs) are an attractive tool for partial-observation problems in biology, where the governing dynamics are known but some compartments cannot be measured. Chemotherapy pharmacokinetics (PK) is a clean instance: drug concentration in plasma is routinely measured, but concentration in tissue -- which determines tumour kill and off-target toxicity -- is not. We benchmark a PINN against the standard clinical baseline (nonlinear least-squares on the analytical biexponential plasma solution, hereafter NLS) and a physics-agnostic neural baseline (a data-only MLP) on two PK problems. On the linear two-compartment problem, NLS is near-optimal; the PINN matches it to within a small constant factor while also producing the tissue curve in a single training pass, whereas the data-only MLP fails on tissue by roughly 10x. On a Michaelis-Menten extension (saturable elimination), the biexponential closed form no longer exists, so NLS is mis-specified and silently returns meaningless rate constants. The PINN instead exposes a deeper fact: the Michaelis-Menten two-compartment model is non-identifiable from plasma alone, and the PINN reports this honestly by converging to a basin with k12 -> 0. Adding two sparse tissue observations largely resolves identifiability: across five seeds the PINN recovers k21 to within 1% of truth and Vmax, Km to within one standard-deviation bar, while k12 moves in the correct direction (0.02 -> 0.82) but remains ~2 sigma below truth -- a recovery the closed-form NLS estimator cannot attempt at all, because its biexponential ansatz describes only plasma. Our claim is not that PINNs beat NLS. It is that PINNs offer a uniform recipe that ties the textbook estimator on the textbook problem, exposes structural identifiability that\n  the textbook estimator hides, and absorbs heterogeneous measurements within a single loss.",
+  "authors": [
+    "Riya Bisht",
+    "Dhruv Agarwal"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-10",
+  "id": "arxiv:2606.12658",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.12658v1</ns0:id>\n    <ns0:title>Physics-Informed Neural Networks for Chemotherapy Pharmacokinetics: Benchmarking the Clinical Estimator and Exposing Parameter Identifiability</ns0:title>\n    <ns0:updated>2026-06-10T20:33:00Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.12658v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.12658v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Physics-Informed Neural Networks (PINNs) are an attractive tool for partial-observation problems in biology, where the governing dynamics are known but some compartments cannot be measured. Chemotherapy pharmacokinetics (PK) is a clean instance: drug concentration in plasma is routinely measured, but concentration in tissue -- which determines tumour kill and off-target toxicity -- is not. We benchmark a PINN against the standard clinical baseline (nonlinear least-squares on the analytical biexponential plasma solution, hereafter NLS) and a physics-agnostic neural baseline (a data-only MLP) on two PK problems. On the linear two-compartment problem, NLS is near-optimal; the PINN matches it to within a small constant factor while also producing the tissue curve in a single training pass, whereas the data-only MLP fails on tissue by roughly 10x. On a Michaelis-Menten extension (saturable elimination), the biexponential closed form no longer exists, so NLS is mis-specified and silently returns meaningless rate constants. The PINN instead exposes a deeper fact: the Michaelis-Menten two-compartment model is non-identifiable from plasma alone, and the PINN reports this honestly by converging to a basin with k12 -&gt; 0. Adding two sparse tissue observations largely resolves identifiability: across five seeds the PINN recovers k21 to within 1% of truth and Vmax, Km to within one standard-deviation bar, while k12 moves in the correct direction (0.02 -&gt; 0.82) but remains ~2 sigma below truth -- a recovery the closed-form NLS estimator cannot attempt at all, because its biexponential ansatz describes only plasma. Our claim is not that PINNs beat NLS. It is that PINNs offer a uniform recipe that ties the textbook estimator on the textbook problem, exposes structural identifiability that\n  the textbook estimator hides, and absorbs heterogeneous measurements within a single loss.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-10T20:33:00Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Riya Bisht</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dhruv Agarwal</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Benchmarks PINNs against nonlinear least-squares and data-only MLP for chemotherapy PK with unmeasured tissue compartments; exposes non-identifiability in…",
+  "title": "Physics-Informed Neural Networks for Chemotherapy Pharmacokinetics: Benchmarking the Clinical Estimator and Exposing Parameter Identifiability",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.12658v1"
+}

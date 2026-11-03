@@ -1,0 +1,42 @@
+{
+  "abstract": "Reproducible computational biology depends on statistical decisions that routine workflows often skip: verifying that a differential-expression tests assumptions hold across all genes, that a strategy-comparison ANOVA is robust to non-normality, or that a meta-analysis is not distorted by publication bias. Surveys consistently find that fewer than 20% of published biomedical studies report checking these assumptions, and existing statistical software leaves validation to the analyst as an optional step. We present StickForStats, an open-source web platform that reframes assumption validation as a default precondition for every analysis. Its Guardian system--a middleware pipeline of eight validators (normality, variance homogeneity, independence, outliers, sample size, modality, linearity, homoscedasticity)--checks assumptions before execution and, on critical violations, reroutes to an appropriate nonparametric alternative with a documented decision trail. At genome scale, applying Guardian to a 91-sample synovial-sarcoma RNA-seq study (GSE271517) cascaded 90.6% of 27,221 genes to a rank-based test and flipped the differential-expression verdict for 553 genes--479 rescued from an under-powered t-test and 74 outlier-driven false positives rejected--materially changing the gene list a biologist would act on. The same automatic validation generalizes across domains: a CRISPR editing-strategy comparison (ANOVA F = 1122, with Guardian recommending Kruskal-Wallis H = 36.6), an ordinal correlation (Pearson r = 0.476 corrected to Spearman {rho} = 0.479), and a sixteen-trial clinical meta-analysis revealing severe publication bias (Eggers t = -5.78, p < 0.001); a complementary module extends the same validators to published manuscripts, checking claims against CONSORT, STROBE, ICH-E9, and JARS-Quant reporting standards. By making assumption validation automatic and transparent, StickForStats targets a tractable, under-served contributor to irreproducibility. The platform is MIT-licensed, validated against SciPy and R, and freely available at https://github.com/visvikbharti/stickforstats_new.\n\nAuthor summaryMost scientific conclusions rest on statistical tests, and every test comes with fine print: assumptions about the data that must hold for the result to be trustworthy. In practice, this fine print is often left unchecked. Surveys find that fewer than one in five published studies reports verifying these assumptions, partly because popular software treats the check as an optional extra that busy researchers easily skip. When the assumptions are ignored, a study can report a difference that is not really there. We built StickForStats to make this checking automatic. Before it runs any statistical test, our platform inspects the data, reports whether each assumption is met, and--if a serious problem is found--switches to a more appropriate method and records why. On four real biomedical datasets, including a gene-editing comparison and a large gene-expression study, we show that this safety net changes which findings are flagged as reliable. A companion tool applies the same checks to finished manuscripts, helping catch reporting problems before publication. By turning assumption checking from something you must remember into something that happens by default, we aim to make everyday analyses more reproducible.",
+  "authors": [
+    "Bharti, V.",
+    "Chakraborty, D."
+  ],
+  "doi": "10.64898/2026.06.15.732278",
+  "first_seen": "2026-06-19",
+  "id": "biorxiv:10.64898/2026.06.15.732278",
+  "metadata": {
+    "abstract": "Reproducible computational biology depends on statistical decisions that routine workflows often skip: verifying that a differential-expression tests assumptions hold across all genes, that a strategy-comparison ANOVA is robust to non-normality, or that a meta-analysis is not distorted by publication bias. Surveys consistently find that fewer than 20% of published biomedical studies report checking these assumptions, and existing statistical software leaves validation to the analyst as an optional step. We present StickForStats, an open-source web platform that reframes assumption validation as a default precondition for every analysis. Its Guardian system--a middleware pipeline of eight validators (normality, variance homogeneity, independence, outliers, sample size, modality, linearity, homoscedasticity)--checks assumptions before execution and, on critical violations, reroutes to an appropriate nonparametric alternative with a documented decision trail. At genome scale, applying Guardian to a 91-sample synovial-sarcoma RNA-seq study (GSE271517) cascaded 90.6% of 27,221 genes to a rank-based test and flipped the differential-expression verdict for 553 genes--479 rescued from an under-powered t-test and 74 outlier-driven false positives rejected--materially changing the gene list a biologist would act on. The same automatic validation generalizes across domains: a CRISPR editing-strategy comparison (ANOVA F = 1122, with Guardian recommending Kruskal-Wallis H = 36.6), an ordinal correlation (Pearson r = 0.476 corrected to Spearman {rho} = 0.479), and a sixteen-trial clinical meta-analysis revealing severe publication bias (Eggers t = -5.78, p < 0.001); a complementary module extends the same validators to published manuscripts, checking claims against CONSORT, STROBE, ICH-E9, and JARS-Quant reporting standards. By making assumption validation automatic and transparent, StickForStats targets a tractable, under-served contributor to irreproducibility. The platform is MIT-licensed, validated against SciPy and R, and freely available at https://github.com/visvikbharti/stickforstats_new.\n\nAuthor summaryMost scientific conclusions rest on statistical tests, and every test comes with fine print: assumptions about the data that must hold for the result to be trustworthy. In practice, this fine print is often left unchecked. Surveys find that fewer than one in five published studies reports verifying these assumptions, partly because popular software treats the check as an optional extra that busy researchers easily skip. When the assumptions are ignored, a study can report a difference that is not really there. We built StickForStats to make this checking automatic. Before it runs any statistical test, our platform inspects the data, reports whether each assumption is met, and--if a serious problem is found--switches to a more appropriate method and records why. On four real biomedical datasets, including a gene-editing comparison and a large gene-expression study, we show that this safety net changes which findings are flagged as reliable. A companion tool applies the same checks to finished manuscripts, helping catch reporting problems before publication. By turning assumption checking from something you must remember into something that happens by default, we aim to make everyday analyses more reproducible.",
+    "author_corresponding": "Debojyoti Chakraborty",
+    "author_corresponding_institution": "CSIR Institute of Genomics & Integrative Biology",
+    "authors": "Bharti, V.; Chakraborty, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-19",
+    "doi": "10.64898/2026.06.15.732278",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/19/2026.06.15.732278.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "StickForStats: automated statistical assumption validation for reproducible computational biology",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "CSIR Institute of Genomics & Integrative Biology",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "StickForStats is an open-source platform that auto-validates statistical assumptions before tests, rerouting violations to nonparametric methods; applied to a…",
+  "title": "StickForStats: automated statistical assumption validation for reproducible computational biology",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.15.732278"
+}

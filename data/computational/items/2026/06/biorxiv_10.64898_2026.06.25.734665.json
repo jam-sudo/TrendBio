@@ -1,0 +1,47 @@
+{
+  "abstract": "BackgroundLarge language model (LLM) agents increasingly automate bioinformatics analyses, but most existing bioinformatics tools were built for standalone use by human experts. An agent driving such a tool must reason about its installation, configuration, and execution from documentation for human, spending many turns, tokens, and tool calls per result. How a method is exposed to an agent can therefore matter as much as the method itself. By designing agentic interfaces for these tools, agent can reduce such overhead and improve the reliability of agent-driven analyses.\n\nFindingsTo test this design, we re-architected Clair3, a widely used deep-learning-based long-read variant caller, into a client-server system, Clair3-Connect. The client performs all genomics related processing and holds the identifiable data. The server runs only neural-network inference, and the client sends only feature tensors to the server, while sample identifiers and genomic context remain on the client. The client exposes schema-defined agent-facing tools that an agent invokes through single structured calls. On an APOE diplotyping task, all 60 agent runs were correct. The agentic tools used 12K tokens in 3 turns, 6.8 to 14 times fewer tokens than the shell-driven baselines (81K-163K tokens), at about a quarter the wall-clock time and far more stably (4% versus 35% token usage variation). Dropping the pileup and phasing stages to keep the client light left SNP F1 within 0.1-0.3 points of standard Clair3 by 50x coverage, while mutual TLS and AES-256-GCM encryption added 7.2% to end-to-end runtime.\n\nConclusionsRecasting an established algorithm as developer-built, agentic tools behind a secure client-server boundary makes it more efficient, reliable, and easier to deploy for an LLM agent than a third-party wrapper, which cannot recover the defaults and conventions only its developers know. Agentic interfaces should be a first-class deliverable of bioinformatics tool development.",
+  "authors": [
+    "Yu, X.",
+    "Zheng, Z.",
+    "CHEN, L.",
+    "QIn, Z.",
+    "Guo, X.",
+    "He, M.",
+    "Luo, R."
+  ],
+  "doi": "10.64898/2026.06.25.734665",
+  "first_seen": "2026-06-28",
+  "id": "biorxiv:10.64898/2026.06.25.734665",
+  "metadata": {
+    "abstract": "BackgroundLarge language model (LLM) agents increasingly automate bioinformatics analyses, but most existing bioinformatics tools were built for standalone use by human experts. An agent driving such a tool must reason about its installation, configuration, and execution from documentation for human, spending many turns, tokens, and tool calls per result. How a method is exposed to an agent can therefore matter as much as the method itself. By designing agentic interfaces for these tools, agent can reduce such overhead and improve the reliability of agent-driven analyses.\n\nFindingsTo test this design, we re-architected Clair3, a widely used deep-learning-based long-read variant caller, into a client-server system, Clair3-Connect. The client performs all genomics related processing and holds the identifiable data. The server runs only neural-network inference, and the client sends only feature tensors to the server, while sample identifiers and genomic context remain on the client. The client exposes schema-defined agent-facing tools that an agent invokes through single structured calls. On an APOE diplotyping task, all 60 agent runs were correct. The agentic tools used 12K tokens in 3 turns, 6.8 to 14 times fewer tokens than the shell-driven baselines (81K-163K tokens), at about a quarter the wall-clock time and far more stably (4% versus 35% token usage variation). Dropping the pileup and phasing stages to keep the client light left SNP F1 within 0.1-0.3 points of standard Clair3 by 50x coverage, while mutual TLS and AES-256-GCM encryption added 7.2% to end-to-end runtime.\n\nConclusionsRecasting an established algorithm as developer-built, agentic tools behind a secure client-server boundary makes it more efficient, reliable, and easier to deploy for an LLM agent than a third-party wrapper, which cannot recover the defaults and conventions only its developers know. Agentic interfaces should be a first-class deliverable of bioinformatics tool development.",
+    "author_corresponding": "Ruibang Luo",
+    "author_corresponding_institution": "The University of Hong Kong",
+    "authors": "Yu, X.; Zheng, Z.; CHEN, L.; QIn, Z.; Guo, X.; He, M.; Luo, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-28",
+    "doi": "10.64898/2026.06.25.734665",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/28/2026.06.25.734665.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Client-server interfaces enable efficient agent-driven variant calling",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Hong Kong",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Clair3-Connect re-architects the Clair3 long-read variant caller into a client-server system with schema-defined agent tools, cutting LLM agent token use…",
+  "title": "Client-server interfaces enable efficient agent-driven variant calling",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.25.734665"
+}

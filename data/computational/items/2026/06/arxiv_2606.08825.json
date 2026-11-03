@@ -1,0 +1,33 @@
+{
+  "abstract": "When do three-dimensional conformer ensembles improve molecular property prediction beyond two-dimensional fingerprints? We provide the first systematic, mechanistically grounded answer. Through ~1,000 experiments spanning 13 model configurations, 14 regression targets, and 2 classification targets across MoleculeNet, QM9, and MARCEL benchmarks, we discover selective complementarity: conformer ensemble statistics extracted via Distribution Kernel Operators (DKOs) yield statistically significant RMSE reductions on solvation-dependent properties (ESOL -11.0%, p < 10^{-9}; FreeSolv -13.5%, p < 3x10^{-5}; 10-seed paired validation) while providing no benefit for electronic or steric tasks. Three lines of evidence confirm this selectivity has a physical rather than statistical basis: improvement is larger under scaffold splits than random splits (+11.9% vs. +8.5% on ESOL), concentrates on large, flexible molecules (+18.9% for heaviest quartile), and grows monotonically with training data. We establish a four-tier performance hierarchy: end-to-end 3D GNNs (SchNet, PaiNN; 21-42% over fingerprints) >= engineered physicochemical descriptors (PMI/SASA/USR) > Morgan fingerprints + XGBoost > all neural conformer ensemble methods, confirmed by two architecturally diverse GNNs and revealing that the pre-computed feature bottleneck limits ensemble approaches. Feature attribution and mutual information analysis expose the mechanistic asymmetry: conformer mean features carry 2-8x more information per feature than fingerprint bits, yet covariance features contribute <2% of model signal, explaining why five simple scalar invariants outperform all complex covariance architectures (p < 0.001). These findings yield an empirical property taxonomy and a practical decision framework for when conformer generation is worth the investment.",
+  "authors": [
+    "Bryan Cheng",
+    "Austin Jin",
+    "Jasper Zhang"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-07",
+  "id": "arxiv:2606.08825",
+  "metadata": {
+    "arxiv_primary_category": "physics.chem-ph",
+    "categories": [
+      "physics.chem-ph",
+      "q-bio.MN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.08825v1</ns0:id>\n    <ns0:title>When Three-Dimensional Conformer Ensembles Improve Molecular Property Prediction Beyond Two-Dimensional Fingerprints: A Systematic Study</ns0:title>\n    <ns0:updated>2026-06-07T20:33:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.08825v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.08825v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>When do three-dimensional conformer ensembles improve molecular property prediction beyond two-dimensional fingerprints? We provide the first systematic, mechanistically grounded answer. Through ~1,000 experiments spanning 13 model configurations, 14 regression targets, and 2 classification targets across MoleculeNet, QM9, and MARCEL benchmarks, we discover selective complementarity: conformer ensemble statistics extracted via Distribution Kernel Operators (DKOs) yield statistically significant RMSE reductions on solvation-dependent properties (ESOL -11.0%, p &lt; 10^{-9}; FreeSolv -13.5%, p &lt; 3x10^{-5}; 10-seed paired validation) while providing no benefit for electronic or steric tasks. Three lines of evidence confirm this selectivity has a physical rather than statistical basis: improvement is larger under scaffold splits than random splits (+11.9% vs. +8.5% on ESOL), concentrates on large, flexible molecules (+18.9% for heaviest quartile), and grows monotonically with training data. We establish a four-tier performance hierarchy: end-to-end 3D GNNs (SchNet, PaiNN; 21-42% over fingerprints) &gt;= engineered physicochemical descriptors (PMI/SASA/USR) &gt; Morgan fingerprints + XGBoost &gt; all neural conformer ensemble methods, confirmed by two architecturally diverse GNNs and revealing that the pre-computed feature bottleneck limits ensemble approaches. Feature attribution and mutual information analysis expose the mechanistic asymmetry: conformer mean features carry 2-8x more information per feature than fingerprint bits, yet covariance features contribute &lt;2% of model signal, explaining why five simple scalar invariants outperform all complex covariance architectures (p &lt; 0.001). These findings yield an empirical property taxonomy and a practical decision framework for when conformer generation is worth the investment.</ns0:summary>\n    <ns0:category term=\"physics.chem-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.MN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-07T20:33:49Z</ns0:published>\n    <ns1:comment>10 pages, 4 figures, ACM-BCB 2026 Full Paper</ns1:comment>\n    <ns1:primary_category term=\"physics.chem-ph\" />\n    <ns0:author>\n      <ns0:name>Bryan Cheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Austin Jin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jasper Zhang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-07",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Conformer ensembles beat 2D fingerprints for solvation-dependent property prediction (ESOL, FreeSolv) but not electronic or steric tasks.",
+  "title": "When Three-Dimensional Conformer Ensembles Improve Molecular Property Prediction Beyond Two-Dimensional Fingerprints: A Systematic Study",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.08825v1"
+}

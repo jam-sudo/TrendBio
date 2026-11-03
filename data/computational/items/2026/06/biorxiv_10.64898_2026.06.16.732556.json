@@ -1,0 +1,40 @@
+{
+  "abstract": "Rare diseases collectively affect over 300 million individuals worldwide, yet the vast majority lack approved pharmacological treatments, leaving patients with few therapeutic options and researchers with limited computational tools for systematic candidate identification. This study presents a network-based computational framework that integrates two complementary public biomedical databases (Orphadata, which catalogs gene-disease associations for Orphanet-classified rare disorders, and DisGeNET, which documents gene-drug interaction records) through a reproducible three-stage gene symbol harmonization pipeline comprising HGNC identifier standardization, MyGene.info API mapping, and RapidFuzz fuzzy string matching. The resulting heterogeneous tripartite knowledge network encompasses 15,454 nodes and 35,131 edges, covering 2,249 clinically distinct rare diseases. A Graph Attention Network (GAT) is trained on this network using node-type classification as a pretext task, enabling the model to learn biologically informed node representations encoding the structural co-association of disease, gene, and drug entities. These representations are used to rank drug candidates for a query rare disorder via cosine similarity in the embedding space. The framework is explicitly positioned as a decision support tool for prioritizing existing gene-bridged drug-disorder connections rather than predicting novel associations. Held-out evaluation across 200 disorders demonstrates Hits@10 = 0.400 compared to a random baseline under 0.001, a greater than 400-fold improvement. The rank-4 retrieval of NITISINONE, the approved standard of care for hereditary tyrosinaemia type 1, for a query disorder sharing the HPD tyrosine catabolism pathway, without pathway annotations provided to the model, supports the biological plausibility of the learned embeddings. The complete pipeline is reproducible and is deployed as an interactive decision support interface on HuggingFace Spaces.",
+  "authors": [
+    "Ramani, D."
+  ],
+  "doi": "10.64898/2026.06.16.732556",
+  "first_seen": "2026-06-21",
+  "id": "biorxiv:10.64898/2026.06.16.732556",
+  "metadata": {
+    "abstract": "Rare diseases collectively affect over 300 million individuals worldwide, yet the vast majority lack approved pharmacological treatments, leaving patients with few therapeutic options and researchers with limited computational tools for systematic candidate identification. This study presents a network-based computational framework that integrates two complementary public biomedical databases (Orphadata, which catalogs gene-disease associations for Orphanet-classified rare disorders, and DisGeNET, which documents gene-drug interaction records) through a reproducible three-stage gene symbol harmonization pipeline comprising HGNC identifier standardization, MyGene.info API mapping, and RapidFuzz fuzzy string matching. The resulting heterogeneous tripartite knowledge network encompasses 15,454 nodes and 35,131 edges, covering 2,249 clinically distinct rare diseases. A Graph Attention Network (GAT) is trained on this network using node-type classification as a pretext task, enabling the model to learn biologically informed node representations encoding the structural co-association of disease, gene, and drug entities. These representations are used to rank drug candidates for a query rare disorder via cosine similarity in the embedding space. The framework is explicitly positioned as a decision support tool for prioritizing existing gene-bridged drug-disorder connections rather than predicting novel associations. Held-out evaluation across 200 disorders demonstrates Hits@10 = 0.400 compared to a random baseline under 0.001, a greater than 400-fold improvement. The rank-4 retrieval of NITISINONE, the approved standard of care for hereditary tyrosinaemia type 1, for a query disorder sharing the HPD tyrosine catabolism pathway, without pathway annotations provided to the model, supports the biological plausibility of the learned embeddings. The complete pipeline is reproducible and is deployed as an interactive decision support interface on HuggingFace Spaces.",
+    "author_corresponding": "Diya Ramani",
+    "author_corresponding_institution": "Vellore Institute of Technology",
+    "authors": "Ramani, D.",
+    "biorxiv_category": "systems biology",
+    "category": "Systems Biology",
+    "date": "2026-06-21",
+    "doi": "10.64898/2026.06.16.732556",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/21/2026.06.16.732556.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Drug repurposing for rare diseases via a gene-bridged heterogeneous knowledge graph and graph attention network",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Vellore Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-06-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "GAT on a gene-bridged disease-gene-drug knowledge graph ranks rare-disease drug candidates; Hits@10 = 0.400 across 200 held-out disorders.",
+  "title": "Drug repurposing for rare diseases via a gene-bridged heterogeneous knowledge graph and graph attention network",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.16.732556"
+}

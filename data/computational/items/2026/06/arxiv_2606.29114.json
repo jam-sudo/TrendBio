@@ -1,0 +1,33 @@
+{
+  "abstract": "Modern multivariate regression problems involve several related outcomes whose regression effects are not only nonlinear, heterogeneous, and outcome-specific, but also where the residual dependence among outcomes is scientifically meaningful. Existing multivariate Bayesian tree-based methods typically address only part of this problem: some impose substantial sharing of tree architecture across outcomes, which is overly restrictive when responses depend on distinct predictors or effect modifiers, while others accommodate residual dependence but retain simpler mean structures. This paper develops multiVCBART, a multivariate varying-coefficient Bayesian additive regression tree framework that jointly models flexible outcome-specific coefficient surfaces and a sparse residual precision matrix. Each entry of the coefficient matrix $B(x)$ is represented by an independent BART ensemble, allowing predictor effects to vary nonlinearly with modifiers $x$ across outcomes, while a Graphical Horseshoe prior on the precision matrix $Ω$ captures parsimonious residual conditional dependence. To permit efficient computation, we introduce a sampler that reduces the multivariate Gaussian likelihood to a sequence of scalar pseudo-response updates, decoupling the tree backfitting from the Graphical Horseshoe step. Theoretically, we establish the first posterior contraction rates for a multivariate BART model with jointly estimated residual dependence, proving near-minimax adaptation to underlying smoothness and structural sparsity. Empirically, multiVCBART outperforms existing multivariate tree models and Bayesian SUR competitors on sparse, high-dimensional datasets. Finally, in a re-analysis of the Genomics of Drug Sensitivity in Cancer dataset, our method identifies distinct biomarker signals and recovers a coherent residual pharmacologic network.",
+  "authors": [
+    "Soham Ghosh",
+    "Sameer K. Deshpande"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-27",
+  "id": "arxiv:2606.29114",
+  "metadata": {
+    "arxiv_primary_category": "stat.ME",
+    "categories": [
+      "stat.ME",
+      "math.ST",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.29114v1</ns0:id>\n    <ns0:title>Multivariate Varying-Coefficient BART with Graphical Horseshoe Priors</ns0:title>\n    <ns0:updated>2026-06-27T23:42:08Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.29114v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.29114v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Modern multivariate regression problems involve several related outcomes whose regression effects are not only nonlinear, heterogeneous, and outcome-specific, but also where the residual dependence among outcomes is scientifically meaningful. Existing multivariate Bayesian tree-based methods typically address only part of this problem: some impose substantial sharing of tree architecture across outcomes, which is overly restrictive when responses depend on distinct predictors or effect modifiers, while others accommodate residual dependence but retain simpler mean structures. This paper develops multiVCBART, a multivariate varying-coefficient Bayesian additive regression tree framework that jointly models flexible outcome-specific coefficient surfaces and a sparse residual precision matrix. Each entry of the coefficient matrix $B(x)$ is represented by an independent BART ensemble, allowing predictor effects to vary nonlinearly with modifiers $x$ across outcomes, while a Graphical Horseshoe prior on the precision matrix $Ω$ captures parsimonious residual conditional dependence. To permit efficient computation, we introduce a sampler that reduces the multivariate Gaussian likelihood to a sequence of scalar pseudo-response updates, decoupling the tree backfitting from the Graphical Horseshoe step. Theoretically, we establish the first posterior contraction rates for a multivariate BART model with jointly estimated residual dependence, proving near-minimax adaptation to underlying smoothness and structural sparsity. Empirically, multiVCBART outperforms existing multivariate tree models and Bayesian SUR competitors on sparse, high-dimensional datasets. Finally, in a re-analysis of the Genomics of Drug Sensitivity in Cancer dataset, our method identifies distinct biomarker signals and recovers a coherent residual pharmacologic network.</ns0:summary>\n    <ns0:category term=\"stat.ME\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.ST\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-27T23:42:08Z</ns0:published>\n    <ns1:comment>70 pages, 5 figures; includes supplementary material</ns1:comment>\n    <ns1:primary_category term=\"stat.ME\" />\n    <ns0:author>\n      <ns0:name>Soham Ghosh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sameer K. Deshpande</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes multiVCBART, a multivariate varying-coefficient BART model with Graphical Horseshoe priors for sparse residual dependence; proves posterior…",
+  "title": "Multivariate Varying-Coefficient BART with Graphical Horseshoe Priors",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.29114v1"
+}

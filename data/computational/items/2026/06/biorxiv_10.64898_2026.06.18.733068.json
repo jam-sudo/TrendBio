@@ -1,0 +1,46 @@
+{
+  "abstract": "BackgroundClinical complications are often predicted with separate sigmoid outputs, even when the target labels arise from related pathophysiological processes. This paper asks whether output-layer choice should reflect both predictive convenience and the biological structure assumed among complications. The central premise is that label-dependence mechanisms are explicit hypotheses about comorbidity, not generic modelling additions.\n\nMethodsOutput-head assumptions were compared across two clinically distinct multi-label prediction tasks. In Type 2 diabetes (T2D), six heads were evaluated for nephropathy, neuropathy, and retinopathy: independent baseline, linear additive, multiplicative, symmetric conditional random field (CRF), residual multilayer perceptron (MLP), and combined additive-multiplicative. In myocardial infarction (MI), four heads were evaluated for ventricular tachycardia, ventricular fibrillation, and atrioventricular block: independent baseline, linear additive, multiplicative, and symmetric CRF. All experiments used five training data fractions and seven independent seeds, with the same shared-backbone protocol within each disease setting.\n\nResultsIn T2D, the symmetric CRF gave the most consistent improvement pattern, ranking highest at full data and at the two lowest data fractions while adding only three interaction parameters. At 20% training data, it was the only interaction head whose aggregate mean exceeded the independent baseline. The residual MLP, despite 123 interaction parameters, remained below the baseline across all T2D fractions. In MI, rankings changed across fractions: the multiplicative head led at 80% and 60%, the CRF led at 100% and 20%, and the baseline led at 40%. The combined additive-multiplicative head did not improve robustness in T2D and showed the largest negative baseline-relative deviations at lower fractions.\n\nConclusionThe findings support a biology-guided view of output-layer design. A small constrained mechanism was most useful when its symmetry matched the shared microvascular structure of T2D, whereas the heterogeneous electrophysiology of MI produced no stable winner. Output-layer choice should therefore be reported and defended as an assumption about disease structure instead of a routine hyperparameter decision.\n\nAuthor summaryMany clinical prediction models treat complications as separate outcomes, even when clinicians know they often arise together. We studied whether the last layer of a model should reflect that biological knowledge. We compared several output heads across two disease settings: Type 2 diabetes, where nephropathy, neuropathy, and retinopathy share a common microvascular origin, and myocardial infarction, where electrical complications arise from a mixture of shared and location-specific mechanisms. We found that a small symmetric CRF head was most useful in the diabetes task, especially when training data were limited, while no single interaction head dominated in myocardial infarction. This suggests that modelling comorbidity is not only a technical choice; it is a statement about how disease processes relate to one another. Our results encourage researchers to report and justify output-layer design as part of the clinical modelling argument, rather than treating it as a routine hyperparameter.",
+  "authors": [
+    "Asumboya, W. A.",
+    "Agbenorhevi, P. K.",
+    "Adams, C. F.",
+    "Ayariga, D. A.",
+    "Adjadeh, T.",
+    "Adams Ziblim, S.",
+    "Kwofie, S. K."
+  ],
+  "doi": "10.64898/2026.06.18.733068",
+  "first_seen": "2026-06-23",
+  "id": "biorxiv:10.64898/2026.06.18.733068",
+  "metadata": {
+    "abstract": "BackgroundClinical complications are often predicted with separate sigmoid outputs, even when the target labels arise from related pathophysiological processes. This paper asks whether output-layer choice should reflect both predictive convenience and the biological structure assumed among complications. The central premise is that label-dependence mechanisms are explicit hypotheses about comorbidity, not generic modelling additions.\n\nMethodsOutput-head assumptions were compared across two clinically distinct multi-label prediction tasks. In Type 2 diabetes (T2D), six heads were evaluated for nephropathy, neuropathy, and retinopathy: independent baseline, linear additive, multiplicative, symmetric conditional random field (CRF), residual multilayer perceptron (MLP), and combined additive-multiplicative. In myocardial infarction (MI), four heads were evaluated for ventricular tachycardia, ventricular fibrillation, and atrioventricular block: independent baseline, linear additive, multiplicative, and symmetric CRF. All experiments used five training data fractions and seven independent seeds, with the same shared-backbone protocol within each disease setting.\n\nResultsIn T2D, the symmetric CRF gave the most consistent improvement pattern, ranking highest at full data and at the two lowest data fractions while adding only three interaction parameters. At 20% training data, it was the only interaction head whose aggregate mean exceeded the independent baseline. The residual MLP, despite 123 interaction parameters, remained below the baseline across all T2D fractions. In MI, rankings changed across fractions: the multiplicative head led at 80% and 60%, the CRF led at 100% and 20%, and the baseline led at 40%. The combined additive-multiplicative head did not improve robustness in T2D and showed the largest negative baseline-relative deviations at lower fractions.\n\nConclusionThe findings support a biology-guided view of output-layer design. A small constrained mechanism was most useful when its symmetry matched the shared microvascular structure of T2D, whereas the heterogeneous electrophysiology of MI produced no stable winner. Output-layer choice should therefore be reported and defended as an assumption about disease structure instead of a routine hyperparameter decision.\n\nAuthor summaryMany clinical prediction models treat complications as separate outcomes, even when clinicians know they often arise together. We studied whether the last layer of a model should reflect that biological knowledge. We compared several output heads across two disease settings: Type 2 diabetes, where nephropathy, neuropathy, and retinopathy share a common microvascular origin, and myocardial infarction, where electrical complications arise from a mixture of shared and location-specific mechanisms. We found that a small symmetric CRF head was most useful in the diabetes task, especially when training data were limited, while no single interaction head dominated in myocardial infarction. This suggests that modelling comorbidity is not only a technical choice; it is a statement about how disease processes relate to one another. Our results encourage researchers to report and justify output-layer design as part of the clinical modelling argument, rather than treating it as a routine hyperparameter.",
+    "author_corresponding": "Cletus  Fiifi Adams",
+    "author_corresponding_institution": "University of Ghana College of Basic and Applied Sciences",
+    "authors": "Asumboya, W. A.; Agbenorhevi, P. K.; Adams, C. F.; Ayariga, D. A.; Adjadeh, T.; Adams Ziblim, S.; Kwofie, S. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-23",
+    "doi": "10.64898/2026.06.18.733068",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/23/2026.06.18.733068.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Comorbidity structure as an inductive bias: Comparing output-head designs for multi-label prediction of diabetes and myocardial infarction complications",
+    "type": "confirmatory results",
+    "version": "1"
+  },
+  "org": "University of Ghana College of Basic and Applied Sciences",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Compares output-head designs for multi-label prediction of diabetes and MI complications; a symmetric CRF head helped most in T2D, while MI showed no stable…",
+  "title": "Comorbidity structure as an inductive bias: Comparing output-head designs for multi-label prediction of diabetes and myocardial infarction complications",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.18.733068"
+}

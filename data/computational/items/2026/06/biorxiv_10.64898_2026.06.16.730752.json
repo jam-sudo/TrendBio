@@ -1,0 +1,41 @@
+{
+  "abstract": "Three-dimensional biological morphologies encode functional and physiological state, yet the directional, orientational, and topological properties of these shapes are rarely captured by morphometric tools available for bioimage analysis. Minkowski tensors are mathematically rigorous tensor-valued measures that encode surface curvature and directionality for objects of arbitrary topology, with tensor eigensystems that directly quantify elongation axes and anisotropy. A C++ implementation, karambola (1), computes Minkowski tensors for triangulated surfaces but is inaccessible within Python-based bioimage workflows. Here we present pykarambola, a pip installable Python package that accepts NumPy arrays and standard mesh formats and returns Minkowski tensors, including derived anisotropy and orientation quantities. A high-level label-image API converts 3D integer arrays into per-object Minkowski tensors in a single call, making pykarambola directly compatible with the output of widely used segmentation tools. An optional Cython extension accelerates graph-traversal steps of mesh initialization for large-scale analyses. Benchmarked on 1,584 adrenal gland meshes, pykarambola reproduces all 121 C++ karambola output features to near-floating-point agreement and, in the pure-Python build, is 2.8x faster at 283 and 1.5x faster at 643 voxel resolution, with speedups primarily attributable to karambolas sequential per-object file I/O. pykarambola is freely available as an open-source software package.",
+  "authors": [
+    "Khurana, Y.",
+    "Ishihara, K."
+  ],
+  "doi": "10.64898/2026.06.16.730752",
+  "first_seen": "2026-06-18",
+  "id": "biorxiv:10.64898/2026.06.16.730752",
+  "metadata": {
+    "abstract": "Three-dimensional biological morphologies encode functional and physiological state, yet the directional, orientational, and topological properties of these shapes are rarely captured by morphometric tools available for bioimage analysis. Minkowski tensors are mathematically rigorous tensor-valued measures that encode surface curvature and directionality for objects of arbitrary topology, with tensor eigensystems that directly quantify elongation axes and anisotropy. A C++ implementation, karambola (1), computes Minkowski tensors for triangulated surfaces but is inaccessible within Python-based bioimage workflows. Here we present pykarambola, a pip installable Python package that accepts NumPy arrays and standard mesh formats and returns Minkowski tensors, including derived anisotropy and orientation quantities. A high-level label-image API converts 3D integer arrays into per-object Minkowski tensors in a single call, making pykarambola directly compatible with the output of widely used segmentation tools. An optional Cython extension accelerates graph-traversal steps of mesh initialization for large-scale analyses. Benchmarked on 1,584 adrenal gland meshes, pykarambola reproduces all 121 C++ karambola output features to near-floating-point agreement and, in the pure-Python build, is 2.8x faster at 283 and 1.5x faster at 643 voxel resolution, with speedups primarily attributable to karambolas sequential per-object file I/O. pykarambola is freely available as an open-source software package.",
+    "author_corresponding": "Keisuke Ishihara",
+    "author_corresponding_institution": "University of Pittsburgh",
+    "authors": "Khurana, Y.; Ishihara, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-06-18",
+    "doi": "10.64898/2026.06.16.730752",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/06/18/2026.06.16.730752.source.xml",
+    "license": "cc_by_nc",
+    "published": "10.1093/bioadv/vbag273",
+    "server": "bioRxiv",
+    "title": "pykarambola: Minkowski tensor morphometry of 3D structures",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Pittsburgh",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-18",
+  "published_doi": "10.1093/bioadv/vbag273",
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "pykarambola is a pip-installable Python package computing Minkowski tensor morphometry for 3D biological structures, matching C++ karambola outputs and running…",
+  "title": "pykarambola: Minkowski tensor morphometry of 3D structures",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.06.16.730752"
+}

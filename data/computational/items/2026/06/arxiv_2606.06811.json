@@ -1,0 +1,31 @@
+{
+  "abstract": "Comparing genomes is critical for discovering mutations, tracking evolutionary lineages, and advancing cross-species genomics. Fundamentally, this reduces to an O(n^2) string-matching dynamic programming (DP) problem, a challenge that has driven decades of performance research. However, executing a strict O(n^2) DP algorithm is computationally intractable for genomes spanning millions to billions of base pairs. Consequently, modern aligners rely on global heuristics to identify thousands of candidate similarity regions between species. Unfortunately, these methods are burdened by complex serial dependencies. Once candidate regions are identified, the pipeline executes localized DP alignments, which introduce their own non-trivial heuristics and irregular data dependencies. While parallelizing dense, two-dimensional DP is a well-studied problem, accelerating this end-to-end pipeline is significantly more challenging. Parallelizing across candidate regions and offloading irregular, heuristic-laden local alignments to modern hardware (such as GPUs) remains a major hurdle. In this work, we address the challenge of overcoming these serial bottlenecks by optimizing the global pipeline across regions. We take inspiration from four papers: LASTZ, SegAlign, Darwin-WGA, and SNAP, synthesizing findings across each to inform optimizations, which we either prototype or implement directly in LASTZ.",
+  "authors": [
+    "Shiv Sundram"
+  ],
+  "doi": null,
+  "first_seen": "2026-06-05",
+  "id": "arxiv:2606.06811",
+  "metadata": {
+    "arxiv_primary_category": "cs.PF",
+    "categories": [
+      "cs.PF",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.06811v1</ns0:id>\n    <ns0:title>Dependencies and Dataflow in Seed-Filter-Extend Pipelines</ns0:title>\n    <ns0:updated>2026-06-05T01:24:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.06811v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.06811v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Comparing genomes is critical for discovering mutations, tracking evolutionary lineages, and advancing cross-species genomics. Fundamentally, this reduces to an O(n^2) string-matching dynamic programming (DP) problem, a challenge that has driven decades of performance research. However, executing a strict O(n^2) DP algorithm is computationally intractable for genomes spanning millions to billions of base pairs. Consequently, modern aligners rely on global heuristics to identify thousands of candidate similarity regions between species. Unfortunately, these methods are burdened by complex serial dependencies. Once candidate regions are identified, the pipeline executes localized DP alignments, which introduce their own non-trivial heuristics and irregular data dependencies. While parallelizing dense, two-dimensional DP is a well-studied problem, accelerating this end-to-end pipeline is significantly more challenging. Parallelizing across candidate regions and offloading irregular, heuristic-laden local alignments to modern hardware (such as GPUs) remains a major hurdle. In this work, we address the challenge of overcoming these serial bottlenecks by optimizing the global pipeline across regions. We take inspiration from four papers: LASTZ, SegAlign, Darwin-WGA, and SNAP, synthesizing findings across each to inform optimizations, which we either prototype or implement directly in LASTZ.</ns0:summary>\n    <ns0:category term=\"cs.PF\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-05T01:24:49Z</ns0:published>\n    <ns1:primary_category term=\"cs.PF\" />\n    <ns0:author>\n      <ns0:name>Shiv Sundram</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-06-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Analyzes dependencies and dataflow in seed-filter-extend genome alignment pipelines (LASTZ, SegAlign, Darwin-WGA, SNAP) to identify serial bottlenecks and…",
+  "title": "Dependencies and Dataflow in Seed-Filter-Extend Pipelines",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.06811v1"
+}

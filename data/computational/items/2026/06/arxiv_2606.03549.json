@@ -1,0 +1,31 @@
+{
+  "abstract": "Hyperparameter optimization (HPO) for Random Forest faces a specific difficulty in tuning the number of trees: the predictive score typically improves monotonically with ensemble size, so standard methods such as Tree-structured Parzen Estimator (TPE) and Hyperband require a predefined search range and often drive the estimate toward its right boundary. Early-stopping strategies avoid fixing such a range, but can be sensitive to score noise and prone to premature stopping. To address this, we propose an integrated triplet-based plateau-search algorithm that removes the number of trees from the direct TPE search space and still exploits information accumulated across HPO trials. The method adaptively tracks a near-minimal sufficient ensemble size by monitoring relative changes in the out-of-bag (OOB) score across a triplet of forest sizes and shifting this triplet accordingly. This yields an automated and user-interpretable procedure based on a tolerance parameter. We also provide a theoretical analysis: we relate the proposed relative OOB-score criterion to the gap between the current and limiting scores, and derive an asymptotic variance estimate for the corresponding OOB-based absolute relative difference. Experiments show that the selected number of trees can differ substantially from the common heuristic: for most classical benchmark datasets it is smaller, whereas for some high-dimensional bioinformatics datasets, such as Arcene and Dorothea, it is larger. The source code and reproducible experiments are available at https://github.com/lange-am/rf_plateau_hpo.",
+  "authors": [
+    "Vadim Porvatov",
+    "Andrey Dukhovny",
+    "Andrey Lange"
+  ],
+  "doi": "10.1109/ACCESS.2026.3705574",
+  "first_seen": "2026-06-02",
+  "id": "arxiv:2606.03549",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "math.PR"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.03549v2</ns0:id>\n    <ns0:title>How Many Trees in a Random Forest? A Revisited Approach with Plateau Search and Optuna Integration</ns0:title>\n    <ns0:updated>2026-06-25T16:34:14Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.03549v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.03549v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Hyperparameter optimization (HPO) for Random Forest faces a specific difficulty in tuning the number of trees: the predictive score typically improves monotonically with ensemble size, so standard methods such as Tree-structured Parzen Estimator (TPE) and Hyperband require a predefined search range and often drive the estimate toward its right boundary. Early-stopping strategies avoid fixing such a range, but can be sensitive to score noise and prone to premature stopping. To address this, we propose an integrated triplet-based plateau-search algorithm that removes the number of trees from the direct TPE search space and still exploits information accumulated across HPO trials. The method adaptively tracks a near-minimal sufficient ensemble size by monitoring relative changes in the out-of-bag (OOB) score across a triplet of forest sizes and shifting this triplet accordingly. This yields an automated and user-interpretable procedure based on a tolerance parameter. We also provide a theoretical analysis: we relate the proposed relative OOB-score criterion to the gap between the current and limiting scores, and derive an asymptotic variance estimate for the corresponding OOB-based absolute relative difference. Experiments show that the selected number of trees can differ substantially from the common heuristic: for most classical benchmark datasets it is smaller, whereas for some high-dimensional bioinformatics datasets, such as Arcene and Dorothea, it is larger. The source code and reproducible experiments are available at https://github.com/lange-am/rf_plateau_hpo.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.PR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-06-02T12:10:43Z</ns0:published>\n    <ns1:comment>24 pages, 4 figures, 5 tables. Author-prepared preprint of the article published in IEEE Access. The published article is licensed under CC BY 4.0</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns1:journal_ref>IEEE Access 14 (2026) 93670-93693</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Vadim Porvatov</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrey Dukhovny</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrey Lange</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1109/ACCESS.2026.3705574</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1109/ACCESS.2026.3705574\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-06-02",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Plateau-search HPO removes Random Forest tree count from TPE search via OOB-score triplets, with theory and Optuna integration.",
+  "title": "How Many Trees in a Random Forest? A Revisited Approach with Plateau Search and Optuna Integration",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.03549v2"
+}
