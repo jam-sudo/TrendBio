@@ -5,13 +5,13 @@ import DayTopics from "../components/DayTopics.astro";
 import { latestDay } from "../lib/data";
 
 const day = latestDay("computational");
-const updated = day ? `Updated ${day.run.finished}.` : "Updated daily.";
 ---
 
 <Base lastRun={day?.run.finished}>
   <Hero slot="hero"
     title="What moved in computational biology today"
-    subtitle={`bioRxiv, arXiv, PubMed, GitHub and industry. ${updated}`}
+    subtitle="bioRxiv, arXiv, PubMed, GitHub and industry."
+    updated={day?.run.finished}
   />
   <DayTopics day={day} />
 </Base>

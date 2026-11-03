@@ -1,18 +1,20 @@
 ---
 import Helix from "./Helix.astro";
+import { formatEastern } from "../lib/time";
 
 interface Props {
   title: string;
   subtitle: string;
+  updated?: string;
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, updated } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <a class="wordmark" href="/"><Helix staticMark />TrendBio</a>
   <h1 id="hero-title">{title}</h1>
-  <p>{subtitle}</p>
+  <p>{subtitle} <span class="updated">{updated ? <>Updated <time datetime={updated}>{formatEastern(updated)}</time>.</> : "Updated daily."}</span></p>
   <div class="hero-art"><Helix /></div>
 </section>
 
@@ -21,5 +23,7 @@ const { title, subtitle } = Astro.props;
   .wordmark { margin-bottom: 1.5rem; }
   h1 { position: relative; z-index: 1; max-width: 30ch; margin: 0 auto 1rem; }
   p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; }
-  .hero-art { position: absolute; pointer-events: none; right: 0; top: 0; width: 28%; height: 100%; }
+  .hero-art { pointer-events: none; width: min(320px, 100%); margin: 1rem auto 0; }
+  .updated { display: block; }
+  @media (max-width: 640px) { .hero-art { width: 240px; margin-top: 0.5rem; } .hero-art :global(.helix) { height: 90px; } }
 </style>

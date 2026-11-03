@@ -2,6 +2,8 @@ import { readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { runInNewContext } from "node:vm";
 import { beforeAll, describe, expect, it } from "vitest";
+import geometry from "../src/components/helix-paths.json";
+import { formatEastern } from "../src/lib/time";
 import { latestDay, loadTaxonomy, loadTopic } from "../src/lib/data";
 
 let html: string;
@@ -13,6 +15,43 @@ beforeAll(() => {
 }, 30_000);
 
 describe("built landing hero", () => {
+  it("commits two depth-aware backbones and at least 30 B-DNA rungs", () => {
+    expect(geometry.backbones).toHaveLength(2);
+    expect(geometry.rungs.length).toBeGreaterThanOrEqual(30);
+    for (const backbone of geometry.backbones) {
+      expect(backbone.samples).toHaveLength(316);
+      expect(backbone.samples.some(sample => sample.z > 0)).toBe(true);
+      expect(backbone.samples.some(sample => sample.z < 0)).toBe(true);
+      expect(new Set(backbone.segments.map(segment => segment.front)).size).toBe(2);
+    }
+    expect(readFileSync("src/components/Helix.astro", "utf8")).toContain("prefers-reduced-motion");
+  });
+
+  it("renders Eastern run times with machine-readable UTC values", () => {
+    expect(html).toMatch(/Updated <time[^>]*datetime="[^"]+"[^>]*>[^<]+ E[DS]T<\/time>/);
+    const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, "");
+    expect(visible).not.toMatch(/T\d{2}:\d{2}:\d{2}Z/);
+    expect(formatEastern("2026-07-01T06:02:00Z")).toBe("Jul 1, 2026, 02:02 EDT");
+    expect(formatEastern("2026-12-01T06:02:00Z")).toBe("Dec 1, 2026, 01:02 EST");
+  });
+
+  it("sets the theme before paint in at most 300 bytes, including when storage is blocked", () => {
+    const script = scripts[0][2];
+    expect(Buffer.byteLength(script)).toBeLessThanOrEqual(300);
+    for (const stored of ["light", "dark", null, "invalid", "blocked"]) {
+      for (const prefersLight of [true, false]) {
+        const document = { documentElement: { dataset: { theme: "dark" } } };
+        runInNewContext(script, {
+          document, matchMedia: () => ({ matches: prefersLight }),
+          localStorage: { getItem: () => { if (stored === "blocked") throw Error("blocked"); return stored; } },
+        });
+        expect(document.documentElement.dataset.theme).toBe(
+          stored === "dark" || stored === "light" ? stored : prefersLight ? "light" : "dark",
+        );
+      }
+    }
+  });
+
   it("contains a decorative SVG inside the hero and no video", () => {
     const hero = html.match(/<section\b[^>]*class="hero"[^>]*>([\s\S]*?)<\/section>/)?.[1];
     expect(hero).toContain("<svg");

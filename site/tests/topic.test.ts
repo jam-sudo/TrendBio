@@ -37,6 +37,9 @@ describe("built topic pages", () => {
     const svg = html.match(/<svg\b[\s\S]*?<\/svg>/)![0];
     const dates = [...svg.matchAll(/data-date="([^"]+)"/g)].map((match) => match[1]);
     expect(dates).toEqual(topic.history.slice(-56).map((entry) => entry.date));
+    expect(svg).toContain('preserveAspectRatio="none"');
+    expect(html).toContain("Items per day, last 8 weeks");
+    expect(html).toContain(`today: ${latest.count_7d}`);
     expect(svg).toContain('aria-label="7-day item counts from 2026-09-07 to 2026-11-01"');
     expect(svg.match(/class="today"/g)).toHaveLength(1);
     expect(svg).toMatch(/<rect[^>]*data-date="2026-11-01"[^>]*class="today"/);
