@@ -1,5 +1,5 @@
 ---
-import { categoryStyle } from "../lib/categories";
+import CategoryIcon from "../components/CategoryIcon.astro";
 import Base from "../layouts/Base.astro";
 import CategoryChips from "../components/CategoryChips.astro";
 import { rankedTopics, latestDay, loadTaxonomy, orphanNotes } from "../lib/data";
@@ -23,7 +23,7 @@ for (const slug of orphanNotes(domain)) console.warn(`orphan note: ${slug}`);
     <thead><tr><th scope="col">Topic</th><th scope="col">Category</th><th scope="col">Last ranked</th></tr></thead>
     <tbody>{topics.map(({ topic, lastRanked }) => <tr data-topic-cats={[topic.category, ...topic.secondary_categories].join(" ")}>
       <td><a class="topic-name" href={`/topic/${topic.slug}/`}>
-        <span class="category-tile" style={`--category-hue: ${categoryStyle(topic.category).hue}`} aria-hidden="true">{categoryStyle(topic.category).emoji}</span>
+        <CategoryIcon slug={topic.category} size={36} />
         <span><strong>{topic.headline ?? topic.label}</strong>{topic.headline && <span class="topic-label">{topic.label}</span>}</span>
       </a></td>
       <td class="category">{categories.find(({ slug }) => slug === topic.category)?.label ?? topic.category}</td>

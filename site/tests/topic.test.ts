@@ -20,7 +20,7 @@ describe("built topic pages", () => {
     expect(html).toContain(loadNote(slug)!.trim());
     const content = [
       'href="/day/2026-11-01/"', "#2 · Structural bio &amp; protein design", topic.headline!,
-      'class="signal-badges"', "<svg", topic.synthesis!, "Editor's note", "Published papers",
+      'class="signal-badges"', 'class="sparkline"', topic.synthesis!, "Editor's note", "Published papers",
       "Preprints", "Code &amp; tools", "Industry</h2>", "Related topics", "Topic history",
     ];
     const article = html.slice(html.indexOf("<article"));
@@ -34,7 +34,7 @@ describe("built topic pages", () => {
 
   it("renders 56 dated sparkline bars including unranked days and highlights the latest day", () => {
     const html = readPage(`topic/${slug}`);
-    const svg = html.match(/<svg\b[\s\S]*?<\/svg>/)![0];
+    const svg = html.match(/<svg\b[^>]*class="sparkline"[\s\S]*?<\/svg>/)![0];
     const dates = [...svg.matchAll(/data-date="([^"]+)"/g)].map((match) => match[1]);
     expect(dates).toEqual(topic.history.slice(-56).map((entry) => entry.date));
     expect(svg).toContain('preserveAspectRatio="none"');
@@ -148,7 +148,7 @@ describe("built topic pages", () => {
       const short = readFileSync(join(output, `topic/${other.slug}/index.html`), "utf8");
       expect(short).toContain("#3 ·");
       expect(short).toContain(other.label);
-      expect(short).not.toContain("<svg");
+      expect(short).not.toContain('class="sparkline"');
       expect(short).not.toContain("Editor's note");
       expect(headings(short)).toEqual(["Topic history"]);
       expect(section(short, "topic-history")).toContain("/day/2026-10-31/");

@@ -1,5 +1,6 @@
 ---
-import { categoryStyle, rankMedal } from "../../lib/categories";
+import CategoryIcon from "../../components/CategoryIcon.astro";
+import { rankMedal } from "../../lib/categories";
 import Base from "../../layouts/Base.astro";
 import SignalBadges from "../../components/SignalBadges.astro";
 import Sparkline from "../../components/Sparkline.astro";
@@ -21,14 +22,13 @@ const ranked = history.filter((entry) => entry.rank !== null);
 const latestRanked = ranked[0];
 const category = loadTaxonomy(domain).find(({ slug }) => slug === topic.category)?.label ?? topic.category;
 const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
-const identity = categoryStyle(topic.category);
 const headline = topic.headline ?? topic.label;
 ---
 
 <Base title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
   <article class="prose">
     {latestRanked && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
-    <p class="rank-category" style={`--category-hue: ${identity.hue}`}><span class="category-tile" aria-hidden="true">{identity.emoji}</span> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>
+    <p class="rank-category"><CategoryIcon slug={topic.category} size={36} /> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>
     <h1>{headline}</h1>
     {latestEntry && <SignalBadges signals={latestEntry.signals} />}
     <Sparkline history={topic.history} />

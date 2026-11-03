@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { loadDays, loadTaxonomy } from "../lib/data";
-import { categoryStyle } from "../lib/categories";
+import CategoryIcon from "../components/CategoryIcon.astro";
 const categories = loadTaxonomy("computational");
 const days = loadDays("computational");
 ---
@@ -11,7 +11,7 @@ const days = loadDays("computational");
     <thead><tr><th scope="col">Date</th><th scope="col">Top 5 topics</th></tr></thead>
     <tbody>{days.map((day) => <tr>
       <th scope="row"><a href={`/day/${day.date}/`}><time datetime={day.date}>{day.date}</time></a></th>
-      <td><ol>{day.ranked.map((topic) => <li><a href={`/topic/${topic.slug}/`}><span aria-hidden="true">{categoryStyle(topic.category).emoji}</span><span class="sr-only">{categories.find(({ slug }) => slug === topic.category)?.label ?? topic.category}: </span> {topic.headline}</a></li>)}</ol>
+      <td><ol>{day.ranked.map((topic) => <li><a href={`/topic/${topic.slug}/`}><CategoryIcon slug={topic.category} size={16} /><span class="sr-only">{categories.find(({ slug }) => slug === topic.category)?.label ?? topic.category}: </span> {topic.headline}</a></li>)}</ol>
         {day.ranked.length === 0 && <span class="quiet">Quiet day: no topic cleared the bar.</span>}
       </td>
     </tr>)}</tbody>
