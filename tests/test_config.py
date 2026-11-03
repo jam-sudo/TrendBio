@@ -45,6 +45,7 @@ def test_scoring_defaults():
         "continuity_threshold": 0.80,
         "window_days": 7,
         "top_n": 5,
+        "max_per_category": 2,
         "synthesis_max_items": 40,
         "monthly_ceiling_usd": 50.0,
         "degraded_fallback_min": 3,

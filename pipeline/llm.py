@@ -216,7 +216,7 @@ class LLM:
             ids = {str(index): item.id for index, item in enumerate(chunk)}
             requests = [Request(
                 custom_id=str(index), params=MessageCreateParamsNonStreaming(
-                    model=model, max_tokens=512,
+                    model=model, max_tokens=1024,
                     messages=_messages(item, taxonomy, hints_by_id.get(item.id, [])),
                     output_config={'effort': 'low', 'format': {'type': 'json_schema', 'schema': schema}},
                 ),
@@ -236,11 +236,12 @@ class LLM:
                 if refused:
                     self._failure(item_id, _refusal_reason(message))
                     continue
-                if not message.content or message.content[0].type != 'text':
-                    self._failure(item_id, 'empty_output')
+                text = next((block.text for block in message.content if block.type == 'text'), None)
+                if text is None:
+                    self._failure(item_id, f'empty_output:{message.stop_reason}')
                     continue
                 try:
-                    result = Enrichment.model_validate_json(message.content[0].text)
+                    result = Enrichment.model_validate_json(text)
                 except ValidationError as error:
                     self._failure(item_id, _validation_reason(error))
                     continue

@@ -1,5 +1,6 @@
 from collections import Counter
 from datetime import date, timedelta
+import logging
 from math import log1p
 from statistics import median
 
@@ -70,4 +71,21 @@ def score_topics(topics_today: list[tuple[Topic, Signals, int]],
 
 def rank(scored: list[tuple[Topic, Signals, Scores]],
          cfg: Scoring) -> list[tuple[Topic, Signals, Scores]]:
-    return scored[:cfg.top_n]
+    selected, overflow = [], []
+    counts = Counter()
+    for row in scored:
+        if len(selected) == cfg.top_n:
+            break
+        category = row[0].category
+        if counts[category] >= cfg.max_per_category:
+            overflow.append(row)
+        else:
+            selected.append(row)
+            counts[category] += 1
+    selected.extend(overflow[:max(0, cfg.top_n - len(selected))])
+    slugs = {row[0].slug for row in selected}
+    for topic, _, _ in scored[:cfg.top_n]:
+        if topic.slug not in slugs:
+            logging.getLogger(__name__).info(
+                'stage=score_rank event=category_cap displaced=%s', topic.slug)
+    return [row for row in scored if row[0].slug in slugs]
