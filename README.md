@@ -25,6 +25,7 @@ Use a dry run before the first real run to inspect usage and estimated cost.
 The manual backfill workflow takes inclusive `from` and `to` dates in
 `YYYY-MM-DD` format, with `resume` enabled by default. Run monthly chunks;
 each successful invocation commits its output once.
+Historical star velocity is unavailable because GitHub restricted the stargazers endpoint, so backfilled days carry paper and industry signals only; daily runs accumulate star counts from launch (2026-11-02) onward.
 Set optional `chain_until` (`YYYY-MM-01`) to automatically backfill previous months through that month, inclusive, after each successful run; failures stop the chain.
 Daily and backfill runs share a concurrency group to prevent overlapping writes.
 Their job limits are 30 and 350 minutes, respectively.
