@@ -56,7 +56,7 @@ class FakeLLM:
                                     relevant=item.id not in self.irrelevant_ids)
                 for item in items}
 
-    def synthesize(self, topic, items, signals, previous, model):
+    def synthesize(self, topic, items, signals, previous, model, *, on_repeated_429=None):
         self.calls.append(model)
         self.budget.record(model, 100, 20)
         if self.fallback:
@@ -733,7 +733,7 @@ def test_resynthesize_updates_topic_and_day(ctx, monkeypatch):
         ctx.store.put_topic(topic)
     outputs = []
 
-    def synthesize(self, topic, items, signals, previous, model):
+    def synthesize(self, topic, items, signals, previous, model, *, on_repeated_429=None):
         assert model == 'claude-haiku-5-5'
         result = Synthesis(label=f'Grounded Biology {len(outputs)}',
                            headline=f'New scientific finding {len(outputs)}',
@@ -750,8 +750,11 @@ def test_resynthesize_updates_topic_and_day(ctx, monkeypatch):
     assert result.exit_code == 0, result.output
     rows = [row for day in days for row in ctx.store.get_day(day).ranked]
     assert len(outputs) == len(rows) > 1
-    for row, (slug, output) in zip(rows, outputs, strict=True):
-        assert row.slug == slug
+    outputs_by_slug = {}
+    for slug, output in outputs:
+        outputs_by_slug.setdefault(slug, []).append(output)
+    for row in rows:
+        output = outputs_by_slug[row.slug].pop(0)
         assert (row.headline, row.summary) == (output.headline, output.summary)
     for slug, output in dict(outputs).items():
         topic = ctx.store.get_topic(slug)
@@ -1104,9 +1107,9 @@ def test_reprocess_only_missing_preserves_synthesis_without_enrichment(ctx, monk
     called = []
     synthesize = ctx.deps.llm.synthesize
 
-    def capture(topic, *args):
+    def capture(topic, *args, **kwargs):
         called.append(topic.slug)
-        return synthesize(topic, *args)
+        return synthesize(topic, *args, **kwargs)
 
     monkeypatch.setattr(ctx.deps.llm, 'synthesize', capture)
     run_reprocess('computational', start, end, ctx.store, ctx.deps,

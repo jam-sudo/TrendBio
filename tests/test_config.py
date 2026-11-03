@@ -56,6 +56,7 @@ def test_scoring_defaults():
         ],
         "backfill_synthesis_model": "claude-haiku-5-5",
         "synthesis_max_items": 40,
+        "synthesis_workers": 6,
         "monthly_ceiling_usd": 50.0,
         "degraded_fallback_min": 3,
         "degraded_fallback_rate": 0.2,
@@ -71,6 +72,6 @@ def test_scoring_rejects_invalid_tiers_and_display():
 
     for values in ({'synthesis_tiers': []}, {'synthesis_tiers': [{'to': 20, 'model': 'x'}]},
                    {'synthesis_tiers': [{'to': 40, 'model': 'x'}, {'to': 5, 'model': 'x'}]},
-                   {'display_open_n': 4}):
+                   {'display_open_n': 4}, {'synthesis_workers': 0}, {'synthesis_workers': -1}):
         with pytest.raises(ValidationError):
             Scoring(weights={}, **values)

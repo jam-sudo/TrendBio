@@ -1,7 +1,9 @@
 import json
 import logging
+import random
 import re
 import time
+from collections.abc import Callable
 from pathlib import Path
 
 import anthropic
@@ -132,6 +134,7 @@ class LLM:
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,
+        *, on_repeated_429: Callable[[], None] | None = None,
     ) -> Synthesis | None:
         self.fallback_reasons.pop(topic.slug, None)
         template = Path(__file__).with_name('prompts').joinpath('synthesize.md').read_text(encoding='utf-8')
@@ -151,7 +154,8 @@ class LLM:
         ])
         for attempt in range(2):
             result = self._parse(Synthesis, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
-                                 entity_id=topic.slug, fallbacks=model in {'claude-opus-5-5', 'claude-sonnet-5-5'})
+                                 entity_id=topic.slug, fallbacks=model in {'claude-opus-5-5', 'claude-sonnet-5-5'},
+                                 on_repeated_429=on_repeated_429)
             if result is None:
                 return None
             bad = grounding.unsupported('\n'.join([
@@ -172,9 +176,11 @@ class LLM:
     def _parse[T: BaseModel](
         self, output_model: type[T], messages: list[dict], model: str, max_tokens: int,
         effort: str, *, entity_id: str, fallbacks: bool = False,
+        on_repeated_429: Callable[[], None] | None = None,
     ) -> T | None:
         parse = self.client.beta.messages.parse if fallbacks else self.client.messages.parse
         options = {'betas': ['server-side-fallback-2026-07-01'], 'fallbacks': 'default'} if fallbacks else {}
+        consecutive_429 = 0
         for attempt in range(4):
             try:
                 response = parse(
@@ -183,12 +189,15 @@ class LLM:
                 )
             except anthropic.APIError as error:
                 status = getattr(error, 'status_code', None)
+                consecutive_429 = consecutive_429 + 1 if status == 429 else 0
+                if consecutive_429 == 2 and on_repeated_429 is not None:
+                    on_repeated_429()
                 retryable = isinstance(error, anthropic.APIConnectionError) or status == 429 or (
                     status is not None and 500 <= status < 600
                 )
                 if not retryable or attempt == 3:
                     return self._failure(entity_id, 'retries_exhausted' if retryable else f'api_error:{status}')
-                time.sleep(2 ** attempt)
+                time.sleep(2 ** attempt + (random.uniform(0, 0.5) if status == 429 else 0))
                 continue
             except ValidationError as error:
                 return self._failure(entity_id, _validation_reason(error))

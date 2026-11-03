@@ -192,7 +192,11 @@ def test_api_errors_retry_only_transient_statuses(tmp_path, item, taxonomy, monk
     llm = LLM(SimpleNamespace(messages=SimpleNamespace(parse=fail)), Budget(tmp_path / 'spend.json', 50))
     assert llm.enrich(item, taxonomy, []) is None
     assert len(calls) == attempts
-    assert sleeps == ([1, 2, 4] if attempts == 4 else [])
+    if status == 429:
+        assert len(sleeps) == 3
+        assert all(base <= delay <= base + 0.5 for base, delay in zip([1, 2, 4], sleeps))
+    else:
+        assert sleeps == ([1, 2, 4] if attempts == 4 else [])
     assert llm.budget.month_spend_usd() == 0
 
 

@@ -171,7 +171,11 @@ def test_synthesis_reuses_transient_error_retries(context, monkeypatch, status, 
     _, _, notes = run(ctx)
     assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
     assert len(ctx.beta.calls) == attempts
-    assert sleeps == ([1, 2, 4] if attempts == 4 else [])
+    if status == 429:
+        assert len(sleeps) == 3
+        assert all(base <= delay <= base + 0.5 for base, delay in zip([1, 2, 4], sleeps))
+    else:
+        assert sleeps == ([1, 2, 4] if attempts == 4 else [])
 
 
 def test_sdk_validation_error_is_not_retried(context, caplog):
@@ -394,3 +398,140 @@ def test_sonnet_uses_sdk_beta_fallback_with_opus_limits(context):
     assert call['output_config'] == {'effort': 'high'}
     assert ctx.plain.calls == []
     assert ctx.budget.month_spend_usd() == pytest.approx(0.0004)
+
+
+def test_synthesize_top_parallel_preserves_order_and_models(context, caplog):
+    from time import perf_counter, sleep
+
+    ctx = context
+    ranked = [(ctx.topic.model_copy(deep=True, update={
+        'slug': str(i), 'item_one_liners': {'older:item': 'Retained'},
+    }), ctx.sig, ctx.scores) for i in range(40)]
+    calls = {}
+
+    def synthesize(topic, items, signals, previous, model, *, on_repeated_429=None):
+        sleep(0.05)
+        calls[topic.slug] = model
+        return Synthesis(**{**OUTPUT, 'headline': topic.slug,
+                            'item_one_liners': {ctx.item.id: topic.slug}})
+
+    caplog.set_level('INFO', logger='pipeline.synthesize')
+    start = perf_counter()
+    topics, model, notes = synthesize_top(
+        ranked, {row[0].slug: [ctx.item] for row in ranked}, SimpleNamespace(synthesize=synthesize),
+        ctx.budget, load_scoring(), TODAY, backfill=False,
+    )
+    assert perf_counter() - start < 1.2  # Sequential calls alone take two seconds.
+    assert [topic.slug for topic in topics] == [str(i) for i in range(40)]
+    expected = ['claude-opus-5-5'] * 5 + ['claude-sonnet-5-5'] * 15 + ['claude-haiku-5-5'] * 20
+    assert [calls[topic.slug] for topic in topics] == expected
+    assert [topic.synthesis_model for topic in topics] == expected
+    assert model == expected[0] and notes == []
+    for topic in topics:
+        assert topic.headline == topic.slug
+        assert topic.item_one_liners == {'older:item': 'Retained', ctx.item.id: topic.slug}
+    assert f'stage=synthesize event=complete date={TODAY} workers=6 elapsed=' in caplog.text
+
+
+def test_parallel_fallback_notes_follow_rank(context):
+    from threading import Event
+
+    ctx = context
+    second_finished = Event()
+    ranked = [(ctx.topic.model_copy(deep=True, update={'slug': slug}), ctx.sig, ctx.scores)
+              for slug in ('z-first', 'a-second')]
+
+    def synthesize(topic, *args, **kwargs):
+        if topic.slug == 'z-first':
+            assert second_finished.wait(2)
+        else:
+            second_finished.set()
+        return None
+
+    topics, _, notes = synthesize_top(
+        ranked, {row[0].slug: [ctx.item] for row in ranked}, SimpleNamespace(synthesize=synthesize),
+        ctx.budget, load_scoring(), TODAY, backfill=False,
+    )
+    assert notes == ['synthesis-fallback:z-first', 'synthesis-fallback:a-second']
+    assert all(topic.headline == 'Protein Design' and topic.summary == '' for topic in topics)
+
+
+@pytest.mark.parametrize('workers', [1, 6])
+def test_synthesize_top_throttles_after_repeated_429(context, monkeypatch, caplog, workers):
+    from collections import Counter
+    from threading import Barrier, Lock
+    from time import sleep
+
+    ctx = context
+    cfg = load_scoring().model_copy(update={'synthesis_workers': workers})
+    monkeypatch.setattr('pipeline.llm.time.sleep', lambda _: None)
+    caplog.set_level('INFO', logger='pipeline.synthesize')
+    # Reusing the LLM on the next day must restore the configured concurrency.
+    for day in (TODAY, TODAY + timedelta(days=1)):
+        barrier, lock = Barrier(workers), Lock()
+        attempts, active, peaks, later_starts = Counter(), 0, [], []
+
+        def parse(**kwargs):
+            nonlocal active
+            prompt = kwargs['messages'][0]['content']
+            with lock:
+                index = list(attempts).index(prompt) if prompt in attempts else len(attempts)
+                attempts[prompt] += 1
+                attempt = attempts[prompt]
+                active += 1
+                peaks.append(active)
+                if index >= workers:
+                    later_starts.append(active)
+            try:
+                if index < workers and attempt == 1:
+                    barrier.wait(timeout=2)
+                if index == 0 and attempt <= 2:
+                    raise anthropic.APIStatusError('rate limited', response=httpx.Response(
+                        429, request=httpx.Request('POST', 'https://example.org/messages'),
+                    ), body=None)
+                sleep(0.03)
+                return SimpleNamespace(stop_reason='end_turn', parsed_output=OUTPUT,
+                                       usage=SimpleNamespace(input_tokens=100, output_tokens=20))
+            finally:
+                with lock:
+                    active -= 1
+
+        monkeypatch.setattr(ctx.plain, 'parse', parse)
+        ranked = [(ctx.topic.model_copy(deep=True, update={'slug': str(i), 'label': f'Topic {i}'}),
+                   ctx.sig, ctx.scores) for i in range(18)]
+        topics, _, notes = synthesize_top(
+            ranked, {row[0].slug: [ctx.item] for row in ranked}, ctx.llm, ctx.budget,
+            cfg, day, backfill=True,
+        )
+        reduced = max(1, workers // 2)
+        assert max(peaks) == workers
+        assert later_starts and max(later_starts) <= reduced
+        assert sorted(attempts.values()) == [1] * 17 + [3]
+        assert len(topics) == 18 and notes == []
+        assert all(topic.synthesis == OUTPUT['synthesis'] for topic in topics)
+        assert f'stage=synthesize event=throttled workers={reduced} date={day}' in caplog.text
+        assert f'date={day} workers={reduced} elapsed=' in caplog.text
+    assert caplog.text.count('event=throttled') == 2
+
+
+@pytest.mark.parametrize('statuses,notifications', [([429, 500, 429], 0), ([429, 429], 1)])
+def test_repeated_429_notification_requires_consecutive_errors(context, monkeypatch, statuses, notifications):
+    ctx = context
+    responses = iter(statuses + [200])
+    notified = []
+
+    def parse(**kwargs):
+        status = next(responses)
+        if status != 200:
+            raise anthropic.APIStatusError('failure', response=httpx.Response(
+                status, request=httpx.Request('POST', 'https://example.org/messages'),
+            ), body=None)
+        return SimpleNamespace(stop_reason='end_turn', parsed_output=OUTPUT,
+                               usage=SimpleNamespace(input_tokens=100, output_tokens=20))
+
+    monkeypatch.setattr(ctx.plain, 'parse', parse)
+    monkeypatch.setattr('pipeline.llm.time.sleep', lambda _: None)
+    result = ctx.llm.synthesize(ctx.topic, [ctx.item], ctx.sig, None, 'claude-haiku-5-5',
+                                on_repeated_429=lambda: notified.append(True))
+    assert result is not None
+    assert len(notified) == notifications
