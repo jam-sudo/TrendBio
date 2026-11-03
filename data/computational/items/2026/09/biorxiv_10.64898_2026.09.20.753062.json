@@ -1,0 +1,41 @@
+{
+  "abstract": "Conventional short read DNA alignment algorithms, such as widely used BWA-MEM2, devote a substantial fraction of their execution time to seed generation. We present RosaSeed, a short read alignment algorithm, based on a configurable seeding framework, that significantly accelerates alignment while maintaining accuracy comparable to that of BWA-MEM2. RosaSeed replaces the BWA-MEM2 seeding kernel and directly supplies candidate seeds to the existing BWA-MEM2 chaining and alignment extension pipeline, producing standard SAM output suitable for downstream variant analysis. RosaSeed was evaluated on both simulated and real short read datasets, and its seeding time, fastq-to-SAM time, alignment accuracy, and memory footprint were compared against BWA-MEM2, Minimap2, Bowtie2, and the Enumerated Radix Tree (ERT) algorithm. We also compared against ERT2, a proposed simplified variant of ERT that sacrifices a small amount of alignment accuracy to significantly increase the alignment throughput. With single-threaded software execution, our recommended RosaSeed configuration achieves 13.06x and 3.85x speedups in seed processing and fastq-to-SAM time, respectively, over BWA-MEM2. Corresponding seed processing (and fastq-to-SAM) speedups are 3.96x (2.48x) over ERT, 1.2x (1.44x) over ERT2, 4.82x (3.31x) over Minimap2, and 33.24x (10.83x) over Bowtie2. RosaSeed requires only 49.61 GB of peak memory, approximately 25% less than ERT and ERT2, while maintaining alignment accuracy comparable to that of BWA-MEM2. Following the recent release of minibwa, a prefetch-optimized FM index aligner, we additionally benchmarked RosaSeed against it on an upgraded 24-core, 48-thread AMD Zen 3 workstation. Our speed-optimized miniRosaSeed configuration achieves a 2.12x fastq-to-SAM speedup over minibwa for single-threaded execution while producing 2.58% higher standard accuracy. Against Strobealign, miniRosaSeed reported a 2.18x fastq-to-SAM speedup and 3.1% higher standard accuracy. For multi-threaded execution, miniRosaSeed was both faster and more accurate than minibwa for up to 26 software threads on the Zen 3 workstation. RosaSeed provides multiple runtime-memory configurations, spanning memory-efficient and high-performance strategies, enabling users to select operating points appropriate for diverse computational environments while maintaining alignment quality comparable to that of BWA-MEM2.",
+  "authors": [
+    "Gandhi, S. M.",
+    "Cockburn, B. F."
+  ],
+  "doi": "10.64898/2026.09.20.753062",
+  "first_seen": "2026-09-25",
+  "id": "biorxiv:10.64898/2026.09.20.753062",
+  "metadata": {
+    "abstract": "Conventional short read DNA alignment algorithms, such as widely used BWA-MEM2, devote a substantial fraction of their execution time to seed generation. We present RosaSeed, a short read alignment algorithm, based on a configurable seeding framework, that significantly accelerates alignment while maintaining accuracy comparable to that of BWA-MEM2. RosaSeed replaces the BWA-MEM2 seeding kernel and directly supplies candidate seeds to the existing BWA-MEM2 chaining and alignment extension pipeline, producing standard SAM output suitable for downstream variant analysis. RosaSeed was evaluated on both simulated and real short read datasets, and its seeding time, fastq-to-SAM time, alignment accuracy, and memory footprint were compared against BWA-MEM2, Minimap2, Bowtie2, and the Enumerated Radix Tree (ERT) algorithm. We also compared against ERT2, a proposed simplified variant of ERT that sacrifices a small amount of alignment accuracy to significantly increase the alignment throughput. With single-threaded software execution, our recommended RosaSeed configuration achieves 13.06x and 3.85x speedups in seed processing and fastq-to-SAM time, respectively, over BWA-MEM2. Corresponding seed processing (and fastq-to-SAM) speedups are 3.96x (2.48x) over ERT, 1.2x (1.44x) over ERT2, 4.82x (3.31x) over Minimap2, and 33.24x (10.83x) over Bowtie2. RosaSeed requires only 49.61 GB of peak memory, approximately 25% less than ERT and ERT2, while maintaining alignment accuracy comparable to that of BWA-MEM2. Following the recent release of minibwa, a prefetch-optimized FM index aligner, we additionally benchmarked RosaSeed against it on an upgraded 24-core, 48-thread AMD Zen 3 workstation. Our speed-optimized miniRosaSeed configuration achieves a 2.12x fastq-to-SAM speedup over minibwa for single-threaded execution while producing 2.58% higher standard accuracy. Against Strobealign, miniRosaSeed reported a 2.18x fastq-to-SAM speedup and 3.1% higher standard accuracy. For multi-threaded execution, miniRosaSeed was both faster and more accurate than minibwa for up to 26 software threads on the Zen 3 workstation. RosaSeed provides multiple runtime-memory configurations, spanning memory-efficient and high-performance strategies, enabling users to select operating points appropriate for diverse computational environments while maintaining alignment quality comparable to that of BWA-MEM2.",
+    "author_corresponding": "Shyama M. Gandhi",
+    "author_corresponding_institution": "University of Alberta",
+    "authors": "Gandhi, S. M.; Cockburn, B. F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-25",
+    "doi": "10.64898/2026.09.20.753062",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/25/2026.09.20.753062.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RosaSeed: Faster and Accurate Short Read Alignment Using a Configurable Seeding Strategy",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Alberta",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "RosaSeed replaces BWA-MEM2's seeding kernel with a configurable framework, reporting up to 13x seed speedups with accuracy comparable to BWA-MEM2 for…",
+  "title": "RosaSeed: Faster and Accurate Short Read Alignment Using a Configurable Seeding Strategy",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.20.753062"
+}

@@ -1,0 +1,87 @@
+{
+  "abstract": "Benchmarking frontier AI agents on the scientific decisions that drive therapeutic antibody discovery",
+  "authors": [
+    "Ramesh Ramasamy"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-02",
+  "id": "rss:https://blog.latch.bio/p/quantifying-frontier-model-performance",
+  "metadata": {
+    "author": "Ramesh Ramasamy",
+    "author_detail": {
+      "name": "Ramesh Ramasamy"
+    },
+    "authors": [
+      {
+        "name": "Ramesh Ramasamy"
+      }
+    ],
+    "content": [
+      {
+        "base": "",
+        "language": null,
+        "type": "text/html",
+        "value": "<p><span>We introduce an Antibody Discovery Benchmark, an experimentally grounded benchmark for testing whether AI agents can make scientific decisions across the stages of therapeutic antibody discovery.</span></p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!_rVU!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb109c1df-188b-4256-8f8d-052829483d35_2888x2877.png\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"597.7146814404432\" src=\"https://substackcdn.com/image/fetch/$s_!_rVU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb109c1df-188b-4256-8f8d-052829483d35_2888x2877.png\" width=\"600\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div><p><span>The benchmark contains 100 evaluations spanning ten areas of antibody discovery, from target and modality selection through assay design, binder discovery, binding characterization, cellular pharmacology, engineering, and preclinical candidate de-risking. Each evaluation asks agents to inspect experimental evidence, choose an appropriate analysis, and use the result to make a decision relevant to a preclinical antibody program.</span></p><div class=\"subscription-widget-wrap-editor\"><div class=\"subscription-widget show-subscribe\"><div class=\"preamble\"><p class=\"cta-caption\">Thanks for reading! Subscribe for free to receive new posts and support my work.</p></div><form class=\"subscription-widget-subscribe\"><input class=\"email-input\" name=\"email\" tabindex=\"-1\" type=\"email\" /><input class=\"button primary\" type=\"submit\" value=\"Subscribe\" /><div class=\"fake-input-wrapper\"><div class=\"fake-input\"></div><div class=\"fake-button\"></div></div></form></div></div><p><span>Across 20 model&#8211;harness configurations, even the strongest systems passed only about half of the attempts. Anthropic&#8217;s Opus 5 with the Claude Code harness topped the leaderboard with a 53% pass rate with models from xAI and Google following closely behind. In contrast, GPT-5.6 Sol using the PI harness lagged substantially behind the other frontier models, reaching only 33.8%.</span></p><h3><strong><span>Biologics discovery requires interpreting data in context</span></strong></h3><p><span>Biologics discovery for therapeutic applications is a multiparameter, context-dependent endeavor. When evaluating antibodies, achieving high affinity or any other desired properties, must be weighed against critical factors like specificity, structural stability, solubility, and expression levels &#8211; all of which collectively dictate a candidate&#8217;s development potential.</span></p><div class=\"captioned-image-container\"><figure><div class=\"image-link image2\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"587\" src=\"https://substackcdn.com/image/fetch/$s_!uo00!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5889ef32-1303-488d-a6f0-bb3c9b644451_4324x587.png\" width=\"4324\" /><div></div></div></div></figure></div><p><span>A clone can become enriched during display because it grows or amplifies efficiently rather than because it binds the target. An antibody can bind strongly to purified antigen but poorly recognize the same protein in its native cell-surface context. An apparent affinity advantage can instead come from avidity on a high-density cell surface. Changing valency or molecular geometry can alter function even when the underlying binding domains remain the same.</span></p><p><span>Deciding which of these measurements to act on is therefore the work that determines where a program should be allocating its resources. Productivity is far more sensitive to how well a decision gate correlates with real clinical utility than to how many candidates it can process; a tool that is fast but only weakly correlated with true biology spends the budget in false positives.<br /><br />This is why benchmarks that focus on evaluating whether models reach accurate decisions rather than testing accuracy in a controlled context are important. This is exactly what we designed the Antibody Discovery Benchmark benchmark to test.</span></p><h3><strong><span>More resource consumption does not necessarily produce better results</span></strong></h3><p><span>Model harness configurations varied substantially in cost, token usage, and tool calls. Allocating more resources did not consistently improve performance.</span></p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!ccQ4!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F93d372a1-eba1-45e8-ad87-96ba10d93955_4096x2304.png\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"819\" src=\"https://substackcdn.com/image/fetch/$s_!ccQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F93d372a1-eba1-45e8-ad87-96ba10d93955_4096x2304.png\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div><p><span>Opus 5 paired with Claude Code harness was the highest-scoring configuration, averaging about $1.68 per completed run, 1.10 million tokens, and 21 tool calls. Gemini 3.7 Flash with PI reached essentially the same accuracy at $0.46 per run, while using approximately 1.84 million tokens and 36 tool calls. Grok 4.6 with PI achieved similar results with slightly higher cost ($0.59), lower tokens (0.50 million) and fewer tool calls (16). Agents from OpenAI models used substantially fewer tokens and tool calls and performed much worse.</span></p><p><span>As an example, more reasoning did not reliably repair an incorrect scientific premise. In one evaluation, agents had to reconcile an inconsistency in experimental treatment records before comparing receptor responses across species. Opus 5 identified the inconsistency, reconstructed the correct experimental arms, and reached the correct result.</span></p><p><span>Gemini recognized the same inconsistency but retained the wrong arm assignment. It then performed considerably more computation on top of that decision, propagating the original mistake through the rest of the analysis.</span></p><p><span>This is an important distinction for scientific agents; resource consumption tells us how much analysis an agent performed, not whether it correctly framed the scientific question.</span></p><h3><strong><span>Models showed substantial differences in performance across the ten different biologics competencies</span></strong></h3><p><span>Opus 5 was strongest on target opportunity and therapeutic-hypothesis decisions, reaching 70.5%, and on cellular pharmacology and mechanism of action decisions, at 67.9%. Gemini 3.7 Flash showed a very different profile. It reached 72.2% on epitope, escape, and structural-mechanism problems, where agents had to combine competition experiments, mutational scans, escape profiles, and structural evidence.</span></p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!THBX!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3cd0e1fb-7e54-4d65-a25c-a10cfea11b21_1456x424.webp\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"424\" src=\"https://substackcdn.com/image/fetch/$s_!THBX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3cd0e1fb-7e54-4d65-a25c-a10cfea11b21_1456x424.webp\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div><p><span>GPT-5.6 Sol was comparatively strongest on sequence, lineage, and enrichment analysis and on discovery engineering and next-cycle design. Meanwhile, some areas remained difficult for all models. Assay and screening decisions were challenging across all three leading model families, in addition to binding, kinetics, avidity, and specificity.</span></p><h3><strong><span>View the results and subset of evals/trajectories</span></strong></h3><p><span>Read </span><a href=\"https://latch.bio/txbench-ab\"><span>the manuscript</span></a><span> for the complete benchmark design and analysis</span></p><p><span>We regularly update </span><a href=\"https://benchmarks.bio/txbench-ab\"><span>our benchmark family</span></a><span> with new models.</span></p><p><span>We also encourage researchers interested in what these benchmarks actually measure to inspect the </span><a href=\"https://github.com/latchbio/txbench-antibody-discovery\"><span>released sample evaluations and agent trajectories</span></a><span>.</span></p><div class=\"subscription-widget-wrap-editor\"><div class=\"subscription-widget show-subscribe\"><div class=\"preamble\"><p class=\"cta-caption\">Thanks for reading! Subscribe for free to receive new posts and support my work.</p></div><form class=\"subscription-widget-subscribe\"><input class=\"email-input\" name=\"email\" tabindex=\"-1\" type=\"email\" /><input class=\"button primary\" type=\"submit\" value=\"Subscribe\" /><div class=\"fake-input-wrapper\"><div class=\"fake-input\"></div><div class=\"fake-button\"></div></div></form></div></div>"
+      }
+    ],
+    "feed_kind": "company",
+    "feed_name": "Latch Bio",
+    "feed_url": "https://blog.latch.bio/feed",
+    "guidislink": false,
+    "id": "https://blog.latch.bio/p/quantifying-frontier-model-performance",
+    "link": "https://blog.latch.bio/p/quantifying-frontier-model-performance",
+    "links": [
+      {
+        "href": "https://blog.latch.bio/p/quantifying-frontier-model-performance",
+        "rel": "alternate",
+        "type": "text/html"
+      },
+      {
+        "href": "https://substackcdn.com/image/fetch/$s_!ccQ4!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F93d372a1-eba1-45e8-ad87-96ba10d93955_4096x2304.png",
+        "length": "0",
+        "rel": "enclosure",
+        "type": "image/jpeg"
+      }
+    ],
+    "published": "Wed, 02 Sep 2026 19:22:37 GMT",
+    "published_parsed": [
+      2026,
+      9,
+      2,
+      19,
+      22,
+      37,
+      2,
+      245,
+      0
+    ],
+    "summary": "Benchmarking frontier AI agents on the scientific decisions that drive therapeutic antibody discovery",
+    "summary_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/html",
+      "value": "Benchmarking frontier AI agents on the scientific decisions that drive therapeutic antibody discovery"
+    },
+    "title": "Quantifying Frontier Model Performance on Antibody Discovery Tasks",
+    "title_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/plain",
+      "value": "Quantifying Frontier Model Performance on Antibody Discovery Tasks"
+    }
+  },
+  "org": "Latch Bio",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "rss",
+  "summary": "Benchmarks frontier AI agents on the scientific decision-making steps underlying therapeutic antibody discovery.",
+  "title": "Quantifying Frontier Model Performance on Antibody Discovery Tasks",
+  "type": "industry",
+  "url": "https://blog.latch.bio/p/quantifying-frontier-model-performance"
+}

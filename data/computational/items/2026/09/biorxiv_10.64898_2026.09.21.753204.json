@@ -1,0 +1,42 @@
+{
+  "abstract": "T cell receptor (TCR) specificity prediction is critical for understanding adaptive immunity and for enabling the development of therapeutic interventions. Current machine learning models for predicting TCR-peptide-MHC interactions perform poorly, despite large efforts by many groups and advances in protein language models. This work identifies and addresses the fundamental issues that might be hindering progress in this field, focusing on current approaches for constructing training and validation sets, particularly on the strategies used by commonly used methods, which generate negative data either by shuffling TCRs between epitopes or by pairing epitopes with TCRs from background datasets of healthy donors. Here, we visualize and quantify the overlap between positive and generated negative TCR sets produced by both strategies using a range of sequence embedding approaches, including simple encodings (one-hot and BLOSUM62), general protein language models (ESM-2 and ProtGPT2), and a TCR-specific embedding model (TCR-BERT). Using paired {beta}TCR data from VDJdb for two well-studied epitopes (GILGFVFTL and KLGGALQAK), we train Random Forest classifiers on each embedding representation and evaluate their ability to distinguish positive from negative data examples. We find that general sequence embedding methods struggle to differentiate between positive and negative TCRs. We further show that the choice of negative data generation method significantly impacts classifier performance. Our findings highlight fundamental limitations in current TCR specificity training data and general protein language models, and underscore the need for TCR-specific embeddings, experimentally validated negative datasets, transparent reporting of negative data construction, and epitope-specific modeling approaches.",
+  "authors": [
+    "Rai, B.",
+    "Hall-Swan, S."
+  ],
+  "doi": "10.64898/2026.09.21.753204",
+  "first_seen": "2026-09-25",
+  "id": "biorxiv:10.64898/2026.09.21.753204",
+  "metadata": {
+    "abstract": "T cell receptor (TCR) specificity prediction is critical for understanding adaptive immunity and for enabling the development of therapeutic interventions. Current machine learning models for predicting TCR-peptide-MHC interactions perform poorly, despite large efforts by many groups and advances in protein language models. This work identifies and addresses the fundamental issues that might be hindering progress in this field, focusing on current approaches for constructing training and validation sets, particularly on the strategies used by commonly used methods, which generate negative data either by shuffling TCRs between epitopes or by pairing epitopes with TCRs from background datasets of healthy donors. Here, we visualize and quantify the overlap between positive and generated negative TCR sets produced by both strategies using a range of sequence embedding approaches, including simple encodings (one-hot and BLOSUM62), general protein language models (ESM-2 and ProtGPT2), and a TCR-specific embedding model (TCR-BERT). Using paired {beta}TCR data from VDJdb for two well-studied epitopes (GILGFVFTL and KLGGALQAK), we train Random Forest classifiers on each embedding representation and evaluate their ability to distinguish positive from negative data examples. We find that general sequence embedding methods struggle to differentiate between positive and negative TCRs. We further show that the choice of negative data generation method significantly impacts classifier performance. Our findings highlight fundamental limitations in current TCR specificity training data and general protein language models, and underscore the need for TCR-specific embeddings, experimentally validated negative datasets, transparent reporting of negative data construction, and epitope-specific modeling approaches.",
+    "author_corresponding": "Brajesh Rai",
+    "author_corresponding_institution": "Pfizer",
+    "authors": "Rai, B.; Hall-Swan, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-25",
+    "doi": "10.64898/2026.09.21.753204",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/25/2026.09.21.753204.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Limitations of general protein language models and public TCRpMHC data in training specificity prediction models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Pfizer",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows general protein language models and shuffled or background-derived negatives limit TCR-peptide-MHC specificity prediction; overlap quantified across…",
+  "title": "Limitations of general protein language models and public TCRpMHC data in training specificity prediction models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.21.753204"
+}

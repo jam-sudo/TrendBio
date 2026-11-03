@@ -1,0 +1,42 @@
+{
+  "abstract": "Hybrid DNA foundation models combine convolutional, recurrent, and attention layers, making speculative decoding more difficult than truncating a KV cache. We present EvSpark, a speculative decoding system for Evo2 that verifies draft blocks in parallel and restores all three classes of inference state by selecting retained intermediate states, without replay. A compact, hidden-state-conditioned drafter proposes each block in one parallel forward pass. On Evo2 7B, a 48-prompt benchmark with three training seeds yields a 2.96-fold speedup on 43 real-sequence prompts and a 3.27-fold speedup including five synthetic controls. Acceleration persists at 262k-token context (1.84-2.43-fold speedup on two bacterial genomes) and over 32k generated tokens. Retraining the same drafter architecture for Evo2 20B and 40B yields 2.18-2.46-fold speedups on real sequences and 2.51-2.78-fold speedups on the full suite. Autoregressive drafter comparisons and batch measurements show why low draft latency, rather than acceptance alone, determines the gain. The method preserves the target distribution. Greedy checks find no non-tie divergences across 48 prompts and six checkpoints; complementary sampling diagnostics quantify decoding fidelity. A drafter trained on 30M supervised positions reaches a 2.82-fold speedup on real sequences, compared with a 2.96-fold speedup at 150M positions. In regulatory-DNA design, EvSpark achieves a median 1.57-fold complete-workflow speedup over a calibrated batched native baseline.",
+  "authors": [
+    "Ding, H.",
+    "Wu, N.",
+    "Qiu, T."
+  ],
+  "doi": "10.64898/2026.09.02.749017",
+  "first_seen": "2026-09-08",
+  "id": "biorxiv:10.64898/2026.09.02.749017",
+  "metadata": {
+    "abstract": "Hybrid DNA foundation models combine convolutional, recurrent, and attention layers, making speculative decoding more difficult than truncating a KV cache. We present EvSpark, a speculative decoding system for Evo2 that verifies draft blocks in parallel and restores all three classes of inference state by selecting retained intermediate states, without replay. A compact, hidden-state-conditioned drafter proposes each block in one parallel forward pass. On Evo2 7B, a 48-prompt benchmark with three training seeds yields a 2.96-fold speedup on 43 real-sequence prompts and a 3.27-fold speedup including five synthetic controls. Acceleration persists at 262k-token context (1.84-2.43-fold speedup on two bacterial genomes) and over 32k generated tokens. Retraining the same drafter architecture for Evo2 20B and 40B yields 2.18-2.46-fold speedups on real sequences and 2.51-2.78-fold speedups on the full suite. Autoregressive drafter comparisons and batch measurements show why low draft latency, rather than acceptance alone, determines the gain. The method preserves the target distribution. Greedy checks find no non-tie divergences across 48 prompts and six checkpoints; complementary sampling diagnostics quantify decoding fidelity. A drafter trained on 30M supervised positions reaches a 2.82-fold speedup on real sequences, compared with a 2.96-fold speedup at 150M positions. In regulatory-DNA design, EvSpark achieves a median 1.57-fold complete-workflow speedup over a calibrated batched native baseline.",
+    "author_corresponding": "Nannan Wu",
+    "author_corresponding_institution": "CreatiPhage Biotechnology Co., Ltd.",
+    "authors": "Ding, H.; Wu, N.; Qiu, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-08",
+    "doi": "10.64898/2026.09.02.749017",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/08/2026.09.02.749017.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "EvSpark: Lossless Speculative Decoding for Hybrid DNA Foundation Models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "CreatiPhage Biotechnology Co., Ltd.",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "EvSpark is a lossless speculative decoding system for hybrid DNA foundation model Evo2, with a hidden-state drafter achieving 2.96x real-sequence speedup on 7B.",
+  "title": "EvSpark: Lossless Speculative Decoding for Hybrid DNA Foundation Models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.02.749017"
+}

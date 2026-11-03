@@ -1,0 +1,43 @@
+{
+  "abstract": "Public repositories of T cell receptor (TCR)-peptide-MHC (pMHC) interactions constitute a critical resource for studying adaptive immunity and developing predictive models of TCR specificity. However, recent evidence suggests that a substantial fraction of reported TCR-pMHC interactions may be incorrectly annotated, limiting the quality of downstream analyses and machine learning applications. Here, we present an unsupervised sequence similarity-based framework for denoising peptide-specific TCR repertoires. The method combines pairwise TCR similarity metrics derived from TCRbase and TCRdist3 with hierarchical clustering and a novel adaptation of the silhouette score designed to address the prevalence of singleton clusters and highly imbalanced cluster structures. By incorporating a pseudo-cluster containing singleton and background TCRs, and by optimising both clustering distance thresholds and minimum cluster-size criteria, the proposed approach identifies TCRs likely to represent true antigen-specific binders while filtering putative noise. Using experimentally validated repertoires from TCRvdb, we demonstrate that the modified silhouette score closely tracks clustering solutions that maximise separation between binding and non-binding TCRs, achieving strong agreement with independent validation based on the Matthews correlation coefficient. Extension to a large collection of peptide-specific TCR data revealed a strong negative correlation between the percentage of TCRs classified as noise and the predictive performance of peptide-specific binding models. Further, the denoising classification labels on this data set were corroborated using structural modeling confidence scores of the peptide-TCR interface extracted from a refined AlphaFold 3 modeling pipeline. Additionally, retraining NetTCR on denoised data improved internal cross-validated performance compared with models trained on the full data set, whereas models trained exclusively on TCRs classified as noise performed close to random. Together, these results demonstrate that sequence similarity-based denoising can effectively enrich for biologically meaningful TCR-pMHC interactions and improve the quality of training data for predictive immunological models. The proposed framework provides a scalable strategy for improving the reliability of public TCR databases and facilitating the development of more accurate TCR specificity prediction methods.",
+  "authors": [
+    "Lund, J. M.",
+    "Deleuran, S. N.",
+    "Nielsen, M."
+  ],
+  "doi": "10.64898/2026.09.03.749070",
+  "first_seen": "2026-09-08",
+  "id": "biorxiv:10.64898/2026.09.03.749070",
+  "metadata": {
+    "abstract": "Public repositories of T cell receptor (TCR)-peptide-MHC (pMHC) interactions constitute a critical resource for studying adaptive immunity and developing predictive models of TCR specificity. However, recent evidence suggests that a substantial fraction of reported TCR-pMHC interactions may be incorrectly annotated, limiting the quality of downstream analyses and machine learning applications. Here, we present an unsupervised sequence similarity-based framework for denoising peptide-specific TCR repertoires. The method combines pairwise TCR similarity metrics derived from TCRbase and TCRdist3 with hierarchical clustering and a novel adaptation of the silhouette score designed to address the prevalence of singleton clusters and highly imbalanced cluster structures. By incorporating a pseudo-cluster containing singleton and background TCRs, and by optimising both clustering distance thresholds and minimum cluster-size criteria, the proposed approach identifies TCRs likely to represent true antigen-specific binders while filtering putative noise. Using experimentally validated repertoires from TCRvdb, we demonstrate that the modified silhouette score closely tracks clustering solutions that maximise separation between binding and non-binding TCRs, achieving strong agreement with independent validation based on the Matthews correlation coefficient. Extension to a large collection of peptide-specific TCR data revealed a strong negative correlation between the percentage of TCRs classified as noise and the predictive performance of peptide-specific binding models. Further, the denoising classification labels on this data set were corroborated using structural modeling confidence scores of the peptide-TCR interface extracted from a refined AlphaFold 3 modeling pipeline. Additionally, retraining NetTCR on denoised data improved internal cross-validated performance compared with models trained on the full data set, whereas models trained exclusively on TCRs classified as noise performed close to random. Together, these results demonstrate that sequence similarity-based denoising can effectively enrich for biologically meaningful TCR-pMHC interactions and improve the quality of training data for predictive immunological models. The proposed framework provides a scalable strategy for improving the reliability of public TCR databases and facilitating the development of more accurate TCR specificity prediction methods.",
+    "author_corresponding": "Johanne Margrethe Lund",
+    "author_corresponding_institution": "Technical University of Denmark",
+    "authors": "Lund, J. M.; Deleuran, S. N.; Nielsen, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-08",
+    "doi": "10.64898/2026.09.03.749070",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/08/2026.09.03.749070.source.xml",
+    "license": "cc_by_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TCRdenoise - an unsupervised similarity-based approach for denoising of TCR-pMHC specificity data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Technical University of Denmark",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Unsupervised TCR similarity-based framework with a modified silhouette score denoises TCR-pMHC specificity data, improving training quality for NetTCR-style…",
+  "title": "TCRdenoise - an unsupervised similarity-based approach for denoising of TCR-pMHC specificity data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.03.749070"
+}

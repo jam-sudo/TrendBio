@@ -1,0 +1,42 @@
+{
+  "abstract": "Accurate molecular subtyping of individual cancer patients from somatic mutation data remains a challenge in precision oncology research. Existing network-based stratification (NBS) methods treat all mutations equivalently, require full-cohort batch processing, and do not demonstrate generalization to independent datasets without retraining. To address this, we present variant interpretation via the adaptive network pRopagatION (VARION), which integrates population-level variant constraint scoring with protein-protein interaction (PPI) network topology. The Adaptive Topology-aware Random Walk with Restart (ATR-RWR) algorithm weights each mutated gene by {varphi}g = {surd}(GIS(g) x {rho}topo(g)), where GIS (Gene Intolerance Score) reflects population-level functional constraint, propagated across a shared PPI network; subtype assignment then uses cosine similarity to TCGA-derived reference centroids, enabling real-time single-patient classification. Across ten TCGA cancer cohorts (n = 2,417), VARION achieved 77.7% accuracy for ovarian cancer (OV), 69.5% for glioblastoma (GBM), 90.2% for cholangiocarcinoma (CHOL), and 75.4% for gastric cancer (STAD). A controlled benchmark applying two alternative clustering methods (PyNBS; a dense autoencoder) to identical ATR-RWR propagation matrices recovered no significant driver enrichment (OR = 1.79 and 1.52, n.s.), versus OR = 144.29 (p = 1.77x10^-12) for VARION, confirming that the GIS-weighted centroid architecture, not propagation alone, drives performance; generalization without retraining was further confirmed in two independent cohorts (ICGC CCA, n = 396; PCAWG, n = 110; OR = {infty}, p < 5x10^-9). Together, these results indicate that VARION's GIS-weighted centroid architecture enables individual-patient molecular subtyping that outperforms existing NBS and graph-learning clustering approaches, with high sensitivity for clinically actionable rare subtypes and robust cross-platform generalization.",
+  "authors": [
+    "Kwon, T.",
+    "Park, Y.-G.",
+    "Choi, J.-G."
+  ],
+  "doi": "10.64898/2026.09.11.751075",
+  "first_seen": "2026-09-12",
+  "id": "biorxiv:10.64898/2026.09.11.751075",
+  "metadata": {
+    "abstract": "Accurate molecular subtyping of individual cancer patients from somatic mutation data remains a challenge in precision oncology research. Existing network-based stratification (NBS) methods treat all mutations equivalently, require full-cohort batch processing, and do not demonstrate generalization to independent datasets without retraining. To address this, we present variant interpretation via the adaptive network pRopagatION (VARION), which integrates population-level variant constraint scoring with protein-protein interaction (PPI) network topology. The Adaptive Topology-aware Random Walk with Restart (ATR-RWR) algorithm weights each mutated gene by {varphi}g = {surd}(GIS(g) x {rho}topo(g)), where GIS (Gene Intolerance Score) reflects population-level functional constraint, propagated across a shared PPI network; subtype assignment then uses cosine similarity to TCGA-derived reference centroids, enabling real-time single-patient classification. Across ten TCGA cancer cohorts (n = 2,417), VARION achieved 77.7% accuracy for ovarian cancer (OV), 69.5% for glioblastoma (GBM), 90.2% for cholangiocarcinoma (CHOL), and 75.4% for gastric cancer (STAD). A controlled benchmark applying two alternative clustering methods (PyNBS; a dense autoencoder) to identical ATR-RWR propagation matrices recovered no significant driver enrichment (OR = 1.79 and 1.52, n.s.), versus OR = 144.29 (p = 1.77x10^-12) for VARION, confirming that the GIS-weighted centroid architecture, not propagation alone, drives performance; generalization without retraining was further confirmed in two independent cohorts (ICGC CCA, n = 396; PCAWG, n = 110; OR = {infty}, p < 5x10^-9). Together, these results indicate that VARION's GIS-weighted centroid architecture enables individual-patient molecular subtyping that outperforms existing NBS and graph-learning clustering approaches, with high sensitivity for clinically actionable rare subtypes and robust cross-platform generalization.",
+    "author_corresponding": "Jong-Gwon Choi",
+    "author_corresponding_institution": "Konyang University Hospital",
+    "authors": "Kwon, T.; Park, Y.-G.; Choi, J.-G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-12",
+    "doi": "10.64898/2026.09.11.751075",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/12/2026.09.11.751075.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "VARION: A Network Propagation Framework for Individual Patient Somatic Mutation Interpretation in Cancer Molecular Subtyping",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Konyang University Hospital",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-09-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "VARION weights somatic mutations by population gene intolerance over a PPI network via ATR-RWR for individual-patient cancer subtyping, reporting TCGA and…",
+  "title": "VARION: A Network Propagation Framework for Individual Patient Somatic Mutation Interpretation in Cancer Molecular Subtyping",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.11.751075"
+}

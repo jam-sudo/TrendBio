@@ -1,0 +1,43 @@
+{
+  "abstract": "Cardiopulmonary exercise testing reveals cardiovascular and respiratory limitations not apparent at rest, but similar measurements can arise from different interacting regulatory mechanisms, preventing physiological causal inference from data alone. Mechanistic computational models can separate these mechanisms in silico. However, whole-body cardiorespiratory models contain hundreds of parameters, making global sensitivity analysis and calibration challenging. We present OpenCRS, an open-source Python cardiorespiratory model coupling closed-loop 0D lumped-parameter circulation with gas exchange and integrated autonomic and respiratory control. The framework incorporates baroreflex, chemoreflex, pulmonary stretch receptors, central command, and neuromuscular drive, together with novel representations of atrial dynamics and exercise baroreflex set-point resetting. We introduce a scalable calibration pipeline that (i) applies a derivative-based global sensitivity measure (DGSM) directly to the simulator, reducing 272 parameters to 72 influential ones; (ii) trains Gaussian process emulator surrogates within iterative History Matching to exclude implausible parameter regions; and (iii) performs Bayesian calibration (MCMC), inferring a joint posterior with Hamiltonian Monte Carlo (No-U-Turn sampler) under a Gaussian copula prior. A single maximum a posteriori parameter set simultaneously reproduced 50 literature-derived rest and exercise targets (45/50 within 1 SD, all within 1.83 SD), with the rest-to-exercise transition emerging from the models embedded feedback rather than independent fitting. Simulator-based DGSM agreed with constrained Sobol indices (mean Spearman rank correlation 0.79). Sensitivity analysis identified influential physiological mechanisms. Only 2-16 parameters contributed >2% of the Sobol total-effect sensitivity per target. Resting cardiovascular targets were driven by unstressed volumes and cardiac mechanics, while exercise shifted influence towards autonomic efferent regulation. Respiratory outputs remained most sensitive to chemoreflex and gas exchange parameters. These shifts capture coordinated cardiorespiratory adaptation to metabolic demand. More broadly, the framework provides a population-level prior with quantified uncertainty for cardiovascular digital twins and a reusable route for calibrating high-dimensional, regulated physiological models.",
+  "authors": [
+    "Wang, S.-Y.",
+    "Saxton, H.",
+    "Balmus, M.",
+    "Niederer, S. A."
+  ],
+  "doi": "10.64898/2026.09.14.751454",
+  "first_seen": "2026-09-21",
+  "id": "biorxiv:10.64898/2026.09.14.751454",
+  "metadata": {
+    "abstract": "Cardiopulmonary exercise testing reveals cardiovascular and respiratory limitations not apparent at rest, but similar measurements can arise from different interacting regulatory mechanisms, preventing physiological causal inference from data alone. Mechanistic computational models can separate these mechanisms in silico. However, whole-body cardiorespiratory models contain hundreds of parameters, making global sensitivity analysis and calibration challenging. We present OpenCRS, an open-source Python cardiorespiratory model coupling closed-loop 0D lumped-parameter circulation with gas exchange and integrated autonomic and respiratory control. The framework incorporates baroreflex, chemoreflex, pulmonary stretch receptors, central command, and neuromuscular drive, together with novel representations of atrial dynamics and exercise baroreflex set-point resetting. We introduce a scalable calibration pipeline that (i) applies a derivative-based global sensitivity measure (DGSM) directly to the simulator, reducing 272 parameters to 72 influential ones; (ii) trains Gaussian process emulator surrogates within iterative History Matching to exclude implausible parameter regions; and (iii) performs Bayesian calibration (MCMC), inferring a joint posterior with Hamiltonian Monte Carlo (No-U-Turn sampler) under a Gaussian copula prior. A single maximum a posteriori parameter set simultaneously reproduced 50 literature-derived rest and exercise targets (45/50 within 1 SD, all within 1.83 SD), with the rest-to-exercise transition emerging from the models embedded feedback rather than independent fitting. Simulator-based DGSM agreed with constrained Sobol indices (mean Spearman rank correlation 0.79). Sensitivity analysis identified influential physiological mechanisms. Only 2-16 parameters contributed >2% of the Sobol total-effect sensitivity per target. Resting cardiovascular targets were driven by unstressed volumes and cardiac mechanics, while exercise shifted influence towards autonomic efferent regulation. Respiratory outputs remained most sensitive to chemoreflex and gas exchange parameters. These shifts capture coordinated cardiorespiratory adaptation to metabolic demand. More broadly, the framework provides a population-level prior with quantified uncertainty for cardiovascular digital twins and a reusable route for calibrating high-dimensional, regulated physiological models.",
+    "author_corresponding": "Sheng-Ya Wang",
+    "author_corresponding_institution": "Imperial College London National Heart and Lung Institute",
+    "authors": "Wang, S.-Y.; Saxton, H.; Balmus, M.; Niederer, S. A.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-09-21",
+    "doi": "10.64898/2026.09.14.751454",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/21/2026.09.14.751454.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "OpenCRS: an open-source regulated human cardiorespiratory model with large-scale calibration and global sensitivity analysis at rest and during exercise",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Imperial College London National Heart and Lung Institute",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-09-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "OpenCRS: open-source Python cardiorespiratory model with DGSM screening, GP-emulated history matching and HMC calibration against 50 rest/exercise targets.",
+  "title": "OpenCRS: an open-source regulated human cardiorespiratory model with large-scale calibration and global sensitivity analysis at rest and during exercise",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.14.751454"
+}

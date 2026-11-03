@@ -1,0 +1,32 @@
+{
+  "abstract": "Manual counting and classification of bacterial colonies are critical yet labor-intensive tasks in microbiology, prone to human error particularly on densely populated plates. This work proposes a multi-task deep learning framework trained on the Annotated Germs for Automated Recognition (AGAR) dataset (18,000 images; 9,202 training / 3,067 testing) to automate Colony Forming Unit (CFU) enumeration and species classification. A custom multi-task CNN employing global regression served as the baseline, but demonstrated limited performance in clustered colony environments due to the absence of spatial localization. To address this, a YOLOv8 object detection architecture was adopted with high-resolution 1024x1024 inputs, enabling instance-level colony detection and label assignment. The model achieved a classification accuracy of 98.13% and a counting accuracy of 98.27% (within a 10-colony margin), demonstrating strong predictive capability. To bridge the gap between model performance and practical deployability, the trained model was optimized through unstructured and structured pruning, ONNX conversion, and reduced-precision inference (FP32, FP16, INT8). On a Raspberry Pi 4B, ONNX FP32 and FP16 variants offered the best balance between inference speed (~6.4s) and accuracy (MAE ~2.20). Unstructured pruning preserved predictive accuracy (MAE ~2.01) without runtime gains, while structured pruning resulted in significant accuracy degradation (MAE ~6.3), revealing the sensitivity of instance-level colony detection to architectural compression. These findings provide practical guidance for selecting optimization strategies in resource-constrained laboratory deployments.",
+  "authors": [
+    "Belaguppa Manjunath Ashwin Desai",
+    "Rohan Rajesh",
+    "Shreyas Murthy",
+    "Pronama Biswas",
+    "Revathi Vaithiyanathan"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-09",
+  "id": "arxiv:2609.09818",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.09818v1</ns0:id>\n    <ns0:title>Multi-Task Bacterial Colony Detection and Classification Using YOLOv8 with Edge Optimization for Resource-Constrained Deployment</ns0:title>\n    <ns0:updated>2026-09-09T07:20:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.09818v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.09818v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Manual counting and classification of bacterial colonies are critical yet labor-intensive tasks in microbiology, prone to human error particularly on densely populated plates. This work proposes a multi-task deep learning framework trained on the Annotated Germs for Automated Recognition (AGAR) dataset (18,000 images; 9,202 training / 3,067 testing) to automate Colony Forming Unit (CFU) enumeration and species classification. A custom multi-task CNN employing global regression served as the baseline, but demonstrated limited performance in clustered colony environments due to the absence of spatial localization. To address this, a YOLOv8 object detection architecture was adopted with high-resolution 1024x1024 inputs, enabling instance-level colony detection and label assignment. The model achieved a classification accuracy of 98.13% and a counting accuracy of 98.27% (within a 10-colony margin), demonstrating strong predictive capability. To bridge the gap between model performance and practical deployability, the trained model was optimized through unstructured and structured pruning, ONNX conversion, and reduced-precision inference (FP32, FP16, INT8). On a Raspberry Pi 4B, ONNX FP32 and FP16 variants offered the best balance between inference speed (~6.4s) and accuracy (MAE ~2.20). Unstructured pruning preserved predictive accuracy (MAE ~2.01) without runtime gains, while structured pruning resulted in significant accuracy degradation (MAE ~6.3), revealing the sensitivity of instance-level colony detection to architectural compression. These findings provide practical guidance for selecting optimization strategies in resource-constrained laboratory deployments.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-09T07:20:48Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Belaguppa Manjunath Ashwin Desai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rohan Rajesh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shreyas Murthy</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pronama Biswas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Revathi Vaithiyanathan</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Manual counting and classification of bacterial colonies are critical yet labor-intensive tasks in microbiology, prone to human error particularly on densely po",
+  "title": "Multi-Task Bacterial Colony Detection and Classification Using YOLOv8 with Edge Optimization for Resource-Constrained Deployment",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.09818v1"
+}

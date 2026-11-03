@@ -1,0 +1,46 @@
+{
+  "abstract": "Marker-gene amplicon workflows are routinely run on shared compute, yet the cores, memory and wall time they are given are chosen by convention and not by measurement. We present a protocol for measuring them, applied to the two dominant stages of a QIIME 2 16S rRNA pipeline, DADA2 denoising and Naive Bayes taxonomic classification, across nine upper-respiratory samples from a paediatric otitis media cohort. The two stages do not consume the same input: denoising reads every sequence, classification only those surviving it. Subsampling one library across a 27-fold range of sequencing depth, denoising wall time rose 14.3-fold while classification changed by 1% and its peak memory not at all (3.11 GiB). Amplicon sequence variant (ASV) richness rose 2.8-fold over that range, so this is not richness saturating: the stage is dominated by a fixed per-invocation cost. Across a body-site gradient of 5 to 70 ASVs, denoising followed read count (exponent 0.75) while classification followed neither: a 5-ASV effusion and a 70-ASV adenoid community cost 40.81 s and 40.79 s. One ASV took 36.20 s and 218 took 37.27 s, 97% fixed cost. Thread-level parallelism offered little benefit. Denoising peaked at 1.18x near 8 threads and then declined; classification was slower at every setting above one job, consuming 10.5 times the CPU at 40. Representative sequences and their taxonomic assignments were identical at 1, 4 and 40 threads, so a reduced allocation changes what the analysis costs, not what it reports. Extending the query set to 10,000 sequences located two distinct boundaries: eight jobs first beat one at roughly 5,000 queries, and fitted fixed and per-query costs become equal at 15,248. Both lie roughly two orders of magnitude above the richest single sample measured. Practically: size denoising by read count, calibrate classification once against the reference in use, request one job for classification below a few thousand sequences, and take throughput from sample-level parallelism. Protocol, data and analysis code are released with the pipeline.",
+  "authors": [
+    "Victor, S.",
+    "Sadasivam, S.",
+    "S, Y.",
+    "R, S.",
+    "P, S. A.",
+    "Satheesh, G."
+  ],
+  "doi": "10.64898/2026.09.01.748377",
+  "first_seen": "2026-09-01",
+  "id": "biorxiv:10.64898/2026.09.01.748377",
+  "metadata": {
+    "abstract": "Marker-gene amplicon workflows are routinely run on shared compute, yet the cores, memory and wall time they are given are chosen by convention and not by measurement. We present a protocol for measuring them, applied to the two dominant stages of a QIIME 2 16S rRNA pipeline, DADA2 denoising and Naive Bayes taxonomic classification, across nine upper-respiratory samples from a paediatric otitis media cohort. The two stages do not consume the same input: denoising reads every sequence, classification only those surviving it. Subsampling one library across a 27-fold range of sequencing depth, denoising wall time rose 14.3-fold while classification changed by 1% and its peak memory not at all (3.11 GiB). Amplicon sequence variant (ASV) richness rose 2.8-fold over that range, so this is not richness saturating: the stage is dominated by a fixed per-invocation cost. Across a body-site gradient of 5 to 70 ASVs, denoising followed read count (exponent 0.75) while classification followed neither: a 5-ASV effusion and a 70-ASV adenoid community cost 40.81 s and 40.79 s. One ASV took 36.20 s and 218 took 37.27 s, 97% fixed cost. Thread-level parallelism offered little benefit. Denoising peaked at 1.18x near 8 threads and then declined; classification was slower at every setting above one job, consuming 10.5 times the CPU at 40. Representative sequences and their taxonomic assignments were identical at 1, 4 and 40 threads, so a reduced allocation changes what the analysis costs, not what it reports. Extending the query set to 10,000 sequences located two distinct boundaries: eight jobs first beat one at roughly 5,000 queries, and fitted fixed and per-query costs become equal at 15,248. Both lie roughly two orders of magnitude above the richest single sample measured. Practically: size denoising by read count, calibrate classification once against the reference in use, request one job for classification below a few thousand sequences, and take throughput from sample-level parallelism. Protocol, data and analysis code are released with the pipeline.",
+    "author_corresponding": "Sam Victor",
+    "author_corresponding_institution": "Department of Computer Science and Engineering, Sri Eshwar College of Engineering, Coimbatore, Tamil Nadu, India",
+    "authors": "Victor, S.; Sadasivam, S.; S, Y.; R, S.; P, S. A.; Satheesh, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-01",
+    "doi": "10.64898/2026.09.01.748377",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/01/2026.09.01.748377.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Taxonomic classification cost tracks neither sequencing depth nor community richness at single-sample scale: a measured resource protocol for 16S rRNA amplicon pipelines",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computer Science and Engineering, Sri Eshwar College of Engineering, Coimbatore, Tamil Nadu, India",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Measures compute cost of QIIME 2 16S amplicon stages: DADA2 denoising scales with read count, while Naive Bayes classification is dominated by fixed…",
+  "title": "Taxonomic classification cost tracks neither sequencing depth nor community richness at single-sample scale: a measured resource protocol for 16S rRNA amplicon pipelines",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.01.748377"
+}

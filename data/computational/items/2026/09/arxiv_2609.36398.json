@@ -1,0 +1,34 @@
+{
+  "abstract": "Generative models make molecular crystal structure prediction fast, but their samples still exhibit geometric and packing violations. Physics can be introduced during training, post-training, or inference, yet these choices are rarely compared with the generator and physical signal held fixed. We introduce CrystAF, an all-atom crystal flow-map generation model, and use it with the UMA interatomic potential to systematically study where physics should enter. Post-training learns physical preferences directly into CrystAF, improving molecular validity and crystal packing while leaving sampling unchanged: physics is paid for once during training rather than repeatedly at deployment. In contrast, UMA relaxation is effective at repairing local clashes but makes generation 6--26$\\times$ slower, while learning from relaxed targets provides little benefit. These routes are complementary rather than competing. Physics-informed post-training first shifts the generated distribution toward more physically reasonable structures, after which inexpensive inference-time corrections further remove clashes and restore stereochemistry that the generator cannot represent. Importantly, the same post-training strategy also improves the multi-step all-atom Clari-M and rigid-body MolCrystalFlow generators, demonstrating transfer across architectures and representations. Together, our results suggest a simple principle: learn reusable physical alignment into the generator, and reserve inference-time physics for residual constraints that are better corrected than learned.",
+  "authors": [
+    "Haocheng Tang",
+    "Junmei Wang",
+    "Wengong Jin"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-28",
+  "id": "arxiv:2609.36398",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.BM",
+    "categories": [
+      "q-bio.BM",
+      "cs.AI",
+      "cs.CE"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.36398v1</ns0:id>\n    <ns0:title>Where Should Physics Enter a Molecular Crystal Generator?</ns0:title>\n    <ns0:updated>2026-09-28T23:53:27Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.36398v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.36398v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Generative models make molecular crystal structure prediction fast, but their samples still exhibit geometric and packing violations. Physics can be introduced during training, post-training, or inference, yet these choices are rarely compared with the generator and physical signal held fixed. We introduce CrystAF, an all-atom crystal flow-map generation model, and use it with the UMA interatomic potential to systematically study where physics should enter. Post-training learns physical preferences directly into CrystAF, improving molecular validity and crystal packing while leaving sampling unchanged: physics is paid for once during training rather than repeatedly at deployment. In contrast, UMA relaxation is effective at repairing local clashes but makes generation 6--26$\\times$ slower, while learning from relaxed targets provides little benefit. These routes are complementary rather than competing. Physics-informed post-training first shifts the generated distribution toward more physically reasonable structures, after which inexpensive inference-time corrections further remove clashes and restore stereochemistry that the generator cannot represent. Importantly, the same post-training strategy also improves the multi-step all-atom Clari-M and rigid-body MolCrystalFlow generators, demonstrating transfer across architectures and representations. Together, our results suggest a simple principle: learn reusable physical alignment into the generator, and reserve inference-time physics for residual constraints that are better corrected than learned.</ns0:summary>\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-28T23:53:27Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.BM\" />\n    <ns0:author>\n      <ns0:name>Haocheng Tang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junmei Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wengong Jin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-09-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Compares where physics enters molecular crystal generators; introduces CrystAF with UMA potential, showing post-training and inference-time corrections are…",
+  "title": "Where Should Physics Enter a Molecular Crystal Generator?",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.36398v1"
+}

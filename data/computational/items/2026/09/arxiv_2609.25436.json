@@ -1,0 +1,33 @@
+{
+  "abstract": "Somatic membrane potential is the primary determinant of neuronal output, yet it remains inaccessible in many experimental setups where only dendritic recordings are available. Reconstructing somatic dynamics from distal measurements is a challenging inverse problem, particularly when the soma and dendrites are weakly coupled, as dendritic signals represent a filtered and attenuated version of somatic activity. To address this, we use a physics-informed neural network (PINN) constrained by a two-compartment Hodgkin--Huxley model. The network is trained on dense dendritic voltage recordings and the known injected current, complemented by a small number of somatic voltage samples (at most 5\\% of the time points), and it reconstructs the full somatic trajectory while adjusting a selected set of somatic maximal conductances. On synthetic data from four stimulation protocols, we quantify how the reconstruction depends on the amount of somatic supervision. Without somatic samples, the present formulation returns a smooth trajectory in which the action potentials are absent and the subthreshold level is biased, with a root-mean-square error of 10--14~mV; 1\\% of the somatic time points is enough to recover every spike; and 5\\% brings the root-mean-square error to about 2~mV, spikes included, with relative errors below 0.1\\% on the sodium and delayed-rectifier conductances. We also compare the PINN with an unscented Kalman filter constrained by the same model and assimilating the same observations, and we assess robustness to measurement noise and to random initialization. The reconstructions reported here therefore rely on sparse somatic anchoring in addition to the dendritic recordings. The results delimit what can be inferred in this synthetic, weakly supervised two-compartment setting and identify the amount of somatic information required by the present formulation.",
+  "authors": [
+    "Abdeltif Oujbara",
+    "Benjamin Ambrosio",
+    "M. A. Aziz-Alaoui"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-21",
+  "id": "arxiv:2609.25436",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.NC",
+    "categories": [
+      "q-bio.NC",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.25436v1</ns0:id>\n    <ns0:title>Physics-constrained inference of somatic dynamics from dendritic recordings with sparse somatic supervision in weakly coupled two-compartment neuron model</ns0:title>\n    <ns0:updated>2026-09-21T21:44:56Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.25436v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.25436v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Somatic membrane potential is the primary determinant of neuronal output, yet it remains inaccessible in many experimental setups where only dendritic recordings are available. Reconstructing somatic dynamics from distal measurements is a challenging inverse problem, particularly when the soma and dendrites are weakly coupled, as dendritic signals represent a filtered and attenuated version of somatic activity. To address this, we use a physics-informed neural network (PINN) constrained by a two-compartment Hodgkin--Huxley model. The network is trained on dense dendritic voltage recordings and the known injected current, complemented by a small number of somatic voltage samples (at most 5\\% of the time points), and it reconstructs the full somatic trajectory while adjusting a selected set of somatic maximal conductances. On synthetic data from four stimulation protocols, we quantify how the reconstruction depends on the amount of somatic supervision. Without somatic samples, the present formulation returns a smooth trajectory in which the action potentials are absent and the subthreshold level is biased, with a root-mean-square error of 10--14~mV; 1\\% of the somatic time points is enough to recover every spike; and 5\\% brings the root-mean-square error to about 2~mV, spikes included, with relative errors below 0.1\\% on the sodium and delayed-rectifier conductances. We also compare the PINN with an unscented Kalman filter constrained by the same model and assimilating the same observations, and we assess robustness to measurement noise and to random initialization. The reconstructions reported here therefore rely on sparse somatic anchoring in addition to the dendritic recordings. The results delimit what can be inferred in this synthetic, weakly supervised two-compartment setting and identify the amount of somatic information required by the present formulation.</ns0:summary>\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-21T21:44:56Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.NC\" />\n    <ns0:author>\n      <ns0:name>Abdeltif Oujbara</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Benjamin Ambrosio</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>M. A. Aziz-Alaoui</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-09-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "PINN constrained by a two-compartment Hodgkin-Huxley model reconstructs somatic voltage from dendritic recordings; 1% somatic samples recover spikes, 5% gives…",
+  "title": "Physics-constrained inference of somatic dynamics from dendritic recordings with sparse somatic supervision in weakly coupled two-compartment neuron model",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.25436v1"
+}

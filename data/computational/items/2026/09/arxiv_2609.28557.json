@@ -1,0 +1,53 @@
+{
+  "abstract": "DNA sequencing pipelines, spanning quality control, alignment, variant calling, and annotation, are now reliably executed by workflow management systems that orchestrate established bioinformatics tools at scale. What remains manual is the decision layer surrounding that execution: selecting quality thresholds appropriate to a sample and platform, adjudicating borderline variant calls, diagnosing anomalies, and determining which findings warrant expert review. These decisions are repetitive, judgment-intensive, inconsistent across operators, and frequently undocumented. This paper introduces BaseCamp, a novel agentic AI framework for automating the decision layer of DNA sequencing pipelines. The framework decomposes the pipeline into six specialized AI agents, covering sample intake and quality control, alignment, variant calling, annotation, cross-stage monitoring, and reporting. Critically, BaseCamp agents do not perform sequence analysis: established tools execute alignment, calling, and annotation, while the agents select among them, configure them, interpret their output, and decide what follows. This confines language model reasoning to the judgment layer where it is reliable and preserves the reproducibility existing tooling guarantees. Agent reasoning is powered by a consortium of fine-tuned, domain-specialized large language models coordinated by a central reasoning LLM, executing locally so no sequencing data leaves the operating environment, under human-in-the-loop orchestration. Evaluation shows agent-generated configurations are concordant with expert practice, that an explicit filtering ledger renders inspectable what filtering otherwise removes without trace, and that cross-stage anomaly detection surfaces conditions execution monitoring misses. BaseCamp offers a generalizable blueprint for agentic automation of scientific data pipelines.",
+  "authors": [
+    "Eranga Bandara",
+    "Xueping Liang",
+    "Asanga Gunaratna",
+    "Tharaka Hewa",
+    "Abdul Rahman",
+    "Peter Foytik",
+    "Safdar H. Bouk",
+    "Sachini Rajapakse",
+    "Isurunima Kularathna",
+    "Pramoda Karunarathna",
+    "Chalani Rajapakse",
+    "Ng Wee Keong",
+    "Kasun De Zoysa",
+    "Amin Hass",
+    "Wathsala Herath",
+    "Ross Gore",
+    "Ravi Mukkamala",
+    "Nihal Siriwardanagea",
+    "Gihan Siriwardanagea",
+    "Aruna Withanage",
+    "Nilaan Loganathan",
+    "Sachin Shetty"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-23",
+  "id": "arxiv:2609.28557",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.28557v1</ns0:id>\n    <ns0:title>BaseCamp --- An Agentic AI Framework for Automating DNA Sequencing Data Pipelines</ns0:title>\n    <ns0:updated>2026-09-23T08:55:17Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.28557v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.28557v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>DNA sequencing pipelines, spanning quality control, alignment, variant calling, and annotation, are now reliably executed by workflow management systems that orchestrate established bioinformatics tools at scale. What remains manual is the decision layer surrounding that execution: selecting quality thresholds appropriate to a sample and platform, adjudicating borderline variant calls, diagnosing anomalies, and determining which findings warrant expert review. These decisions are repetitive, judgment-intensive, inconsistent across operators, and frequently undocumented. This paper introduces BaseCamp, a novel agentic AI framework for automating the decision layer of DNA sequencing pipelines. The framework decomposes the pipeline into six specialized AI agents, covering sample intake and quality control, alignment, variant calling, annotation, cross-stage monitoring, and reporting. Critically, BaseCamp agents do not perform sequence analysis: established tools execute alignment, calling, and annotation, while the agents select among them, configure them, interpret their output, and decide what follows. This confines language model reasoning to the judgment layer where it is reliable and preserves the reproducibility existing tooling guarantees. Agent reasoning is powered by a consortium of fine-tuned, domain-specialized large language models coordinated by a central reasoning LLM, executing locally so no sequencing data leaves the operating environment, under human-in-the-loop orchestration. Evaluation shows agent-generated configurations are concordant with expert practice, that an explicit filtering ledger renders inspectable what filtering otherwise removes without trace, and that cross-stage anomaly detection surfaces conditions execution monitoring misses. BaseCamp offers a generalizable blueprint for agentic automation of scientific data pipelines.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-23T08:55:17Z</ns0:published>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Eranga Bandara</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xueping Liang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Asanga Gunaratna</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tharaka Hewa</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abdul Rahman</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peter Foytik</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Safdar H. Bouk</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sachini Rajapakse</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Isurunima Kularathna</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pramoda Karunarathna</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chalani Rajapakse</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ng Wee Keong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kasun De Zoysa</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Amin Hass</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wathsala Herath</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ross Gore</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ravi Mukkamala</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nihal Siriwardanagea</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gihan Siriwardanagea</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aruna Withanage</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nilaan Loganathan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sachin Shetty</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "BaseCamp is an agentic AI framework that automates decision layers of DNA sequencing pipelines, using six agents with local fine-tuned LLMs while established…",
+  "title": "BaseCamp --- An Agentic AI Framework for Automating DNA Sequencing Data Pipelines",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.28557v1"
+}

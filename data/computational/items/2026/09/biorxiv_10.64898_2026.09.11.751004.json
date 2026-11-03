@@ -1,0 +1,42 @@
+{
+  "abstract": "Agentic coding systems are increasingly presented as a way to reduce the engineering burden of scientific software development. Bioinformatics is a strong test case for this claim because useful pipelines must combine domain-specific analysis choices, command-line software, sample metadata, workflow orchestration, container or HPC execution, and interpretable quality-control reporting. We evaluated three agentic systems - Biomni, Claude Code, and Codex - on the same task: constructing a Nextflow DSL2 pipeline for paired-end CUT&Tag data that included read QC, trimming, alignment, filtering, duplicate removal, signal track generation, per-sample and group-level peak calling, control-aware group merging, annotation, FRiP calculation, deepTools visualizations, and final MultiQC reporting. Each system received the same detailed CRAFT-style prompt and was assessed against a hand-coded reference pipeline developed by the authors. All three systems produced pipeline implementations that appeared plausible at the level of documentation and file structure, but none fully satisfied the requested analysis. The most consequential failure was shared: the agent-generated pipelines performed some form of group-level merging but did not produce the requested merged-group reporting outputs. Sample-level MultiQC reports also disagreed with the reference report. Codex was closest to the reference for primary mapped-read counts, although its total-read accounting and report structure still differed. Claude Code produced the broadest final report, but its mapping summary mixed stages and therefore could not be treated as numerically correct. Biomni produced the strongest subjective documentation, but its read-count agreement with the reference report was poor and several failures required substantial Nextflow expertise to diagnose. These results suggest that current coding agents can accelerate scaffolding, documentation, and routine implementation, but they do not eliminate the need for expert review in bioinformatics workflow construction. For complex sequencing workflows, prompts must specify not only the biological intent, but also the exact stage semantics, acceptance tests, metadata contracts, expected report sections, resource propagation rules, and failure criteria needed to distinguish a plausible pipeline from a correct one.",
+  "authors": [
+    "Munn, P. R.",
+    "Grenier, J. K."
+  ],
+  "doi": "10.64898/2026.09.11.751004",
+  "first_seen": "2026-09-17",
+  "id": "biorxiv:10.64898/2026.09.11.751004",
+  "metadata": {
+    "abstract": "Agentic coding systems are increasingly presented as a way to reduce the engineering burden of scientific software development. Bioinformatics is a strong test case for this claim because useful pipelines must combine domain-specific analysis choices, command-line software, sample metadata, workflow orchestration, container or HPC execution, and interpretable quality-control reporting. We evaluated three agentic systems - Biomni, Claude Code, and Codex - on the same task: constructing a Nextflow DSL2 pipeline for paired-end CUT&Tag data that included read QC, trimming, alignment, filtering, duplicate removal, signal track generation, per-sample and group-level peak calling, control-aware group merging, annotation, FRiP calculation, deepTools visualizations, and final MultiQC reporting. Each system received the same detailed CRAFT-style prompt and was assessed against a hand-coded reference pipeline developed by the authors. All three systems produced pipeline implementations that appeared plausible at the level of documentation and file structure, but none fully satisfied the requested analysis. The most consequential failure was shared: the agent-generated pipelines performed some form of group-level merging but did not produce the requested merged-group reporting outputs. Sample-level MultiQC reports also disagreed with the reference report. Codex was closest to the reference for primary mapped-read counts, although its total-read accounting and report structure still differed. Claude Code produced the broadest final report, but its mapping summary mixed stages and therefore could not be treated as numerically correct. Biomni produced the strongest subjective documentation, but its read-count agreement with the reference report was poor and several failures required substantial Nextflow expertise to diagnose. These results suggest that current coding agents can accelerate scaffolding, documentation, and routine implementation, but they do not eliminate the need for expert review in bioinformatics workflow construction. For complex sequencing workflows, prompts must specify not only the biological intent, but also the exact stage semantics, acceptance tests, metadata contracts, expected report sections, resource propagation rules, and failure criteria needed to distinguish a plausible pipeline from a correct one.",
+    "author_corresponding": "Paul R Munn",
+    "author_corresponding_institution": "Cornell",
+    "authors": "Munn, P. R.; Grenier, J. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-17",
+    "doi": "10.64898/2026.09.11.751004",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/17/2026.09.11.751004.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "From Prompt to Pipeline: A Comparative Evaluation of Large Language Model Coding Agents for Reproducible Bioinformatics Pipeline Construction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Cornell",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "epigenomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Compares three LLM coding agents (Biomni, Claude Code, Codex) building a Nextflow CUT&Tag pipeline against a reference; none fully correct, with shared…",
+  "title": "From Prompt to Pipeline: A Comparative Evaluation of Large Language Model Coding Agents for Reproducible Bioinformatics Pipeline Construction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.11.751004"
+}

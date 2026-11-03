@@ -1,0 +1,32 @@
+{
+  "abstract": "When there is not enough labeled data to properly train deep learning models, transfer learning can help. We still do not fully understand how effective it is in neuroimaging, especially for Alzheimer's disease research. It is also not clear if these transferred models can work on new datasets without being retrained for each specific task. We evaluate whether a compact, supervised pretrained model can serve as a reusable foundation model for downstream neuroimaging tasks. We freeze the 7.18 million weights of a 3D CNN previously trained for brain-age prediction, and adapt it to each task using Low-Rank Adaptation (LoRA), requiring only ~1% additional trainable parameters. We evaluate generalizability in six experiments. Adapting the model to classify cognitively normal versus Dementia on ADNI gave an AUC of 0.964 on held-out folds (Experiment #1). Applying that adapted model unchanged to OASIS-3, with no retraining, gave an AUC of 0.871 (Experiment #2). Reusing its output logit together with age and a cognitive score distinguished stable from progressing MCI with an AUC of 0.828 (Experiment #3). Adapting the same backbone to predict amyloid positivity from structural MRI gave an AUC of 0.804 (Experiment #4). Finally, the same approach estimated ICV-normalized hippocampal and white matter hypointensity volumes directly from the T1w image, with R^2 of 0.80 and 0.91 respectively, tasks normally addressed with much larger U-Net networks (Experiments #5 and #6). A compact model supervised on brain age can therefore serve as a reusable backbone, adapting to each task with ~1% additional parameters and transferring to an unseen cohort without any training. Our findings suggest that a carefully trained brain age model can serve as an effective foundation model for Alzheimer's related tasks, even under strict data constraints.",
+  "authors": [
+    "Reza Rajabli",
+    "D. Louis Collins"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-04",
+  "id": "arxiv:2609.05400",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.05400v1</ns0:id>\n    <ns0:title>A Generalizable Feature Extractor for Alzheimer's-Related Brain MRI Tasks</ns0:title>\n    <ns0:updated>2026-09-04T17:47:28Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.05400v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.05400v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>When there is not enough labeled data to properly train deep learning models, transfer learning can help. We still do not fully understand how effective it is in neuroimaging, especially for Alzheimer's disease research. It is also not clear if these transferred models can work on new datasets without being retrained for each specific task. We evaluate whether a compact, supervised pretrained model can serve as a reusable foundation model for downstream neuroimaging tasks. We freeze the 7.18 million weights of a 3D CNN previously trained for brain-age prediction, and adapt it to each task using Low-Rank Adaptation (LoRA), requiring only ~1% additional trainable parameters. We evaluate generalizability in six experiments. Adapting the model to classify cognitively normal versus Dementia on ADNI gave an AUC of 0.964 on held-out folds (Experiment #1). Applying that adapted model unchanged to OASIS-3, with no retraining, gave an AUC of 0.871 (Experiment #2). Reusing its output logit together with age and a cognitive score distinguished stable from progressing MCI with an AUC of 0.828 (Experiment #3). Adapting the same backbone to predict amyloid positivity from structural MRI gave an AUC of 0.804 (Experiment #4). Finally, the same approach estimated ICV-normalized hippocampal and white matter hypointensity volumes directly from the T1w image, with R^2 of 0.80 and 0.91 respectively, tasks normally addressed with much larger U-Net networks (Experiments #5 and #6). A compact model supervised on brain age can therefore serve as a reusable backbone, adapting to each task with ~1% additional parameters and transferring to an unseen cohort without any training. Our findings suggest that a carefully trained brain age model can serve as an effective foundation model for Alzheimer's related tasks, even under strict data constraints.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-04T17:47:28Z</ns0:published>\n    <ns1:comment>26 pages (excluding the references section), 7 figures (excluding sub-figures)</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Reza Rajabli</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>D. Louis Collins</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "A frozen 3D CNN pretrained for brain-age prediction, adapted with LoRA, transfers to Alzheimer's MRI tasks across cohorts with AUCs of 0.80-0.96 and…",
+  "title": "A Generalizable Feature Extractor for Alzheimer's-Related Brain MRI Tasks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.05400v1"
+}

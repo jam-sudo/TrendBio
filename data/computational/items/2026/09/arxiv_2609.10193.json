@@ -1,0 +1,36 @@
+{
+  "abstract": "Protein-protein interaction (PPI) databases do not faithfully reflect biological realities. Instead, they are influenced by study and technical biases that distort certain protein and interaction attributes. Machine learning models can exploit these as learning shortcuts if the negative dataset is not constructed with care. So far, the shortcuts introduced during PPI dataset construction have only been examined in isolation. Here, we systematically characterize both reported and, to our knowledge, previously unreported biases in PPI datasets that lead machine learning models to learn shortcuts instead of biological signal. We analyze HIPPIE, IntAct, and STRING, dedicated PPI databases, as well as two datasets derived from 3D-structural information in the Protein Data Bank (PDB). We show that random data splitting introduces strong topological shortcuts. When train-test protein overlap is removed, the resulting datasets still retain usable shortcuts stemming from self-interactions, taxonomic identity, and functional relatedness, whose prevalence interestingly depends on the data source. We further show that sampling negatives from a set of high-confidence non-interactors, an intuitively appealing choice, can amplify the shortcut stemming from functional relatedness. To detect and mitigate these biases, we provide an open Nextflow pipeline that combines similarity-aware, data-loss-minimizing dataset splitting with bias-minimizing negative sampling, both formulated as integer linear programs. Its key concept of quantifying biases to minimize them through optimization-based negative sampling can, in principle, be extended to any machine learning problem where the pool of negative candidates is much larger than the positives and is thus of interest also beyond PPI prediction.",
+  "authors": [
+    "Judith Bernett",
+    "Anton Spannagl",
+    "Joel Ås",
+    "Markus List",
+    "David B. Blumenthal"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-09",
+  "id": "arxiv:2609.10193",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.MN",
+    "categories": [
+      "q-bio.MN",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.10193v1</ns0:id>\n    <ns0:title>Are You Learning Biological Signal or Shortcuts? Auditing and Mitigating Bias in Protein-Protein Interaction Datasets</ns0:title>\n    <ns0:updated>2026-09-09T14:02:18Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.10193v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.10193v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Protein-protein interaction (PPI) databases do not faithfully reflect biological realities. Instead, they are influenced by study and technical biases that distort certain protein and interaction attributes. Machine learning models can exploit these as learning shortcuts if the negative dataset is not constructed with care. So far, the shortcuts introduced during PPI dataset construction have only been examined in isolation. Here, we systematically characterize both reported and, to our knowledge, previously unreported biases in PPI datasets that lead machine learning models to learn shortcuts instead of biological signal. We analyze HIPPIE, IntAct, and STRING, dedicated PPI databases, as well as two datasets derived from 3D-structural information in the Protein Data Bank (PDB). We show that random data splitting introduces strong topological shortcuts. When train-test protein overlap is removed, the resulting datasets still retain usable shortcuts stemming from self-interactions, taxonomic identity, and functional relatedness, whose prevalence interestingly depends on the data source. We further show that sampling negatives from a set of high-confidence non-interactors, an intuitively appealing choice, can amplify the shortcut stemming from functional relatedness. To detect and mitigate these biases, we provide an open Nextflow pipeline that combines similarity-aware, data-loss-minimizing dataset splitting with bias-minimizing negative sampling, both formulated as integer linear programs. Its key concept of quantifying biases to minimize them through optimization-based negative sampling can, in principle, be extended to any machine learning problem where the pool of negative candidates is much larger than the positives and is thus of interest also beyond PPI prediction.</ns0:summary>\n    <ns0:category term=\"q-bio.MN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-09T14:02:18Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.MN\" />\n    <ns0:author>\n      <ns0:name>Judith Bernett</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anton Spannagl</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Joel Ås</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Markus List</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>David B. Blumenthal</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-09-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Audits shortcut biases in PPI datasets (HIPPIE, IntAct, STRING, PDB-derived) and proposes an open Nextflow pipeline with ILP-based splitting and negative…",
+  "title": "Are You Learning Biological Signal or Shortcuts? Auditing and Mitigating Bias in Protein-Protein Interaction Datasets",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.10193v1"
+}

@@ -1,0 +1,41 @@
+{
+  "abstract": "Scientific image sequences often feature recurring structures with unknown appearance and dynamics. While traditional methods using predefined templates, noise models, or motion classes work well when targets are known, such assumptions can hinder exploratory analysis where discovering that knowledge is the primary goal. This work presents a self-supervised framework that maps noisy video into a discrete vocabulary of local states and their spatiotemporal relationships. The method operates without clean targets, pretrained representations, semantic labels, feature templates, or prescribed trajectories, assuming only that informative structures recur for a finite duration within a bounded spatial neighborhood. A temporally masked vector-quantized network predicts the missing central frame from its neighbors, while a masked Transformer refines token assignments by weighing encoder evidence against contextual compatibility. Project-specific token sets define the feature family, while a support model quantifies the temporal evidence for individual occurrences, facilitating optional conservative suppression. The framework is first demonstrated on synthetic videos of moving particles. Without access to clean frames or particle coordinates during learning and selection, the learned states recover compact, point-spread-function-like structures. Tests on low-signal particle-tracking benchmarks yield frame-wise component precision between 87.0% and 94.5%, with recall decreasing as particle density rises. An experimental example using E. coli further shows that discrete states can separate biological structures from illumination and acquisition artifacts. In all cases, the primary outputs are interpretable state, activity, support, and component maps; rendered images serve as diagnostics rather than optimization targets.",
+  "authors": [
+    "Zhao, S.-C.",
+    "Mizuno, D."
+  ],
+  "doi": "10.64898/2026.09.17.751938",
+  "first_seen": "2026-09-24",
+  "id": "biorxiv:10.64898/2026.09.17.751938",
+  "metadata": {
+    "abstract": "Scientific image sequences often feature recurring structures with unknown appearance and dynamics. While traditional methods using predefined templates, noise models, or motion classes work well when targets are known, such assumptions can hinder exploratory analysis where discovering that knowledge is the primary goal. This work presents a self-supervised framework that maps noisy video into a discrete vocabulary of local states and their spatiotemporal relationships. The method operates without clean targets, pretrained representations, semantic labels, feature templates, or prescribed trajectories, assuming only that informative structures recur for a finite duration within a bounded spatial neighborhood. A temporally masked vector-quantized network predicts the missing central frame from its neighbors, while a masked Transformer refines token assignments by weighing encoder evidence against contextual compatibility. Project-specific token sets define the feature family, while a support model quantifies the temporal evidence for individual occurrences, facilitating optional conservative suppression. The framework is first demonstrated on synthetic videos of moving particles. Without access to clean frames or particle coordinates during learning and selection, the learned states recover compact, point-spread-function-like structures. Tests on low-signal particle-tracking benchmarks yield frame-wise component precision between 87.0% and 94.5%, with recall decreasing as particle density rises. An experimental example using E. coli further shows that discrete states can separate biological structures from illumination and acquisition artifacts. In all cases, the primary outputs are interpretable state, activity, support, and component maps; rendered images serve as diagnostics rather than optimization targets.",
+    "author_corresponding": "Song-Chuan Zhao",
+    "author_corresponding_institution": "Kyushu University",
+    "authors": "Zhao, S.-C.; Mizuno, D.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-09-24",
+    "doi": "10.64898/2026.09.17.751938",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/24/2026.09.17.751938.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Self-Supervised Discovery of Discrete Local States in Noisy Image Sequences",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Kyushu University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Self-supervised vector-quantized network with masked Transformer maps noisy microscopy video to discrete local states; tested on particle tracking and E. coli…",
+  "title": "Self-Supervised Discovery of Discrete Local States in Noisy Image Sequences",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.17.751938"
+}

@@ -1,0 +1,35 @@
+{
+  "abstract": "Bidirectional discrete diffusion model appears naturally suited to genomic modeling because it can reconstruct missing sequence from both flanks. We developed GenDA (Genomic Density-optimized Absorbing Diffusion) under the additional hypothesis that entropy-guided span placement would concentrate reconstruction pressure on compositionally complex regions, improving both downstream variant-effect prediction and functional sequence generation. Our results only partially support this premise. After supervised fine-tuning, the 202M-parameter GenDA model reaches a pooled ClinVar SNV AUROC of 0.774, exceeding a similarly scaled autoregressive model by 0.103. However, a matched random-span variant reaches 0.777, providing no evidence that entropy guidance causes the ClinVar improvement. More unexpectedly, GenDA fails a zero-shot functional inpainting stress test: across promoters, enhancers, exon boundaries, and intron boundaries, it does not consistently outperform a control that shuffles the native gap while exactly preserving 3-mer composition. Failure is already present for 50--500-bp gaps, although enhancer degradation worsens at longer gaps. Diagnostics identify several boundary conditions: entropy measures local sequence complexity rather than functional importance; 1-mer tokenization limits physical context; training spans are capped at 300 bp; and high absolute AlphaGenome fidelity can coexist with negative control-normalized restoration. These results show that strong fine-tuned variant prediction, a plausible corruption prior, and functional generation are distinct claims that require separate validation.",
+  "authors": [
+    "Susu Hu",
+    "Preetam Gattogi",
+    "Jens Lehmann",
+    "Sahar Vahdati",
+    "Stefanie Speidel",
+    "Julien Vibert"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-04",
+  "id": "arxiv:2609.04861",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.04861v2</ns0:id>\n    <ns0:title>When Genomic Masking Priors Fail to Transfer: Strong Variant Prediction, Weak Functional Generation</ns0:title>\n    <ns0:updated>2026-10-14T02:35:33Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.04861v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.04861v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Bidirectional discrete diffusion model appears naturally suited to genomic modeling because it can reconstruct missing sequence from both flanks. We developed GenDA (Genomic Density-optimized Absorbing Diffusion) under the additional hypothesis that entropy-guided span placement would concentrate reconstruction pressure on compositionally complex regions, improving both downstream variant-effect prediction and functional sequence generation. Our results only partially support this premise. After supervised fine-tuning, the 202M-parameter GenDA model reaches a pooled ClinVar SNV AUROC of 0.774, exceeding a similarly scaled autoregressive model by 0.103. However, a matched random-span variant reaches 0.777, providing no evidence that entropy guidance causes the ClinVar improvement. More unexpectedly, GenDA fails a zero-shot functional inpainting stress test: across promoters, enhancers, exon boundaries, and intron boundaries, it does not consistently outperform a control that shuffles the native gap while exactly preserving 3-mer composition. Failure is already present for 50--500-bp gaps, although enhancer degradation worsens at longer gaps. Diagnostics identify several boundary conditions: entropy measures local sequence complexity rather than functional importance; 1-mer tokenization limits physical context; training spans are capped at 300 bp; and high absolute AlphaGenome fidelity can coexist with negative control-normalized restoration. These results show that strong fine-tuned variant prediction, a plausible corruption prior, and functional generation are distinct claims that require separate validation.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-04T08:21:34Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns1:journal_ref>NeurIPS 2026 workshop</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Susu Hu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Preetam Gattogi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jens Lehmann</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sahar Vahdati</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Stefanie Speidel</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julien Vibert</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "GenDA, a 202M-parameter bidirectional discrete diffusion model for genomic sequence, reaches 0.774 ClinVar SNV AUROC but fails zero-shot functional inpainting…",
+  "title": "When Genomic Masking Priors Fail to Transfer: Strong Variant Prediction, Weak Functional Generation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.04861v2"
+}

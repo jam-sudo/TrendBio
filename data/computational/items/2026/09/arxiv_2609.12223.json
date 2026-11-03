@@ -1,0 +1,37 @@
+{
+  "abstract": "Collision cross section (CCS), derived from ion mobility mass spectrometry, is a common descriptor for molecular annotation. Prediction is challenging for machine learning models because it reflects the size, shape, and ionization state of a gas-phase molecular ion. Most predictors either ignore explicit 3D structure or treat adduct identity as a late categorical feature, which limits their ability to capture adduct-dependent geometric effects. We present GRACE (Geometric Residual Adduct Conditioning via Early-fusion), a 3D CCS predictor that adapts a pretrained molecular geometry encoder using geometric residual adduct conditioning via early fusion. GRACE combines two inductive biases: a residual objective relative to an adduct-aware physical descriptor baseline and adduct conditioning within the encoder via a learned adduct token and low-rank attention adapters. We evaluate the model on a curated set of over 9,000 experimental molecule-adduct CCS records with random, scaffold, and adduct-sensitive splits designed to separate interpolation, scaffold generalization, and adduct-driven generalization. GRACE achieves the best mean percentage difference among the evaluated learned models on all three splits: 1.67% on the random split, 2.11% on the scaffold split, and 2.36% on the adduct-sensitive split. Diagnostic analyses suggest that residual learning stabilizes training by removing the dominant mass-CCS trend, while early fusion improves adduct-sensitive prediction relative to late fusion. Across four independent external test sets, GRACE shows consistently lower error than the other evaluated models. On a held-out set, GRACE also attains the lowest mean percent difference when compared with four previously reported physics-based workflows. These results support residual learning and encoder-level adduct conditioning as practical inductive biases for fast, accurate CCS prediction.",
+  "authors": [
+    "Parthasarathy Suryanarayanan",
+    "Susanta Das",
+    "Shreyans Sethi",
+    "Kenneth M. Merz,",
+    "Joseph A. Morrone"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-10",
+  "id": "arxiv:2609.12223",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.12223v2</ns0:id>\n    <ns0:title>Predicting Collision Cross Sections with GRACE: Geometric Residual Adduct Conditioning via Early-fusion</ns0:title>\n    <ns0:updated>2026-10-01T23:09:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.12223v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.12223v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Collision cross section (CCS), derived from ion mobility mass spectrometry, is a common descriptor for molecular annotation. Prediction is challenging for machine learning models because it reflects the size, shape, and ionization state of a gas-phase molecular ion. Most predictors either ignore explicit 3D structure or treat adduct identity as a late categorical feature, which limits their ability to capture adduct-dependent geometric effects. We present GRACE (Geometric Residual Adduct Conditioning via Early-fusion), a 3D CCS predictor that adapts a pretrained molecular geometry encoder using geometric residual adduct conditioning via early fusion. GRACE combines two inductive biases: a residual objective relative to an adduct-aware physical descriptor baseline and adduct conditioning within the encoder via a learned adduct token and low-rank attention adapters. We evaluate the model on a curated set of over 9,000 experimental molecule-adduct CCS records with random, scaffold, and adduct-sensitive splits designed to separate interpolation, scaffold generalization, and adduct-driven generalization. GRACE achieves the best mean percentage difference among the evaluated learned models on all three splits: 1.67% on the random split, 2.11% on the scaffold split, and 2.36% on the adduct-sensitive split. Diagnostic analyses suggest that residual learning stabilizes training by removing the dominant mass-CCS trend, while early fusion improves adduct-sensitive prediction relative to late fusion. Across four independent external test sets, GRACE shows consistently lower error than the other evaluated models. On a held-out set, GRACE also attains the lowest mean percent difference when compared with four previously reported physics-based workflows. These results support residual learning and encoder-level adduct conditioning as practical inductive biases for fast, accurate CCS prediction.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-10T21:31:11Z</ns0:published>\n    <ns1:comment>35 pages, including 10 figures and 18 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Parthasarathy Suryanarayanan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Susanta Das</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shreyans Sethi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kenneth M. Merz,</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Joseph A. Morrone</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "metabolomics",
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "GRACE predicts ion mobility collision cross sections from 3D geometry using residual learning and early adduct conditioning in a pretrained encoder, reporting…",
+  "title": "Predicting Collision Cross Sections with GRACE: Geometric Residual Adduct Conditioning via Early-fusion",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.12223v2"
+}

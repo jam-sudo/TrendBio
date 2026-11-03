@@ -1,0 +1,41 @@
+{
+  "abstract": "Motivation: Multivariate survival analysis with hundreds of correlated outcomes is computationally challenging. Established approaches either ignore correlations between response variables, rely on black-box deep learning or are limited to small-scale outcomes. Results: We introduce MMAD-Risk, a novel multivariate mixed accelerated failure time (AFT) model that enables scalable analysis of high-dimensional survival analysis data. We train MMAD-Risk using amortized variational inference where we design the variational distribution such that it factorizes across diseases, allowing us to decompose multivariate disease risk prediction into a series of tractable, one-dimensional problems. This allows us to calculate the ELBO analytically, enabling fast computation. The model employs a low-rank decomposition of the effect size matrix B = VW to capture shared disease mechanisms and latent random effects Vz to model comorbidity. MMAD-Risk is trained on the UK Biobank Pharma Proteomics cohort (N {approx} 55000, P {approx} 3000 proteins, D = 271 diseases). Using the full 3,000-protein dataset, MMAD-Risk achieved a mean concordance index (c-index) of 0.744 for diagnoses occurring [&gt;=] 10 years after blood sample collection, outperforming a Cox proportional hazards model (mean c-index = 0.709). Greedy backward selection identified a 10-protein panel that preserved > 99% of the full-model performance. On this reduced panel MMAD-Risk still outperformed Cox regression (0.738 vs. 0.679).",
+  "authors": [
+    "Hilger, A. M.",
+    "Soeding, J."
+  ],
+  "doi": "10.64898/2026.09.16.752074",
+  "first_seen": "2026-09-17",
+  "id": "biorxiv:10.64898/2026.09.16.752074",
+  "metadata": {
+    "abstract": "Motivation: Multivariate survival analysis with hundreds of correlated outcomes is computationally challenging. Established approaches either ignore correlations between response variables, rely on black-box deep learning or are limited to small-scale outcomes. Results: We introduce MMAD-Risk, a novel multivariate mixed accelerated failure time (AFT) model that enables scalable analysis of high-dimensional survival analysis data. We train MMAD-Risk using amortized variational inference where we design the variational distribution such that it factorizes across diseases, allowing us to decompose multivariate disease risk prediction into a series of tractable, one-dimensional problems. This allows us to calculate the ELBO analytically, enabling fast computation. The model employs a low-rank decomposition of the effect size matrix B = VW to capture shared disease mechanisms and latent random effects Vz to model comorbidity. MMAD-Risk is trained on the UK Biobank Pharma Proteomics cohort (N {approx} 55000, P {approx} 3000 proteins, D = 271 diseases). Using the full 3,000-protein dataset, MMAD-Risk achieved a mean concordance index (c-index) of 0.744 for diagnoses occurring [&gt;=] 10 years after blood sample collection, outperforming a Cox proportional hazards model (mean c-index = 0.709). Greedy backward selection identified a 10-protein panel that preserved > 99% of the full-model performance. On this reduced panel MMAD-Risk still outperformed Cox regression (0.738 vs. 0.679).",
+    "author_corresponding": "Johannes Soeding",
+    "author_corresponding_institution": "Max Planck Institute for Multidisciplinary Sciences",
+    "authors": "Hilger, A. M.; Soeding, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-17",
+    "doi": "10.64898/2026.09.16.752074",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/17/2026.09.16.752074.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MMAD-Risk: Multivariate Mixed Survival Analysis for the Prediction of Age-Dependent Disease Risks from Plasma Proteomes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Max Planck Institute for Multidisciplinary Sciences",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "proteomics"
+  ],
+  "source": "biorxiv",
+  "summary": "MMAD-Risk: a scalable multivariate mixed AFT survival model with amortized variational inference predicts 271 age-dependent disease risks from UK Biobank…",
+  "title": "MMAD-Risk: Multivariate Mixed Survival Analysis for the Prediction of Age-Dependent Disease Risks from Plasma Proteomes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.16.752074"
+}

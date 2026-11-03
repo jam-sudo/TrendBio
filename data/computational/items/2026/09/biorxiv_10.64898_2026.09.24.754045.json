@@ -1,0 +1,43 @@
+{
+  "abstract": "Motivation: Biomedical natural language processing (Bio-NLP) classification tasks are often limited by the cost of manual annotation, especially for specialised extraction problems where labelled corpora are scarce. Active learning can reduce this cost by prioritising informative samples, while large language models (LLMs) avoid task-specific annotation, but at high computational cost. We ask whether an encoder trained via active learning can match LLM performance at a lower computational cost, using identification of chondrogenesis regulators from PubMed abstracts as a test case applicable to other under-annotated Bio-NLP problems. Results: We built an active learning framework to fine-tune PubMedBERT to classify gene mentions as regulators of chondrocyte differentiation, achieving an AUC-ROC of 0.93 using 1,238 annotated sentences. Against open-weight LLMs (Qwen3, Llama-3.1), PubMedBERT matched the top-performing LLMs on AUC-ROC and achieved the highest precision (0.69) of any model, while classifying the full corpus far faster. Applied to 67,111 gene mentions, it identified 1,128 candidate regulators, recovered 79% of Gene Ontology-annotated genes related to chondrocyte differentiation (94 genes recovered), and proposed 981 new candidates. The pipeline is agnostic to the target process, suggesting it could be adapted to identify regulators of other biological processes. Availability and Implementation: Code is available at https://github.com/ChondroTextomics/ALRegulatorDiscovery. Data are available at Zenodo: https://doi.org/10.5281/zenodo.22746090. Final model is available in HuggingFace Hub amav/pubmedbert-chondrogenesis-classifier Supplementary information: Supplementary data are available in a separate file",
+  "authors": [
+    "Anhel, A.-M.",
+    "Peffers, M. J.",
+    "Young, D.",
+    "Soul, J."
+  ],
+  "doi": "10.64898/2026.09.24.754045",
+  "first_seen": "2026-09-29",
+  "id": "biorxiv:10.64898/2026.09.24.754045",
+  "metadata": {
+    "abstract": "Motivation: Biomedical natural language processing (Bio-NLP) classification tasks are often limited by the cost of manual annotation, especially for specialised extraction problems where labelled corpora are scarce. Active learning can reduce this cost by prioritising informative samples, while large language models (LLMs) avoid task-specific annotation, but at high computational cost. We ask whether an encoder trained via active learning can match LLM performance at a lower computational cost, using identification of chondrogenesis regulators from PubMed abstracts as a test case applicable to other under-annotated Bio-NLP problems. Results: We built an active learning framework to fine-tune PubMedBERT to classify gene mentions as regulators of chondrocyte differentiation, achieving an AUC-ROC of 0.93 using 1,238 annotated sentences. Against open-weight LLMs (Qwen3, Llama-3.1), PubMedBERT matched the top-performing LLMs on AUC-ROC and achieved the highest precision (0.69) of any model, while classifying the full corpus far faster. Applied to 67,111 gene mentions, it identified 1,128 candidate regulators, recovered 79% of Gene Ontology-annotated genes related to chondrocyte differentiation (94 genes recovered), and proposed 981 new candidates. The pipeline is agnostic to the target process, suggesting it could be adapted to identify regulators of other biological processes. Availability and Implementation: Code is available at https://github.com/ChondroTextomics/ALRegulatorDiscovery. Data are available at Zenodo: https://doi.org/10.5281/zenodo.22746090. Final model is available in HuggingFace Hub amav/pubmedbert-chondrogenesis-classifier Supplementary information: Supplementary data are available in a separate file",
+    "author_corresponding": "Jamie Soul",
+    "author_corresponding_institution": "University of Liverpool",
+    "authors": "Anhel, A.-M.; Peffers, M. J.; Young, D.; Soul, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-29",
+    "doi": "10.64898/2026.09.24.754045",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/29/2026.09.24.754045.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A low-annotation-budget PubMedBERT classifier for chondrogenesis regulator discovery via active learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Liverpool",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Active-learning fine-tuned PubMedBERT classifies gene mentions as chondrocyte differentiation regulators, matching open LLMs on AUC-ROC at lower cost and…",
+  "title": "A low-annotation-budget PubMedBERT classifier for chondrogenesis regulator discovery via active learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.24.754045"
+}

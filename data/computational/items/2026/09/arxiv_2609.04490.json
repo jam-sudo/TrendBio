@@ -1,0 +1,33 @@
+{
+  "abstract": "Quantization is widely used to reduce the computational and memory demands of neural-network inference. In recurrent networks, however, the quantized state is stored and returned at the next time step, so the rule used to store that state can alter subsequent computations. Here, we introduce recurrent-state write-back to denote this rule and isolate its effect in a compact GRU encoder--decoder for fluorescence lifetime imaging, a molecular imaging modality used in quantitative biological imaging. A central task is estimating two lifetime parameters, the short-lived component τ1 and the long-lived component τ2, from high-noise time-resolved fluorescence signals. Holding the trained model fixed, replacing continuous state propagation with deterministic 4-bit state storage increases estimation errors for τ1 and τ2 by approximately 70x and 300x, respectively. Failure occurs when repeated small updates remain below the write threshold, leaving the stored state nearly fixed while the network continues to propose change. Error feedback, residual memory, and direction memory carry information from these suppressed updates across time and recover accuracy without retraining. Precision sweeps show that increasing state precision can worsen a fixed recurrent solution, while matched training shows that compatibility with the state interface can be learned. To test whether this behavior extends beyond the GRU, we repeat the post-training intervention in an independently trained LSTM, where coarse write-back reproduces the failure, error feedback restores accuracy, and state-specific interventions reveal greater sensitivity of the cell state than the hidden state. Our results establish recurrent-state write-back as a key determinant of low-precision recurrent dynamics and identify the state-storage interface as a central design consideration for quantized recurrent inference.",
+  "authors": [
+    "Ismail Erbas",
+    "Xavier Intes",
+    "Vikas Pandey"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-03",
+  "id": "arxiv:2609.04490",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "cs.LG",
+      "physics.optics",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.04490v1</ns0:id>\n    <ns0:title>When Quantization Breaks Memory: Recurrent-State Write-Back in Low-Precision Temporal Inference</ns0:title>\n    <ns0:updated>2026-09-03T21:23:35Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.04490v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.04490v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Quantization is widely used to reduce the computational and memory demands of neural-network inference. In recurrent networks, however, the quantized state is stored and returned at the next time step, so the rule used to store that state can alter subsequent computations. Here, we introduce recurrent-state write-back to denote this rule and isolate its effect in a compact GRU encoder--decoder for fluorescence lifetime imaging, a molecular imaging modality used in quantitative biological imaging. A central task is estimating two lifetime parameters, the short-lived component τ1 and the long-lived component τ2, from high-noise time-resolved fluorescence signals. Holding the trained model fixed, replacing continuous state propagation with deterministic 4-bit state storage increases estimation errors for τ1 and τ2 by approximately 70x and 300x, respectively. Failure occurs when repeated small updates remain below the write threshold, leaving the stored state nearly fixed while the network continues to propose change. Error feedback, residual memory, and direction memory carry information from these suppressed updates across time and recover accuracy without retraining. Precision sweeps show that increasing state precision can worsen a fixed recurrent solution, while matched training shows that compatibility with the state interface can be learned. To test whether this behavior extends beyond the GRU, we repeat the post-training intervention in an independently trained LSTM, where coarse write-back reproduces the failure, error feedback restores accuracy, and state-specific interventions reveal greater sensitivity of the cell state than the hidden state. Our results establish recurrent-state write-back as a key determinant of low-precision recurrent dynamics and identify the state-storage interface as a central design consideration for quantized recurrent inference.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.optics\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-03T21:23:35Z</ns0:published>\n    <ns1:comment>28 pages, 8 figures</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Ismail Erbas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xavier Intes</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Vikas Pandey</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Quantization is widely used to reduce the computational and memory demands of neural-network inference.",
+  "title": "When Quantization Breaks Memory: Recurrent-State Write-Back in Low-Precision Temporal Inference",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.04490v1"
+}

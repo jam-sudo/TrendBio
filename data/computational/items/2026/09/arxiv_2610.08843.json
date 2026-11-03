@@ -1,0 +1,35 @@
+{
+  "abstract": "Proton therapy offers a dosimetric advantage over conventional radiotherapy through the Bragg peak, enabling precise dose delivery to the tumour while sparing surrounding tissue. Monte Carlo (MC) simulation provides the most accurate dose calculation but is computationally expensive for clinical workflows. A promising compromise is to simulate with a reduced number of primary histories and recover a high-quality dose distribution through a deep learning denoising step.\n  In this work, we take a 3D multiscale U-Net from recent literature as a case study and investigate two improvements critical for clinical deployment. First, we replace the standard MSE training objective with a differentiable $γ$-index-based loss, extended to native 3D operation, and demonstrate that directly optimising the clinical evaluation metric yields a mean Gamma Passing Rate of 99.47\\% at 2mm/2\\% and 95.67\\% at 1mm/1\\% on the test set, compared to 92.10\\% and 71.13\\% for MSE. Second, we apply L1-norm structured filter pruning to reduce the model's memory footprint, achieving a 13.3\\% parameter reduction with negligible performance loss under partial pruning, and 20\\% reduction under full-block pruning after fine-tuning.",
+  "authors": [
+    "Junaid Jawaid",
+    "Matteo Spezialetti",
+    "Gabriele Libardi",
+    "Giovanni Stilo",
+    "Filippo Mignosi"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-30",
+  "id": "arxiv:2610.08843",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "eess.IV"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.08843v1</ns0:id>\n    <ns0:title>Optimization of Deep Learning Model for Denoising Dose Profiles in Proton Therapy</ns0:title>\n    <ns0:updated>2026-09-30T15:22:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.08843v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.08843v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Proton therapy offers a dosimetric advantage over conventional radiotherapy through the Bragg peak, enabling precise dose delivery to the tumour while sparing surrounding tissue. Monte Carlo (MC) simulation provides the most accurate dose calculation but is computationally expensive for clinical workflows. A promising compromise is to simulate with a reduced number of primary histories and recover a high-quality dose distribution through a deep learning denoising step.\n  In this work, we take a 3D multiscale U-Net from recent literature as a case study and investigate two improvements critical for clinical deployment. First, we replace the standard MSE training objective with a differentiable $γ$-index-based loss, extended to native 3D operation, and demonstrate that directly optimising the clinical evaluation metric yields a mean Gamma Passing Rate of 99.47\\% at 2mm/2\\% and 95.67\\% at 1mm/1\\% on the test set, compared to 92.10\\% and 71.13\\% for MSE. Second, we apply L1-norm structured filter pruning to reduce the model's memory footprint, achieving a 13.3\\% parameter reduction with negligible performance loss under partial pruning, and 20\\% reduction under full-block pruning after fine-tuning.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-30T15:22:37Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Junaid Jawaid</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Matteo Spezialetti</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gabriele Libardi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Giovanni Stilo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Filippo Mignosi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Optimises a 3D U-Net for denoising proton-therapy Monte Carlo dose profiles using a differentiable gamma-index loss and L1 structured filter pruning to cut…",
+  "title": "Optimization of Deep Learning Model for Denoising Dose Profiles in Proton Therapy",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.08843v1"
+}

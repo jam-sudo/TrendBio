@@ -1,0 +1,36 @@
+{
+  "abstract": "Proteolysis-targeting chimeras (PROTACs) have emerged as a transformative therapeutic strategy that selectively degrades historically ''undruggable'' targets via the ubiquitin-proteasome system. Despite growing efforts to develop computational predictors of PROTAC degradation activity, existing supervised approaches remain severely challenged by data scarcity and imbalance across E3 ligases, limiting their ability to generalize beyond well-studied ligase contexts. In practice, labeled data are heavily concentrated on a few ligases (e.g., CRBN and VHL), while the majority of E3 ligases remain underexplored yet are critical for expanding the design space of targeted degraders. Developing methods that enable robust cross-ligase generalization with minimal labeled data is therefore essential for improving the practical utility of computational PROTAC discovery. We reformulate PROTAC degradation activity prediction across E3 ligases as a few-shot meta-learning problem and present ProMeta, a prototype-based graph neural network trained through episodic meta-learning on source-E3 tasks and evaluated on held-out target-E3 tasks through support-conditioned inference. ProMeta performs inference without updating the encoder by dynamically estimating class prototypes from minimal target-ligase support samples. On the CRBN-to-VHL benchmark, ProMeta achieves AUROC values of 0.796 under K=2, Q=3 and 0.883 under K=2, Q=5, improving by 19.9% and 6.8%, respectively, over the corresponding supervised GNN baseline. Reverse VHL-to-CRBN transfer under the same protocol yielded AUROC values of 0.702 (K=2, Q=3) and 0.821 (K=2, Q=5), confirming bidirectional applicability while revealing direction and data-regime dependence. Together, these results support ProMeta as a practical framework for cross-ligase few-shot prediction under the evaluated support/query protocols.",
+  "authors": [
+    "Yuansheng Liu",
+    "Yufei Ye",
+    "Tao Tang",
+    "Jiawei Luo",
+    "Wen Tao",
+    "Xiao Luo"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-09",
+  "id": "arxiv:2609.09891",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.09891v1</ns0:id>\n    <ns0:title>ProMeta: Few-shot PROTAC-targeted degradation prediction across E3 ligases</ns0:title>\n    <ns0:updated>2026-09-09T08:47:01Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.09891v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.09891v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Proteolysis-targeting chimeras (PROTACs) have emerged as a transformative therapeutic strategy that selectively degrades historically ''undruggable'' targets via the ubiquitin-proteasome system. Despite growing efforts to develop computational predictors of PROTAC degradation activity, existing supervised approaches remain severely challenged by data scarcity and imbalance across E3 ligases, limiting their ability to generalize beyond well-studied ligase contexts. In practice, labeled data are heavily concentrated on a few ligases (e.g., CRBN and VHL), while the majority of E3 ligases remain underexplored yet are critical for expanding the design space of targeted degraders. Developing methods that enable robust cross-ligase generalization with minimal labeled data is therefore essential for improving the practical utility of computational PROTAC discovery. We reformulate PROTAC degradation activity prediction across E3 ligases as a few-shot meta-learning problem and present ProMeta, a prototype-based graph neural network trained through episodic meta-learning on source-E3 tasks and evaluated on held-out target-E3 tasks through support-conditioned inference. ProMeta performs inference without updating the encoder by dynamically estimating class prototypes from minimal target-ligase support samples. On the CRBN-to-VHL benchmark, ProMeta achieves AUROC values of 0.796 under K=2, Q=3 and 0.883 under K=2, Q=5, improving by 19.9% and 6.8%, respectively, over the corresponding supervised GNN baseline. Reverse VHL-to-CRBN transfer under the same protocol yielded AUROC values of 0.702 (K=2, Q=3) and 0.821 (K=2, Q=5), confirming bidirectional applicability while revealing direction and data-regime dependence. Together, these results support ProMeta as a practical framework for cross-ligase few-shot prediction under the evaluated support/query protocols.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-09T08:47:01Z</ns0:published>\n    <ns1:comment>13 pages, 4 figures, and 2 tables. Source code and reproducibility resources are available at https://github.com/yeyufeiyyf/prometa and https://doi.org/10.5281/zenodo.21371599</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Yuansheng Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yufei Ye</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tao Tang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiawei Luo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wen Tao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiao Luo</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "ProMeta casts PROTAC degradation prediction across E3 ligases as few-shot meta-learning with a prototype-based GNN, reporting AUROC gains on CRBN-to-VHL…",
+  "title": "ProMeta: Few-shot PROTAC-targeted degradation prediction across E3 ligases",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.09891v1"
+}

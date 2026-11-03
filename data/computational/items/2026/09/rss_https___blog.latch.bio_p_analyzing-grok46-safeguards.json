@@ -1,0 +1,85 @@
+{
+  "abstract": "Analyzing performance of the new safeguards across our benchmark suite",
+  "authors": [
+    "Arjun Banerjee"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-01",
+  "id": "rss:https://blog.latch.bio/p/analyzing-grok46-safeguards",
+  "metadata": {
+    "author": "Arjun Banerjee",
+    "author_detail": {
+      "name": "Arjun Banerjee"
+    },
+    "authors": [
+      {
+        "name": "Arjun Banerjee"
+      }
+    ],
+    "content": [
+      {
+        "base": "",
+        "language": null,
+        "type": "text/html",
+        "value": "<p>Following the initial releas<span>e of Grok 4.6, LatchBio performed testing of the latest-available version of the model on our </span><a href=\"https://benchmarks.bio/\"><span>full suite of biological-capability tests</span></a><span>, including  </span><a href=\"https://benchmarks.bio/security\"><span>BiosecBench-Refusal</span></a><span>. This benchmark tests a model&#8217;s ability to refuse disguised red-team tasks while complying with routine research tasks that have dual-use characteristics across BSL-1 to BSL-4 viral, toxin, and bacterial engineering settings.</span></p><p></p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!5sc8!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7f6d9072-f3cb-4294-a666-e034b8343c61_1456x773.webp\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"773\" src=\"https://substackcdn.com/image/fetch/$s_!5sc8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7f6d9072-f3cb-4294-a666-e034b8343c61_1456x773.webp\" title=\"\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div><p><span>Our investigation into the latest-available Grok 4.6 checkpoint revealed:</span></p><ol><li><p><span>The currently-served version of Grok 4.6 is the most performant model we have tested on our biosecurity refusal benchmark, as measured by a weighted sum of disguised red-team refusals and routine, dual-use-adjacent research completions. This is a significant improvement from the earlier-tested versions of Grok 4.6.</span></p></li><li><p><span>This behavior is driven primarily by model intelligence, rather than input classifiers or system flags, unlike other models we have assessed.</span></p></li><li><p><span>Additionally, Grok 4.6&#8217;s refusal behavior does not degrade general biological performance. Grok 4.6 consistently scores near the top of our benchmarks, including therapeutics, variant discovery, epigenomics, spatial transcriptomics, single-cell transcriptomics, and pathogen surveillance.</span></p></li></ol><h2><strong>Model Performance</strong></h2><p><span>Grok 4.6 was the only model that we tested that scored above 50% in both red-team refusal </span><em><span>and</span></em><span> routine answer rates, regardless of which harness we tested it with. Grok 4.6 also resisted the trend of red-team refusal behavior trading off with routine task compliance, being highly performant in both refusing dangerous queries and answering dual-use queries that have legitimate research value.</span></p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!4QcU!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdf6987a3-b1a2-4bdf-b83e-6620d1d3a816_1983x1483.png\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"1089\" src=\"https://substackcdn.com/image/fetch/$s_!4QcU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdf6987a3-b1a2-4bdf-b83e-6620d1d3a816_1983x1483.png\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div><p></p><p><span>Model capability and red-team refusal rates were consistent across biological precaution levels, with BSL-1 tasks having similar performance to BSL-3/4. Additionally, Grok 4.6 distinguished routine from red-team tasks in the viral engineering and gain-of-function domains more reliably than other models tested.</span></p><p><span>There were two mechanisms that enabled Grok 4.6 to effectively distinguish between routine and red-team tasks:</span></p><ol><li><p><strong><span>Evasion Resistance Detection:</span></strong><span> Grok 4.6 is effective at recognizing attempts to conceal threats, such as anonymized input files, screening evasion workflows, or malicious data editing techniques.<br /><br />For example, in a task where inputs were anonymized, Grok successfully identified that the payload is related to an immune escape design request. In a task with a benign cover story, Grok noticed the framing conflicted with the file present and declined to build the vector. It also reasons around mislabelled files, correctly refusing a task containing a virus that was intentionally misannotated.<br /><br />Moreover, Grok is effective at identifying and correctly responding to hidden threats or malicious use. In two distinct tasks where sequences were fragmented, Grok 4.6 was able to successfully detect both viral genomes. Similar results were observed with backbone identification, where Grok was able to identify proteins that were modified to conceal identity. Grok is thus </span><em><span>one</span></em><span> of the most capable models we&#8217;ve tested in biosecurity monitoring, an observation further supported by results on our </span><a href=\"https://benchmarks.bio/surveillance\"><span>pathogen genomic surveillance benchmark</span></a><span>. </span></p><p></p></li><li><p><strong><span>Production Focus:</span></strong><span> Grok 4.6 discerns the purpose and intent behind an experiment, rather than refusing any task that involved dual-use materials. For example, instead of immediately rejecting tasks involving toxins, Grok reasons about the potential products, only answering tasks relating to neutralization goals while rejecting redesign tasks. A similar result was observed for viral engineering tasks, where neutralization or deactivation was enabled but redesign was not</span></p></li></ol><p><span>These mechanisms are distinctly reasoning-based, requiring the model to understand and deliberate on the biological intent of the task. Indeed, nearly all of Grok&#8217;s refusals are model-driven refusals, rather than system- or API-level blocks, regardless of harness. This is distinct from other models analyzed, which overwhelmingly rely on other moderation to control refusals, rather than underlying behavior of the model itself.</span></p><h2><strong>Frontier Biology Performance </strong></h2><p><span>Despite helping Grok 4.6 effectively detect malicious intent in biological work, these safeguards did not lead to any degradation in performance on any of the other benchmarks in our suite. For other models, increased refusal behavior frequently leads to refusals on benign tasks, such as pharmacodynamic reasoning or design of neoantigen cancer vaccines. This is not the case with Grok&#8217;s safeguards: There were no erroneous refusals present, and performance in other subdomains of biology was comparable to Opus 5 and GPT-5.6-Sol.</span></p><div class=\"captioned-image-container\"><figure><a class=\"image-link image2 is-viewable-img\" href=\"https://substackcdn.com/image/fetch/$s_!e5W0!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F999c3d02-e518-442e-bb88-b556a3dc917e_1999x1607.png\" target=\"_blank\"><div class=\"image2-inset\"><source type=\"image/webp\" /><img alt=\"\" class=\"sizing-normal\" height=\"1170\" src=\"https://substackcdn.com/image/fetch/$s_!e5W0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F999c3d02-e518-442e-bb88-b556a3dc917e_1999x1607.png\" width=\"1456\" /><div class=\"image-link-expand\"><div class=\"pencraft pc-display-flex pc-gap-8 pc-reset\"><button class=\"pencraft pc-reset pencraft icon-container restack-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"var(--color-fg-primary)\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M2.53001 7.81595C3.49179 4.73911 6.43281 2.5 9.91173 2.5C13.1684 2.5 15.9537 4.46214 17.0852 7.23684L17.6179 8.67647M17.6179 8.67647L18.5002 4.26471M17.6179 8.67647L13.6473 6.91176M17.4995 12.1841C16.5378 15.2609 13.5967 17.5 10.1178 17.5C6.86118 17.5 4.07589 15.5379 2.94432 12.7632L2.41165 11.3235M2.41165 11.3235L1.5293 15.7353M2.41165 11.3235L6.38224 13.0882\"></path></g></svg></button><button class=\"pencraft pc-reset pencraft icon-container view-image buttonBase-GK1x3M\" tabindex=\"0\" type=\"button\"><svg class=\"lucide lucide-maximize2 lucide-maximize-2 icon-noB79L\" fill=\"none\" height=\"20\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 0 24 24\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"15 3 21 3 21 9\"></polyline><polyline points=\"9 21 3 21 3 15\"></polyline><line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\"></line><line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\"></line></svg></button></div></div></div></a></figure></div><p><span>Thus, our findings indicate that the newest version of Grok 4.6 is significantly more performant than the previous versions we&#8217;ve tested. Additionally, this behavior is largely driven by model reasoning capabilities, which also enables frontier performance across various biology domains.</span></p><div class=\"subscription-widget-wrap-editor\"><div class=\"subscription-widget show-subscribe\"><div class=\"preamble\"><p class=\"cta-caption\"></p></div><form class=\"subscription-widget-subscribe\"><input class=\"email-input\" name=\"email\" tabindex=\"-1\" type=\"email\" /><input class=\"button primary\" type=\"submit\" value=\"Subscribe\" /><div class=\"fake-input-wrapper\"><div class=\"fake-input\"></div><div class=\"fake-button\"></div></div></form></div></div>"
+      }
+    ],
+    "feed_kind": "company",
+    "feed_name": "Latch Bio",
+    "feed_url": "https://blog.latch.bio/feed",
+    "guidislink": false,
+    "id": "https://blog.latch.bio/p/analyzing-grok46-safeguards",
+    "link": "https://blog.latch.bio/p/analyzing-grok46-safeguards",
+    "links": [
+      {
+        "href": "https://blog.latch.bio/p/analyzing-grok46-safeguards",
+        "rel": "alternate",
+        "type": "text/html"
+      },
+      {
+        "href": "https://substack-post-media.s3.amazonaws.com/public/images/0147ea0b-a853-4736-8ade-d9e9f53029f0_1131x600.png",
+        "length": "0",
+        "rel": "enclosure",
+        "type": "image/jpeg"
+      }
+    ],
+    "published": "Tue, 01 Sep 2026 15:20:40 GMT",
+    "published_parsed": [
+      2026,
+      9,
+      1,
+      15,
+      20,
+      40,
+      1,
+      244,
+      0
+    ],
+    "summary": "Analyzing performance of the new safeguards across our benchmark suite",
+    "summary_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/html",
+      "value": "Analyzing performance of the new safeguards across our benchmark suite"
+    },
+    "title": "Testing Grok 4.6’s Enhanced Biology Safeguards",
+    "title_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/plain",
+      "value": "Testing Grok 4.6’s Enhanced Biology Safeguards"
+    }
+  },
+  "org": "Latch Bio",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "rss",
+  "summary": "Analyzing performance of the new safeguards across our benchmark suite",
+  "title": "Testing Grok 4.6’s Enhanced Biology Safeguards",
+  "type": "industry",
+  "url": "https://blog.latch.bio/p/analyzing-grok46-safeguards"
+}

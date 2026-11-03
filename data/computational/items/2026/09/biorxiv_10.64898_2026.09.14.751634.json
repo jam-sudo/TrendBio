@@ -1,0 +1,42 @@
+{
+  "abstract": "Clustering microbiome samples into community types is central to cohort stratification and biomarker discovery, yet the resulting inference becomes unstable when the between group signal is small compared with sampling noise: variational Bayes yields different partitions across initialisations, and common fixes do not solve the problem. Simple restarts are ineffective because the variational free energy is anti-correlated with clustering accuracy; deterministic annealing collapses to the same solution as greedy ascent, with the operator staying diagonal at every temperature; and parallel tempering replicas remain too similar to permit configuration exchanges. We propose QBayMic, which replaces the assignment step of a Dirichlet-multinomial mixture with sparse variable selection via a quantum Gibbs state under an annealed Hamiltonian, coupling competing assignments through a transverse-field term that cannot be reproduced by temperature scaling alone. We present two gate-based circuit designs for this step, evaluating on noiseless qubit-register simulations, and we derive a signal fraction, computable prior to clustering, that predicts the expected strength of quantum coupling. With matched compute in the predicted regime, the three classical methods recovered the reference partition (ARI > 0.4) in 0/100 seeds, while QBayMic recovered it in 47-64/100; when the number of clusters exceeded three, only QBayMic recovered the correct cluster count. For a soil pH dataset, the diagnostic indicates a narrow separation margin; for a human-derived dataset tuned into the predicted band via controlled dilution, classical methods recovered the cluster count in 0/100 seeds, compared with 61-76% for QBayMic. The implementation is publicly available at https://github.com/tungtokyo1108/QBayMic.",
+  "authors": [
+    "Dang, T.",
+    "Lysenko, A.",
+    "Tsunoda, T."
+  ],
+  "doi": "10.64898/2026.09.14.751634",
+  "first_seen": "2026-09-18",
+  "id": "biorxiv:10.64898/2026.09.14.751634",
+  "metadata": {
+    "abstract": "Clustering microbiome samples into community types is central to cohort stratification and biomarker discovery, yet the resulting inference becomes unstable when the between group signal is small compared with sampling noise: variational Bayes yields different partitions across initialisations, and common fixes do not solve the problem. Simple restarts are ineffective because the variational free energy is anti-correlated with clustering accuracy; deterministic annealing collapses to the same solution as greedy ascent, with the operator staying diagonal at every temperature; and parallel tempering replicas remain too similar to permit configuration exchanges. We propose QBayMic, which replaces the assignment step of a Dirichlet-multinomial mixture with sparse variable selection via a quantum Gibbs state under an annealed Hamiltonian, coupling competing assignments through a transverse-field term that cannot be reproduced by temperature scaling alone. We present two gate-based circuit designs for this step, evaluating on noiseless qubit-register simulations, and we derive a signal fraction, computable prior to clustering, that predicts the expected strength of quantum coupling. With matched compute in the predicted regime, the three classical methods recovered the reference partition (ARI > 0.4) in 0/100 seeds, while QBayMic recovered it in 47-64/100; when the number of clusters exceeded three, only QBayMic recovered the correct cluster count. For a soil pH dataset, the diagnostic indicates a narrow separation margin; for a human-derived dataset tuned into the predicted band via controlled dilution, classical methods recovered the cluster count in 0/100 seeds, compared with 61-76% for QBayMic. The implementation is publicly available at https://github.com/tungtokyo1108/QBayMic.",
+    "author_corresponding": "Tung Dang Sr.",
+    "author_corresponding_institution": "The University of Tokyo",
+    "authors": "Dang, T.; Lysenko, A.; Tsunoda, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-18",
+    "doi": "10.64898/2026.09.14.751634",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/18/2026.09.14.751634.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "QBayMic: Quantum-coupled variational Bayes for clustering and feature selection in low-signal microbiome data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Tokyo",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "QBayMic uses a quantum Gibbs-state variable selection step in a Dirichlet-multinomial mixture to stabilize microbiome clustering under low signal; simulations…",
+  "title": "QBayMic: Quantum-coupled variational Bayes for clustering and feature selection in low-signal microbiome data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.14.751634"
+}

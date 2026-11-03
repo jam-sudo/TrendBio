@@ -1,0 +1,47 @@
+{
+  "abstract": "Movement disorders (MDs) frequently co-occur, yet phenomenological and severity assessment shows substantial inter-rater variability. Markerless video could improve reproducibility, but prior work is largely single-symptom, depends on standardized acquisition, and lacks validation and transfer across ages and sites. We combined two foundation models into one frozen backbone: Segment Anything Model 3 (SAM 3) for dense, per-frame markerless segmentation summarized into geometric, contour and grid kinematic signals, and TabICLv2, a tabular foundation model, for in-context multi-label classification of eight hyperkinetic MD phenomenologies. Trained on standardized recordings of 21 adults and 4 controls, it transferred unchanged to two independent datasets, pediatric (n=12) and tremor-dominant adult (n=20), assessed with the CODY-SAMP scale; only the patient-level decision step was recalibrated per site. Under clinician consensus labels, false positives fell to zero in both datasets. Dystonia recovered perfectly (7/7 pediatric; 15/15 adult held-out), chorea fully in children (3/3), and tremor was recovered in adults (11/15) once a tremor-rich cohort made it evaluable, through recalibration alone. Per-region effect-size analysis gave clinically coherent, phenomenology-specific signals and identified myoclonus as the principal failure. Against YOLOv8 sparse keypoints, the dense representation matched under clinician permissive labels (Jaccard 0.63 vs 0.63) and was markedly more robust under clinician-label consensus (0.93 vs 0.76). This frozen foundation-model backbone with light per-site calibration yields transferable, interpretable, conservative multi-label phenotyping of co-occurring hyperkinetic MDs across ages and from standardized to routine video, adding robustness on high-confidence, clinician-agreed labels. Prospective multi-centre validation is required before clinical use.",
+  "authors": [
+    "Laura Cif",
+    "Zohra Souei",
+    "Diane Demailly",
+    "Mayte Castro-Jimenez",
+    "Juan Dario Ortigoza-Escobar",
+    "Muhammad Mushhood Ur Rehman",
+    "Morgan Dornadic",
+    "Sophie Huby",
+    "Gun-Marie Hariz",
+    "Cecile Hubsch",
+    "Nathalie Dorison",
+    "Eduardo M. Moraud",
+    "Jocelyne Bloch",
+    "Gabriella Horvath",
+    "Olivier Oullier",
+    "Xavier Vasques"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-17",
+  "id": "arxiv:2609.22369",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.22369v1</ns0:id>\n    <ns0:title>Foundation-model-based multi-label phenotyping of combined hyperkinetic movement disorders</ns0:title>\n    <ns0:updated>2026-09-17T15:50:35Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.22369v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.22369v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Movement disorders (MDs) frequently co-occur, yet phenomenological and severity assessment shows substantial inter-rater variability. Markerless video could improve reproducibility, but prior work is largely single-symptom, depends on standardized acquisition, and lacks validation and transfer across ages and sites. We combined two foundation models into one frozen backbone: Segment Anything Model 3 (SAM 3) for dense, per-frame markerless segmentation summarized into geometric, contour and grid kinematic signals, and TabICLv2, a tabular foundation model, for in-context multi-label classification of eight hyperkinetic MD phenomenologies. Trained on standardized recordings of 21 adults and 4 controls, it transferred unchanged to two independent datasets, pediatric (n=12) and tremor-dominant adult (n=20), assessed with the CODY-SAMP scale; only the patient-level decision step was recalibrated per site. Under clinician consensus labels, false positives fell to zero in both datasets. Dystonia recovered perfectly (7/7 pediatric; 15/15 adult held-out), chorea fully in children (3/3), and tremor was recovered in adults (11/15) once a tremor-rich cohort made it evaluable, through recalibration alone. Per-region effect-size analysis gave clinically coherent, phenomenology-specific signals and identified myoclonus as the principal failure. Against YOLOv8 sparse keypoints, the dense representation matched under clinician permissive labels (Jaccard 0.63 vs 0.63) and was markedly more robust under clinician-label consensus (0.93 vs 0.76). This frozen foundation-model backbone with light per-site calibration yields transferable, interpretable, conservative multi-label phenotyping of co-occurring hyperkinetic MDs across ages and from standardized to routine video, adding robustness on high-confidence, clinician-agreed labels. Prospective multi-centre validation is required before clinical use.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-17T15:50:35Z</ns0:published>\n    <ns1:comment>29 pages, 7 figures, 6 tables, 1 supplementary table. Submitted to Artificial Intelligence in Medicine. Code: https://github.com/xaviervasques/cody-sam3 ; data: https://doi.org/10.5281/zenodo.22232609</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Laura Cif</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zohra Souei</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Diane Demailly</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mayte Castro-Jimenez</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Juan Dario Ortigoza-Escobar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Muhammad Mushhood Ur Rehman</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Morgan Dornadic</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sophie Huby</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gun-Marie Hariz</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Cecile Hubsch</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nathalie Dorison</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Eduardo M. Moraud</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jocelyne Bloch</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gabriella Horvath</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Olivier Oullier</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xavier Vasques</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Frozen foundation-model pipeline (SAM 3 segmentation plus TabICLv2 in-context classification) for markerless multi-label phenotyping of hyperkinetic movement…",
+  "title": "Foundation-model-based multi-label phenotyping of combined hyperkinetic movement disorders",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.22369v1"
+}

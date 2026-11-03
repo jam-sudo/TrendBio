@@ -1,0 +1,41 @@
+{
+  "abstract": "Population-scale sequencing now produces variant call sets with thousands of samples and millions of sites, making post-calling analysis a recurring bottleneck. Because the Variant Call Format stores every field of every record together, a tool answering a field-limited question still parses the unused annotations, FORMAT blocks, and per-sample values, which costs time without changing the result. We present VariantFlow, a command-line engine built on selective execution, decoding only the fields the current filter, statistic, or projection requires and preserving original records where possible. On correctness-matched benchmarks on the 1000 Genomes 3,202-sample high-coverage dataset, VariantFlow computed whole-chromosome missingness 8.0-8.5x faster than VCFtools at a constant 8.6 MB of memory, the chromosome 1 summary taking 128 s against 1031 s. An index-assisted FILTER=PASS predicate ran 123-273x faster than bcftools where block metadata excludes most of the file. Further gains, reported in Table 1, cover FORMAT-rich filtering on record subsets, linkage disequilibrium, and export-once Parquet queries served through DuckDB. Core population-genetic outputs were byte-identical to VCFtools, per-individual missingness and the site-frequency spectrum matched scikit-allel exactly, and the missing-data-aware pi and dxy estimators reproduced pixy's pairwise counts in every window. By decoding only the fields each operation requires, VariantFlow brings large-cohort post-calling analysis within reach of exploratory work on a single workstation. It complements rather than replaces bcftools, HTSlib, GATK, and VCFtools, and should be of value wherever large cohort VCFs are repeatedly summarised, filtered, or exported. VariantFlow is open source (Rust, MIT OR Apache-2.0) at https://github.com/ehsanestaji/VariantFlow; version 1.5.0 is archived at doi:10.5281/zenodo.21198172.",
+  "authors": [
+    "Estaji, E.",
+    "Mao, J.-F."
+  ],
+  "doi": "10.64898/2026.09.01.748643",
+  "first_seen": "2026-09-04",
+  "id": "biorxiv:10.64898/2026.09.01.748643",
+  "metadata": {
+    "abstract": "Population-scale sequencing now produces variant call sets with thousands of samples and millions of sites, making post-calling analysis a recurring bottleneck. Because the Variant Call Format stores every field of every record together, a tool answering a field-limited question still parses the unused annotations, FORMAT blocks, and per-sample values, which costs time without changing the result. We present VariantFlow, a command-line engine built on selective execution, decoding only the fields the current filter, statistic, or projection requires and preserving original records where possible. On correctness-matched benchmarks on the 1000 Genomes 3,202-sample high-coverage dataset, VariantFlow computed whole-chromosome missingness 8.0-8.5x faster than VCFtools at a constant 8.6 MB of memory, the chromosome 1 summary taking 128 s against 1031 s. An index-assisted FILTER=PASS predicate ran 123-273x faster than bcftools where block metadata excludes most of the file. Further gains, reported in Table 1, cover FORMAT-rich filtering on record subsets, linkage disequilibrium, and export-once Parquet queries served through DuckDB. Core population-genetic outputs were byte-identical to VCFtools, per-individual missingness and the site-frequency spectrum matched scikit-allel exactly, and the missing-data-aware pi and dxy estimators reproduced pixy's pairwise counts in every window. By decoding only the fields each operation requires, VariantFlow brings large-cohort post-calling analysis within reach of exploratory work on a single workstation. It complements rather than replaces bcftools, HTSlib, GATK, and VCFtools, and should be of value wherever large cohort VCFs are repeatedly summarised, filtered, or exported. VariantFlow is open source (Rust, MIT OR Apache-2.0) at https://github.com/ehsanestaji/VariantFlow; version 1.5.0 is archived at doi:10.5281/zenodo.21198172.",
+    "author_corresponding": "Ehsan Estaji",
+    "author_corresponding_institution": "Umeå Plant Science Centre, Department of Plant Physiology, Umeå University, SE-901 87 Umeå, Sweden",
+    "authors": "Estaji, E.; Mao, J.-F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-04",
+    "doi": "10.64898/2026.09.01.748643",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/04/2026.09.01.748643.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "VariantFlow: a selective-execution engine for efficient population genomic computation on large variant datasets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Umeå Plant Science Centre, Department of Plant Physiology, Umeå University, SE-901 87 Umeå, Sweden",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "VariantFlow, a selective-decoding Rust engine for large VCF population-genomic queries, runs faster than VCFtools and bcftools at constant memory with matched…",
+  "title": "VariantFlow: a selective-execution engine for efficient population genomic computation on large variant datasets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.01.748643"
+}

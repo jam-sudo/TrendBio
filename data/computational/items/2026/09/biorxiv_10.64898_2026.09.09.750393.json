@@ -1,0 +1,42 @@
+{
+  "abstract": "Objective: Extracellular electric fields critically influence neural activity through both exogenous neuromodulation and endogenous ephaptic coupling. While conventional cable models efficiently simulate membrane dynamics, they fail to capture bidirectional, field-mediated interactions self-consistently, and fully coupled volumetric methods require computationally prohibitive 3D meshing. We present Cable-BEM, a hybrid wire-kernel bidomain boundary element method designed to resolve these limitations. Approach: By analytically integrating boundary integral kernels around cylindrical neuronal compartments, Cable-BEM fully couples intracellular, extracellular, and membrane dynamics while strictly retaining the highly efficient 1D degrees of freedom of traditional cable equations. The system is advanced using a semi-implicit Crank-Nicolson scheme. To overcome the dense nature of the resulting integral operators, we implement an Adaptive Cross Approximation (ACA) and Hierarchical Off-Diagonal Low-Rank (HODLR) compression scheme. Main result: The solver was rigorously validated against full-surface bidomain boundary element method (BEM) reference implementations, demonstrating tight agreement in activation thresholds (within 1.3% relative error) across diverse stimulation geometries. The ACA-HODLR compression scheme achieved substantial memory footprint reductions-by a factor of up to 4.6 for large 225-cell networks- without sacrificing numerical accuracy. Furthermore, we utilized the framework to resolve subtle, distance-dependent ephaptic interactions, successfully demonstrating the progressive phase synchronization of biophysically realistic, multi-compartment Purkinje cells. Significance: Cable-BEM provides a computationally scalable, mesh-free framework that establishes a powerful and practical foundation for investigating complex field-mediated phenomena in large-scale, multicellular neuronal networks.",
+  "authors": [
+    "Sabino, V.",
+    "Walenciak, A.",
+    "Gomez, L. J."
+  ],
+  "doi": "10.64898/2026.09.09.750393",
+  "first_seen": "2026-09-10",
+  "id": "biorxiv:10.64898/2026.09.09.750393",
+  "metadata": {
+    "abstract": "Objective: Extracellular electric fields critically influence neural activity through both exogenous neuromodulation and endogenous ephaptic coupling. While conventional cable models efficiently simulate membrane dynamics, they fail to capture bidirectional, field-mediated interactions self-consistently, and fully coupled volumetric methods require computationally prohibitive 3D meshing. We present Cable-BEM, a hybrid wire-kernel bidomain boundary element method designed to resolve these limitations. Approach: By analytically integrating boundary integral kernels around cylindrical neuronal compartments, Cable-BEM fully couples intracellular, extracellular, and membrane dynamics while strictly retaining the highly efficient 1D degrees of freedom of traditional cable equations. The system is advanced using a semi-implicit Crank-Nicolson scheme. To overcome the dense nature of the resulting integral operators, we implement an Adaptive Cross Approximation (ACA) and Hierarchical Off-Diagonal Low-Rank (HODLR) compression scheme. Main result: The solver was rigorously validated against full-surface bidomain boundary element method (BEM) reference implementations, demonstrating tight agreement in activation thresholds (within 1.3% relative error) across diverse stimulation geometries. The ACA-HODLR compression scheme achieved substantial memory footprint reductions-by a factor of up to 4.6 for large 225-cell networks- without sacrificing numerical accuracy. Furthermore, we utilized the framework to resolve subtle, distance-dependent ephaptic interactions, successfully demonstrating the progressive phase synchronization of biophysically realistic, multi-compartment Purkinje cells. Significance: Cable-BEM provides a computationally scalable, mesh-free framework that establishes a powerful and practical foundation for investigating complex field-mediated phenomena in large-scale, multicellular neuronal networks.",
+    "author_corresponding": "Luis J Gomez",
+    "author_corresponding_institution": "Purdue University",
+    "authors": "Sabino, V.; Walenciak, A.; Gomez, L. J.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-09-10",
+    "doi": "10.64898/2026.09.09.750393",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/10/2026.09.09.750393.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A Bidomain Boundary Element-Cable Method for Modeling Neuronal Responses to Electric Fields",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Purdue University",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-09-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Cable-BEM, a hybrid bidomain boundary element-cable solver for neuronal field effects, uses ACA-HODLR compression (up to 4.6x memory reduction) and matches…",
+  "title": "A Bidomain Boundary Element-Cable Method for Modeling Neuronal Responses to Electric Fields",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.09.750393"
+}

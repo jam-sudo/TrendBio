@@ -1,0 +1,45 @@
+{
+  "abstract": "The exponential growth of genomic databases necessitates alignment-free methods for comparing genomes. While MinHash-based tools have revolutionized this field by efficiently estimating the Average Nucleotide Identity based on k-mer sets, they inherently discard structural genomic information. We introduce HyperSketch, a novel sketching tool that encodes the de Bruijn graph structure of a genome into a fixed-size, topology-aware vector using Hyperdimensional Computing (HDC). Unlike set-based sketches, HyperSketch encodes the transitions between adjacent k-mers into a superposition of orthogonal hypervectors. To formalize parameter selection, we also propose an analytical framework proving that graph-based sketches fundamentally require a smaller k-mer size than set-based models due to their expanded k+1 biological footprint. We benchmarked HyperSketch against Mash and HyperGen using a dataset of ~26 thousand viral reference genomes from NCBI GenBank. Under optimal parameters, we demonstrate a strong linear correlation (>99%) between the graph-based similarity computed by HyperSketch and standard MinHash distance estimates. Crucially, we show that the mathematical formulation of HyperSketch introduces a distance scaling effect that expands the dynamic range of estimates for closely related strains, providing a higher-resolution metric for sub-lineage clustering than purely compositional estimators. HyperSketch provides a computationally efficient, structure-aware alternative to traditional sketching. By natively encoding genomic syntax, it offers a new dimension of genomic comparison that excels at both high-resolution strain differentiation and deep evolutionary scaling, complementing existing nucleotide identity metrics without requiring sequence alignment.",
+  "authors": [
+    "Cumbo, F.",
+    "Dhillon, K.",
+    "Najafi, M. H.",
+    "Aygun, S.",
+    "Blankenberg, D."
+  ],
+  "doi": "10.64898/2026.09.01.748726",
+  "first_seen": "2026-09-06",
+  "id": "biorxiv:10.64898/2026.09.01.748726",
+  "metadata": {
+    "abstract": "The exponential growth of genomic databases necessitates alignment-free methods for comparing genomes. While MinHash-based tools have revolutionized this field by efficiently estimating the Average Nucleotide Identity based on k-mer sets, they inherently discard structural genomic information. We introduce HyperSketch, a novel sketching tool that encodes the de Bruijn graph structure of a genome into a fixed-size, topology-aware vector using Hyperdimensional Computing (HDC). Unlike set-based sketches, HyperSketch encodes the transitions between adjacent k-mers into a superposition of orthogonal hypervectors. To formalize parameter selection, we also propose an analytical framework proving that graph-based sketches fundamentally require a smaller k-mer size than set-based models due to their expanded k+1 biological footprint. We benchmarked HyperSketch against Mash and HyperGen using a dataset of ~26 thousand viral reference genomes from NCBI GenBank. Under optimal parameters, we demonstrate a strong linear correlation (>99%) between the graph-based similarity computed by HyperSketch and standard MinHash distance estimates. Crucially, we show that the mathematical formulation of HyperSketch introduces a distance scaling effect that expands the dynamic range of estimates for closely related strains, providing a higher-resolution metric for sub-lineage clustering than purely compositional estimators. HyperSketch provides a computationally efficient, structure-aware alternative to traditional sketching. By natively encoding genomic syntax, it offers a new dimension of genomic comparison that excels at both high-resolution strain differentiation and deep evolutionary scaling, complementing existing nucleotide identity metrics without requiring sequence alignment.",
+    "author_corresponding": "Daniel Blankenberg",
+    "author_corresponding_institution": "Cleveland Clinic Foundation",
+    "authors": "Cumbo, F.; Dhillon, K.; Najafi, M. H.; Aygun, S.; Blankenberg, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-06",
+    "doi": "10.64898/2026.09.01.748726",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/06/2026.09.01.748726.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "HyperSketch: de Bruijn graph sketching for genomic similarity estimation with Hyperdimensional Computing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Cleveland Clinic Foundation",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "HyperSketch encodes de Bruijn graph topology of genomes into fixed-size hypervectors via Hyperdimensional Computing, enabling alignment-free similarity…",
+  "title": "HyperSketch: de Bruijn graph sketching for genomic similarity estimation with Hyperdimensional Computing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.01.748726"
+}

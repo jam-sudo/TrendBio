@@ -1,0 +1,51 @@
+{
+  "abstract": "Linkage disequilibrium (LD) information from one's own dataset is considered optimal for downstream analyses such as statistical fine-mapping. However, the computational complexity ({approx}N2 / 2 computations for N variants) lead most studies to use external reference panels, such as from 1000 Genomes. To capture LD across all variant pairs in biobank-scale whole-genome sequencing (WGS) datasets with hundreds of millions of variants, new computational strategies are essential. We present a novel approach that uses multi-GPU distributed computing to compute R2 for every variant pair in a dataset. On chromosome 22 (1.8 million variants) of the 30x WGS 1000 Genomes dataset, our method using eight consumer-level 12GB GPUs (NVIDIA RTX 2080TIs) takes <10 minutes, while the same calculation with PLINK using a high-end 64-threaded CPU (Intel Xeon Gold 6338) takes >80 minutes, corresponding to a {approx}8x speedup. We further demonstrate true biobank-scale performance in the Penn Medicine Biobank (PMBB; 57,170 samples), computing chromosome 1 LD ({approx}1.38 million variants) in 49 minutes versus 22.7 hours for PLINK, a {approx}28x speedup. With this method, we successfully computed on the aforementioned 30x WGS 1000 Genomes dataset ({approx}120 million variants and {approx}2500 samples) the entire LD matrix (>1e16, or 10 quadrillion elements) in under 6 hours using 512 NVIDIA 40GB A100 GPUs on the Department of Energy Argonne Leadership Computing Facility Polaris Supercomputer. We make this tool, coded in Python using CuPy, publicly available. Using this tool, researchers can leverage the full extent of their genomic data without relying on external LD reference panels and acquire more accurate, population-specific findings, particularly for groups underrepresented in existing databases.",
+  "authors": [
+    "Kumar, R.",
+    "Singhal, P.",
+    "Zhang, D.",
+    "Carson, C.",
+    "Conery, M.",
+    "Rodriguez, A. A.",
+    "Nandi, T.",
+    "Ritchie, M.",
+    "Thavappiragasam, M.",
+    "Voight, B. F.",
+    "Madduri, R.",
+    "Verma, A."
+  ],
+  "doi": "10.64898/2026.09.15.751759",
+  "first_seen": "2026-09-21",
+  "id": "biorxiv:10.64898/2026.09.15.751759",
+  "metadata": {
+    "abstract": "Linkage disequilibrium (LD) information from one's own dataset is considered optimal for downstream analyses such as statistical fine-mapping. However, the computational complexity ({approx}N2 / 2 computations for N variants) lead most studies to use external reference panels, such as from 1000 Genomes. To capture LD across all variant pairs in biobank-scale whole-genome sequencing (WGS) datasets with hundreds of millions of variants, new computational strategies are essential. We present a novel approach that uses multi-GPU distributed computing to compute R2 for every variant pair in a dataset. On chromosome 22 (1.8 million variants) of the 30x WGS 1000 Genomes dataset, our method using eight consumer-level 12GB GPUs (NVIDIA RTX 2080TIs) takes <10 minutes, while the same calculation with PLINK using a high-end 64-threaded CPU (Intel Xeon Gold 6338) takes >80 minutes, corresponding to a {approx}8x speedup. We further demonstrate true biobank-scale performance in the Penn Medicine Biobank (PMBB; 57,170 samples), computing chromosome 1 LD ({approx}1.38 million variants) in 49 minutes versus 22.7 hours for PLINK, a {approx}28x speedup. With this method, we successfully computed on the aforementioned 30x WGS 1000 Genomes dataset ({approx}120 million variants and {approx}2500 samples) the entire LD matrix (>1e16, or 10 quadrillion elements) in under 6 hours using 512 NVIDIA 40GB A100 GPUs on the Department of Energy Argonne Leadership Computing Facility Polaris Supercomputer. We make this tool, coded in Python using CuPy, publicly available. Using this tool, researchers can leverage the full extent of their genomic data without relying on external LD reference panels and acquire more accurate, population-specific findings, particularly for groups underrepresented in existing databases.",
+    "author_corresponding": "Rachit Kumar",
+    "author_corresponding_institution": "University of Pennsylvania",
+    "authors": "Kumar, R.; Singhal, P.; Zhang, D.; Carson, C.; Conery, M.; Rodriguez, A. A.; Nandi, T.; Ritchie, M.; Thavappiragasam, M.; Voight, B. F.; Madduri, R.; Verma, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-21",
+    "doi": "10.64898/2026.09.15.751759",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/21/2026.09.15.751759.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ARCHER-LD: Rapid Long-Range Linkage Disequilibrium Calculations at Biobank Scale using GPU Acceleration",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Pennsylvania",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-09-21",
+  "published_doi": "10.1093/bioinformatics/btag783",
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "ARCHER-LD computes full pairwise LD (R2) across biobank-scale WGS using multi-GPU CuPy code, achieving ~8x and ~28x speedups over PLINK and scaling to 120M…",
+  "title": "ARCHER-LD: Rapid Long-Range Linkage Disequilibrium Calculations at Biobank Scale using GPU Acceleration",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.15.751759"
+}

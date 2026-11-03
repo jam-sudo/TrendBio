@@ -1,0 +1,41 @@
+{
+  "abstract": "Summary: Ensembl VEP is the de facto reference for variant consequence annotation, but its Perl implementation limits throughput, and the open reimplementation benchmarked here is validated on a set too small to bound its disagreement with it. We present vep-rs, a Rust reimplementation of Ensembl VEP release 115.2, audited over 260,638,766 VEP consequence tuples, each a (location, allele, feature) key carrying a Sequence Ontology term set, from six variant datasets (ClinVar, gnomAD chr21, and 1000 Genomes chr21 across GRCh37 and GRCh38). On SNPs and indels vep-rs emits exactly VEP's tuple count on all six and attains F1 [&ge;] 0.999974, differing from VEP on 3,169 tuples, at most one in 38,000 per dataset; with two documented VEP defect shapes set aside, F1 rounds to 1.000000 on all six. Per consequence class, 29 of the 30 Sequence Ontology terms carrying at least 1,000 tuples exceed F1 0.99, and the lowest, 0.540 on start_retained_variant, is entirely a VEP defect. On structural variants, F1 is 0.975395 (GRCh37) and 0.909998 (GRCh38). Timed on 20 independent machines per engine and architecture, vep-rs is faster than VEP by 101x-284x on ARM (geometric mean 176x) and 78.3x-192x on x86 (geometric mean 135x). Five divergence classes are documented, four of them defects in VEP release 115 that vep-rs does not reproduce: a consequence call that contradicts itself, a splice-region term dropped from a variant that lies in a splice region, annotation against a chromosome the variant does not lie on, and output that depends on input batch composition. A pipeline keyed on VEP consequence terms can therefore adopt vep-rs against a measured, per-term bound, shed VEP's contradictory and batch-dependent calls, and annotate population-scale inputs at 78.3 to 284 times VEP's throughput, and per-file structural-variant sets at 22.5 to 52.9 times. Availability and implementation: vep-rs, its harness, both comparators, and every per-machine wall time are released under Apache-2.0 at https://github.com/natera-open-source/vep-rs (release v0.1.0, archived at https://doi.org/10.5281/zenodo.22837897). Supplementary information: Supplementary data are available at Bioinformatics online.",
+  "authors": [
+    "Porter, M.",
+    "Borkowski, R."
+  ],
+  "doi": "10.64898/2026.09.22.753614",
+  "first_seen": "2026-09-28",
+  "id": "biorxiv:10.64898/2026.09.22.753614",
+  "metadata": {
+    "abstract": "Summary: Ensembl VEP is the de facto reference for variant consequence annotation, but its Perl implementation limits throughput, and the open reimplementation benchmarked here is validated on a set too small to bound its disagreement with it. We present vep-rs, a Rust reimplementation of Ensembl VEP release 115.2, audited over 260,638,766 VEP consequence tuples, each a (location, allele, feature) key carrying a Sequence Ontology term set, from six variant datasets (ClinVar, gnomAD chr21, and 1000 Genomes chr21 across GRCh37 and GRCh38). On SNPs and indels vep-rs emits exactly VEP's tuple count on all six and attains F1 [&ge;] 0.999974, differing from VEP on 3,169 tuples, at most one in 38,000 per dataset; with two documented VEP defect shapes set aside, F1 rounds to 1.000000 on all six. Per consequence class, 29 of the 30 Sequence Ontology terms carrying at least 1,000 tuples exceed F1 0.99, and the lowest, 0.540 on start_retained_variant, is entirely a VEP defect. On structural variants, F1 is 0.975395 (GRCh37) and 0.909998 (GRCh38). Timed on 20 independent machines per engine and architecture, vep-rs is faster than VEP by 101x-284x on ARM (geometric mean 176x) and 78.3x-192x on x86 (geometric mean 135x). Five divergence classes are documented, four of them defects in VEP release 115 that vep-rs does not reproduce: a consequence call that contradicts itself, a splice-region term dropped from a variant that lies in a splice region, annotation against a chromosome the variant does not lie on, and output that depends on input batch composition. A pipeline keyed on VEP consequence terms can therefore adopt vep-rs against a measured, per-term bound, shed VEP's contradictory and batch-dependent calls, and annotate population-scale inputs at 78.3 to 284 times VEP's throughput, and per-file structural-variant sets at 22.5 to 52.9 times. Availability and implementation: vep-rs, its harness, both comparators, and every per-machine wall time are released under Apache-2.0 at https://github.com/natera-open-source/vep-rs (release v0.1.0, archived at https://doi.org/10.5281/zenodo.22837897). Supplementary information: Supplementary data are available at Bioinformatics online.",
+    "author_corresponding": "Matthew Porter",
+    "author_corresponding_institution": "Natera, Inc.",
+    "authors": "Porter, M.; Borkowski, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-28",
+    "doi": "10.64898/2026.09.22.753614",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/28/2026.09.22.753614.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "vep-rs: high-throughput Rust variant annotation with population-scale concordance to Ensembl VEP",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Natera, Inc.",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "vep-rs: a Rust reimplementation of Ensembl VEP 115.2 matching its consequence tuples (F1 ≥0.999974 on SNPs/indels) and running 78–284x faster.",
+  "title": "vep-rs: high-throughput Rust variant annotation with population-scale concordance to Ensembl VEP",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.22.753614"
+}

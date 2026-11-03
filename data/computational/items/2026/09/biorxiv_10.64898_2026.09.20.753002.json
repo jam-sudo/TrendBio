@@ -1,0 +1,42 @@
+{
+  "abstract": "We present an automated pipeline for finding therapeutic interventions in channelopathies. It starts from patch clamp recordings of the variant channel, searches over the pharmacologically accessible conductances, and says which currents must change and by how much. The intervention never touches the mutated channel: it compensates by modulating others. The feasibility of this approach is demonstrated through two computational strategies, each addressing a specific capability gap. First, we employ high-fidelity NEURON simulations combined with exploratory search algorithms to model two clinically described variants, and identify \"stability windows\" in which channel modulations restore the reference firing pattern. The compensating configurations are degenerate: 37 conductance triples fire the same number of action potentials at every one of the 35 injected-current levels, and the 10,780 triples reaching the best intervention value produce only six distinct firing patterns. Second, to address the computational cost of such detailed modeling, we implement a differentiable Hodgkin-Huxley model in PyTorch. Applied here to theoretical mutation screening, this approach trades granular detail for speed, treating the search as a continuous optimization problem that makes very large, non-local searches of the conductance parameter space affordable: the differentiable forward model evaluates 34,000-64,000 candidate parameter sets per second on a single consumer graphics card, against 11.9-16.9 per second for the non-differentiable pipeline on a 72-core node. The gain arises from forward-model throughput feeding a search rather than from the gradient itself, and it is what makes the 32,000,000-point survey of the solution topology reported here affordable. These computational predictions can inform practical drug development and high-throughput screening by naming the currents that must change and by how much.",
+  "authors": [
+    "Hazan, H.",
+    "Levin, M."
+  ],
+  "doi": "10.64898/2026.09.20.753002",
+  "first_seen": "2026-09-25",
+  "id": "biorxiv:10.64898/2026.09.20.753002",
+  "metadata": {
+    "abstract": "We present an automated pipeline for finding therapeutic interventions in channelopathies. It starts from patch clamp recordings of the variant channel, searches over the pharmacologically accessible conductances, and says which currents must change and by how much. The intervention never touches the mutated channel: it compensates by modulating others. The feasibility of this approach is demonstrated through two computational strategies, each addressing a specific capability gap. First, we employ high-fidelity NEURON simulations combined with exploratory search algorithms to model two clinically described variants, and identify \"stability windows\" in which channel modulations restore the reference firing pattern. The compensating configurations are degenerate: 37 conductance triples fire the same number of action potentials at every one of the 35 injected-current levels, and the 10,780 triples reaching the best intervention value produce only six distinct firing patterns. Second, to address the computational cost of such detailed modeling, we implement a differentiable Hodgkin-Huxley model in PyTorch. Applied here to theoretical mutation screening, this approach trades granular detail for speed, treating the search as a continuous optimization problem that makes very large, non-local searches of the conductance parameter space affordable: the differentiable forward model evaluates 34,000-64,000 candidate parameter sets per second on a single consumer graphics card, against 11.9-16.9 per second for the non-differentiable pipeline on a 72-core node. The gain arises from forward-model throughput feeding a search rather than from the gradient itself, and it is what makes the 32,000,000-point survey of the solution topology reported here affordable. These computational predictions can inform practical drug development and high-throughput screening by naming the currents that must change and by how much.",
+    "author_corresponding": "Michael Levin",
+    "author_corresponding_institution": "Tufts University",
+    "authors": "Hazan, H.; Levin, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-25",
+    "doi": "10.64898/2026.09.20.753002",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/25/2026.09.20.753002.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Computational Framework for Identifying Ion Channel Mutation-Compensating Interventions",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Tufts University",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-09-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Automated pipeline using NEURON simulations and a differentiable PyTorch Hodgkin-Huxley model to find compensatory ion-channel modulations for channelopathy…",
+  "title": "Computational Framework for Identifying Ion Channel Mutation-Compensating Interventions",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.20.753002"
+}

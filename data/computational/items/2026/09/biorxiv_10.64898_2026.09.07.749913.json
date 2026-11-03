@@ -1,0 +1,42 @@
+{
+  "abstract": "Accurate genome-wide prediction of transcription factor (TF)-DNA binding remains challenging because many models focus mainly on DNA sequence and overlook chromatin context and TF structure. We previously developed TransBind, a protein-aware model that combines TF and DNA representations through cross-attention. Here, we introduce TransBind2, which improves on TransBind in several ways. It incorporates DNase-seq accessibility and genome mappability tracks as additional input, uses a biomodal protein language model (ProstT5) to capture both TF sequence and structure, and applies bidirectional cross-attention so DNA and protein features can refine each other. We also frame prediction as binary classification of individual <DNA bin, TF, cell type> triplets, allowing the model to generalize to new TFs and cell types. Across 690 human ChIP-seq experiments covering 161 TFs and 91 cell types, TransBind2 achieves a macro AUROC of 0.9648 and AUPR of 0.4215, outperforming TransBind and other baselines, with a [&ge;]12.67% relative AUPR gain. The model trained on human data also performs well in cross-species zero-shot prediction on mouse data. Saliency analysis shows that it can identify TF-binding peaks with a median error of 12-38 base pairs (bps) despite being trained on window-level labels. Ablation studies further show that TF structure, chromatin accessibility, and bidirectional attention each improve performance. Overall, these results show that combining TF structure with chromatin context leads to more accurate and generalizable TF-DNA binding predictions.",
+  "authors": [
+    "Basnet, S.",
+    "Cheng, J."
+  ],
+  "doi": "10.64898/2026.09.07.749913",
+  "first_seen": "2026-09-14",
+  "id": "biorxiv:10.64898/2026.09.07.749913",
+  "metadata": {
+    "abstract": "Accurate genome-wide prediction of transcription factor (TF)-DNA binding remains challenging because many models focus mainly on DNA sequence and overlook chromatin context and TF structure. We previously developed TransBind, a protein-aware model that combines TF and DNA representations through cross-attention. Here, we introduce TransBind2, which improves on TransBind in several ways. It incorporates DNase-seq accessibility and genome mappability tracks as additional input, uses a biomodal protein language model (ProstT5) to capture both TF sequence and structure, and applies bidirectional cross-attention so DNA and protein features can refine each other. We also frame prediction as binary classification of individual <DNA bin, TF, cell type> triplets, allowing the model to generalize to new TFs and cell types. Across 690 human ChIP-seq experiments covering 161 TFs and 91 cell types, TransBind2 achieves a macro AUROC of 0.9648 and AUPR of 0.4215, outperforming TransBind and other baselines, with a [&ge;]12.67% relative AUPR gain. The model trained on human data also performs well in cross-species zero-shot prediction on mouse data. Saliency analysis shows that it can identify TF-binding peaks with a median error of 12-38 base pairs (bps) despite being trained on window-level labels. Ablation studies further show that TF structure, chromatin accessibility, and bidirectional attention each improve performance. Overall, these results show that combining TF structure with chromatin context leads to more accurate and generalizable TF-DNA binding predictions.",
+    "author_corresponding": "Jianlin Cheng",
+    "author_corresponding_institution": "University of Missouri - Columbia",
+    "authors": "Basnet, S.; Cheng, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-14",
+    "doi": "10.64898/2026.09.07.749913",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/14/2026.09.07.749913.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TransBind2: Improving Transcription Factor-DNA Binding Prediction with Multimodal Data and Bidirectional Cross Attention",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Missouri - Columbia",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "epigenomics",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "TransBind2 adds DNase-seq accessibility, ProstT5 protein structure features, and bidirectional cross-attention to predict TF-DNA binding, reaching macro AUROC…",
+  "title": "TransBind2: Improving Transcription Factor-DNA Binding Prediction with Multimodal Data and Bidirectional Cross Attention",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.07.749913"
+}

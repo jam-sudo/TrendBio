@@ -1,0 +1,47 @@
+{
+  "abstract": "De novo transcriptome assembly is the standard approach for constructing a reference transcriptome in non-model plants that lack a high-quality genome, yet short-read assemblies struggle to resolve full-length isoforms. Long-read Iso-Seq (PacBio) captures full-length transcripts directly, but its use as a primary reference and the choice of downstream assembly pipeline remains poorly benchmarked. Here, we construct genome-free Iso-Seq reference transcriptomes for two organs, flower and leaf, of the non-model species Moricandia arvensis (L.) DC. (Brassicaceae), and systematically compare pipeline strategies combining Iso-Seq clustering, CD-HIT redundancy reduction, and Cogent graph-based reconstruction, benchmarked by BUSCO completeness, RSEM short-read mapping, and TransDecoder ORF completeness. We find that the optimal pipeline is organ specific. For flower, CD-HIT pre-filtering followed by Cogent reconstruction produced a high-quality reference (95.3% BUSCO complete). For the leaf, the same Cogent step was detrimental, reducing BUSCO completeness from 90.1% to 78.0% by incorrectly merging distinct genes; therefore, CD-HIT at 95% identity without reconstruction was retained. We trace this divergence to organ-specific input-data characteristics: leaf transcripts show extreme full-length-read expression skew and predominantly single-isoform gene support, depriving Cogent's graph algorithm of the multi-isoform evidence it requires. We find that the concentration of full-length reads among the most highly expressed transcripts predicts pipeline suitability before reconstruction, with per-transcript read depth acting as a necessary but non-discriminating floor. Because the leaf reference lacked gene-level structure, we further recovered gene-isoform grouping using expression-aware read-clustering (Corset), which preserved completeness while restoring the paralog structure expected of a paleopolyploid genome and outperformed sequence-only clustering. Our results provide a robust, genome-free framework for constructing full-length reference transcriptomes in non-model plant species and demonstrate that pipeline choice must be evaluated per organ rather than assuming one size fits all.",
+  "authors": [
+    "Sharma, S.",
+    "Hackenberg, M.",
+    "Navarro, L.",
+    "Narbona, E.",
+    "Gonzalez-Megias, A.",
+    "Armas, C.",
+    "M. Gomez, J.",
+    "Perfectti, F."
+  ],
+  "doi": "10.64898/2026.09.08.750093",
+  "first_seen": "2026-09-09",
+  "id": "biorxiv:10.64898/2026.09.08.750093",
+  "metadata": {
+    "abstract": "De novo transcriptome assembly is the standard approach for constructing a reference transcriptome in non-model plants that lack a high-quality genome, yet short-read assemblies struggle to resolve full-length isoforms. Long-read Iso-Seq (PacBio) captures full-length transcripts directly, but its use as a primary reference and the choice of downstream assembly pipeline remains poorly benchmarked. Here, we construct genome-free Iso-Seq reference transcriptomes for two organs, flower and leaf, of the non-model species Moricandia arvensis (L.) DC. (Brassicaceae), and systematically compare pipeline strategies combining Iso-Seq clustering, CD-HIT redundancy reduction, and Cogent graph-based reconstruction, benchmarked by BUSCO completeness, RSEM short-read mapping, and TransDecoder ORF completeness. We find that the optimal pipeline is organ specific. For flower, CD-HIT pre-filtering followed by Cogent reconstruction produced a high-quality reference (95.3% BUSCO complete). For the leaf, the same Cogent step was detrimental, reducing BUSCO completeness from 90.1% to 78.0% by incorrectly merging distinct genes; therefore, CD-HIT at 95% identity without reconstruction was retained. We trace this divergence to organ-specific input-data characteristics: leaf transcripts show extreme full-length-read expression skew and predominantly single-isoform gene support, depriving Cogent's graph algorithm of the multi-isoform evidence it requires. We find that the concentration of full-length reads among the most highly expressed transcripts predicts pipeline suitability before reconstruction, with per-transcript read depth acting as a necessary but non-discriminating floor. Because the leaf reference lacked gene-level structure, we further recovered gene-isoform grouping using expression-aware read-clustering (Corset), which preserved completeness while restoring the paralog structure expected of a paleopolyploid genome and outperformed sequence-only clustering. Our results provide a robust, genome-free framework for constructing full-length reference transcriptomes in non-model plant species and demonstrate that pipeline choice must be evaluated per organ rather than assuming one size fits all.",
+    "author_corresponding": "Francisco Perfectti",
+    "author_corresponding_institution": "Universidad de Granada",
+    "authors": "Sharma, S.; Hackenberg, M.; Navarro, L.; Narbona, E.; Gonzalez-Megias, A.; Armas, C.; M. Gomez, J.; Perfectti, F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-09",
+    "doi": "10.64898/2026.09.08.750093",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/09/2026.09.08.750093.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmarking long-read RNA sequencing for de novo transcriptome assembly in non-model plant species: insights from Moricandia arvensis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universidad de Granada",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-09-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks Iso-Seq long-read de novo transcriptome assembly pipelines (CD-HIT, Cogent, Corset) in non-model Moricandia arvensis, finding organ-specific optimal…",
+  "title": "Benchmarking long-read RNA sequencing for de novo transcriptome assembly in non-model plant species: insights from Moricandia arvensis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.08.750093"
+}

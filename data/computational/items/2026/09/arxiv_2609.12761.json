@@ -1,0 +1,37 @@
+{
+  "abstract": "Vision encoders for Cell Painting are typically ranked by a single evaluation, commonly replicate mean average precision (mAP). We introduce CP-BG-Bench, a paired-view evaluation framework that holds the central cell fixed across four matched views (raw crop C, segmented S, and density-augmented variants CD and SD), ablating or augmenting surrounding pixels as a controlled intervention. Instantiating the framework on three datasets (JUMP-CP, RxRx1, RxRx3-core) and three encoders (DINOv3 ViT-B/16, OpenPhenom, SubCell) under four community-standard protocols (replicate mAP, scIB batch integration, CellProfiler feature prediction, cross-batch perturbation recall), we find that the four protocols rank the same encoders systematically differently, with disagreements decomposing along three axes: cell versus background, morphology versus context, and within-study versus across-batch. The largest effect: on RxRx3-core, SubCell with segmented inputs retains 94% of crop replicate mAP but only 32% of crop R@10, so the within-study signal preserved under segmentation is largely non-transferable; density augmentation recovers 84% of the within-study C-to-S gap but only 8% of the cross-batch gap. Segmented views predict CellProfiler features as well as or better than crops on two of three datasets, inverting the replicate-mAP ranking, and the C-to-S gap varies by an order of magnitude across datasets while remaining similar across encoders, indicating that background-driven gain is set by experimental design rather than by the encoder. Single-metric ranking of Cell Painting encoders is therefore sensitive to the protocol used, and protocol disagreements are interpretable as projections onto the three axes the paired-view design exposes. We will release the paired-view datasets, reconstruction pipelines, 36 trained checkpoints, aggregated embeddings, and the full evaluation suite.",
+  "authors": [
+    "Tim Treis",
+    "Nikita Moshkov",
+    "Johan Fredin Haslum",
+    "Shantanu Singh",
+    "Fabian J. Theis"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-11",
+  "id": "arxiv:2609.12761",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.12761v1</ns0:id>\n    <ns0:title>Same Encoder, Different Winner: A Paired-View Framework for Cell Painting Encoder Evaluation</ns0:title>\n    <ns0:updated>2026-09-11T12:14:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.12761v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.12761v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Vision encoders for Cell Painting are typically ranked by a single evaluation, commonly replicate mean average precision (mAP). We introduce CP-BG-Bench, a paired-view evaluation framework that holds the central cell fixed across four matched views (raw crop C, segmented S, and density-augmented variants CD and SD), ablating or augmenting surrounding pixels as a controlled intervention. Instantiating the framework on three datasets (JUMP-CP, RxRx1, RxRx3-core) and three encoders (DINOv3 ViT-B/16, OpenPhenom, SubCell) under four community-standard protocols (replicate mAP, scIB batch integration, CellProfiler feature prediction, cross-batch perturbation recall), we find that the four protocols rank the same encoders systematically differently, with disagreements decomposing along three axes: cell versus background, morphology versus context, and within-study versus across-batch. The largest effect: on RxRx3-core, SubCell with segmented inputs retains 94% of crop replicate mAP but only 32% of crop R@10, so the within-study signal preserved under segmentation is largely non-transferable; density augmentation recovers 84% of the within-study C-to-S gap but only 8% of the cross-batch gap. Segmented views predict CellProfiler features as well as or better than crops on two of three datasets, inverting the replicate-mAP ranking, and the C-to-S gap varies by an order of magnitude across datasets while remaining similar across encoders, indicating that background-driven gain is set by experimental design rather than by the encoder. Single-metric ranking of Cell Painting encoders is therefore sensitive to the protocol used, and protocol disagreements are interpretable as projections onto the three axes the paired-view design exposes. We will release the paired-view datasets, reconstruction pipelines, 36 trained checkpoints, aggregated embeddings, and the full evaluation suite.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-11T12:14:37Z</ns0:published>\n    <ns1:comment>22 pages, 6 figures</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Tim Treis</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nikita Moshkov</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Johan Fredin Haslum</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shantanu Singh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fabian J. Theis</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "CP-BG-Bench paired-view framework shows Cell Painting encoder rankings depend on evaluation protocol; background cues drive gains, with segmentation and…",
+  "title": "Same Encoder, Different Winner: A Paired-View Framework for Cell Painting Encoder Evaluation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.12761v1"
+}

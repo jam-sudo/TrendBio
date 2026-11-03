@@ -1,0 +1,39 @@
+{
+  "abstract": "Simplified spiking neuron models such as the Adaptive Exponential Integrate-and-Fire (AdEx) model reproduce the firing behaviour of diverse neuron types at a fraction of the cost of biophysically detailed models, making them attractive for large-scale brain simulation. Fitting their parameters to recordings, however, still relies on derivative-free search such as grid search or evolutionary algorithms, because the discrete spike-and-reset mechanism renders these models non-differentiable. Surrogate gradients, used in deep spiking networks, replace the spike derivative with a smooth approximation on the backward pass. Whether they also enable efficient gradient-based parameter estimation for single simplified neurons is untested. We implement a differentiable AdEx model with a surrogate-gradient variant in the Jaxley framework. The implementation is on par with target-compiled C++ Brian2 code while remaining end-to-end differentiable, vmap-batchable and GPU/TPU-portable. It is 200 times faster than Brian2's default runtime mode. Across a recovery-radius benchmark of 2,700 paired runs, gradient-based fitting never matched a gradient-free Nelder-Mead baseline. At sub- threshold levels, gradient descent instead beats Nelder-Mead. The obstacle is therefore the spike mechanism and the loss geometry it induces, not gradient descent itself.",
+  "authors": [
+    "Mayer, P.",
+    "Kozlov, A."
+  ],
+  "doi": "10.64898/2026.09.19.752831",
+  "first_seen": "2026-09-24",
+  "id": "biorxiv:10.64898/2026.09.19.752831",
+  "metadata": {
+    "abstract": "Simplified spiking neuron models such as the Adaptive Exponential Integrate-and-Fire (AdEx) model reproduce the firing behaviour of diverse neuron types at a fraction of the cost of biophysically detailed models, making them attractive for large-scale brain simulation. Fitting their parameters to recordings, however, still relies on derivative-free search such as grid search or evolutionary algorithms, because the discrete spike-and-reset mechanism renders these models non-differentiable. Surrogate gradients, used in deep spiking networks, replace the spike derivative with a smooth approximation on the backward pass. Whether they also enable efficient gradient-based parameter estimation for single simplified neurons is untested. We implement a differentiable AdEx model with a surrogate-gradient variant in the Jaxley framework. The implementation is on par with target-compiled C++ Brian2 code while remaining end-to-end differentiable, vmap-batchable and GPU/TPU-portable. It is 200 times faster than Brian2's default runtime mode. Across a recovery-radius benchmark of 2,700 paired runs, gradient-based fitting never matched a gradient-free Nelder-Mead baseline. At sub- threshold levels, gradient descent instead beats Nelder-Mead. The obstacle is therefore the spike mechanism and the loss geometry it induces, not gradient descent itself.",
+    "author_corresponding": "Paul Mayer",
+    "author_corresponding_institution": "KTH Royal Institute of Technology",
+    "authors": "Mayer, P.; Kozlov, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-24",
+    "doi": "10.64898/2026.09.19.752831",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/24/2026.09.19.752831.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Surrogate Gradients for Gradient-Based Parameter Estimation in Simplified Neuron Models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "KTH Royal Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-09-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "Simplified spiking neuron models such as the Adaptive Exponential Integrate-and-Fire (AdEx) model reproduce the firing behaviour of diverse neuron types at a fr",
+  "title": "Surrogate Gradients for Gradient-Based Parameter Estimation in Simplified Neuron Models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.19.752831"
+}

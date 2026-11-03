@@ -1,0 +1,43 @@
+{
+  "abstract": "Multi-component drug regimens, with traditional Chinese medicine formulas as the hardest case, act across signalling, transcriptional, proteomic and metabolic layers, and elucidating their mechanisms requires dynamic models that predict molecular trajectories rather than static association networks. Trainable ordinary differential equation (ODE) systems fitted to time-series omics are increasingly used for this purpose; yet their validation remains fit-based: at genomic scale, no ground truth has existed to test whether a good fit implies correct mechanisms. Here we build that ground truth: a white-box masked ODE benchmark on the real trans-omics topology of insulin action in mouse liver (transcriptome GEO GSE166336, proteome ProteomeXchange PXD022728, phosphoproteome PXD022823, metabolome source-publication Tables S2-S3; 2,106 molecular species; 4,912 ground-truth edges), with controllable noise, missingness and sampling budgets. Four instruments quantify identifiability: an oracle-perturbation basin curve, a held-out-layer corruption assay, a saturation audit, and an ideal-budget ceiling test. We find that a static baseline (FD + LASSO) performs at chance (AUROC ~ 0.50, except GE at 0.567); that from-scratch training remains at chance even with noise-free, fully observed, densely sampled data (per-layer AUROC 0.48-0.53); that held out layers act as corruption sinks whose failure decomposes into an information floor, a scale-mismatch amplifier, and an edge-gradient drag, curable only jointly; that tanh saturation silently zeroes entire regulator columns; and that a 12-knockout validation battery decomposes intervention reliability by network distance. We distill these into operational prescriptions. The binding constraint is not fitting but structural identifiability. Benchmark, code and audit tools are planned for open release upon publication.",
+  "authors": [
+    "Zhang, Z.",
+    "Jia, L.",
+    "Pan, Y."
+  ],
+  "doi": "10.64898/2026.09.22.753490",
+  "first_seen": "2026-09-28",
+  "id": "biorxiv:10.64898/2026.09.22.753490",
+  "metadata": {
+    "abstract": "Multi-component drug regimens, with traditional Chinese medicine formulas as the hardest case, act across signalling, transcriptional, proteomic and metabolic layers, and elucidating their mechanisms requires dynamic models that predict molecular trajectories rather than static association networks. Trainable ordinary differential equation (ODE) systems fitted to time-series omics are increasingly used for this purpose; yet their validation remains fit-based: at genomic scale, no ground truth has existed to test whether a good fit implies correct mechanisms. Here we build that ground truth: a white-box masked ODE benchmark on the real trans-omics topology of insulin action in mouse liver (transcriptome GEO GSE166336, proteome ProteomeXchange PXD022728, phosphoproteome PXD022823, metabolome source-publication Tables S2-S3; 2,106 molecular species; 4,912 ground-truth edges), with controllable noise, missingness and sampling budgets. Four instruments quantify identifiability: an oracle-perturbation basin curve, a held-out-layer corruption assay, a saturation audit, and an ideal-budget ceiling test. We find that a static baseline (FD + LASSO) performs at chance (AUROC ~ 0.50, except GE at 0.567); that from-scratch training remains at chance even with noise-free, fully observed, densely sampled data (per-layer AUROC 0.48-0.53); that held out layers act as corruption sinks whose failure decomposes into an information floor, a scale-mismatch amplifier, and an edge-gradient drag, curable only jointly; that tanh saturation silently zeroes entire regulator columns; and that a 12-knockout validation battery decomposes intervention reliability by network distance. We distill these into operational prescriptions. The binding constraint is not fitting but structural identifiability. Benchmark, code and audit tools are planned for open release upon publication.",
+    "author_corresponding": "Yanli Pan",
+    "author_corresponding_institution": "China Academy of Chinese Medical Sciences",
+    "authors": "Zhang, Z.; Jia, L.; Pan, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-09-28",
+    "doi": "10.64898/2026.09.22.753490",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/09/28/2026.09.22.753490.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Fitting dynamics is not identifying causal edges: a white-box masked ODE benchmark for trans-omics digital twins of drug action mechanisms",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "China Academy of Chinese Medical Sciences",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-09-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "White-box masked ODE benchmark on real insulin-action trans-omics topology in mouse liver (2,106 species, 4,912 edges) showing fit-based validation fails to…",
+  "title": "Fitting dynamics is not identifying causal edges: a white-box masked ODE benchmark for trans-omics digital twins of drug action mechanisms",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.22.753490"
+}

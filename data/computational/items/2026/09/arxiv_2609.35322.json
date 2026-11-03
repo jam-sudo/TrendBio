@@ -1,0 +1,34 @@
+{
+  "abstract": "Score-based generative models generate new samples by integrating a time-dependent drift that carries Gaussian noise onto the target distribution. In practice this drift is modeled by a neural network, trained on a loss integrated over time $t$ with a weighting schedule $w(t)$. Along the backward dynamics, and for multi-modal distributions, trajectories commit to modes of the target within a narrow time window, the \\textit{speciation time}. In this work, focusing on high-dimensional data, we decompose the integrated loss into its single-time contributions and analyze each at fixed signal-to-noise ratio $Λ(t)$: we show that $Λ(t)$ sets the rate at which each feature of a multimodal target - the mode directions and their relative weights - is acquired during training. Crucially, at high $Λ(t)$ all mode directions are acquired together, on a single timescale insensitive to their amplitudes, while the relative weights are not learned at all. Only near the speciation time, where $Λ(t)$ becomes of order one, do all features become learnable, each on its own timescale: the weights are acquired jointly with the directions, and the directions at rates set by their relative amplitudes. For models trained on time-integrated objectives, the learning dynamics is then governed by how much of the weighting effectively sits near the speciation time, which provides insights on $w(t)$ design choices. These results follow from an exact high-dimensional analysis of the training dynamics of unbalanced and hierarchical Gaussian mixtures. Numerical experiments on image and human genome haplotype generation recover the predicted hierarchy of learning timescales in more complex settings.",
+  "authors": [
+    "Jérémie Klinger",
+    "Raphaël Urfin",
+    "Giulio Biroli",
+    "Marylou Gabrié"
+  ],
+  "doi": null,
+  "first_seen": "2026-09-28",
+  "id": "arxiv:2609.35322",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cond-mat.dis-nn"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2609.35322v1</ns0:id>\n    <ns0:title>Weighting Schedules Govern What and When Score-Based Generative Models Learn from Multimodal Data</ns0:title>\n    <ns0:updated>2026-09-28T14:51:00Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2609.35322v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2609.35322v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Score-based generative models generate new samples by integrating a time-dependent drift that carries Gaussian noise onto the target distribution. In practice this drift is modeled by a neural network, trained on a loss integrated over time $t$ with a weighting schedule $w(t)$. Along the backward dynamics, and for multi-modal distributions, trajectories commit to modes of the target within a narrow time window, the \\textit{speciation time}. In this work, focusing on high-dimensional data, we decompose the integrated loss into its single-time contributions and analyze each at fixed signal-to-noise ratio $Λ(t)$: we show that $Λ(t)$ sets the rate at which each feature of a multimodal target - the mode directions and their relative weights - is acquired during training. Crucially, at high $Λ(t)$ all mode directions are acquired together, on a single timescale insensitive to their amplitudes, while the relative weights are not learned at all. Only near the speciation time, where $Λ(t)$ becomes of order one, do all features become learnable, each on its own timescale: the weights are acquired jointly with the directions, and the directions at rates set by their relative amplitudes. For models trained on time-integrated objectives, the learning dynamics is then governed by how much of the weighting effectively sits near the speciation time, which provides insights on $w(t)$ design choices. These results follow from an exact high-dimensional analysis of the training dynamics of unbalanced and hierarchical Gaussian mixtures. Numerical experiments on image and human genome haplotype generation recover the predicted hierarchy of learning timescales in more complex settings.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cond-mat.dis-nn\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-09-28T14:51:00Z</ns0:published>\n    <ns1:comment>Main text : 9 pages / 5 figures Supplemental : 21 pages / 1 figure</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Jérémie Klinger</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Raphaël Urfin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Giulio Biroli</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Marylou Gabrié</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-09-28",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Analyzes how time-weighting schedules in score-based generative models control learning of multimodal mode directions and weights via signal-to-noise ratio,…",
+  "title": "Weighting Schedules Govern What and When Score-Based Generative Models Learn from Multimodal Data",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2609.35322v1"
+}
