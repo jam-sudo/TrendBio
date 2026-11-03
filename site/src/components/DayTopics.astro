@@ -19,7 +19,7 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 ]));
 ---
 
-<div class="section-heading"><h2>Top 5</h2><a href="/topics/">View all ›</a></div>
+<div class="section-heading"><h2>Top 5</h2><a href="/archive/">View all ›</a></div>
 {day?.run.status === "degraded" && <p class="notice"><span class="badge">PARTIAL</span> Some sources or summaries were unavailable for this run.</p>}
 {day?.run.backfilled && <p class="notice"><span class="badge">BACKFILLED</span> Code and industry signals are partial for backfilled days.</p>}
 {ranked.length === 0 && <p class="notice"><span class="badge">QUIET DAY</span> Quiet day: no topic cleared the bar.</p>}
