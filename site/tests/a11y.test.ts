@@ -201,6 +201,34 @@ describe("built site accessibility and responsive layout", () => {
     expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
     await page.keyboard.press("Home");
     expect(await all.getAttribute("aria-pressed")).toBe("true");
-    expect(await visible.count()).toBe(5);
+    expect(await visible.count()).toBe(20);
+  }, 30_000);
+
+  it("opens compact rows natively and reveals a category present only at rank twelve", async () => {
+    await page.goto(`http://127.0.0.1:${server!.port}/`);
+    const details = page.locator('[data-more-topics]');
+    expect(await page.locator('[data-topic-cats]:visible').count()).toBe(5);
+    await details.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    expect(await details.evaluate((el) => (el as HTMLDetailsElement).open)).toBe(true);
+    expect(await page.locator('[data-topic-cats]:visible').count()).toBe(20);
+    for (const width of [1280, 375]) {
+      await page.setViewportSize({ width, height: 900 });
+      const heights = await page.locator('.compact-row').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
+      expect(heights).toEqual(Array(15).fill(40));
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+    }
+    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);
+    await details.locator('summary').focus();
+    await page.keyboard.press('Space');
+    expect(await details.evaluate((el) => (el as HTMLDetailsElement).open)).toBe(false);
+    const industry = page.locator('[data-cat="industry"]');
+    expect(await industry.isEnabled()).toBe(true);
+    await industry.click();
+    expect(await details.evaluate((el) => (el as HTMLDetailsElement).open)).toBe(true);
+    const visible = page.locator('[data-topic-cats]:visible');
+    expect(await visible.count()).toBe(1);
+    expect(await visible.locator('.rank').textContent()).toBe('Rank 12');
+    expect(await visible.getAttribute('href')).toBe('/topic/industry-platforms-0012/');
   }, 30_000);
 });

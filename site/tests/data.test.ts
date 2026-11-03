@@ -18,7 +18,7 @@ describe("fixture data", () => {
     expect(loadDay("computational", "1900-01-01")).toBeNull();
     expect(loadTopic("computational", "not-a-slug")).toBeNull();
     expect(latestDay("missing-domain")).toBeNull();
-    expect(allTopics("computational")).toHaveLength(6);
+    expect(allTopics("computational")).toHaveLength(21);
   });
 
   it("loads requested items across month shards in requested order", () => {

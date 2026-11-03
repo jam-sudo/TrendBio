@@ -15,6 +15,12 @@ const section = (html: string, id: string) => html.match(new RegExp(`<section\\b
 const headings = (html: string) => [...html.matchAll(/<h2\b[^>]*>(.*?)<\/h2>/g)].map((match) => match[1]);
 
 describe("built topic pages", () => {
+  it("shows ranks through twenty without medals outside the top three", () => {
+    const html = readPage('topic/workflow-validation-0020');
+    expect(html).toContain('#20 ·');
+    expect(section(html, 'topic-history')).toContain('2026-11-01 · #20');
+    expect(section(html, 'topic-history')).not.toMatch(/🥇|🥈|🥉/);
+  });
   it("renders the note HTML and the specified content order", () => {
     const html = readPage(`topic/${slug}`);
     expect(html).toContain(loadNote(slug)!.trim());
@@ -90,12 +96,12 @@ describe("built topic pages", () => {
     expect(inject("buildOutput")).toContain("[build] Complete!");
   });
 
-  it("lists exactly the five ranked topics with matching category filters", () => {
+  it("lists all twenty ranked topics with matching category filters", () => {
     const html = readPage("topics");
     const ranked = allTopics(domain).filter((entry) => entry.history.some((day) => day.rank !== null));
     expect(rankedTopics(domain)).toEqual(ranked);
     expect(rankedTopics("missing-domain")).toEqual([]);
-    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(5);
+    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(20);
     expect([...html.matchAll(/href="\/topic\/([^/]+)\/"/g)].map((match) => match[1]))
       .toEqual(ranked.map((entry) => entry.slug));
     for (const entry of ranked) {
@@ -104,7 +110,7 @@ describe("built topic pages", () => {
       expect(html).toContain(`href="/topic/${entry.slug}/"`);
     }
     expect(html).toContain("data-category-chips");
-    expect(html.match(/datetime="2026-11-01"/g)).toHaveLength(5);
+    expect(html.match(/datetime="2026-11-01"/g)).toHaveLength(20);
     expect(html).not.toContain(neverRankedSlug);
     expect(html).not.toContain(loadTopic(domain, neverRankedSlug)!.label);
     expect(existsSync(`dist/topic/${neverRankedSlug}`)).toBe(false);
@@ -157,7 +163,7 @@ describe("built topic pages", () => {
       const index = readFileSync(join(output, "topics/index.html"), "utf8");
       const links = [...index.matchAll(/href="\/topic\/([^/]+)\/"/g)].map((match) => match[1]);
       expect(links.at(-1)).toBe(other.slug);
-      expect(links).toHaveLength(5);
+      expect(links).toHaveLength(20);
       expect(links).not.toContain(neverRankedSlug);
     } finally {
       rmSync(temporary, { recursive: true, force: true });

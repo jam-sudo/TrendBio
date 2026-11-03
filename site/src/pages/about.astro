@@ -4,18 +4,19 @@ import { parse } from "yaml";
 import Base from "../layouts/Base.astro";
 import { latestDay } from "../lib/data";
 
-const { weights } = parse(readFileSync("../config/scoring.yaml", "utf8"));
+const { weights, top_n, category_floor, max_per_category } = parse(readFileSync("../config/scoring.yaml", "utf8"));
 const day = latestDay("computational");
 ---
 
 <Base title="About — TrendBio" lastRun={day?.run.finished}>
   <article class="prose" aria-labelledby="about-heading">
     <h1 id="about-heading">About TrendBio</h1>
-    <p>TrendBio tracks what is moving in computational biology and bioinformatics. Each day, it groups related research, tools and industry activity into topics and ranks the Top 5, with evidence and a synthesis for readers who already know the field.</p>
+    <p>TrendBio tracks what is moving in computational biology and bioinformatics. Each day, it groups related research, tools and industry activity into topics and ranks the Top {top_n}, with evidence and a synthesis for readers who already know the field.</p>
     <h2>Sources</h2>
     <p>We collect preprints from bioRxiv and arXiv, published papers from PubMed, code and tool activity from GitHub, and announcements from industry feeds. Each topic links to its underlying evidence, with preprints linked to their published versions when known.</p>
     <h2>How ranking works</h2>
     <p>Topics are ranked using four weighted terms: rise ({weights.rise * 100}%), diversity ({weights.diversity * 100}%), code velocity ({weights.code_velocity * 100}%), and volume ({weights.volume * 100}%). Rise compares recent activity with a topic’s historical baseline, or a typical cluster when history is limited; diversity rewards a mix of evidence types, code velocity measures GitHub star gains, and volume reflects item count. A small penalty for topics that ranked yesterday encourages rotation.</p>
+    <p>Selection reserves {category_floor} topic per represented category, then fills by score with at most {max_per_category} per category. The selected topics appear in score order; quieter days may have fewer than {top_n} topics.</p>
     <h2>Machine-generated summaries</h2>
     <p>Headlines, summaries and syntheses are machine-generated and may contain errors. Follow the evidence links and consult the original sources before relying on a claim.</p>
     <h2>Contact</h2>

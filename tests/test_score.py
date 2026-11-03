@@ -99,6 +99,7 @@ def test_rank_empty_returns_empty(cfg):
 
 
 def test_rank_returns_at_most_5(topic, sig, cfg):
+    cfg.top_n = 5
     inputs = [(topic.model_copy(update={'slug': str(i)}), sig, 7)
               for i in reversed(range(7))]
     scored = score_topics(inputs, set(), cfg, TODAY)
@@ -146,6 +147,7 @@ def test_components_scale_and_cap(sig):
 
 
 def test_rank_caps_two_per_category_and_backfills_with_other_categories(topic, sig, cfg, caplog):
+    cfg.top_n, cfg.max_per_category = 5, 2
     categories = ['ml-ai'] * 4 + ['structural', 'genomics', 'tools-infra']
     scored = score_topics([(topic.model_copy(update={'slug': str(i), 'category': category}), sig, 7)
                            for i, category in enumerate(categories)], set(), cfg, TODAY)
@@ -155,16 +157,43 @@ def test_rank_caps_two_per_category_and_backfills_with_other_categories(topic, s
     assert 'stage=score_rank event=category_cap displaced=2' in caplog.text
     assert 'stage=score_rank event=category_cap displaced=3' in caplog.text
     cfg.max_per_category = 1
-    assert [row[0].slug for row in rank(scored, cfg)] == ['0', '1', '4', '5', '6']
+    assert [row[0].slug for row in rank(scored, cfg)] == ['0', '4', '5', '6']
 
 
-def test_rank_overflows_when_not_enough_categories(topic, sig, cfg, caplog):
+def test_rank_keeps_cap_when_not_enough_categories(topic, sig, cfg, caplog):
+    cfg.top_n, cfg.max_per_category = 5, 2
     categories = ['ml-ai'] * 5 + ['structural']
     scored = score_topics([(topic.model_copy(update={'slug': str(i), 'category': category}), sig, 7)
                            for i, category in enumerate(categories)], set(), cfg, TODAY)
     with caplog.at_level('INFO'):
         ranked = rank(scored, cfg)
-    assert [row[0].slug for row in ranked] == ['0', '1', '2', '3', '5']
+    assert [row[0].slug for row in ranked] == ['0', '1', '5']
     assert 'displaced=4' in caplog.text
-    assert 'displaced=2' not in caplog.text and 'displaced=3' not in caplog.text
-    assert rank(scored[:4], cfg) == scored[:4]
+    assert 'displaced=2' in caplog.text and 'displaced=3' in caplog.text
+    assert rank(scored[:4], cfg) == scored[:2]
+
+
+def test_rank_floor_includes_each_category_once(topic, sig, cfg):
+    from pipeline.config import load_taxonomy
+
+    categories = ['ml-ai'] * 25 + load_taxonomy('computational').slugs()
+    scored = score_topics([(topic.model_copy(update={'slug': f'{i:02}', 'category': category}), sig, 100 - i)
+                           for i, category in enumerate(categories)], set(), cfg, TODAY)
+    ranked = rank(list(reversed(scored)), cfg)
+    assert {row[0].category for row in ranked} == set(categories)
+    assert [row[2].total for row in ranked] == sorted((row[2].total for row in ranked), reverse=True)
+    cfg.top_n = 3
+    assert [row[0].slug for row in rank(scored, cfg)] == ['00', '25', '26']
+
+
+def test_rank_floor_then_fill_respects_cap(topic, sig, cfg):
+    from collections import Counter
+
+    categories = ['ml-ai'] * 12 + ['genomics'] * 12 + ['structural'] * 12 + ['single-cell'] * 12 + ['industry']
+    scored = score_topics([(topic.model_copy(update={'slug': f'{i:02}', 'category': category}), sig, 100 - i)
+                           for i, category in enumerate(categories)], set(), cfg, TODAY)
+    ranked = rank(scored, cfg)
+    counts = Counter(row[0].category for row in ranked)
+    assert len(ranked) == 20
+    assert counts == {'ml-ai': 5, 'genomics': 5, 'structural': 5, 'single-cell': 4, 'industry': 1}
+    assert ranked[-1][0].category == 'industry'

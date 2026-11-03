@@ -71,18 +71,24 @@ def score_topics(topics_today: list[tuple[Topic, Signals, int]],
 
 def rank(scored: list[tuple[Topic, Signals, Scores]],
          cfg: Scoring) -> list[tuple[Topic, Signals, Scores]]:
-    selected, overflow = [], []
+    scored = sorted(scored, key=lambda row: (-row[2].total, row[0].slug))
+    selected = []
     counts = Counter()
     for row in scored:
-        if len(selected) == cfg.top_n:
-            break
         category = row[0].category
-        if counts[category] >= cfg.max_per_category:
-            overflow.append(row)
-        else:
+        if counts[category] < min(cfg.category_floor, cfg.max_per_category):
             selected.append(row)
             counts[category] += 1
-    selected.extend(overflow[:max(0, cfg.top_n - len(selected))])
+    selected = selected[:cfg.top_n]
+    slugs = {row[0].slug for row in selected}
+    for row in scored:
+        if len(selected) >= cfg.top_n:
+            break
+        category = row[0].category
+        if row[0].slug not in slugs and counts[category] < cfg.max_per_category:
+            selected.append(row)
+            slugs.add(row[0].slug)
+            counts[category] += 1
     slugs = {row[0].slug for row in selected}
     for topic, _, _ in scored[:cfg.top_n]:
         if topic.slug not in slugs:

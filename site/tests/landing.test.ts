@@ -8,18 +8,27 @@ const readPage = (path: string) => readFileSync(`dist/${path}`, "utf8");
 const cards = (html: string) => [...html.matchAll(/<a\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map(([card]) => card);
 
 describe("built landing, day and archive pages", () => {
-  it("links five leaderboard rows and gives rank one a larger summary", () => {
+  it("links twenty leaderboard rows and gives rank one a larger summary", () => {
     const html = readPage("index.html");
     const rendered = cards(html);
     const day = latestDay("computational")!;
-    expect(rendered).toHaveLength(5);
-    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(5);
+    expect(rendered).toHaveLength(20);
+    expect(html.match(/\bdata-topic-cats="/g)).toHaveLength(20);
     expect(rendered[0]).toMatch(/class="[^"]*\bfeatured\b/);
     expect(html).toContain('class="topic-list"');
+    expect(rendered.slice(0, 5).every((row) => row.includes('topic-card'))).toBe(true);
+    const details = html.match(/<details\b[^>]*data-more-topics[^>]*>[\s\S]*?<\/details>/)![0];
+    expect(details).toContain('Show 15 more');
+    expect(cards(details)).toHaveLength(15);
+    expect(details).not.toMatch(/<details[^>]*\bopen\b/);
     day.ranked.forEach((topic, index) => {
       expect(rendered[index]).toContain(`href="/topic/${topic.slug}/"`);
       expect(rendered[index]).toContain(topic.headline);
-      expect(rendered[index]).toContain(topic.summary);
+      if (index < 5) expect(rendered[index]).toContain(topic.summary);
+      else {
+        expect(rendered[index]).toContain('class="compact-row"');
+        expect(rendered[index]).not.toContain(topic.summary);
+      }
     });
   });
 
@@ -29,6 +38,7 @@ describe("built landing, day and archive pages", () => {
     expect(html).toContain("Code and industry signals are partial for backfilled days.");
     expect(html).not.toContain('class="hero"');
     expect(cards(html)).toHaveLength(5);
+    expect(html).not.toMatch(/<details\b/);
     expect(html).toContain("1 preprint · 1 published · 1 tool · 1 industry · ↑ 4.3× vs 4-wk avg");
     expect(html).toContain("4 preprints");
   });

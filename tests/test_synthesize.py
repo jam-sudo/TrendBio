@@ -324,3 +324,40 @@ def test_previous_synthesis_is_not_grounding_source(context):
     assert result.synthesis == OUTPUT['synthesis']
     assert '47 datasets' in ctx.beta.calls[0]['messages'][0]['content']
     assert len(ctx.beta.calls) == 2
+
+
+@pytest.mark.parametrize('backfill,over_ceiling,override', [
+    (False, False, None), (True, False, None), (False, True, None),
+    (True, False, 'claude-opus-5-5'),
+])
+def test_top_twenty_uses_featured_model_and_haiku_tail(context, backfill, over_ceiling, override):
+    ctx = context
+    if over_ceiling:
+        ctx.budget.record('claude-opus-5-5', 20_000_000, 0)
+    ranked = [(ctx.topic.model_copy(deep=True, update={'slug': str(i)}), ctx.sig, ctx.scores)
+              for i in range(20)]
+    topics, model, notes = synthesize_top(
+        ranked, {row[0].slug: [ctx.item] for row in ranked}, ctx.llm, ctx.budget,
+        load_scoring(), TODAY, backfill=backfill, model=override,
+    )
+    featured = override or ('claude-haiku-5-5' if backfill or over_ceiling else 'claude-opus-5-5')
+    assert model == featured
+    assert [topic.synthesis_model for topic in topics] == [featured] * 5 + ['claude-haiku-5-5'] * 15
+    assert all(topic.headline and topic.summary and topic.label and topic.synthesis for topic in topics)
+    assert notes == []
+
+
+def test_skipping_cached_featured_topics_keeps_tail_on_haiku(context):
+    ctx = context
+    cfg = load_scoring().model_copy(update={'featured_n': 2})
+    ranked = [(ctx.topic.model_copy(deep=True, update={'slug': str(i)}), ctx.sig, ctx.scores)
+              for i in range(4)]
+    before = [row[0].model_dump() for row in ranked[:2]]
+    topics, model, _ = synthesize_top(
+        ranked, {row[0].slug: [ctx.item] for row in ranked}, ctx.llm, ctx.budget,
+        cfg, TODAY, backfill=False, skip_slugs={'0', '1'},
+    )
+    assert model == 'claude-opus-5-5'
+    assert [topic.model_dump() for topic in topics[:2]] == before
+    assert ctx.beta.calls == []
+    assert len(ctx.plain.calls) == 2

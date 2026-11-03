@@ -1084,4 +1084,51 @@ def test_cli_reprocess_passes_range_and_options(ctx, monkeypatch):
                                      '--reenrich', '--model', 'custom-model', '--data-root', str(ctx.root)])
     assert result.exit_code == 0, result.output
     assert process.call_args.args[:3] == ('computational', date(2026, 10, 1), date(2026, 10, 31))
-    assert process.call_args.kwargs == {'reenrich': True, 'model': 'custom-model'}
+    assert process.call_args.kwargs == {'reenrich': True, 'model': 'custom-model', 'only_missing_synthesis': False}
+
+
+def test_reprocess_only_missing_preserves_synthesis_without_enrichment(ctx, monkeypatch):
+    start, end = prepare_reprocess(ctx, monkeypatch)
+    preserved = {}
+    for topic in ctx.store.all_topics():
+        if topic.slug == 'never-ranked-fixture-0000':
+            continue
+        if topic.history[-1].rank > 5:
+            topic.headline = topic.summary = topic.synthesis = topic.synthesis_model = None
+            ctx.store.put_topic(topic)
+        else:
+            preserved[topic.slug] = (topic.label, topic.headline, topic.summary, topic.synthesis,
+                                     topic.synthesis_model, topic.synthesized_on, topic.item_one_liners)
+    for method in ('enrich', 'enrich_batch'):
+        monkeypatch.setattr(ctx.deps.llm, method, lambda *a, **k: pytest.fail('no enrichment allowed'))
+    called = []
+    synthesize = ctx.deps.llm.synthesize
+
+    def capture(topic, *args):
+        called.append(topic.slug)
+        return synthesize(topic, *args)
+
+    monkeypatch.setattr(ctx.deps.llm, 'synthesize', capture)
+    run_reprocess('computational', start, end, ctx.store, ctx.deps,
+                  reenrich=False, only_missing_synthesis=True)
+    assert len(called) == len(set(called)) == 15
+    assert not set(called) & preserved.keys()
+    for slug, fields in preserved.items():
+        topic = ctx.store.get_topic(slug)
+        assert (topic.label, topic.headline, topic.summary, topic.synthesis,
+                topic.synthesis_model, topic.synthesized_on, topic.item_one_liners) == fields
+    assert len(ctx.store.get_day(end).ranked) == 20
+    assert all(adapter.calls == [] for adapter in ctx.deps.adapters)
+
+
+def test_cli_reprocess_no_reenrich_only_missing(ctx, monkeypatch):
+    from unittest.mock import Mock
+
+    process = Mock()
+    monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
+    monkeypatch.setattr('pipeline.__main__.run_reprocess', process)
+    result = CliRunner().invoke(app, ['reprocess', '--from', '2026-10-01', '--to', '2026-10-31',
+                                     '--no-reenrich', '--only-missing-synthesis', '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    assert process.call_args.kwargs == {'reenrich': False, 'model': 'claude-haiku-5-5',
+                                        'only_missing_synthesis': True}

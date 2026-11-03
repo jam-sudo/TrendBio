@@ -30,8 +30,10 @@ class Scoring(BaseModel):
     min_cluster_size: int = 3
     continuity_threshold: float = 0.80
     window_days: int = 7
-    top_n: int = 5
-    max_per_category: int = Field(default=2, ge=1)
+    top_n: int = Field(default=20, ge=0)
+    max_per_category: int = Field(default=5, ge=1)
+    category_floor: int = Field(default=1, ge=0)
+    featured_n: int = Field(default=5, ge=0)
     synthesis_max_items: int = Field(default=40, ge=1)
     monthly_ceiling_usd: float = 50.0
     degraded_fallback_min: int = 3
