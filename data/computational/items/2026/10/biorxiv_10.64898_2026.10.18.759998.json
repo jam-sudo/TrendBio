@@ -1,0 +1,43 @@
+{
+  "abstract": "Systemic Lupus Erythematosus (SLE) is a complex autoimmune disease with a strong genetic component and highly variable clinical features. Because of this heterogeneity, predicting disease status remains challenging using any single marker alone. In this study, we explore two complementary data sources: (1) genotypes at 30 candidate SNPs in a South Indian case-control cohort (n = 425) and (2) bulk expression of 13 genes from the same pathways, curated from six GEO series (n = 642 SLE or control samples from 483 individuals), to investigate whether they can distinguish SLE cases from healthy controls. The expression data were placed on a common log2 scale and corrected for batch effects using mean-only ComBat. To avoid data leakage, ComBat, gene filtering, scaling, and model fitting were re-estimated within every training fold, and all samples from the same individual were kept in the same fold. Performance was summarised using ROC-AUC, precision-recall AUC (PR-AUC), and the Matthews correlation coefficient (MCC) over 10 x 5-fold cross-validation. Models were interpreted using out-of-fold SHAP values, and the entire pipeline was evaluated using label permutations. For the SNP data, dominant encoding with age and sex gave ROC-AUC 0.699 {+/-} 0.052, PR-AUC 0.668 {+/-} 0.063, and MCC 0.309 {+/-} 0.101. However, this performance depended on four SNPs that deviated from Hardy-Weinberg equilibrium in controls. Without these SNPs, the SNPs added little predictive value beyond age and sex (ROC-AUC 0.656). The strongest single association, at MTRR A66G, resulted from an excess of heterozygotes among controls, a pattern typical of genotyping error. In contrast, homozygous CYP1A1 M2 and COMT genotypes, as well as CYP1A1 M4 carriers, were enriched in cases, pointing to a possible role for xenobiotic metabolism. The leakage-free expression classifiers achieved ROC-AUC values of 0.837 {+/-} 0.033 for L1-penalised logistic regression and 0.915 {+/-} 0.021 for XGBoost. Shuffled labels produced chance-level results, supporting the absence of label leakage in the pipeline. However, a model using only the study label achieved an ROC-AUC of 0.857, indicating strong confounding between disease status and study identity. Within individual studies, ROC-AUC was 0.743 for L1-penalised logistic regression and 0.835 for XGBoost. Performance fell to 0.46-0.74 when entire studies were held out. Lower MTR expression was the most important and consistent expression feature, whereas two other highly ranked genes, CYP1A1 and GSTT1, carried little predictive signal within individual studies. These findings show that, in pooled multi-study expression data, leakage-free cross-validation alone does not guarantee reliable performance estimates. Batch-label confounding and genotype quality must also be assessed directly.",
+  "authors": [
+    "R, K.",
+    "Kannan, V.",
+    "Daniel, A."
+  ],
+  "doi": "10.64898/2026.10.18.759998",
+  "first_seen": "2026-10-23",
+  "id": "biorxiv:10.64898/2026.10.18.759998",
+  "metadata": {
+    "abstract": "Systemic Lupus Erythematosus (SLE) is a complex autoimmune disease with a strong genetic component and highly variable clinical features. Because of this heterogeneity, predicting disease status remains challenging using any single marker alone. In this study, we explore two complementary data sources: (1) genotypes at 30 candidate SNPs in a South Indian case-control cohort (n = 425) and (2) bulk expression of 13 genes from the same pathways, curated from six GEO series (n = 642 SLE or control samples from 483 individuals), to investigate whether they can distinguish SLE cases from healthy controls. The expression data were placed on a common log2 scale and corrected for batch effects using mean-only ComBat. To avoid data leakage, ComBat, gene filtering, scaling, and model fitting were re-estimated within every training fold, and all samples from the same individual were kept in the same fold. Performance was summarised using ROC-AUC, precision-recall AUC (PR-AUC), and the Matthews correlation coefficient (MCC) over 10 x 5-fold cross-validation. Models were interpreted using out-of-fold SHAP values, and the entire pipeline was evaluated using label permutations. For the SNP data, dominant encoding with age and sex gave ROC-AUC 0.699 {+/-} 0.052, PR-AUC 0.668 {+/-} 0.063, and MCC 0.309 {+/-} 0.101. However, this performance depended on four SNPs that deviated from Hardy-Weinberg equilibrium in controls. Without these SNPs, the SNPs added little predictive value beyond age and sex (ROC-AUC 0.656). The strongest single association, at MTRR A66G, resulted from an excess of heterozygotes among controls, a pattern typical of genotyping error. In contrast, homozygous CYP1A1 M2 and COMT genotypes, as well as CYP1A1 M4 carriers, were enriched in cases, pointing to a possible role for xenobiotic metabolism. The leakage-free expression classifiers achieved ROC-AUC values of 0.837 {+/-} 0.033 for L1-penalised logistic regression and 0.915 {+/-} 0.021 for XGBoost. Shuffled labels produced chance-level results, supporting the absence of label leakage in the pipeline. However, a model using only the study label achieved an ROC-AUC of 0.857, indicating strong confounding between disease status and study identity. Within individual studies, ROC-AUC was 0.743 for L1-penalised logistic regression and 0.835 for XGBoost. Performance fell to 0.46-0.74 when entire studies were held out. Lower MTR expression was the most important and consistent expression feature, whereas two other highly ranked genes, CYP1A1 and GSTT1, carried little predictive signal within individual studies. These findings show that, in pooled multi-study expression data, leakage-free cross-validation alone does not guarantee reliable performance estimates. Batch-label confounding and genotype quality must also be assessed directly.",
+    "author_corresponding": "Karthik R",
+    "author_corresponding_institution": "IIT Madras",
+    "authors": "R, K.; Kannan, V.; Daniel, A.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-10-23",
+    "doi": "10.64898/2026.10.18.759998",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/23/2026.10.18.759998.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Prediction of Systemic Lupus Erythematosus from Genotype and1 Gene-Expression Data: Batch Correction and Leakage Free2 Evaluation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "IIT Madras",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Predicts SLE from 30 SNPs and 13-gene expression with leakage-free CV; ComBat batch correction, SHAP, and study confounding show pooled-data performance is…",
+  "title": "Prediction of Systemic Lupus Erythematosus from Genotype and1 Gene-Expression Data: Batch Correction and Leakage Free2 Evaluation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.18.759998"
+}

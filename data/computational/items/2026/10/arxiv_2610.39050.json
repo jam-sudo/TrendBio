@@ -1,0 +1,32 @@
+{
+  "abstract": "Single-cell assays study the genome one cell at a time. Unimodal assays measure one molecular layer, the newer multimodal assays measure several. Most data are single-modality, so integrating them relies on models trained on multimodal assays, where the cell correspondence across modalities is known. These models return a matching, but rarely a confidence measure. We present BASILISC (Bayesian Alignment of Siamese-Integrated Latents for Inferring Single-cell Correspondence), a framework for matching single-cell representations with uncertainty on the correspondence itself. A BASILISC model is a probabilistic siamese network over the two modalities with a predictive distribution over the correspondence for a cross-modal pair of cells. We instantiate it at two levels: at the cell-type level the question is whether two cells share a cell type, at the cell level which cell is the partner in the other modality. To our knowledge, this is the first uncertainty score on a learned cross-modal correspondence evaluated against a known ground-truth pairing. BASILISC learns a similarity across modalities that reflects cell lineage: an unseen cell type is matched to its lineage relative, matching still works on such held-out types (balanced accuracy 0.86 on unseen against 0.93 on seen types), and the predictive uncertainty rises on these out-of-distribution cells. The uncertainty score also selects high-quality matches for downstream analysis: discarding the least certain fifth of the pairs raises accuracy from 0.93 to 0.98. At the cell level, a deep ensemble of the deterministic matcher reaches 0.062 matching accuracy on the benchmark test set, above the competition winner; on the Bayesian matcher's assignment, the posterior flags the wrong matches that cross a cell-type boundary better than a deterministic read of the same scores (AUROC 0.68 against 0.64).",
+  "authors": [
+    "Sepideh Saran",
+    "Mahsa Ghanbari",
+    "Uwe Ohler"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-28",
+  "id": "arxiv:2610.39050",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.39050v1</ns0:id>\n    <ns0:title>BASILISC: Bayesian Alignment of Siamese-Integrated Latents for Inferring Single-cell Correspondence</ns0:title>\n    <ns0:updated>2026-10-28T23:26:25Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.39050v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.39050v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Single-cell assays study the genome one cell at a time. Unimodal assays measure one molecular layer, the newer multimodal assays measure several. Most data are single-modality, so integrating them relies on models trained on multimodal assays, where the cell correspondence across modalities is known. These models return a matching, but rarely a confidence measure. We present BASILISC (Bayesian Alignment of Siamese-Integrated Latents for Inferring Single-cell Correspondence), a framework for matching single-cell representations with uncertainty on the correspondence itself. A BASILISC model is a probabilistic siamese network over the two modalities with a predictive distribution over the correspondence for a cross-modal pair of cells. We instantiate it at two levels: at the cell-type level the question is whether two cells share a cell type, at the cell level which cell is the partner in the other modality. To our knowledge, this is the first uncertainty score on a learned cross-modal correspondence evaluated against a known ground-truth pairing. BASILISC learns a similarity across modalities that reflects cell lineage: an unseen cell type is matched to its lineage relative, matching still works on such held-out types (balanced accuracy 0.86 on unseen against 0.93 on seen types), and the predictive uncertainty rises on these out-of-distribution cells. The uncertainty score also selects high-quality matches for downstream analysis: discarding the least certain fifth of the pairs raises accuracy from 0.93 to 0.98. At the cell level, a deep ensemble of the deterministic matcher reaches 0.062 matching accuracy on the benchmark test set, above the competition winner; on the Bayesian matcher's assignment, the posterior flags the wrong matches that cross a cell-type boundary better than a deterministic read of the same scores (AUROC 0.68 against 0.64).</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-28T23:26:25Z</ns0:published>\n    <ns1:comment>12 pages main text, 3 figures, 1 table; supplementary material with 10 figures and 10 tables (38 pages total). Code to be released on publication. Currently under review</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Sepideh Saran</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mahsa Ghanbari</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Uwe Ohler</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-10-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "BASILISC: a probabilistic siamese network giving uncertainty over cross-modal single-cell correspondence, tested on held-out cell types and filtering…",
+  "title": "BASILISC: Bayesian Alignment of Siamese-Integrated Latents for Inferring Single-cell Correspondence",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.39050v1"
+}

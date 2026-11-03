@@ -1,0 +1,42 @@
+{
+  "abstract": "Motivation: De novo genome assembly relies on accurate path selection through complex graphs, yet unitig graph branching points remain a major ambiguity source. Multiple extensions may be equally plausible from topology alone, but sequence-level consistency of competing paths remains largely unexplored. Model: We introduce RASTRO, a reference-free framework for scoring candidate paths at unitig branching points using nucleotide sequence information. RASTRO-S employs a sample-specific n-gram model to estimate extension plausibility via bits-per-base surprisal, while RASTRO-L uses the Evo2 pretrained DNA language model for autoregressive path scoring. Both operate directly on unitig graphs without reference genomes or assembled contigs. To evaluate branch decisions independently, we develop a read-based validation strategy using boundary k-mers spanning the junction between graph context and candidate extensions. Results: Experiments on HIV-1 and SARS-CoV-2 unitig graphs from Logan show sequence-based models provide meaningful match with read-supported choices. Among 20,000 sampled branching points, unique read-supported choices were identified for 15,319 HIV-1 branches (76.6%) and 19,882 SARS-CoV-2 branches (99.4%). RASTRO-S improved match from 54.1% to 75.8% for HIV-1 and from 58.6% to 76.4% for SARS-CoV-2 as context length rose from n=5 to n=10. RASTRO-L also improved with context length, reaching 49.96% and 49.25% match. Both outperformed random selection and the longest-extension greedy baseline. Conclusion: RASTRO provides an efficient, interpretable framework for evaluating ambiguous path decisions in unitig graphs using raw-read evidence rather than contig-level alignment. Results demonstrate the potential of lightweight, sample-adaptive sequence models for improving local decision-making in genome assembly workflows.",
+  "authors": [
+    "Behtari, S.",
+    "Hooshmand, M."
+  ],
+  "doi": "10.64898/2026.09.28.754897",
+  "first_seen": "2026-10-07",
+  "id": "biorxiv:10.64898/2026.09.28.754897",
+  "metadata": {
+    "abstract": "Motivation: De novo genome assembly relies on accurate path selection through complex graphs, yet unitig graph branching points remain a major ambiguity source. Multiple extensions may be equally plausible from topology alone, but sequence-level consistency of competing paths remains largely unexplored. Model: We introduce RASTRO, a reference-free framework for scoring candidate paths at unitig branching points using nucleotide sequence information. RASTRO-S employs a sample-specific n-gram model to estimate extension plausibility via bits-per-base surprisal, while RASTRO-L uses the Evo2 pretrained DNA language model for autoregressive path scoring. Both operate directly on unitig graphs without reference genomes or assembled contigs. To evaluate branch decisions independently, we develop a read-based validation strategy using boundary k-mers spanning the junction between graph context and candidate extensions. Results: Experiments on HIV-1 and SARS-CoV-2 unitig graphs from Logan show sequence-based models provide meaningful match with read-supported choices. Among 20,000 sampled branching points, unique read-supported choices were identified for 15,319 HIV-1 branches (76.6%) and 19,882 SARS-CoV-2 branches (99.4%). RASTRO-S improved match from 54.1% to 75.8% for HIV-1 and from 58.6% to 76.4% for SARS-CoV-2 as context length rose from n=5 to n=10. RASTRO-L also improved with context length, reaching 49.96% and 49.25% match. Both outperformed random selection and the longest-extension greedy baseline. Conclusion: RASTRO provides an efficient, interpretable framework for evaluating ambiguous path decisions in unitig graphs using raw-read evidence rather than contig-level alignment. Results demonstrate the potential of lightweight, sample-adaptive sequence models for improving local decision-making in genome assembly workflows.",
+    "author_corresponding": "Mohsen Hooshmand",
+    "author_corresponding_institution": "Zanjan Institute for Advanced Studies in Basic Sciences",
+    "authors": "Behtari, S.; Hooshmand, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-07",
+    "doi": "10.64898/2026.09.28.754897",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/07/2026.09.28.754897.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RASTRO: Branching Point Decision-Making in Unitig Graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Zanjan Institute for Advanced Studies in Basic Sciences",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-10-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "RASTRO scores candidate extensions at unitig graph branching points using sample-specific n-gram and Evo2 DNA language model surprisal, validated against…",
+  "title": "RASTRO: Branching Point Decision-Making in Unitig Graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.28.754897"
+}

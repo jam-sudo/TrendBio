@@ -1,0 +1,34 @@
+{
+  "abstract": "Preprocessing is an under-measured reliability risk in clinical prediction: a model can keep a similar AUROC and still change who receives an alert. Imputation quality is commonly evaluated using reconstruction error or aggregate discrimination, neither of which directly measures agreement on which patients are flagged. At a matched alert rate, pipelines with similar aggregate performance can produce different patient lists. This question is especially relevant under the frequent, structured missingness of real ICU records. We therefore introduce alert-list concordance, which asks whether two pipelines identify the same high-risk patients, measured by the Jaccard similarity of their top-k% alert sets with patient-level bootstrap confidence intervals. On PhysioNet/CinC 2019 (40,336 patients, 71.9% missingness), we compare nine imputation strategies and a native-missingness baseline using a fixed XGBoost configuration, fitted and Platt-calibrated separately for each strategy. After Bonferroni correction, 22 of the 28 reconstruction-method pairs showed no statistically significant difference in patient-level AUROC, yet their alert lists overlap at Jaccard 0.518 to 0.750. Similar aggregate discrimination can therefore accompany different patient selections. ForwardFill is a separate outlier, pairing higher discrimination with the lowest overlap in the matrix, 0.40 to 0.45. The broad pattern holds within each hospital system and under six patient-level aggregation rules. At the row level, eight of ten methods fall within an AUROC range of 0.011. In this row-level pipeline, deep imputers did not outperform mean imputation on discrimination, and the sequential implementations cost 5 to 12 times mean imputation in total pipeline wall-clock time on our hardware.",
+  "authors": [
+    "Priyanka Siddappa",
+    "Muntaqim Ahmed Raju",
+    "Shifat Haider Al Amin",
+    "Ruizhe Ma"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-15",
+  "id": "arxiv:2610.22635",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.22635v1</ns0:id>\n    <ns0:title>Alert-List Concordance for Evaluating Imputation Strategies in ICU Sepsis Prediction</ns0:title>\n    <ns0:updated>2026-10-15T20:40:20Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.22635v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.22635v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Preprocessing is an under-measured reliability risk in clinical prediction: a model can keep a similar AUROC and still change who receives an alert. Imputation quality is commonly evaluated using reconstruction error or aggregate discrimination, neither of which directly measures agreement on which patients are flagged. At a matched alert rate, pipelines with similar aggregate performance can produce different patient lists. This question is especially relevant under the frequent, structured missingness of real ICU records. We therefore introduce alert-list concordance, which asks whether two pipelines identify the same high-risk patients, measured by the Jaccard similarity of their top-k% alert sets with patient-level bootstrap confidence intervals. On PhysioNet/CinC 2019 (40,336 patients, 71.9% missingness), we compare nine imputation strategies and a native-missingness baseline using a fixed XGBoost configuration, fitted and Platt-calibrated separately for each strategy. After Bonferroni correction, 22 of the 28 reconstruction-method pairs showed no statistically significant difference in patient-level AUROC, yet their alert lists overlap at Jaccard 0.518 to 0.750. Similar aggregate discrimination can therefore accompany different patient selections. ForwardFill is a separate outlier, pairing higher discrimination with the lowest overlap in the matrix, 0.40 to 0.45. The broad pattern holds within each hospital system and under six patient-level aggregation rules. At the row level, eight of ten methods fall within an AUROC range of 0.011. In this row-level pipeline, deep imputers did not outperform mean imputation on discrimination, and the sequential implementations cost 5 to 12 times mean imputation in total pipeline wall-clock time on our hardware.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-15T20:40:20Z</ns0:published>\n    <ns1:comment>8 pages, 2 figures. Accepted at the 14th Workshop on Data Mining in Biomedical Informatics and Healthcare (DMBIH 2026), held in conjunction with IEEE ICDM 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Priyanka Siddappa</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Muntaqim Ahmed Raju</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shifat Haider Al Amin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruizhe Ma</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Introduces alert-list concordance (Jaccard overlap of top-k% alert sets) to test whether ICU sepsis imputation pipelines flag the same patients; similar AUROC…",
+  "title": "Alert-List Concordance for Evaluating Imputation Strategies in ICU Sepsis Prediction",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.22635v1"
+}

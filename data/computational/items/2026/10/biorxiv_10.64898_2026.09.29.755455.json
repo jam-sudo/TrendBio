@@ -1,0 +1,47 @@
+{
+  "abstract": "Single-cell RNA sequencing fundamentally depends on defining cell-to-cell similarity to resolve distinct cell states. However, conventional dimensional-reduction frameworks such as t-SNE and UMAP inherently rely on Euclidean geometry, a construct ill-suited for high-dimensional, sparse count matrices, and produce cluster boundaries that lack biological interpretability. Here, we introduce cell-driven information fusion, an end-to-end framework that constructs cell affinity directly from raw counts by integrating three biological signals: gene detection patterns, expression magnitude of dominant transcripts, and global profile correlation. A sparsity-adaptive operator merges these signals into a unified affinity matrix, while an entry-usage diagnostic traces which biological component governs local cluster boundaries. The framework comprises two complementary implementations: c-TSNE for low-to-moderate sparsity (below 80 percent), which consistently outperforms Euclidean baselines across six benchmarks, and c-UMAP for high-sparsity regimes. Evaluated across 29 datasets and two protocols against 11 baseline methods, c-UMAP achieved the highest mean normalized and adjusted mutual information (NMI and AMI) in every setting, with all improvements remaining significant after Bonferroni correction. Because a single fixed weight vector was applied across all 29 datasets per protocol, these gains reflect intrinsic algorithmic robustness rather than dataset-specific hyperparameter tuning. Furthermore, c-UMAP scales seamlessly to 1.14 million cells, running up to 22-fold faster than the leading baseline. Crucially, by operating directly on raw counts without variance-based gene selection, our approach avoids the median 46.9 percent loss of top differentially expressed genes per cell class, preserving essential lineage markers such as IAPP and FOXP3. Together, these results demonstrate that atlas-scale efficiency, raw-data preservation, and mechanistic interpretability are fully compatible.",
+  "authors": [
+    "Han, H.",
+    "Zhang, T.",
+    "Niu, L.",
+    "Wang, J.",
+    "Han, F.",
+    "Li, C.",
+    "Li, J.",
+    "Cao, H."
+  ],
+  "doi": "10.64898/2026.09.29.755455",
+  "first_seen": "2026-10-05",
+  "id": "biorxiv:10.64898/2026.09.29.755455",
+  "metadata": {
+    "abstract": "Single-cell RNA sequencing fundamentally depends on defining cell-to-cell similarity to resolve distinct cell states. However, conventional dimensional-reduction frameworks such as t-SNE and UMAP inherently rely on Euclidean geometry, a construct ill-suited for high-dimensional, sparse count matrices, and produce cluster boundaries that lack biological interpretability. Here, we introduce cell-driven information fusion, an end-to-end framework that constructs cell affinity directly from raw counts by integrating three biological signals: gene detection patterns, expression magnitude of dominant transcripts, and global profile correlation. A sparsity-adaptive operator merges these signals into a unified affinity matrix, while an entry-usage diagnostic traces which biological component governs local cluster boundaries. The framework comprises two complementary implementations: c-TSNE for low-to-moderate sparsity (below 80 percent), which consistently outperforms Euclidean baselines across six benchmarks, and c-UMAP for high-sparsity regimes. Evaluated across 29 datasets and two protocols against 11 baseline methods, c-UMAP achieved the highest mean normalized and adjusted mutual information (NMI and AMI) in every setting, with all improvements remaining significant after Bonferroni correction. Because a single fixed weight vector was applied across all 29 datasets per protocol, these gains reflect intrinsic algorithmic robustness rather than dataset-specific hyperparameter tuning. Furthermore, c-UMAP scales seamlessly to 1.14 million cells, running up to 22-fold faster than the leading baseline. Crucially, by operating directly on raw counts without variance-based gene selection, our approach avoids the median 46.9 percent loss of top differentially expressed genes per cell class, preserving essential lineage markers such as IAPP and FOXP3. Together, these results demonstrate that atlas-scale efficiency, raw-data preservation, and mechanistic interpretability are fully compatible.",
+    "author_corresponding": "Henry Han",
+    "author_corresponding_institution": "Baylor University",
+    "authors": "Han, H.; Zhang, T.; Niu, L.; Wang, J.; Han, F.; Li, C.; Li, J.; Cao, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-05",
+    "doi": "10.64898/2026.09.29.755455",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/05/2026.09.29.755455.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Explainable t-SNE for Single-Cell RNA-seq Data Analysis: A Cell-DrivenInformation Fusion Framework",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Baylor University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-10-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces c-TSNE and c-UMAP, cell-affinity dimensionality reduction for scRNA-seq built on raw counts, benchmarked on 29 datasets and scaling to 1.14M cells.",
+  "title": "Explainable t-SNE for Single-Cell RNA-seq Data Analysis: A Cell-DrivenInformation Fusion Framework",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.09.29.755455"
+}

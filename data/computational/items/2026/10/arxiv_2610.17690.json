@@ -1,0 +1,44 @@
+{
+  "abstract": "Medical multimodal reasoning models are typically trained on teacher-generated rationales, discarding the valid reasoning in students' own failed trajectories, while general-domain correction methods offer little guidance for errors in image reading, anatomical context, or differential diagnosis. We propose MedEvo, which uses medical knowledge, namely a tag taxonomy and error-type diagnosis, to navigate both trajectory repair and data selection. For each failed rollout, a gold-blind auditor locates the first consequential error and provides a minimal, answer-free hint; the same student retains the valid prefix and regenerates the erroneous suffix. After each round, MedEvo identifies capability gaps across medical tags on a held-out feedback set and prioritizes related questions for new rollouts and repairs. With supervised fine-tuning (SFT) alone, MedEvo raises Qwen3.5-9B mean accuracy across seven benchmarks from 65.57% to 69.12% (47.40% to 54.50% on the multimodal track of MedXpertQA (MedXpertQA-MM)), surpassing teacher-distillation SFT (66.93%). It also raises Qwen3.5-35B and Qwen3.5-397B mean accuracy from 67.91% to 73.04% and from 71.83% to 74.95%, respectively. Our analyses show that failed trajectories contain reasoning worth preserving, that repair success does not imply learning value, and that independent feedback is key to sustained improvement.",
+  "authors": [
+    "Xiaoliang Wang",
+    "Zhuo Chen",
+    "Chuanyang Zheng",
+    "Quanbin Wang",
+    "Jiangwei Lao",
+    "Yingao Liu",
+    "Jiajia Liu",
+    "Jinming Cao",
+    "Honglin Lin",
+    "Zhihong Lu",
+    "Hao Jin",
+    "Jian Wang",
+    "Jinjie Gu",
+    "Lijun Wu"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-13",
+  "id": "arxiv:2610.17690",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "cs.CV",
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.17690v2</ns0:id>\n    <ns0:title>MedEvo: Medical Reasoning Evolution through Knowledge Navigation</ns0:title>\n    <ns0:updated>2026-10-26T13:42:51Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.17690v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.17690v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Medical multimodal reasoning models are typically trained on teacher-generated rationales, discarding the valid reasoning in students' own failed trajectories, while general-domain correction methods offer little guidance for errors in image reading, anatomical context, or differential diagnosis. We propose MedEvo, which uses medical knowledge, namely a tag taxonomy and error-type diagnosis, to navigate both trajectory repair and data selection. For each failed rollout, a gold-blind auditor locates the first consequential error and provides a minimal, answer-free hint; the same student retains the valid prefix and regenerates the erroneous suffix. After each round, MedEvo identifies capability gaps across medical tags on a held-out feedback set and prioritizes related questions for new rollouts and repairs. With supervised fine-tuning (SFT) alone, MedEvo raises Qwen3.5-9B mean accuracy across seven benchmarks from 65.57% to 69.12% (47.40% to 54.50% on the multimodal track of MedXpertQA (MedXpertQA-MM)), surpassing teacher-distillation SFT (66.93%). It also raises Qwen3.5-35B and Qwen3.5-397B mean accuracy from 67.91% to 73.04% and from 71.83% to 74.95%, respectively. Our analyses show that failed trajectories contain reasoning worth preserving, that repair success does not imply learning value, and that independent feedback is key to sustained improvement.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-13T04:11:26Z</ns0:published>\n    <ns1:comment>Project: https://pork-pay.github.io/MedEvo/ GitHub: https://github.com/pork-pay/MedEvo</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Xiaoliang Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhuo Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chuanyang Zheng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Quanbin Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiangwei Lao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yingao Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiajia Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jinming Cao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Honglin Lin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhihong Lu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hao Jin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jian Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jinjie Gu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lijun Wu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Medical multimodal reasoning models are typically trained on teacher-generated rationales, discarding the valid reasoning in students' own failed trajectories, ",
+  "title": "MedEvo: Medical Reasoning Evolution through Knowledge Navigation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.17690v2"
+}

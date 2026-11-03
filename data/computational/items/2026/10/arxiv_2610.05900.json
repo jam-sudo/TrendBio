@@ -1,0 +1,32 @@
+{
+  "abstract": "Bilateral coronary tree (LCA/RCA) reconstruction in cardiac CT angiography (CCTA) faces $64^3$ discretization, territory ambiguity, and ostium drift. Within GT-foreground $128^3$ ROIs ($\\pm 15$-voxel margin, 9.8--12.0 mm; seed-free in ROI; whole-volume localization upstream), we propose a canonical $(Z_{IS},Y_{PA},X_{LR})$ multi-task network and scalar-potential arborescence solver. Volumes, centerlines, and thick-stem ostia map to $(Z_{IS},Y_{PA},X_{LR})$, extending a 3D pyramid encoder and tubular decoder with a $128^3\\to 64^3$ skip, stop-gradient $128^3$ residual branch, 3D sub-voxel displacement head $Δ\\hat{u}(x)$, ipsilateral head $(P_{LCA},P_{RCA})$, and $32^3$ ostium head. From a recall-balanced anchor, 327,385 active parameters (398,843 total) are fine-tuned in a 30-epoch AdamW loop ($ε=10^{-8}$, 7 groups) with L2-SP/anchor blending. Our solver couples Valsalva-STJ calibration, $128^3$ rooting, contralateral inhibition, radius-ratio pruning, normal-plane pullback, and collision reduction. On OOS-50 (Cases 251--300, 50 volumes, 100 trees; 201--250 isolated) vs. 3D U-Net (skeleton/$M_3$--$M_5$) and 5 proxies, it reaches $2.7671\\pm 1.1385$ mm $CD_{CL}^{union}$ (SD 0.0415), $3.2338\\pm 1.3557$ mm $CD_{CL}^{arc1mm}$, and $3.2926\\pm 2.6253$ mm $CD_{ipsi}$ (arc1mm 3.7460 mm, node $p_{Holm}\\le 0.0400$ vs. Ext-0b [arc1mm $p=0.1629/0.2187$]; 76.33% junction [23.04% 1-to-1], 79.65% branch F1). On Dev-14 (14 volumes, 28 trees), it reaches $2.1362\\pm 0.5041$ mm $CD_{CL}^{union}$ (SD 0.0369), $2.3798\\pm 0.5725$ mm $CD_{CL}^{arc1mm}$, and $2.2480\\pm 0.6835$ mm $CD_{ipsi}$ (arc1mm 2.4951 mm, node $CD_{CL}^{union}$ $p_{Holm}=0.0494$ vs. Ext-0b [$CD_{ipsi}$/arc1mm $p_{Holm}=0.1353/0.0676$--$0.0906$]; 56.76%/77.74% F1@1/2mm; 79.95% junction [21.06% 1-to-1], 83.80% branch F1, 4.6880/4.9298 mm ostia), and $N=64$ $CD_{CL}^{union}=2.6291\\pm 1.0629$ mm (arc1mm 3.0470, $CD_{ipsi}$ 3.0641).",
+  "authors": [
+    "Zeyu Jia",
+    "Xin Ming"
+  ],
+  "doi": null,
+  "first_seen": "2026-10-05",
+  "id": "arxiv:2610.05900",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "q-bio.TO"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2610.05900v3</ns0:id>\n    <ns0:title>Sub-Voxel Displacement and Ipsilateral Territory Decoupling for 3D Bilateral Coronary Artery Tree Reconstruction in Cardiac CT Angiography</ns0:title>\n    <ns0:updated>2026-10-30T09:05:55Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2610.05900v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2610.05900v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Bilateral coronary tree (LCA/RCA) reconstruction in cardiac CT angiography (CCTA) faces $64^3$ discretization, territory ambiguity, and ostium drift. Within GT-foreground $128^3$ ROIs ($\\pm 15$-voxel margin, 9.8--12.0 mm; seed-free in ROI; whole-volume localization upstream), we propose a canonical $(Z_{IS},Y_{PA},X_{LR})$ multi-task network and scalar-potential arborescence solver. Volumes, centerlines, and thick-stem ostia map to $(Z_{IS},Y_{PA},X_{LR})$, extending a 3D pyramid encoder and tubular decoder with a $128^3\\to 64^3$ skip, stop-gradient $128^3$ residual branch, 3D sub-voxel displacement head $Δ\\hat{u}(x)$, ipsilateral head $(P_{LCA},P_{RCA})$, and $32^3$ ostium head. From a recall-balanced anchor, 327,385 active parameters (398,843 total) are fine-tuned in a 30-epoch AdamW loop ($ε=10^{-8}$, 7 groups) with L2-SP/anchor blending. Our solver couples Valsalva-STJ calibration, $128^3$ rooting, contralateral inhibition, radius-ratio pruning, normal-plane pullback, and collision reduction. On OOS-50 (Cases 251--300, 50 volumes, 100 trees; 201--250 isolated) vs. 3D U-Net (skeleton/$M_3$--$M_5$) and 5 proxies, it reaches $2.7671\\pm 1.1385$ mm $CD_{CL}^{union}$ (SD 0.0415), $3.2338\\pm 1.3557$ mm $CD_{CL}^{arc1mm}$, and $3.2926\\pm 2.6253$ mm $CD_{ipsi}$ (arc1mm 3.7460 mm, node $p_{Holm}\\le 0.0400$ vs. Ext-0b [arc1mm $p=0.1629/0.2187$]; 76.33% junction [23.04% 1-to-1], 79.65% branch F1). On Dev-14 (14 volumes, 28 trees), it reaches $2.1362\\pm 0.5041$ mm $CD_{CL}^{union}$ (SD 0.0369), $2.3798\\pm 0.5725$ mm $CD_{CL}^{arc1mm}$, and $2.2480\\pm 0.6835$ mm $CD_{ipsi}$ (arc1mm 2.4951 mm, node $CD_{CL}^{union}$ $p_{Holm}=0.0494$ vs. Ext-0b [$CD_{ipsi}$/arc1mm $p_{Holm}=0.1353/0.0676$--$0.0906$]; 56.76%/77.74% F1@1/2mm; 79.95% junction [21.06% 1-to-1], 83.80% branch F1, 4.6880/4.9298 mm ostia), and $N=64$ $CD_{CL}^{union}=2.6291\\pm 1.0629$ mm (arc1mm 3.0470, $CD_{ipsi}$ 3.0641).</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.TO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-05T07:20:05Z</ns0:published>\n    <ns1:comment>12 pages (8-page main manuscript and 4-page supplementary material), 2 figures, 8 tables, 5 algorithms</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Zeyu Jia</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xin Ming</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-10-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Multi-task 3D network with sub-voxel displacement and ipsilateral heads plus a scalar-potential arborescence solver reconstructs bilateral coronary trees from…",
+  "title": "Sub-Voxel Displacement and Ipsilateral Territory Decoupling for 3D Bilateral Coronary Artery Tree Reconstruction in Cardiac CT Angiography",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2610.05900v3"
+}

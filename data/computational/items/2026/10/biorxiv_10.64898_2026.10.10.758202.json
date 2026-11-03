@@ -1,0 +1,44 @@
+{
+  "abstract": "Integrative macromolecular docking pipelines generate thousands of candidate structural decoys, relying on downstream pairwise ensemble analysis, including Root-Mean-Square Deviation (RMSD) matrices and Fraction of Common Contacts (FCC) clustering, to identify biologically relevant binding poses. However, pairwise structural comparisons scale quadratically (O(N^2)), and canonical workflows in HADDOCK3 historically rely on disk-bound trajectory serialization and iterative CPU set operations, creating a quadratic computational and storage bottleneck for large ensembles. Here, we demonstrate that these operations can be reformulated as continuous linear algebra on GPU-resident tensors: structural superposition via batched Singular Value Decomposition (SVD) and residue contact overlap via binary matrix multiplication (M = A A^T). Across empirical benchmarks spanning N = 200 to 10,000 models (evaluating up to 49,995,000 decoy pairs), our GPU implementation achieves a 6.41-fold compute speedup on Apple Silicon (MPS) and up to 12.2-fold end-to-end acceleration in an N = 5,000 ablation on NVIDIA CUDA by eliminating trajectory disk I/O. Crucially, the implementation achieves zero downstream structural regression relative to canonical baselines, preserving identical cluster assignments (Adjusted Rand Index ARI = 1.0000, zero differing assignments) with sub-microangstrom RMSD concordance (Delta_max <= 4.07 x 10^-7 Angstrom on single-precision MPS; machine-precision Delta_max <= 8.88 x 10^-16 Angstrom on double-precision CUDA). The accelerated code, test suites, and benchmarking workflows are openly accessible on GitHub under the Apache-2.0 license.",
+  "authors": [
+    "Salami, R. O.",
+    "Kumordzi, S. M.",
+    "Amuna, D. N.",
+    "Carr, R. A.",
+    "Morang'a, C. M."
+  ],
+  "doi": "10.64898/2026.10.10.758202",
+  "first_seen": "2026-10-12",
+  "id": "biorxiv:10.64898/2026.10.10.758202",
+  "metadata": {
+    "abstract": "Integrative macromolecular docking pipelines generate thousands of candidate structural decoys, relying on downstream pairwise ensemble analysis, including Root-Mean-Square Deviation (RMSD) matrices and Fraction of Common Contacts (FCC) clustering, to identify biologically relevant binding poses. However, pairwise structural comparisons scale quadratically (O(N^2)), and canonical workflows in HADDOCK3 historically rely on disk-bound trajectory serialization and iterative CPU set operations, creating a quadratic computational and storage bottleneck for large ensembles. Here, we demonstrate that these operations can be reformulated as continuous linear algebra on GPU-resident tensors: structural superposition via batched Singular Value Decomposition (SVD) and residue contact overlap via binary matrix multiplication (M = A A^T). Across empirical benchmarks spanning N = 200 to 10,000 models (evaluating up to 49,995,000 decoy pairs), our GPU implementation achieves a 6.41-fold compute speedup on Apple Silicon (MPS) and up to 12.2-fold end-to-end acceleration in an N = 5,000 ablation on NVIDIA CUDA by eliminating trajectory disk I/O. Crucially, the implementation achieves zero downstream structural regression relative to canonical baselines, preserving identical cluster assignments (Adjusted Rand Index ARI = 1.0000, zero differing assignments) with sub-microangstrom RMSD concordance (Delta_max <= 4.07 x 10^-7 Angstrom on single-precision MPS; machine-precision Delta_max <= 8.88 x 10^-16 Angstrom on double-precision CUDA). The accelerated code, test suites, and benchmarking workflows are openly accessible on GitHub under the Apache-2.0 license.",
+    "author_corresponding": "Derek Nsoh Amuna",
+    "author_corresponding_institution": "University of Ghana",
+    "authors": "Salami, R. O.; Kumordzi, S. M.; Amuna, D. N.; Carr, R. A.; Morang'a, C. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-10-12",
+    "doi": "10.64898/2026.10.10.758202",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/10/12/2026.10.10.758202.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Tensorizing Pairwise Structural Analysis: GPU-Accelerated RMSD and FCC Clustering in HADDOCK3 Without Structural Regression.",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Ghana",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-10-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "GPU-accelerated batched SVD RMSD and binary-matrix FCC clustering in HADDOCK3 yield 6.4-12.2x speedups with identical cluster assignments (ARI=1.0) across…",
+  "title": "Tensorizing Pairwise Structural Analysis: GPU-Accelerated RMSD and FCC Clustering in HADDOCK3 Without Structural Regression.",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.10.758202"
+}
