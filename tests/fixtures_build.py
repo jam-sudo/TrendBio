@@ -2,6 +2,7 @@
 
 from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal
+from itertools import combinations
 from pathlib import Path
 
 import yaml
@@ -26,6 +27,21 @@ def build(root: Path) -> None:
         ("pangenome-graph-mapping-e5f6", "Pangenome graph mapping", 0, "Graph mapping workflows expand reproducible comparisons"),
         ("spatial-transcriptomics-atlas-a7b8", "Spatial transcriptomics atlases", 1, "Spatial atlas methods connect expression and tissue context"),
         ("reproducible-workflow-tools-c9d0", "Reproducible workflow tools", 9, "Workflow releases bring portable analysis environments"),
+        ("proteome-search-0006", "Proteome search", 2, "Proteome search methods improve reference coverage"),
+        ("metabolic-flux-0007", "Metabolic flux models", 3, "Flux models connect metabolite measurements to pathways"),
+        ("chromatin-accessibility-0008", "Chromatin accessibility", 4, "Chromatin models resolve regulatory context"),
+        ("pathway-networks-0009", "Pathway networks", 7, "Pathway networks connect perturbation evidence"),
+        ("sequence-models-0010", "Biological sequence models", 8, "Sequence models broaden held-out evaluation"),
+        ("variant-annotation-0011", "Variant annotation", 0, "Variant annotation tools share reference benchmarks"),
+        ("industry-platforms-0012", "Industry platforms", 10, "Research platforms release reproducible reference workflows"),
+        ("rna-splicing-0013", "RNA splicing models", 1, "Splicing models connect sequence and expression"),
+        ("protein-interactions-0014", "Protein interactions", 2, "Interaction maps extend shared evaluation resources"),
+        ("metabolite-identification-0015", "Metabolite identification", 3, "Metabolite identification gains open reference spectra"),
+        ("methylation-models-0016", "Methylation models", 4, "Methylation methods compare regulatory predictions"),
+        ("cell-state-mapping-0017", "Cell state mapping", 5, "Cell state maps connect independent reference atlases"),
+        ("enzyme-design-0018", "Enzyme design", 6, "Enzyme design benchmarks compare functional predictions"),
+        ("network-dynamics-0019", "Network dynamics", 7, "Network models compare dynamic pathway responses"),
+        ("workflow-validation-0020", "Workflow validation", 9, "Workflow validation tools simplify reproducibility checks"),
     ]
     days = [date(2026, 10, 30) + timedelta(days=i) for i in range(3)]
     topics = []
@@ -82,7 +98,7 @@ def build(root: Path) -> None:
             linked = {item.preprint_id for item in current if item.preprint_id}
             counted = [item for item in current if item.id not in linked]
             rank = None
-            if today in days:
+            if today in days and (topic_index < 5 or today == days[-1]):
                 rank = topic_index + 1
                 if today == days[-1] and topic_index < 2:
                     rank = 2 - topic_index
@@ -91,6 +107,8 @@ def build(root: Path) -> None:
             counts = {kind: sum(item.type == kind for item in counted) for kind in ("published", "preprint", "code", "industry")}
             signals = Signals(**counts, rise_ratio=5.0 - rank * 0.7 if rank else 1.0 if counted else 0.0,
                               star_gain_7d=sum(item.metadata.get("star_gain_7d", 0) for item in counted))
+            if today == days[-1] and rank:
+                signals.rise_ratio = 5.0 - rank * 0.15 if rank <= 5 else 3.8 - (rank - 6) * 0.1
             components = dict(rise=signals.rise_ratio, diversity=sum(value > 0 for value in counts.values()) / 4,
                               code_velocity=min(log1p(signals.star_gain_7d) / log1p(10_000), 1),
                               volume=min(log1p(len(counted)) / log1p(50), 1))
@@ -107,18 +125,25 @@ def build(root: Path) -> None:
             "reproducibility across implementations. They do not establish superiority on every dataset or demonstrate clinical performance; "
             "those conclusions would require evidence beyond the synthetic records included here."
         )
+        if topic_index < 5:
+            centroid = [float(i == topic_index) for i in range(5)]
+        elif topic_index < 15:
+            pair = list(combinations(range(5), 2))[topic_index - 5]
+            centroid = [float(1 / Decimal(2).sqrt()) if i in pair else 0.0 for i in range(5)]
+        else:
+            centroid = [-float(i == topic_index - 15) for i in range(5)]
         topics.append(Topic(
             slug=slug, label=label, category=category, secondary_categories=secondary,
-            centroid=[float(i == topic_index) for i in range(len(specs))], history=history,
+            centroid=centroid, history=history,
             headline=headline, summary=f"Research, a toolkit, and a workflow announcement connect {label.lower()} to reproducible evaluation.",
-            synthesis=synthesis, synthesis_model="claude-opus-5-5", synthesized_on=days[-1],
+            synthesis=synthesis, synthesis_model="claude-opus-5-5" if topic_index < 5 else "claude-haiku-5-5", synthesized_on=days[-1],
             item_one_liners={items[4].id: "Published evaluation with a linked preprint and shared analysis inputs."},
             related=[spec[0] for spec in specs if spec[0] != slug][:3],
         ))
-    never_ranked = topics[-1].model_copy(update={
+    never_ranked = topics[4].model_copy(update={
         "slug": "never-ranked-fixture-0000", "label": "Never-ranked workflow fixture",
         "headline": "Never-ranked workflow fixture",
-        "history": [entry.model_copy(update={"rank": None}) for entry in topics[-1].history],
+        "history": [entry.model_copy(update={"rank": None}) for entry in topics[4].history],
         "related": [],
     })
     topics[0].related[-1] = never_ranked.slug
@@ -129,6 +154,8 @@ def build(root: Path) -> None:
         ranked = []
         for topic in topics if today in days else []:
             entry = next(entry for entry in topic.history if entry.date == today)
+            if entry.rank is None:
+                continue
             ranked.append(RankedTopic(slug=topic.slug, rank=entry.rank, headline=topic.headline,
                                       summary=topic.summary, category=topic.category,
                                       signals=entry.signals, scores=entry.scores))

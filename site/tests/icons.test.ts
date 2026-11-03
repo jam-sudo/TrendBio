@@ -30,7 +30,7 @@ describe("drawn category icons", () => {
   it("renders decorative icons at both sizes while retaining labels and the note emoji", () => {
     const home = readFileSync("dist/index.html", "utf8");
     const icons = [...home.matchAll(/<svg\b[^>]*class="category-icon\b[^>]*>/g)].map(([svg]) => svg);
-    expect(icons).toHaveLength(loadTaxonomy("computational").length + 5);
+    expect(icons).toHaveLength(loadTaxonomy("computational").length + 20);
     for (const svg of icons) {
       expect(svg).toContain('viewBox="0 0 24 24"');
       expect(svg).toContain('aria-hidden="true"');
@@ -38,7 +38,7 @@ describe("drawn category icons", () => {
       expect(svg).toContain('stroke-width="1.75"');
       expect(svg).toContain('stroke="currentColor"');
     }
-    expect(icons.filter((svg) => svg.includes('width="16"'))).toHaveLength(11);
+    expect(icons.filter((svg) => svg.includes('width="16"'))).toHaveLength(26);
     expect(icons.filter((svg) => svg.includes('width="36"'))).toHaveLength(5);
     const topic = readFileSync("dist/topic/protein-design-binders-a1b2/index.html", "utf8");
     expect(topic).toContain("#2 · Structural bio &amp; protein design");

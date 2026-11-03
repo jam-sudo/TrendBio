@@ -117,8 +117,8 @@ def test_fixtures_validate(fixtures_root):
             assert path == day_path(root, "computational", day.date)
             days[day.date] = day
 
-    assert len(items) == 40
-    assert len(topics) == 6
+    assert len(items) == 160
+    assert len(topics) == 21
     assert sorted(days) == [date(2026, 10, 29), date(2026, 10, 30), date(2026, 10, 31), date(2026, 11, 1)]
     assert {item.type for item in items.values()} == {"preprint", "published", "code", "industry"}
     assert {item.source for item in items.values()} == {"biorxiv", "arxiv", "pubmed", "github", "rss"}
@@ -172,9 +172,9 @@ def test_fixtures_validate(fixtures_root):
             assert day.run.status == "degraded"
             assert day.run.backfilled is True
             continue
-        assert [row.rank for row in day.ranked] == [1, 2, 3, 4, 5]
+        assert [row.rank for row in day.ranked] == list(range(1, 21 if day.date.month == 11 else 6))
         assert {row.slug for row in day.ranked} == {
-            topic.slug for topic in topics.values() if any(entry.rank is not None for entry in topic.history)
+            topic.slug for topic in topics.values() if any(entry.date == day.date and entry.rank is not None for entry in topic.history)
         }
         assert [row.scores.total for row in day.ranked] == sorted((row.scores.total for row in day.ranked), reverse=True)
         for row in day.ranked:

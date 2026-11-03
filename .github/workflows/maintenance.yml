@@ -15,6 +15,10 @@ on:
         description: Re-enrich all stored items (reprocess only)
         type: boolean
         default: true
+      only_missing_synthesis:
+        description: Preserve existing topic syntheses (reprocess only)
+        type: boolean
+        default: false
       from:
         description: First date (YYYY-MM-DD)
         type: string
@@ -42,6 +46,7 @@ jobs:
     env:
       COMMAND: ${{ inputs.command }}
       REENRICH: ${{ inputs.reenrich }}
+      ONLY_MISSING_SYNTHESIS: ${{ inputs.only_missing_synthesis }}
       FROM: ${{ inputs.from }}
       TO: ${{ inputs.to }}
       MODEL: ${{ inputs.model }}
@@ -70,7 +75,8 @@ jobs:
           case "$COMMAND" in
             reprocess)
               args+=(--model "$MODEL")
-              if [[ "$REENRICH" == "true" ]]; then args+=(--reenrich); fi
+              if [[ "$REENRICH" == "true" ]]; then args+=(--reenrich); else args+=(--no-reenrich); fi
+              if [[ "$ONLY_MISSING_SYNTHESIS" == "true" ]]; then args+=(--only-missing-synthesis); fi
               ;;
             restatus) ;;
             *) exit 1 ;;

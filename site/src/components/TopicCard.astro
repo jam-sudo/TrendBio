@@ -4,13 +4,20 @@ import SignalLine from "./SignalLine.astro";
 import { loadTaxonomy, loadTopic } from "../lib/data";
 import { categoryStyle, rankMedal } from "../lib/categories";
 import type { RankedTopic } from "../lib/types";
-interface Props { ranked: RankedTopic; featured: boolean }
-const { ranked, featured } = Astro.props;
+interface Props { ranked: RankedTopic; featured?: boolean; compact?: boolean }
+const { ranked, featured = false, compact = false } = Astro.props;
 const category = loadTaxonomy("computational").find(({ slug }) => slug === ranked.category);
 const secondary = loadTopic("computational", ranked.slug)?.secondary_categories ?? [];
 const identity = categoryStyle(ranked.category);
 ---
-<a class:list={["topic-card", { featured }]} href={`/topic/${ranked.slug}/`}
+{compact ? <a class="compact-row" href={`/topic/${ranked.slug}/`}
+  style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
+  <span class="rank"><span class="sr-only">Rank </span>{ranked.rank}</span>
+  <CategoryIcon slug={ranked.category} size={16} />
+  <span class="compact-headline">{ranked.headline}</span>
+  {ranked.signals.rise_ratio >= 1.5 && <span class="badge" aria-label={`${ranked.signals.rise_ratio.toFixed(1)} times the four-week average`}>↑ {ranked.signals.rise_ratio.toFixed(1)}×</span>}
+  <span class="compact-category">{category?.label ?? ranked.category}</span>
+</a> : <a class:list={["topic-card", { featured }]} href={`/topic/${ranked.slug}/`}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
   <CategoryIcon slug={ranked.category} size={36} />
@@ -20,8 +27,14 @@ const identity = categoryStyle(ranked.category);
     <p class="summary">{ranked.summary}</p>
   </div>
   <SignalLine signals={ranked.signals} />
-</a>
+</a>}
 <style>
+  .compact-row { display: flex; align-items: center; gap: 0.75rem; height: 40px; padding: 0 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); text-decoration: none; font-size: var(--t3); min-width: 0; }
+  .compact-row:hover { border-color: var(--muted); }
+  .compact-row .rank { width: 24px; flex-shrink: 0; color: var(--muted); }
+  .compact-headline { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .compact-row .badge { flex-shrink: 0; white-space: nowrap; }
+  .compact-category { max-width: 210px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: var(--muted); }
   .topic-card { position: relative; display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) auto; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); padding: 1.25rem; min-width: 0; overflow-wrap: anywhere; text-decoration: none; }
   .topic-card:hover { border-color: var(--muted); }
   .rank { text-align: center; }
@@ -34,6 +47,9 @@ const identity = categoryStyle(ranked.category);
     .topic-card :global(.signal-line) { grid-column: 3; }
   }
   @media (max-width: 480px) {
+    .compact-row { gap: 6px; padding: 0 6px; font-size: 12px; }
+    .compact-category { max-width: 65px; font-size: 10px; }
+    .compact-row .badge { padding: 2px 4px; }
     .topic-card { grid-template-columns: 24px 36px minmax(0, 1fr); align-items: start; }
     .topic-copy { grid-column: 1 / -1; }
     .rank-category { position: absolute; top: 1rem; right: 1rem; max-width: calc(100% - 110px); margin: 0; }

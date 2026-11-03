@@ -3,6 +3,8 @@ import CategoryChips from "./CategoryChips.astro";
 import TopicCard from "./TopicCard.astro";
 import { loadTaxonomy, loadTopic } from "../lib/data";
 import type { Day } from "../lib/types";
+import { readFileSync } from "node:fs";
+import { parse } from "yaml";
 
 interface Props {
   day: Day | null;
@@ -10,6 +12,8 @@ interface Props {
 
 const { day } = Astro.props;
 const ranked = day?.ranked ?? [];
+const { featured_n, top_n } = parse(readFileSync("../config/scoring.yaml", "utf8"));
+const compact = ranked.filter((topic) => topic.rank > featured_n);
 const categories = loadTaxonomy("computational");
 const topicCategories = ranked.map((topic) => [
   topic.category, ...(loadTopic("computational", topic.slug)?.secondary_categories ?? []),
@@ -19,16 +23,25 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 ]));
 ---
 
-<div class="section-heading"><h2>Top 5</h2><a href="/archive/">View all ›</a></div>
+<div class="section-heading"><h2>Top {top_n}</h2><a href="/archive/">View all ›</a></div>
 {day?.run.status === "degraded" && <p class="notice"><span class="badge">PARTIAL</span> Some sources or summaries were unavailable for this run.</p>}
 {day?.run.backfilled && <p class="notice"><span class="badge">BACKFILLED</span> Code and industry signals are partial for backfilled days.</p>}
 {ranked.length === 0 && <p class="notice"><span class="badge">QUIET DAY</span> Quiet day: no topic cleared the bar.</p>}
 <CategoryChips categories={categories} counts={counts} />
 <div class="topic-list">
-  {ranked.map((topic) => <TopicCard ranked={topic} featured={topic.rank === 1} />)}
+  {ranked.filter((topic) => topic.rank <= featured_n).map((topic) => <TopicCard ranked={topic} featured={topic.rank === 1} />)}
 </div>
+{compact.length > 0 && <details data-more-topics>
+  <summary>Show {compact.length} more</summary>
+  <div class="compact-list">
+    {compact.map((topic) => <TopicCard ranked={topic} compact />)}
+  </div>
+</details>}
 
 <style>
   .topic-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  details { margin-top: 1rem; }
+  summary { cursor: pointer; padding: 0.75rem 0; font-size: var(--t3); }
+  .compact-list { display: flex; flex-direction: column; gap: 4px; }
   .notice { font-size: var(--t3); color: var(--muted); margin-bottom: 1rem; }
 </style>

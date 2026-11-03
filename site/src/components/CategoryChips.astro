@@ -32,6 +32,9 @@ const { categories, counts } = Astro.props;
       document.querySelectorAll('[data-topic-cats]').forEach((card) => {
         card.hidden = chosen.dataset.cat !== 'all' && !card.dataset.topicCats.split(/\s+/).includes(chosen.dataset.cat);
       });
+      if (chosen.dataset.cat !== 'all') {
+        document.querySelectorAll('[data-more-topics]').forEach((details) => { details.open = true; });
+      }
     });
     row.addEventListener('keydown', (event) => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;

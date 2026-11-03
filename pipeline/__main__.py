@@ -102,14 +102,15 @@ def backfill(start: FromDate, end: ToDate, domain: Domain = 'computational',
 
 @app.command()
 def reprocess(start: FromDate, end: ToDate, domain: Domain = 'computational',
-              reenrich: Annotated[bool, typer.Option(help='Replace enrichment for every stored item.')] = False,
+              reenrich: Annotated[bool, typer.Option('--reenrich/--no-reenrich', help='Replace enrichment for every stored item.')] = False,
+              only_missing_synthesis: Annotated[bool, typer.Option(help='Preserve topics with an existing headline.')] = False,
               model: Annotated[str, typer.Option(help='Batch enrichment model.')] = 'claude-haiku-5-5',
               data_root: DataRoot = Path('data')):
     """Re-scope and rebuild whole months from stored items, resuming interrupted work."""
     validate_month_range(start.date(), end.date())
     with _dependencies(domain, data_root) as deps:
         run_reprocess(domain, start.date(), end.date(), Store(data_root, domain), deps,
-                      reenrich=reenrich, model=model)
+                      reenrich=reenrich, model=model, only_missing_synthesis=only_missing_synthesis)
 
 
 @app.command()

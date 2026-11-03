@@ -161,7 +161,8 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
 
 
 def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool = False,
-            dry_run: bool = False, skip_collect: bool = False) -> Day:
+            dry_run: bool = False, skip_collect: bool = False,
+            only_missing_synthesis: bool = False) -> Day:
     if domain != store.domain:
         raise ValueError('domain does not match store')
     started = datetime.now(timezone.utc)
@@ -298,17 +299,19 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                       and previous_ranked[topic.slug].signals == signals
                       and previous_ranked[topic.slug].scores == scores
                       and previous.run.backfilled == backfill}
+            if only_missing_synthesis:
+                cached = {topic.slug for topic, _, _ in ranked if topic.headline}
         with _stage('synthesize', model='claude-haiku-5-5' if backfill or deps.budget.over_ceiling() else 'claude-opus-5-5') as counts:
             _, model, synthesis_notes = synthesize_top(
-                [row for row in ranked if row[0].slug not in cached], items_by_topic,
-                deps.llm, deps.budget, deps.cfg, day, backfill=backfill,
+                ranked, items_by_topic,
+                deps.llm, deps.budget, deps.cfg, day, backfill=backfill, skip_slugs=cached,
             )
             notes.extend(synthesis_notes)
             if previous:
                 notes.extend(note for note in previous.run.notes if (
                     note.startswith('enrichment-fallback:') and note.split(':', 1)[1] in window_item_ids
                     or note.startswith('synthesis-fallback:') and note.split(':', 1)[1] in cached))
-                if ranked and len(cached) == len(ranked):
+                if ranked and all(topic.slug in cached for topic, _, _ in ranked[:deps.cfg.featured_n]):
                     model = previous.run.synthesis_model
             counts['model'] = model
         with _stage('write'):
@@ -484,7 +487,8 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
 
 
 def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps, *,
-                  reenrich: bool = False, model: str = 'claude-haiku-5-5') -> None:
+                  reenrich: bool = False, model: str = 'claude-haiku-5-5',
+                  only_missing_synthesis: bool = False) -> None:
     validate_month_range(start, end)
     if domain != store.domain:
         raise ValueError('domain does not match store')
@@ -492,10 +496,11 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
     item_ids = {item.id for item in items}
     path = store.root / domain / '.reprocess_state.json'
     request = {'command': 'reprocess', 'range': {'from': str(start), 'to': str(end)},
-               'reenrich': reenrich, 'model': model}
+               'reenrich': reenrich, 'model': model, 'only_missing_synthesis': only_missing_synthesis}
     if path.exists():
         state = json.loads(path.read_text(encoding='utf-8'))
-        if any(state.get(key) != value for key, value in request.items()):
+        if any(state.get(key, False if key == 'only_missing_synthesis' else None) != value
+               for key, value in request.items()):
             raise ValueError('unfinished reprocess checkpoint has different range or options')
     else:
         runs = {}
@@ -564,13 +569,16 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
         store._write(path, state)
     if state['stage'] == 'reset':
         with _stage('reset') as counts:
-            counts.update(reset_derived(store, start, end))
+            # Keep topic identities and synthesis when expanding an existing leaderboard.
+            if not only_missing_synthesis:
+                counts.update(reset_derived(store, start, end))
         state['stage'] = 'days'
         store._write(path, state)
     day = date.fromisoformat(state['last_day']) + timedelta(days=1) if state['last_day'] else start
     while day <= end:
         with _stage('day', day=day, topics=0, ranked=0) as counts:
-            result = run_day(domain, day, store, deps, backfill=True, skip_collect=True)
+            result = run_day(domain, day, store, deps, backfill=True, skip_collect=True,
+                             only_missing_synthesis=only_missing_synthesis)
             counts.update(topics=len(store.all_topics()), ranked=len(result.ranked))
         state['last_day'] = str(day)
         store._write(path, state)
