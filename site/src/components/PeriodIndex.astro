@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import PeriodLinks from "./PeriodLinks.astro";
+import { loadPeriods } from "../lib/period-data";
+import { periodRows } from "../lib/leaderboard";
+interface Props { kind: "week" | "month" }
+const { kind } = Astro.props;
+const data = loadPeriods();
+const periods = kind === "week" ? data.weeks : data.months;
+const title = kind === "week" ? "Weekly rankings" : "Monthly rankings";
+---
+<Base title={`${title} — TrendBio`} lastRun={data.days[0]?.run.finished}>
+  <h1>{title}</h1>
+  <PeriodLinks current={kind} />
+  <ul class="period-list">
+    {periods.map((period) => {
+      const top = periodRows(period.topics.slice(0, 1))[0];
+      return <li><a href={`/${kind}/${period.id}/`}>{period.label}{period.soFar && " · so far"}</a>
+        {top && <p>#1 · {top.headline}{top.autoLabel && <span class="auto-label"> (auto label)</span>}</p>}
+      </li>;
+    })}
+  </ul>
+  {periods.length === 0 && <p>No stored {kind === "week" ? "weeks" : "months"} yet.</p>}
+</Base>
+<style>
+  .period-list { list-style: none; margin: 0; padding: 0; }
+  li { border-bottom: 1px solid var(--border); padding: 1rem 0; }
+  p { margin: 0.5rem 0 0; font-size: var(--t3); color: var(--muted); }
+  .auto-label { color: var(--muted); }
+</style>

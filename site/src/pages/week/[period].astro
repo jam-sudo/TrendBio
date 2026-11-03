@@ -1,0 +1,10 @@
+---
+import PeriodPage from "../../components/PeriodPage.astro";
+import { loadPeriods, type RankedPeriod } from "../../lib/period-data";
+export function getStaticPaths() {
+  return loadPeriods().weeks.map((period) => ({ params: { period: period.id }, props: { period } }));
+}
+interface Props { period: RankedPeriod }
+const { period } = Astro.props;
+---
+<PeriodPage kind="week" period={period} />

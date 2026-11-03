@@ -7,10 +7,15 @@ import Sparkline from "../../components/Sparkline.astro";
 import EditorNote from "../../components/EditorNote.astro";
 import EvidenceList from "../../components/EvidenceList.astro";
 import { rankedTopics, latestDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
+import { loadPeriods } from "../../lib/period-data";
 import type { Topic } from "../../lib/types";
 
 export function getStaticPaths() {
-  return rankedTopics("computational").map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
+  const data = loadPeriods();
+  const selected = new Set([...data.weeks, ...data.months].flatMap(({ topics }) => topics.map(({ slug }) => slug)));
+  const topics = [...rankedTopics("computational"), ...data.topics.filter((topic) =>
+    selected.has(topic.slug) && !topic.history.some(({ rank }) => rank !== null))];
+  return topics.map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
 }
 
 interface Props { topic: Topic }

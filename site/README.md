@@ -7,7 +7,7 @@ installation and skips browser checks with a warning only if installation fails;
 launch errors and accessibility failures fail the suite. On Linux, install
 Chromium's system libraries with `npx playwright install --with-deps chromium`.
 
-Build the same 13 fixture pages with:
+Build the fixture pages with:
 
 ```sh
 TRENDBIO_DATA_ROOT=../fixtures/data TRENDBIO_NOTES_ROOT=../fixtures/notes npm run build
@@ -34,3 +34,8 @@ The dependency findings remain unresolved; a breaking framework upgrade is
 outside this accessibility pass. Reassess before adding image processing,
 server rendering or accepting untrusted build inputs. Do not expose the local
 development/preview server as production hosting.
+
+Weekly and monthly pages share a cached date index built from topic histories once per build.
+The period tests verify that ranking a year of periods never reads those histories again.
+Periods are listed only when they contain a stored day; “so far” means the latest stored
+day is before that period’s end, so fixture builds are independent of the wall clock.

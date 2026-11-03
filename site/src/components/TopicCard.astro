@@ -1,34 +1,41 @@
 ---
 import CategoryIcon from "./CategoryIcon.astro";
 import SignalLine from "./SignalLine.astro";
-import { loadTaxonomy, loadTopic } from "../lib/data";
+import { loadTaxonomy } from "../lib/data";
 import { categoryStyle, rankMedal } from "../lib/categories";
-import type { RankedTopic } from "../lib/types";
-interface Props { ranked: RankedTopic; featured?: boolean; compact?: boolean }
-const { ranked, featured = false, compact = false } = Astro.props;
+import type { LeaderboardTopic } from "../lib/leaderboard";
+interface Props { ranked: LeaderboardTopic; featured?: boolean; compact?: boolean; period?: boolean }
+const { ranked, featured = false, compact = false, period = false } = Astro.props;
 const category = loadTaxonomy("computational").find(({ slug }) => slug === ranked.category);
-const secondary = loadTopic("computational", ranked.slug)?.secondary_categories ?? [];
+const secondary = ranked.secondary_categories;
+const rise = ranked.stats.find(({ label }) => label === "Rise");
 const identity = categoryStyle(ranked.category);
 ---
-{compact ? <a class="compact-row" href={`/topic/${ranked.slug}/`}
+{compact ? <a class:list={["compact-row", { "period-row": period }]} href={`/topic/${ranked.slug}/`}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span class="sr-only">Rank </span>{ranked.rank}</span>
   <CategoryIcon slug={ranked.category} size={16} />
-  <span class="compact-headline">{ranked.headline}</span>
-  {ranked.signals.rise_ratio >= 1.5 && <span class="badge" aria-label={`${ranked.signals.rise_ratio.toFixed(1)} times the four-week average`}>↑ {ranked.signals.rise_ratio.toFixed(1)}×</span>}
+  <span class="compact-headline">{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</span>
+  {!period && rise && <span class="badge" aria-label={rise.spoken}>{rise.value}</span>}
   <span class="compact-category">{category?.label ?? ranked.category}</span>
+  {period && <SignalLine stats={ranked.stats} />}
 </a> : <a class:list={["topic-card", { featured }]} href={`/topic/${ranked.slug}/`}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
   <CategoryIcon slug={ranked.category} size={36} />
   <div class="topic-copy">
     <p class="rank-category">{category?.label ?? ranked.category}</p>
-    <h2>{ranked.headline}</h2>
-    <p class="summary">{ranked.summary}</p>
+    <h2>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</h2>
+    {ranked.summary && <p class="summary">{ranked.summary}</p>}
   </div>
-  <SignalLine signals={ranked.signals} />
+  <SignalLine stats={ranked.stats} />
 </a>}
 <style>
+  .auto-label { color: var(--muted); font-size: var(--t3); font-weight: 400; }
+  .compact-row.period-row { height: auto; min-height: 64px; flex-wrap: wrap; padding-block: 0.5rem; }
+  @media (max-width: 800px) {
+    .period-row :global(.signal-line) { flex-basis: 100%; padding-left: 44px; }
+  }
   .compact-row { display: flex; align-items: center; gap: 0.75rem; height: 40px; padding: 0 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); text-decoration: none; font-size: var(--t3); min-width: 0; }
   .compact-row:hover { border-color: var(--muted); }
   .compact-row .rank { width: 24px; flex-shrink: 0; color: var(--muted); }

@@ -113,7 +113,7 @@ describe("built topic pages", () => {
     expect(html.match(/datetime="2026-11-01"/g)).toHaveLength(20);
     expect(html).not.toContain(neverRankedSlug);
     expect(html).not.toContain(loadTopic(domain, neverRankedSlug)!.label);
-    expect(existsSync(`dist/topic/${neverRankedSlug}`)).toBe(false);
+    expect(existsSync(`dist/topic/${neverRankedSlug}`)).toBe(true);
     for (const category of loadTaxonomy(domain)) {
       const chip = html.match(new RegExp(`<button[^>]*data-cat="${category.slug}"[^>]*>`))![0];
       expect(chip.includes("disabled")).toBe(!ranked.some((entry) =>
@@ -132,6 +132,8 @@ describe("built topic pages", () => {
         item_ids: [published.id, published.preprint_id!], count_7d: 1,
         signals: { published: 1, preprint: 0, code: 0, industry: 0, star_gain_7d: 0, rise_ratio: 1.49 } });
       changed.related = [];
+      changed.headline = null;
+      changed.label = "auto label example";
       writeFileSync(join(data, domain, "topics", `${slug}.json`), JSON.stringify(changed));
       const other = rankedTopics(domain).find((entry) => entry.slug !== slug)!;
       other.history = other.history.slice(-2).map((entry, index) => ({ ...entry,
@@ -154,12 +156,14 @@ describe("built topic pages", () => {
       const short = readFileSync(join(output, `topic/${other.slug}/index.html`), "utf8");
       expect(short).toContain("#3 ·");
       expect(short).toContain(other.label);
+      const week = readFileSync(join(output, "week/2026-W44/index.html"), "utf8");
+      expect(week).toMatch(/Auto Label Example<span class="auto-label"[^>]*> \(auto label\)<\/span>/);
       expect(short).not.toContain('class="sparkline"');
       expect(short).not.toContain("Editor's note");
       expect(headings(short)).toEqual(["Topic history"]);
       expect(section(short, "topic-history")).toContain("/day/2026-10-31/");
       expect(section(short, "topic-history")).not.toContain("/day/2026-11-01/");
-      expect(existsSync(join(output, `topic/${neverRankedSlug}`))).toBe(false);
+      expect(existsSync(join(output, `topic/${neverRankedSlug}`))).toBe(true);
       const index = readFileSync(join(output, "topics/index.html"), "utf8");
       const links = [...index.matchAll(/href="\/topic\/([^/]+)\/"/g)].map((match) => match[1]);
       expect(links.at(-1)).toBe(other.slug);

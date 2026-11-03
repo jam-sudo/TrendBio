@@ -1,20 +1,14 @@
 ---
 import type { Signals } from "../lib/types";
-interface Props { signals: Signals }
-const { signals } = Astro.props;
-const counts = [
-  { label: "preprints", value: signals.preprint, spoken: `${signals.preprint} preprint${signals.preprint === 1 ? "" : "s"}` },
-  { label: "published", value: signals.published, spoken: `${signals.published} published` },
-  { label: "code", value: signals.code, spoken: `${signals.code} tool${signals.code === 1 ? "" : "s"}` },
-  { label: "industry", value: signals.industry, spoken: `${signals.industry} industry` },
-].filter(({ value }) => value > 0);
-const rising = signals.rise_ratio >= 1.5;
-const spoken = [...counts.map(({ spoken }) => spoken), ...(rising ? [`↑ ${signals.rise_ratio.toFixed(1)}× vs 4-wk avg`] : [])].join(" · ");
+import { signalStats, type Stat } from "../lib/leaderboard";
+interface Props { signals?: Signals; stats?: Stat[] }
+const { signals, stats = signals ? signalStats(signals) : [] } = Astro.props;
+const spoken = stats.map(({ label, value, spoken, context }) => spoken ??
+  `${label}: ${value}${context ? ` ${context}` : ""}`).join(" · ");
 ---
-{spoken && <div class="signal-line">
+{stats.length > 0 && <div class="signal-line">
   <span class="sr-only">{spoken}</span>
   <div class="stat-row" aria-hidden="true">
-    {counts.map(({ label, value }) => <span class="stat"><span class="stat-label">{label}</span><span class="stat-value">{value}</span></span>)}
-    {rising && <span class="stat rise"><span class="stat-label">Rise</span><span class="stat-value">↑ {signals.rise_ratio.toFixed(1)}×</span><span class="stat-context">vs 4-wk avg</span></span>}
+    {stats.map(({ label, value, context }) => <span class:list={["stat", { rise: label === "Rise" }]}><span class="stat-label">{label}</span><span class="stat-value">{value}</span>{context && <span class="stat-context">{context}</span>}</span>)}
   </div>
 </div>}

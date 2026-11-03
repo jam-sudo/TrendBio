@@ -1,5 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
+import PeriodLinks from "../../components/PeriodLinks.astro";
+import { dailyRows } from "../../lib/leaderboard";
 import DayTopics from "../../components/DayTopics.astro";
 import { loadDays } from "../../lib/data";
 import type { Day } from "../../lib/types";
@@ -17,5 +19,6 @@ const { day } = Astro.props;
 
 <Base title={`${day.date} — TrendBio`} lastRun={day.run.finished}>
   <h1 class="day-title"><time datetime={day.date}>{day.date}</time></h1>
-  <DayTopics day={day} />
+  <PeriodLinks current="day" />
+  <DayTopics day={day} topics={dailyRows(day)} />
 </Base>
