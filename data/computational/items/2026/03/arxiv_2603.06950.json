@@ -1,0 +1,34 @@
+{
+  "abstract": "DNA foundation models have become transformative tools in bioinformatics and healthcare applications. Trained on vast genomic datasets, these models can be used to generate sequence embeddings, dense vector representations that capture complex genomic information. These embeddings are increasingly being shared via Embeddings-as-a-Service (EaaS) frameworks to facilitate downstream tasks, while supposedly protecting the privacy of the underlying raw sequences. However, as this practice becomes more prevalent, the security of these representations is being called into question. This study evaluates the resilience of DNA foundation models to model inversion attacks, whereby adversaries attempt to reconstruct sensitive training data from model outputs. In our study, the model's output for reconstructing the DNA sequence is a zero-shot embedding, which is then fed to a decoder. We evaluated the privacy of three DNA foundation models: DNABERT-2, Evo 2, and Nucleotide Transformer v2 (NTv2). Our results show that per-token embeddings allow near-perfect sequence reconstruction across all models. For mean-pooled embeddings, reconstruction quality degrades as sequence length increases, though it remains substantially above random baselines. Evo 2 and NTv2 prove to be most vulnerable, especially for shorter sequences with reconstruction similarities > 90%, while DNABERT-2's BPE tokenization provides the greatest resilience. We found that the correlation between embedding similarity and sequence similarity was a key predictor of reconstruction success. Our findings emphasize the urgent need for privacy-aware design in genomic foundation models prior to their widespread deployment in EaaS settings. Training code, model weights and evaluation pipeline are released on: https://github.com/not-a-feature/DNA-Embedding-Inversion.",
+  "authors": [
+    "Sofiane Ouaari",
+    "Jules Kreuer",
+    "Nico Pfeifer"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-06",
+  "id": "arxiv:2603.06950",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.06950v1</ns0:id>\n    <ns0:title>How Private Are DNA Embeddings? Inverting Foundation Model Representations of Genomic Sequences</ns0:title>\n    <ns0:updated>2026-03-06T23:52:26Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.06950v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.06950v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>DNA foundation models have become transformative tools in bioinformatics and healthcare applications. Trained on vast genomic datasets, these models can be used to generate sequence embeddings, dense vector representations that capture complex genomic information. These embeddings are increasingly being shared via Embeddings-as-a-Service (EaaS) frameworks to facilitate downstream tasks, while supposedly protecting the privacy of the underlying raw sequences. However, as this practice becomes more prevalent, the security of these representations is being called into question. This study evaluates the resilience of DNA foundation models to model inversion attacks, whereby adversaries attempt to reconstruct sensitive training data from model outputs. In our study, the model's output for reconstructing the DNA sequence is a zero-shot embedding, which is then fed to a decoder. We evaluated the privacy of three DNA foundation models: DNABERT-2, Evo 2, and Nucleotide Transformer v2 (NTv2). Our results show that per-token embeddings allow near-perfect sequence reconstruction across all models. For mean-pooled embeddings, reconstruction quality degrades as sequence length increases, though it remains substantially above random baselines. Evo 2 and NTv2 prove to be most vulnerable, especially for shorter sequences with reconstruction similarities &gt; 90%, while DNABERT-2's BPE tokenization provides the greatest resilience. We found that the correlation between embedding similarity and sequence similarity was a key predictor of reconstruction success. Our findings emphasize the urgent need for privacy-aware design in genomic foundation models prior to their widespread deployment in EaaS settings. Training code, model weights and evaluation pipeline are released on: https://github.com/not-a-feature/DNA-Embedding-Inversion.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-06T23:52:26Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Sofiane Ouaari</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jules Kreuer</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nico Pfeifer</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Evaluates model inversion attacks on DNA foundation model embeddings (DNABERT-2, Evo 2, NTv2), finding near-perfect reconstruction from per-token embeddings…",
+  "title": "How Private Are DNA Embeddings? Inverting Foundation Model Representations of Genomic Sequences",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.06950v1"
+}

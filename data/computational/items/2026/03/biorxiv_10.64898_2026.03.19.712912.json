@@ -1,0 +1,43 @@
+{
+  "abstract": "Modern sequencing pipelines routinely produce billions of reads, yet the dominant storage formats (FASTQ and FASTA) are text-based and sequential, making high-throughput parsing a persistent bottleneck in bioinformatics. Their regular, line-oriented structure makes them well-suited to SIMD vectorization, but existing libraries do not fully exploit it.\n\nWe present vectorized algorithms for high-throughput FASTA/Q parsing, with on-the-fly handling of non-ACTG characters and built-in bitpacking of DNA sequences into multiple compact representations. The parsing logic is expressed as a finite state machine, compiled into efficient SIMD programs targeting both x86 and ARM CPUs. These algorithms are implemented in Helicase, a Rust library exposing a tunable interface that retrieves only caller-requested fields, minimizing unnecessary work. Exhaustive benchmarks across a wide range of CPUs show that Helicase meets or exceeds the throughput of all evaluated state-of-the-art libraries, making it the fastest general-purpose FASTA/Q parser to our knowledge.\n\nAvailabilityhttps://github.com/imartayan/helicase.",
+  "authors": [
+    "Martayan, I.",
+    "Lobet, L.",
+    "Marchet, C.",
+    "Paperman, C."
+  ],
+  "doi": "10.64898/2026.03.19.712912",
+  "first_seen": "2026-03-22",
+  "id": "biorxiv:10.64898/2026.03.19.712912",
+  "metadata": {
+    "abstract": "Modern sequencing pipelines routinely produce billions of reads, yet the dominant storage formats (FASTQ and FASTA) are text-based and sequential, making high-throughput parsing a persistent bottleneck in bioinformatics. Their regular, line-oriented structure makes them well-suited to SIMD vectorization, but existing libraries do not fully exploit it.\n\nWe present vectorized algorithms for high-throughput FASTA/Q parsing, with on-the-fly handling of non-ACTG characters and built-in bitpacking of DNA sequences into multiple compact representations. The parsing logic is expressed as a finite state machine, compiled into efficient SIMD programs targeting both x86 and ARM CPUs. These algorithms are implemented in Helicase, a Rust library exposing a tunable interface that retrieves only caller-requested fields, minimizing unnecessary work. Exhaustive benchmarks across a wide range of CPUs show that Helicase meets or exceeds the throughput of all evaluated state-of-the-art libraries, making it the fastest general-purpose FASTA/Q parser to our knowledge.\n\nAvailabilityhttps://github.com/imartayan/helicase.",
+    "author_corresponding": "Igor Martayan",
+    "author_corresponding_institution": "Univ. Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL, F-59000 Lille, France",
+    "authors": "Martayan, I.; Lobet, L.; Marchet, C.; Paperman, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-22",
+    "doi": "10.64898/2026.03.19.712912",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/22/2026.03.19.712912.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Helicase: Vectorized parsing and bitpacking of genomic sequences",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Univ. Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL, F-59000 Lille, France",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Helicase, a Rust library using SIMD-vectorized finite-state parsing of FASTA/FASTQ with on-the-fly non-ACTG handling and DNA bitpacking, reports throughput…",
+  "title": "Helicase: Vectorized parsing and bitpacking of genomic sequences",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.19.712912"
+}

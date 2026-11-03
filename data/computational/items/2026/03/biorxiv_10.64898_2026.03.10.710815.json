@@ -1,0 +1,51 @@
+{
+  "abstract": "BackgroundFormalin-fixed paraffin-embedding (FFPE) is a widely used, cost-effective method for long-term storage of clinical samples. However, fixation is known to introduce damage to nucleic acids that can present as artifactual bases in sequencing otherwise absent from higher fidelity storage methods such as fresh freezing (FF). Various machine learning methods exist for filtering these variant artifacts, but benchmarking performance can be difficult without reliable truth sets. In this study, we employ a collection of 90 paired fresh-frozen and formalin-fixed paraffin embedded samples from the same tumor to robustly define real and FFPE-derived, artifactual variation and enable objective evaluation of filtering methods. To address existing shortcomings, we propose a novel explainable boosting machine (EBM) model that improves performance, can be easily updated with new data, requires modest computational resources, and is analysis pipeline agnostic, making it broadly accessible.\n\nResultsWe evaluated several methods for limiting FFPE-derived variant artifacts using cohorts of B-cell lymphoma samples. We found capturing local context around variants to be a highly informative, under-utilized feature set not commonly incorporated into many existing machine learning methods. Consequently, we developed a novel algorithm, FIFA, for filtering FFPE artifacts, which uses an EBM model, an interpretable decision-tree-based learning algorithm, to address some of the existing shortcomings. We used four independent cohorts composed of paired lymphoma and cervical cancer samples and a breast cancer cell line with both FF and FFPE samples to define clearly annotated training and test sets and demonstrated improved performance over existing methods. Additionally, FIFA filtering increased relevant biological signals in FFPE breast cancer datasets distinct from the training and testing sets. The EBM framework employed by FIFA is computationally efficient and easily amenable to incorporation of additional datasets due to its generalized additive modeling of features making it straightforward to incorporate new data into existing models dynamically over time.\n\nConclusionsOur novel FFPE variant artifact filtering tool, FIFA, is a marked improvement over existing methods. It can be easily implemented, post hoc, to supplement existing somatic calling pipelines, training and inference can be run quickly across most compute environments, and it can be easily updated online as new training data becomes available. Accordingly, FIFA represents an important advance in retrospective cancer genomics research by further enhancing access to the vast stores of FFPE-archived tumor samples currently in existence.",
+  "authors": [
+    "Grether, V.",
+    "Goldstein, Z. R.",
+    "Shelton, J. M.",
+    "Chu, T. R.",
+    "Hooper, W. F.",
+    "Geiger, H.",
+    "Corvelo, A.",
+    "Martini, R.",
+    "Davis, M. B.",
+    "Robine, N.",
+    "Liao, W."
+  ],
+  "doi": "10.64898/2026.03.10.710815",
+  "first_seen": "2026-03-13",
+  "id": "biorxiv:10.64898/2026.03.10.710815",
+  "metadata": {
+    "abstract": "BackgroundFormalin-fixed paraffin-embedding (FFPE) is a widely used, cost-effective method for long-term storage of clinical samples. However, fixation is known to introduce damage to nucleic acids that can present as artifactual bases in sequencing otherwise absent from higher fidelity storage methods such as fresh freezing (FF). Various machine learning methods exist for filtering these variant artifacts, but benchmarking performance can be difficult without reliable truth sets. In this study, we employ a collection of 90 paired fresh-frozen and formalin-fixed paraffin embedded samples from the same tumor to robustly define real and FFPE-derived, artifactual variation and enable objective evaluation of filtering methods. To address existing shortcomings, we propose a novel explainable boosting machine (EBM) model that improves performance, can be easily updated with new data, requires modest computational resources, and is analysis pipeline agnostic, making it broadly accessible.\n\nResultsWe evaluated several methods for limiting FFPE-derived variant artifacts using cohorts of B-cell lymphoma samples. We found capturing local context around variants to be a highly informative, under-utilized feature set not commonly incorporated into many existing machine learning methods. Consequently, we developed a novel algorithm, FIFA, for filtering FFPE artifacts, which uses an EBM model, an interpretable decision-tree-based learning algorithm, to address some of the existing shortcomings. We used four independent cohorts composed of paired lymphoma and cervical cancer samples and a breast cancer cell line with both FF and FFPE samples to define clearly annotated training and test sets and demonstrated improved performance over existing methods. Additionally, FIFA filtering increased relevant biological signals in FFPE breast cancer datasets distinct from the training and testing sets. The EBM framework employed by FIFA is computationally efficient and easily amenable to incorporation of additional datasets due to its generalized additive modeling of features making it straightforward to incorporate new data into existing models dynamically over time.\n\nConclusionsOur novel FFPE variant artifact filtering tool, FIFA, is a marked improvement over existing methods. It can be easily implemented, post hoc, to supplement existing somatic calling pipelines, training and inference can be run quickly across most compute environments, and it can be easily updated online as new training data becomes available. Accordingly, FIFA represents an important advance in retrospective cancer genomics research by further enhancing access to the vast stores of FFPE-archived tumor samples currently in existence.",
+    "author_corresponding": "Will Liao",
+    "author_corresponding_institution": "New York Genome Center",
+    "authors": "Grether, V.; Goldstein, Z. R.; Shelton, J. M.; Chu, T. R.; Hooper, W. F.; Geiger, H.; Corvelo, A.; Martini, R.; Davis, M. B.; Robine, N.; Liao, W.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-13",
+    "doi": "10.64898/2026.03.10.710815",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/13/2026.03.10.710815.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "An explainable boosting machine model for identifying artifacts caused by formalin-fixed paraffin embedding",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "New York Genome Center",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-03-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "FIFA, an explainable boosting machine tool using local variant context, filters FFPE-derived sequencing artifacts and outperforms existing methods across…",
+  "title": "An explainable boosting machine model for identifying artifacts caused by formalin-fixed paraffin embedding",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.10.710815"
+}

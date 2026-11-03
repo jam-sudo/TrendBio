@@ -1,0 +1,42 @@
+{
+  "abstract": "Protein language models (PLMs) are increasingly central to protein engineering and drug discovery. Many high-performing systems, however, rely on large parameter counts, multiple sequence alignments (MSAs), explicit structural inputs, or computationally intensive attention mechanisms, limiting their accessibility and throughput. Here we present AINN-P1, a 167M-parameter protein language model trained exclusively on raw UniRef amino-acid sequences using an autoregressive next-token prediction objective. AINN-P1 employs a multiplicative LSTM (mLSTM) architecture--an attention-free, recurrent design that scales linearly with sequence length and avoids growing key-value caches during inference.\n\nWe evaluate AINN-P1 on ProteinGym fitness prediction tasks spanning activity, binding, expression, and stability using a frozen-encoder protocol with lightweight few-shot regression heads. Under this protocol, AINN-P1 achieves an average Spearman{rho} of 0.441 across four task categories and a Spearman{rho} of 0.625 on stability--the highest among sequence-only models in our comparison set. Because our evaluation uses few-shot supervised regression rather than the zero-shot scoring employed by most ProteinGym leaderboard baselines, direct numerical comparison requires caution; we discuss this methodological distinction throughout.\n\nBeyond benchmark performance, AINN-P1 emphasizes practical deployability: its recurrent architecture avoids quadratic memory scaling, supports fixed-state inference on long sequences, and enables rapid adaptation through frozen embeddings rather than costly end-to-end fine-tuning. We discuss when sequence-only models are sufficient when structural information remains beneficial and how compact foundation models can serve as efficient front-end filters in drug discovery workflows.",
+  "authors": [
+    "Wang, R.",
+    "Jin, K.",
+    "Pan, L."
+  ],
+  "doi": "10.64898/2026.03.26.714619",
+  "first_seen": "2026-03-30",
+  "id": "biorxiv:10.64898/2026.03.26.714619",
+  "metadata": {
+    "abstract": "Protein language models (PLMs) are increasingly central to protein engineering and drug discovery. Many high-performing systems, however, rely on large parameter counts, multiple sequence alignments (MSAs), explicit structural inputs, or computationally intensive attention mechanisms, limiting their accessibility and throughput. Here we present AINN-P1, a 167M-parameter protein language model trained exclusively on raw UniRef amino-acid sequences using an autoregressive next-token prediction objective. AINN-P1 employs a multiplicative LSTM (mLSTM) architecture--an attention-free, recurrent design that scales linearly with sequence length and avoids growing key-value caches during inference.\n\nWe evaluate AINN-P1 on ProteinGym fitness prediction tasks spanning activity, binding, expression, and stability using a frozen-encoder protocol with lightweight few-shot regression heads. Under this protocol, AINN-P1 achieves an average Spearman{rho} of 0.441 across four task categories and a Spearman{rho} of 0.625 on stability--the highest among sequence-only models in our comparison set. Because our evaluation uses few-shot supervised regression rather than the zero-shot scoring employed by most ProteinGym leaderboard baselines, direct numerical comparison requires caution; we discuss this methodological distinction throughout.\n\nBeyond benchmark performance, AINN-P1 emphasizes practical deployability: its recurrent architecture avoids quadratic memory scaling, supports fixed-state inference on long sequences, and enables rapid adaptation through frozen embeddings rather than costly end-to-end fine-tuning. We discuss when sequence-only models are sufficient when structural information remains beneficial and how compact foundation models can serve as efficient front-end filters in drug discovery workflows.",
+    "author_corresponding": "Lurong Pan",
+    "author_corresponding_institution": "Ainnocence Inc.",
+    "authors": "Wang, R.; Jin, K.; Pan, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-30",
+    "doi": "10.64898/2026.03.26.714619",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/30/2026.03.26.714619.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "AINN-P1: A Compact Sequence-Only Protein Language Model Achieves Competitive Fitness Prediction on ProteinGym",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Ainnocence Inc.",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "AINN-P1, a 167M-parameter attention-free mLSTM protein language model trained on UniRef sequences, reports Spearman 0.441 average on ProteinGym few-shot…",
+  "title": "AINN-P1: A Compact Sequence-Only Protein Language Model Achieves Competitive Fitness Prediction on ProteinGym",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.26.714619"
+}

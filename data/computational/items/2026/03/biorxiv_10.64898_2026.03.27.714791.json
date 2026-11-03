@@ -1,0 +1,40 @@
+{
+  "abstract": "Characterising cellular differentiation from single-cell RNA sequencing (scRNA-seq) requires representations that capture both discrete cell-type identity and continuous developmental trajectories. We present MOCOO, a modular framework integrating a Variational Autoencoder (VAE), Neural Ordinary Differential Equations (Neural ODE), and Momentum Contrast (MoCo), complemented by a systematic Phase-2 Flow Matching (FM) refinement step applicable to all model variants. Through a systematic six-configuration ablation across 20 scRNA-seq datasets evaluated with a proposed five-metric suite covering clustering geometry (ASW, DAV, CAL) and embedding quality (DRE, DREX), we demonstrate two central findings. First, the ODE+MoCo combination is the core architectural synergy: VAE+ODE+MoCo achieves four of five top-two finishes among base configurations, including the best ASW (0.225) and DAV (1.478), plus second-best DRE (0.640) and CAL. Second, FM refinement systematically improves both embedding quality and clustering geometry across all six base configurations--DREX in 92% and DRE in 88% of 120 dataset- configuration pairs ({Delta}DREX= +0.030, {Delta}DRE= +0.023), CAL in 88%, ASW in 86% ({Delta}ASW= +0.018), and DAV in 80% ({Delta}DAV= -0.072; Fig. 2). Combined, the full MoCoO pipeline (VAE+ODE+MoCo+Proto+FM) achieves the best DRE (0.678), DREX (0.660), and CAL, while VAE+ODE+MoCo+FM achieves the best ASW (0.257) and DAV (1.359). ODE smooths the latent manifold along developmental trajectories; MoCo sharpens cluster geometry; FM recovers and amplifies both embedding quality and cluster separation post-hoc. Downstream validation confirms that MoCoO latent spaces support annotation transfer, uncertainty quantification, differential expression, and branching detection. Pseudotime predictions correlate significantly with canonical marker genes across all five core developmental systems. We publicly release the MoCoO Python package (pip install mocoo) and full benchmark suite.\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=65 SRC=\"FIGDIR/small/714791v1_fig2.gif\" ALT=\"Figure 2\">\nView larger version (22K):\norg.highwire.dtl.DTLVardef@59a7feorg.highwire.dtl.DTLVardef@242f8borg.highwire.dtl.DTLVardef@1ad851dorg.highwire.dtl.DTLVardef@fe6b2c_HPS_FORMAT_FIGEXP  M_FIG O_FLOATNOFig. 2.C_FLOATNO FM systematically improves all model variants across all metrics (Fig. 2). Each subplot shows absolute performance for all 12 configurations (6 base + 6 FM variants) across 20 datasets. Coloured triangle indicators above each pair show FM effect: [Figure 2] improved, [Figure 2] degraded. Subplot titles include FM win-rate (% of 120 config x dataset pairs improved). ODE-containing configurations (V+OM, Full) dominate all metrics, and FM universally raises the median across all 6 base variants (CAL 88%, DREX 92%, DRE 88%, ASW 86%, DAV 80%).\n\nC_FIG",
+  "authors": [
+    "Fu, Z."
+  ],
+  "doi": "10.64898/2026.03.27.714791",
+  "first_seen": "2026-03-31",
+  "id": "biorxiv:10.64898/2026.03.27.714791",
+  "metadata": {
+    "abstract": "Characterising cellular differentiation from single-cell RNA sequencing (scRNA-seq) requires representations that capture both discrete cell-type identity and continuous developmental trajectories. We present MOCOO, a modular framework integrating a Variational Autoencoder (VAE), Neural Ordinary Differential Equations (Neural ODE), and Momentum Contrast (MoCo), complemented by a systematic Phase-2 Flow Matching (FM) refinement step applicable to all model variants. Through a systematic six-configuration ablation across 20 scRNA-seq datasets evaluated with a proposed five-metric suite covering clustering geometry (ASW, DAV, CAL) and embedding quality (DRE, DREX), we demonstrate two central findings. First, the ODE+MoCo combination is the core architectural synergy: VAE+ODE+MoCo achieves four of five top-two finishes among base configurations, including the best ASW (0.225) and DAV (1.478), plus second-best DRE (0.640) and CAL. Second, FM refinement systematically improves both embedding quality and clustering geometry across all six base configurations--DREX in 92% and DRE in 88% of 120 dataset- configuration pairs ({Delta}DREX= +0.030, {Delta}DRE= +0.023), CAL in 88%, ASW in 86% ({Delta}ASW= +0.018), and DAV in 80% ({Delta}DAV= -0.072; Fig. 2). Combined, the full MoCoO pipeline (VAE+ODE+MoCo+Proto+FM) achieves the best DRE (0.678), DREX (0.660), and CAL, while VAE+ODE+MoCo+FM achieves the best ASW (0.257) and DAV (1.359). ODE smooths the latent manifold along developmental trajectories; MoCo sharpens cluster geometry; FM recovers and amplifies both embedding quality and cluster separation post-hoc. Downstream validation confirms that MoCoO latent spaces support annotation transfer, uncertainty quantification, differential expression, and branching detection. Pseudotime predictions correlate significantly with canonical marker genes across all five core developmental systems. We publicly release the MoCoO Python package (pip install mocoo) and full benchmark suite.\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=65 SRC=\"FIGDIR/small/714791v1_fig2.gif\" ALT=\"Figure 2\">\nView larger version (22K):\norg.highwire.dtl.DTLVardef@59a7feorg.highwire.dtl.DTLVardef@242f8borg.highwire.dtl.DTLVardef@1ad851dorg.highwire.dtl.DTLVardef@fe6b2c_HPS_FORMAT_FIGEXP  M_FIG O_FLOATNOFig. 2.C_FLOATNO FM systematically improves all model variants across all metrics (Fig. 2). Each subplot shows absolute performance for all 12 configurations (6 base + 6 FM variants) across 20 datasets. Coloured triangle indicators above each pair show FM effect: [Figure 2] improved, [Figure 2] degraded. Subplot titles include FM win-rate (% of 120 config x dataset pairs improved). ODE-containing configurations (V+OM, Full) dominate all metrics, and FM universally raises the median across all 6 base variants (CAL 88%, DREX 92%, DRE 88%, ASW 86%, DAV 80%).\n\nC_FIG",
+    "author_corresponding": "Zeyu Fu",
+    "author_corresponding_institution": "Third Military Medical University",
+    "authors": "Fu, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-31",
+    "doi": "10.64898/2026.03.27.714791",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/31/2026.03.27.714791.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MoCoO: Momentum Contrast ODE-Regularized VAE for Single-Cell Trajectory Inference and Representation Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Third Military Medical University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-03-31",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "MoCoO combines a VAE, neural ODE, and momentum contrast with flow-matching refinement for scRNA-seq trajectory inference, benchmarked across 20 datasets and…",
+  "title": "MoCoO: Momentum Contrast ODE-Regularized VAE for Single-Cell Trajectory Inference and Representation Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.27.714791"
+}

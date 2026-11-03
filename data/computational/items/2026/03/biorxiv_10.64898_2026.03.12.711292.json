@@ -1,0 +1,44 @@
+{
+  "abstract": "Copy number variations (CNVs) drive cancer initiation and progression, but resolving them at single-cell resolution from targeted DNA sequencing panels remains challenging. The Mission Bio Tapestri platform generates two complementary signals for CNV inference: sequencing depth and B-allele frequency (BAF) from heterozygous variants; however, existing methods such as karyotapR rely primarily on read depth, potentially missing allele-specific events invisible to depth-only approaches. Here we introduce scPloidyR, a hidden Markov model (HMM) that jointly models read depth and BAF at amplicon resolution for single-cell copy number calling from Tapestri data. scPloidyR fits independent per-chromosome Markov chains with copy number states as hidden variables, factorizes emission probabilities into depth and BAF likelihoods, and learns parameters via Baum-Welch expectation-maximization with Viterbi decoding. We compared scPloidyR with the established karyotapR Gaussian Mixture Model (GMM) through two simulation studies that evaluates BAF noise, variant density, amplicon density, sample size, and heterozygosity rate, and through application to a public Tapestri five-cell-line mixture dataset. In simulations, scPloidyR substantially outperformed karyotapR on class-balanced metrics (macro-F1: 0.472 vs. 0.264; alteration F1: 0.902 vs. 0.383 in simulation study 1) when allelic information was available. Adding just one heterozygous variant per amplicon increased scPloidyR accuracy from 0.548 to 0.899 for copy number gains. However, when BAF information was absent, karyotapR outperformed scPloidyR, and high BAF noise substantially degraded joint-model performance. On real data, scPloidyR produced more spatially coherent and biologically plausible copy number profiles. These results establish that joint depth-BAF modeling provides a clear advantage for single-cell CNV calling when allelic information is available, while depth-only methods remain preferable when such information is absent.\n\nAuthor SummaryCancer cells frequently gain or lose copies of DNA segments, and detecting these changes in individual cells is critical for understanding how tumors evolve and resist treatment. A technology called Tapestri sequences DNA from thousands of single cells and produces two types of signals: how much DNA is present (read depth) and which version of each gene a cell carries (allele information). Existing tools mainly use the first signal, potentially missing important changes that only the second signal can reveal. We developed scPloidyR, a statistical method that combines both signals to more accurately identify DNA copy number changes in single cells. Through simulations and analysis of real cancer cell data, we found that using both signals together substantially improves detection when allele information is available -- even a small amount of allele data makes a meaningful difference. However, when allele information is absent, the simpler depth-only approach performs better. Our work provides researchers with a new tool and practical guidance on when each approach is most effective for studying cancer at single-cell resolution.",
+  "authors": [
+    "Pei, D.",
+    "Griffard-Smith, R.",
+    "Cano Urrego, B.",
+    "Schueddig, E."
+  ],
+  "doi": "10.64898/2026.03.12.711292",
+  "first_seen": "2026-03-16",
+  "id": "biorxiv:10.64898/2026.03.12.711292",
+  "metadata": {
+    "abstract": "Copy number variations (CNVs) drive cancer initiation and progression, but resolving them at single-cell resolution from targeted DNA sequencing panels remains challenging. The Mission Bio Tapestri platform generates two complementary signals for CNV inference: sequencing depth and B-allele frequency (BAF) from heterozygous variants; however, existing methods such as karyotapR rely primarily on read depth, potentially missing allele-specific events invisible to depth-only approaches. Here we introduce scPloidyR, a hidden Markov model (HMM) that jointly models read depth and BAF at amplicon resolution for single-cell copy number calling from Tapestri data. scPloidyR fits independent per-chromosome Markov chains with copy number states as hidden variables, factorizes emission probabilities into depth and BAF likelihoods, and learns parameters via Baum-Welch expectation-maximization with Viterbi decoding. We compared scPloidyR with the established karyotapR Gaussian Mixture Model (GMM) through two simulation studies that evaluates BAF noise, variant density, amplicon density, sample size, and heterozygosity rate, and through application to a public Tapestri five-cell-line mixture dataset. In simulations, scPloidyR substantially outperformed karyotapR on class-balanced metrics (macro-F1: 0.472 vs. 0.264; alteration F1: 0.902 vs. 0.383 in simulation study 1) when allelic information was available. Adding just one heterozygous variant per amplicon increased scPloidyR accuracy from 0.548 to 0.899 for copy number gains. However, when BAF information was absent, karyotapR outperformed scPloidyR, and high BAF noise substantially degraded joint-model performance. On real data, scPloidyR produced more spatially coherent and biologically plausible copy number profiles. These results establish that joint depth-BAF modeling provides a clear advantage for single-cell CNV calling when allelic information is available, while depth-only methods remain preferable when such information is absent.\n\nAuthor SummaryCancer cells frequently gain or lose copies of DNA segments, and detecting these changes in individual cells is critical for understanding how tumors evolve and resist treatment. A technology called Tapestri sequences DNA from thousands of single cells and produces two types of signals: how much DNA is present (read depth) and which version of each gene a cell carries (allele information). Existing tools mainly use the first signal, potentially missing important changes that only the second signal can reveal. We developed scPloidyR, a statistical method that combines both signals to more accurately identify DNA copy number changes in single cells. Through simulations and analysis of real cancer cell data, we found that using both signals together substantially improves detection when allele information is available -- even a small amount of allele data makes a meaningful difference. However, when allele information is absent, the simpler depth-only approach performs better. Our work provides researchers with a new tool and practical guidance on when each approach is most effective for studying cancer at single-cell resolution.",
+    "author_corresponding": "Dong Pei",
+    "author_corresponding_institution": "University of Kansas Medical Center",
+    "authors": "Pei, D.; Griffard-Smith, R.; Cano Urrego, B.; Schueddig, E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-16",
+    "doi": "10.64898/2026.03.12.711292",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/16/2026.03.12.711292.source.xml",
+    "license": "cc_by",
+    "published": "10.34133/csbj.0203",
+    "server": "bioRxiv",
+    "title": "Integrative modeling of read depth and B-allele frequency improves single-cell copy number calling from targeted DNA sequencing panels",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Kansas Medical Center",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-03-16",
+  "published_doi": "10.34133/csbj.0203",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "scPloidyR, an HMM jointly modeling read depth and B-allele frequency, improves single-cell copy number calling from Tapestri panels over depth-only karyotapR…",
+  "title": "Integrative modeling of read depth and B-allele frequency improves single-cell copy number calling from targeted DNA sequencing panels",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.12.711292"
+}

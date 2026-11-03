@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundIn microbiome research, differential abundance analysis aids in identifying significant differences in microbial taxa across two or more conditions. Statistical approaches used for this purpose include classical tests such as the t-test and Wilcoxon test, as well as methods designed to account for the compositional nature of microbiome data, including ALDEx2, ANCOM-BC2, and metagenomeSeq. In addition, methods originally developed for RNA sequencing data, such as DESeq2 and edgeR, have been frequently applied to microbiome studies. However, the use of these methods has been controversial. One area of concern is whether different modeling frameworks produce accurate p-values when the null hypothesis is true.\n\nResultsWe evaluated seven methods across six datasets. Four permutation strategies were applied to generate data under the null hypothesis: shuffling sample names, shuffling counts within samples, shuffling counts within taxa, and fully randomizing the counts table. Methods based on the negative binomial distribution (DESeq2 and edgeR) produced p-values that were consistently smaller than expected under the null hypothesis. In contrast, methods that attempt to correct for compositionality (ALDEx2, ANCOM-BC2, and metagenomeSeq) tended to produce larger-than-expected p-values, even when only sample labels were shuffled, a permutation strategy that does not alter compositional structure. These deviations were dependent on dataset characteristics and permutation strategy, suggesting complex interactions between underlying data structure and algorithm performance. Generating data to follow the expected negative binomial distribution did not eliminate the tendency of DESeq2 and edgeR to exaggerate statistical significance. Although similar patterns were observed in RNA sequencing (RNAseq) datasets, the deviations were less pronounced than in microbiome data. In contrast, the classical t-test and Wilcoxon test yielded p-value distributions consistent with theoretical expectations across datasets and permutation strategies.\n\nConclusionsThese results indicate that the performance of several widely used differential abundance methods can be problematic under null conditions and may affect biological interpretation. Our findings emphasize the importance of careful method selection and highlight the robustness of simpler statistical approaches for reliable inference.",
+  "authors": [
+    "Zeng, K.",
+    "Fodor, A. A."
+  ],
+  "doi": "10.64898/2026.03.14.711836",
+  "first_seen": "2026-03-18",
+  "id": "biorxiv:10.64898/2026.03.14.711836",
+  "metadata": {
+    "abstract": "BackgroundIn microbiome research, differential abundance analysis aids in identifying significant differences in microbial taxa across two or more conditions. Statistical approaches used for this purpose include classical tests such as the t-test and Wilcoxon test, as well as methods designed to account for the compositional nature of microbiome data, including ALDEx2, ANCOM-BC2, and metagenomeSeq. In addition, methods originally developed for RNA sequencing data, such as DESeq2 and edgeR, have been frequently applied to microbiome studies. However, the use of these methods has been controversial. One area of concern is whether different modeling frameworks produce accurate p-values when the null hypothesis is true.\n\nResultsWe evaluated seven methods across six datasets. Four permutation strategies were applied to generate data under the null hypothesis: shuffling sample names, shuffling counts within samples, shuffling counts within taxa, and fully randomizing the counts table. Methods based on the negative binomial distribution (DESeq2 and edgeR) produced p-values that were consistently smaller than expected under the null hypothesis. In contrast, methods that attempt to correct for compositionality (ALDEx2, ANCOM-BC2, and metagenomeSeq) tended to produce larger-than-expected p-values, even when only sample labels were shuffled, a permutation strategy that does not alter compositional structure. These deviations were dependent on dataset characteristics and permutation strategy, suggesting complex interactions between underlying data structure and algorithm performance. Generating data to follow the expected negative binomial distribution did not eliminate the tendency of DESeq2 and edgeR to exaggerate statistical significance. Although similar patterns were observed in RNA sequencing (RNAseq) datasets, the deviations were less pronounced than in microbiome data. In contrast, the classical t-test and Wilcoxon test yielded p-value distributions consistent with theoretical expectations across datasets and permutation strategies.\n\nConclusionsThese results indicate that the performance of several widely used differential abundance methods can be problematic under null conditions and may affect biological interpretation. Our findings emphasize the importance of careful method selection and highlight the robustness of simpler statistical approaches for reliable inference.",
+    "author_corresponding": "Ke Zeng",
+    "author_corresponding_institution": "University of North Carolina at Charlotte",
+    "authors": "Zeng, K.; Fodor, A. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-18",
+    "doi": "10.64898/2026.03.14.711836",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/18/2026.03.14.711836.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A Permutation-Based Framework for Evaluating Bias in Microbiome Differential Abundance Analysis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of North Carolina at Charlotte",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Permutation null benchmark of 7 microbiome DA methods: DESeq2/edgeR overstate significance; t-test and Wilcoxon stay calibrated.",
+  "title": "A Permutation-Based Framework for Evaluating Bias in Microbiome Differential Abundance Analysis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.14.711836"
+}

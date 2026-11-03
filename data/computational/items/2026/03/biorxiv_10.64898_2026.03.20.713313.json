@@ -1,0 +1,41 @@
+{
+  "abstract": "The rapid growth of T-cell receptor (TCR) sequencing data has created an urgent need for computational methods that can efficiently search CDR3 sequences at scale. Existing approaches either rely on exact pairwise distance computation, which scales quadratically with repertoire size, or employ heuristic grouping that sacrifices sensitivity. Here we present TCRseek, a two-stage retrieval framework that combines biologically informed sequence embeddings with approximate nearest neighbor (ANN) indexing for scalable search over TCR repertoires. TCRseek first encodes CDR3 amino acid sequences into fixed-length numerical vectors through a multi-scale windowed k-mer embedding scheme derived from BLOSUM62 eigendecomposition, then indexes these vectors using FAISS-based structures (IVF-Flat, IVF-PQ, or HNSW-Flat) that support sublinear-time search. A second-stage reranking module refines the shortlisted candidates using exact sequence alignment scores (Needleman-Wunsch with BLOSUM62), Levenshtein distance, or Hamming distance. We benchmarked TCRseek against tcrdist3, TCRMatch, and GIANA on a 100,000-sequence corpus with precomputed exact ground truth under three distance metrics. Under cross-metric evaluation--where the reranking and ground truth metrics differ, providing the most informative test of generalization--TCRseek achieved NDCG@10 = 0.890 (Levenshtein ground truth) and 0.880 (Hamming ground truth), ranking highest among the retained baselines under Hamming and remaining competitive with tcrdist3 (0.894) under Levenshtein. When the reranking metric matches the ground truth definition (BLOSUM62 alignment), NDCG@10 reached 0.993, confirming that the ANN shortlist captures >99% of true neighbors--the expected ceiling of the two-stage design. On the 100,000-sequence corpus, TCRseek achieved 3.6-39.6x speedup over exact brute-force search depending on index type and distance metric, with the largest gains for alignment-based retrieval. These results demonstrate that embedding-based ANN search provides a practical and scalable alternative for TCR repertoire analysis.",
+  "authors": [
+    "Yang, Y."
+  ],
+  "doi": "10.64898/2026.03.20.713313",
+  "first_seen": "2026-03-24",
+  "id": "biorxiv:10.64898/2026.03.20.713313",
+  "metadata": {
+    "abstract": "The rapid growth of T-cell receptor (TCR) sequencing data has created an urgent need for computational methods that can efficiently search CDR3 sequences at scale. Existing approaches either rely on exact pairwise distance computation, which scales quadratically with repertoire size, or employ heuristic grouping that sacrifices sensitivity. Here we present TCRseek, a two-stage retrieval framework that combines biologically informed sequence embeddings with approximate nearest neighbor (ANN) indexing for scalable search over TCR repertoires. TCRseek first encodes CDR3 amino acid sequences into fixed-length numerical vectors through a multi-scale windowed k-mer embedding scheme derived from BLOSUM62 eigendecomposition, then indexes these vectors using FAISS-based structures (IVF-Flat, IVF-PQ, or HNSW-Flat) that support sublinear-time search. A second-stage reranking module refines the shortlisted candidates using exact sequence alignment scores (Needleman-Wunsch with BLOSUM62), Levenshtein distance, or Hamming distance. We benchmarked TCRseek against tcrdist3, TCRMatch, and GIANA on a 100,000-sequence corpus with precomputed exact ground truth under three distance metrics. Under cross-metric evaluation--where the reranking and ground truth metrics differ, providing the most informative test of generalization--TCRseek achieved NDCG@10 = 0.890 (Levenshtein ground truth) and 0.880 (Hamming ground truth), ranking highest among the retained baselines under Hamming and remaining competitive with tcrdist3 (0.894) under Levenshtein. When the reranking metric matches the ground truth definition (BLOSUM62 alignment), NDCG@10 reached 0.993, confirming that the ANN shortlist captures >99% of true neighbors--the expected ceiling of the two-stage design. On the 100,000-sequence corpus, TCRseek achieved 3.6-39.6x speedup over exact brute-force search depending on index type and distance metric, with the largest gains for alignment-based retrieval. These results demonstrate that embedding-based ANN search provides a practical and scalable alternative for TCR repertoire analysis.",
+    "author_corresponding": "Yang Yang",
+    "author_corresponding_institution": "Frazer Institute, Faculty of Health, Medicine and Behavioural Sciences, University of Queensland, Brisbane, QLD 4072, Australia",
+    "authors": "Yang, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-24",
+    "doi": "10.64898/2026.03.20.713313",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/24/2026.03.20.713313.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "TCRseek: Scalable Approximate Nearest Neighbor Search for T-Cell Receptor Repertoires via Windowed k-mer Embeddings",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Frazer Institute, Faculty of Health, Medicine and Behavioural Sciences, University of Queensland, Brisbane, QLD 4072, Australia",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "TCRseek: two-stage ANN search over TCR CDR3 repertoires using windowed k-mer embeddings and FAISS indexes with alignment reranking; 3.6-39.6x speedup over…",
+  "title": "TCRseek: Scalable Approximate Nearest Neighbor Search for T-Cell Receptor Repertoires via Windowed k-mer Embeddings",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.20.713313"
+}

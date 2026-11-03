@@ -1,0 +1,30 @@
+{
+  "abstract": "Cross-species antimicrobial resistance (AMR) prediction is fundamentally an out-of-distribution (OOD) generalization problem: models trained on one set of bacterial taxa must transfer to phylogenetically distinct genomes that may rely on different resistance mechanisms. Across species, resistance arises from a heterogeneous mixture of localized, horizontally transferred gene cassettes and diffuse species-specific genomic backgrounds, making successful transfer inherently mechanism-dependent. Using a strict species holdout protocol, we first establish an interpretable k-mer baseline with Kover and show that strong within-species performance collapses under true cross-species evaluation. This motivates representation-level approaches that preserve transferable biological signals rather than amplify phylogenetic shortcuts.  We investigate genomic foundation model embeddings derived from Evo-1-8k-base and introduce diagnostics for layer selection based on activation scale, isotropy, effective rank, and cross-seed stability under native bfloat16 inference. These analyses identify a stability boundary in deeper layers and reveal that embeddings extracted near this boundary provide more robust representations for downstream prediction. To preserve localized resistance signals, we treat per-window embeddings as an ordered multivariate signal and apply MiniRocket to summarize multi-scale local activation patterns instead of relying on global pooling. Our results show that aggregation strategy plays a central role in cross-species AMR prediction and that preserving local activation patterns substantially improves generalization when resistance mechanisms are localized.",
+  "authors": [
+    "Huilin Tai"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-11",
+  "id": "arxiv:2603.11141",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.11141v1</ns0:id>\n    <ns0:title>Cross-Species Antimicrobial Resistance Prediction from Genomic Foundation Models</ns0:title>\n    <ns0:updated>2026-03-11T16:40:13Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.11141v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.11141v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Cross-species antimicrobial resistance (AMR) prediction is fundamentally an out-of-distribution (OOD) generalization problem: models trained on one set of bacterial taxa must transfer to phylogenetically distinct genomes that may rely on different resistance mechanisms. Across species, resistance arises from a heterogeneous mixture of localized, horizontally transferred gene cassettes and diffuse species-specific genomic backgrounds, making successful transfer inherently mechanism-dependent. Using a strict species holdout protocol, we first establish an interpretable k-mer baseline with Kover and show that strong within-species performance collapses under true cross-species evaluation. This motivates representation-level approaches that preserve transferable biological signals rather than amplify phylogenetic shortcuts.  We investigate genomic foundation model embeddings derived from Evo-1-8k-base and introduce diagnostics for layer selection based on activation scale, isotropy, effective rank, and cross-seed stability under native bfloat16 inference. These analyses identify a stability boundary in deeper layers and reveal that embeddings extracted near this boundary provide more robust representations for downstream prediction. To preserve localized resistance signals, we treat per-window embeddings as an ordered multivariate signal and apply MiniRocket to summarize multi-scale local activation patterns instead of relying on global pooling. Our results show that aggregation strategy plays a central role in cross-species AMR prediction and that preserving local activation patterns substantially improves generalization when resistance mechanisms are localized.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-11T16:40:13Z</ns0:published>\n    <ns1:comment>Master's thesis, Columbia University, Department of Computer Science</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Huilin Tai</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-03-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Cross-species AMR prediction via Evo genomic foundation model embeddings, layer-selection diagnostics, and MiniRocket aggregation under a strict species…",
+  "title": "Cross-Species Antimicrobial Resistance Prediction from Genomic Foundation Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.11141v1"
+}

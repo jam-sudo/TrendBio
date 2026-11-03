@@ -1,0 +1,49 @@
+{
+  "abstract": "BackgroundThe success of hematopoietic stem cell transplantation (HSCT) depends critically on human leukocyte antigen (HLA) matching between donor and recipient. While traditional matching focuses on five classical HLA loci (A, B, C, DRB1, DQB1), clinical practice increasingly considers extended typing at nine loci, including DPA1, DQA1, DPB1, and DRB3/4/5. Furthermore, emerging evidence supports transplantation with up to three HLA mismatches under post-transplant cyclophosphamide (PTCy) regimens. However, current donor search algorithms cannot efficiently identify donors with multiple mismatches across extended HLA loci in real-time.\n\nMethodsWe developed GRIMM-II (GRaph IMputation and Matching, version II), which comprises two novel algorithms: ML-GRIM (Multi-Locus GRIM) for HLA imputation across multiple loci, and ML-GRMA (Multi-Locus GRMA) for real-time donor-patient matching with up to three mismatches. Both algorithms employ a two-stage approach that combines efficient candidate reduction through graph-theoretic frameworks with detailed genotype comparison. ML-GRIM partitions genotypes into class I (HLA-A, B, C) and class II (remaining loci) components, enabling memory-efficient storage and rapid candidate identification. ML-GRMA searches a pre-imputed donor graph composed of donor genotypes and their sub-components, then computes asymmetric graft-versus-host (GvH) and host-versus-graft (HvG) mismatch probabilities to provide clinically relevant compatibility assessments. Both imputation and matching tools are available as a web application at https://grimmard.math.biu.ac.il/ and through GitHub repositories at https://github.com/nmdp-bioinformatics/py-graph-imputation (imputation) and https://github.com/nmdp-bioinformatics/py-graph-match (matching).\n\nResultsWe validated ML-GRMA and ML-GRIM using the WMDA3 (World Marrow Donor Association) validation dataset, successfully reproducing all previously reported matches while identifying numerous additional candidate donors not detected by previous algorithms. Further validation of ML-GRMA using 3,000 patients with artificially introduced mismatches (0-3 allele substitutions) demonstrated 100% sensitivity and specificity in identifying matching donors at expected mismatch levels. We validated ML-GRIM using simulated nine-locus typings derived from 8,078,224 US donors in the NMDP registry. The algorithm successfully imputed genotypes across variable numbers of typed loci while incorporating multiethnic haplotype frequencies. The algorithm achieved real-time performance with typical imputation times under one second and matching times of 1-13 seconds per patient for up to three mismatches, even when searching databases exceeding 8 million donors. Notably, ML-GRMA identified substantially more potentially suitable donors than traditional algorithms by accounting for the biological reality that GvH and HvG mismatches often differ, particularly for donors homozygous at specific loci. To evaluate ML-GRIM performance with low-resolution typing, we tested it on simulated 3-locus typings from the same population. The resulting imputation accuracy correlated with the mutual information between typed loci and complete genotypes.\n\nConclusionsGRIMM-II provides a scalable, memory-efficient solution for nine-locus HLA imputation and real-time identification of donors with up to three mismatches. The graph-based framework supports dynamic registry updates and can readily accommodate additional HLA loci and matching criteria as clinical knowledge evolves. By expanding the pool of acceptable donors while maintaining computational efficiency, GRIMM-II addresses a critical need in contemporary transplantation practice, particularly for patients from underrepresented ethnic minorities who face lower probabilities of finding perfectly matched donors.",
+  "authors": [
+    "Kirshenboim, O.",
+    "Kabya, A.",
+    "Yehezkel-Imra, R.",
+    "Tshuva, Y.",
+    "Maiers, M.",
+    "Gragert, L.",
+    "Bashyal, P.",
+    "Israeli, S.",
+    "Louzoun, Y."
+  ],
+  "doi": "10.64898/2026.03.28.715027",
+  "first_seen": "2026-03-31",
+  "id": "biorxiv:10.64898/2026.03.28.715027",
+  "metadata": {
+    "abstract": "BackgroundThe success of hematopoietic stem cell transplantation (HSCT) depends critically on human leukocyte antigen (HLA) matching between donor and recipient. While traditional matching focuses on five classical HLA loci (A, B, C, DRB1, DQB1), clinical practice increasingly considers extended typing at nine loci, including DPA1, DQA1, DPB1, and DRB3/4/5. Furthermore, emerging evidence supports transplantation with up to three HLA mismatches under post-transplant cyclophosphamide (PTCy) regimens. However, current donor search algorithms cannot efficiently identify donors with multiple mismatches across extended HLA loci in real-time.\n\nMethodsWe developed GRIMM-II (GRaph IMputation and Matching, version II), which comprises two novel algorithms: ML-GRIM (Multi-Locus GRIM) for HLA imputation across multiple loci, and ML-GRMA (Multi-Locus GRMA) for real-time donor-patient matching with up to three mismatches. Both algorithms employ a two-stage approach that combines efficient candidate reduction through graph-theoretic frameworks with detailed genotype comparison. ML-GRIM partitions genotypes into class I (HLA-A, B, C) and class II (remaining loci) components, enabling memory-efficient storage and rapid candidate identification. ML-GRMA searches a pre-imputed donor graph composed of donor genotypes and their sub-components, then computes asymmetric graft-versus-host (GvH) and host-versus-graft (HvG) mismatch probabilities to provide clinically relevant compatibility assessments. Both imputation and matching tools are available as a web application at https://grimmard.math.biu.ac.il/ and through GitHub repositories at https://github.com/nmdp-bioinformatics/py-graph-imputation (imputation) and https://github.com/nmdp-bioinformatics/py-graph-match (matching).\n\nResultsWe validated ML-GRMA and ML-GRIM using the WMDA3 (World Marrow Donor Association) validation dataset, successfully reproducing all previously reported matches while identifying numerous additional candidate donors not detected by previous algorithms. Further validation of ML-GRMA using 3,000 patients with artificially introduced mismatches (0-3 allele substitutions) demonstrated 100% sensitivity and specificity in identifying matching donors at expected mismatch levels. We validated ML-GRIM using simulated nine-locus typings derived from 8,078,224 US donors in the NMDP registry. The algorithm successfully imputed genotypes across variable numbers of typed loci while incorporating multiethnic haplotype frequencies. The algorithm achieved real-time performance with typical imputation times under one second and matching times of 1-13 seconds per patient for up to three mismatches, even when searching databases exceeding 8 million donors. Notably, ML-GRMA identified substantially more potentially suitable donors than traditional algorithms by accounting for the biological reality that GvH and HvG mismatches often differ, particularly for donors homozygous at specific loci. To evaluate ML-GRIM performance with low-resolution typing, we tested it on simulated 3-locus typings from the same population. The resulting imputation accuracy correlated with the mutual information between typed loci and complete genotypes.\n\nConclusionsGRIMM-II provides a scalable, memory-efficient solution for nine-locus HLA imputation and real-time identification of donors with up to three mismatches. The graph-based framework supports dynamic registry updates and can readily accommodate additional HLA loci and matching criteria as clinical knowledge evolves. By expanding the pool of acceptable donors while maintaining computational efficiency, GRIMM-II addresses a critical need in contemporary transplantation practice, particularly for patients from underrepresented ethnic minorities who face lower probabilities of finding perfectly matched donors.",
+    "author_corresponding": "Yoram Louzoun",
+    "author_corresponding_institution": "Department of Mathematics, Bar-Ilan University, Ramat Gan, Israel",
+    "authors": "Kirshenboim, O.; Kabya, A.; Yehezkel-Imra, R.; Tshuva, Y.; Maiers, M.; Gragert, L.; Bashyal, P.; Israeli, S.; Louzoun, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-31",
+    "doi": "10.64898/2026.03.28.715027",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/31/2026.03.28.715027.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "10.1016/j.humimm.2026.111810",
+    "server": "bioRxiv",
+    "title": "GRIMM-II: A Two-Stage Real-Time Algorithm for Nine-Locus HLA Imputation and Matching with Up to Three Mismatches",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Mathematics, Bar-Ilan University, Ramat Gan, Israel",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-31",
+  "published_doi": "10.1016/j.humimm.2026.111810",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "GRIMM-II: graph-based algorithms for nine-locus HLA imputation and real-time donor matching with up to three mismatches, validated on WMDA and NMDP registry…",
+  "title": "GRIMM-II: A Two-Stage Real-Time Algorithm for Nine-Locus HLA Imputation and Matching with Up to Three Mismatches",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.28.715027"
+}

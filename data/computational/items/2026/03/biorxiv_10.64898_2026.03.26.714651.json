@@ -1,0 +1,40 @@
+{
+  "abstract": "Variational autoencoders for single-cell transcriptomics typically learn Gaussian latent spaces that lack part-based interpretability: individual latent dimensions carry no inherent biological meaning and the decoder provides no explicit gene-program readout. We introduce Topic-FM, a family of neural topic VAEs in which a logistic-normal Dirichlet prior constrains the latent vector to the probability simplex, turning each coordinate into a topic proportion and the decoder weight matrix into a directly readable topic-gene signature. A conditional optimal-transport flow field, trained entirely in pre-softmax [R]K, sharpens posterior geometry without modifying the decoder or breaking simplex validity. Unlike nonparametric mixture priors that improve geometry at the expense of label concordance, Topic-FM improves all core metrics simultaneously: across 56 scRNA-seq datasets, Topic-FM-Transformer raises NMI by 8.2%, ARI by 20.4%, and ASW by 21.7% relative to prior-free Pure-VAE (composite 0.502 vs. 0.434, +15.6%). Wilcoxon signed-rank tests confirm significance with medium-to-large Cliffs{delta} effects on all three metrics--no concordance-geometry trade-off is observed. Downstream kNN classification improves by 13.5% in accuracy and 27.7% in macro-F1. Among four architectural variants, Topic-FM-Contrastive achieves the highest external core win rate (86.4% against 23 baselines), while Topic-FM-Transformer leads on composite score and supervised discrimination. Dual-pathway biological validation--perturbation importance and direct decoder-{beta} readout-- yields convergent GO enrichment, demonstrating that the learned topics correspond to coherent, annotatable gene programs rather than opaque embedding dimensions.",
+  "authors": [
+    "Fu, Z."
+  ],
+  "doi": "10.64898/2026.03.26.714651",
+  "first_seen": "2026-03-30",
+  "id": "biorxiv:10.64898/2026.03.26.714651",
+  "metadata": {
+    "abstract": "Variational autoencoders for single-cell transcriptomics typically learn Gaussian latent spaces that lack part-based interpretability: individual latent dimensions carry no inherent biological meaning and the decoder provides no explicit gene-program readout. We introduce Topic-FM, a family of neural topic VAEs in which a logistic-normal Dirichlet prior constrains the latent vector to the probability simplex, turning each coordinate into a topic proportion and the decoder weight matrix into a directly readable topic-gene signature. A conditional optimal-transport flow field, trained entirely in pre-softmax [R]K, sharpens posterior geometry without modifying the decoder or breaking simplex validity. Unlike nonparametric mixture priors that improve geometry at the expense of label concordance, Topic-FM improves all core metrics simultaneously: across 56 scRNA-seq datasets, Topic-FM-Transformer raises NMI by 8.2%, ARI by 20.4%, and ASW by 21.7% relative to prior-free Pure-VAE (composite 0.502 vs. 0.434, +15.6%). Wilcoxon signed-rank tests confirm significance with medium-to-large Cliffs{delta} effects on all three metrics--no concordance-geometry trade-off is observed. Downstream kNN classification improves by 13.5% in accuracy and 27.7% in macro-F1. Among four architectural variants, Topic-FM-Contrastive achieves the highest external core win rate (86.4% against 23 baselines), while Topic-FM-Transformer leads on composite score and supervised discrimination. Dual-pathway biological validation--perturbation importance and direct decoder-{beta} readout-- yields convergent GO enrichment, demonstrating that the learned topics correspond to coherent, annotatable gene programs rather than opaque embedding dimensions.",
+    "author_corresponding": "Zeyu Fu",
+    "author_corresponding_institution": "Third Military Medical University",
+    "authors": "Fu, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-30",
+    "doi": "10.64898/2026.03.26.714651",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/30/2026.03.26.714651.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Flow-Matching-Refined Dirichlet-Prior Autoencoders for Interpretable and Structurally Balanced Single-Cell Representation Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Third Military Medical University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-03-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Topic-FM uses a Dirichlet-prior neural topic VAE with flow-matching refinement to yield interpretable topic-gene signatures for scRNA-seq, improving clustering…",
+  "title": "Flow-Matching-Refined Dirichlet-Prior Autoencoders for Interpretable and Structurally Balanced Single-Cell Representation Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.26.714651"
+}

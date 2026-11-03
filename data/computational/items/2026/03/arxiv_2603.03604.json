@@ -1,0 +1,34 @@
+{
+  "abstract": "The social structures of group-living animals such as feral horses are diverse and remain insufficiently understood, even within a single species. To investigate group dynamics, aerial videos are often utilized to track individuals and analyze their movement trajectories, which are essential for evaluating inter-individual interactions and comparing social behaviors. Accurate individual tracking is therefore crucial. In multi-animal tracking, axis-aligned bounding boxes (bboxes) are widely used; however, for aerial top-view footage of entire groups, their performance degrades due to complex backgrounds, small target sizes, high animal density, and varying body orientations. To address this issue, we employ oriented bounding boxes (OBBs), which include rotation angles and reduce unnecessary background. Nevertheless, current OBB detectors such as YOLO-OBB restrict angles within a 180$^{\\circ}$ range, making it impossible to distinguish head from tail and often causing sudden 180$^{\\circ}$ flips across frames, which severely disrupts continuous tracking. To overcome this limitation, we propose a head-orientation estimation method that crops OBB-centered patches, applies three detectors (head, tail, and head-tail), and determines the final label through IoU-based majority voting. Experiments using 299 test images show that our method achieves 99.3% accuracy, outperforming individual models, demonstrating its effectiveness for robust OBB-based tracking.",
+  "authors": [
+    "Saeko Takizawa",
+    "Tamao Maeda",
+    "Shinya Yamamoto",
+    "Hiroaki Kawashima"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-04",
+  "id": "arxiv:2603.03604",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.03604v1</ns0:id>\n    <ns0:title>Tracking Feral Horses in Aerial Video Using Oriented Bounding Boxes</ns0:title>\n    <ns0:updated>2026-03-04T00:27:57Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.03604v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.03604v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The social structures of group-living animals such as feral horses are diverse and remain insufficiently understood, even within a single species. To investigate group dynamics, aerial videos are often utilized to track individuals and analyze their movement trajectories, which are essential for evaluating inter-individual interactions and comparing social behaviors. Accurate individual tracking is therefore crucial. In multi-animal tracking, axis-aligned bounding boxes (bboxes) are widely used; however, for aerial top-view footage of entire groups, their performance degrades due to complex backgrounds, small target sizes, high animal density, and varying body orientations. To address this issue, we employ oriented bounding boxes (OBBs), which include rotation angles and reduce unnecessary background. Nevertheless, current OBB detectors such as YOLO-OBB restrict angles within a 180$^{\\circ}$ range, making it impossible to distinguish head from tail and often causing sudden 180$^{\\circ}$ flips across frames, which severely disrupts continuous tracking. To overcome this limitation, we propose a head-orientation estimation method that crops OBB-centered patches, applies three detectors (head, tail, and head-tail), and determines the final label through IoU-based majority voting. Experiments using 299 test images show that our method achieves 99.3% accuracy, outperforming individual models, demonstrating its effectiveness for robust OBB-based tracking.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-04T00:27:57Z</ns0:published>\n    <ns1:comment>Author's version of the paper presented at AROB-ISBC 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns1:journal_ref>Proc. of the Joint Symposium of AROB 31st and ISBC 11th (AROB-ISBC 2026), pp. 1580-1584, 2026</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Saeko Takizawa</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tamao Maeda</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shinya Yamamoto</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hiroaki Kawashima</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-04",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes a head-orientation estimation method using OBB-centered patches and IoU-based majority voting over head, tail, and head-tail detectors to fix 180°…",
+  "title": "Tracking Feral Horses in Aerial Video Using Oriented Bounding Boxes",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.03604v1"
+}

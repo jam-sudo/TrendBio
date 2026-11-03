@@ -1,0 +1,42 @@
+{
+  "abstract": "Minimizers are sampling schemes which are ubiquitous in almost any high-throughput sequencing analysis. Assuming a fixed alphabet of size{sigma} , a minimizer is defined by two positive integers k, w and a linear order{rho} on k-mers. A sequence is processed by a sliding window algorithm that chooses in each window of length w + k- 1 its minimal k-mer with respect to{rho} . A key characteristic of a minimizer is its density, which is the expected frequency of chosen k-mers among all k-mers in a random infinite{sigma} -ary sequence. Minimizers of smaller density are preferred as they produce smaller samples, which lead to reduced runtime and memory usage in downstream applications. Recent studies developed methods to generate minimizers with optimal and near-optimal densities, but they require to explicitly store k-mer ranks in{Omega} (2k) space. While constant-space minimizers exist, and some of them are proven to be asymptotically optimal, no constant-space minimizers was proven to guarantee lower density compared to a random minimizer in the non-asymptotic regime, and many minimizer schemes suffer from long k-mer key-retrieval times due to complex computation.\n\nIn this paper, we introduce 10-minimizers, which constitute a class of minimizers with promising properties. First, we prove that for every k > 1 and every w[&ge;] k- 2, a random 10-minimizer has, on expectation, lower density than a random minimizer. This is the first provable guarantee for a class of minimizers in the non-asymptotic regime. Second, we present spacers, which are particular 10-minimizers combining three desirable properties: they are constant-space, low-density, and have small k-mer key-retrieval time. In terms of density, spacers are competitive to the best known constant-space minimizers; in certain (k, w) regimes they achieve the lowest density among all known (not necessarily constant-space) minimizers. Notably, we are the first to benchmark constant-space minimizers in the time spent for k-mer key retrieval, which is the most fundamental operation in many minimizers-based methods. Our empirical results show that spacers can retrieve k-mer keys in competitive time (a few seconds per genome-size sequence, which is less than required by random minimizers), for all practical values of k and w. We expect 10-minimizers to improve minimizers-based methods, especially those using large window sizes. We also propose the k-mer key-retrieval benchmark as a standard objective for any new minimizer scheme.",
+  "authors": [
+    "Shur, A.",
+    "Tziony, I.",
+    "Orenstein, Y."
+  ],
+  "doi": "10.64898/2026.03.16.712052",
+  "first_seen": "2026-03-18",
+  "id": "biorxiv:10.64898/2026.03.16.712052",
+  "metadata": {
+    "abstract": "Minimizers are sampling schemes which are ubiquitous in almost any high-throughput sequencing analysis. Assuming a fixed alphabet of size{sigma} , a minimizer is defined by two positive integers k, w and a linear order{rho} on k-mers. A sequence is processed by a sliding window algorithm that chooses in each window of length w + k- 1 its minimal k-mer with respect to{rho} . A key characteristic of a minimizer is its density, which is the expected frequency of chosen k-mers among all k-mers in a random infinite{sigma} -ary sequence. Minimizers of smaller density are preferred as they produce smaller samples, which lead to reduced runtime and memory usage in downstream applications. Recent studies developed methods to generate minimizers with optimal and near-optimal densities, but they require to explicitly store k-mer ranks in{Omega} (2k) space. While constant-space minimizers exist, and some of them are proven to be asymptotically optimal, no constant-space minimizers was proven to guarantee lower density compared to a random minimizer in the non-asymptotic regime, and many minimizer schemes suffer from long k-mer key-retrieval times due to complex computation.\n\nIn this paper, we introduce 10-minimizers, which constitute a class of minimizers with promising properties. First, we prove that for every k > 1 and every w[&ge;] k- 2, a random 10-minimizer has, on expectation, lower density than a random minimizer. This is the first provable guarantee for a class of minimizers in the non-asymptotic regime. Second, we present spacers, which are particular 10-minimizers combining three desirable properties: they are constant-space, low-density, and have small k-mer key-retrieval time. In terms of density, spacers are competitive to the best known constant-space minimizers; in certain (k, w) regimes they achieve the lowest density among all known (not necessarily constant-space) minimizers. Notably, we are the first to benchmark constant-space minimizers in the time spent for k-mer key retrieval, which is the most fundamental operation in many minimizers-based methods. Our empirical results show that spacers can retrieve k-mer keys in competitive time (a few seconds per genome-size sequence, which is less than required by random minimizers), for all practical values of k and w. We expect 10-minimizers to improve minimizers-based methods, especially those using large window sizes. We also propose the k-mer key-retrieval benchmark as a standard objective for any new minimizer scheme.",
+    "author_corresponding": "Arseny Shur",
+    "author_corresponding_institution": "Bar-Ilan University",
+    "authors": "Shur, A.; Tziony, I.; Orenstein, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-18",
+    "doi": "10.64898/2026.03.16.712052",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/18/2026.03.16.712052.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "10-minimizers: a promising class of constant-space minimizers",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Bar-Ilan University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces 10-minimizers, a constant-space minimizer class with provably lower expected density than random minimizers for non-asymptotic k and w, plus spacers…",
+  "title": "10-minimizers: a promising class of constant-space minimizers",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.16.712052"
+}

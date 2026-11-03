@@ -1,0 +1,43 @@
+{
+  "abstract": "MotivationOptimizing peptide sequences for binding to specific MHC class I alleles is a central challenge in immunotherapy and vaccine design. The combinatorial size of peptide space, the nonlinear nature of peptide- MHC interactions, and limited experimental budgets make efficient optimization difficult. Latent-space Bayesian optimization (LSBO) provides a framework by embedding discrete sequences into a continuous space where Bayesian optimization can be applied. However, existing LSBO methods do not effectively leverage binding data from related alleles and often rely on inefficient random initialization.\n\nResultsWe propose PepCABO, an LSBO framework for peptide-MHC binding using contrastive alignment, which utilizes a dual variational autoencoder framework that jointly learns peptide-allele alignment and a Gaussian process surrogate prior to Bayesian optimization. This simultaneous training induces a latent geometry that reflects the binding landscape and enables structured knowledge transfer across alleles. The pretrained model shapes a structured latent space in which peptides with high objective values regarding a specific MHC allele are geometrically organized, while the jointly trained Gaussian process defines an informative prior over the objective in this space, enabling principled and efficient exploration of promising regions during subsequent optimization. Across 12 target alleles without prior binding data and under both low- and high-budget settings, PepCABO consistently outperforms various baselines. We observe faster convergence, improved area under the optimization curve, and stronger best-found binding affinities, suggesting improved sample efficiency under experimentally constrained scenarios.\n\nCode availabilityThe source code is available at https://github.com/mohsen-g/PepCABO",
+  "authors": [
+    "Ghane, M.",
+    "Korpela, D.",
+    "Dumitrescu, A.",
+    "Lähdesmäki, H."
+  ],
+  "doi": "10.64898/2026.03.13.711540",
+  "first_seen": "2026-03-16",
+  "id": "biorxiv:10.64898/2026.03.13.711540",
+  "metadata": {
+    "abstract": "MotivationOptimizing peptide sequences for binding to specific MHC class I alleles is a central challenge in immunotherapy and vaccine design. The combinatorial size of peptide space, the nonlinear nature of peptide- MHC interactions, and limited experimental budgets make efficient optimization difficult. Latent-space Bayesian optimization (LSBO) provides a framework by embedding discrete sequences into a continuous space where Bayesian optimization can be applied. However, existing LSBO methods do not effectively leverage binding data from related alleles and often rely on inefficient random initialization.\n\nResultsWe propose PepCABO, an LSBO framework for peptide-MHC binding using contrastive alignment, which utilizes a dual variational autoencoder framework that jointly learns peptide-allele alignment and a Gaussian process surrogate prior to Bayesian optimization. This simultaneous training induces a latent geometry that reflects the binding landscape and enables structured knowledge transfer across alleles. The pretrained model shapes a structured latent space in which peptides with high objective values regarding a specific MHC allele are geometrically organized, while the jointly trained Gaussian process defines an informative prior over the objective in this space, enabling principled and efficient exploration of promising regions during subsequent optimization. Across 12 target alleles without prior binding data and under both low- and high-budget settings, PepCABO consistently outperforms various baselines. We observe faster convergence, improved area under the optimization curve, and stronger best-found binding affinities, suggesting improved sample efficiency under experimentally constrained scenarios.\n\nCode availabilityThe source code is available at https://github.com/mohsen-g/PepCABO",
+    "author_corresponding": "Mohsen Ghane",
+    "author_corresponding_institution": "Aalto University",
+    "authors": "Ghane, M.; Korpela, D.; Dumitrescu, A.; Lähdesmäki, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-16",
+    "doi": "10.64898/2026.03.13.711540",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/16/2026.03.13.711540.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "PepCABO: Latent-space Bayesian optimization for peptide-MHC binding using contrastive alignment",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Aalto University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "PepCABO applies latent-space Bayesian optimization with contrastive alignment and a dual VAE to design peptides binding MHC class I alleles, transferring…",
+  "title": "PepCABO: Latent-space Bayesian optimization for peptide-MHC binding using contrastive alignment",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.13.711540"
+}

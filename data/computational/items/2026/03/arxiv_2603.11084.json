@@ -1,0 +1,33 @@
+{
+  "abstract": "Agent-based models (ABMs) are widely used to estimate causal treatment effects via paired counterfactual simulation. A standard variance reduction technique is common random numbers (CRNs), which couples replicates across intervention scenarios by sharing the same random inputs. In practice, CRNs are implemented by reusing the same base seed, but this relies on a critical assumption: that the same draw index corresponds to the same modeled event across scenarios. Stateful pseudorandom number generators (PRNGs) violate this assumption whenever interventions alter the simulation's execution path, because any change in control flow shifts the draw index used for all downstream events. We argue that this execution-path-dependent draw indexing is not only a variance-reduction nuisance, but represents a fundamental mismatch between the scientific causal structure ABMs are intended to encode and the program-level causal structure induced by stateful PRNG implementations. Formalizing this through the lens of structural causal models (SCMs), we show that standard PRNG practices yield causally incoherent paired counterfactual comparisons even when the mechanistic specification is otherwise sound. We show that a remedy is to combine counter-based random number generators (e.g., Philox/Threefry) with event identifiers. This decouples random number generation from simulation execution order by making random draws explicit functions of the particular modeled event that called them, restoring the stable event-indexed exogenous structure assumed by SCMs.",
+  "authors": [
+    "Vince Buffalo",
+    "Carl A. B. Pearson",
+    "Daniel Klein"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-11",
+  "id": "arxiv:2603.11084",
+  "metadata": {
+    "arxiv_primary_category": "stat.ME",
+    "categories": [
+      "stat.ME",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.11084v1</ns0:id>\n    <ns0:title>Realizing Common Random Numbers: Event-Keyed Hashing for Causally Valid Stochastic Models</ns0:title>\n    <ns0:updated>2026-03-11T03:04:47Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.11084v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.11084v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Agent-based models (ABMs) are widely used to estimate causal treatment effects via paired counterfactual simulation. A standard variance reduction technique is common random numbers (CRNs), which couples replicates across intervention scenarios by sharing the same random inputs. In practice, CRNs are implemented by reusing the same base seed, but this relies on a critical assumption: that the same draw index corresponds to the same modeled event across scenarios. Stateful pseudorandom number generators (PRNGs) violate this assumption whenever interventions alter the simulation's execution path, because any change in control flow shifts the draw index used for all downstream events. We argue that this execution-path-dependent draw indexing is not only a variance-reduction nuisance, but represents a fundamental mismatch between the scientific causal structure ABMs are intended to encode and the program-level causal structure induced by stateful PRNG implementations. Formalizing this through the lens of structural causal models (SCMs), we show that standard PRNG practices yield causally incoherent paired counterfactual comparisons even when the mechanistic specification is otherwise sound. We show that a remedy is to combine counter-based random number generators (e.g., Philox/Threefry) with event identifiers. This decouples random number generation from simulation execution order by making random draws explicit functions of the particular modeled event that called them, restoring the stable event-indexed exogenous structure assumed by SCMs.</ns0:summary>\n    <ns0:category term=\"stat.ME\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-11T03:04:47Z</ns0:published>\n    <ns1:primary_category term=\"stat.ME\" />\n    <ns0:author>\n      <ns0:name>Vince Buffalo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Carl A. B. Pearson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Daniel Klein</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-11",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Argues stateful PRNGs break common random numbers in agent-based causal simulations; proposes counter-based RNGs keyed by event IDs to restore valid paired…",
+  "title": "Realizing Common Random Numbers: Event-Keyed Hashing for Causally Valid Stochastic Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.11084v1"
+}

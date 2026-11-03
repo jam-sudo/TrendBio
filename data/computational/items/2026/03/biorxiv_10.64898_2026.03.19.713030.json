@@ -1,0 +1,44 @@
+{
+  "abstract": "Querying the RDF Portal knowledge graph maintained by DBCLS--which aggregates approximately 60 life-science databases--requires proficiency in both SPARQL and database-specific RDF schemas, placing this resource beyond the reach of most researchers. Large Language Models (LLMs) can, in principle, translate natural-language questions into executable SPARQL, but without schema-level context, they frequently fabricate non-existent predicates or fail to resolve entity names to database-specific identifiers. We present TogoMCP, a system that recasts the LLM as a protocol-driven inference engine orchestrating specialized tools via the Model Context Protocol (MCP). Two mechanisms are essential to its design: (i) the MIE (Metadata-Interoperability-Exchange) file, a concise YAML document that dynamically supplies the LLM with each target databases structural and semantic context at query time; and (ii) a two-stage workflow separating entity resolution via external REST APIs from schema-guided SPARQL generation. On a benchmark of 50 biologically grounded questions spanning five types and 23 databases, TogoMCP achieved a large improvement over an unaided baseline (Cohens d = 1.82, Wilcoxon p < 0.001), with win rates exceeding 80% for question types with precise, verifiable answers. An ablation study shows that all component configurations deliver significant improvements, with MIE schema files providing the largest marginal contribution on mean per-question score ({Delta} = +0.50 relative to a no-MIE condition, two-sided Wilcoxon p = 0.067; 90% bootstrap CI [+0.04, +0.94] excludes zero); a one-line instruction to load the relevant MIE file recovers the same mean improvement as a full procedural protocol, while the protocol additionally reduces downside risk (loss rate 1.6% vs. 4.8%, Fisher p = 0.036). These results suggest a general design principle: concise, dynamically delivered schema context is more valuable than complex orchestration logic for mean-score performance, while procedural guidance plays a complementary role in narrowing variance.\n\nDatabase URL: https://togomcp.rdfportal.org/",
+  "authors": [
+    "Kinjo, A. R.",
+    "Yamamoto, Y.",
+    "Bustamante-Larriet, S.",
+    "Labra-Gayo, J. E.",
+    "Fujisawa, T."
+  ],
+  "doi": "10.64898/2026.03.19.713030",
+  "first_seen": "2026-03-23",
+  "id": "biorxiv:10.64898/2026.03.19.713030",
+  "metadata": {
+    "abstract": "Querying the RDF Portal knowledge graph maintained by DBCLS--which aggregates approximately 60 life-science databases--requires proficiency in both SPARQL and database-specific RDF schemas, placing this resource beyond the reach of most researchers. Large Language Models (LLMs) can, in principle, translate natural-language questions into executable SPARQL, but without schema-level context, they frequently fabricate non-existent predicates or fail to resolve entity names to database-specific identifiers. We present TogoMCP, a system that recasts the LLM as a protocol-driven inference engine orchestrating specialized tools via the Model Context Protocol (MCP). Two mechanisms are essential to its design: (i) the MIE (Metadata-Interoperability-Exchange) file, a concise YAML document that dynamically supplies the LLM with each target databases structural and semantic context at query time; and (ii) a two-stage workflow separating entity resolution via external REST APIs from schema-guided SPARQL generation. On a benchmark of 50 biologically grounded questions spanning five types and 23 databases, TogoMCP achieved a large improvement over an unaided baseline (Cohens d = 1.82, Wilcoxon p < 0.001), with win rates exceeding 80% for question types with precise, verifiable answers. An ablation study shows that all component configurations deliver significant improvements, with MIE schema files providing the largest marginal contribution on mean per-question score ({Delta} = +0.50 relative to a no-MIE condition, two-sided Wilcoxon p = 0.067; 90% bootstrap CI [+0.04, +0.94] excludes zero); a one-line instruction to load the relevant MIE file recovers the same mean improvement as a full procedural protocol, while the protocol additionally reduces downside risk (loss rate 1.6% vs. 4.8%, Fisher p = 0.036). These results suggest a general design principle: concise, dynamically delivered schema context is more valuable than complex orchestration logic for mean-score performance, while procedural guidance plays a complementary role in narrowing variance.\n\nDatabase URL: https://togomcp.rdfportal.org/",
+    "author_corresponding": "Yasunori Yamamoto",
+    "author_corresponding_institution": "Database Center for Life Science, Joint Support-Center for Data Science Research, Research Organization of Information and Systems",
+    "authors": "Kinjo, A. R.; Yamamoto, Y.; Bustamante-Larriet, S.; Labra-Gayo, J. E.; Fujisawa, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-23",
+    "doi": "10.64898/2026.03.19.713030",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/23/2026.03.19.713030.source.xml",
+    "license": "cc_by",
+    "published": "10.1093/database/baag042",
+    "server": "bioRxiv",
+    "title": "TogoMCP: Natural Language Querying of Life-Science Knowledge Graphs via Schema-Guided LLMs and the Model Context Protocol",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Database Center for Life Science, Joint Support-Center for Data Science Research, Research Organization of Information and Systems",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-23",
+  "published_doi": "10.1093/database/baag042",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "TogoMCP uses an LLM orchestrating MCP tools with per-database MIE schema files and two-stage entity resolution to query DBCLS RDF Portal knowledge graphs;…",
+  "title": "TogoMCP: Natural Language Querying of Life-Science Knowledge Graphs via Schema-Guided LLMs and the Model Context Protocol",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.19.713030"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Antimicrobial resistance (AMR) threatens antibiotic effectiveness, but quantitatively evaluating stewardship strategies under partial observability and delayed feedback remains difficult in real-world data. We developed abx_amr_simulator, a Gymnasium-compatible simulation framework, and used it to benchmark reinforcement learning (RL) prescribing policies against value-iteration (VI) benchmarks and fixed prescribing rules across four experiment sets of increasing complexity, with varying levels of information degradation.\n\nAcross scenarios, temporal abstraction was consistently important: flat PPO was competitive only in simpler settings, whereas hierarchical PPO was generally needed when prescribing decisions had delayed, coupled effects on future resistance. We found that adding recurrent memory did not uniformly improve performance; its value was context-dependent. In some degraded-information settings, memoryless policies performed better by adopting conservative update-responsive behavior, while in more complex, multi-signal partially observable settings, recurrent memory provided modest advantages.\n\nPatient heterogeneity and risk-stratification signals were major determinants of policy quality. When agents could differentiate higher-from lower-risk patients, they more reliably learned selective treatment behavior, stabilized AMR, and improved clinical outcomes. Exaggerated risk stratification modestly outperformed accurate stratification, while compressed stratification produced moderate degradation. In more realistic settings combining noisy patient observations, delayed AMR surveillance, and multi-patient decisions, hierarchical agents outperformed fixed prescribing rules across both stewardship and clinical metrics, converging to conservative low-AMR equilibria with reduced cross-seed variance.\n\nAcross experiments, results support the utility of hierarchical RL as a best-case policy-analysis tool for stewardship under uncertainty, while also highlighting that performance estimates are sensitive to observation structure and training horizon design. The framework provides a controlled environment for hypothesis generation and for stress-testing prescribing strategies before translation to policy-relevant settings.",
+  "authors": [
+    "Lee, J.",
+    "Blumberg, S."
+  ],
+  "doi": "10.64898/2026.03.12.711398",
+  "first_seen": "2026-03-16",
+  "id": "biorxiv:10.64898/2026.03.12.711398",
+  "metadata": {
+    "abstract": "Antimicrobial resistance (AMR) threatens antibiotic effectiveness, but quantitatively evaluating stewardship strategies under partial observability and delayed feedback remains difficult in real-world data. We developed abx_amr_simulator, a Gymnasium-compatible simulation framework, and used it to benchmark reinforcement learning (RL) prescribing policies against value-iteration (VI) benchmarks and fixed prescribing rules across four experiment sets of increasing complexity, with varying levels of information degradation.\n\nAcross scenarios, temporal abstraction was consistently important: flat PPO was competitive only in simpler settings, whereas hierarchical PPO was generally needed when prescribing decisions had delayed, coupled effects on future resistance. We found that adding recurrent memory did not uniformly improve performance; its value was context-dependent. In some degraded-information settings, memoryless policies performed better by adopting conservative update-responsive behavior, while in more complex, multi-signal partially observable settings, recurrent memory provided modest advantages.\n\nPatient heterogeneity and risk-stratification signals were major determinants of policy quality. When agents could differentiate higher-from lower-risk patients, they more reliably learned selective treatment behavior, stabilized AMR, and improved clinical outcomes. Exaggerated risk stratification modestly outperformed accurate stratification, while compressed stratification produced moderate degradation. In more realistic settings combining noisy patient observations, delayed AMR surveillance, and multi-patient decisions, hierarchical agents outperformed fixed prescribing rules across both stewardship and clinical metrics, converging to conservative low-AMR equilibria with reduced cross-seed variance.\n\nAcross experiments, results support the utility of hierarchical RL as a best-case policy-analysis tool for stewardship under uncertainty, while also highlighting that performance estimates are sensitive to observation structure and training horizon design. The framework provides a controlled environment for hypothesis generation and for stress-testing prescribing strategies before translation to policy-relevant settings.",
+    "author_corresponding": "Joyce Lee",
+    "author_corresponding_institution": "UCSF",
+    "authors": "Lee, J.; Blumberg, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-16",
+    "doi": "10.64898/2026.03.12.711398",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/16/2026.03.12.711398.source.xml",
+    "license": "cc_by",
+    "published": "10.1016/j.softx.2026.102872",
+    "server": "bioRxiv",
+    "title": "Reinforcement Learning for Antibiotic Stewardship: Optimizing Prescribing Policies Under Antimicrobial Resistance Dynamics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "UCSF",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-16",
+  "published_doi": "10.1016/j.softx.2026.102872",
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces abx_amr_simulator, a Gymnasium-compatible framework benchmarking hierarchical and flat PPO against value iteration and fixed rules for antibiotic…",
+  "title": "Reinforcement Learning for Antibiotic Stewardship: Optimizing Prescribing Policies Under Antimicrobial Resistance Dynamics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.12.711398"
+}

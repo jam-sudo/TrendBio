@@ -1,0 +1,35 @@
+{
+  "abstract": "Understanding mouse behavior at scale is a foundational problem in neuroscience, with two core tasks: classifying frames into known behaviors and segmenting recordings into recurring patterns without labels. Pose-based methods are the standard approach but face fundamental limitations: pose coordinates capture only skeletal information, discard environmental context, and degrade under frequent occlusions in social scenarios. Mouse videos can provide the visual context that pose lacks, yet not all frames benefit equally, and adding visual features uniformly to every frame is suboptimal. We find that a pose-based motion encoder, trained with auxiliary supervision from videos, can identify where it struggles: with a discrete representation, the encoder learns a codebook of recurring patterns, and frames whose motion does not fit this codebook produce large quantization residuals. We show that these high-residual frames are where visual context tends to help most: residual-guided frame selection consistently outperforms uniform selection across budgets, and matches or exceeds dense visual processing in most settings. We therefore propose ResiFuse, a framework that pretrains a motion encoder on pose with an auxiliary cross-modal loss and integrates vision context only on high-residual frames at fine-tuning time. We evaluate on three mouse behavior datasets and show improvements over pose- and video-based baselines on most tasks, with the largest gains on the most socially complex dataset.",
+  "authors": [
+    "Weihan Li",
+    "Jingyang Ke",
+    "Qinheng Pu",
+    "Yule Wang",
+    "Chengrui Li",
+    "Anqi Wu"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-07",
+  "id": "arxiv:2603.07279",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.07279v2</ns0:id>\n    <ns0:title>Learning When Visual Context Matters for Mouse Behavior Analysis</ns0:title>\n    <ns0:updated>2026-10-12T01:58:33Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.07279v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.07279v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Understanding mouse behavior at scale is a foundational problem in neuroscience, with two core tasks: classifying frames into known behaviors and segmenting recordings into recurring patterns without labels. Pose-based methods are the standard approach but face fundamental limitations: pose coordinates capture only skeletal information, discard environmental context, and degrade under frequent occlusions in social scenarios. Mouse videos can provide the visual context that pose lacks, yet not all frames benefit equally, and adding visual features uniformly to every frame is suboptimal. We find that a pose-based motion encoder, trained with auxiliary supervision from videos, can identify where it struggles: with a discrete representation, the encoder learns a codebook of recurring patterns, and frames whose motion does not fit this codebook produce large quantization residuals. We show that these high-residual frames are where visual context tends to help most: residual-guided frame selection consistently outperforms uniform selection across budgets, and matches or exceeds dense visual processing in most settings. We therefore propose ResiFuse, a framework that pretrains a motion encoder on pose with an auxiliary cross-modal loss and integrates vision context only on high-residual frames at fine-tuning time. We evaluate on three mouse behavior datasets and show improvements over pose- and video-based baselines on most tasks, with the largest gains on the most socially complex dataset.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-07T16:43:35Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Weihan Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingyang Ke</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qinheng Pu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yule Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chengrui Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anqi Wu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "ResiFuse adds visual context only to high-residual frames from a pose-based motion codebook, improving mouse behavior classification and segmentation over pose…",
+  "title": "Learning When Visual Context Matters for Mouse Behavior Analysis",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.07279v2"
+}

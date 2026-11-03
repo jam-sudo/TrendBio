@@ -1,0 +1,32 @@
+{
+  "abstract": "Foundation models trained on DNA sequences have achieved strong performance across biological tasks including variant effect prediction and genome design. These models rely on massive public genomic datasets comprising trillions of nucleotide tokens. Unlike natural language, DNA sequences lack semantic transparency, making corrupted or adversarially crafted entries difficult to detect during data curation. We present the first systematic study of training data poisoning in genomic language models, targeting both pre-training and fine-tuning stages. At pre-training, using Evo 2 and GENERator architectures, we show that less than 1% adversarially crafted sequences in the training corpus can selectively degrade generative performance on targeted genomic contexts while leaving unrelated sequences unaffected. We evaluate three scenarios: corruption of TATA-box promoter motifs, disruption of CTCF binding sites, and insertion of synthetic sequences absent from all training genomes. At fine-tuning, we demonstrate two additional attacks. First, poisoning a subset of CTCF sites in a ClinVar-derived corpus installs a conditional backdoor in a LoRA-adapted model that activates almost exclusively when the trigger sequence is present. Second, using frozen Evo 2 7B embeddings, targeted label corruption of downstream training data selectively compromises a clinically relevant variant classification task, demonstrated on BRCA1 variant effect prediction. These results show genomic foundation models are susceptible to targeted data poisoning with minimal footprint. We urge the field to adopt data provenance tracking, integrity verification, and adversarial robustness evaluation as standard components of the genomic model development pipeline.",
+  "authors": [
+    "Charalampos Koilakos",
+    "Ioannis Mouratidis",
+    "Ilias Georgakopoulos-Soares"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-29",
+  "id": "arxiv:2603.27465",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.27465v2</ns0:id>\n    <ns0:title>Poisoning the Genome: Targeted Backdoor Attacks on DNA Foundation Models</ns0:title>\n    <ns0:updated>2026-06-17T15:05:21Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.27465v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.27465v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Foundation models trained on DNA sequences have achieved strong performance across biological tasks including variant effect prediction and genome design. These models rely on massive public genomic datasets comprising trillions of nucleotide tokens. Unlike natural language, DNA sequences lack semantic transparency, making corrupted or adversarially crafted entries difficult to detect during data curation. We present the first systematic study of training data poisoning in genomic language models, targeting both pre-training and fine-tuning stages. At pre-training, using Evo 2 and GENERator architectures, we show that less than 1% adversarially crafted sequences in the training corpus can selectively degrade generative performance on targeted genomic contexts while leaving unrelated sequences unaffected. We evaluate three scenarios: corruption of TATA-box promoter motifs, disruption of CTCF binding sites, and insertion of synthetic sequences absent from all training genomes. At fine-tuning, we demonstrate two additional attacks. First, poisoning a subset of CTCF sites in a ClinVar-derived corpus installs a conditional backdoor in a LoRA-adapted model that activates almost exclusively when the trigger sequence is present. Second, using frozen Evo 2 7B embeddings, targeted label corruption of downstream training data selectively compromises a clinically relevant variant classification task, demonstrated on BRCA1 variant effect prediction. These results show genomic foundation models are susceptible to targeted data poisoning with minimal footprint. We urge the field to adopt data provenance tracking, integrity verification, and adversarial robustness evaluation as standard components of the genomic model development pipeline.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-29T00:59:10Z</ns0:published>\n    <ns1:comment>23 pages, double column format</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Charalampos Koilakos</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ioannis Mouratidis</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ilias Georgakopoulos-Soares</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Shows that <1% adversarially crafted sequences can poison DNA foundation models (Evo 2, GENERator), enabling targeted degradation and backdoors in genomic LMs.",
+  "title": "Poisoning the Genome: Targeted Backdoor Attacks on DNA Foundation Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.27465v2"
+}

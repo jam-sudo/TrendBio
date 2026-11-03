@@ -1,0 +1,31 @@
+{
+  "abstract": "Dissipative cognitive architectures maintain computation through continuous energy expenditure, where units that exhaust their energy are stochastically replaced with fresh random state. This creates a fundamental challenge: how can persistent, context-specific memory survive when all learnable state is periodically destroyed? Existing memory mechanisms -- including elastic weight consolidation, synaptic intelligence, and surprise-driven gating -- rely on gradient computation and are inapplicable to systems that do not perform it. We introduce Deep Memory (DM), a backpropagation-free persistent memory mechanism operating through a triple-loop consolidation cycle: (1) recording of expert-specific content centroids, (2) seeding of replaced units with stored representations, and (3) stabilization through continuous re-entry. Discrete expert routing via Mixture-of-Experts (MoE) gating is required, in the regimes tested, to prevent the centroid convergence that would render stored memories identical. We derive a Foster-Lyapunov drift bound for the full triple loop, showing that seeding rescales the turnover noise floor. Across $1{,}007$ simulation runs over thirteen blocks: (i) removing stable context-expert binding removes specialization ($\\mathrm{MI}=1.10$ vs. $0.001$; $n=91$); (ii) DM achieves $R=0.984$ vs. $0.385$ without memory ($n=16$); (iii) continuous seeding reconstructs representations after interference ($R_\\mathrm{recon}=0.978$; one-shot fails; $n=30$); (iv) the mechanism operates within a characterized $(K,p)$ envelope ($n=350$); (v) recording $\\times$ seeding is the minimal critical dyad ($n=40$); (vi) associative and reservoir baselines (Hopfield, ESN) are compared under matched turnover ($n=370$). DM is thus a falsifiable, bounded mechanism for persistent memory in backpropagation-free cognitive systems, with functional parallels to hippocampal consolidation.",
+  "authors": [
+    "Jianwei Lou"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-28",
+  "id": "arxiv:2603.27188",
+  "metadata": {
+    "arxiv_primary_category": "cs.NE",
+    "categories": [
+      "cs.NE",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.27188v3</ns0:id>\n    <ns0:title>Persistent Memory Through Triple-Loop Consolidation Under Stochastic Unit Turnover</ns0:title>\n    <ns0:updated>2026-09-24T08:25:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.27188v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.27188v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Dissipative cognitive architectures maintain computation through continuous energy expenditure, where units that exhaust their energy are stochastically replaced with fresh random state. This creates a fundamental challenge: how can persistent, context-specific memory survive when all learnable state is periodically destroyed? Existing memory mechanisms -- including elastic weight consolidation, synaptic intelligence, and surprise-driven gating -- rely on gradient computation and are inapplicable to systems that do not perform it. We introduce Deep Memory (DM), a backpropagation-free persistent memory mechanism operating through a triple-loop consolidation cycle: (1) recording of expert-specific content centroids, (2) seeding of replaced units with stored representations, and (3) stabilization through continuous re-entry. Discrete expert routing via Mixture-of-Experts (MoE) gating is required, in the regimes tested, to prevent the centroid convergence that would render stored memories identical. We derive a Foster-Lyapunov drift bound for the full triple loop, showing that seeding rescales the turnover noise floor. Across $1{,}007$ simulation runs over thirteen blocks: (i) removing stable context-expert binding removes specialization ($\\mathrm{MI}=1.10$ vs. $0.001$; $n=91$); (ii) DM achieves $R=0.984$ vs. $0.385$ without memory ($n=16$); (iii) continuous seeding reconstructs representations after interference ($R_\\mathrm{recon}=0.978$; one-shot fails; $n=30$); (iv) the mechanism operates within a characterized $(K,p)$ envelope ($n=350$); (v) recording $\\times$ seeding is the minimal critical dyad ($n=40$); (vi) associative and reservoir baselines (Hopfield, ESN) are compared under matched turnover ($n=370$). DM is thus a falsifiable, bounded mechanism for persistent memory in backpropagation-free cognitive systems, with functional parallels to hippocampal consolidation.</ns0:summary>\n    <ns0:category term=\"cs.NE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-28T08:29:48Z</ns0:published>\n    <ns1:comment>27 pages, 7 figures, 6 tables. v2 (revised after peer review): title changed; \"non-gradient\" replaced with \"backpropagation-free\" (an EMA update is gradient-equivalent, so the earlier classification was wrong); new Foster-Lyapunov drift bound (Prop. 5); bootstrap 95% CIs added; \"phase diagram\" corrected to \"regime map\"; run count corrected to 1,007</ns1:comment>\n    <ns1:primary_category term=\"cs.NE\" />\n    <ns0:author>\n      <ns0:name>Jianwei Lou</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-28",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Backprop-free Deep Memory uses triple-loop consolidation and MoE routing for persistent memory under stochastic unit turnover (simulations).",
+  "title": "Persistent Memory Through Triple-Loop Consolidation Under Stochastic Unit Turnover",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.27188v3"
+}

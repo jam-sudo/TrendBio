@@ -1,0 +1,32 @@
+{
+  "abstract": "Functional evidence is essential for clinical interpretation of genomic variants, but identifying relevant studies and translating experimental results into structured evidence remains labor intensive. We developed a benchmark based on ClinGen curated annotations to evaluate two large language models (LLMs), a non reasoning model (gpt-4o-mini) and a reasoning model (o4-mini), on tasks relevant to functional evidence curation: (1) abstract screening to determine whether a study reports functional experiments directly testing specific variants, and (2) full text evidence extraction and classification from matched variant-paper pairs, including interpretation of evidence direction and generation of evidence summaries. Starting from ClinGen variants annotated with functional evidence, we processed curator comments with an LLM to extract PubMed identifiers, evidence labels, and narrative, and retrieved titles, abstracts, and open access PDFs to construct variant-paper pairs. In abstract screening, both models achieved high recall (0.88-0.90) with moderate specificity (0.59-0.65). For full text evidence classification under an explicit variant matching gate, o4-mini achieved 96% accuracy and higher specificity (0.83 vs. 0.37) while maintaining high F1 (0.98 vs. 0.96) compared with gpt-4o-mini. We also used an LLM-as-judge protocol to compare model generated evidence summaries with expert curator comments. Finally, we developed AcmGENTIC, an end to end pipeline that expands variant identifiers, retrieves literature via LitVar2, filters abstracts with LLMs, acquires PDFs, performs multimodal evidence extraction, and generates evidence reports for curator review, with optional agentic parsing of figures and tables. Together, this benchmark and pipeline provide a practical framework for scaling functional evidence curation with human in the loop LLM assistance.",
+  "authors": [
+    "Ali Saadat",
+    "Jacques Fellay"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-31",
+  "id": "arxiv:2604.00075",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.00075v1</ns0:id>\n    <ns0:title>Large Language Models for Variant-Centric Functional Evidence Mining</ns0:title>\n    <ns0:updated>2026-03-31T15:08:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.00075v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.00075v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Functional evidence is essential for clinical interpretation of genomic variants, but identifying relevant studies and translating experimental results into structured evidence remains labor intensive. We developed a benchmark based on ClinGen curated annotations to evaluate two large language models (LLMs), a non reasoning model (gpt-4o-mini) and a reasoning model (o4-mini), on tasks relevant to functional evidence curation: (1) abstract screening to determine whether a study reports functional experiments directly testing specific variants, and (2) full text evidence extraction and classification from matched variant-paper pairs, including interpretation of evidence direction and generation of evidence summaries. Starting from ClinGen variants annotated with functional evidence, we processed curator comments with an LLM to extract PubMed identifiers, evidence labels, and narrative, and retrieved titles, abstracts, and open access PDFs to construct variant-paper pairs. In abstract screening, both models achieved high recall (0.88-0.90) with moderate specificity (0.59-0.65). For full text evidence classification under an explicit variant matching gate, o4-mini achieved 96% accuracy and higher specificity (0.83 vs. 0.37) while maintaining high F1 (0.98 vs. 0.96) compared with gpt-4o-mini. We also used an LLM-as-judge protocol to compare model generated evidence summaries with expert curator comments. Finally, we developed AcmGENTIC, an end to end pipeline that expands variant identifiers, retrieves literature via LitVar2, filters abstracts with LLMs, acquires PDFs, performs multimodal evidence extraction, and generates evidence reports for curator review, with optional agentic parsing of figures and tables. Together, this benchmark and pipeline provide a practical framework for scaling functional evidence curation with human in the loop LLM assistance.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-31T15:08:37Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Ali Saadat</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jacques Fellay</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-31",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Benchmarks two LLMs (gpt-4o-mini, o4-mini) on ClinGen-based variant functional evidence screening and extraction, and presents AcmGENTIC, an end-to-end…",
+  "title": "Large Language Models for Variant-Centric Functional Evidence Mining",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.00075v1"
+}

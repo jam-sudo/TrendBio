@@ -1,0 +1,41 @@
+{
+  "abstract": "Distance-based structural phylogenies summarise relationships between proteins using pairwise structural similarity scores. Unlike character-based methods, however, they lack a natural analogue of the non-parametric bootstrap. Because distances derived from continuous, high-dimensional folds provide no discrete sites to resample, rigorous support estimation would ideally rely on conformational ensembles from Molecular Dynamics or Monte Carlo simulations, which is computationally prohibitive at scale. A practical alternative is parametric bootstrapping in distance space, but this introduces a calibration problem: without an objective estimate of the signal-to-noise ratio, the perturbation magnitude cannot be chosen in a principled way. Here, we introduce the Duplicate Monophyly Criterion (DMC), an empirical strategy for calibrating distance-matrix perturbations using synthetic taxon duplicates as internal controls. We expand the observed distance matrix with virtual copies of each taxon, assign each original-duplicate pair a small baseline distance, and apply a floor-augmented heteroscedastic noise model directly in distance space. The central hypothesis is that loss of duplicate monophyly (i.e., failure of taxon-duplicate pairs to form two-tip cherries) marks a regime in which perturbations overwhelm intrinsic phylogenetic signal, thereby defining a conservative operating range for stability-based (bootstrap-like) support estimation. As a practical use case, we select a dataset-specific perturbation level{lambda} * as the largest noise level that retains a target fraction of duplicate pairings (e.g., [&ge;] 90%), and report split frequencies across replicate trees generated at{lambda} * as support values. We validate the framework in a geometric toy model where evolving two-dimensional shapes provide a known ground-truth topology, and in an empirical globin benchmark using distances derived from 1 - TM-score. Across both settings, duplicate monophyly tracks the erosion of tree structure under distance-matrix noise, establishing an internally calibrated \"resolution limit\" for assigning confidence in distance-based structural phylogenetics.",
+  "authors": [
+    "Malik, A. J.",
+    "Ascher, D."
+  ],
+  "doi": "10.64898/2026.03.25.713827",
+  "first_seen": "2026-03-25",
+  "id": "biorxiv:10.64898/2026.03.25.713827",
+  "metadata": {
+    "abstract": "Distance-based structural phylogenies summarise relationships between proteins using pairwise structural similarity scores. Unlike character-based methods, however, they lack a natural analogue of the non-parametric bootstrap. Because distances derived from continuous, high-dimensional folds provide no discrete sites to resample, rigorous support estimation would ideally rely on conformational ensembles from Molecular Dynamics or Monte Carlo simulations, which is computationally prohibitive at scale. A practical alternative is parametric bootstrapping in distance space, but this introduces a calibration problem: without an objective estimate of the signal-to-noise ratio, the perturbation magnitude cannot be chosen in a principled way. Here, we introduce the Duplicate Monophyly Criterion (DMC), an empirical strategy for calibrating distance-matrix perturbations using synthetic taxon duplicates as internal controls. We expand the observed distance matrix with virtual copies of each taxon, assign each original-duplicate pair a small baseline distance, and apply a floor-augmented heteroscedastic noise model directly in distance space. The central hypothesis is that loss of duplicate monophyly (i.e., failure of taxon-duplicate pairs to form two-tip cherries) marks a regime in which perturbations overwhelm intrinsic phylogenetic signal, thereby defining a conservative operating range for stability-based (bootstrap-like) support estimation. As a practical use case, we select a dataset-specific perturbation level{lambda} * as the largest noise level that retains a target fraction of duplicate pairings (e.g., [&ge;] 90%), and report split frequencies across replicate trees generated at{lambda} * as support values. We validate the framework in a geometric toy model where evolving two-dimensional shapes provide a known ground-truth topology, and in an empirical globin benchmark using distances derived from 1 - TM-score. Across both settings, duplicate monophyly tracks the erosion of tree structure under distance-matrix noise, establishing an internally calibrated \"resolution limit\" for assigning confidence in distance-based structural phylogenetics.",
+    "author_corresponding": "Ashar J Malik",
+    "author_corresponding_institution": "School of Chemistry & Molecular Biosciences, The University of Queensland",
+    "authors": "Malik, A. J.; Ascher, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-25",
+    "doi": "10.64898/2026.03.25.713827",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/25/2026.03.25.713827.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "The Duplicate Monophyly Criterion: An Empirical Approach to Bootstrapping Distance-Based Structural Phylogenies",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "School of Chemistry & Molecular Biosciences, The University of Queensland",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-03-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces the Duplicate Monophyly Criterion, using synthetic taxon duplicates to calibrate distance-matrix noise for bootstrap-like support in distance-based…",
+  "title": "The Duplicate Monophyly Criterion: An Empirical Approach to Bootstrapping Distance-Based Structural Phylogenies",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.25.713827"
+}

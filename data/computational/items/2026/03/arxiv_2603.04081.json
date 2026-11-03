@@ -1,0 +1,38 @@
+{
+  "abstract": "Background and objective: Cell-level pathological image analysis requires working with extremely small image patches (40x40 pixels), far below standard ImageNet resolutions. It remains unclear whether modern deep learning architectures and foundation models can learn robust and scalable representations under this constraint. We systematically evaluated architectural suitability and data-scale effects for small-patch cell classification. Methods: We analyzed 303 colorectal cancer specimens with CD103/CD8 immunostaining, generating 185,432 annotated cell images. Eight task-specific architectures were trained from scratch at multiple data scales (FlagLimit: 256--16,384 samples per class), and three foundation models were evaluated via linear probing and fine-tuning after resizing inputs to 224x224 pixels. Robustness to blur was assessed using pre- and post-resize Gaussian perturbations. Results: Task-specific models improved consistently with increasing data scale, whereas foundation models saturated at moderate sample sizes. A Vision Transformer optimized for small patches (CustomViT) achieved the highest accuracy, outperforming all foundation models with substantially lower inference cost. Blur robustness was comparable across architectures, with no qualitative advantage observed for foundation models. Conclusion: For cell-level classification under extreme spatial constraints, task-specific architectures are more effective and efficient than foundation models once sufficient training data are available. Higher clean accuracy does not imply superior robustness, and large pre-trained models offer limited benefit in the small-patch regime.",
+  "authors": [
+    "Hiroki Kagiyama",
+    "Toru Nagasaka",
+    "Yukari Adachi",
+    "Takaaki Tachibana",
+    "Ryota Ito",
+    "Mitsugu Fujita",
+    "Kimihiro Yamashita",
+    "Yoshihiro Kakeji"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-04",
+  "id": "arxiv:2603.04081",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.04081v1</ns0:id>\n    <ns0:title>Revisiting the Role of Foundation Models in Cell-Level Histopathological Image Analysis under Small-Patch Constraints -- Effects of Training Data Scale and Blur Perturbations on CNNs and Vision Transformers</ns0:title>\n    <ns0:updated>2026-03-04T13:52:19Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.04081v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.04081v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Background and objective: Cell-level pathological image analysis requires working with extremely small image patches (40x40 pixels), far below standard ImageNet resolutions. It remains unclear whether modern deep learning architectures and foundation models can learn robust and scalable representations under this constraint. We systematically evaluated architectural suitability and data-scale effects for small-patch cell classification. Methods: We analyzed 303 colorectal cancer specimens with CD103/CD8 immunostaining, generating 185,432 annotated cell images. Eight task-specific architectures were trained from scratch at multiple data scales (FlagLimit: 256--16,384 samples per class), and three foundation models were evaluated via linear probing and fine-tuning after resizing inputs to 224x224 pixels. Robustness to blur was assessed using pre- and post-resize Gaussian perturbations. Results: Task-specific models improved consistently with increasing data scale, whereas foundation models saturated at moderate sample sizes. A Vision Transformer optimized for small patches (CustomViT) achieved the highest accuracy, outperforming all foundation models with substantially lower inference cost. Blur robustness was comparable across architectures, with no qualitative advantage observed for foundation models. Conclusion: For cell-level classification under extreme spatial constraints, task-specific architectures are more effective and efficient than foundation models once sufficient training data are available. Higher clean accuracy does not imply superior robustness, and large pre-trained models offer limited benefit in the small-patch regime.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-04T13:52:19Z</ns0:published>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Hiroki Kagiyama</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Toru Nagasaka</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yukari Adachi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Takaaki Tachibana</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ryota Ito</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mitsugu Fujita</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kimihiro Yamashita</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yoshihiro Kakeji</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "arxiv",
+  "summary": "Benchmarks CNNs and ViTs vs. foundation models for 40x40 cell-level histopathology classification on 185k CD103/CD8 cell images; task-specific models scale…",
+  "title": "Revisiting the Role of Foundation Models in Cell-Level Histopathological Image Analysis under Small-Patch Constraints -- Effects of Training Data Scale and Blur Perturbations on CNNs and Vision Transformers",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.04081v1"
+}

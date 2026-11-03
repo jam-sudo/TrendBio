@@ -1,0 +1,42 @@
+{
+  "abstract": "Background. STAR is the aligner underlying most transcriptomics processing, and is used inside Cell Ranger. However, the surrounding steps - adapter trimming, sorting, feature-barcode assignment, probe handling, SLAM-seq analysis, quantification, and quality control - run as separate tools scripted around it. Cell Ranger hides this complexity but is proprietary, restricted to 10x products, and barred by its license from redistribution, so it cannot serve as a shared processing layer. While STARsolo supports scRNA-seq, it lacks the feature-barcode detection needed for Perturb-seq, where short tags such as CRISPR guides or lineage barcodes are read alongside the transcriptome. No open-source tool processes Perturb-seq feature barcodes at production scale, and the only open-source processor for 10x Flex - a probe-based assay for fixed and FFPE tissue that multiplexes several samples in one lane - is a recent standalone k-mer tool. Results. STAR Suite compiles these steps into the STAR codebase to create a drop-in executable for bulk RNA-seq, scRNA-seq, Perturb-seq, 10x Flex, and SLAM-seq. It adds no dependencies beyond OpenSSL's libcrypto, and legacy behavior is preserved. On consortium and public benchmarks it is up to 41-fold faster than Cell Ranger 9.0.1 for Flex (20- to 41-fold from binary CBQ input, 17- to 23-fold from FASTQ) and 3.9- to 6.2-fold faster for scRNA-seq and Perturb-seq, timed on one modest server (24 cores, 128 GiB, local SSD) except for the largest dataset, which ran on a cloud instance limited to the same size. The concordance to Cell Ranger is high: gene-level Spearman and Pearson 0.98-1.0, cell-level Pearson on per-cell total counts 0.9999-1.0, feature-UMI Pearson 0.999-1.000, Jaccard agreement of the called-cell sets 0.97-0.995, and 99-100% CRISPR-call agreement. It also needs far less disk: its peak use on the largest Flex dataset is 16.9 GiB, against 1.8 TiB for Cell Ranger. These gains arise from running the steps in one process rather than as separate programs exchanging files, and from four new computational techniques: fast-Hamming, a vectorized exact Hamming-distance search, used for Flex probe matching and optionally for feature barcodes; a disambiguated hash cascade that assigns Flex probes without alignment; a permit-based thread scheduler that interleaves alignment and feature assignment; and variance-based auto-trimming for SLAM-seq conversion calling, which finds the reliable region of each read from how variable the conversion rate is along it. The four modules add 183,606 lines of C/C++ to STAR's 28,228. STAR Suite is the NIH MorPhiC consortium's production processor. The same binary is run by people, by AI agents and by cluster schedulers, and every production run is recorded with its commands, checksums and outputs. It has been built and maintained over eight months and 25 releases under a human-directed, AI-implemented workflow, with its full design and benchmark record public. Conclusions. STAR Suite provides the first production-ready open-source implementation of Perturb-seq feature-barcode processing, and an open end-to-end 10x Flex pipeline matched to Cell Ranger, delivered as a drop-in replacement for the STAR aligner. The design also extends: downstream analysis now done in Python or R packages can be built into the same binary, and further modalities added alongside, as a companion preprint does for ATAC-seq. Source code, workflow recipes, and per-run provenance are released under the MIT license.",
+  "authors": [
+    "Hung, L.-H.",
+    "Yeung, K. Y."
+  ],
+  "doi": "10.64898/2026.03.09.710580",
+  "first_seen": "2026-03-10",
+  "id": "biorxiv:10.64898/2026.03.09.710580",
+  "metadata": {
+    "abstract": "Background. STAR is the aligner underlying most transcriptomics processing, and is used inside Cell Ranger. However, the surrounding steps - adapter trimming, sorting, feature-barcode assignment, probe handling, SLAM-seq analysis, quantification, and quality control - run as separate tools scripted around it. Cell Ranger hides this complexity but is proprietary, restricted to 10x products, and barred by its license from redistribution, so it cannot serve as a shared processing layer. While STARsolo supports scRNA-seq, it lacks the feature-barcode detection needed for Perturb-seq, where short tags such as CRISPR guides or lineage barcodes are read alongside the transcriptome. No open-source tool processes Perturb-seq feature barcodes at production scale, and the only open-source processor for 10x Flex - a probe-based assay for fixed and FFPE tissue that multiplexes several samples in one lane - is a recent standalone k-mer tool. Results. STAR Suite compiles these steps into the STAR codebase to create a drop-in executable for bulk RNA-seq, scRNA-seq, Perturb-seq, 10x Flex, and SLAM-seq. It adds no dependencies beyond OpenSSL's libcrypto, and legacy behavior is preserved. On consortium and public benchmarks it is up to 41-fold faster than Cell Ranger 9.0.1 for Flex (20- to 41-fold from binary CBQ input, 17- to 23-fold from FASTQ) and 3.9- to 6.2-fold faster for scRNA-seq and Perturb-seq, timed on one modest server (24 cores, 128 GiB, local SSD) except for the largest dataset, which ran on a cloud instance limited to the same size. The concordance to Cell Ranger is high: gene-level Spearman and Pearson 0.98-1.0, cell-level Pearson on per-cell total counts 0.9999-1.0, feature-UMI Pearson 0.999-1.000, Jaccard agreement of the called-cell sets 0.97-0.995, and 99-100% CRISPR-call agreement. It also needs far less disk: its peak use on the largest Flex dataset is 16.9 GiB, against 1.8 TiB for Cell Ranger. These gains arise from running the steps in one process rather than as separate programs exchanging files, and from four new computational techniques: fast-Hamming, a vectorized exact Hamming-distance search, used for Flex probe matching and optionally for feature barcodes; a disambiguated hash cascade that assigns Flex probes without alignment; a permit-based thread scheduler that interleaves alignment and feature assignment; and variance-based auto-trimming for SLAM-seq conversion calling, which finds the reliable region of each read from how variable the conversion rate is along it. The four modules add 183,606 lines of C/C++ to STAR's 28,228. STAR Suite is the NIH MorPhiC consortium's production processor. The same binary is run by people, by AI agents and by cluster schedulers, and every production run is recorded with its commands, checksums and outputs. It has been built and maintained over eight months and 25 releases under a human-directed, AI-implemented workflow, with its full design and benchmark record public. Conclusions. STAR Suite provides the first production-ready open-source implementation of Perturb-seq feature-barcode processing, and an open end-to-end 10x Flex pipeline matched to Cell Ranger, delivered as a drop-in replacement for the STAR aligner. The design also extends: downstream analysis now done in Python or R packages can be built into the same binary, and further modalities added alongside, as a companion preprint does for ATAC-seq. Source code, workflow recipes, and per-run provenance are released under the MIT license.",
+    "author_corresponding": "Ling-Hong Hung",
+    "author_corresponding_institution": "University of Washington Tacoma",
+    "authors": "Hung, L.-H.; Yeung, K. Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-10",
+    "doi": "10.64898/2026.03.09.710580",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/10/2026.03.09.710580.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "STAR Suite: Integrating transcriptomics through AI software engineering in the NIH MorPhiC consortium",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Washington Tacoma",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "STAR Suite merges transcriptomics preprocessing steps into one STAR-based binary for bulk, scRNA, Perturb-seq, 10x Flex and SLAM-seq, matching Cell Ranger…",
+  "title": "STAR Suite: Integrating transcriptomics through AI software engineering in the NIH MorPhiC consortium",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.09.710580"
+}

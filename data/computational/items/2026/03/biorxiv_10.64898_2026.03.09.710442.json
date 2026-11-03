@@ -1,0 +1,44 @@
+{
+  "abstract": "BackgroundDetecting copy number variations (CNVs) in circulating tumor DNA (ctDNA) is crucial for the companion diagnosis and resistance monitoring of various solid tumors (e.g., NSCLC, Glioblastoma). However, when tumor-derived DNA fractions are extremely low (often <1%), traditional depth-based methods frequently fail due to non-linear sequencing depth fluctuations and probe-specific capture biases inherent to targeted Next-Generation Sequencing (NGS).\n\nMethodsWe developed CESAR (CNV Estimation with Segmentation and Anchor Recalibration), a computational tool for tumor-only CNV detection in targeted NGS panels. CESAR uses Circular Binary Segmentation (CBS) to re-partition target regions according to relative capture efficiency, then applies a data-driven \"anchor\" selection procedure that, for each target segment, identifies a personalized set of co-varying genomic segments. By selecting the anchor set that minimizes the coefficient of variation (CV) of the anchor-recalibrated depth ratio across a panel of normals, CESAR recalibrates the per-segment baseline and suppresses probe-specific technical noise. Copy-number status is then called from the deviation of the observed ratio against this trained baseline.\n\nResultsUsing standard DNA reference materials, CESAR identified amplifications of MET, ERBB2, and EGFR at low tumor fractions. CESAR resolved focal alterations as subtle as 2.18 copies (a 1.09-fold change relative to the diploid baseline) while reporting no false-positive amplifications in diploid control regions. Applied to a clinical cohort of nine NSCLC ctDNA samples profiled on a 94-gene panel, CESAR successfully separated three MET-amplified samples from six matched negatives, where the standard CNVkit-based pipeline failed to distinguish them. In head-to-head benchmarking on identical data, CESAR reduced technical variance relative to the widely used CNVkit and more reproducibly resolved low-level copy-number gains, particularly in the depth-heterogeneous MET amplicon.\n\nConclusionsCESAR provides a stable and sensitive framework for tumor-only CNV calling in liquid biopsies. On reference standards it outperforms CNVkit in bias and reproducibility, and on a clinical NSCLC cohort it recovered MET CNV abnormalities that a standard CNVkit pipeline missed. Validation on larger and more diverse cohorts is warranted.",
+  "authors": [
+    "Ni, S.",
+    "Kan, K.",
+    "Wang, L.",
+    "Wu, N.",
+    "Jiang, X."
+  ],
+  "doi": "10.64898/2026.03.09.710442",
+  "first_seen": "2026-03-11",
+  "id": "biorxiv:10.64898/2026.03.09.710442",
+  "metadata": {
+    "abstract": "BackgroundDetecting copy number variations (CNVs) in circulating tumor DNA (ctDNA) is crucial for the companion diagnosis and resistance monitoring of various solid tumors (e.g., NSCLC, Glioblastoma). However, when tumor-derived DNA fractions are extremely low (often <1%), traditional depth-based methods frequently fail due to non-linear sequencing depth fluctuations and probe-specific capture biases inherent to targeted Next-Generation Sequencing (NGS).\n\nMethodsWe developed CESAR (CNV Estimation with Segmentation and Anchor Recalibration), a computational tool for tumor-only CNV detection in targeted NGS panels. CESAR uses Circular Binary Segmentation (CBS) to re-partition target regions according to relative capture efficiency, then applies a data-driven \"anchor\" selection procedure that, for each target segment, identifies a personalized set of co-varying genomic segments. By selecting the anchor set that minimizes the coefficient of variation (CV) of the anchor-recalibrated depth ratio across a panel of normals, CESAR recalibrates the per-segment baseline and suppresses probe-specific technical noise. Copy-number status is then called from the deviation of the observed ratio against this trained baseline.\n\nResultsUsing standard DNA reference materials, CESAR identified amplifications of MET, ERBB2, and EGFR at low tumor fractions. CESAR resolved focal alterations as subtle as 2.18 copies (a 1.09-fold change relative to the diploid baseline) while reporting no false-positive amplifications in diploid control regions. Applied to a clinical cohort of nine NSCLC ctDNA samples profiled on a 94-gene panel, CESAR successfully separated three MET-amplified samples from six matched negatives, where the standard CNVkit-based pipeline failed to distinguish them. In head-to-head benchmarking on identical data, CESAR reduced technical variance relative to the widely used CNVkit and more reproducibly resolved low-level copy-number gains, particularly in the depth-heterogeneous MET amplicon.\n\nConclusionsCESAR provides a stable and sensitive framework for tumor-only CNV calling in liquid biopsies. On reference standards it outperforms CNVkit in bias and reproducibility, and on a clinical NSCLC cohort it recovered MET CNV abnormalities that a standard CNVkit pipeline missed. Validation on larger and more diverse cohorts is warranted.",
+    "author_corresponding": "Xiaobing Jiang",
+    "author_corresponding_institution": "Huazhong University of Science and Technology Union Hospital",
+    "authors": "Ni, S.; Kan, K.; Wang, L.; Wu, N.; Jiang, X.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-11",
+    "doi": "10.64898/2026.03.09.710442",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/11/2026.03.09.710442.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CESAR: High-Sensitivity Detection of Copy Number Variations in ctDNA Using Segmentation and Anchor Recalibration",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Huazhong University of Science and Technology Union Hospital",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "CESAR, a tumor-only CNV caller for targeted ctDNA NGS panels, uses CBS segmentation and CV-minimizing anchor recalibration; it outperforms CNVkit on reference…",
+  "title": "CESAR: High-Sensitivity Detection of Copy Number Variations in ctDNA Using Segmentation and Anchor Recalibration",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.09.710442"
+}

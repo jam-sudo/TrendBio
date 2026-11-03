@@ -1,0 +1,50 @@
+{
+  "abstract": "Whole-genome sequencing (WGS) is central to foodborne pathogen surveillance and cross-border outbreak detection. Long-read sequencing using Oxford Nanopore Technologies (ONT) promises rapid, complete, and cost-effective genome assemblies in a single workflow. However, the adoption of standalone ONT sequencing of native DNA has been slowed by concerns that DNA modifications can compromise per-base sequencing accuracy and downstream genotyping.\n\nIn this study, we evaluated ONT-only sequencing performance across 294 genetically diverse isolates representing ten major foodborne pathogens. Using the SUP@v5.2 basecalling model at 50x coverage, 97.3% (286/294) of the ONT assemblies produced identical or near-identical cgMLST profiles ([&le;]3 allelic differences) as Illumina-polished hybrid assemblies. Elevated error rates were observed in four Salmonella enterica serovar Kentucky and four Listeria monocytogenes isolates and were associated with the presence of specific DNA phosphorothioation or methylation systems.\n\nRe-basecalling the same dataset with the newly released HAC@v6.0 model revealed a different error profile: although 93.5% (275/294) of assemblies remained highly accurate, all 13 isolates carrying dnd (DNA phosphorothioation) or dpd (7-deazaguanine modification) systems, including isolates of S. enterica, Cronobacter sakazakii, and Vibrio parahaemolyticus, exhibited high error rates, suggesting that such atypical modifications were not adequately represented in the models training dataset.\n\nTo enable rapid identification of unreliable assemblies, we developed alpaqa, a lightweight computational tool that detects systematic nanopore assembly errors without requiring supplemental short-read data or reference genomes. By identifying affected assemblies, alpaqa provides a quality safeguard for ONT-only workflows. Masking low-quality bases in assemblies flagged by alpaqa improved cgMLST accuracy, although this reduced the number of callable loci and therefore genotyping resolution.\n\nOur findings demonstrate that standalone ONT sequencing of native DNA is sufficiently accurate for routine foodborne pathogen surveillance when combined with appropriate quality control, supporting its use in harmonised genomic surveillance frameworks.\n\nData summaryAll sequencing data generated in this study have been submitted to the NCBI Sequence Read Archive. Accession numbers for Illumina and ONT (SUP@v5.2) reads are listed in Supplementary Table S1. Raw pod5 files from error-prone isolates have been deposited in SquiDBase (SQB000021). Alpaqa is available at github.com/MBiggel/alpaqa/. An automated ONT assembly and quality control pipeline integrating alpaqa is available at github.com/MBiggel/boap/.\n\nImpact statementThis study demonstrates that standalone Oxford Nanopore sequencing of native DNA can achieve highly accurate genotyping for routine foodborne pathogen surveillance across diverse species. We show that the remaining inaccuracies are linked to specific DNA modification systems, including phosphorothioation and 7-deazaguanine modifications, which are identified here as previously unrecognised sources of systematic sequencing errors. To address this limitation, we introduce alpaqa, a reference-free method for detecting such error-prone assemblies, providing a practical quality-control framework for ONT-only workflows. Together, these results support the reliable use of nanopore sequencing in routine genomic surveillance.",
+  "authors": [
+    "Biggel, M.",
+    "Cernela, N.",
+    "Horlbog, J.",
+    "DeMott, M. S.",
+    "Dedon, P. C.",
+    "Hall, M. B.",
+    "Chen, J.",
+    "Smith, P.",
+    "Carleton, H. A.",
+    "Stephan, R.",
+    "Urban, L."
+  ],
+  "doi": "10.64898/2026.03.20.713089",
+  "first_seen": "2026-03-24",
+  "id": "biorxiv:10.64898/2026.03.20.713089",
+  "metadata": {
+    "abstract": "Whole-genome sequencing (WGS) is central to foodborne pathogen surveillance and cross-border outbreak detection. Long-read sequencing using Oxford Nanopore Technologies (ONT) promises rapid, complete, and cost-effective genome assemblies in a single workflow. However, the adoption of standalone ONT sequencing of native DNA has been slowed by concerns that DNA modifications can compromise per-base sequencing accuracy and downstream genotyping.\n\nIn this study, we evaluated ONT-only sequencing performance across 294 genetically diverse isolates representing ten major foodborne pathogens. Using the SUP@v5.2 basecalling model at 50x coverage, 97.3% (286/294) of the ONT assemblies produced identical or near-identical cgMLST profiles ([&le;]3 allelic differences) as Illumina-polished hybrid assemblies. Elevated error rates were observed in four Salmonella enterica serovar Kentucky and four Listeria monocytogenes isolates and were associated with the presence of specific DNA phosphorothioation or methylation systems.\n\nRe-basecalling the same dataset with the newly released HAC@v6.0 model revealed a different error profile: although 93.5% (275/294) of assemblies remained highly accurate, all 13 isolates carrying dnd (DNA phosphorothioation) or dpd (7-deazaguanine modification) systems, including isolates of S. enterica, Cronobacter sakazakii, and Vibrio parahaemolyticus, exhibited high error rates, suggesting that such atypical modifications were not adequately represented in the models training dataset.\n\nTo enable rapid identification of unreliable assemblies, we developed alpaqa, a lightweight computational tool that detects systematic nanopore assembly errors without requiring supplemental short-read data or reference genomes. By identifying affected assemblies, alpaqa provides a quality safeguard for ONT-only workflows. Masking low-quality bases in assemblies flagged by alpaqa improved cgMLST accuracy, although this reduced the number of callable loci and therefore genotyping resolution.\n\nOur findings demonstrate that standalone ONT sequencing of native DNA is sufficiently accurate for routine foodborne pathogen surveillance when combined with appropriate quality control, supporting its use in harmonised genomic surveillance frameworks.\n\nData summaryAll sequencing data generated in this study have been submitted to the NCBI Sequence Read Archive. Accession numbers for Illumina and ONT (SUP@v5.2) reads are listed in Supplementary Table S1. Raw pod5 files from error-prone isolates have been deposited in SquiDBase (SQB000021). Alpaqa is available at github.com/MBiggel/alpaqa/. An automated ONT assembly and quality control pipeline integrating alpaqa is available at github.com/MBiggel/boap/.\n\nImpact statementThis study demonstrates that standalone Oxford Nanopore sequencing of native DNA can achieve highly accurate genotyping for routine foodborne pathogen surveillance across diverse species. We show that the remaining inaccuracies are linked to specific DNA modification systems, including phosphorothioation and 7-deazaguanine modifications, which are identified here as previously unrecognised sources of systematic sequencing errors. To address this limitation, we introduce alpaqa, a reference-free method for detecting such error-prone assemblies, providing a practical quality-control framework for ONT-only workflows. Together, these results support the reliable use of nanopore sequencing in routine genomic surveillance.",
+    "author_corresponding": "Michael Biggel",
+    "author_corresponding_institution": "Institute for Food Safety and Hygiene, University of Zurich, Zurich, Switzerland",
+    "authors": "Biggel, M.; Cernela, N.; Horlbog, J.; DeMott, M. S.; Dedon, P. C.; Hall, M. B.; Chen, J.; Smith, P.; Carleton, H. A.; Stephan, R.; Urban, L.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-03-24",
+    "doi": "10.64898/2026.03.20.713089",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/24/2026.03.20.713089.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Standalone nanopore sequencing for foodborne pathogen surveillance: a large-scale evaluation and quality control framework",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institute for Food Safety and Hygiene, University of Zurich, Zurich, Switzerland",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-03-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Evaluates ONT-only native-DNA sequencing on 294 foodborne isolates; links errors to dnd/dpd DNA modification systems and introduces alpaqa, a reference-free QC…",
+  "title": "Standalone nanopore sequencing for foodborne pathogen surveillance: a large-scale evaluation and quality control framework",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.20.713089"
+}

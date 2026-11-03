@@ -1,0 +1,41 @@
+{
+  "abstract": "Skiplists (Pugh, 1990) are probabilistic data structures over ordered lists supporting [O] (log N) insertion and search, which share many properties with balanced binary trees. Previously we introduced the graph Burrows-Wheeler transform (GBWT) to support efficient search over pangenome path sets, but current implementations are static and cumbersome to build and use. Here we introduce a doubly-linked skiplist variant over run-length-compressed BWTs that supports [O] (log N) rank and access operations, and a dynamic version of this that supports [O] (log N + S) rank and insert operations, where S is the number of symbols in the alphabet. We use these to store and search over paths through a syncmer graph built from Edgars closed syncmers, equivalent to a sparse de Bruijn graph. Code is available in rskip.[ch] within the syng package at github.com/richarddurbin/syng. This builds a 5.8 GB lossless GBWT representation of 92 full human genomes, single-threaded in 52 minutes, on top of a 4GB 63bp syncmer set built in 37 minutes. Arbitrarily long maximal exact matches (MEMs) can then be found as seeds for sequence matches to the graph at a search rate of approximately 1Gbp per 10 seconds per thread.",
+  "authors": [
+    "Durbin, R."
+  ],
+  "doi": "10.64898/2026.03.26.714584",
+  "first_seen": "2026-03-29",
+  "id": "biorxiv:10.64898/2026.03.26.714584",
+  "metadata": {
+    "abstract": "Skiplists (Pugh, 1990) are probabilistic data structures over ordered lists supporting [O] (log N) insertion and search, which share many properties with balanced binary trees. Previously we introduced the graph Burrows-Wheeler transform (GBWT) to support efficient search over pangenome path sets, but current implementations are static and cumbersome to build and use. Here we introduce a doubly-linked skiplist variant over run-length-compressed BWTs that supports [O] (log N) rank and access operations, and a dynamic version of this that supports [O] (log N + S) rank and insert operations, where S is the number of symbols in the alphabet. We use these to store and search over paths through a syncmer graph built from Edgars closed syncmers, equivalent to a sparse de Bruijn graph. Code is available in rskip.[ch] within the syng package at github.com/richarddurbin/syng. This builds a 5.8 GB lossless GBWT representation of 92 full human genomes, single-threaded in 52 minutes, on top of a 4GB 63bp syncmer set built in 37 minutes. Arbitrarily long maximal exact matches (MEMs) can then be found as seeds for sequence matches to the graph at a search rate of approximately 1Gbp per 10 seconds per thread.",
+    "author_corresponding": "Richard Durbin",
+    "author_corresponding_institution": "University of Cambridge",
+    "authors": "Durbin, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-29",
+    "doi": "10.64898/2026.03.26.714584",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/29/2026.03.26.714584.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A run-length-compressed skiplist data structure for dynamic GBWTs supports time and space efficient pangenome operations over syncmers",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Cambridge",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces a run-length-compressed doubly-linked skiplist for dynamic GBWTs, enabling time- and space-efficient pangenome path search over syncmer graphs, with…",
+  "title": "A run-length-compressed skiplist data structure for dynamic GBWTs supports time and space efficient pangenome operations over syncmers",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.26.714584"
+}

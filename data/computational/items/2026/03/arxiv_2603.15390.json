@@ -1,0 +1,32 @@
+{
+  "abstract": "We present Hecate, a modular lossless genomic compression framework. It is designed around uncommon but practical source-coding choices. Unlike many single-method compressors, Hecate treats compression as a conditional coding problem over coupled FASTA/FASTQ streams (control, headers, nucleotides, case, quality, extras). It uses per-stream codecs under a shared indexed block container. Codecs include alphabet-aware packing with an explicit side channel for out-of-alphabet residues, an auxiliary-index Burrows-Wheeler pipeline with custom arithmetic coding, and a blockwise Markov mixture coder with explicit model-competition signaling. This architecture yields high throughput, exact random-access slicing, and referential mode through streamwise binary differencing. In a comprehensive benchmark suite, Hecate provides the best compression vs. speed trade-offs against state-of-the-art established tools (MFCompress, NAF, bzip3, AGC), with notably stronger behaviour on large genomes and high-similarity referential settings. For the same compression ratio, Hecate is 2 to 10 times faster. When given the same time budget as other algorithms, Hecate achieves up to 5% to 10% better compression.",
+  "authors": [
+    "Kamila Szewczyk",
+    "Sven Rahmann"
+  ],
+  "doi": null,
+  "first_seen": "2026-03-16",
+  "id": "arxiv:2603.15390",
+  "metadata": {
+    "arxiv_primary_category": "cs.DS",
+    "categories": [
+      "cs.DS",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.15390v1</ns0:id>\n    <ns0:title>Hecate: A Modular Genomic Compressor</ns0:title>\n    <ns0:updated>2026-03-16T15:06:28Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.15390v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.15390v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We present Hecate, a modular lossless genomic compression framework. It is designed around uncommon but practical source-coding choices. Unlike many single-method compressors, Hecate treats compression as a conditional coding problem over coupled FASTA/FASTQ streams (control, headers, nucleotides, case, quality, extras). It uses per-stream codecs under a shared indexed block container. Codecs include alphabet-aware packing with an explicit side channel for out-of-alphabet residues, an auxiliary-index Burrows-Wheeler pipeline with custom arithmetic coding, and a blockwise Markov mixture coder with explicit model-competition signaling. This architecture yields high throughput, exact random-access slicing, and referential mode through streamwise binary differencing. In a comprehensive benchmark suite, Hecate provides the best compression vs. speed trade-offs against state-of-the-art established tools (MFCompress, NAF, bzip3, AGC), with notably stronger behaviour on large genomes and high-similarity referential settings. For the same compression ratio, Hecate is 2 to 10 times faster. When given the same time budget as other algorithms, Hecate achieves up to 5% to 10% better compression.</ns0:summary>\n    <ns0:category term=\"cs.DS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-03-16T15:06:28Z</ns0:published>\n    <ns1:primary_category term=\"cs.DS\" />\n    <ns0:author>\n      <ns0:name>Kamila Szewczyk</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sven Rahmann</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Hecate is a modular lossless genomic compressor coding FASTA/FASTQ streams with per-stream codecs and indexed blocks, reporting better speed and ratio…",
+  "title": "Hecate: A Modular Genomic Compressor",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.15390v1"
+}

@@ -1,0 +1,39 @@
+{
+  "abstract": "MotivationSearching short DNA patterns such as barcodes, primers, or CRISPR spacers within sequencing reads or genomes is a fundamental task in bioinformatics. These problems are instances of multiple approximate string matching (MASM) [Baeza-Yates and Navarro, 1997], which requires locating all occurrences with up to k errors of multiple patterns of length m in a text of length n. Classical approaches based on seeding with exact matches become inefficient for short patterns (m [&le;] 64 bp) as k increases, producing either many spurious hits or missing true matches. Our previous work, Sassy1, showed that careful hardware optimization drastically accelerates single-pattern searches in long texts by distributing chunks of the text across SIMD lanes.\n\nMethodsSassy2 distributes multiple patterns across SIMD lanes to maximize parallelism when searching batches of short patterns. When k is small, often only a short substring of the pattern of length O(k) is needed to reject a possible match. Thus, Sassy2 first examines short suffixes of the patterns (e.g., the last 16 bp of 32 bp patterns), allowing more (but smaller) parallel SIMD lanes. Only positions passing this suffix filter undergo full pattern verification.\n\nResultsOn synthetic data, Sassy2 achieves 10-50x speedups over Sassy1 for short texts (n [&le;] 200 bp) and 2-4x for large texts (n [&ge;] 1 Mbp). On real-world tasks with 16 threads, Sassy2 reaches over 100 Gbp/s text throughput per guide when searching 312 gRNAs across the human genome and 116 Gbp/s throughput when demultiplexing Nanopore reads with 96 barcodes. In both cases, Sassy2 outperforms Sassy1 by 2-5x and Edlib by 20-45x.\n\nAvailabilitySassy2 is implemented in Rust and available at github.com/RagnarGrootKoerkamp/sassy.",
+  "authors": [
+    "Beeloo, R.",
+    "Groot Koerkamp, R."
+  ],
+  "doi": "10.64898/2026.03.10.710811",
+  "first_seen": "2026-03-12",
+  "id": "biorxiv:10.64898/2026.03.10.710811",
+  "metadata": {
+    "abstract": "MotivationSearching short DNA patterns such as barcodes, primers, or CRISPR spacers within sequencing reads or genomes is a fundamental task in bioinformatics. These problems are instances of multiple approximate string matching (MASM) [Baeza-Yates and Navarro, 1997], which requires locating all occurrences with up to k errors of multiple patterns of length m in a text of length n. Classical approaches based on seeding with exact matches become inefficient for short patterns (m [&le;] 64 bp) as k increases, producing either many spurious hits or missing true matches. Our previous work, Sassy1, showed that careful hardware optimization drastically accelerates single-pattern searches in long texts by distributing chunks of the text across SIMD lanes.\n\nMethodsSassy2 distributes multiple patterns across SIMD lanes to maximize parallelism when searching batches of short patterns. When k is small, often only a short substring of the pattern of length O(k) is needed to reject a possible match. Thus, Sassy2 first examines short suffixes of the patterns (e.g., the last 16 bp of 32 bp patterns), allowing more (but smaller) parallel SIMD lanes. Only positions passing this suffix filter undergo full pattern verification.\n\nResultsOn synthetic data, Sassy2 achieves 10-50x speedups over Sassy1 for short texts (n [&le;] 200 bp) and 2-4x for large texts (n [&ge;] 1 Mbp). On real-world tasks with 16 threads, Sassy2 reaches over 100 Gbp/s text throughput per guide when searching 312 gRNAs across the human genome and 116 Gbp/s throughput when demultiplexing Nanopore reads with 96 barcodes. In both cases, Sassy2 outperforms Sassy1 by 2-5x and Edlib by 20-45x.\n\nAvailabilitySassy2 is implemented in Rust and available at github.com/RagnarGrootKoerkamp/sassy.",
+    "author_corresponding": "Ragnar Groot Koerkamp",
+    "author_corresponding_institution": "Karlsruhe Institute of Technology",
+    "authors": "Beeloo, R.; Groot Koerkamp, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-12",
+    "doi": "10.64898/2026.03.10.710811",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/12/2026.03.10.710811.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Sassy2: Batch Searching of Short DNA Patterns",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Karlsruhe Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-03-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "MotivationSearching short DNA patterns such as barcodes, primers, or CRISPR spacers within sequencing reads or genomes is a fundamental task in bioinformatics.",
+  "title": "Sassy2: Batch Searching of Short DNA Patterns",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.10.710811"
+}

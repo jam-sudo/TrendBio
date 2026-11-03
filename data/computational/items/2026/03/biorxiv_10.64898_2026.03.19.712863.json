@@ -1,0 +1,42 @@
+{
+  "abstract": "Computational bacteriophage host prediction from genomic sequences remains challenging because host range depends on diverse, rapidly evolving genomic determinants--from receptor-binding proteins to anti-defense systems and downstream infection compatibility--and because the signals available to predictors, including sequence homology, CRISPR spacer matches, nucleotide composition, and mobile genetic elements, are sparse, unevenly distributed across taxa, and constrained by incomplete host annotations. Here, we frame host prediction as an unsupervised retrieval problem. We asked whether embeddings from the pretrained genome language model Evo2 captured a reliable host-range signal without training on phage-host labels. We generated whole-genome embeddings for phages and candidate bacterial hosts with the Evo2-7B model, applied normalization, and ranked hosts by cosine similarity. Using the Virus-Host Database, we selected embedding and fusion choices on a Gram-positive validation cohort and then evaluated the approach on a held-out Gram-negative test cohort to minimize data leakage. We found that Evo2 was strongest at retrieving multiple plausible hosts, with the recorded host in the top 10 for 55.4% of phages. However, it did not maximize species-level top-1 accuracy (19.4% vs. 23.2% for the best baseline). At higher taxonomic ranks, Evo2 captured a coarser host-range signal: top-1 accuracy reached 43.4% at the genus level and 51.6% at the family level. Reciprocal rank fusion of Evo2 with BLASTN, VirHostMatcher, and PHIST improved all retrieval metrics. Top-10 retrieval rose to 58.5% and top-1 accuracy to 26.9%. Stratified analyses by phage genome length, host clade, and host mobile genetic element coverage revealed scenario-dependent performance. Evo2 embeddings excelled for intermediate-length phages and when host mobile element content was low, whereas alignment and k-mer methods dominated when local homology was abundant. These results suggest that pretrained genome embeddings complement established alignment- and k-mer/composition-based methods and that context-aware hybrid pipelines may help improve phage host prediction.\n\nAuthor summaryBacteriophages are viruses that prey on bacteria and play central roles in microbial ecosystems, nutrient cycling, and the spread of antibiotic resistance genes. Knowing which bacterium a phage can infect is important for applications such as phage therapy, where viruses are used to treat bacterial infections, but making this prediction from DNA sequence data alone remains difficult. Existing computational tools each exploit different types of genomic evidence, and none works reliably across all settings. We asked whether an artificial intelligence model trained to read raw DNA--without ever being shown which phages infect which hosts--could contribute a new, complementary signal. We found that this approach was particularly effective at narrowing the field to a short list of candidate hosts and at capturing broad evolutionary relationships between phages and bacteria. When we combined it with established sequence-comparison tools, overall prediction improved beyond what any single method achieved alone. By examining when each method succeeded or failed, we identified biological factors that govern prediction difficulty, offering practical guidance for building more robust prediction systems.",
+  "authors": [
+    "WANG, Z.",
+    "Arsuaga, J."
+  ],
+  "doi": "10.64898/2026.03.19.712863",
+  "first_seen": "2026-03-20",
+  "id": "biorxiv:10.64898/2026.03.19.712863",
+  "metadata": {
+    "abstract": "Computational bacteriophage host prediction from genomic sequences remains challenging because host range depends on diverse, rapidly evolving genomic determinants--from receptor-binding proteins to anti-defense systems and downstream infection compatibility--and because the signals available to predictors, including sequence homology, CRISPR spacer matches, nucleotide composition, and mobile genetic elements, are sparse, unevenly distributed across taxa, and constrained by incomplete host annotations. Here, we frame host prediction as an unsupervised retrieval problem. We asked whether embeddings from the pretrained genome language model Evo2 captured a reliable host-range signal without training on phage-host labels. We generated whole-genome embeddings for phages and candidate bacterial hosts with the Evo2-7B model, applied normalization, and ranked hosts by cosine similarity. Using the Virus-Host Database, we selected embedding and fusion choices on a Gram-positive validation cohort and then evaluated the approach on a held-out Gram-negative test cohort to minimize data leakage. We found that Evo2 was strongest at retrieving multiple plausible hosts, with the recorded host in the top 10 for 55.4% of phages. However, it did not maximize species-level top-1 accuracy (19.4% vs. 23.2% for the best baseline). At higher taxonomic ranks, Evo2 captured a coarser host-range signal: top-1 accuracy reached 43.4% at the genus level and 51.6% at the family level. Reciprocal rank fusion of Evo2 with BLASTN, VirHostMatcher, and PHIST improved all retrieval metrics. Top-10 retrieval rose to 58.5% and top-1 accuracy to 26.9%. Stratified analyses by phage genome length, host clade, and host mobile genetic element coverage revealed scenario-dependent performance. Evo2 embeddings excelled for intermediate-length phages and when host mobile element content was low, whereas alignment and k-mer methods dominated when local homology was abundant. These results suggest that pretrained genome embeddings complement established alignment- and k-mer/composition-based methods and that context-aware hybrid pipelines may help improve phage host prediction.\n\nAuthor summaryBacteriophages are viruses that prey on bacteria and play central roles in microbial ecosystems, nutrient cycling, and the spread of antibiotic resistance genes. Knowing which bacterium a phage can infect is important for applications such as phage therapy, where viruses are used to treat bacterial infections, but making this prediction from DNA sequence data alone remains difficult. Existing computational tools each exploit different types of genomic evidence, and none works reliably across all settings. We asked whether an artificial intelligence model trained to read raw DNA--without ever being shown which phages infect which hosts--could contribute a new, complementary signal. We found that this approach was particularly effective at narrowing the field to a short list of candidate hosts and at capturing broad evolutionary relationships between phages and bacteria. When we combined it with established sequence-comparison tools, overall prediction improved beyond what any single method achieved alone. By examining when each method succeeded or failed, we identified biological factors that govern prediction difficulty, offering practical guidance for building more robust prediction systems.",
+    "author_corresponding": "Javier Arsuaga",
+    "author_corresponding_institution": "University of California Davis",
+    "authors": "WANG, Z.; Arsuaga, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-03-20",
+    "doi": "10.64898/2026.03.19.712863",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/03/20/2026.03.19.712863.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Bacteriophage host prediction using a genome language model",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of California Davis",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-03-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Frames phage host prediction as unsupervised retrieval using Evo2 genome embeddings; fusing them with BLASTN, VirHostMatcher and PHIST improves retrieval…",
+  "title": "Bacteriophage host prediction using a genome language model",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.19.712863"
+}
