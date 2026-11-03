@@ -1,0 +1,40 @@
+{
+  "abstract": "Spectral methods for DNA sequence analysis--treating genomic data as a discrete signal and computing its Fourier transform--were proposed over three decades ago but remained impractical for whole-genome analysis due to computational cost. We present a quaternion Fourier transform framework that encodes DNA as a quaternion-valued signal q[n] [isin] {1, i, j, k} mapping to the four nucleotides {A, T, G, C}, and prove that the full quaternion spectrum is computable from exactly two standard complex FFTs: Q(k) = Z1(k) + Z2(N-k) {middle dot} j, where Z1 = FFT(uA +i {middle dot} uT ) and Z2 = FFT(uG +i {middle dot} uC). We establish that the resulting spectral finger-print F(k) = (|Z1(k)|2,|Z2(k)|2) is invariant under both cyclic shift and reverse complement-- the two fundamental symmetries of double-stranded DNA.\n\nBuilding on this theoretical foundation, we develop three computational tools: (i) a 4x4 Hermitian cross-spectral matrix with inter-channel coherence analysis, (ii) a genome spectrogram via sliding-window short-time Fourier transform, and (iii) an alignment-free spectral variant detection algorithm with O(N log N) complexity. Applying Welchs cross-spectral coherence analysis to E. coli K-12, we discover that the DNA helical repeat ([~]11 bp) is invisible to the standard power spectrum but clearly detected through the cross-spectral matrix condition number ({kappa} = 6.5), demonstrating that multi-channel analysis reveals structural periodicities that single-channel methods miss. Phase spectrum analysis recovers the characteristic nucleotide ordering within codons (A [-&gt;] T [-&gt;] G [-&gt;] C), while three distinct frequency regimes of inter-nucleotide coupling emerge: complementary-dominated (long-range), purine/pyrimidine-dominated (structural), and codon-position-dominated (coding).\n\nCross-species validation on 18 genomes spanning all three domains of life--Bacteria (5), Archaea (3), and Eukarya (10)--with GC content from 19.6% (P. falciparum) to 69.5% (T. thermophilus) confirms the universality of these findings. The helical repeat is detected via cross-spectral coherence in 18/18 organisms (100%). All 10 eukaryotes show A-T dominance at the helical repeat--a spectral signature of nucleosome wrapping absent from prokaryotes. Non-complementary pairs (A-C, T-G) dominate the coding frequency in 17/18 organisms.\n\nValidation on human chromosome 21 (46.7 Mb, processed in 5.0 s on Apple M1) reveals eukaryote-specific spectral signatures--nucleosome positioning at 10.67 bp, nucleosome spacing at 170.7 bp, and Alu repeat dominance at 341 bp--absent from prokaryotic spectra. A proof-of-concept spectral variant detection experiment achieves 100% read-matching accuracy (100/100 reads) and statistically significant discrimination of SNPs from sequencing errors (t = 14.80, p < 0.001, Cohens d = 1.64), scaling to d = 8.96 at 30x coverage. The full human genome can be spectrally analyzed in approximately 3-4 seconds on an M1 GPU and under 1 second on M4 Max, enabling interactive spectral genomics on commodity hardware.\n\nAvailabilitySource code, Metal kernels, and benchmarks are available at https://github.com/aminems/AppleSiliconFFT under the MIT license.",
+  "authors": [
+    "Bergach, M. A."
+  ],
+  "doi": "10.64898/2026.04.03.716441",
+  "first_seen": "2026-04-09",
+  "id": "biorxiv:10.64898/2026.04.03.716441",
+  "metadata": {
+    "abstract": "Spectral methods for DNA sequence analysis--treating genomic data as a discrete signal and computing its Fourier transform--were proposed over three decades ago but remained impractical for whole-genome analysis due to computational cost. We present a quaternion Fourier transform framework that encodes DNA as a quaternion-valued signal q[n] [isin] {1, i, j, k} mapping to the four nucleotides {A, T, G, C}, and prove that the full quaternion spectrum is computable from exactly two standard complex FFTs: Q(k) = Z1(k) + Z2(N-k) {middle dot} j, where Z1 = FFT(uA +i {middle dot} uT ) and Z2 = FFT(uG +i {middle dot} uC). We establish that the resulting spectral finger-print F(k) = (|Z1(k)|2,|Z2(k)|2) is invariant under both cyclic shift and reverse complement-- the two fundamental symmetries of double-stranded DNA.\n\nBuilding on this theoretical foundation, we develop three computational tools: (i) a 4x4 Hermitian cross-spectral matrix with inter-channel coherence analysis, (ii) a genome spectrogram via sliding-window short-time Fourier transform, and (iii) an alignment-free spectral variant detection algorithm with O(N log N) complexity. Applying Welchs cross-spectral coherence analysis to E. coli K-12, we discover that the DNA helical repeat ([~]11 bp) is invisible to the standard power spectrum but clearly detected through the cross-spectral matrix condition number ({kappa} = 6.5), demonstrating that multi-channel analysis reveals structural periodicities that single-channel methods miss. Phase spectrum analysis recovers the characteristic nucleotide ordering within codons (A [-&gt;] T [-&gt;] G [-&gt;] C), while three distinct frequency regimes of inter-nucleotide coupling emerge: complementary-dominated (long-range), purine/pyrimidine-dominated (structural), and codon-position-dominated (coding).\n\nCross-species validation on 18 genomes spanning all three domains of life--Bacteria (5), Archaea (3), and Eukarya (10)--with GC content from 19.6% (P. falciparum) to 69.5% (T. thermophilus) confirms the universality of these findings. The helical repeat is detected via cross-spectral coherence in 18/18 organisms (100%). All 10 eukaryotes show A-T dominance at the helical repeat--a spectral signature of nucleosome wrapping absent from prokaryotes. Non-complementary pairs (A-C, T-G) dominate the coding frequency in 17/18 organisms.\n\nValidation on human chromosome 21 (46.7 Mb, processed in 5.0 s on Apple M1) reveals eukaryote-specific spectral signatures--nucleosome positioning at 10.67 bp, nucleosome spacing at 170.7 bp, and Alu repeat dominance at 341 bp--absent from prokaryotic spectra. A proof-of-concept spectral variant detection experiment achieves 100% read-matching accuracy (100/100 reads) and statistically significant discrimination of SNPs from sequencing errors (t = 14.80, p < 0.001, Cohens d = 1.64), scaling to d = 8.96 at 30x coverage. The full human genome can be spectrally analyzed in approximately 3-4 seconds on an M1 GPU and under 1 second on M4 Max, enabling interactive spectral genomics on commodity hardware.\n\nAvailabilitySource code, Metal kernels, and benchmarks are available at https://github.com/aminems/AppleSiliconFFT under the MIT license.",
+    "author_corresponding": "Mohamed Amine Bergach",
+    "author_corresponding_institution": "illumina",
+    "authors": "Bergach, M. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-09",
+    "doi": "10.64898/2026.04.03.716441",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/09/2026.04.03.716441.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Quaternion Spectral Fingerprinting of DNA: GPU-Accelerated Multi-Channel Fourier Analysis for Alignment-Free Genomics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "illumina",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-04-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Quaternion Fourier framework for DNA with GPU tools; detects helical repeat across 18 genomes and enables alignment-free SNP detection.",
+  "title": "Quaternion Spectral Fingerprinting of DNA: GPU-Accelerated Multi-Channel Fourier Analysis for Alignment-Free Genomics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.03.716441"
+}

@@ -1,0 +1,33 @@
+{
+  "abstract": "Pancreatic tumor segmentation in contrast-enhanced computed tomography (CT) is clinically important yet technically challenging: lesions are often small, heterogeneous, and easily confused with surrounding soft tissue, and models that perform well on one cohort frequently degrade under cohort shift. Our goal is to improve cross-cohort generalization while keeping the model architecture simple, efficient, and practical for 3D CT segmentation. We introduce PanGuide3D, a cohort-robust architecture with a shared 3D encoder, a pancreas decoder that predicts a probabilistic pancreas map, and a tumor decoder that is explicitly conditioned on this pancreas probability at multiple scales via differentiable soft gating. To capture long-range context under distribution shift, we further add a lightweight Transformer bottleneck in the U-Net bottleneck representation. We evaluate cohort transfer by training on the PanTS (Pancreatic Tumor Segmentation) cohort and testing both in-cohort (PanTS) and out-of-cohort on MSD (Medical Segmentation Decathlon) Task07 Pancreas, using matched preprocessing and training protocols across strong baselines. We collect voxel-level segmentation metrics, patient-level tumor detection, subgroup analyses by tumor size and anatomical location, volume-conditioned performance analyses, and calibration measurements to assess reliability. Across the evaluated models, PanGuide3D achieves the best overall tumor performance and shows improved cross-cohort generalization, particularly for small tumors and challenging anatomical locations, while reducing anatomically implausible false positives. These findings support probabilistic anatomical conditioning as a practical strategy for improving cross-cohort robustness in an end-to-end model and suggest potential utility for contouring support, treatment planning, and multi-institutional studies.",
+  "authors": [
+    "Sunny Joy Ma",
+    "Xiang Ma"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-22",
+  "id": "arxiv:2604.20981",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.CV",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.20981v1</ns0:id>\n    <ns0:title>PanGuide3D: Cohort-Robust Pancreas Tumor Segmentation via Probabilistic Pancreas Conditioning and a Transformer Bottleneck</ns0:title>\n    <ns0:updated>2026-04-22T18:10:01Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.20981v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.20981v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Pancreatic tumor segmentation in contrast-enhanced computed tomography (CT) is clinically important yet technically challenging: lesions are often small, heterogeneous, and easily confused with surrounding soft tissue, and models that perform well on one cohort frequently degrade under cohort shift. Our goal is to improve cross-cohort generalization while keeping the model architecture simple, efficient, and practical for 3D CT segmentation. We introduce PanGuide3D, a cohort-robust architecture with a shared 3D encoder, a pancreas decoder that predicts a probabilistic pancreas map, and a tumor decoder that is explicitly conditioned on this pancreas probability at multiple scales via differentiable soft gating. To capture long-range context under distribution shift, we further add a lightweight Transformer bottleneck in the U-Net bottleneck representation. We evaluate cohort transfer by training on the PanTS (Pancreatic Tumor Segmentation) cohort and testing both in-cohort (PanTS) and out-of-cohort on MSD (Medical Segmentation Decathlon) Task07 Pancreas, using matched preprocessing and training protocols across strong baselines. We collect voxel-level segmentation metrics, patient-level tumor detection, subgroup analyses by tumor size and anatomical location, volume-conditioned performance analyses, and calibration measurements to assess reliability. Across the evaluated models, PanGuide3D achieves the best overall tumor performance and shows improved cross-cohort generalization, particularly for small tumors and challenging anatomical locations, while reducing anatomically implausible false positives. These findings support probabilistic anatomical conditioning as a practical strategy for improving cross-cohort robustness in an end-to-end model and suggest potential utility for contouring support, treatment planning, and multi-institutional studies.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-22T18:10:01Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Sunny Joy Ma</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiang Ma</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "PanGuide3D: a 3D CT pancreatic tumor segmentation model conditioned on a probabilistic pancreas map with a Transformer bottleneck, tested for cross-cohort…",
+  "title": "PanGuide3D: Cohort-Robust Pancreas Tumor Segmentation via Probabilistic Pancreas Conditioning and a Transformer Bottleneck",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.20981v1"
+}

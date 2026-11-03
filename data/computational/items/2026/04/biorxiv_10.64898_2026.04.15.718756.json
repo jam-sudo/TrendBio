@@ -1,0 +1,42 @@
+{
+  "abstract": "RNA modifications are important for RNA structure, stability, and ribosome function, but their identification and localisation remains challenging. Oxford Nanopore direct RNA sequencing (DRS) enables modification-agnostic detection in native RNA, but existing tool benchmarks have focused almost exclusively on m6A in eukaryotic mRNA, leaving multi-modification tool performance in bacterial systems largely untested. Here, we benchmark ten RNA modification detection tools spanning signal-comparison, error-rate, and hybrid approaches on Escherichia coli K-12 MG1655 16S and 23S rRNA, which harbour 11 and 25 known modified sites, respectively, across 17 modification types. Using native RNA and in vitro transcribed (IVT) unmodified RNA, we evaluate performance across 25 coverage levels (5x to 1000x). DiffErr and JACUSA2 showed the strongest discrimination performance (AUROC >0.9 on both 16S and 23S rRNA), with DiffErr achieving the highest F1 score on 16S and JACUSA2 showing the most consistent precision-recall balance across both rRNAs. Both tools achieved full transcript-wide scoring and, along with DRUMMER, exact positional localisation. Several other tools produced no output at many rRNA positions, and restricting evaluation to reported positions inflated apparent performance. Signal-based tools showed a systematic 1-4 nucleotide 5' offset from known modified positions, consistent with the [~]5-mer nucleotide stretch present in the read head of the nanopore; applying tool-specific offset corrections substantially improved per-site recovery and reduced false positives, substantially improving the performance of tools such as EpiNano and nanoDoc. At single-site resolution, no known modified site was recovered by all tools, and several m5C, m5U, and m6A sites were missed by the majority of tools. Tool combination analysis showed that pairing error-rate-based tools with offset-corrected signal-based tools improved site recovery beyond any individual tool, with the best three-tool combination recovering 30 of the 36 known sites while maintaining low false positive rates. These results establish that discrimination metrics (e.g. AUROC) alone are insufficient to evaluate modification detection tools: output completeness, positional precision, and per-modification-type sensitivity should be reported alongside standard benchmarking metrics.",
+  "authors": [
+    "Morampalli, B. R.",
+    "Silander, O. K."
+  ],
+  "doi": "10.64898/2026.04.15.718756",
+  "first_seen": "2026-04-17",
+  "id": "biorxiv:10.64898/2026.04.15.718756",
+  "metadata": {
+    "abstract": "RNA modifications are important for RNA structure, stability, and ribosome function, but their identification and localisation remains challenging. Oxford Nanopore direct RNA sequencing (DRS) enables modification-agnostic detection in native RNA, but existing tool benchmarks have focused almost exclusively on m6A in eukaryotic mRNA, leaving multi-modification tool performance in bacterial systems largely untested. Here, we benchmark ten RNA modification detection tools spanning signal-comparison, error-rate, and hybrid approaches on Escherichia coli K-12 MG1655 16S and 23S rRNA, which harbour 11 and 25 known modified sites, respectively, across 17 modification types. Using native RNA and in vitro transcribed (IVT) unmodified RNA, we evaluate performance across 25 coverage levels (5x to 1000x). DiffErr and JACUSA2 showed the strongest discrimination performance (AUROC >0.9 on both 16S and 23S rRNA), with DiffErr achieving the highest F1 score on 16S and JACUSA2 showing the most consistent precision-recall balance across both rRNAs. Both tools achieved full transcript-wide scoring and, along with DRUMMER, exact positional localisation. Several other tools produced no output at many rRNA positions, and restricting evaluation to reported positions inflated apparent performance. Signal-based tools showed a systematic 1-4 nucleotide 5' offset from known modified positions, consistent with the [~]5-mer nucleotide stretch present in the read head of the nanopore; applying tool-specific offset corrections substantially improved per-site recovery and reduced false positives, substantially improving the performance of tools such as EpiNano and nanoDoc. At single-site resolution, no known modified site was recovered by all tools, and several m5C, m5U, and m6A sites were missed by the majority of tools. Tool combination analysis showed that pairing error-rate-based tools with offset-corrected signal-based tools improved site recovery beyond any individual tool, with the best three-tool combination recovering 30 of the 36 known sites while maintaining low false positive rates. These results establish that discrimination metrics (e.g. AUROC) alone are insufficient to evaluate modification detection tools: output completeness, positional precision, and per-modification-type sensitivity should be reported alongside standard benchmarking metrics.",
+    "author_corresponding": "Olin K Silander",
+    "author_corresponding_institution": "University of Auckland",
+    "authors": "Morampalli, B. R.; Silander, O. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-17",
+    "doi": "10.64898/2026.04.15.718756",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/17/2026.04.15.718756.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmarking Tools for Identification of rRNA Modifications in Escherichia coli using Oxford Nanopore Direct RNA Sequencing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Auckland",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks ten nanopore direct RNA sequencing tools for detecting E. coli rRNA modifications, showing AUROC alone is insufficient and offset corrections…",
+  "title": "Benchmarking Tools for Identification of rRNA Modifications in Escherichia coli using Oxford Nanopore Direct RNA Sequencing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.15.718756"
+}

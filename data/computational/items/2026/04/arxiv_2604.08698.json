@@ -1,0 +1,37 @@
+{
+  "abstract": "Tokens serve as the basic units of representation in DNA language models (DNALMs), yet their design remains underexplored. Unlike natural language, DNA lacks inherent token boundaries or predefined compositional rules, making tokenization a fundamental modeling decision rather than a naturally specified one. While existing approaches like byte-pair encoding (BPE) excel at capturing token structures that reflect human-generated linguistic regularities, DNA is organized by biological function and evolutionary constraint rather than linguistic convention. We argue that DNA tokenization should prioritize functional sequence patterns like regulatory motifs-short, recurring segments under evolutionary constraint and typically preserved across species. We incorporate evolutionary information directly into the tokenization process through EvoLen, a tokenizer that combines evolutionary stratification with length-aware decoding to better preserve motif-scale functional sequence units. EvoLen uses cross-species evolutionary signals to group DNA sequences, trains separate BPE tokenizers on each group, merges the resulting vocabularies via a rule prioritizing preserved patterns, and applies length-aware decoding with dynamic programming. Through controlled experiments, EvoLen improves the preservation of functional sequence patterns, differentiation across genomic contexts, and alignment with evolutionary constraint, while matching or outperforming standard BPE across diverse DNALM benchmarks. These results demonstrate that tokenization introduces a critical inductive bias and that incorporating evolutionary information yields more biologically meaningful and interpretable sequence representations. Code, pretrained and fine-tuned checkpoints, and tokenizer files are available at https://github.com/HN020719/EvoLen and https://huggingface.co/EvoLenTokenizer.",
+  "authors": [
+    "Nan Huang",
+    "Xiaoxiao Zhou",
+    "Junxia Cui",
+    "Mario Tapia-Pacheco",
+    "Tiffany Amariuta",
+    "Yang Li",
+    "Jingbo Shang"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-09",
+  "id": "arxiv:2604.08698",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.08698v3</ns0:id>\n    <ns0:title>EvoLen: Evolution-Guided Tokenization for DNA Language Model</ns0:title>\n    <ns0:updated>2026-09-27T00:53:13Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.08698v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.08698v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Tokens serve as the basic units of representation in DNA language models (DNALMs), yet their design remains underexplored. Unlike natural language, DNA lacks inherent token boundaries or predefined compositional rules, making tokenization a fundamental modeling decision rather than a naturally specified one. While existing approaches like byte-pair encoding (BPE) excel at capturing token structures that reflect human-generated linguistic regularities, DNA is organized by biological function and evolutionary constraint rather than linguistic convention. We argue that DNA tokenization should prioritize functional sequence patterns like regulatory motifs-short, recurring segments under evolutionary constraint and typically preserved across species. We incorporate evolutionary information directly into the tokenization process through EvoLen, a tokenizer that combines evolutionary stratification with length-aware decoding to better preserve motif-scale functional sequence units. EvoLen uses cross-species evolutionary signals to group DNA sequences, trains separate BPE tokenizers on each group, merges the resulting vocabularies via a rule prioritizing preserved patterns, and applies length-aware decoding with dynamic programming. Through controlled experiments, EvoLen improves the preservation of functional sequence patterns, differentiation across genomic contexts, and alignment with evolutionary constraint, while matching or outperforming standard BPE across diverse DNALM benchmarks. These results demonstrate that tokenization introduces a critical inductive bias and that incorporating evolutionary information yields more biologically meaningful and interpretable sequence representations. Code, pretrained and fine-tuned checkpoints, and tokenizer files are available at https://github.com/HN020719/EvoLen and https://huggingface.co/EvoLenTokenizer.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-09T18:41:28Z</ns0:published>\n    <ns1:comment>Published as a conference paper at COLM 2026</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Nan Huang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaoxiao Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junxia Cui</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mario Tapia-Pacheco</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tiffany Amariuta</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yang Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingbo Shang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "EvoLen is a DNA tokenizer that groups sequences by cross-species evolutionary signals, trains per-group BPE tokenizers, merges vocabularies, and decodes with…",
+  "title": "EvoLen: Evolution-Guided Tokenization for DNA Language Model",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.08698v3"
+}

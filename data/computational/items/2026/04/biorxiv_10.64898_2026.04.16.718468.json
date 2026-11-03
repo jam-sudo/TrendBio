@@ -1,0 +1,44 @@
+{
+  "abstract": "AO_SCPLOWBSTRACTC_SCPLOWIn mass spectrometry-based proteomics, false discovery rate (FDR) control underpins the credibility of peptide and protein identifications. In contemporary workflows, including multi-run Data Independent Acquisition (DIA), deep learning-assisted scoring, library-free searches, and extensive post-processing, the statement \"1% FDR\" has become increasingly ambiguous, potentially referring to different statistical entities, multiple-testing scopes, and null models.\n\nWe propose a standardized framework requiring explicit specification of three complementary properties: \"scope\", meaning which statistical universe is controlled; \"calibration\", meaning whether confidence measures behave consistently with their intended interpretation on the reported unit; and \"stability\", meaning whether acceptance thresholds and resulting identification lists remain robust to perturbations.\n\nBuilding on routine target/decoy outputs, we introduce pipeline-agnostic diagnostics that audit internal coherence of scores, q-values, and posterior error probabilities, quantify tail support and cutoff fragility, and test plausibility of target-decoy assumptions. We further complement internal checks with external validation via entrapment, which measures empirical false positives on knownabsent sequences. We highlight a \"granularity paradox\": as scoring becomes more discriminative, decoy matches can become so sparse near stringent cutoffs that the numerical support for decoy-based estimation deteriorates, making reported FDR thresholds increasingly fragile despite improved separation between the distributions of target and decoy scores.\n\nApplications to DIA-NN and MS2Rescore show that scope and aggregation choices can materially alter both estimated error rates and list reproducibility. We provide a practical reporting checklist and an open-source R package (diagFDR, available from CRAN) that generates diagnostic reports from standard software outputs. As a minimal verifiable reporting standard, we recommend that any \"FDR = %\" claim specify the controlled unit and scope, report tail support at the operating cutoff, and make decoy-inclusive outputs available for independent verification.\n\nHighlightsO_LIFDR claims can be misleading without explicit scope, calibration, and stability assessment.\nC_LIO_LIdiagFDR introduces pipeline-agnostic diagnostics from standard software outputs.\nC_LIO_LIThe granularity paradox shows sparse decoy tails can make stringent cutoffs numerically fragile.\nC_LIO_LICase studies show that scope misuse and rescoring can affect both error rates and stability.\nC_LIO_LIdiagFDR produces reviewer-ready reports and a practical reporting checklist.\nC_LI",
+  "authors": [
+    "Chion, M.",
+    "Godmer, A.",
+    "Douche, T.",
+    "Matondo, M.",
+    "Giai Gianetto, Q."
+  ],
+  "doi": "10.64898/2026.04.16.718468",
+  "first_seen": "2026-04-20",
+  "id": "biorxiv:10.64898/2026.04.16.718468",
+  "metadata": {
+    "abstract": "AO_SCPLOWBSTRACTC_SCPLOWIn mass spectrometry-based proteomics, false discovery rate (FDR) control underpins the credibility of peptide and protein identifications. In contemporary workflows, including multi-run Data Independent Acquisition (DIA), deep learning-assisted scoring, library-free searches, and extensive post-processing, the statement \"1% FDR\" has become increasingly ambiguous, potentially referring to different statistical entities, multiple-testing scopes, and null models.\n\nWe propose a standardized framework requiring explicit specification of three complementary properties: \"scope\", meaning which statistical universe is controlled; \"calibration\", meaning whether confidence measures behave consistently with their intended interpretation on the reported unit; and \"stability\", meaning whether acceptance thresholds and resulting identification lists remain robust to perturbations.\n\nBuilding on routine target/decoy outputs, we introduce pipeline-agnostic diagnostics that audit internal coherence of scores, q-values, and posterior error probabilities, quantify tail support and cutoff fragility, and test plausibility of target-decoy assumptions. We further complement internal checks with external validation via entrapment, which measures empirical false positives on knownabsent sequences. We highlight a \"granularity paradox\": as scoring becomes more discriminative, decoy matches can become so sparse near stringent cutoffs that the numerical support for decoy-based estimation deteriorates, making reported FDR thresholds increasingly fragile despite improved separation between the distributions of target and decoy scores.\n\nApplications to DIA-NN and MS2Rescore show that scope and aggregation choices can materially alter both estimated error rates and list reproducibility. We provide a practical reporting checklist and an open-source R package (diagFDR, available from CRAN) that generates diagnostic reports from standard software outputs. As a minimal verifiable reporting standard, we recommend that any \"FDR = %\" claim specify the controlled unit and scope, report tail support at the operating cutoff, and make decoy-inclusive outputs available for independent verification.\n\nHighlightsO_LIFDR claims can be misleading without explicit scope, calibration, and stability assessment.\nC_LIO_LIdiagFDR introduces pipeline-agnostic diagnostics from standard software outputs.\nC_LIO_LIThe granularity paradox shows sparse decoy tails can make stringent cutoffs numerically fragile.\nC_LIO_LICase studies show that scope misuse and rescoring can affect both error rates and stability.\nC_LIO_LIdiagFDR produces reviewer-ready reports and a practical reporting checklist.\nC_LI",
+    "author_corresponding": "Quentin Giai Gianetto",
+    "author_corresponding_institution": "Institut Pasteur, Universite Paris Cite, Bioinformatics and Biostatistics HUB Institut Pasteur, Proteomics Platform, Mass Spectrometry for Biology Unit, UAR CNR",
+    "authors": "Chion, M.; Godmer, A.; Douche, T.; Matondo, M.; Giai Gianetto, Q.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-20",
+    "doi": "10.64898/2026.04.16.718468",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/20/2026.04.16.718468.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "diagFDR: Verifiable False Discovery Rate Reporting in Proteomics via Scope, Calibration, and Stability Diagnostics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institut Pasteur, Universite Paris Cite, Bioinformatics and Biostatistics HUB Institut Pasteur, Proteomics Platform, Mass Spectrometry for Biology Unit, UAR CNR",
+  "preprint_id": null,
+  "primary_category": "proteomics",
+  "published_at": "2026-04-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes a standardized framework and open-source R package (diagFDR) for verifiable FDR reporting in proteomics, with scope, calibration, and stability…",
+  "title": "diagFDR: Verifiable False Discovery Rate Reporting in Proteomics via Scope, Calibration, and Stability Diagnostics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.16.718468"
+}

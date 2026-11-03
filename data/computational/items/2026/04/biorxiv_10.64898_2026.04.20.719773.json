@@ -1,0 +1,46 @@
+{
+  "abstract": "Single-cell RNA sequencing yields continuous expression profiles, whereas large language models operate over discrete autoregressive sequences, leaving no shared computational interface for language-model reasoning over cell states. Existing approaches either keep cellular information outside the LLM vocabulary, consume context per listed gene, or learn reconstruction codes without gene-level grounding. We introduce RVQ-Alpha, which systematically adapts four stages of LLM training (tokenization, supervised fine-tuning, reinforcement learning, and distillation) to single-cell analysis. Multi-codebook Residual Vector Quantization (RVQ) lexicalizes each profile into a compact, hierarchical cellular alphabet in the models native token stream, while a paired decoder reconstructs the corresponding expression profile. Evidence-First supervision grounds these symbols in named genes and expression-linked evidence; Fact-Aware RLVR then penalizes contradictory claims to support auditable reasoning. Task-specific RLVR yields strong experts, but a single Mixed policy underperforms them across all four task families. To recover specialist competence in a unified model, we adopt Multi-Teacher On-Policy Distillation (MOPD), which consolidates these experts into one All-in-One checkpoint without retaining a separate policy for each task. On the CAPSTONE benchmark, a four-task suite with explicit biological shifts and deterministic ontology-aware graders, the unified checkpoint improves over Mixed on all 12 metrics and remains within 0.005 of the task-routed specialist reference on every primary metric. Overall, RVQ-Alpha provides a unified pipeline for grounded, auditable multi-task single-cell analysis.",
+  "authors": [
+    "Li, G.",
+    "You, Y.",
+    "Fu, Y.",
+    "Zhou, W.",
+    "Tang, F.",
+    "Kong, J.",
+    "Tian, L."
+  ],
+  "doi": "10.64898/2026.04.20.719773",
+  "first_seen": "2026-04-23",
+  "id": "biorxiv:10.64898/2026.04.20.719773",
+  "metadata": {
+    "abstract": "Single-cell RNA sequencing yields continuous expression profiles, whereas large language models operate over discrete autoregressive sequences, leaving no shared computational interface for language-model reasoning over cell states. Existing approaches either keep cellular information outside the LLM vocabulary, consume context per listed gene, or learn reconstruction codes without gene-level grounding. We introduce RVQ-Alpha, which systematically adapts four stages of LLM training (tokenization, supervised fine-tuning, reinforcement learning, and distillation) to single-cell analysis. Multi-codebook Residual Vector Quantization (RVQ) lexicalizes each profile into a compact, hierarchical cellular alphabet in the models native token stream, while a paired decoder reconstructs the corresponding expression profile. Evidence-First supervision grounds these symbols in named genes and expression-linked evidence; Fact-Aware RLVR then penalizes contradictory claims to support auditable reasoning. Task-specific RLVR yields strong experts, but a single Mixed policy underperforms them across all four task families. To recover specialist competence in a unified model, we adopt Multi-Teacher On-Policy Distillation (MOPD), which consolidates these experts into one All-in-One checkpoint without retaining a separate policy for each task. On the CAPSTONE benchmark, a four-task suite with explicit biological shifts and deterministic ontology-aware graders, the unified checkpoint improves over Mixed on all 12 metrics and remains within 0.005 of the task-routed specialist reference on every primary metric. Overall, RVQ-Alpha provides a unified pipeline for grounded, auditable multi-task single-cell analysis.",
+    "author_corresponding": "Luyi Tian",
+    "author_corresponding_institution": "Guangzhou National Laboratory",
+    "authors": "Li, G.; You, Y.; Fu, Y.; Zhou, W.; Tang, F.; Kong, J.; Tian, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-23",
+    "doi": "10.64898/2026.04.20.719773",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/23/2026.04.20.719773.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RVQ-Alpha: Bridging Single-Cell Transcriptomics and Large Language Models via Discrete Tokenization and Verifiable Reinforcement Learning",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Guangzhou National Laboratory",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-04-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "RVQ-Alpha adapts LLM training stages to single-cell RNA-seq via multi-codebook residual vector quantization tokenization, evidence-grounded SFT, fact-aware…",
+  "title": "RVQ-Alpha: Bridging Single-Cell Transcriptomics and Large Language Models via Discrete Tokenization and Verifiable Reinforcement Learning",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.20.719773"
+}

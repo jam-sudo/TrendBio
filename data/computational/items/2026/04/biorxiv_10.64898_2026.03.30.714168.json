@@ -1,0 +1,47 @@
+{
+  "abstract": "The development of machine-learning models for protein-ligand interactions is constrained by the quality and diversity of the available structural data. Existing resources force researchers into a trade-off: carefully curated collections such as PDBBind and HiQBind offer high structural reliability but cover only a narrow slice of the Protein Data Bank (PDB), whereas large-scale resources such as PLINDER provide broad coverage with minimal quality control. We present CROWN (Curated Repository Of Well-resolved Non-covalent interactions), a machine-learning-ready dataset that reconciles scale and rigor through a fully automated preprocessing pipeline. Starting from the PDB database, CROWN applies a series of interleaved quality filters and processing stages that address crystallographic resolution, ligand identity, pocket completeness, structural repair, interaction quality, and protonation at physiological pH. The pipeline finishes with a constrained energy-minimization step built on custom flat-bottomed restraints - a step absent from all existing protein-ligand datasets - that balances crystallographic evidence against the relaxation of intramolecular strain. By reconciling the heterogeneous refinement practices of different depositions without distorting the experimentally observed binding geometry, this step yields a structurally uniform collection of 178,263 complexes, representing a roughly four-fold increase in protein diversity over PDBBind and HiQBind. Rather than organizing the data around sparsely available, bias-prone binding affinities, CROWN adopts a geometry-centric design philosophy that treats the three-dimensional arrangement of atoms at the binding interface as a self-consistent source of information. To demonstrate its value as a training resource, we trained two knowledge-based scoring functions on CROWN and benchmarked them on CASF-2016: relative to HiQBind-trained counterparts, CROWN-trained models showed markedly improved ranking power (mean Spearman correlation rising from 0.509 to 0.637) and docking power (top-1 near-native pose recovery of 0.785 versus 0.724). Because CROWN imposes no requirement for affinity labels, it can in principle support any model that learns from or is evaluated against protein-ligand complex structures. We anticipate that it will serve as a broadly useful resource for tasks such as the training of binder generation, protein design or protein folding models conditioned on bound ligands, the development of scoring functions or benchmarking of interaction-prediction methods.",
+  "authors": [
+    "Poelmans, R.",
+    "Van Eynde, W.",
+    "Bruncsics, B.",
+    "Bruncsics, B.",
+    "Arany, A.",
+    "Moreau, Y.",
+    "Voet, A. R."
+  ],
+  "doi": "10.64898/2026.03.30.714168",
+  "first_seen": "2026-04-01",
+  "id": "biorxiv:10.64898/2026.03.30.714168",
+  "metadata": {
+    "abstract": "The development of machine-learning models for protein-ligand interactions is constrained by the quality and diversity of the available structural data. Existing resources force researchers into a trade-off: carefully curated collections such as PDBBind and HiQBind offer high structural reliability but cover only a narrow slice of the Protein Data Bank (PDB), whereas large-scale resources such as PLINDER provide broad coverage with minimal quality control. We present CROWN (Curated Repository Of Well-resolved Non-covalent interactions), a machine-learning-ready dataset that reconciles scale and rigor through a fully automated preprocessing pipeline. Starting from the PDB database, CROWN applies a series of interleaved quality filters and processing stages that address crystallographic resolution, ligand identity, pocket completeness, structural repair, interaction quality, and protonation at physiological pH. The pipeline finishes with a constrained energy-minimization step built on custom flat-bottomed restraints - a step absent from all existing protein-ligand datasets - that balances crystallographic evidence against the relaxation of intramolecular strain. By reconciling the heterogeneous refinement practices of different depositions without distorting the experimentally observed binding geometry, this step yields a structurally uniform collection of 178,263 complexes, representing a roughly four-fold increase in protein diversity over PDBBind and HiQBind. Rather than organizing the data around sparsely available, bias-prone binding affinities, CROWN adopts a geometry-centric design philosophy that treats the three-dimensional arrangement of atoms at the binding interface as a self-consistent source of information. To demonstrate its value as a training resource, we trained two knowledge-based scoring functions on CROWN and benchmarked them on CASF-2016: relative to HiQBind-trained counterparts, CROWN-trained models showed markedly improved ranking power (mean Spearman correlation rising from 0.509 to 0.637) and docking power (top-1 near-native pose recovery of 0.785 versus 0.724). Because CROWN imposes no requirement for affinity labels, it can in principle support any model that learns from or is evaluated against protein-ligand complex structures. We anticipate that it will serve as a broadly useful resource for tasks such as the training of binder generation, protein design or protein folding models conditioned on bound ligands, the development of scoring functions or benchmarking of interaction-prediction methods.",
+    "author_corresponding": "Arnout RD Voet",
+    "author_corresponding_institution": "KU Leuven",
+    "authors": "Poelmans, R.; Van Eynde, W.; Bruncsics, B.; Bruncsics, B.; Arany, A.; Moreau, Y.; Voet, A. R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-01",
+    "doi": "10.64898/2026.03.30.714168",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/01/2026.03.30.714168.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CROWN: Curated Repository Of Well-resolved Noncovalent interactions",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "KU Leuven",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "CROWN is an automatically curated, machine-learning-ready dataset of 178,263 protein-ligand complexes from the PDB, using flat-bottomed restraint energy…",
+  "title": "CROWN: Curated Repository Of Well-resolved Noncovalent interactions",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.30.714168"
+}

@@ -1,0 +1,34 @@
+{
+  "abstract": "Optical Chemical Structure Recognition (OCSR) is critical for converting 2D molecular diagrams from printed literature into machine-readable formats. While Vision-Language Models have shown promise in end-to-end OCR tasks, their direct application to OCSR remains challenging, and direct full-parameter supervised fine-tuning often fails. In this work, we adapt DeepSeek-OCR-2 for molecular optical recognition by formulating the task as image-conditioned SMILES generation. To overcome training instabilities, we propose a two-stage progressive supervised fine-tuning strategy: starting with parameter-efficient LoRA and transitioning to selective full-parameter fine-tuning with split learning rates. We train our model on a large-scale corpus combining synthetic renderings from PubChem and realistic patent images from USPTO-MOL to improve coverage and robustness. Our fine-tuned model, MolSeek-OCR, demonstrates competitive capabilities, achieving exact matching accuracies comparable to the best-performing image-to-sequence model. However, it remains inferior to state-of-the-art image-to-graph modelS. Furthermore, we explore reinforcement-style post-training and data-curation-based refinement, finding that they fail to improve the strict sequence-level fidelity required for exact SMILES matching.",
+  "authors": [
+    "Haocheng Tang",
+    "Xingyu Dang",
+    "Junmei Wang"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-03",
+  "id": "arxiv:2604.03476",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.03476v2</ns0:id>\n    <ns0:title>Fine-tuning DeepSeek-OCR-2 for Molecular Structure Recognition</ns0:title>\n    <ns0:updated>2026-04-21T00:23:18Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.03476v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.03476v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Optical Chemical Structure Recognition (OCSR) is critical for converting 2D molecular diagrams from printed literature into machine-readable formats. While Vision-Language Models have shown promise in end-to-end OCR tasks, their direct application to OCSR remains challenging, and direct full-parameter supervised fine-tuning often fails. In this work, we adapt DeepSeek-OCR-2 for molecular optical recognition by formulating the task as image-conditioned SMILES generation. To overcome training instabilities, we propose a two-stage progressive supervised fine-tuning strategy: starting with parameter-efficient LoRA and transitioning to selective full-parameter fine-tuning with split learning rates. We train our model on a large-scale corpus combining synthetic renderings from PubChem and realistic patent images from USPTO-MOL to improve coverage and robustness. Our fine-tuned model, MolSeek-OCR, demonstrates competitive capabilities, achieving exact matching accuracies comparable to the best-performing image-to-sequence model. However, it remains inferior to state-of-the-art image-to-graph modelS. Furthermore, we explore reinforcement-style post-training and data-curation-based refinement, finding that they fail to improve the strict sequence-level fidelity required for exact SMILES matching.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-03T21:42:54Z</ns0:published>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Haocheng Tang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xingyu Dang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junmei Wang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-03",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Fine-tunes DeepSeek-OCR-2 in two stages (LoRA, then full) to map molecular diagrams to SMILES; trails image-to-graph models.",
+  "title": "Fine-tuning DeepSeek-OCR-2 for Molecular Structure Recognition",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.03476v2"
+}

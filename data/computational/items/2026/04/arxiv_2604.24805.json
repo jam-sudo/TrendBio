@@ -1,0 +1,29 @@
+{
+  "abstract": "Modern machine learning optimizes for accuracy without explicit treatment of internal computational cost, even though physical and biological systems operate under intrinsic energy constraints. We evaluate energy-aware learning across 2,203 experiments spanning vision, text, neuromorphic, and physiological datasets with 10 seeds per configuration and factorial statistical analysis. Three findings emerge. First, architecture alone explains negligible variance in accuracy (partial eta^2 = 0.001), while the architecture x dataset interaction is large (partial eta^2 = 0.44, p < 0.001), demonstrating that optimal architecture depends critically on task modality and rejecting the assumption of a universal best architecture. Second, a controlled lambda-sweep across lambda in {0, 1e-5, 1e-4, 1e-3, 1e-2} validates a single-parameter energy-regularized objective L = L_CE + lambda * E(theta, x): across this range, internal activation energy decreases by approximately three orders of magnitude relative to the unregularized lambda=0 baseline, with negligible accuracy change (<0.5 percentage points) on both MNIST and Fashion-MNIST. Third, energy-first architectures inspired by an action-principle framework yield 5-33% within-modality training-efficiency gains over conventional baselines. These results emerge from a research program that interprets learning through a structural correspondence between the action functional in classical mechanics, free energy in statistical physics, and KL-regularized objectives in variational inference. We frame this correspondence as a design hypothesis, not a derivation.",
+  "authors": [
+    "Martin G. Frasch"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-27",
+  "id": "arxiv:2604.24805",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.24805v2</ns0:id>\n    <ns0:title>minAction.net: Energy-First Neural Architecture Design -- From Biological Principles to Systematic Validation</ns0:title>\n    <ns0:updated>2026-04-29T19:07:35Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.24805v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.24805v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Modern machine learning optimizes for accuracy without explicit treatment of internal computational cost, even though physical and biological systems operate under intrinsic energy constraints. We evaluate energy-aware learning across 2,203 experiments spanning vision, text, neuromorphic, and physiological datasets with 10 seeds per configuration and factorial statistical analysis. Three findings emerge. First, architecture alone explains negligible variance in accuracy (partial eta^2 = 0.001), while the architecture x dataset interaction is large (partial eta^2 = 0.44, p &lt; 0.001), demonstrating that optimal architecture depends critically on task modality and rejecting the assumption of a universal best architecture. Second, a controlled lambda-sweep across lambda in {0, 1e-5, 1e-4, 1e-3, 1e-2} validates a single-parameter energy-regularized objective L = L_CE + lambda * E(theta, x): across this range, internal activation energy decreases by approximately three orders of magnitude relative to the unregularized lambda=0 baseline, with negligible accuracy change (&lt;0.5 percentage points) on both MNIST and Fashion-MNIST. Third, energy-first architectures inspired by an action-principle framework yield 5-33% within-modality training-efficiency gains over conventional baselines. These results emerge from a research program that interprets learning through a structural correspondence between the action functional in classical mechanics, free energy in statistical physics, and KL-regularized objectives in variational inference. We frame this correspondence as a design hypothesis, not a derivation.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-27T06:26:36Z</ns0:published>\n    <ns1:comment>v2: Abstract updated to match revised lambda-sweep results (full sweep range; both MNIST and Fashion-MNIST; ~3 orders of magnitude reduction). Updated author affiliations and emails. Embedded Zenodo data DOI 10.5281/zenodo.19840031. Notation uniformity in Sec 3.4. Fig S2(a) caption clarified. Corrected Zenodo archive size in Appendix A (95 MB compressed)</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Martin G. Frasch</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-27",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Energy-regularized neural architectures evaluated across 2,203 experiments; architecture-dataset interaction dominates accuracy, and an energy penalty cuts…",
+  "title": "minAction.net: Energy-First Neural Architecture Design -- From Biological Principles to Systematic Validation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.24805v2"
+}

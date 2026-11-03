@@ -1,0 +1,31 @@
+{
+  "abstract": "We introduce RegNetAgents, an AI-oriented multi-agent framework for structured, query-driven regulatory candidate identification across heterogeneous gene regulatory networks. It integrates bulk tumor (TCGA) and single-cell (GREmLN project) ARACNe networks and labels each candidate regulator by the network or networks in which it appears (Both, TCGA-only, GREmLN-only). For a given focal gene, the framework finds its regulators in both networks and labels each by source, flags those that are known cancer driver genes (IntOGen), and, for tumor-network regulators, gives the mode of action (MoA; activating or repressive). It is implemented as a multi-agent LangGraph state-graph workflow, accessible through a Python API and a Model Context Protocol (MCP) client, and operates as a downstream analytical layer over precomputed networks rather than a network inference method. For example, a single query for CTNNB1 in BRCA returns two tumor-specific (TCGA-only) driver-gene regulators, DDR2 and IL6ST, both with activating MoA. Across twelve breast cancer (BRCA) and thirteen colorectal cancer (COAD) driver genes, we compared each gene's tumor-network-only (TCGA-only) regulators with the TCGA-only regulators of random non-driver genes. Regulators as a group are about 2.7-fold richer in driver genes than genes overall, so almost any gene's regulators look enriched when tested against all genes. We therefore used random genes as the baseline. In COAD, the cancer genes' regulators include modestly but consistently more IntOGen driver genes than random genes' regulators do (nominal p = 0.012-0.036 across five random samples); in BRCA the difference is borderline (p = 0.048-0.083). Housekeeping and non-driver control genes show no such excess in the tumor-network tier, and the same comparison for GREmLN-only regulators shows none (p >= 0.20). Code: https://github.com/jab57/RegNetAgents",
+  "authors": [
+    "Jose A. Bird"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-16",
+  "id": "arxiv:2607.14097",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2607.14097v3</ns0:id>\n    <ns0:title>RegNetAgents: A Multi-Agent Framework for Cross-Network Regulatory Driver Identification in Cancer Genomics</ns0:title>\n    <ns0:updated>2026-10-07T14:52:10Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2607.14097v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2607.14097v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We introduce RegNetAgents, an AI-oriented multi-agent framework for structured, query-driven regulatory candidate identification across heterogeneous gene regulatory networks. It integrates bulk tumor (TCGA) and single-cell (GREmLN project) ARACNe networks and labels each candidate regulator by the network or networks in which it appears (Both, TCGA-only, GREmLN-only). For a given focal gene, the framework finds its regulators in both networks and labels each by source, flags those that are known cancer driver genes (IntOGen), and, for tumor-network regulators, gives the mode of action (MoA; activating or repressive). It is implemented as a multi-agent LangGraph state-graph workflow, accessible through a Python API and a Model Context Protocol (MCP) client, and operates as a downstream analytical layer over precomputed networks rather than a network inference method. For example, a single query for CTNNB1 in BRCA returns two tumor-specific (TCGA-only) driver-gene regulators, DDR2 and IL6ST, both with activating MoA. Across twelve breast cancer (BRCA) and thirteen colorectal cancer (COAD) driver genes, we compared each gene's tumor-network-only (TCGA-only) regulators with the TCGA-only regulators of random non-driver genes. Regulators as a group are about 2.7-fold richer in driver genes than genes overall, so almost any gene's regulators look enriched when tested against all genes. We therefore used random genes as the baseline. In COAD, the cancer genes' regulators include modestly but consistently more IntOGen driver genes than random genes' regulators do (nominal p = 0.012-0.036 across five random samples); in BRCA the difference is borderline (p = 0.048-0.083). Housekeeping and non-driver control genes show no such excess in the tumor-network tier, and the same comparison for GREmLN-only regulators shows none (p &gt;= 0.20). Code: https://github.com/jab57/RegNetAgents</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-16T17:39:10Z</ns0:published>\n    <ns1:comment>29 pages, 5 figures, 9 tables. v3: cancer-gene reference set changed from OncoKB to IntOGen; random-gene comparison added; GREmLN-only enrichment claim corrected; CDH1/RNF43 restored (gene-ID bug); LLM-derived domain-agent table removed; statements and references corrected. See the revision note in the paper</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Jose A. Bird</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "RegNetAgents is a LangGraph multi-agent workflow that queries precomputed TCGA and GREmLN ARACNe networks to label cancer driver regulators by source and mode…",
+  "title": "RegNetAgents: A Multi-Agent Framework for Cross-Network Regulatory Driver Identification in Cancer Genomics",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2607.14097v3"
+}

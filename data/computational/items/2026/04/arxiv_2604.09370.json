@@ -1,0 +1,34 @@
+{
+  "abstract": "Labelling tissue components in histology whole slide images (WSIs) is prohibitively labour-intensive: a single slide may contain tens of thousands of structures--cells, nuclei, and other morphologically distinct objects--each requiring manual boundary delineation and classification. We present a cloudnative, end-to-end pipeline that automates this process through a cluster-first paradigm. Our system tiles WSIs, filters out tiles deemed unlikely to contain valuable information, segments tissue components with Cellpose-SAM (including cells, nuclei, and other morphologically similar structures), extracts neural embeddings via a pretrained ResNet-50, reduces dimensionality with UMAP, and groups morphologically similar objects using DBSCAN clustering. Under this paradigm, a human annotator labels representative clusters rather than individual objects, reducing annotation effort by orders of magnitude. We evaluate the pipeline on 3,696 tissue components across 13 diverse tissue types from three species (human, rat, rabbit), measuring how well unsupervised clusters align with independent human labels via per-tile Hungarian-algorithm matching. Our system achieves a weighted cluster-label alignment accuracy of 96.8%, with 7 of 13 tissue types reaching perfect agreement. The pipeline, a companion labelling web application, and all evaluation code are released as open-source software.",
+  "authors": [
+    "Muhammad Haseeb Ahmad",
+    "Sharmila Rajendran",
+    "Damion Young",
+    "Jon Mason"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-10",
+  "id": "arxiv:2604.09370",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.CV"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.09370v1</ns0:id>\n    <ns0:title>Cluster-First Labelling: An Automated Pipeline for Segmentation and Morphological Clustering in Histology Whole Slide Images</ns0:title>\n    <ns0:updated>2026-04-10T14:40:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.09370v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.09370v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Labelling tissue components in histology whole slide images (WSIs) is prohibitively labour-intensive: a single slide may contain tens of thousands of structures--cells, nuclei, and other morphologically distinct objects--each requiring manual boundary delineation and classification. We present a cloudnative, end-to-end pipeline that automates this process through a cluster-first paradigm. Our system tiles WSIs, filters out tiles deemed unlikely to contain valuable information, segments tissue components with Cellpose-SAM (including cells, nuclei, and other morphologically similar structures), extracts neural embeddings via a pretrained ResNet-50, reduces dimensionality with UMAP, and groups morphologically similar objects using DBSCAN clustering. Under this paradigm, a human annotator labels representative clusters rather than individual objects, reducing annotation effort by orders of magnitude. We evaluate the pipeline on 3,696 tissue components across 13 diverse tissue types from three species (human, rat, rabbit), measuring how well unsupervised clusters align with independent human labels via per-tile Hungarian-algorithm matching. Our system achieves a weighted cluster-label alignment accuracy of 96.8%, with 7 of 13 tissue types reaching perfect agreement. The pipeline, a companion labelling web application, and all evaluation code are released as open-source software.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-10T14:40:36Z</ns0:published>\n    <ns1:comment>7 pages, 4 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Muhammad Haseeb Ahmad</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sharmila Rajendran</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Damion Young</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jon Mason</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Cloud-native pipeline for histology WSIs: tiling, Cellpose-SAM segmentation, ResNet-50 embeddings, UMAP and DBSCAN clustering to reduce manual labelling; 96.8%…",
+  "title": "Cluster-First Labelling: An Automated Pipeline for Segmentation and Morphological Clustering in Histology Whole Slide Images",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.09370v1"
+}

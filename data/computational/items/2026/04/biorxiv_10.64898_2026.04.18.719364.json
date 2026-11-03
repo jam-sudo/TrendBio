@@ -1,0 +1,43 @@
+{
+  "abstract": "BackgroundIn computational biology, embedding known physical laws into deep learning models to construct \"Physics-Informed Neural Networks\" (PINNs) is a mainstream paradigm for enhancing model interpretability and extrapolation capability. However, in complex multi-physics coupling problems, there is a risk of competitive imbalance between the physical term and the flexible artificial intelligence (AI) residual term, causing the model to degenerate into a \"black-box\" fit and lose the original purpose of being physics-driven.\n\nMethodsIn this study, targeting the problem of predicting protein liquid-liquid phase separation (LLPS) behavior in response to environmental factors (temperature, salt concentration), we identified physical distortions, gradient vanishing, and numerical instability in the initial physics-AI hybrid model. Three core correction strategies were proposed: (1) Weight Allocation Logic Reconstruction: Force the physical trunk weight to 1.0 at the output layer, suppressing the AI residual term to the perturbation level of 0.05~0.1, ensuring physics dominance; (2) Robust Physics Formula Construction: Abandon the unstable power function and introduce a combination of Softplus and logarithmic functions to stably simulate the nonlinear effects of charge shielding; (3) Gain Compensation Alignment: Apply gain compensation to the weak signal branch (temperature) to ensure its effective participation in optimization.\n\nResultsThe optimized model maintained a fitting accuracy of R2{approx}0.62 on the test set, while physical consistency was significantly enhanced. The model successfully restored the monotonic increase in solubility with temperature characteristic of UCST-type phase diagrams and correctly captured the nonlinear charge shielding features in the salt concentration response. The weights of key physical parameters (e.g., hydrophobic contribution w_h, net charge contribution w_ncpr) increased from <10-3 to the 10-2 magnitude, demonstrating the reactivation of the physical branch.\n\nConclusionsThe weight control, formula stabilization, and signal gain alignment strategies proposed in this study effectively address the classic problem of \"AI hijacking\" physics in physics-AI hybrid models. This work provides a universal solution for constructing biophysical predictive models that combine high fitting accuracy with strong physical interpretability.",
+  "authors": [
+    "Wang, M.",
+    "Lu, T.",
+    "Song, Y.-h.",
+    "Li, y."
+  ],
+  "doi": "10.64898/2026.04.18.719364",
+  "first_seen": "2026-04-21",
+  "id": "biorxiv:10.64898/2026.04.18.719364",
+  "metadata": {
+    "abstract": "BackgroundIn computational biology, embedding known physical laws into deep learning models to construct \"Physics-Informed Neural Networks\" (PINNs) is a mainstream paradigm for enhancing model interpretability and extrapolation capability. However, in complex multi-physics coupling problems, there is a risk of competitive imbalance between the physical term and the flexible artificial intelligence (AI) residual term, causing the model to degenerate into a \"black-box\" fit and lose the original purpose of being physics-driven.\n\nMethodsIn this study, targeting the problem of predicting protein liquid-liquid phase separation (LLPS) behavior in response to environmental factors (temperature, salt concentration), we identified physical distortions, gradient vanishing, and numerical instability in the initial physics-AI hybrid model. Three core correction strategies were proposed: (1) Weight Allocation Logic Reconstruction: Force the physical trunk weight to 1.0 at the output layer, suppressing the AI residual term to the perturbation level of 0.05~0.1, ensuring physics dominance; (2) Robust Physics Formula Construction: Abandon the unstable power function and introduce a combination of Softplus and logarithmic functions to stably simulate the nonlinear effects of charge shielding; (3) Gain Compensation Alignment: Apply gain compensation to the weak signal branch (temperature) to ensure its effective participation in optimization.\n\nResultsThe optimized model maintained a fitting accuracy of R2{approx}0.62 on the test set, while physical consistency was significantly enhanced. The model successfully restored the monotonic increase in solubility with temperature characteristic of UCST-type phase diagrams and correctly captured the nonlinear charge shielding features in the salt concentration response. The weights of key physical parameters (e.g., hydrophobic contribution w_h, net charge contribution w_ncpr) increased from <10-3 to the 10-2 magnitude, demonstrating the reactivation of the physical branch.\n\nConclusionsThe weight control, formula stabilization, and signal gain alignment strategies proposed in this study effectively address the classic problem of \"AI hijacking\" physics in physics-AI hybrid models. This work provides a universal solution for constructing biophysical predictive models that combine high fitting accuracy with strong physical interpretability.",
+    "author_corresponding": "yangxin Li",
+    "author_corresponding_institution": "Soochow University",
+    "authors": "Wang, M.; Lu, T.; Song, Y.-h.; Li, y.",
+    "biorxiv_category": "cell biology",
+    "category": "cell biology",
+    "date": "2026-04-21",
+    "doi": "10.64898/2026.04.18.719364",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/21/2026.04.18.719364.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Physics-Guided Deep Neural Networks: Correcting Physical Distortions in Protein Phase Separation Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Soochow University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes weight control, Softplus-log formula stabilization, and gain compensation to keep physics dominant in physics-AI hybrid models predicting protein LLPS…",
+  "title": "Physics-Guided Deep Neural Networks: Correcting Physical Distortions in Protein Phase Separation Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.18.719364"
+}

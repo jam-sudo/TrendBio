@@ -1,0 +1,41 @@
+{
+  "abstract": "In adversarial representation learning for fair prediction, the gradient reversal coefficient ({lambda}) is widely treated as the primary control for sensitive-attribute invariance. We show this assumption is wrong. Using a dual-stream architecture for cross-ancestry polygenic risk score (PRS) prediction, we demonstrate that latent dimensionality -- the information bottleneck -- accounts for 8-27 x more variance in ancestry leakage than adversarial strength. Varying{lambda} across a 20 x range changes leakage by only 2.2 percentage points; varying dimensionality across a 16 x range changes it by 46.6 pp. At dimension 8 with no adversarial training ({lambda} = 0), ancestry leakage is 32.9% (chance = 20%): the bottleneck alone achieves near-invariance. The adversary architecture (linear vs deep MLP) is equally irrelevant (0.6 pp range). We validate this finding across two unrelated domains -- genomic ancestry invariance (6 clinical traits, 1000 Genomes, n = 2,504) and EEG subject invariance (pretrained HFTP + Braindecode dual-domain model, 20 subjects) -- observing consistent dimensionality dominance (12.7:1 ratio in EEG).\n\nFor the genomic application, Stream 1 encodes population structure via DCT-II frequencydomain features (136 coefficients); Stream 2 encodes phenotype signal from top PRS SNPs (PCA to 128 dimensions). The architecture works equally well with standard genomic PCA as the ancestry stream (R2 = 0.217 vs 0.222), confirming the contribution is architectural, not encoding-specific. African-ancestry PRS reconstruction R2 improves on all six traits (e.g., +5.1 pp for coronary artery disease). Linear models achieve higher aggregate R2 but fail catastrophically on cross-ancestry transfer (R2 = - 12.45 for African-ancestry CAD). We emphasize that we predict PRS (a computed score), not disease phenotypes; validation on biobank-scale phenotype data is ongoing.\n\nThese results suggest the adversarial fairness community has been over-investing in adversary engineering relative to simple capacity control. Practitioners should select latent dimensionality first to set the information budget for the fairness-accuracy tradeoff, then optionally use adversarial training for marginal refinement.",
+  "authors": [
+    "Tran, P. P.",
+    "Do, A. T."
+  ],
+  "doi": "10.64898/2026.04.24.720752",
+  "first_seen": "2026-04-29",
+  "id": "biorxiv:10.64898/2026.04.24.720752",
+  "metadata": {
+    "abstract": "In adversarial representation learning for fair prediction, the gradient reversal coefficient ({lambda}) is widely treated as the primary control for sensitive-attribute invariance. We show this assumption is wrong. Using a dual-stream architecture for cross-ancestry polygenic risk score (PRS) prediction, we demonstrate that latent dimensionality -- the information bottleneck -- accounts for 8-27 x more variance in ancestry leakage than adversarial strength. Varying{lambda} across a 20 x range changes leakage by only 2.2 percentage points; varying dimensionality across a 16 x range changes it by 46.6 pp. At dimension 8 with no adversarial training ({lambda} = 0), ancestry leakage is 32.9% (chance = 20%): the bottleneck alone achieves near-invariance. The adversary architecture (linear vs deep MLP) is equally irrelevant (0.6 pp range). We validate this finding across two unrelated domains -- genomic ancestry invariance (6 clinical traits, 1000 Genomes, n = 2,504) and EEG subject invariance (pretrained HFTP + Braindecode dual-domain model, 20 subjects) -- observing consistent dimensionality dominance (12.7:1 ratio in EEG).\n\nFor the genomic application, Stream 1 encodes population structure via DCT-II frequencydomain features (136 coefficients); Stream 2 encodes phenotype signal from top PRS SNPs (PCA to 128 dimensions). The architecture works equally well with standard genomic PCA as the ancestry stream (R2 = 0.217 vs 0.222), confirming the contribution is architectural, not encoding-specific. African-ancestry PRS reconstruction R2 improves on all six traits (e.g., +5.1 pp for coronary artery disease). Linear models achieve higher aggregate R2 but fail catastrophically on cross-ancestry transfer (R2 = - 12.45 for African-ancestry CAD). We emphasize that we predict PRS (a computed score), not disease phenotypes; validation on biobank-scale phenotype data is ongoing.\n\nThese results suggest the adversarial fairness community has been over-investing in adversary engineering relative to simple capacity control. Practitioners should select latent dimensionality first to set the information budget for the fairness-accuracy tradeoff, then optionally use adversarial training for marginal refinement.",
+    "author_corresponding": "Philip Phuong Tran",
+    "author_corresponding_institution": "Univault Technologies LLC - DBA Paragon Biosignals",
+    "authors": "Tran, P. P.; Do, A. T.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-04-29",
+    "doi": "10.64898/2026.04.24.720752",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/29/2026.04.24.720752.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Information Bottleneck Dominates Adversarial Training for Ancestry-Invariant Polygenic Risk Prediction: Dimensionality, Not Gradient Reversal, Controls the Fairness-Accuracy Tradeoff",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Univault Technologies LLC - DBA Paragon Biosignals",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows latent dimensionality, not adversarial strength, controls ancestry leakage in adversarial PRS prediction (1000 Genomes, EEG).",
+  "title": "Information Bottleneck Dominates Adversarial Training for Ancestry-Invariant Polygenic Risk Prediction: Dimensionality, Not Gradient Reversal, Controls the Fairness-Accuracy Tradeoff",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.24.720752"
+}

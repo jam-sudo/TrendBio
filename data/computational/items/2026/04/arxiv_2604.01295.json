@@ -1,0 +1,30 @@
+{
+  "abstract": "This work presents the Parallelized Hierarchical Connectome (PHC), a general architectural framework that upgrades temporal-only State-Space Models (SSMs) into spatiotemporal recurrent networks. Conventional SSMs achieve parallel-scan training but are limited to temporal recurrence, lacking lateral or feedback interactions within a single timestep. PHC maps the diagonal SSM core to a shared Neuron Layer and inter-neuronal communication to a shared Synapse Layer of hierarchical regions, reconnected by a Multi-Transmission Loop iterating spatial recurrence within each temporal window, at parameter complexity Theta(D^2) versus Theta(D^2 L) of stacked SSMs. This spatiotemporal framework enables the seamless integration of neuro-physical priors typically intractable for standard SSMs, including adaptive LIF, synaptic delay, STP, Dale's Law with E/I-asymmetric topology, and STDP. The framework is instantiated as PHCSSM, the first spiking SSM that integrates all five biological priors and is evaluated on long-sequence data, achieving test accuracy competitive with state-of-the-art SSM baselines at 1,312 to 4,891 trainable parameters (1 to 4 orders of magnitude smaller than every baseline). PHCSSM further admits a sequential recurrent spiking neural network (RSNN) deployment mode that converges asymptotically to the parallel-scan training mode without artificial-neural-network-to-spiking-neural-network (ANN-to-SNN) conversion, with cross-backend reproducibility verified across four hardware backends (x86 CPU, H100 GPU, Cortex-A76, Cortex-M4F) including end-to-end deployment on the Cortex-M4F microcontroller (40 KB SRAM, 128 KB Flash). PHCSSM thereby bridges parallel-scan SSM and biologically grounded RSNN, two paradigms with previously incompatible training regimes, into a single architecture and trained weights.",
+  "authors": [
+    "Po-Han Chiang"
+  ],
+  "doi": "10.1016/j.array.2026.101315",
+  "first_seen": "2026-04-01",
+  "id": "arxiv:2604.01295",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.NC",
+    "categories": [
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.01295v2</ns0:id>\n    <ns0:title>Parallelized Hierarchical Connectome: A Spatiotemporal Recurrent Framework for Spiking State-Space Models</ns0:title>\n    <ns0:updated>2026-05-20T14:09:08Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.01295v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.01295v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>This work presents the Parallelized Hierarchical Connectome (PHC), a general architectural framework that upgrades temporal-only State-Space Models (SSMs) into spatiotemporal recurrent networks. Conventional SSMs achieve parallel-scan training but are limited to temporal recurrence, lacking lateral or feedback interactions within a single timestep. PHC maps the diagonal SSM core to a shared Neuron Layer and inter-neuronal communication to a shared Synapse Layer of hierarchical regions, reconnected by a Multi-Transmission Loop iterating spatial recurrence within each temporal window, at parameter complexity Theta(D^2) versus Theta(D^2 L) of stacked SSMs. This spatiotemporal framework enables the seamless integration of neuro-physical priors typically intractable for standard SSMs, including adaptive LIF, synaptic delay, STP, Dale's Law with E/I-asymmetric topology, and STDP. The framework is instantiated as PHCSSM, the first spiking SSM that integrates all five biological priors and is evaluated on long-sequence data, achieving test accuracy competitive with state-of-the-art SSM baselines at 1,312 to 4,891 trainable parameters (1 to 4 orders of magnitude smaller than every baseline). PHCSSM further admits a sequential recurrent spiking neural network (RSNN) deployment mode that converges asymptotically to the parallel-scan training mode without artificial-neural-network-to-spiking-neural-network (ANN-to-SNN) conversion, with cross-backend reproducibility verified across four hardware backends (x86 CPU, H100 GPU, Cortex-A76, Cortex-M4F) including end-to-end deployment on the Cortex-M4F microcontroller (40 KB SRAM, 128 KB Flash). PHCSSM thereby bridges parallel-scan SSM and biologically grounded RSNN, two paradigms with previously incompatible training regimes, into a single architecture and trained weights.</ns0:summary>\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-01T18:02:29Z</ns0:published>\n    <ns1:comment>38 pages, 3 figures, 9 tables. Submitted to Neural Networks</ns1:comment>\n    <ns1:primary_category term=\"q-bio.NC\" />\n    <ns1:journal_ref>Array, 101315 (2026)</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Po-Han Chiang</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1016/j.array.2026.101315</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1016/j.array.2026.101315\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-01",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "PHCSSM: spiking state-space model with spatial recurrence and neuro priors; 1.3k-4.9k parameters, runs on Cortex-M4F microcontroller.",
+  "title": "Parallelized Hierarchical Connectome: A Spatiotemporal Recurrent Framework for Spiking State-Space Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.01295v2"
+}

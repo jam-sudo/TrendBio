@@ -1,0 +1,34 @@
+{
+  "abstract": "Semi-Markov Conditional Random Fields (semi-CRFs) assign labels to segments of a sequence rather than to individual positions, enabling exact inference over segment-level features and principled uncertainty estimates at their boundaries. However, existing implementations must materialize a large edge potential tensor whose size grows with sequence length, maximum segment length, and label count, becoming prohibitive for speech-scale state spaces and intractable at genomic scales where sequences can exceed 100,000 positions. This memory bottleneck has limited the adoption of exact segment-level inference for long sequences and large label sets. We identify that the core inefficiency is materializing edge potentials that can instead be evaluated on-the-fly from a compact prefix-sum array, and make several improvements. First, replacing the stored edge tensor with prefix-sum lookup reduces the memory footprint by a factor proportional to the product of segment length and label count. Second, a streaming forward-backward pass with checkpoint-boundary normalization keeps working memory sublinear in sequence length while preserving exact gradients. Third, zero-centered cumulative scores control numerical drift and induce an adaptive duration prior under label imbalance. We integrate these ideas into Flash-SemiCRF, a fused Triton kernel that enables exact semi-CRF inference on previously intractable problem sizes. Available at https://github.com/biobenkj/flash-semicrf.",
+  "authors": [
+    "Benjamin K. Johnson",
+    "Thomas Goralski",
+    "Ayush Semwal",
+    "Hui Shen",
+    "H. Josh Jang"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-20",
+  "id": "arxiv:2604.18780",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.18780v1</ns0:id>\n    <ns0:title>Streaming Structured Inference with Flash-SemiCRF</ns0:title>\n    <ns0:updated>2026-04-20T19:42:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.18780v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.18780v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Semi-Markov Conditional Random Fields (semi-CRFs) assign labels to segments of a sequence rather than to individual positions, enabling exact inference over segment-level features and principled uncertainty estimates at their boundaries. However, existing implementations must materialize a large edge potential tensor whose size grows with sequence length, maximum segment length, and label count, becoming prohibitive for speech-scale state spaces and intractable at genomic scales where sequences can exceed 100,000 positions. This memory bottleneck has limited the adoption of exact segment-level inference for long sequences and large label sets. We identify that the core inefficiency is materializing edge potentials that can instead be evaluated on-the-fly from a compact prefix-sum array, and make several improvements. First, replacing the stored edge tensor with prefix-sum lookup reduces the memory footprint by a factor proportional to the product of segment length and label count. Second, a streaming forward-backward pass with checkpoint-boundary normalization keeps working memory sublinear in sequence length while preserving exact gradients. Third, zero-centered cumulative scores control numerical drift and induce an adaptive duration prior under label imbalance. We integrate these ideas into Flash-SemiCRF, a fused Triton kernel that enables exact semi-CRF inference on previously intractable problem sizes. Available at https://github.com/biobenkj/flash-semicrf.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-20T19:42:48Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Benjamin K. Johnson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Thomas Goralski</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ayush Semwal</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hui Shen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>H. Josh Jang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-20",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Flash-SemiCRF, a fused Triton kernel that computes semi-CRF edge potentials on the fly for exact, memory-efficient inference on long sequences.",
+  "title": "Streaming Structured Inference with Flash-SemiCRF",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.18780v1"
+}

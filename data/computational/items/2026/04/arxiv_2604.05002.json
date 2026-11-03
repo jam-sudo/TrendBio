@@ -1,0 +1,35 @@
+{
+  "abstract": "Learning from weak, proxy, or relative supervision is common when ground-truth labels are unavailable, but robustness under distribution shift remains poorly understood because the supervision mechanism itself may change across environments. We formalize this phenomenon as supervision drift, defined as changes in $P(y \\mid x, c)$ across contexts, and study it in CRISPR-Cas13d transcriptomic perturbation experiments where guide efficacy is inferred indirectly from RNA-seq responses. Using publicly available data spanning two human cell lines and multiple post-induction timepoints, we construct a controlled non-IID benchmark with explicit domain (cell line) and temporal shifts, while reusing a fixed weak-label construction across all contexts to avoid changing targets. Across linear and tree-based models, weak supervision supports meaningful learning in-domain (ridge $R^2 = 0.356$, Spearman $ρ= 0.442$) and partial cross-cell-line transfer ($ρ\\approx 0.40$). In contrast, temporal transfer collapses across all model classes considered, yielding negative $R^2$ and weak or near-zero $ρ$ (ridge $R^2 = -0.145$, $ρ= 0.008$; XGBoost $R^2 = -0.155$, $ρ= 0.056$; random forest $R^2 = -0.322$, $ρ= 0.139$). Additional robustness analyses using externally recomputed weak labels, shift-score quantification, and simple mitigation baselines preserve the same qualitative pattern. Feature-label association and feature-importance analyses remain relatively stable across cell lines but change sharply over time, indicating that failures arise from supervision drift rather than model capacity or simple covariate shift. These results show that strong in-domain performance under weak supervision can be misleading and motivate feature stability as a lightweight diagnostic for non-transferability before deployment.",
+  "authors": [
+    "Mehrdad Shoeibi",
+    "Elias Hossain",
+    "Ivan Garibay",
+    "Niloofar Yousefi"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-05",
+  "id": "arxiv:2604.05002",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.05002v3</ns0:id>\n    <ns0:title>Learning Stable Predictors from Weak Supervision under Distribution Shift</ns0:title>\n    <ns0:updated>2026-05-19T16:35:24Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.05002v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.05002v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Learning from weak, proxy, or relative supervision is common when ground-truth labels are unavailable, but robustness under distribution shift remains poorly understood because the supervision mechanism itself may change across environments. We formalize this phenomenon as supervision drift, defined as changes in $P(y \\mid x, c)$ across contexts, and study it in CRISPR-Cas13d transcriptomic perturbation experiments where guide efficacy is inferred indirectly from RNA-seq responses. Using publicly available data spanning two human cell lines and multiple post-induction timepoints, we construct a controlled non-IID benchmark with explicit domain (cell line) and temporal shifts, while reusing a fixed weak-label construction across all contexts to avoid changing targets. Across linear and tree-based models, weak supervision supports meaningful learning in-domain (ridge $R^2 = 0.356$, Spearman $ρ= 0.442$) and partial cross-cell-line transfer ($ρ\\approx 0.40$). In contrast, temporal transfer collapses across all model classes considered, yielding negative $R^2$ and weak or near-zero $ρ$ (ridge $R^2 = -0.145$, $ρ= 0.008$; XGBoost $R^2 = -0.155$, $ρ= 0.056$; random forest $R^2 = -0.322$, $ρ= 0.139$). Additional robustness analyses using externally recomputed weak labels, shift-score quantification, and simple mitigation baselines preserve the same qualitative pattern. Feature-label association and feature-importance analyses remain relatively stable across cell lines but change sharply over time, indicating that failures arise from supervision drift rather than model capacity or simple covariate shift. These results show that strong in-domain performance under weak supervision can be misleading and motivate feature stability as a lightweight diagnostic for non-transferability before deployment.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-05T23:46:49Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Mehrdad Shoeibi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Elias Hossain</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ivan Garibay</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Niloofar Yousefi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Introduces supervision drift and a non-IID benchmark on CRISPR-Cas13d RNA-seq guide efficacy; weak-label models transfer across cell lines but collapse across…",
+  "title": "Learning Stable Predictors from Weak Supervision under Distribution Shift",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.05002v3"
+}

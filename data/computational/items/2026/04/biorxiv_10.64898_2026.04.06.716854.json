@@ -1,0 +1,43 @@
+{
+  "abstract": "MotivationExisting RNA 3D structure quality assessment (QA) methods rely on local geometric descriptors or statistical potentials that evaluate atomic-level contacts but are blind to global topological coherence. This creates a critical failure mode--structures that are \"locally correct but globally wrong\"--where well-formed local helices mask misplaced domains and incorrect overall packing.\n\nResultsWe introduce SpecRNA-QA, a lightweight RNA QA method based on multi-scale graph-Laplacian features of inter-nucleotide contact networks. In CASP16 leave-one-out cross-validation, it achieves median per-target Spearman{rho} = 0.69 (target-clustered bootstrap 95% CI [0.64, 0.73]) versus 0.47 for an internal geometry baseline--a +0.22 gap that is significant at p = 1.2 x 10-10 (one-sided Wilcoxon signed-rank) and reflects a per-target win rate of 93%. The gain is concentrated on large, multi-domain RNAs, where global coherence is poorly captured by local descriptors. In a contextual comparison with established statistical potentials, local energy-based scores remain strongest on compact RNAs, while SpecRNA-QA yields the strongest signal we observed on targets longer than 200 nt; within the single-threaded runtime budget used here, the strongest local-energy comparator, rsRNASP, timed out on 22 of 26 large targets, and we report an explicit paired head-to-head on the four commonly scored targets in Section 4.2. A training-free heuristic variant further shows that the spectral prior carries intrinsic quality information even in the absence of labeled QA data.\n\nAvailabilitySpecRNA-QA is available as a Python package at https://github.com/yudabitrends/specrnaq.\n\nContactybi3@gsu.edu\n\nSupplementary informationSupplementary data are available online.\n\nKey PointsO_LISpecRNA-QA uses multi-scale graph-Laplacian spectra to score global RNA fold coherence that local geometric descriptors and local statistical potentials can miss.\nC_LIO_LIThe method uncovers a size-dependent division of labor: on compact RNAs that can be scored exhaustively, atom-level statistical potentials such as rsRNASP remain strongest, whereas on >200 nt RNAs--where the strongest local comparator times out on most targets under the single-threaded runtime budget used here--SpecRNA-QA provides the strongest signal we observed.\nC_LIO_LIHeat-kernel traces at intermediate diffusion times emerge as the most discriminative spectral features and form an interpretable bridge between local packing and long-range tertiary organization.\nC_LIO_LIA training-free heuristic variant of SpecRNA-QA retains informative spectral signal without any labeled QA data, supporting the interpretation of the learned model as amplifying a real structural signal rather than overfitting one.\nC_LI",
+  "authors": [
+    "Zhu, Y.",
+    "Zhang, H.",
+    "Calhoun, V. D.",
+    "Bi, Y."
+  ],
+  "doi": "10.64898/2026.04.06.716854",
+  "first_seen": "2026-04-09",
+  "id": "biorxiv:10.64898/2026.04.06.716854",
+  "metadata": {
+    "abstract": "MotivationExisting RNA 3D structure quality assessment (QA) methods rely on local geometric descriptors or statistical potentials that evaluate atomic-level contacts but are blind to global topological coherence. This creates a critical failure mode--structures that are \"locally correct but globally wrong\"--where well-formed local helices mask misplaced domains and incorrect overall packing.\n\nResultsWe introduce SpecRNA-QA, a lightweight RNA QA method based on multi-scale graph-Laplacian features of inter-nucleotide contact networks. In CASP16 leave-one-out cross-validation, it achieves median per-target Spearman{rho} = 0.69 (target-clustered bootstrap 95% CI [0.64, 0.73]) versus 0.47 for an internal geometry baseline--a +0.22 gap that is significant at p = 1.2 x 10-10 (one-sided Wilcoxon signed-rank) and reflects a per-target win rate of 93%. The gain is concentrated on large, multi-domain RNAs, where global coherence is poorly captured by local descriptors. In a contextual comparison with established statistical potentials, local energy-based scores remain strongest on compact RNAs, while SpecRNA-QA yields the strongest signal we observed on targets longer than 200 nt; within the single-threaded runtime budget used here, the strongest local-energy comparator, rsRNASP, timed out on 22 of 26 large targets, and we report an explicit paired head-to-head on the four commonly scored targets in Section 4.2. A training-free heuristic variant further shows that the spectral prior carries intrinsic quality information even in the absence of labeled QA data.\n\nAvailabilitySpecRNA-QA is available as a Python package at https://github.com/yudabitrends/specrnaq.\n\nContactybi3@gsu.edu\n\nSupplementary informationSupplementary data are available online.\n\nKey PointsO_LISpecRNA-QA uses multi-scale graph-Laplacian spectra to score global RNA fold coherence that local geometric descriptors and local statistical potentials can miss.\nC_LIO_LIThe method uncovers a size-dependent division of labor: on compact RNAs that can be scored exhaustively, atom-level statistical potentials such as rsRNASP remain strongest, whereas on >200 nt RNAs--where the strongest local comparator times out on most targets under the single-threaded runtime budget used here--SpecRNA-QA provides the strongest signal we observed.\nC_LIO_LIHeat-kernel traces at intermediate diffusion times emerge as the most discriminative spectral features and form an interpretable bridge between local packing and long-range tertiary organization.\nC_LIO_LIA training-free heuristic variant of SpecRNA-QA retains informative spectral signal without any labeled QA data, supporting the interpretation of the learned model as amplifying a real structural signal rather than overfitting one.\nC_LI",
+    "author_corresponding": "Yuda Bi",
+    "author_corresponding_institution": "TReNDS Center, Georgia State University, Atlanta, GA, USA",
+    "authors": "Zhu, Y.; Zhang, H.; Calhoun, V. D.; Bi, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-09",
+    "doi": "10.64898/2026.04.06.716854",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/09/2026.04.06.716854.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Spectral Graph Features for Reference-free RNA 3D Quality Assessment",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "TReNDS Center, Georgia State University, Atlanta, GA, USA",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-04-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "SpecRNA-QA scores global RNA 3D fold coherence using multi-scale graph-Laplacian spectra of contact networks, outperforming a geometry baseline on CASP16 large…",
+  "title": "Spectral Graph Features for Reference-free RNA 3D Quality Assessment",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.06.716854"
+}

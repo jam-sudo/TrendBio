@@ -1,0 +1,41 @@
+{
+  "abstract": "BackgroundThe study of transposable elements (TEs) has become increasingly central to fields such as cancer biology, immunology, and aging. Accurately quantifying disease- or laboratory-mediated perturbations in these elements is critical to support this expanding research, yet current RNA-seq pipelines struggle with the pervasive overlap between TEs and protein-coding genes. Existing tools either aggregate to the subfamily level with no locus resolution (TEtranscripts), or provide locus-level quantification without modeling gene overlap (Telescope), with the latter attributing over 40% of TE signal to the 1.1% of loci that overlap gene exons.\n\nResultsWe present MAJEC (Momentum Accelerated Junction Enhanced Counting), a unified Expectation-Maximization (EM) framework that jointly quantifies genes, transcript isoforms, and individual TE loci from BAM alignments in a single pass. Splice junction evidence informs transcript-level priors, enabling MAJEC to probabilistically distinguish genic from TE-derived reads. This approach was independently validated against Salmon and RSEM on isoform quantification benchmarks. The joint feature space reduces exon-overlap contamination of locus-level TE estimates from 43% of total signal (Telescope) to 5% (MAJEC), while preserving subfamily-level accuracy (differential expression r = 0.987 vs TEtranscripts). Using paired biological vignettes, we demonstrate that MAJEC correctly resolves both the false TE reactivation artifacts endemic to TE-only models, and the false gene upregulation artifacts that occur when heuristic rules misassign genuine intragenic TE transcription.\n\nConclusionMAJEC simultaneously produces the isoform and locus-level resolution that TEtranscripts lacks, with greater accuracy than Telescope, and runs faster than either.",
+  "authors": [
+    "Lim, T.-Y.",
+    "Firestone, A. J."
+  ],
+  "doi": "10.64898/2026.04.10.717472",
+  "first_seen": "2026-04-14",
+  "id": "biorxiv:10.64898/2026.04.10.717472",
+  "metadata": {
+    "abstract": "BackgroundThe study of transposable elements (TEs) has become increasingly central to fields such as cancer biology, immunology, and aging. Accurately quantifying disease- or laboratory-mediated perturbations in these elements is critical to support this expanding research, yet current RNA-seq pipelines struggle with the pervasive overlap between TEs and protein-coding genes. Existing tools either aggregate to the subfamily level with no locus resolution (TEtranscripts), or provide locus-level quantification without modeling gene overlap (Telescope), with the latter attributing over 40% of TE signal to the 1.1% of loci that overlap gene exons.\n\nResultsWe present MAJEC (Momentum Accelerated Junction Enhanced Counting), a unified Expectation-Maximization (EM) framework that jointly quantifies genes, transcript isoforms, and individual TE loci from BAM alignments in a single pass. Splice junction evidence informs transcript-level priors, enabling MAJEC to probabilistically distinguish genic from TE-derived reads. This approach was independently validated against Salmon and RSEM on isoform quantification benchmarks. The joint feature space reduces exon-overlap contamination of locus-level TE estimates from 43% of total signal (Telescope) to 5% (MAJEC), while preserving subfamily-level accuracy (differential expression r = 0.987 vs TEtranscripts). Using paired biological vignettes, we demonstrate that MAJEC correctly resolves both the false TE reactivation artifacts endemic to TE-only models, and the false gene upregulation artifacts that occur when heuristic rules misassign genuine intragenic TE transcription.\n\nConclusionMAJEC simultaneously produces the isoform and locus-level resolution that TEtranscripts lacks, with greater accuracy than Telescope, and runs faster than either.",
+    "author_corresponding": "Ari J Firestone",
+    "author_corresponding_institution": "Calico Life Sciences LLC",
+    "authors": "Lim, T.-Y.; Firestone, A. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-14",
+    "doi": "10.64898/2026.04.10.717472",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/14/2026.04.10.717472.source.xml",
+    "license": "cc_by",
+    "published": "10.1093/bioinformatics/btag737",
+    "server": "bioRxiv",
+    "title": "MAJEC: unified gene, isoform, and locus-level transposable element quantification from RNA-seq",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Calico Life Sciences LLC",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-04-14",
+  "published_doi": "10.1093/bioinformatics/btag737",
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "MAJEC is an EM framework that jointly quantifies genes, isoforms, and TE loci from RNA-seq BAMs, reducing exon-overlap contamination of TE estimates from 43%…",
+  "title": "MAJEC: unified gene, isoform, and locus-level transposable element quantification from RNA-seq",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.10.717472"
+}

@@ -1,0 +1,41 @@
+{
+  "abstract": "Hepatocellular carcinoma (HCC) is a leading cause of cancer mortality worldwide, yet existing prognostic models incompletely capture its molecular heterogeneity. We developed an interpretable, attention-based multi-branch deep learning framework for multi-omics survival prediction in HCC. Using 358 TCGA LIHC patients with matched mRNA expression, miRNA expression, and DNA methylation data, we first reproduced the Chaudhary et al. autoencoder-based survival model as a baseline (C-index = 0.561, log-rank p = 3.10 x 10-2). We then designed a multi-branch architecture with omics-specific encoders, multi-head attention fusion, and Cox partial likelihood training, optimized via Bayesian hyperparameter search (100 Optuna trials). In 5-fold stratified cross-validation with nested feature selection (no data leakage), our attention model achieved a mean C-index of 0.683 {+/-} 0.039, outperforming the autoencoder baseline (0.561) and clinical-only model (0.637), and performing similarly to an AUTOSurv-like benchmark (0.697). Branch dropout enabled single-omics inference; external validation on the real GSE14520 cohort (n=221, mRNA) achieved a C-index of 0.637 (p = 0.004), comparable to Chaudhary et al.s reported 0.67 on the same data. Integrated gradients and attention weights highlighted features with prior links to HCC biology, including cell cycle genes (CCNA2, PLK1) and a Wnt pathway component (FZD7), along with candidate biomarkers stable across all cross-validation folds (PZP, SGCB, CD300LG, ZNF831 for mRNA; 12 miRNAs; 6 CpG sites). Differential expression analysis between model-defined risk groups identified 381 significant genes (Bonferroni p < 0.05), though this analysis is partly circular. Multivariable Cox regression indicated that the model-derived risk score adds prognostic value beyond clinical variables, with consistent performance across clinical subgroups, though clinical integration metrics were evaluated on training data. This framework provides a transparent, biologically grounded approach to multi-omics prognostication in HCC.",
+  "authors": [
+    "Znabu, B. F.",
+    "Atif, Z."
+  ],
+  "doi": "10.64898/2026.04.01.715980",
+  "first_seen": "2026-04-05",
+  "id": "biorxiv:10.64898/2026.04.01.715980",
+  "metadata": {
+    "abstract": "Hepatocellular carcinoma (HCC) is a leading cause of cancer mortality worldwide, yet existing prognostic models incompletely capture its molecular heterogeneity. We developed an interpretable, attention-based multi-branch deep learning framework for multi-omics survival prediction in HCC. Using 358 TCGA LIHC patients with matched mRNA expression, miRNA expression, and DNA methylation data, we first reproduced the Chaudhary et al. autoencoder-based survival model as a baseline (C-index = 0.561, log-rank p = 3.10 x 10-2). We then designed a multi-branch architecture with omics-specific encoders, multi-head attention fusion, and Cox partial likelihood training, optimized via Bayesian hyperparameter search (100 Optuna trials). In 5-fold stratified cross-validation with nested feature selection (no data leakage), our attention model achieved a mean C-index of 0.683 {+/-} 0.039, outperforming the autoencoder baseline (0.561) and clinical-only model (0.637), and performing similarly to an AUTOSurv-like benchmark (0.697). Branch dropout enabled single-omics inference; external validation on the real GSE14520 cohort (n=221, mRNA) achieved a C-index of 0.637 (p = 0.004), comparable to Chaudhary et al.s reported 0.67 on the same data. Integrated gradients and attention weights highlighted features with prior links to HCC biology, including cell cycle genes (CCNA2, PLK1) and a Wnt pathway component (FZD7), along with candidate biomarkers stable across all cross-validation folds (PZP, SGCB, CD300LG, ZNF831 for mRNA; 12 miRNAs; 6 CpG sites). Differential expression analysis between model-defined risk groups identified 381 significant genes (Bonferroni p < 0.05), though this analysis is partly circular. Multivariable Cox regression indicated that the model-derived risk score adds prognostic value beyond clinical variables, with consistent performance across clinical subgroups, though clinical integration metrics were evaluated on training data. This framework provides a transparent, biologically grounded approach to multi-omics prognostication in HCC.",
+    "author_corresponding": "Brhanu Fentaw Znabu",
+    "author_corresponding_institution": "University of Nebraska-Lincoln",
+    "authors": "Znabu, B. F.; Atif, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-05",
+    "doi": "10.64898/2026.04.01.715980",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/05/2026.04.01.715980.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Interpretable Deep Learning-Based Multi-Omics Integrationfor Prognosis in Hepatocellular Carcinoma",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Nebraska-Lincoln",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Attention-based multi-branch deep learning for HCC multi-omics survival prediction: C-index 0.683 in TCGA CV, 0.637 on GSE14520.",
+  "title": "Interpretable Deep Learning-Based Multi-Omics Integrationfor Prognosis in Hepatocellular Carcinoma",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.01.715980"
+}

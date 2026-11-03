@@ -1,0 +1,31 @@
+{
+  "abstract": "Masked diffusion models (MDMs) generate discrete sequences by iterative denoising under an absorbing masking process. In standard masked diffusion, if a token remains masked after a reverse update, the model discards its clean-state prediction for that position. Thus, still-masked positions must be repeatedly inferred from the mask token alone. This design choice limits cross-step refinement. To address this limitation, this paper proposes a simple, yet effective, post-training adaptation for MDMs that conditions each denoising step on the model's own previous clean-state predictions. The resulting method, called Self-Conditioned Masked Diffusion Models (SCMDM), requires minimal architectural change, does not introduce a recurrent latent-state pathway, does not rely on an auxiliary reference model, and adds no extra denoiser evaluations during sampling. This is an important departure from partial self-conditioning approaches which requires expensive model training from scratch. In particular, the paper shows that partial self-conditioning, including the commonly used 50% dropout strategy for training self-conditioned models from scratch, is suboptimal in the post-training regime. Instead, once the model's self-generated clean-state estimates become informative, the specialization to refinement is preferable to mixing conditional and unconditional objectives. SCMDM is evaluated across multiple domains, demonstrating consistent improvement over vanilla MDM baselines, achieving nearly a 50% reduction in generative perplexity on OWT-trained models (42.89 to 23.72), alongside strong improvements in discretized image synthesis quality, small molecular generation, and enhanced fidelity in genomic distribution modeling.",
+  "authors": [
+    "Michael Cardei",
+    "Huu Binh Ta",
+    "Ferdinando Fioretto"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-28",
+  "id": "arxiv:2604.26985",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.26985v2</ns0:id>\n    <ns0:title>Simple Self-Conditioning Adaptation for Masked Diffusion Models</ns0:title>\n    <ns0:updated>2026-06-06T20:43:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.26985v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.26985v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Masked diffusion models (MDMs) generate discrete sequences by iterative denoising under an absorbing masking process. In standard masked diffusion, if a token remains masked after a reverse update, the model discards its clean-state prediction for that position. Thus, still-masked positions must be repeatedly inferred from the mask token alone. This design choice limits cross-step refinement. To address this limitation, this paper proposes a simple, yet effective, post-training adaptation for MDMs that conditions each denoising step on the model's own previous clean-state predictions. The resulting method, called Self-Conditioned Masked Diffusion Models (SCMDM), requires minimal architectural change, does not introduce a recurrent latent-state pathway, does not rely on an auxiliary reference model, and adds no extra denoiser evaluations during sampling. This is an important departure from partial self-conditioning approaches which requires expensive model training from scratch. In particular, the paper shows that partial self-conditioning, including the commonly used 50% dropout strategy for training self-conditioned models from scratch, is suboptimal in the post-training regime. Instead, once the model's self-generated clean-state estimates become informative, the specialization to refinement is preferable to mixing conditional and unconditional objectives. SCMDM is evaluated across multiple domains, demonstrating consistent improvement over vanilla MDM baselines, achieving nearly a 50% reduction in generative perplexity on OWT-trained models (42.89 to 23.72), alongside strong improvements in discretized image synthesis quality, small molecular generation, and enhanced fidelity in genomic distribution modeling.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-28T19:34:04Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Michael Cardei</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Huu Binh Ta</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ferdinando Fioretto</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-28",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "SCMDM self-conditions masked diffusion post-training, cutting OWT perplexity 42.89 to 23.72; tested on images, molecules, genomics.",
+  "title": "Simple Self-Conditioning Adaptation for Masked Diffusion Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.26985v2"
+}

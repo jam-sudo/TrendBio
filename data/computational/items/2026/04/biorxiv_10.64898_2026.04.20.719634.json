@@ -1,0 +1,43 @@
+{
+  "abstract": "The CD8+ T cell response is a critical component of antiviral immunity, particularly in hosts who are immunocompromised or undergoing B cell-depleting therapy, such as rituximab. As viral evolution can lead to escape from CD8+ T cell recognition, tools that predict such escape are increasingly relevant. Here, we present CD8scape, an accessible command-line tool designed to predict viral escape from the CD8+ T cell response based on within-host sequence variation and HLA class I genotype. CD8scape is primarily a Julia wrapper for NetMHCpan v4.2, a neural network-based predictor trained on mass spectrometry-derived peptide presentation data. CD8scape integrates variant data and viral reading frames to identify all overlapping 8-11mer peptides at variant sites in both ancestral and derived states. These peptides are evaluated using NetMHCpan, which outputs eluted ligand (EL) scores as allele-specific percentile ranks to account for differences in MHC binding fastidiousness, and these are passed back to CD8scape itself. For each variant, the best-ranking peptide across all alleles is identified, and a harmonic mean is used to summarize presentation likelihood across the hosts HLA genotype. A fold-change between ancestral and derived harmonic means quantifies the likelihood of immune escape, with values >1 indicating reduced predicted presentation, and therefore a potential escape from the CD8+ T cell response. This is converted to a log2 value of this fold-change so that the metric is symmetric around 0, with positive values representing predicted escape. CD8scape can operate with known HLA genotypes or a representative HLA supertype panel for generalizable predictions. We demonstrate our method by application to within-host SARS-CoV-2 evolution in a rituximab-treated patient and discuss its implications for population-level CD8+ T cell escape.",
+  "authors": [
+    "Smith, E. W.",
+    "Hughes, J.",
+    "Robertson, D. L.",
+    "Illingworth, C."
+  ],
+  "doi": "10.64898/2026.04.20.719634",
+  "first_seen": "2026-04-22",
+  "id": "biorxiv:10.64898/2026.04.20.719634",
+  "metadata": {
+    "abstract": "The CD8+ T cell response is a critical component of antiviral immunity, particularly in hosts who are immunocompromised or undergoing B cell-depleting therapy, such as rituximab. As viral evolution can lead to escape from CD8+ T cell recognition, tools that predict such escape are increasingly relevant. Here, we present CD8scape, an accessible command-line tool designed to predict viral escape from the CD8+ T cell response based on within-host sequence variation and HLA class I genotype. CD8scape is primarily a Julia wrapper for NetMHCpan v4.2, a neural network-based predictor trained on mass spectrometry-derived peptide presentation data. CD8scape integrates variant data and viral reading frames to identify all overlapping 8-11mer peptides at variant sites in both ancestral and derived states. These peptides are evaluated using NetMHCpan, which outputs eluted ligand (EL) scores as allele-specific percentile ranks to account for differences in MHC binding fastidiousness, and these are passed back to CD8scape itself. For each variant, the best-ranking peptide across all alleles is identified, and a harmonic mean is used to summarize presentation likelihood across the hosts HLA genotype. A fold-change between ancestral and derived harmonic means quantifies the likelihood of immune escape, with values >1 indicating reduced predicted presentation, and therefore a potential escape from the CD8+ T cell response. This is converted to a log2 value of this fold-change so that the metric is symmetric around 0, with positive values representing predicted escape. CD8scape can operate with known HLA genotypes or a representative HLA supertype panel for generalizable predictions. We demonstrate our method by application to within-host SARS-CoV-2 evolution in a rituximab-treated patient and discuss its implications for population-level CD8+ T cell escape.",
+    "author_corresponding": "Christopher Illingworth",
+    "author_corresponding_institution": "University of Glasgow",
+    "authors": "Smith, E. W.; Hughes, J.; Robertson, D. L.; Illingworth, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-22",
+    "doi": "10.64898/2026.04.20.719634",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/22/2026.04.20.719634.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CD8scape: an accessible, command-line tool for predicting viral escape from the CD8+ T cell response",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Glasgow",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "CD8scape is a command-line tool, a Julia wrapper for NetMHCpan v4.2, that predicts viral escape from CD8+ T cell responses using within-host variation and HLA…",
+  "title": "CD8scape: an accessible, command-line tool for predicting viral escape from the CD8+ T cell response",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.20.719634"
+}

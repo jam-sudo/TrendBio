@@ -1,0 +1,32 @@
+{
+  "abstract": "Bidirectional transformers are the foundation of many sequence modeling tasks across natural, biological, and chemical language domains, but they are permutation-invariant without explicit positional embeddings. In contrast, unidirectional attention inherently encodes positional information through its triangular mask, enabling models to operate without positional embeddings altogether. Here, we introduce Dual Triangle Attention, a novel bidirectional attention mechanism that separates the query-key subspace of each attention head into two complementary triangular masks: one that attends to past-and-self positions and one that attends to future-and-self positions. This design provides bidirectional context while maintaining the causal mask's implicit positional inductive bias in both directions. Using PyTorch's flex_attention, Dual Triangle Attention is implemented as a single compiled kernel call with no additional parameters beyond standard multi-head attention. We evaluated Dual Triangle Attention across three settings: (1) a synthetic argmax position probe, (2) masked language modeling (MLM) on natural language, and (3) MLM on protein sequences. In the argmax task, both Dual Triangle Attention and causal attention learn positional information without explicit positional embeddings, whereas standard bidirectional attention cannot. In the MLM experiments, Dual Triangle Attention with Rotary Positional Embeddings (RoPE) achieved the best context extension performance and strong performance across the board. These findings suggest that Dual Triangle Attention is a viable attention mechanism for bidirectional transformers, with or without positional embeddings.",
+  "authors": [
+    "Logan Hallee",
+    "Jason P. Gleghorn"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-09",
+  "id": "arxiv:2604.18603",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.18603v1</ns0:id>\n    <ns0:title>Dual Triangle Attention: Effective Bidirectional Attention Without Positional Embeddings</ns0:title>\n    <ns0:updated>2026-04-09T19:32:11Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.18603v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.18603v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Bidirectional transformers are the foundation of many sequence modeling tasks across natural, biological, and chemical language domains, but they are permutation-invariant without explicit positional embeddings. In contrast, unidirectional attention inherently encodes positional information through its triangular mask, enabling models to operate without positional embeddings altogether. Here, we introduce Dual Triangle Attention, a novel bidirectional attention mechanism that separates the query-key subspace of each attention head into two complementary triangular masks: one that attends to past-and-self positions and one that attends to future-and-self positions. This design provides bidirectional context while maintaining the causal mask's implicit positional inductive bias in both directions. Using PyTorch's flex_attention, Dual Triangle Attention is implemented as a single compiled kernel call with no additional parameters beyond standard multi-head attention. We evaluated Dual Triangle Attention across three settings: (1) a synthetic argmax position probe, (2) masked language modeling (MLM) on natural language, and (3) MLM on protein sequences. In the argmax task, both Dual Triangle Attention and causal attention learn positional information without explicit positional embeddings, whereas standard bidirectional attention cannot. In the MLM experiments, Dual Triangle Attention with Rotary Positional Embeddings (RoPE) achieved the best context extension performance and strong performance across the board. These findings suggest that Dual Triangle Attention is a viable attention mechanism for bidirectional transformers, with or without positional embeddings.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-09T19:32:11Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Logan Hallee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jason P. Gleghorn</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-09",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Introduces Dual Triangle Attention, a bidirectional attention mechanism using two complementary causal-style masks that encode position without embeddings;…",
+  "title": "Dual Triangle Attention: Effective Bidirectional Attention Without Positional Embeddings",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.18603v1"
+}
