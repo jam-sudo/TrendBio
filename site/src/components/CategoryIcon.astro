@@ -1,0 +1,15 @@
+---
+import { categoryIcon, categoryStyle } from "../lib/categories";
+
+interface Props { slug: string; size: 16 | 36 }
+const { slug, size } = Astro.props;
+---
+<svg class:list={["category-icon", { "category-tile": size === 36 }]}
+  viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false"
+  fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+  style={`--category-hue: ${categoryStyle(slug).hue}`} set:html={categoryIcon(slug)} />
+
+<style>
+  .category-icon { display: inline-block; flex-shrink: 0; vertical-align: middle; color: oklch(var(--icon-lightness) var(--icon-chroma) var(--category-hue)); }
+  .category-tile { padding: 4px; }
+</style>

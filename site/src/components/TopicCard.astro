@@ -1,4 +1,5 @@
 ---
+import CategoryIcon from "./CategoryIcon.astro";
 import SignalLine from "./SignalLine.astro";
 import { loadTaxonomy, loadTopic } from "../lib/data";
 import { categoryStyle, rankMedal } from "../lib/categories";
@@ -12,7 +13,7 @@ const identity = categoryStyle(ranked.category);
 <a class:list={["topic-card", { featured }]} href={`/topic/${ranked.slug}/`}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
-  <span class="category-tile" aria-hidden="true">{identity.emoji}</span>
+  <CategoryIcon slug={ranked.category} size={36} />
   <div class="topic-copy">
     <p class="rank-category">{category?.label ?? ranked.category}</p>
     <h2>{ranked.headline}</h2>
@@ -38,6 +39,6 @@ const identity = categoryStyle(ranked.category);
     .rank-category { position: absolute; top: 1rem; right: 1rem; max-width: calc(100% - 110px); margin: 0; }
     .topic-card :global(.signal-line) { grid-column: 1 / -1; padding-top: 0.5rem; border-top: 1px solid var(--border); }
     .rank { align-self: center; }
-    .category-tile { grid-column: 2; }
+    .topic-card :global(.category-tile) { grid-column: 2; }
   }
 </style>
