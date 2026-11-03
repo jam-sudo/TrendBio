@@ -1,0 +1,43 @@
+{
+  "abstract": "BD Rhapsody is a widely used single-cell RNA-seq (scRNA-seq) platform to profile gene expression. Based on barcoded beads, processing BD Rhapsody experiments is demanding because of the multiple barcode versions and layouts, which makes it difficult to locate barcodes by scanning reads positionally.\n\nWe introduce rhapsodist, a reproducible and scalable Snakemake workflow to process BD Rhapsody whole transcriptome analysis (WTA) data from raw FASTQ reads. As a result, rhapsodist generates count tables in a HDF5-backed SingleCellExperiment format. It supports all generations of BD Rhapsody beads, regardless of the barcode allowlist version and the presence of a variable-length diversity inset. rhapsodist orchestrates STARsolo, kallisto/bustools, salmon/alevin, and the official BD Rhapsody CWL pipeline, enabling direct cross-aligner comparison. Optionally, sample tag demultiplexing, read downsampling, tunable linker-mismatch tolerance, and per-sample reports are provided.\n\nWe showcase a remarkable consistency across aligner results, and highlight their differences in performance (e.g., quantification, clustering, or speed). On simulated data all four aligners recovered true barcodes with perfect precision and recall and equivalent UMI counts. On HeLa cells (a cell line; enhanced beads), both per-cell correlations across aligners and pseudobulk correlations were remarkably high on every comparison (Pearson r of 0.89-0.96 and 0.94-0.98 per cell and pseudobulk, respectively). On a mouse epidermis dataset with a more complex transcriptional profile (e.g., with celltypes; on legacy beads), cell type pseudobulk correlations showed a similar consistency (Pearson r 0.92-0.98), pointing to calling robustness. As expected, pseudoaligners (kallisto/bustools and salmon/alevin) were best performers speed-wise, and BDs workflow recovered a higher number of barcodes and UMIs.\n\nrhapsodist is available at https://github.com/imallona/rhapsodist under GPLv3, tried on Linux with conda, and includes unit and integration tests.",
+  "authors": [
+    "Moro, G. A.",
+    "Wang, J.",
+    "Sendoel, A.",
+    "Mallona, I."
+  ],
+  "doi": "10.64898/2026.04.28.721304",
+  "first_seen": "2026-04-30",
+  "id": "biorxiv:10.64898/2026.04.28.721304",
+  "metadata": {
+    "abstract": "BD Rhapsody is a widely used single-cell RNA-seq (scRNA-seq) platform to profile gene expression. Based on barcoded beads, processing BD Rhapsody experiments is demanding because of the multiple barcode versions and layouts, which makes it difficult to locate barcodes by scanning reads positionally.\n\nWe introduce rhapsodist, a reproducible and scalable Snakemake workflow to process BD Rhapsody whole transcriptome analysis (WTA) data from raw FASTQ reads. As a result, rhapsodist generates count tables in a HDF5-backed SingleCellExperiment format. It supports all generations of BD Rhapsody beads, regardless of the barcode allowlist version and the presence of a variable-length diversity inset. rhapsodist orchestrates STARsolo, kallisto/bustools, salmon/alevin, and the official BD Rhapsody CWL pipeline, enabling direct cross-aligner comparison. Optionally, sample tag demultiplexing, read downsampling, tunable linker-mismatch tolerance, and per-sample reports are provided.\n\nWe showcase a remarkable consistency across aligner results, and highlight their differences in performance (e.g., quantification, clustering, or speed). On simulated data all four aligners recovered true barcodes with perfect precision and recall and equivalent UMI counts. On HeLa cells (a cell line; enhanced beads), both per-cell correlations across aligners and pseudobulk correlations were remarkably high on every comparison (Pearson r of 0.89-0.96 and 0.94-0.98 per cell and pseudobulk, respectively). On a mouse epidermis dataset with a more complex transcriptional profile (e.g., with celltypes; on legacy beads), cell type pseudobulk correlations showed a similar consistency (Pearson r 0.92-0.98), pointing to calling robustness. As expected, pseudoaligners (kallisto/bustools and salmon/alevin) were best performers speed-wise, and BDs workflow recovered a higher number of barcodes and UMIs.\n\nrhapsodist is available at https://github.com/imallona/rhapsodist under GPLv3, tried on Linux with conda, and includes unit and integration tests.",
+    "author_corresponding": "Izaskun Mallona",
+    "author_corresponding_institution": "University of Zurich",
+    "authors": "Moro, G. A.; Wang, J.; Sendoel, A.; Mallona, I.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-30",
+    "doi": "10.64898/2026.04.28.721304",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/30/2026.04.28.721304.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "rhapsodist: a reproducible Snakemake workflow for BD~Rhapsody single-cell RNA-seq data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Zurich",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "rhapsodist: a reproducible, scalable Snakemake workflow processing BD Rhapsody scRNA-seq reads across all bead generations, wrapping four aligners for…",
+  "title": "rhapsodist: a reproducible Snakemake workflow for BD~Rhapsody single-cell RNA-seq data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.28.721304"
+}

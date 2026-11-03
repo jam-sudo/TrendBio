@@ -1,0 +1,31 @@
+{
+  "abstract": "Knowledge graphs used for retrieval treat all facts as equally current. Existing temporal approaches apply uniform decay, using a single forgetting curve regardless of knowledge type. We show this is fundamentally misspecified: different knowledge types exhibit different temporal dynamics, and the core retrieval problem is not latency or throughput but identifying what is important at query time.\n  We propose a hierarchical framework that replaces uniform decay with a continuous decay surface parameterized by two orthogonal signals: velocity (how frequently a concept is observed) and volatility (how much the value changes between observations, measured via embedding distance). The decay surface is decomposed into three learnable levels: domain-level parameters capture universal patterns (some predicates are inherently permanent, others inherently transient), context-level parameters capture setting-dependent variation, and entity-level adaptation personalizes decay to specific subjects. All parameters emerge from data through survival analysis on observed value lifetimes, requiring no predefined taxonomies or domain expertise.\n  We formulate edge lifetime as a survival problem where the event is value supersession (a meaningfully different value replacing the current one), distinct from mere re-observation. Experiments on synthetic temporal knowledge graphs demonstrate recovery of planted hierarchical parameters (HDBSCAN ARI = 1.0).\n  Validation on 107 Wikipedia articles and 1,163 patient records from the Synthea clinical EHR simulator shows that velocity-volatility clusters emerge naturally, align with observable persistence patterns, and near-universally exhibit the Lindy effect (Weibull shape k < 1). Uniform decay performs 18x worse than no temporal weighting. Heterogeneous decay recovers from this, with each hierarchy level contributing measurable improvement.",
+  "authors": [
+    "Mandar Karhade"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-22",
+  "id": "arxiv:2604.26970",
+  "metadata": {
+    "arxiv_primary_category": "cs.IR",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.26970v1</ns0:id>\n    <ns0:title>Not All Memories Age the Same: Autodiscovery of Adaptive Decay in Knowledge Graphs</ns0:title>\n    <ns0:updated>2026-04-22T02:32:01Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.26970v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.26970v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Knowledge graphs used for retrieval treat all facts as equally current. Existing temporal approaches apply uniform decay, using a single forgetting curve regardless of knowledge type. We show this is fundamentally misspecified: different knowledge types exhibit different temporal dynamics, and the core retrieval problem is not latency or throughput but identifying what is important at query time.\n  We propose a hierarchical framework that replaces uniform decay with a continuous decay surface parameterized by two orthogonal signals: velocity (how frequently a concept is observed) and volatility (how much the value changes between observations, measured via embedding distance). The decay surface is decomposed into three learnable levels: domain-level parameters capture universal patterns (some predicates are inherently permanent, others inherently transient), context-level parameters capture setting-dependent variation, and entity-level adaptation personalizes decay to specific subjects. All parameters emerge from data through survival analysis on observed value lifetimes, requiring no predefined taxonomies or domain expertise.\n  We formulate edge lifetime as a survival problem where the event is value supersession (a meaningfully different value replacing the current one), distinct from mere re-observation. Experiments on synthetic temporal knowledge graphs demonstrate recovery of planted hierarchical parameters (HDBSCAN ARI = 1.0).\n  Validation on 107 Wikipedia articles and 1,163 patient records from the Synthea clinical EHR simulator shows that velocity-volatility clusters emerge naturally, align with observable persistence patterns, and near-universally exhibit the Lindy effect (Weibull shape k &lt; 1). Uniform decay performs 18x worse than no temporal weighting. Heterogeneous decay recovers from this, with each hierarchy level contributing measurable improvement.</ns0:summary>\n    <ns0:category term=\"cs.IR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-22T02:32:01Z</ns0:published>\n    <ns1:comment>27 pages, 2 figures, 19 tables (including appendix). Preprint under review</ns1:comment>\n    <ns1:primary_category term=\"cs.IR\" />\n    <ns0:author>\n      <ns0:name>Mandar Karhade</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-22",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Learns adaptive fact-decay for knowledge-graph retrieval via survival analysis; validated on Wikipedia and Synthea synthetic EHR data.",
+  "title": "Not All Memories Age the Same: Autodiscovery of Adaptive Decay in Knowledge Graphs",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.26970v1"
+}

@@ -1,0 +1,43 @@
+{
+  "abstract": "Multiplexed tissue imaging platforms resolve dozens of cell types at single-cell spatial resolution, enabling characterization of conditional interaction networks governing tumor immune microenvironments. Existing methods rely on marginal pairwise co-occurrence statistics without conditioning on third cell types, or estimate a global interaction coefficient per cell type pair that ignores spatial heterogeneity across tissue compartments. We present GP-GHS, a Bayesian nodewise regression framework for inferring spatially varying cell-cell interaction networks from multi-plexed imaging data. Each regression coefficient is modeled as a Gaussian process over the tissue domain, approximated via a Hilbert Space Gaussian Process (HSGP) expansion for scalability. A group horseshoe prior assigns a single local shrinkage parameter across all spectral basis coefficients for each candidate edge, enforcing edge inclusion as a group decision rather than independent coefficient level decisions. This separation of roles, where group shrinkage governs edge existence and the spectral prior governs spatial smoothness conditional on existence, enables recovery of spatially structured graphs with high sensitivity. Posterior inference uses a closed form block Gibbs sampler with nodewise regressions parallelized across cores. In simulation studies, GP-GHS dominates all competitors on F1 and MCC across sparsity levels and problem sizes, with ablations isolating group shrinkage as the critical modeling ingredient. Applied to a 140 image CODEX dataset from advanced colorectal cancer patients stratified by pathology subtype, GP-GHS identifies 13 differentially active edges at FDR < 0.05, forming a Treg-centered immunosuppressive network amplified in the diffuse inflammatory subtype, consistent with known mechanisms of Treg recruitment and macrophage-mediated immunosuppression in colorectal cancer.",
+  "authors": [
+    "Bhadury, S.",
+    "Gaskins, J. T.",
+    "Rao, A."
+  ],
+  "doi": "10.64898/2026.04.01.715977",
+  "first_seen": "2026-04-05",
+  "id": "biorxiv:10.64898/2026.04.01.715977",
+  "metadata": {
+    "abstract": "Multiplexed tissue imaging platforms resolve dozens of cell types at single-cell spatial resolution, enabling characterization of conditional interaction networks governing tumor immune microenvironments. Existing methods rely on marginal pairwise co-occurrence statistics without conditioning on third cell types, or estimate a global interaction coefficient per cell type pair that ignores spatial heterogeneity across tissue compartments. We present GP-GHS, a Bayesian nodewise regression framework for inferring spatially varying cell-cell interaction networks from multi-plexed imaging data. Each regression coefficient is modeled as a Gaussian process over the tissue domain, approximated via a Hilbert Space Gaussian Process (HSGP) expansion for scalability. A group horseshoe prior assigns a single local shrinkage parameter across all spectral basis coefficients for each candidate edge, enforcing edge inclusion as a group decision rather than independent coefficient level decisions. This separation of roles, where group shrinkage governs edge existence and the spectral prior governs spatial smoothness conditional on existence, enables recovery of spatially structured graphs with high sensitivity. Posterior inference uses a closed form block Gibbs sampler with nodewise regressions parallelized across cores. In simulation studies, GP-GHS dominates all competitors on F1 and MCC across sparsity levels and problem sizes, with ablations isolating group shrinkage as the critical modeling ingredient. Applied to a 140 image CODEX dataset from advanced colorectal cancer patients stratified by pathology subtype, GP-GHS identifies 13 differentially active edges at FDR < 0.05, forming a Treg-centered immunosuppressive network amplified in the diffuse inflammatory subtype, consistent with known mechanisms of Treg recruitment and macrophage-mediated immunosuppression in colorectal cancer.",
+    "author_corresponding": "Sagnik Bhadury",
+    "author_corresponding_institution": "University of Michigan",
+    "authors": "Bhadury, S.; Gaskins, J. T.; Rao, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-05",
+    "doi": "10.64898/2026.04.01.715977",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/05/2026.04.01.715977.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Spatially Varying Graphical Models for Cell-Cell Interaction Networks in Multiplexed Tissue Imaging",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Michigan",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-04-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces GP-GHS, a Bayesian nodewise regression with Gaussian process coefficients (HSGP) and group horseshoe priors to infer spatially varying cell-cell…",
+  "title": "Spatially Varying Graphical Models for Cell-Cell Interaction Networks in Multiplexed Tissue Imaging",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.01.715977"
+}

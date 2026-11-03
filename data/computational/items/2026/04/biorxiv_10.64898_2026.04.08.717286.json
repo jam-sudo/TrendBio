@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundConstructing digital twins in healthcare requires biological data sources that are simultaneously informative, dynamic, and practical for routine collection. Dried blood spot (DBS) sampling combined with untargeted metabolomics is well suited to meet these requirements: DBS can be self-collected at home and mailed at ambient temperature, while untargeted LC-MS/MS captures thousands of metabolites reflecting individual physiology, lifestyle, and exposures. We previously demonstrated proof-of-concept individual identification from DBS-derived metabolomic profiles in 277 volunteers (80-92% accuracy). Here, we report a large-scale validation on a substantially expanded cohort.\n\nMethodsWe collected 18,288 DBS samples from 1,257 individuals across 134 analytical batches over 15 months. Samples were self-collected at home, mailed via standard postal service, and analyzed by untargeted LC-MS/MS on a high-resolution Orbitrap platform in positive ESI mode. Our classification pipeline comprises batch-aware normalization, supervised feature selection, biological signal filtering, dimensionality reduction, and user-level majority voting across all available samples. This voting reflects the real-world use case: participants contribute multiple self-collected DBS cards over time, taken at different times of day and under varying conditions. We employed GroupKFold cross-validation with group=batch to ensure zero batch leakage between training and testing sets.\n\nResultsIn 10-fold GroupKFold cross-validation (group=batch, zero batch leakage), our pipeline achieved 94.1% user-level identification accuracy (85.5% sample-level). In a fully held-out validation on 17 future batches -- with all feature selection, normalization, and model fitting performed exclusively on training data -- performance was even stronger: 96.1% user-level and 92.6% sample-level across 1,134 classes (chance level: 0.088%). Feature selection stability was confirmed via bootstrap analysis. We identified batch leakage as a critical methodological pitfall for the field: naive random splitting inflated accuracy by sharing 92.8% of test samples (user, batch) pairs with the training set. The top discriminative metabolites span biologically relevant pathways including amino acid metabolism, fatty acid transport, and sphingolipid biosynthesis.\n\nConclusionsUntargeted metabolomics from dried blood spots supports batch-aware, closed-set individual identification in a single-laboratory setting, with potential relevance for longitudinal sample-to-person linkage in future digital twin workflows.",
+  "authors": [
+    "Hauguel, P.",
+    "Anctil, N.",
+    "Noel, L. P."
+  ],
+  "doi": "10.64898/2026.04.08.717286",
+  "first_seen": "2026-04-11",
+  "id": "biorxiv:10.64898/2026.04.08.717286",
+  "metadata": {
+    "abstract": "BackgroundConstructing digital twins in healthcare requires biological data sources that are simultaneously informative, dynamic, and practical for routine collection. Dried blood spot (DBS) sampling combined with untargeted metabolomics is well suited to meet these requirements: DBS can be self-collected at home and mailed at ambient temperature, while untargeted LC-MS/MS captures thousands of metabolites reflecting individual physiology, lifestyle, and exposures. We previously demonstrated proof-of-concept individual identification from DBS-derived metabolomic profiles in 277 volunteers (80-92% accuracy). Here, we report a large-scale validation on a substantially expanded cohort.\n\nMethodsWe collected 18,288 DBS samples from 1,257 individuals across 134 analytical batches over 15 months. Samples were self-collected at home, mailed via standard postal service, and analyzed by untargeted LC-MS/MS on a high-resolution Orbitrap platform in positive ESI mode. Our classification pipeline comprises batch-aware normalization, supervised feature selection, biological signal filtering, dimensionality reduction, and user-level majority voting across all available samples. This voting reflects the real-world use case: participants contribute multiple self-collected DBS cards over time, taken at different times of day and under varying conditions. We employed GroupKFold cross-validation with group=batch to ensure zero batch leakage between training and testing sets.\n\nResultsIn 10-fold GroupKFold cross-validation (group=batch, zero batch leakage), our pipeline achieved 94.1% user-level identification accuracy (85.5% sample-level). In a fully held-out validation on 17 future batches -- with all feature selection, normalization, and model fitting performed exclusively on training data -- performance was even stronger: 96.1% user-level and 92.6% sample-level across 1,134 classes (chance level: 0.088%). Feature selection stability was confirmed via bootstrap analysis. We identified batch leakage as a critical methodological pitfall for the field: naive random splitting inflated accuracy by sharing 92.8% of test samples (user, batch) pairs with the training set. The top discriminative metabolites span biologically relevant pathways including amino acid metabolism, fatty acid transport, and sphingolipid biosynthesis.\n\nConclusionsUntargeted metabolomics from dried blood spots supports batch-aware, closed-set individual identification in a single-laboratory setting, with potential relevance for longitudinal sample-to-person linkage in future digital twin workflows.",
+    "author_corresponding": "Pierrick Hauguel",
+    "author_corresponding_institution": "Biotwin",
+    "authors": "Hauguel, P.; Anctil, N.; Noel, L. P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-11",
+    "doi": "10.64898/2026.04.08.717286",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/11/2026.04.08.717286.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Metabolomic Fingerprinting from Dried Blood Spots Enables Individual Identification Across 1,257 Participants at 94% User-Level Accuracy",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Biotwin",
+  "preprint_id": null,
+  "primary_category": "metabolomics",
+  "published_at": "2026-04-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Batch-aware classification of untargeted LC-MS/MS dried-blood-spot metabolomes identifies 1,257 individuals at 96% user-level accuracy.",
+  "title": "Metabolomic Fingerprinting from Dried Blood Spots Enables Individual Identification Across 1,257 Participants at 94% User-Level Accuracy",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.08.717286"
+}

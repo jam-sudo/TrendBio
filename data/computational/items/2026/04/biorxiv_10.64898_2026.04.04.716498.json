@@ -1,0 +1,46 @@
+{
+  "abstract": "BackgroundAchieving FAIR-compliant computational research in bioinformatics is systematically undermined by two compounding challenges that existing tools leave unresolved: long-term reproducibility and accessibility. Standard package managers re-download dependencies from live repositories at every build, making environments vulnerable to library disappearance and version drift, and pinning a package version does not pin the versions of its transitive dependencies, causing divergences between builds performed at different points in time. Compounding this, packages from repositories such as CRAN, Bioconductor, and PyPI frequently omit critical system-level dependencies from their installation metadata, leaving users to manually discover which underlying library is missing or which version is required. Beyond these technical failures, constructing a truly reproducible environment demands expertise in containerization making reproducibility in practice a privilege and not a standard.\n\nFindingsWe present REBEL (Reproducible Environment Builder for Explicit Library Resolution), a framework that addresses both challenges through three dependency inference heuristics: (i) Deep Inspection of source code, (ii) Fuzzy Matching against a manually curated knowledge base, and (iii) Conservative Dependency Locking. The resolved dependency stack is then archived into a self-contained local store, enabling offline and deterministic rebuilds at any future time. We compared the installation of 1,000 randomly sampled CRAN packages in isolated Docker containers versus the standard package manager and REBEL resolved 149 of 328 standard installation failures (45.4%). Moreover through its DockerBuilder component, REBEL further generates fully reproducible Docker images from a plain text requirements file, making deterministic environment construction accessible without expertise in containerization.\n\nConclusionsREBEL provides a practical foundation for FAIR-compliant, long-term reproducible bioinformatics analyses, making deterministic environment construction accessible to researchers regardless of their technical background.\n\nREBEL is freely available at https://github.com/Rebel-Project-Core",
+  "authors": [
+    "Martelli, E.",
+    "Ratto, M. L.",
+    "Nuvolari, B.",
+    "Arigoni, M.",
+    "Tao, J.",
+    "Micocci, F. M. A.",
+    "Alessandri, L."
+  ],
+  "doi": "10.64898/2026.04.04.716498",
+  "first_seen": "2026-04-07",
+  "id": "biorxiv:10.64898/2026.04.04.716498",
+  "metadata": {
+    "abstract": "BackgroundAchieving FAIR-compliant computational research in bioinformatics is systematically undermined by two compounding challenges that existing tools leave unresolved: long-term reproducibility and accessibility. Standard package managers re-download dependencies from live repositories at every build, making environments vulnerable to library disappearance and version drift, and pinning a package version does not pin the versions of its transitive dependencies, causing divergences between builds performed at different points in time. Compounding this, packages from repositories such as CRAN, Bioconductor, and PyPI frequently omit critical system-level dependencies from their installation metadata, leaving users to manually discover which underlying library is missing or which version is required. Beyond these technical failures, constructing a truly reproducible environment demands expertise in containerization making reproducibility in practice a privilege and not a standard.\n\nFindingsWe present REBEL (Reproducible Environment Builder for Explicit Library Resolution), a framework that addresses both challenges through three dependency inference heuristics: (i) Deep Inspection of source code, (ii) Fuzzy Matching against a manually curated knowledge base, and (iii) Conservative Dependency Locking. The resolved dependency stack is then archived into a self-contained local store, enabling offline and deterministic rebuilds at any future time. We compared the installation of 1,000 randomly sampled CRAN packages in isolated Docker containers versus the standard package manager and REBEL resolved 149 of 328 standard installation failures (45.4%). Moreover through its DockerBuilder component, REBEL further generates fully reproducible Docker images from a plain text requirements file, making deterministic environment construction accessible without expertise in containerization.\n\nConclusionsREBEL provides a practical foundation for FAIR-compliant, long-term reproducible bioinformatics analyses, making deterministic environment construction accessible to researchers regardless of their technical background.\n\nREBEL is freely available at https://github.com/Rebel-Project-Core",
+    "author_corresponding": "Luca Alessandri",
+    "author_corresponding_institution": "University of Turin",
+    "authors": "Martelli, E.; Ratto, M. L.; Nuvolari, B.; Arigoni, M.; Tao, J.; Micocci, F. M. A.; Alessandri, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-07",
+    "doi": "10.64898/2026.04.04.716498",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/07/2026.04.04.716498.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "REBEL, Reproducible Environment Builder for Explicit Library resolution",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Turin",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "REBEL resolves system and transitive dependencies for CRAN, Bioconductor and PyPI packages, archives them locally for offline rebuilds, and resolved 149 of 328…",
+  "title": "REBEL, Reproducible Environment Builder for Explicit Library resolution",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.04.716498"
+}

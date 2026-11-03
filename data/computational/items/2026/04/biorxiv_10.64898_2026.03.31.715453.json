@@ -1,0 +1,44 @@
+{
+  "abstract": "Multimodal learning is commonly assumed to improve predictive performance, yet in biological applications auxiliary modalities are often imperfect and can degrade learning if fused naively. We investigate this problem in TCR-peptide binding prediction, where sequence embeddings from pretrained protein language models are strong and transferable, but structure-derived residue graphs are built from predicted folds and heuristic discretization. In this setting, structural views can be noisy, inconsistent, and difficult to optimize jointly with sequence features. We introduce TRACE, a lightweight multimodal framework that encodes each entity (TCR and peptide) with parallel sequence and graph towers, then applies CLIP-style intra-entity contrastive alignment before interaction modeling. The alignment objective regularizes representation geometry by encouraging modality consistency for the same biological entity, thereby preventing unstable graph signals from dominating fusion. Across protocol-aware TCHard RN evaluations, naive sequence+graph fusion frequently underperforms a sequence-only baseline and can collapse toward near-random behavior. In contrast, TRACE consistently restores and improves performance. Controlled noise and supervision sweeps show that these gains persist under increasing graph corruption and positive-label scarcity, indicating that alignment is especially important when training conditions are hard. Our results challenge the assumption that adding modalities is inherently beneficial. Instead, they highlight a central principle for robust multimodal bioinformatics: performance depends not only on what modalities are used, but on how their interaction is constrained during optimization. TRACE provides a simple and general recipe for leveraging imperfect structural information without sacrificing stability.",
+  "authors": [
+    "Qi, C.",
+    "Wang, W.",
+    "Fang, H.",
+    "Wei, Z."
+  ],
+  "doi": "10.64898/2026.03.31.715453",
+  "first_seen": "2026-04-02",
+  "id": "biorxiv:10.64898/2026.03.31.715453",
+  "metadata": {
+    "abstract": "Multimodal learning is commonly assumed to improve predictive performance, yet in biological applications auxiliary modalities are often imperfect and can degrade learning if fused naively. We investigate this problem in TCR-peptide binding prediction, where sequence embeddings from pretrained protein language models are strong and transferable, but structure-derived residue graphs are built from predicted folds and heuristic discretization. In this setting, structural views can be noisy, inconsistent, and difficult to optimize jointly with sequence features. We introduce TRACE, a lightweight multimodal framework that encodes each entity (TCR and peptide) with parallel sequence and graph towers, then applies CLIP-style intra-entity contrastive alignment before interaction modeling. The alignment objective regularizes representation geometry by encouraging modality consistency for the same biological entity, thereby preventing unstable graph signals from dominating fusion. Across protocol-aware TCHard RN evaluations, naive sequence+graph fusion frequently underperforms a sequence-only baseline and can collapse toward near-random behavior. In contrast, TRACE consistently restores and improves performance. Controlled noise and supervision sweeps show that these gains persist under increasing graph corruption and positive-label scarcity, indicating that alignment is especially important when training conditions are hard. Our results challenge the assumption that adding modalities is inherently beneficial. Instead, they highlight a central principle for robust multimodal bioinformatics: performance depends not only on what modalities are used, but on how their interaction is constrained during optimization. TRACE provides a simple and general recipe for leveraging imperfect structural information without sacrificing stability.",
+    "author_corresponding": "Zhi Wei",
+    "author_corresponding_institution": "New Jersey Institute of Technology",
+    "authors": "Qi, C.; Wang, W.; Fang, H.; Wei, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-02",
+    "doi": "10.64898/2026.03.31.715453",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/02/2026.03.31.715453.source.xml",
+    "license": "cc_by",
+    "published": "10.1093/bioinformatics/btag573",
+    "server": "bioRxiv",
+    "title": "When Multimodal Fusion Fails: Contrastive Alignment as a Necessary Stabilizer for TCR--Peptide Binding Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "New Jersey Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-02",
+  "published_doi": "10.1093/bioinformatics/btag573",
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "TRACE, a multimodal TCR-peptide binding predictor with CLIP-style intra-entity contrastive alignment of sequence and graph towers; naive fusion underperforms…",
+  "title": "When Multimodal Fusion Fails: Contrastive Alignment as a Necessary Stabilizer for TCR--Peptide Binding Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.31.715453"
+}

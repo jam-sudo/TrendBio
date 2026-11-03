@@ -1,0 +1,43 @@
+{
+  "abstract": "Despite major advances in computational antibody engineering, no systematic comparison of modern open-source LLM backbone families for antibody sequence generation exists, nor is it known whether architectural differences matter at compact model scales. In this study, five compact transformer variants inspired by prominent open-source LLM families (Llama-4, Gemma-3, DeepSeek-V3, Mistral 7B, and NVIDIA Nemotron-3) were customized and trained from scratch for de novo VH single-domain antibody (sdAb) design. All five models were pretrained from scratch on 15 million sequences from the Observed Antibody Space (OAS) database. Pretraining yielded uniformly high generative fidelity across architectures: sequence diversity 0.507-0.516 (CV=0.8%), uniqueness approaching 1.0, and novelty 0.925-0.977 (CV=2.2%). The models were subsequently fine-tuned on disease-stratified repertoires spanning SARS-CoV-2 (n=4,688), HIV (n=430), HER2 (n=22,778), and Ebola virus (n=2,868). Structural assessment of top-ranked candidates of those case studies via AlphaFold-2, Boltz-2, RoseTTAFold-2, and ESMFold produced mean pLDDT scores of 92.88{+/-}1.54 to 93.77{+/-}2.16, with no statistically significant inter-model differences (Kruskal-Wallis H=2.06, p>0.05; N=100), indicating no statistically detectable difference was observed across architectures at this compressed scale in a single-seed experiment, suggesting that generative capacity at this parameter regime is primarily determined by training data and model scale rather than family-specific design elements at this scale. Computational docking yielded predicted binding free energies of -36.34 to -65.60 kcal/mol; independent biological rigor validation through IMGT-defined CDR-H3 extraction, BLASTp novelty assessment, and NetMHCIIpan 4.3 MHC-II immunogenicity profiling collectively confirmed antigen-binding loop novelty (CDR-H3 identity 0-29% to closest database hits), germline-consistent humanness (77-90% VH germline content), and immunogenically silent antigen-binding surfaces with no strong MHC-II binders detected across CDR regions in any candidate. We further introduce a proof-of-concept agentic evaluation pipeline leveraging the Model Context Protocol (MCP) with Claude Sonnet 4.6, enabling automated structural profiling and candidate prioritization across disease targets.",
+  "authors": [
+    "Hossain, D.",
+    "Abir, F. A.",
+    "Zhang, S.",
+    "Chen, J. Y."
+  ],
+  "doi": "10.64898/2026.04.18.716776",
+  "first_seen": "2026-04-21",
+  "id": "biorxiv:10.64898/2026.04.18.716776",
+  "metadata": {
+    "abstract": "Despite major advances in computational antibody engineering, no systematic comparison of modern open-source LLM backbone families for antibody sequence generation exists, nor is it known whether architectural differences matter at compact model scales. In this study, five compact transformer variants inspired by prominent open-source LLM families (Llama-4, Gemma-3, DeepSeek-V3, Mistral 7B, and NVIDIA Nemotron-3) were customized and trained from scratch for de novo VH single-domain antibody (sdAb) design. All five models were pretrained from scratch on 15 million sequences from the Observed Antibody Space (OAS) database. Pretraining yielded uniformly high generative fidelity across architectures: sequence diversity 0.507-0.516 (CV=0.8%), uniqueness approaching 1.0, and novelty 0.925-0.977 (CV=2.2%). The models were subsequently fine-tuned on disease-stratified repertoires spanning SARS-CoV-2 (n=4,688), HIV (n=430), HER2 (n=22,778), and Ebola virus (n=2,868). Structural assessment of top-ranked candidates of those case studies via AlphaFold-2, Boltz-2, RoseTTAFold-2, and ESMFold produced mean pLDDT scores of 92.88{+/-}1.54 to 93.77{+/-}2.16, with no statistically significant inter-model differences (Kruskal-Wallis H=2.06, p>0.05; N=100), indicating no statistically detectable difference was observed across architectures at this compressed scale in a single-seed experiment, suggesting that generative capacity at this parameter regime is primarily determined by training data and model scale rather than family-specific design elements at this scale. Computational docking yielded predicted binding free energies of -36.34 to -65.60 kcal/mol; independent biological rigor validation through IMGT-defined CDR-H3 extraction, BLASTp novelty assessment, and NetMHCIIpan 4.3 MHC-II immunogenicity profiling collectively confirmed antigen-binding loop novelty (CDR-H3 identity 0-29% to closest database hits), germline-consistent humanness (77-90% VH germline content), and immunogenically silent antigen-binding surfaces with no strong MHC-II binders detected across CDR regions in any candidate. We further introduce a proof-of-concept agentic evaluation pipeline leveraging the Model Context Protocol (MCP) with Claude Sonnet 4.6, enabling automated structural profiling and candidate prioritization across disease targets.",
+    "author_corresponding": "Delower Hossain",
+    "author_corresponding_institution": "The University of Alabama at Birmingham",
+    "authors": "Hossain, D.; Abir, F. A.; Zhang, S.; Chen, J. Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-21",
+    "doi": "10.64898/2026.04.18.716776",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/21/2026.04.18.716776.source.xml",
+    "license": "cc_by_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmarking Generative Large Language Models for de novo Antibody Design and Agentic Evaluation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Alabama at Birmingham",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks five compact transformer LLM-family variants trained from scratch for de novo VH single-domain antibody design on OAS data, with structural,…",
+  "title": "Benchmarking Generative Large Language Models for de novo Antibody Design and Agentic Evaluation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.18.716776"
+}

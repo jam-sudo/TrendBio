@@ -1,0 +1,40 @@
+{
+  "abstract": "Annotating genomic variants with their predicted functional consequences is a required step in genomics research and clinical diagnostics. The Ensembl Variant Effect Predictor (VEP) is the community standard for this task, but its Perl implementation struggles with the variant call sets that modern sequencing studies produce. Here we present fastVEP, a complete reimplementation of the VEP variant annotation engine in Rust, a systems programming language that combines memory safety with C-level performance.\n\nfastVEP annotates the complete GIAB HG002 clinical whole-genome sequencing benchmark (4.05 million high-confidence variants) against the full Ensembl GRCh38 gene model (508,530 transcripts) in 86 seconds. Across five organisms and complete gold-standard call sets, including 26 million Mouse Genomes Project variants and 12.9 million Arabidopsis 1001 Genomes variants, throughput holds between 47,000 and 86,000 variants per second. In single-threaded head-to-head runs on the same whole genome, fastVEP is 22-24x faster than Ensembl VEP v115.1, which needs approximately 77 minutes for the equivalent consequence-only run. Accuracy was checked field by field against Ensembl VEP release 115.1: all 23 compared annotation fields matched on 2,340 shared transcript-allele pairs.\n\nBeyond core consequence prediction, fastVEP provides a supplementary annotation framework (fastSA) with a native binary format for direct integration with ClinVar, gnomAD, dbSNP, COSMIC, 1000 Genomes, TOPMed, and MitoMap. It also supplies prediction and conservation scores including PhyloP, GERP, REVEL, SpliceAI, PrimateAI, and SIFT/PolyPhen via dbNSFP; structural variant annotation (DEL, DUP, INV, CNV, BND) with SV-specific consequence prediction; gene-level annotation from OMIM and gnomAD gene constraint metrics; a filter_vep-compatible expression filter engine; multi-sample genotype parsing; regulatory region detection; and mitochondrial-specific variant handling.\n\nfastVEP supports both GRCh38 and GRCh37, predicts 49 Sequence Ontology consequence terms, writes 47 VEP-compatible CSQ annotation fields, generates HGVS nomenclature, and outputs VCF, tab-delimited, or JSON. It ships as a single 3.3 MB statically linked binary with no external dependencies and includes a built-in web interface for interactive annotation; a hosted server is available at https://fastVEP.org\n\nfastVEP is open source under the Apache 2.0 license at https://github.com/Huang-lab/fastVEP",
+  "authors": [
+    "Huang, K.-l."
+  ],
+  "doi": "10.64898/2026.04.14.718452",
+  "first_seen": "2026-04-16",
+  "id": "biorxiv:10.64898/2026.04.14.718452",
+  "metadata": {
+    "abstract": "Annotating genomic variants with their predicted functional consequences is a required step in genomics research and clinical diagnostics. The Ensembl Variant Effect Predictor (VEP) is the community standard for this task, but its Perl implementation struggles with the variant call sets that modern sequencing studies produce. Here we present fastVEP, a complete reimplementation of the VEP variant annotation engine in Rust, a systems programming language that combines memory safety with C-level performance.\n\nfastVEP annotates the complete GIAB HG002 clinical whole-genome sequencing benchmark (4.05 million high-confidence variants) against the full Ensembl GRCh38 gene model (508,530 transcripts) in 86 seconds. Across five organisms and complete gold-standard call sets, including 26 million Mouse Genomes Project variants and 12.9 million Arabidopsis 1001 Genomes variants, throughput holds between 47,000 and 86,000 variants per second. In single-threaded head-to-head runs on the same whole genome, fastVEP is 22-24x faster than Ensembl VEP v115.1, which needs approximately 77 minutes for the equivalent consequence-only run. Accuracy was checked field by field against Ensembl VEP release 115.1: all 23 compared annotation fields matched on 2,340 shared transcript-allele pairs.\n\nBeyond core consequence prediction, fastVEP provides a supplementary annotation framework (fastSA) with a native binary format for direct integration with ClinVar, gnomAD, dbSNP, COSMIC, 1000 Genomes, TOPMed, and MitoMap. It also supplies prediction and conservation scores including PhyloP, GERP, REVEL, SpliceAI, PrimateAI, and SIFT/PolyPhen via dbNSFP; structural variant annotation (DEL, DUP, INV, CNV, BND) with SV-specific consequence prediction; gene-level annotation from OMIM and gnomAD gene constraint metrics; a filter_vep-compatible expression filter engine; multi-sample genotype parsing; regulatory region detection; and mitochondrial-specific variant handling.\n\nfastVEP supports both GRCh38 and GRCh37, predicts 49 Sequence Ontology consequence terms, writes 47 VEP-compatible CSQ annotation fields, generates HGVS nomenclature, and outputs VCF, tab-delimited, or JSON. It ships as a single 3.3 MB statically linked binary with no external dependencies and includes a built-in web interface for interactive annotation; a hosted server is available at https://fastVEP.org\n\nfastVEP is open source under the Apache 2.0 license at https://github.com/Huang-lab/fastVEP",
+    "author_corresponding": "Kuan-lin Huang",
+    "author_corresponding_institution": "Icahn School of Medicine at Mount Sinai",
+    "authors": "Huang, K.-l.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-04-16",
+    "doi": "10.64898/2026.04.14.718452",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/16/2026.04.14.718452.source.xml",
+    "license": "cc_by_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "fastVEP: A Fast, Comprehensive Variant Effect Predictor Written in Rust",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Icahn School of Medicine at Mount Sinai",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "fastVEP reimplements the Ensembl VEP variant annotation engine in Rust, annotating GIAB HG002 WGS in 86 s and running 22-24x faster than VEP with matching…",
+  "title": "fastVEP: A Fast, Comprehensive Variant Effect Predictor Written in Rust",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.14.718452"
+}

@@ -1,0 +1,44 @@
+{
+  "abstract": "Motivation: Structural Biologists have contributed more than 245,000 experimentally determined three-dimensional structures of biological macromolecules to the Protein Data Bank (PDB). Incoming data are validated and biocurated by ~20 expert biocurators across the wwPDB. RCSB PDB biocurators who process more than 40% of global depositions face increasing challenges in maintaining efficient Help Desk operations, with approximately 19,000 messages in approximately 8,000 entries received from depositors in 2025.\n  Results: We developed an AI-powered Help Desk using Retrieval-Augmented Generation (RAG) built on LangChain with a pgvector store (PostgreSQL) and GPT-4.1-mini. The system employs pymupdf4llm for Markdown-preserving PDF extraction, two-stage document chunking, Maximal Marginal Relevance retrieval, a topical guardrail that filters off-topic queries, and a specialized system prompt that prevents exposure of internal terminology. A dual-LLM architecture uses separate model configurations for question condensing and response generation. Deployed in production on Kubernetes with PostgreSQL (pgvector), it provides around-the-clock depositor assistance with citation-backed, streaming responses.\n  Availability and implementation: Freely available at https://rcsb-deposit-help.rcsb.org.",
+  "authors": [
+    "Vivek Reddy Chithari",
+    "Jasmine Y. Young",
+    "Irina Persikova",
+    "Yuhe Liang",
+    "Gregg V. Crichlow",
+    "Justin W. Flatt",
+    "Sutapa Ghosh",
+    "Brian P. Hudson",
+    "Ezra Peisach",
+    "Monica Sekharan",
+    "Chenghua Shao",
+    "Stephen K. Burley"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-13",
+  "id": "arxiv:2604.22800",
+  "metadata": {
+    "arxiv_primary_category": "cs.IR",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.CL",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.22800v1</ns0:id>\n    <ns0:title>RCSB PDB AI Help Desk: retrieval-augmented generation for protein structure deposition support</ns0:title>\n    <ns0:updated>2026-04-13T18:36:35Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.22800v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.22800v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Motivation: Structural Biologists have contributed more than 245,000 experimentally determined three-dimensional structures of biological macromolecules to the Protein Data Bank (PDB). Incoming data are validated and biocurated by ~20 expert biocurators across the wwPDB. RCSB PDB biocurators who process more than 40% of global depositions face increasing challenges in maintaining efficient Help Desk operations, with approximately 19,000 messages in approximately 8,000 entries received from depositors in 2025.\n  Results: We developed an AI-powered Help Desk using Retrieval-Augmented Generation (RAG) built on LangChain with a pgvector store (PostgreSQL) and GPT-4.1-mini. The system employs pymupdf4llm for Markdown-preserving PDF extraction, two-stage document chunking, Maximal Marginal Relevance retrieval, a topical guardrail that filters off-topic queries, and a specialized system prompt that prevents exposure of internal terminology. A dual-LLM architecture uses separate model configurations for question condensing and response generation. Deployed in production on Kubernetes with PostgreSQL (pgvector), it provides around-the-clock depositor assistance with citation-backed, streaming responses.\n  Availability and implementation: Freely available at https://rcsb-deposit-help.rcsb.org.</ns0:summary>\n    <ns0:category term=\"cs.IR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-13T18:36:35Z</ns0:published>\n    <ns1:comment>13 pages, 0 figures</ns1:comment>\n    <ns1:primary_category term=\"cs.IR\" />\n    <ns0:author>\n      <ns0:name>Vivek Reddy Chithari</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jasmine Y. Young</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Irina Persikova</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuhe Liang</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gregg V. Crichlow</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Justin W. Flatt</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sutapa Ghosh</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Brian P. Hudson</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ezra Peisach</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Monica Sekharan</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chenghua Shao</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Stephen K. Burley</ns0:name>\n      <ns1:affiliation>RCSB Protein Data Bank, Rutgers, The State University of New Jersey, Piscataway, NJ, USA</ns1:affiliation>\n      <ns1:affiliation>RCSB Protein Data Bank, San Diego Supercomputer Center, University of California San Diego, CA, USA</ns1:affiliation>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-13",
+  "published_doi": "10.1093/bioadv/vbag289",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "RAG-based AI Help Desk for RCSB PDB structure depositors, using pgvector retrieval and GPT-4.1-mini with citation-backed answers.",
+  "title": "RCSB PDB AI Help Desk: retrieval-augmented generation for protein structure deposition support",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.22800v1"
+}

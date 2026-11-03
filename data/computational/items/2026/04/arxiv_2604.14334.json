@@ -1,0 +1,32 @@
+{
+  "abstract": "Gradient saliency from deep sequence models surfaces candidate biomarkers efficiently, but the resulting gene lists can be contaminated by tissue-composition confounders that degrade downstream classifiers. We study whether LLM chain-of-thought (CoT) reasoning can filter these confounders, and whether reasoning quality is associated with downstream performance. We train a Mamba SSM on TCGA-BRCA RNA-seq and extract the top-50 genes by gradient saliency; DeepSeek-R1 evaluates every candidate with structured CoT to produce a final 17-gene set. On the held-out test split, the raw 50-gene saliency set (no LLM) performs worse than a 5,000-gene variance baseline (AUC 0.832 vs. 0.903), while the LLM-filtered set surpasses it (AUC 0.927), using 294x fewer features. A faithfulness audit (COSMIC CGC, OncoKB, PAM50) shows that 6 of 17 selected genes (35.3%) are validated BRCA biomarkers, while 10 of 16 known BRCA genes present in the input were missed - including FOXA1. This divergence between downstream performance and reasoning faithfulness suggests selective faithfulness in this setting: targeted confounder removal can improve predictive performance without comprehensive recall.",
+  "authors": [
+    "Pushpa Kumar Balan",
+    "Aijing Feng"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-15",
+  "id": "arxiv:2604.14334",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.14334v2</ns0:id>\n    <ns0:title>Mamba-SSM with LLM Reasoning for Feature Selection: Faithfulness-Aware Biomarker Discovery</ns0:title>\n    <ns0:updated>2026-04-17T04:42:54Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.14334v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.14334v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Gradient saliency from deep sequence models surfaces candidate biomarkers efficiently, but the resulting gene lists can be contaminated by tissue-composition confounders that degrade downstream classifiers. We study whether LLM chain-of-thought (CoT) reasoning can filter these confounders, and whether reasoning quality is associated with downstream performance. We train a Mamba SSM on TCGA-BRCA RNA-seq and extract the top-50 genes by gradient saliency; DeepSeek-R1 evaluates every candidate with structured CoT to produce a final 17-gene set. On the held-out test split, the raw 50-gene saliency set (no LLM) performs worse than a 5,000-gene variance baseline (AUC 0.832 vs. 0.903), while the LLM-filtered set surpasses it (AUC 0.927), using 294x fewer features. A faithfulness audit (COSMIC CGC, OncoKB, PAM50) shows that 6 of 17 selected genes (35.3%) are validated BRCA biomarkers, while 10 of 16 known BRCA genes present in the input were missed - including FOXA1. This divergence between downstream performance and reasoning faithfulness suggests selective faithfulness in this setting: targeted confounder removal can improve predictive performance without comprehensive recall.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-15T18:39:46Z</ns0:published>\n    <ns1:comment>9 pages, 4 figures. Accepted at ICLR 2026 Workshop on Logical Reasoning of Large Language Models</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Pushpa Kumar Balan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aijing Feng</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "arxiv",
+  "summary": "LLM chain-of-thought filters Mamba saliency genes to 17 TCGA-BRCA biomarkers, AUC 0.927 vs 0.903 for a 5,000-gene baseline.",
+  "title": "Mamba-SSM with LLM Reasoning for Feature Selection: Faithfulness-Aware Biomarker Discovery",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.14334v2"
+}

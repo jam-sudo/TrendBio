@@ -1,0 +1,53 @@
+{
+  "abstract": "BackgroundAlthough pangenome references offer richer population diversity compared to linear references, current mainstream pangenome-based variant callers are limited to detecting only known variants stored in the graph. To address this limitation, we developed PanVariants, a novel pipeline designed to improve the detection of both known and novel variants accurately. We systematically evaluated its performance against the traditional linear alignment solution (BWA+GATK/Manta) and the existing pangenome-aware solution (DRAGEN/PanGenie) in three contexts: small variants (SNVs/indels) and structural variants (SVs) accuracy in Genome in a Bottle samples, clinical detection on positive samples, and application in cohort-based joint calling.\n\nResultsBy integrating k-mer-based and mapping-based methods, PanVariants significantly reduced variant errors (FPs + FNs), achieving a 73% reduction compared to BWA+GATK and a 45% reduction compared to DRAGEN for SNVs. Retraining the DeepVariant model with high-quality DNBSEQ data further decreased errors by 15%. For SVs detection, PanVariants attained an F1-score of 89.39%, markedly outperforming DRAGEN (68.18%) and BWA+Manta (58.33%), approaching long-read sequencing performance (95.22%). In validation using clinical positive samples, PanVariants successfully detected all expected pathogenic variants while PanGenie failed. In the cohort joint-calling analysis, PanVariants detected more variants, made fewer Mendelian inheritance errors, and gave better per-sample accuracy than GATK.\n\nConclusionsPanVariants establishes a robust framework and best-practice pipeline for pangenome-based variant detection, achieving both sensitive novel variant discovery and high accuracy for SNVs, indels and SVs. Our systematic evaluation of optional processing steps and input variables offers practical guidance for users. Validated across diagnostic and population-based applications, our findings strongly support the transition from linear to pangenome references in future genomics.",
+  "authors": [
+    "Yi, H.",
+    "Wang, L.",
+    "Chen, X.",
+    "Ding, Y.",
+    "Carroll, A.",
+    "Chang, P.-C.",
+    "Shafin, K.",
+    "Xu, L.",
+    "Zeng, X.",
+    "Zhao, X.",
+    "Gong, M.",
+    "Wei, X.",
+    "Hou, Y.",
+    "Ni, M."
+  ],
+  "doi": "10.64898/2026.04.22.720142",
+  "first_seen": "2026-04-24",
+  "id": "biorxiv:10.64898/2026.04.22.720142",
+  "metadata": {
+    "abstract": "BackgroundAlthough pangenome references offer richer population diversity compared to linear references, current mainstream pangenome-based variant callers are limited to detecting only known variants stored in the graph. To address this limitation, we developed PanVariants, a novel pipeline designed to improve the detection of both known and novel variants accurately. We systematically evaluated its performance against the traditional linear alignment solution (BWA+GATK/Manta) and the existing pangenome-aware solution (DRAGEN/PanGenie) in three contexts: small variants (SNVs/indels) and structural variants (SVs) accuracy in Genome in a Bottle samples, clinical detection on positive samples, and application in cohort-based joint calling.\n\nResultsBy integrating k-mer-based and mapping-based methods, PanVariants significantly reduced variant errors (FPs + FNs), achieving a 73% reduction compared to BWA+GATK and a 45% reduction compared to DRAGEN for SNVs. Retraining the DeepVariant model with high-quality DNBSEQ data further decreased errors by 15%. For SVs detection, PanVariants attained an F1-score of 89.39%, markedly outperforming DRAGEN (68.18%) and BWA+Manta (58.33%), approaching long-read sequencing performance (95.22%). In validation using clinical positive samples, PanVariants successfully detected all expected pathogenic variants while PanGenie failed. In the cohort joint-calling analysis, PanVariants detected more variants, made fewer Mendelian inheritance errors, and gave better per-sample accuracy than GATK.\n\nConclusionsPanVariants establishes a robust framework and best-practice pipeline for pangenome-based variant detection, achieving both sensitive novel variant discovery and high accuracy for SNVs, indels and SVs. Our systematic evaluation of optional processing steps and input variables offers practical guidance for users. Validated across diagnostic and population-based applications, our findings strongly support the transition from linear to pangenome references in future genomics.",
+    "author_corresponding": "Heng Yi",
+    "author_corresponding_institution": "College of Life Sciences, University of Chinese Academy of Sciences, Beijing 101408, China",
+    "authors": "Yi, H.; Wang, L.; Chen, X.; Ding, Y.; Carroll, A.; Chang, P.-C.; Shafin, K.; Xu, L.; Zeng, X.; Zhao, X.; Gong, M.; Wei, X.; Hou, Y.; Ni, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-24",
+    "doi": "10.64898/2026.04.22.720142",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/24/2026.04.22.720142.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "PanVariants: Best Practice for Pangenome-based Variant Calling Pipeline and Framework",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "College of Life Sciences, University of Chinese Academy of Sciences, Beijing 101408, China",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-04-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "PanVariants, a pangenome-based variant calling pipeline combining k-mer and mapping methods, cuts SNV errors and improves SV F1 over linear and existing…",
+  "title": "PanVariants: Best Practice for Pangenome-based Variant Calling Pipeline and Framework",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.22.720142"
+}

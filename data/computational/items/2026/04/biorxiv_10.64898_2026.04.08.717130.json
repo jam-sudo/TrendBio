@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundAmbient RNA contamination is a pervasive artifact of single-cell and single-nucleus RNA sequencing (sxRNA-seq), yet no consensus exists on which computational removal tool performs best across experimental platforms.\n\nResultsWe present a systematic benchmark of six tools: CellBender, DecontX, SoupX, scCDC, scAR, and CellClear - evaluated across six human-mouse cell line mixing (hgmm) datasets (1k-20k cells) providing partial ground truth, two droplet-based complex tissue datasets (PBMC scRNA-seq; prefrontal cortex snRNA-seq), and a well-plate-based dataset (BD Rhapsody WBC). Using inter-species counts as partial ground truth, we quantify sensitivity, specificity, precision, and removal consistency per tool. We further apply a count-integrity criterion quantifying gene-cell positions where corrected values exceed raw counts. This reveals that scAR and CellClear do not merely denoise but fundamentally restructure count matrices: CellClear replaces >93% of counts with values derived from matrix factorization, while scAR generates spurious cell types absent from uncorrected data, including three spurious coarse cell types in the BD Rhapsody dataset and up to eight novel cell types in the prefrontal cortex. CellBender and SoupX exhibit reliable contamination removal with minimal count distortion. DecontX and scCDC are the only tools operable on non-droplet platforms without raw count matrix access. Runtime benchmarking at atlas scale (up to 172,000 nuclei) further demonstrates that CellClear fails to scale.\n\nConclusionsCount matrix integrity, not removal sensitivity alone, must be a primary criterion when selecting ambient RNA correction tools. We provide platform-specific recommendations and a decision framework to guide tool selection across experimental contexts.",
+  "authors": [
+    "Schroeder, L.",
+    "Gerber, S.",
+    "Ruffini, N."
+  ],
+  "doi": "10.64898/2026.04.08.717130",
+  "first_seen": "2026-04-10",
+  "id": "biorxiv:10.64898/2026.04.08.717130",
+  "metadata": {
+    "abstract": "BackgroundAmbient RNA contamination is a pervasive artifact of single-cell and single-nucleus RNA sequencing (sxRNA-seq), yet no consensus exists on which computational removal tool performs best across experimental platforms.\n\nResultsWe present a systematic benchmark of six tools: CellBender, DecontX, SoupX, scCDC, scAR, and CellClear - evaluated across six human-mouse cell line mixing (hgmm) datasets (1k-20k cells) providing partial ground truth, two droplet-based complex tissue datasets (PBMC scRNA-seq; prefrontal cortex snRNA-seq), and a well-plate-based dataset (BD Rhapsody WBC). Using inter-species counts as partial ground truth, we quantify sensitivity, specificity, precision, and removal consistency per tool. We further apply a count-integrity criterion quantifying gene-cell positions where corrected values exceed raw counts. This reveals that scAR and CellClear do not merely denoise but fundamentally restructure count matrices: CellClear replaces >93% of counts with values derived from matrix factorization, while scAR generates spurious cell types absent from uncorrected data, including three spurious coarse cell types in the BD Rhapsody dataset and up to eight novel cell types in the prefrontal cortex. CellBender and SoupX exhibit reliable contamination removal with minimal count distortion. DecontX and scCDC are the only tools operable on non-droplet platforms without raw count matrix access. Runtime benchmarking at atlas scale (up to 172,000 nuclei) further demonstrates that CellClear fails to scale.\n\nConclusionsCount matrix integrity, not removal sensitivity alone, must be a primary criterion when selecting ambient RNA correction tools. We provide platform-specific recommendations and a decision framework to guide tool selection across experimental contexts.",
+    "author_corresponding": "Nicolas Ruffini",
+    "author_corresponding_institution": "Martin-Luther University Halle-Wittenberg",
+    "authors": "Schroeder, L.; Gerber, S.; Ruffini, N.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-10",
+    "doi": "10.64898/2026.04.08.717130",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/10/2026.04.08.717130.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmarking ambient RNA removal across droplet and well-plate platforms reveals artificial count generation as a critical failure mode of scAR and CellClear",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Martin-Luther University Halle-Wittenberg",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-04-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks six ambient RNA removal tools across droplet and well-plate single-cell/nucleus datasets; finds scAR and CellClear distort count matrices, while…",
+  "title": "Benchmarking ambient RNA removal across droplet and well-plate platforms reveals artificial count generation as a critical failure mode of scAR and CellClear",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.08.717130"
+}

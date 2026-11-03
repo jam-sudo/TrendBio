@@ -1,0 +1,40 @@
+{
+  "abstract": "Machine learning models for protein-ligand bioactivity prediction are increasingly used in computational drug discovery. However, reported benchmark performance is often sensitive to evaluation design. To further understand evaluation design strategies, we present a systematic evaluation of seven machine learning architectures for kinase inhibitor bioactivity prediction, spanning classical baselines (Random Forest, XGBoost, ElasticNet, multi-layer perceptron) and advanced neural approaches (Graph Isomorphism Network, ESM-2 protein embedding MLP, and a GNN-ESM fusion model). Using a curated ChEMBL-derived kinase activity dataset of 352,874 records across 507 human protein kinase targets, we evaluated all models under three splitting strategies of increasing stringency: random, scaffold-based (Bemis-Murcko), and target-held-out. We observed that Random Forest with Morgan fingerprints achieves near-equivalent or superior performance to all neural architectures under scaffold and target-based evaluation. On target-held-out splits frozen ESM-2 embeddings showed worse generalization, with ESM-FP MLP exhibiting the largest performance degradation. Learned graph representations (GIN) do not outperform fixed 2048-bit ECFP4 fingerprints at this data scale, and tree-based uncertainty methods outperform MC-Dropout implementations tested here on calibration and selective prediction metrics. A JAK kinase subfamily case study shows that protein-aware models achieved 79% top-1 selectivity accuracy versus 52% for pooled fingerprint models. However, stronger baselines using explicit target identity achieved 83-84%, indicating that ESM-2 embeddings in this study functioned primarily as an implicit target identifier. These results indicate that evaluation methodology and statistical rigor are major determinants of reported performance in bioactivity prediction.\n\nBenchmark design overview\n\nO_FIG O_LINKSMALLFIG WIDTH=177 HEIGHT=200 SRC=\"FIGDIR/small/719590v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (50K):\norg.highwire.dtl.DTLVardef@18b6fc8org.highwire.dtl.DTLVardef@157db3dorg.highwire.dtl.DTLVardef@fac215org.highwire.dtl.DTLVardef@dbfa6f_HPS_FORMAT_FIGEXP  M_FIG C_FIG A curated ChEMBL kinase bioactivity dataset (352,874 records, 507 targets) was evaluated under three splitting strategies of increasing stringency. Seven model architectures spanning baselines, protein-aware, and graph neural approaches were each trained under 5-seed replication (105 total runs), with results analyzed across three complementary branches: the main 507-target benchmark, ESM-2 embedding ablation studies on a clean 92-target subset, and a JAK-family selectivity case study with stronger target-conditioned baselines",
+  "authors": [
+    "Abbott, J. M."
+  ],
+  "doi": "10.64898/2026.04.20.719590",
+  "first_seen": "2026-04-22",
+  "id": "biorxiv:10.64898/2026.04.20.719590",
+  "metadata": {
+    "abstract": "Machine learning models for protein-ligand bioactivity prediction are increasingly used in computational drug discovery. However, reported benchmark performance is often sensitive to evaluation design. To further understand evaluation design strategies, we present a systematic evaluation of seven machine learning architectures for kinase inhibitor bioactivity prediction, spanning classical baselines (Random Forest, XGBoost, ElasticNet, multi-layer perceptron) and advanced neural approaches (Graph Isomorphism Network, ESM-2 protein embedding MLP, and a GNN-ESM fusion model). Using a curated ChEMBL-derived kinase activity dataset of 352,874 records across 507 human protein kinase targets, we evaluated all models under three splitting strategies of increasing stringency: random, scaffold-based (Bemis-Murcko), and target-held-out. We observed that Random Forest with Morgan fingerprints achieves near-equivalent or superior performance to all neural architectures under scaffold and target-based evaluation. On target-held-out splits frozen ESM-2 embeddings showed worse generalization, with ESM-FP MLP exhibiting the largest performance degradation. Learned graph representations (GIN) do not outperform fixed 2048-bit ECFP4 fingerprints at this data scale, and tree-based uncertainty methods outperform MC-Dropout implementations tested here on calibration and selective prediction metrics. A JAK kinase subfamily case study shows that protein-aware models achieved 79% top-1 selectivity accuracy versus 52% for pooled fingerprint models. However, stronger baselines using explicit target identity achieved 83-84%, indicating that ESM-2 embeddings in this study functioned primarily as an implicit target identifier. These results indicate that evaluation methodology and statistical rigor are major determinants of reported performance in bioactivity prediction.\n\nBenchmark design overview\n\nO_FIG O_LINKSMALLFIG WIDTH=177 HEIGHT=200 SRC=\"FIGDIR/small/719590v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (50K):\norg.highwire.dtl.DTLVardef@18b6fc8org.highwire.dtl.DTLVardef@157db3dorg.highwire.dtl.DTLVardef@fac215org.highwire.dtl.DTLVardef@dbfa6f_HPS_FORMAT_FIGEXP  M_FIG C_FIG A curated ChEMBL kinase bioactivity dataset (352,874 records, 507 targets) was evaluated under three splitting strategies of increasing stringency. Seven model architectures spanning baselines, protein-aware, and graph neural approaches were each trained under 5-seed replication (105 total runs), with results analyzed across three complementary branches: the main 507-target benchmark, ESM-2 embedding ablation studies on a clean 92-target subset, and a JAK-family selectivity case study with stronger target-conditioned baselines",
+    "author_corresponding": "Joshua M Abbott",
+    "author_corresponding_institution": "Rapafusyn Pharmaceuticals",
+    "authors": "Abbott, J. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-22",
+    "doi": "10.64898/2026.04.20.719590",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/22/2026.04.20.719590.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Systematic Benchmarking of Kinase Bioactivity Models Across Splitting Strategies and Protein Representations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Rapafusyn Pharmaceuticals",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks seven ML architectures for kinase bioactivity on 352,874 ChEMBL records across 507 targets under random, scaffold, and target-held-out splits;…",
+  "title": "Systematic Benchmarking of Kinase Bioactivity Models Across Splitting Strategies and Protein Representations",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.20.719590"
+}

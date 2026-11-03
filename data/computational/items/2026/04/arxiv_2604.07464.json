@@ -1,0 +1,34 @@
+{
+  "abstract": "High-dimensional variable selection, particularly in genomics, requires error-controlling procedures that scale to millions of predictors. The Terminating-Random Experiments (T-Rex) selector achieves false discovery rate (FDR) control by aggregating results of early terminated random experiments, each combining original predictors with i.i.d. synthetic null variables (dummies). At biobank scales, however, explicit dummy augmentation requires terabytes of memory. We demonstrate that this bottleneck is not fundamental. Formalizing the information flow of forward selection through a filtration, we show that compatible selectors interact with unselected dummies solely through projections onto an adaptively evolving low-dimensional subspace. For rotationally invariant dummy distributions, we derive an adaptive stick-breaking construction sampling these projections from their exact conditional distribution given the selection history, thereby eliminating dummy matrix materialization. We prove a pathwise universality theorem: under mild delocalization conditions, selection paths driven by generic standardized i.i.d. dummies converge to the same Gaussian limit. We instantiate the theory through Virtual Dummy LARS (VD-LARS), reducing memory and runtime by several orders of magnitude while preserving the exact selection law and FDR guarantees of the T-Rex selector. Experiments on realistic genome-wide association study data confirm that VD-T-Rex controls FDR and achieves power at scales where all competing methods either fail or time out.",
+  "authors": [
+    "Taulant Koka",
+    "Jasin Machkour",
+    "Daniel P. Palomar",
+    "Michael Muma"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-08",
+  "id": "arxiv:2604.07464",
+  "metadata": {
+    "arxiv_primary_category": "stat.ME",
+    "categories": [
+      "stat.ME",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2604.07464v1</ns0:id>\n    <ns0:title>Virtual Dummies: Enabling Scalable FDR-Controlled Variable Selection via Sequential Sampling of Null Features</ns0:title>\n    <ns0:updated>2026-04-08T18:04:06Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2604.07464v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2604.07464v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>High-dimensional variable selection, particularly in genomics, requires error-controlling procedures that scale to millions of predictors. The Terminating-Random Experiments (T-Rex) selector achieves false discovery rate (FDR) control by aggregating results of early terminated random experiments, each combining original predictors with i.i.d. synthetic null variables (dummies). At biobank scales, however, explicit dummy augmentation requires terabytes of memory. We demonstrate that this bottleneck is not fundamental. Formalizing the information flow of forward selection through a filtration, we show that compatible selectors interact with unselected dummies solely through projections onto an adaptively evolving low-dimensional subspace. For rotationally invariant dummy distributions, we derive an adaptive stick-breaking construction sampling these projections from their exact conditional distribution given the selection history, thereby eliminating dummy matrix materialization. We prove a pathwise universality theorem: under mild delocalization conditions, selection paths driven by generic standardized i.i.d. dummies converge to the same Gaussian limit. We instantiate the theory through Virtual Dummy LARS (VD-LARS), reducing memory and runtime by several orders of magnitude while preserving the exact selection law and FDR guarantees of the T-Rex selector. Experiments on realistic genome-wide association study data confirm that VD-T-Rex controls FDR and achieves power at scales where all competing methods either fail or time out.</ns0:summary>\n    <ns0:category term=\"stat.ME\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-08T18:04:06Z</ns0:published>\n    <ns1:primary_category term=\"stat.ME\" />\n    <ns0:author>\n      <ns0:name>Taulant Koka</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jasin Machkour</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Daniel P. Palomar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael Muma</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Virtual Dummy LARS samples null-feature projections sequentially, removing explicit dummy matrices to scale FDR-controlled T-Rex variable selection to…",
+  "title": "Virtual Dummies: Enabling Scalable FDR-Controlled Variable Selection via Sequential Sampling of Null Features",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2604.07464v1"
+}

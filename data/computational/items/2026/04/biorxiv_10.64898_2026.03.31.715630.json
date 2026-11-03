@@ -1,0 +1,40 @@
+{
+  "abstract": "Quality control (QC) of high-throughput sequencing data is a critical first step in genomics analysis pipelines. FastQC has served as the de facto standard for sequencing QC for over a decade, but its Java runtime dependency introduces startup overhead, elevated memory consumption, and deployment complexity. Meanwhile, the growing adoption of long-read sequencing platforms from Oxford Nanopore Technologies (ONT) and Pacific Biosciences (PacBio) has created a pressing demand for QC tools capable of handling both short and long reads. However, existing solutions require separate tools for each data type and an additional aggregation tool, such as MultiQC, to consolidate results across samples. Here we present RastQC, a unified sequencing QC tool written in Rust that combines FastQC-compatible short-read QC, long-read-specific metrics, built-in multi-sample summary, native MultiQC JSON export, and a web-based report viewer in a single 2.1 MB static binary. RastQC implements all 12 standard FastQC modules with matching algorithms, plus 3 long-read modules (Read Length N50, Quality Stratified Length, and Homopolymer Content), achieving 100% module-level concordance with FastQC across 55 out of 55 calls on five model organisms. RastQCs streaming parallel pipeline with adaptive batch sizing delivers 1.8-3.2x speedup on short-read Illumina data and 4.7-6.5x speedup on long-read ONT/PacBio data, while using 8-9x less memory on small files and comparable memory on large files. RastQC is freely available and is available as an AI agent skill at https://github.com/Huang-lab/RastQC under the MIT license.",
+  "authors": [
+    "Huang, K.-l."
+  ],
+  "doi": "10.64898/2026.03.31.715630",
+  "first_seen": "2026-04-02",
+  "id": "biorxiv:10.64898/2026.03.31.715630",
+  "metadata": {
+    "abstract": "Quality control (QC) of high-throughput sequencing data is a critical first step in genomics analysis pipelines. FastQC has served as the de facto standard for sequencing QC for over a decade, but its Java runtime dependency introduces startup overhead, elevated memory consumption, and deployment complexity. Meanwhile, the growing adoption of long-read sequencing platforms from Oxford Nanopore Technologies (ONT) and Pacific Biosciences (PacBio) has created a pressing demand for QC tools capable of handling both short and long reads. However, existing solutions require separate tools for each data type and an additional aggregation tool, such as MultiQC, to consolidate results across samples. Here we present RastQC, a unified sequencing QC tool written in Rust that combines FastQC-compatible short-read QC, long-read-specific metrics, built-in multi-sample summary, native MultiQC JSON export, and a web-based report viewer in a single 2.1 MB static binary. RastQC implements all 12 standard FastQC modules with matching algorithms, plus 3 long-read modules (Read Length N50, Quality Stratified Length, and Homopolymer Content), achieving 100% module-level concordance with FastQC across 55 out of 55 calls on five model organisms. RastQCs streaming parallel pipeline with adaptive batch sizing delivers 1.8-3.2x speedup on short-read Illumina data and 4.7-6.5x speedup on long-read ONT/PacBio data, while using 8-9x less memory on small files and comparable memory on large files. RastQC is freely available and is available as an AI agent skill at https://github.com/Huang-lab/RastQC under the MIT license.",
+    "author_corresponding": "Kuan-lin Huang",
+    "author_corresponding_institution": "Icahn School of Medicine at Mount Sinai",
+    "authors": "Huang, K.-l.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-02",
+    "doi": "10.64898/2026.03.31.715630",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/02/2026.03.31.715630.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RastQC: High-Performance Sequencing Quality Control Written in Rust",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Icahn School of Medicine at Mount Sinai",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "RastQC is a Rust-based sequencing QC tool that reimplements FastQC's modules, adds long-read metrics, and reports 1.8-6.5x speedups with lower memory use.",
+  "title": "RastQC: High-Performance Sequencing Quality Control Written in Rust",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.31.715630"
+}

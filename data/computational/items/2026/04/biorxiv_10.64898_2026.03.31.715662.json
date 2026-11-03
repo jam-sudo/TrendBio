@@ -1,0 +1,45 @@
+{
+  "abstract": "As long-read amplicon sequencing becomes routine for fungal metabarcoding, species-level abundance estimation from ITS amplicons remains limited by naive best-hit classification, which misattributes reads among closely related species sharing similar ITS sequences and fragments abundance across redundant database entries. Expectation-maximization (EM) approaches developed for full-length 16S rRNA, notably EMU [Curry et al., 2022], have recently been benchmarked for fungal ITS metabarcoding [Graetz et al., 2025], but applying EMU to ITS requires custom reference database construction and uses parameters originally tuned for 16S. Here we present EMITS, a Rust-based tool that applies EM to iteratively resolve ambiguous read-to-reference mappings from minimap2 alignments against the UNITE database, producing probabilistic species-level abundance estimates. EMITS provides UNITE-native header parsing with automatic accession aggregation, empirically tuned platform presets for current Oxford Nanopore (R10.4.1, R9.4.1, Duplex) and PacBio HiFi chemistries, and integration with ITSxRust [OBrien et al., 2026] for upstream ITS region extraction. We validated EMITS using three complementary approaches and benchmarked it against both naive best-hit counting and EMU (with a UNITE-formatted reference database). In controlled simulations, EM reduced L1 error by 80- 92% compared to naive counting under realistic noise conditions. On the ATCC fungal ITS mock community, EMITS provided superior within-genus species resolution in taxonomically challenging genera: it correctly identified Trichophyton mentagrophytes (2.21%) where EMU misattributed substantial abundance to T. tonsurans (1.54%); it suppressed Penicillium rubens false positives (0.002% vs. EMU 0.58%); and it more accurately consolidated Nakaseomyces glabratus abundance across UNITE accessions (12.40% vs. EMU 9.95%). On a 21-species synthetic UNITE community lacking substantial within-genus difficulty, all three methods detected expected species at 100% sensitivity, with aggregate L1 errors of 8.64% (naive), 7.48% (EMITS), and 6.71% (EMU). Together with ITSxRust for upstream ITS extraction, EMITS provides a complete pipeline tuned for long-read fungal amplicon profiling.",
+  "authors": [
+    "O'Brien, A.",
+    "Lagos, C.",
+    "Fernandez, K.",
+    "Ojeda, B.",
+    "Parada, P."
+  ],
+  "doi": "10.64898/2026.03.31.715662",
+  "first_seen": "2026-04-02",
+  "id": "biorxiv:10.64898/2026.03.31.715662",
+  "metadata": {
+    "abstract": "As long-read amplicon sequencing becomes routine for fungal metabarcoding, species-level abundance estimation from ITS amplicons remains limited by naive best-hit classification, which misattributes reads among closely related species sharing similar ITS sequences and fragments abundance across redundant database entries. Expectation-maximization (EM) approaches developed for full-length 16S rRNA, notably EMU [Curry et al., 2022], have recently been benchmarked for fungal ITS metabarcoding [Graetz et al., 2025], but applying EMU to ITS requires custom reference database construction and uses parameters originally tuned for 16S. Here we present EMITS, a Rust-based tool that applies EM to iteratively resolve ambiguous read-to-reference mappings from minimap2 alignments against the UNITE database, producing probabilistic species-level abundance estimates. EMITS provides UNITE-native header parsing with automatic accession aggregation, empirically tuned platform presets for current Oxford Nanopore (R10.4.1, R9.4.1, Duplex) and PacBio HiFi chemistries, and integration with ITSxRust [OBrien et al., 2026] for upstream ITS region extraction. We validated EMITS using three complementary approaches and benchmarked it against both naive best-hit counting and EMU (with a UNITE-formatted reference database). In controlled simulations, EM reduced L1 error by 80- 92% compared to naive counting under realistic noise conditions. On the ATCC fungal ITS mock community, EMITS provided superior within-genus species resolution in taxonomically challenging genera: it correctly identified Trichophyton mentagrophytes (2.21%) where EMU misattributed substantial abundance to T. tonsurans (1.54%); it suppressed Penicillium rubens false positives (0.002% vs. EMU 0.58%); and it more accurately consolidated Nakaseomyces glabratus abundance across UNITE accessions (12.40% vs. EMU 9.95%). On a 21-species synthetic UNITE community lacking substantial within-genus difficulty, all three methods detected expected species at 100% sensitivity, with aggregate L1 errors of 8.64% (naive), 7.48% (EMITS), and 6.71% (EMU). Together with ITSxRust for upstream ITS extraction, EMITS provides a complete pipeline tuned for long-read fungal amplicon profiling.",
+    "author_corresponding": "Aaron O'Brien",
+    "author_corresponding_institution": "Universidad Andres Bello",
+    "authors": "O'Brien, A.; Lagos, C.; Fernandez, K.; Ojeda, B.; Parada, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-02",
+    "doi": "10.64898/2026.03.31.715662",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/02/2026.03.31.715662.source.xml",
+    "license": "cc_by",
+    "published": "10.1111/2041-210x.70418",
+    "server": "bioRxiv",
+    "title": "EMITS: expectation-maximization abundance estimation for fungal ITS communities from long-read sequencing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universidad Andres Bello",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-02",
+  "published_doi": "10.1111/2041-210x.70418",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "EMITS applies expectation-maximization to minimap2 alignments against UNITE for species-level fungal ITS abundance from long reads, reducing L1 error versus…",
+  "title": "EMITS: expectation-maximization abundance estimation for fungal ITS communities from long-read sequencing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.31.715662"
+}

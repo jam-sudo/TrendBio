@@ -1,0 +1,40 @@
+{
+  "abstract": "Large language model agents are increasingly used for bioinformatics tasks that require external databases, tool use, and long multi-step retrieval workflows. However, practical evaluation of these systems remains limited, especially for prompts whose target set is both large and biologically heterogeneous. Here, I benchmarked three agent systems on the same difficult retrieval task: downloading coccolithophore calcification-related proteins from UniProt across six mechanistically distinct categories, while producing category-separated FASTA files and supporting evidence. The compared systems were Codex app agents extended with Claude Scientific Skills, Biomni Lab online, and DeerFlow 2 with default skills only. Outputs were normalized at the UniProt accession level and compared category by category using overlap analysis, Venn decomposition, and a heuristic relevance assessment of each subset relative to the benchmark prompt. Across the six shared categories, Codex retrieved 2,118 proteins, DeerFlow 6,255, and Biomni 8,752 in a run. Codex showed the best balance between sensitivity and specificity: 92.4% of its proteins fell into subsets labeled high relevance and the remaining 7.6% into medium relevance. DeerFlow was substantially more exhaustive, but 43.8% of its proteins fell into low or low-medium relevance subsets. Biomni produced the largest sets, yet 69.5% of its proteins fell into low or low-medium relevance subsets, mainly due to broad expansion into generic calcium sensors, kinases, transcription factors, and poorly specific domain families. Category-specific analysis showed that Codex was the strongest primary source for inorganic carbon transport, calcium and pH regulation, vesicle trafficking, and signaling, whereas DeerFlow contributed valuable complementary matrix and polysaccharide candidates. A second run for each system also separated them strongly by repeatability: Codex had the highest within-system stability (mean category Jaccard 0.982; micro-Jaccard 0.974), DeerFlow was intermediate (0.795; 0.571), and Biomni was least stable (0.412; 0.319). These results suggest that for complex protein-family retrieval tasks, agent quality depends less on raw output volume than on prompt decomposition, taxonomic scoping, exact query generation, provenance-rich export artifacts, and repeated-run stability.",
+  "authors": [
+    "Zhang, X."
+  ],
+  "doi": "10.64898/2026.03.28.715041",
+  "first_seen": "2026-04-02",
+  "id": "biorxiv:10.64898/2026.03.28.715041",
+  "metadata": {
+    "abstract": "Large language model agents are increasingly used for bioinformatics tasks that require external databases, tool use, and long multi-step retrieval workflows. However, practical evaluation of these systems remains limited, especially for prompts whose target set is both large and biologically heterogeneous. Here, I benchmarked three agent systems on the same difficult retrieval task: downloading coccolithophore calcification-related proteins from UniProt across six mechanistically distinct categories, while producing category-separated FASTA files and supporting evidence. The compared systems were Codex app agents extended with Claude Scientific Skills, Biomni Lab online, and DeerFlow 2 with default skills only. Outputs were normalized at the UniProt accession level and compared category by category using overlap analysis, Venn decomposition, and a heuristic relevance assessment of each subset relative to the benchmark prompt. Across the six shared categories, Codex retrieved 2,118 proteins, DeerFlow 6,255, and Biomni 8,752 in a run. Codex showed the best balance between sensitivity and specificity: 92.4% of its proteins fell into subsets labeled high relevance and the remaining 7.6% into medium relevance. DeerFlow was substantially more exhaustive, but 43.8% of its proteins fell into low or low-medium relevance subsets. Biomni produced the largest sets, yet 69.5% of its proteins fell into low or low-medium relevance subsets, mainly due to broad expansion into generic calcium sensors, kinases, transcription factors, and poorly specific domain families. Category-specific analysis showed that Codex was the strongest primary source for inorganic carbon transport, calcium and pH regulation, vesicle trafficking, and signaling, whereas DeerFlow contributed valuable complementary matrix and polysaccharide candidates. A second run for each system also separated them strongly by repeatability: Codex had the highest within-system stability (mean category Jaccard 0.982; micro-Jaccard 0.974), DeerFlow was intermediate (0.795; 0.571), and Biomni was least stable (0.412; 0.319). These results suggest that for complex protein-family retrieval tasks, agent quality depends less on raw output volume than on prompt decomposition, taxonomic scoping, exact query generation, provenance-rich export artifacts, and repeated-run stability.",
+    "author_corresponding": "Xiaoyu Zhang",
+    "author_corresponding_institution": "California State University San Marcos",
+    "authors": "Zhang, X.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-02",
+    "doi": "10.64898/2026.03.28.715041",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/02/2026.03.28.715041.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmarking Agentic Bioinformatics Systems for Complex Protein-Set Retrieval: A Coccolithophore Calcification Case Study",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "California State University San Marcos",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks three LLM agent systems on retrieving coccolithophore calcification proteins from UniProt, comparing overlap, relevance, and run-to-run stability.",
+  "title": "Benchmarking Agentic Bioinformatics Systems for Complex Protein-Set Retrieval: A Coccolithophore Calcification Case Study",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.03.28.715041"
+}

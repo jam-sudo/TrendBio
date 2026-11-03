@@ -1,0 +1,52 @@
+{
+  "abstract": "Cellular identity and fate transitions are governed by continuous molecular processes that form dynamic trajectories within a high-dimensional transcriptomic landscape. Existing methods attempt to model these dynamics from two complementary perspectives: trajectory inference and velocity modeling. Ideally, velocity and trajectory are dual aspects of transcriptomic dynamics where velocity is tangent to trajectory everywhere. This inherent connection between velocity and trajectory is currently absent in transcriptomic analysis. Splicing velocity are precision-limited to inadequately-sequenced genes, while trajectory inference prioritizes the modeling of global trends while omitting local dynamics. This divergence breaks the geometric continuity between local velocities and global trajectories, hindering the reliable interpretation of developmental dynamics. To reconcile trajectory inference and RNA velocity, we introduce VeloTrace, a framework that unifies them through Neural Ordinary Differential Equations (NeuralODEs). VeloTrace learns a continuous-time velocity field whose integral curves constitute the trajectory itself, while ensuring that velocities are tangent to integral paths everywhere. Leveraging a splicing quality score, VeloTrace incorporates high-quality splicing velocity as partial supervision for velocity orientation and grounding. During optimization, VeloTrace incorporates a Monte Carlo multi-time-frame supervision strategy to ensure coherence between local and global trajectorys and suppress sequencing-induced stochastic diffusion. Through refining the velocity field and cell-specific parameters for pseudo-time, expression, and velocity, VeloTrace reconstructs a smooth, local-and-global-coherent velocity-vector-guided flow in the transcriptomic latent space. This strategy ensures a complementary integration of velocity and trajectory, imputing the transcriptional kinetics for genes of insufficient strength, whose kinetics cannot be accurately portrayed by splicing velocity. In simulation benchmarks, VeloTrace captured the transcriptional dynamics of all expressed genes, even those with inadequate sequencing coverage, producing velocity directions that were most consistent with the true direction and every-where tangential across the entire process, outperforming state-of-the-art methods, including scVelo, UniTVelo, VeloVI and scTour. VeloTrace uniquely reconciles RNA velocity and trajectory inference, creating a velocity field where each cell can infer past and future transitions from its current state. Moreover, VeloTrace extends reliable velocity estimation to a broader set of genes. When applied to mouse neural stem cell differentiation data, it successfully recovers dynamics of driver genes for two developmental lineages, including those with low expression, shedding light on their regulatory roles during differentiation. This unified framework lays the foundation for more accurate modeling of gene regulation and cell fate decisions in complex biological systems.",
+  "authors": [
+    "Cheng, H.",
+    "Qiao, Y.",
+    "Feng, Y.",
+    "Wei, Y.",
+    "Li, J.",
+    "Cai, J.",
+    "Zheng, S.",
+    "Chen, S.",
+    "Li, G.",
+    "Simons, B. D.",
+    "Lian, Q.",
+    "Xin, H."
+  ],
+  "doi": "10.64898/2026.04.09.717458",
+  "first_seen": "2026-04-13",
+  "id": "biorxiv:10.64898/2026.04.09.717458",
+  "metadata": {
+    "abstract": "Cellular identity and fate transitions are governed by continuous molecular processes that form dynamic trajectories within a high-dimensional transcriptomic landscape. Existing methods attempt to model these dynamics from two complementary perspectives: trajectory inference and velocity modeling. Ideally, velocity and trajectory are dual aspects of transcriptomic dynamics where velocity is tangent to trajectory everywhere. This inherent connection between velocity and trajectory is currently absent in transcriptomic analysis. Splicing velocity are precision-limited to inadequately-sequenced genes, while trajectory inference prioritizes the modeling of global trends while omitting local dynamics. This divergence breaks the geometric continuity between local velocities and global trajectories, hindering the reliable interpretation of developmental dynamics. To reconcile trajectory inference and RNA velocity, we introduce VeloTrace, a framework that unifies them through Neural Ordinary Differential Equations (NeuralODEs). VeloTrace learns a continuous-time velocity field whose integral curves constitute the trajectory itself, while ensuring that velocities are tangent to integral paths everywhere. Leveraging a splicing quality score, VeloTrace incorporates high-quality splicing velocity as partial supervision for velocity orientation and grounding. During optimization, VeloTrace incorporates a Monte Carlo multi-time-frame supervision strategy to ensure coherence between local and global trajectorys and suppress sequencing-induced stochastic diffusion. Through refining the velocity field and cell-specific parameters for pseudo-time, expression, and velocity, VeloTrace reconstructs a smooth, local-and-global-coherent velocity-vector-guided flow in the transcriptomic latent space. This strategy ensures a complementary integration of velocity and trajectory, imputing the transcriptional kinetics for genes of insufficient strength, whose kinetics cannot be accurately portrayed by splicing velocity. In simulation benchmarks, VeloTrace captured the transcriptional dynamics of all expressed genes, even those with inadequate sequencing coverage, producing velocity directions that were most consistent with the true direction and every-where tangential across the entire process, outperforming state-of-the-art methods, including scVelo, UniTVelo, VeloVI and scTour. VeloTrace uniquely reconciles RNA velocity and trajectory inference, creating a velocity field where each cell can infer past and future transitions from its current state. Moreover, VeloTrace extends reliable velocity estimation to a broader set of genes. When applied to mouse neural stem cell differentiation data, it successfully recovers dynamics of driver genes for two developmental lineages, including those with low expression, shedding light on their regulatory roles during differentiation. This unified framework lays the foundation for more accurate modeling of gene regulation and cell fate decisions in complex biological systems.",
+    "author_corresponding": "Qiuyu Lian",
+    "author_corresponding_institution": "University of Cambridge",
+    "authors": "Cheng, H.; Qiao, Y.; Feng, Y.; Wei, Y.; Li, J.; Cai, J.; Zheng, S.; Chen, S.; Li, G.; Simons, B. D.; Lian, Q.; Xin, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-13",
+    "doi": "10.64898/2026.04.09.717458",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/13/2026.04.09.717458.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "VeloTrace Reconciles Divergent Velocity and Trajectory in Single-cell Transcriptomics with Deep Neural ODE",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Cambridge",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-04-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "VeloTrace unifies RNA velocity and trajectory inference via neural ODEs, learning a velocity field whose integral curves form the trajectory, and outperforms…",
+  "title": "VeloTrace Reconciles Divergent Velocity and Trajectory in Single-cell Transcriptomics with Deep Neural ODE",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.09.717458"
+}

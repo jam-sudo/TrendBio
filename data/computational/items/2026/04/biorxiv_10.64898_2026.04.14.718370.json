@@ -1,0 +1,40 @@
+{
+  "abstract": "Variant Call Format (VCF) files are the dominant interchange format for genomic variant data, but their size - routinely exceeding tens of gigabytes for population-scale studies - creates a significant computational bottleneck at the quality-filtering stage. Existing tools such as bcftools and vcftools provide broad functionality through general-purpose expression engines, but incur substantial per-record overhead from dynamic field lookup, type resolution, and heap allocation. We present vcfilt, a streaming, batch-parallel VCF filter implemented in Go that restricts its scope to three high-frequency filter criteria (INFO/DP, INFO/AF, and QUAL) and applies them via a zero-allocation byte-scan parser. Benchmarked on real 1000 Genomes Project data (chromosome 20, 1,811,146 variants), vcfilt achieves 147,000 variants/second on an 18 GB plain-text VCF file using a single thread - a 12.2x speedup over bcftools 1.18 under identical conditions. On gzip-compressed input, the speedup is 7.9x. Output is byte-for-byte identical to bcftools across all tested filter combinations. vcfilt is distributed as a self-contained static binary, a Docker image, and a Singularity-compatible container. The source code and all benchmark scripts are openly available under the MIT licence.",
+  "authors": [
+    "KP, M. M."
+  ],
+  "doi": "10.64898/2026.04.14.718370",
+  "first_seen": "2026-04-16",
+  "id": "biorxiv:10.64898/2026.04.14.718370",
+  "metadata": {
+    "abstract": "Variant Call Format (VCF) files are the dominant interchange format for genomic variant data, but their size - routinely exceeding tens of gigabytes for population-scale studies - creates a significant computational bottleneck at the quality-filtering stage. Existing tools such as bcftools and vcftools provide broad functionality through general-purpose expression engines, but incur substantial per-record overhead from dynamic field lookup, type resolution, and heap allocation. We present vcfilt, a streaming, batch-parallel VCF filter implemented in Go that restricts its scope to three high-frequency filter criteria (INFO/DP, INFO/AF, and QUAL) and applies them via a zero-allocation byte-scan parser. Benchmarked on real 1000 Genomes Project data (chromosome 20, 1,811,146 variants), vcfilt achieves 147,000 variants/second on an 18 GB plain-text VCF file using a single thread - a 12.2x speedup over bcftools 1.18 under identical conditions. On gzip-compressed input, the speedup is 7.9x. Output is byte-for-byte identical to bcftools across all tested filter combinations. vcfilt is distributed as a self-contained static binary, a Docker image, and a Singularity-compatible container. The source code and all benchmark scripts are openly available under the MIT licence.",
+    "author_corresponding": "Muhammed Murshid KP",
+    "author_corresponding_institution": "Decipher Genomics & Research, Gujarat, India",
+    "authors": "KP, M. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-16",
+    "doi": "10.64898/2026.04.14.718370",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/16/2026.04.14.718370.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "vcfilt: A Zero-Allocation Streaming Filter for High-Throughput VCF Processing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Decipher Genomics & Research, Gujarat, India",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-04-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "vcfilt, a Go streaming VCF filter using zero-allocation byte-scan parsing, reports 12.2x single-thread speedup over bcftools 1.18 on 1000 Genomes chr20 data.",
+  "title": "vcfilt: A Zero-Allocation Streaming Filter for High-Throughput VCF Processing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.14.718370"
+}

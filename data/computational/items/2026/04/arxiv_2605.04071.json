@@ -1,0 +1,34 @@
+{
+  "abstract": "Autoregressive models can predict clinical events, but generating patient-conditioned multi-step trajectories that respond to intervention tokens and testing whether those responses preserve known pharmacological associations has received limited attention. We present FlatASCEND, a 14.5M-parameter autoregressive clinical sequence model using flat composite tokens and a zero-inflated log-normal time head. Standard distributional metrics (Jaccard 0.889-0.954) do not distinguish FlatASCEND from trivial baselines; the model's value lies in conditional generation from patient-specific prefixes. A prompt-shuffle ablation shows patient-specific conditioning amplifies mechanistic pharmacological effects (2.0-2.2x for steroid to glucose, diuretic to potassium) while leaving confounding-driven associations unchanged (0.9x for insulin to glucose). An incident-user framework assesses directional consistency against prior pharmacological knowledge on MIMIC-IV (N=500 per comparison): 4/10 recover correct mechanistic directions, 2 reproduce treatment-context associations, 4 are incorrect (9/10 significant, Wilcoxon p<0.05). This pattern - partial recovery under residual confounding - is consistent with learned observational associations without causal distinction. Direct preference optimisation with surrogate reward destroys all correct associations (3/3 to 0/3), illustrating reward exploitation when reward and evaluation share an outcome domain. Generative evidence is strongest for short-horizon ICU data; outpatient temporal fidelity is weaker (median 10 vs 154 days on INSPECT), and zero-shot cross-site transfer degrades without adaptation.",
+  "authors": [
+    "Chris Sainsbury",
+    "Feng Dong",
+    "Andreas Karwath"
+  ],
+  "doi": null,
+  "first_seen": "2026-04-13",
+  "id": "arxiv:2605.04071",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.04071v1</ns0:id>\n    <ns0:title>FlatASCEND: Autoregressive Clinical Sequence Generation with Continuous Time Prediction and Association-Based Pharmacological Testing</ns0:title>\n    <ns0:updated>2026-04-13T11:43:51Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.04071v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.04071v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Autoregressive models can predict clinical events, but generating patient-conditioned multi-step trajectories that respond to intervention tokens and testing whether those responses preserve known pharmacological associations has received limited attention. We present FlatASCEND, a 14.5M-parameter autoregressive clinical sequence model using flat composite tokens and a zero-inflated log-normal time head. Standard distributional metrics (Jaccard 0.889-0.954) do not distinguish FlatASCEND from trivial baselines; the model's value lies in conditional generation from patient-specific prefixes. A prompt-shuffle ablation shows patient-specific conditioning amplifies mechanistic pharmacological effects (2.0-2.2x for steroid to glucose, diuretic to potassium) while leaving confounding-driven associations unchanged (0.9x for insulin to glucose). An incident-user framework assesses directional consistency against prior pharmacological knowledge on MIMIC-IV (N=500 per comparison): 4/10 recover correct mechanistic directions, 2 reproduce treatment-context associations, 4 are incorrect (9/10 significant, Wilcoxon p&lt;0.05). This pattern - partial recovery under residual confounding - is consistent with learned observational associations without causal distinction. Direct preference optimisation with surrogate reward destroys all correct associations (3/3 to 0/3), illustrating reward exploitation when reward and evaluation share an outcome domain. Generative evidence is strongest for short-horizon ICU data; outpatient temporal fidelity is weaker (median 10 vs 154 days on INSPECT), and zero-shot cross-site transfer degrades without adaptation.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-04-13T11:43:51Z</ns0:published>\n    <ns1:comment>22 pages, 2 figures, 12 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Chris Sainsbury</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Feng Dong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andreas Karwath</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-04-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "FlatASCEND, a 14.5M-parameter autoregressive clinical sequence model with zero-inflated log-normal time head, tested on MIMIC-IV for pharmacological…",
+  "title": "FlatASCEND: Autoregressive Clinical Sequence Generation with Continuous Time Prediction and Association-Based Pharmacological Testing",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.04071v1"
+}

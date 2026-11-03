@@ -1,0 +1,46 @@
+{
+  "abstract": "Spatial transcriptomics is often interpreted with tools that do not explicitly encode tissue-scale physical priors such as finite ligand diffusion, density-based state stability, or self-exciting spatial recruitment. We introduce three compact computational methods and apply them to a 326,554-cell spatial atlas of human oral mucosal carcinogenesis spanning normal mucosa, hyperplasia, oral lichen planus, and dysplasia. DC3 (Diffusion-Constrained Cell Communication) replaces distance-blind ligand-receptor co-expression with a ligand-specific exponential distance kernel. It down-weights short-range ECM-class interactions by three to four orders of magnitude relative to traditional scoring, remains rank-stable under diffusion-length perturbation and dys2 removal (Spearman rho >= 0.93), and better matches COMMOT than traditional co-expression on the dys2 benchmark. A within-section label-permutation null indicates that only 0.5-6.6% of the top MRB-autocrine DC3 signal is attributable to spatial clustering alone. A log-density landscape, reported in nats rather than thermodynamic units, places the Malignant_risk_basal (MRB) cluster in a high-density epithelial region with a reverse barrier of 2.43 nats from stress-proliferative basal cells on the full atlas, 1.93 nats after dys2 removal, and 1.0-1.9 nats under Silverman/Scott bandwidth rules. MRB local neighborhood entropy is stable at 0.67-0.68 bits across bandwidth and PCA-dimension choices. A spatial Hawkes model separates immune-cell background density from self-excitation; apparent dysplasia-level adaptive-immune attenuation is not significant by 10,000 label permutations (all FDR q = 1.00) and is retained only as a section-level observation. External checks in CELLxGENE Census and Puram 2017 reposition the MRB signature as a dysplasia-restricted aberrant-basal-differentiation phenotype rather than a marker preserved in fully malignant OSCC. The methods are presented as lightweight, interpretable tools, and the biological findings as hypotheses requiring independent validation.\n\nAuthor summarySpatial transcriptomics records both gene expression and tissue position, but common analysis pipelines often treat signaling and cell-state structure as if distance and tissue architecture were secondary details. We developed three simple methods that make these assumptions explicit: DC3 scores cell-cell communication with ligand-specific diffusion distances, a log-density landscape summarizes where epithelial states are densely populated in expression space, and a spatial Hawkes model separates baseline immune density from local self-excitation. Applied to an oral mucosal carcinogenesis atlas, these methods highlight a dysplasia-enriched Malignant_risk_basal (MRB) population with short-range autocrine signaling and mixed epithelial neighborhoods. We also stress-test each claim by removing the MRB-rich section, varying model parameters, running permutation tests, benchmarking against COMMOT, and checking public external datasets. These tests narrow the biological interpretation: MRB is best viewed here as a dysplasia-restricted aberrant-basal-differentiation phenotype, not as a proven step toward fully malignant oral squamous cell carcinoma, and the apparent dysplasia-level immune-cascade attenuation is not statistically supported. The study therefore offers both a reusable computational toolkit and a deliberately constrained biological hypothesis for future validation.",
+  "authors": [
+    "Huang, Z.",
+    "Yang, D.",
+    "Zhang, R.",
+    "Chen, Q.",
+    "Zhao, H.",
+    "Xu, H."
+  ],
+  "doi": "10.64898/2026.04.27.721026",
+  "first_seen": "2026-04-29",
+  "id": "biorxiv:10.64898/2026.04.27.721026",
+  "metadata": {
+    "abstract": "Spatial transcriptomics is often interpreted with tools that do not explicitly encode tissue-scale physical priors such as finite ligand diffusion, density-based state stability, or self-exciting spatial recruitment. We introduce three compact computational methods and apply them to a 326,554-cell spatial atlas of human oral mucosal carcinogenesis spanning normal mucosa, hyperplasia, oral lichen planus, and dysplasia. DC3 (Diffusion-Constrained Cell Communication) replaces distance-blind ligand-receptor co-expression with a ligand-specific exponential distance kernel. It down-weights short-range ECM-class interactions by three to four orders of magnitude relative to traditional scoring, remains rank-stable under diffusion-length perturbation and dys2 removal (Spearman rho >= 0.93), and better matches COMMOT than traditional co-expression on the dys2 benchmark. A within-section label-permutation null indicates that only 0.5-6.6% of the top MRB-autocrine DC3 signal is attributable to spatial clustering alone. A log-density landscape, reported in nats rather than thermodynamic units, places the Malignant_risk_basal (MRB) cluster in a high-density epithelial region with a reverse barrier of 2.43 nats from stress-proliferative basal cells on the full atlas, 1.93 nats after dys2 removal, and 1.0-1.9 nats under Silverman/Scott bandwidth rules. MRB local neighborhood entropy is stable at 0.67-0.68 bits across bandwidth and PCA-dimension choices. A spatial Hawkes model separates immune-cell background density from self-excitation; apparent dysplasia-level adaptive-immune attenuation is not significant by 10,000 label permutations (all FDR q = 1.00) and is retained only as a section-level observation. External checks in CELLxGENE Census and Puram 2017 reposition the MRB signature as a dysplasia-restricted aberrant-basal-differentiation phenotype rather than a marker preserved in fully malignant OSCC. The methods are presented as lightweight, interpretable tools, and the biological findings as hypotheses requiring independent validation.\n\nAuthor summarySpatial transcriptomics records both gene expression and tissue position, but common analysis pipelines often treat signaling and cell-state structure as if distance and tissue architecture were secondary details. We developed three simple methods that make these assumptions explicit: DC3 scores cell-cell communication with ligand-specific diffusion distances, a log-density landscape summarizes where epithelial states are densely populated in expression space, and a spatial Hawkes model separates baseline immune density from local self-excitation. Applied to an oral mucosal carcinogenesis atlas, these methods highlight a dysplasia-enriched Malignant_risk_basal (MRB) population with short-range autocrine signaling and mixed epithelial neighborhoods. We also stress-test each claim by removing the MRB-rich section, varying model parameters, running permutation tests, benchmarking against COMMOT, and checking public external datasets. These tests narrow the biological interpretation: MRB is best viewed here as a dysplasia-restricted aberrant-basal-differentiation phenotype, not as a proven step toward fully malignant oral squamous cell carcinoma, and the apparent dysplasia-level immune-cascade attenuation is not statistically supported. The study therefore offers both a reusable computational toolkit and a deliberately constrained biological hypothesis for future validation.",
+    "author_corresponding": "Hao Xu",
+    "author_corresponding_institution": "Sichuan University",
+    "authors": "Huang, Z.; Yang, D.; Zhang, R.; Chen, Q.; Zhao, H.; Xu, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-04-29",
+    "doi": "10.64898/2026.04.27.721026",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/04/29/2026.04.27.721026.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Physics-inspired computational methods for spatial transcriptomics reveal a dysplasia-restricted premalignant basin and a density-asymmetric autocrine niche in oral mucosal carcinogenesis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Sichuan University",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-04-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces DC3, a diffusion-constrained ligand-receptor scoring method, a log-density landscape, and a spatial Hawkes model, applied to a 326,554-cell oral…",
+  "title": "Physics-inspired computational methods for spatial transcriptomics reveal a dysplasia-restricted premalignant basin and a density-asymmetric autocrine niche in oral mucosal carcinogenesis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.27.721026"
+}
