@@ -1,0 +1,33 @@
+{
+  "abstract": "Reliable control in motor imagery brain-computer interfaces (MI-BCIs) requires the precise decoding of user-specific neural rhythms, which vary significantly across individuals. The Common Spatial Pattern (CSP) algorithm is a cornerstone of MI-BCI decoding, yet its performance depends strongly on the spectral range of the input EEG data. Although Filter Bank CSP (FBCSP) extends this as a data-driven decoding framework, its frequency sub-bands are predefined rather than selected using subject-specific physiological criteria. This paper presents a proof-of-concept study of static functional connectivity (FC)-guided band selection for MI-BCI, demonstrated using a conventional FBCSP-based pipeline. The proposed method identifies the most discriminative spectral bands by calculating phase-based connectivity across four sensorimotor channels using wPLI, PLV, and PLI. Nine bands in a 4-40 Hz filter bank are ranked by the effect size of their hemispheric coupling differences and pruned to the top K bands for feature extraction and classification via FBCSP and a Support Vector Regressor. This framework was tested for K values ranging from 1 to 8 across the BCI Competition IV-2a (n = 9) and OpenBMI (n = 54) datasets. Performance was benchmarked against standard nine-band FBCSP and random ablation to determine the minimum number of bands (K*) required to maintain accuracy within a 2% baseline equivalence zone. Results show FC-guided selection can outperform random ablation and achieve near-baseline performance while reducing required CSP fits by 22.2% to 77.8%. PLV enables the most aggressive dimensionality reduction by prioritizing the μ and low-\\b{eta} ranges, while wPLI demonstrates superior inter-session robustness by mitigating volume conduction. These findings establish FC-guided selection as a principled and interpretable alternative to heuristic filter bank designs.",
+  "authors": [
+    "Natália Araújo do Carmo",
+    "Aarthy Nagarajan"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-01",
+  "id": "arxiv:2605.00746",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.NC",
+    "categories": [
+      "q-bio.NC",
+      "eess.SP",
+      "physics.optics"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.00746v2</ns0:id>\n    <ns0:title>Functional Connectivity-Guided Band Selection for Motor Imagery Brain-Computer Interfaces</ns0:title>\n    <ns0:updated>2026-09-22T21:02:39Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.00746v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.00746v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Reliable control in motor imagery brain-computer interfaces (MI-BCIs) requires the precise decoding of user-specific neural rhythms, which vary significantly across individuals. The Common Spatial Pattern (CSP) algorithm is a cornerstone of MI-BCI decoding, yet its performance depends strongly on the spectral range of the input EEG data. Although Filter Bank CSP (FBCSP) extends this as a data-driven decoding framework, its frequency sub-bands are predefined rather than selected using subject-specific physiological criteria. This paper presents a proof-of-concept study of static functional connectivity (FC)-guided band selection for MI-BCI, demonstrated using a conventional FBCSP-based pipeline. The proposed method identifies the most discriminative spectral bands by calculating phase-based connectivity across four sensorimotor channels using wPLI, PLV, and PLI. Nine bands in a 4-40 Hz filter bank are ranked by the effect size of their hemispheric coupling differences and pruned to the top K bands for feature extraction and classification via FBCSP and a Support Vector Regressor. This framework was tested for K values ranging from 1 to 8 across the BCI Competition IV-2a (n = 9) and OpenBMI (n = 54) datasets. Performance was benchmarked against standard nine-band FBCSP and random ablation to determine the minimum number of bands (K*) required to maintain accuracy within a 2% baseline equivalence zone. Results show FC-guided selection can outperform random ablation and achieve near-baseline performance while reducing required CSP fits by 22.2% to 77.8%. PLV enables the most aggressive dimensionality reduction by prioritizing the μ and low-\\b{eta} ranges, while wPLI demonstrates superior inter-session robustness by mitigating volume conduction. These findings establish FC-guided selection as a principled and interpretable alternative to heuristic filter bank designs.</ns0:summary>\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.optics\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-01T15:53:32Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.NC\" />\n    <ns0:author>\n      <ns0:name>Natália Araújo do Carmo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aarthy Nagarajan</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-05-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes phase-connectivity (wPLI, PLV, PLI) guided selection of frequency bands for FBCSP motor-imagery BCI decoding, tested on BCI-IV-2a and OpenBMI with…",
+  "title": "Functional Connectivity-Guided Band Selection for Motor Imagery Brain-Computer Interfaces",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.00746v2"
+}

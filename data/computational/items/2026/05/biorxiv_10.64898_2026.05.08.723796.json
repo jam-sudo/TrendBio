@@ -1,0 +1,43 @@
+{
+  "abstract": "Identifying causal relationships and distinguishing them from associations is a central scientific endeavor with many applications; knowing causal links between genes and diseases, for instance, can focus drug discovery on curing diseases beyond just symptom management. Despite several studies on automatically extracting relations between entities from large biomedical literature corpora like PubMed, only a few studies extract causal relations from abstracts and even fewer summarize corpus-level evidence for causal links. Recently, Large Language Models (LLMs) have been increasingly deployed to summarize biomedical information and extract relations; however, there is a distinct lack of explicit benchmarking comparing these generalized LLM-based methods against specialized, domain-aware frameworks for corpus-wide causal inference. In this work, we develop a method to infer Corpus-Wide Causal Score (CWCS) of a gene-disease (G-D) pair by integrating two pieces of evidence: (i) network-based causal signals in a prior gene regulatory network, quantified as a CWCS-Net score using an existing multilayer network centrality algorithm; and (ii) corpus-wide literature evidence, quantified as a CWCS-TD (TD for Truth Discovery) score using a newly-developed TD algorithm. Our CWCS-TD (scoring) algorithm jointly and iteratively estimates causal scores for multiple G-D pairs while modeling the reliability of PubMed abstracts co-mentioning them; and represents an advance in the field of TD algorithms due to its incorporation of bibliometric features of publications to address the challenge of sparsity of abstracts that assert a G-D causal relation. Using OMIM as an external expert-curated reference to evaluate classifications of G-D pairs as causal or not, our CWCS method achieved a causal class F1 score of 0.600 across ten diseases, outperforming both LLMs, GPT-4o and MMed-Llama 3 (this performance trend also persists when using area under the precision-recall curve as the evaluation metric). Both LLMs exhibit high recall accompanied by comparatively low precision, resulting in lower causal class F1 scores (0.505 for GPT-4o and 0.522 for MMed-Llama 3) due to large number of false positive predictions. Taken together, these evaluations and other ablation studies show the promise of our carefully designed algorithm in collating and integrating evidence of biomedical causal relations from both network- and literature-based sources, thereby supporting its broader applicability.",
+  "authors": [
+    "Bansal, N.",
+    "Parsodkar, A. P.",
+    "Pathak, A.",
+    "Narayanan, M."
+  ],
+  "doi": "10.64898/2026.05.08.723796",
+  "first_seen": "2026-05-12",
+  "id": "biorxiv:10.64898/2026.05.08.723796",
+  "metadata": {
+    "abstract": "Identifying causal relationships and distinguishing them from associations is a central scientific endeavor with many applications; knowing causal links between genes and diseases, for instance, can focus drug discovery on curing diseases beyond just symptom management. Despite several studies on automatically extracting relations between entities from large biomedical literature corpora like PubMed, only a few studies extract causal relations from abstracts and even fewer summarize corpus-level evidence for causal links. Recently, Large Language Models (LLMs) have been increasingly deployed to summarize biomedical information and extract relations; however, there is a distinct lack of explicit benchmarking comparing these generalized LLM-based methods against specialized, domain-aware frameworks for corpus-wide causal inference. In this work, we develop a method to infer Corpus-Wide Causal Score (CWCS) of a gene-disease (G-D) pair by integrating two pieces of evidence: (i) network-based causal signals in a prior gene regulatory network, quantified as a CWCS-Net score using an existing multilayer network centrality algorithm; and (ii) corpus-wide literature evidence, quantified as a CWCS-TD (TD for Truth Discovery) score using a newly-developed TD algorithm. Our CWCS-TD (scoring) algorithm jointly and iteratively estimates causal scores for multiple G-D pairs while modeling the reliability of PubMed abstracts co-mentioning them; and represents an advance in the field of TD algorithms due to its incorporation of bibliometric features of publications to address the challenge of sparsity of abstracts that assert a G-D causal relation. Using OMIM as an external expert-curated reference to evaluate classifications of G-D pairs as causal or not, our CWCS method achieved a causal class F1 score of 0.600 across ten diseases, outperforming both LLMs, GPT-4o and MMed-Llama 3 (this performance trend also persists when using area under the precision-recall curve as the evaluation metric). Both LLMs exhibit high recall accompanied by comparatively low precision, resulting in lower causal class F1 scores (0.505 for GPT-4o and 0.522 for MMed-Llama 3) due to large number of false positive predictions. Taken together, these evaluations and other ablation studies show the promise of our carefully designed algorithm in collating and integrating evidence of biomedical causal relations from both network- and literature-based sources, thereby supporting its broader applicability.",
+    "author_corresponding": "Manikandan Narayanan",
+    "author_corresponding_institution": "Dept. of Computer Science & Engineering, Indian Institute of Technology (IIT) Madras, Chennai, India; Centre for Integrative Biology and Systems Medicine, IIT M",
+    "authors": "Bansal, N.; Parsodkar, A. P.; Pathak, A.; Narayanan, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-12",
+    "doi": "10.64898/2026.05.08.723796",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/12/2026.05.08.723796.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Corpus-wide causality: Algorithm design & application for aggregating gene-disease causal evidence",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Dept. of Computer Science & Engineering, Indian Institute of Technology (IIT) Madras, Chennai, India; Centre for Integrative Biology and Systems Medicine, IIT M",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-05-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Corpus-wide causal score (CWCS) integrates network centrality and a bibliometric-aware truth discovery algorithm to rank gene-disease causal links; beats…",
+  "title": "Corpus-wide causality: Algorithm design & application for aggregating gene-disease causal evidence",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.08.723796"
+}

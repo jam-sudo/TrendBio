@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundSharing patient-level gene expression data is essential for translational discovery but carries documented re-identification risks. Bulk RNA-seq count matrices can retain genotypic signals and paired clinical metadata compounds this through quasi-identifier matching. Synthetic RNA-seq cohorts offer a complementary path for privacy-preserving data sharing, but the field lacks a multi-axis benchmark that probes biological fidelity and empirical privacy risk at transcriptome scale. Here we present a multi-axis benchmark framework that reflects how transcriptomic cohorts are used in translational practice.\n\nMethodsWe benchmarked three generative models across four cohorts drawn from datasets spanning oncology (TCGA-LUAD), sepsis (GSE184900), and pediatric IBD (RISK/GSE57945): dbTwin (a non-deep-learning, target-conditioned method that operates natively at RNA-seq scale), class-MVN (a low-rank target-conditioned multivariate Gaussian model), and PCA-CTGAN (a tabular GAN trained in PCA-compressed space). Synthetic cohorts were generated from training folds of a five-fold stratified design. We evaluated DE genes recovery, log2FC and significance (padj) concordance, held-out AUC (TSTR) and SHAP concordance and distance-based memorization risk.\n\nResultsclass-MVN recovered 64.8% and 43.1% of real DE genes in the two binary cohorts with high fold-change correlation but lower significance concordance (r = 0.24-0.68) and inflated DE gene counts. dbTwin recovered 78.7% and 91.8% of real DE genes in the same cohorts, with high fold-change correlation and stronger significance concordance (r [&ge;] 0.88). Both methods matched held-out real AUC under TSTR, but SHAP agreement differed substantially: dbTwin preserved feature attribution patterns across cohorts (SHAP top-50 genes r = 0.84-0.99 across two binary and two multiclass cohorts), whereas class-MVN showed moderate performance for majority classes but degraded in multiclass and imbalanced settings (SHAP r = 0.31-0.79). PCA-CTGAN performed poorly across most DE and ML metrics. Distance-toclosest-record analysis did not indicate memorization by any of the models.\n\nConclusionsWe introduced a multi-axis, transcriptome-scale, discovery-aware benchmark to validate synthetic RNA-seq cohorts for translational workflows and evaluated three generative models across four real-world cohorts. These results support the use of synthetic RNA-seq cohorts for exploratory analysis and method development, while emphasizing the need for careful validation before use in higher-stakes applications. All benchmark code and data are available at https://github.com/Nanda-Aditya/rna-syn-bench.",
+  "authors": [
+    "NANDA, A.",
+    "Saha, S."
+  ],
+  "doi": "10.64898/2026.05.22.726357",
+  "first_seen": "2026-05-26",
+  "id": "biorxiv:10.64898/2026.05.22.726357",
+  "metadata": {
+    "abstract": "BackgroundSharing patient-level gene expression data is essential for translational discovery but carries documented re-identification risks. Bulk RNA-seq count matrices can retain genotypic signals and paired clinical metadata compounds this through quasi-identifier matching. Synthetic RNA-seq cohorts offer a complementary path for privacy-preserving data sharing, but the field lacks a multi-axis benchmark that probes biological fidelity and empirical privacy risk at transcriptome scale. Here we present a multi-axis benchmark framework that reflects how transcriptomic cohorts are used in translational practice.\n\nMethodsWe benchmarked three generative models across four cohorts drawn from datasets spanning oncology (TCGA-LUAD), sepsis (GSE184900), and pediatric IBD (RISK/GSE57945): dbTwin (a non-deep-learning, target-conditioned method that operates natively at RNA-seq scale), class-MVN (a low-rank target-conditioned multivariate Gaussian model), and PCA-CTGAN (a tabular GAN trained in PCA-compressed space). Synthetic cohorts were generated from training folds of a five-fold stratified design. We evaluated DE genes recovery, log2FC and significance (padj) concordance, held-out AUC (TSTR) and SHAP concordance and distance-based memorization risk.\n\nResultsclass-MVN recovered 64.8% and 43.1% of real DE genes in the two binary cohorts with high fold-change correlation but lower significance concordance (r = 0.24-0.68) and inflated DE gene counts. dbTwin recovered 78.7% and 91.8% of real DE genes in the same cohorts, with high fold-change correlation and stronger significance concordance (r [&ge;] 0.88). Both methods matched held-out real AUC under TSTR, but SHAP agreement differed substantially: dbTwin preserved feature attribution patterns across cohorts (SHAP top-50 genes r = 0.84-0.99 across two binary and two multiclass cohorts), whereas class-MVN showed moderate performance for majority classes but degraded in multiclass and imbalanced settings (SHAP r = 0.31-0.79). PCA-CTGAN performed poorly across most DE and ML metrics. Distance-toclosest-record analysis did not indicate memorization by any of the models.\n\nConclusionsWe introduced a multi-axis, transcriptome-scale, discovery-aware benchmark to validate synthetic RNA-seq cohorts for translational workflows and evaluated three generative models across four real-world cohorts. These results support the use of synthetic RNA-seq cohorts for exploratory analysis and method development, while emphasizing the need for careful validation before use in higher-stakes applications. All benchmark code and data are available at https://github.com/Nanda-Aditya/rna-syn-bench.",
+    "author_corresponding": "ADITYA NANDA",
+    "author_corresponding_institution": "dbTwin, Inc.",
+    "authors": "NANDA, A.; Saha, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-26",
+    "doi": "10.64898/2026.05.22.726357",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/26/2026.05.22.726357.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Synthetic RNA-seq cohorts for data sharing: a discovery-aware benchmark at transcriptome scale",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "dbTwin, Inc.",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-05-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Multi-axis benchmark for synthetic bulk RNA-seq cohorts comparing dbTwin, class-MVN and PCA-CTGAN on DE recovery, SHAP concordance and memorization risk.",
+  "title": "Synthetic RNA-seq cohorts for data sharing: a discovery-aware benchmark at transcriptome scale",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.22.726357"
+}

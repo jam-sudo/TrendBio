@@ -1,0 +1,50 @@
+{
+  "abstract": "Protein structure prediction via AlphaFold2 has revolutionized drug discovery, yet its end-to-end execution remains computationally intensive. While GPUs are traditionally favored for deep learning, the AlphaFold2 algorithm consists of heterogeneous phases -- preprocessing with sparse database searches and model inference with low-arithmetic-intensity attention modules -- that present unique architectural challenges. In this work, we address these bottlenecks by introducing Open-Omics-AlphaFold2, a highly optimized implementation for Intel(R) Xeon(R) CPU. By leveraging the CPUs versatility in handling both sparse preprocessing algorithms and dense matrix operations via Intel Advanced Matrix Extensions (AMX), we accelerate the entire pipeline end-to-end. Our optimization strategy employs multi-level parallelism -- spanning multiprocessing, multi-threading, and vectorization -- alongside cacheaware tiling and operator fusion. Our results demonstrate that, on a Xeon CPU, Open-Omics-AlphaFold2 achieves 2 7.58 speedup for preprocessing and 19.8 29.2 speedup for model inference over baseline Deepmind-AlphaFold2. Moreover, for a proteome of 391 proteins, Open-Omics-AlphaFold2 running on a dual-socket Intel Xeon 6980P system achieves a remarkable 76% higher through-put over the state-of-the-art GPU-accelerated solution, FastFold, running on a single-socket Intel Xeon 6980P CPU with an NVIDIA H100 offioad.\n\nCode availabilityBaremetal: https://github.com/IntelLabs/open-omics-alphafold Containerized: https://github.com/IntelLabs/Open-Omics-Accelera tion-Framework/tree/main/pipelines/alphafold2-based-protein-folding",
+  "authors": [
+    "Chaudhary, N.",
+    "Yang, W.",
+    "Kalamkar, D.",
+    "Zhou, J.",
+    "Ghosh, S.",
+    "Xia, L.",
+    "Tiwari, M.",
+    "Heinecke, A.",
+    "Kaul, B.",
+    "Misra, S."
+  ],
+  "doi": "10.64898/2026.05.27.728222",
+  "first_seen": "2026-05-29",
+  "id": "biorxiv:10.64898/2026.05.27.728222",
+  "metadata": {
+    "abstract": "Protein structure prediction via AlphaFold2 has revolutionized drug discovery, yet its end-to-end execution remains computationally intensive. While GPUs are traditionally favored for deep learning, the AlphaFold2 algorithm consists of heterogeneous phases -- preprocessing with sparse database searches and model inference with low-arithmetic-intensity attention modules -- that present unique architectural challenges. In this work, we address these bottlenecks by introducing Open-Omics-AlphaFold2, a highly optimized implementation for Intel(R) Xeon(R) CPU. By leveraging the CPUs versatility in handling both sparse preprocessing algorithms and dense matrix operations via Intel Advanced Matrix Extensions (AMX), we accelerate the entire pipeline end-to-end. Our optimization strategy employs multi-level parallelism -- spanning multiprocessing, multi-threading, and vectorization -- alongside cacheaware tiling and operator fusion. Our results demonstrate that, on a Xeon CPU, Open-Omics-AlphaFold2 achieves 2 7.58 speedup for preprocessing and 19.8 29.2 speedup for model inference over baseline Deepmind-AlphaFold2. Moreover, for a proteome of 391 proteins, Open-Omics-AlphaFold2 running on a dual-socket Intel Xeon 6980P system achieves a remarkable 76% higher through-put over the state-of-the-art GPU-accelerated solution, FastFold, running on a single-socket Intel Xeon 6980P CPU with an NVIDIA H100 offioad.\n\nCode availabilityBaremetal: https://github.com/IntelLabs/open-omics-alphafold Containerized: https://github.com/IntelLabs/Open-Omics-Accelera tion-Framework/tree/main/pipelines/alphafold2-based-protein-folding",
+    "author_corresponding": "Narendra Chaudhary",
+    "author_corresponding_institution": "Intel Corporation",
+    "authors": "Chaudhary, N.; Yang, W.; Kalamkar, D.; Zhou, J.; Ghosh, S.; Xia, L.; Tiwari, M.; Heinecke, A.; Kaul, B.; Misra, S.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-05-29",
+    "doi": "10.64898/2026.05.27.728222",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/29/2026.05.27.728222.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Revisiting CPUs for Protein Folding: Xeon-Based Acceleration of AlphaFold2",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Intel Corporation",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces Open-Omics-AlphaFold2, a CPU-optimized AlphaFold2 implementation on Intel Xeon using AMX, reporting end-to-end speedups and higher throughput than a…",
+  "title": "Revisiting CPUs for Protein Folding: Xeon-Based Acceleration of AlphaFold2",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.27.728222"
+}

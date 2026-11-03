@@ -1,0 +1,41 @@
+{
+  "abstract": "RNA structural alignment is a central task in comparative RNA analysis, but many efficient methods achieve tractability by restricting the class of admissible structures, often excluding pseudoknots. This exclusion is limiting for viral and regulatory RNAs, where conserved structure can remain informative even when sequence conservation is weak. We introduce a coarse RNA structural alignment algorithm that aligns secondary structures by searching over partial maps between stems rather than nucleotides. Each input structure is decomposed into stems, annotated with nucleotide-level features, and encoded by pairwise topological relations among stems. Alignment is formulated as a cost-minimizing partial stem map with skip operations, and the search tree is pruned by RNA-specific directionality and topological constraints derived from already aligned stems. For the stated cost function and over the class of injective, direction-preserving, topologically consistent stem maps, the search is exact. This shifts the dominant computational dependence from sequence length to the number and arrangement of stems. We evaluated the method on 2100 pairwise alignments sampled from seven Rfam families spanning 40-224 nucleotides and 2-15 stems. Across these benchmarks, the algorithm returned terminal coarse alignments in which every stem was either matched or skipped. We measured running time and search-tree width to characterize performance on diverse family-to-family comparisons. The experiments also show that ordering the input structures affects efficiency: using the structure with more stems as the search-driving structure reduces tree width. The resulting partial stem map is directly interpretable for RNA annotation and can be projected to nucleotide resolution for downstream sequence-structure analysis. The source code for CoSTAR is available at: https://github.com/TheCOBRALab/CoSTAR",
+  "authors": [
+    "Archinuk, F.",
+    "Jabbari, H."
+  ],
+  "doi": "10.64898/2026.05.22.727263",
+  "first_seen": "2026-05-26",
+  "id": "biorxiv:10.64898/2026.05.22.727263",
+  "metadata": {
+    "abstract": "RNA structural alignment is a central task in comparative RNA analysis, but many efficient methods achieve tractability by restricting the class of admissible structures, often excluding pseudoknots. This exclusion is limiting for viral and regulatory RNAs, where conserved structure can remain informative even when sequence conservation is weak. We introduce a coarse RNA structural alignment algorithm that aligns secondary structures by searching over partial maps between stems rather than nucleotides. Each input structure is decomposed into stems, annotated with nucleotide-level features, and encoded by pairwise topological relations among stems. Alignment is formulated as a cost-minimizing partial stem map with skip operations, and the search tree is pruned by RNA-specific directionality and topological constraints derived from already aligned stems. For the stated cost function and over the class of injective, direction-preserving, topologically consistent stem maps, the search is exact. This shifts the dominant computational dependence from sequence length to the number and arrangement of stems. We evaluated the method on 2100 pairwise alignments sampled from seven Rfam families spanning 40-224 nucleotides and 2-15 stems. Across these benchmarks, the algorithm returned terminal coarse alignments in which every stem was either matched or skipped. We measured running time and search-tree width to characterize performance on diverse family-to-family comparisons. The experiments also show that ordering the input structures affects efficiency: using the structure with more stems as the search-driving structure reduces tree width. The resulting partial stem map is directly interpretable for RNA annotation and can be projected to nucleotide resolution for downstream sequence-structure analysis. The source code for CoSTAR is available at: https://github.com/TheCOBRALab/CoSTAR",
+    "author_corresponding": "Hosna Jabbari",
+    "author_corresponding_institution": "University of Alberta",
+    "authors": "Archinuk, F.; Jabbari, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-26",
+    "doi": "10.64898/2026.05.22.727263",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/26/2026.05.22.727263.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CoSTAR: Coarse Stem-Topology Alignment of Pseudoknotted RNA Structures by Relation-Constrained Search",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Alberta",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "CoSTAR aligns pseudoknotted RNA structures by exact search over stem-level partial maps with topological constraints, benchmarked on 2100 Rfam pairwise…",
+  "title": "CoSTAR: Coarse Stem-Topology Alignment of Pseudoknotted RNA Structures by Relation-Constrained Search",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.22.727263"
+}

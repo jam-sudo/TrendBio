@@ -1,0 +1,41 @@
+{
+  "abstract": "Principal component analysis (PCA) of the Hi-C Pearson correlation matrix is the standard approach for identifying A/B chromatin compartments. Despite its widespread use, the relationship between the first principal component (PC1) and the underlying compartment structure remains insufficiently characterized, and computing PC1 can become computationally expensive for high-resolution Hi-C data.\n\nHere we investigate the role of the PC1 explained variance ratio in compartment analysis and show that chromosomes with strong compartment organization typically exhibit a dominant PC1 signal. Based on this observation, we propose HiCPEP, a heuristic algorithm that estimates the sign pattern and relative magnitude of PC1 directly from the Hi-C Pearson covariance matrix without performing explicit eigenvector decomposition. The method can operate from either a dense Pearson matrix for fast approximation or a sparse observed/expected (O/E) matrix to reduce memory usage. Furthermore, because many covariance columns exhibit PC1-like patterns when the compartment signal is strong, HiCPEP can be accelerated using random sampling without substantially reducing accuracy.\n\nAcross multiple Hi-C datasets, HiCPEP consistently recovered compartment patterns with high similarity to reference PC1 vectors produced by standard PCA-based methods. Benchmark experiments show that HiCPEP achieves comparable accuracy while reducing computational cost in terms of runtime or memory usage. These results suggest that HiCPEP provides a practical alternative for efficient chromatin compartment analysis from large-scale Hi-C datasets. The HiCPEP implementation is freely available at https://github.com/ZhiRongDev/HiCPEP.",
+  "authors": [
+    "Cheng, Z.-R.",
+    "Chang, J.-M."
+  ],
+  "doi": "10.64898/2026.05.14.725269",
+  "first_seen": "2026-05-18",
+  "id": "biorxiv:10.64898/2026.05.14.725269",
+  "metadata": {
+    "abstract": "Principal component analysis (PCA) of the Hi-C Pearson correlation matrix is the standard approach for identifying A/B chromatin compartments. Despite its widespread use, the relationship between the first principal component (PC1) and the underlying compartment structure remains insufficiently characterized, and computing PC1 can become computationally expensive for high-resolution Hi-C data.\n\nHere we investigate the role of the PC1 explained variance ratio in compartment analysis and show that chromosomes with strong compartment organization typically exhibit a dominant PC1 signal. Based on this observation, we propose HiCPEP, a heuristic algorithm that estimates the sign pattern and relative magnitude of PC1 directly from the Hi-C Pearson covariance matrix without performing explicit eigenvector decomposition. The method can operate from either a dense Pearson matrix for fast approximation or a sparse observed/expected (O/E) matrix to reduce memory usage. Furthermore, because many covariance columns exhibit PC1-like patterns when the compartment signal is strong, HiCPEP can be accelerated using random sampling without substantially reducing accuracy.\n\nAcross multiple Hi-C datasets, HiCPEP consistently recovered compartment patterns with high similarity to reference PC1 vectors produced by standard PCA-based methods. Benchmark experiments show that HiCPEP achieves comparable accuracy while reducing computational cost in terms of runtime or memory usage. These results suggest that HiCPEP provides a practical alternative for efficient chromatin compartment analysis from large-scale Hi-C datasets. The HiCPEP implementation is freely available at https://github.com/ZhiRongDev/HiCPEP.",
+    "author_corresponding": "Jia-Ming Chang",
+    "author_corresponding_institution": "Department of Computer Science & Institute of Neuroscience,  National Chengchi University",
+    "authors": "Cheng, Z.-R.; Chang, J.-M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-18",
+    "doi": "10.64898/2026.05.14.725269",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/18/2026.05.14.725269.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "HiCPEP: Efficient estimation of chromatin compartment PC1 from Hi-C covariance structure",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computer Science & Institute of Neuroscience,  National Chengchi University",
+  "preprint_id": null,
+  "primary_category": "epigenomics",
+  "published_at": "2026-05-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "HiCPEP estimates Hi-C chromatin compartment PC1 sign pattern and magnitude directly from the Pearson covariance matrix, avoiding eigendecomposition, with dense…",
+  "title": "HiCPEP: Efficient estimation of chromatin compartment PC1 from Hi-C covariance structure",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.14.725269"
+}

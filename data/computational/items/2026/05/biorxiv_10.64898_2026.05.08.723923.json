@@ -1,0 +1,49 @@
+{
+  "abstract": "MicroRNAs are short noncoding RNAs that regulate gene expression and are commonly profiled by small RNA sequencing (miRNA-seq). Despite the widespread use of miRNA-seq, datasets are often analyzed with RNA-seq method such as DESeq2 or edgeR, which do not take into account the specific characteristics of miRNA-seq data. Here, we present a benchmark study of normalization and differential expression approaches using a realistic ground-truth dataset. By mixing mouse RNA of two organs, we generated expression trends while capturing biological and technical variability. Using monotonicity across the dataset and expected fold changes from the mixture design, we assessed normalization and differential expression methods.\n\nNormalization benchmarking showed that within-sample scaling, particularly Read Per Million (RPM), best preserved the expected monotonic trends, outperforming cross-sample methods such as TMM, rlog, and VST. These approaches sometimes recovered apparent monotonicity among abundant miRNAs, but inspection of individual profiles suggested likely over-correction.\n\nRegarding differential expression, edgeR consistently ranked among the best-performing methods across several metrics, including log2 fold-change estimation, with performance comparable to miRNA-seq-specific tools such as miRglmm and NBSR. DESeq2, edgeR-v4, and limma-based approaches tended to systematically underestimate log2 fold changes. Applying a common RPM-based normalization substantially improved the performance of cross-sample methods, highlighting the strong influence of normalization on differential expression analysis.\n\nOverall, our findings support within-sample scaling methods such as RPM for normalization, and edgeR, miRglmm, or NBSR for differential expression. The dataset has been made publicly available, providing a valuable resource for objective method comparison and future miRNA-seq software development.",
+  "authors": [
+    "Aparicio-Puerta, E.",
+    "Baran, A. M.",
+    "Ashton, J. M.",
+    "Pritchett, E. M.",
+    "Gaca, A.",
+    "Becker, J.",
+    "Halushka, M. K.",
+    "Jun, S.-H.",
+    "McCall, M. N."
+  ],
+  "doi": "10.64898/2026.05.08.723923",
+  "first_seen": "2026-05-13",
+  "id": "biorxiv:10.64898/2026.05.08.723923",
+  "metadata": {
+    "abstract": "MicroRNAs are short noncoding RNAs that regulate gene expression and are commonly profiled by small RNA sequencing (miRNA-seq). Despite the widespread use of miRNA-seq, datasets are often analyzed with RNA-seq method such as DESeq2 or edgeR, which do not take into account the specific characteristics of miRNA-seq data. Here, we present a benchmark study of normalization and differential expression approaches using a realistic ground-truth dataset. By mixing mouse RNA of two organs, we generated expression trends while capturing biological and technical variability. Using monotonicity across the dataset and expected fold changes from the mixture design, we assessed normalization and differential expression methods.\n\nNormalization benchmarking showed that within-sample scaling, particularly Read Per Million (RPM), best preserved the expected monotonic trends, outperforming cross-sample methods such as TMM, rlog, and VST. These approaches sometimes recovered apparent monotonicity among abundant miRNAs, but inspection of individual profiles suggested likely over-correction.\n\nRegarding differential expression, edgeR consistently ranked among the best-performing methods across several metrics, including log2 fold-change estimation, with performance comparable to miRNA-seq-specific tools such as miRglmm and NBSR. DESeq2, edgeR-v4, and limma-based approaches tended to systematically underestimate log2 fold changes. Applying a common RPM-based normalization substantially improved the performance of cross-sample methods, highlighting the strong influence of normalization on differential expression analysis.\n\nOverall, our findings support within-sample scaling methods such as RPM for normalization, and edgeR, miRglmm, or NBSR for differential expression. The dataset has been made publicly available, providing a valuable resource for objective method comparison and future miRNA-seq software development.",
+    "author_corresponding": "Ernesto Aparicio-Puerta",
+    "author_corresponding_institution": "University of Rochester",
+    "authors": "Aparicio-Puerta, E.; Baran, A. M.; Ashton, J. M.; Pritchett, E. M.; Gaca, A.; Becker, J.; Halushka, M. K.; Jun, S.-H.; McCall, M. N.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-13",
+    "doi": "10.64898/2026.05.08.723923",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/13/2026.05.08.723923.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "An assessment of normalization and differential expression methods for miRNA-seq analysis using a realistic benchmark dataset",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Rochester",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks miRNA-seq normalization and differential expression methods on a mixed-organ ground-truth dataset; RPM best preserves monotonic trends, edgeR,…",
+  "title": "An assessment of normalization and differential expression methods for miRNA-seq analysis using a realistic benchmark dataset",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.08.723923"
+}

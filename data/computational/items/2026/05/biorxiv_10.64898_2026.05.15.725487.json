@@ -1,0 +1,44 @@
+{
+  "abstract": "Principal Component Analysis (PCA) is a fundamental tool in human genetics, widely used to study population structure. However, the rapid growth of modern genomic datasets, which often exceed main memory capacity, renders traditional PCA methods infeasible, motivating out-of-core approaches. Prior work on out-of-core genomic PCA has focused primarily on optimizing the inherently compute-intensive numerical core, largely overlooking the stages of data I/O and preprocessing, which emerge as significant performance bottlenecks at tera-scale. Furthermore, existing approaches remain limited to shared-memory single-node architectures, lacking support for distributed multi-node environments. To address these limitations, we introduce DistPCA, the first distributed out-of-core framework for tera-scale genomic PCA, implemented as a C++ library and scalable across both single- and multi-node systems. Built on top of Message Passage Interface (MPI), the proposed framework employs multi-level data parallelism across the entire PCA pipeline, combining multiprocessing, multithreading, SIMD vectorization, and compute-transfer overlap, while remaining compatible with block-based methods that rely on associative operations. Extensive evaluation on real and synthetic datasets demonstrates near-linear scalability, achieving speedups of up to 58.2x and over 98% reduction in wall-clock time, while maintaining parallel efficiency above 82% and preserving accuracy in the recovered principal components.",
+  "authors": [
+    "Mermigkis, G.",
+    "Sofotasios, A.",
+    "Kontopoulou, E.-M.",
+    "Gallopoulos, E.",
+    "Hadjidoukas, P."
+  ],
+  "doi": "10.64898/2026.05.15.725487",
+  "first_seen": "2026-05-19",
+  "id": "biorxiv:10.64898/2026.05.15.725487",
+  "metadata": {
+    "abstract": "Principal Component Analysis (PCA) is a fundamental tool in human genetics, widely used to study population structure. However, the rapid growth of modern genomic datasets, which often exceed main memory capacity, renders traditional PCA methods infeasible, motivating out-of-core approaches. Prior work on out-of-core genomic PCA has focused primarily on optimizing the inherently compute-intensive numerical core, largely overlooking the stages of data I/O and preprocessing, which emerge as significant performance bottlenecks at tera-scale. Furthermore, existing approaches remain limited to shared-memory single-node architectures, lacking support for distributed multi-node environments. To address these limitations, we introduce DistPCA, the first distributed out-of-core framework for tera-scale genomic PCA, implemented as a C++ library and scalable across both single- and multi-node systems. Built on top of Message Passage Interface (MPI), the proposed framework employs multi-level data parallelism across the entire PCA pipeline, combining multiprocessing, multithreading, SIMD vectorization, and compute-transfer overlap, while remaining compatible with block-based methods that rely on associative operations. Extensive evaluation on real and synthetic datasets demonstrates near-linear scalability, achieving speedups of up to 58.2x and over 98% reduction in wall-clock time, while maintaining parallel efficiency above 82% and preserving accuracy in the recovered principal components.",
+    "author_corresponding": "Georgios Mermigkis",
+    "author_corresponding_institution": "University of Patras",
+    "authors": "Mermigkis, G.; Sofotasios, A.; Kontopoulou, E.-M.; Gallopoulos, E.; Hadjidoukas, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-19",
+    "doi": "10.64898/2026.05.15.725487",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/19/2026.05.15.725487.source.xml",
+    "license": "cc_by",
+    "published": "10.1093/bioadv/vbag303",
+    "server": "bioRxiv",
+    "title": "DistPCA: Tera-Scale Genomic PCA via Out-of-Core Distributed Parallelism",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Patras",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-19",
+  "published_doi": "10.1093/bioadv/vbag303",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "DistPCA is a distributed out-of-core C++ library using MPI and multi-level parallelism for tera-scale genomic PCA, reporting up to 58.2x speedups.",
+  "title": "DistPCA: Tera-Scale Genomic PCA via Out-of-Core Distributed Parallelism",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.15.725487"
+}

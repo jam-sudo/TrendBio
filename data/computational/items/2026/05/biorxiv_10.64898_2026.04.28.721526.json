@@ -1,0 +1,44 @@
+{
+  "abstract": "Therapeutic nanobodies must combine target binding with biophysical and chemical properties that determine manufacturability, stability, and clinical viability, collectively termed developability, yet most computational design pipelines still treat developability as a post-hoc filter rather than an integrated training objective. We present Aiki-GeNano, a three-stage language-model alignment pipeline for epitope-conditioned nanobody generation that integrates multiple developability signals directly into training, using only sequence information and previously published predictors. Across 65 target epitopes and relative to the supervised baseline, the combined pipeline raised predicted mean melting temperature by 6.6 {degrees}C, halved isomerization-motif severity, reduced deamidation, N-glycosylation sequons and CDR methionine-oxidation motifs, and preserved predicted humanness and solubility. On a shared 10-target GPCR benchmark, Aiki-GeNano achieved the highest predicted melting temperature and the lowest isomerization severity among five contemporary VHH generators. Starting from ProtGPT2 and a 1.35-million-pair binder dataset generated on an mRNA-display platform, the pipeline applies supervised fine-tuning, Direct Preference Optimization on 522,800 pairs ranked by a composite of selectivity, predicted thermal stability, solubility, and humanness, and Group Reward-Decoupled Policy Optimization against six sequence-based rewards (FR2 hydrophobicity, hydrophobic-patch coverage, chemical-liability motifs, Wilkinson-Harrison expression probability, VHH hallmark residues, scaffold integrity). Generated sequences differ from the nearest training sequence by a mean of 8.1-9.0 amino acids out of 126, and two alternative training trajectories converge to distinct amino-acid-composition strategies with similar liability outcomes but different thermal-stability gains, indicating initialization-dependent convergence of the reward-optimized policy. Predicted humanness was preserved at the level of the camelid VHH scaffold of the training library -- a data-side limitation rather than a methodological one, since the framework was effectively constant across all preference pairs. Applicability to the drug discovery and development pipeline, limitations of predicted-property evaluation, and future work are discussed.",
+  "authors": [
+    "Meda, R. S.",
+    "Doshi, J.",
+    "Iyer, E.",
+    "Shastry, S.",
+    "Mysore, V."
+  ],
+  "doi": "10.64898/2026.04.28.721526",
+  "first_seen": "2026-05-01",
+  "id": "biorxiv:10.64898/2026.04.28.721526",
+  "metadata": {
+    "abstract": "Therapeutic nanobodies must combine target binding with biophysical and chemical properties that determine manufacturability, stability, and clinical viability, collectively termed developability, yet most computational design pipelines still treat developability as a post-hoc filter rather than an integrated training objective. We present Aiki-GeNano, a three-stage language-model alignment pipeline for epitope-conditioned nanobody generation that integrates multiple developability signals directly into training, using only sequence information and previously published predictors. Across 65 target epitopes and relative to the supervised baseline, the combined pipeline raised predicted mean melting temperature by 6.6 {degrees}C, halved isomerization-motif severity, reduced deamidation, N-glycosylation sequons and CDR methionine-oxidation motifs, and preserved predicted humanness and solubility. On a shared 10-target GPCR benchmark, Aiki-GeNano achieved the highest predicted melting temperature and the lowest isomerization severity among five contemporary VHH generators. Starting from ProtGPT2 and a 1.35-million-pair binder dataset generated on an mRNA-display platform, the pipeline applies supervised fine-tuning, Direct Preference Optimization on 522,800 pairs ranked by a composite of selectivity, predicted thermal stability, solubility, and humanness, and Group Reward-Decoupled Policy Optimization against six sequence-based rewards (FR2 hydrophobicity, hydrophobic-patch coverage, chemical-liability motifs, Wilkinson-Harrison expression probability, VHH hallmark residues, scaffold integrity). Generated sequences differ from the nearest training sequence by a mean of 8.1-9.0 amino acids out of 126, and two alternative training trajectories converge to distinct amino-acid-composition strategies with similar liability outcomes but different thermal-stability gains, indicating initialization-dependent convergence of the reward-optimized policy. Predicted humanness was preserved at the level of the camelid VHH scaffold of the training library -- a data-side limitation rather than a methodological one, since the framework was effectively constant across all preference pairs. Applicability to the drug discovery and development pipeline, limitations of predicted-property evaluation, and future work are discussed.",
+    "author_corresponding": "Venkatesh Mysore",
+    "author_corresponding_institution": "Aikium Inc.",
+    "authors": "Meda, R. S.; Doshi, J.; Iyer, E.; Shastry, S.; Mysore, V.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-01",
+    "doi": "10.64898/2026.04.28.721526",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/01/2026.04.28.721526.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Aiki-GeNano: Multi-Stage Preference Optimization for Generative Design of Developable Nanobodies",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Aikium Inc.",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-05-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Aiki-GeNano uses three-stage language-model alignment (SFT, DPO, GRDPO) to generate epitope-conditioned nanobodies with integrated developability rewards,…",
+  "title": "Aiki-GeNano: Multi-Stage Preference Optimization for Generative Design of Developable Nanobodies",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.28.721526"
+}

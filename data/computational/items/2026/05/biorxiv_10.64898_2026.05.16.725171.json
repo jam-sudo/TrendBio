@@ -1,0 +1,42 @@
+{
+  "abstract": "In compositional next-generation sequencing (NGS) analyses (including microbiome studies, RNA-seq and metagenomics) the arithmetic mean (AM) of relative proportions is the default operator for summarizing feature abundances. We show that this default produces unstable rankings in real compositional data. Across 102 prevalent genera in the dietswap dataset (n=38 baseline samples), 23 genera (22.5%), including members of Bacteroides, Eubacterium and Bilophila, yielded opposite group-level conclusions under AM and the geometric mean (GM).\n\nThis pattern reflects two formal properties of compositional aggregation. First, AM-based rankings change with the within-sample normalization domain, whereas GM-based rankings are invariant under the multiplicative structure of compositional data. Second, the centered log-ratio (CLR) transformation absorbs geometric averaging into the data representation, so that arithmetic averaging on CLR-space recovers the GM ranking exactly. Both properties were verified numerically on the dietswap dataset, where the Spearman correlation between GM- and CLR-based rankings was 1.000 in both groups.\n\nThe operator-choice problem propagates to between-group differential inference: under AM, log2 fold-changes vary across normalizations and the relative ranking of features by effect size is not preserved; under GM and CLR, the ranking is preserved. We recommend GM-based summaries for feature ranking and CLR-transformed abundances for cross-sample comparisons. This change requires no new computational tools and is fully compatible with existing differential-abundance pipelines, but eliminates an under-recognized source of irreproducibility in biomarker discovery across microbiome studies, transcriptomics, metagenomics, and mass-spectrometry-based metabolomics, in all settings where features are quantified relative to a sample total.\n\nIMPORTANCEStudies of the gut microbiome routinely identify which bacterial groups are more or less abundant in patients versus healthy controls, in different diets, or before and after a treatment. The same kind of comparison underlies sequencing-based analyses across biology, from gene expression to metagenomics. To do this, researchers must average the abundance of each measured entity across many samples, and the standard choice is the simple arithmetic average. We show that this choice can be misleading for any data where each measurement is expressed relative to a sample total, as is typical of sequencing-based assays, and that in real data it can flip the answer to which group is more enriched. Analyzing a published dietary intervention study, we found that one in five gut bacteria (including Bacteroides and Eubacterium) gave opposite results depending on which average was used. Switching to the geometric average resolves this inconsistency and makes biomarker discovery more reproducible. This change is immediate to implement (it does not require new software or specialized training) and applies not only to microbiome studies, but to any biological measurement where what is detected, whether a gene transcript, a microbial taxon, or a metabolite, is quantified relative to a sample total: gene-expression analysis, metagenomics, and metabolomics among others.",
+  "authors": [
+    "Nunzi, E.",
+    "Romani, L."
+  ],
+  "doi": "10.64898/2026.05.16.725171",
+  "first_seen": "2026-05-19",
+  "id": "biorxiv:10.64898/2026.05.16.725171",
+  "metadata": {
+    "abstract": "In compositional next-generation sequencing (NGS) analyses (including microbiome studies, RNA-seq and metagenomics) the arithmetic mean (AM) of relative proportions is the default operator for summarizing feature abundances. We show that this default produces unstable rankings in real compositional data. Across 102 prevalent genera in the dietswap dataset (n=38 baseline samples), 23 genera (22.5%), including members of Bacteroides, Eubacterium and Bilophila, yielded opposite group-level conclusions under AM and the geometric mean (GM).\n\nThis pattern reflects two formal properties of compositional aggregation. First, AM-based rankings change with the within-sample normalization domain, whereas GM-based rankings are invariant under the multiplicative structure of compositional data. Second, the centered log-ratio (CLR) transformation absorbs geometric averaging into the data representation, so that arithmetic averaging on CLR-space recovers the GM ranking exactly. Both properties were verified numerically on the dietswap dataset, where the Spearman correlation between GM- and CLR-based rankings was 1.000 in both groups.\n\nThe operator-choice problem propagates to between-group differential inference: under AM, log2 fold-changes vary across normalizations and the relative ranking of features by effect size is not preserved; under GM and CLR, the ranking is preserved. We recommend GM-based summaries for feature ranking and CLR-transformed abundances for cross-sample comparisons. This change requires no new computational tools and is fully compatible with existing differential-abundance pipelines, but eliminates an under-recognized source of irreproducibility in biomarker discovery across microbiome studies, transcriptomics, metagenomics, and mass-spectrometry-based metabolomics, in all settings where features are quantified relative to a sample total.\n\nIMPORTANCEStudies of the gut microbiome routinely identify which bacterial groups are more or less abundant in patients versus healthy controls, in different diets, or before and after a treatment. The same kind of comparison underlies sequencing-based analyses across biology, from gene expression to metagenomics. To do this, researchers must average the abundance of each measured entity across many samples, and the standard choice is the simple arithmetic average. We show that this choice can be misleading for any data where each measurement is expressed relative to a sample total, as is typical of sequencing-based assays, and that in real data it can flip the answer to which group is more enriched. Analyzing a published dietary intervention study, we found that one in five gut bacteria (including Bacteroides and Eubacterium) gave opposite results depending on which average was used. Switching to the geometric average resolves this inconsistency and makes biomarker discovery more reproducible. This change is immediate to implement (it does not require new software or specialized training) and applies not only to microbiome studies, but to any biological measurement where what is detected, whether a gene transcript, a microbial taxon, or a metabolite, is quantified relative to a sample total: gene-expression analysis, metagenomics, and metabolomics among others.",
+    "author_corresponding": "Emilia Nunzi",
+    "author_corresponding_institution": "Universita degli Studi di Perugia",
+    "authors": "Nunzi, E.; Romani, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-19",
+    "doi": "10.64898/2026.05.16.725171",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/19/2026.05.16.725171.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Geometric averaging provides normalization-invariant feature ranking in compositional sequencing data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universita degli Studi di Perugia",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-05-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "metabolomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Arithmetic-mean summaries of compositional sequencing data give unstable rankings; geometric mean and CLR are invariant (dietswap).",
+  "title": "Geometric averaging provides normalization-invariant feature ranking in compositional sequencing data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.16.725171"
+}

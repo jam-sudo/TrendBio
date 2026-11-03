@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundThe biomedical literature is expanding at an unprecedented rate, with over 4,000 new articles indexed on PubMed each day. Clinicians and researchers frequently lack the time to review this volume before making decisions. Retrieval-Augmented Generation (RAG) systems attempt to bridge this gap by grounding language model responses in relevant documents, but standard implementations rank all retrieved passages solely by semantic similarity, treating a case report and a meta-analysis as equally authoritative.\n\nObjectiveWe aimed to develop and pilot-evaluate a RAG variant that incorporates evidence quality and publication recency into the retrieval scoring function, and to determine whether these signals improve answer quality on biomedical questions compared with standard cosine similarity RAG and a full-context baseline.\n\nMethodsWe developed ET-RAG (Evidence-Temporal RAG), which scores each retrieved chunk using a weighted combination of cosine similarity (50%), evidence quality based on the GRADE hierarchy (30%), and temporal recency (20%). We evaluated ET-RAG alongside two baselines: a full context agent powered by Gemini 2.0 Flash and a standard cosine RAG agent using GPT-4o-mini. All agents were tested on 40 benchmark questions (10 single-choice, 10 multiple-choice, 10 short answer, and 10 long answer) drawn from 10 peer-reviewed Alzheimers disease papers published between 2021 and 2025.\n\nResultsET-RAG achieved the highest scores across all four question categories: single choice (0.90), multiple choice (0.74), short answer (0.92), and long answer (0.89), with a combined average of 0.86. Cosine RAG scored 80%, 0.48, 0.82, and 0.69, respectively (average 0.70), while the full context agent scored 0.60, 0.59, 0.71, and 0.53 (average 0.61). The full context agent, despite having access to the entire corpus through Geminis large context window, struggled with consistent answer extraction and was prone to rate limiting under heavy query loads. A control question on forestry was correctly rejected by all three agents, suggesting no hallucination on this control item.\n\nConclusionsIn this pilot Alzheimers disease benchmark, incorporating evidence quality and recency into RAG retrieval improved answer quality relative to pure cosine similarity retrieval and full-corpus prompting. The evidence-temporal scoring function is lightweight to implement and adds minimal computational overhead to existing vector search pipelines, but broader validation across domains, evidence levels, and stronger retrieval baselines are required before claims of generalizable biomedical reliability can be made.",
+  "authors": [
+    "Palem, R. R.",
+    "Chen, H.",
+    "Yue, Z."
+  ],
+  "doi": "10.64898/2026.05.26.727050",
+  "first_seen": "2026-05-29",
+  "id": "biorxiv:10.64898/2026.05.26.727050",
+  "metadata": {
+    "abstract": "BackgroundThe biomedical literature is expanding at an unprecedented rate, with over 4,000 new articles indexed on PubMed each day. Clinicians and researchers frequently lack the time to review this volume before making decisions. Retrieval-Augmented Generation (RAG) systems attempt to bridge this gap by grounding language model responses in relevant documents, but standard implementations rank all retrieved passages solely by semantic similarity, treating a case report and a meta-analysis as equally authoritative.\n\nObjectiveWe aimed to develop and pilot-evaluate a RAG variant that incorporates evidence quality and publication recency into the retrieval scoring function, and to determine whether these signals improve answer quality on biomedical questions compared with standard cosine similarity RAG and a full-context baseline.\n\nMethodsWe developed ET-RAG (Evidence-Temporal RAG), which scores each retrieved chunk using a weighted combination of cosine similarity (50%), evidence quality based on the GRADE hierarchy (30%), and temporal recency (20%). We evaluated ET-RAG alongside two baselines: a full context agent powered by Gemini 2.0 Flash and a standard cosine RAG agent using GPT-4o-mini. All agents were tested on 40 benchmark questions (10 single-choice, 10 multiple-choice, 10 short answer, and 10 long answer) drawn from 10 peer-reviewed Alzheimers disease papers published between 2021 and 2025.\n\nResultsET-RAG achieved the highest scores across all four question categories: single choice (0.90), multiple choice (0.74), short answer (0.92), and long answer (0.89), with a combined average of 0.86. Cosine RAG scored 80%, 0.48, 0.82, and 0.69, respectively (average 0.70), while the full context agent scored 0.60, 0.59, 0.71, and 0.53 (average 0.61). The full context agent, despite having access to the entire corpus through Geminis large context window, struggled with consistent answer extraction and was prone to rate limiting under heavy query loads. A control question on forestry was correctly rejected by all three agents, suggesting no hallucination on this control item.\n\nConclusionsIn this pilot Alzheimers disease benchmark, incorporating evidence quality and recency into RAG retrieval improved answer quality relative to pure cosine similarity retrieval and full-corpus prompting. The evidence-temporal scoring function is lightweight to implement and adds minimal computational overhead to existing vector search pipelines, but broader validation across domains, evidence levels, and stronger retrieval baselines are required before claims of generalizable biomedical reliability can be made.",
+    "author_corresponding": "Zongliang Yue",
+    "author_corresponding_institution": "Auburn University",
+    "authors": "Palem, R. R.; Chen, H.; Yue, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-29",
+    "doi": "10.64898/2026.05.26.727050",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/29/2026.05.26.727050.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A Multi-Agent RAG Framework for Biomedical Literature Analysis",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Auburn University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "ET-RAG adds GRADE evidence quality and recency to RAG retrieval scoring; a pilot Alzheimer's benchmark shows gains over cosine RAG.",
+  "title": "A Multi-Agent RAG Framework for Biomedical Literature Analysis",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.26.727050"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Bacteriophage therapy offers a potential route to treat antibiotic-resistant Klebsiella pneumoniae infections, but its use is limited by the narrow specificity of phage-host interactions. In Klebsiella, adsorption is largely determined by receptor-binding proteins (RBPs) that recognize bacterial capsular polysaccharides, yet current machine learning approaches often represent whole phages rather than the individual proteins that mediate recognition. Here, we ask whether adsorption can be predicted at the level of single RBPs and whether the resulting models can identify the molecular features responsible for host specificity.\n\nUsing experimentally validated Klebsiella phage-host interactions, we extended the PhageHostLearn framework from averaged phage-level representations to individual RBP-level predictions. We found that single-RBP models recover the predictive performance of strain-level models when host capsule identity is explicitly represented. However, models trained only on interaction-level labels did not reliably distinguish motif-bearing RBPs from other viral proteins, indicating that protein-level inputs alone are insufficient for mechanistic interpretability. To resolve this ambiguity, we identified serotype-specific conserved motifs among RBPs from phages infecting the same capsular type. Structural modelling showed that these motifs localize to exposed regions of RBPs and resemble carbohydrate-binding modules. Incorporating motif information into a relabelled training scheme improved prioritization of motif-bearing RBPs while preserving interaction-level predictive power. We further identified a candidate multi-motif RBP from phage S8c that may recognize multiple capsular serotypes.\n\nTogether, these results support a modular model of Klebsiella phage adsorption in which conserved sub-protein elements drive capsule recognition. More broadly, this work shows how protein-level machine learning combined with biological constraints can move beyond accurate phage-host prediction toward mechanistic identification of host-range determinants.\n\nAuthor summaryBacteriophages -viruses that infect bacteria- are being explored as alternatives to antibiotics, especially against drug-resistant pathogens such as Klebsiella pneumoniae.\n\nThe challenge is specificity: each phage attaches to only a narrow range of bacterial strains, recognising them through proteins on its tail that bind the bacteriums protective sugar capsule. Choosing or engineering the right phage for a given infection therefore requires understanding what these recognition proteins actually do.\n\nWe asked whether a machine learning model could move beyond predicting which phages infect a given strain and start identifying which protein on the phage drives that recognition. Prediction alone, we found, is not enough: a model can be accurate without pointing to the responsible protein. To bridge this gap, we searched for short shared sequences among recognition proteins from phages that infect bacteria with the same capsule type, and used these shared patterns to guide the model. This combination correctly prioritised the recognition protein far more often than chance. One phage protein, from phage S8c, carried patterns matching five different capsule types, suggesting a candidate broadly-recognising protein for future experimental study.",
+  "authors": [
+    "Fumagalli, F.",
+    "Spigler, G."
+  ],
+  "doi": "10.64898/2026.05.21.726843",
+  "first_seen": "2026-05-23",
+  "id": "biorxiv:10.64898/2026.05.21.726843",
+  "metadata": {
+    "abstract": "Bacteriophage therapy offers a potential route to treat antibiotic-resistant Klebsiella pneumoniae infections, but its use is limited by the narrow specificity of phage-host interactions. In Klebsiella, adsorption is largely determined by receptor-binding proteins (RBPs) that recognize bacterial capsular polysaccharides, yet current machine learning approaches often represent whole phages rather than the individual proteins that mediate recognition. Here, we ask whether adsorption can be predicted at the level of single RBPs and whether the resulting models can identify the molecular features responsible for host specificity.\n\nUsing experimentally validated Klebsiella phage-host interactions, we extended the PhageHostLearn framework from averaged phage-level representations to individual RBP-level predictions. We found that single-RBP models recover the predictive performance of strain-level models when host capsule identity is explicitly represented. However, models trained only on interaction-level labels did not reliably distinguish motif-bearing RBPs from other viral proteins, indicating that protein-level inputs alone are insufficient for mechanistic interpretability. To resolve this ambiguity, we identified serotype-specific conserved motifs among RBPs from phages infecting the same capsular type. Structural modelling showed that these motifs localize to exposed regions of RBPs and resemble carbohydrate-binding modules. Incorporating motif information into a relabelled training scheme improved prioritization of motif-bearing RBPs while preserving interaction-level predictive power. We further identified a candidate multi-motif RBP from phage S8c that may recognize multiple capsular serotypes.\n\nTogether, these results support a modular model of Klebsiella phage adsorption in which conserved sub-protein elements drive capsule recognition. More broadly, this work shows how protein-level machine learning combined with biological constraints can move beyond accurate phage-host prediction toward mechanistic identification of host-range determinants.\n\nAuthor summaryBacteriophages -viruses that infect bacteria- are being explored as alternatives to antibiotics, especially against drug-resistant pathogens such as Klebsiella pneumoniae.\n\nThe challenge is specificity: each phage attaches to only a narrow range of bacterial strains, recognising them through proteins on its tail that bind the bacteriums protective sugar capsule. Choosing or engineering the right phage for a given infection therefore requires understanding what these recognition proteins actually do.\n\nWe asked whether a machine learning model could move beyond predicting which phages infect a given strain and start identifying which protein on the phage drives that recognition. Prediction alone, we found, is not enough: a model can be accurate without pointing to the responsible protein. To bridge this gap, we searched for short shared sequences among recognition proteins from phages that infect bacteria with the same capsule type, and used these shared patterns to guide the model. This combination correctly prioritised the recognition protein far more often than chance. One phage protein, from phage S8c, carried patterns matching five different capsule types, suggesting a candidate broadly-recognising protein for future experimental study.",
+    "author_corresponding": "Giacomo Spigler",
+    "author_corresponding_institution": "Tilburg University",
+    "authors": "Fumagalli, F.; Spigler, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-23",
+    "doi": "10.64898/2026.05.21.726843",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/23/2026.05.21.726843.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Protein-level prediction of Klebsiella phage adsorption identifies conserved receptor-binding motifs.",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Tilburg University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Extends PhageHostLearn to single receptor-binding protein (RBP) predictions for Klebsiella phage adsorption; identifies serotype-conserved motifs resembling…",
+  "title": "Protein-level prediction of Klebsiella phage adsorption identifies conserved receptor-binding motifs.",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.21.726843"
+}

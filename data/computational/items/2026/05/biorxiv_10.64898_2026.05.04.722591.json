@@ -1,0 +1,43 @@
+{
+  "abstract": "Motivation10x Genomics VisiumHD enables spatial transcriptomics at 2 m x 2 m resolution but exhibits slide-specific, non-periodic striping artifacts due to lane-width variability. These multiplicative row/column effects distort bin total counts and can bias downstream analyses. The state-of-the-art destriping approach is the normalization procedure used as a preprocessing step in bin2cell; it applies sequential high-quantile row- then column-wise normalization, which is asymmetric and can introduce edge effects/macro-stripes and distortions of large-scale total-count structure.\n\nResultsWe propose a statistical destriping approach that leverages nuclei segmentation from the coregistered H&E image. Assuming transcript abundance is constant within each nucleus, we model bin counts with a negative binomial distribution whose mean is a product of a nucleus-specific concentration and row- and column-specific stripe-factors reflecting lane-width variation. We fit all parameters in a generalized linear modeling framework with cross-validated regularization on stripe-factors and iterative dispersion estimation, and use the fitted parameters to correct the observed counts into a destriped image. On synthetic data with known ground truth, our method improves stripe-factor estimation accuracy and reduces error in corrected counts relative to bin2cell and bin2cell-derived baselines. Across four public VisiumHD slides, it consistently lowers striping intensity while substantially better preserving biological signal present in the large-scale global count structure and avoiding the artifacts introduced by other methods.\n\nAvailability and ImplementationAll source code and links to publicly available data used for this study are available at https://github.com/paolamalsot/destriping-GLM.\n\nContactpaola.malsot@inf.ethz.ch, raetsch@inf.ethz.ch\n\nNoteThis manuscript extends the version submitted to Intelligent Systems for Molecular Biology (ISMB) 2026 by describing a new optimization algorithm that yields an approximately tenfold speedup. All plots and benchmarks in this manuscript use the updated implementation.",
+  "authors": [
+    "Malsot, P.",
+    "Londschien, M.",
+    "Boeva, V.",
+    "Raetsch, G."
+  ],
+  "doi": "10.64898/2026.05.04.722591",
+  "first_seen": "2026-05-07",
+  "id": "biorxiv:10.64898/2026.05.04.722591",
+  "metadata": {
+    "abstract": "Motivation10x Genomics VisiumHD enables spatial transcriptomics at 2 m x 2 m resolution but exhibits slide-specific, non-periodic striping artifacts due to lane-width variability. These multiplicative row/column effects distort bin total counts and can bias downstream analyses. The state-of-the-art destriping approach is the normalization procedure used as a preprocessing step in bin2cell; it applies sequential high-quantile row- then column-wise normalization, which is asymmetric and can introduce edge effects/macro-stripes and distortions of large-scale total-count structure.\n\nResultsWe propose a statistical destriping approach that leverages nuclei segmentation from the coregistered H&E image. Assuming transcript abundance is constant within each nucleus, we model bin counts with a negative binomial distribution whose mean is a product of a nucleus-specific concentration and row- and column-specific stripe-factors reflecting lane-width variation. We fit all parameters in a generalized linear modeling framework with cross-validated regularization on stripe-factors and iterative dispersion estimation, and use the fitted parameters to correct the observed counts into a destriped image. On synthetic data with known ground truth, our method improves stripe-factor estimation accuracy and reduces error in corrected counts relative to bin2cell and bin2cell-derived baselines. Across four public VisiumHD slides, it consistently lowers striping intensity while substantially better preserving biological signal present in the large-scale global count structure and avoiding the artifacts introduced by other methods.\n\nAvailability and ImplementationAll source code and links to publicly available data used for this study are available at https://github.com/paolamalsot/destriping-GLM.\n\nContactpaola.malsot@inf.ethz.ch, raetsch@inf.ethz.ch\n\nNoteThis manuscript extends the version submitted to Intelligent Systems for Molecular Biology (ISMB) 2026 by describing a new optimization algorithm that yields an approximately tenfold speedup. All plots and benchmarks in this manuscript use the updated implementation.",
+    "author_corresponding": "Gunnar Raetsch",
+    "author_corresponding_institution": "Department of Computer Science, ETH Zurich.",
+    "authors": "Malsot, P.; Londschien, M.; Boeva, V.; Raetsch, G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-07",
+    "doi": "10.64898/2026.05.04.722591",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/07/2026.05.04.722591.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Striping artifact removal in VisiumHD data through nuclear counts modeling",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computer Science, ETH Zurich.",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-05-07",
+  "published_doi": "10.1093/bioinformatics/btag306",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes a negative binomial GLM destriping method for VisiumHD spatial transcriptomics that uses nuclei segmentation from H&E to estimate row/column stripe…",
+  "title": "Striping artifact removal in VisiumHD data through nuclear counts modeling",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.04.722591"
+}

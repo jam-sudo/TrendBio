@@ -1,0 +1,32 @@
+{
+  "abstract": "Donor-level disease classification from single-cell RNA sequencing (scRNA-seq) requires strict donor-aware cross-validation: naive pipelines that split cells randomly conflate training and test donors, inflating reported performance through pseudoreplication. We present a donor-aware benchmark evaluating three feature representations across two independent IBD cohorts: centered log-ratio (CLR) transformed cell-type composition, GatedStructuralCFN dependency embeddings, and scVI variational autoencoder latent embeddings. The cohorts are the SCP259 ulcerative colitis atlas (UC vs. Healthy, n=30 donors, 51 cell types) and the Kong 2023 Crohn's disease atlas (CD vs. Healthy, n=71 donors, 55-68 cell types across three intestinal regions).\n  Compartment-stratified CLR composition achieves AUROC 0.956 +/- 0.061 on SCP259; GatedStructuralCFN on the same features achieves 0.978 +/- 0.050. In the Kong cohort, CFN achieves its best performance in the colon region (0.960 +/- 0.055 after feature filtering), exceeding linear CLR (0.900 +/- 0.100), while terminal ileum classification is dominated by linear models (CatBoost CLR 0.967 +/- 0.075 vs. CFN 0.811 +/- 0.164). Cross-dataset transfer (CD->UC, four shared cell types) achieves AUC 0.833 with XGBoost CLR; the reverse direction performs at chance. CFN edge stability analysis shows that compartment-wise composition eliminates spurious unit-sum-induced instability present in global composition (Jaccard 0.026 vs. top-20 recurrence 1.0). CFN shows a consistent numerical advantage over linear models in the colon region of CD (AUROC 0.960 vs. 0.900), though no inter-method comparison reached statistical significance at n<=34 donors per region. Compartment-aware feature construction is critical for both classification performance and structural interpretability. Code: https://github.com/Jonathan-321/sfn-scrna-study",
+  "authors": [
+    "Jonathan Muhire"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-05",
+  "id": "arxiv:2605.03281",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.LG",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.03281v1</ns0:id>\n    <ns0:title>Donor-Aware scRNA-seq Benchmarks for IBD Classification</ns0:title>\n    <ns0:updated>2026-05-05T02:13:43Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.03281v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.03281v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Donor-level disease classification from single-cell RNA sequencing (scRNA-seq) requires strict donor-aware cross-validation: naive pipelines that split cells randomly conflate training and test donors, inflating reported performance through pseudoreplication. We present a donor-aware benchmark evaluating three feature representations across two independent IBD cohorts: centered log-ratio (CLR) transformed cell-type composition, GatedStructuralCFN dependency embeddings, and scVI variational autoencoder latent embeddings. The cohorts are the SCP259 ulcerative colitis atlas (UC vs. Healthy, n=30 donors, 51 cell types) and the Kong 2023 Crohn's disease atlas (CD vs. Healthy, n=71 donors, 55-68 cell types across three intestinal regions).\n  Compartment-stratified CLR composition achieves AUROC 0.956 +/- 0.061 on SCP259; GatedStructuralCFN on the same features achieves 0.978 +/- 0.050. In the Kong cohort, CFN achieves its best performance in the colon region (0.960 +/- 0.055 after feature filtering), exceeding linear CLR (0.900 +/- 0.100), while terminal ileum classification is dominated by linear models (CatBoost CLR 0.967 +/- 0.075 vs. CFN 0.811 +/- 0.164). Cross-dataset transfer (CD-&gt;UC, four shared cell types) achieves AUC 0.833 with XGBoost CLR; the reverse direction performs at chance. CFN edge stability analysis shows that compartment-wise composition eliminates spurious unit-sum-induced instability present in global composition (Jaccard 0.026 vs. top-20 recurrence 1.0). CFN shows a consistent numerical advantage over linear models in the colon region of CD (AUROC 0.960 vs. 0.900), though no inter-method comparison reached statistical significance at n&lt;=34 donors per region. Compartment-aware feature construction is critical for both classification performance and structural interpretability. Code: https://github.com/Jonathan-321/sfn-scrna-study</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-05T02:13:43Z</ns0:published>\n    <ns1:comment>15 pages, 5 figures, 4 tables. Independent study at Oklahoma Christian University, advised by Fang Li. Code: https://github.com/Jonathan-321/sfn-scrna-study</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Jonathan Muhire</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-05-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Donor-aware benchmark of CLR cell-type composition, GatedStructuralCFN, and scVI embeddings for IBD donor classification across UC and Crohn's scRNA-seq…",
+  "title": "Donor-Aware scRNA-seq Benchmarks for IBD Classification",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.03281v1"
+}

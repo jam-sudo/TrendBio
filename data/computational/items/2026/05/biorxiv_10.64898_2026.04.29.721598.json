@@ -1,0 +1,44 @@
+{
+  "abstract": "MotivationRobust annotation of Coding Sequences (CDS) is critical for downstream transcriptomics, yet heavily fragmented de novo RNA-Seq assemblies pose a severe challenge. Traditional computational tools rely on fixed, hand-crafted features that are prone to fail when canonical sequence signals are truncated. While recent deep learning models excel at automatically extracting complex representations, they predominantly treat these as isolated prediction tasks. Lacking a joint inference mechanism to enforce structural constraints, existing models occasionally output biologically invalid predictions. Therefore, a computational framework capable of fusing heterogeneous neural network representations for joint annotation is critically needed.\n\nResultsWe present NeuroCDS, a reliable framework that bridges the effective representation capabilities of deep neural networks with the structural rigor of dynamic programming. NeuroCDS employs a dual-branch architecture: a Convolutional Neural Network (CNN) acts as a local sensor to extract Translation Initiation Sites (TIS), while a Temporal Convolutional Network (TCN) acts as a global sensor to evaluate continuous regional coding potential. The primary contribution of NeuroCDS lies in a structurally constrained Viterbi Decoding algorithm designed to fuse these heterogeneous signals. This joint inference mechanism strictly enforces biological grammars (e.g., reading frame preservation) to dynamically calculate the globally optimal transcript structure via a tripartite state space. Crucially, by introducing a dynamic length normalization mechanism, our formulation adaptively leverages global continuous representations to stably annotate both intact transcripts and highly truncated fragments. Comprehensive evaluations demonstrate that NeuroCDS achieves high F1-scores on full-length transcripts and maintains robust performance on complex Ribo-seq validated datasets, comparing favorably against traditional HMM-based and heuristic methodologies.\n\nAvailabilitySource code, pre-trained models, and datasets are freely available at https://github.com/hgcwei/NeuroCDS.",
+  "authors": [
+    "Mei, Z.",
+    "Xie, Z.",
+    "Wu, L.",
+    "Wei, C."
+  ],
+  "doi": "10.64898/2026.04.29.721598",
+  "first_seen": "2026-05-02",
+  "id": "biorxiv:10.64898/2026.04.29.721598",
+  "metadata": {
+    "abstract": "MotivationRobust annotation of Coding Sequences (CDS) is critical for downstream transcriptomics, yet heavily fragmented de novo RNA-Seq assemblies pose a severe challenge. Traditional computational tools rely on fixed, hand-crafted features that are prone to fail when canonical sequence signals are truncated. While recent deep learning models excel at automatically extracting complex representations, they predominantly treat these as isolated prediction tasks. Lacking a joint inference mechanism to enforce structural constraints, existing models occasionally output biologically invalid predictions. Therefore, a computational framework capable of fusing heterogeneous neural network representations for joint annotation is critically needed.\n\nResultsWe present NeuroCDS, a reliable framework that bridges the effective representation capabilities of deep neural networks with the structural rigor of dynamic programming. NeuroCDS employs a dual-branch architecture: a Convolutional Neural Network (CNN) acts as a local sensor to extract Translation Initiation Sites (TIS), while a Temporal Convolutional Network (TCN) acts as a global sensor to evaluate continuous regional coding potential. The primary contribution of NeuroCDS lies in a structurally constrained Viterbi Decoding algorithm designed to fuse these heterogeneous signals. This joint inference mechanism strictly enforces biological grammars (e.g., reading frame preservation) to dynamically calculate the globally optimal transcript structure via a tripartite state space. Crucially, by introducing a dynamic length normalization mechanism, our formulation adaptively leverages global continuous representations to stably annotate both intact transcripts and highly truncated fragments. Comprehensive evaluations demonstrate that NeuroCDS achieves high F1-scores on full-length transcripts and maintains robust performance on complex Ribo-seq validated datasets, comparing favorably against traditional HMM-based and heuristic methodologies.\n\nAvailabilitySource code, pre-trained models, and datasets are freely available at https://github.com/hgcwei/NeuroCDS.",
+    "author_corresponding": "Chao Wei",
+    "author_corresponding_institution": "Hubei University of Technology",
+    "authors": "Mei, Z.; Xie, Z.; Wu, L.; Wei, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-02",
+    "doi": "10.64898/2026.04.29.721598",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/02/2026.04.29.721598.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "NeuroCDS: Integrating Local and Global Neural Network Representations via Structural Constrained Viterbi Decoding for Robust CDS Annotation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Hubei University of Technology",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-05-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "NeuroCDS combines CNN and TCN neural representations with a structurally constrained Viterbi decoder to annotate coding sequences in fragmented RNA-Seq…",
+  "title": "NeuroCDS: Integrating Local and Global Neural Network Representations via Structural Constrained Viterbi Decoding for Robust CDS Annotation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.04.29.721598"
+}

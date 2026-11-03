@@ -1,0 +1,43 @@
+{
+  "abstract": "BackgroundOxford Nanopore Technologies (ONT) sequencing is increasingly used for whole-genome sequencing (WGS) across a wide range of applications. However, the platform has evolved rapidly through updates to flow cell chemistry and basecalling algorithms, altering the characteristics of the resulting sequencing data. Read simulators provide synthetic datasets with known ground truth, enabling controlled development and evaluation of methods. However, many existing simulators were developed for earlier versions of ONT sequencing or use generic long-read assumptions, and their realism for contemporary ONT data is unclear.\n\nResultsWe benchmarked six ONT-compatible read simulators (Badread, LongISLND, lrsim, NanoSim, PBSIM3 and SimLoRD) using a microbial genome reference and ONT R10.4.1 reads as the empirical standard. Each tool was configured to maximise realism, including training on empirical reads when supported. We compared simulated and real datasets with respect to read length, read accuracy, FASTQ quality scores and sequence error profiles. No simulator reproduced all metrics of the real data well. PBSIM3 most closely reproduced read length, read accuracy and FASTQ quality scores, making it a strong simulator for broad read-level realism. However, it did not capture important features of the real error profile, including context-dependent substitution rates and homopolymer-length errors. Badread and LongISLND better reproduced some aspects of the error profile, but showed other departures from the real data.\n\nConclusionPBSIM3 is a good general-purpose choice for many ONT WGS simulation tasks because it reproduced several key read-level properties well. However, Badread or LongISLND may be preferable for applications where error structure is more important. No evaluated tool was realistic across all tested metrics, highlighting a gap for improved long-read simulators.",
+  "authors": [
+    "Taouk, M. L.",
+    "Ingle, D. J.",
+    "Wick, R. R."
+  ],
+  "doi": "10.64898/2026.05.06.723380",
+  "first_seen": "2026-05-11",
+  "id": "biorxiv:10.64898/2026.05.06.723380",
+  "metadata": {
+    "abstract": "BackgroundOxford Nanopore Technologies (ONT) sequencing is increasingly used for whole-genome sequencing (WGS) across a wide range of applications. However, the platform has evolved rapidly through updates to flow cell chemistry and basecalling algorithms, altering the characteristics of the resulting sequencing data. Read simulators provide synthetic datasets with known ground truth, enabling controlled development and evaluation of methods. However, many existing simulators were developed for earlier versions of ONT sequencing or use generic long-read assumptions, and their realism for contemporary ONT data is unclear.\n\nResultsWe benchmarked six ONT-compatible read simulators (Badread, LongISLND, lrsim, NanoSim, PBSIM3 and SimLoRD) using a microbial genome reference and ONT R10.4.1 reads as the empirical standard. Each tool was configured to maximise realism, including training on empirical reads when supported. We compared simulated and real datasets with respect to read length, read accuracy, FASTQ quality scores and sequence error profiles. No simulator reproduced all metrics of the real data well. PBSIM3 most closely reproduced read length, read accuracy and FASTQ quality scores, making it a strong simulator for broad read-level realism. However, it did not capture important features of the real error profile, including context-dependent substitution rates and homopolymer-length errors. Badread and LongISLND better reproduced some aspects of the error profile, but showed other departures from the real data.\n\nConclusionPBSIM3 is a good general-purpose choice for many ONT WGS simulation tasks because it reproduced several key read-level properties well. However, Badread or LongISLND may be preferable for applications where error structure is more important. No evaluated tool was realistic across all tested metrics, highlighting a gap for improved long-read simulators.",
+    "author_corresponding": "Ryan R Wick",
+    "author_corresponding_institution": "University of Melbourne",
+    "authors": "Taouk, M. L.; Ingle, D. J.; Wick, R. R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-11",
+    "doi": "10.64898/2026.05.06.723380",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/11/2026.05.06.723380.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Benchmarking long-read simulators against Oxford Nanopore whole-genome sequencing data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Melbourne",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks six ONT-compatible long-read simulators against R10.4.1 WGS reads; PBSIM3 best matches read-level metrics, while no tool captures the full error…",
+  "title": "Benchmarking long-read simulators against Oxford Nanopore whole-genome sequencing data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.06.723380"
+}

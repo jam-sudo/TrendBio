@@ -1,0 +1,48 @@
+{
+  "abstract": "BackgroundGenes with highly similar genomic copies (paralogs, tandem duplications and pseudogenes) pose a major challenge for Short-Read High Throughput Sequencing (srHTS). High sequence similarity makes it difficult to unambiguously identify the sequences of origin of short reads. This results in misalignment artifacts which can propagate through bioinformatic pipelines and increase error rates in variant calling.\n\nResultsWe present ParaDISM, a pipeline that refines standard alignments to improve read placement and reduce misalignment-driven false variant calls in highly homologous sequences. ParaDISM assigns a read/read pair to a sequence only when supported by unambiguous sequence-specific evidence by using a multiple sequence alignment of reference sequences to identify disambiguating positions. An optional iterative refinement procedure calls variants from confidently assigned reads, updates the reference sequences, and processes remaining non-assigned reads.\n\nWe evaluated the performance of ParaDISM both in terms of read alignment and the resulting short variant calls using extensive computational simulation experiments and the Genome in a Bottle HG002 benchmark. We applied ParaDISM to reanalyze two case studies: five public tumour exomes at the GNAQ/GNAQP1 locus, and 18 short-read sequencing datasets of patients diagnosed with Autosomal Dominant Polycystic Kidney Disease (16 exomes and 2 panel sequencing datasets). Compared to the standard aligners (bowtie2, bwa-mem and minimap2), ParaDISM reduced the number of misalignment artifacts and false variant calls, resulting in an increased specificity and precision of the results.\n\nConclusionsParaDISM improves the precision of read placement and single-nucleotide variant calling in highly homologous reference sequences. By reducing the number of false variant calls caused by misalignment artifacts, ParaDISM provides a stronger level of evidence for the called variants compared to currently available approaches. The pipeline is open source and available under the MIT license at github.com/BioGeMT/ParaDISM.",
+  "authors": [
+    "Tzimotoudis, D.",
+    "Farrugia, R.",
+    "Zammit, J.",
+    "Masini, M. C.",
+    "Balestrucci, A.",
+    "Carbott, F. B.",
+    "Wettinger, S. B.",
+    "Alexiou, P.",
+    "Ciach, M. A."
+  ],
+  "doi": "10.64898/2026.05.19.726275",
+  "first_seen": "2026-05-21",
+  "id": "biorxiv:10.64898/2026.05.19.726275",
+  "metadata": {
+    "abstract": "BackgroundGenes with highly similar genomic copies (paralogs, tandem duplications and pseudogenes) pose a major challenge for Short-Read High Throughput Sequencing (srHTS). High sequence similarity makes it difficult to unambiguously identify the sequences of origin of short reads. This results in misalignment artifacts which can propagate through bioinformatic pipelines and increase error rates in variant calling.\n\nResultsWe present ParaDISM, a pipeline that refines standard alignments to improve read placement and reduce misalignment-driven false variant calls in highly homologous sequences. ParaDISM assigns a read/read pair to a sequence only when supported by unambiguous sequence-specific evidence by using a multiple sequence alignment of reference sequences to identify disambiguating positions. An optional iterative refinement procedure calls variants from confidently assigned reads, updates the reference sequences, and processes remaining non-assigned reads.\n\nWe evaluated the performance of ParaDISM both in terms of read alignment and the resulting short variant calls using extensive computational simulation experiments and the Genome in a Bottle HG002 benchmark. We applied ParaDISM to reanalyze two case studies: five public tumour exomes at the GNAQ/GNAQP1 locus, and 18 short-read sequencing datasets of patients diagnosed with Autosomal Dominant Polycystic Kidney Disease (16 exomes and 2 panel sequencing datasets). Compared to the standard aligners (bowtie2, bwa-mem and minimap2), ParaDISM reduced the number of misalignment artifacts and false variant calls, resulting in an increased specificity and precision of the results.\n\nConclusionsParaDISM improves the precision of read placement and single-nucleotide variant calling in highly homologous reference sequences. By reducing the number of false variant calls caused by misalignment artifacts, ParaDISM provides a stronger level of evidence for the called variants compared to currently available approaches. The pipeline is open source and available under the MIT license at github.com/BioGeMT/ParaDISM.",
+    "author_corresponding": "Michał Aleksander Ciach",
+    "author_corresponding_institution": "University of Malta",
+    "authors": "Tzimotoudis, D.; Farrugia, R.; Zammit, J.; Masini, M. C.; Balestrucci, A.; Carbott, F. B.; Wettinger, S. B.; Alexiou, P.; Ciach, M. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-21",
+    "doi": "10.64898/2026.05.19.726275",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/21/2026.05.19.726275.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ParaDISM: Precise mapping of short reads to genes with highly homologous regions",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Malta",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-05-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "ParaDISM refines short-read alignments in highly homologous regions using a multiple sequence alignment to find disambiguating positions, reducing…",
+  "title": "ParaDISM: Precise mapping of short reads to genes with highly homologous regions",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.19.726275"
+}

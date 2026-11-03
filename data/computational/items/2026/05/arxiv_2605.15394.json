@@ -1,0 +1,30 @@
+{
+  "abstract": "Joint-embedding predictive architectures (JEPAs) propose that a model should learn more useful abstractions when trained to predict latent representations rather than observed outputs. For autoregressive language-model fine-tuning the principle entails a stricter requirement: the induced hidden-state geometry must reach the language-model head \\emph{and} improve the decoded task metric. We test that requirement under a fixed Llama-3.2-1B-Instruct LoRA harness on natural-language-to-regex generation, comparing twenty-two training-time auxiliaries across trajectory-shape regularisation, distributional constraints, predictor/target asymmetry, Fisher-metric Jacobi residuals, and a decoder-visible JEPA objective constructed to lie in cross-entropy's positive cone. The empirical answer is a structured null: several auxiliaries clear single-cell paired $α= 0.10$ without correction (T3-Local at $Δ= +2.53$~pp, $p = 0.003$ being the strongest), but none survives Bonferroni or Holm--Bonferroni at the relevant family-wise threshold, even though many change curvature, anisotropy, variance, and gradient direction. Decoder-visible JEPA yields the first positive auxiliary--cross-entropy gradient cosine in the study, yet exact match remains inside seed noise; a full-fine-tuning replication of the same auxiliary at $n = 5$ seeds reproduces the null on both benchmarks (TURK: $Δ= +0.04$~pp, $p_{\\text{paired}} = 0.96$; SYNTH: $Δ= +0.52$~pp, $p_{\\text{paired}} = 0.28$), so the null is robust across LoRA and full fine-tuning for the decoder-visible construction. Hidden-state representation work and decoded-task accuracy are therefore weakly coupled in this regime; we accordingly reframe LLM-domain JEPA evaluation as a coupling problem, in which the operative question is under which metrics useful hidden geometry becomes decoder-visible task signal.",
+  "authors": [
+    "Biswa Sengupta"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-14",
+  "id": "arxiv:2605.15394",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.15394v1</ns0:id>\n    <ns0:title>Representation Without Reward: A JEPA Audit for LLM Fine-Tuning</ns0:title>\n    <ns0:updated>2026-05-14T20:27:32Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.15394v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.15394v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Joint-embedding predictive architectures (JEPAs) propose that a model should learn more useful abstractions when trained to predict latent representations rather than observed outputs. For autoregressive language-model fine-tuning the principle entails a stricter requirement: the induced hidden-state geometry must reach the language-model head \\emph{and} improve the decoded task metric. We test that requirement under a fixed Llama-3.2-1B-Instruct LoRA harness on natural-language-to-regex generation, comparing twenty-two training-time auxiliaries across trajectory-shape regularisation, distributional constraints, predictor/target asymmetry, Fisher-metric Jacobi residuals, and a decoder-visible JEPA objective constructed to lie in cross-entropy's positive cone. The empirical answer is a structured null: several auxiliaries clear single-cell paired $α= 0.10$ without correction (T3-Local at $Δ= +2.53$~pp, $p = 0.003$ being the strongest), but none survives Bonferroni or Holm--Bonferroni at the relevant family-wise threshold, even though many change curvature, anisotropy, variance, and gradient direction. Decoder-visible JEPA yields the first positive auxiliary--cross-entropy gradient cosine in the study, yet exact match remains inside seed noise; a full-fine-tuning replication of the same auxiliary at $n = 5$ seeds reproduces the null on both benchmarks (TURK: $Δ= +0.04$~pp, $p_{\\text{paired}} = 0.96$; SYNTH: $Δ= +0.52$~pp, $p_{\\text{paired}} = 0.28$), so the null is robust across LoRA and full fine-tuning for the decoder-visible construction. Hidden-state representation work and decoded-task accuracy are therefore weakly coupled in this regime; we accordingly reframe LLM-domain JEPA evaluation as a coupling problem, in which the operative question is under which metrics useful hidden geometry becomes decoder-visible task signal.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-14T20:27:32Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Biswa Sengupta</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-14",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Audits 22 JEPA-style auxiliary losses for Llama-3.2-1B fine-tuning on NL-to-regex; none significantly improves decoded task accuracy.",
+  "title": "Representation Without Reward: A JEPA Audit for LLM Fine-Tuning",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.15394v1"
+}

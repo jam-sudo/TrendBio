@@ -1,0 +1,41 @@
+{
+  "abstract": "Chemical Reaction Network Theory (CRNT), developed by Horn, Jackson, and Feinberg, provides parameter-free structural theorems that constrain the asymptotic dynamics of mass-action systems irrespective of the numerical values of the rate constants. Despite the maturity of the theory, modern open-source implementations that combine CRNT structural analysis with symbolic ordinary differential equation (ODE) construction and robust numerical steady-state finding remain scarce. We present mantis-delta, a pure Python library that ingests human-readable reaction strings, builds the complex reaction graph, computes the deficiency{delta} = n-{ell}-s and weak reversibility, and decides applicability of the Deficiency Zero Theorem (DZT) and Deficiency One Theorem (D1T). For systems satisfying these structural conditions, mantis-delta certifies, without any simulation whatsoever, existence, uniqueness and (for DZT) asymptotic stability of the positive steady state in every stoichiometric compatibility class. When the structural theorems do not apply, the library provides symbolic mass-action ODEs and Jacobians via SymPy and a hybrid numerical solver that combines stiff implicit integration with bound-constrained algebraic least-squares to locate both stable and unstable fixed points, including Hopf bifurcation centres inaccessible to forward integration. We demonstrate the workflow on six benchmarks: a reversible isomerisation, the Michaelis-Menten enzyme mechanism, the closed and chemostatted Brusselator, a catalytic hairpin assembly (CHA) miR-21 biosensor, and the Goldbeter-Koshland zero-order ultrasensitivity switch. In each case, the CRNT-predicted qualitative behaviour (monostability, oscillation, uniqueness) is recovered numerically with a residual below 10-6 M s-1, and the Goldbeter-Koshland dose-response curve agrees with the closed-form quasi-steady-state approximation to within 1% over a 400x kinase/phosphatase activity scan. mantis-delta is open-source (MIT license) and available at https://github.com/emiliovenegas/mantis-delta.",
+  "authors": [
+    "Venegas Hernandez, E. A."
+  ],
+  "doi": "10.64898/2026.05.14.725189",
+  "first_seen": "2026-05-18",
+  "id": "biorxiv:10.64898/2026.05.14.725189",
+  "metadata": {
+    "abstract": "Chemical Reaction Network Theory (CRNT), developed by Horn, Jackson, and Feinberg, provides parameter-free structural theorems that constrain the asymptotic dynamics of mass-action systems irrespective of the numerical values of the rate constants. Despite the maturity of the theory, modern open-source implementations that combine CRNT structural analysis with symbolic ordinary differential equation (ODE) construction and robust numerical steady-state finding remain scarce. We present mantis-delta, a pure Python library that ingests human-readable reaction strings, builds the complex reaction graph, computes the deficiency{delta} = n-{ell}-s and weak reversibility, and decides applicability of the Deficiency Zero Theorem (DZT) and Deficiency One Theorem (D1T). For systems satisfying these structural conditions, mantis-delta certifies, without any simulation whatsoever, existence, uniqueness and (for DZT) asymptotic stability of the positive steady state in every stoichiometric compatibility class. When the structural theorems do not apply, the library provides symbolic mass-action ODEs and Jacobians via SymPy and a hybrid numerical solver that combines stiff implicit integration with bound-constrained algebraic least-squares to locate both stable and unstable fixed points, including Hopf bifurcation centres inaccessible to forward integration. We demonstrate the workflow on six benchmarks: a reversible isomerisation, the Michaelis-Menten enzyme mechanism, the closed and chemostatted Brusselator, a catalytic hairpin assembly (CHA) miR-21 biosensor, and the Goldbeter-Koshland zero-order ultrasensitivity switch. In each case, the CRNT-predicted qualitative behaviour (monostability, oscillation, uniqueness) is recovered numerically with a residual below 10-6 M s-1, and the Goldbeter-Koshland dose-response curve agrees with the closed-form quasi-steady-state approximation to within 1% over a 400x kinase/phosphatase activity scan. mantis-delta is open-source (MIT license) and available at https://github.com/emiliovenegas/mantis-delta.",
+    "author_corresponding": "Emilio A Venegas Hernandez",
+    "author_corresponding_institution": "Instituto Tecnologico y de Estudios Superiores de Monterrey",
+    "authors": "Venegas Hernandez, E. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-18",
+    "doi": "10.64898/2026.05.14.725189",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/18/2026.05.14.725189.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Mantis-Delta: Mass-Action Network Theory and Steady-State Characterization for Chemical Reaction Networks",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Instituto Tecnologico y de Estudios Superiores de Monterrey",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Open-source Python library mantis-delta combines chemical reaction network theory structural tests (deficiency, DZT, D1T) with symbolic mass-action ODEs and…",
+  "title": "Mantis-Delta: Mass-Action Network Theory and Steady-State Characterization for Chemical Reaction Networks",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.14.725189"
+}

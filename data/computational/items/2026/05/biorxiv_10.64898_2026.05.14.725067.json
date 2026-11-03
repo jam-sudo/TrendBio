@@ -1,0 +1,43 @@
+{
+  "abstract": "MotivationSequence-based predictors of recombinant protein solubility in Escherichia coli have plateaued (NESG independent-test AUC 0.760 [-&gt;]~ 0.80 over eight years of protein-language-model variants). The plateau hides a latent confound: the centrifugation regime used to separate the soluble from the insoluble fraction is a hidden variable collapsed into a single binary \"soluble\" label. The proteins biochemistry does not change between regimes; what changes is which fraction of the lysate is recovered as soluble. Existing predictors treat the regime as label noise rather than a feature, and sequence overlap between training and test partitions masks the resulting failure mode.\n\nResultsWe release the Aiki-Sol Dataset, a tiered E. coli solubility corpus: a ~ 85K stringency-annotated benchmark, an Apache-licensed ~ 147K extension adding binary-only-labelled proteins, and a ~ 229K research-tier pool incorporating non-commercially-licensed sources. On the ~ 85K benchmark, scored on sequence-cluster-disjoint partitions, the strongest published binary comparator falls below chance on the 32,000 x g stratum (AUC 0.491 {+/-} 0.020); a fine-tuned ESM-2 650M backbone with five protocol-matched out-puts lifts pooled AUC by +0.108 (paired-bootstrap CI lower bound +0.090). The gain is curation, not architecture: structure-aware predictors given ESMFold structures do not outperform the sequence-only frame, and capacity scaled to 3B parameters does not exceed the conditioned 650M backbone. The released model, Aiki-Sol, jointly supervises five per-stringency outputs alongside a marginal output for stringency-unknown proteins; on five external cohorts it lifts cohort-mean AUC from 0.69-0.70 to 0.825, with a [&ge;] +0.10-0.16 lift on the three cohorts at measurably-zero training-pool overlap.\n\nAvailability and implementationAiki-Sol model weights (Apache 2.0), the 147K-row license-clean training pool of the deployment checkpoint (CC BY 4.0), the cluster-disjoint per-stringency 5-fold partition assignments, per-cohort prediction CSVs, and source code for training, inference, and figure reproduction are available at https://github.com/aikium-public/aiki-sol and archived at Zenodo 10.5281/zenodo.20151817. The research-tier 229K checkpoint is released under CC-BY-NC-ND 4.0 (inheriting the most-restrictive upstream-source tier); its training CSV and the 84,809-protein stringency-annotated bench-mark of [&#167;]2.1 mix non-commercial-tier upstream sources and are not redistributed verbatim. Upstream sources are documented in Data availability and SI [&#167;]S1. The deployment artefact is distributed as a Python package (pip install aikisol) with a predict(seq) entry point.\n\nContactvenkatesh@aikium.com.\n\nSupplementary informationSupplementary text, figures, and tables are available at Bioinformatics online.",
+  "authors": [
+    "Rajagopalan, R.",
+    "Meda, R. S.",
+    "Shastry, S.",
+    "Mysore, V."
+  ],
+  "doi": "10.64898/2026.05.14.725067",
+  "first_seen": "2026-05-14",
+  "id": "biorxiv:10.64898/2026.05.14.725067",
+  "metadata": {
+    "abstract": "MotivationSequence-based predictors of recombinant protein solubility in Escherichia coli have plateaued (NESG independent-test AUC 0.760 [-&gt;]~ 0.80 over eight years of protein-language-model variants). The plateau hides a latent confound: the centrifugation regime used to separate the soluble from the insoluble fraction is a hidden variable collapsed into a single binary \"soluble\" label. The proteins biochemistry does not change between regimes; what changes is which fraction of the lysate is recovered as soluble. Existing predictors treat the regime as label noise rather than a feature, and sequence overlap between training and test partitions masks the resulting failure mode.\n\nResultsWe release the Aiki-Sol Dataset, a tiered E. coli solubility corpus: a ~ 85K stringency-annotated benchmark, an Apache-licensed ~ 147K extension adding binary-only-labelled proteins, and a ~ 229K research-tier pool incorporating non-commercially-licensed sources. On the ~ 85K benchmark, scored on sequence-cluster-disjoint partitions, the strongest published binary comparator falls below chance on the 32,000 x g stratum (AUC 0.491 {+/-} 0.020); a fine-tuned ESM-2 650M backbone with five protocol-matched out-puts lifts pooled AUC by +0.108 (paired-bootstrap CI lower bound +0.090). The gain is curation, not architecture: structure-aware predictors given ESMFold structures do not outperform the sequence-only frame, and capacity scaled to 3B parameters does not exceed the conditioned 650M backbone. The released model, Aiki-Sol, jointly supervises five per-stringency outputs alongside a marginal output for stringency-unknown proteins; on five external cohorts it lifts cohort-mean AUC from 0.69-0.70 to 0.825, with a [&ge;] +0.10-0.16 lift on the three cohorts at measurably-zero training-pool overlap.\n\nAvailability and implementationAiki-Sol model weights (Apache 2.0), the 147K-row license-clean training pool of the deployment checkpoint (CC BY 4.0), the cluster-disjoint per-stringency 5-fold partition assignments, per-cohort prediction CSVs, and source code for training, inference, and figure reproduction are available at https://github.com/aikium-public/aiki-sol and archived at Zenodo 10.5281/zenodo.20151817. The research-tier 229K checkpoint is released under CC-BY-NC-ND 4.0 (inheriting the most-restrictive upstream-source tier); its training CSV and the 84,809-protein stringency-annotated bench-mark of [&#167;]2.1 mix non-commercial-tier upstream sources and are not redistributed verbatim. Upstream sources are documented in Data availability and SI [&#167;]S1. The deployment artefact is distributed as a Python package (pip install aikisol) with a predict(seq) entry point.\n\nContactvenkatesh@aikium.com.\n\nSupplementary informationSupplementary text, figures, and tables are available at Bioinformatics online.",
+    "author_corresponding": "Venkatesh Mysore",
+    "author_corresponding_institution": "Aikium Inc.",
+    "authors": "Rajagopalan, R.; Meda, R. S.; Shastry, S.; Mysore, V.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-14",
+    "doi": "10.64898/2026.05.14.725067",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/14/2026.05.14.725067.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Protein solubility depends on centrifugation: Aiki-Sol, a per-regime predictor for E. coli",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Aikium Inc.",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Aiki-Sol models centrifugation stringency as a hidden label variable, lifting E. coli protein solubility prediction AUC on external cohorts.",
+  "title": "Protein solubility depends on centrifugation: Aiki-Sol, a per-regime predictor for E. coli",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.14.725067"
+}

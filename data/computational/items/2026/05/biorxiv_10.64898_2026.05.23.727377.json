@@ -1,0 +1,41 @@
+{
+  "abstract": "MotivationClassical protein structure comparison metrics such as RMSD and TM-score assess geometric similarity via rigid-body superposition and sequence-dependent alignment, but they do not explicitly incorporate the linear order of amino-acid residues into the metric itself. The Gromov-Hausdorff (GH) metric compares metric spaces by their intrinsic shape, yet it also ignores order. Consequently, proteins with rearranged domains can appear geometrically similar under GH even when their evolutionary relationship is ambiguous. We introduce the Ordered Gromov-Hausdorff (OGH) metric, defined on linearly ordered metric spaces via optimal order-preserving isometric embeddings into a common host space, to rigorously incorporate residue order into structural comparison.\n\nResultsThe theoretical OGH distance satisfies all metric axioms for finite ordered spaces (non-negativity, symmetry, identity of indiscernibles, and the triangle inequality), proved by standard metric-gluing arguments. For computation, we introduce an efficient surrogate based on a greedy monotonic alignment with an exponential order-penalty; we prove that any monotone alignment produced by the surrogate induces a monotone correspondence whose distortion rigorously bounds the theoretical distance from above (Lemma 2.2.5). The algorithm runs in O (n, {middle dot} w), where w is the search window width. Analytical properties include invariance under rigid-body motions, upper boundedness, Lipschitz continuity under small coordinate perturbations, and concavity in the weight parameter . On the Viral Affinity Dataset (28 viral proteins from HIV-1, SARS-CoV-2 and MERS-CoV), the practical OGH score increases monotonically with residue shuffling (up to 0.363 at 100% shuffling) and correlates strongly with TM-score (r = 0.706). In the task of separating homologs at fixed global structural similarity (TM-score {approx}.0.5), OGH achieves AUC = 0.800, whereas TM-score gives AUC = 0.467, demonstrating that order conservation is a more reliable signal of evolutionary relatedness than global geometry alone in the twilight zone of homology.\n\nAvailabilityThe Python source code for OGH is freely available at https://github.com/andytimoffilim/OGH. The VAD dataset (PDB IDs listed in the paper) is publicly accessible from the RCSB Protein Data Bank [1,2].",
+  "authors": [
+    "Timofeev, A.",
+    "Anufriev, A."
+  ],
+  "doi": "10.64898/2026.05.23.727377",
+  "first_seen": "2026-05-27",
+  "id": "biorxiv:10.64898/2026.05.23.727377",
+  "metadata": {
+    "abstract": "MotivationClassical protein structure comparison metrics such as RMSD and TM-score assess geometric similarity via rigid-body superposition and sequence-dependent alignment, but they do not explicitly incorporate the linear order of amino-acid residues into the metric itself. The Gromov-Hausdorff (GH) metric compares metric spaces by their intrinsic shape, yet it also ignores order. Consequently, proteins with rearranged domains can appear geometrically similar under GH even when their evolutionary relationship is ambiguous. We introduce the Ordered Gromov-Hausdorff (OGH) metric, defined on linearly ordered metric spaces via optimal order-preserving isometric embeddings into a common host space, to rigorously incorporate residue order into structural comparison.\n\nResultsThe theoretical OGH distance satisfies all metric axioms for finite ordered spaces (non-negativity, symmetry, identity of indiscernibles, and the triangle inequality), proved by standard metric-gluing arguments. For computation, we introduce an efficient surrogate based on a greedy monotonic alignment with an exponential order-penalty; we prove that any monotone alignment produced by the surrogate induces a monotone correspondence whose distortion rigorously bounds the theoretical distance from above (Lemma 2.2.5). The algorithm runs in O (n, {middle dot} w), where w is the search window width. Analytical properties include invariance under rigid-body motions, upper boundedness, Lipschitz continuity under small coordinate perturbations, and concavity in the weight parameter . On the Viral Affinity Dataset (28 viral proteins from HIV-1, SARS-CoV-2 and MERS-CoV), the practical OGH score increases monotonically with residue shuffling (up to 0.363 at 100% shuffling) and correlates strongly with TM-score (r = 0.706). In the task of separating homologs at fixed global structural similarity (TM-score {approx}.0.5), OGH achieves AUC = 0.800, whereas TM-score gives AUC = 0.467, demonstrating that order conservation is a more reliable signal of evolutionary relatedness than global geometry alone in the twilight zone of homology.\n\nAvailabilityThe Python source code for OGH is freely available at https://github.com/andytimoffilim/OGH. The VAD dataset (PDB IDs listed in the paper) is publicly accessible from the RCSB Protein Data Bank [1,2].",
+    "author_corresponding": "Andrey Timofeev",
+    "author_corresponding_institution": "LLC AI Center for SCO+ Countries, St. Petersburg, 197341, Russia",
+    "authors": "Timofeev, A.; Anufriev, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-27",
+    "doi": "10.64898/2026.05.23.727377",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/27/2026.05.23.727377.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Ordered Gromov-Hausdorff Metric: A New Tool for Comparative Analysis of Protein Structures",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "LLC AI Center for SCO+ Countries, St. Petersburg, 197341, Russia",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-05-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces Ordered Gromov-Hausdorff (OGH), a metric incorporating residue order for protein structure comparison, with a fast surrogate algorithm; outperforms…",
+  "title": "Ordered Gromov-Hausdorff Metric: A New Tool for Comparative Analysis of Protein Structures",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.23.727377"
+}

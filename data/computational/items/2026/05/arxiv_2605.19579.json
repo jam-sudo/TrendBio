@@ -1,0 +1,33 @@
+{
+  "abstract": "Proteolysis-targeting chimeras (PROTACs) represent a promising therapeutic modality that induces targeted protein degradation by hijacking the ubiquitin-proteasome system. However, rational PROTAC design remains challenging due to the complex interplay between molecular structure, target proteins, E3 ligases, and the cellular context. We present TACK, a statistical evaluation of degradation activity on a novel TArgeting Chimeras Knowledge dataset of 3,514 PROTACs and 6,561 degradation endpoints aggregated from three major repositories with standardized molecular representations, protein annotations, and experimental conditions. Using scaffold-based 5x5 cross-validation, we perform a rigorous statistical comparison of three machine learning methods to predict PROTAC degradation activity across three tasks: $DC_{50}$ and Dmax regression, and binary activity classification. Feature ablation demonstrates that cellular context features and simple protein representations rival complex ESM protein embeddings, highlighting the importance of feature engineering over architectural sophistication. Models trained on the best performing features show that potency ($pDC_{50}$, $R^2=0.66$) is substantially more predictable than maximum degradation (Dmax, $R^2=0.36$). In activity prediction, statistical tests support that classical methods (XGBoost and MLP) significantly outperform PROTAC-STAN, a domain-specific graph neural network model (ROC-AUC: 0.85 vs. 0.75, p<0.001). Finally, we propose an ensemble-based uncertainty quantification approach showing that prediction variance correlates with prediction error ($pDC_{50}$: Spearman $ρ= 0.36$, p<0.001; Dmax: $ρ=0.69$, p<0.001), enabling confidence-aware experimental prioritization. Our findings challenge assumptions about specialized architectures for degradation prediction and provide evidence-based guidance for ML-driven PROTAC assessment.",
+  "authors": [
+    "Stefano Ribes",
+    "Nils Dunlop",
+    "Rocío Mercado"
+  ],
+  "doi": "10.1145/3770855.3819052",
+  "first_seen": "2026-05-19",
+  "id": "arxiv:2605.19579",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.19579v2</ns0:id>\n    <ns0:title>TACK: A Statistical Evaluation of Degradation Activity on a Novel TArgeting Chimeras Knowledge Dataset</ns0:title>\n    <ns0:updated>2026-06-08T07:51:28Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.19579v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.19579v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Proteolysis-targeting chimeras (PROTACs) represent a promising therapeutic modality that induces targeted protein degradation by hijacking the ubiquitin-proteasome system. However, rational PROTAC design remains challenging due to the complex interplay between molecular structure, target proteins, E3 ligases, and the cellular context. We present TACK, a statistical evaluation of degradation activity on a novel TArgeting Chimeras Knowledge dataset of 3,514 PROTACs and 6,561 degradation endpoints aggregated from three major repositories with standardized molecular representations, protein annotations, and experimental conditions. Using scaffold-based 5x5 cross-validation, we perform a rigorous statistical comparison of three machine learning methods to predict PROTAC degradation activity across three tasks: $DC_{50}$ and Dmax regression, and binary activity classification. Feature ablation demonstrates that cellular context features and simple protein representations rival complex ESM protein embeddings, highlighting the importance of feature engineering over architectural sophistication. Models trained on the best performing features show that potency ($pDC_{50}$, $R^2=0.66$) is substantially more predictable than maximum degradation (Dmax, $R^2=0.36$). In activity prediction, statistical tests support that classical methods (XGBoost and MLP) significantly outperform PROTAC-STAN, a domain-specific graph neural network model (ROC-AUC: 0.85 vs. 0.75, p&lt;0.001). Finally, we propose an ensemble-based uncertainty quantification approach showing that prediction variance correlates with prediction error ($pDC_{50}$: Spearman $ρ= 0.36$, p&lt;0.001; Dmax: $ρ=0.69$, p&lt;0.001), enabling confidence-aware experimental prioritization. Our findings challenge assumptions about specialized architectures for degradation prediction and provide evidence-based guidance for ML-driven PROTAC assessment.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-19T09:22:30Z</ns0:published>\n    <ns1:comment>12 pages, 6 figures, accepted to Knowledge Discovery and Data Mining - KDD '26</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Stefano Ribes</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nils Dunlop</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rocío Mercado</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3770855.3819052</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3770855.3819052\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "TACK: a curated dataset of 3,514 PROTACs and 6,561 degradation endpoints, with scaffold-based benchmarking of ML models for DC50, Dmax, and activity prediction…",
+  "title": "TACK: A Statistical Evaluation of Degradation Activity on a Novel TArgeting Chimeras Knowledge Dataset",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.19579v2"
+}

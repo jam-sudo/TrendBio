@@ -1,0 +1,42 @@
+{
+  "abstract": "Native mass spectrometry is a central analytical method for characterizing intact proteins, antibody-drug conjugates, and non-covalent assemblies, and it is increasingly the deciding measurement in biotherapeutic development pipelines. A single screening attempt requires days of expression, purification, and buffer exchange into ammonium acetate, followed by 30 to 60 minutes of optimization on a Q-Exactive UHMR or comparable instrument. To our knowledge, no published sequence-based predictor currently estimates native MS suitability before experimental screening.\n\nWe curated 634 unique proteins with documented native MS outcomes, drawn from a 232-protein hand-curated base set, 358 entries recovered from RCSB PDB by full-text searching for native MS terminology, and 44 evidence-based extractions from supplementary tables across 80 EuropePMC papers. We trained four model variants on this benchmark: a 36-feature BioPython physicochemical baseline, an ESM-2 linear probe, an ESM-2 PCA-256 random forest, and a combined model that concatenates ESM-2 PCA components with BioPython features. All variants were evaluated under cluster-aware 5-fold cross-validation (GroupKFold over ESM-2 embedding-similarity clusters) with isotonic calibration, and standard stratified 5-fold cross-validation is reported as a sensitivity analysis.\n\nUnder cluster-aware 5-fold cross-validation (GroupKFold over ESM-2 embedding-similarity clusters, our defense against homology leakage), the combined model achieved an AUC of 0.869 plus or minus 0.036, robust against the original stratified-CV value (0.873) and the BioPython baseline (0.852). The ESM-2-only variants showed AUC drops of 0.024 to 0.046 between stratified and cluster-aware splits, indicating that some of the apparent ESM-2 contribution under standard CV reflects homology leakage. Negative recall was 9.4 percent under cluster-aware splitting versus 26.0 percent under stratified, confirming that the models apparent failure-detection capability was substantially inflated by within-fold homology. We report both numbers and treat the cluster-aware values as the primary results.\n\nWe release the curated dataset, the trained model, and an interactive web tool at nativeready.netlify.app. In its current form, NativeReady should be interpreted primarily as a positive-suitability triage tool; failure prediction remains limited by the scarcity of experimentally documented negative cases. We propose a user-contribution mechanism to accumulate real failure data over time. To our knowledge, no published sequence-based predictor currently estimates native MS suitability before experimental screening, and NativeReady is the first open benchmark and triage model specifically designed for this task.",
+  "authors": [
+    "Znabu, B. F.",
+    "Atif, Z."
+  ],
+  "doi": "10.64898/2026.05.03.722506",
+  "first_seen": "2026-05-06",
+  "id": "biorxiv:10.64898/2026.05.03.722506",
+  "metadata": {
+    "abstract": "Native mass spectrometry is a central analytical method for characterizing intact proteins, antibody-drug conjugates, and non-covalent assemblies, and it is increasingly the deciding measurement in biotherapeutic development pipelines. A single screening attempt requires days of expression, purification, and buffer exchange into ammonium acetate, followed by 30 to 60 minutes of optimization on a Q-Exactive UHMR or comparable instrument. To our knowledge, no published sequence-based predictor currently estimates native MS suitability before experimental screening.\n\nWe curated 634 unique proteins with documented native MS outcomes, drawn from a 232-protein hand-curated base set, 358 entries recovered from RCSB PDB by full-text searching for native MS terminology, and 44 evidence-based extractions from supplementary tables across 80 EuropePMC papers. We trained four model variants on this benchmark: a 36-feature BioPython physicochemical baseline, an ESM-2 linear probe, an ESM-2 PCA-256 random forest, and a combined model that concatenates ESM-2 PCA components with BioPython features. All variants were evaluated under cluster-aware 5-fold cross-validation (GroupKFold over ESM-2 embedding-similarity clusters) with isotonic calibration, and standard stratified 5-fold cross-validation is reported as a sensitivity analysis.\n\nUnder cluster-aware 5-fold cross-validation (GroupKFold over ESM-2 embedding-similarity clusters, our defense against homology leakage), the combined model achieved an AUC of 0.869 plus or minus 0.036, robust against the original stratified-CV value (0.873) and the BioPython baseline (0.852). The ESM-2-only variants showed AUC drops of 0.024 to 0.046 between stratified and cluster-aware splits, indicating that some of the apparent ESM-2 contribution under standard CV reflects homology leakage. Negative recall was 9.4 percent under cluster-aware splitting versus 26.0 percent under stratified, confirming that the models apparent failure-detection capability was substantially inflated by within-fold homology. We report both numbers and treat the cluster-aware values as the primary results.\n\nWe release the curated dataset, the trained model, and an interactive web tool at nativeready.netlify.app. In its current form, NativeReady should be interpreted primarily as a positive-suitability triage tool; failure prediction remains limited by the scarcity of experimentally documented negative cases. We propose a user-contribution mechanism to accumulate real failure data over time. To our knowledge, no published sequence-based predictor currently estimates native MS suitability before experimental screening, and NativeReady is the first open benchmark and triage model specifically designed for this task.",
+    "author_corresponding": "Brhanu Fentaw Znabu",
+    "author_corresponding_institution": "university of nebraska-lincoln",
+    "authors": "Znabu, B. F.; Atif, Z.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-06",
+    "doi": "10.64898/2026.05.03.722506",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/06/2026.05.03.722506.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "NativeReady: an open benchmark and sequence-based triage model for native mass spectrometry suitability",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "university of nebraska-lincoln",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "NativeReady: an open curated benchmark (634 proteins) and ESM-2/BioPython triage model predicting native MS suitability from sequence, with cluster-aware CV…",
+  "title": "NativeReady: an open benchmark and sequence-based triage model for native mass spectrometry suitability",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.03.722506"
+}

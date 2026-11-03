@@ -1,0 +1,40 @@
+{
+  "abstract": "Multi-omics integration, the joint analysis of two or more high-dimensional molecular data types collected on the same biological samples, is now a standard analytical approach across nutrigenomics, toxicogenomics, microbiome research, and disease genomics. Existing methods sit on a trade-off between expressiveness and interpretability: latent-variable methods such as MOFA and DIABLO yield compact, biologically interpretable signatures but assume a restrictive linear structure; tree ensembles such as Random Forests achieve strong predictive performance but resist mechanistic interpretation; deep neural networks combine the drawbacks of both, with large numbers of opaque weights and no built-in feature selection. I ask whether the Lottery Ticket Hypothesis (LTH), the conjecture that a randomly initialised dense network contains a sparse subnetwork that matches its accuracy when trained from the original initialisation, can help reconcile this trade-off in the multi-omics setting. I apply Iterative Magnitude Pruning with weight rewinding for 25 rounds (cumulative sparsity 99.6%) on a multi-input fused multi-layer perceptron across eight datasets spanning four biological domains (n=40 to n=1,492), with 5-fold outer cross-validation and inner-validation winning-ticket selection to avoid test-set leakage. On the largest task, TCGA Pan-Cancer (4-class tissue-of-origin, n=1,492), a 2,952-weight subnetwork (83% sparsity) reached 84% +/- 3% test accuracy compared with 86% +/-2 % for the dense network. Pruning improved test accuracy on two TCGA staging tasks (TCGA-LUAD: 51% {+/-} 1% vs 45% {+/-} 5%; TCGA-KIRC: 50% {+/-} 4% vs 48% {+/-} 7%). Networks compressed by 6x to 270x while retaining task-level signal on well-specified tasks. I suggest LTH as a domain-agnostic, prior-free option for sparse neural integration of multi-omics data, complementary to graph-based and pathway-constrained methods.",
+  "authors": [
+    "Miszczak, R."
+  ],
+  "doi": "10.64898/2026.05.22.727123",
+  "first_seen": "2026-05-26",
+  "id": "biorxiv:10.64898/2026.05.22.727123",
+  "metadata": {
+    "abstract": "Multi-omics integration, the joint analysis of two or more high-dimensional molecular data types collected on the same biological samples, is now a standard analytical approach across nutrigenomics, toxicogenomics, microbiome research, and disease genomics. Existing methods sit on a trade-off between expressiveness and interpretability: latent-variable methods such as MOFA and DIABLO yield compact, biologically interpretable signatures but assume a restrictive linear structure; tree ensembles such as Random Forests achieve strong predictive performance but resist mechanistic interpretation; deep neural networks combine the drawbacks of both, with large numbers of opaque weights and no built-in feature selection. I ask whether the Lottery Ticket Hypothesis (LTH), the conjecture that a randomly initialised dense network contains a sparse subnetwork that matches its accuracy when trained from the original initialisation, can help reconcile this trade-off in the multi-omics setting. I apply Iterative Magnitude Pruning with weight rewinding for 25 rounds (cumulative sparsity 99.6%) on a multi-input fused multi-layer perceptron across eight datasets spanning four biological domains (n=40 to n=1,492), with 5-fold outer cross-validation and inner-validation winning-ticket selection to avoid test-set leakage. On the largest task, TCGA Pan-Cancer (4-class tissue-of-origin, n=1,492), a 2,952-weight subnetwork (83% sparsity) reached 84% +/- 3% test accuracy compared with 86% +/-2 % for the dense network. Pruning improved test accuracy on two TCGA staging tasks (TCGA-LUAD: 51% {+/-} 1% vs 45% {+/-} 5%; TCGA-KIRC: 50% {+/-} 4% vs 48% {+/-} 7%). Networks compressed by 6x to 270x while retaining task-level signal on well-specified tasks. I suggest LTH as a domain-agnostic, prior-free option for sparse neural integration of multi-omics data, complementary to graph-based and pathway-constrained methods.",
+    "author_corresponding": "Rebecca Miszczak",
+    "author_corresponding_institution": "Department of Plant Cytology and Embryology, Institute of Botany, Faculty of Biology",
+    "authors": "Miszczak, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-26",
+    "doi": "10.64898/2026.05.22.727123",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/26/2026.05.22.727123.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Sparse, trainable subnetworks for multi-omics integration: a cross-validated evaluation of the Lottery Ticket Hypothesis across nutrigenomic, toxicogenomic, and oncogenomic datasets",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Plant Cytology and Embryology, Institute of Botany, Faculty of Biology",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Cross-validated test of Lottery Ticket pruning for sparse neural multi-omics integration on eight datasets, 6-270x compression.",
+  "title": "Sparse, trainable subnetworks for multi-omics integration: a cross-validated evaluation of the Lottery Ticket Hypothesis across nutrigenomic, toxicogenomic, and oncogenomic datasets",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.22.727123"
+}

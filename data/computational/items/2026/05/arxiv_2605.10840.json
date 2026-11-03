@@ -1,0 +1,44 @@
+{
+  "abstract": "Joint-embedding predictive architectures (JEPA) learn representations by predicting in latent space, as in computer vision; retaining the action-conditioned predictor at inference turns them into latent world models, enabling planning in robotics (V-JEPA 2-AC). Bringing this design to EHR patient trajectories---a predictor that simulates a patient's trajectory in latent space---has not been explored. We use an LLM as the encoder, reading the hourly record as text, avoiding feature engineering and vocabulary harmonisation. But an LLM adapted by supervised fine-tuning does not organise its latent space around physiological dynamics, and freezing it to train the predictor, as in V-JEPA 2-AC, leaves the encoder unaware of the rollout signal: the predictor degrades under rollout. We instead co-train encoder and predictor under one latent-prediction objective, grounding the encoder in the dynamics its predictor must follow. Naïve co-training, however, is unstable: the untrained predictor drags the encoder toward collapse, and the predictor's rollout diverges as its target space moves. We present Clin-JEPA, a five-phase curriculum that stably co-trains an LLM encoder with a latent trajectory predictor on MIMIC-IV. Three evaluations support the design: (1) under 48-hour autoregressive rollout the co-trained predictor degrades least (predictor degradation $\\times$1.06, against $\\times$1.23--1.36 for two-stage designs and $\\times$6.3--66 for curriculum ablations) while the co-trained encoder resolves the progression of patient state most sharply (largest state displacement); (2) the co-trained encoder separates deteriorating from stable patients in its latent space with Cohen's $d{=}1.59$, against $\\leq$0.50 for two-stage encoders; (3) one set of embeddings serves 34 downstream tasks across three benchmarks, outperforming strong per-task tuned baselines and a pretrained EHR foundation model.",
+  "authors": [
+    "Yixuan Yang",
+    "Mehak Arora",
+    "Ryan Zhang",
+    "Baraa Abed",
+    "Junseob Kim",
+    "Tilendra Choudhary",
+    "Md Hassanuzzaman",
+    "Kevin Zhu",
+    "Ayman Ali",
+    "Chengkun Yang",
+    "Alasdair Edward Gent",
+    "Victor Moas",
+    "Rishikesan Kamaleswaran"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-11",
+  "id": "arxiv:2605.10840",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.10840v5</ns0:id>\n    <ns0:title>Clin-JEPA: A Multi-Phase Co-Training Framework for Joint-Embedding Predictive Pretraining on EHR Patient Trajectories</ns0:title>\n    <ns0:updated>2026-09-16T23:25:33Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.10840v5\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.10840v5\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Joint-embedding predictive architectures (JEPA) learn representations by predicting in latent space, as in computer vision; retaining the action-conditioned predictor at inference turns them into latent world models, enabling planning in robotics (V-JEPA 2-AC). Bringing this design to EHR patient trajectories---a predictor that simulates a patient's trajectory in latent space---has not been explored. We use an LLM as the encoder, reading the hourly record as text, avoiding feature engineering and vocabulary harmonisation. But an LLM adapted by supervised fine-tuning does not organise its latent space around physiological dynamics, and freezing it to train the predictor, as in V-JEPA 2-AC, leaves the encoder unaware of the rollout signal: the predictor degrades under rollout. We instead co-train encoder and predictor under one latent-prediction objective, grounding the encoder in the dynamics its predictor must follow. Naïve co-training, however, is unstable: the untrained predictor drags the encoder toward collapse, and the predictor's rollout diverges as its target space moves. We present Clin-JEPA, a five-phase curriculum that stably co-trains an LLM encoder with a latent trajectory predictor on MIMIC-IV. Three evaluations support the design: (1) under 48-hour autoregressive rollout the co-trained predictor degrades least (predictor degradation $\\times$1.06, against $\\times$1.23--1.36 for two-stage designs and $\\times$6.3--66 for curriculum ablations) while the co-trained encoder resolves the progression of patient state most sharply (largest state displacement); (2) the co-trained encoder separates deteriorating from stable patients in its latent space with Cohen's $d{=}1.59$, against $\\leq$0.50 for two-stage encoders; (3) one set of embeddings serves 34 downstream tasks across three benchmarks, outperforming strong per-task tuned baselines and a pretrained EHR foundation model.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-11T16:54:23Z</ns0:published>\n    <ns1:comment>42 pages, 7 figures, 18 tables. Code: https://github.com/Kamaleswaran-Lab/Clin-JEPA</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Yixuan Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mehak Arora</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ryan Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Baraa Abed</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junseob Kim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tilendra Choudhary</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Md Hassanuzzaman</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kevin Zhu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ayman Ali</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chengkun Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alasdair Edward Gent</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Victor Moas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rishikesan Kamaleswaran</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "arxiv",
+  "summary": "Clin-JEPA co-trains an LLM encoder with a latent trajectory predictor on MIMIC-IV EHR text via a five-phase curriculum, improving rollout stability and…",
+  "title": "Clin-JEPA: A Multi-Phase Co-Training Framework for Joint-Embedding Predictive Pretraining on EHR Patient Trajectories",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.10840v5"
+}

@@ -1,0 +1,35 @@
+{
+  "abstract": "Brain foundation models (BFMs) are self-supervised Transformers pretrained on fMRI data. We posit that these models should capture each subject's cognitive performance from their fMRI signal. Yet across three state-of-the-art BFMs and every readout we test, they predict cognition worse than a linear regression from the $\\sim$80K parameters of the functional connectivity matrix (FC). The gap widens with scale: BrainLM's 650M model predicts cognition worse than its 111M. We attribute this to a \\textbf{variance allocation problem}: BFM pretraining captures the variance components that dominate fMRI but not the higher-order structure that predicts cognition. Our per-cumulant analysis of the reconstructed signal shows that the second-order covariance is partially preserved, while the third-order co-skewness tensor is largely destroyed. To recover what BFMs lose, we design a linear pipeline that projects the fMRI signal into the subspace that best preserves its co-skewness and computes FC there. This \\textbf{exceeds raw FC and every pretrained BFM} on every dataset and parcellation we test, outperforming prior state-of-the-art under controlled evaluation \\textbf{with no pretraining and no GPU}. We \\textbf{recover the raw-FC ceiling on BrainLM's forward pass} by finetuning with a loss targeted at this same subspace. This shows that the bottleneck is the pretraining objective, not the architecture or the model size.",
+  "authors": [
+    "Giovanni Marraffini",
+    "Gabriel Mahuas",
+    "Trinidad Borrell",
+    "Victoria Shevchenko",
+    "Demian Wassermann"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-29",
+  "id": "arxiv:2606.04010",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.NC",
+    "categories": [
+      "q-bio.NC",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2606.04010v1</ns0:id>\n    <ns0:title>The Variance Brain Foundation Models Forgot: Third-Order Statistics Predict Cognition Where Billion-Parameter Models Fail</ns0:title>\n    <ns0:updated>2026-05-29T23:57:21Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2606.04010v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2606.04010v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Brain foundation models (BFMs) are self-supervised Transformers pretrained on fMRI data. We posit that these models should capture each subject's cognitive performance from their fMRI signal. Yet across three state-of-the-art BFMs and every readout we test, they predict cognition worse than a linear regression from the $\\sim$80K parameters of the functional connectivity matrix (FC). The gap widens with scale: BrainLM's 650M model predicts cognition worse than its 111M. We attribute this to a \\textbf{variance allocation problem}: BFM pretraining captures the variance components that dominate fMRI but not the higher-order structure that predicts cognition. Our per-cumulant analysis of the reconstructed signal shows that the second-order covariance is partially preserved, while the third-order co-skewness tensor is largely destroyed. To recover what BFMs lose, we design a linear pipeline that projects the fMRI signal into the subspace that best preserves its co-skewness and computes FC there. This \\textbf{exceeds raw FC and every pretrained BFM} on every dataset and parcellation we test, outperforming prior state-of-the-art under controlled evaluation \\textbf{with no pretraining and no GPU}. We \\textbf{recover the raw-FC ceiling on BrainLM's forward pass} by finetuning with a loss targeted at this same subspace. This shows that the bottleneck is the pretraining objective, not the architecture or the model size.</ns0:summary>\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-29T23:57:21Z</ns0:published>\n    <ns1:comment>37 pages, 16 figures, 23 tables</ns1:comment>\n    <ns1:primary_category term=\"q-bio.NC\" />\n    <ns0:author>\n      <ns0:name>Giovanni Marraffini</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gabriel Mahuas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Trinidad Borrell</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Victoria Shevchenko</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Demian Wassermann</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Shows brain foundation models lose third-order co-skewness in fMRI and fail to predict cognition better than FC regression; proposes a linear co-skewness…",
+  "title": "The Variance Brain Foundation Models Forgot: Third-Order Statistics Predict Cognition Where Billion-Parameter Models Fail",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2606.04010v1"
+}

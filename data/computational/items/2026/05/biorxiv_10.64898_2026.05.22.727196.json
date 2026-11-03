@@ -1,0 +1,50 @@
+{
+  "abstract": "BackgroundAcute myeloid leukemia (AML) remains the most lethal acute leukemia in adults, with 5-year overall survival below 32% despite recent advances including venetoclax-, FLT3-, IDH1/2-, and Menin-targeted therapies. Clinical outcomes remain highly heterogeneous across patients, highlighting the need for robust molecular biomarkers capable of improving prognostic precision. MicroRNAs (miRNAs) are critical regulators of hematopoietic differentiation, apoptosis, and therapeutic resistance and are differentially expressed across AML subtypes. However, their clinical translation has been limited by high dimensionality, feature redundancy, and relatively small cohort sizes.\n\nMethodsWe developed and evaluated the AML Survival Estimator (AMLS), an inheritable bi-objective combinatorial genetic algorithm integrated with support vector regression (SVR), using TCGA-LAML miRNA expression profiles (n = 156). AMLS was benchmarked against ten widely used machine-learning approaches, including penalized regression, tree-based ensembles, support-vector regression, k-nearest neighbors, and multilayer perceptron models. Performance was assessed using stratified cross-validation with Pearson correlation (R), Harrells concordance index (C-index), and mean absolute error (MAE). Functional characterization of the derived miRNA signature was performed through consensus target integration followed by pathway enrichment, gene ontology analysis, network reconstruction, and Kaplan-Meier risk stratification.\n\nResultsAMLS achieved superior prognostic performance with pooled out-of-fold metrics of Pearson R = 0.86, C-index = 0.788, and MAE = 7.49 months, substantially outperforming all comparator models. Restricting analyses to the AMLS-derived 28-miRNA signature improved all baseline learners by approximately 2-4-fold, with the multilayer perceptron achieving R = 0.674; however, none matched the native AMLS framework, indicating that the evolutionary optimization strategy contributes predictive information beyond feature selection alone. The prognostic signature included biologically established AML-associated miRNAs, including hsa-miR-191, hsa-miR-29c, hsa-miR-125b, hsa-miR-148a, hsa-miR-15b, hsa-miR-10b, and hsa-miR-30c, linked to DNA methylation, apoptosis, cell-cycle regulation, and oncogenic Wnt/MAPK signaling pathways. Functional analyses demonstrated significant enrichment of canonical AML-associated pathways, including p53, PI3K-AKT, TGF-{beta}, JAK-STAT, FoxO, and hematopoietic lineage signaling.\n\nConclusionsOur findings demonstrate that evolutionary learning integrated with SVR can recover a compact and biologically interpretable miRNA prognostic signature that substantially outperforms conventional machine-learning approaches for AML survival prediction. The identified miRNA network converged on key leukemogenic pathways involved in apoptosis, cell-cycle regulation, and oncogenic signaling, supporting both the biological relevance and prognostic utility of the framework. Given the minimally invasive and quantitatively scalable nature of miRNA profiling, this approach may provide a practical molecular adjunct for improving prognostic assessment and precision medicine strategies in AML.\n\nAbstract FigureSchematic overview of the AMLS framework. Left: acute myeloid leukemia, a clonal hematological malignancy with persistent prognostic heterogeneity. Middle: AMLS couples an evolutionary learning-based feature selection algorithms to support vector regression for miRNA-based survival modeling. Right: AMLS recovers a 28-miRNA prognostic signature that predicts overall survival with Pearson R = 0.86 and MAE = 7.5 months.\n\n\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=86 SRC=\"FIGDIR/small/727196v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (20K):\norg.highwire.dtl.DTLVardef@11ead1org.highwire.dtl.DTLVardef@4f5c19org.highwire.dtl.DTLVardef@277de1org.highwire.dtl.DTLVardef@b95c9a_HPS_FORMAT_FIGEXP  M_FIG C_FIG",
+  "authors": [
+    "Yerukala Sathipati, S.",
+    "Agustriawan, D.",
+    "Gopireddy, N. S. R.",
+    "Popat, A.",
+    "Moat, L.",
+    "Aimalla, N.",
+    "Elugoti, M. R.",
+    "Kampa, S. A.",
+    "Sharma, P.",
+    "Ho, S.-Y.",
+    "Sharma, R."
+  ],
+  "doi": "10.64898/2026.05.22.727196",
+  "first_seen": "2026-05-26",
+  "id": "biorxiv:10.64898/2026.05.22.727196",
+  "metadata": {
+    "abstract": "BackgroundAcute myeloid leukemia (AML) remains the most lethal acute leukemia in adults, with 5-year overall survival below 32% despite recent advances including venetoclax-, FLT3-, IDH1/2-, and Menin-targeted therapies. Clinical outcomes remain highly heterogeneous across patients, highlighting the need for robust molecular biomarkers capable of improving prognostic precision. MicroRNAs (miRNAs) are critical regulators of hematopoietic differentiation, apoptosis, and therapeutic resistance and are differentially expressed across AML subtypes. However, their clinical translation has been limited by high dimensionality, feature redundancy, and relatively small cohort sizes.\n\nMethodsWe developed and evaluated the AML Survival Estimator (AMLS), an inheritable bi-objective combinatorial genetic algorithm integrated with support vector regression (SVR), using TCGA-LAML miRNA expression profiles (n = 156). AMLS was benchmarked against ten widely used machine-learning approaches, including penalized regression, tree-based ensembles, support-vector regression, k-nearest neighbors, and multilayer perceptron models. Performance was assessed using stratified cross-validation with Pearson correlation (R), Harrells concordance index (C-index), and mean absolute error (MAE). Functional characterization of the derived miRNA signature was performed through consensus target integration followed by pathway enrichment, gene ontology analysis, network reconstruction, and Kaplan-Meier risk stratification.\n\nResultsAMLS achieved superior prognostic performance with pooled out-of-fold metrics of Pearson R = 0.86, C-index = 0.788, and MAE = 7.49 months, substantially outperforming all comparator models. Restricting analyses to the AMLS-derived 28-miRNA signature improved all baseline learners by approximately 2-4-fold, with the multilayer perceptron achieving R = 0.674; however, none matched the native AMLS framework, indicating that the evolutionary optimization strategy contributes predictive information beyond feature selection alone. The prognostic signature included biologically established AML-associated miRNAs, including hsa-miR-191, hsa-miR-29c, hsa-miR-125b, hsa-miR-148a, hsa-miR-15b, hsa-miR-10b, and hsa-miR-30c, linked to DNA methylation, apoptosis, cell-cycle regulation, and oncogenic Wnt/MAPK signaling pathways. Functional analyses demonstrated significant enrichment of canonical AML-associated pathways, including p53, PI3K-AKT, TGF-{beta}, JAK-STAT, FoxO, and hematopoietic lineage signaling.\n\nConclusionsOur findings demonstrate that evolutionary learning integrated with SVR can recover a compact and biologically interpretable miRNA prognostic signature that substantially outperforms conventional machine-learning approaches for AML survival prediction. The identified miRNA network converged on key leukemogenic pathways involved in apoptosis, cell-cycle regulation, and oncogenic signaling, supporting both the biological relevance and prognostic utility of the framework. Given the minimally invasive and quantitatively scalable nature of miRNA profiling, this approach may provide a practical molecular adjunct for improving prognostic assessment and precision medicine strategies in AML.\n\nAbstract FigureSchematic overview of the AMLS framework. Left: acute myeloid leukemia, a clonal hematological malignancy with persistent prognostic heterogeneity. Middle: AMLS couples an evolutionary learning-based feature selection algorithms to support vector regression for miRNA-based survival modeling. Right: AMLS recovers a 28-miRNA prognostic signature that predicts overall survival with Pearson R = 0.86 and MAE = 7.5 months.\n\n\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=86 SRC=\"FIGDIR/small/727196v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (20K):\norg.highwire.dtl.DTLVardef@11ead1org.highwire.dtl.DTLVardef@4f5c19org.highwire.dtl.DTLVardef@277de1org.highwire.dtl.DTLVardef@b95c9a_HPS_FORMAT_FIGEXP  M_FIG C_FIG",
+    "author_corresponding": "Srinivasulu Yerukala Sathipati",
+    "author_corresponding_institution": "Marshfield Clinic Research Institute, Sanford Health-Marshfield Clinic, WI, USA",
+    "authors": "Yerukala Sathipati, S.; Agustriawan, D.; Gopireddy, N. S. R.; Popat, A.; Moat, L.; Aimalla, N.; Elugoti, M. R.; Kampa, S. A.; Sharma, P.; Ho, S.-Y.; Sharma, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-26",
+    "doi": "10.64898/2026.05.22.727196",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/26/2026.05.22.727196.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Precision survival estimation in acute myeloid leukemia using evolutionary learning-derived microRNA signature",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Marshfield Clinic Research Institute, Sanford Health-Marshfield Clinic, WI, USA",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Evolutionary genetic algorithm with SVR selects a 28-miRNA AML survival signature from TCGA data, outperforming ten ML baselines.",
+  "title": "Precision survival estimation in acute myeloid leukemia using evolutionary learning-derived microRNA signature",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.22.727196"
+}

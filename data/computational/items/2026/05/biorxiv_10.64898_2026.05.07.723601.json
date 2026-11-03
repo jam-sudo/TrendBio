@@ -1,0 +1,43 @@
+{
+  "abstract": "BackgroundVariable selection for causal inference from observational biomedical data is challenging, as overlooking confounders or conditioning on colliders leads to biased estimates. While vast causal knowledge exists in biomedical literature, manually extracting this information for principled variable selection is impractical at scale.\n\nMethodsWe developed CausalKnowledgeTrace, a Python-based computational framework with Django web interface that systematically leverages structured causal knowledge from the Semantic MEDLINE Database (SemMedDB) to inform variable selection in causal studies. The system implements a six-stage analysis pipeline using NetworkX for graph operations, including graph parsing, basic analysis, comprehensive cycle detection, systematic generic node removal, post-removal analysis, and formal causal inference with bias detection.\n\nResultsAnalysis of the hypertension-Alzheimers relationship across three degree neighborhoods (1-3) demonstrated systematic scaling of causal complexity: 361-866 variables, 429-1,442 relationships, with graph densities of 0.0033-0.0019. The analysis revealed complex cyclic structures with 54-606 baseline cycles across degree levels. Processing times ranged from 0.3-1.0 seconds for all three degrees, demonstrating computational efficiency for complex biomedical networks. Key confounders identified across all degrees included inflammation, diabetes, insulin resistance, obesity, and ischemia. In the third degree of graph, the pipeline structurally identified 39 confounders, 11 mediators, and 3 colliders from the causal graph. Among the key identified confounders and mediators--including obesity, oxidative stress, ischemia, and vascular diseases--all were found to have strong supporting evidence in established epidemiological and pathophysiological literature.\n\nConclusionsCausalKnowledgeTrace provides a scalable, evidence-based approach to causal graph construction that systematically identifies confounders and bias structures often missed by conventional approaches. The Python-Django architecture enables both standalone analysis and integration into larger computational workflows, representing a significant advance in computational support for causal inference in biomedical research.\n\nStatement of SignificanceO_ST_ABSProblem or IssueC_ST_ABSSelecting proper confounders and variables for causal inference from observational biomedical datasets is challenging and often biased by limited expertise or manual review.\n\nWhat is Already KnownExisting approaches rely on domain experts, statistical variable screening, or manual construction of causal graphs, but these often overlook literature-documented confounders and complex biases.\n\nWhat this Paper AddsThis paper introduces an automated, literature-based framework for synthesizing and validating causal graphs, identifying critical variables and complex bias structures, such as M-bias and butterfly bias, with full evidentiary traceability.\n\nWho would benefit from the new knowledge in this paper?Epidemiologists, biomedical researchers, informaticians, and clinical investigators seeking reliable and transparent causal modeling for observational studies.",
+  "authors": [
+    "Upadhayaya, R.",
+    "Pradhan, M. M.",
+    "Metzger, V. T.",
+    "Malec, S. A."
+  ],
+  "doi": "10.64898/2026.05.07.723601",
+  "first_seen": "2026-05-12",
+  "id": "biorxiv:10.64898/2026.05.07.723601",
+  "metadata": {
+    "abstract": "BackgroundVariable selection for causal inference from observational biomedical data is challenging, as overlooking confounders or conditioning on colliders leads to biased estimates. While vast causal knowledge exists in biomedical literature, manually extracting this information for principled variable selection is impractical at scale.\n\nMethodsWe developed CausalKnowledgeTrace, a Python-based computational framework with Django web interface that systematically leverages structured causal knowledge from the Semantic MEDLINE Database (SemMedDB) to inform variable selection in causal studies. The system implements a six-stage analysis pipeline using NetworkX for graph operations, including graph parsing, basic analysis, comprehensive cycle detection, systematic generic node removal, post-removal analysis, and formal causal inference with bias detection.\n\nResultsAnalysis of the hypertension-Alzheimers relationship across three degree neighborhoods (1-3) demonstrated systematic scaling of causal complexity: 361-866 variables, 429-1,442 relationships, with graph densities of 0.0033-0.0019. The analysis revealed complex cyclic structures with 54-606 baseline cycles across degree levels. Processing times ranged from 0.3-1.0 seconds for all three degrees, demonstrating computational efficiency for complex biomedical networks. Key confounders identified across all degrees included inflammation, diabetes, insulin resistance, obesity, and ischemia. In the third degree of graph, the pipeline structurally identified 39 confounders, 11 mediators, and 3 colliders from the causal graph. Among the key identified confounders and mediators--including obesity, oxidative stress, ischemia, and vascular diseases--all were found to have strong supporting evidence in established epidemiological and pathophysiological literature.\n\nConclusionsCausalKnowledgeTrace provides a scalable, evidence-based approach to causal graph construction that systematically identifies confounders and bias structures often missed by conventional approaches. The Python-Django architecture enables both standalone analysis and integration into larger computational workflows, representing a significant advance in computational support for causal inference in biomedical research.\n\nStatement of SignificanceO_ST_ABSProblem or IssueC_ST_ABSSelecting proper confounders and variables for causal inference from observational biomedical datasets is challenging and often biased by limited expertise or manual review.\n\nWhat is Already KnownExisting approaches rely on domain experts, statistical variable screening, or manual construction of causal graphs, but these often overlook literature-documented confounders and complex biases.\n\nWhat this Paper AddsThis paper introduces an automated, literature-based framework for synthesizing and validating causal graphs, identifying critical variables and complex bias structures, such as M-bias and butterfly bias, with full evidentiary traceability.\n\nWho would benefit from the new knowledge in this paper?Epidemiologists, biomedical researchers, informaticians, and clinical investigators seeking reliable and transparent causal modeling for observational studies.",
+    "author_corresponding": "Rajesh Upadhayaya",
+    "author_corresponding_institution": "University of New Mexico",
+    "authors": "Upadhayaya, R.; Pradhan, M. M.; Metzger, V. T.; Malec, S. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-12",
+    "doi": "10.64898/2026.05.07.723601",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/12/2026.05.07.723601.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CausalKnowledgeTrace: A Novel Computational Framework for Automated Literature-Based Causal Graph Construction and Evidence-Based Variable Selection in Biomedical Research",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of New Mexico",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-05-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "CausalKnowledgeTrace is a Python/Django framework that builds causal graphs from SemMedDB literature knowledge to guide confounder and collider selection for…",
+  "title": "CausalKnowledgeTrace: A Novel Computational Framework for Automated Literature-Based Causal Graph Construction and Evidence-Based Variable Selection in Biomedical Research",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.07.723601"
+}

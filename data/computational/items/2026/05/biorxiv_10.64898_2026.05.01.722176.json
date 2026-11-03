@@ -1,0 +1,42 @@
+{
+  "abstract": "AO_SCPLOWBSTRACTC_SCPLOWThe stochastic simulation algorithm (SSA) is widely used to perform exact forward simulation of discrete stochastic processes in biology. However, the computational cost, driven by sequential event-by-event sampling across large ensembles, remains a computational barrier. We investigate whether reduced-precision floating-point arithmetic can accelerate SSA without degrading statistical fidelity, drawing on the success of reduced-precision methods in weather and climate modelling. We evaluate two strategies across five canonical models (birth-death, Schlogl, Telegraph, dimerisation, repressilator): (i) mixed precision, computing propensities in 16-bit while maintaining accumulators in 32-bit; and (ii) uniform precision, performing all arithmetic in 16-bit. Mixed-precision SSA produces ensemble statistics that closely match the 64-bit reference for all models, as measured by Kolmogorov-Smirnov tests and Wasserstein distances. Under uniform precision, deterministic rounding introduces systematic biases across several models, with catastrophic failures in some cases. Stochastic rounding (SR) and propensity normalisation eliminate these biases, restoring distributional fidelity across all models tested (KS p > 0.05). Our results establish mixed-precision SSA with SR as a viable acceleration strategy for mathematical biology: 16-bit formats shrink per-variable data size by 2-4x relative to fp32/fp64, yielding comparable reductions in memory footprint and up to ~ 1.5x wall-clock speedup on CPU hardware that lacks native 16-bit arithmetic. As a hardware-level acceleration, mixed-precision SSA complements algorithmic methods such as tau-leaping and maps naturally onto modern GPU and TPU architectures with native 16-bit arithmetic.",
+  "authors": [
+    "Kimpson, T.",
+    "Flegg, M. B.",
+    "Flegg, J. A."
+  ],
+  "doi": "10.64898/2026.05.01.722176",
+  "first_seen": "2026-05-06",
+  "id": "biorxiv:10.64898/2026.05.01.722176",
+  "metadata": {
+    "abstract": "AO_SCPLOWBSTRACTC_SCPLOWThe stochastic simulation algorithm (SSA) is widely used to perform exact forward simulation of discrete stochastic processes in biology. However, the computational cost, driven by sequential event-by-event sampling across large ensembles, remains a computational barrier. We investigate whether reduced-precision floating-point arithmetic can accelerate SSA without degrading statistical fidelity, drawing on the success of reduced-precision methods in weather and climate modelling. We evaluate two strategies across five canonical models (birth-death, Schlogl, Telegraph, dimerisation, repressilator): (i) mixed precision, computing propensities in 16-bit while maintaining accumulators in 32-bit; and (ii) uniform precision, performing all arithmetic in 16-bit. Mixed-precision SSA produces ensemble statistics that closely match the 64-bit reference for all models, as measured by Kolmogorov-Smirnov tests and Wasserstein distances. Under uniform precision, deterministic rounding introduces systematic biases across several models, with catastrophic failures in some cases. Stochastic rounding (SR) and propensity normalisation eliminate these biases, restoring distributional fidelity across all models tested (KS p > 0.05). Our results establish mixed-precision SSA with SR as a viable acceleration strategy for mathematical biology: 16-bit formats shrink per-variable data size by 2-4x relative to fp32/fp64, yielding comparable reductions in memory footprint and up to ~ 1.5x wall-clock speedup on CPU hardware that lacks native 16-bit arithmetic. As a hardware-level acceleration, mixed-precision SSA complements algorithmic methods such as tau-leaping and maps naturally onto modern GPU and TPU architectures with native 16-bit arithmetic.",
+    "author_corresponding": "Tom Kimpson",
+    "author_corresponding_institution": "University of Melbourne School of Mathematics and Statistics",
+    "authors": "Kimpson, T.; Flegg, M. B.; Flegg, J. A.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-05-06",
+    "doi": "10.64898/2026.05.01.722176",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/06/2026.05.01.722176.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "REDUCED-PRECISION STOCHASTIC SIMULATION FOR MATHEMATICAL BIOLOGY",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Melbourne School of Mathematics and Statistics",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-05-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Evaluates reduced-precision (16-bit) stochastic simulation algorithm variants across five biological models, finding mixed precision with stochastic rounding…",
+  "title": "REDUCED-PRECISION STOCHASTIC SIMULATION FOR MATHEMATICAL BIOLOGY",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.01.722176"
+}

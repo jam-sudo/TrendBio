@@ -1,0 +1,40 @@
+{
+  "abstract": "Multiple instance learning (MIL) is the dominant framework for whole-slide image analysis in computational pathology, typically combining a frozen patch encoder, a projection layer, and a slide-level aggregator. While encoders and aggregators have been extensively studied, the projection layer remains a largely morphology-only bottleneck. This limits endpoints such as biomarker status and survival, which are governed by a molecular state that is not fully captured by H&E morphology. We introduce Molecularly Informed Staining Transform (MIST), a plug-in replacement for the MIL projection layer that uses paired spatial transcriptomics only during training to construct virtual molecular stains. MIST clusters gene expression profiles into cross-modal prototypes, anchors them in the frozen foundation model feature space, and uses them to reorganize H&E patch features along molecularly guided axes. It requires no transcriptomics at inference and can be inserted before standard MIL aggregators. We evaluate MIST across 23 downstream tasks and 8 MIL aggregators. MIST improves 240 of 256 configurations over the standard projection layer, with an average gain of +3.5%, observed consistently across endpoint types: +5.2% on survival prediction, +3.3% on tissue subtyping, and +2.6% on biomarker prediction. Ablations confirm that gene-derived prototypes are the primary source of the gains, while spatial, biological, and pathological analyses show that cross-modal prototype affinities capture spatially coherent molecular programs from H&E alone.",
+  "authors": [
+    "Yucheng Xing",
+    "Pei Liu",
+    "Jingying Ma",
+    "Ruping Hong",
+    "Jiangdong Qiu",
+    "Tianyu Liu",
+    "Kai He",
+    "Ling Huang",
+    "Mengling Feng"
+  ],
+  "doi": null,
+  "first_seen": "2026-05-12",
+  "id": "arxiv:2605.16392",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.CV",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2605.16392v1</ns0:id>\n    <ns0:title>Bridging the Modality Bottleneck in Pathology MIL through Virtual Molecular Staining</ns0:title>\n    <ns0:updated>2026-05-12T06:49:35Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2605.16392v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2605.16392v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Multiple instance learning (MIL) is the dominant framework for whole-slide image analysis in computational pathology, typically combining a frozen patch encoder, a projection layer, and a slide-level aggregator. While encoders and aggregators have been extensively studied, the projection layer remains a largely morphology-only bottleneck. This limits endpoints such as biomarker status and survival, which are governed by a molecular state that is not fully captured by H&amp;E morphology. We introduce Molecularly Informed Staining Transform (MIST), a plug-in replacement for the MIL projection layer that uses paired spatial transcriptomics only during training to construct virtual molecular stains. MIST clusters gene expression profiles into cross-modal prototypes, anchors them in the frozen foundation model feature space, and uses them to reorganize H&amp;E patch features along molecularly guided axes. It requires no transcriptomics at inference and can be inserted before standard MIL aggregators. We evaluate MIST across 23 downstream tasks and 8 MIL aggregators. MIST improves 240 of 256 configurations over the standard projection layer, with an average gain of +3.5%, observed consistently across endpoint types: +5.2% on survival prediction, +3.3% on tissue subtyping, and +2.6% on biomarker prediction. Ablations confirm that gene-derived prototypes are the primary source of the gains, while spatial, biological, and pathological analyses show that cross-modal prototype affinities capture spatially coherent molecular programs from H&amp;E alone.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-05-12T06:49:35Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Yucheng Xing</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pei Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingying Ma</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruping Hong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiangdong Qiu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tianyu Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kai He</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ling Huang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mengling Feng</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-05-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "arxiv",
+  "summary": "MIST replaces the MIL projection layer with virtual molecular staining learned from paired spatial transcriptomics during training, improving H&E whole-slide…",
+  "title": "Bridging the Modality Bottleneck in Pathology MIL through Virtual Molecular Staining",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2605.16392v1"
+}

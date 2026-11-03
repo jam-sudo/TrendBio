@@ -1,0 +1,44 @@
+{
+  "abstract": "Drug-induced inhibition of the hERG potassium channel is the leading cause of cardiac safety-related drug attrition, but the Comprehensive in Vitro Proarrhythmia Assay (CiPA) framework requires activity data on multiple cardiac ion channels to assess proarrhythmic risk. We present CardioSafe, a three-branch multi-task neural network with cross-attention fusion that integrates chemical fingerprints, ChemBERTa embeddings, and predicted L1000 transcriptomic features to predict blocker status and potency for hERG, Nav1.5, and Cav1.2, with an exploratory IKs head. CardioSafe was trained on the largest publicly reported multi-channel cardiac ion channel dataset, combining ChEMBL 36 with the hERGCentral database (331127 hERG, 3160 Nav1.5, 1138 Cav1.2, and 115 IKs compounds), curated under a pharmacology-aware policy that retains censored measurements and inhibition-percentage votes. Under Tanimoto-similarity-controlled splits, CardioSafe outperforms the leading published comparators (CToxPred2 and CardioGenAI) on the data-rich hERG head; on the smaller Nav1.5 and Cav1.2 heads the standard evaluation is statistically inconclusive. A reverse-leak audit revealed that 22% of Nav1.5 and 21% of Cav1.2 test compounds were present in published comparators training data (92% as exact compound matches); after removing these contaminated compounds, CardioSafes lead on Nav1.5 and Cav1.2 also reaches statistical significance, demonstrating that prior cross-publication benchmarks for these channels were inflated by training-data overlap.\n\nScientific contributionWe present the first multi-task neural network jointly predicting blocker activity for the three primary CiPA cardiac ion channels (hERG, Nav1.5, Cav1.2) within a single architecture. We introduce a reverse-leak audit methodology that reveals systematic test-set contamination in cross-publication cardiac safety benchmarks, establishing a stricter evaluation protocol. We provide the empirical test of predicted L1000 transcriptomic features as auxiliary input for cardiac ion channel prediction and document a well-characterized negative result.\n\nGraphical abstractCardioSafe encodes each query SMILES with three branches (chemical fingerprints + descriptors, pretrained ChemBERTa, and predicted L1000 transcriptomic signatures), fuses them via a cross-attention block with four learnable per-channel query tokens, and emits binary blocker calls plus pChEMBL regression for hERG, Nav1.5, Cav1.2, and (exploratory) IKs.\n\n\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=59 SRC=\"FIGDIR/small/723181v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (13K):\norg.highwire.dtl.DTLVardef@1c0ba2aorg.highwire.dtl.DTLVardef@1fe3a0borg.highwire.dtl.DTLVardef@194de8aorg.highwire.dtl.DTLVardef@9e4f74_HPS_FORMAT_FIGEXP  M_FIG C_FIG",
+  "authors": [
+    "Jovanovic, M.",
+    "Weidener, L. S.",
+    "Brkic, M.",
+    "Ulgac, E.",
+    "Meduri, A."
+  ],
+  "doi": "10.64898/2026.05.06.723181",
+  "first_seen": "2026-05-12",
+  "id": "biorxiv:10.64898/2026.05.06.723181",
+  "metadata": {
+    "abstract": "Drug-induced inhibition of the hERG potassium channel is the leading cause of cardiac safety-related drug attrition, but the Comprehensive in Vitro Proarrhythmia Assay (CiPA) framework requires activity data on multiple cardiac ion channels to assess proarrhythmic risk. We present CardioSafe, a three-branch multi-task neural network with cross-attention fusion that integrates chemical fingerprints, ChemBERTa embeddings, and predicted L1000 transcriptomic features to predict blocker status and potency for hERG, Nav1.5, and Cav1.2, with an exploratory IKs head. CardioSafe was trained on the largest publicly reported multi-channel cardiac ion channel dataset, combining ChEMBL 36 with the hERGCentral database (331127 hERG, 3160 Nav1.5, 1138 Cav1.2, and 115 IKs compounds), curated under a pharmacology-aware policy that retains censored measurements and inhibition-percentage votes. Under Tanimoto-similarity-controlled splits, CardioSafe outperforms the leading published comparators (CToxPred2 and CardioGenAI) on the data-rich hERG head; on the smaller Nav1.5 and Cav1.2 heads the standard evaluation is statistically inconclusive. A reverse-leak audit revealed that 22% of Nav1.5 and 21% of Cav1.2 test compounds were present in published comparators training data (92% as exact compound matches); after removing these contaminated compounds, CardioSafes lead on Nav1.5 and Cav1.2 also reaches statistical significance, demonstrating that prior cross-publication benchmarks for these channels were inflated by training-data overlap.\n\nScientific contributionWe present the first multi-task neural network jointly predicting blocker activity for the three primary CiPA cardiac ion channels (hERG, Nav1.5, Cav1.2) within a single architecture. We introduce a reverse-leak audit methodology that reveals systematic test-set contamination in cross-publication cardiac safety benchmarks, establishing a stricter evaluation protocol. We provide the empirical test of predicted L1000 transcriptomic features as auxiliary input for cardiac ion channel prediction and document a well-characterized negative result.\n\nGraphical abstractCardioSafe encodes each query SMILES with three branches (chemical fingerprints + descriptors, pretrained ChemBERTa, and predicted L1000 transcriptomic signatures), fuses them via a cross-attention block with four learnable per-channel query tokens, and emits binary blocker calls plus pChEMBL regression for hERG, Nav1.5, Cav1.2, and (exploratory) IKs.\n\n\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=59 SRC=\"FIGDIR/small/723181v1_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (13K):\norg.highwire.dtl.DTLVardef@1c0ba2aorg.highwire.dtl.DTLVardef@1fe3a0borg.highwire.dtl.DTLVardef@194de8aorg.highwire.dtl.DTLVardef@9e4f74_HPS_FORMAT_FIGEXP  M_FIG C_FIG",
+    "author_corresponding": "Lukas S. Weidener",
+    "author_corresponding_institution": "Applied Scientific Intelligence, Inc.",
+    "authors": "Jovanovic, M.; Weidener, L. S.; Brkic, M.; Ulgac, E.; Meduri, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-05-12",
+    "doi": "10.64898/2026.05.06.723181",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/05/12/2026.05.06.723181.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "CardioSafe: Multi-task prediction of cardiac ion channel activity with reverse-leak audited benchmarking",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Applied Scientific Intelligence, Inc.",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-05-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "CardioSafe: a multi-task network jointly predicting hERG, Nav1.5, and Cav1.2 blocker activity, with a reverse-leak audit exposing training-data overlap in…",
+  "title": "CardioSafe: Multi-task prediction of cardiac ion channel activity with reverse-leak audited benchmarking",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.05.06.723181"
+}
