@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 from pipeline.jsonio import day_path, dump, embeddings_shard_path, item_path, load, topic_path
-from pipeline.models import Day, Item, Topic
+from pipeline.models import Day, Item, MapData, Topic
 
 
 class Store:
@@ -77,6 +77,13 @@ class Store:
     def all_topics(self) -> list[Topic]:
         directory = topic_path(self.root, self.domain, "").parent
         return [load(Topic, path) for path in sorted(directory.glob("*.json"))]
+
+    def put_map(self, data: MapData) -> None:
+        self._write(self.root / self.domain / 'map.json', data)
+
+    def get_map(self) -> MapData | None:
+        path = self.root / self.domain / 'map.json'
+        return load(MapData, path) if path.exists() else None
 
     def put_day(self, day: Day) -> None:
         self._write(day_path(self.root, self.domain, day.date), day)

@@ -31,6 +31,7 @@ from pipeline.sources.base import load_config
 from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
 from pipeline.store import Store
+from pipeline.topic_map import build_map
 from pipeline.synthesize import synthesize_top, tier_model
 from pipeline.wipe import reset_derived, validate_month_range
 
@@ -335,6 +336,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 source_status=source_status, notes=sorted(set(notes)),
             ))
             store.put_day(result)
+        if not backfill:
+            with _stage('map'):
+                store.put_map(build_map(store, deps.cfg, previous=store.get_map()))
     return result
 
 
@@ -477,6 +481,8 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
         state['last_day'] = day.isoformat()
         store._write(path, state)
         day += timedelta(days=1)
+    with _stage('map'):
+        store.put_map(build_map(store, deps.cfg, previous=store.get_map()))
     summary = f"backfill_summary collected={state['collected']} failed_chunks={len(state['failed_chunks'])}"
     print(summary)
     if state['failed_chunks']:
@@ -583,6 +589,8 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
         state['last_day'] = str(day)
         store._write(path, state)
         day += timedelta(days=1)
+    with _stage('map'):
+        store.put_map(build_map(store, deps.cfg, previous=store.get_map()))
     print(f"reprocess_summary days={(end - start).days + 1} "
           f"reenriched={state['reenriched']} out_of_scope={state['out_of_scope']}")
     path.unlink()

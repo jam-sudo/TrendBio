@@ -26,6 +26,7 @@ from pipeline.sources.github import GithubAdapter
 from pipeline.sources.pubmed import PubmedAdapter
 from pipeline.sources.rss import RssAdapter
 from pipeline.store import Store
+from pipeline.topic_map import build_map
 from pipeline.synthesize import synthesize_top
 from pipeline.wipe import validate_month_range, wipe as wipe_store
 
@@ -89,6 +90,15 @@ def run(domain: Domain = 'computational',
     day = (run_date or datetime.now(timezone.utc)).date()
     with _dependencies(domain, data_root) as deps:
         run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run)
+
+
+@app.command('map')
+def topic_map(domain: Domain = 'computational', data_root: DataRoot = Path('data')):
+    """Rebuild the topic map from stored centroids, without LLM calls."""
+    load_taxonomy(domain)
+    store = Store(data_root, domain)
+    with _stage('map'):
+        store.put_map(build_map(store, load_scoring(), previous=store.get_map()))
 
 
 @app.command()
