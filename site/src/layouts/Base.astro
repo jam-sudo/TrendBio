@@ -2,14 +2,16 @@
 import "@fontsource/inconsolata/400.css";
 import "@fontsource/inconsolata/700.css";
 import "../styles/global.css";
+import SponsorColumns from "../components/SponsorColumns.astro";
 import { formatEastern } from "../lib/time";
 
 interface Props {
   title?: string;
   lastRun?: string | null;
+  heroAligned?: boolean;
 }
 
-const { title = "TrendBio", lastRun } = Astro.props;
+const { title = "TrendBio", lastRun, heroAligned = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,6 +24,7 @@ const { title = "TrendBio", lastRun } = Astro.props;
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell">
     <header>
       {Astro.slots.has("hero") ? <slot name="hero" /> : <a class="wordmark" href="/">TrendBio</a>}
       <nav aria-label="Main navigation">
@@ -39,6 +42,8 @@ const { title = "TrendBio", lastRun } = Astro.props;
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <main id="main"><slot /></main>
+    <SponsorColumns {heroAligned} />
+    </div>
     <footer>
       <p>Auto-curated from bioRxiv, arXiv, PubMed, GitHub and industry sources. Summaries are machine-generated.</p>
       <p><a href="/about">How this works</a></p>

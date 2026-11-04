@@ -12,7 +12,7 @@ const latest = topic.history.at(-1)!;
 const items = loadItems(domain, latest.item_ids);
 const readPage = (path: string) => readFileSync(`dist/${path}/index.html`, "utf8");
 const section = (html: string, id: string) => html.match(new RegExp(`<section\\b[^>]*id="${id}"[^>]*>[\\s\\S]*?</section>`))?.[0] ?? "";
-const headings = (html: string) => [...html.matchAll(/<h2\b[^>]*>(.*?)<\/h2>/g)].map((match) => match[1]);
+const headings = (html: string) => [...html.slice(html.indexOf("<main"), html.indexOf("</main>")).matchAll(/<h2\b[^>]*>(.*?)<\/h2>/g)].map((match) => match[1]);
 
 describe("built topic pages", () => {
   it("shows ranks through twenty without medals outside the top three", () => {

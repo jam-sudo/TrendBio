@@ -21,8 +21,9 @@ On 2026-11-02, `npm audit fix` (without `--force`) left **5 vulnerabilities:
 
 The critical advisory is [GHSA-26w7-cxv4-gfx2](https://github.com/advisories/GHSA-26w7-cxv4-gfx2),
 remote code execution through AVIF image optimization. This project uses Astro
-only to build static HTML, CSS and JavaScript, has no server adapter, image
-optimization calls or image inputs, and deploys only `dist/`. Astro, sharp,
+only to build static HTML, CSS and JavaScript, has no server adapter or image
+optimization calls, and deploys only `dist/`. Sponsor logos use plain static
+`<img>` tags. Astro, sharp,
 esbuild and Zod are not deployed server runtimes. The remaining findings include
 Astro rendering/server advisories, sharp image-decoder vulnerabilities
 (`GHSA-f88m-g3jw-g9cj`, `GHSA-rgj7-g3m4-5g8c`, `GHSA-wq5f-xc86-pv6w`),

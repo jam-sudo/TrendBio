@@ -1,0 +1,44 @@
+---
+import SponsorCard from "./SponsorCard.astro";
+import { loadSponsors } from "../lib/sponsors";
+
+interface Props { heroAligned?: boolean }
+const { heroAligned = false } = Astro.props;
+const { slots, contact, sponsors } = loadSponsors();
+const remaining = slots - sponsors.length;
+const cardProps = { slots, contact, remaining };
+const left = sponsors.slice(0, Math.ceil(sponsors.length / 2));
+const right = sponsors.slice(left.length);
+---
+
+<aside class:list={["sponsor-column", "sponsor-left", { "hero-aligned": heroAligned }]} aria-label="Sponsors, left column">
+  <div class="sponsor-stack">{left.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}</div>
+</aside>
+<aside class:list={["sponsor-column", "sponsor-right", { "hero-aligned": heroAligned }]} aria-label="Sponsors, right column">
+  <div class="sponsor-stack">
+    {right.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}
+    {remaining > 0 && <SponsorCard {...cardProps} />}
+  </div>
+</aside>
+{sponsors.length + remaining > 0 && <section class="sponsors-row" aria-labelledby="sponsors-heading">
+  <h2 id="sponsors-heading">Sponsors</h2>
+  <div class="sponsor-scroll" tabindex="0" role="region" aria-label="Sponsor cards">
+    {sponsors.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}
+    {remaining > 0 && <SponsorCard {...cardProps} />}
+  </div>
+</section>}
+
+<style>
+  .sponsor-column { display: none; }
+  .sponsors-row { width: min(100% - 2rem, 1120px); margin: 0 auto 2rem; }
+  h2 { margin: 0 0 1rem; }
+  .sponsor-scroll { display: flex; align-items: stretch; gap: 12px; overflow-x: auto; padding: 5px; margin: -5px; }
+  @media (min-width: 1440px) {
+    .sponsors-row { display: none; }
+    .sponsor-column { display: block; grid-row: 2; min-width: 0; }
+    .sponsor-left { grid-column: 1; }
+    .sponsor-right { grid-column: 3; }
+    .hero-aligned { grid-row: 1 / 3; padding-top: 2rem; }
+    .sponsor-stack { position: sticky; top: 2rem; display: flex; flex-direction: column; gap: 12px; }
+  }
+</style>
