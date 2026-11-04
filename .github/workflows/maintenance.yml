@@ -16,6 +16,10 @@ on:
         description: Re-enrich all stored items (reprocess only)
         type: boolean
         default: true
+      rebuild_topics:
+        description: Reset topic history in range and rebuild topics (reprocess only)
+        type: boolean
+        default: false
       only_missing_synthesis:
         description: Preserve existing topic syntheses (reprocess only)
         type: boolean
@@ -48,6 +52,7 @@ jobs:
       COMMAND: ${{ inputs.command }}
       REENRICH: ${{ inputs.reenrich }}
       ONLY_MISSING_SYNTHESIS: ${{ inputs.only_missing_synthesis }}
+      REBUILD_TOPICS: ${{ inputs.rebuild_topics }}
       FROM: ${{ inputs.from }}
       TO: ${{ inputs.to }}
       MODEL: ${{ inputs.model }}
@@ -79,6 +84,7 @@ jobs:
               args+=(--model "$MODEL")
               if [[ "$REENRICH" == "true" ]]; then args+=(--reenrich); else args+=(--no-reenrich); fi
               if [[ "$ONLY_MISSING_SYNTHESIS" == "true" ]]; then args+=(--only-missing-synthesis); fi
+              if [[ "$REBUILD_TOPICS" == "true" ]]; then args+=(--rebuild-topics); fi
               ;;
             restatus|map) ;;
             *) exit 1 ;;
