@@ -35,23 +35,43 @@ const shortDate = (date: string) => new Date(`${date}T00:00:00Z`).toLocaleDateSt
   month: "short", day: "numeric", timeZone: "UTC",
 });
 
+const shared = globalThis as typeof globalThis & {
+  trendbioPeriods?: {
+    weeks: WeakMap<Pick<Day, "date">[], Period[]>;
+    months: WeakMap<Pick<Day, "date">[], Period[]>;
+    histories: WeakMap<Topic[], HistoryIndex>;
+    rankings: WeakMap<HistoryIndex, Map<string, PeriodRanked[]>>;
+  };
+};
+const cache = shared.trendbioPeriods ??= {
+  weeks: new WeakMap(), months: new WeakMap(), histories: new WeakMap(), rankings: new WeakMap(),
+};
+
 export function allWeeks(days: Pick<Day, "date">[]): Period[] {
+  const cached = cache.weeks.get(days);
+  if (cached) return cached;
   const latest = days.map(({ date }) => date).sort().at(-1);
-  return [...new Set(days.map(({ date }) => isoWeekOf(date).start))].sort().reverse().map((date) => {
+  const weeks = [...new Set(days.map(({ date }) => isoWeekOf(date).start))].sort().reverse().map((date) => {
     const { year, week, start, end } = isoWeekOf(date);
     return { id: `${year}-W${String(week).padStart(2, "0")}`, start, end,
       label: `Week ${week}, ${year} · ${shortDate(start)} – ${shortDate(end)}`, soFar: start <= latest! && latest! < end };
   });
+  cache.weeks.set(days, weeks);
+  return weeks;
 }
 
 export function allMonths(days: Pick<Day, "date">[]): Period[] {
+  const cached = cache.months.get(days);
+  if (cached) return cached;
   const latest = days.map(({ date }) => date).sort().at(-1);
-  return [...new Set(days.map(({ date }) => date.slice(0, 7)))].sort().reverse().map((id) => {
+  const months = [...new Set(days.map(({ date }) => date.slice(0, 7)))].sort().reverse().map((id) => {
     const { start, end } = monthOf(`${id}-01`);
     return { id, start, end, label: new Date(`${start}T00:00:00Z`).toLocaleDateString("en-US", {
       month: "long", year: "numeric", timeZone: "UTC",
     }), soFar: start <= latest! && latest! < end };
   });
+  cache.months.set(days, months);
+  return months;
 }
 
 export interface PeriodRanked {
@@ -71,6 +91,8 @@ export interface PeriodRanked {
 export type HistoryIndex = Map<string, { topic: Topic; entry: TopicDay }[]>;
 
 export function indexHistories(topics: Topic[]): HistoryIndex {
+  const cached = cache.histories.get(topics);
+  if (cached) return cached;
   const index: HistoryIndex = new Map();
   for (const topic of topics) {
     for (const entry of topic.history) {
@@ -79,11 +101,17 @@ export function indexHistories(topics: Topic[]): HistoryIndex {
       index.set(entry.date, entries);
     }
   }
+  cache.histories.set(topics, index);
   return index;
 }
 
 export function rankPeriod(topics: Topic[] | HistoryIndex, start: string, end: string, taxonomy: Category[]): PeriodRanked[] {
   const index = Array.isArray(topics) ? indexHistories(topics) : topics;
+  const key = JSON.stringify([start, end, taxonomy.map(({ slug }) => slug)]);
+  const rankings = cache.rankings.get(index) ?? new Map<string, PeriodRanked[]>();
+  cache.rankings.set(index, rankings);
+  const cached = rankings.get(key);
+  if (cached) return cached;
   const totals = new Map<string, PeriodRanked & { itemIds: Set<string> }>();
   for (let date = new Date(`${start}T00:00:00Z`); dateString(date) <= end; date.setUTCDate(date.getUTCDate() + 1)) {
     for (const { topic, entry } of index.get(dateString(date)) ?? []) {
@@ -121,5 +149,7 @@ export function rankPeriod(topics: Topic[] | HistoryIndex, start: string, end: s
       counts.set(topic.category, (counts.get(topic.category) ?? 0) + 1);
     }
   }
-  return sorted.filter(({ slug }) => selected.has(slug)).map(({ itemIds, ...topic }, index) => ({ ...topic, rank: index + 1 }));
+  const ranked = sorted.filter(({ slug }) => selected.has(slug)).map(({ itemIds, ...topic }, index) => ({ ...topic, rank: index + 1 }));
+  rankings.set(key, ranked);
+  return ranked;
 }
