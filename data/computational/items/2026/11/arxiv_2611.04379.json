@@ -1,0 +1,33 @@
+{
+  "abstract": "Scene Graph Generation (SGG) produces structured scene representations, yet its training-time backdoor risk remains unexplored. Unlike classification, SGG exposes a pair-level attack surface that enables selective corruption of relations involving a designated object category. However, because SGG largely relies on localized evidence, globally placed triggers may face difficulty in manipulating such predictions. Recent SGG architectures increasingly incorporate global context to improve scene modeling, which may in turn facilitate such attacks. In this paper, we systematically study this backdoor risk and investigate the role of the global context pathway in backdoor behavior. Concretely, we first instantiate this attack with an effective method, and propose a three-axis evaluation protocol to characterize backdoor behavior. Experiments on Visual Genome with representative open-vocabulary and closed-set SGG models demonstrate the effectiveness of the attack. Mechanistic analyses reveal that the explicit global context pathway serves as a major carrier of the backdoor effect across the evaluated SGG models. In particular, replacing the poisoned global context representation with its clean counterpart during inference sharply suppresses the attack, yielding 100% and 97% reductions in attack success for the OvSGTR family and RelationFormer, respectively. Moreover, training-time interventions in the OvSGTR family show that suppressing trigger signals in this pathway either reduces attack success or substantially degrades utility. Together, these findings suggest that explicit global context designs may pose a backdoor risk in SGG architectures.",
+  "authors": [
+    "Xiaoguang Chang",
+    "Tuo Chen",
+    "Chengze Jiang",
+    "Teng Wang",
+    "Changyin Sun"
+  ],
+  "doi": "10.1145/3767308.3835381",
+  "first_seen": "2026-11-03",
+  "id": "arxiv:2611.04379",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.04379v1</ns0:id>\n    <ns0:title>Understanding Backdoor Attacks in Scene Graph Generation via Global Context Pathway</ns0:title>\n    <ns0:updated>2026-11-03T06:05:22Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.04379v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.04379v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Scene Graph Generation (SGG) produces structured scene representations, yet its training-time backdoor risk remains unexplored. Unlike classification, SGG exposes a pair-level attack surface that enables selective corruption of relations involving a designated object category. However, because SGG largely relies on localized evidence, globally placed triggers may face difficulty in manipulating such predictions. Recent SGG architectures increasingly incorporate global context to improve scene modeling, which may in turn facilitate such attacks. In this paper, we systematically study this backdoor risk and investigate the role of the global context pathway in backdoor behavior. Concretely, we first instantiate this attack with an effective method, and propose a three-axis evaluation protocol to characterize backdoor behavior. Experiments on Visual Genome with representative open-vocabulary and closed-set SGG models demonstrate the effectiveness of the attack. Mechanistic analyses reveal that the explicit global context pathway serves as a major carrier of the backdoor effect across the evaluated SGG models. In particular, replacing the poisoned global context representation with its clean counterpart during inference sharply suppresses the attack, yielding 100% and 97% reductions in attack success for the OvSGTR family and RelationFormer, respectively. Moreover, training-time interventions in the OvSGTR family show that suppressing trigger signals in this pathway either reduces attack success or substantially degrades utility. Together, these findings suggest that explicit global context designs may pose a backdoor risk in SGG architectures.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-03T06:05:22Z</ns0:published>\n    <ns1:comment>Accepted by the 34th ACM International Conference on Multimedia (ACM MM 2026)</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Xiaoguang Chang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Tuo Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chengze Jiang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Teng Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Changyin Sun</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1145/3767308.3835381</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1145/3767308.3835381\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Studies backdoor attacks on scene graph generation models, showing the global context pathway carries attack effects; evaluated on Visual Genome with OvSGTR…",
+  "title": "Understanding Backdoor Attacks in Scene Graph Generation via Global Context Pathway",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.04379v1"
+}

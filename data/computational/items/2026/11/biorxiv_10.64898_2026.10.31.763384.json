@@ -1,0 +1,41 @@
+{
+  "abstract": "The worldwide escalation of antimicrobial resistance (AMR) poses a severe challenge to modern public health, necessitating novel classes of therapeutic agents. Antimicrobial peptides (AMPs) represent highly promising alternatives to small-molecule antibiotics due to their co-evolutionary resilience and rapid membrane disruption dynamics. However, translating computational AMP leads into clinical drug candidates remains bottlenecked by off-target cytotoxicity, predominantly hemolytic activity against mammalian erythrocytes. Although pretrained foundational protein language models (PLMs) have rapidly advanced molecular property prediction, current architectures frequently isolate antibacterial potency and cytotoxicity into disconnected single-task pipelines or succumb to catastrophic performance drops under strict homology-controlled evaluations. Recently, the Quantitative Mapping of Antimicrobial Peptides (QMAP) benchmark proposed that frozen PLM embeddings show weak linearly accessible features for hemolytic activity (HC50) resulting in poor rank correlation ({rho} < 0.25) on out-of-distribution sequence splits. In this work, we introduce an end-to-end multi-task parameter-efficient transfer learning framework designed to simultaneously optimize antibacterial potency and minimize mammalian cytotoxicity without sequence leakage. Built upon ESM-2 (150M), our architecture incorporates Low-Rank Adaptation (LoRA) into self-attention projections, fine-tuning approx 0.70% of model weights. To restore gradient interference originating from disparate membrane lysis mechanisms, we implement an adaptive multi-task loss guided by Kendall homoscedastic uncertainty weighting. Evaluated across predefined QMAP benchmark splits enforcing a 60% maximal sequence identity threshold, our joint architecture remarkably outperforms conventional linear probes, tree-based regressors, and frozen foundational models. The framework achieves an E. coli potency rank correlation of {rho} = 0.6132 (r = 0.6816) and successfully elevates hemolytic toxicity correlation to {rho} = 0.5374 (r = 0.5541). To establish real world utility, we deploy the optimized joint network to screen a curated in silico library of 749 de-novo designed peptides, successfully isolating selective cationic-amphipathic candidates possessing Therapeutic Indices (TI = HC50/MIC) up to 144.03 while effectively deprioritizing broadly lytic motifs (TI < 2.0). These findings demonstrate that parameter-efficient adaptation unlocks fine-grained bioactive structural semantics in foundational PLMs, providing an accurate, scalable framework for therapeutic peptide engineering.",
+  "authors": [
+    "Jat, R.",
+    "Ejaz, S. R."
+  ],
+  "doi": "10.64898/2026.10.31.763384",
+  "first_seen": "2026-11-03",
+  "id": "biorxiv:10.64898/2026.10.31.763384",
+  "metadata": {
+    "abstract": "The worldwide escalation of antimicrobial resistance (AMR) poses a severe challenge to modern public health, necessitating novel classes of therapeutic agents. Antimicrobial peptides (AMPs) represent highly promising alternatives to small-molecule antibiotics due to their co-evolutionary resilience and rapid membrane disruption dynamics. However, translating computational AMP leads into clinical drug candidates remains bottlenecked by off-target cytotoxicity, predominantly hemolytic activity against mammalian erythrocytes. Although pretrained foundational protein language models (PLMs) have rapidly advanced molecular property prediction, current architectures frequently isolate antibacterial potency and cytotoxicity into disconnected single-task pipelines or succumb to catastrophic performance drops under strict homology-controlled evaluations. Recently, the Quantitative Mapping of Antimicrobial Peptides (QMAP) benchmark proposed that frozen PLM embeddings show weak linearly accessible features for hemolytic activity (HC50) resulting in poor rank correlation ({rho} < 0.25) on out-of-distribution sequence splits. In this work, we introduce an end-to-end multi-task parameter-efficient transfer learning framework designed to simultaneously optimize antibacterial potency and minimize mammalian cytotoxicity without sequence leakage. Built upon ESM-2 (150M), our architecture incorporates Low-Rank Adaptation (LoRA) into self-attention projections, fine-tuning approx 0.70% of model weights. To restore gradient interference originating from disparate membrane lysis mechanisms, we implement an adaptive multi-task loss guided by Kendall homoscedastic uncertainty weighting. Evaluated across predefined QMAP benchmark splits enforcing a 60% maximal sequence identity threshold, our joint architecture remarkably outperforms conventional linear probes, tree-based regressors, and frozen foundational models. The framework achieves an E. coli potency rank correlation of {rho} = 0.6132 (r = 0.6816) and successfully elevates hemolytic toxicity correlation to {rho} = 0.5374 (r = 0.5541). To establish real world utility, we deploy the optimized joint network to screen a curated in silico library of 749 de-novo designed peptides, successfully isolating selective cationic-amphipathic candidates possessing Therapeutic Indices (TI = HC50/MIC) up to 144.03 while effectively deprioritizing broadly lytic motifs (TI < 2.0). These findings demonstrate that parameter-efficient adaptation unlocks fine-grained bioactive structural semantics in foundational PLMs, providing an accurate, scalable framework for therapeutic peptide engineering.",
+    "author_corresponding": "Ramsha Jat",
+    "author_corresponding_institution": "fast Nuces",
+    "authors": "Jat, R.; Ejaz, S. R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-03",
+    "doi": "10.64898/2026.10.31.763384",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/03/2026.10.31.763384.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Parameter-Efficient Adaptation of Protein Language Models for Dual-Target Antimicrobial Peptide Discovery Under Strict Homology Constraints",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "fast Nuces",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Multi-task LoRA fine-tuning of ESM-2 (150M) jointly predicts AMP antibacterial potency and hemolytic toxicity under 60% homology splits, screening 749 designed…",
+  "title": "Parameter-Efficient Adaptation of Protein Language Models for Dual-Target Antimicrobial Peptide Discovery Under Strict Homology Constraints",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.31.763384"
+}

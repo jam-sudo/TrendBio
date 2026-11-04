@@ -1,0 +1,31 @@
+{
+  "abstract": "Biologists annotate genomes by searching proteins against reference databases such as Pfam, which publish new releases every few weeks to months. Each release forces a full re-search, though most of the database is unchanged: 86.6% of Pfam entries matched between releases 38.1 and 38.2 after excluding build metadata and comments. Reusing old results is hard because search programs are fixed binaries whose printed statistics depend on whole-database size. We present TARE (Tool Annotation Replay with Evidence), a wrapper that reruns an unmodified program only on entries that can matter, pinning the program's database-size setting to the new release so it prints the numbers a full run would print. TARE then tests the replay by adding back omitted entries and refuses with a failure status if any line changes, dumping a full stock body when the tool still runs. Two claims stay separate: conditional exactness under a stated contract (tested each update, not proved), and runtime assurance as probabilistic validation at a stated prevalence---not a guarantee against shipping incorrect output. In the all-record timing, TARE audits 299 records from all queries, so a hidden dependency affecting at least 1% of that population ships with probability at most 5% (valid oracle); rarer faults are outside that bound. On Pfam 38.1->38.2, TARE is 3.47x faster than a full rerun under that audit (median over 8 genomes after excluding 1 flagged genome; 95% CI 3.30-3.81). Historical candidate-population timings on the same nine genomes were 4.24x (Bernoulli; 95% CI 4.17-4.68) and 3.49x (bounded s=299; 95% CI 3.32-4.10). Cost of checking versus unchecked replay is 1.58x (C/B). Across 715,704 HMMER and Infernal output lines, none differed from a full run. TARE refused DIAMOND, whose first filter reads neighboring database bytes, and BLAST+, whose unpinned probe rows fit none of TARE's column rules.",
+  "authors": [
+    "Joshua Terranova",
+    "Jiapeng Zhang"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-01",
+  "id": "arxiv:2611.02182",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.02182v1</ns0:id>\n    <ns0:title>Pin and Replay, or Refuse: Conditional Exactness and Probabilistic Validation Across Reference Releases</ns0:title>\n    <ns0:updated>2026-11-01T20:30:29Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.02182v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.02182v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Biologists annotate genomes by searching proteins against reference databases such as Pfam, which publish new releases every few weeks to months. Each release forces a full re-search, though most of the database is unchanged: 86.6% of Pfam entries matched between releases 38.1 and 38.2 after excluding build metadata and comments. Reusing old results is hard because search programs are fixed binaries whose printed statistics depend on whole-database size. We present TARE (Tool Annotation Replay with Evidence), a wrapper that reruns an unmodified program only on entries that can matter, pinning the program's database-size setting to the new release so it prints the numbers a full run would print. TARE then tests the replay by adding back omitted entries and refuses with a failure status if any line changes, dumping a full stock body when the tool still runs. Two claims stay separate: conditional exactness under a stated contract (tested each update, not proved), and runtime assurance as probabilistic validation at a stated prevalence---not a guarantee against shipping incorrect output. In the all-record timing, TARE audits 299 records from all queries, so a hidden dependency affecting at least 1% of that population ships with probability at most 5% (valid oracle); rarer faults are outside that bound. On Pfam 38.1-&gt;38.2, TARE is 3.47x faster than a full rerun under that audit (median over 8 genomes after excluding 1 flagged genome; 95% CI 3.30-3.81). Historical candidate-population timings on the same nine genomes were 4.24x (Bernoulli; 95% CI 4.17-4.68) and 3.49x (bounded s=299; 95% CI 3.32-4.10). Cost of checking versus unchecked replay is 1.58x (C/B). Across 715,704 HMMER and Infernal output lines, none differed from a full run. TARE refused DIAMOND, whose first filter reads neighboring database bytes, and BLAST+, whose unpinned probe rows fit none of TARE's column rules.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-01T20:30:29Z</ns0:published>\n    <ns1:comment>15 pages. Named system: TARE (not the anonymous OSDI name). Artifact: https://github.com/thatrandomasiandev/tare/releases/tag/artifact-20261101 Code and protocols; exclusive-node walls are committed results. Expert isolation closed inconclusive (3/5)</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Joshua Terranova</ns0:name>\n      <ns1:affiliation>Thomas Lord Department of Computer Science, University of Southern California</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiapeng Zhang</ns0:name>\n      <ns1:affiliation>Thomas Lord Department of Computer Science, University of Southern California</ns1:affiliation>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "TARE replays unchanged Pfam/HMMER/Infernal searches across reference releases by pinning database-size settings, auditing with probabilistic validation and…",
+  "title": "Pin and Replay, or Refuse: Conditional Exactness and Probabilistic Validation Across Reference Releases",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.02182v1"
+}

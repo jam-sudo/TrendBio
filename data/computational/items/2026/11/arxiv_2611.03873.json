@@ -1,0 +1,43 @@
+{
+  "abstract": "Computing phylogenetic likelihoods becomes challenging when the continuous-time Markov chain has a large state space. At each branch, pruning algorithms require terms of the form $e^{Q t}\\cdot B$, where $Q$ is an $S \\times S$ rate matrix (e.g., for $S$ states), $t$ is a branch length, and the columns of matrix $B$ (e.g., $B \\in \\mathbb{R}_{+}^{S \\times L}$) are partial-likelihood vectors for $L$ site patterns. Many implementations calculate the dense transition matrix $P(t)=e^{Q t}$ via eigendecomposition and multiply it by $B$. This strategy is efficient for small state spaces, but it can be inefficient for large sparse rate matrices because forming $P(t)$ or its eigen vector matrices destroys sparsity and its cost may not be well amortized when $L$ is small. We implement an alternative likelihood kernel based on the Al-Mohy and Higham (2011) algorithm for computing the action of the matrix exponential directly, avoiding explicit construction of $P(t)$ or its eigen vector matrices. The resulting method takes full advantage of the sparsity of $Q$. We implement this method as a CPU-based extension to the BEAGLE library and evaluate it on two large-state molecular models: a Markov-modulated codon model of heterotachy with $M$ selective regimes and $61\\cdot M$ possible states, and a codon-pair model of interlocus gene conversion between two paralogs with $61^2=3\\,721$ possible states. Our results characterize when action-based likelihood computation improves performance over calculating $e^{Q t}$ directly. We show that this method enables fast, scalable inference for complex models, removing a key computational barrier to the study of evolution with large state space models.",
+  "authors": [
+    "Benjamin D Redelings",
+    "April Wright",
+    "Karthik Gangavarapu",
+    "Yucai Shao",
+    "Filippo Monti",
+    "Wu-Min Deng",
+    "Shuo Su",
+    "Andrew Rambaut",
+    "Guy Baele",
+    "Philippe Lemey",
+    "Marc A. Suchard",
+    "Xiang Ji"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-02",
+  "id": "arxiv:2611.03873",
+  "metadata": {
+    "arxiv_primary_category": "stat.CO",
+    "categories": [
+      "stat.CO",
+      "q-bio.PE"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.03873v1</ns0:id>\n    <ns0:title>BEAGLE in Action: Phylogenetic Likelihoods for Very Large State Spaces</ns0:title>\n    <ns0:updated>2026-11-02T19:43:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.03873v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.03873v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Computing phylogenetic likelihoods becomes challenging when the continuous-time Markov chain has a large state space. At each branch, pruning algorithms require terms of the form $e^{Q t}\\cdot B$, where $Q$ is an $S \\times S$ rate matrix (e.g., for $S$ states), $t$ is a branch length, and the columns of matrix $B$ (e.g., $B \\in \\mathbb{R}_{+}^{S \\times L}$) are partial-likelihood vectors for $L$ site patterns. Many implementations calculate the dense transition matrix $P(t)=e^{Q t}$ via eigendecomposition and multiply it by $B$. This strategy is efficient for small state spaces, but it can be inefficient for large sparse rate matrices because forming $P(t)$ or its eigen vector matrices destroys sparsity and its cost may not be well amortized when $L$ is small. We implement an alternative likelihood kernel based on the Al-Mohy and Higham (2011) algorithm for computing the action of the matrix exponential directly, avoiding explicit construction of $P(t)$ or its eigen vector matrices. The resulting method takes full advantage of the sparsity of $Q$. We implement this method as a CPU-based extension to the BEAGLE library and evaluate it on two large-state molecular models: a Markov-modulated codon model of heterotachy with $M$ selective regimes and $61\\cdot M$ possible states, and a codon-pair model of interlocus gene conversion between two paralogs with $61^2=3\\,721$ possible states. Our results characterize when action-based likelihood computation improves performance over calculating $e^{Q t}$ directly. We show that this method enables fast, scalable inference for complex models, removing a key computational barrier to the study of evolution with large state space models.</ns0:summary>\n    <ns0:category term=\"stat.CO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.PE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-02T19:43:37Z</ns0:published>\n    <ns1:comment>35 pages, 8 figures, including appendix</ns1:comment>\n    <ns1:primary_category term=\"stat.CO\" />\n    <ns0:author>\n      <ns0:name>Benjamin D Redelings</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>April Wright</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Karthik Gangavarapu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yucai Shao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Filippo Monti</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wu-Min Deng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shuo Su</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrew Rambaut</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guy Baele</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Philippe Lemey</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Marc A. Suchard</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiang Ji</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Adds a matrix-exponential-action likelihood kernel to the BEAGLE library, avoiding dense transition matrices and exploiting rate-matrix sparsity for…",
+  "title": "BEAGLE in Action: Phylogenetic Likelihoods for Very Large State Spaces",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.03873v1"
+}

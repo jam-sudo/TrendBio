@@ -1,0 +1,41 @@
+{
+  "abstract": "AlphaFold 3 (AF3) and Boltz-2 estimate confidence in predicted biomolecular complexes using the interface predicted template modeling (ipTM) score, which is derived from probability distributions of predicted aligned errors (PAEs) between molecular tokens. These errors are directional: the predicted position of tokens in one molecule is evaluated relative to coordinate frames defined by tokens in another. The PAE matrix is therefore asymmetric, but AF3 reports the maximum of the two directional pairwise ipTM scores, whereas Boltz-2 reports them separately. In both programs, the TM-score scaling parameter, d0, depends on molecular system size rather than solely on the component being scored. In protein-protein complexes, including disordered regions and domains unrelated to the interface can further lower ipTM. I previously introduced the interaction predicted score from aligned errors (ipSAE) to address these limitations for protein-protein complexes. Here, I extend ipSAE to interactions involving proteins, nucleic acids, small-molecule ligands, and atomic ions. The framework makes three explicit choices for each molecular pair: which component supplies the alignment frames, which tokens are scored, and how d0 is defined. For different molecular types, I propose aligning on the more complex molecule and scoring the simpler one. For protein-ligand complexes, this entails aligning on protein residues, scoring all ligand heavy atoms without a PAE cutoff, and using a fixed d0 of 2 [A]. In benchmarks of 102 protein-ligand complexes predicted by AF3 and Boltz-2, this ipSAE formulation yields a substantially wider range of confidence scores than native ipTM. On a held-out set of 82 complexes, ipSAE thresholds of 0.5 for AF3 and 0.8 for Boltz-2 classified ligand placements with balanced accuracies of 0.938 and 0.862, respectively, using a ligand RMSD threshold of 5 [A]. Protein-DNA benchmarks support the same directional scoring scheme, while smaller protein-RNA benchmarks provide a preliminary assessment. These results establish a framework for interpreting predicted structural confidence across different classes of biomolecular interactions and suggest that directional scoring may also be useful for computationally designed protein binders. The new freely available ipSAE code is available from: https://github.com/DunbrackLab/IPSAE2.",
+  "authors": [
+    "Dunbrack, R."
+  ],
+  "doi": "10.64898/2026.11.02.763449",
+  "first_seen": "2026-11-03",
+  "id": "biorxiv:10.64898/2026.11.02.763449",
+  "metadata": {
+    "abstract": "AlphaFold 3 (AF3) and Boltz-2 estimate confidence in predicted biomolecular complexes using the interface predicted template modeling (ipTM) score, which is derived from probability distributions of predicted aligned errors (PAEs) between molecular tokens. These errors are directional: the predicted position of tokens in one molecule is evaluated relative to coordinate frames defined by tokens in another. The PAE matrix is therefore asymmetric, but AF3 reports the maximum of the two directional pairwise ipTM scores, whereas Boltz-2 reports them separately. In both programs, the TM-score scaling parameter, d0, depends on molecular system size rather than solely on the component being scored. In protein-protein complexes, including disordered regions and domains unrelated to the interface can further lower ipTM. I previously introduced the interaction predicted score from aligned errors (ipSAE) to address these limitations for protein-protein complexes. Here, I extend ipSAE to interactions involving proteins, nucleic acids, small-molecule ligands, and atomic ions. The framework makes three explicit choices for each molecular pair: which component supplies the alignment frames, which tokens are scored, and how d0 is defined. For different molecular types, I propose aligning on the more complex molecule and scoring the simpler one. For protein-ligand complexes, this entails aligning on protein residues, scoring all ligand heavy atoms without a PAE cutoff, and using a fixed d0 of 2 [A]. In benchmarks of 102 protein-ligand complexes predicted by AF3 and Boltz-2, this ipSAE formulation yields a substantially wider range of confidence scores than native ipTM. On a held-out set of 82 complexes, ipSAE thresholds of 0.5 for AF3 and 0.8 for Boltz-2 classified ligand placements with balanced accuracies of 0.938 and 0.862, respectively, using a ligand RMSD threshold of 5 [A]. Protein-DNA benchmarks support the same directional scoring scheme, while smaller protein-RNA benchmarks provide a preliminary assessment. These results establish a framework for interpreting predicted structural confidence across different classes of biomolecular interactions and suggest that directional scoring may also be useful for computationally designed protein binders. The new freely available ipSAE code is available from: https://github.com/DunbrackLab/IPSAE2.",
+    "author_corresponding": "Roland Dunbrack Jr.",
+    "author_corresponding_institution": "Fox Chase Cancer Center",
+    "authors": "Dunbrack, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-03",
+    "doi": "10.64898/2026.11.02.763449",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/03/2026.11.02.763449.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Res ipSAE adhuc loquuntur: What the directionality of predicted aligned error in cofolding models can tell us about scoring diverse molecular complexes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Fox Chase Cancer Center",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Extends the ipSAE confidence score to protein, nucleic acid, ligand and ion interactions in AF3/Boltz-2 cofolding models, with directional PAE scoring and…",
+  "title": "Res ipSAE adhuc loquuntur: What the directionality of predicted aligned error in cofolding models can tell us about scoring diverse molecular complexes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.02.763449"
+}

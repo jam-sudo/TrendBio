@@ -1,0 +1,34 @@
+{
+  "abstract": "Read mapping algorithms represent a critical bottleneck in genomic analysis pipelines due to the resources required; a problem that is becoming more pronounced as sequencing technologies advance and datasets expand. We present an extensive workload characterization of leading read mapping algorithms across diverse sequencing technologies to identify hardware acceleration and optimization opportunities. We analyzed the following implementations: MashMap, wfmash, and Minimap2 for whole-genome alignment (WGA); NGMLR, Minimap2, and LRA for long reads; and Bowtie2, BWA-MEM, StrobeAlign, and minibwa for short reads. We used the Intel VTune Profiler for detailed memory analysis to identify memory- bound functions, cache usage patterns, and data transfer bottlenecks. We further analyzed a selected subset of alignment tools using the DAMOV-SIM simulator to obtain a more granular view of data movement characteristics for two different cache structures. Based on our results, Minimap2 emerges as the fastest alignment tool for long read scenarios, but falls behind in whole-genome alignment due to poor multithreading. Across all three categories, some programs (e.g., LRA, BWA-MEM) are highly memory-bound. More in-depth analysis via DAMOV-SIM revealed that some memory-bound tools, in particular, do not fully utilize the multi-level cache hierarchy in modern multi-core CPU architectures. Our results show that while some tools require algorithmic redesign for performance gains, some others can benefit from running on PIM architectures.",
+  "authors": [
+    "Berkan Şahin",
+    "Ecem İlgün",
+    "Klea Zambaku",
+    "Can Alkan"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-02",
+  "id": "arxiv:2611.03400",
+  "metadata": {
+    "arxiv_primary_category": "cs.AR",
+    "categories": [
+      "cs.AR",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.03400v1</ns0:id>\n    <ns0:title>In-depth data movement characterization of DNA read mapping algorithms</ns0:title>\n    <ns0:updated>2026-11-02T16:31:32Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.03400v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.03400v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Read mapping algorithms represent a critical bottleneck in genomic analysis pipelines due to the resources required; a problem that is becoming more pronounced as sequencing technologies advance and datasets expand. We present an extensive workload characterization of leading read mapping algorithms across diverse sequencing technologies to identify hardware acceleration and optimization opportunities. We analyzed the following implementations: MashMap, wfmash, and Minimap2 for whole-genome alignment (WGA); NGMLR, Minimap2, and LRA for long reads; and Bowtie2, BWA-MEM, StrobeAlign, and minibwa for short reads. We used the Intel VTune Profiler for detailed memory analysis to identify memory- bound functions, cache usage patterns, and data transfer bottlenecks. We further analyzed a selected subset of alignment tools using the DAMOV-SIM simulator to obtain a more granular view of data movement characteristics for two different cache structures. Based on our results, Minimap2 emerges as the fastest alignment tool for long read scenarios, but falls behind in whole-genome alignment due to poor multithreading. Across all three categories, some programs (e.g., LRA, BWA-MEM) are highly memory-bound. More in-depth analysis via DAMOV-SIM revealed that some memory-bound tools, in particular, do not fully utilize the multi-level cache hierarchy in modern multi-core CPU architectures. Our results show that while some tools require algorithmic redesign for performance gains, some others can benefit from running on PIM architectures.</ns0:summary>\n    <ns0:category term=\"cs.AR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-02T16:31:32Z</ns0:published>\n    <ns1:primary_category term=\"cs.AR\" />\n    <ns0:author>\n      <ns0:name>Berkan Şahin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ecem İlgün</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Klea Zambaku</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Can Alkan</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Workload characterization of WGA, long-read, and short-read DNA mapping tools using VTune and DAMOV-SIM, identifying memory-bound functions and cache…",
+  "title": "In-depth data movement characterization of DNA read mapping algorithms",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.03400v1"
+}

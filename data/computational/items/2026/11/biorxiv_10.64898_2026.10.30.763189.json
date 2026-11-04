@@ -1,0 +1,49 @@
+{
+  "abstract": "Frontier large language models (LLMs) trained with extended reasoning, such as DeepSeek-R1 and OpenAI o1, have established state-of-the-art benchmarks in formal logic, competitive programming, and mathematics. In interactive, empirical scientific sandboxes, however, their efficacy remains counter-intuitive. In the Bioinformatics Benchmark (BixBench), extended reasoning models paradoxically degraded in multi-turn environments, leading benchmark authors to exclude them from primary agentic evaluations. In this paper, we conduct the first systematic forensic audit of the internal cognitive monologue (<think> ... </think>) of open-weight reasoning models (DeepSeek-R1-Distill-Qwen-14B) and matched instruction-tuned controls (Qwen2.5-Coder-14B) deployed inside containerized computational biology sandboxes on Nvidia H100 GPUs. Our forensic analysis uncovers two distinct systemic failure modes: (1) The PubMed Prior Trap, in which reasoning models engage in epistemic rationalization within their cognitive stream, falsely convincing themselves that empirical datasets are missing and substituting empirical computation with speculative literature recall (e.g., estimating adjusted p-values based on \"typical experimental outcomes\"); and (2) Tag Language Nesting Collisions, in which models conflate agent-level XML action tags with Python syntax, producing terminal interpreter syntax errors. To resolve this paradox, we introduce Dual Track Decoupled Reasoning (DTDR), an agent scaffolding architecture that evicts internal cognitive monologues from multi-turn history, injects strict empirical grounding guardrails, and dynamically intercepts runtime tool invocations. On a stratified diagnostic benchmark spanning single-cell RNA-seq, bulk differential expression (DESeq2), and genomic variant prioritization (n=22 per arm), DTDR rescues the 14B reasoning model from 0.0% to 9.09% accuracy (2/22), doubling the performance of the matched non-reasoning coder control (4.55%, 1/22) while slashing code execution errors by 81% (13.6% vs. 72.7%) and reducing average steps to solution by 66% (1.77 vs. 5.18 steps). All replication pipelines, prompts, and trajectory manifests are openly released.",
+  "authors": [
+    "Salami, R. O.",
+    "Amuna, D.",
+    "Akorful, R. A.",
+    "Anjali, R.",
+    "Morang'a, C. M.",
+    "Quashie, P. K.",
+    "Asiamah, E. A.",
+    "Carr, R. A.",
+    "Adase, I.",
+    "Kumordzi, S. M."
+  ],
+  "doi": "10.64898/2026.10.30.763189",
+  "first_seen": "2026-11-03",
+  "id": "biorxiv:10.64898/2026.10.30.763189",
+  "metadata": {
+    "abstract": "Frontier large language models (LLMs) trained with extended reasoning, such as DeepSeek-R1 and OpenAI o1, have established state-of-the-art benchmarks in formal logic, competitive programming, and mathematics. In interactive, empirical scientific sandboxes, however, their efficacy remains counter-intuitive. In the Bioinformatics Benchmark (BixBench), extended reasoning models paradoxically degraded in multi-turn environments, leading benchmark authors to exclude them from primary agentic evaluations. In this paper, we conduct the first systematic forensic audit of the internal cognitive monologue (<think> ... </think>) of open-weight reasoning models (DeepSeek-R1-Distill-Qwen-14B) and matched instruction-tuned controls (Qwen2.5-Coder-14B) deployed inside containerized computational biology sandboxes on Nvidia H100 GPUs. Our forensic analysis uncovers two distinct systemic failure modes: (1) The PubMed Prior Trap, in which reasoning models engage in epistemic rationalization within their cognitive stream, falsely convincing themselves that empirical datasets are missing and substituting empirical computation with speculative literature recall (e.g., estimating adjusted p-values based on \"typical experimental outcomes\"); and (2) Tag Language Nesting Collisions, in which models conflate agent-level XML action tags with Python syntax, producing terminal interpreter syntax errors. To resolve this paradox, we introduce Dual Track Decoupled Reasoning (DTDR), an agent scaffolding architecture that evicts internal cognitive monologues from multi-turn history, injects strict empirical grounding guardrails, and dynamically intercepts runtime tool invocations. On a stratified diagnostic benchmark spanning single-cell RNA-seq, bulk differential expression (DESeq2), and genomic variant prioritization (n=22 per arm), DTDR rescues the 14B reasoning model from 0.0% to 9.09% accuracy (2/22), doubling the performance of the matched non-reasoning coder control (4.55%, 1/22) while slashing code execution errors by 81% (13.6% vs. 72.7%) and reducing average steps to solution by 66% (1.77 vs. 5.18 steps). All replication pipelines, prompts, and trajectory manifests are openly released.",
+    "author_corresponding": "Derek Amuna",
+    "author_corresponding_institution": "University of Ghana",
+    "authors": "Salami, R. O.; Amuna, D.; Akorful, R. A.; Anjali, R.; Morang'a, C. M.; Quashie, P. K.; Asiamah, E. A.; Carr, R. A.; Adase, I.; Kumordzi, S. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-03",
+    "doi": "10.64898/2026.10.30.763189",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/03/2026.10.30.763189.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "The Reasoning Paradox in Scientific Sandboxes: Why Extended Reasoning Fails in Autonomous Bioinformatics and How to Fix It.",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Ghana",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "DTDR scaffolding fixes reasoning-LLM failures in bioinformatics agent sandboxes, lifting accuracy from 0% to 9.09% and cutting steps 66%.",
+  "title": "The Reasoning Paradox in Scientific Sandboxes: Why Extended Reasoning Fails in Autonomous Bioinformatics and How to Fix It.",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.30.763189"
+}
