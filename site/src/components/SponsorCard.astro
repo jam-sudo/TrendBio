@@ -1,0 +1,45 @@
+---
+import type { Sponsor } from "../lib/sponsors";
+
+interface Props {
+  sponsor?: Sponsor;
+  slots: number;
+  remaining: number;
+  contact: string;
+}
+const { sponsor, slots, remaining, contact } = Astro.props;
+---
+
+<a class:list={["sponsor-card", { "advertise-card": !sponsor }]}
+  href={sponsor?.url ?? `mailto:${contact}?subject=TrendBio%20sponsorship`}
+  target={sponsor ? "_blank" : undefined}
+  rel={sponsor ? "sponsored noopener" : undefined}
+  style={`--sponsor-hue: ${sponsor?.hue ?? 150}`}
+  data-sponsor={sponsor ? "" : undefined}>
+  <span class="badge sponsored-badge">SPONSORED</span>
+  {sponsor ? <>
+    <span class="sponsor-logo" aria-hidden="true">
+      {sponsor.logo.startsWith("/sponsors/")
+        ? <img src={sponsor.logo} width="28" height="28" alt="" loading="lazy" />
+        : sponsor.logo}
+    </span>
+    <strong class="sponsor-name">{sponsor.name}</strong>
+    <span class="sponsor-tagline">{sponsor.tagline}</span>
+  </> : <>
+    <strong class="advertise-title">Advertise · {remaining}/{slots} spots left</strong>
+    <span class="advertise-tagline">Reach computational biologists daily</span>
+  </>}
+</a>
+
+<style>
+  .sponsor-card { position: relative; display: flex; flex-direction: column; gap: 8px; width: 200px; flex: none; padding: 30px 12px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--sponsor-lightness) 0.03 var(--sponsor-hue)); color: var(--fg); text-decoration: none; }
+  .sponsor-card:hover .sponsor-name, .sponsor-card:hover .advertise-title { text-decoration: underline; }
+  .sponsored-badge { position: absolute; top: 7px; right: 7px; }
+  .sponsor-logo { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 6px; background: oklch(var(--tile-lightness) 0.06 var(--sponsor-hue)); font-size: 20px; }
+  .sponsor-logo img { width: 28px; height: 28px; object-fit: contain; border-radius: inherit; }
+  .sponsor-name { line-height: 1.3; overflow-wrap: anywhere; }
+  .sponsor-tagline { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; color: var(--muted); font-size: var(--t3); line-height: 1.5; }
+  .advertise-card { border-style: dashed; }
+  .advertise-title { font-size: var(--t3); white-space: nowrap; }
+  .advertise-tagline { color: var(--muted); font-size: 10px; letter-spacing: -0.025em; white-space: nowrap; }
+</style>

@@ -146,3 +146,24 @@ run from `site/`:
 ```sh
 TRENDBIO_DATA_ROOT=../data TRENDBIO_NOTES_ROOT=../notes npm run build
 ```
+
+## Site sponsors
+
+Edit `site/src/content/sponsors.json` and push to `main` to update sponsors.
+The static build publishes the cards; there is no ad network or sponsor JavaScript.
+Keep `slots` an even number (10 by default; 0 disables sponsorship), and set
+`contact` to the email used by the Advertise card. Add entries like:
+
+```json
+{ "name": "Example Bio", "tagline": "Tools for computational biology", "url": "https://example.com", "logo": "🧪", "hue": 150 }
+```
+
+Taglines must be one line and at most 60 characters; links must be absolute HTTP(S)
+URLs and hues must be numbers from 0 to 360. Use one emoji for `logo`, or put an
+image (PNG, JPEG, WebP, GIF, AVIF, SVG; at most 20 KB) in `site/public/sponsors/`
+and set `logo` to `/sponsors/filename.png`. Logos display at 28px. The build fails
+with the entry and field when the JSON is invalid. Keep the number of sponsors
+at or below `slots`; remaining capacity appears in the contact card.
+
+At 1440px and wider, cards sit in sticky columns beside the main content; on
+smaller screens they appear in a scrollable Sponsors row above the footer.
