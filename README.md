@@ -51,14 +51,13 @@ The manual backfill workflow takes inclusive `from` and `to` dates in
 each successful invocation commits its output once.
 Historical star velocity is unavailable because GitHub restricted the stargazers endpoint, so backfilled days carry paper and industry signals only; daily runs accumulate star counts from launch (2026-11-02) onward.
 Set optional `chain_until` (`YYYY-MM-01`) to automatically backfill previous months through that month, inclusive, after each successful run; failures stop the chain.
-Daily and backfill runs share a concurrency group to prevent overlapping writes.
-Their job limits are 30 and 350 minutes, respectively.
-The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5` for the featured tier and always Haiku for ranks 6–40, shares the `pipeline` concurrency group, and commits changed data with a 120-minute job limit.
+Daily and backfill processing steps have limits of 30 and 350 minutes, respectively.
+The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5` for the featured tier and always Haiku for ranks 6–40, shares the `pipeline` concurrency group, and commits changed data with a 120-minute processing limit.
 
 The manual maintenance workflow supports `restatus` (recompute stored run statuses
 without collection or LLM calls) and `reprocess` (apply current PubMed scope and
 rebuild clustering, ranking and synthesis from stored items). It shares the
-`pipeline` concurrency group, has a 350-minute limit, and rebases before pushing
+`pipeline` concurrency group, has a 350-minute processing limit, and rebases before pushing
 its committed output to `main`. `reprocess` requires whole months and automatically resumes
 an interrupted run with the same range and options while its checkpoint remains
 in the data directory. It retains items
@@ -84,6 +83,18 @@ python -m pipeline restatus --domain computational --from 2026-10-01 --to 2026-1
 python -m pipeline reprocess --domain computational --from 2026-10-01 --to 2026-10-31 --reenrich --model claude-haiku-5-5
 python -m pipeline reprocess --domain computational --from 2026-01-01 --to 2026-10-31 --rebuild-topics --only-missing-synthesis
 ```
+
+The four data-writing workflows (Daily pipeline, Backfill, Maintenance and
+Resynthesize) keep the `pipeline` concurrency group and also poll the Actions API
+after checkout, waiting for earlier-created queued or in-progress writers before
+refreshing `main` and processing data. The wait defaults to 300 minutes with a
+60-second poll interval; younger runs wait for older runs to avoid a mutual wait.
+The 360-minute job limit includes waiting, setup and processing, so long waits
+reduce the remaining processing time. If committing still hits a rebase conflict,
+the workflow aborts the rebase and logs a single merge retry using `-X ours`, so
+this run's fresher data wins conflicting hunks while non-conflicting upstream
+changes are retained. This fallback is a last resort; the wait does not prevent
+GitHub from replacing pending runs in the retained concurrency group.
 
 ## Operator notes
 
