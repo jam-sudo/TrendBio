@@ -1,0 +1,36 @@
+{
+  "abstract": "Decoding natural language from non-invasive EEG signals is a promising yet challenging task. However, current state-of-the-art models remain constrained by three fundamental issues: Semantic Bias, where outputs collapse into generic linguistic templates; Signal Neglect, where models rely heavily on LLM priors to hallucinate fluent text even in the absence of meaningful signals; and the \"BLEU Trap\", where high-frequency stopwords inflate n-gram metrics, masking a lack of true semantic fidelity. To resolve these challenges, we move beyond conventional end-to-end pipelines and propose SemKey, a novel multi-stage framework that enforces signal-grounded generation through four decoupled semantic objectives: sentiment, topic, length, and surprisal. We extract these semantic anchors from EEG embeddings directly, then unify them with an Active Retrieval Decoding mechanism, compelling the LLM to ground its token generation in the neural signals rather than defaulting to linguistic priors. Furthermore, we break the BLEU Trap by establishing a comprehensive evaluation protocol using rigorous retrieval and distribution-based metrics such as Fréchet Distance. Extensive experiments demonstrate that SemKey effectively mitigates hallucinations on noise inputs and achieves SOTA performance on these robust protocols. Code will be released upon acceptance at https://github.com/xmed-lab/SemKey.",
+  "authors": [
+    "Yuchen Wang",
+    "Haonan Wang",
+    "Yu Guo",
+    "Honglong Yang",
+    "Xiaomeng Li"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-09",
+  "id": "arxiv:2603.03312",
+  "metadata": {
+    "arxiv_primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.HC",
+      "eess.AS",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2603.03312v3</ns0:id>\n    <ns0:title>Escaping the BLEU Trap: A Signal-Grounded Framework with Decoupled Semantic Guidance for EEG-to-Text Decoding</ns0:title>\n    <ns0:updated>2026-05-29T19:20:43Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2603.03312v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2603.03312v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Decoding natural language from non-invasive EEG signals is a promising yet challenging task. However, current state-of-the-art models remain constrained by three fundamental issues: Semantic Bias, where outputs collapse into generic linguistic templates; Signal Neglect, where models rely heavily on LLM priors to hallucinate fluent text even in the absence of meaningful signals; and the \"BLEU Trap\", where high-frequency stopwords inflate n-gram metrics, masking a lack of true semantic fidelity. To resolve these challenges, we move beyond conventional end-to-end pipelines and propose SemKey, a novel multi-stage framework that enforces signal-grounded generation through four decoupled semantic objectives: sentiment, topic, length, and surprisal. We extract these semantic anchors from EEG embeddings directly, then unify them with an Active Retrieval Decoding mechanism, compelling the LLM to ground its token generation in the neural signals rather than defaulting to linguistic priors. Furthermore, we break the BLEU Trap by establishing a comprehensive evaluation protocol using rigorous retrieval and distribution-based metrics such as Fréchet Distance. Extensive experiments demonstrate that SemKey effectively mitigates hallucinations on noise inputs and achieves SOTA performance on these robust protocols. Code will be released upon acceptance at https://github.com/xmed-lab/SemKey.</ns0:summary>\n    <ns0:category term=\"cs.CL\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.HC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.AS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-09T02:47:07Z</ns0:published>\n    <ns1:primary_category term=\"cs.CL\" />\n    <ns0:author>\n      <ns0:name>Yuchen Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Haonan Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yu Guo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Honglong Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaomeng Li</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-09",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "SemKey grounds LLM decoding of EEG in decoupled semantic anchors and retrieval, judged by retrieval and Fréchet metrics.",
+  "title": "Escaping the BLEU Trap: A Signal-Grounded Framework with Decoupled Semantic Guidance for EEG-to-Text Decoding",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2603.03312v3"
+}

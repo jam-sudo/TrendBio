@@ -1,0 +1,43 @@
+{
+  "abstract": "Mobile genetic elements and genomic islands (GIs) frequently encode antibiotic resistance and host-adaptation cargo, yet routine genome comparison pipelines often miss the higher-order organization of how genes co-occur as transferable, GI-anchored modules. We present Cassette2Vec-EC, a structural genomics framework that converts annotated genomes into cassette units (local gene neighborhoods with GI context), encodes each cassette as a fixed-length feature vector, and applies genome-grouped machine learning to predict pathogenic lineages while preventing within-genome leakage. Using a curated Enterococcus cecorum cohort from poultry production systems, we integrate pangenome context, GI calls, mobility markers, and AMR/virulence annotations into cassette-level features and evaluate models strictly under GroupKFold-by-genome. Cassette2Vec-EC achieves strong genome-level generalization (AUROC 0.975 {+/-} 0.030, average precision 0.938 {+/-} 0.077, Brier score 0.056 {+/-} 0.058). When evaluated at the cassette unit level under the same genome-grouped protocol, performance remains high (AUROC 0.974 {+/-} 0.029, AP 0.919 {+/-} 0.093, Brier 0.057 {+/-} 0.057), supporting that cassette representations capture transferable signal rather than genome identity. Baselines show that GI burden alone can partially rank genomes but yields poorer calibration and limited interpretability. By combining comparative genomics with cassette-aware features and providing locus-level explanations (SHAP) that map predictions to specific GI-associated modules, Cassette2Vec-EC provides a practical blueprint for genomic-island-aware pathogen surveillance, junction-based diagnostics, and targeted monitoring of high-risk lineages.\n\nImportancePathogenic Enterococcus cecorum lineages threaten poultry health and production, yet many genomic surveillance workflows reduce genomes to gene presence-absence lists and overlook how mobile elements are organized into transferable modules. Cassette2Vec-EC addresses this gap by representing genomic islands as GI-anchored cassette neighborhoods and encoding each cassette as a fixed-length feature vector linking cassette architecture to pathogenic risk. Under a strict genome-grouped evaluation protocol, the framework predicts pathogenic lineages while preventing within-genome leakage and supports calibrated probability estimates in the full model. Cassette level explanations (SHAP) localize predictive signal to specific GI-anchored modules, yielding tractable targets for surveillance prioritization and junction-based diagnostics. Although developed for poultry-associated E. cecorum, this cassette and GI-aware representation is transferable to other bacterial pathogens to strengthen genomic surveillance and help partners identify high-risk isolates before clinical disease emerges.",
+  "authors": [
+    "Goswami, A.",
+    "Rafi, S.",
+    "Lagad, R."
+  ],
+  "doi": "10.64898/2026.02.21.707173",
+  "first_seen": "2026-02-21",
+  "id": "biorxiv:10.64898/2026.02.21.707173",
+  "metadata": {
+    "abstract": "Mobile genetic elements and genomic islands (GIs) frequently encode antibiotic resistance and host-adaptation cargo, yet routine genome comparison pipelines often miss the higher-order organization of how genes co-occur as transferable, GI-anchored modules. We present Cassette2Vec-EC, a structural genomics framework that converts annotated genomes into cassette units (local gene neighborhoods with GI context), encodes each cassette as a fixed-length feature vector, and applies genome-grouped machine learning to predict pathogenic lineages while preventing within-genome leakage. Using a curated Enterococcus cecorum cohort from poultry production systems, we integrate pangenome context, GI calls, mobility markers, and AMR/virulence annotations into cassette-level features and evaluate models strictly under GroupKFold-by-genome. Cassette2Vec-EC achieves strong genome-level generalization (AUROC 0.975 {+/-} 0.030, average precision 0.938 {+/-} 0.077, Brier score 0.056 {+/-} 0.058). When evaluated at the cassette unit level under the same genome-grouped protocol, performance remains high (AUROC 0.974 {+/-} 0.029, AP 0.919 {+/-} 0.093, Brier 0.057 {+/-} 0.057), supporting that cassette representations capture transferable signal rather than genome identity. Baselines show that GI burden alone can partially rank genomes but yields poorer calibration and limited interpretability. By combining comparative genomics with cassette-aware features and providing locus-level explanations (SHAP) that map predictions to specific GI-associated modules, Cassette2Vec-EC provides a practical blueprint for genomic-island-aware pathogen surveillance, junction-based diagnostics, and targeted monitoring of high-risk lineages.\n\nImportancePathogenic Enterococcus cecorum lineages threaten poultry health and production, yet many genomic surveillance workflows reduce genomes to gene presence-absence lists and overlook how mobile elements are organized into transferable modules. Cassette2Vec-EC addresses this gap by representing genomic islands as GI-anchored cassette neighborhoods and encoding each cassette as a fixed-length feature vector linking cassette architecture to pathogenic risk. Under a strict genome-grouped evaluation protocol, the framework predicts pathogenic lineages while preventing within-genome leakage and supports calibrated probability estimates in the full model. Cassette level explanations (SHAP) localize predictive signal to specific GI-anchored modules, yielding tractable targets for surveillance prioritization and junction-based diagnostics. Although developed for poultry-associated E. cecorum, this cassette and GI-aware representation is transferable to other bacterial pathogens to strengthen genomic surveillance and help partners identify high-risk isolates before clinical disease emerges.",
+    "author_corresponding": "Aranyak Goswami",
+    "author_corresponding_institution": "University of Arkansas",
+    "authors": "Goswami, A.; Rafi, S.; Lagad, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-21",
+    "doi": "10.64898/2026.02.21.707173",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/21/2026.02.21.707173.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Genomic-island cassette architecture drives pathogenic Enterococcus cecorum lineages: Cassette2Vec-EC, a structural genomics and machine-learning framework",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Arkansas",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-02-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Cassette2Vec-EC encodes genomic-island gene neighborhoods as fixed-length vectors and uses genome-grouped ML with SHAP to predict pathogenic E. cecorum…",
+  "title": "Genomic-island cassette architecture drives pathogenic Enterococcus cecorum lineages: Cassette2Vec-EC, a structural genomics and machine-learning framework",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.21.707173"
+}

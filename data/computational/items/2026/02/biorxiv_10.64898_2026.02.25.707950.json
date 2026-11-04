@@ -1,0 +1,43 @@
+{
+  "abstract": "As long-read amplicon sequencing (e.g., Oxford Nanopore and PacBio HiFi) becomes routine for fungal metabarcoding, identifying and extracting ITS subregions at scale has become a throughput and robustness bottleneck. The nuclear ribosomal internal transcribed spacer (ITS) region is the formal DNA barcode for fungi and is widely used for taxonomic profiling of fungal communities [Schoch et al., 2012]. Standard preprocessing locates conserved ribosomal flanks with hidden Markov profile models (profile-HMMs) to extract ITS1, 5.8S, ITS2, or the full ITS, as implemented in ITSx [Bengtsson-Palme et al., 2013] and ITSxpress [Rivers et al., 2018, Einarsson and Rivers, 2024].\n\nHere we describe ITSxRust, a Rust-based ITS extractor designed for long-read scale. ITSxRust coordinates HMMER searches with efficient Rust-native I/O and sequence processing, optionally reduces redundant searches via dereplication, provides ONT and HiFi parameter presets, and emits structured failure diagnostics and QC summaries. On an Oxford Nanopore ITS dataset (54,659 reads), ITSxRust extracted the full ITS region from 75.3% of reads, exceeding both ITSx (69.9%) and ITSxpress v2 (41.4%), while running 4.6x faster than ITSx. In addition, a partial-chain fallback strategy that extracts subregions using two-anchor pairs when the full four-anchor chain is unavailable recovered an additional 10,725 reads that would otherwise be discarded.",
+  "authors": [
+    "O'Brien, A.",
+    "Lagos, C.",
+    "Fernandez, K.",
+    "Parada, P."
+  ],
+  "doi": "10.64898/2026.02.25.707950",
+  "first_seen": "2026-02-26",
+  "id": "biorxiv:10.64898/2026.02.25.707950",
+  "metadata": {
+    "abstract": "As long-read amplicon sequencing (e.g., Oxford Nanopore and PacBio HiFi) becomes routine for fungal metabarcoding, identifying and extracting ITS subregions at scale has become a throughput and robustness bottleneck. The nuclear ribosomal internal transcribed spacer (ITS) region is the formal DNA barcode for fungi and is widely used for taxonomic profiling of fungal communities [Schoch et al., 2012]. Standard preprocessing locates conserved ribosomal flanks with hidden Markov profile models (profile-HMMs) to extract ITS1, 5.8S, ITS2, or the full ITS, as implemented in ITSx [Bengtsson-Palme et al., 2013] and ITSxpress [Rivers et al., 2018, Einarsson and Rivers, 2024].\n\nHere we describe ITSxRust, a Rust-based ITS extractor designed for long-read scale. ITSxRust coordinates HMMER searches with efficient Rust-native I/O and sequence processing, optionally reduces redundant searches via dereplication, provides ONT and HiFi parameter presets, and emits structured failure diagnostics and QC summaries. On an Oxford Nanopore ITS dataset (54,659 reads), ITSxRust extracted the full ITS region from 75.3% of reads, exceeding both ITSx (69.9%) and ITSxpress v2 (41.4%), while running 4.6x faster than ITSx. In addition, a partial-chain fallback strategy that extracts subregions using two-anchor pairs when the full four-anchor chain is unavailable recovered an additional 10,725 reads that would otherwise be discarded.",
+    "author_corresponding": "Aaron O'Brien",
+    "author_corresponding_institution": "Universidad Andres Bello",
+    "authors": "O'Brien, A.; Lagos, C.; Fernandez, K.; Parada, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-26",
+    "doi": "10.64898/2026.02.25.707950",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/26/2026.02.25.707950.source.xml",
+    "license": "cc_by",
+    "published": "10.1111/2041-210x.70393",
+    "server": "bioRxiv",
+    "title": "ITSxRust: ITS region extraction with partial-chain recovery and structured diagnostics for long-read amplicon sequencing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universidad Andres Bello",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-02-26",
+  "published_doi": "10.1111/2041-210x.70393",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "ITSxRust is a Rust-based ITS extractor for long-read amplicon data that uses HMMER with partial-chain recovery and QC diagnostics; it extracted full ITS from…",
+  "title": "ITSxRust: ITS region extraction with partial-chain recovery and structured diagnostics for long-read amplicon sequencing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.25.707950"
+}

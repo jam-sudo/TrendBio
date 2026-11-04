@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationPhylogenetic placement is an established approach for rapidly classifying new genetic sequences and updating a phylogeny without fully recomputing it. Popular maximum-likelihood placement methods, such as pplacer and EPA-ng, tend to struggle computationally when the size of the reference tree increases to tens or hundreds of thousands of sequences. As a more scalable alternative, distance-based and parsimony-based placement methods were introduced such as UShER. These methods, in principle, scale linearly as the size of the reference tree grows. However, as the scale of genetic and genomic sequences continues to grow nearly exponentially, developing algorithms that can perform placement in sub-linear time while maintaining accuracy becomes more crucial.\n\nResultsHere, we develop Splicer, the first such algorithm that can perform placement in guaranteed [Formula] time. To achieve this performance, Splicer first decomposes the original reference tree into  blobs and constructs a phylogenetic scaffold tree linking representatives from different blobs. Every blob in such decomposition has at most [Formula] taxa, and the scaffold tree has at most [Formula] leaves, where c is any constant. Then, given the query sequences for placement, they are first placed onto a scaffold tree using pplacer or EPA-ng, and then placed more precisely within the respective blobs. We demonstrate the high accuracy of Splicer on an empirical influenza A virus dataset that has sparse coverage due to limited genomic surveillance. We also show that Splicer can, for the first time, apply maximum-likelihood placement to COVID-19 pandemic-scale data using a dataset with over 12 million SARS-CoV-2 reference genomes. Splicer scales the highly accurate maximum-likelihood approaches implemented in pplacer and EPA-ng to trees with millions of taxa and eliminates the necessity to curate and subsample genomic datasets for real-time classifications.\n\nAvailability and implementationSplicer tool and source code are freely available at https://github.com/flu-crew/splicer.",
+  "authors": [
+    "Markin, A.",
+    "Anderson, T. K."
+  ],
+  "doi": "10.64898/2026.02.10.705130",
+  "first_seen": "2026-02-12",
+  "id": "biorxiv:10.64898/2026.02.10.705130",
+  "metadata": {
+    "abstract": "MotivationPhylogenetic placement is an established approach for rapidly classifying new genetic sequences and updating a phylogeny without fully recomputing it. Popular maximum-likelihood placement methods, such as pplacer and EPA-ng, tend to struggle computationally when the size of the reference tree increases to tens or hundreds of thousands of sequences. As a more scalable alternative, distance-based and parsimony-based placement methods were introduced such as UShER. These methods, in principle, scale linearly as the size of the reference tree grows. However, as the scale of genetic and genomic sequences continues to grow nearly exponentially, developing algorithms that can perform placement in sub-linear time while maintaining accuracy becomes more crucial.\n\nResultsHere, we develop Splicer, the first such algorithm that can perform placement in guaranteed [Formula] time. To achieve this performance, Splicer first decomposes the original reference tree into  blobs and constructs a phylogenetic scaffold tree linking representatives from different blobs. Every blob in such decomposition has at most [Formula] taxa, and the scaffold tree has at most [Formula] leaves, where c is any constant. Then, given the query sequences for placement, they are first placed onto a scaffold tree using pplacer or EPA-ng, and then placed more precisely within the respective blobs. We demonstrate the high accuracy of Splicer on an empirical influenza A virus dataset that has sparse coverage due to limited genomic surveillance. We also show that Splicer can, for the first time, apply maximum-likelihood placement to COVID-19 pandemic-scale data using a dataset with over 12 million SARS-CoV-2 reference genomes. Splicer scales the highly accurate maximum-likelihood approaches implemented in pplacer and EPA-ng to trees with millions of taxa and eliminates the necessity to curate and subsample genomic datasets for real-time classifications.\n\nAvailability and implementationSplicer tool and source code are freely available at https://github.com/flu-crew/splicer.",
+    "author_corresponding": "Alexey Markin",
+    "author_corresponding_institution": "National Animal Disease Center, USDA-ARS",
+    "authors": "Markin, A.; Anderson, T. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-12",
+    "doi": "10.64898/2026.02.10.705130",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/12/2026.02.10.705130.source.xml",
+    "license": "cc0",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Splicer: Phylogenetic Placement in Sub-Linear Time",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "National Animal Disease Center, USDA-ARS",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-02-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Splicer is a phylogenetic placement algorithm that decomposes reference trees into blobs with a scaffold tree, achieving sub-linear placement and scaling ML…",
+  "title": "Splicer: Phylogenetic Placement in Sub-Linear Time",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.10.705130"
+}

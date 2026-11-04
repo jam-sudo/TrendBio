@@ -1,0 +1,40 @@
+{
+  "abstract": "When analyzing single-cell RNA sequencing data with SCVI, low-UMI cells typically need to be filtered, because their learned representations lack meaningful biological signal. We show that this is caused by a specific mechanism: as UMI depth decreases, the SCVI encoder maps cells towards a learned bias point, collapsing their representations regardless of cell identity. This phenomenon is distinct from classical posterior collapse driven by KL regularization. By augmenting training with binomial thinning and adding a cross-correlation loss between original and thinned cell embeddings, the encoder learns representations that preserve cell type identity, experimental condition differences, and sample-level variation at lower UMI depths, without sacrificing reconstruction quality. These modifications extend the range of usable cells, enabling analysis of cells that would typically be discarded due to low molecule counts.",
+  "authors": [
+    "Svensson, V."
+  ],
+  "doi": "10.64898/2026.02.11.705441",
+  "first_seen": "2026-02-13",
+  "id": "biorxiv:10.64898/2026.02.11.705441",
+  "metadata": {
+    "abstract": "When analyzing single-cell RNA sequencing data with SCVI, low-UMI cells typically need to be filtered, because their learned representations lack meaningful biological signal. We show that this is caused by a specific mechanism: as UMI depth decreases, the SCVI encoder maps cells towards a learned bias point, collapsing their representations regardless of cell identity. This phenomenon is distinct from classical posterior collapse driven by KL regularization. By augmenting training with binomial thinning and adding a cross-correlation loss between original and thinned cell embeddings, the encoder learns representations that preserve cell type identity, experimental condition differences, and sample-level variation at lower UMI depths, without sacrificing reconstruction quality. These modifications extend the range of usable cells, enabling analysis of cells that would typically be discarded due to low molecule counts.",
+    "author_corresponding": "Valentine Svensson",
+    "author_corresponding_institution": "Independent research",
+    "authors": "Svensson, V.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-13",
+    "doi": "10.64898/2026.02.11.705441",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/13/2026.02.11.705441.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Improving SCVI for low-count cells through self-supervised augmentation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Independent research",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-02-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Modifies SCVI for scRNA-seq by adding binomial thinning augmentation and a cross-correlation loss, preserving cell identity in low-UMI cells that are normally…",
+  "title": "Improving SCVI for low-count cells through self-supervised augmentation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.11.705441"
+}

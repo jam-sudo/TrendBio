@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationHash tables are fundamental to computational genomics, where keys are often k-mers--fixed-length substrings that exhibit a \"streaming\" property: consecutive k-mers share k-1 nucleotides and are processed in order. Existing static data structures exploit this locality but cannot support dynamic updates, while state-of-the-art concurrent hash tables support dynamic operations but ignore k-mer locality.\n\nResultsWe introduce kache-hash, the first dynamic, concurrent, and resizable hash table that exploits k-mer locality. kache-hash builds on Iceberg hashing--a multi-level design achieving stability and low associativity--but replaces generic hashing with minimizer-based hashing, ensuring that consecutive k-mers map to the same buckets. This keeps frequently accessed buckets cache-resident during streaming operations. On the human genome, kache-hash achieves 1.58-2.62x higher insertion throughput than IcebergHT and up to 6.1x higher query throughput, while incurring 7.39x fewer cache misses. kache-hash scales near-linearly to 16 threads and supports dynamic resizing without sacrificing locality. Our theoretical analysis proves that streaming k-mer operations achieve [O](1/r) amortized cache misses per operation, where r is the minimizer run length, explaining the substantial performance gains over general-purpose hash tables.\n\nAvailabilitykache-hash is implemented in C++20 and is available at https://github.com/jamshed/kache-hash.\n\nContactp.pandey@northeastern.edu\n\nSupplementary informationSupplementary material are available for this manuscript.",
+  "authors": [
+    "Khan, J.",
+    "Patro, R.",
+    "Pandey, P."
+  ],
+  "doi": "10.64898/2026.02.13.705625",
+  "first_seen": "2026-02-16",
+  "id": "biorxiv:10.64898/2026.02.13.705625",
+  "metadata": {
+    "abstract": "MotivationHash tables are fundamental to computational genomics, where keys are often k-mers--fixed-length substrings that exhibit a \"streaming\" property: consecutive k-mers share k-1 nucleotides and are processed in order. Existing static data structures exploit this locality but cannot support dynamic updates, while state-of-the-art concurrent hash tables support dynamic operations but ignore k-mer locality.\n\nResultsWe introduce kache-hash, the first dynamic, concurrent, and resizable hash table that exploits k-mer locality. kache-hash builds on Iceberg hashing--a multi-level design achieving stability and low associativity--but replaces generic hashing with minimizer-based hashing, ensuring that consecutive k-mers map to the same buckets. This keeps frequently accessed buckets cache-resident during streaming operations. On the human genome, kache-hash achieves 1.58-2.62x higher insertion throughput than IcebergHT and up to 6.1x higher query throughput, while incurring 7.39x fewer cache misses. kache-hash scales near-linearly to 16 threads and supports dynamic resizing without sacrificing locality. Our theoretical analysis proves that streaming k-mer operations achieve [O](1/r) amortized cache misses per operation, where r is the minimizer run length, explaining the substantial performance gains over general-purpose hash tables.\n\nAvailabilitykache-hash is implemented in C++20 and is available at https://github.com/jamshed/kache-hash.\n\nContactp.pandey@northeastern.edu\n\nSupplementary informationSupplementary material are available for this manuscript.",
+    "author_corresponding": "Prashant Pandey",
+    "author_corresponding_institution": "Northeastern University",
+    "authors": "Khan, J.; Patro, R.; Pandey, P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-16",
+    "doi": "10.64898/2026.02.13.705625",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/16/2026.02.13.705625.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "kache-hash: A dynamic, concurrent, and cache-efficient hash table for streaming k-mer operations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Northeastern University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-02-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "kache-hash is a dynamic, concurrent, resizable hash table using minimizer-based hashing to keep k-mer streaming operations cache-resident, reporting higher…",
+  "title": "kache-hash: A dynamic, concurrent, and cache-efficient hash table for streaming k-mer operations",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.13.705625"
+}

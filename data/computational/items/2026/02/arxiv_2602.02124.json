@@ -1,0 +1,35 @@
+{
+  "abstract": "Drug-induced toxicity is a leading cause of preclinical and early-clinical failure, making early detection critical. Histopathology is the gold standard for toxicity assessment but relies on expert pathologists, creating a bottleneck for large-scale screening. We introduce an AI-based anomaly detection framework for whole-slide images (WSIs) of rodent liver that identifies healthy tissue and known pathologies (anomalies) and flags samples without training data as out-of-distribution (OOD). We evaluate OOD detection on two held-out categories: apoptosis (single-cell, near-OOD) and staining/processing artifacts (heterogeneous, far-OOD). We build a novel pixelwise-annotated dataset and fine-tune a pre-trained Vision Transformer (DINOv2) via Low-Rank Adaptation (LoRA) for segmentation, then use the Mahalanobis distance for OOD detection with class-specific thresholds. Optimizing the false positive rate subject to a predefined constraint on the false negative rate yields only 0.16% of pathological tissue classified as healthy and 0.35% of healthy tissue classified as pathological. Our false negative rate does not penalise cross-type errors, reflecting the safety-first objective of never overlooking a lesion; under the stricter correct-class criterion our method assigns 93.93% of ID and 89.38% of OOD findings to their own class. The study demonstrates technical feasibility of pixel-level anomaly detection for mouse liver histopathology, indicating possible applications in improving preclinical workflows and drug development efficiency.",
+  "authors": [
+    "Olga Graf",
+    "Dhrupal Patel",
+    "Peter Groß",
+    "Charlotte Lempp",
+    "Matthias Hein",
+    "Fabian Heinemann"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-02",
+  "id": "arxiv:2602.02124",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.02124v2</ns0:id>\n    <ns0:title>Toxicity Assessment in Preclinical Histopathology via Class-Aware Mahalanobis Distance for Known and Novel Anomalies</ns0:title>\n    <ns0:updated>2026-06-30T01:14:45Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.02124v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.02124v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Drug-induced toxicity is a leading cause of preclinical and early-clinical failure, making early detection critical. Histopathology is the gold standard for toxicity assessment but relies on expert pathologists, creating a bottleneck for large-scale screening. We introduce an AI-based anomaly detection framework for whole-slide images (WSIs) of rodent liver that identifies healthy tissue and known pathologies (anomalies) and flags samples without training data as out-of-distribution (OOD). We evaluate OOD detection on two held-out categories: apoptosis (single-cell, near-OOD) and staining/processing artifacts (heterogeneous, far-OOD). We build a novel pixelwise-annotated dataset and fine-tune a pre-trained Vision Transformer (DINOv2) via Low-Rank Adaptation (LoRA) for segmentation, then use the Mahalanobis distance for OOD detection with class-specific thresholds. Optimizing the false positive rate subject to a predefined constraint on the false negative rate yields only 0.16% of pathological tissue classified as healthy and 0.35% of healthy tissue classified as pathological. Our false negative rate does not penalise cross-type errors, reflecting the safety-first objective of never overlooking a lesion; under the stricter correct-class criterion our method assigns 93.93% of ID and 89.38% of OOD findings to their own class. The study demonstrates technical feasibility of pixel-level anomaly detection for mouse liver histopathology, indicating possible applications in improving preclinical workflows and drug development efficiency.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-02T14:07:33Z</ns0:published>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Olga Graf</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dhrupal Patel</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peter Groß</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Charlotte Lempp</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Matthias Hein</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Fabian Heinemann</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "LoRA-tuned DINOv2 with class-aware Mahalanobis OOD detection for pixel-level anomaly segmentation in rodent liver histopathology WSIs.",
+  "title": "Toxicity Assessment in Preclinical Histopathology via Class-Aware Mahalanobis Distance for Known and Novel Anomalies",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.02124v2"
+}

@@ -1,0 +1,46 @@
+{
+  "abstract": "Machine learning (ML) models are effective at classifying images across various fields, including biology. However, their performance on biomedical images is often limited by the small size of available datasets that are constrained by the time-consuming and costly nature of experimental data collection. A review of the literature shows that many studies using biomedical images fail to follow ML best practices. This study focuses on regenerative medicine, which aims to promote tissue regeneration rather than scarring. To explore this process, we applied ML to a limited dataset of images of mice tissues, aiming to distinguish between regenerating and scarring samples. As expected binary classification failed to generalize to independent data. A novel SHAP-based analysis revealed that the overfitting models were based on spurious correlations including individual mice characteristics that aligned with the regeneration/scarring labels. The models appeared to be solving the binary classification task, but were in fact recognizing individuals. To investigate this behavior further, we examined the test set confusion matrix of a model trained to identify individual mice. We observed that, beyond individual recognition, individuals were grouped according to the time elapsed after injury (day 3 or 10) and the healing outcome (regeneration or scarring). We hypothesized that these groupings were based on relevant biological information captured by the model. To test this hypothesis, we successfully trained a model to classify images according to the time elapsed after injury (3 or 10 days), demonstrating that ML can extract relevant biological information when the task is aligned with what the data can actually support. Altogether, this study demonstrates that carefully examining explanations of a model is not only an effective way to unveil putative biases but also to extract relevant information from a limited dataset.\n\nAuthor summaryMachine learning is increasingly used to analyze biomedical images, but in many experimental settings only small datasets are available, which can easily mislead powerful models. In this study, we looked at images from mice tissues, with the goal to distinguish healing by regeneration from healing by scarring. Although standard machine learning models appeared to perform well during training, they failed to generalize to new animals. By carefully analyzing model explanations, we found that the models were not learning biologically meaningful patterns of tissue repair, but instead were recognizing individual mice based on subtle image-specific signatures. Importantly, this same analysis revealed that the models did capture relevant biological information when the task was better aligned with the data, such as distinguishing early versus late stages of healing. Our results highlight how explanation methods can uncover hidden biases, prevent false conclusions, and help researchers extract meaningful biological insights even from limited and imperfect datasets.",
+  "authors": [
+    "Bolut, C.",
+    "Pacary, A.",
+    "Pieruccioni, L.",
+    "Ousset, M.",
+    "Paupert, J.",
+    "Casteilla, L.",
+    "Simoncini, D."
+  ],
+  "doi": "10.64898/2026.02.20.706981",
+  "first_seen": "2026-02-20",
+  "id": "biorxiv:10.64898/2026.02.20.706981",
+  "metadata": {
+    "abstract": "Machine learning (ML) models are effective at classifying images across various fields, including biology. However, their performance on biomedical images is often limited by the small size of available datasets that are constrained by the time-consuming and costly nature of experimental data collection. A review of the literature shows that many studies using biomedical images fail to follow ML best practices. This study focuses on regenerative medicine, which aims to promote tissue regeneration rather than scarring. To explore this process, we applied ML to a limited dataset of images of mice tissues, aiming to distinguish between regenerating and scarring samples. As expected binary classification failed to generalize to independent data. A novel SHAP-based analysis revealed that the overfitting models were based on spurious correlations including individual mice characteristics that aligned with the regeneration/scarring labels. The models appeared to be solving the binary classification task, but were in fact recognizing individuals. To investigate this behavior further, we examined the test set confusion matrix of a model trained to identify individual mice. We observed that, beyond individual recognition, individuals were grouped according to the time elapsed after injury (day 3 or 10) and the healing outcome (regeneration or scarring). We hypothesized that these groupings were based on relevant biological information captured by the model. To test this hypothesis, we successfully trained a model to classify images according to the time elapsed after injury (3 or 10 days), demonstrating that ML can extract relevant biological information when the task is aligned with what the data can actually support. Altogether, this study demonstrates that carefully examining explanations of a model is not only an effective way to unveil putative biases but also to extract relevant information from a limited dataset.\n\nAuthor summaryMachine learning is increasingly used to analyze biomedical images, but in many experimental settings only small datasets are available, which can easily mislead powerful models. In this study, we looked at images from mice tissues, with the goal to distinguish healing by regeneration from healing by scarring. Although standard machine learning models appeared to perform well during training, they failed to generalize to new animals. By carefully analyzing model explanations, we found that the models were not learning biologically meaningful patterns of tissue repair, but instead were recognizing individual mice based on subtle image-specific signatures. Importantly, this same analysis revealed that the models did capture relevant biological information when the task was better aligned with the data, such as distinguishing early versus late stages of healing. Our results highlight how explanation methods can uncover hidden biases, prevent false conclusions, and help researchers extract meaningful biological insights even from limited and imperfect datasets.",
+    "author_corresponding": "David Simoncini",
+    "author_corresponding_institution": "Universite Toulouse 1 Capitole",
+    "authors": "Bolut, C.; Pacary, A.; Pieruccioni, L.; Ousset, M.; Paupert, J.; Casteilla, L.; Simoncini, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-20",
+    "doi": "10.64898/2026.02.20.706981",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/20/2026.02.20.706981.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "How to gain valuable insight from scarce data with Machine Learning: a post-hoc explanation tool to identify biases in biological images classification",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Universite Toulouse 1 Capitole",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows ML image classifiers on small mouse tissue datasets learn individual-mouse artifacts; a SHAP-based explanation method exposes these biases and recovers…",
+  "title": "How to gain valuable insight from scarce data with Machine Learning: a post-hoc explanation tool to identify biases in biological images classification",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.20.706981"
+}

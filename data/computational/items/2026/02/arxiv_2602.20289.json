@@ -1,0 +1,35 @@
+{
+  "abstract": "Magnetic resonance spectroscopy (MRS) is used to quantify metabolites in vivo and estimate biomarkers for conditions ranging from neurological disorders to cancers. Quantifying low-concentration metabolites such as GABA ($γ$-aminobutyric acid) is challenging due to low signal-to-noise ratio (SNR) and spectral overlap. We investigate and validate deep learning for quantifying complex, low-SNR, overlapping signals from MEGA-PRESS spectra, devise a convolutional neural network (CNN) and a Y-shaped autoencoder (YAE), and select the best models via Bayesian optimisation on 10,000 simulated spectra from slice-profile-aware MEGA-PRESS simulations. The selected models are trained on 100,000 simulated spectra. We validate their performance on 144 spectra from 112 experimental phantoms containing five metabolites of interest (GABA, Glu, Gln, NAA, Cr) with known ground truth concentrations across solution and gel series acquired at 3 T under varied bandwidths and implementations. These models are further assessed against the widely used LCModel quantification tool. On simulations, both models achieve near-perfect agreement (small MAEs; regression slopes $\\approx 1.00$, $R^2 \\approx 1.00$). On experimental phantom data, errors initially increased substantially. However, modelling variable linewidths in the training data significantly reduced this gap. The best augmented deep learning models achieved a mean MAE for GABA over all phantom spectra of 0.151 (YAE) and 0.160 (FCNN) in max-normalised relative concentrations, outperforming the conventional baseline LCModel (0.220). A sim-to-real gap remains, but physics-informed data augmentation substantially reduced it. Phantom ground truth is needed to judge whether a method will perform reliably on real data.",
+  "authors": [
+    "Zien Ma",
+    "S. M. Shermer",
+    "Oktay Karakuş",
+    "Frank C. Langbein"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-23",
+  "id": "arxiv:2602.20289",
+  "metadata": {
+    "arxiv_primary_category": "eess.SP",
+    "categories": [
+      "eess.SP",
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.20289v1</ns0:id>\n    <ns0:title>The Sim-to-Real Gap in MRS Quantification: A Systematic Deep Learning Validation for GABA</ns0:title>\n    <ns0:updated>2026-02-23T19:16:03Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.20289v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.20289v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Magnetic resonance spectroscopy (MRS) is used to quantify metabolites in vivo and estimate biomarkers for conditions ranging from neurological disorders to cancers. Quantifying low-concentration metabolites such as GABA ($γ$-aminobutyric acid) is challenging due to low signal-to-noise ratio (SNR) and spectral overlap. We investigate and validate deep learning for quantifying complex, low-SNR, overlapping signals from MEGA-PRESS spectra, devise a convolutional neural network (CNN) and a Y-shaped autoencoder (YAE), and select the best models via Bayesian optimisation on 10,000 simulated spectra from slice-profile-aware MEGA-PRESS simulations. The selected models are trained on 100,000 simulated spectra. We validate their performance on 144 spectra from 112 experimental phantoms containing five metabolites of interest (GABA, Glu, Gln, NAA, Cr) with known ground truth concentrations across solution and gel series acquired at 3 T under varied bandwidths and implementations. These models are further assessed against the widely used LCModel quantification tool. On simulations, both models achieve near-perfect agreement (small MAEs; regression slopes $\\approx 1.00$, $R^2 \\approx 1.00$). On experimental phantom data, errors initially increased substantially. However, modelling variable linewidths in the training data significantly reduced this gap. The best augmented deep learning models achieved a mean MAE for GABA over all phantom spectra of 0.151 (YAE) and 0.160 (FCNN) in max-normalised relative concentrations, outperforming the conventional baseline LCModel (0.220). A sim-to-real gap remains, but physics-informed data augmentation substantially reduced it. Phantom ground truth is needed to judge whether a method will perform reliably on real data.</ns0:summary>\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-23T19:16:03Z</ns0:published>\n    <ns1:comment>37 pages, 10 figures, 12 tables</ns1:comment>\n    <ns1:primary_category term=\"eess.SP\" />\n    <ns0:author>\n      <ns0:name>Zien Ma</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>S. M. Shermer</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Oktay Karakuş</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Frank C. Langbein</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "metabolomics",
+  "published_at": "2026-02-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Systematic validation of CNN and Y-shaped autoencoder models for quantifying GABA and other metabolites from MEGA-PRESS MRS; linewidth-aware augmentation…",
+  "title": "The Sim-to-Real Gap in MRS Quantification: A Systematic Deep Learning Validation for GABA",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.20289v1"
+}

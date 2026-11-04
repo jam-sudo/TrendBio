@@ -1,0 +1,46 @@
+{
+  "abstract": "Whole-slide image (WSI) preprocessing, including tissue detection and patch extraction, is critical computational pathology, yet remains a major bottleneck for large-scale workflows. Existing methods often rely either on threshold-based heuristics that are sensitive to staining variations, tissue fragmentation, and artifacts, or on patch-wise deep learning pipelines with substantially higher computational cost. We present AtlasPatch, a scalable high-throughput WSI preprocessing method built around a foundation-model-based tissue detector that operates at thumbnail resolution: a single thumbnail-level forward pass yields a tissue mask that directly guides patch coordinate generation at the target desired magnification, avoiding repeated patch-level inference. The proposed detector's robustness and efficiency is driven by two coupled contributions: (i) a parameter-efficient adaptation of the SAM2 foundation model that updates only its layer-normalization parameters (0.076% of model weights), and (ii) a curated and semi-manually annotated multi-cohort dataset of 30,000 WSI thumbnail-mask pairs deliberately spanning multiple organs, scanners, tissue appearances, and artifacts. The detector is coupled with pyramid-aware contour mapping from thumbnail to full-resolution slide coordinates, enabling direct patch coordinate generation at the target magnification and parallelized high-throughput patch extraction. AtlasPatch's tissue detection achieves a precision of 0.986 and remains robust across slide variations. Compared with widely used deep-learning preprocessing methods, AtlasPatch is up to 16x faster while preserving downstream multiple-instance learning performance across six slide-level classification tasks. These results position AtlasPatch as a frontier of efficient preprocessing in large-scale computational pathology and pathology foundation models.",
+  "authors": [
+    "Ahmed Alagha",
+    "Christopher Leclerc",
+    "Yousef Kotp",
+    "Omar Metwally",
+    "Calvin Moras",
+    "Peter Rentopoulos",
+    "Ghodsiyeh Rostami",
+    "Bich Ngoc Nguyen",
+    "Jumanah Baig",
+    "Abdelhakim Khellaf",
+    "Vincent Quoc-Huy Trinh",
+    "Rabeb Mizouni",
+    "Hadi Otrok",
+    "Jamal Bentahar",
+    "Mahdi S. Hosseini"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-03",
+  "id": "arxiv:2602.03998",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "cs.CV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.03998v3</ns0:id>\n    <ns0:title>AtlasPatch: Scalable Foundation Model-based Tissue Detection and Patch Extraction for Computational Pathology</ns0:title>\n    <ns0:updated>2026-09-02T16:30:21Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.03998v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.03998v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Whole-slide image (WSI) preprocessing, including tissue detection and patch extraction, is critical computational pathology, yet remains a major bottleneck for large-scale workflows. Existing methods often rely either on threshold-based heuristics that are sensitive to staining variations, tissue fragmentation, and artifacts, or on patch-wise deep learning pipelines with substantially higher computational cost. We present AtlasPatch, a scalable high-throughput WSI preprocessing method built around a foundation-model-based tissue detector that operates at thumbnail resolution: a single thumbnail-level forward pass yields a tissue mask that directly guides patch coordinate generation at the target desired magnification, avoiding repeated patch-level inference. The proposed detector's robustness and efficiency is driven by two coupled contributions: (i) a parameter-efficient adaptation of the SAM2 foundation model that updates only its layer-normalization parameters (0.076% of model weights), and (ii) a curated and semi-manually annotated multi-cohort dataset of 30,000 WSI thumbnail-mask pairs deliberately spanning multiple organs, scanners, tissue appearances, and artifacts. The detector is coupled with pyramid-aware contour mapping from thumbnail to full-resolution slide coordinates, enabling direct patch coordinate generation at the target magnification and parallelized high-throughput patch extraction. AtlasPatch's tissue detection achieves a precision of 0.986 and remains robust across slide variations. Compared with widely used deep-learning preprocessing methods, AtlasPatch is up to 16x faster while preserving downstream multiple-instance learning performance across six slide-level classification tasks. These results position AtlasPatch as a frontier of efficient preprocessing in large-scale computational pathology and pathology foundation models.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-03T20:32:07Z</ns0:published>\n    <ns1:comment>Under review</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Ahmed Alagha</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Christopher Leclerc</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yousef Kotp</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Omar Metwally</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Calvin Moras</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peter Rentopoulos</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ghodsiyeh Rostami</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bich Ngoc Nguyen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jumanah Baig</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Abdelhakim Khellaf</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Vincent Quoc-Huy Trinh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rabeb Mizouni</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hadi Otrok</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jamal Bentahar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mahdi S. Hosseini</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "AtlasPatch: a SAM2-based tissue detector (LayerNorm-only adaptation, 30,000 annotated WSI thumbnail-mask pairs) enabling up to 16x faster WSI patch extraction…",
+  "title": "AtlasPatch: Scalable Foundation Model-based Tissue Detection and Patch Extraction for Computational Pathology",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.03998v3"
+}

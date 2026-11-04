@@ -1,0 +1,43 @@
+{
+  "abstract": "PROTACs work by bringing together a protein-of-interest ligand and an E3 ligase recruiter to trigger targeted degradation. However, Diffusion-based generative models frequently produce chemically invalid or disconnected linker structures that satisfy global geometric constraints but violate local bonding requirements. These models operate in continuous coordinate space and therefore lack explicit mechanisms for enforcing discrete chemical connectivity under fixed-anchor constraints. Invalid, disconnected outputs recur rather than being a rare exception, such that naive resampling is not an effective method to obtain valid chimeras.\n\nPro-GAT is a graph attention-based framework for geometry-preserving molecular graph repair, capable of functioning on chemically disconnected diffusion-generated PROTAC candidates by predicting bounded coordinate corrections and constrained atom-type modifications using geometry-aware graph attention network (GAT) layers. The proposed model is trained on PROTAC datasets with added disconnections to overcome systematic connectivity failures in diffusion-based PROTAC generation with fixed anchors. When combined with DiffPROTACs and DiffLinker, Pro-GAT improves the percentage of chemically valid candidates in the aggregated output from 76.70% to 83.92% and 63.16% to 68.73% while maintaining 80.18% and 63.80% uniqueness levels of valid candidates respectively, thus facilitating the generation of usable PROTAC candidates from invalid diffusion samples. Pro-GAT was used in a case study of the 7Z76 ternary complex to repair DiffPROTACs and DiffLinker generated samples, which gave rise to connected chimeras whose docking scores were comparable to the original 7Z76 structure.",
+  "authors": [
+    "Vemuri, S.",
+    "Bijigiri, L. P.",
+    "Gogte, S.",
+    "Kondaparthi, V."
+  ],
+  "doi": "10.64898/2026.02.22.707266",
+  "first_seen": "2026-02-23",
+  "id": "biorxiv:10.64898/2026.02.22.707266",
+  "metadata": {
+    "abstract": "PROTACs work by bringing together a protein-of-interest ligand and an E3 ligase recruiter to trigger targeted degradation. However, Diffusion-based generative models frequently produce chemically invalid or disconnected linker structures that satisfy global geometric constraints but violate local bonding requirements. These models operate in continuous coordinate space and therefore lack explicit mechanisms for enforcing discrete chemical connectivity under fixed-anchor constraints. Invalid, disconnected outputs recur rather than being a rare exception, such that naive resampling is not an effective method to obtain valid chimeras.\n\nPro-GAT is a graph attention-based framework for geometry-preserving molecular graph repair, capable of functioning on chemically disconnected diffusion-generated PROTAC candidates by predicting bounded coordinate corrections and constrained atom-type modifications using geometry-aware graph attention network (GAT) layers. The proposed model is trained on PROTAC datasets with added disconnections to overcome systematic connectivity failures in diffusion-based PROTAC generation with fixed anchors. When combined with DiffPROTACs and DiffLinker, Pro-GAT improves the percentage of chemically valid candidates in the aggregated output from 76.70% to 83.92% and 63.16% to 68.73% while maintaining 80.18% and 63.80% uniqueness levels of valid candidates respectively, thus facilitating the generation of usable PROTAC candidates from invalid diffusion samples. Pro-GAT was used in a case study of the 7Z76 ternary complex to repair DiffPROTACs and DiffLinker generated samples, which gave rise to connected chimeras whose docking scores were comparable to the original 7Z76 structure.",
+    "author_corresponding": "Vani Kondaparthi",
+    "author_corresponding_institution": "Keshav Memorial Engineering College",
+    "authors": "Vemuri, S.; Bijigiri, L. P.; Gogte, S.; Kondaparthi, V.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-23",
+    "doi": "10.64898/2026.02.22.707266",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/23/2026.02.22.707266.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "10.1021/acs.jcim.6c01049",
+    "server": "bioRxiv",
+    "title": "Pro-GAT: Reconnecting Fragmented PROTACs Using Graph Attention Transformer",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Keshav Memorial Engineering College",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-02-23",
+  "published_doi": "10.1021/acs.jcim.6c01049",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Pro-GAT, a geometry-aware graph attention model, repairs disconnected diffusion-generated PROTAC linkers, raising valid candidate rates for DiffPROTACs and…",
+  "title": "Pro-GAT: Reconnecting Fragmented PROTACs Using Graph Attention Transformer",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.22.707266"
+}
