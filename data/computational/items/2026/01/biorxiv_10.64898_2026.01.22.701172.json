@@ -1,0 +1,49 @@
+{
+  "abstract": "MotivationHigh-throughput sequencing (HTS) enables population-scale genomics but generates massive datasets, creating bottlenecks in storage, transfer, and analysis. FASTQ, the standard format for over two decades, stores one byte per base and one byte per quality score, leading to inefficient I/O, high storage costs, and redundancy. Existing compression tools can mitigate some issues, but often introduce costly decompression or complex dependency issues.\n\nResultsWe introduce FASTR, a lossless, computation-native successor to FASTQ that encodes each nucleotide together with its base quality score into a single 8-bit value. FASTR reduces file size by at least 2x while remaining fully reversible and directly usable for downstream analyses. Applying general-purpose compression tools on FASTR consistently yields higher compression ratios, 2.47, 3.64, and 4.8x faster compression, and 2.34, 1.96, 1.75x faster decompression than on FASTQ across Illumina, HiFi, and ONT reads. FASTR is machine-learning-ready, allowing reads to be consumed directly as numerical vectors or image-like representations. We provide a highly parallel software ecosystem for FASTQ-FASTR conversion and show that FASTR integrates with existing tools, such as minimap2, with minimal interface changes and no performance overhead. By eliminating decompression costs and reducing data movement, FASTR lays the foundation for scalable genomics analyses and real-time sequencing workflows.\n\nAvailability and Implementationhttps://github.com/ALSER-Lab/FASTR",
+  "authors": [
+    "Tkachenko, A.",
+    "Salem, S.",
+    "Ezekiel Adeniyi, A.",
+    "Bingol, Z.",
+    "Nayeem Uddin, M.",
+    "Prasanna, A.",
+    "Zelikovsky, A.",
+    "Mangul, S.",
+    "Alkan, C.",
+    "Alser, M."
+  ],
+  "doi": "10.64898/2026.01.22.701172",
+  "first_seen": "2026-01-23",
+  "id": "biorxiv:10.64898/2026.01.22.701172",
+  "metadata": {
+    "abstract": "MotivationHigh-throughput sequencing (HTS) enables population-scale genomics but generates massive datasets, creating bottlenecks in storage, transfer, and analysis. FASTQ, the standard format for over two decades, stores one byte per base and one byte per quality score, leading to inefficient I/O, high storage costs, and redundancy. Existing compression tools can mitigate some issues, but often introduce costly decompression or complex dependency issues.\n\nResultsWe introduce FASTR, a lossless, computation-native successor to FASTQ that encodes each nucleotide together with its base quality score into a single 8-bit value. FASTR reduces file size by at least 2x while remaining fully reversible and directly usable for downstream analyses. Applying general-purpose compression tools on FASTR consistently yields higher compression ratios, 2.47, 3.64, and 4.8x faster compression, and 2.34, 1.96, 1.75x faster decompression than on FASTQ across Illumina, HiFi, and ONT reads. FASTR is machine-learning-ready, allowing reads to be consumed directly as numerical vectors or image-like representations. We provide a highly parallel software ecosystem for FASTQ-FASTR conversion and show that FASTR integrates with existing tools, such as minimap2, with minimal interface changes and no performance overhead. By eliminating decompression costs and reducing data movement, FASTR lays the foundation for scalable genomics analyses and real-time sequencing workflows.\n\nAvailability and Implementationhttps://github.com/ALSER-Lab/FASTR",
+    "author_corresponding": "Mohammed Alser",
+    "author_corresponding_institution": "Georgia State University",
+    "authors": "Tkachenko, A.; Salem, S.; Ezekiel Adeniyi, A.; Bingol, Z.; Nayeem Uddin, M.; Prasanna, A.; Zelikovsky, A.; Mangul, S.; Alkan, C.; Alser, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-23",
+    "doi": "10.64898/2026.01.22.701172",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/23/2026.01.22.701172.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "FASTR: Reimagining FASTQ via Compact Image-inspired Representation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Georgia State University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-01-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "FASTR, a lossless FASTQ successor encoding base and quality per 8-bit value, reduces file size at least 2x, speeds compression and decompression, and…",
+  "title": "FASTR: Reimagining FASTQ via Compact Image-inspired Representation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.22.701172"
+}

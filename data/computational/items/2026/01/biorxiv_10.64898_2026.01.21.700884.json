@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationRepresenting a set of k-mers -- strings of length k -- in small space under fast lookup queries is a fundamental requirement for several applications in Bioinformatics. A data structure based on sparse and skew hashing (SSHash) was recently proposed for this purpose [Pibiri, 2022]: it combines good space effectiveness with fast lookup and streaming queries. It is also order-preserving, i.e., consecutive k-mers (sharing a prefix-suffix overlap of length k-1) are assigned consecutive hash codes which helps compressing satellite data typically associated with k-mers, like abundances and color sets in colored De Bruijn graphs.\n\nResultsWe study the problem of accelerating queries under the sparse and skew hashing indexing paradigm, without compromising its space effectiveness. We propose a refined data structure with less complex lookups and fewer cache misses. We give a simpler and faster algorithm for streaming lookup queries. Compared to indexes with similar capabilities and based on the Burrows-Wheeler transform, like SBWT and FMSI, SSHash is significantly faster to build and query. SSHash is competitive in space with the fast (and default) modality of SBWT when both k-mer strands are indexed. While larger than FMSI, it is also more than one order of magnitude faster to query.\n\nAvailability and ImplementationThe SSHash software is available at https://github.com/jermp/sshash, and also distributed via Bioconda. A benchmark of data structures for k-mer sets is available at https://github.com/jermp/kmer_sets_benchmark. The datasets used in this article are described and available at https://zenodo.org/records/17582116.\n\nContactgiulioermanno.pibiri@unive.it, rob@cs.umd.edu.",
+  "authors": [
+    "Pibiri, G. E.",
+    "Patro, R."
+  ],
+  "doi": "10.64898/2026.01.21.700884",
+  "first_seen": "2026-01-22",
+  "id": "biorxiv:10.64898/2026.01.21.700884",
+  "metadata": {
+    "abstract": "MotivationRepresenting a set of k-mers -- strings of length k -- in small space under fast lookup queries is a fundamental requirement for several applications in Bioinformatics. A data structure based on sparse and skew hashing (SSHash) was recently proposed for this purpose [Pibiri, 2022]: it combines good space effectiveness with fast lookup and streaming queries. It is also order-preserving, i.e., consecutive k-mers (sharing a prefix-suffix overlap of length k-1) are assigned consecutive hash codes which helps compressing satellite data typically associated with k-mers, like abundances and color sets in colored De Bruijn graphs.\n\nResultsWe study the problem of accelerating queries under the sparse and skew hashing indexing paradigm, without compromising its space effectiveness. We propose a refined data structure with less complex lookups and fewer cache misses. We give a simpler and faster algorithm for streaming lookup queries. Compared to indexes with similar capabilities and based on the Burrows-Wheeler transform, like SBWT and FMSI, SSHash is significantly faster to build and query. SSHash is competitive in space with the fast (and default) modality of SBWT when both k-mer strands are indexed. While larger than FMSI, it is also more than one order of magnitude faster to query.\n\nAvailability and ImplementationThe SSHash software is available at https://github.com/jermp/sshash, and also distributed via Bioconda. A benchmark of data structures for k-mer sets is available at https://github.com/jermp/kmer_sets_benchmark. The datasets used in this article are described and available at https://zenodo.org/records/17582116.\n\nContactgiulioermanno.pibiri@unive.it, rob@cs.umd.edu.",
+    "author_corresponding": "Giulio Ermanno Pibiri",
+    "author_corresponding_institution": "Ca' Foscari University of Venice",
+    "authors": "Pibiri, G. E.; Patro, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-22",
+    "doi": "10.64898/2026.01.21.700884",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/22/2026.01.21.700884.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Optimizing sparse and skew hashing: faster k-mer dictionaries",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Ca' Foscari University of Venice",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-01-22",
+  "published_doi": "10.1093/bioinformatics/btag264",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Refined sparse and skew hashing (SSHash) k-mer dictionary with simpler, cache-friendlier lookups and faster streaming queries, outperforming BWT-based indexes…",
+  "title": "Optimizing sparse and skew hashing: faster k-mer dictionaries",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.21.700884"
+}

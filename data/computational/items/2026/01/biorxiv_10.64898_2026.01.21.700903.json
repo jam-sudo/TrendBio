@@ -1,0 +1,43 @@
+{
+  "abstract": "We present a fast, unconditionally energy-stable numerical scheme for simulating vesicle deformation under osmotic pressure using a phase-field approach. The model couples an Allen-Cahn equation for the biomembrane interface with a variable-mobility Cahn-Hilliard equation governing mass exchange across the membrane. Classical approaches, including nonlinear multigrid and Multiple Scalar Auxiliary Variable (MSAV) methods, require iterative solution of variable-coefficient systems at each time step, resulting in substantial computational cost. We introduce a constant-coefficient MSAV (CC-MSAV) scheme that incorporates stabilization directly into the Cahn-Hilliard evolution equation rather than the chemical potential. This reformulation yields fully decoupled constant-coefficient elliptic problems solvable via fast discrete cosine transform (DCT), eliminating iterative solvers entirely. The method achieves O(N2 log N) complexity per time step while preserving unconditional energy stability and discrete mass conservation. Numerical experiments verify second-order temporal and spatial accuracy, mass conservation to relative errors below 5 x 10-11, and close agreement with nonlinear multigrid benchmarks. On grids with N [&ge;] 2048, CC-MSAV achieves 6-15x overall speedup compared to classical MSAV with optimized preconditioning, while the dominant Cahn-Hilliard subsystem is accelerated by up to two orders of magnitude. These efficiency gains, achieved without sacrificing accuracy, make CC-MSAV particularly well-suited for large-scale simulations of vesicle dynamics.",
+  "authors": [
+    "Zhang, Z.",
+    "Li, S.",
+    "Lowengrub, J.",
+    "Wise, S. M."
+  ],
+  "doi": "10.64898/2026.01.21.700903",
+  "first_seen": "2026-01-23",
+  "id": "biorxiv:10.64898/2026.01.21.700903",
+  "metadata": {
+    "abstract": "We present a fast, unconditionally energy-stable numerical scheme for simulating vesicle deformation under osmotic pressure using a phase-field approach. The model couples an Allen-Cahn equation for the biomembrane interface with a variable-mobility Cahn-Hilliard equation governing mass exchange across the membrane. Classical approaches, including nonlinear multigrid and Multiple Scalar Auxiliary Variable (MSAV) methods, require iterative solution of variable-coefficient systems at each time step, resulting in substantial computational cost. We introduce a constant-coefficient MSAV (CC-MSAV) scheme that incorporates stabilization directly into the Cahn-Hilliard evolution equation rather than the chemical potential. This reformulation yields fully decoupled constant-coefficient elliptic problems solvable via fast discrete cosine transform (DCT), eliminating iterative solvers entirely. The method achieves O(N2 log N) complexity per time step while preserving unconditional energy stability and discrete mass conservation. Numerical experiments verify second-order temporal and spatial accuracy, mass conservation to relative errors below 5 x 10-11, and close agreement with nonlinear multigrid benchmarks. On grids with N [&ge;] 2048, CC-MSAV achieves 6-15x overall speedup compared to classical MSAV with optimized preconditioning, while the dominant Cahn-Hilliard subsystem is accelerated by up to two orders of magnitude. These efficiency gains, achieved without sacrificing accuracy, make CC-MSAV particularly well-suited for large-scale simulations of vesicle dynamics.",
+    "author_corresponding": "Shuwang Li",
+    "author_corresponding_institution": "Department of Applied Mathematics, Illinois Institute of Technology",
+    "authors": "Zhang, Z.; Li, S.; Lowengrub, J.; Wise, S. M.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-01-23",
+    "doi": "10.64898/2026.01.21.700903",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/23/2026.01.21.700903.source.xml",
+    "license": "cc_by_nc",
+    "published": "10.4208/cicp.OA-2026-0008",
+    "server": "bioRxiv",
+    "title": "An Efficient Constant-Coefficient MSAV Scheme for Computing Vesicle Growth and Shrinkage",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Applied Mathematics, Illinois Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-01-23",
+  "published_doi": "10.4208/cicp.OA-2026-0008",
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces a constant-coefficient MSAV scheme with DCT-based solvers for fast, energy-stable phase-field simulation of vesicle growth and shrinkage under…",
+  "title": "An Efficient Constant-Coefficient MSAV Scheme for Computing Vesicle Growth and Shrinkage",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.21.700903"
+}

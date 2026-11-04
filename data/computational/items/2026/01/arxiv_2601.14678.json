@@ -1,0 +1,36 @@
+{
+  "abstract": "Supervised deep learning models often achieve excellent performance within their training distribution but struggle to generalize beyond it. In cancer histopathology, for example, a convolutional neural network (CNN) may classify cancer severity accurately for cancer types represented in its training data, yet fail on related but unseen types. Although adenocarcinomas from different organs share morphological features that might support limited cross-domain generalization, addressing domain shift directly is necessary for robust performance. Domain adaptation offers a way to transfer knowledge from labeled data in one cancer type to unlabeled data in another, helping mitigate the scarcity of annotated medical images.\n  This work evaluates cross-domain classification performance among lung, colon, breast, and kidney adenocarcinomas. A ResNet50 trained on any single adenocarcinoma achieves over 98% accuracy on its own domain but shows minimal generalization to others. Ensembling multiple supervised models does not resolve this limitation. In contrast, converting the ResNet50 into a domain adversarial neural network (DANN) substantially improves performance on unlabeled target domains. A DANN trained on labeled breast and colon data and adapted to unlabeled lung data reaches 95.56% accuracy.\n  We also examine the impact of stain normalization on domain adaptation. Its effects vary by target domain: for lung, accuracy drops from 95.56% to 66.60%, while for breast and colon targets, stain normalization boosts accuracy from 49.22% to 81.29% and from 78.48% to 83.36%, respectively. Finally, using Integrated Gradients reveals that DANNs consistently attribute importance to biologically meaningful regions such as densely packed nuclei, indicating that the model learns clinically relevant features and can apply them to unlabeled cancer types.",
+  "authors": [
+    "Justin Cheung",
+    "Samuel Savine",
+    "Calvin Nguyen",
+    "Lin Lu",
+    "Alhassan S. Yasin"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-21",
+  "id": "arxiv:2601.14678",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG",
+      "cs.NE",
+      "q-bio.TO"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.14678v1</ns0:id>\n    <ns0:title>Transfer Learning from One Cancer to Another via Deep Learning Domain Adaptation</ns0:title>\n    <ns0:updated>2026-01-21T05:50:34Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.14678v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.14678v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Supervised deep learning models often achieve excellent performance within their training distribution but struggle to generalize beyond it. In cancer histopathology, for example, a convolutional neural network (CNN) may classify cancer severity accurately for cancer types represented in its training data, yet fail on related but unseen types. Although adenocarcinomas from different organs share morphological features that might support limited cross-domain generalization, addressing domain shift directly is necessary for robust performance. Domain adaptation offers a way to transfer knowledge from labeled data in one cancer type to unlabeled data in another, helping mitigate the scarcity of annotated medical images.\n  This work evaluates cross-domain classification performance among lung, colon, breast, and kidney adenocarcinomas. A ResNet50 trained on any single adenocarcinoma achieves over 98% accuracy on its own domain but shows minimal generalization to others. Ensembling multiple supervised models does not resolve this limitation. In contrast, converting the ResNet50 into a domain adversarial neural network (DANN) substantially improves performance on unlabeled target domains. A DANN trained on labeled breast and colon data and adapted to unlabeled lung data reaches 95.56% accuracy.\n  We also examine the impact of stain normalization on domain adaptation. Its effects vary by target domain: for lung, accuracy drops from 95.56% to 66.60%, while for breast and colon targets, stain normalization boosts accuracy from 49.22% to 81.29% and from 78.48% to 83.36%, respectively. Finally, using Integrated Gradients reveals that DANNs consistently attribute importance to biologically meaningful regions such as densely packed nuclei, indicating that the model learns clinically relevant features and can apply them to unlabeled cancer types.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.NE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.TO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-21T05:50:34Z</ns0:published>\n    <ns1:comment>8 pages, 6 figures, 3 table</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Justin Cheung</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Samuel Savine</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Calvin Nguyen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lin Lu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alhassan S. Yasin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-21",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Evaluates domain adversarial neural networks (DANN) on ResNet50 for cross-cancer histopathology classification among lung, colon, breast, and kidney…",
+  "title": "Transfer Learning from One Cancer to Another via Deep Learning Domain Adaptation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.14678v1"
+}

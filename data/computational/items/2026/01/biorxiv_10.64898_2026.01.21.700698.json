@@ -1,0 +1,45 @@
+{
+  "abstract": "MotivationProteins function through motion. Yet, most discoveries still commence with static representations of protein structures. Here, we investigated the feasibility of leveraging protein dynamics to improve homology detection.\n\nResultsWe introduce ProtProfileMD, a sequence-to-3D-probability model that predicts, from an amino acid sequence, a profile of discrete structural representations capturing protein dynamics. We applied supervised parameter-efficient finetuning of the ProstT5 protein Language Model (pLM) to predict per-residue distributions over Foldseeks 3Di alphabet derived from motions observed in molecular dynamics. This original result reveals that the 3Di tokens, despite being coarse-grained descriptors of 3D structure, still offer sufficient resolution to capture aspects of conformational changes. This is evidenced by a correlation between fluctuations in the 3D protein structure over the course of a molecular dynamics trajectory and the entropy of 3Di states. Based on this insight, we introduce a proof-of-concept for making remote homology detection of proteins more sensitive by leveraging a proteins distinctive dynamic fingerprint captured by our model. Our method recovers flexibility signals with a fidelity that is biologically relevant, improving search and complementing protein structure predictions, for example, by flagging flexible, disordered, or other functionally relevant regions.\n\nAvailability and ImplementationProtProfileMD is available at github.com/finnlueth/ProtProfileMD. The associated training data and model weights are available at huggingface.co/datasets/finnlueth/ProtProfileMD and huggingface.co/finnlueth/ProtProfileMD.",
+  "authors": [
+    "Lueth, F. H.",
+    "Mihaila, V.",
+    "Mirdita, M.",
+    "Steinegger, M.",
+    "Rost, B.",
+    "Heinzinger, M."
+  ],
+  "doi": "10.64898/2026.01.21.700698",
+  "first_seen": "2026-01-22",
+  "id": "biorxiv:10.64898/2026.01.21.700698",
+  "metadata": {
+    "abstract": "MotivationProteins function through motion. Yet, most discoveries still commence with static representations of protein structures. Here, we investigated the feasibility of leveraging protein dynamics to improve homology detection.\n\nResultsWe introduce ProtProfileMD, a sequence-to-3D-probability model that predicts, from an amino acid sequence, a profile of discrete structural representations capturing protein dynamics. We applied supervised parameter-efficient finetuning of the ProstT5 protein Language Model (pLM) to predict per-residue distributions over Foldseeks 3Di alphabet derived from motions observed in molecular dynamics. This original result reveals that the 3Di tokens, despite being coarse-grained descriptors of 3D structure, still offer sufficient resolution to capture aspects of conformational changes. This is evidenced by a correlation between fluctuations in the 3D protein structure over the course of a molecular dynamics trajectory and the entropy of 3Di states. Based on this insight, we introduce a proof-of-concept for making remote homology detection of proteins more sensitive by leveraging a proteins distinctive dynamic fingerprint captured by our model. Our method recovers flexibility signals with a fidelity that is biologically relevant, improving search and complementing protein structure predictions, for example, by flagging flexible, disordered, or other functionally relevant regions.\n\nAvailability and ImplementationProtProfileMD is available at github.com/finnlueth/ProtProfileMD. The associated training data and model weights are available at huggingface.co/datasets/finnlueth/ProtProfileMD and huggingface.co/finnlueth/ProtProfileMD.",
+    "author_corresponding": "Michael Heinzinger",
+    "author_corresponding_institution": "Helmholtz Center Munich",
+    "authors": "Lueth, F. H.; Mihaila, V.; Mirdita, M.; Steinegger, M.; Rost, B.; Heinzinger, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-22",
+    "doi": "10.64898/2026.01.21.700698",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/22/2026.01.21.700698.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Protein Language Modeling beyond static folds reveals sequence-encoded flexibility",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Helmholtz Center Munich",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-01-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "ProtProfileMD finetunes ProstT5 to predict per-residue distributions over Foldseek 3Di states from sequence, capturing MD-derived flexibility to aid remote…",
+  "title": "Protein Language Modeling beyond static folds reveals sequence-encoded flexibility",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.21.700698"
+}

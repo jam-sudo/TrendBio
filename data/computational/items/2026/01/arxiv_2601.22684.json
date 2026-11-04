@@ -1,0 +1,33 @@
+{
+  "abstract": "The BioModels database is one of the premier databases for computational models in systems biology. The database contains over 1000 curated models and an even larger number of non-curated models. All the models are stored in the machine-readable format, SBML. Although SBML can be translated into the human readable Antimony format, analyzing the models can still be time consuming. In order to bridge this gap, a LLM (large language model) assistant was created to analyze the BioModels and allow interaction between the user and the model using natural language. By doing so, a user can easily and rapidly extract the salient points in a given model. Our analysis workflow involved 'chunking' BioModels and converting them to plain text using llama3, and then embedding them in a ChromaDB database. The user-provided query was also embedded, and a similarity search was performed between the query and the BioModels in ChromaDB to extract the most relevant BioModels. The BioModels were then used as context to create the most accurate output in the chat between the user and the LLM. This approach greatly minimized the chance of hallucination and kept the LLM focused on the problem at hand.",
+  "authors": [
+    "Bhavyahshree Navaneetha Krishnan",
+    "Adel Heydarabadipour",
+    "Herbert Sauro"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-30",
+  "id": "arxiv:2601.22684",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.MN",
+    "categories": [
+      "q-bio.MN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.22684v1</ns0:id>\n    <ns0:title>BioModelsRAG: A Biological Modeling Assistant Using RAG (Retrieval Augmented Generation)</ns0:title>\n    <ns0:updated>2026-01-30T07:58:57Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.22684v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.22684v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The BioModels database is one of the premier databases for computational models in systems biology. The database contains over 1000 curated models and an even larger number of non-curated models. All the models are stored in the machine-readable format, SBML. Although SBML can be translated into the human readable Antimony format, analyzing the models can still be time consuming. In order to bridge this gap, a LLM (large language model) assistant was created to analyze the BioModels and allow interaction between the user and the model using natural language. By doing so, a user can easily and rapidly extract the salient points in a given model. Our analysis workflow involved 'chunking' BioModels and converting them to plain text using llama3, and then embedding them in a ChromaDB database. The user-provided query was also embedded, and a similarity search was performed between the query and the BioModels in ChromaDB to extract the most relevant BioModels. The BioModels were then used as context to create the most accurate output in the chat between the user and the LLM. This approach greatly minimized the chance of hallucination and kept the LLM focused on the problem at hand.</ns0:summary>\n    <ns0:category term=\"q-bio.MN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-30T07:58:57Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.MN\" />\n    <ns0:author>\n      <ns0:name>Bhavyahshree Navaneetha Krishnan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Adel Heydarabadipour</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Herbert Sauro</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-01-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "BioModelsRAG applies retrieval-augmented generation with llama3 and ChromaDB so users can query SBML systems biology models from BioModels in natural language.",
+  "title": "BioModelsRAG: A Biological Modeling Assistant Using RAG (Retrieval Augmented Generation)",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.22684v1"
+}

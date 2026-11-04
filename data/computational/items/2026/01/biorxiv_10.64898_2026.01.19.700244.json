@@ -1,0 +1,41 @@
+{
+  "abstract": "The enzyme turnover number (kcat) is a pivotal kinetic parameter for understanding bio-catalytic efficiency, yet its accurate prediction remains a grand challenge due to the complex interplay between local physicochemical constraints and global evolutionary context. Existing methods typically bifurcate into sequence-based approaches, which capture evolutionary semantics but miss fine-grained spatial details, or structure-based models, which often suffer from noise in whole-protein representations or lack global context.\n\nTo bridge this gap, we propose PocketGNN, a cross-modal deep learning framework that synergizes the precision of local 3D geometry with the breadth of global 1D sequence semantics. PocketGNN introduces a high-fidelity graph representation of the active pocket, enriched with a novel 24-dimensional geometric edge encoding (RBF distances, bond angles, dihedral angles) to capture the stereochemical determinants of catalysis. Crucially, this local structural view is fused with global evolutionary information extracted from pre-trained protein language models (ESM-2), creating a unified representation that spans spatial scales.\n\nEvaluated on a rigorous dataset derived from IntEnzyDB, PocketGNN achieves a Pearson correlation coefficient (r) of 0.98 and a coefficient of determination (R2) of 0.918 for log10(kcat) under standard random splitting. Furthermore, under a strict 40% sequence identity split designed to test zero-shot generalization to unseen families, the model maintains a robust correlation (r = 0.67, R2 = 0.44), significantly outperforming recent state-of-the-art methods including CatPred (r = 0.52) and CataPro (r = 0.50). Interpretability analysis confirms that the model successfully attends to key catalytic residues, validating its ability to learn chemically meaningful structure-function relationships rather than mere sequence memorization.",
+  "authors": [
+    "Li, Z.",
+    "Lu, D."
+  ],
+  "doi": "10.64898/2026.01.19.700244",
+  "first_seen": "2026-01-21",
+  "id": "biorxiv:10.64898/2026.01.19.700244",
+  "metadata": {
+    "abstract": "The enzyme turnover number (kcat) is a pivotal kinetic parameter for understanding bio-catalytic efficiency, yet its accurate prediction remains a grand challenge due to the complex interplay between local physicochemical constraints and global evolutionary context. Existing methods typically bifurcate into sequence-based approaches, which capture evolutionary semantics but miss fine-grained spatial details, or structure-based models, which often suffer from noise in whole-protein representations or lack global context.\n\nTo bridge this gap, we propose PocketGNN, a cross-modal deep learning framework that synergizes the precision of local 3D geometry with the breadth of global 1D sequence semantics. PocketGNN introduces a high-fidelity graph representation of the active pocket, enriched with a novel 24-dimensional geometric edge encoding (RBF distances, bond angles, dihedral angles) to capture the stereochemical determinants of catalysis. Crucially, this local structural view is fused with global evolutionary information extracted from pre-trained protein language models (ESM-2), creating a unified representation that spans spatial scales.\n\nEvaluated on a rigorous dataset derived from IntEnzyDB, PocketGNN achieves a Pearson correlation coefficient (r) of 0.98 and a coefficient of determination (R2) of 0.918 for log10(kcat) under standard random splitting. Furthermore, under a strict 40% sequence identity split designed to test zero-shot generalization to unseen families, the model maintains a robust correlation (r = 0.67, R2 = 0.44), significantly outperforming recent state-of-the-art methods including CatPred (r = 0.52) and CataPro (r = 0.50). Interpretability analysis confirms that the model successfully attends to key catalytic residues, validating its ability to learn chemically meaningful structure-function relationships rather than mere sequence memorization.",
+    "author_corresponding": "Diannan Lu",
+    "author_corresponding_institution": "Tsinghua University",
+    "authors": "Li, Z.; Lu, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-21",
+    "doi": "10.64898/2026.01.19.700244",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/21/2026.01.19.700244.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "PocketGNN: A Cross-Modal Framework Unifying Local 3D Pocket Geometry and Global Sequence Semantics for Enzyme Kinetic Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Tsinghua University",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-01-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "PocketGNN fuses local 3D active-pocket graph geometry with ESM-2 sequence embeddings to predict log10(kcat); reports r=0.67 under a 40% identity split versus…",
+  "title": "PocketGNN: A Cross-Modal Framework Unifying Local 3D Pocket Geometry and Global Sequence Semantics for Enzyme Kinetic Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.19.700244"
+}

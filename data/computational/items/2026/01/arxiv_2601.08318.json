@@ -1,0 +1,33 @@
+{
+  "abstract": "Background:Subject-specific finite element analysis accurately characterizes knee joint mechanics but is computationally expensive. Deep surrogate models provide a rapid alternative, yet their generalization across subjects under limited pose and load inputs remains unclear. It remains unclear whether the dominant source of prediction uncertainty arises from temporal history dependence or spatial propagation dependence. Methods:To disentangle these factors, we employed a shared MGN backbone with a fixed mesh topology. A dataset of running trials from nine subjects was constructed using an OpenSim-FEBio workflow. We developed four model variants to isolate specific dependencies: (1) a baseline MGN; (2) CT-MGN, incorporating a Control Transformer to encode short-horizon history; (3) MsgModMGN, applying state-conditioned modulation to message passing for adaptive propagation; (4) CT-MsgModMGN, combining both mechanisms. Models were evaluated using a rigorous grouped 3-fold cross-validation on unseen subjects.Results:The models incorporating history encoding significantly outperformed the baseline MGN and MsgModMGN in global accuracy and spatial consistency. Crucially, the CT module effectively mitigated the peak-shaving defect common in deep surrogates, significantly reducing peak stress prediction errors. In contrast, the spatial propagation modulation alone yielded no significant improvement over the baseline, and combining it with CT provided no additional benefit.Conclusion:Temporal history dependence, rather than spatial propagation modulation, is the primary driver of prediction uncertainty in cross-subject knee contact mechanics. Explicitly encoding short-horizon driver sequences enables the surrogate model to recover implicit phase information, thereby achieving superior fidelity in peak-stress capture and high-risk localization compared to purely state-based approaches.",
+  "authors": [
+    "Zhengye Pan",
+    "Jianwei Zuo",
+    "Jiajia Luo"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-13",
+  "id": "arxiv:2601.08318",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.08318v1</ns0:id>\n    <ns0:title>Disentangling History and Propagation Dependencies in Cross-Subject Knee Contact Stress Prediction Using a Shared MeshGraphNet Backbone</ns0:title>\n    <ns0:updated>2026-01-13T08:15:57Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.08318v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.08318v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Background:Subject-specific finite element analysis accurately characterizes knee joint mechanics but is computationally expensive. Deep surrogate models provide a rapid alternative, yet their generalization across subjects under limited pose and load inputs remains unclear. It remains unclear whether the dominant source of prediction uncertainty arises from temporal history dependence or spatial propagation dependence. Methods:To disentangle these factors, we employed a shared MGN backbone with a fixed mesh topology. A dataset of running trials from nine subjects was constructed using an OpenSim-FEBio workflow. We developed four model variants to isolate specific dependencies: (1) a baseline MGN; (2) CT-MGN, incorporating a Control Transformer to encode short-horizon history; (3) MsgModMGN, applying state-conditioned modulation to message passing for adaptive propagation; (4) CT-MsgModMGN, combining both mechanisms. Models were evaluated using a rigorous grouped 3-fold cross-validation on unseen subjects.Results:The models incorporating history encoding significantly outperformed the baseline MGN and MsgModMGN in global accuracy and spatial consistency. Crucially, the CT module effectively mitigated the peak-shaving defect common in deep surrogates, significantly reducing peak stress prediction errors. In contrast, the spatial propagation modulation alone yielded no significant improvement over the baseline, and combining it with CT provided no additional benefit.Conclusion:Temporal history dependence, rather than spatial propagation modulation, is the primary driver of prediction uncertainty in cross-subject knee contact mechanics. Explicitly encoding short-horizon driver sequences enables the surrogate model to recover implicit phase information, thereby achieving superior fidelity in peak-stress capture and high-risk localization compared to purely state-based approaches.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-13T08:15:57Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Zhengye Pan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jianwei Zuo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiajia Luo</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Compares MeshGraphNet surrogate variants for cross-subject knee contact stress; temporal history encoding via a Control Transformer improves peak stress…",
+  "title": "Disentangling History and Propagation Dependencies in Cross-Subject Knee Contact Stress Prediction Using a Shared MeshGraphNet Backbone",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.08318v1"
+}

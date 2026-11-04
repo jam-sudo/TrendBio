@@ -1,0 +1,44 @@
+{
+  "abstract": "DNA methylation is a significant epigenetic modification involving the addition of a methyl group to the position 5' of the cytosine residues. The modification is responsible for disease progression, immune response, and outcomes in diseases such as breast cancer (BC) and acute myeloid leukemia (AML). Illuminas HumanMethylation450 BeadChip (450K) and EPIC BeadChip (850K) methylation arrays are heavily used for such cancer studies to determine differentially expressed and differentially methylated genomic regions. Many of these are biomarkers used effectively for exploring therapeutic targets. Several studies report a few potential biomarkers, but the enormous numbers of largely unexplored probe-level (CpG sites) methylation signals may contain additional significant biomarkers. To prioritise the under-explored and disease-specific CpG sites from DNA methylation arrays and potentially uncover novel biomarkers, we present the novel approach GraphMeX-plain, a graph neural network (GNN)-based approach with explainable AI module. The underlying graph neural network is a principal neighbourhood aggregation (PNA). The approach uses the biomarkers reported in recent studies to rank biomarkers from the unexplored set. A similarity graph between CpG sites (known and unexplored sets) is constructed using DNA methylation {beta} values from arrays, producing an interaction graph. Biomarkers from recent studies are used as seeds and from the unexplored CpG sites, highly-variable ones (excluding the seeds) are selected that vary significantly between conditions (BC patients and normal controls for breast cancer arrays). Using the combination of seed and highly-variable CpG sites, a positive-unlabeled approach, network-informed adaptive positive-unlabeled learning (NIAPU), is utilized to assign a set of soft labels to unknown CpG sites such as likely positive, weakly negative, likely negative, and reliable negative in the descending order of likelihood of CpG sites being potential biomarkers. The graph neural network, a multi-layer PNA, refines the soft label assignments and achieves a high F1 classification score (weighted) of 0.93 for BC and 0.91 for AML. The most likely set of CpG sites, classified under \"likely positive\", are further explored using GNNExplainer, an explainable AI approach. Subgraphs for likely positive CpG sites, predicted with high probabilities, are computed and their proximities to the original seed CpG sites are analysed. The CpG sites which are predicted as likely positives have close interactions to the seeds. The top likely positive CpG site for BC is cg13265740 (C6orf115) where gene C6orf115 is strongly associated with BC. For AML, the top likely positive predicted CpG site is cg23281527 (KLHDC7A) where gene KLHDC7A plays a strong role in the mechanism of AML. A high percentage of these likely positive predicted CpG sites for both BC and AML, which remained unseen by the GNN model during training, are highly relevant to them and can serve as potential therapeutic targets and prognostic values.",
+  "authors": [
+    "Kumar, A.",
+    "Do, T. A.",
+    "Gruening, B.",
+    "Becker, H.",
+    "Backofen, R."
+  ],
+  "doi": "10.64898/2026.01.26.701692",
+  "first_seen": "2026-01-27",
+  "id": "biorxiv:10.64898/2026.01.26.701692",
+  "metadata": {
+    "abstract": "DNA methylation is a significant epigenetic modification involving the addition of a methyl group to the position 5' of the cytosine residues. The modification is responsible for disease progression, immune response, and outcomes in diseases such as breast cancer (BC) and acute myeloid leukemia (AML). Illuminas HumanMethylation450 BeadChip (450K) and EPIC BeadChip (850K) methylation arrays are heavily used for such cancer studies to determine differentially expressed and differentially methylated genomic regions. Many of these are biomarkers used effectively for exploring therapeutic targets. Several studies report a few potential biomarkers, but the enormous numbers of largely unexplored probe-level (CpG sites) methylation signals may contain additional significant biomarkers. To prioritise the under-explored and disease-specific CpG sites from DNA methylation arrays and potentially uncover novel biomarkers, we present the novel approach GraphMeX-plain, a graph neural network (GNN)-based approach with explainable AI module. The underlying graph neural network is a principal neighbourhood aggregation (PNA). The approach uses the biomarkers reported in recent studies to rank biomarkers from the unexplored set. A similarity graph between CpG sites (known and unexplored sets) is constructed using DNA methylation {beta} values from arrays, producing an interaction graph. Biomarkers from recent studies are used as seeds and from the unexplored CpG sites, highly-variable ones (excluding the seeds) are selected that vary significantly between conditions (BC patients and normal controls for breast cancer arrays). Using the combination of seed and highly-variable CpG sites, a positive-unlabeled approach, network-informed adaptive positive-unlabeled learning (NIAPU), is utilized to assign a set of soft labels to unknown CpG sites such as likely positive, weakly negative, likely negative, and reliable negative in the descending order of likelihood of CpG sites being potential biomarkers. The graph neural network, a multi-layer PNA, refines the soft label assignments and achieves a high F1 classification score (weighted) of 0.93 for BC and 0.91 for AML. The most likely set of CpG sites, classified under \"likely positive\", are further explored using GNNExplainer, an explainable AI approach. Subgraphs for likely positive CpG sites, predicted with high probabilities, are computed and their proximities to the original seed CpG sites are analysed. The CpG sites which are predicted as likely positives have close interactions to the seeds. The top likely positive CpG site for BC is cg13265740 (C6orf115) where gene C6orf115 is strongly associated with BC. For AML, the top likely positive predicted CpG site is cg23281527 (KLHDC7A) where gene KLHDC7A plays a strong role in the mechanism of AML. A high percentage of these likely positive predicted CpG sites for both BC and AML, which remained unseen by the GNN model during training, are highly relevant to them and can serve as potential therapeutic targets and prognostic values.",
+    "author_corresponding": "Anup Kumar",
+    "author_corresponding_institution": "University of Freiburg",
+    "authors": "Kumar, A.; Do, T. A.; Gruening, B.; Becker, H.; Backofen, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-27",
+    "doi": "10.64898/2026.01.26.701692",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/27/2026.01.26.701692.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Prioritizing DNA methylation biomarkers using graph neural networks and explainable AI",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Freiburg",
+  "preprint_id": null,
+  "primary_category": "epigenomics",
+  "published_at": "2026-01-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "GraphMeX-plain uses a PNA graph neural network with GNNExplainer and NIAPU soft labelling to rank unexplored CpG sites as methylation biomarkers in breast…",
+  "title": "Prioritizing DNA methylation biomarkers using graph neural networks and explainable AI",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.26.701692"
+}

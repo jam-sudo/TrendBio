@@ -1,0 +1,41 @@
+{
+  "abstract": "Deep learning has transformed protein structure prediction, yet most systems return a single dominant conformation with little control over alternative functional states. We introduce pair representation scaling, an inference-time method that biases conformational sampling in diffusion-based structure predictors by multiplying the latent pair representation by a single scalar before the Pairformer trunk, without retraining, an auxiliary model, or a second forward pass. On 86 two-state targets spanning domain motions and membrane transporters, scaling broadens the conformational ensembles of both AlphaFold 3 and Boltz-2 and recovers alternative states that default inference misses, most strongly in AlphaFold 3, where the gains extend even to targets deposited after the training cutoff. It approaches the alternative-state recovery of alignment-based sampling methods, and the benefit persists even without a multiple sequence alignment. The predicted distance distributions show that scaling shifts the encoded two-state distribution toward the experimentally observed alternative state, a directed modulation rather than arbitrary perturbation. Pair representation scaling is an interpretable, low-cost handle on the conformational ensembles of deep learning structure predictors.\n\n\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=62 SRC=\"FIGDIR/small/701250v3_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (16K):\norg.highwire.dtl.DTLVardef@5e52dorg.highwire.dtl.DTLVardef@1090910org.highwire.dtl.DTLVardef@3218beorg.highwire.dtl.DTLVardef@f67068_HPS_FORMAT_FIGEXP  M_FIG C_FIG Pair representation scalingA query sequence and its multiple sequence alignment enter the Pairformer trunk, where the latent pair representation z is rescaled by a single global scalar to (1 + {beta}) z and the diffusion module then generates a structure. The alignment and the trained weights are unchanged, and the same operation applies in AlphaFold 3 and Boltz-2. The scalar {beta} is a single explicit handle: sweeping it broadens the sampled ensemble toward alternative states, and its effect can be read out directly inside the network.",
+  "authors": [
+    "Suzuki, S.",
+    "Amagasa, T."
+  ],
+  "doi": "10.64898/2026.01.23.701250",
+  "first_seen": "2026-01-23",
+  "id": "biorxiv:10.64898/2026.01.23.701250",
+  "metadata": {
+    "abstract": "Deep learning has transformed protein structure prediction, yet most systems return a single dominant conformation with little control over alternative functional states. We introduce pair representation scaling, an inference-time method that biases conformational sampling in diffusion-based structure predictors by multiplying the latent pair representation by a single scalar before the Pairformer trunk, without retraining, an auxiliary model, or a second forward pass. On 86 two-state targets spanning domain motions and membrane transporters, scaling broadens the conformational ensembles of both AlphaFold 3 and Boltz-2 and recovers alternative states that default inference misses, most strongly in AlphaFold 3, where the gains extend even to targets deposited after the training cutoff. It approaches the alternative-state recovery of alignment-based sampling methods, and the benefit persists even without a multiple sequence alignment. The predicted distance distributions show that scaling shifts the encoded two-state distribution toward the experimentally observed alternative state, a directed modulation rather than arbitrary perturbation. Pair representation scaling is an interpretable, low-cost handle on the conformational ensembles of deep learning structure predictors.\n\n\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=62 SRC=\"FIGDIR/small/701250v3_ufig1.gif\" ALT=\"Figure 1\">\nView larger version (16K):\norg.highwire.dtl.DTLVardef@5e52dorg.highwire.dtl.DTLVardef@1090910org.highwire.dtl.DTLVardef@3218beorg.highwire.dtl.DTLVardef@f67068_HPS_FORMAT_FIGEXP  M_FIG C_FIG Pair representation scalingA query sequence and its multiple sequence alignment enter the Pairformer trunk, where the latent pair representation z is rescaled by a single global scalar to (1 + {beta}) z and the diffusion module then generates a structure. The alignment and the trained weights are unchanged, and the same operation applies in AlphaFold 3 and Boltz-2. The scalar {beta} is a single explicit handle: sweeping it broadens the sampled ensemble toward alternative states, and its effect can be read out directly inside the network.",
+    "author_corresponding": "Shosuke Suzuki",
+    "author_corresponding_institution": "University of Tsukuba",
+    "authors": "Suzuki, S.; Amagasa, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-23",
+    "doi": "10.64898/2026.01.23.701250",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/23/2026.01.23.701250.source.xml",
+    "license": "cc_by",
+    "published": "10.1021/acs.jcim.6c02094",
+    "server": "bioRxiv",
+    "title": "Steering Conformational Sampling in Boltz-2 via Pair Representation Scaling",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Tsukuba",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-01-23",
+  "published_doi": "10.1021/acs.jcim.6c02094",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Inference-time pair representation scaling by a single scalar steers conformational sampling in AlphaFold 3 and Boltz-2, recovering alternative states on 86…",
+  "title": "Steering Conformational Sampling in Boltz-2 via Pair Representation Scaling",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.23.701250"
+}

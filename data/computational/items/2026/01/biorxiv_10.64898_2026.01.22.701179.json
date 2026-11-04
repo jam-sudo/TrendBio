@@ -1,0 +1,43 @@
+{
+  "abstract": "BackgroundSingle-cell pooled CRISPR screens (Perturb-seq) are a powerful tool in functional genomics. A key preprocessing step is to determine which cells received which perturbations based on possibly noisy sequencing counts of the guide RNA library. Many existing approaches to this problem require fitting probabilistic models which may be computationally expensive on large screens with 10s of thousands of cells and guides.\n\nResultsWe propose to view the guide count matrix as a contingency table and use Fishers Exact Test to test for associations between cell and guide barcodes. This approach is fast, normalizes for both cell and guide-specific size factors, and provides a p-value for each cell-guide pair. Our method further uses a multiple testing correction approach that accounts for the correlation structure between the tests, and a correction for Simpsons paradox that arises due to hidden confounding. Additionally, to facilitate the development and benchmarking of guide assignment methods, we propose a framework for simulating guide counts with a realistic model of sequencing noise.\n\nConclusionsWe find that our method compares favorably to existing methods in both accuracy and runtime on simulated and real datasets. We provide our method in an easy to use R package, fishash, available at https://github.com/jackkamm/fishash. Additionally, the code to reproduce the results of this manuscript is available at https://github.com/jackkamm/fishash_analysis.",
+  "authors": [
+    "Kamm, J.",
+    "Yeung, J.",
+    "Forrest, W."
+  ],
+  "doi": "10.64898/2026.01.22.701179",
+  "first_seen": "2026-01-23",
+  "id": "biorxiv:10.64898/2026.01.22.701179",
+  "metadata": {
+    "abstract": "BackgroundSingle-cell pooled CRISPR screens (Perturb-seq) are a powerful tool in functional genomics. A key preprocessing step is to determine which cells received which perturbations based on possibly noisy sequencing counts of the guide RNA library. Many existing approaches to this problem require fitting probabilistic models which may be computationally expensive on large screens with 10s of thousands of cells and guides.\n\nResultsWe propose to view the guide count matrix as a contingency table and use Fishers Exact Test to test for associations between cell and guide barcodes. This approach is fast, normalizes for both cell and guide-specific size factors, and provides a p-value for each cell-guide pair. Our method further uses a multiple testing correction approach that accounts for the correlation structure between the tests, and a correction for Simpsons paradox that arises due to hidden confounding. Additionally, to facilitate the development and benchmarking of guide assignment methods, we propose a framework for simulating guide counts with a realistic model of sequencing noise.\n\nConclusionsWe find that our method compares favorably to existing methods in both accuracy and runtime on simulated and real datasets. We provide our method in an easy to use R package, fishash, available at https://github.com/jackkamm/fishash. Additionally, the code to reproduce the results of this manuscript is available at https://github.com/jackkamm/fishash_analysis.",
+    "author_corresponding": "Jack Kamm",
+    "author_corresponding_institution": "Genentech Inc",
+    "authors": "Kamm, J.; Yeung, J.; Forrest, W.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-01-23",
+    "doi": "10.64898/2026.01.22.701179",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/23/2026.01.22.701179.source.xml",
+    "license": "cc_no",
+    "published": "10.1186/s12859-026-06631-9",
+    "server": "bioRxiv",
+    "title": "Fishash: A contingency table approach to Perturb-seq guide assignment",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Genentech Inc",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-01-23",
+  "published_doi": "10.1186/s12859-026-06631-9",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Fishash applies Fisher's Exact Test to guide-count contingency tables to assign Perturb-seq guides to cells, with multiple-testing and Simpson's paradox…",
+  "title": "Fishash: A contingency table approach to Perturb-seq guide assignment",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.22.701179"
+}

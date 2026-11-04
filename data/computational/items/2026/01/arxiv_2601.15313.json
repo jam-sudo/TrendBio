@@ -1,0 +1,31 @@
+{
+  "abstract": "Biological memory solves a problem that eludes current AI: storing specific episodic facts without corrupting general semantic knowledge. Complementary Learning Systems theory explains this through two subsystems - a fast hippocampal system using sparse, pattern-separated representations for episodes, and a slow neocortical system using distributed representations for statistical regularities. Current AI systems lack this separation, attempting to serve both functions through neural weights alone. We identify the Orthogonality Constraint: reliable memory requires orthogonal keys, but semantic embeddings cannot be orthogonal because training clusters similar concepts together. The result is Semantic Interference (connecting to what cognitive psychologists have long observed in human memory), where neural systems writing facts into shared continuous parameters collapse to near-random accuracy within tens of semantically related facts. Through semantic density (rho), the mean pairwise cosine similarity, we show collapse occurs at N=5 facts (rho > 0.6) or N ~ 20-75 (moderate rho). We validate across modalities: 16,309 Wikipedia facts, scientific measurements (rho = 0.96, 0.02% accuracy at N=10,000), and image embeddings (rho = 0.82, 0.05% at N=2,000). This failure is geometric - no increase in model capacity can overcome interference when keys share semantic overlap. We propose Knowledge Objects (KOs): structured facts with hash-based identity, controlled vocabularies, and explicit version chains. On Wikipedia facts, KO retrieval achieves 45.7% where Modern Hopfield Networks collapse to near-zero; hash-based retrieval maintains 100%. Production systems (Claude Memory, ChatGPT Memory) store unstructured text, causing schema drift (40-70% consistency) and version ambiguity. Knowledge Objects provide the discrete hippocampal component that enables reliable bicameral memory.",
+  "authors": [
+    "Oliver Zahn",
+    "Matt Beton",
+    "Simran Chana"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-14",
+  "id": "arxiv:2601.15313",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.NC",
+    "categories": [
+      "q-bio.NC",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.15313v2</ns0:id>\n    <ns0:title>Attention Is Not Retention: The Orthogonality Constraint in Infinite-Context Architectures</ns0:title>\n    <ns0:updated>2026-02-04T07:21:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.15313v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.15313v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Biological memory solves a problem that eludes current AI: storing specific episodic facts without corrupting general semantic knowledge. Complementary Learning Systems theory explains this through two subsystems - a fast hippocampal system using sparse, pattern-separated representations for episodes, and a slow neocortical system using distributed representations for statistical regularities. Current AI systems lack this separation, attempting to serve both functions through neural weights alone. We identify the Orthogonality Constraint: reliable memory requires orthogonal keys, but semantic embeddings cannot be orthogonal because training clusters similar concepts together. The result is Semantic Interference (connecting to what cognitive psychologists have long observed in human memory), where neural systems writing facts into shared continuous parameters collapse to near-random accuracy within tens of semantically related facts. Through semantic density (rho), the mean pairwise cosine similarity, we show collapse occurs at N=5 facts (rho &gt; 0.6) or N ~ 20-75 (moderate rho). We validate across modalities: 16,309 Wikipedia facts, scientific measurements (rho = 0.96, 0.02% accuracy at N=10,000), and image embeddings (rho = 0.82, 0.05% at N=2,000). This failure is geometric - no increase in model capacity can overcome interference when keys share semantic overlap. We propose Knowledge Objects (KOs): structured facts with hash-based identity, controlled vocabularies, and explicit version chains. On Wikipedia facts, KO retrieval achieves 45.7% where Modern Hopfield Networks collapse to near-zero; hash-based retrieval maintains 100%. Production systems (Claude Memory, ChatGPT Memory) store unstructured text, causing schema drift (40-70% consistency) and version ambiguity. Knowledge Objects provide the discrete hippocampal component that enables reliable bicameral memory.</ns0:summary>\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-14T18:55:23Z</ns0:published>\n    <ns1:comment>32 Pages, 7 Figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.NC\" />\n    <ns0:author>\n      <ns0:name>Oliver Zahn</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Matt Beton</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Simran Chana</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-14",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Shows semantic overlap causes neural fact-memory interference; proposes Knowledge Objects with hash-based retrieval for reliable storage.",
+  "title": "Attention Is Not Retention: The Orthogonality Constraint in Infinite-Context Architectures",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.15313v2"
+}
