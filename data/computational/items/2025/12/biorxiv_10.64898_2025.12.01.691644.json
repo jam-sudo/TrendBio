@@ -1,0 +1,47 @@
+{
+  "abstract": "Detecting long shared ancestry tracts in large haplotype panels is central to IBD analysis, imputation, and local ancestry inference, and can be approximated computationally by finding Set-Maximal Exact Matches (SMEMs) between sequences. The Positional Burrows-Wheeler Transform (PBWT) provides an efficient index for these panels, yet current methods often enumerate all SMEMs, producing a large number of short, uninformative matches. We introduce Positional Boyer- Moore-Li (PBML), which restricts enumeration to SMEMs occurring in at least k haplotypes and spanning at least L sites (kL-SMEMs). PBML is the first algorithm for computing KL-SMEMs on top of a single compressed run-length encoded PBWT index reusable for any (k, L) without rebuilding. On the 1000 Genomes Project, PBML achieves 4.6x faster query time than {micro}-PBWT and 2.4x over Durbins PBWT with lower memory, scaling to 15.9x over {micro}-PBWT at 16 threads. On a 10,000-haplotype panel from the Tennessee BIG Initiative, a diverse admixed cohort, PBML outperforms {micro}-PBWT by up to 4.7x in k-SMEM finding. By applying both thresholds during traversal, PBML extracts biologically informative, population-shared segments while filtering millions of short matches, a capability not available in current tools. On the BIG panel, in about 10 seconds PBML finds 2,441 long tracts at (k = 50, L = 5000) shared by an average of 60 haplotypes against 1000 queries, significantly reducing the 4.8 million unfiltered SMEMs shared on average by 2 haplotypes. These results establish PBML as a scalable tool for targeted long-range shared ancestry detection in large, diverse panels.",
+  "authors": [
+    "Islam, U. I.",
+    "Cozzi, D.",
+    "Gagie, T.",
+    "Varki, R.",
+    "Colonna, V.",
+    "Garrison, E.",
+    "Bonizzoni, P.",
+    "Boucher, C."
+  ],
+  "doi": "10.64898/2025.12.01.691644",
+  "first_seen": "2025-12-03",
+  "id": "biorxiv:10.64898/2025.12.01.691644",
+  "metadata": {
+    "abstract": "Detecting long shared ancestry tracts in large haplotype panels is central to IBD analysis, imputation, and local ancestry inference, and can be approximated computationally by finding Set-Maximal Exact Matches (SMEMs) between sequences. The Positional Burrows-Wheeler Transform (PBWT) provides an efficient index for these panels, yet current methods often enumerate all SMEMs, producing a large number of short, uninformative matches. We introduce Positional Boyer- Moore-Li (PBML), which restricts enumeration to SMEMs occurring in at least k haplotypes and spanning at least L sites (kL-SMEMs). PBML is the first algorithm for computing KL-SMEMs on top of a single compressed run-length encoded PBWT index reusable for any (k, L) without rebuilding. On the 1000 Genomes Project, PBML achieves 4.6x faster query time than {micro}-PBWT and 2.4x over Durbins PBWT with lower memory, scaling to 15.9x over {micro}-PBWT at 16 threads. On a 10,000-haplotype panel from the Tennessee BIG Initiative, a diverse admixed cohort, PBML outperforms {micro}-PBWT by up to 4.7x in k-SMEM finding. By applying both thresholds during traversal, PBML extracts biologically informative, population-shared segments while filtering millions of short matches, a capability not available in current tools. On the BIG panel, in about 10 seconds PBML finds 2,441 long tracts at (k = 50, L = 5000) shared by an average of 60 haplotypes against 1000 queries, significantly reducing the 4.8 million unfiltered SMEMs shared on average by 2 haplotypes. These results establish PBML as a scalable tool for targeted long-range shared ancestry detection in large, diverse panels.",
+    "author_corresponding": "Uwaise Ibna Islam",
+    "author_corresponding_institution": "University of Florida",
+    "authors": "Islam, U. I.; Cozzi, D.; Gagie, T.; Varki, R.; Colonna, V.; Garrison, E.; Bonizzoni, P.; Boucher, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-12-03",
+    "doi": "10.64898/2025.12.01.691644",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/12/03/2025.12.01.691644.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Scalable PBWT Queries with Minimum-Length SMEMConstraints",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Florida",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-12-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "PBML enumerates SMEMs shared by at least k haplotypes spanning at least L sites on a reusable run-length PBWT index, enabling fast targeted shared-ancestry…",
+  "title": "Scalable PBWT Queries with Minimum-Length SMEMConstraints",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2025.12.01.691644"
+}

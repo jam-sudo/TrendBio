@@ -1,0 +1,31 @@
+{
+  "abstract": "Selective State Space Models (SSMs) achieve linear-time inference, yet their gradient-based sensitivity analysis remains bottlenecked by O(L) memory scaling during backpropagation. This memory constraint precludes genomic-scale modeling (L > 10^5) on consumer-grade hardware. We introduce Phase Gradient Flow (PGF), a framework that computes exact analytical derivatives by operating directly in the state-space manifold, bypassing the need to materialize the intermediate computational graph. By reframing SSM dynamics as Tiled Operator-Space Evolution (TOSE), our method delivers O(1) memory complexity relative to sequence length, yielding a 94% reduction in peak VRAM and a 23x increase in throughput compared to standard Autograd. Unlike parallel prefix scans that exhibit numerical divergence in stiff ODE regimes, PGF ensures stability through invariant error scaling, maintaining near-machine precision across extreme sequences. We demonstrate the utility of PGF on an impulse-response benchmark with 128,000-step sequences - a scale where conventional Autograd encounters prohibitive memory overhead, often leading to out-of-memory (OOM) failures in multi-layered models. Our work enables chromosome-scale sensitivity analysis on a single GPU, bridging the gap between theoretical infinite-context models and practical hardware limitations.",
+  "authors": [
+    "Shuhuan Wang",
+    "Yuzhen Xie",
+    "Jiayi Li",
+    "Yinliang Diao"
+  ],
+  "doi": null,
+  "first_seen": "2025-12-28",
+  "id": "arxiv:2512.23068",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.23068v1</ns0:id>\n    <ns0:title>Breaking the Memory Wall: Exact Analytical Differentiation via Tiled Operator-Space Evolution</ns0:title>\n    <ns0:updated>2025-12-28T20:27:58Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.23068v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.23068v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Selective State Space Models (SSMs) achieve linear-time inference, yet their gradient-based sensitivity analysis remains bottlenecked by O(L) memory scaling during backpropagation. This memory constraint precludes genomic-scale modeling (L &gt; 10^5) on consumer-grade hardware. We introduce Phase Gradient Flow (PGF), a framework that computes exact analytical derivatives by operating directly in the state-space manifold, bypassing the need to materialize the intermediate computational graph. By reframing SSM dynamics as Tiled Operator-Space Evolution (TOSE), our method delivers O(1) memory complexity relative to sequence length, yielding a 94% reduction in peak VRAM and a 23x increase in throughput compared to standard Autograd. Unlike parallel prefix scans that exhibit numerical divergence in stiff ODE regimes, PGF ensures stability through invariant error scaling, maintaining near-machine precision across extreme sequences. We demonstrate the utility of PGF on an impulse-response benchmark with 128,000-step sequences - a scale where conventional Autograd encounters prohibitive memory overhead, often leading to out-of-memory (OOM) failures in multi-layered models. Our work enables chromosome-scale sensitivity analysis on a single GPU, bridging the gap between theoretical infinite-context models and practical hardware limitations.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-28T20:27:58Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Shuhuan Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuzhen Xie</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiayi Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yinliang Diao</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-12-28",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Phase Gradient Flow computes exact gradients for selective state space models with O(1) memory in sequence length, tested on 128k-step impulse-response…",
+  "title": "Breaking the Memory Wall: Exact Analytical Differentiation via Tiled Operator-Space Evolution",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.23068v1"
+}

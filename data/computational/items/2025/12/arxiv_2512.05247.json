@@ -1,0 +1,32 @@
+{
+  "abstract": "Given a sequence $s_1$ of $n$ letters drawn i.i.d. from an alphabet of size $σ$ and a mutated substring $s_2$ of length $m < n$, we often want to recover the mutation history that generated $s_2$ from $s_1$. Modern sequence aligners are widely used for this task, and many employ the seed-chain-extend heuristic with $k$-mer seeds. Previously, Shaw and Yu showed that optimal linear-gap cost chaining can produce a chain with $1 - O\\left(\\frac{1}{\\sqrt{m}}\\right)$ recoverability, the proportion of the mutation history that is recovered, in $O\\left(mn^{2.43θ} \\log n\\right)$ expected time, where $θ< 0.206$ is the mutation rate under a substitution-only channel and $s_1$ is assumed to be uniformly random. However, a gap remains between theory and practice, since real genomic data includes insertions and deletions (indels), and yet seed-chain-extend remains effective. In this paper, we generalize those prior results by introducing mathematical machinery to deal with the two new obstacles introduced by indel channels: the dependence of neighboring anchors and the presence of anchors that are only partially correct. We are thus able\n  to prove that the expected recoverability of an optimal chain is $\\ge 1 - O\\Bigl(\\frac{1}{\\sqrt{m}}\\Bigr)$ and the expected runtime is $O(mn^{3.15 \\cdot θ_T}\\log n)$, when the total mutation rate given by the sum of the substitution, insertion, and deletion mutation rates ($θ_T = θ_i + θ_d + θ_s$) is less than $0.159$.",
+  "authors": [
+    "Spencer Gibson",
+    "Yun William Yu"
+  ],
+  "doi": null,
+  "first_seen": "2025-12-04",
+  "id": "arxiv:2512.05247",
+  "metadata": {
+    "arxiv_primary_category": "cs.DS",
+    "categories": [
+      "cs.DS",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.05247v1</ns0:id>\n    <ns0:title>Incorporating indel channels into average-case analysis of seed-chain-extend</ns0:title>\n    <ns0:updated>2025-12-04T20:51:20Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.05247v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.05247v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Given a sequence $s_1$ of $n$ letters drawn i.i.d. from an alphabet of size $σ$ and a mutated substring $s_2$ of length $m &lt; n$, we often want to recover the mutation history that generated $s_2$ from $s_1$. Modern sequence aligners are widely used for this task, and many employ the seed-chain-extend heuristic with $k$-mer seeds. Previously, Shaw and Yu showed that optimal linear-gap cost chaining can produce a chain with $1 - O\\left(\\frac{1}{\\sqrt{m}}\\right)$ recoverability, the proportion of the mutation history that is recovered, in $O\\left(mn^{2.43θ} \\log n\\right)$ expected time, where $θ&lt; 0.206$ is the mutation rate under a substitution-only channel and $s_1$ is assumed to be uniformly random. However, a gap remains between theory and practice, since real genomic data includes insertions and deletions (indels), and yet seed-chain-extend remains effective. In this paper, we generalize those prior results by introducing mathematical machinery to deal with the two new obstacles introduced by indel channels: the dependence of neighboring anchors and the presence of anchors that are only partially correct. We are thus able\n  to prove that the expected recoverability of an optimal chain is $\\ge 1 - O\\Bigl(\\frac{1}{\\sqrt{m}}\\Bigr)$ and the expected runtime is $O(mn^{3.15 \\cdot θ_T}\\log n)$, when the total mutation rate given by the sum of the substitution, insertion, and deletion mutation rates ($θ_T = θ_i + θ_d + θ_s$) is less than $0.159$.</ns0:summary>\n    <ns0:category term=\"cs.DS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-04T20:51:20Z</ns0:published>\n    <ns1:comment>25 pages (10 page main text + 2 page biblio + 13 page appendix); conference submission</ns1:comment>\n    <ns1:primary_category term=\"cs.DS\" />\n    <ns0:author>\n      <ns0:name>Spencer Gibson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yun William Yu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-12-04",
+  "published_doi": "10.1093/bioinformatics/btag312",
+  "relevant": false,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Extends average-case analysis of seed-chain-extend alignment to indel channels, proving recoverability and runtime bounds when total mutation rate is below…",
+  "title": "Incorporating indel channels into average-case analysis of seed-chain-extend",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.05247v1"
+}

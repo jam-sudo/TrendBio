@@ -1,0 +1,36 @@
+{
+  "abstract": "Lipophilicity (logP) prediction remains central to drug discovery, yet linear regression models for this task frequently violate statistical assumptions in ways that invalidate their reported performance metrics. We analyzed 426,850 bioactive molecules from a rigorously curated intersection of PubChem, ChEMBL, and eMolecules databases, revealing severe heteroskedasticity in linear models predicting computed logP values (XLOGP3): residual variance increases 4.2-fold in lipophilic regions (logP greater than 5) compared to balanced regions (logP 2 to 4). Classical remediation strategies (Weighted Least Squares and Box-Cox transformation) failed to resolve this violation (Breusch-Pagan p-value less than 0.0001 for all variants). Tree-based ensemble methods (Random Forest R-squared of 0.764, XGBoost R-squared of 0.765) proved inherently robust to heteroskedasticity while delivering superior predictive performance. SHAP analysis resolved a critical multicollinearity paradox: despite a weak bivariate correlation of 0.146, molecular weight emerged as the single most important predictor (mean absolute SHAP value of 0.573), with its effect suppressed in simple correlations by confounding with topological polar surface area (TPSA). These findings demonstrate that standard linear models face fundamental challenges for computed lipophilicity prediction and provide a principled framework for interpreting ensemble models in QSAR applications.",
+  "authors": [
+    " Malikussaid",
+    "Septian Caesar Floresko",
+    "Ade Romadhony",
+    "Isman Kurniawan",
+    "Warih Maharani",
+    "Hilal Hudan Nuha"
+  ],
+  "doi": "10.1109/KST67832.2026.11431952",
+  "first_seen": "2025-12-31",
+  "id": "arxiv:2512.24643",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "physics.chem-ph",
+      "q-bio.BM",
+      "stat.AP"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.24643v2</ns0:id>\n    <ns0:title>Diagnosing Heteroskedasticity and Resolving Multicollinearity Paradoxes in Physicochemical Property Prediction</ns0:title>\n    <ns0:updated>2026-01-01T10:32:53Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.24643v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.24643v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Lipophilicity (logP) prediction remains central to drug discovery, yet linear regression models for this task frequently violate statistical assumptions in ways that invalidate their reported performance metrics. We analyzed 426,850 bioactive molecules from a rigorously curated intersection of PubChem, ChEMBL, and eMolecules databases, revealing severe heteroskedasticity in linear models predicting computed logP values (XLOGP3): residual variance increases 4.2-fold in lipophilic regions (logP greater than 5) compared to balanced regions (logP 2 to 4). Classical remediation strategies (Weighted Least Squares and Box-Cox transformation) failed to resolve this violation (Breusch-Pagan p-value less than 0.0001 for all variants). Tree-based ensemble methods (Random Forest R-squared of 0.764, XGBoost R-squared of 0.765) proved inherently robust to heteroskedasticity while delivering superior predictive performance. SHAP analysis resolved a critical multicollinearity paradox: despite a weak bivariate correlation of 0.146, molecular weight emerged as the single most important predictor (mean absolute SHAP value of 0.573), with its effect suppressed in simple correlations by confounding with topological polar surface area (TPSA). These findings demonstrate that standard linear models face fundamental challenges for computed lipophilicity prediction and provide a principled framework for interpreting ensemble models in QSAR applications.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.chem-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.AP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-31T05:32:13Z</ns0:published>\n    <ns1:comment>7 pages, 4 figures, 3 tables, to be published in KST 2026, unabridged version exists as arXiv:2512.24643v1</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns1:journal_ref>Proc. 2026 Int. Conf. Knowl. Smart Technol. (KST), 2026, pp. 645-651</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name> Malikussaid</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Septian Caesar Floresko</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ade Romadhony</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Isman Kurniawan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Warih Maharani</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hilal Hudan Nuha</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1109/KST67832.2026.11431952</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1109/KST67832.2026.11431952\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-12-31",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Linear logP models show heteroskedasticity on 426,850 molecules; tree ensembles perform better and SHAP ranks molecular weight top.",
+  "title": "Diagnosing Heteroskedasticity and Resolving Multicollinearity Paradoxes in Physicochemical Property Prediction",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.24643v2"
+}

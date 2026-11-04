@@ -1,0 +1,34 @@
+{
+  "abstract": "Understanding how small molecules perturb gene expression is essential for uncovering drug mechanisms, predicting off-target effects, and identifying repurposing opportunities. While prior deep learning frameworks have integrated multimodal embeddings into biomedical knowledge graphs (BKGs) and further improved these representations through graph neural network message-passing paradigms, these models have been applied to tasks such as link prediction and binary drug-disease association, rather than the task of gene perturbation, which may unveil more about mechanistic transcriptomic effects. To address this gap, we construct a merged biomedical graph that integrates (i) PrimeKG++, an augmentation of PrimeKG containing semantically rich embeddings for nodes with (ii) LINCS L1000 drug and cell line nodes, initialized with multimodal embeddings from foundation models such as MolFormerXL and BioBERT. Using this heterogeneous graph, we train a graph attention network (GAT) with a downstream prediction head that learns the delta expression profile of over 978 landmark genes for a given drug-cell pair. Our results show that our framework outperforms MLP baselines for differentially expressed genes (DEG) -- which predict the delta expression given a concatenated embedding of drug features, target features, and baseline cell expression -- under the scaffold and random splits. Ablation experiments with edge shuffling and node feature randomization further demonstrate that the edges provided by biomedical KGs enhance perturbation-level prediction. More broadly, our framework provides a path toward mechanistic drug modeling: moving beyond binary drug-disease association tasks to granular transcriptional effects of therapeutic intervention.",
+  "authors": [
+    "Pascal Passigan",
+    "Kevin Zhu",
+    "Angelina Ning"
+  ],
+  "doi": null,
+  "first_seen": "2025-12-24",
+  "id": "arxiv:2512.22251",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.22251v2</ns0:id>\n    <ns0:title>Interpretable Perturbation Modeling Through Biomedical Knowledge Graphs</ns0:title>\n    <ns0:updated>2025-12-31T17:30:56Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.22251v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.22251v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Understanding how small molecules perturb gene expression is essential for uncovering drug mechanisms, predicting off-target effects, and identifying repurposing opportunities. While prior deep learning frameworks have integrated multimodal embeddings into biomedical knowledge graphs (BKGs) and further improved these representations through graph neural network message-passing paradigms, these models have been applied to tasks such as link prediction and binary drug-disease association, rather than the task of gene perturbation, which may unveil more about mechanistic transcriptomic effects. To address this gap, we construct a merged biomedical graph that integrates (i) PrimeKG++, an augmentation of PrimeKG containing semantically rich embeddings for nodes with (ii) LINCS L1000 drug and cell line nodes, initialized with multimodal embeddings from foundation models such as MolFormerXL and BioBERT. Using this heterogeneous graph, we train a graph attention network (GAT) with a downstream prediction head that learns the delta expression profile of over 978 landmark genes for a given drug-cell pair. Our results show that our framework outperforms MLP baselines for differentially expressed genes (DEG) -- which predict the delta expression given a concatenated embedding of drug features, target features, and baseline cell expression -- under the scaffold and random splits. Ablation experiments with edge shuffling and node feature randomization further demonstrate that the edges provided by biomedical KGs enhance perturbation-level prediction. More broadly, our framework provides a path toward mechanistic drug modeling: moving beyond binary drug-disease association tasks to granular transcriptional effects of therapeutic intervention.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-24T04:42:25Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Pascal Passigan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kevin Zhu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Angelina Ning</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-12-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "transcriptomics"
+  ],
+  "source": "arxiv",
+  "summary": "Graph attention network over a merged biomedical knowledge graph (PrimeKG++ with LINCS L1000) predicts drug-cell delta expression of 978 landmark genes,…",
+  "title": "Interpretable Perturbation Modeling Through Biomedical Knowledge Graphs",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.22251v2"
+}

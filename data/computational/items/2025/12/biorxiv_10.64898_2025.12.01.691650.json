@@ -1,0 +1,42 @@
+{
+  "abstract": "As viral sequencing datasets continue to grow, traditional alignment-based variant calling pipelines are becoming computationally prohibitive. To address these challenges, we developed bronko, an ultrafast alignment-free framework for detecting viral variation directly from sequencing data. The novel computational approach implemented in bronko allows scaling to massive viral sequencing datasets and has three key components: i) a locality-sensitive bucketing function to rapidly identify single-nucleotide polymorphisms (SNPs) relative to reference(s), ii) a direct k-mer count pseudo-mapping approach that approximates a pileup without alignment, and iii) a streaming-based sliding window outlier test to estimate baseline noise across the genome and precisely differentiate real minor variants from noise. Together, these components yield near-linear computational complexity with respect to sequencing depth, enabling bronko to process thousands of viral samples rapidly on modest hardware. Our results are threefold: 1) On simulated amplicon sequencing, bronko recovers variants with higher precision and comparable recall to existing tools while running up to one to three orders of magnitude faster; 2) bronko generates sequence alignments directly from sequencing data, with SNP content similar to that of whole-genome alignment while also running in a fraction of the time, and 3) applying bronko to longitudinal sequencing data from chronically infected SARS-CoV-2 patients revealed consistent patterns of intrahost diversification and adaptive mutations over time. Altogether, these results demonstrate bronkos potential as a scalable tool for large-scale viral genomic analyses, overcoming longstanding computational barriers for intrahost and interhost characterization of viral variation.\n\nAvailabilitybronko is implemented in Rust and publicly available at https://github.com/treangenlab/bronko or via conda at https://anaconda.org/channels/bioconda/packages/bronko/overview. All results, evaluations, and other code used in this study are available at https://github.com/treangenlab/bronko-test.",
+  "authors": [
+    "Doughty, R. D.",
+    "Tisza, M. J.",
+    "Treangen, T. J."
+  ],
+  "doi": "10.64898/2025.12.01.691650",
+  "first_seen": "2025-12-02",
+  "id": "biorxiv:10.64898/2025.12.01.691650",
+  "metadata": {
+    "abstract": "As viral sequencing datasets continue to grow, traditional alignment-based variant calling pipelines are becoming computationally prohibitive. To address these challenges, we developed bronko, an ultrafast alignment-free framework for detecting viral variation directly from sequencing data. The novel computational approach implemented in bronko allows scaling to massive viral sequencing datasets and has three key components: i) a locality-sensitive bucketing function to rapidly identify single-nucleotide polymorphisms (SNPs) relative to reference(s), ii) a direct k-mer count pseudo-mapping approach that approximates a pileup without alignment, and iii) a streaming-based sliding window outlier test to estimate baseline noise across the genome and precisely differentiate real minor variants from noise. Together, these components yield near-linear computational complexity with respect to sequencing depth, enabling bronko to process thousands of viral samples rapidly on modest hardware. Our results are threefold: 1) On simulated amplicon sequencing, bronko recovers variants with higher precision and comparable recall to existing tools while running up to one to three orders of magnitude faster; 2) bronko generates sequence alignments directly from sequencing data, with SNP content similar to that of whole-genome alignment while also running in a fraction of the time, and 3) applying bronko to longitudinal sequencing data from chronically infected SARS-CoV-2 patients revealed consistent patterns of intrahost diversification and adaptive mutations over time. Altogether, these results demonstrate bronkos potential as a scalable tool for large-scale viral genomic analyses, overcoming longstanding computational barriers for intrahost and interhost characterization of viral variation.\n\nAvailabilitybronko is implemented in Rust and publicly available at https://github.com/treangenlab/bronko or via conda at https://anaconda.org/channels/bioconda/packages/bronko/overview. All results, evaluations, and other code used in this study are available at https://github.com/treangenlab/bronko-test.",
+    "author_corresponding": "Todd J Treangen",
+    "author_corresponding_institution": "Rice University",
+    "authors": "Doughty, R. D.; Tisza, M. J.; Treangen, T. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-12-02",
+    "doi": "10.64898/2025.12.01.691650",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/12/02/2025.12.01.691650.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "bronko: ultrafast, alignment-free detection of viral genome variation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Rice University",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-12-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "bronko is an alignment-free tool that detects viral SNPs and minor variants directly from sequencing reads via k-mer pseudo-mapping, scaling near-linearly with…",
+  "title": "bronko: ultrafast, alignment-free detection of viral genome variation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2025.12.01.691650"
+}

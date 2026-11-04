@@ -1,0 +1,42 @@
+{
+  "abstract": "Petabases of sequencing data in the Sequence Read Archive (SRA) present a significant challenge for holistic reanalysis due to their sheer volume. Recent efforts have assembled this data into terabytes of unitigs, an efficient k-mer set representation that can reduce data size by an order of magnitude. However, these unitigs were compressed on a per-accession basis, leaving substantial cross-sample redundancy unexploited. While co-compression of related samples offers high space-saving potential, existing tools lack targeted decompression: the ability to retrieve specific documents at a cost proportional to their individual sizes rather than that of the entire collection.\n\nThis paper introduces the \"inverted de Bruijn graph\" property, formalizing the concept of efficient targeted decompression, and presents kloe, its first implementation. kloe is a compression method for large, highly similar k-mer multi-sets, such as collections of unitigs from related samples. Unlike existing approaches that map k-mers to colors (samples), kloe takes a complementary route by performing color-to-k-mer mapping, associating samples with their respective k-mer sets. This enables targeted decompression of any chosen samples k-mer content. At its core, kloe utilizes a new sequence construct called \"monochromatigs,\" drawing on concepts from simplitigs and monotigs to achieve both significant space savings and efficient retrieval. Finally, a central aim of this work is to highlight this novel problem area, which we argue is critically understudied compared to colored de Bruijn graphs. The associated tool is available as an open source project at github.com/TimRouze/KLOE",
+  "authors": [
+    "Rouze, T.",
+    "Chikhi, R.",
+    "Limasset, A."
+  ],
+  "doi": "10.64898/2025.12.08.692073",
+  "first_seen": "2025-12-10",
+  "id": "biorxiv:10.64898/2025.12.08.692073",
+  "metadata": {
+    "abstract": "Petabases of sequencing data in the Sequence Read Archive (SRA) present a significant challenge for holistic reanalysis due to their sheer volume. Recent efforts have assembled this data into terabytes of unitigs, an efficient k-mer set representation that can reduce data size by an order of magnitude. However, these unitigs were compressed on a per-accession basis, leaving substantial cross-sample redundancy unexploited. While co-compression of related samples offers high space-saving potential, existing tools lack targeted decompression: the ability to retrieve specific documents at a cost proportional to their individual sizes rather than that of the entire collection.\n\nThis paper introduces the \"inverted de Bruijn graph\" property, formalizing the concept of efficient targeted decompression, and presents kloe, its first implementation. kloe is a compression method for large, highly similar k-mer multi-sets, such as collections of unitigs from related samples. Unlike existing approaches that map k-mers to colors (samples), kloe takes a complementary route by performing color-to-k-mer mapping, associating samples with their respective k-mer sets. This enables targeted decompression of any chosen samples k-mer content. At its core, kloe utilizes a new sequence construct called \"monochromatigs,\" drawing on concepts from simplitigs and monotigs to achieve both significant space savings and efficient retrieval. Finally, a central aim of this work is to highlight this novel problem area, which we argue is critically understudied compared to colored de Bruijn graphs. The associated tool is available as an open source project at github.com/TimRouze/KLOE",
+    "author_corresponding": "Timothe Rouze",
+    "author_corresponding_institution": "Institut Pasteur, Universite Paris Cite, Paris 75724, France",
+    "authors": "Rouze, T.; Chikhi, R.; Limasset, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-12-10",
+    "doi": "10.64898/2025.12.08.692073",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/12/10/2025.12.08.692073.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Inverted colored de Bruijn Graph for practical kmer sets storage",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institut Pasteur, Universite Paris Cite, Paris 75724, France",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-12-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces kloe, a compression method for highly similar k-mer sets from related samples that uses monochromatigs and color-to-k-mer mapping to enable targeted…",
+  "title": "Inverted colored de Bruijn Graph for practical kmer sets storage",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2025.12.08.692073"
+}

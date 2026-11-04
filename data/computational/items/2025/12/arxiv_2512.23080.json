@@ -1,0 +1,34 @@
+{
+  "abstract": "The discovery of novel odorant molecules is key for the fragrance and flavor industries, yet efficiently navigating the vast chemical space to identify structures with desirable olfactory properties remains a significant challenge. Generative artificial intelligence offers a promising approach for de novo molecular design but typically requires large sets of molecules to learn from. To address this problem, we present a framework combining a variational autoencoder (VAE) with a quantitative structure-activity relationship (QSAR) model to generate novel odorants from limited training sets of odor molecules. The self-supervised learning capabilities of the VAE allow it to learn SMILES grammar from ChEMBL database, while its training objective is augmented with a loss term derived from an external QSAR model to structure the latent representation according to odor probability. While the VAE demonstrated high internal consistency in learning the QSAR supervision signal, validation against an external, unseen ground truth dataset (Unique Good Scents) confirms the model generates syntactically valid structures (100% validity achieved via rejection sampling) and 93.9% unique structures. The latent space is effectively structured by odor likelihood, evidenced by a Frechet ChemNet Distance (FCD) of ~6.96 between generated molecules and known odorants, compared to ~21.6 for the ChEMBL baseline. An ablation of the property head shows that its contribution lies in the density of retrievable structures near an odorant seed -- a 4.3-fold increase in distinct novel compounds per seed -- rather than in the odor-likeness of any individual compound. Bemis-Murcko analysis shows 2,499 of 6,765 ring-containing candidates, spanning 1,429 distinct core frameworks, absent from all training sets, while a further 294 molecules...",
+  "authors": [
+    "Tim C. Pearce",
+    "Ahmed Ibrahim"
+  ],
+  "doi": null,
+  "first_seen": "2025-12-28",
+  "id": "arxiv:2512.23080",
+  "metadata": {
+    "arxiv_primary_category": "physics.chem-ph",
+    "categories": [
+      "physics.chem-ph",
+      "cs.LG",
+      "q-bio.BM",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.23080v2</ns0:id>\n    <ns0:title>QSAR-Guided Generative Framework for the Discovery of Synthetically Viable Odorants</ns0:title>\n    <ns0:updated>2026-10-12T10:08:59Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.23080v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.23080v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The discovery of novel odorant molecules is key for the fragrance and flavor industries, yet efficiently navigating the vast chemical space to identify structures with desirable olfactory properties remains a significant challenge. Generative artificial intelligence offers a promising approach for de novo molecular design but typically requires large sets of molecules to learn from. To address this problem, we present a framework combining a variational autoencoder (VAE) with a quantitative structure-activity relationship (QSAR) model to generate novel odorants from limited training sets of odor molecules. The self-supervised learning capabilities of the VAE allow it to learn SMILES grammar from ChEMBL database, while its training objective is augmented with a loss term derived from an external QSAR model to structure the latent representation according to odor probability. While the VAE demonstrated high internal consistency in learning the QSAR supervision signal, validation against an external, unseen ground truth dataset (Unique Good Scents) confirms the model generates syntactically valid structures (100% validity achieved via rejection sampling) and 93.9% unique structures. The latent space is effectively structured by odor likelihood, evidenced by a Frechet ChemNet Distance (FCD) of ~6.96 between generated molecules and known odorants, compared to ~21.6 for the ChEMBL baseline. An ablation of the property head shows that its contribution lies in the density of retrievable structures near an odorant seed -- a 4.3-fold increase in distinct novel compounds per seed -- rather than in the odor-likeness of any individual compound. Bemis-Murcko analysis shows 2,499 of 6,765 ring-containing candidates, spanning 1,429 distinct core frameworks, absent from all training sets, while a further 294 molecules...</ns0:summary>\n    <ns0:category term=\"physics.chem-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-28T21:06:01Z</ns0:published>\n    <ns1:primary_category term=\"physics.chem-ph\" />\n    <ns0:author>\n      <ns0:name>Tim C. Pearce</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ahmed Ibrahim</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-12-28",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "VAE with an external QSAR loss generates novel odorant SMILES from small training sets; reports 100% validity via rejection sampling, FCD ~6.96 vs ~21.6 ChEMBL…",
+  "title": "QSAR-Guided Generative Framework for the Discovery of Synthetically Viable Odorants",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.23080v2"
+}
