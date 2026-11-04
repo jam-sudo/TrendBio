@@ -770,7 +770,7 @@
     0.014828836545348167,
     -0.03445027023553848
   ],
-  "headline": "Surface geometry and tractography connectivity as inputs to neuroimaging models",
+  "headline": "Spatial, connectivity, and harmonization constraints in brain imaging statistics",
   "history": [
     {
       "count_7d": 3,
@@ -961,19 +961,19 @@
     }
   ],
   "item_one_liners": {},
-  "label": "Connectivity Guided Neuroimaging Models",
+  "label": "Statistical Brain Imaging Pipelines",
   "related": [
     "specific-architecture-corpus-3bc4",
-    "untitled-topic-7932",
-    "untitled-topic-282a"
+    "mri-comprehensive-3a49",
+    "assessment-atrial-electromechanical-0756"
   ],
   "secondary_categories": [
     "ml-ai",
     "systems"
   ],
   "slug": "modeling-connectivity-8f3f",
-  "summary": "Structural and diffusion-derived priors are being built into neuroimaging registration and modeling pipelines to extract disease-relevant variation.",
-  "synthesis": "The dominant thread is the use of explicit structural representations to extract disease-relevant variation from neuroimaging data. JOSAConn is the clearest connectivity-guided case, adding dMRI tractography-derived connectivity maps to deep-learning cortical surface registration and reported to outperform FreeSurfer. The hippocampal tau PET framework instead relies on principal surface geometry, pairing two-stage inverse-probability-weighted regression and SuStaIn subtyping with choroid plexus contamination detection. TRAECR addresses PET preprocessing for statistical modeling through registration, MRI co-registration, and COMBAT/RAVEL harmonization, and the TBI work targets heterogeneity across multi-site segmentations. Connectivity is not shared across these items; what is new is surface geometry and tractography-derived connectivity serving as inputs to modeling.",
+  "summary": "Heterogeneous multi-site and PET data require explicit spatial, connectivity, and harmonization handling before statistical modeling.",
+  "synthesis": "The dominant thread is treating spatial geometry, connectivity, or harmonization as explicit constraints in statistical brain imaging pipelines, though the four preprints differ in scope. The hippocampal tau preprint builds a principal surface for PET covariate analysis, combining two-stage inverse probability weighted regression with SuStaIn subtyping, and detects choroid plexus off-target contamination. TRAECR handles upstream PET preparation for statistical modeling through registration, MRI co-registration, and COMBAT/RAVEL harmonization. The TBI preprint pursues phenotype discovery across heterogeneous multi-site segmentations. JOSAConn is the only one of these that directly incorporates connectivity, adding dMRI tractography-derived maps to deep-learning cortical registration and reporting outperformance relative to FreeSurfer. New elements are contamination detection in tau PET and connectivity-informed cortical registration.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2025-11-09"
 }

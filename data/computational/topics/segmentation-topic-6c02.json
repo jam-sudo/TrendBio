@@ -770,7 +770,7 @@
     -0.018313487991690636,
     -0.04767835885286331
   ],
-  "headline": "Input choice and fusion strategy govern biomedical model performance on limited data",
+  "headline": "Input selection and fusion strategies govern biomedical ML prognostic performance",
   "history": [
     {
       "count_7d": 4,
@@ -1232,16 +1232,16 @@
     }
   ],
   "item_one_liners": {},
-  "label": "Data Efficient Biomedical Modelling",
+  "label": "Biomedical Ml Input Fusion",
   "related": [
-    "epidemiological-immunity-reinfection-ce00",
-    "transcriptomics-single-ab11",
-    "docking-dynamics-069e"
+    "diabetes-type-4df1",
+    "ancestry-inference-0cee",
+    "neoantigen-personalized-b822"
   ],
   "secondary_categories": [],
   "slug": "segmentation-topic-6c02",
-  "summary": "Adding weak modalities degrades prostate recurrence prediction, and sample size and signal properties shape biologically-informed network performance.",
-  "synthesis": "Across these items, the recurring question is what enters a model and how little data suffices, rather than which architecture is used. Multimodal fusion of histology, radiology and clinical data for prostate cancer recurrence reports that adding weak modalities degrades accuracy, while copula fusion of clinical and gene-expression risk scores for breast cancer yields no AUC gain over the clinical model. Simulation work on P-NET quantifies how signal type, strength, sparsity and sample size affect biologically-informed network performance. scMFF tests four feature types under six fusion strategies for scRNA-seq cell typing, and the PDAC consensus classifier combines tumor and stroma mRNA features. What is new is emphasis on feature composition and fusion choice under constrained data. The ZILLNB denoising framework and the single-cell integration benchmark address adjacent problems and are less directly tied to this thread.",
+  "summary": "Recent studies show weak added modalities can degrade recurrence-free survival accuracy, making input composition a central determinant of model performance.",
+  "synthesis": "The dominant thread is how inputs are structured, selected and combined before learning. In prostate cancer, adding weak histology, radiology and clinical modalities degrades biochemical recurrence-free survival accuracy, so additional inputs are not uniformly beneficial. Copula fusion of clinical and gene-expression risk scores yields no AUC gain over the clinical model for breast cancer mortality, reinforcing this caution. On the whole-slide side, TDAM-CRC links MIL features from colorectal cancer images to the multi-omics hub gene MRPL37. Single-cell items address related questions: a ZINB-based denoiser with InfoVAE-GAN latent factors, a fusion of four feature types across six strategies for cell typing, and a benchmark of 16 deep learning integration methods. What is new is explicit evaluation of input composition and fusion strategy against baseline models, rather than architecture alone.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2025-11-20"
 }
