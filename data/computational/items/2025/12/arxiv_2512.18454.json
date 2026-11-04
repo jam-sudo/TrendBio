@@ -1,0 +1,34 @@
+{
+  "abstract": "Predictive machine learning models generally excel on in-distribution data, but their performance degrades on out-of-distribution (OOD) inputs. Reliable deployment therefore requires robust OOD detection, yet this is particularly challenging for irregular 3D graphs that combine continuous geometry with categorical identities and are unordered by construction. Here, we present a probabilistic OOD detection framework for complex 3D graph data built on a diffusion model that learns a density of the training distribution in a fully unsupervised manner. A key ingredient we introduce is a unified continuous diffusion over both 3D coordinates and discrete features: categorical identities are embedded in a continuous space and trained with cross-entropy, while the corresponding diffusion score is obtained analytically via posterior-mean interpolation from predicted class probabilities. This yields a single self-consistent probability-flow ODE (PF-ODE) that produces per-sample log-likelihoods, providing a principled typicality score for distribution shift. We validate the approach on protein-ligand complexes and construct strict OOD datasets by withholding entire protein families from training. PF-ODE likelihoods identify held-out families as OOD and correlate strongly with prediction errors of an independent binding-affinity model (GEMS), enabling a priori reliability estimates on new complexes. Beyond scalar likelihoods, we show that multi-scale PF-ODE trajectory statistics - including path tortuosity, flow stiffness, and vector-field instability - provide complementary OOD information. Modeling the joint distribution of these trajectory features yields a practical, high-sensitivity detector that improves separation over likelihood-only baselines, offering a label-free OOD quantification workflow for geometric deep learning.",
+  "authors": [
+    "David Graber",
+    "Victor Armegioiu",
+    "Rebecca Buller",
+    "Siddhartha Mishra"
+  ],
+  "doi": null,
+  "first_seen": "2025-12-20",
+  "id": "arxiv:2512.18454",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.18454v3</ns0:id>\n    <ns0:title>Out-of-Distribution Detection in Molecular Complexes via Diffusion Models for Irregular Graphs</ns0:title>\n    <ns0:updated>2026-07-06T07:45:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.18454v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.18454v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Predictive machine learning models generally excel on in-distribution data, but their performance degrades on out-of-distribution (OOD) inputs. Reliable deployment therefore requires robust OOD detection, yet this is particularly challenging for irregular 3D graphs that combine continuous geometry with categorical identities and are unordered by construction. Here, we present a probabilistic OOD detection framework for complex 3D graph data built on a diffusion model that learns a density of the training distribution in a fully unsupervised manner. A key ingredient we introduce is a unified continuous diffusion over both 3D coordinates and discrete features: categorical identities are embedded in a continuous space and trained with cross-entropy, while the corresponding diffusion score is obtained analytically via posterior-mean interpolation from predicted class probabilities. This yields a single self-consistent probability-flow ODE (PF-ODE) that produces per-sample log-likelihoods, providing a principled typicality score for distribution shift. We validate the approach on protein-ligand complexes and construct strict OOD datasets by withholding entire protein families from training. PF-ODE likelihoods identify held-out families as OOD and correlate strongly with prediction errors of an independent binding-affinity model (GEMS), enabling a priori reliability estimates on new complexes. Beyond scalar likelihoods, we show that multi-scale PF-ODE trajectory statistics - including path tortuosity, flow stiffness, and vector-field instability - provide complementary OOD information. Modeling the joint distribution of these trajectory features yields a practical, high-sensitivity detector that improves separation over likelihood-only baselines, offering a label-free OOD quantification workflow for geometric deep learning.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-20T17:56:15Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>David Graber</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Victor Armegioiu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rebecca Buller</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Siddhartha Mishra</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-12-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Diffusion-based OOD detector for 3D protein-ligand graphs using PF-ODE likelihoods and trajectory statistics; flags held-out protein families and tracks GEMS…",
+  "title": "Out-of-Distribution Detection in Molecular Complexes via Diffusion Models for Irregular Graphs",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.18454v3"
+}

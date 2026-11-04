@@ -1,0 +1,33 @@
+{
+  "abstract": "Due to the computationally demanding nature of fluid-structure interaction simulations, heart valve simulation is a complex task. A simpler alternative is to model the valve as a resistive flow obstacle that can be updated dynamically without altering the mesh, but this approach can also become computationally expensive for large meshes.\n  In this work, we present a fast method for computing the resistive flow obstacle of a heart valve. The method is based on a parametric surface model of the valve, which is defined by a set of curves. The curves are adaptively sampled to create a polyline representation, which is then used to generate the surface. The surface is represented as a set of points, allowing for efficient distance calculations to determine whether mesh nodes belong to the valve surface. We introduce three algorithms for computing these distances: minimization, sampling, and triangulation. Additionally, we implement two mesh traversal strategies: exhaustive node iteration and recursive neighbor search. The latter significantly reduces the number of distance calculations by only considering neighboring nodes.\n  Our pipeline is demonstrated on both a previously reported aortic valve model and a newly proposed mitral valve model, highlighting its flexibility and efficiency for rapid valve shape updates in computational simulations.",
+  "authors": [
+    "Bob van der Vuurst",
+    "Jiří Kosinka",
+    "Cristóbal Bertoglio"
+  ],
+  "doi": null,
+  "first_seen": "2025-12-07",
+  "id": "arxiv:2512.09945",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.TO",
+    "categories": [
+      "q-bio.TO",
+      "physics.med-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.09945v1</ns0:id>\n    <ns0:title>Fast generation of 3D flow obstacles from parametric surface models: application to cardiac valves</ns0:title>\n    <ns0:updated>2025-12-07T08:49:47Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.09945v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.09945v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Due to the computationally demanding nature of fluid-structure interaction simulations, heart valve simulation is a complex task. A simpler alternative is to model the valve as a resistive flow obstacle that can be updated dynamically without altering the mesh, but this approach can also become computationally expensive for large meshes.\n  In this work, we present a fast method for computing the resistive flow obstacle of a heart valve. The method is based on a parametric surface model of the valve, which is defined by a set of curves. The curves are adaptively sampled to create a polyline representation, which is then used to generate the surface. The surface is represented as a set of points, allowing for efficient distance calculations to determine whether mesh nodes belong to the valve surface. We introduce three algorithms for computing these distances: minimization, sampling, and triangulation. Additionally, we implement two mesh traversal strategies: exhaustive node iteration and recursive neighbor search. The latter significantly reduces the number of distance calculations by only considering neighboring nodes.\n  Our pipeline is demonstrated on both a previously reported aortic valve model and a newly proposed mitral valve model, highlighting its flexibility and efficiency for rapid valve shape updates in computational simulations.</ns0:summary>\n    <ns0:category term=\"q-bio.TO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.med-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-07T08:49:47Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.TO\" />\n    <ns0:author>\n      <ns0:name>Bob van der Vuurst</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiří Kosinka</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Cristóbal Bertoglio</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2025-12-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Parametric surface method builds 3D resistive flow obstacles for heart valves; recursive neighbor search cuts distance computations.",
+  "title": "Fast generation of 3D flow obstacles from parametric surface models: application to cardiac valves",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.09945v1"
+}

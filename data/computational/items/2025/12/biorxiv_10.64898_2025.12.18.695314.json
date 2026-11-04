@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationSingle-cell RNA-seq captures both mature (spliced) and nascent (unspliced) transcripts, yet standard preprocessing typically collapses these signals into a single expression matrix, obscuring recoverable transcriptional structure and introducing splicing-dependent artifacts in downstream embeddings in foundation models. We asked whether treating spliced and unspliced counts as distinct feature sets increases recoverable latent structure in unsupervised dimension reduction.\n\nResultsAcross four datasets with paired spliced and unspliced count layers, we applied non-negative matrix factorization (NMF) to spliced-only, unspliced-only, summed, and concatenated representations. Using cross-validation, we estimated the revealable rank k* (largest stable rank achieving near-optimal held-out error). In all datasets, concatenated representations consistently supported higher k* than spliced-only or unspliced-only inputs and typically exceeded the summed representation, indicating that preserving splicing status exposes additional stable latent programs. Minimal overlap between spliced- and unspliced-derived factors corresponded to modality-specific gene set enrichment patterns consistent with complementary steady-state and nascent regulatory activity. These results establish splicing status as an informative axis of variation and motivate preserving spliced and unspliced layers as first-class features to maximize information recovery in single-cell analysis.\n\nAvailability and ImplementationThe singlet R package is available at github.com/zdebruine/singlet. Code to reproduce all figures is available at github.com/Arya-86/nmf-spliced-unspliced.\n\nSupplementary informationSupplementary data are appended to this manuscript.",
+  "authors": [
+    "Jadhav, A.",
+    "DeBruine, Z. J."
+  ],
+  "doi": "10.64898/2025.12.18.695314",
+  "first_seen": "2025-12-22",
+  "id": "biorxiv:10.64898/2025.12.18.695314",
+  "metadata": {
+    "abstract": "MotivationSingle-cell RNA-seq captures both mature (spliced) and nascent (unspliced) transcripts, yet standard preprocessing typically collapses these signals into a single expression matrix, obscuring recoverable transcriptional structure and introducing splicing-dependent artifacts in downstream embeddings in foundation models. We asked whether treating spliced and unspliced counts as distinct feature sets increases recoverable latent structure in unsupervised dimension reduction.\n\nResultsAcross four datasets with paired spliced and unspliced count layers, we applied non-negative matrix factorization (NMF) to spliced-only, unspliced-only, summed, and concatenated representations. Using cross-validation, we estimated the revealable rank k* (largest stable rank achieving near-optimal held-out error). In all datasets, concatenated representations consistently supported higher k* than spliced-only or unspliced-only inputs and typically exceeded the summed representation, indicating that preserving splicing status exposes additional stable latent programs. Minimal overlap between spliced- and unspliced-derived factors corresponded to modality-specific gene set enrichment patterns consistent with complementary steady-state and nascent regulatory activity. These results establish splicing status as an informative axis of variation and motivate preserving spliced and unspliced layers as first-class features to maximize information recovery in single-cell analysis.\n\nAvailability and ImplementationThe singlet R package is available at github.com/zdebruine/singlet. Code to reproduce all figures is available at github.com/Arya-86/nmf-spliced-unspliced.\n\nSupplementary informationSupplementary data are appended to this manuscript.",
+    "author_corresponding": "Zachary J. DeBruine",
+    "author_corresponding_institution": "Van Andel Institute",
+    "authors": "Jadhav, A.; DeBruine, Z. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-12-22",
+    "doi": "10.64898/2025.12.18.695314",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/12/22/2025.12.18.695314.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Joint representation of spliced and unspliced RNA expands information content in single-cell expression data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Van Andel Institute",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2025-12-22",
+  "published_doi": "10.1093/bioadv/vbag263",
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows that keeping spliced and unspliced scRNA-seq counts as separate feature sets via NMF reveals more stable latent programs than collapsed matrices, across…",
+  "title": "Joint representation of spliced and unspliced RNA expands information content in single-cell expression data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2025.12.18.695314"
+}

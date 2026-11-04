@@ -1,0 +1,32 @@
+{
+  "abstract": "Population-scale analysis of phased genetic variants requires both allele-carrier retrieval and ordered haplotype context. We examine H1, an adaptive allele-haplotype incidence-row index, and H2, a canonical edge-path representation derived from a fixed, nonoverlapping variant catalog. We prove conditional reconstruction of abstract H2 walks and distinguish this property from unrestricted equivalence to genomic variation graphs. A completed local notebook experiment used a chromosome 1 interval (20-22 Mb), 200 diploid individuals, 24,921 SNV/indel records, and 45 SVTYPE-annotated records. For 24,966 extracted nonreference rows across 400 haplotypes, the serialized H1 incidence-row files occupied 0.872 MiB with a simple adaptive layout and 1.126 MiB with a custom Roaring-like layout, versus 1.190 MiB for a bitmap-payload baseline; a whole-file Zstandard archive of the adaptive layout occupied 0.207 MiB. For a separately constructed nonoverlapping SNV projection containing 22,727 sites, indexed H2 edge sequences occupied 75,130,882 bytes in a raw format and 5,156,418 bytes with context-Huffman encoding (14.57-fold reduction). Carrier-equivalence and graph-adjacency assertions passed in the notebook, but full crosscallset phasing, nucleotide-level SV reconstruction, and comparison with production indexes remain unresolved. The measurements establish a restricted implementation feasibility result, not superior end-to-end pangenome compression.",
+  "authors": [
+    "Roberto Garrone"
+  ],
+  "doi": null,
+  "first_seen": "2025-12-24",
+  "id": "arxiv:2512.21320",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.DB",
+      "cs.DS"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2512.21320v3</ns0:id>\n    <ns0:title>Adaptive Allele-Haplotype Incidence Indexing for Pangenome Queries: Representation, Reconstruction, and Benchmarking</ns0:title>\n    <ns0:updated>2026-10-28T10:36:31Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2512.21320v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2512.21320v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Population-scale analysis of phased genetic variants requires both allele-carrier retrieval and ordered haplotype context. We examine H1, an adaptive allele-haplotype incidence-row index, and H2, a canonical edge-path representation derived from a fixed, nonoverlapping variant catalog. We prove conditional reconstruction of abstract H2 walks and distinguish this property from unrestricted equivalence to genomic variation graphs. A completed local notebook experiment used a chromosome 1 interval (20-22 Mb), 200 diploid individuals, 24,921 SNV/indel records, and 45 SVTYPE-annotated records. For 24,966 extracted nonreference rows across 400 haplotypes, the serialized H1 incidence-row files occupied 0.872 MiB with a simple adaptive layout and 1.126 MiB with a custom Roaring-like layout, versus 1.190 MiB for a bitmap-payload baseline; a whole-file Zstandard archive of the adaptive layout occupied 0.207 MiB. For a separately constructed nonoverlapping SNV projection containing 22,727 sites, indexed H2 edge sequences occupied 75,130,882 bytes in a raw format and 5,156,418 bytes with context-Huffman encoding (14.57-fold reduction). Carrier-equivalence and graph-adjacency assertions passed in the notebook, but full crosscallset phasing, nucleotide-level SV reconstruction, and comparison with production indexes remain unresolved. The measurements establish a restricted implementation feasibility result, not superior end-to-end pangenome compression.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DB\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-12-24T18:44:07Z</ns0:published>\n    <ns1:comment>10 Pages, 2 Figures, 3 Tables</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Roberto Garrone</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-12-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Introduces H1 (adaptive allele-haplotype incidence index) and H2 (canonical edge-path representation) for phased variant queries, with conditional walk…",
+  "title": "Adaptive Allele-Haplotype Incidence Indexing for Pangenome Queries: Representation, Reconstruction, and Benchmarking",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2512.21320v3"
+}

@@ -1,0 +1,48 @@
+{
+  "abstract": "Bacterial genome and metagenome databases collectively contain over 5 million high-quality assemblies. However, the redundancy of these databases and the limited scalability of existing tools create bottlenecks for fully comprehensive, tree-of-life-scale genomic analyses. A fundamental task is to first break this data into smaller chunks, guided by their genome similarity. However, alignment-based comparative methods struggle to handle more than a few tens of thousands of genomes at a time, making the global organisation computationally complex and expensive. Here, we present gemsparcl (https://github.com/johannahelene/gemsparcl), a tool that clusters bacterial genomes into genomic cohesive units (GCUs), at approximately species-level resolution, over 500 times faster than existing methods. As part of developing gemsparcl, we developed sketchlib.rust, a one-permutation MinHash approach that implements an auxiliary inverted index to further accelerate all-versus-all comparisons. We added a statistical correction for incomplete metagenome-assembled genomes (MAGs) to enable accurate distance estimation and network-based edge quality filtering. After genome completeness quality control, we clustered 5.6 million high-quality bacterial genomes (2.88 million isolates and 2.77 million MAGs) into 92,954 GCUs in [~]14 hours using 48 CPU threads and less than 16.5 GB of memory. Using taxonomic validation of the GCUs, the method achieves very high (99.76%) cluster purity (meaning only one species label occurs per GCU). We demonstrate that the clustering also highlights cases where taxonomic naming can be potentially harmonised or improved. Furthermore, we identify the most frequently reconstructed MAGs that lack a corresponding isolate genome and are thus priorities for culturing. The enhanced speed of gemsparcl enables routine database updates to incorporate the latest genomes. It also makes reference-free microbiome analysis across millions of genomes computationally tractable for the first time.",
+  "authors": [
+    "von Wachsmann, J. H.",
+    "Lorenz, L. J.",
+    "Gurbich, T.",
+    "Russell, M.",
+    "Rodriguez Bouza, V.",
+    "Horsfield, S.",
+    "Lees, J. A.",
+    "Finn, R. D."
+  ],
+  "doi": "10.64898/2025.12.30.695181",
+  "first_seen": "2025-12-30",
+  "id": "biorxiv:10.64898/2025.12.30.695181",
+  "metadata": {
+    "abstract": "Bacterial genome and metagenome databases collectively contain over 5 million high-quality assemblies. However, the redundancy of these databases and the limited scalability of existing tools create bottlenecks for fully comprehensive, tree-of-life-scale genomic analyses. A fundamental task is to first break this data into smaller chunks, guided by their genome similarity. However, alignment-based comparative methods struggle to handle more than a few tens of thousands of genomes at a time, making the global organisation computationally complex and expensive. Here, we present gemsparcl (https://github.com/johannahelene/gemsparcl), a tool that clusters bacterial genomes into genomic cohesive units (GCUs), at approximately species-level resolution, over 500 times faster than existing methods. As part of developing gemsparcl, we developed sketchlib.rust, a one-permutation MinHash approach that implements an auxiliary inverted index to further accelerate all-versus-all comparisons. We added a statistical correction for incomplete metagenome-assembled genomes (MAGs) to enable accurate distance estimation and network-based edge quality filtering. After genome completeness quality control, we clustered 5.6 million high-quality bacterial genomes (2.88 million isolates and 2.77 million MAGs) into 92,954 GCUs in [~]14 hours using 48 CPU threads and less than 16.5 GB of memory. Using taxonomic validation of the GCUs, the method achieves very high (99.76%) cluster purity (meaning only one species label occurs per GCU). We demonstrate that the clustering also highlights cases where taxonomic naming can be potentially harmonised or improved. Furthermore, we identify the most frequently reconstructed MAGs that lack a corresponding isolate genome and are thus priorities for culturing. The enhanced speed of gemsparcl enables routine database updates to incorporate the latest genomes. It also makes reference-free microbiome analysis across millions of genomes computationally tractable for the first time.",
+    "author_corresponding": "Johanna Helene von Wachsmann",
+    "author_corresponding_institution": "EMBL's European Bioinformatics Institute (EMBL-EBI)",
+    "authors": "von Wachsmann, J. H.; Lorenz, L. J.; Gurbich, T.; Russell, M.; Rodriguez Bouza, V.; Horsfield, S.; Lees, J. A.; Finn, R. D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-12-30",
+    "doi": "10.64898/2025.12.30.695181",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/12/30/2025.12.30.695181.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Rapid and Consistent Genome Clustering for Navigating Bacterial Diversity with Millions of MAGs and Isolates",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "EMBL's European Bioinformatics Institute (EMBL-EBI)",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-12-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces gemsparcl, a fast tool clustering 5.6M bacterial genomes/MAGs into GCUs using sketchlib.rust MinHash with MAG completeness correction, achieving…",
+  "title": "Rapid and Consistent Genome Clustering for Navigating Bacterial Diversity with Millions of MAGs and Isolates",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2025.12.30.695181"
+}
