@@ -1,0 +1,47 @@
+name: Wait for pipeline
+description: Wait for older data-writing workflow runs to finish.
+inputs:
+  token:
+    description: GitHub token with actions read permission.
+    default: ${{ github.token }}
+  max-wait-minutes:
+    description: Maximum time to wait for older pipeline runs.
+    default: '300'
+  poll-seconds:
+    description: Seconds between polls.
+    default: '60'
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        MAX_WAIT_MINUTES: ${{ inputs.max-wait-minutes }}
+        POLL_SECONDS: ${{ inputs.poll-seconds }}
+      run: |
+        set -euo pipefail
+        if [[ ! "$MAX_WAIT_MINUTES" =~ ^[1-9][0-9]*$ || ! "$POLL_SECONDS" =~ ^[1-9][0-9]*$ ]]; then
+          echo '::error::max-wait-minutes and poll-seconds must be positive integers.'
+          exit 1
+        fi
+        deadline=$((SECONDS + MAX_WAIT_MINUTES * 60))
+        created_at=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" | jq -er '.created_at // empty')
+        while true; do
+          # Read queued first so a run starting between requests is still seen.
+          queued=$(gh api --paginate "repos/$GITHUB_REPOSITORY/actions/runs?status=queued&per_page=50")
+          in_progress=$(gh api --paginate "repos/$GITHUB_REPOSITORY/actions/runs?status=in_progress&per_page=50")
+          waiting=$(printf '%s\n' "$queued" "$in_progress" | jq -sr \
+            --argjson run_id "$GITHUB_RUN_ID" --arg created_at "$created_at" \
+            -f "$GITHUB_ACTION_PATH/waiting-runs.jq")
+          if [[ -z "$waiting" ]]; then
+            echo 'No older pipeline runs remain.'
+            break
+          fi
+          echo "$waiting"
+          remaining=$((deadline - SECONDS))
+          if (( remaining <= 0 )); then
+            echo "::error::Timed out after $MAX_WAIT_MINUTES minutes waiting for older pipeline runs."
+            exit 1
+          fi
+          sleep "$((POLL_SECONDS < remaining ? POLL_SECONDS : remaining))"
+        done

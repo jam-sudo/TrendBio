@@ -26,11 +26,12 @@ concurrency:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 360
     env:
       FROM: ${{ inputs.from }}
       TO: ${{ inputs.to }}
@@ -39,6 +40,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: ./.github/actions/wait-for-pipeline
+      - name: Refresh data after waiting
+        run: git pull --ff-only origin main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -50,6 +54,7 @@ jobs:
           key: ${{ runner.os }}-specter2
       - run: pip install -e .
       - name: Resynthesize pipeline
+        timeout-minutes: 120
         env:
           PYTHONUNBUFFERED: "1"
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -64,6 +69,12 @@ jobs:
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add data
             git commit -m "data: resynthesize $FROM..$TO ($MODEL)"
-            git pull --rebase --autostash origin main
+            if ! git pull --rebase --autostash origin main; then
+              git rebase --abort
+              echo '::warning::Data rebase conflicted; retrying once with an ours merge.'
+              # Last resort after waiting: the fresher run wins conflicts in data/.
+              git fetch origin main
+              git merge --no-edit -X ours origin/main
+            fi
             git push
           fi
