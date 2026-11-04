@@ -77,7 +77,7 @@ def test_continuity_matches_existing_topic_above_threshold(topic, items, cfg):
     today = date(2026, 11, 2)
     append_history(topic, today - timedelta(days=1), ['old'], 1)
     titles = [item.title for item in items.values()]
-    centroid = np.array([.8, .6, 0], dtype=np.float32)
+    centroid = l2_normalize([[1, .1, 0]])[0]
     worse = topic.model_copy(deep=True, update={'slug': 'worse', 'centroid': [0, 1, 0]})
     result = match_or_create(list(items), centroid, [worse, topic], today, cfg,
                              titles, titles, items)
@@ -85,7 +85,7 @@ def test_continuity_matches_existing_topic_above_threshold(topic, items, cfg):
     assert result.slug == 'protein-design-abcd'
     assert result.headline == 'Existing headline'
     assert len(result.history) == 1
-    np.testing.assert_allclose(result.centroid, l2_normalize([[1.8, .6, 0]])[0])
+    np.testing.assert_allclose(result.centroid, centroid)
     assert result.category == 'ml-ai'  # Alphabetical tie-break.
     assert result.secondary_categories == ['structural']
     assert worse.centroid == [0, 1, 0]
@@ -107,6 +107,76 @@ def test_continuity_creates_new_below_threshold(topic, items, cfg):
     assert result.headline is result.summary is result.synthesis is None
     assert result.synthesis_model is result.synthesized_on is None
     assert topic.centroid == [1, 0, 0]
+
+
+def match(topic, items, cfg, similarity):
+    titles = [item.title for item in items.values()]
+    centroid = np.array([similarity, np.sqrt(1 - similarity ** 2), 0])
+    return match_or_create(list(items), centroid, [topic], date(2026, 11, 2), cfg,
+                           titles, titles, items)
+
+
+@pytest.mark.parametrize('offset', [-30, 30])
+def test_continuity_requires_recent_entry(topic, items, cfg, offset):
+    append_history(topic, date(2026, 11, 2) + timedelta(days=offset), list(items), 4)
+    assert match(topic, items, cfg, .99) is not topic
+
+
+@pytest.mark.parametrize('offset', [-1, 1, -10, 10])
+def test_continuity_by_jaccard(topic, items, cfg, offset):
+    append_history(topic, date(2026, 11, 2) + timedelta(days=offset), ['0', '1', 'old'], 3)
+    assert match(topic, items, cfg, .7) is topic  # 2 / 5 = 0.4 overlap.
+
+
+def test_continuity_rejects_loose_similarity(topic, items, cfg):
+    append_history(topic, date(2026, 11, 1), ['old'], 1)
+    assert match(topic, items, cfg, .85) is not topic
+
+
+def test_continued_topic_centroid_tracks_today(topic, items, cfg):
+    append_history(topic, date(2026, 11, 1), list(items), 4)
+    assert match(topic, items, cfg, .7) is topic
+    np.testing.assert_allclose(topic.centroid, [.7, np.sqrt(1 - .7 ** 2), 0])
+
+
+def test_continuity_uses_union_of_adjacent_week_only(topic, items, cfg):
+    append_history(topic, date(2026, 10, 26), ['0'], 1)
+    append_history(topic, date(2026, 11, 1), ['old'], 1)
+    assert match(topic, items, cfg, .7) is not topic  # 1 / 5 is below threshold.
+    append_history(topic, date(2026, 10, 27), ['1'], 1)
+    assert match(topic, items, cfg, .7) is topic
+    topic.history[0].date = date(2026, 10, 25)
+    assert match(topic, items, cfg, 0) is not topic  # Oct 25 is outside the week.
+
+
+def test_continuity_prefers_overlap_to_similarity(topic, items, cfg):
+    append_history(topic, date(2026, 11, 1), list(items), 4)
+    similar = topic.model_copy(deep=True, update={'slug': 'closer', 'centroid': [0, 1, 0]})
+    similar.history[0].item_ids = ['other']
+    titles = [item.title for item in items.values()]
+    result = match_or_create(list(items), np.array([0, 1, 0]), [similar, topic],
+                             date(2026, 11, 2), cfg, titles, titles, items)
+    assert result is topic
+
+
+def test_new_topic_slug_cannot_overwrite_expired_identity(items, cfg):
+    titles = [item.title for item in items.values()]
+    centroid = np.array([1., 0, 0])
+    old = match_or_create(list(items), centroid, [], date(2026, 10, 1), cfg, titles, titles, items)
+    append_history(old, date(2026, 10, 1), list(items), 4)
+    new = match_or_create(list(items), centroid, [old], date(2026, 11, 2), cfg, titles, titles, items)
+    assert new.slug != old.slug and new.label == old.label
+    assert new.slug.rsplit('-', 1)[0] == old.slug.rsplit('-', 1)[0]
+
+
+@pytest.mark.parametrize('gap', [10, 11, 30])
+def test_fill_unranked_days_respects_max_gap_in_both_directions(topic, gap):
+    first = date(2026, 10, 1)
+    last = first + timedelta(days=gap)
+    append_history(topic, first, ['first'], 1)
+    append_history(topic, last, ['last'], 1)
+    fill_unranked_days(topic, first, 10)
+    assert len(topic.history) == (gap + 1 if gap <= 10 else 2)
 
 
 def test_slug_is_keywords_plus_hash_and_stable(items):

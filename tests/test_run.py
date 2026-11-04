@@ -11,7 +11,9 @@ import pytest
 from typer.testing import CliRunner
 
 from pipeline.budget import Budget
+from pipeline.cluster import append_history, match_or_create
 from pipeline.config import load_scoring, load_taxonomy
+from pipeline.embed import l2_normalize
 from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
@@ -106,20 +108,20 @@ def test_run_day_writes_day_topics_items(ctx):
         assert ctx.store.get_item(item.id).summary
     assert ctx.store.get_embeddings([item.id for item in ctx.items]).shape == (3, 5)
     for topic in ctx.store.all_topics():
-        entry = next(entry for entry in topic.history if entry.date == TODAY)
         assert len(topic.related) == 3 and topic.slug not in topic.related
         if topic.slug in {row.slug for row in result.ranked}:
+            entry = next(entry for entry in topic.history if entry.date == TODAY)
             assert entry.rank and entry.signals.preprint == 3
         else:
-            assert entry.rank is None and entry.count_7d == 0
+            assert all(entry.date != TODAY for entry in topic.history)
 
 
 def test_rerun_same_day_is_idempotent(ctx):
-    run_day('computational', TODAY, ctx.store, ctx.deps)
+    result = run_day('computational', TODAY, ctx.store, ctx.deps)
     before = tree(ctx.root)
     run_day('computational', TODAY, ctx.store, ctx.deps)
     assert tree(ctx.root) == before
-    topic = ctx.store.get_topic('protein-design-binders-a1b2')
+    topic = ctx.store.get_topic(result.ranked[0].slug)
     assert sum(entry.date == TODAY for entry in topic.history) == 1
 
 
@@ -1093,7 +1095,8 @@ def test_cli_reprocess_passes_range_and_options(ctx, monkeypatch):
                                      '--reenrich', '--model', 'custom-model', '--data-root', str(ctx.root)])
     assert result.exit_code == 0, result.output
     assert process.call_args.args[:3] == ('computational', date(2026, 10, 1), date(2026, 10, 31))
-    assert process.call_args.kwargs == {'reenrich': True, 'model': 'custom-model', 'only_missing_synthesis': False}
+    assert process.call_args.kwargs == {'reenrich': True, 'model': 'custom-model',
+                                        'only_missing_synthesis': False, 'rebuild_topics': False}
 
 
 def test_reprocess_only_missing_preserves_synthesis_without_enrichment(ctx, monkeypatch):
@@ -1140,4 +1143,148 @@ def test_cli_reprocess_no_reenrich_only_missing(ctx, monkeypatch):
                                      '--no-reenrich', '--only-missing-synthesis', '--data-root', str(ctx.root)])
     assert result.exit_code == 0, result.output
     assert process.call_args.kwargs == {'reenrich': False, 'model': 'claude-haiku-5-5',
-                                        'only_missing_synthesis': True}
+                                        'only_missing_synthesis': True, 'rebuild_topics': False}
+
+
+def add_cluster(ctx, store, day, prefix, vector):
+    items = [ctx.items[0].model_copy(update={
+        'id': f'biorxiv:{prefix}-{i}', 'title': f'Protein {prefix} evidence {i}',
+        'first_seen': day, 'published_at': day, 'summary': 'Evidence',
+        'primary_category': 'structural',
+    }) for i in range(3)]
+    for item in items:
+        store.put_item(item)
+        store.put_embedding(item.id, np.array(vector))
+    return items
+
+
+@pytest.mark.parametrize('strong_first', [False, True])
+def test_one_cluster_per_topic_per_day(ctx, tmp_path, monkeypatch, strong_first):
+    store = Store(tmp_path / 'isolated', 'computational')
+    weaker = add_cluster(ctx, store, TODAY, 'weak', [1., 0, 0])
+    stronger = add_cluster(ctx, store, TODAY, 'strong', [.7, np.sqrt(.51), 0])
+    items = {item.id: item for item in weaker + stronger}
+    titles = [item.title for item in items.values()]
+    old = match_or_create([item.id for item in stronger], np.array([1., 0, 0]), [],
+                          TODAY, ctx.deps.cfg, titles, titles, items)
+    append_history(old, TODAY - timedelta(days=1), [item.id for item in stronger], 3)
+    store.put_topic(old)
+    clusters = [[item.id for item in group] for group in (weaker, stronger)]
+    monkeypatch.setattr('pipeline.run.cluster_items', lambda *a: clusters[::-1] if strong_first else clusters)
+    run_day('computational', TODAY, store, ctx.deps, backfill=True, skip_collect=True)
+    topics = store.all_topics()
+    assert len(topics) == 2
+    continued = store.get_topic(old.slug)
+    assert continued.history[-1].item_ids == [item.id for item in stronger]
+    assert len([entry for entry in continued.history if entry.date == TODAY]) == 1
+    assert {id for topic in topics for entry in topic.history if entry.date == TODAY
+            for id in entry.item_ids} == set(items)
+
+
+def test_inactive_topic_does_not_gain_history_or_revive(ctx, tmp_path):
+    store = Store(tmp_path / 'isolated', 'computational')
+    add_cluster(ctx, store, TODAY, 'first', [1., 0, 0])
+    run_day('computational', TODAY, store, ctx.deps, backfill=True, skip_collect=True)
+    original = store.all_topics()[0]
+    for offset in range(7, 31):
+        run_day('computational', TODAY + timedelta(days=offset), store, ctx.deps,
+                backfill=True, skip_collect=True)
+    assert store.get_topic(original.slug).history == original.history
+    add_cluster(ctx, store, TODAY + timedelta(days=31), 'return', [1., 0, 0])
+    run_day('computational', TODAY + timedelta(days=31), store, ctx.deps,
+            backfill=True, skip_collect=True)
+    assert len(store.all_topics()) == 2
+
+
+def test_sixty_days_of_three_drifting_clusters(ctx, tmp_path):
+    store = Store(tmp_path / 'isolated', 'computational')
+    ctx.deps.cfg.top_n = 0
+    for offset in range(60):
+        day = date(2026, 1, 1) + timedelta(days=offset)
+        for group in range(3):
+            vector = np.zeros(7)
+            vector[0] = np.sqrt(.85)
+            vector[1 + 2 * group:3 + 2 * group] = np.sqrt(.15) * np.array([
+                np.cos(offset * .03), np.sin(offset * .03),
+            ])
+            add_cluster(ctx, store, day, f'group{group}-day{offset}', vector)
+        run_day('computational', day, store, ctx.deps, backfill=True, skip_collect=True)
+    topics = store.all_topics()
+    assert 3 <= len(topics) <= 10
+    for topic in topics:
+        groups = {id.split('group')[1].split('-')[0]
+                  for entry in topic.history for id in entry.item_ids}
+        assert len(groups) == 1
+        latest = topic.history[-1]
+        expected = l2_normalize([store.get_embeddings(latest.item_ids).mean(axis=0)])[0]
+        np.testing.assert_allclose(topic.centroid, expected, atol=1e-6)
+
+
+def test_reprocess_rebuild_topics_recreates_identities(ctx, tmp_path, monkeypatch):
+    store = Store(tmp_path / 'isolated', 'computational')
+    start, end = date(2026, 10, 1), date(2026, 10, 31)
+    first = add_cluster(ctx, store, start, 'first', [1., 0, 0])
+    second = add_cluster(ctx, store, start + timedelta(days=20), 'second', [.85, np.sqrt(1 - .85 ** 2), 0])
+    items = {item.id: item for item in first + second}
+    titles = [item.title for item in items.values()]
+    mega = match_or_create(list(items), np.array([1., 0, 0]), [], start,
+                           ctx.deps.cfg, titles, titles, items)
+    mega.slug = 'old-mega-topic'
+    mega.headline = mega.summary = mega.synthesis = 'Stale synthesis'
+    for offset in range(31):
+        append_history(mega, start + timedelta(days=offset), list(items), 6)
+    store.put_topic(mega)
+    untouched = mega.model_copy(deep=True, update={'slug': 'untouched', 'history': []})
+    append_history(untouched, start - timedelta(days=40), ['outside'], 1)
+    store.put_topic(untouched)
+    affected = mega.model_copy(deep=True, update={'slug': 'trimmed-survivor'})
+    append_history(affected, end + timedelta(days=40), ['outside'], 1)
+    store.put_topic(affected)
+    monkeypatch.setattr(ctx.deps.embedder, 'embed', lambda _: pytest.fail('reuse embeddings'))
+    real_run = run_day
+    attempted = []
+
+    def interrupted(domain, day, store, deps, **kwargs):
+        attempted.append(day)
+        if day == start + timedelta(days=2):
+            raise RuntimeError('interrupted')
+        return real_run(domain, day, store, deps, **kwargs)
+
+    monkeypatch.setattr('pipeline.run.run_day', interrupted)
+    with pytest.raises(RuntimeError, match='interrupted'):
+        run_reprocess('computational', start, end, store, ctx.deps,
+                      rebuild_topics=True, only_missing_synthesis=True)
+    assert attempted == [start, start + timedelta(days=1), start + timedelta(days=2)]
+    assert store.get_topic(mega.slug) is None
+    surviving = store.get_topic(affected.slug)
+    assert surviving.headline is surviving.synthesis is surviving.synthesized_on is None
+    assert [entry.date for entry in surviving.history] == [end + timedelta(days=40)]
+    with pytest.raises(ValueError, match='different range or options'):
+        run_reprocess('computational', start, end, store, ctx.deps, only_missing_synthesis=True)
+    monkeypatch.setattr('pipeline.run.run_day', real_run)
+    monkeypatch.setattr('pipeline.run.reset_derived', lambda *a: pytest.fail('must not reset twice'))
+    run_reprocess('computational', start, end, store, ctx.deps,
+                  rebuild_topics=True, only_missing_synthesis=True)
+    rebuilt = [topic for topic in store.all_topics() if topic.slug not in {untouched.slug, affected.slug}]
+    assert len(rebuilt) == 2
+    assert all((topic.history[-1].date - topic.history[0].date).days == 6 for topic in rebuilt)
+    assert all(topic.headline and topic.synthesis != 'Stale synthesis' for topic in rebuilt)
+    assert len(ctx.deps.llm.calls) == 2 and set(ctx.deps.llm.calls) == {'claude-haiku-5-5'}
+    assert store.get_topic(untouched.slug).headline == untouched.headline
+    assert store.get_topic(untouched.slug).synthesis == untouched.synthesis
+    assert len(store.all_days()) == 31
+    assert store.get_map().points
+    assert not (store.root / store.domain / '.reprocess_state.json').exists()
+
+
+def test_cli_reprocess_rebuild_topics(ctx, monkeypatch):
+    from unittest.mock import Mock
+
+    process = Mock()
+    monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
+    monkeypatch.setattr('pipeline.__main__.run_reprocess', process)
+    result = CliRunner().invoke(app, ['reprocess', '--from', '2026-10-01', '--to', '2026-10-31',
+                                     '--rebuild-topics', '--only-missing-synthesis', '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    assert process.call_args.kwargs['rebuild_topics'] is True
+    assert process.call_args.kwargs['only_missing_synthesis'] is True

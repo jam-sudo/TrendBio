@@ -29,6 +29,15 @@ are visible; “Show more” reveals the rest. `synthesis_tiers` sets the model 
 Backfill and reprocessed history use `backfill_synthesis_model` (Haiku) for every tier;
 over-ceiling runs always use Haiku.
 
+Topic continuity requires a history entry within ±10 days (`continuity_max_gap_days`),
+including when backfilling older months. A cluster continues a topic if its item IDs
+have Jaccard overlap ≥0.25 (`continuity_min_jaccard`) with the adjacent seven days of
+that topic's history, or centroid cosine similarity ≥0.95 (`continuity_threshold`).
+Matches are assigned by overlap first, then similarity, with at most one cluster per
+topic per day. The centroid and categories track today's cluster; keyword slugs stay
+stable. Empty history entries fill gaps of at most 10 days between appearances;
+inactive topics stop accumulating history, and a later return starts a new topic.
+
 GitHub discovery excludes forks and repos below `github.min_stars_for_discovery` (20 stars); explicit watchlist entries bypass these filters.
 Discovered repos with matching normalized descriptions and variant names, or identical descriptions and fewer than 50 stars, collapse to the most-starred copy; collection logs report `collapsed=<n>`.
 
@@ -62,9 +71,18 @@ topic identities and existing headlines, summaries and syntheses while rerunning
 clustering and ranking, and synthesizes only topics without a headline. No LLM
 enrichment is performed. The workflow exposes `only_missing_synthesis` (default false):
 
+For a full continuity rebuild, pass `--rebuild-topics`: it removes every topic's
+history in the requested months, deletes topics left empty, and discards synthesis
+on affected surviving topics before replaying days chronologically. Items and
+embeddings remain cached. Combine with `--only-missing-synthesis` to synthesize new
+or affected topics once with the backfill model (Haiku), while keeping synthesis on
+untouched surviving topics. Rebuild the entire affected date range to replace old
+mega-topics completely.
+
 ```sh
 python -m pipeline restatus --domain computational --from 2026-10-01 --to 2026-10-31
 python -m pipeline reprocess --domain computational --from 2026-10-01 --to 2026-10-31 --reenrich --model claude-haiku-5-5
+python -m pipeline reprocess --domain computational --from 2026-01-01 --to 2026-10-31 --rebuild-topics --only-missing-synthesis
 ```
 
 ## Operator notes

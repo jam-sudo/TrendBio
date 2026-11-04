@@ -18,7 +18,9 @@ import httpx
 import numpy as np
 
 from pipeline.budget import Budget
-from pipeline.cluster import append_history, cluster_items, fill_unranked_days, match_or_create
+from pipeline.cluster import (
+    append_history, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
+)
 from pipeline.collect import AllPaperSourcesFailed
 from pipeline.config import Scoring, Taxonomy
 from pipeline.dedupe import dedupe
@@ -263,26 +265,35 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             previous_slugs = set(topics)
             items_by_topic = {}
             unchanged = set()
-            for cluster in clusters:
-                candidates = [topic for slug, topic in sorted(topics.items()) if slug not in items_by_topic]
-                existing = next((topic for topic in candidates if any(
-                    entry.date == day and entry.item_ids == cluster for entry in topic.history)), None)
-                old_centroid = existing.centroid[:] if existing else None
-                centroid = l2_normalize([np.mean([vectors_by_id[id] for id in cluster], axis=0)])[0]
-                topic = match_or_create(cluster, centroid, [existing] if existing else candidates,
+            centroids = [l2_normalize([np.mean([vectors_by_id[id] for id in cluster], axis=0)])[0]
+                         for cluster in clusters]
+            matches = sorted([
+                (jaccard, similarity, index, topic.slug)
+                for index, (cluster, centroid) in enumerate(zip(clusters, centroids, strict=True))
+                for jaccard, similarity, topic in continuity_candidates(
+                    cluster, centroid, list(topics.values()), day, deps.cfg)
+            ], key=lambda row: (-row[0], -row[1], tuple(sorted(clusters[row[2]])), row[3]))
+            assignments, used = {}, set()
+            for _, _, index, slug in matches:
+                if index not in assignments and slug not in used:
+                    assignments[index] = slug
+                    used.add(slug)
+            for index, (cluster, centroid) in enumerate(zip(clusters, centroids, strict=True)):
+                existing = topics.get(assignments.get(index))
+                if existing and any(entry.date == day and entry.item_ids == cluster
+                                    for entry in existing.history):
+                    unchanged.add(existing.slug)
+                topic = match_or_create(cluster, centroid, list(topics.values()),
                                         day, deps.cfg, [items_by_id[id].title for id in cluster],
-                                        [item.title for item in window], items_by_id)
-                if existing and topic.slug == existing.slug:
-                    # Continuity averages centroids; reapplying today's update would drift on retries.
-                    topic.centroid = old_centroid
-                    unchanged.add(topic.slug)
+                                        [item.title for item in window], items_by_id,
+                                        excluded_slugs=set(topics) - {assignments.get(index)})
                 append_history(topic, day, cluster, len(cluster))
+                fill_unranked_days(topic, day, deps.cfg.continuity_max_gap_days)
                 topics[topic.slug] = topic
                 items_by_topic[topic.slug] = [items_by_id[id] for id in cluster]
             for slug, topic in topics.items():
                 if slug not in items_by_topic:
-                    append_history(topic, day, [], 0)
-                fill_unranked_days(topic, day)
+                    topic.history = [entry for entry in topic.history if entry.date != day]
             counts.update(topics_new=len(set(items_by_topic) - previous_slugs),
                           topics_continued=len(set(items_by_topic) & previous_slugs))
         with _stage('score_rank'):
@@ -494,7 +505,7 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
 
 def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps, *,
                   reenrich: bool = False, model: str = 'claude-haiku-5-5',
-                  only_missing_synthesis: bool = False) -> None:
+                  only_missing_synthesis: bool = False, rebuild_topics: bool = False) -> None:
     validate_month_range(start, end)
     if domain != store.domain:
         raise ValueError('domain does not match store')
@@ -502,10 +513,11 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
     item_ids = {item.id for item in items}
     path = store.root / domain / '.reprocess_state.json'
     request = {'command': 'reprocess', 'range': {'from': str(start), 'to': str(end)},
-               'reenrich': reenrich, 'model': model, 'only_missing_synthesis': only_missing_synthesis}
+               'reenrich': reenrich, 'model': model, 'only_missing_synthesis': only_missing_synthesis,
+               'rebuild_topics': rebuild_topics}
     if path.exists():
         state = json.loads(path.read_text(encoding='utf-8'))
-        if any(state.get(key, False if key == 'only_missing_synthesis' else None) != value
+        if any(state.get(key, False if key in {'only_missing_synthesis', 'rebuild_topics'} else None) != value
                for key, value in request.items()):
             raise ValueError('unfinished reprocess checkpoint has different range or options')
     else:
@@ -575,8 +587,15 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
         store._write(path, state)
     if state['stage'] == 'reset':
         with _stage('reset') as counts:
+            if rebuild_topics:
+                for topic in store.all_topics():
+                    if any(start <= entry.date <= end for entry in topic.history):
+                        topic.headline = topic.summary = topic.synthesis = None
+                        topic.synthesis_model = topic.synthesized_on = None
+                        topic.item_one_liners = {}
+                        store.put_topic(topic)
             # Keep topic identities and synthesis when expanding an existing leaderboard.
-            if not only_missing_synthesis:
+            if rebuild_topics or not only_missing_synthesis:
                 counts.update(reset_derived(store, start, end))
         state['stage'] = 'days'
         store._write(path, state)
