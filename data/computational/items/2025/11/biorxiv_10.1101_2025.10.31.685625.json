@@ -1,0 +1,48 @@
+{
+  "abstract": "MotivationAdvances in DNA sequencing have outpaced advances in computation, making sequence alignment a major bottleneck in genome data analyses. Classical dynamic programming (DP) algorithms are particularly memory-intensive, especially when computing gap-affine and dual gap-affine alignments. Existing strategies to reduce memory consumption often sacrifice either speed or alignment accuracy.\n\nResultsWe present Singletrack, an efficient algorithm for backtrace gap-affine and dual gap-affine alignments that requires only storing a single DP matrix. Compared to classical DP algorithms, Singletrack removes the need to store additional matrices (i.e., 2 for gap-affine and 4 for dual gap-affine), significantly reducing memory consumption and, in turn, reducing pressure on the memory hierarchy and improving overall performance. Most importantly, Singletrack is a general backtrace method compatible with state-of-the-art DP-based algorithms and heuristics, such as the Suzuki-Kasahara (SK) and the Wavefront Alignment (WFA) algorithms. Our results demonstrate that Singletrack accelerates the SK implementation of KSW2, used within Minimap2, by up to 1.4x. Similarly, Singletrack enhances the performance of the WFA implementation in WFA2-lib by 1.2-2.1x while reducing memory usage by 3x for gap-affine and 5x for dual gap-affine. Compared to the efficient linear-memory BiWFA algorithm, the Singletrack-accelerated version of WFA trades a practical increase in memory usage for up to 5.2x higher performance.\n\nAvailabilityAll the implementations of the Singletrack algorithm presented in this work are available at https://github.com/LorienLV/singletrack.",
+  "authors": [
+    "Lopez-Villellas, L.",
+    "Iniguez, C.",
+    "Jimenez-Blanco, A.",
+    "Aguado-Puig, Q.",
+    "Moreto, M.",
+    "Alastruey-Benede, J.",
+    "Ibanez, P.",
+    "Marco-Sola, S."
+  ],
+  "doi": "10.1101/2025.10.31.685625",
+  "first_seen": "2025-11-02",
+  "id": "biorxiv:10.1101/2025.10.31.685625",
+  "metadata": {
+    "abstract": "MotivationAdvances in DNA sequencing have outpaced advances in computation, making sequence alignment a major bottleneck in genome data analyses. Classical dynamic programming (DP) algorithms are particularly memory-intensive, especially when computing gap-affine and dual gap-affine alignments. Existing strategies to reduce memory consumption often sacrifice either speed or alignment accuracy.\n\nResultsWe present Singletrack, an efficient algorithm for backtrace gap-affine and dual gap-affine alignments that requires only storing a single DP matrix. Compared to classical DP algorithms, Singletrack removes the need to store additional matrices (i.e., 2 for gap-affine and 4 for dual gap-affine), significantly reducing memory consumption and, in turn, reducing pressure on the memory hierarchy and improving overall performance. Most importantly, Singletrack is a general backtrace method compatible with state-of-the-art DP-based algorithms and heuristics, such as the Suzuki-Kasahara (SK) and the Wavefront Alignment (WFA) algorithms. Our results demonstrate that Singletrack accelerates the SK implementation of KSW2, used within Minimap2, by up to 1.4x. Similarly, Singletrack enhances the performance of the WFA implementation in WFA2-lib by 1.2-2.1x while reducing memory usage by 3x for gap-affine and 5x for dual gap-affine. Compared to the efficient linear-memory BiWFA algorithm, the Singletrack-accelerated version of WFA trades a practical increase in memory usage for up to 5.2x higher performance.\n\nAvailabilityAll the implementations of the Singletrack algorithm presented in this work are available at https://github.com/LorienLV/singletrack.",
+    "author_corresponding": "Lorién López-Villellas",
+    "author_corresponding_institution": "Departamento de Informática e Ingeniería de Sistemas, Universidad de Zaragoza, Spain",
+    "authors": "Lopez-Villellas, L.; Iniguez, C.; Jimenez-Blanco, A.; Aguado-Puig, Q.; Moreto, M.; Alastruey-Benede, J.; Ibanez, P.; Marco-Sola, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-02",
+    "doi": "10.1101/2025.10.31.685625",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/02/2025.10.31.685625.source.xml",
+    "license": "cc_by",
+    "published": "10.1093/bioinformatics/btag183",
+    "server": "bioRxiv",
+    "title": "Singletrack: An Algorithm for Improving Memory Consumption and Performance of Gap-Affine Sequence Alignment",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Departamento de Informática e Ingeniería de Sistemas, Universidad de Zaragoza, Spain",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-11-02",
+  "published_doi": "10.1093/bioinformatics/btag183",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Singletrack is a backtrace method for gap-affine and dual gap-affine sequence alignment that stores only one DP matrix, cutting memory use and speeding up KSW2…",
+  "title": "Singletrack: An Algorithm for Improving Memory Consumption and Performance of Gap-Affine Sequence Alignment",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.10.31.685625"
+}

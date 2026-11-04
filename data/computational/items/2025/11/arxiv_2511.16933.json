@@ -1,0 +1,33 @@
+{
+  "abstract": "12-lead ECGs with high sampling frequency are the clinical gold standard for arrhythmia detection, but their short-term, spot-check nature often misses intermittent events. Wearable ECGs enable long-term monitoring but suffer from irregular, lower sampling frequencies due to battery constraints, making morphology analysis challenging. We present an end-to-end classification pipeline to address these issues. We train a latent ODE to model continuous ECG waveforms and create robust feature vectors from high-frequency single-channel signals. We construct three latent vectors per waveform via downsampling the initial 360 Hz ECG to 90 Hz and 45 Hz. We then use a gradient boosted tree to classify these vectors and test robustness across frequencies. Performance shows minimal degradation, with macro-averaged AUC-ROC values of 0.984, 0.978, and 0.976 at 360 Hz, 90 Hz, and 45 Hz, respectively, suggesting a way to sidestep the trade-off between signal fidelity and battery life. This enables smaller wearables, promoting long-term monitoring of cardiac health.",
+  "authors": [
+    "Angelina Yan",
+    "Matt L. Sampson",
+    "Peter Melchior"
+  ],
+  "doi": null,
+  "first_seen": "2025-11-21",
+  "id": "arxiv:2511.16933",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2511.16933v1</ns0:id>\n    <ns0:title>A novel approach to classification of ECG arrhythmia types with latent ODEs</ns0:title>\n    <ns0:updated>2025-11-21T03:57:52Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2511.16933v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2511.16933v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>12-lead ECGs with high sampling frequency are the clinical gold standard for arrhythmia detection, but their short-term, spot-check nature often misses intermittent events. Wearable ECGs enable long-term monitoring but suffer from irregular, lower sampling frequencies due to battery constraints, making morphology analysis challenging. We present an end-to-end classification pipeline to address these issues. We train a latent ODE to model continuous ECG waveforms and create robust feature vectors from high-frequency single-channel signals. We construct three latent vectors per waveform via downsampling the initial 360 Hz ECG to 90 Hz and 45 Hz. We then use a gradient boosted tree to classify these vectors and test robustness across frequencies. Performance shows minimal degradation, with macro-averaged AUC-ROC values of 0.984, 0.978, and 0.976 at 360 Hz, 90 Hz, and 45 Hz, respectively, suggesting a way to sidestep the trade-off between signal fidelity and battery life. This enables smaller wearables, promoting long-term monitoring of cardiac health.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-11-21T03:57:52Z</ns0:published>\n    <ns1:comment>Accepted into NeurIPS 2025 Learning from Time Series for Health workshop</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Angelina Yan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Matt L. Sampson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peter Melchior</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Latent ODE features plus gradient-boosted trees classify arrhythmias from ECG; macro AUC-ROC 0.976-0.984 at 360, 90, 45 Hz.",
+  "title": "A novel approach to classification of ECG arrhythmia types with latent ODEs",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2511.16933v1"
+}

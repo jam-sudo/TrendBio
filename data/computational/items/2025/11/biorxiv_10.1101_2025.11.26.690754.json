@@ -1,0 +1,42 @@
+{
+  "abstract": "Recent algorithmic advancements have shown how to utilize pangenome graphs in combination with the haplotype reconstruction framework of Li and Stephens to accurately reconstruct a haplotype from a reference pangenome graph and a set of input reads. However, significant work remains in developing techniques that utilize a pangenome graph to obtain a pair of phased haplotypes called a diploid pair.\n\nResultsWe introduce new problem formulations and scalable algorithms for inferring phased diploid genomes from a pangenome graph and a set of input reads. We implement them in our tool DipGenie. The key idea is to jointly optimize genotyping and phasing along global paths through the pangenome graph, guided by a biologically motivated recombination budget that constrains inferred haplotypes to plausible mosaics of reference haplotypes. We evaluate DipGenie on real Illumina short-read data from the highly polymorphic MHC region in 22 leave-one-out diploid experiments, benchmarking against three tools that also operate on graph structures: VG, which samples haplotypes directly from the pangenome graph, and PanGenie + Beagle and Paragraph + Beagle, which derive local graphs from a VCF panel for per-site genotyping and delegate phasing to a statistical method. At full coverage, DipGenie achieves a geometric mean switch error rate (SER) of 0.86%, which is 5.7x lower than PanGenie + Beagle (4.88%), 7.9x lower than VG (6.77%), and 13.2x lower than Paragraph + Beagle (11.35%). For structural variant calling, DipGenie leads with a geometric mean F1-score of 0.571, compared to 0.470 (PanGenie + Beagle), 0.450 (VG), and 0.379 (Paragraph + Beagle). These advantages hold at every coverage level tested.\n\nAvailability and Implementationhttps://github.com/gsc74/DipGenie.",
+  "authors": [
+    "Chandra, G.",
+    "Doan, W. T.",
+    "Gibney, D."
+  ],
+  "doi": "10.1101/2025.11.26.690754",
+  "first_seen": "2025-11-27",
+  "id": "biorxiv:10.1101/2025.11.26.690754",
+  "metadata": {
+    "abstract": "Recent algorithmic advancements have shown how to utilize pangenome graphs in combination with the haplotype reconstruction framework of Li and Stephens to accurately reconstruct a haplotype from a reference pangenome graph and a set of input reads. However, significant work remains in developing techniques that utilize a pangenome graph to obtain a pair of phased haplotypes called a diploid pair.\n\nResultsWe introduce new problem formulations and scalable algorithms for inferring phased diploid genomes from a pangenome graph and a set of input reads. We implement them in our tool DipGenie. The key idea is to jointly optimize genotyping and phasing along global paths through the pangenome graph, guided by a biologically motivated recombination budget that constrains inferred haplotypes to plausible mosaics of reference haplotypes. We evaluate DipGenie on real Illumina short-read data from the highly polymorphic MHC region in 22 leave-one-out diploid experiments, benchmarking against three tools that also operate on graph structures: VG, which samples haplotypes directly from the pangenome graph, and PanGenie + Beagle and Paragraph + Beagle, which derive local graphs from a VCF panel for per-site genotyping and delegate phasing to a statistical method. At full coverage, DipGenie achieves a geometric mean switch error rate (SER) of 0.86%, which is 5.7x lower than PanGenie + Beagle (4.88%), 7.9x lower than VG (6.77%), and 13.2x lower than Paragraph + Beagle (11.35%). For structural variant calling, DipGenie leads with a geometric mean F1-score of 0.571, compared to 0.470 (PanGenie + Beagle), 0.450 (VG), and 0.379 (Paragraph + Beagle). These advantages hold at every coverage level tested.\n\nAvailability and Implementationhttps://github.com/gsc74/DipGenie.",
+    "author_corresponding": "Daniel Gibney",
+    "author_corresponding_institution": "University of Texas at Dallas",
+    "authors": "Chandra, G.; Doan, W. T.; Gibney, D.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-27",
+    "doi": "10.1101/2025.11.26.690754",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/27/2025.11.26.690754.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Haplotype-resolved diploid genome inference on pangenome graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Texas at Dallas",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-11-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "DipGenie jointly optimizes genotyping and phasing on pangenome graphs with a recombination budget, cutting switch error versus VG and PanGenie/Paragraph+Beagle…",
+  "title": "Haplotype-resolved diploid genome inference on pangenome graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.26.690754"
+}

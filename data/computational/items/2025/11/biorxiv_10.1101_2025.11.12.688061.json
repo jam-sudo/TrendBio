@@ -1,0 +1,41 @@
+{
+  "abstract": "MotivationIntegrating single-cell RNA sequencing experiments (scRNA-seq) across technologies is hindered by severe technical batch effects that confound analysis and mask biological variation. Adversarial autoencoders are a popular solution to correct for these confounding effects, often relying on discriminator networks that approximate the Jensen-Shannon divergence. Previous research has established that the Jensen-Shannon divergence suffers from vanishing gradients when distributions do not overlap, a common phenomenon when datasets come from different sequencing technologies, leading to failed training. In contrast, the Wasserstein distance remains a valid metric with informative gradients even for disjoint distributions. While both approaches appear in the literature, no study has rigorously isolated the adversarial objective to systematically evaluate its impact on batch alignment, biological conservation, and scalability across varying dataset complexities.\n\nResultsWe introduce a multi-class reference-based Wasserstein critic to systematically benchmark adversarial objectives. We find that the Wasserstein critic yields superior mixing; however, extensive reference sensitivity analysis reveals that the Wasserstein critic is prone to over-correction resulting in collapsed cellular representations; that its integrative performance is dependent on a topologically dense reference batch; and that it scales poorly with the number of batches. In contrast, we find that the \"weak\" integration characteristic of discriminators acts as a protective measure against over-correction. By highlighting the trade-offs between these methods, we aim to empower researchers to choose the correct method for their specific needs.\n\nAvailability and ImplementationSource code is available at https://github.com/kreid415/wasserstein-critic-deconfounding. Data are available at https://figshare.com/articles/dataset/Benchmarking_atlas-level_data_integration_in_single-cell_genomics_-_integration_task_datasets_Immune_and_pancreas_/12420968/1.\n\nContactkreid20@jh.edu.",
+  "authors": [
+    "Reid, K.",
+    "Guven, E."
+  ],
+  "doi": "10.1101/2025.11.12.688061",
+  "first_seen": "2025-11-13",
+  "id": "biorxiv:10.1101/2025.11.12.688061",
+  "metadata": {
+    "abstract": "MotivationIntegrating single-cell RNA sequencing experiments (scRNA-seq) across technologies is hindered by severe technical batch effects that confound analysis and mask biological variation. Adversarial autoencoders are a popular solution to correct for these confounding effects, often relying on discriminator networks that approximate the Jensen-Shannon divergence. Previous research has established that the Jensen-Shannon divergence suffers from vanishing gradients when distributions do not overlap, a common phenomenon when datasets come from different sequencing technologies, leading to failed training. In contrast, the Wasserstein distance remains a valid metric with informative gradients even for disjoint distributions. While both approaches appear in the literature, no study has rigorously isolated the adversarial objective to systematically evaluate its impact on batch alignment, biological conservation, and scalability across varying dataset complexities.\n\nResultsWe introduce a multi-class reference-based Wasserstein critic to systematically benchmark adversarial objectives. We find that the Wasserstein critic yields superior mixing; however, extensive reference sensitivity analysis reveals that the Wasserstein critic is prone to over-correction resulting in collapsed cellular representations; that its integrative performance is dependent on a topologically dense reference batch; and that it scales poorly with the number of batches. In contrast, we find that the \"weak\" integration characteristic of discriminators acts as a protective measure against over-correction. By highlighting the trade-offs between these methods, we aim to empower researchers to choose the correct method for their specific needs.\n\nAvailability and ImplementationSource code is available at https://github.com/kreid415/wasserstein-critic-deconfounding. Data are available at https://figshare.com/articles/dataset/Benchmarking_atlas-level_data_integration_in_single-cell_genomics_-_integration_task_datasets_Immune_and_pancreas_/12420968/1.\n\nContactkreid20@jh.edu.",
+    "author_corresponding": "Kendall Reid",
+    "author_corresponding_institution": "Johns Hopkins University",
+    "authors": "Reid, K.; Guven, E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-13",
+    "doi": "10.1101/2025.11.12.688061",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/13/2025.11.12.688061.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Wasserstein Critics Outperform Discriminatorsin Adversarial Deconfounding of Gene Expression Data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2025-11-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks Wasserstein versus discriminator adversarial objectives for scRNA-seq batch deconfounding, finding better mixing but over-correction and poor batch…",
+  "title": "Wasserstein Critics Outperform Discriminatorsin Adversarial Deconfounding of Gene Expression Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.12.688061"
+}

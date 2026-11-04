@@ -1,0 +1,38 @@
+{
+  "abstract": "Snarls and superbubbles are fundamental pangenome decompositions capturing variant sites. These bubble-like structures underpin key tasks in computational pangenomics, including structural-variant genotyping, distance indexing, haplotype sampling, and variant annotation. Snarls can be quadratically-many in the size of the graph, and since their introduction in 2018 with the vg toolkit, there has been no work on identifying all snarls in linear time. Moreover, while it is known how to find superbubbles in linear time, this result is a highly specialized solution only achieved after a long series of papers.\n  We present the first algorithm identifying all snarls in linear time. This is based on a new representation of all snarls, of size linear in the input graph size, and which can be computed in linear time. Our algorithm is based on a unified framework that also provides a new linear-time algorithm for finding superbubbles. An observation behind our results is that all such structures are separated from the rest of the graph by two vertices (except for cases which are trivially computable), i.e. their endpoints are a 2-separator of the underlying undirected graph. Based on this, we employ the well-known SPQR tree decomposition, which encodes all 2-separators, to guide a traversal that finds the bubble-like structures efficiently.\n  We implemented our algorithms in C++ (available at https://github.com/algbio/BubbleFinder) and evaluated them on various pangenomic datasets. Our algorithms outcompete or they are on the same level of existing methods. For snarls, we are up to two times faster than vg, while identifying all snarls. When computing superbubbles, we are up to 50 times faster than BubbleGun. Our SPQR tree framework provides a unifying perspective on bubble-like structures in pangenomics, together with a template for finding other bubble-like structures efficiently.",
+  "authors": [
+    "Francisco Sena",
+    "Aleksandr Politov",
+    "Corentin Moumard",
+    "Manuel Cáceres",
+    "Sebastian Schmidt",
+    "Juha Harviainen",
+    "Alexandru I. Tomescu"
+  ],
+  "doi": null,
+  "first_seen": "2025-11-26",
+  "id": "arxiv:2511.21919",
+  "metadata": {
+    "arxiv_primary_category": "cs.DS",
+    "categories": [
+      "cs.DS",
+      "cs.DM",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2511.21919v1</ns0:id>\n    <ns0:title>Identifying all snarls and superbubbles in linear-time, via a unified SPQR-tree framework</ns0:title>\n    <ns0:updated>2025-11-26T21:24:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2511.21919v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2511.21919v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Snarls and superbubbles are fundamental pangenome decompositions capturing variant sites. These bubble-like structures underpin key tasks in computational pangenomics, including structural-variant genotyping, distance indexing, haplotype sampling, and variant annotation. Snarls can be quadratically-many in the size of the graph, and since their introduction in 2018 with the vg toolkit, there has been no work on identifying all snarls in linear time. Moreover, while it is known how to find superbubbles in linear time, this result is a highly specialized solution only achieved after a long series of papers.\n  We present the first algorithm identifying all snarls in linear time. This is based on a new representation of all snarls, of size linear in the input graph size, and which can be computed in linear time. Our algorithm is based on a unified framework that also provides a new linear-time algorithm for finding superbubbles. An observation behind our results is that all such structures are separated from the rest of the graph by two vertices (except for cases which are trivially computable), i.e. their endpoints are a 2-separator of the underlying undirected graph. Based on this, we employ the well-known SPQR tree decomposition, which encodes all 2-separators, to guide a traversal that finds the bubble-like structures efficiently.\n  We implemented our algorithms in C++ (available at https://github.com/algbio/BubbleFinder) and evaluated them on various pangenomic datasets. Our algorithms outcompete or they are on the same level of existing methods. For snarls, we are up to two times faster than vg, while identifying all snarls. When computing superbubbles, we are up to 50 times faster than BubbleGun. Our SPQR tree framework provides a unifying perspective on bubble-like structures in pangenomics, together with a template for finding other bubble-like structures efficiently.</ns0:summary>\n    <ns0:category term=\"cs.DS\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-11-26T21:24:48Z</ns0:published>\n    <ns1:primary_category term=\"cs.DS\" />\n    <ns0:author>\n      <ns0:name>Francisco Sena</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aleksandr Politov</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Corentin Moumard</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Manuel Cáceres</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sebastian Schmidt</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Juha Harviainen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alexandru I. Tomescu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-11-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Presents the first linear-time algorithm for identifying all snarls in pangenome graphs, plus a linear-time superbubble method via SPQR-tree decomposition; C++…",
+  "title": "Identifying all snarls and superbubbles in linear-time, via a unified SPQR-tree framework",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2511.21919v1"
+}

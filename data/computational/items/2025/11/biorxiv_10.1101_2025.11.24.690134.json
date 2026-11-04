@@ -1,0 +1,43 @@
+{
+  "abstract": "MotivationSpatial transcriptomics offers detailed molecular insights but struggles to capture continuous tissue dynamics due to experimental constraints and destructive sampling. Traditional optimal transport (OT) methods attempt to link time points but often rely on unimodal data and oversimplify complex developmental processes. We propose a spatiotemporal deep generative model that captures the continuous evolution of tissue, integrating both spatial and gene-expression dynamics. We first embed spatial transcriptomic particles into a latent space using a VAE and then learn time-dependent dynamics with a potential-guided neural ODE. This framework reveals diverse tissue behaviors, including growth patterns, spatial reorganization, and temporal gene-expression changes. A neural decoder estimates key behaviors like growth, disappearance, movement, and clustering, while a differentiable growth module models region appearance and disappearance.\n\nResultsSTODE is a deep generative model that reconstructs continuous spatiotemporal dynamics from discrete spatial transcriptomics measurements collected at multiple time points. On a complex synthetic dataset simulating gene-driven tissue morphogenesis and mouse midbrain development dataset, STODE significantly outperformed both linear interpolation and Entropic Optimal Transport models in predicting gene expression and spatial coordinates for a excluded timepoint. When applied to a mouse organogenesis dataset, the models backward simulations from late-stage embryos to early progenitors accurately reconstructed known developmental processes. The simulations correctly identified early pharyngeal arch derivatives as the populations occupying the largest area and captured the progressive differentiation of diverse cell types from multipotent neural crest and mesenchymal progenitors, demonstrating the models capability to reconstruct continuous and meaningful biological trajectories from discrete-timepoint spatial transcriptomes. In addition, the inferred factors reflected coordinated activation of morphogenetic programs, including cytoskeletal remodeling and cell-matrix interactions, and revealed transcriptional signatures associated with epithelial-mesenchymal transition and directed tissue migration, suggesting that the model effectively disentangled regulatory modules underlying the spatial organization and morphogenesis of craniofacial structures. The proposed model, STODE, will be broadly applicable to studies on embryogenesis, tissue regeneration, and disease progression, where reconstructing continuous spatiotemporal trajectories is essential for understanding biological mechanisms.\n\nAvailability and ImplementationThe STODE model was implemented in Python using the PyTorch deep learning library. This code is available on GitHub at https://github.com/LzrRacer/STODE/.\n\nContactk.majima1214@gmail.com, yakojim@ncc.go.jp, shimamura.csb@tmd.ac.jp",
+  "authors": [
+    "Majima, K.",
+    "Kojima, Y.",
+    "Shimamura, T."
+  ],
+  "doi": "10.1101/2025.11.24.690134",
+  "first_seen": "2025-11-26",
+  "id": "biorxiv:10.1101/2025.11.24.690134",
+  "metadata": {
+    "abstract": "MotivationSpatial transcriptomics offers detailed molecular insights but struggles to capture continuous tissue dynamics due to experimental constraints and destructive sampling. Traditional optimal transport (OT) methods attempt to link time points but often rely on unimodal data and oversimplify complex developmental processes. We propose a spatiotemporal deep generative model that captures the continuous evolution of tissue, integrating both spatial and gene-expression dynamics. We first embed spatial transcriptomic particles into a latent space using a VAE and then learn time-dependent dynamics with a potential-guided neural ODE. This framework reveals diverse tissue behaviors, including growth patterns, spatial reorganization, and temporal gene-expression changes. A neural decoder estimates key behaviors like growth, disappearance, movement, and clustering, while a differentiable growth module models region appearance and disappearance.\n\nResultsSTODE is a deep generative model that reconstructs continuous spatiotemporal dynamics from discrete spatial transcriptomics measurements collected at multiple time points. On a complex synthetic dataset simulating gene-driven tissue morphogenesis and mouse midbrain development dataset, STODE significantly outperformed both linear interpolation and Entropic Optimal Transport models in predicting gene expression and spatial coordinates for a excluded timepoint. When applied to a mouse organogenesis dataset, the models backward simulations from late-stage embryos to early progenitors accurately reconstructed known developmental processes. The simulations correctly identified early pharyngeal arch derivatives as the populations occupying the largest area and captured the progressive differentiation of diverse cell types from multipotent neural crest and mesenchymal progenitors, demonstrating the models capability to reconstruct continuous and meaningful biological trajectories from discrete-timepoint spatial transcriptomes. In addition, the inferred factors reflected coordinated activation of morphogenetic programs, including cytoskeletal remodeling and cell-matrix interactions, and revealed transcriptional signatures associated with epithelial-mesenchymal transition and directed tissue migration, suggesting that the model effectively disentangled regulatory modules underlying the spatial organization and morphogenesis of craniofacial structures. The proposed model, STODE, will be broadly applicable to studies on embryogenesis, tissue regeneration, and disease progression, where reconstructing continuous spatiotemporal trajectories is essential for understanding biological mechanisms.\n\nAvailability and ImplementationThe STODE model was implemented in Python using the PyTorch deep learning library. This code is available on GitHub at https://github.com/LzrRacer/STODE/.\n\nContactk.majima1214@gmail.com, yakojim@ncc.go.jp, shimamura.csb@tmd.ac.jp",
+    "author_corresponding": "Koichiro Majima",
+    "author_corresponding_institution": "Department of Computational and Systems Biology, Medical Research Laboratory, Institute of Science Tokyo",
+    "authors": "Majima, K.; Kojima, Y.; Shimamura, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-26",
+    "doi": "10.1101/2025.11.24.690134",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/26/2025.11.24.690134.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "STODE: A Deep Generative Framework for Continuous Spatiotemporal Dynamics in Spatial Transcriptomics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computational and Systems Biology, Medical Research Laboratory, Institute of Science Tokyo",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2025-11-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "STODE, a VAE plus potential-guided neural ODE with a differentiable growth module, reconstructs continuous spatiotemporal dynamics from discrete-timepoint…",
+  "title": "STODE: A Deep Generative Framework for Continuous Spatiotemporal Dynamics in Spatial Transcriptomics",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.24.690134"
+}

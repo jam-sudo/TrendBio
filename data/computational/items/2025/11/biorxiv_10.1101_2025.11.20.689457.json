@@ -1,0 +1,47 @@
+{
+  "abstract": "Alternative splicing (AS) is a fundamental post-transcriptional mechanism that amplifies proteomic diversity and enables adaptive responses across eukaryotes. Current AS detection methods rely heavily on reference genomes, limiting their applicability to non-model organisms. Existing reference-free approaches suffer from inaccurate splice site prediction and treat detection and classification as separate processes, resulting in cascading errors. We present IRCAS, an integrated end-to-end framework for reference-free AS analysis, comprising three modules: identification, rectification, and classification. IRCAS employs colored de Bruijn graphs for AS detection, an attention-based CNN for splice site rectification, and a hybrid Graph Neural Network combining GAT and Transformer layers for classification. Evaluation across four species demonstrates substantial improvements: splice site accuracy increased to 92-96% versus 50-55% for existing methods, and end-to-end accuracy reached 83.4% compared to 41.2% for the previous best method. IRCAS establishes a new benchmark for reference-free AS detection in non-model organisms.\n\nGRAPHICAL ABSTRACT\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=167 SRC=\"FIGDIR/small/689457v1_fig1.gif\" ALT=\"Figure 1\">\nView larger version (42K):\norg.highwire.dtl.DTLVardef@1162531org.highwire.dtl.DTLVardef@e3c2e2org.highwire.dtl.DTLVardef@10f9032org.highwire.dtl.DTLVardef@c3cb5e_HPS_FORMAT_FIGEXP  M_FIG O_FLOATNOFig 1.C_FLOATNO Workflow for construction and application of IRCAS. IRCAS is composed of three parts: identification, rectification, classification. (A) Workflow for reference-free AS identification from a raw transcriptomic data. First, according to the input transcripts, we apply BLAST all versus all alignment for preliminary screen. Then we adopt the MkcDBGAS Graph construction strategy. A cDBG was constructed from two sequences using a specified k-mer size. Based on bubble topologies, bubbles were classified into 5 types: SNV-induced, four AS-induced, MX-induced, AL-induced, AF-induced. (B)Workflow for AS position offset rectification and reconstruction of cDBG. Input transcript pairs are converted into a single sequence that includes two virtual nucleotides denoting the splicing start and end sites. SUPPA, a reference-based method, is utilized to determine the true splicing sites. The sequence is encoded into an nx6 vector using one-hot encoding. The offset between the true and predicted splicing sites is calculated and encoded as the ground truth. An attention-based convolutional neural network (CNN) rectification model is trained on these data to predict the offset, enabling the reconstruction of the cDBG with corrected splicing positions. (C) Workflow for 4 types AS classification. For each cDBG, node features, edge features, and global features are extracted. These features are integrated into distinct layers of a graph attention network (GAT)-Transformer hybrid model. This architecture enables high-precision classification of four types of AS events. (D)Workflow for end-to-end application of IRCAS. Transcriptomic data from any species lacking a reference genome is processed by IRCAS, enabling the classification of seven AS types with high accuracy.\n\nC_FIG",
+  "authors": [
+    "Shen, C.",
+    "Zhang, Q.",
+    "Cao, Q.",
+    "Liu, X.",
+    "Zhang, Z.",
+    "Li, B.",
+    "Zhang, R."
+  ],
+  "doi": "10.1101/2025.11.20.689457",
+  "first_seen": "2025-11-20",
+  "id": "biorxiv:10.1101/2025.11.20.689457",
+  "metadata": {
+    "abstract": "Alternative splicing (AS) is a fundamental post-transcriptional mechanism that amplifies proteomic diversity and enables adaptive responses across eukaryotes. Current AS detection methods rely heavily on reference genomes, limiting their applicability to non-model organisms. Existing reference-free approaches suffer from inaccurate splice site prediction and treat detection and classification as separate processes, resulting in cascading errors. We present IRCAS, an integrated end-to-end framework for reference-free AS analysis, comprising three modules: identification, rectification, and classification. IRCAS employs colored de Bruijn graphs for AS detection, an attention-based CNN for splice site rectification, and a hybrid Graph Neural Network combining GAT and Transformer layers for classification. Evaluation across four species demonstrates substantial improvements: splice site accuracy increased to 92-96% versus 50-55% for existing methods, and end-to-end accuracy reached 83.4% compared to 41.2% for the previous best method. IRCAS establishes a new benchmark for reference-free AS detection in non-model organisms.\n\nGRAPHICAL ABSTRACT\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=167 SRC=\"FIGDIR/small/689457v1_fig1.gif\" ALT=\"Figure 1\">\nView larger version (42K):\norg.highwire.dtl.DTLVardef@1162531org.highwire.dtl.DTLVardef@e3c2e2org.highwire.dtl.DTLVardef@10f9032org.highwire.dtl.DTLVardef@c3cb5e_HPS_FORMAT_FIGEXP  M_FIG O_FLOATNOFig 1.C_FLOATNO Workflow for construction and application of IRCAS. IRCAS is composed of three parts: identification, rectification, classification. (A) Workflow for reference-free AS identification from a raw transcriptomic data. First, according to the input transcripts, we apply BLAST all versus all alignment for preliminary screen. Then we adopt the MkcDBGAS Graph construction strategy. A cDBG was constructed from two sequences using a specified k-mer size. Based on bubble topologies, bubbles were classified into 5 types: SNV-induced, four AS-induced, MX-induced, AL-induced, AF-induced. (B)Workflow for AS position offset rectification and reconstruction of cDBG. Input transcript pairs are converted into a single sequence that includes two virtual nucleotides denoting the splicing start and end sites. SUPPA, a reference-based method, is utilized to determine the true splicing sites. The sequence is encoded into an nx6 vector using one-hot encoding. The offset between the true and predicted splicing sites is calculated and encoded as the ground truth. An attention-based convolutional neural network (CNN) rectification model is trained on these data to predict the offset, enabling the reconstruction of the cDBG with corrected splicing positions. (C) Workflow for 4 types AS classification. For each cDBG, node features, edge features, and global features are extracted. These features are integrated into distinct layers of a graph attention network (GAT)-Transformer hybrid model. This architecture enables high-precision classification of four types of AS events. (D)Workflow for end-to-end application of IRCAS. Transcriptomic data from any species lacking a reference genome is processed by IRCAS, enabling the classification of seven AS types with high accuracy.\n\nC_FIG",
+    "author_corresponding": "Rongqing Zhang",
+    "author_corresponding_institution": "Yangtze Delta Region Institute of Tsinghua University",
+    "authors": "Shen, C.; Zhang, Q.; Cao, Q.; Liu, X.; Zhang, Z.; Li, B.; Zhang, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-20",
+    "doi": "10.1101/2025.11.20.689457",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/20/2025.11.20.689457.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "10.1093/bib/bbag384",
+    "server": "bioRxiv",
+    "title": "IRCAS: a novel end-to-end approach to identify, rectify and classify comprehensive alternative splicing events in a transcriptome without genome reference",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Yangtze Delta Region Institute of Tsinghua University",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2025-11-20",
+  "published_doi": "10.1093/bib/bbag384",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "IRCAS is a reference-free end-to-end framework combining colored de Bruijn graph AS detection, CNN splice site rectification, and GAT-Transformer GNN…",
+  "title": "IRCAS: a novel end-to-end approach to identify, rectify and classify comprehensive alternative splicing events in a transcriptome without genome reference",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.20.689457"
+}

@@ -1,0 +1,46 @@
+{
+  "abstract": "IntroductionChromatin accessibility profiling is an important tool for understanding gene regulation and cellular function. While public repositories house nearly 10,000 scATAC-seq experiments, unifying this data for meaningful analysis remains challenging. Existing tools struggle with the scale and complexity of scATAC-seq datasets, limiting tasks like clustering, cell-type annotation, and reference mapping. A promising solution is using foundation models adapted to specific tasks via transfer learning. While transfer learning has been applied to scRNA-seq, its potential for scATAC-seq remains underexplored.\n\nMethodsWe introduce Atacformer, a transformer-based foundation model for scATAC-seq data analysis. Unlike other models that only produce cell-level representations, Atacformer generates embeddings for individual cis-regulatory elements. Pre-trained on a large atlas of scATAC-seq experiments, Atacformer learns robust representations of genomic regulatory regions for downstream use. After pretraining, the model is fine-tuned for cell-type prediction and batch correction. We also integrated Atacformer with RNA-seq data to build a Contrastive RNA-ATAC Fine Tuning (CRAFT) model capable of cross-modal alignment and RNA imputation from ATAC data.\n\nResultsAtacformer matches or exceeds leading scATAC-seq clustering tools in adjusted rand index and runtime, with fine-tuned models achieving top performance across datasets. It processes raw fragment files end-to-end 80% faster than existing tools while preserving biological structure. Fine-tuned on bulk BED files, it recovers cell type and assay labels with >80% accuracy. We show how the Atacformer architecture produces contextualized embeddings of individual genomic regions, which we use to identify unannotated, cell-type-specific promoter elements directly from chromatin accessibility data.",
+  "authors": [
+    "LeRoy, N. J.",
+    "Zheng, G.",
+    "Khoroshevskyi, O.",
+    "Campbell, D. R.",
+    "Zhang, A.",
+    "Sheffield, N. C."
+  ],
+  "doi": "10.1101/2025.11.03.685753",
+  "first_seen": "2025-11-04",
+  "id": "biorxiv:10.1101/2025.11.03.685753",
+  "metadata": {
+    "abstract": "IntroductionChromatin accessibility profiling is an important tool for understanding gene regulation and cellular function. While public repositories house nearly 10,000 scATAC-seq experiments, unifying this data for meaningful analysis remains challenging. Existing tools struggle with the scale and complexity of scATAC-seq datasets, limiting tasks like clustering, cell-type annotation, and reference mapping. A promising solution is using foundation models adapted to specific tasks via transfer learning. While transfer learning has been applied to scRNA-seq, its potential for scATAC-seq remains underexplored.\n\nMethodsWe introduce Atacformer, a transformer-based foundation model for scATAC-seq data analysis. Unlike other models that only produce cell-level representations, Atacformer generates embeddings for individual cis-regulatory elements. Pre-trained on a large atlas of scATAC-seq experiments, Atacformer learns robust representations of genomic regulatory regions for downstream use. After pretraining, the model is fine-tuned for cell-type prediction and batch correction. We also integrated Atacformer with RNA-seq data to build a Contrastive RNA-ATAC Fine Tuning (CRAFT) model capable of cross-modal alignment and RNA imputation from ATAC data.\n\nResultsAtacformer matches or exceeds leading scATAC-seq clustering tools in adjusted rand index and runtime, with fine-tuned models achieving top performance across datasets. It processes raw fragment files end-to-end 80% faster than existing tools while preserving biological structure. Fine-tuned on bulk BED files, it recovers cell type and assay labels with >80% accuracy. We show how the Atacformer architecture produces contextualized embeddings of individual genomic regions, which we use to identify unannotated, cell-type-specific promoter elements directly from chromatin accessibility data.",
+    "author_corresponding": "Nathan C. Sheffield",
+    "author_corresponding_institution": "University of Virginia",
+    "authors": "LeRoy, N. J.; Zheng, G.; Khoroshevskyi, O.; Campbell, D. R.; Zhang, A.; Sheffield, N. C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-04",
+    "doi": "10.1101/2025.11.03.685753",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/04/2025.11.03.685753.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Atacformer: A transformer-based foundation model for analysis and interpretation of ATAC-seq data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Virginia",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "epigenomics",
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "Atacformer is a transformer foundation model pretrained on scATAC-seq atlases, producing per-cis-regulatory-element embeddings for clustering, cell-type…",
+  "title": "Atacformer: A transformer-based foundation model for analysis and interpretation of ATAC-seq data",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.03.685753"
+}

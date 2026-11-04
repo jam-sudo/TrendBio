@@ -1,0 +1,42 @@
+{
+  "abstract": "Comprehensive bacterial collections have reached millions of genomes, opening new opportunities for point-of-care diagnostics and epidemiological surveillance. However, local real-time search over such collections on commodity hardware remains difficult. Currently, only LexicMap and Phylign enable local search and alignment at such a scale; among them, only Phylign is designed to run on laptops, via a subindex approach informed by phylogenetic compression. However, Phyligns performance deteriorates on long and divergent queries because it uses COBS as a k-mer-based prefilter before alignment with Minimap2. Meanwhile, recent k-mer indexes such as Fulgor and Themisto have emerged, but there is no practical methodology for selecting, combining, and parameterizing them for phylogenetically partitioned million-genome search under constraints.\n\nHere, we develop an end-to-end methodology for k-mer matching in phylogenetically compressed bacterial collections. We formalize a matching strategy defined by matching mode, query type, and reference characteristics, and use this to shortlist candidate indexes and benchmark them under space-time trade-offs. As a case study, we address plasmid search over AllTheBacteria, compare multiple index types, and identify configurations optimizing the Pareto frontier of space and speed. Guided by these results, we implement a phylogenetically compressed variant of Fulgor, integrate it into Phylign, and obtain Phylign-Fulgor, a laptop-ready pipeline for million-genome search. On the 661k collection, Phylign-Fulgor makes the prefiltering step [~]4x faster than Phylign-COBS at the cost of a 1.2x larger index. On AllTheBacteria, its k-mer filter is 20x-300x faster in real time than LexicMaps alignment-based search and uses [~]20x smaller disk space. The full Phylign-Fulgor workflow including Minimap2 alignments is slower than LexicMap for a single plasmid but competitive or faster for batched plasmid queries. Phylign-Fulgor has comparable matching sensitivity to LexicMap, is less sensitive at the alignment level, but always stays within a laptop RAM budget ([~]5x-20x lower memory than LexicMap).",
+  "authors": [
+    "Brunetti, F.",
+    "Brinda, K."
+  ],
+  "doi": "10.1101/2025.11.23.690050",
+  "first_seen": "2025-11-26",
+  "id": "biorxiv:10.1101/2025.11.23.690050",
+  "metadata": {
+    "abstract": "Comprehensive bacterial collections have reached millions of genomes, opening new opportunities for point-of-care diagnostics and epidemiological surveillance. However, local real-time search over such collections on commodity hardware remains difficult. Currently, only LexicMap and Phylign enable local search and alignment at such a scale; among them, only Phylign is designed to run on laptops, via a subindex approach informed by phylogenetic compression. However, Phyligns performance deteriorates on long and divergent queries because it uses COBS as a k-mer-based prefilter before alignment with Minimap2. Meanwhile, recent k-mer indexes such as Fulgor and Themisto have emerged, but there is no practical methodology for selecting, combining, and parameterizing them for phylogenetically partitioned million-genome search under constraints.\n\nHere, we develop an end-to-end methodology for k-mer matching in phylogenetically compressed bacterial collections. We formalize a matching strategy defined by matching mode, query type, and reference characteristics, and use this to shortlist candidate indexes and benchmark them under space-time trade-offs. As a case study, we address plasmid search over AllTheBacteria, compare multiple index types, and identify configurations optimizing the Pareto frontier of space and speed. Guided by these results, we implement a phylogenetically compressed variant of Fulgor, integrate it into Phylign, and obtain Phylign-Fulgor, a laptop-ready pipeline for million-genome search. On the 661k collection, Phylign-Fulgor makes the prefiltering step [~]4x faster than Phylign-COBS at the cost of a 1.2x larger index. On AllTheBacteria, its k-mer filter is 20x-300x faster in real time than LexicMaps alignment-based search and uses [~]20x smaller disk space. The full Phylign-Fulgor workflow including Minimap2 alignments is slower than LexicMap for a single plasmid but competitive or faster for batched plasmid queries. Phylign-Fulgor has comparable matching sensitivity to LexicMap, is less sensitive at the alignment level, but always stays within a laptop RAM budget ([~]5x-20x lower memory than LexicMap).",
+    "author_corresponding": "Karel Břinda",
+    "author_corresponding_institution": "Inria/Irisa Rennes",
+    "authors": "Brunetti, F.; Brinda, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-26",
+    "doi": "10.1101/2025.11.23.690050",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/26/2025.11.23.690050.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Optimized k-mer search across millions of bacterial genomes on laptops",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Inria/Irisa Rennes",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-11-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Develops a methodology for k-mer matching in phylogenetically compressed bacterial collections and Phylign-Fulgor, a laptop-ready pipeline for million-genome…",
+  "title": "Optimized k-mer search across millions of bacterial genomes on laptops",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.23.690050"
+}

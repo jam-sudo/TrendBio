@@ -1,0 +1,34 @@
+{
+  "abstract": "Generative Flow Networks (GFlowNets) construct molecules through sequential decisions, but their internal policies remain opaque, limiting adoption in drug discovery, where chemists need interpretable rationales for proposed structures. We present a control-validated interpretability study of SynFlowNet, a synthesis-aware GFlowNet trained with a drug-likeness (QED) reward. Our framework combines gradient saliency and counterfactual edits, an undercomplete factor analysis, and an overcomplete BatchTopK sparse autoencoder, evaluated with shuffled-label controls, RDKit-descriptor baselines, a scaffold-disjoint split, cross-seed stability, and an architecture-matched untrained network.\n  These controls materially change the interpretation. Physicochemical properties and functional groups are highly decodable from SynFlowNet embeddings, but an untrained network with the same architecture performs essentially as well as the trained policy (drug-likeness within 0.005 and marginally better molecular-size decoding). Thus, this decodability reflects graph architecture and atom featurization rather than representations acquired through policy training. The surviving conclusions are narrower: the overcomplete autoencoder reconstructs embeddings better than a matched undercomplete baseline at comparable sparsity; chemically enriched substructure detectors, including per-halogen and boron features, emerge in individual runs, although only a small subset of dictionary directions is stable across seeds; and zeroing individual features produces property-specific effects on probe decoding.\n  Beyond SynFlowNet, this study provides a reusable control protocol for molecular-model interpretability, separating learned structure from signals supplied by architecture and input representation. High probe scores alone should not be treated as evidence of learned chemistry.",
+  "authors": [
+    "Amirtha Varshini A S",
+    "Duminda S. Ranasinghe",
+    "Hok Hei Tam"
+  ],
+  "doi": null,
+  "first_seen": "2025-11-24",
+  "id": "arxiv:2511.19264",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2511.19264v2</ns0:id>\n    <ns0:title>Interpreting GFlowNets for Drug Discovery: What probes can and cannot show</ns0:title>\n    <ns0:updated>2026-08-05T01:36:52Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2511.19264v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2511.19264v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Generative Flow Networks (GFlowNets) construct molecules through sequential decisions, but their internal policies remain opaque, limiting adoption in drug discovery, where chemists need interpretable rationales for proposed structures. We present a control-validated interpretability study of SynFlowNet, a synthesis-aware GFlowNet trained with a drug-likeness (QED) reward. Our framework combines gradient saliency and counterfactual edits, an undercomplete factor analysis, and an overcomplete BatchTopK sparse autoencoder, evaluated with shuffled-label controls, RDKit-descriptor baselines, a scaffold-disjoint split, cross-seed stability, and an architecture-matched untrained network.\n  These controls materially change the interpretation. Physicochemical properties and functional groups are highly decodable from SynFlowNet embeddings, but an untrained network with the same architecture performs essentially as well as the trained policy (drug-likeness within 0.005 and marginally better molecular-size decoding). Thus, this decodability reflects graph architecture and atom featurization rather than representations acquired through policy training. The surviving conclusions are narrower: the overcomplete autoencoder reconstructs embeddings better than a matched undercomplete baseline at comparable sparsity; chemically enriched substructure detectors, including per-halogen and boron features, emerge in individual runs, although only a small subset of dictionary directions is stable across seeds; and zeroing individual features produces property-specific effects on probe decoding.\n  Beyond SynFlowNet, this study provides a reusable control protocol for molecular-model interpretability, separating learned structure from signals supplied by architecture and input representation. High probe scores alone should not be treated as evidence of learned chemistry.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-11-24T16:16:18Z</ns0:published>\n    <ns1:comment>25 pages, 17 figures in V2. v1 was Accepted for presentation at NeurIPS 2025 WiML Workshop and Molecular Machine Learning Conference (MoML) 2025</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Amirtha Varshini A S</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Duminda S. Ranasinghe</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hok Hei Tam</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Control-validated interpretability study of SynFlowNet, a GFlowNet for drug-like molecule design; untrained networks match trained policies, so probe…",
+  "title": "Interpreting GFlowNets for Drug Discovery: What probes can and cannot show",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2511.19264v2"
+}

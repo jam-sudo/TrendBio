@@ -1,0 +1,45 @@
+{
+  "abstract": "The FASTQ file format is the lingua franca of primary data distribution and processing across most of bioinformatics. Over time, the compression, storage, transmission, and decompression of gzip compressed fastq.gz files has become a substantial scalability bottleneck in the modern world of fast and massively parallel genomics tools and algorithms.\n\nIn this work, we introduce mim: a lightweight, auxiliary index that enables fast, parallel, and highly-scalable parsing of compressed fastq.gz files. The creation of the mim index for a file is a one-time operation that can be performed in time comparable to that of simply decompressing and parsing the file (index creation induces [~] 20% overhead) and with minimal working memory. The mim index itself is very small, usually about [Formula]th of the size of the original compressed file, and can be easily stored along side the file or fetched from a remote location when it is needed. Further, the mim index is purely additive -- it does not modify the original gzipped FASTQ file in any way, nor require that the file be recompressed or rewritten -- and thus it does not require converting the massive back catalog of existing raw sequencing data.\n\nTo demonstrate the feasibility and utility of the mim index, we benchmark construction of the mim index on a variety of existing gzipped FASTQ data, and also measure thread-scaling of mim index-assisted parallel FASTQ parsing on a simple parsing/ decompression-related task. We find that, for the one-time cost of index creation, and a small fraction of extra storage space, the mim index can massively accelerate the ingestion and parsing of gzipped FASTQ data, exhibiting near linear thread scaling in our experiments. mim is written in C++17, and is available as open source software under a BSD 3-clause license at https://github.com/COMBINE-lab/mim.",
+  "authors": [
+    "Patro, R.",
+    "Bharti, S.",
+    "Singhania, P.",
+    "Dhakal, R.",
+    "Dahlstrom, T. J.",
+    "Groot Koerkamp, R."
+  ],
+  "doi": "10.1101/2025.11.24.690271",
+  "first_seen": "2025-11-27",
+  "id": "biorxiv:10.1101/2025.11.24.690271",
+  "metadata": {
+    "abstract": "The FASTQ file format is the lingua franca of primary data distribution and processing across most of bioinformatics. Over time, the compression, storage, transmission, and decompression of gzip compressed fastq.gz files has become a substantial scalability bottleneck in the modern world of fast and massively parallel genomics tools and algorithms.\n\nIn this work, we introduce mim: a lightweight, auxiliary index that enables fast, parallel, and highly-scalable parsing of compressed fastq.gz files. The creation of the mim index for a file is a one-time operation that can be performed in time comparable to that of simply decompressing and parsing the file (index creation induces [~] 20% overhead) and with minimal working memory. The mim index itself is very small, usually about [Formula]th of the size of the original compressed file, and can be easily stored along side the file or fetched from a remote location when it is needed. Further, the mim index is purely additive -- it does not modify the original gzipped FASTQ file in any way, nor require that the file be recompressed or rewritten -- and thus it does not require converting the massive back catalog of existing raw sequencing data.\n\nTo demonstrate the feasibility and utility of the mim index, we benchmark construction of the mim index on a variety of existing gzipped FASTQ data, and also measure thread-scaling of mim index-assisted parallel FASTQ parsing on a simple parsing/ decompression-related task. We find that, for the one-time cost of index creation, and a small fraction of extra storage space, the mim index can massively accelerate the ingestion and parsing of gzipped FASTQ data, exhibiting near linear thread scaling in our experiments. mim is written in C++17, and is available as open source software under a BSD 3-clause license at https://github.com/COMBINE-lab/mim.",
+    "author_corresponding": "Rob Patro",
+    "author_corresponding_institution": "University of Maryland",
+    "authors": "Patro, R.; Bharti, S.; Singhania, P.; Dhakal, R.; Dahlstrom, T. J.; Groot Koerkamp, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-27",
+    "doi": "10.1101/2025.11.24.690271",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/27/2025.11.24.690271.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "mim: A lightweight auxiliary index to enable fast, parallel, gzipped FASTQ parsing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Maryland",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-11-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "mim: a lightweight auxiliary index enabling fast, parallel, near-linear-scaling parsing of gzipped FASTQ files without modifying or recompressing the originals.",
+  "title": "mim: A lightweight auxiliary index to enable fast, parallel, gzipped FASTQ parsing",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.24.690271"
+}

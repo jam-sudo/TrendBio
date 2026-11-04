@@ -1,0 +1,40 @@
+{
+  "abstract": "Surgical scene understanding demands temporally consistent tracking of instruments and tissues. For clinical use, such tracking should generalize to new centers and procedure types, yet retraining for each of them is costly and not scalable. Interactive video object segmentation offers a way toward this generalization: the target is specified at inference by a first-frame visual prompt, so a model can generalize to unseen categories and new scenarios without retraining. However, training such a generalizable model demands spatio-temporal masklet annotations at a scale and procedural diversity that existing surgical benchmarks lack. We fill this gap with iSurg, the largest surgical segmentation benchmark to our knowledge, spanning six procedure types with over 170k frames, 410k object masks, and 2.4k masklets, including an in-house clinical dataset of four 30-minute videos. Yet tracking over such long videos remains challenging: the target needs to be re-identified among visually similar objects after long absences, while long-term memory has to judge whether each stored frame genuinely depicts the target, both demanding a stable object-level semantic identity. To this end, we propose SurgSLOT, a surgical segmentation generalist that segments any prompted target through two coupled modules built on this semantic identity: Temporal Semantic Learning learns it for re-identification, and Semantic-driven Long-term Memory reuses it to select reliable memory frames, suppressing identity drift over long procedures. On the SAM2 and SAM3 backbones, SurgSLOT reaches 81.0 and 82.8 Macro Average J&F under cross-dataset evaluation, surpassing their fine-tuned counterparts by 5.1 and 5.3 points and transferring zero-shot to an unseen procedure type and unseen object categories, with the SAM2 version running in real time at 68 FPS.",
+  "authors": [
+    "Haofeng Liu",
+    "Ziyue Wang",
+    "Sudhanshu Mishra",
+    "Mingqi Gao",
+    "Guanyi Qin",
+    "Chang Han Low",
+    "Alex Y. W. Kong",
+    "Zhu Zhuo",
+    "Huazhu Fu",
+    "Joseph S. Ng",
+    "Yueming Jin"
+  ],
+  "doi": null,
+  "first_seen": "2025-11-20",
+  "id": "arxiv:2511.16618",
+  "metadata": {
+    "arxiv_primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "eess.IV",
+      "q-bio.TO"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2511.16618v2</ns0:id>\n    <ns0:title>SurgSLOT: Segment Anything in Surgical Videos via Semantic Long-term Tracking</ns0:title>\n    <ns0:updated>2026-07-28T09:58:43Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2511.16618v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2511.16618v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Surgical scene understanding demands temporally consistent tracking of instruments and tissues. For clinical use, such tracking should generalize to new centers and procedure types, yet retraining for each of them is costly and not scalable. Interactive video object segmentation offers a way toward this generalization: the target is specified at inference by a first-frame visual prompt, so a model can generalize to unseen categories and new scenarios without retraining. However, training such a generalizable model demands spatio-temporal masklet annotations at a scale and procedural diversity that existing surgical benchmarks lack. We fill this gap with iSurg, the largest surgical segmentation benchmark to our knowledge, spanning six procedure types with over 170k frames, 410k object masks, and 2.4k masklets, including an in-house clinical dataset of four 30-minute videos. Yet tracking over such long videos remains challenging: the target needs to be re-identified among visually similar objects after long absences, while long-term memory has to judge whether each stored frame genuinely depicts the target, both demanding a stable object-level semantic identity. To this end, we propose SurgSLOT, a surgical segmentation generalist that segments any prompted target through two coupled modules built on this semantic identity: Temporal Semantic Learning learns it for re-identification, and Semantic-driven Long-term Memory reuses it to select reliable memory frames, suppressing identity drift over long procedures. On the SAM2 and SAM3 backbones, SurgSLOT reaches 81.0 and 82.8 Macro Average J&amp;F under cross-dataset evaluation, surpassing their fine-tuned counterparts by 5.1 and 5.3 points and transferring zero-shot to an unseen procedure type and unseen object categories, with the SAM2 version running in real time at 68 FPS.</ns0:summary>\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.TO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-11-20T18:18:49Z</ns0:published>\n    <ns1:comment>19 pages, 7 figures, 11 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.CV\" />\n    <ns0:author>\n      <ns0:name>Haofeng Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ziyue Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sudhanshu Mishra</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Mingqi Gao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Guanyi Qin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chang Han Low</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alex Y. W. Kong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhu Zhuo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Huazhu Fu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Joseph S. Ng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yueming Jin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-20",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "SurgSLOT: a prompted surgical video segmentation model with semantic long-term tracking, plus iSurg, a large surgical masklet benchmark, reaching 82.8 J&F…",
+  "title": "SurgSLOT: Segment Anything in Surgical Videos via Semantic Long-term Tracking",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2511.16618v2"
+}

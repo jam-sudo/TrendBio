@@ -1,0 +1,45 @@
+{
+  "abstract": "Modern sequencing continues to drive explosive growth of nucleotide sequence archives, pushing MinHash sketching methods to their scalability limits. Tools such as Mash, Dashing2, and Bindash2 provide compact sketches and accurate similarity estimates, but they typically use forward indexes that materialize each sketch as an explicit fingerprint vector. This architecture makes large-scale similarity search and collection-versus-collection comparison costly in both time and memory, especially at the scale of millions of sequences.\n\nWe revisit sketch index architectures and develop a framework based on inverted indexes over sketch fingerprints. We introduce a cost model for sketch comparison and prove that, with suitably compressed posting lists, inverted indexes can match the asymptotic space complexity of forward indexes. Using this model, we design all-vs-all comparison algorithms between two inverted indexes whose running time is proportional to the total number of matching sketch positions, yielding outputsensitive optimality and enabling efficient large collection comparisons at scale.\n\nBecause many applications impose similarity thresholds, we add two early-pruning schemes for Jaccard similarity. The first is exact and eliminates pairs guaranteed not to reach a target threshold. The second is probabilistic and exploits partial match statistics to discard pairs unlikely to exceed the threshold, with explicit control of the false-rejection probability. These schemes reduce time and memory while preserving rigorous guarantees on retained high-similarity pairs.\n\nWe implement these ideas in Onika, an open-source Rust system built on compressed inverted posting lists at github.com/Malfoy/Onika. Onika also applies similarity-aware document reordering to shrink index size and improve locality, especially for redundant collections. Experiments on bacterial genome repositories and long-read HiFi datasets show that Onika matches or improves sketch sizes of leading tools while accelerating large-scale search and collection-versus-collection comparison by up to several orders of magnitude in low-redundancy regimes, without compromising sensitivity at practically relevant similarity thresholds.",
+  "authors": [
+    "Ingels, F.",
+    "Vandamme, L.",
+    "Girard, M.",
+    "Agret, C.",
+    "Cazaux, B.",
+    "Limasset, A."
+  ],
+  "doi": "10.1101/2025.11.21.689685",
+  "first_seen": "2025-11-21",
+  "id": "biorxiv:10.1101/2025.11.21.689685",
+  "metadata": {
+    "abstract": "Modern sequencing continues to drive explosive growth of nucleotide sequence archives, pushing MinHash sketching methods to their scalability limits. Tools such as Mash, Dashing2, and Bindash2 provide compact sketches and accurate similarity estimates, but they typically use forward indexes that materialize each sketch as an explicit fingerprint vector. This architecture makes large-scale similarity search and collection-versus-collection comparison costly in both time and memory, especially at the scale of millions of sequences.\n\nWe revisit sketch index architectures and develop a framework based on inverted indexes over sketch fingerprints. We introduce a cost model for sketch comparison and prove that, with suitably compressed posting lists, inverted indexes can match the asymptotic space complexity of forward indexes. Using this model, we design all-vs-all comparison algorithms between two inverted indexes whose running time is proportional to the total number of matching sketch positions, yielding outputsensitive optimality and enabling efficient large collection comparisons at scale.\n\nBecause many applications impose similarity thresholds, we add two early-pruning schemes for Jaccard similarity. The first is exact and eliminates pairs guaranteed not to reach a target threshold. The second is probabilistic and exploits partial match statistics to discard pairs unlikely to exceed the threshold, with explicit control of the false-rejection probability. These schemes reduce time and memory while preserving rigorous guarantees on retained high-similarity pairs.\n\nWe implement these ideas in Onika, an open-source Rust system built on compressed inverted posting lists at github.com/Malfoy/Onika. Onika also applies similarity-aware document reordering to shrink index size and improve locality, especially for redundant collections. Experiments on bacterial genome repositories and long-read HiFi datasets show that Onika matches or improves sketch sizes of leading tools while accelerating large-scale search and collection-versus-collection comparison by up to several orders of magnitude in low-redundancy regimes, without compromising sensitivity at practically relevant similarity thresholds.",
+    "author_corresponding": "Antoine Limasset",
+    "author_corresponding_institution": "Univ. Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL, F-59000 Lille, France",
+    "authors": "Ingels, F.; Vandamme, L.; Girard, M.; Agret, C.; Cazaux, B.; Limasset, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-21",
+    "doi": "10.1101/2025.11.21.689685",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/21/2025.11.21.689685.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Compressed inverted indexes for scalable sequence similarity",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Univ. Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL, F-59000 Lille, France",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-11-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Onika: open-source Rust system using compressed inverted indexes over MinHash sketches for scalable sequence similarity search and collection-vs-collection…",
+  "title": "Compressed inverted indexes for scalable sequence similarity",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.21.689685"
+}

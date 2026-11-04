@@ -1,0 +1,43 @@
+{
+  "abstract": "Hybridization between species is an important force in evolution, commonly modeled by the network multispecies coalescent. Reconstructing evolutionary histories under this model is computationally challenging, even for level-1 networks where hybridization events are isolated. Divide-and-conquer is a promising path forward, but current methods with statistical guarantees rely on an estimated tree of blobs (TOB) for the network, which compresses the non-tree-like parts into single vertices. TOB reconstruction is itself challenging, with the only available method TINNiK having time complexity O(n5 + n4k) for k genes and n species. Here, we present a new framework for scalable TOB reconstruction with statistical guarantees. Our approach operates by (1) seeking a refinement of the TOB and then (2) contracting edges in it. For step (1), we show that any optimal solution to Weighted Quartet Consensus is a TOB refinement almost surely, as the number of genes goes to infinity, motivating the use of methods, such as ASTRAL or TREE-QMC. For step (2), we show that applying the same hypothesis tests as TINNiK to just O(n) four-taxon subsets around each edge is sufficient for statistical consistency when the underlying network is level-1. Leveraging TREE-QMC for the first step gives our method time complexity O(n3k) and its name: TOB-QMC. On simulated data, TOB-QMC typically matches or exceeds TINNiK in accuracy while being more scalable. TOB-QMC also enables fast exploration of non-tree-like evolution, as demonstrated through re-analysis of three phylogenomic data sets. Lastly, our study clarifies the theoretical utility of quartet-based species tree methods in the context of hybridization, which is critical given the recent result that ASTRAL can be misleading.",
+  "authors": [
+    "Dai, J.",
+    "Han, Y.",
+    "Molloy, E."
+  ],
+  "doi": "10.1101/2025.11.05.686850",
+  "first_seen": "2025-11-06",
+  "id": "biorxiv:10.1101/2025.11.05.686850",
+  "metadata": {
+    "abstract": "Hybridization between species is an important force in evolution, commonly modeled by the network multispecies coalescent. Reconstructing evolutionary histories under this model is computationally challenging, even for level-1 networks where hybridization events are isolated. Divide-and-conquer is a promising path forward, but current methods with statistical guarantees rely on an estimated tree of blobs (TOB) for the network, which compresses the non-tree-like parts into single vertices. TOB reconstruction is itself challenging, with the only available method TINNiK having time complexity O(n5 + n4k) for k genes and n species. Here, we present a new framework for scalable TOB reconstruction with statistical guarantees. Our approach operates by (1) seeking a refinement of the TOB and then (2) contracting edges in it. For step (1), we show that any optimal solution to Weighted Quartet Consensus is a TOB refinement almost surely, as the number of genes goes to infinity, motivating the use of methods, such as ASTRAL or TREE-QMC. For step (2), we show that applying the same hypothesis tests as TINNiK to just O(n) four-taxon subsets around each edge is sufficient for statistical consistency when the underlying network is level-1. Leveraging TREE-QMC for the first step gives our method time complexity O(n3k) and its name: TOB-QMC. On simulated data, TOB-QMC typically matches or exceeds TINNiK in accuracy while being more scalable. TOB-QMC also enables fast exploration of non-tree-like evolution, as demonstrated through re-analysis of three phylogenomic data sets. Lastly, our study clarifies the theoretical utility of quartet-based species tree methods in the context of hybridization, which is critical given the recent result that ASTRAL can be misleading.",
+    "author_corresponding": "Erin Molloy",
+    "author_corresponding_institution": "University of Maryland, College Park",
+    "authors": "Dai, J.; Han, Y.; Molloy, E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-06",
+    "doi": "10.1101/2025.11.05.686850",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/06/2025.11.05.686850.source.xml",
+    "license": "cc_no",
+    "published": "10.1101/gr.282203.126",
+    "server": "bioRxiv",
+    "title": "Fast and accurate tree of blobs reconstruction under the network multispecies coalescent",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Maryland, College Park",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-11-06",
+  "published_doi": "10.1101/gr.282203.126",
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Presents TOB-QMC, a scalable tree-of-blobs reconstruction method under the network multispecies coalescent with statistical consistency for level-1 networks,…",
+  "title": "Fast and accurate tree of blobs reconstruction under the network multispecies coalescent",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.05.686850"
+}

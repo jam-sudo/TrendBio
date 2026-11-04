@@ -1,0 +1,42 @@
+{
+  "abstract": "Despite substantial progress in genomic foundation models, accurately predicting inter-individual variation in gene expression from DNA sequence alone remains a major challenge. Current sequence-based models, such as Enformer and Borzoi, trained exclusively on the reference genome, cannot capture the effects of individual-specific regulatory variants. Moreover, the acquisition of paired whole-genome and transcriptome data required for personalized modeling is hindered by privacy and data-sharing constraints. To address this limitation, we integrate genomic data synthesis with established statistical frameworks. Our approach generates thousands of synthetic training samples by simulating genetic variation from the 1000 Genomes Project and assigning pseudo-expression labels using PrediXcan, a validated eQTL-based predictor. Because simulated and real expression values differ in scale and distribution, we introduce a preference-based objective that models relative rather than absolute expression patterns. Fine-tuning Enformer through alternating cycles of real-data regression and synthetic-data preference optimization enables efficient learning from both real and synthesized data. Using the GEUVADIS dataset, our framework outperforms AlphaGenome, PrediXcan, and Enformer fine-tuned without synthesized data, demonstrating that simulation-based integration of population-level regulatory knowledge can effectively mitigate data scarcity and improve cross-individual generalization in sequence-based gene expression prediction.\n\nAvailability and implementationCode and data are available at https://github.com/pacifiic/augment-finetune-genomics.",
+  "authors": [
+    "Choi, M.",
+    "Cho, B.",
+    "Lee, S."
+  ],
+  "doi": "10.1101/2025.11.09.687505",
+  "first_seen": "2025-11-11",
+  "id": "biorxiv:10.1101/2025.11.09.687505",
+  "metadata": {
+    "abstract": "Despite substantial progress in genomic foundation models, accurately predicting inter-individual variation in gene expression from DNA sequence alone remains a major challenge. Current sequence-based models, such as Enformer and Borzoi, trained exclusively on the reference genome, cannot capture the effects of individual-specific regulatory variants. Moreover, the acquisition of paired whole-genome and transcriptome data required for personalized modeling is hindered by privacy and data-sharing constraints. To address this limitation, we integrate genomic data synthesis with established statistical frameworks. Our approach generates thousands of synthetic training samples by simulating genetic variation from the 1000 Genomes Project and assigning pseudo-expression labels using PrediXcan, a validated eQTL-based predictor. Because simulated and real expression values differ in scale and distribution, we introduce a preference-based objective that models relative rather than absolute expression patterns. Fine-tuning Enformer through alternating cycles of real-data regression and synthetic-data preference optimization enables efficient learning from both real and synthesized data. Using the GEUVADIS dataset, our framework outperforms AlphaGenome, PrediXcan, and Enformer fine-tuned without synthesized data, demonstrating that simulation-based integration of population-level regulatory knowledge can effectively mitigate data scarcity and improve cross-individual generalization in sequence-based gene expression prediction.\n\nAvailability and implementationCode and data are available at https://github.com/pacifiic/augment-finetune-genomics.",
+    "author_corresponding": "Seunggeun Lee",
+    "author_corresponding_institution": "Seoul National University",
+    "authors": "Choi, M.; Cho, B.; Lee, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-11",
+    "doi": "10.1101/2025.11.09.687505",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/11/2025.11.09.687505.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Preference-Based Fine-Tuning of Genomic Sequence Models for Personal Expression Prediction with Data Augmentation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Seoul National University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Preference-based fine-tuning of Enformer with PrediXcan-labeled synthetic 1000 Genomes samples improves personal gene expression prediction on GEUVADIS over…",
+  "title": "Preference-Based Fine-Tuning of Genomic Sequence Models for Personal Expression Prediction with Data Augmentation",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.09.687505"
+}
