@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { marked } from "marked";
 import { parse } from "yaml";
-import type { Day, Item, Topic } from "./types";
+import type { Day, Item, MapData, Topic } from "./types";
 
 export const DATA_ROOT = process.env.TRENDBIO_DATA_ROOT ?? "../data";
 export const NOTES_ROOT = process.env.TRENDBIO_NOTES_ROOT ?? "../notes";
@@ -24,6 +24,10 @@ function readRecords<T>(directory: string): T[] {
     .sort()
     .map((path) => readJson<T>(join(directory, path)))
     .filter((record): record is T => record !== null);
+}
+
+export function loadMap(domain: string): MapData | null {
+  return readJson<MapData>(join(DATA_ROOT, domain, "map.json"));
 }
 
 export function loadDays(domain: string): Day[] {

@@ -9,6 +9,7 @@ on:
         required: true
         default: reprocess
         options:
+          - map
           - restatus
           - reprocess
       reenrich:
@@ -20,13 +21,13 @@ on:
         type: boolean
         default: false
       from:
-        description: First date (YYYY-MM-DD)
+        description: First date (YYYY-MM-DD, except map)
         type: string
-        required: true
+        required: false
       to:
-        description: Last date (YYYY-MM-DD)
+        description: Last date (YYYY-MM-DD, except map)
         type: string
-        required: true
+        required: false
       model:
         description: Batch enrichment model (reprocess only)
         type: string
@@ -71,14 +72,15 @@ jobs:
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          args=(--domain computational --from "$FROM" --to "$TO")
+          args=(--domain computational)
+          if [[ "$COMMAND" != "map" ]]; then args+=(--from "$FROM" --to "$TO"); fi
           case "$COMMAND" in
             reprocess)
               args+=(--model "$MODEL")
               if [[ "$REENRICH" == "true" ]]; then args+=(--reenrich); else args+=(--no-reenrich); fi
               if [[ "$ONLY_MISSING_SYNTHESIS" == "true" ]]; then args+=(--only-missing-synthesis); fi
               ;;
-            restatus) ;;
+            restatus|map) ;;
             *) exit 1 ;;
           esac
           python -m pipeline "$COMMAND" "${args[@]}"

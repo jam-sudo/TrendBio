@@ -99,6 +99,7 @@ def ctx(tmp_path, fixtures_root):
 def test_run_day_writes_day_topics_items(ctx):
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
     assert ctx.store.get_day(TODAY) == result
+    assert ctx.store.get_map().points
     assert result.ranked and result.run.status == 'ok'
     assert ctx.deps.adapters[0].calls == [(TODAY - timedelta(days=6), TODAY)]
     for item in ctx.items:
@@ -516,7 +517,8 @@ def test_stage_logs_have_timings_and_counts_without_item_content(ctx, caplog):
 def test_daily_embeds_new_and_existing_missing_embeddings_in_one_call(ctx):
     from unittest.mock import Mock
 
-    existing = ctx.items[0].model_copy(update={'id': 'biorxiv:existing', 'summary': 'Already summarized'})
+    existing = ctx.items[0].model_copy(update={'id': 'biorxiv:existing', 'summary': 'Already summarized',
+                                            'primary_category': 'structural'})
     ctx.store.put_item(existing)
     ctx.deps.embedder.embed = Mock(wraps=ctx.deps.embedder.embed)
     run_day('computational', TODAY, ctx.store, ctx.deps)
@@ -583,6 +585,8 @@ def test_backfill_chunk_failure_is_logged_and_skipped(ctx, caplog, capsys):
     state = json.loads((ctx.root / 'computational/.backfill_state.json').read_text())
     assert state['failed_chunks'] == [{'source': 'biorxiv', 'start': str(failed_day), 'end': str(failed_day)}]
     assert state['stage'] == 'days' and state['last_day'] == str(TODAY + timedelta(days=2))
+    assert caplog.text.count('stage=map event=start') == 1
+    assert ctx.store.get_map().points
     assert ctx.store.get_day(failed_day).run.source_status['biorxiv'] == 'failed'
     assert ctx.store.get_day(failed_day).run.status == 'degraded'
     assert (f'stage=collect event=chunk_failed source=biorxiv chunk={failed_day}..{failed_day} '
@@ -976,6 +980,8 @@ def test_reprocess_resets_range_and_reranks(ctx, monkeypatch, capsys, caplog):
     with caplog.at_level('INFO'):
         run_reprocess('computational', start, end, ctx.store, ctx.deps)
     assert len(resets) == 1 and resets[0]['topics_deleted'] == 1
+    assert caplog.text.count('stage=map event=start') == 1
+    assert ctx.store.get_map().points
     assert day_path(ctx.root, ctx.store.domain, end).read_bytes() != day_before
     assert ctx.store.get_day(end).ranked
     assert outside_day.read_bytes() == outside_bytes

@@ -91,3 +91,21 @@ export interface Day {
   ranked: RankedTopic[];
   run: RunInfo;
 }
+
+export interface MapData {
+  generated_on: string;
+  method: "umap";
+  points: {
+    slug: string;
+    label: string;
+    headline: string;
+    category: string;
+    x: number;
+    y: number;
+    size: number;
+    first_ranked: string;
+    last_ranked: string;
+    months: string[];
+    neighbors: string[];
+  }[];
+}

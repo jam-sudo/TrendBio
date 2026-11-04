@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 ItemType = Literal["published", "preprint", "code", "industry"]
 Source = Literal["biorxiv", "arxiv", "pubmed", "github", "rss"]
@@ -96,3 +96,22 @@ class Day(BaseModel):
     date: date
     ranked: list[RankedTopic]
     run: RunInfo
+
+
+class MapData(BaseModel):
+    class Point(BaseModel):
+        slug: str
+        label: str
+        headline: str
+        category: str
+        x: float = Field(ge=0, le=1)
+        y: float = Field(ge=0, le=1)
+        size: int = Field(ge=0)
+        first_ranked: date
+        last_ranked: date
+        months: list[str]
+        neighbors: list[str]
+
+    generated_on: date
+    method: Literal["umap"]
+    points: list[Point]

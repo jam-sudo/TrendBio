@@ -54,7 +54,7 @@ describe("built site accessibility and responsive layout", () => {
     await server?.stop();
   });
 
-  it.each(["dark", "light"].flatMap(theme => ["/", "/week/2026-W44/", "/topic/protein-design-binders-a1b2/", "/topics/", "/archive/"].map(path => ({ theme, path }))))(
+  it.each(["dark", "light"].flatMap(theme => ["/", "/week/2026-W44/", "/topic/protein-design-binders-a1b2/", "/topics/", "/map/", "/archive/"].map(path => ({ theme, path }))))(
     "$path in $theme has zero WCAG A/AA violations and accessible landmarks", async ({ theme, path }) => {
       await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
       const response = await page.goto(`http://127.0.0.1:${server!.port}${path}`);
@@ -63,6 +63,7 @@ describe("built site accessibility and responsive layout", () => {
       const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
       console.log(`axe ${theme} ${path}: ${violations.length} wcag2a/wcag2aa violations`);
       expect(violations).toEqual([]);
+      expect(await page.locator('header nav a[href="/map/"]').textContent()).toBe("Map");
       for (const selector of ["header", "header nav[aria-label]", "main#main", "footer", "h1"]) {
         expect(await page.locator(selector).count(), selector).toBe(1);
       }

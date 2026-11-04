@@ -1,0 +1,173 @@
+---
+import CategoryChips from "./CategoryChips.astro";
+import { categoryStyle } from "../lib/categories";
+import type { Category } from "../lib/data";
+import type { MapData } from "../lib/types";
+
+interface Props { map: MapData; categories: Category[] }
+const { map, categories } = Astro.props;
+const counts = Object.fromEntries(categories.map(({ slug }) => [slug, map.points.filter(p => p.category === slug).length]));
+const colors = Object.fromEntries(categories.map(({ slug, label }) => [slug, { hue: categoryStyle(slug).hue, label }]));
+const months = [...new Set(map.points.flatMap(p => p.months))].sort();
+const json = JSON.stringify(map).replace(/</g, "\\u003c");
+const external = Buffer.byteLength(json, "utf8") > 600_000;
+---
+<section class="topic-map" aria-label="Topic relationship map" data-map data-colors={JSON.stringify(colors)}>
+  <CategoryChips categories={categories} counts={counts} />
+  <div class="map-controls">
+    <label for="map-month">Activity: <output id="map-month-label" for="map-month">All time</output></label>
+    <input id="map-month" type="range" min="0" max={months.length} value={months.length} step="1" aria-valuetext="All time" />
+    <span class="map-count">{map.points.length} topics · updated <time datetime={map.generated_on}>{map.generated_on}</time></span>
+  </div>
+  <div class="map-stage">
+    <canvas aria-label="Research topics and their nearest neighbours. Topic links follow the map." role="img"></canvas>
+    <div class="map-tooltip" role="tooltip" hidden><strong></strong><span></span></div>
+  </div>
+  <p class="map-hint">Hover for details · click a topic to explore · filter by category or month</p>
+  <p class="map-error" hidden>The map could not load. Browse the topic links below.</p>
+  <ul class="map-links sr-only" aria-label="Research topics">
+    {map.points.map(p => <li><a href={`/topic/${p.slug}/`}>{p.headline} — {categories.find(c => c.slug === p.category)?.label ?? p.category}, last ranked {p.last_ranked}</a></li>)}
+  </ul>
+  <noscript>
+    <style>.topic-map .map-links{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal}.topic-map .map-stage,.topic-map .map-controls,.topic-map .category-chips,.topic-map .map-hint{display:none}</style>
+  </noscript>
+  <script id="topic-map-data" type="application/json" is:inline data-src={external ? "/map.json" : undefined} set:html={external ? "null" : json} />
+</section>
+
+<script is:inline type="module">
+  const root = document.querySelector('[data-map]');
+  const data = root.querySelector('#topic-map-data');
+  try {
+    const map = data.dataset.src ? await fetch(data.dataset.src).then(response => {
+      if (!response.ok) throw new Error('Map unavailable');
+      return response.json();
+    }) : JSON.parse(data.textContent);
+    const canvas = root.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas unavailable');
+    const colors = JSON.parse(root.dataset.colors);
+    const months = [...new Set(map.points.flatMap(p => p.months))].sort();
+    const slider = root.querySelector('#map-month');
+    const label = root.querySelector('#map-month-label');
+    const tooltip = root.querySelector('.map-tooltip');
+    const points = map.points;
+    const bySlug = new Map(points.map(p => [p.slug, p]));
+    const edgeKeys = new Set();
+    const edges = [];
+    for (const p of points) for (const slug of p.neighbors) {
+      const other = bySlug.get(slug);
+      const key = [p.slug, slug].sort().join('|');
+      if (other && other !== p && !edgeKeys.has(key)) {
+        edgeKeys.add(key);
+        edges.push([p, other]);
+      }
+    }
+    const maxSize = Math.max(1, ...points.map(p => Math.log1p(p.size)));
+    for (const p of points) p.radius = 2 + 7 * Math.log1p(p.size) / maxSize;
+    const grid = new Map();
+    const cellSize = 24;
+    let width = 0, height = 0, category = 'all', month, hovered;
+    function active(p) {
+      return (category === 'all' || p.category === category) && (!month || p.months.includes(month));
+    }
+    function draw() {
+      const style = getComputedStyle(root);
+      ctx.clearRect(0, 0, width, height);
+      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = style.getPropertyValue('--fg').trim();
+      for (const [p, other] of edges) {
+        ctx.globalAlpha = 0.25 * (active(p) && active(other) ? 1 : 0.15);
+        ctx.beginPath(); ctx.moveTo(p.px, p.py); ctx.lineTo(other.px, other.py); ctx.stroke();
+      }
+      for (const p of points) {
+        ctx.globalAlpha = active(p) ? 1 : 0.15;
+        ctx.fillStyle = `oklch(${style.getPropertyValue('--icon-lightness')} ${style.getPropertyValue('--icon-chroma')} ${colors[p.category]?.hue ?? 0})`;
+        ctx.beginPath(); ctx.arc(p.px, p.py, p.radius, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (hovered) {
+        ctx.strokeStyle = style.getPropertyValue('--fg').trim();
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(hovered.px, hovered.py, hovered.radius + 4, 0, Math.PI * 2); ctx.stroke();
+      }
+    }
+    function resize() {
+      const box = canvas.getBoundingClientRect();
+      width = box.width; height = box.height;
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      grid.clear();
+      for (const p of points) {
+        p.px = 24 + p.x * (width - 48); p.py = 24 + p.y * (height - 48);
+        const key = `${Math.floor(p.px / cellSize)},${Math.floor(p.py / cellSize)}`;
+        if (!grid.has(key)) grid.set(key, []);
+        grid.get(key).push(p);
+      }
+      clearHover();
+    }
+    function hit(event) {
+      const box = canvas.getBoundingClientRect();
+      const x = event.clientX - box.left, y = event.clientY - box.top;
+      const gx = Math.floor(x / cellSize), gy = Math.floor(y / cellSize);
+      let closest, best = Infinity;
+      for (let i = gx - 1; i <= gx + 1; i++) for (let j = gy - 1; j <= gy + 1; j++) {
+        for (const p of grid.get(`${i},${j}`) ?? []) {
+          const distance = Math.hypot(p.px - x, p.py - y);
+          if (distance <= p.radius + 5 && distance < best) { closest = p; best = distance; }
+        }
+      }
+      return closest;
+    }
+    function clearHover() {
+      hovered = undefined; tooltip.hidden = true; canvas.style.cursor = 'default'; draw();
+    }
+    canvas.addEventListener('mousemove', event => {
+      hovered = hit(event);
+      if (!hovered) return clearHover();
+      tooltip.querySelector('strong').textContent = hovered.headline;
+      tooltip.querySelector('span').textContent = `${colors[hovered.category]?.label ?? hovered.category} · last ranked ${hovered.last_ranked}`;
+      tooltip.hidden = false;
+      tooltip.style.left = `${Math.max(8, Math.min(width - tooltip.offsetWidth - 8, hovered.px + 16))}px`;
+      tooltip.style.top = `${Math.max(8, Math.min(height - tooltip.offsetHeight - 8, hovered.py + 16))}px`;
+      canvas.style.cursor = 'pointer'; draw();
+    });
+    canvas.addEventListener('mouseleave', clearHover);
+    canvas.addEventListener('click', event => {
+      const point = hit(event);
+      if (point) window.location.assign(`/topic/${encodeURIComponent(point.slug)}/`);
+    });
+    root.querySelector('[data-category-chips]').addEventListener('click', event => {
+      const button = event.target.closest('button[data-cat]');
+      if (!button || button.disabled) return;
+      category = button.dataset.cat; clearHover();
+    });
+    slider.addEventListener('input', () => {
+      month = months[Number(slider.value)];
+      label.textContent = month ?? 'All time';
+      slider.setAttribute('aria-valuetext', label.textContent); clearHover();
+    });
+    new ResizeObserver(resize).observe(canvas);
+    window.addEventListener('resize', resize);
+    new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    resize();
+  } catch (error) {
+    root.querySelector('.map-error').hidden = false;
+    root.querySelector('.map-links').classList.remove('sr-only');
+    root.querySelector('.map-stage').hidden = true;
+  }
+</script>
+
+<style>
+  .map-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+  .map-controls label { min-width: 170px; }
+  input { flex: 1; min-width: 120px; accent-color: var(--accent); }
+  .map-count, .map-hint { color: var(--muted); font-size: var(--t3); }
+  .map-stage { position: relative; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); overflow: hidden; }
+  canvas { display: block; width: 100%; height: clamp(340px, 55vw, 560px); }
+  .map-tooltip { position: absolute; z-index: 1; max-width: min(320px, calc(100% - 16px)); padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--fg); pointer-events: none; }
+  .map-tooltip strong, .map-tooltip span { display: block; }
+  .map-tooltip span { color: var(--muted); font-size: var(--t3); }
+  .map-hint { margin-top: 0.5rem; }
+  .map-links:focus-within { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; white-space: normal; }
+</style>
