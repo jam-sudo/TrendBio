@@ -1,0 +1,42 @@
+{
+  "abstract": "We present a deep-learning framework that combines an LSTM, a graph neural network (GNN), and transformer-style attention to model genotype-environment (G x E) effects for maize yield prediction. Weather data for a growing season is summarized using LSTM and encoded into a 21-dimensional embedding that is used as the environment node feature; 437,214 SNPs are summarized into 548 principal components that instantiate genotype nodes. Multi-head attention dynamically weights the edges during message passing. We compare three architectures: A (fully bipartite graph), B (A with intra-set top-k similarity within genotype and within environment), and C (B with a single learnable supernode readout that attends over all nodes after message passing). The joint representations feed a compact MLP for yield prediction. Using a forward-time split (2014-2021 train; 2022 test with unseen genotypes and unseen environments), performance improves monotonically from A to C: A (RMSE 2.7749, PCC 0.4115, R2 0.1693), B (2.3683, 0.6622, 0.4385), C (2.2120, 0.6945, 0.4823). Compared to A, C has a reduction in RMSE by 0.5629 ([~]20.3%) and an increase in PCC by 0.283 ([~]68.8%), indicating that global, content-adaptive aggregation promotes local G x E propagation. Performance of our approach remains consistent regardless of the number of genotypes per environment and has strong performance under variable or unbalanced genotype sampling expression across environments.",
+  "authors": [
+    "Morshedian, A.",
+    "Domaratzki, M."
+  ],
+  "doi": "10.1101/2025.11.09.687529",
+  "first_seen": "2025-11-11",
+  "id": "biorxiv:10.1101/2025.11.09.687529",
+  "metadata": {
+    "abstract": "We present a deep-learning framework that combines an LSTM, a graph neural network (GNN), and transformer-style attention to model genotype-environment (G x E) effects for maize yield prediction. Weather data for a growing season is summarized using LSTM and encoded into a 21-dimensional embedding that is used as the environment node feature; 437,214 SNPs are summarized into 548 principal components that instantiate genotype nodes. Multi-head attention dynamically weights the edges during message passing. We compare three architectures: A (fully bipartite graph), B (A with intra-set top-k similarity within genotype and within environment), and C (B with a single learnable supernode readout that attends over all nodes after message passing). The joint representations feed a compact MLP for yield prediction. Using a forward-time split (2014-2021 train; 2022 test with unseen genotypes and unseen environments), performance improves monotonically from A to C: A (RMSE 2.7749, PCC 0.4115, R2 0.1693), B (2.3683, 0.6622, 0.4385), C (2.2120, 0.6945, 0.4823). Compared to A, C has a reduction in RMSE by 0.5629 ([~]20.3%) and an increase in PCC by 0.283 ([~]68.8%), indicating that global, content-adaptive aggregation promotes local G x E propagation. Performance of our approach remains consistent regardless of the number of genotypes per environment and has strong performance under variable or unbalanced genotype sampling expression across environments.",
+    "author_corresponding": "Amir Morshedian",
+    "author_corresponding_institution": "University of Western Ontario: Western University",
+    "authors": "Morshedian, A.; Domaratzki, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-11",
+    "doi": "10.1101/2025.11.09.687529",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/11/2025.11.09.687529.source.xml",
+    "license": "cc_by",
+    "published": "10.1371/journal.pcbi.1013729",
+    "server": "bioRxiv",
+    "title": "LSTM-Attention-Guided Graph Neural Networks for Integrated Genotype-Environment Modeling in Maize Yield Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Western Ontario: Western University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-11",
+  "published_doi": "10.1371/journal.pcbi.1013729",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Hybrid LSTM, GNN, and attention model using SNP PCs and weather embeddings to predict maize yield under G x E effects; best architecture reaches PCC 0.6945 on…",
+  "title": "LSTM-Attention-Guided Graph Neural Networks for Integrated Genotype-Environment Modeling in Maize Yield Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.09.687529"
+}

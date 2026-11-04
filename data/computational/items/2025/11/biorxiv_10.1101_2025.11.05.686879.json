@@ -1,0 +1,42 @@
+{
+  "abstract": "We present mdBIRCH, an online clustering method that adapts the BIRCH CF-tree to molecular dynamics (MD) data by applying a merge test calibrated directly to RMSD. Each arriving frame is routed to the nearest leaf microcluster and merged only if the post-merge centroid-based spread, computed from the cluster feature (CF) summaries, remains within a user-supplied threshold{tau} . This enables incremental, memory-bounded operation without constructing pairwise distance matrices, with a physically interpretable parameter controlling structural granularity. We evaluate mdBIRCH on {beta}-heptapeptide and HP35 systems and propose two practical strategies to make the threshold selection easier: (a) RMSD-anchored runs that use controlled structural edits to define interpretable operating points and (b) a blind sweep that tracks how cluster counts, occupancies, and coverage evolve with the threshold. Across both systems, increasing this threshold produces predictable consolidation into fewer, higher-occupancy states, and broader RMSD-to-centroid distributions. We further analyze the effect of the CF-tree capacity through the branching factor, quantify sensitivity to data ordering, and compare dominant-state representatives against batch clustering workflows to contextualize the resulting partitions. Finally, because decisions rely only on cluster summaries, mdBIRCH scales near-linearly with the number of frames on standard CPU hardware, offering a practical combination of speed and interpretability for large-scale trajectory analysis.",
+  "authors": [
+    "Woody Santos, J. B.",
+    "Chen, L.",
+    "Miranda Quintana, R. A."
+  ],
+  "doi": "10.1101/2025.11.05.686879",
+  "first_seen": "2025-11-07",
+  "id": "biorxiv:10.1101/2025.11.05.686879",
+  "metadata": {
+    "abstract": "We present mdBIRCH, an online clustering method that adapts the BIRCH CF-tree to molecular dynamics (MD) data by applying a merge test calibrated directly to RMSD. Each arriving frame is routed to the nearest leaf microcluster and merged only if the post-merge centroid-based spread, computed from the cluster feature (CF) summaries, remains within a user-supplied threshold{tau} . This enables incremental, memory-bounded operation without constructing pairwise distance matrices, with a physically interpretable parameter controlling structural granularity. We evaluate mdBIRCH on {beta}-heptapeptide and HP35 systems and propose two practical strategies to make the threshold selection easier: (a) RMSD-anchored runs that use controlled structural edits to define interpretable operating points and (b) a blind sweep that tracks how cluster counts, occupancies, and coverage evolve with the threshold. Across both systems, increasing this threshold produces predictable consolidation into fewer, higher-occupancy states, and broader RMSD-to-centroid distributions. We further analyze the effect of the CF-tree capacity through the branching factor, quantify sensitivity to data ordering, and compare dominant-state representatives against batch clustering workflows to contextualize the resulting partitions. Finally, because decisions rely only on cluster summaries, mdBIRCH scales near-linearly with the number of frames on standard CPU hardware, offering a practical combination of speed and interpretability for large-scale trajectory analysis.",
+    "author_corresponding": "Ramon Alain Miranda Quintana",
+    "author_corresponding_institution": "University of Florida",
+    "authors": "Woody Santos, J. B.; Chen, L.; Miranda Quintana, R. A.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2025-11-07",
+    "doi": "10.1101/2025.11.05.686879",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/07/2025.11.05.686879.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "mdBIRCH for Fast, Scalable, Online Clustering of Molecular Dynamics Trajectories",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Florida",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2025-11-07",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "mdBIRCH adapts the BIRCH CF-tree to online, memory-bounded clustering of MD trajectories using an RMSD-calibrated merge test, with tunable granularity and…",
+  "title": "mdBIRCH for Fast, Scalable, Online Clustering of Molecular Dynamics Trajectories",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.05.686879"
+}

@@ -1,0 +1,50 @@
+{
+  "abstract": "The study of tumour-associated microbiomes using whole-genome sequencing (WGS) has attracted considerable attention, but microbial signal detection remains controversial due to host contamination and methodological artefacts. As the necessity of human-read removal becomes increasingly evident, many groups now include this step in their data pre-processing workflows. In this work, we introduce an open-source tool designed for rigorous host-read removal and apply it to the reanalysis of WGS data from ten mucinous rectal adenocarcinoma cases originally published by Reynolds et al. The workflow integrates k-mer-based classification (Kraken2), quality and adapter trimming (Trim Galore), vector filtering (BBDuk/UniVec_Core), and duplicate-removal (FastUniq). After reducing data complexity, a multi-aligner, multi-reference approach (BWA-MEM/GRCh38, Bowtie2/T2T-CHM13, Minimap2/HPRC v1.1) removes remaining host sequences, collectively eliminating more than 99.9% of human-derived reads. Although the additional alignment steps eliminated only a small fraction of total reads, they consistently removed millions of residual sequences per sample, underscoring the importance of rigorous filtering in datasets where non-human reads are a small minority. Taxonomic profiling with PathSeq and MetaPhlAn revealed reproducible enrichment of Fusobacterium species in tumour versus matched normal tissues, with stricter filtering reducing overall microbial signal compared to prior results. Cross-validation with immunofluorescence analysis using pan-Fusobacterium (detecting both F. animalis and F. nucleatum) and F. nucleatum-specific antibodies showed a strong concordance with Fusobacterium subspecies detected by WGS. Compared to the unfiltered analysis, host depletion markedly reduced artificial microbial signals in normal samples while preserving tumour-associated Fusobacterium, resulting in a more reliable microbial profile.\n\nImportanceWe developed an open-source tool that enables rapid removal of human-derived sequences and applied it to rectal cancer WGS data. This approach reduced false microbial signals while preserving true tumour-associated Fusobacterium, and we confirmed these findings in tissue using immunofluorescence staining. Our method provides a more reliable foundation for studying tumour-bacteria interactions.",
+  "authors": [
+    "Frolova, M. S.",
+    "Maguire, B.",
+    "Duessmann, H.",
+    "Rayan, M.",
+    "Burke, C.",
+    "Korashy, H. M.",
+    "Raman, A.",
+    "Gallagher, W. M.",
+    "Burke, J. P.",
+    "Furney, S. J.",
+    "Prehn, J. H. M."
+  ],
+  "doi": "10.1101/2025.11.24.690231",
+  "first_seen": "2025-11-26",
+  "id": "biorxiv:10.1101/2025.11.24.690231",
+  "metadata": {
+    "abstract": "The study of tumour-associated microbiomes using whole-genome sequencing (WGS) has attracted considerable attention, but microbial signal detection remains controversial due to host contamination and methodological artefacts. As the necessity of human-read removal becomes increasingly evident, many groups now include this step in their data pre-processing workflows. In this work, we introduce an open-source tool designed for rigorous host-read removal and apply it to the reanalysis of WGS data from ten mucinous rectal adenocarcinoma cases originally published by Reynolds et al. The workflow integrates k-mer-based classification (Kraken2), quality and adapter trimming (Trim Galore), vector filtering (BBDuk/UniVec_Core), and duplicate-removal (FastUniq). After reducing data complexity, a multi-aligner, multi-reference approach (BWA-MEM/GRCh38, Bowtie2/T2T-CHM13, Minimap2/HPRC v1.1) removes remaining host sequences, collectively eliminating more than 99.9% of human-derived reads. Although the additional alignment steps eliminated only a small fraction of total reads, they consistently removed millions of residual sequences per sample, underscoring the importance of rigorous filtering in datasets where non-human reads are a small minority. Taxonomic profiling with PathSeq and MetaPhlAn revealed reproducible enrichment of Fusobacterium species in tumour versus matched normal tissues, with stricter filtering reducing overall microbial signal compared to prior results. Cross-validation with immunofluorescence analysis using pan-Fusobacterium (detecting both F. animalis and F. nucleatum) and F. nucleatum-specific antibodies showed a strong concordance with Fusobacterium subspecies detected by WGS. Compared to the unfiltered analysis, host depletion markedly reduced artificial microbial signals in normal samples while preserving tumour-associated Fusobacterium, resulting in a more reliable microbial profile.\n\nImportanceWe developed an open-source tool that enables rapid removal of human-derived sequences and applied it to rectal cancer WGS data. This approach reduced false microbial signals while preserving true tumour-associated Fusobacterium, and we confirmed these findings in tissue using immunofluorescence staining. Our method provides a more reliable foundation for studying tumour-bacteria interactions.",
+    "author_corresponding": "Jochen H. M. Prehn",
+    "author_corresponding_institution": "Royal College of Surgeons in Ireland",
+    "authors": "Frolova, M. S.; Maguire, B.; Duessmann, H.; Rayan, M.; Burke, C.; Korashy, H. M.; Raman, A.; Gallagher, W. M.; Burke, J. P.; Furney, S. J.; Prehn, J. H. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-26",
+    "doi": "10.1101/2025.11.24.690231",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/26/2025.11.24.690231.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A multi-step filtering pipeline for human read removal enhances detection of Fusobacterium in WGS datasets with immunohistochemical confirmation in mucinous rectal cancer.",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Royal College of Surgeons in Ireland",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-11-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Open-source multi-step host-read filtering pipeline (Kraken2, BBDuk, multi-aligner) removes over 99.9% of human reads from rectal cancer WGS, reducing…",
+  "title": "A multi-step filtering pipeline for human read removal enhances detection of Fusobacterium in WGS datasets with immunohistochemical confirmation in mucinous rectal cancer.",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.24.690231"
+}

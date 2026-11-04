@@ -1,0 +1,44 @@
+{
+  "abstract": "Detecting chemical modifications on RNA molecules remains a key challenge in epitranscriptomics. Traditional reverse transcription-based sequencing methods introduce enzyme- and sequence-dependent biases and fragment RNA molecules, confounding the accurate mapping of modifications across the transcriptome. Nanopore direct RNA sequencing offers a powerful alternative by preserving native RNA molecules, enabling the detection of modifications at single-molecule resolution. However, current computational tools can identify only a limited subset of modification types within well-characterized sequence contexts for which ample training data exists. Here, we introduce a model-free computational method that reframes modification detection as an anomaly detection problem, requiring only canonical (unmodified) RNA reads without any other annotated data. For each nanopore read, our approach extracts robust, modification-sensitive features from the raw ionic current signal at a site using the signature transform, then computes an anomaly score by comparing the resulting feature vector to its nearest neighbors in an unmodified reference dataset. We convert anomaly scores into statistical p-values to enable anomaly detection at both individual read and site levels. Validation on densely-modified \\textit{E. coli} rRNA demonstrates that our approach detects known sites harboring diverse modification types, without prior training on these modifications. We further applyied this framework to dengue virus (DENV) transcripts and mammalian mRNAs. For DENV sfRNA, it led to revealing a novel 2'-O-methylated site, which we validate orthogonally by qRT-PCR assays. These results demonstrate that our model-free approach operates robustly across different types of RNAs and datasets generated with different nanopore sequencing chemistries.",
+  "authors": [
+    "Maud Lemercier",
+    "Paola Arrubarrena",
+    "Salvatore Di Giorgio",
+    "Julia Brettschneider",
+    "Thomas Cass",
+    "Valerie Griesche",
+    "Isabel S. Naarmann-de Vries",
+    "Anastasia Papavasiliou",
+    "Alessia Ruggieri",
+    "Irem Tellioglu",
+    "Chia Ching Wu",
+    "F. Nina Papavasiliou",
+    "Terry Lyons"
+  ],
+  "doi": null,
+  "first_seen": "2025-11-12",
+  "id": "arxiv:2511.08855",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2511.08855v2</ns0:id>\n    <ns0:title>Path Signatures Enable Model-Free Mapping of RNA Modifications</ns0:title>\n    <ns0:updated>2026-02-06T14:22:23Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2511.08855v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2511.08855v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Detecting chemical modifications on RNA molecules remains a key challenge in epitranscriptomics. Traditional reverse transcription-based sequencing methods introduce enzyme- and sequence-dependent biases and fragment RNA molecules, confounding the accurate mapping of modifications across the transcriptome. Nanopore direct RNA sequencing offers a powerful alternative by preserving native RNA molecules, enabling the detection of modifications at single-molecule resolution. However, current computational tools can identify only a limited subset of modification types within well-characterized sequence contexts for which ample training data exists. Here, we introduce a model-free computational method that reframes modification detection as an anomaly detection problem, requiring only canonical (unmodified) RNA reads without any other annotated data. For each nanopore read, our approach extracts robust, modification-sensitive features from the raw ionic current signal at a site using the signature transform, then computes an anomaly score by comparing the resulting feature vector to its nearest neighbors in an unmodified reference dataset. We convert anomaly scores into statistical p-values to enable anomaly detection at both individual read and site levels. Validation on densely-modified \\textit{E. coli} rRNA demonstrates that our approach detects known sites harboring diverse modification types, without prior training on these modifications. We further applyied this framework to dengue virus (DENV) transcripts and mammalian mRNAs. For DENV sfRNA, it led to revealing a novel 2'-O-methylated site, which we validate orthogonally by qRT-PCR assays. These results demonstrate that our model-free approach operates robustly across different types of RNAs and datasets generated with different nanopore sequencing chemistries.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-11-12T00:22:56Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Maud Lemercier</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Paola Arrubarrena</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Salvatore Di Giorgio</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Julia Brettschneider</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Thomas Cass</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Valerie Griesche</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Isabel S. Naarmann-de Vries</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anastasia Papavasiliou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alessia Ruggieri</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Irem Tellioglu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chia Ching Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>F. Nina Papavasiliou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Terry Lyons</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2025-11-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "Model-free anomaly detection using path signatures of nanopore raw current signals maps RNA modifications from canonical reads alone, validated on E. coli rRNA…",
+  "title": "Path Signatures Enable Model-Free Mapping of RNA Modifications",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2511.08855v2"
+}

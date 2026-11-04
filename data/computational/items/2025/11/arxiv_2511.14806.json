@@ -1,0 +1,41 @@
+{
+  "abstract": "Modeling genomic sequences faces two unsolved challenges: the information density varies widely across different regions, while there is no clearly defined minimum vocabulary unit. Relying on either four primitive bases or independently designed DNA tokenizers, existing approaches with naive masked language modeling pre-training often fail to adapt to the varying complexities of genomic sequences. Leveraging Token Merging techniques, this paper introduces a hierarchical architecture that jointly optimizes a dynamic genomic tokenizer and latent Transformers with context-aware pre-training tasks. As for network structures, the tokenization module automatically chunks adjacent bases into words by stacking multiple layers of the differentiable token merging blocks with local-window constraints, then a Latent Encoder captures the global context of these merged words by full-attention blocks. Symmetrically employing a Latent Decoder and a Local Decoder, MergeDNA learns with two pre-training tasks: Merged Token Reconstruction simultaneously trains the dynamic tokenization module and adaptively filters important tokens, while Adaptive Masked Token Modeling learns to predict these filtered tokens to capture informative contents. Extensive experiments show that MergeDNA achieves superior performance on three popular DNA benchmarks and several multi-omics tasks with fine-tuning or zero-shot evaluation, outperforming typical tokenization methods and large-scale DNA foundation models.",
+  "authors": [
+    "Siyuan Li",
+    "Kai Yu",
+    "Anna Wang",
+    "Zicheng Liu",
+    "Chang Yu",
+    "Jingbo Zhou",
+    "Qirong Yang",
+    "Yucheng Guo",
+    "Xiaoming Zhang",
+    "Stan Z. Li"
+  ],
+  "doi": null,
+  "first_seen": "2025-11-17",
+  "id": "arxiv:2511.14806",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2511.14806v1</ns0:id>\n    <ns0:title>MergeDNA: Context-aware Genome Modeling with Dynamic Tokenization through Token Merging</ns0:title>\n    <ns0:updated>2025-11-17T19:27:41Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2511.14806v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2511.14806v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Modeling genomic sequences faces two unsolved challenges: the information density varies widely across different regions, while there is no clearly defined minimum vocabulary unit. Relying on either four primitive bases or independently designed DNA tokenizers, existing approaches with naive masked language modeling pre-training often fail to adapt to the varying complexities of genomic sequences. Leveraging Token Merging techniques, this paper introduces a hierarchical architecture that jointly optimizes a dynamic genomic tokenizer and latent Transformers with context-aware pre-training tasks. As for network structures, the tokenization module automatically chunks adjacent bases into words by stacking multiple layers of the differentiable token merging blocks with local-window constraints, then a Latent Encoder captures the global context of these merged words by full-attention blocks. Symmetrically employing a Latent Decoder and a Local Decoder, MergeDNA learns with two pre-training tasks: Merged Token Reconstruction simultaneously trains the dynamic tokenization module and adaptively filters important tokens, while Adaptive Masked Token Modeling learns to predict these filtered tokens to capture informative contents. Extensive experiments show that MergeDNA achieves superior performance on three popular DNA benchmarks and several multi-omics tasks with fine-tuning or zero-shot evaluation, outperforming typical tokenization methods and large-scale DNA foundation models.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2025-11-17T19:27:41Z</ns0:published>\n    <ns1:comment>AAAI 2026 (Oral Presentation) Preprint</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Siyuan Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kai Yu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anna Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zicheng Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chang Yu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jingbo Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qirong Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yucheng Guo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiaoming Zhang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Stan Z. Li</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "MergeDNA introduces a hierarchical genome language model with a differentiable token-merging tokenizer and latent Transformers, pre-trained via reconstruction…",
+  "title": "MergeDNA: Context-aware Genome Modeling with Dynamic Tokenization through Token Merging",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2511.14806v1"
+}

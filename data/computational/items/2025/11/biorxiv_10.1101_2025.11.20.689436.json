@@ -1,0 +1,41 @@
+{
+  "abstract": "1Membrane building and embedding of proteins into a membrane is a crucial step in preparing a simulation for Molecular Dynamics (MD). When an MD simulation contains several million atoms, embedding the protein into a membrane becomes computationally expensive. MembraneBuilder [1] speeds up the generation of these membranes by simplifying the lipid insertion process, which allows membranes to be generated for these larger systems. Realistic lipid densities and elimination of infinite forces caused by overlapping atoms are achieved at a low computational cost. See Figure 1 for specific time comparisons. The comparisons emphasize that not only does MembraneBuilder run orders of magnitude faster than state-of-the-art programs [2, 3, 4], it enables generation of systems several orders of magnitude larger.\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=105 SRC=\"FIGDIR/small/689436v1_fig1.gif\" ALT=\"Figure 1\">\nView larger version (15K):\norg.highwire.dtl.DTLVardef@1ebfd2aorg.highwire.dtl.DTLVardef@39e8faorg.highwire.dtl.DTLVardef@1ee8ccborg.highwire.dtl.DTLVardef@5d9294_HPS_FORMAT_FIGEXP  M_FIG O_FLOATNOFigure 1:C_FLOATNO Speed Analysis: Comparison between the amount of time taken to run MembraneBuilder and CHARMM-GUI with varying protein sizes and their requisite amount of lipids. Note that the x and y scales are on a log scale, which further emphasizes the efficiency of MembraneBuilder.\n\nC_FIG MembraneBuilder enables customizable embedding of proteins into a membrane. Users can modify lipid types and their ratios, the location to insert the membrane, the size of the membrane box, as well as the lipid density. The program reduces the computational time required to perform a membrane embedding by bypassing many of the computationally expensive steps, such as identification of polar/non-polar sections of the protein and exhaustive packing of the lipids into the membrane with the intent to avoid steric clashes. Efficient packing begins with constricting the lipid bonds by a given factor in x, y, and z directions before inserting them on a grid. Grid spacing is determined by the width of the constricted lipids. The grid spacing is smaller than in other lipid-generation tools due to the constriction process. The constricted bonds will relax and the lipids will assume realistic interweaving during energy minimization and equilibration.",
+  "authors": [
+    "Hamilton, C. J.",
+    "Hart, G."
+  ],
+  "doi": "10.1101/2025.11.20.689436",
+  "first_seen": "2025-11-20",
+  "id": "biorxiv:10.1101/2025.11.20.689436",
+  "metadata": {
+    "abstract": "1Membrane building and embedding of proteins into a membrane is a crucial step in preparing a simulation for Molecular Dynamics (MD). When an MD simulation contains several million atoms, embedding the protein into a membrane becomes computationally expensive. MembraneBuilder [1] speeds up the generation of these membranes by simplifying the lipid insertion process, which allows membranes to be generated for these larger systems. Realistic lipid densities and elimination of infinite forces caused by overlapping atoms are achieved at a low computational cost. See Figure 1 for specific time comparisons. The comparisons emphasize that not only does MembraneBuilder run orders of magnitude faster than state-of-the-art programs [2, 3, 4], it enables generation of systems several orders of magnitude larger.\n\nO_FIG O_LINKSMALLFIG WIDTH=200 HEIGHT=105 SRC=\"FIGDIR/small/689436v1_fig1.gif\" ALT=\"Figure 1\">\nView larger version (15K):\norg.highwire.dtl.DTLVardef@1ebfd2aorg.highwire.dtl.DTLVardef@39e8faorg.highwire.dtl.DTLVardef@1ee8ccborg.highwire.dtl.DTLVardef@5d9294_HPS_FORMAT_FIGEXP  M_FIG O_FLOATNOFigure 1:C_FLOATNO Speed Analysis: Comparison between the amount of time taken to run MembraneBuilder and CHARMM-GUI with varying protein sizes and their requisite amount of lipids. Note that the x and y scales are on a log scale, which further emphasizes the efficiency of MembraneBuilder.\n\nC_FIG MembraneBuilder enables customizable embedding of proteins into a membrane. Users can modify lipid types and their ratios, the location to insert the membrane, the size of the membrane box, as well as the lipid density. The program reduces the computational time required to perform a membrane embedding by bypassing many of the computationally expensive steps, such as identification of polar/non-polar sections of the protein and exhaustive packing of the lipids into the membrane with the intent to avoid steric clashes. Efficient packing begins with constricting the lipid bonds by a given factor in x, y, and z directions before inserting them on a grid. Grid spacing is determined by the width of the constricted lipids. The grid spacing is smaller than in other lipid-generation tools due to the constriction process. The constricted bonds will relax and the lipids will assume realistic interweaving during energy minimization and equilibration.",
+    "author_corresponding": "Cayson  J Hamilton",
+    "author_corresponding_institution": "Brigham Young University-Provo: Brigham Young University",
+    "authors": "Hamilton, C. J.; Hart, G.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2025-11-20",
+    "doi": "10.1101/2025.11.20.689436",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/20/2025.11.20.689436.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MembraneBuilder: High-speed membrane construction for large molecular dynamics simulations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Brigham Young University-Provo: Brigham Young University",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2025-11-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "MembraneBuilder is a fast tool for embedding proteins into lipid membranes for large MD simulations, running orders of magnitude faster than CHARMM-GUI.",
+  "title": "MembraneBuilder: High-speed membrane construction for large molecular dynamics simulations",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.20.689436"
+}

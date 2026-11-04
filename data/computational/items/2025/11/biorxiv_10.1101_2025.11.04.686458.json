@@ -1,0 +1,42 @@
+{
+  "abstract": "Foundation models are increasingly applied to single-cell transcriptomics, where they promise to capture generalizable representations that support diverse downstream analyzes. However, two central questions remain: Does scaling pre-training data reliably improve performance, and do models trained on rank-ordered expression profiles confer advantages for mitigating batch effects? We addressed these questions by systematically assessing transformer-based models pre-trained on ranked single-cell profiles with varying data scales. The models were evaluated on masked gene prediction and downstream tasks, including cell type classification, perturbation response prediction, and zero-shot batch integration. To complement prediction accuracy, we further quantified prediction repetition, uniqueness, and diversity. In addition, we evaluated architectural refinements that incorporate cumulative prediction adjustment and similarity-based regularization; however, the study mainly focused on comparative evaluations rather than the development of new models. Our results indicated that scaling pretraining corpora improved masked prediction accuracy but did not consistently enhance downstream performance. Smaller models often matched or exceeded larger ones, indicating diminishing returns relative to scale. Rank-based models offered limited robustness to batch effects and consistently underperformed relative to domain-specific correction methods. Across all scales, high redundancy in predicted genes remains a major limitation. Together, these findings challenge assumptions that larger datasets or rank-order modeling automatically confer stronger generalization. Progress in single-cell foundation models may depend less on scale and more on pre-training objectives that enhance predictive diversity and biological plausibility.\n\nAuthor summaryIn recent years, large machine learning models have been adapted to study single cells, raising hopes that simply training on more data would automatically lead to better biological insights. Our study aimed to test this assumption by carefully evaluating models trained on small versus very large collections of single-cell data. We also asked whether models that learn from ranked lists of gene expressions offer an advantage in correcting technical differences between experiments, a common challenge in biology.\n\nWe found that bigger is not always better. Although larger models improved performance in predicting missing genes, this advantage did not consistently translate to stronger results in tasks such as cell type classification or data integration across studies. In fact, smaller models often matched or outperformed their larger counterparts. Models trained on ranked data were also not sufficient to reliably correct batch effects, and traditional tools still worked better for this purpose.\n\nOur findings suggest that future progress may come less from ever-larger models and more from rethinking how models learn from biological data. This work provides guidance for researchers designing new approaches and helps clarify realistic expectations for applying artificial intelligence to single-cell biology.",
+  "authors": [
+    "Chen, J.",
+    "Schmidt, F.",
+    "Henao, R."
+  ],
+  "doi": "10.1101/2025.11.04.686458",
+  "first_seen": "2025-11-05",
+  "id": "biorxiv:10.1101/2025.11.04.686458",
+  "metadata": {
+    "abstract": "Foundation models are increasingly applied to single-cell transcriptomics, where they promise to capture generalizable representations that support diverse downstream analyzes. However, two central questions remain: Does scaling pre-training data reliably improve performance, and do models trained on rank-ordered expression profiles confer advantages for mitigating batch effects? We addressed these questions by systematically assessing transformer-based models pre-trained on ranked single-cell profiles with varying data scales. The models were evaluated on masked gene prediction and downstream tasks, including cell type classification, perturbation response prediction, and zero-shot batch integration. To complement prediction accuracy, we further quantified prediction repetition, uniqueness, and diversity. In addition, we evaluated architectural refinements that incorporate cumulative prediction adjustment and similarity-based regularization; however, the study mainly focused on comparative evaluations rather than the development of new models. Our results indicated that scaling pretraining corpora improved masked prediction accuracy but did not consistently enhance downstream performance. Smaller models often matched or exceeded larger ones, indicating diminishing returns relative to scale. Rank-based models offered limited robustness to batch effects and consistently underperformed relative to domain-specific correction methods. Across all scales, high redundancy in predicted genes remains a major limitation. Together, these findings challenge assumptions that larger datasets or rank-order modeling automatically confer stronger generalization. Progress in single-cell foundation models may depend less on scale and more on pre-training objectives that enhance predictive diversity and biological plausibility.\n\nAuthor summaryIn recent years, large machine learning models have been adapted to study single cells, raising hopes that simply training on more data would automatically lead to better biological insights. Our study aimed to test this assumption by carefully evaluating models trained on small versus very large collections of single-cell data. We also asked whether models that learn from ranked lists of gene expressions offer an advantage in correcting technical differences between experiments, a common challenge in biology.\n\nWe found that bigger is not always better. Although larger models improved performance in predicting missing genes, this advantage did not consistently translate to stronger results in tasks such as cell type classification or data integration across studies. In fact, smaller models often matched or outperformed their larger counterparts. Models trained on ranked data were also not sufficient to reliably correct batch effects, and traditional tools still worked better for this purpose.\n\nOur findings suggest that future progress may come less from ever-larger models and more from rethinking how models learn from biological data. This work provides guidance for researchers designing new approaches and helps clarify realistic expectations for applying artificial intelligence to single-cell biology.",
+    "author_corresponding": "Fabian Schmidt",
+    "author_corresponding_institution": "King Abdullah University of Science and Technology",
+    "authors": "Chen, J.; Schmidt, F.; Henao, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-05",
+    "doi": "10.1101/2025.11.04.686458",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/05/2025.11.04.686458.source.xml",
+    "license": "cc_by",
+    "published": "10.1371/journal.pcbi.1013701",
+    "server": "bioRxiv",
+    "title": "Assessing Scale and Predictive Diversity in Models for Single-Cell Transcriptomics based on Geneformer",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "King Abdullah University of Science and Technology",
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2025-11-05",
+  "published_doi": "10.1371/journal.pcbi.1013701",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Systematic evaluation of Geneformer-style transformers pre-trained on ranked single-cell profiles at varying scales; larger corpora improve masked prediction…",
+  "title": "Assessing Scale and Predictive Diversity in Models for Single-Cell Transcriptomics based on Geneformer",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.04.686458"
+}

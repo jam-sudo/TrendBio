@@ -1,0 +1,43 @@
+{
+  "abstract": "SpliceAI has become the leading computational tool for predicting splice-altering variants, but restrictive licensing has limited its adoption by commercial clinical laboratories. While open-source reimplementations have emerged with author-reported comparisons, independent benchmarking across diverse datasets is needed to establish their practical equivalence.\n\nWe compared the original SpliceAI algorithm against two open-source alternatives (OpenSpliceAI and CI-SpliceAI) across three independent benchmarks: a curated dataset of 1,316 functionally validated variants, 213 variants with experimental splice assay data, and 58,064 clinically classified variants from ClinVar. All deep-learning methods were also compared with a legacy ensemble of four traditional splice prediction algorithms (MaxEntScan, NNSplice, GeneSplicer, and PWM), enabling direct comparison between modern and conventional approaches. Across all benchmarks, the deep-learning models consistently outperformed the ensemble of traditional algorithms. We evaluated sensitivity, specificity, and balanced accuracy for each algorithm, and performed statistical testing to assess significance of performance differences. Additionally, we conducted a correlation analysis on 100,000 variants to quantify the concordance of splice-scores and the agreement on splice site positions between implementations.\n\nAll three deep learning algorithms demonstrated comparable performance on the literature-curated benchmark (balanced accuracies: 89.5-90.7%) and the ClinVar dataset (88.9-89.5%). While both open-source solutions achieved a statistically significantly higher accuracy than SpliceAI on the ClinVar dataset, the magnitude of this improvement was small and unlikely to be of practical significance. On the functional splice assay dataset, the original SpliceAI achieved the highest accuracy (83.6%), while OpenSpliceAI showed significantly lower performance (74.6%, p = 0.019). Correlation analysis revealed that CI-SpliceAI maintained balanced concordance across splice event types ({rho} = 0.786-0.883), whereas OpenSpliceAI exhibited asymmetric performance with stronger correlation for loss events ({rho} = 0.924-0.940) than gain events ({rho} = 0.668-0.677). Both implementations demonstrated high spatial agreement with SpliceAI, with exact splice site position match rates exceeding 90% for all event types. Together, these results demonstrate that both open-source reimplementations of SpliceAI successfully reproduce the predictive behavior of the original algorithm across multiple evaluation contexts, while consistently outperforming traditional splice prediction methods.",
+  "authors": [
+    "Fortier, N.",
+    "Rudy, G.",
+    "Scherer, A."
+  ],
+  "doi": "10.1101/2025.11.20.689501",
+  "first_seen": "2025-11-20",
+  "id": "biorxiv:10.1101/2025.11.20.689501",
+  "metadata": {
+    "abstract": "SpliceAI has become the leading computational tool for predicting splice-altering variants, but restrictive licensing has limited its adoption by commercial clinical laboratories. While open-source reimplementations have emerged with author-reported comparisons, independent benchmarking across diverse datasets is needed to establish their practical equivalence.\n\nWe compared the original SpliceAI algorithm against two open-source alternatives (OpenSpliceAI and CI-SpliceAI) across three independent benchmarks: a curated dataset of 1,316 functionally validated variants, 213 variants with experimental splice assay data, and 58,064 clinically classified variants from ClinVar. All deep-learning methods were also compared with a legacy ensemble of four traditional splice prediction algorithms (MaxEntScan, NNSplice, GeneSplicer, and PWM), enabling direct comparison between modern and conventional approaches. Across all benchmarks, the deep-learning models consistently outperformed the ensemble of traditional algorithms. We evaluated sensitivity, specificity, and balanced accuracy for each algorithm, and performed statistical testing to assess significance of performance differences. Additionally, we conducted a correlation analysis on 100,000 variants to quantify the concordance of splice-scores and the agreement on splice site positions between implementations.\n\nAll three deep learning algorithms demonstrated comparable performance on the literature-curated benchmark (balanced accuracies: 89.5-90.7%) and the ClinVar dataset (88.9-89.5%). While both open-source solutions achieved a statistically significantly higher accuracy than SpliceAI on the ClinVar dataset, the magnitude of this improvement was small and unlikely to be of practical significance. On the functional splice assay dataset, the original SpliceAI achieved the highest accuracy (83.6%), while OpenSpliceAI showed significantly lower performance (74.6%, p = 0.019). Correlation analysis revealed that CI-SpliceAI maintained balanced concordance across splice event types ({rho} = 0.786-0.883), whereas OpenSpliceAI exhibited asymmetric performance with stronger correlation for loss events ({rho} = 0.924-0.940) than gain events ({rho} = 0.668-0.677). Both implementations demonstrated high spatial agreement with SpliceAI, with exact splice site position match rates exceeding 90% for all event types. Together, these results demonstrate that both open-source reimplementations of SpliceAI successfully reproduce the predictive behavior of the original algorithm across multiple evaluation contexts, while consistently outperforming traditional splice prediction methods.",
+    "author_corresponding": "Nathan Fortier",
+    "author_corresponding_institution": "Golden Helix, Inc.",
+    "authors": "Fortier, N.; Rudy, G.; Scherer, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-20",
+    "doi": "10.1101/2025.11.20.689501",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/20/2025.11.20.689501.source.xml",
+    "license": "cc_by",
+    "published": "10.1371/journal.pone.0348885",
+    "server": "bioRxiv",
+    "title": "Analyzing the Performance of Deep Learning Splice Prediction Algorithms",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Golden Helix, Inc.",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-20",
+  "published_doi": "10.1371/journal.pone.0348885",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Independent benchmark of SpliceAI against open-source reimplementations OpenSpliceAI and CI-SpliceAI and traditional splice predictors on variant datasets,…",
+  "title": "Analyzing the Performance of Deep Learning Splice Prediction Algorithms",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.20.689501"
+}

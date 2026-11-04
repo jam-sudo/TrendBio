@@ -1,0 +1,41 @@
+{
+  "abstract": "1.Genomic best linear unbiased prediction (GBLUP) is widely used for genomic selection in livestock and crop breeding. There is growing interest in connecting machine learning with genomic breeding value prediction. Although the BLUP formula is itself mathematically differentiable, existing implementations do not expose a differentiable computational graph and cannot be trained end-to-end. Here, we present [D]-BLUP, a differentiable implementation of the genomic mixed model in JAX that makes the BLUP solve part of the training process rather than an external step. The variance ratio {lambda} and optional block-level kernel weights are treated as trainable parameters, allowing these components to be learned directly from prediction error while preserving the BLUP structure used in animal and plant breeding. This means BLUP can now fit naturally within gradient-based models common in machine learning without losing its interpretability. The method solves the familiar system (Gw + {lambda}I) u = y* with either an unweighted VanRaden genomic relationship matrix G or a block-weighted variant Gw, via automatic differentiation, allowing simultaneous training. On a public dataset, [D]-BLUP with a fixed VanRaden kernel reproduces rrBLUP estimated breeding values and predictive performance, while learning {lambda}, and optionally SNP block weights, from a mean squared error objective. [D]-BLUP preserves the structure of BLUP used in routine breeding programs but makes it differentiable, maintaining its interpretability while making it embeddable in machine learning pipelines.",
+  "authors": [
+    "Guhlin, J. G.",
+    "Dearden, P."
+  ],
+  "doi": "10.1101/2025.11.25.690542",
+  "first_seen": "2025-11-28",
+  "id": "biorxiv:10.1101/2025.11.25.690542",
+  "metadata": {
+    "abstract": "1.Genomic best linear unbiased prediction (GBLUP) is widely used for genomic selection in livestock and crop breeding. There is growing interest in connecting machine learning with genomic breeding value prediction. Although the BLUP formula is itself mathematically differentiable, existing implementations do not expose a differentiable computational graph and cannot be trained end-to-end. Here, we present [D]-BLUP, a differentiable implementation of the genomic mixed model in JAX that makes the BLUP solve part of the training process rather than an external step. The variance ratio {lambda} and optional block-level kernel weights are treated as trainable parameters, allowing these components to be learned directly from prediction error while preserving the BLUP structure used in animal and plant breeding. This means BLUP can now fit naturally within gradient-based models common in machine learning without losing its interpretability. The method solves the familiar system (Gw + {lambda}I) u = y* with either an unweighted VanRaden genomic relationship matrix G or a block-weighted variant Gw, via automatic differentiation, allowing simultaneous training. On a public dataset, [D]-BLUP with a fixed VanRaden kernel reproduces rrBLUP estimated breeding values and predictive performance, while learning {lambda}, and optionally SNP block weights, from a mean squared error objective. [D]-BLUP preserves the structure of BLUP used in routine breeding programs but makes it differentiable, maintaining its interpretability while making it embeddable in machine learning pipelines.",
+    "author_corresponding": "Joseph G Guhlin",
+    "author_corresponding_institution": "Genomics Aotearoa / University of Otago",
+    "authors": "Guhlin, J. G.; Dearden, P.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2025-11-28",
+    "doi": "10.1101/2025.11.25.690542",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/28/2025.11.25.690542.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "D-BLUP: a differentiable genomic BLUP model with learnable variance and marker weights",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Genomics Aotearoa / University of Otago",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-11-28",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "D-BLUP is a JAX-based differentiable GBLUP implementation that learns the variance ratio and SNP block kernel weights end-to-end from prediction error,…",
+  "title": "D-BLUP: a differentiable genomic BLUP model with learnable variance and marker weights",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.25.690542"
+}

@@ -1,0 +1,43 @@
+{
+  "abstract": "MotivationLong-Read Sequencing (LRS), and Oxford Nanopore Technologies (ONT) in particular, has greatly improved the detection of structural genome variants (SVs). Fast alignment-based ONT callers achieve strong benchmark performance, but they necessarily reduce the read sequence to alignment-derived signals when deciding whether variants are shared across samples. This can be limiting for cohort and clinical analyses, especially for insertions and repeat regions where sequence representation matters. We present Svirlpool, a multi-sample SV caller for ONT data that builds local consensus assemblies of candidate SV regions and retains the assembled sequence up to the final joint-calling step, where merging tolerances are scaled by a reference-independent noise estimate derived from the reads.\n\nResultsWe validated Svirlpool on two ONT family datasets: the recent high-quality HG002 Ashkenazi trio and the older Platinum Pedigree family, using the Genome in a Bottle and T2TQ100 benchmarks on the GRCh38, GRCh37, and CHM13v2 references and the Mendelian consistency of native multi-sample calls. We compare against current native joint callers and post-hoc merging workflows. Svirlpool produces highly Mendelian-consistent insertion calls in trio analyses (95.2% on GRCh38 and 95.1% on CHM13v2 at 30x), and on CHM13v2 it reaches the highest insertion and deletion consistency among all tested approaches. Sawfish and Sniffles achieve the highest SV benchmark F1 scores on recent high-quality ONT data, whereas Svirlpool enters the competition with more conservative SV calls. Svirlpool features native, sequence-aware joint calling with retained local consensus sequences and shows a very high Mendelian consistency with sequencing data from different batches and chemistries, which is a common situation in clinical application. Availability and Implementation: Source code, container images, and documentation available at https://github.com/bihealth/svirlpool.\n\nContactvinzenz.may@bih-charite.de",
+  "authors": [
+    "Holtgrewe, M.",
+    "Beule, D.",
+    "Hartmann, T.",
+    "May, V."
+  ],
+  "doi": "10.1101/2025.11.03.686231",
+  "first_seen": "2025-11-04",
+  "id": "biorxiv:10.1101/2025.11.03.686231",
+  "metadata": {
+    "abstract": "MotivationLong-Read Sequencing (LRS), and Oxford Nanopore Technologies (ONT) in particular, has greatly improved the detection of structural genome variants (SVs). Fast alignment-based ONT callers achieve strong benchmark performance, but they necessarily reduce the read sequence to alignment-derived signals when deciding whether variants are shared across samples. This can be limiting for cohort and clinical analyses, especially for insertions and repeat regions where sequence representation matters. We present Svirlpool, a multi-sample SV caller for ONT data that builds local consensus assemblies of candidate SV regions and retains the assembled sequence up to the final joint-calling step, where merging tolerances are scaled by a reference-independent noise estimate derived from the reads.\n\nResultsWe validated Svirlpool on two ONT family datasets: the recent high-quality HG002 Ashkenazi trio and the older Platinum Pedigree family, using the Genome in a Bottle and T2TQ100 benchmarks on the GRCh38, GRCh37, and CHM13v2 references and the Mendelian consistency of native multi-sample calls. We compare against current native joint callers and post-hoc merging workflows. Svirlpool produces highly Mendelian-consistent insertion calls in trio analyses (95.2% on GRCh38 and 95.1% on CHM13v2 at 30x), and on CHM13v2 it reaches the highest insertion and deletion consistency among all tested approaches. Sawfish and Sniffles achieve the highest SV benchmark F1 scores on recent high-quality ONT data, whereas Svirlpool enters the competition with more conservative SV calls. Svirlpool features native, sequence-aware joint calling with retained local consensus sequences and shows a very high Mendelian consistency with sequencing data from different batches and chemistries, which is a common situation in clinical application. Availability and Implementation: Source code, container images, and documentation available at https://github.com/bihealth/svirlpool.\n\nContactvinzenz.may@bih-charite.de",
+    "author_corresponding": "Vinzenz May",
+    "author_corresponding_institution": "Translational Bioinformatics, Institute of Health at Charite Berlin",
+    "authors": "Holtgrewe, M.; Beule, D.; Hartmann, T.; May, V.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-04",
+    "doi": "10.1101/2025.11.03.686231",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/04/2025.11.03.686231.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Svirlpool: structural variant detection from long read sequencing by local assembly",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Translational Bioinformatics, Institute of Health at Charite Berlin",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2025-11-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Svirlpool is a multi-sample ONT structural variant caller that builds local consensus assemblies and joint-calls SVs using retained sequence, benchmarked on…",
+  "title": "Svirlpool: structural variant detection from long read sequencing by local assembly",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.03.686231"
+}

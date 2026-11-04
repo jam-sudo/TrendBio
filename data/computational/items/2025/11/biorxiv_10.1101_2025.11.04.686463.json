@@ -1,0 +1,46 @@
+{
+  "abstract": "Yeast replicative lifespan is a crucial part of aging research, yet its quantification remains labor-intensive and time-consuming, particularly when using time-lapse imaging and microfluidics. Manual counting methods for cell division events are prone to bias and inefficiency, while existing automated approaches often require extensive annotated datasets. These limitations hinder the adaptability of such tools across different microfluidic setups. To address these challenges, we propose a versatile image analysis approach that accurately detects yeast cell division events. To reduce the burden of requiring a large cell division annotated dataset, we pretrained a Masked Auto-Encoder on large-scale segmented yeast cell images. This substantially reduced the annotated data needed to train the transformer model for detecting cellular division events. Additionally, the model is trained directly on budding event detection, circumventing reliance on arbitrary heuristics, such as changes in cell area. By leveraging self-supervised pretraining, we reduced the training data requirement to fewer than 50 mother cells ([~]1,000 divisions), representing a >5-fold reduction compared to prior methods while maintaining comparable accuracy.\n\nAuthor SummaryOur work addresses a longstanding challenge in in live-cell time-lapse microscopy analysis, namely, automating cellular division tracking while minimizing the amount of training data required. Traditionally, scientists identify each division event by manually inspecting thousands of time-lapse images, a process that is both tedious and prone to bias. While automated tools exist, they often require large amounts of annotated data to work effectively, limiting their use across different experimental setups. To overcome these barriers, we developed BudFinder, which can recognize and track cell divisions with far less training data. Using yeast replicative aging data as an example, we first trained a model to understand what a yeast cell \"looks like\", using tens of thousands of segmented yeast cell images entrapped in our custom-built microfluidic device. Then, we taught it to detect budding events directly from time-lapse movies. This approach reduces the need for manual labeling by more than five-fold compared to previous structures in place, while maintaining accuracy comparable to existing methods. By making high-throughput analysis of cellular division more accessible, our work paves the way for faster and more scalable quantification of cellular dynamics.",
+  "authors": [
+    "Nguyen, P.",
+    "Mousavi Karimi, Z.",
+    "Layer, A.",
+    "Wan, M.",
+    "Su, H.",
+    "Hasty, J.",
+    "Hao, N."
+  ],
+  "doi": "10.1101/2025.11.04.686463",
+  "first_seen": "2025-11-05",
+  "id": "biorxiv:10.1101/2025.11.04.686463",
+  "metadata": {
+    "abstract": "Yeast replicative lifespan is a crucial part of aging research, yet its quantification remains labor-intensive and time-consuming, particularly when using time-lapse imaging and microfluidics. Manual counting methods for cell division events are prone to bias and inefficiency, while existing automated approaches often require extensive annotated datasets. These limitations hinder the adaptability of such tools across different microfluidic setups. To address these challenges, we propose a versatile image analysis approach that accurately detects yeast cell division events. To reduce the burden of requiring a large cell division annotated dataset, we pretrained a Masked Auto-Encoder on large-scale segmented yeast cell images. This substantially reduced the annotated data needed to train the transformer model for detecting cellular division events. Additionally, the model is trained directly on budding event detection, circumventing reliance on arbitrary heuristics, such as changes in cell area. By leveraging self-supervised pretraining, we reduced the training data requirement to fewer than 50 mother cells ([~]1,000 divisions), representing a >5-fold reduction compared to prior methods while maintaining comparable accuracy.\n\nAuthor SummaryOur work addresses a longstanding challenge in in live-cell time-lapse microscopy analysis, namely, automating cellular division tracking while minimizing the amount of training data required. Traditionally, scientists identify each division event by manually inspecting thousands of time-lapse images, a process that is both tedious and prone to bias. While automated tools exist, they often require large amounts of annotated data to work effectively, limiting their use across different experimental setups. To overcome these barriers, we developed BudFinder, which can recognize and track cell divisions with far less training data. Using yeast replicative aging data as an example, we first trained a model to understand what a yeast cell \"looks like\", using tens of thousands of segmented yeast cell images entrapped in our custom-built microfluidic device. Then, we taught it to detect budding events directly from time-lapse movies. This approach reduces the need for manual labeling by more than five-fold compared to previous structures in place, while maintaining accuracy comparable to existing methods. By making high-throughput analysis of cellular division more accessible, our work paves the way for faster and more scalable quantification of cellular dynamics.",
+    "author_corresponding": "Nan Hao",
+    "author_corresponding_institution": "University of California San Diego",
+    "authors": "Nguyen, P.; Mousavi Karimi, Z.; Layer, A.; Wan, M.; Su, H.; Hasty, J.; Hao, N.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2025-11-05",
+    "doi": "10.1101/2025.11.04.686463",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/05/2025.11.04.686463.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BudFinder: A Masked Auto-Encoder Vision Transformer Framework for Yeast Budding Detection",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of California San Diego",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "BudFinder uses a masked auto-encoder vision transformer, pretrained on segmented yeast images, to detect budding events in time-lapse microscopy with under 50…",
+  "title": "BudFinder: A Masked Auto-Encoder Vision Transformer Framework for Yeast Budding Detection",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.04.686463"
+}

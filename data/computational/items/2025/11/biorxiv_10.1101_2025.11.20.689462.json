@@ -1,0 +1,43 @@
+{
+  "abstract": "Foundation models pre-trained on certain biological data modalities exhibit systematic representational biases when encountering out-of-distribution (OOD) data from new assays. The embedding drift largely arises from instrumentation and protocol-related artifacts rather than true biological variation in cell states or tissue morphology. These drifts are distinct from conventional batch effects and cannot be remedied by retraining as sample sizes are often insufficient, and modifying existing embeddings breaks downstream tools that depend on stable representations. We introduce USHER, an adaptable framework to learn simple transforms that return OOD embeddings to a foundation models reference space. USHER enables embedding transformation via an expectation maximization-style procedure. Given a reference in-distribution sample, USHER first estimates a Fused Gromov-Wasserstein coupling that aligns unpaired OOD (source) and reference (target) embeddings by minimizing transport distance while preserving local structure. To make optimal transport couplings more useful for down-stream tasks, we introduce the concept of entropic filtering to retain only high-confidence correspondences. In the second step, USHER learns a low-complexity transformation that reliably restores the models representation space for OOD data. We demonstrate this learned transformation generalizes to other OOD data from similar experimental conditions. We applied USHER to correct platform-specific biases seen when running scGPT on Xenium transcript counts: USHER maps Xenium embeddings back to the native scRNA-seq representation space, improving cell type clustering and cross-platform integration. Histopathology foundation models trained on H&E images fail on MALDI metabolite-profiled tissue images due to data-acquisition artifacts. USHER corrects these, enabling cell-type classification and protein abundance imputation. USHER offers a generalizable framework to make biological foundation models portable across a rapidly-evolving experimental landscape.",
+  "authors": [
+    "Pratapa, A.",
+    "Tata, P. R.",
+    "Singh, R."
+  ],
+  "doi": "10.1101/2025.11.20.689462",
+  "first_seen": "2025-11-21",
+  "id": "biorxiv:10.1101/2025.11.20.689462",
+  "metadata": {
+    "abstract": "Foundation models pre-trained on certain biological data modalities exhibit systematic representational biases when encountering out-of-distribution (OOD) data from new assays. The embedding drift largely arises from instrumentation and protocol-related artifacts rather than true biological variation in cell states or tissue morphology. These drifts are distinct from conventional batch effects and cannot be remedied by retraining as sample sizes are often insufficient, and modifying existing embeddings breaks downstream tools that depend on stable representations. We introduce USHER, an adaptable framework to learn simple transforms that return OOD embeddings to a foundation models reference space. USHER enables embedding transformation via an expectation maximization-style procedure. Given a reference in-distribution sample, USHER first estimates a Fused Gromov-Wasserstein coupling that aligns unpaired OOD (source) and reference (target) embeddings by minimizing transport distance while preserving local structure. To make optimal transport couplings more useful for down-stream tasks, we introduce the concept of entropic filtering to retain only high-confidence correspondences. In the second step, USHER learns a low-complexity transformation that reliably restores the models representation space for OOD data. We demonstrate this learned transformation generalizes to other OOD data from similar experimental conditions. We applied USHER to correct platform-specific biases seen when running scGPT on Xenium transcript counts: USHER maps Xenium embeddings back to the native scRNA-seq representation space, improving cell type clustering and cross-platform integration. Histopathology foundation models trained on H&E images fail on MALDI metabolite-profiled tissue images due to data-acquisition artifacts. USHER corrects these, enabling cell-type classification and protein abundance imputation. USHER offers a generalizable framework to make biological foundation models portable across a rapidly-evolving experimental landscape.",
+    "author_corresponding": "Rohit Singh",
+    "author_corresponding_institution": "Duke University",
+    "authors": "Pratapa, A.; Tata, P. R.; Singh, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-21",
+    "doi": "10.1101/2025.11.20.689462",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/21/2025.11.20.689462.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Transforming Biological Foundation Model Representations for Out-of-Distribution Data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Duke University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2025-11-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "USHER learns low-complexity transforms via Fused Gromov-Wasserstein coupling and entropic filtering to map OOD assay embeddings (Xenium, MALDI) back into…",
+  "title": "Transforming Biological Foundation Model Representations for Out-of-Distribution Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.20.689462"
+}

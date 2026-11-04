@@ -1,0 +1,42 @@
+{
+  "abstract": "With the surge in sequencing data generated from an ever-expanding range of biological studies, designing scalable computational techniques has become essential. One effective strategy to enable large-scale computation is to split long DNA or protein sequences into k-mers, and summarize large k-mer sets into compact random samples (a.k.a. sketches). These random samples allow for rapid estimation of similarity metrics such as Jaccard or cosine, and thus facilitate scalable computations such as fast similarity search, classification, and clustering. Popular sketching tools in bioinformatics include Mash and sourmash. Mash uses the MinHash algorithm to generate fixed-size sketches; while sourmash employs FracMinHash, which produces sketches whose size scales linearly with the total number of k-mers.\n\nHere, we introduce a novel sketching algorithm, MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW, which for a specified integer parameter b [&ge;] 1, will produce, without prior knowledge of n (the number of k-mers) a random sample of size b lg(n/b) + [O](b). Notably, this is the first permutation-invariant and parallelizable sketching algorithm to date that can produce sub-linear sketches, to the best of our knowledge. We also introduce a variant, -MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW, that produces sketches of size{Theta} (n) for a given  [isin] (0, 1). We study the algorithms properties, analyze generated sample sizes, verify theoretical results empirically, provide a fast implementation, and investigate similarity estimate quality. With intermediate-sized samples between constant (MinHash) and linear (FracMinHash), MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW balances efficiency (smaller samples need less storage and processing) with accuracy (larger samples yield better estimates). On genomic datasets, we demonstrate that MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW sketches can be used to compute a similarity tree (proxy for a phylogenetic tree) more accurately than MinHash, and more efficiently than FracMinHash. Our C++ implementation is available at: github.com/mahmudhera/kmer-sketch. Code to reproduce the analyses and experiments is at: github.com/KoslickiLab/MaxGeomHash.",
+  "authors": [
+    "Hera, M. R.",
+    "Koslicki, D.",
+    "Martinez, C."
+  ],
+  "doi": "10.1101/2025.11.11.687920",
+  "first_seen": "2025-11-13",
+  "id": "biorxiv:10.1101/2025.11.11.687920",
+  "metadata": {
+    "abstract": "With the surge in sequencing data generated from an ever-expanding range of biological studies, designing scalable computational techniques has become essential. One effective strategy to enable large-scale computation is to split long DNA or protein sequences into k-mers, and summarize large k-mer sets into compact random samples (a.k.a. sketches). These random samples allow for rapid estimation of similarity metrics such as Jaccard or cosine, and thus facilitate scalable computations such as fast similarity search, classification, and clustering. Popular sketching tools in bioinformatics include Mash and sourmash. Mash uses the MinHash algorithm to generate fixed-size sketches; while sourmash employs FracMinHash, which produces sketches whose size scales linearly with the total number of k-mers.\n\nHere, we introduce a novel sketching algorithm, MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW, which for a specified integer parameter b [&ge;] 1, will produce, without prior knowledge of n (the number of k-mers) a random sample of size b lg(n/b) + [O](b). Notably, this is the first permutation-invariant and parallelizable sketching algorithm to date that can produce sub-linear sketches, to the best of our knowledge. We also introduce a variant, -MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW, that produces sketches of size{Theta} (n) for a given  [isin] (0, 1). We study the algorithms properties, analyze generated sample sizes, verify theoretical results empirically, provide a fast implementation, and investigate similarity estimate quality. With intermediate-sized samples between constant (MinHash) and linear (FracMinHash), MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW balances efficiency (smaller samples need less storage and processing) with accuracy (larger samples yield better estimates). On genomic datasets, we demonstrate that MO_SCPLOWAXC_SCPLOWGO_SCPLOWEOMC_SCPLOWHO_SCPLOWASHC_SCPLOW sketches can be used to compute a similarity tree (proxy for a phylogenetic tree) more accurately than MinHash, and more efficiently than FracMinHash. Our C++ implementation is available at: github.com/mahmudhera/kmer-sketch. Code to reproduce the analyses and experiments is at: github.com/KoslickiLab/MaxGeomHash.",
+    "author_corresponding": "David Koslicki",
+    "author_corresponding_institution": "Pennsylvania State University",
+    "authors": "Hera, M. R.; Koslicki, D.; Martinez, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2025-11-13",
+    "doi": "10.1101/2025.11.11.687920",
+    "jatsxml": "https://www.biorxiv.org/content/early/2025/11/13/2025.11.11.687920.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MaxGeomHash: An Algorithm for Variable-Size Random Sampling of Distinct Elements",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Pennsylvania State University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2025-11-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces MaxGeomHash, a permutation-invariant, parallelizable k-mer sketching algorithm producing sub-linear sketches (b lg(n/b)) for scalable sequence…",
+  "title": "MaxGeomHash: An Algorithm for Variable-Size Random Sampling of Distinct Elements",
+  "type": "preprint",
+  "url": "https://doi.org/10.1101/2025.11.11.687920"
+}
