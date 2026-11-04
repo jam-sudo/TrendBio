@@ -58,7 +58,7 @@ def test_scoring_defaults():
         ],
         "backfill_synthesis_model": "claude-haiku-5-5",
         "synthesis_max_items": 40,
-        "synthesis_workers": 6,
+        "synthesis_workers": 12,
         "monthly_ceiling_usd": 50.0,
         "degraded_fallback_min": 3,
         "degraded_fallback_rate": 0.2,

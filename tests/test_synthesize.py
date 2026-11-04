@@ -430,7 +430,7 @@ def test_synthesize_top_parallel_preserves_order_and_models(context, caplog):
     for topic in topics:
         assert topic.headline == topic.slug
         assert topic.item_one_liners == {'older:item': 'Retained', ctx.item.id: topic.slug}
-    assert f'stage=synthesize event=complete date={TODAY} workers=6 elapsed=' in caplog.text
+    assert f'stage=synthesize event=complete date={TODAY} workers=12 elapsed=' in caplog.text
 
 
 def test_parallel_fallback_notes_follow_rank(context):
