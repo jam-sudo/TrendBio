@@ -1,0 +1,43 @@
+{
+  "abstract": "MotivationEstimating genetic clusters from sequencing data is a fundamental task in population and medical genetics, enabling demographic inference and adjustment for population structure in association studies. ADMIXTURE, a widely used model-based clustering method, employs an accelerated Expectation-Maximization (EM) algorithm to infer population parameters; however, its computational demands scale poorly, limiting its usefulness for modern biobank-sized datasets. While recent EM acceleration strategies employing second-order quasi-Newton schemes preserve accuracy, they remain computationally intensive. Conversely, EM-free approaches that prioritize speed often compromise solution quality.\n\nResultsWe introduce ADAMIXTURE, a novel optimization framework that integrates the EM algorithm with Adaptive Moment Estimation (Adam). Unlike traditional acceleration methods, ADAMIXTURE utilizes first-order gradients with adaptive learning rates derived from raw and squared moments to approximate curvature information, bypassing the computational overhead of Hessian approximations. This approach surpasses the convergence efficiency of second-order methods while maintaining the low computational complexity of first-order updates. Across simulated and large-scale empirical datasets, ADAMIXTURE demonstrates substantial reductions in wall-clock runtime and enhanced scalability compared to state-of-the-art methods, while maintaining comparable or improved inference accuracy. Its GPU implementation runs in under 2 hours on half a million samples and variants, a two order of magnitude speedup over current state-of-the-art.\n\nAvailability and implementationSource code is available at: https://github.com/AI-sandbox/ADAMIXTURE.\n\nContactioannidis@stanford.edu",
+  "authors": [
+    "Saurina-i-Ricos, J.",
+    "Mas Monserrrat, D.",
+    "Ioannidis, A. G."
+  ],
+  "doi": "10.64898/2026.02.13.700171",
+  "first_seen": "2026-02-13",
+  "id": "biorxiv:10.64898/2026.02.13.700171",
+  "metadata": {
+    "abstract": "MotivationEstimating genetic clusters from sequencing data is a fundamental task in population and medical genetics, enabling demographic inference and adjustment for population structure in association studies. ADMIXTURE, a widely used model-based clustering method, employs an accelerated Expectation-Maximization (EM) algorithm to infer population parameters; however, its computational demands scale poorly, limiting its usefulness for modern biobank-sized datasets. While recent EM acceleration strategies employing second-order quasi-Newton schemes preserve accuracy, they remain computationally intensive. Conversely, EM-free approaches that prioritize speed often compromise solution quality.\n\nResultsWe introduce ADAMIXTURE, a novel optimization framework that integrates the EM algorithm with Adaptive Moment Estimation (Adam). Unlike traditional acceleration methods, ADAMIXTURE utilizes first-order gradients with adaptive learning rates derived from raw and squared moments to approximate curvature information, bypassing the computational overhead of Hessian approximations. This approach surpasses the convergence efficiency of second-order methods while maintaining the low computational complexity of first-order updates. Across simulated and large-scale empirical datasets, ADAMIXTURE demonstrates substantial reductions in wall-clock runtime and enhanced scalability compared to state-of-the-art methods, while maintaining comparable or improved inference accuracy. Its GPU implementation runs in under 2 hours on half a million samples and variants, a two order of magnitude speedup over current state-of-the-art.\n\nAvailability and implementationSource code is available at: https://github.com/AI-sandbox/ADAMIXTURE.\n\nContactioannidis@stanford.edu",
+    "author_corresponding": "Alexander G Ioannidis",
+    "author_corresponding_institution": "Stanford University",
+    "authors": "Saurina-i-Ricos, J.; Mas Monserrrat, D.; Ioannidis, A. G.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-13",
+    "doi": "10.64898/2026.02.13.700171",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/13/2026.02.13.700171.source.xml",
+    "license": "cc_by_nc",
+    "published": "",
+    "server": "bioRxiv",
+    "title": "ADAMIXTURE: Adaptive First-Order Optimization for Biobank-Scale Genetic Clustering",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Stanford University",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-02-13",
+  "published_doi": "10.1093/bioinformatics/btag236",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "ADAMIXTURE integrates EM with Adam first-order adaptive updates for ADMIXTURE-style genetic clustering, reporting large runtime reductions and GPU scaling to…",
+  "title": "ADAMIXTURE: Adaptive First-Order Optimization for Biobank-Scale Genetic Clustering",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.13.700171"
+}

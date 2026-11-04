@@ -1,0 +1,36 @@
+{
+  "abstract": "Exact stochastic simulation of continuous-time Markov chains (CTMCs) is essential when discreteness and noise drive system behavior, but the hard categorical event selection in Gillespie-type algorithms blocks gradient-based learning. We eliminate this constraint by decoupling forward simulation from backward differentiation, with hard categorical sampling generating exact trajectories and gradients propagating through a continuous massively-parallel Gumbel-Softmax straight-through surrogate. Our approach enables accurate optimization at parameter scales over four orders of magnitude beyond existing simulators. We validate for accuracy, scalability, and reliability on a reversible dimerization model (0.09% error), a genetic oscillator (1.2% error), a 203,796-parameter gene regulatory network achieving 98.4% MNIST accuracy (a prototypical deep-learning multilayer perceptron benchmark), and experimental patch-clamp recordings of ion channel gating (R^2 = 0.987) in the single-channel regime. Our GPU implementation delivers 1.9 billion steps per second, matching the scale of non-differentiable simulators. By making exact stochastic simulation massively parallel and autodiff-compatible, our results enable high-dimensional parameter inference and inverse design across systems biology, chemical kinetics, physics, and related CTMC-governed domains.",
+  "authors": [
+    "Jose M. G. Vilar",
+    "Leonor Saiz"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-23",
+  "id": "arxiv:2602.19775",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cond-mat.stat-mech",
+      "cs.LG",
+      "physics.comp-ph",
+      "q-bio.MN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.19775v1</ns0:id>\n    <ns0:title>Exact Discrete Stochastic Simulation with Deep-Learning-Scale Gradient Optimization</ns0:title>\n    <ns0:updated>2026-02-23T12:29:43Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.19775v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.19775v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Exact stochastic simulation of continuous-time Markov chains (CTMCs) is essential when discreteness and noise drive system behavior, but the hard categorical event selection in Gillespie-type algorithms blocks gradient-based learning. We eliminate this constraint by decoupling forward simulation from backward differentiation, with hard categorical sampling generating exact trajectories and gradients propagating through a continuous massively-parallel Gumbel-Softmax straight-through surrogate. Our approach enables accurate optimization at parameter scales over four orders of magnitude beyond existing simulators. We validate for accuracy, scalability, and reliability on a reversible dimerization model (0.09% error), a genetic oscillator (1.2% error), a 203,796-parameter gene regulatory network achieving 98.4% MNIST accuracy (a prototypical deep-learning multilayer perceptron benchmark), and experimental patch-clamp recordings of ion channel gating (R^2 = 0.987) in the single-channel regime. Our GPU implementation delivers 1.9 billion steps per second, matching the scale of non-differentiable simulators. By making exact stochastic simulation massively parallel and autodiff-compatible, our results enable high-dimensional parameter inference and inverse design across systems biology, chemical kinetics, physics, and related CTMC-governed domains.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cond-mat.stat-mech\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.comp-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.MN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-23T12:29:43Z</ns0:published>\n    <ns1:comment>28 pages, 8 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Jose M. G. Vilar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Leonor Saiz</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-02-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Decouples exact Gillespie-type CTMC simulation from gradient propagation via a Gumbel-Softmax straight-through surrogate, enabling GPU-scale autodiff for…",
+  "title": "Exact Discrete Stochastic Simulation with Deep-Learning-Scale Gradient Optimization",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.19775v1"
+}

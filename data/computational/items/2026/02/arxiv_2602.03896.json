@@ -1,0 +1,39 @@
+{
+  "abstract": "Poisson-distributed latent variable models are widely used in computational neuroscience, but differentiating through discrete stochastic samples remains challenging. Two approaches address this: *Exponential Arrival Time* (EAT) simulation and *Gumbel-SoftMax* (GSM) relaxation. We provide the first systematic comparison of these methods, along with practical guidance for practitioners. Our main technical contribution is a modification to the EAT method that theoretically guarantees an unbiased first moment (exactly matching the firing rate), and reduces second-moment bias. We evaluate these methods on their distributional fidelity, gradient quality, and performance on two tasks: (1) variational autoencoders with Poisson latents, and (2) partially observable generalized linear models, where latent neural connectivity must be inferred from observed spike trains. Across all metrics, our modified EAT method exhibits better overall performance (often comparable to exact gradients), and substantially higher robustness to hyperparameter choices. These results extend to over-dispersed Negative Binomial latents, where modified EAT again performs best. However, only GSM generalizes to arbitrary non-Poisson distributions, including the under-dispersed regime. Together, our results clarify the trade-offs between these methods and offer concrete recommendations for practitioners working with Poisson latent variable models.",
+  "authors": [
+    "Michael Ibrahim",
+    "Hanqi Zhao",
+    "Eli Sennesh",
+    "Zhi Li",
+    "Anqi Wu",
+    "Jacob L. Yates",
+    "Chengrui Li",
+    "Hadi Vafaii"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-03",
+  "id": "arxiv:2602.03896",
+  "metadata": {
+    "arxiv_primary_category": "stat.ML",
+    "categories": [
+      "stat.ML",
+      "cs.LG",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.03896v2</ns0:id>\n    <ns0:title>A hitchhiker's guide to Poisson gradient estimation</ns0:title>\n    <ns0:updated>2026-05-29T01:08:34Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.03896v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.03896v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Poisson-distributed latent variable models are widely used in computational neuroscience, but differentiating through discrete stochastic samples remains challenging. Two approaches address this: *Exponential Arrival Time* (EAT) simulation and *Gumbel-SoftMax* (GSM) relaxation. We provide the first systematic comparison of these methods, along with practical guidance for practitioners. Our main technical contribution is a modification to the EAT method that theoretically guarantees an unbiased first moment (exactly matching the firing rate), and reduces second-moment bias. We evaluate these methods on their distributional fidelity, gradient quality, and performance on two tasks: (1) variational autoencoders with Poisson latents, and (2) partially observable generalized linear models, where latent neural connectivity must be inferred from observed spike trains. Across all metrics, our modified EAT method exhibits better overall performance (often comparable to exact gradients), and substantially higher robustness to hyperparameter choices. These results extend to over-dispersed Negative Binomial latents, where modified EAT again performs best. However, only GSM generalizes to arbitrary non-Poisson distributions, including the under-dispersed regime. Together, our results clarify the trade-offs between these methods and offer concrete recommendations for practitioners working with Poisson latent variable models.</ns0:summary>\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-03T08:47:30Z</ns0:published>\n    <ns1:comment>Published at ICML2026 --- code: https://github.com/hadivafaii/PoissonGradientEstimation</ns1:comment>\n    <ns1:primary_category term=\"stat.ML\" />\n    <ns0:author>\n      <ns0:name>Michael Ibrahim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hanqi Zhao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Eli Sennesh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhi Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anqi Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jacob L. Yates</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chengrui Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hadi Vafaii</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Compares EAT and Gumbel-SoftMax gradients for Poisson latents; a modified EAT gives unbiased first moments and robustness.",
+  "title": "A hitchhiker's guide to Poisson gradient estimation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.03896v2"
+}

@@ -1,0 +1,45 @@
+{
+  "abstract": "Oxford Nanopore Technologies (ONT) sequencing enables long-range haplotype phasing and contiguous genome assembly but still exhibits elevated error rates that challenge small variant calling, particularly for insertions and deletions (Indels). While raw electrical signals contain rich information, existing signal-aware methods require computationally intensive processing of large signal files. Here, we present Clair3 v2, a method that leverages the ONT move table--a lightweight byproduct of basecalling that maps signal events to nucleotide positions--to improve variant calling accuracy. Clair3 v2 builds upon Clair3 and integrates signal-level dwelling time to significantly enhance variant calling performance. We also propose a genome position based circular buffer to incorporate dwelling time with minimal computational overhead. Benchmarking across six Genome in a Bottle samples demonstrates substantial improvements in variant calling accuracy. With HAC basecalling, Clair3 v2 achieves a mean SNP F1-score of 97.69% at 10x depth (compared to 96.45% for baseline Clair3), and Indel F1 scores improved from 64.27% to 76.70%, while gains persisted at higher depths. The benefits were most pronounced for longer Indels and in complex genomic regions, where Indel F1 scores in long homopolymer regions improved from 14.3% to 45.2%. Benchmark results across various basecalling modes, samples, and coverage settings outperformed Clair3 baselines and other methods, including DeepVariant and Dorado Variant, and demonstrate the significant benefits of Clair3 v2. Furthermore, Clair3 v2 incurs negligible runtime compared to standard Clair3, making it practical for routine use.",
+  "authors": [
+    "Yu, X.",
+    "Zheng, Z.",
+    "Chen, L.",
+    "Qin, Z.",
+    "He, M.",
+    "Luo, R."
+  ],
+  "doi": "10.64898/2026.02.13.705285",
+  "first_seen": "2026-02-16",
+  "id": "biorxiv:10.64898/2026.02.13.705285",
+  "metadata": {
+    "abstract": "Oxford Nanopore Technologies (ONT) sequencing enables long-range haplotype phasing and contiguous genome assembly but still exhibits elevated error rates that challenge small variant calling, particularly for insertions and deletions (Indels). While raw electrical signals contain rich information, existing signal-aware methods require computationally intensive processing of large signal files. Here, we present Clair3 v2, a method that leverages the ONT move table--a lightweight byproduct of basecalling that maps signal events to nucleotide positions--to improve variant calling accuracy. Clair3 v2 builds upon Clair3 and integrates signal-level dwelling time to significantly enhance variant calling performance. We also propose a genome position based circular buffer to incorporate dwelling time with minimal computational overhead. Benchmarking across six Genome in a Bottle samples demonstrates substantial improvements in variant calling accuracy. With HAC basecalling, Clair3 v2 achieves a mean SNP F1-score of 97.69% at 10x depth (compared to 96.45% for baseline Clair3), and Indel F1 scores improved from 64.27% to 76.70%, while gains persisted at higher depths. The benefits were most pronounced for longer Indels and in complex genomic regions, where Indel F1 scores in long homopolymer regions improved from 14.3% to 45.2%. Benchmark results across various basecalling modes, samples, and coverage settings outperformed Clair3 baselines and other methods, including DeepVariant and Dorado Variant, and demonstrate the significant benefits of Clair3 v2. Furthermore, Clair3 v2 incurs negligible runtime compared to standard Clair3, making it practical for routine use.",
+    "author_corresponding": "Ruibang Luo",
+    "author_corresponding_institution": "The University of Hong Kong",
+    "authors": "Yu, X.; Zheng, Z.; Chen, L.; Qin, Z.; He, M.; Luo, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-16",
+    "doi": "10.64898/2026.02.13.705285",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/16/2026.02.13.705285.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Leveraging ONT move table values for signal aware variant calling",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Hong Kong",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-02-16",
+  "published_doi": "10.1093/bioinformatics/btag376",
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Clair3 v2 adds ONT move-table dwelling-time signals to Clair3, improving small-variant calling; Indel F1 rises from 64.27% to 76.70% on GIAB samples at 10x…",
+  "title": "Leveraging ONT move table values for signal aware variant calling",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.13.705285"
+}

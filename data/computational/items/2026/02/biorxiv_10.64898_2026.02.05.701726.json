@@ -1,0 +1,44 @@
+{
+  "abstract": "Direct Preference Optimization (DPO) has emerged as a powerful paradigm for aligning generative models, yet its temporal optimization dynamics in the discrete diffusion space of proteins remain poorly understood. Existing approaches often assume that maintaining structural integrity while optimizing physicochemical properties requires simultaneous, tightly coupled reinforcement learning constraints. In this work, we challenge this assumption by uncovering a fundamental temporal decoupling between structural and functional alignment. Using antibody design as a testbed, extensive trajectory analysis reveals two distinct regimes: (1) Instant Structural Alignment, where the strong generative prior of discrete diffusion rapidly eliminates structural hallucinations via denoising within the first few epochs; and (2) Slow Property Adaptation, where physicochemical attributes improve gradually over a prolonged optimization window. We further identify a critical transition point around Epoch 50, which empirically defines a Pareto-optimal boundary between property improvement and structural stability. Beyond this point, continued optimization induces a sharp phase transition into a Structural Collapse regime. To isolate the physical driver underlying this collapse, we introduce a counterfactual preference experiment targeting negative charge. We observe a striking symmetrical collapse: while hydrophilicity optimization induces a Poly-Arginine (+) degeneration, negative charge optimization drives a Poly-Aspartate (-) degeneration. Despite opposite physicochemical trajectories, including extreme shifts in isoelectric point (> 11 vs. < 4.5), both regimes converge to the same structural failure. This symmetry demonstrates that generic Coulombic repulsion, rather than residue-specific bias, constitutes the fundamental physical constraint being violated. Our findings reveal that discrete diffusion models possess strong intrinsic structural robustness, enabling minimalist alignment strategies provided optimization halts before this physical boundary. More broadly, this work offers a mechanistic warning against unchecked reward optimization in biological generation, illustrating a concrete manifestation of Goodharts Law in protein design. Code and data are available at https://github.com/Wu-Junqi/DPO-Protein-Diffusion.",
+  "authors": [
+    "Wu, J.",
+    "Dong, L.",
+    "Jia, N.",
+    "Li, L.",
+    "Zhang, H."
+  ],
+  "doi": "10.64898/2026.02.05.701726",
+  "first_seen": "2026-02-08",
+  "id": "biorxiv:10.64898/2026.02.05.701726",
+  "metadata": {
+    "abstract": "Direct Preference Optimization (DPO) has emerged as a powerful paradigm for aligning generative models, yet its temporal optimization dynamics in the discrete diffusion space of proteins remain poorly understood. Existing approaches often assume that maintaining structural integrity while optimizing physicochemical properties requires simultaneous, tightly coupled reinforcement learning constraints. In this work, we challenge this assumption by uncovering a fundamental temporal decoupling between structural and functional alignment. Using antibody design as a testbed, extensive trajectory analysis reveals two distinct regimes: (1) Instant Structural Alignment, where the strong generative prior of discrete diffusion rapidly eliminates structural hallucinations via denoising within the first few epochs; and (2) Slow Property Adaptation, where physicochemical attributes improve gradually over a prolonged optimization window. We further identify a critical transition point around Epoch 50, which empirically defines a Pareto-optimal boundary between property improvement and structural stability. Beyond this point, continued optimization induces a sharp phase transition into a Structural Collapse regime. To isolate the physical driver underlying this collapse, we introduce a counterfactual preference experiment targeting negative charge. We observe a striking symmetrical collapse: while hydrophilicity optimization induces a Poly-Arginine (+) degeneration, negative charge optimization drives a Poly-Aspartate (-) degeneration. Despite opposite physicochemical trajectories, including extreme shifts in isoelectric point (> 11 vs. < 4.5), both regimes converge to the same structural failure. This symmetry demonstrates that generic Coulombic repulsion, rather than residue-specific bias, constitutes the fundamental physical constraint being violated. Our findings reveal that discrete diffusion models possess strong intrinsic structural robustness, enabling minimalist alignment strategies provided optimization halts before this physical boundary. More broadly, this work offers a mechanistic warning against unchecked reward optimization in biological generation, illustrating a concrete manifestation of Goodharts Law in protein design. Code and data are available at https://github.com/Wu-Junqi/DPO-Protein-Diffusion.",
+    "author_corresponding": "Hao Zhang",
+    "author_corresponding_institution": "Jilin University",
+    "authors": "Wu, J.; Dong, L.; Jia, N.; Li, L.; Zhang, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-08",
+    "doi": "10.64898/2026.02.05.701726",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/08/2026.02.05.701726.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Decoupling Structure and Property in Discrete Protein Diffusion: Alignment Dynamics and Collapse Mechanisms",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Jilin University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Analyzes DPO alignment dynamics in discrete protein diffusion for antibody design, finding structure aligns early while properties improve slowly, with…",
+  "title": "Decoupling Structure and Property in Discrete Protein Diffusion: Alignment Dynamics and Collapse Mechanisms",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.05.701726"
+}

@@ -1,0 +1,33 @@
+{
+  "abstract": "Simulation code for conventional supercomputers serves as a reference for neuromorphic computing systems. The present bottleneck of distributed large-scale spiking neuronal network simulations is the communication between compute nodes. Communication speed seems limited by the interconnect between the nodes and the software library orchestrating the data transfer. Profiling reveals, however, that the variability of the time required by the compute nodes between communication calls is large. The bottleneck is in fact the waiting time for the slowest node. A statistical model explains total simulation time on the basis of the distribution of computation times between communication calls. A fundamental cure is to avoid communication calls because this requires fewer synchronizations and reduces the variability of computation times across compute nodes. The organization of the mammalian brain into areas lends itself to such an optimization strategy. Connections between neurons within an area have short delays, but the delays of the long-range connections across areas are an order of magnitude longer. This suggests a structure-aware mapping of areas to compute nodes allowing for a partition into more frequent communication between nodes simulating a particular area and less frequent global communication. We demonstrate a substantial performance gain on a real-world example. This work proposes a local-global hybrid communication architecture for large-scale neuronal network simulations as a first step in mapping the structure of the brain to the structure of a supercomputer. It challenges the long-standing belief that the bottleneck of simulation is synchronization inherent in the collective calls of standard communication libraries. We provide guidelines for the energy efficient simulation of neuronal networks on conventional computing systems and raise the bar for neuromorphic systems.",
+  "authors": [
+    "Melissa Lober",
+    "Markus Diesmann",
+    "Susanne Kunkel"
+  ],
+  "doi": "10.1088/2634-4386/ae762e",
+  "first_seen": "2026-02-26",
+  "id": "arxiv:2602.23274",
+  "metadata": {
+    "arxiv_primary_category": "cs.DC",
+    "categories": [
+      "cs.DC",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.23274v2</ns0:id>\n    <ns0:title>Exploiting network topology in brain-scale simulations of spiking neural networks</ns0:title>\n    <ns0:updated>2026-06-26T12:43:56Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.23274v2\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.23274v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Simulation code for conventional supercomputers serves as a reference for neuromorphic computing systems. The present bottleneck of distributed large-scale spiking neuronal network simulations is the communication between compute nodes. Communication speed seems limited by the interconnect between the nodes and the software library orchestrating the data transfer. Profiling reveals, however, that the variability of the time required by the compute nodes between communication calls is large. The bottleneck is in fact the waiting time for the slowest node. A statistical model explains total simulation time on the basis of the distribution of computation times between communication calls. A fundamental cure is to avoid communication calls because this requires fewer synchronizations and reduces the variability of computation times across compute nodes. The organization of the mammalian brain into areas lends itself to such an optimization strategy. Connections between neurons within an area have short delays, but the delays of the long-range connections across areas are an order of magnitude longer. This suggests a structure-aware mapping of areas to compute nodes allowing for a partition into more frequent communication between nodes simulating a particular area and less frequent global communication. We demonstrate a substantial performance gain on a real-world example. This work proposes a local-global hybrid communication architecture for large-scale neuronal network simulations as a first step in mapping the structure of the brain to the structure of a supercomputer. It challenges the long-standing belief that the bottleneck of simulation is synchronization inherent in the collective calls of standard communication libraries. We provide guidelines for the energy efficient simulation of neuronal networks on conventional computing systems and raise the bar for neuromorphic systems.</ns0:summary>\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-26T17:49:13Z</ns0:published>\n    <ns1:primary_category term=\"cs.DC\" />\n    <ns1:journal_ref>Neuromorphic Computing and Engineering 6(2), 024024 (2026)</ns1:journal_ref>\n    <ns0:author>\n      <ns0:name>Melissa Lober</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Markus Diesmann</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Susanne Kunkel</ns0:name>\n    </ns0:author>\n    <ns1:doi>10.1088/2634-4386/ae762e</ns1:doi>\n    <ns0:link rel=\"related\" href=\"https://doi.org/10.1088/2634-4386/ae762e\" title=\"doi\" />\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-02-26",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes a structure-aware local-global communication architecture reducing sync waits in brain-scale spiking network simulations.",
+  "title": "Exploiting network topology in brain-scale simulations of spiking neural networks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.23274v2"
+}

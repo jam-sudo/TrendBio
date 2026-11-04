@@ -1,0 +1,32 @@
+{
+  "abstract": "Spiking Neural Networks (SNNs) offer energy-efficient, biologically plausible computation but suffer from non-differentiable spike generation, necessitating reliance on heuristic surrogate gradients. This paper introduces UltraLIF, a principled framework that replaces surrogate gradients with ultradiscretization, a mathematical formalism from tropical geometry providing continuous relaxations of discrete dynamics. The central insight is that the max-plus semiring underlying ultradiscretization naturally models neural threshold dynamics: the log-sum-exp function serves as a differentiable soft-maximum that converges to hard thresholding as a learnable temperature parameter $\\eps \\to 0$. Two neuron models are derived from distinct dynamical systems: UltraLIF from the LIF ordinary differential equation (temporal dynamics) and UltraDLIF from the diffusion equation modeling gap junction coupling across neuronal populations (spatial dynamics). Both yield fully differentiable SNNs trainable via standard backpropagation with no forward-backward mismatch. Theoretical analysis establishes pointwise convergence to classical LIF dynamics with quantitative error bounds and bounded non-vanishing gradients. Experiments on six benchmarks spanning static images, neuromorphic vision, and audio demonstrate improvements over surrogate gradient baselines, with gains most pronounced in single-timestep ($T{=}1$) settings on neuromorphic and temporal datasets. An optional sparsity penalty enables significant energy reduction while maintaining competitive accuracy.",
+  "authors": [
+    "Jose Marie Antonio Miñoza"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-10",
+  "id": "arxiv:2602.11206",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CV",
+      "math.RA",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.11206v1</ns0:id>\n    <ns0:title>UltraLIF: Fully Differentiable Spiking Neural Networks via Ultradiscretization and Max-Plus Algebra</ns0:title>\n    <ns0:updated>2026-02-10T18:21:54Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.11206v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.11206v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Spiking Neural Networks (SNNs) offer energy-efficient, biologically plausible computation but suffer from non-differentiable spike generation, necessitating reliance on heuristic surrogate gradients. This paper introduces UltraLIF, a principled framework that replaces surrogate gradients with ultradiscretization, a mathematical formalism from tropical geometry providing continuous relaxations of discrete dynamics. The central insight is that the max-plus semiring underlying ultradiscretization naturally models neural threshold dynamics: the log-sum-exp function serves as a differentiable soft-maximum that converges to hard thresholding as a learnable temperature parameter $\\eps \\to 0$. Two neuron models are derived from distinct dynamical systems: UltraLIF from the LIF ordinary differential equation (temporal dynamics) and UltraDLIF from the diffusion equation modeling gap junction coupling across neuronal populations (spatial dynamics). Both yield fully differentiable SNNs trainable via standard backpropagation with no forward-backward mismatch. Theoretical analysis establishes pointwise convergence to classical LIF dynamics with quantitative error bounds and bounded non-vanishing gradients. Experiments on six benchmarks spanning static images, neuromorphic vision, and audio demonstrate improvements over surrogate gradient baselines, with gains most pronounced in single-timestep ($T{=}1$) settings on neuromorphic and temporal datasets. An optional sparsity penalty enables significant energy reduction while maintaining competitive accuracy.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"math.RA\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-10T18:21:54Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Jose Marie Antonio Miñoza</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-10",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "UltraLIF replaces surrogate gradients in spiking neural networks with ultradiscretization from tropical geometry, yielding fully differentiable LIF and…",
+  "title": "UltraLIF: Fully Differentiable Spiking Neural Networks via Ultradiscretization and Max-Plus Algebra",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.11206v1"
+}

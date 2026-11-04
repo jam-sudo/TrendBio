@@ -1,0 +1,47 @@
+{
+  "abstract": "Graph foundation models have emerged as powerful tools for drug repurposing by enabling the prediction of novel drug-disease indications from large biomedical knowledge graphs. A representative example is TxGNN, which was previously developed and trained on PrimeKG, a comprehensive biomedical knowledge graph covering over 17,000 diseases. While TxGNN demonstrates strong performance, existing biomedical knowledge graphs largely lack fine-grained, cell-type-specific expression context. This limits their ability to capture disease mechanisms driven by dysregulated cellular programs, such as immune cell-specific pathways in autoimmune diseases. Moreover, prior evaluations typically test only randomly selected subsets of diseases, leaving many diseases unexamined and limiting conclusions about model performance across the full disease spectrum.\n\nTo address these limitations, we first update PrimeKG to PrimeKG-U by incorporating expanded and curated biomedical knowledge and then develop TxGNN-U as a stronger graph-based baseline. Building on this foundation, we introduce CellAwareGNN, a graph foundation model that integrates single-cell genomics into PrimeKG-U. We construct a single-cell-enhanced knowledge graph, scPrimeKG, by incorporating cell-type-specific gene expression signatures from the OneK1K dataset, expanding PrimeKG from approximately 8.1 million edges and 129k nodes to over 14 million edges and 147k nodes. CellAwareGNN is pre-trained on all relation types in scPrimeKG and evaluated on drug indication prediction with explicit coverage of all diseases in the knowledge graph.\n\nCellAwareGNN consistently outperforms TxGNN and TxGNN-U. For drug indication prediction, CellAwareGNN achieves an AUPRC of 0.826, representing a 1.2% improvement over TxGNN-U (0.816) and a 3.4% improvement over TxGNN (0.799). Notably, for autoimmune diseases, CellAwareGNN attains an AUPRC of 0.864, improving by 2.0% over TxGNN-U (0.847) and 6.0% over TxGNN (0.815). Importantly, CellAwareGNN prioritizes promising repurposing candidates, including Ocrelizumab for Pemphigus via CD20-expressing B cells, Methotrexate for Pemphigus through DHFR and ATIC activity in T and B cells, and Rosiglitazone for Rheumatoid Arthritis through PPAR-{gamma} activation. These results demonstrate the value of incorporating cell-type-specific expression context to improve both predictive performance and biological interpretability in graph-based drug repurposing.\n\nCCS ConceptsO_LIApplied computing [-&gt;] Health informatics; Bioinformatics;\nC_LIO_LIComputing methodologies [-&gt;] Knowledge representation and reasoning; Neural networks.\nC_LI\n\nACM Reference FormatXinmeng Zhang, Eugene Jeong, Chao Yan, Yubo Feng, Linshuoshuo Lyu, Xingyi Guo, and You Chen. 2026. CellAwareGNN: Single-Cell Enhanced Knowledge Graph Foundation Model for Drug Indication Prediction. In Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (KDD 2026), August 9-13, 2026, Jeju Island, Republic of Korea. ACM, New York, NY, USA, 12 pages. https://doi.org/10.1145/3770855.3819012",
+  "authors": [
+    "Zhang, X.",
+    "Jeong, E.",
+    "Yan, C.",
+    "Feng, Y.",
+    "Lyu, L.",
+    "Guo, X.",
+    "Chen, Y."
+  ],
+  "doi": "10.64898/2026.02.20.707076",
+  "first_seen": "2026-02-23",
+  "id": "biorxiv:10.64898/2026.02.20.707076",
+  "metadata": {
+    "abstract": "Graph foundation models have emerged as powerful tools for drug repurposing by enabling the prediction of novel drug-disease indications from large biomedical knowledge graphs. A representative example is TxGNN, which was previously developed and trained on PrimeKG, a comprehensive biomedical knowledge graph covering over 17,000 diseases. While TxGNN demonstrates strong performance, existing biomedical knowledge graphs largely lack fine-grained, cell-type-specific expression context. This limits their ability to capture disease mechanisms driven by dysregulated cellular programs, such as immune cell-specific pathways in autoimmune diseases. Moreover, prior evaluations typically test only randomly selected subsets of diseases, leaving many diseases unexamined and limiting conclusions about model performance across the full disease spectrum.\n\nTo address these limitations, we first update PrimeKG to PrimeKG-U by incorporating expanded and curated biomedical knowledge and then develop TxGNN-U as a stronger graph-based baseline. Building on this foundation, we introduce CellAwareGNN, a graph foundation model that integrates single-cell genomics into PrimeKG-U. We construct a single-cell-enhanced knowledge graph, scPrimeKG, by incorporating cell-type-specific gene expression signatures from the OneK1K dataset, expanding PrimeKG from approximately 8.1 million edges and 129k nodes to over 14 million edges and 147k nodes. CellAwareGNN is pre-trained on all relation types in scPrimeKG and evaluated on drug indication prediction with explicit coverage of all diseases in the knowledge graph.\n\nCellAwareGNN consistently outperforms TxGNN and TxGNN-U. For drug indication prediction, CellAwareGNN achieves an AUPRC of 0.826, representing a 1.2% improvement over TxGNN-U (0.816) and a 3.4% improvement over TxGNN (0.799). Notably, for autoimmune diseases, CellAwareGNN attains an AUPRC of 0.864, improving by 2.0% over TxGNN-U (0.847) and 6.0% over TxGNN (0.815). Importantly, CellAwareGNN prioritizes promising repurposing candidates, including Ocrelizumab for Pemphigus via CD20-expressing B cells, Methotrexate for Pemphigus through DHFR and ATIC activity in T and B cells, and Rosiglitazone for Rheumatoid Arthritis through PPAR-{gamma} activation. These results demonstrate the value of incorporating cell-type-specific expression context to improve both predictive performance and biological interpretability in graph-based drug repurposing.\n\nCCS ConceptsO_LIApplied computing [-&gt;] Health informatics; Bioinformatics;\nC_LIO_LIComputing methodologies [-&gt;] Knowledge representation and reasoning; Neural networks.\nC_LI\n\nACM Reference FormatXinmeng Zhang, Eugene Jeong, Chao Yan, Yubo Feng, Linshuoshuo Lyu, Xingyi Guo, and You Chen. 2026. CellAwareGNN: Single-Cell Enhanced Knowledge Graph Foundation Model for Drug Indication Prediction. In Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (KDD 2026), August 9-13, 2026, Jeju Island, Republic of Korea. ACM, New York, NY, USA, 12 pages. https://doi.org/10.1145/3770855.3819012",
+    "author_corresponding": "You Chen",
+    "author_corresponding_institution": "Vanderbilt University Medical Center",
+    "authors": "Zhang, X.; Jeong, E.; Yan, C.; Feng, Y.; Lyu, L.; Guo, X.; Chen, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-23",
+    "doi": "10.64898/2026.02.20.707076",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/23/2026.02.20.707076.source.xml",
+    "license": "cc_by",
+    "published": "10.1145/3770855.3819012",
+    "server": "bioRxiv",
+    "title": "CellAwareGNN: Single-Cell Enhanced Knowledge Graph Foundation Model for Drug Indication Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Vanderbilt University Medical Center",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-23",
+  "published_doi": "10.1145/3770855.3819012",
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "CellAwareGNN adds cell-type-specific expression from OneK1K to PrimeKG-U (scPrimeKG) and pre-trains a graph foundation model for drug indication prediction,…",
+  "title": "CellAwareGNN: Single-Cell Enhanced Knowledge Graph Foundation Model for Drug Indication Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.02.20.707076"
+}

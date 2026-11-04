@@ -1,0 +1,43 @@
+{
+  "abstract": "Large-scale pharmacogenomic screens provide extensive measurements of drug response across diverse cancer cell lines; however, most computational approaches emphasize point-wise sensitivity prediction or static ranking, which are poorly aligned with practical decision-making, where only a limited number of candidate drugs can be tested. We propose NetPolicy-RL, a biologically informed and decision-centric framework for pharmacogenomic drug prioritization that integrates network diffusion modeling with offline reinforcement learning. Drug selection for each cell line is formulated as an offline contextual bandit problem, enabling direct optimization of ranking quality rather than surrogate regression objectives. Mechanistic biological context is incorporated by propagating drug targets over curated interaction networks (STRING and Reactome) using random walk with restart, and combining the resulting diffusion profiles with cell-specific molecular importance derived from multi-omics data to compute network disruption scores. These biologically grounded signals are integrated with normalized drug response measurements to construct a joint state representation, which is optimized using an offline actor-critic architecture. Across held-out test splits, NetPolicy-RL consistently outperforms global ranking heuristics and learning-to-rank baselines, achieving statistically significant improvements in per-cell Normalized Discounted Cumulative Gain (NDCG@10) and substantial reductions in per-cell regret. Relative to GlobalTopK, the policy improves NDCG@10 for 88.7% of cell lines, while improvements exceed 95% compared with LambdaMART and regression-to-ranking baselines. Ablation analyses show that neither empirical response signals nor network-derived features alone are sufficient, and that their integration yields the most robust performance. Overall, this study demonstrates that combining mechanistic network biology with offline policy learning provides an effective and interpretable framework for drug prioritization in precision oncology.",
+  "authors": [
+    "Lodh, E.",
+    "Majumder, S.",
+    "Chowdhury, T.",
+    "De, M."
+  ],
+  "doi": "10.64898/2026.01.29.702506",
+  "first_seen": "2026-02-02",
+  "id": "biorxiv:10.64898/2026.01.29.702506",
+  "metadata": {
+    "abstract": "Large-scale pharmacogenomic screens provide extensive measurements of drug response across diverse cancer cell lines; however, most computational approaches emphasize point-wise sensitivity prediction or static ranking, which are poorly aligned with practical decision-making, where only a limited number of candidate drugs can be tested. We propose NetPolicy-RL, a biologically informed and decision-centric framework for pharmacogenomic drug prioritization that integrates network diffusion modeling with offline reinforcement learning. Drug selection for each cell line is formulated as an offline contextual bandit problem, enabling direct optimization of ranking quality rather than surrogate regression objectives. Mechanistic biological context is incorporated by propagating drug targets over curated interaction networks (STRING and Reactome) using random walk with restart, and combining the resulting diffusion profiles with cell-specific molecular importance derived from multi-omics data to compute network disruption scores. These biologically grounded signals are integrated with normalized drug response measurements to construct a joint state representation, which is optimized using an offline actor-critic architecture. Across held-out test splits, NetPolicy-RL consistently outperforms global ranking heuristics and learning-to-rank baselines, achieving statistically significant improvements in per-cell Normalized Discounted Cumulative Gain (NDCG@10) and substantial reductions in per-cell regret. Relative to GlobalTopK, the policy improves NDCG@10 for 88.7% of cell lines, while improvements exceed 95% compared with LambdaMART and regression-to-ranking baselines. Ablation analyses show that neither empirical response signals nor network-derived features alone are sufficient, and that their integration yields the most robust performance. Overall, this study demonstrates that combining mechanistic network biology with offline policy learning provides an effective and interpretable framework for drug prioritization in precision oncology.",
+    "author_corresponding": "Ekarsi Lodh",
+    "author_corresponding_institution": "Techno Main Salt Lake, India; Present address: College of Medicine and Health, University of Birmingham, UK",
+    "authors": "Lodh, E.; Majumder, S.; Chowdhury, T.; De, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-02-02",
+    "doi": "10.64898/2026.01.29.702506",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/02/02/2026.01.29.702506.source.xml",
+    "license": "cc_no",
+    "published": "10.1007/s10822-026-00823-4",
+    "server": "bioRxiv",
+    "title": "NetPolicy-RL: Network-Informed Offline Reinforcement Learning for Pharmacogenomic Drug Prioritization",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Techno Main Salt Lake, India; Present address: College of Medicine and Health, University of Birmingham, UK",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-02-02",
+  "published_doi": "10.1007/s10822-026-00823-4",
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "NetPolicy-RL combines random-walk network diffusion on STRING and Reactome with offline actor-critic reinforcement learning to rank drugs per cancer cell line,…",
+  "title": "NetPolicy-RL: Network-Informed Offline Reinforcement Learning for Pharmacogenomic Drug Prioritization",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.29.702506"
+}

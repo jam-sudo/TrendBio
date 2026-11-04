@@ -1,0 +1,38 @@
+{
+  "abstract": "Protein function relies on dynamic conformational ensembles, yet current generative models like AlphaFold3 often fail to produce ensembles that match experimental data. Recent experiment-guided generators attempt to address this by steering the reverse diffusion process. However, these methods are limited by fixed sampling horizons and sensitivity to initialization, often yielding thermodynamically implausible results. We introduce a general inference-time optimization framework to solve these challenges. First, we optimize over latent representations to maximize ensemble log-likelihood, rather than perturbing structures post hoc. This approach eliminates dependence on diffusion length, removes initialization bias, and easily incorporates external constraints. Second, we present novel sampling schemes for drawing Boltzmann-weighted ensembles. By combining structural priors from AlphaFold3 with force-field-based priors, we sample from their product distribution while balancing experimental likelihoods. Our results show that this framework consistently outperforms state-of-the-art guidance, improving diversity, physical energy, and agreement with data in X-ray crystallography and NMR, often fitting the experimental data better than deposited PDB structures. Finally, inference-time optimization experiments maximizing ipTM scores reveal that perturbing AlphaFold3 embeddings can artificially inflate model confidence. This exposes a vulnerability in current design metrics, whose mitigation could offer a pathway to reduce false discovery rates in binder engineering.",
+  "authors": [
+    "Advaith Maddipatla",
+    "Anar Rzayev",
+    "Marco Pegoraro",
+    "Martin Pacesa",
+    "Paul Schanda",
+    "Ailie Marx",
+    "Sanketh Vedula",
+    "Alex M. Bronstein"
+  ],
+  "doi": null,
+  "first_seen": "2026-02-27",
+  "id": "arxiv:2602.24007",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.BM",
+    "categories": [
+      "q-bio.BM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2602.24007v3</ns0:id>\n    <ns0:title>Inference-time optimization for experiment-grounded protein ensemble generation</ns0:title>\n    <ns0:updated>2026-06-29T10:07:16Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2602.24007v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2602.24007v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Protein function relies on dynamic conformational ensembles, yet current generative models like AlphaFold3 often fail to produce ensembles that match experimental data. Recent experiment-guided generators attempt to address this by steering the reverse diffusion process. However, these methods are limited by fixed sampling horizons and sensitivity to initialization, often yielding thermodynamically implausible results. We introduce a general inference-time optimization framework to solve these challenges. First, we optimize over latent representations to maximize ensemble log-likelihood, rather than perturbing structures post hoc. This approach eliminates dependence on diffusion length, removes initialization bias, and easily incorporates external constraints. Second, we present novel sampling schemes for drawing Boltzmann-weighted ensembles. By combining structural priors from AlphaFold3 with force-field-based priors, we sample from their product distribution while balancing experimental likelihoods. Our results show that this framework consistently outperforms state-of-the-art guidance, improving diversity, physical energy, and agreement with data in X-ray crystallography and NMR, often fitting the experimental data better than deposited PDB structures. Finally, inference-time optimization experiments maximizing ipTM scores reveal that perturbing AlphaFold3 embeddings can artificially inflate model confidence. This exposes a vulnerability in current design metrics, whose mitigation could offer a pathway to reduce false discovery rates in binder engineering.</ns0:summary>\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-02-27T13:31:07Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.BM\" />\n    <ns0:author>\n      <ns0:name>Advaith Maddipatla</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anar Rzayev</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Marco Pegoraro</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Martin Pacesa</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Paul Schanda</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ailie Marx</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sanketh Vedula</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alex M. Bronstein</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-02-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Latent-space inference-time optimization with Boltzmann-weighted sampling generates protein ensembles matching X-ray and NMR data better than guidance…",
+  "title": "Inference-time optimization for experiment-grounded protein ensemble generation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2602.24007v3"
+}
