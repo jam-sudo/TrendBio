@@ -1,0 +1,42 @@
+{
+  "abstract": "Constructing continuous, thermodynamically reversible reduced equations of motion from atomistic molecular dynamics (MD) that scale from fast-folding miniproteins to multi-domain allosteric enzymes in explicit water remains a foundational problem in computational biophysics. Across 15 molecular systems (890,000 SHA-256-verified frames, 0.89 us cumulative sampling) spanning 13 structurally diverse proteins from Chignolin (d=18) to explicit-solvent Adenylate Kinase (d=426, 40,110 particles) and Maltose-Binding Protein (d=738, 49,215 particles), plus two analytical verification peptides (d=2, 4), we formulate a contact-gated, GENERIC-regularized stochastic operator on the backbone torus T^d. We show that collective slow modes compress sub-linearly across two orders of magnitude in chain length - with spectral participation ratio scaling as PR(d)=1.061 d^0.494 (95% CI [0.332, 0.666], Delta AICc=-18.15) and short-time diffusion rank as r_D^90(d)=0.799 d^0.930 (Delta AICc=-14.39) - whereas cumulative 90% equilibrium variance in large native-basin enzymes transitions to extensive proportionality (10.0% blind extrapolation error vs. 35.7% for small-protein power laws). Consequently, macromolecular tractability above d>200 requires off-diagonal sparsity rather than global PCA truncation alone: universal peptide-plane crankshaft anti-correlation (mean R(psi_i, phi_i+1)=-0.603 +/- 0.054) and sparse 3D tertiary contact gating (mean k_eff=5.97, reaching 99.3% sparsity at d=738) enable a sparse directed acyclic contact-graph Cholesky estimator scaling empirically as O(d^0.92) in time and O(d^1.06) in memory (65.8x memory compression, 99.6x faster than Graphical LASSO, and higher blind held-out log-likelihood +0.303/d vs. dense +0.205/d on MBP). Biophysically, relative solvent-accessible surface area (rSASA_i) unifies dry linear equipartition in protein cores (alpha_core=1.00, 12.33% blind thermal error) with viscosity-coupled loops (alpha_loop=1.28) and peptides (alpha_peptide=1.57); parameter-free kinematic projection reproduces solution NMR Lipari-Szabo S^2 order parameters (mean r_s=+0.483 across four BMRB enzymes, Ubiquitin Pearson r=+0.921) and X-ray B-factors (mean r_s=+0.276); and 13-fold zero-shot Leave-One-Protein-Out transfer predicts unseen protein operators directly from static PDB coordinates (r_s=+0.706, R^2=+0.359 ridge; r_s=+0.721, R^2=+0.410 GBDT). Applied to functional discovery, explicit-solvent apo toroidal operators localize mechanical domain-closure hinges in AdK (PR-AUC=0.348) and MBP (AUROC=0.690 vs. 0.446 ANM), resolve distal Met20 <-> FG catalytic loop coupling in E. coli DHFR (71.6% recovery at 93.2% sparsity) and beta1-beta2 <-> Ile44 routing in Ubiquitin (7.1x amplification) on blind trajectories, and quantify sub-diffusive Mori-Zwanzig reaction-coordinate memory (mean gamma_M=0.593 +/- 0.126). A validation-tuned head-to-head benchmark against Markov State Models, TICA, Smoluchowski diffusion, Elastic Network Models, and unconstrained SDEs across all 13 proteins maps the physical regimes where continuous contact-gated GENERIC operators (lowest Frobenius error 0.288, exact 0.000 spurious entropy vs. median 65.79 kB/ns/d, IQR 53.76-104.66, mean 346.17) and discrete or harmonic baselines each excel.",
+  "authors": [
+    "Singh, M.",
+    "Singh, G."
+  ],
+  "doi": "10.64898/2026.11.01.763458",
+  "first_seen": "2026-11-03",
+  "id": "biorxiv:10.64898/2026.11.01.763458",
+  "metadata": {
+    "abstract": "Constructing continuous, thermodynamically reversible reduced equations of motion from atomistic molecular dynamics (MD) that scale from fast-folding miniproteins to multi-domain allosteric enzymes in explicit water remains a foundational problem in computational biophysics. Across 15 molecular systems (890,000 SHA-256-verified frames, 0.89 us cumulative sampling) spanning 13 structurally diverse proteins from Chignolin (d=18) to explicit-solvent Adenylate Kinase (d=426, 40,110 particles) and Maltose-Binding Protein (d=738, 49,215 particles), plus two analytical verification peptides (d=2, 4), we formulate a contact-gated, GENERIC-regularized stochastic operator on the backbone torus T^d. We show that collective slow modes compress sub-linearly across two orders of magnitude in chain length - with spectral participation ratio scaling as PR(d)=1.061 d^0.494 (95% CI [0.332, 0.666], Delta AICc=-18.15) and short-time diffusion rank as r_D^90(d)=0.799 d^0.930 (Delta AICc=-14.39) - whereas cumulative 90% equilibrium variance in large native-basin enzymes transitions to extensive proportionality (10.0% blind extrapolation error vs. 35.7% for small-protein power laws). Consequently, macromolecular tractability above d>200 requires off-diagonal sparsity rather than global PCA truncation alone: universal peptide-plane crankshaft anti-correlation (mean R(psi_i, phi_i+1)=-0.603 +/- 0.054) and sparse 3D tertiary contact gating (mean k_eff=5.97, reaching 99.3% sparsity at d=738) enable a sparse directed acyclic contact-graph Cholesky estimator scaling empirically as O(d^0.92) in time and O(d^1.06) in memory (65.8x memory compression, 99.6x faster than Graphical LASSO, and higher blind held-out log-likelihood +0.303/d vs. dense +0.205/d on MBP). Biophysically, relative solvent-accessible surface area (rSASA_i) unifies dry linear equipartition in protein cores (alpha_core=1.00, 12.33% blind thermal error) with viscosity-coupled loops (alpha_loop=1.28) and peptides (alpha_peptide=1.57); parameter-free kinematic projection reproduces solution NMR Lipari-Szabo S^2 order parameters (mean r_s=+0.483 across four BMRB enzymes, Ubiquitin Pearson r=+0.921) and X-ray B-factors (mean r_s=+0.276); and 13-fold zero-shot Leave-One-Protein-Out transfer predicts unseen protein operators directly from static PDB coordinates (r_s=+0.706, R^2=+0.359 ridge; r_s=+0.721, R^2=+0.410 GBDT). Applied to functional discovery, explicit-solvent apo toroidal operators localize mechanical domain-closure hinges in AdK (PR-AUC=0.348) and MBP (AUROC=0.690 vs. 0.446 ANM), resolve distal Met20 <-> FG catalytic loop coupling in E. coli DHFR (71.6% recovery at 93.2% sparsity) and beta1-beta2 <-> Ile44 routing in Ubiquitin (7.1x amplification) on blind trajectories, and quantify sub-diffusive Mori-Zwanzig reaction-coordinate memory (mean gamma_M=0.593 +/- 0.126). A validation-tuned head-to-head benchmark against Markov State Models, TICA, Smoluchowski diffusion, Elastic Network Models, and unconstrained SDEs across all 13 proteins maps the physical regimes where continuous contact-gated GENERIC operators (lowest Frobenius error 0.288, exact 0.000 spurious entropy vs. median 65.79 kB/ns/d, IQR 53.76-104.66, mean 346.17) and discrete or harmonic baselines each excel.",
+    "author_corresponding": "Mehardeep Singh",
+    "author_corresponding_institution": "Sri Chaitanya Educational Institutions",
+    "authors": "Singh, M.; Singh, G.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-11-03",
+    "doi": "10.64898/2026.11.01.763458",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/03/2026.11.01.763458.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Scalable Contact-Gated Stochastic Operators and Universal Reduction Laws for Macromolecular Protein Dynamics, Allostery, and Kinetics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Sri Chaitanya Educational Institutions",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Contact-gated GENERIC stochastic operators with sparse Cholesky estimation reduce MD dynamics of proteins up to 738 dimensions, scaling sub-linearly and…",
+  "title": "Scalable Contact-Gated Stochastic Operators and Universal Reduction Laws for Macromolecular Protein Dynamics, Allostery, and Kinetics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.01.763458"
+}

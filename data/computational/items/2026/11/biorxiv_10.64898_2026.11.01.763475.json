@@ -1,0 +1,45 @@
+{
+  "abstract": "Clinical genome sequencing pipelines change often, and each change requires proportionate revalidation. Guidelines accept in silico data as a supplement but leave variant interpretation outside pipeline validation, and, to our knowledge, no framework tests a pipeline against a known truth up to the reportable finding, so report specificity is not measured. We present a source-available framework that tests a pipeline end to end, from sequencing reads to the report, against a truth fixed before any run. It plants expert-curated pathogenic and benign variants from the same genes, and optionally synthetic variants that no database holds, into the GIAB HG002 germline background and records the expected class and report decision of each variant. It then simulates reads and runs secondary and tertiary analysis as black boxes through exchangeable adapters. Findings are compared with the truth at the call-set and report levels, each failure is assigned to the first pipeline stage where it appears, and a variant-by-variant comparison of two runs serves as a regression test. We applied the framework to nf-core/sarek with DeepVariant and to the ACMG/AMP classifier BIAS-2015, using 243 ClinGen-curated variants in five test sets. Single-nucleotide variant recall against the HG002 benchmark was 99.5% on simulated and 99.3% on real reads, and every planted variant was present in the reads and called with the correct genotype. The report included 115 of 117 pathogenic and likely pathogenic variants (98.3%) but withheld only 106 of 126 variants that must not be reported (84.1%), mainly because variants of uncertain significance were upgraded and recessive carriers were reported. Without ClinVar-derived criteria, report sensitivity fell to 74.4%. Most false reports of one test set came from diploid calling of the male chromosome X, and haploid calling removed them without side effects. In supplementary experiments, indels were called completely up to 20 bp, and BIAS-2015 left 74% of synthetic loss-of-function variants unreported because it combined criteria by the 2015 rules. The framework measures report-level sensitivity and specificity and localizes regressions, so it can supplement validation on human samples and support change control.",
+  "authors": [
+    "Dvorsky, B.",
+    "Komarkova, M.",
+    "Kollinova, K.",
+    "Klempir, O.",
+    "Krupicka, R."
+  ],
+  "doi": "10.64898/2026.11.01.763475",
+  "first_seen": "2026-11-04",
+  "id": "biorxiv:10.64898/2026.11.01.763475",
+  "metadata": {
+    "abstract": "Clinical genome sequencing pipelines change often, and each change requires proportionate revalidation. Guidelines accept in silico data as a supplement but leave variant interpretation outside pipeline validation, and, to our knowledge, no framework tests a pipeline against a known truth up to the reportable finding, so report specificity is not measured. We present a source-available framework that tests a pipeline end to end, from sequencing reads to the report, against a truth fixed before any run. It plants expert-curated pathogenic and benign variants from the same genes, and optionally synthetic variants that no database holds, into the GIAB HG002 germline background and records the expected class and report decision of each variant. It then simulates reads and runs secondary and tertiary analysis as black boxes through exchangeable adapters. Findings are compared with the truth at the call-set and report levels, each failure is assigned to the first pipeline stage where it appears, and a variant-by-variant comparison of two runs serves as a regression test. We applied the framework to nf-core/sarek with DeepVariant and to the ACMG/AMP classifier BIAS-2015, using 243 ClinGen-curated variants in five test sets. Single-nucleotide variant recall against the HG002 benchmark was 99.5% on simulated and 99.3% on real reads, and every planted variant was present in the reads and called with the correct genotype. The report included 115 of 117 pathogenic and likely pathogenic variants (98.3%) but withheld only 106 of 126 variants that must not be reported (84.1%), mainly because variants of uncertain significance were upgraded and recessive carriers were reported. Without ClinVar-derived criteria, report sensitivity fell to 74.4%. Most false reports of one test set came from diploid calling of the male chromosome X, and haploid calling removed them without side effects. In supplementary experiments, indels were called completely up to 20 bp, and BIAS-2015 left 74% of synthetic loss-of-function variants unreported because it combined criteria by the 2015 rules. The framework measures report-level sensitivity and specificity and localizes regressions, so it can supplement validation on human samples and support change control.",
+    "author_corresponding": "Radim Krupicka",
+    "author_corresponding_institution": "Czech Technical University in Prague, Faculty of Biomedical Engineering, Department of Biomedical Informatics",
+    "authors": "Dvorsky, B.; Komarkova, M.; Kollinova, K.; Klempir, O.; Krupicka, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-04",
+    "doi": "10.64898/2026.11.01.763475",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/04/2026.11.01.763475.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "An end-to-end in silico framework for truth-based validation and regression testing of clinical genome sequencing pipelines, from simulated reads to reportable findings",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Czech Technical University in Prague, Faculty of Biomedical Engineering, Department of Biomedical Informatics",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-04",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "End-to-end in silico framework testing clinical sequencing pipelines against planted truth variants from reads to reportable findings, with stage-localized…",
+  "title": "An end-to-end in silico framework for truth-based validation and regression testing of clinical genome sequencing pipelines, from simulated reads to reportable findings",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.01.763475"
+}

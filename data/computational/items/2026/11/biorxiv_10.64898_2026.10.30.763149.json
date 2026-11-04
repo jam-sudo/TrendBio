@@ -1,0 +1,42 @@
+{
+  "abstract": "Conventional low-pass filters attenuate or remove high-frequency Fourier amplitudes but leave the phases intact wherever the amplitude response stays above zero. As a result, fine-scale detail of the original signal can persist beyond the target resolution. A sharp cutoff removes this detail but produces ringing artifacts. To address both limitations, this work introduces ramped phase randomization, which extends a conventional low-pass filter by adding random offsets to Fourier phases that increase smoothly with spatial frequency. For cryo-EM maps, the correlation between a map at the target resolution and an ideal, noiseless map sets the levels of the phase offsets, with a correction for the finite resolution of the input map. On three published map pairs, ramped phase filtering reduced the higher resolution parent's fine detail to a level similar to that of independently determined maps at the lower target resolution, whereas amplitude-only filtering kept the parent's sharp features. The FSCs between the filtered maps and their parents closely resembled those of the experimental maps. The same filter also serves as a data augmentation approach for neural network-based machine learning. With ramped phase randomization, each augmented copy keeps the power spectrum and low-frequency content of the original example but has a different high-frequency pattern. For simulated CryoBench particles of 16 ribosome assembly states, phase augmentation raised mean test accuracy in all 20 combinations of training-set size and latent dimension, by 20.8 percentage points on average (range from 3.3 points to 44.2 points). On two general deep learning benchmarks, mean test accuracy rose from 92.15% to 96.99% with 60 labelled UCI Synthetic Control traces and from 53.44% to 74.27% with 500 labelled noisy MNIST images. The ramped phase randomization is implemented in an open-source Python package, with a companion browser application for interactive visualization of cryo-EM maps and filtering effects.",
+  "authors": [
+    "Dang, L. Y.",
+    "Jiang, W."
+  ],
+  "doi": "10.64898/2026.10.30.763149",
+  "first_seen": "2026-11-01",
+  "id": "biorxiv:10.64898/2026.10.30.763149",
+  "metadata": {
+    "abstract": "Conventional low-pass filters attenuate or remove high-frequency Fourier amplitudes but leave the phases intact wherever the amplitude response stays above zero. As a result, fine-scale detail of the original signal can persist beyond the target resolution. A sharp cutoff removes this detail but produces ringing artifacts. To address both limitations, this work introduces ramped phase randomization, which extends a conventional low-pass filter by adding random offsets to Fourier phases that increase smoothly with spatial frequency. For cryo-EM maps, the correlation between a map at the target resolution and an ideal, noiseless map sets the levels of the phase offsets, with a correction for the finite resolution of the input map. On three published map pairs, ramped phase filtering reduced the higher resolution parent's fine detail to a level similar to that of independently determined maps at the lower target resolution, whereas amplitude-only filtering kept the parent's sharp features. The FSCs between the filtered maps and their parents closely resembled those of the experimental maps. The same filter also serves as a data augmentation approach for neural network-based machine learning. With ramped phase randomization, each augmented copy keeps the power spectrum and low-frequency content of the original example but has a different high-frequency pattern. For simulated CryoBench particles of 16 ribosome assembly states, phase augmentation raised mean test accuracy in all 20 combinations of training-set size and latent dimension, by 20.8 percentage points on average (range from 3.3 points to 44.2 points). On two general deep learning benchmarks, mean test accuracy rose from 92.15% to 96.99% with 60 labelled UCI Synthetic Control traces and from 53.44% to 74.27% with 500 labelled noisy MNIST images. The ramped phase randomization is implemented in an open-source Python package, with a companion browser application for interactive visualization of cryo-EM maps and filtering effects.",
+    "author_corresponding": "Wen Jiang",
+    "author_corresponding_institution": "The Pennsylvania State University",
+    "authors": "Dang, L. Y.; Jiang, W.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-11-01",
+    "doi": "10.64898/2026.10.30.763149",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/01/2026.10.30.763149.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Low-pass filtering revisited: ramped phase randomization for cryo-EM map comparison and data augmentation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The Pennsylvania State University",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces ramped phase randomization, a low-pass filter variant for cryo-EM map comparison and neural network data augmentation, with an open-source Python…",
+  "title": "Low-pass filtering revisited: ramped phase randomization for cryo-EM map comparison and data augmentation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.30.763149"
+}

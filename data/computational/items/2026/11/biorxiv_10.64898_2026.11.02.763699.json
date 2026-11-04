@@ -1,0 +1,45 @@
+{
+  "abstract": "Deep learning sequence-to-function (S2F) models learn to predict functional readouts, such as gene expression, from genetic sequence. However, these models are trained predominantly on the reference genome and struggle to accurately predict the effect of genetic variation on gene expression. Massively parallel reporter assays (MPRAs) explore the direct impact of genetic variation on gene expression, but saturation-mutagenesis MPRAs that measure variant effects directly remain limited, thereby restricting their use for fine-tuning S2F models. In this work, we investigate fine-tuning Borzoi, a state-of-the-art S2F model, on model-generated synthetic MPRA variant-effect data as a scalable alternative to overcome limits on the availability of supervised training data for genetic variation. First, we trained an ensemble of 16 models on 110,359 K562 MPRA measurements. Then, we distilled their predictions into a single student model using MPRA elements associated with 1,000 genes. The distilled model was subsequently used to generate synthetic variant-effect labels across increasing numbers of genes (50 to 1,000), with 600 variants per gene, to fine-tune Borzoi. Performance improved as we included more genes in training. In data-limited settings, training on more genes with fewer variants per gene performed better than training on fewer genes with more variants per gene, given the same number of total variants. Compared to pre-trained Borzoi, Borzoi fine-tuned on 600,000 synthetic samples across 1,000 genes increased Pearson correlation from 0.28 to 0.54 on CAGI5 promoter variants and from 0.39 to 0.46 on 903 GTEx fine-mapped whole-blood expression quantitative trait loci (eQTLs). Importantly, these improvements were achieved while preserving the pre-trained performance across all 7,611 output tracks. Furthermore, fine-tuned Borzoi recovered regulatory motifs identified by the MPRA model in genes unseen during training, suggesting that learned regulatory features can generalize across loci. Together, these results provide a proof of concept that model-generated synthetic supervision can improve variant effect prediction in S2F models while preserving their original pre-trained capabilities, offering a scalable strategy toward capturing the impact of genetic variation on gene regulation.",
+  "authors": [
+    "Wang, L.",
+    "Galvin, J.",
+    "Vaz, E.",
+    "Keener, R.",
+    "Battle, A."
+  ],
+  "doi": "10.64898/2026.11.02.763699",
+  "first_seen": "2026-11-03",
+  "id": "biorxiv:10.64898/2026.11.02.763699",
+  "metadata": {
+    "abstract": "Deep learning sequence-to-function (S2F) models learn to predict functional readouts, such as gene expression, from genetic sequence. However, these models are trained predominantly on the reference genome and struggle to accurately predict the effect of genetic variation on gene expression. Massively parallel reporter assays (MPRAs) explore the direct impact of genetic variation on gene expression, but saturation-mutagenesis MPRAs that measure variant effects directly remain limited, thereby restricting their use for fine-tuning S2F models. In this work, we investigate fine-tuning Borzoi, a state-of-the-art S2F model, on model-generated synthetic MPRA variant-effect data as a scalable alternative to overcome limits on the availability of supervised training data for genetic variation. First, we trained an ensemble of 16 models on 110,359 K562 MPRA measurements. Then, we distilled their predictions into a single student model using MPRA elements associated with 1,000 genes. The distilled model was subsequently used to generate synthetic variant-effect labels across increasing numbers of genes (50 to 1,000), with 600 variants per gene, to fine-tune Borzoi. Performance improved as we included more genes in training. In data-limited settings, training on more genes with fewer variants per gene performed better than training on fewer genes with more variants per gene, given the same number of total variants. Compared to pre-trained Borzoi, Borzoi fine-tuned on 600,000 synthetic samples across 1,000 genes increased Pearson correlation from 0.28 to 0.54 on CAGI5 promoter variants and from 0.39 to 0.46 on 903 GTEx fine-mapped whole-blood expression quantitative trait loci (eQTLs). Importantly, these improvements were achieved while preserving the pre-trained performance across all 7,611 output tracks. Furthermore, fine-tuned Borzoi recovered regulatory motifs identified by the MPRA model in genes unseen during training, suggesting that learned regulatory features can generalize across loci. Together, these results provide a proof of concept that model-generated synthetic supervision can improve variant effect prediction in S2F models while preserving their original pre-trained capabilities, offering a scalable strategy toward capturing the impact of genetic variation on gene regulation.",
+    "author_corresponding": "Alexis Battle",
+    "author_corresponding_institution": "Johns Hopkins University",
+    "authors": "Wang, L.; Galvin, J.; Vaz, E.; Keener, R.; Battle, A.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-11-03",
+    "doi": "10.64898/2026.11.02.763699",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/03/2026.11.02.763699.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Synthetic MPRA perturbation supervision improves variant-effect prediction in sequence-to-function models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Fine-tunes Borzoi sequence-to-function model on synthetic MPRA variant-effect labels, raising CAGI5 and eQTL Pearson correlations while preserving pre-trained…",
+  "title": "Synthetic MPRA perturbation supervision improves variant-effect prediction in sequence-to-function models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.02.763699"
+}

@@ -1,0 +1,35 @@
+{
+  "abstract": "Assigning GWAS variants to causal genes requires evidence from multiple resources. We present V2G, an agentic pipeline that records evidence retrieval and returns ranked genes alongside the retrieved evidence. We evaluate whether language-model reranking improves gene prioritisation and whether its gains depend on the retrieved evidence or recall of known associations. On 135 held-out loci where candidate retrieval succeeded and Open Targets L2G predicts, reranking by a language model improves Precision@1 over the evidence ordering it receives, 0.793 against 0.711 (+0.081, 95% CI +0.038 to +0.129), and over nearest-gene assignment (+0.178); no difference from Open Targets L2G or from training-membership baselines was detected. Given only the trait and the candidate gene symbols, in shuffled order, the same model scores 0.864 on these loci (three seeds, 0.859 - 0.867) and names the reference gene at 0.594 of the loci where the pipeline never retrieved it; with each gene's symbol moved to another gene's evidence row it follows the top-scored row and scores 0.284. The gain over the evidence ordering is recall of known genes, and the evidence as presented anchors the model to the ordering rather than informing it. Across the 296 held-out loci (five seeds each) the model keeps the given top candidate at 86% of decisions; at naturally retrieved loci its departures select a reference gene in 85% of departure decisions (31 of 37 loci), and none displaced one. Its calls carry trait-matched mouse mutant or Mendelian phenotype annotations more often than other candidates at the same locus. Train-test overlap is reported throughout. The study includes a frozen benchmark, cached predictions and reproduction code.",
+  "authors": [
+    "Shakuntala Baichoo",
+    " Sohail",
+    " Sarkar",
+    "Bo Wang"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-01",
+  "id": "arxiv:2611.01461",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.01461v1</ns0:id>\n    <ns0:title>An auditable agentic pipeline for variant-to-gene prioritisation, validated against orthogonal functional evidence</ns0:title>\n    <ns0:updated>2026-11-01T02:48:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.01461v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.01461v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Assigning GWAS variants to causal genes requires evidence from multiple resources. We present V2G, an agentic pipeline that records evidence retrieval and returns ranked genes alongside the retrieved evidence. We evaluate whether language-model reranking improves gene prioritisation and whether its gains depend on the retrieved evidence or recall of known associations. On 135 held-out loci where candidate retrieval succeeded and Open Targets L2G predicts, reranking by a language model improves Precision@1 over the evidence ordering it receives, 0.793 against 0.711 (+0.081, 95% CI +0.038 to +0.129), and over nearest-gene assignment (+0.178); no difference from Open Targets L2G or from training-membership baselines was detected. Given only the trait and the candidate gene symbols, in shuffled order, the same model scores 0.864 on these loci (three seeds, 0.859 - 0.867) and names the reference gene at 0.594 of the loci where the pipeline never retrieved it; with each gene's symbol moved to another gene's evidence row it follows the top-scored row and scores 0.284. The gain over the evidence ordering is recall of known genes, and the evidence as presented anchors the model to the ordering rather than informing it. Across the 296 held-out loci (five seeds each) the model keeps the given top candidate at 86% of decisions; at naturally retrieved loci its departures select a reference gene in 85% of departure decisions (31 of 37 loci), and none displaced one. Its calls carry trait-matched mouse mutant or Mendelian phenotype annotations more often than other candidates at the same locus. Train-test overlap is reported throughout. The study includes a frozen benchmark, cached predictions and reproduction code.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-01T02:48:40Z</ns0:published>\n    <ns1:comment>21 pages of main manuscript including References, 4 figures, 11 supplementary tables, 2 main tables</ns1:comment>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Shakuntala Baichoo</ns0:name>\n      <ns1:affiliation>Neel</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name> Sohail</ns0:name>\n      <ns1:affiliation>Neel</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name> Sarkar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Bo Wang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-11-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Auditable agentic LLM pipeline (V2G) for GWAS variant-to-gene prioritisation; reranking gains track known-gene recall, not evidence use.",
+  "title": "An auditable agentic pipeline for variant-to-gene prioritisation, validated against orthogonal functional evidence",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.01461v1"
+}

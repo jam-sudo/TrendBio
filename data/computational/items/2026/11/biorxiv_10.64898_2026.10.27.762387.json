@@ -1,0 +1,46 @@
+{
+  "abstract": "The fragment ion indexed database searching approach enables highly efficient tandem mass spectrometry database searches, including real-time search workflows. However, the index can require tens of gigabytes of memory, often exceeding the free memory available on instrument acquisition computers running the search. This restricts the size of the searchable database, the variable modification space, and the number of searches that can run concurrently. To address this problem, we developed an index-pruning pipeline within the Comet database search tool using Carafe, a deep learning tool that predicts fragment ion intensities based on peptide sequences. In our approach, only fragment ion positions that are predicted to be observable are written in the index, eliminating entries that are unlikely to contribute to spectrum detection. We evaluated this approach on two search spaces in three index configurations to demonstrate that masking significantly reduced the number of fragment ion index entries and, consequently, peak search memory use. Masked searches were also faster than unmasked searches and identified a comparable number of peptide-spectrum matches. Because all prediction and masking steps are performed before searching, their cost is amortized across repeated, future searches of the same database and modification configuration, introducing no per-spectrum search overhead. The complete implementation is open source with an Apache license.",
+  "authors": [
+    "Eng, J.",
+    "Hoopmann, M.",
+    "Schweppe, D. K.",
+    "MacCoss, M. J.",
+    "Noble, W. S.",
+    "Wen, B."
+  ],
+  "doi": "10.64898/2026.10.27.762387",
+  "first_seen": "2026-11-03",
+  "id": "biorxiv:10.64898/2026.10.27.762387",
+  "metadata": {
+    "abstract": "The fragment ion indexed database searching approach enables highly efficient tandem mass spectrometry database searches, including real-time search workflows. However, the index can require tens of gigabytes of memory, often exceeding the free memory available on instrument acquisition computers running the search. This restricts the size of the searchable database, the variable modification space, and the number of searches that can run concurrently. To address this problem, we developed an index-pruning pipeline within the Comet database search tool using Carafe, a deep learning tool that predicts fragment ion intensities based on peptide sequences. In our approach, only fragment ion positions that are predicted to be observable are written in the index, eliminating entries that are unlikely to contribute to spectrum detection. We evaluated this approach on two search spaces in three index configurations to demonstrate that masking significantly reduced the number of fragment ion index entries and, consequently, peak search memory use. Masked searches were also faster than unmasked searches and identified a comparable number of peptide-spectrum matches. Because all prediction and masking steps are performed before searching, their cost is amortized across repeated, future searches of the same database and modification configuration, introducing no per-spectrum search overhead. The complete implementation is open source with an Apache license.",
+    "author_corresponding": "Jimmy Eng",
+    "author_corresponding_institution": "University of Washington",
+    "authors": "Eng, J.; Hoopmann, M.; Schweppe, D. K.; MacCoss, M. J.; Noble, W. S.; Wen, B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-03",
+    "doi": "10.64898/2026.10.27.762387",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/03/2026.10.27.762387.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Improving real-time search through deep learning-enhanced fragment ion indexing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Washington",
+  "preprint_id": null,
+  "primary_category": "proteomics",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Deep learning fragment-ion intensity prediction (Carafe) prunes the Comet fragment ion index, cutting index memory and speeding tandem MS database searches…",
+  "title": "Improving real-time search through deep learning-enhanced fragment ion indexing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.27.762387"
+}

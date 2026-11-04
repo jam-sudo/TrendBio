@@ -1,0 +1,34 @@
+{
+  "abstract": "Probing frozen representations layer by layer is now standard practice, but reporting when a signal first becomes decodable requires a rule for reading a depth curve, and the obvious rule is wrong. On synthetic curves with known ground truth, requiring a probe score to exceed a null-calibrated threshold for three consecutive stages reports an onset nineteen stages early under transformer-like depth correlation, with every resample returning an onset. The failure follows from correlation between neighboring layers, a hazard known in neuroimaging but not, to our knowledge, checked for depth curves.\n  We give an estimator whose error rate is calibrated rather than assumed. Null trajectories are built by permuting labels within each evaluation unit and holding each permutation fixed across depth, preserving the correlation structure the rule must survive; thresholds are per-layer order statistics; and the persistence requirement is calibrated rather than chosen.\n  Applied to pocket information in a frozen co-folding trunk, stratifying 1,820 post-cutoff targets by protein-family and pocket familiarity, the five-stage rule fires on 4 to 7 per cent of null trajectories against a nominal 5 per cent and the three-stage rule on 12 to 17: the synthetic failure reproduces on real data. Pocket membership is decodable above threshold at all 48 blocks in all four regimes, so the onset cannot discriminate them; the pre-declared accumulation depth does, and is latest for familiar families with structurally novel pockets in every feature set. That regime is also the weakest, by a margin surviving controls for length, pocket measure and alignment depth.\n  Separately, a widely used public co-folding checkpoint loads against its own code with 128 trunk parameters missing; those would be randomly initialized, and every representation extracted would be partly noise while appearing normal.",
+  "authors": [
+    "Maryam Rahimimovassagh",
+    "Michael Brown",
+    "Sanjeda Sara Jennifer",
+    "Niloofar Yousefi"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-02",
+  "id": "arxiv:2611.03968",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.03968v1</ns0:id>\n    <ns0:title>One Mistake, Three Layers: Persistence Rules Under Depth Correlation</ns0:title>\n    <ns0:updated>2026-11-02T21:11:15Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.03968v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.03968v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Probing frozen representations layer by layer is now standard practice, but reporting when a signal first becomes decodable requires a rule for reading a depth curve, and the obvious rule is wrong. On synthetic curves with known ground truth, requiring a probe score to exceed a null-calibrated threshold for three consecutive stages reports an onset nineteen stages early under transformer-like depth correlation, with every resample returning an onset. The failure follows from correlation between neighboring layers, a hazard known in neuroimaging but not, to our knowledge, checked for depth curves.\n  We give an estimator whose error rate is calibrated rather than assumed. Null trajectories are built by permuting labels within each evaluation unit and holding each permutation fixed across depth, preserving the correlation structure the rule must survive; thresholds are per-layer order statistics; and the persistence requirement is calibrated rather than chosen.\n  Applied to pocket information in a frozen co-folding trunk, stratifying 1,820 post-cutoff targets by protein-family and pocket familiarity, the five-stage rule fires on 4 to 7 per cent of null trajectories against a nominal 5 per cent and the three-stage rule on 12 to 17: the synthetic failure reproduces on real data. Pocket membership is decodable above threshold at all 48 blocks in all four regimes, so the onset cannot discriminate them; the pre-declared accumulation depth does, and is latest for familiar families with structurally novel pockets in every feature set. That regime is also the weakest, by a margin surviving controls for length, pocket measure and alignment depth.\n  Separately, a widely used public co-folding checkpoint loads against its own code with 128 trunk parameters missing; those would be randomly initialized, and every representation extracted would be partly noise while appearing normal.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-02T21:11:15Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Maryam Rahimimovassagh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael Brown</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sanjeda Sara Jennifer</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Niloofar Yousefi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Naive persistence rules misdate probe onsets under depth correlation; a permutation-calibrated estimator tested on co-folding models.",
+  "title": "One Mistake, Three Layers: Persistence Rules Under Depth Correlation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.03968v1"
+}

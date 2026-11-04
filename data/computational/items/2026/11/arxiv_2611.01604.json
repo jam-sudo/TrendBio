@@ -1,0 +1,30 @@
+{
+  "abstract": "Pooled drug screens treat and sequence dozens of cancer cell lines together in one well. Tahoe-100M, the largest, is used to train and benchmark models that predict how unmeasured cell lines respond to drugs, and its benchmarks, reproducibility ceilings and statistical tests treat the cell lines of a well, and random halves of a well's cells, as independent observations of a drug's effect. Because the drug is applied to the well, this is harmless only if the lines of a well share nothing beyond the drug's reproducible effect. We tested this with pairs of untreated control wells on 13 plates, with replicate wells whose labels we checked, and with two plates that repeat each other well by well. In each test the cell lines of a well share a component of expression that a replicate well does not reproduce, also when the two wells occupy the same inferred position; where drugs are present, it cannot be told apart from an interaction of plate and drug, but in untreated wells it can. In replicate wells at different positions whose labels pass the check, about a third of what two halves of a well have in common (35%, 95% interval 22-58%, 9 compounds) is not reproduced by the replicate well. The well effect inflates results that take something from a well and judge it in the same well: retrained versions of two published models that take a measured response as input lose about a quarter to a third of their score when the input comes from a replicate well instead of the predicted well (22-43% under the control-well reference), halves of a well overstate how well the experiment reproduces, and a test across the lines of a well calls 5 of 13 plates significant when two untreated wells are compared. Many labels of strongly responding replicate wells, those of plate 13 above all, fail the label check. Evaluations, ceilings and tests on such data should treat the well as the experimental unit.",
+  "authors": [
+    "Xuanrui Huang"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-01",
+  "id": "arxiv:2611.01604",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.01604v1</ns0:id>\n    <ns0:title>Cell lines that share a well are not independent observations in the Tahoe-100M drug screen</ns0:title>\n    <ns0:updated>2026-11-01T05:42:09Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.01604v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.01604v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Pooled drug screens treat and sequence dozens of cancer cell lines together in one well. Tahoe-100M, the largest, is used to train and benchmark models that predict how unmeasured cell lines respond to drugs, and its benchmarks, reproducibility ceilings and statistical tests treat the cell lines of a well, and random halves of a well's cells, as independent observations of a drug's effect. Because the drug is applied to the well, this is harmless only if the lines of a well share nothing beyond the drug's reproducible effect. We tested this with pairs of untreated control wells on 13 plates, with replicate wells whose labels we checked, and with two plates that repeat each other well by well. In each test the cell lines of a well share a component of expression that a replicate well does not reproduce, also when the two wells occupy the same inferred position; where drugs are present, it cannot be told apart from an interaction of plate and drug, but in untreated wells it can. In replicate wells at different positions whose labels pass the check, about a third of what two halves of a well have in common (35%, 95% interval 22-58%, 9 compounds) is not reproduced by the replicate well. The well effect inflates results that take something from a well and judge it in the same well: retrained versions of two published models that take a measured response as input lose about a quarter to a third of their score when the input comes from a replicate well instead of the predicted well (22-43% under the control-well reference), halves of a well overstate how well the experiment reproduces, and a test across the lines of a well calls 5 of 13 plates significant when two untreated wells are compared. Many labels of strongly responding replicate wells, those of plate 13 above all, fail the label check. Evaluations, ceilings and tests on such data should treat the well as the experimental unit.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-01T05:42:09Z</ns0:published>\n    <ns1:comment>31 pages, 4 figures, 1 supplementary figure, 9 supplementary tables. Code and result files: https://github.com/xuanruihuang/well-is-the-unit</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Xuanrui Huang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "single-cell",
+  "published_at": "2026-11-01",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Cell lines sharing a well in the Tahoe-100M pooled drug screen aren't independent; well effects inflate model benchmarks and statistical tests.",
+  "title": "Cell lines that share a well are not independent observations in the Tahoe-100M drug screen",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.01604v1"
+}

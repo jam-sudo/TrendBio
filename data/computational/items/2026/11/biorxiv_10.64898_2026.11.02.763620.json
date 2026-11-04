@@ -1,0 +1,42 @@
+{
+  "abstract": "We formalize Relative Forest Accessibility (RFA), a topological accessibility index computed as the solution of (I - {gamma}P )x = v0, where P is a Markov transition matrix built from Hi-C contacts and v0 is a vector of TF peaks (or ATAC peaks). RFA yields a continuous accessibility profile across all genomic bins. We test RFA on three targets. First, on promoter TF counts (GM12878 chr1, 10 kb, 811 genes), RFA loses to 1D distance (AUC 0.836 vs 0.976); this is an artifact because the target and the 1D distance look at the same window. Second, on eQTL (GTEx v10 LCL, chr1+17+19, 10 kb, 1625 genes), RFA anticorrelates with eQTL: {rho}(RFA, - log10 pmin) = -0.09, AUC(RFA) = 0.386 (below chance), AUC(-RFA) = 0.614. High RFA corresponds to fewer eQTL, and dose-response analysis confirms that AUC(RFA) decreases with eQTL strength (mean trend -0.056, 19/20 TFs). A distance-preserving shuffle of the Hi-C matrix reproduces this anticorrelation ({triangleup}AUC vs real: [-0.074, +0.076] across 5 TFs, all CIs include 0), whereas a degree-preserving rewiring destroys it ({triangleup}AUC [isin] [-0.261, -0.003], CIs exclude 0 for 5/5 TFs); the anticorrelation therefore reflects distance-decay of Hi-C contacts (local 3D accessibility), not higher-order topology. The anticorrelation replicates on chr17 ({triangleup}{rho} = -0.13 for rewired, 0/5 for shuffled) and on chr19 with an inverted control pattern, consistent with local within-diagonal heterogeneity as the carrier on short gene-dense chromosomes. Third, on {triangleup}RNA (MCF10A vs MCF7, 40 kb, ATAC peaks), RFA does not predict {triangleup}RNA ({rho} = +0.005, permutation p = 0.87, bootstrap 95% CI [-0.040, +0.053], n = 1730); the CI includes zero and does not exclude the practical boundary |{rho}| = 0.05. Within-line sanity checks are also null. We conclude that RFA anticorrelates with eQTL via local distance-decay and does not predict {triangleup}RNA. The anticorrelation is carried by distance-decay, not by loops or TADs, and may reflect expression buffering: genes with strong eQTL are less dependent on local 3D accessibility. RFA is not a universal predictor but a filter with an inverted sign on eQTL and no signal on {triangleup}RNA.",
+  "authors": [
+    "Andrey, T.",
+    "Bratishchikov, A.",
+    "Anufriev, A."
+  ],
+  "doi": "10.64898/2026.11.02.763620",
+  "first_seen": "2026-11-03",
+  "id": "biorxiv:10.64898/2026.11.02.763620",
+  "metadata": {
+    "abstract": "We formalize Relative Forest Accessibility (RFA), a topological accessibility index computed as the solution of (I - {gamma}P )x = v0, where P is a Markov transition matrix built from Hi-C contacts and v0 is a vector of TF peaks (or ATAC peaks). RFA yields a continuous accessibility profile across all genomic bins. We test RFA on three targets. First, on promoter TF counts (GM12878 chr1, 10 kb, 811 genes), RFA loses to 1D distance (AUC 0.836 vs 0.976); this is an artifact because the target and the 1D distance look at the same window. Second, on eQTL (GTEx v10 LCL, chr1+17+19, 10 kb, 1625 genes), RFA anticorrelates with eQTL: {rho}(RFA, - log10 pmin) = -0.09, AUC(RFA) = 0.386 (below chance), AUC(-RFA) = 0.614. High RFA corresponds to fewer eQTL, and dose-response analysis confirms that AUC(RFA) decreases with eQTL strength (mean trend -0.056, 19/20 TFs). A distance-preserving shuffle of the Hi-C matrix reproduces this anticorrelation ({triangleup}AUC vs real: [-0.074, +0.076] across 5 TFs, all CIs include 0), whereas a degree-preserving rewiring destroys it ({triangleup}AUC [isin] [-0.261, -0.003], CIs exclude 0 for 5/5 TFs); the anticorrelation therefore reflects distance-decay of Hi-C contacts (local 3D accessibility), not higher-order topology. The anticorrelation replicates on chr17 ({triangleup}{rho} = -0.13 for rewired, 0/5 for shuffled) and on chr19 with an inverted control pattern, consistent with local within-diagonal heterogeneity as the carrier on short gene-dense chromosomes. Third, on {triangleup}RNA (MCF10A vs MCF7, 40 kb, ATAC peaks), RFA does not predict {triangleup}RNA ({rho} = +0.005, permutation p = 0.87, bootstrap 95% CI [-0.040, +0.053], n = 1730); the CI includes zero and does not exclude the practical boundary |{rho}| = 0.05. Within-line sanity checks are also null. We conclude that RFA anticorrelates with eQTL via local distance-decay and does not predict {triangleup}RNA. The anticorrelation is carried by distance-decay, not by loops or TADs, and may reflect expression buffering: genes with strong eQTL are less dependent on local 3D accessibility. RFA is not a universal predictor but a filter with an inverted sign on eQTL and no signal on {triangleup}RNA.",
+    "author_corresponding": "Timofeev Andrey",
+    "author_corresponding_institution": "AI Center for SCO+ Countries LLC",
+    "authors": "Andrey, T.; Bratishchikov, A.; Anufriev, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-03",
+    "doi": "10.64898/2026.11.02.763620",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/03/2026.11.02.763620.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Continuous Topological Accessibility (RFA) as a 3D-Aware GRN Filter: Anticorrelation with eQTL and No Prediction of ΔRNA",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "AI Center for SCO+ Countries LLC",
+  "preprint_id": null,
+  "primary_category": "epigenomics",
+  "published_at": "2026-11-03",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes RFA, a Hi-C-based accessibility index: anticorrelates with eQTL via distance-decay, no predictive signal for ΔRNA.",
+  "title": "Continuous Topological Accessibility (RFA) as a 3D-Aware GRN Filter: Anticorrelation with eQTL and No Prediction of ΔRNA",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.02.763620"
+}
