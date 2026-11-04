@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { basename, join, resolve } from "node:path";
 import { marked } from "marked";
 import { parse } from "yaml";
 import type { Day, Item, MapData, Topic } from "./types";
@@ -26,17 +26,94 @@ function readRecords<T>(directory: string): T[] {
     .filter((record): record is T => record !== null);
 }
 
+interface DataIndex {
+  days: Day[];
+  daysByDate: Map<string, Day>;
+  topics: Topic[];
+  topicsBySlug: Map<string, Topic>;
+  rankedTopics: Topic[];
+  itemPathById: Map<string, string>;
+  map: MapData | null;
+  notes: Map<string, string | null>;
+  orphanNotes: string[];
+  stats: { builds: number; itemReads: number };
+}
+
+// Astro can evaluate server modules more than once; share immutable build inputs across them.
+// shortcut: inputs are a process-lifetime snapshot; add invalidation if live data reloads are needed.
+const shared = globalThis as typeof globalThis & {
+  trendbioData?: {
+    indexes: Map<string, DataIndex>;
+    notes: Map<string, Map<string, string | null>>;
+    taxonomies: Map<string, Category[]>;
+    builds: Map<string, number>;
+  };
+};
+const cache = shared.trendbioData ??= {
+  indexes: new Map(), notes: new Map(), taxonomies: new Map(), builds: new Map(),
+};
+const notesKey = resolve(NOTES_ROOT);
+const notes = cache.notes.get(notesKey) ?? new Map<string, string | null>();
+cache.notes.set(notesKey, notes);
+
+export function getDataIndex(domain: string): DataIndex {
+  const key = JSON.stringify([resolve(DATA_ROOT, domain), notesKey]);
+  const cached = cache.indexes.get(key);
+  if (cached) return cached;
+  const started = performance.now();
+  const days = readRecords<Day>(join(DATA_ROOT, domain, "days"))
+    .sort((a, b) => b.date.localeCompare(a.date));
+  const topics = readRecords<Topic>(join(DATA_ROOT, domain, "topics"));
+  const topicsBySlug = new Map(topics.map((topic) => [topic.slug, topic]));
+  const ranked = topics.map((topic) => ({
+    topic,
+    lastRanked: topic.history.filter((entry) => entry.rank !== null).map((entry) => entry.date).sort().at(-1),
+  })).filter((entry) => entry.lastRanked !== undefined)
+    .sort((a, b) => b.lastRanked!.localeCompare(a.lastRanked!))
+    .map(({ topic }) => topic);
+  const itemDirectory = join(DATA_ROOT, domain, "items");
+  const itemPathById = new Map<string, string>();
+  if (existsSync(itemDirectory)) {
+    for (const path of readdirSync(itemDirectory, { recursive: true, encoding: "utf8" }).sort()) {
+      if (!path.endsWith(".json")) continue;
+      const id = basename(path, ".json"), fullPath = join(itemDirectory, path);
+      const previous = itemPathById.get(id);
+      // Filename encoding is lossy: disambiguate collisions across shards by their stored IDs once.
+      if (previous) {
+        for (const candidate of [previous, fullPath]) {
+          const item = readJson<Item>(candidate);
+          if (item) itemPathById.set(item.id, candidate);
+        }
+      }
+      itemPathById.set(id, fullPath);
+    }
+  }
+  const orphanNotes = existsSync(NOTES_ROOT) ? readdirSync(NOTES_ROOT, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .map((entry) => entry.name.slice(0, -3))
+    .filter((slug) => !topicsBySlug.has(slug)).sort() : [];
+  const builds = (cache.builds.get(key) ?? 0) + 1;
+  cache.builds.set(key, builds);
+  const index: DataIndex = {
+    days, daysByDate: new Map(days.map((day) => [day.date, day])), topics, topicsBySlug,
+    rankedTopics: ranked, itemPathById, map: readJson<MapData>(join(DATA_ROOT, domain, "map.json")),
+    notes, orphanNotes, stats: { builds, itemReads: 0 },
+  };
+  cache.indexes.set(key, index);
+  console.info(`[data-index] ${domain} built #${builds} in ${(performance.now() - started).toFixed(0)}ms`);
+  return index;
+}
+
 export function loadMap(domain: string): MapData | null {
-  return readJson<MapData>(join(DATA_ROOT, domain, "map.json"));
+  return getDataIndex(domain).map;
 }
 
 export function loadDays(domain: string): Day[] {
-  return readRecords<Day>(join(DATA_ROOT, domain, "days"))
-    .sort((a, b) => b.date.localeCompare(a.date));
+  return getDataIndex(domain).days;
 }
 
 export function loadDay(domain: string, date: string): Day | null {
-  return readJson<Day>(join(DATA_ROOT, domain, "days", `${date}.json`));
+  return getDataIndex(domain).daysByDate.get(date) ?? null;
 }
 
 export function latestDay(domain: string): Day | null {
@@ -44,49 +121,48 @@ export function latestDay(domain: string): Day | null {
 }
 
 export function loadTopic(domain: string, slug: string): Topic | null {
-  return readJson<Topic>(join(DATA_ROOT, domain, "topics", `${slug}.json`));
+  return getDataIndex(domain).topicsBySlug.get(slug) ?? null;
 }
 
 export function allTopics(domain: string): Topic[] {
-  return readRecords<Topic>(join(DATA_ROOT, domain, "topics"));
+  return getDataIndex(domain).topics;
 }
 
 export function rankedTopics(domain: string): Topic[] {
-  return allTopics(domain).map((topic) => ({
-    topic,
-    lastRanked: topic.history.filter((entry) => entry.rank !== null).map((entry) => entry.date).sort().at(-1),
-  })).filter((entry) => entry.lastRanked !== undefined)
-    .sort((a, b) => b.lastRanked!.localeCompare(a.lastRanked!))
-    .map(({ topic }) => topic);
+  return getDataIndex(domain).rankedTopics;
 }
 
 export function loadItems(domain: string, ids: string[]): Item[] {
-  // shortcut: scans the item store per call; index by ID when archive builds become slow.
-  const items = new Map(
-    readRecords<Item>(join(DATA_ROOT, domain, "items")).map((item) => [item.id, item]),
-  );
-  return ids.map((id) => items.get(id)).filter((item): item is Item => item !== undefined);
+  const index = getDataIndex(domain);
+  return ids.map((id) => {
+    // Match pipeline/jsonio.py's filename encoding; sorted paths retain the last shard's copy.
+    const path = index.itemPathById.get(id) ?? index.itemPathById.get(id.replace(/[:/]/g, "_"));
+    if (!path) return null;
+    index.stats.itemReads++;
+    const item = readJson<Item>(path);
+    return item?.id === id ? item : null;
+  }).filter((item): item is Item => item !== null);
 }
 
 export function loadNote(slug: string): string | null {
-  try {
-    return marked.parse(readFileSync(join(NOTES_ROOT, `${slug}.md`), "utf8"), { async: false });
-  } catch {
-    console.warn(`Could not load note: ${slug}`);
-    return null;
+  if (!notes.has(slug)) {
+    try {
+      notes.set(slug, marked.parse(readFileSync(join(NOTES_ROOT, `${slug}.md`), "utf8"), { async: false }));
+    } catch {
+      notes.set(slug, null);
+    }
   }
+  const html = notes.get(slug)!;
+  if (html === null) console.warn(`Could not load note: ${slug}`);
+  return html;
 }
 
 export function orphanNotes(domain: string): string[] {
-  if (!existsSync(NOTES_ROOT)) return [];
-  const slugs = new Set(allTopics(domain).map((topic) => topic.slug));
-  return readdirSync(NOTES_ROOT, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
-    .map((entry) => entry.name.slice(0, -3))
-    .filter((slug) => !slugs.has(slug))
-    .sort();
+  return getDataIndex(domain).orphanNotes;
 }
 
 export function loadTaxonomy(domain: string): Category[] {
-  return parse(readFileSync(join("../config/taxonomy", `${domain}.yaml`), "utf8")).categories;
+  const path = resolve("../config/taxonomy", `${domain}.yaml`);
+  if (!cache.taxonomies.has(path)) cache.taxonomies.set(path, parse(readFileSync(path, "utf8")).categories);
+  return cache.taxonomies.get(path)!;
 }
