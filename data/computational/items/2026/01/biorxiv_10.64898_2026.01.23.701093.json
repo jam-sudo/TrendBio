@@ -1,0 +1,44 @@
+{
+  "abstract": "MotivationThe quality of tandem mass spectra critically determines metabolite identifiability in untargeted metabolomics, yet optimizing MS2 acquisition parameters experimentally is costly, time-consuming, and infeasible across the full diversity of samples and instruments. A key obstacle to computational quality assessment is the absence of reliable negative labels: most MS2 spectra remain unannotated not because they are low quality, but because the corresponding compounds are absent from reference libraries. This label ambiguity fundamentally limits supervised learning approaches and complicates acquisition-time decision making.\n\nResultsWe present a deep learning framework that predicts the probability that an MS2 scan will be identifiable using only the preceding MS1 spectrum and instrument acquisition parameters, without inspecting the MS2 spectrum itself. The problem is formulated as positive-unlabeled learning and addressed using a non-negative positive-unlabeled objective, enabling robust training despite missing negative labels. Trained on over eight million MS2 scans from public Orbitrap metabolomics datasets and evaluated on laboratory-disjoint benchmarks, the model recovered 90% of known identifiable spectra in a held-out test set. Predicted probabilities generalized to unseen laboratories and stratified unlabeled spectra in a physicochemically meaningful manner. Independent validation demonstrated that high predicted quality is associated with increased structural explainability, richer fragmentation patterns, canonical precursor charge states, and reduced spectral interference. These results indicate that MS2 identifiability can be anticipated from precursor context and acquisition settings alone.\n\nAvailability and implementationCode is available at https://github.com/bittremieuxlab/pu_ms2_identifiability. Model weights and processed datasets are available at 10.5281/zenodo.18266932.",
+  "authors": [
+    "Bekbergenova, M.",
+    "Jiang, T.",
+    "NOTHIAS, L.-F.",
+    "Bittremieux, W."
+  ],
+  "doi": "10.64898/2026.01.23.701093",
+  "first_seen": "2026-01-24",
+  "id": "biorxiv:10.64898/2026.01.23.701093",
+  "metadata": {
+    "abstract": "MotivationThe quality of tandem mass spectra critically determines metabolite identifiability in untargeted metabolomics, yet optimizing MS2 acquisition parameters experimentally is costly, time-consuming, and infeasible across the full diversity of samples and instruments. A key obstacle to computational quality assessment is the absence of reliable negative labels: most MS2 spectra remain unannotated not because they are low quality, but because the corresponding compounds are absent from reference libraries. This label ambiguity fundamentally limits supervised learning approaches and complicates acquisition-time decision making.\n\nResultsWe present a deep learning framework that predicts the probability that an MS2 scan will be identifiable using only the preceding MS1 spectrum and instrument acquisition parameters, without inspecting the MS2 spectrum itself. The problem is formulated as positive-unlabeled learning and addressed using a non-negative positive-unlabeled objective, enabling robust training despite missing negative labels. Trained on over eight million MS2 scans from public Orbitrap metabolomics datasets and evaluated on laboratory-disjoint benchmarks, the model recovered 90% of known identifiable spectra in a held-out test set. Predicted probabilities generalized to unseen laboratories and stratified unlabeled spectra in a physicochemically meaningful manner. Independent validation demonstrated that high predicted quality is associated with increased structural explainability, richer fragmentation patterns, canonical precursor charge states, and reduced spectral interference. These results indicate that MS2 identifiability can be anticipated from precursor context and acquisition settings alone.\n\nAvailability and implementationCode is available at https://github.com/bittremieuxlab/pu_ms2_identifiability. Model weights and processed datasets are available at 10.5281/zenodo.18266932.",
+    "author_corresponding": "Wout Bittremieux",
+    "author_corresponding_institution": "University of Antwerp",
+    "authors": "Bekbergenova, M.; Jiang, T.; NOTHIAS, L.-F.; Bittremieux, W.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-24",
+    "doi": "10.64898/2026.01.23.701093",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/24/2026.01.23.701093.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Positive-Unlabeled Learning for Predicting Small Molecule MS2 Identifiability from MS1 Context and Acquisition Parameters",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Antwerp",
+  "preprint_id": null,
+  "primary_category": "metabolomics",
+  "published_at": "2026-01-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Deep PU-learning framework predicts MS2 scan identifiability from preceding MS1 spectra and acquisition parameters alone, trained on 8M+ Orbitrap metabolomics…",
+  "title": "Positive-Unlabeled Learning for Predicting Small Molecule MS2 Identifiability from MS1 Context and Acquisition Parameters",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.23.701093"
+}

@@ -1,0 +1,33 @@
+{
+  "abstract": "Tokenization sits at the boundary between high-throughput genomic input and GPU compute, posing challenges in both algorithm design and system throughput. Overlapping k-mer tokenization can introduce information leakage under masked language modeling (MLM) and may degrade downstream accuracy. Single-nucleotide tokenization avoids leakage and preserves per-base fidelity, but it greatly increases sequence length for attention-based architectures. Non-overlapping k-mers and byte-pair encoding (BPE) provide compression and avoid leakage, at the cost of boundary sensitivity or reduced interpretability. Empirically, the choice of tokenization interacts strongly with model architecture and task requirements. At the system level, however, standard string tokenizers and host-bound vocabulary lookups dominate wall-clock time once inputs reach billions of bases, regardless of the tokenization algorithm. We present DNATok, a high-performance, GPU-first tokenization system that replaces general-purpose string processing with byte lookup table (LUT)-based identifier streaming and an overlapped host-to-device (H2D)/compute pipeline using pinned memory and architectural parallelism. DNATok is vocabulary-agnostic: it accelerates single-nucleotide, non-overlapping k-mer, and BPE tokenization, and integrates as a drop-in systems layer beneath genomic foundation models. DNATok achieves 84-95x higher encoding throughput than optimized Hugging Face baselines and up to 1.9x higher H2D throughput. End-to-end streaming reaches 1.27-1.84e8 tokens/s depending on configuration, effectively removing tokenization as a bottleneck for production-scale training and inference.",
+  "authors": [
+    "Eliatan Niktab",
+    "Hardip Patel"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-09",
+  "id": "arxiv:2601.05531",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.05531v1</ns0:id>\n    <ns0:title>DNATokenizer: A GPU-First Byte-to-Identifier Tokenizer for High-Throughput DNA Language Models</ns0:title>\n    <ns0:updated>2026-01-09T05:08:17Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.05531v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.05531v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Tokenization sits at the boundary between high-throughput genomic input and GPU compute, posing challenges in both algorithm design and system throughput. Overlapping k-mer tokenization can introduce information leakage under masked language modeling (MLM) and may degrade downstream accuracy. Single-nucleotide tokenization avoids leakage and preserves per-base fidelity, but it greatly increases sequence length for attention-based architectures. Non-overlapping k-mers and byte-pair encoding (BPE) provide compression and avoid leakage, at the cost of boundary sensitivity or reduced interpretability. Empirically, the choice of tokenization interacts strongly with model architecture and task requirements. At the system level, however, standard string tokenizers and host-bound vocabulary lookups dominate wall-clock time once inputs reach billions of bases, regardless of the tokenization algorithm. We present DNATok, a high-performance, GPU-first tokenization system that replaces general-purpose string processing with byte lookup table (LUT)-based identifier streaming and an overlapped host-to-device (H2D)/compute pipeline using pinned memory and architectural parallelism. DNATok is vocabulary-agnostic: it accelerates single-nucleotide, non-overlapping k-mer, and BPE tokenization, and integrates as a drop-in systems layer beneath genomic foundation models. DNATok achieves 84-95x higher encoding throughput than optimized Hugging Face baselines and up to 1.9x higher H2D throughput. End-to-end streaming reaches 1.27-1.84e8 tokens/s depending on configuration, effectively removing tokenization as a bottleneck for production-scale training and inference.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-09T05:08:17Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Eliatan Niktab</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hardip Patel</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-01-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "genomics"
+  ],
+  "source": "arxiv",
+  "summary": "DNATok is a GPU-first, LUT-based tokenization system for DNA language models that streams identifiers and overlaps H2D transfer with compute, reporting 84-95x…",
+  "title": "DNATokenizer: A GPU-First Byte-to-Identifier Tokenizer for High-Throughput DNA Language Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.05531v1"
+}

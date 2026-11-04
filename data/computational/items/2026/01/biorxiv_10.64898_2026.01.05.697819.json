@@ -1,0 +1,47 @@
+{
+  "abstract": "Reliable identification of allosteric binding sites remains a major bottleneck in structure-based drug discovery, particularly in protein kinase families where such sites are often structurally cryptic, evolutionarily non-conserved, and sparsely populated. In this work, we present a systematic analysis of binding site prediction across a rigorously curated dataset of human kinase-ligand complexes, encompassing 453 kinases and spanning five inhibitor classes: Type I, Type I.5, and Type II (orthosteric ATP-competitive) and Type III/IV (non-ATP allosteric) modulators. We employed the pretrained protein language model (PLM) ESM2-650M model that was fine-tuned for prediction of protein-ligand binding sites by replacing the original masked language modeling head with a token-level classification head that acts as a projection layer that maps the high-dimensional latent representation of each residue to a scalar probability score for a given protein residue to be part of the binding site. We employed this fine-tuned sequence-based PLM and structure-based detection approach P2Rank for identification of orthosteric and allosteric binding sites in protein kinases. Our analysis reveals a stark performance divergence: while both methods achieve high precision-recall (AUPR = 0.64-0.76) on orthosteric sites, PLM performance collapses on allosteric sites (AUPR = 0.06), despite retaining moderate ranking ability (AUROC = 0.70). This deficit persists even after strict control for sequence similarity, structural redundancy, and extreme class imbalance (allosteric residues constitute <3% of the kinase domain). To mechanistically interpret this discrepancy, we integrate large-scale local frustration analysis, a physics-based framework derived from energy landscape theory that quantifies the energetic stability of residue-residue interactions under mutational and conformational perturbations. We find that, although the global frustration landscape is conserved across kinase states dominated by neutral frustration (55-75% of residues), local binding sites exhibit fundamentally distinct mutational constraints. Orthosteric pockets are enriched in minimally frustrated residues, whereas allosteric sites are characterized by neutral mutational frustration, indicating evolutionary permissiveness and sequence degeneracy. This study reframes the performance of AI approaches in predicting protein binding sites as a reflection of functional design that can be rationalized through lens of the landscape-encoded protein frustration as an explainable AI framework.",
+  "authors": [
+    "Riedlova, K.",
+    "Skrhak, V.",
+    "Gatlin, W.",
+    "Ludwick, M.",
+    "Turano, L.",
+    "Novotny, M.",
+    "Hoksza, D.",
+    "Verkhivker, G."
+  ],
+  "doi": "10.64898/2026.01.05.697819",
+  "first_seen": "2026-01-06",
+  "id": "biorxiv:10.64898/2026.01.05.697819",
+  "metadata": {
+    "abstract": "Reliable identification of allosteric binding sites remains a major bottleneck in structure-based drug discovery, particularly in protein kinase families where such sites are often structurally cryptic, evolutionarily non-conserved, and sparsely populated. In this work, we present a systematic analysis of binding site prediction across a rigorously curated dataset of human kinase-ligand complexes, encompassing 453 kinases and spanning five inhibitor classes: Type I, Type I.5, and Type II (orthosteric ATP-competitive) and Type III/IV (non-ATP allosteric) modulators. We employed the pretrained protein language model (PLM) ESM2-650M model that was fine-tuned for prediction of protein-ligand binding sites by replacing the original masked language modeling head with a token-level classification head that acts as a projection layer that maps the high-dimensional latent representation of each residue to a scalar probability score for a given protein residue to be part of the binding site. We employed this fine-tuned sequence-based PLM and structure-based detection approach P2Rank for identification of orthosteric and allosteric binding sites in protein kinases. Our analysis reveals a stark performance divergence: while both methods achieve high precision-recall (AUPR = 0.64-0.76) on orthosteric sites, PLM performance collapses on allosteric sites (AUPR = 0.06), despite retaining moderate ranking ability (AUROC = 0.70). This deficit persists even after strict control for sequence similarity, structural redundancy, and extreme class imbalance (allosteric residues constitute <3% of the kinase domain). To mechanistically interpret this discrepancy, we integrate large-scale local frustration analysis, a physics-based framework derived from energy landscape theory that quantifies the energetic stability of residue-residue interactions under mutational and conformational perturbations. We find that, although the global frustration landscape is conserved across kinase states dominated by neutral frustration (55-75% of residues), local binding sites exhibit fundamentally distinct mutational constraints. Orthosteric pockets are enriched in minimally frustrated residues, whereas allosteric sites are characterized by neutral mutational frustration, indicating evolutionary permissiveness and sequence degeneracy. This study reframes the performance of AI approaches in predicting protein binding sites as a reflection of functional design that can be rationalized through lens of the landscape-encoded protein frustration as an explainable AI framework.",
+    "author_corresponding": "Gennady Verkhivker",
+    "author_corresponding_institution": "Chapman University School of Pharmacy",
+    "authors": "Riedlova, K.; Skrhak, V.; Gatlin, W.; Ludwick, M.; Turano, L.; Novotny, M.; Hoksza, D.; Verkhivker, G.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-01-06",
+    "doi": "10.64898/2026.01.05.697819",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/06/2026.01.05.697819.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Protein Language Models and Structure-Based Machine Learning for Prediction of Allosteric Binding Sites in Protein Kinases: An Explainable AI Framework Grounded in Energy Landscape-Encoded Frustration",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Chapman University School of Pharmacy",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-01-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Fine-tuned ESM2 and P2Rank predict kinase binding sites; PLM fails on allosteric sites (AUPR 0.06), linked to frustration.",
+  "title": "Protein Language Models and Structure-Based Machine Learning for Prediction of Allosteric Binding Sites in Protein Kinases: An Explainable AI Framework Grounded in Energy Landscape-Encoded Frustration",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.05.697819"
+}

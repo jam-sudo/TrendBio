@@ -1,0 +1,42 @@
+{
+  "abstract": "MotivationPrioritization of transcription factor (TF)-target relationships predicted by computational models for experimental validation often requires biologists to manually inspect heterogeneous and context-dependent evidence scattered across the biomedical literature. Large Language Models (LLMs) offer a promising solution to streamline this task. However, their reliance on general-purpose knowledge may lead to hallucinations and inaccurate interpretations.\n\nResultsWe present RAGulate, a retrieval-augmented generation (RAG) framework for literature-grounded assessment of transcriptional regulation. RAGulate leverages CollecTRI, an external regulatory knowledge base, and integrates alias-aware query expansion, sparse and dense retrieval, maximum-marginal-relevance re-ranking, and LLM-based classification of predictions within a modular pipeline. Using a balanced TF-target-context benchmark from the same resource, we evaluate retrieval, classification, and evidence faithfulness. While CollecTRI provides TF-target links with supporting PubMed Identifiers (PMIDs), RAGulate infers the context of each interaction from the retrieved literature. Results show that alias normalization markedly improves retrieval recall, while hybrid retrieval, which merges lexical and embedding-based candidates, achieves the highest evidence recovery across all cut-offs. Conditioning LLMs on retrieved documents consistently improves AUROC and AUPR for classifying whether a TF-target interaction is supported in the specified context compared with direct prompting. RAGulate reduces hallucinations and improves PMID-level citation correctness, producing explanations that faithfully reflect the supporting literature. RAGulate represents a knowledge-based AI tool that partners with biologists to accelerate the process of TF-target prioritization for experimental validation and foster hypothesis generation.\n\nAvailability and implementationThe software and tutorials are available at github.com/YDaiLab/RAGulate.",
+  "authors": [
+    "Zandigohar, M.",
+    "Dai, Y."
+  ],
+  "doi": "10.64898/2026.01.20.700704",
+  "first_seen": "2026-01-21",
+  "id": "biorxiv:10.64898/2026.01.20.700704",
+  "metadata": {
+    "abstract": "MotivationPrioritization of transcription factor (TF)-target relationships predicted by computational models for experimental validation often requires biologists to manually inspect heterogeneous and context-dependent evidence scattered across the biomedical literature. Large Language Models (LLMs) offer a promising solution to streamline this task. However, their reliance on general-purpose knowledge may lead to hallucinations and inaccurate interpretations.\n\nResultsWe present RAGulate, a retrieval-augmented generation (RAG) framework for literature-grounded assessment of transcriptional regulation. RAGulate leverages CollecTRI, an external regulatory knowledge base, and integrates alias-aware query expansion, sparse and dense retrieval, maximum-marginal-relevance re-ranking, and LLM-based classification of predictions within a modular pipeline. Using a balanced TF-target-context benchmark from the same resource, we evaluate retrieval, classification, and evidence faithfulness. While CollecTRI provides TF-target links with supporting PubMed Identifiers (PMIDs), RAGulate infers the context of each interaction from the retrieved literature. Results show that alias normalization markedly improves retrieval recall, while hybrid retrieval, which merges lexical and embedding-based candidates, achieves the highest evidence recovery across all cut-offs. Conditioning LLMs on retrieved documents consistently improves AUROC and AUPR for classifying whether a TF-target interaction is supported in the specified context compared with direct prompting. RAGulate reduces hallucinations and improves PMID-level citation correctness, producing explanations that faithfully reflect the supporting literature. RAGulate represents a knowledge-based AI tool that partners with biologists to accelerate the process of TF-target prioritization for experimental validation and foster hypothesis generation.\n\nAvailability and implementationThe software and tutorials are available at github.com/YDaiLab/RAGulate.",
+    "author_corresponding": "Yang Dai",
+    "author_corresponding_institution": "University of Illinois Chicago",
+    "authors": "Zandigohar, M.; Dai, Y.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-21",
+    "doi": "10.64898/2026.01.20.700704",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/21/2026.01.20.700704.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RAGulate: Retrieval-Augmented Generation for Post-hoc Literature-Grounded Regulatory Assessment",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Illinois Chicago",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-21",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "RAGulate: a retrieval-augmented LLM framework using CollecTRI and PubMed evidence to assess TF-target regulatory predictions in context, with reduced…",
+  "title": "RAGulate: Retrieval-Augmented Generation for Post-hoc Literature-Grounded Regulatory Assessment",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.20.700704"
+}

@@ -1,0 +1,35 @@
+{
+  "abstract": "Diffusion models have emerged as a powerful class of generative models for molecular design, capable of capturing complex structural distributions and achieving high fidelity in 3D molecule generation. However, their widespread use remains constrained by long sampling trajectories, stochastic variance in the reverse process, and limited structural awareness in denoising dynamics. The Directly Denoising Diffusion Model (DDDM) mitigates these inefficiencies by replacing stochastic reverse MCMC updates with deterministic denoising step, substantially reducing inference time. Yet, the theoretical underpinnings of such deterministic updates have remained opaque. In this work, we provide a principled reinterpretation of DDDM through the lens of the Reverse Transition Kernel (RTK) framework by Huang et al. 2024, unifying deterministic and stochastic diffusion under a shared probabilistic formalism. By expressing the DDDM reverse process as an approximate kernel operator, we show that the direct denoising process implicitly optimizes a structured transport map between noisy and clean samples. This perspective elucidates why deterministic denoising achieves efficient inference. Beyond theoretical clarity, this reframing resolves several long-standing bottlenecks in molecular diffusion. The RTK view ensures numerical stability by enforcing well-conditioned reverse kernels, improves sample consistency by eliminating stochastic variance, and enables scalable and symmetry-preserving denoisers that respect SE(3) equivariance. Empirically, we demonstrate that RTK-guided deterministic denoising achieves faster convergence and higher structural fidelity than stochastic diffusion models, while preserving chemical validity across GEOM-DRUGS dataset. Code, models, and datasets are publicly available in our project repository.",
+  "authors": [
+    "Adrita Das",
+    "Peiran Jiang",
+    "Dantong Zhu",
+    "Barnabas Poczos",
+    "Jose Lugo-Martinez"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-13",
+  "id": "arxiv:2601.08963",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.08963v1</ns0:id>\n    <ns0:title>Breaking the Bottlenecks: Scalable Diffusion Models for 3D Molecular Generation</ns0:title>\n    <ns0:updated>2026-01-13T20:09:44Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.08963v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.08963v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Diffusion models have emerged as a powerful class of generative models for molecular design, capable of capturing complex structural distributions and achieving high fidelity in 3D molecule generation. However, their widespread use remains constrained by long sampling trajectories, stochastic variance in the reverse process, and limited structural awareness in denoising dynamics. The Directly Denoising Diffusion Model (DDDM) mitigates these inefficiencies by replacing stochastic reverse MCMC updates with deterministic denoising step, substantially reducing inference time. Yet, the theoretical underpinnings of such deterministic updates have remained opaque. In this work, we provide a principled reinterpretation of DDDM through the lens of the Reverse Transition Kernel (RTK) framework by Huang et al. 2024, unifying deterministic and stochastic diffusion under a shared probabilistic formalism. By expressing the DDDM reverse process as an approximate kernel operator, we show that the direct denoising process implicitly optimizes a structured transport map between noisy and clean samples. This perspective elucidates why deterministic denoising achieves efficient inference. Beyond theoretical clarity, this reframing resolves several long-standing bottlenecks in molecular diffusion. The RTK view ensures numerical stability by enforcing well-conditioned reverse kernels, improves sample consistency by eliminating stochastic variance, and enables scalable and symmetry-preserving denoisers that respect SE(3) equivariance. Empirically, we demonstrate that RTK-guided deterministic denoising achieves faster convergence and higher structural fidelity than stochastic diffusion models, while preserving chemical validity across GEOM-DRUGS dataset. Code, models, and datasets are publicly available in our project repository.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-13T20:09:44Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Adrita Das</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peiran Jiang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dantong Zhu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Barnabas Poczos</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jose Lugo-Martinez</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Reinterprets the Directly Denoising Diffusion Model (DDDM) via a Reverse Transition Kernel framework, showing deterministic denoising optimizes a transport map…",
+  "title": "Breaking the Bottlenecks: Scalable Diffusion Models for 3D Molecular Generation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.08963v1"
+}

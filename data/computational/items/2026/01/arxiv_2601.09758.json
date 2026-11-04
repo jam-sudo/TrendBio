@@ -1,0 +1,34 @@
+{
+  "abstract": "Batch effects represent a major confounder in genomic diagnostics. In copy number variant (CNV) detection from NGS, many algorithms compare read depth between test samples and a reference sample, assuming they are process-matched. When this assumption is violated, with causes ranging from reagent lot changes to multi-site processing, the reference becomes inappropriate, introducing false CNV calls or masking true pathogenic variants. Detecting such heterogeneity before downstream analysis is critical for reliable clinical interpretation. Existing batch effect detection methods either cluster samples based on raw features, risking conflation of biological signal with technical variation, or require known batch labels that are frequently unavailable. We introduce a method that addresses both limitations by clustering samples according to their Bayesian model evidence. The central insight is that evidence quantifies compatibility between data and model assumptions, technical artifacts violate assumptions and reduce evidence, whereas biological variation, including CNV status, is anticipated by the model and yields high evidence. This asymmetry provides a discriminative signal that separates batch effects from biology. We formalize heterogeneity detection as a likelihood ratio test for mixture structure in evidence space, using parametric bootstrap calibration to ensure conservative false positive rates. We validate our approach on synthetic data demonstrating proper Type I error control, three clinical targeted sequencing panels (liquid biopsy, BRCA, and thalassemia) exhibiting distinct batch effect mechanisms, and mouse electrophysiology recordings demonstrating cross-modality generalization. Our method achieves superior clustering accuracy compared to standard correlation-based and dimensionality-reduction approaches while maintaining the conservativeness required for clinical usage.",
+  "authors": [
+    "Austin Talbot",
+    "Yue Ke"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-14",
+  "id": "arxiv:2601.09758",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.GN",
+    "categories": [
+      "q-bio.GN",
+      "cs.LG",
+      "stat.ME",
+      "stat.ML"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.09758v1</ns0:id>\n    <ns0:title>Detecting Batch Heterogeneity via Likelihood Clustering</ns0:title>\n    <ns0:updated>2026-01-14T01:49:21Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.09758v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.09758v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Batch effects represent a major confounder in genomic diagnostics. In copy number variant (CNV) detection from NGS, many algorithms compare read depth between test samples and a reference sample, assuming they are process-matched. When this assumption is violated, with causes ranging from reagent lot changes to multi-site processing, the reference becomes inappropriate, introducing false CNV calls or masking true pathogenic variants. Detecting such heterogeneity before downstream analysis is critical for reliable clinical interpretation. Existing batch effect detection methods either cluster samples based on raw features, risking conflation of biological signal with technical variation, or require known batch labels that are frequently unavailable. We introduce a method that addresses both limitations by clustering samples according to their Bayesian model evidence. The central insight is that evidence quantifies compatibility between data and model assumptions, technical artifacts violate assumptions and reduce evidence, whereas biological variation, including CNV status, is anticipated by the model and yields high evidence. This asymmetry provides a discriminative signal that separates batch effects from biology. We formalize heterogeneity detection as a likelihood ratio test for mixture structure in evidence space, using parametric bootstrap calibration to ensure conservative false positive rates. We validate our approach on synthetic data demonstrating proper Type I error control, three clinical targeted sequencing panels (liquid biopsy, BRCA, and thalassemia) exhibiting distinct batch effect mechanisms, and mouse electrophysiology recordings demonstrating cross-modality generalization. Our method achieves superior clustering accuracy compared to standard correlation-based and dimensionality-reduction approaches while maintaining the conservativeness required for clinical usage.</ns0:summary>\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ME\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"stat.ML\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-14T01:49:21Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.GN\" />\n    <ns0:author>\n      <ns0:name>Austin Talbot</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yue Ke</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-01-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes a likelihood-based clustering method that detects batch heterogeneity in NGS CNV analysis by grouping samples on Bayesian model evidence, with…",
+  "title": "Detecting Batch Heterogeneity via Likelihood Clustering",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.09758v1"
+}

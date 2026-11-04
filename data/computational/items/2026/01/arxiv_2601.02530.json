@@ -1,0 +1,34 @@
+{
+  "abstract": "We present Connection-Aware Motif Sequencing (CamS), a graph-to-sequence representation that enables decoder-only Transformers to learn molecular graphs via standard next-token prediction (NTP). For molecular property prediction, SMILES-based NTP scales well but lacks explicit topology, whereas graph-native masked modeling captures connectivity but risks disrupting the pivotal chemical details (e.g., activity cliffs). CamS bridges this gap by serializing molecular graphs into structure-rich causal sequences. CamS first mines data-driven connection-aware motifs. It then serializes motifs via scaffold-rooted breadth-first search (BFS) to establish a stable core-to-periphery order. Crucially, CamS enables hierarchical modeling by concatenating sequences from fine to coarse motif scales, allowing the model to condition global scaffolds on dense, uncorrupted local structural evidence. We instantiate CamS-LLaMA by pre-training a vanilla LLaMA backbone on CamS sequences. It achieves state-of-the-art performance on MoleculeNet and the activity-cliff benchmark MoleculeACE, outperforming both SMILES-based language models and strong graph baselines. Interpretability analysis confirms that our multi-scale causal serialization effectively drives attention toward cliff-determining differences.",
+  "authors": [
+    "Zhuoyang Jiang",
+    "Yaosen Min",
+    "Peiran Jin",
+    "Lei Chen"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-05",
+  "id": "arxiv:2601.02530",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.02530v3</ns0:id>\n    <ns0:title>Multi-scale Graph Autoregressive Modeling: Molecular Property Prediction via Next Token Prediction</ns0:title>\n    <ns0:updated>2026-01-23T16:49:47Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.02530v3\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.02530v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We present Connection-Aware Motif Sequencing (CamS), a graph-to-sequence representation that enables decoder-only Transformers to learn molecular graphs via standard next-token prediction (NTP). For molecular property prediction, SMILES-based NTP scales well but lacks explicit topology, whereas graph-native masked modeling captures connectivity but risks disrupting the pivotal chemical details (e.g., activity cliffs). CamS bridges this gap by serializing molecular graphs into structure-rich causal sequences. CamS first mines data-driven connection-aware motifs. It then serializes motifs via scaffold-rooted breadth-first search (BFS) to establish a stable core-to-periphery order. Crucially, CamS enables hierarchical modeling by concatenating sequences from fine to coarse motif scales, allowing the model to condition global scaffolds on dense, uncorrupted local structural evidence. We instantiate CamS-LLaMA by pre-training a vanilla LLaMA backbone on CamS sequences. It achieves state-of-the-art performance on MoleculeNet and the activity-cliff benchmark MoleculeACE, outperforming both SMILES-based language models and strong graph baselines. Interpretability analysis confirms that our multi-scale causal serialization effectively drives attention toward cliff-determining differences.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-05T20:06:11Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Zhuoyang Jiang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yaosen Min</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peiran Jin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lei Chen</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "CamS serializes molecular graphs into motif-based causal sequences so decoder-only LLaMA models can learn properties via next-token prediction, reaching SOTA…",
+  "title": "Multi-scale Graph Autoregressive Modeling: Molecular Property Prediction via Next Token Prediction",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.02530v3"
+}

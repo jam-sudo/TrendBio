@@ -1,0 +1,45 @@
+{
+  "abstract": "Studying microtubules (MTs) and their mechanical properties is central to understanding intracellular transport, cell division, and drug action. While important, experts still need to spend many hours manually segmenting these filamentous structures. The suitability of state-of-the-art methods for this task cannot be systematically assessed, as large-scale labeled datasets are missing. We address this gap by presenting the synthetic dataset SynthMT, produced by tuning a novel image generation pipeline on real-world interference reflection microscopy (IRM) frames of in vitro reconstituted MTs without requiring human annotations. In our benchmark, we evaluate nine fully automated methods for MT analysis in both zero- and Hyperparameter Optimization (HPO)-based few-shot settings. Across both settings, classical algorithms and current foundation models still struggle to achieve the accuracy required for biological downstream analysis on in vitro MT IRM images that humans perceive as visually simple. However, a notable exception is the recently introduced SAM3 model. After HPO on only ten random SynthMT images, its text-prompted version SAM3Text achieves near-perfect and in some cases super-human performance on unseen, real data. This indicates that fully automated MT segmentation has become feasible when method configuration is effectively guided by synthetic data. To enable progress, we publicly release the dataset, the generation pipeline, and the evaluation framework at DATEXIS.github.io/SynthMT-project-page.\n\nAuthor summaryUnderstanding the behavior of microtubules -- stiff filaments inside cells -- is essential for studying fundamental cell biological processes and for developing therapies for diseases such as cancer and neurodegenerative conditions. Yet, analyzing microtubule images is slow and labor-intensive, as researchers must manually trace these thin, overlapping filaments, which can take hours and is prone to errors. We therefore asked whether current fully automated segmentation methods are ready to replace manual microtubule analysis, and how synthetic data can be used to rigorously evaluate and improve them.\n\nTo address these questions, we created a synthetic dataset that mimics real microtubule images by capturing the appearance and variability of real microscopy. Importantly, this dataset can be generated without any manual annotations. Using this dataset, we evaluated a range of segmentation methods and found that most of them struggled to accurately identify filaments. However, we discovered that a recent foundation model, when guided by a simple text instruction and tuned on only a few synthetic images, can achieve near-perfect, human-level performance on previously unseen real microtubule imaging data.\n\nOur work demonstrates that fully automated microtubule analysis is now possible and provides a reproducible framework that other researchers can use to evaluate and improve their methods. This opens the door to faster, more consistent studies of microtubules, ultimately accelerating discoveries in cell biology and therapeutic research.",
+  "authors": [
+    "Koddenbrock, M.",
+    "Westerhoff, J.",
+    "Fachet, D.",
+    "Reber, S.",
+    "Gers, F.",
+    "Rodner, E."
+  ],
+  "doi": "10.64898/2026.01.09.698597",
+  "first_seen": "2026-01-09",
+  "id": "biorxiv:10.64898/2026.01.09.698597",
+  "metadata": {
+    "abstract": "Studying microtubules (MTs) and their mechanical properties is central to understanding intracellular transport, cell division, and drug action. While important, experts still need to spend many hours manually segmenting these filamentous structures. The suitability of state-of-the-art methods for this task cannot be systematically assessed, as large-scale labeled datasets are missing. We address this gap by presenting the synthetic dataset SynthMT, produced by tuning a novel image generation pipeline on real-world interference reflection microscopy (IRM) frames of in vitro reconstituted MTs without requiring human annotations. In our benchmark, we evaluate nine fully automated methods for MT analysis in both zero- and Hyperparameter Optimization (HPO)-based few-shot settings. Across both settings, classical algorithms and current foundation models still struggle to achieve the accuracy required for biological downstream analysis on in vitro MT IRM images that humans perceive as visually simple. However, a notable exception is the recently introduced SAM3 model. After HPO on only ten random SynthMT images, its text-prompted version SAM3Text achieves near-perfect and in some cases super-human performance on unseen, real data. This indicates that fully automated MT segmentation has become feasible when method configuration is effectively guided by synthetic data. To enable progress, we publicly release the dataset, the generation pipeline, and the evaluation framework at DATEXIS.github.io/SynthMT-project-page.\n\nAuthor summaryUnderstanding the behavior of microtubules -- stiff filaments inside cells -- is essential for studying fundamental cell biological processes and for developing therapies for diseases such as cancer and neurodegenerative conditions. Yet, analyzing microtubule images is slow and labor-intensive, as researchers must manually trace these thin, overlapping filaments, which can take hours and is prone to errors. We therefore asked whether current fully automated segmentation methods are ready to replace manual microtubule analysis, and how synthetic data can be used to rigorously evaluate and improve them.\n\nTo address these questions, we created a synthetic dataset that mimics real microtubule images by capturing the appearance and variability of real microscopy. Importantly, this dataset can be generated without any manual annotations. Using this dataset, we evaluated a range of segmentation methods and found that most of them struggled to accurately identify filaments. However, we discovered that a recent foundation model, when guided by a simple text instruction and tuned on only a few synthetic images, can achieve near-perfect, human-level performance on previously unseen real microtubule imaging data.\n\nOur work demonstrates that fully automated microtubule analysis is now possible and provides a reproducible framework that other researchers can use to evaluate and improve their methods. This opens the door to faster, more consistent studies of microtubules, ultimately accelerating discoveries in cell biology and therapeutic research.",
+    "author_corresponding": "Mario Koddenbrock",
+    "author_corresponding_institution": "HTW Berlin University of Applied Sciences",
+    "authors": "Koddenbrock, M.; Westerhoff, J.; Fachet, D.; Reber, S.; Gers, F.; Rodner, E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-09",
+    "doi": "10.64898/2026.01.09.698597",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/09/2026.01.09.698597.source.xml",
+    "license": "cc_by",
+    "published": "10.1371/journal.pcbi.1013901",
+    "server": "bioRxiv",
+    "title": "Synthetic data enables human-grade microtubule analysis with foundation models for segmentation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "HTW Berlin University of Applied Sciences",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-09",
+  "published_doi": "10.1371/journal.pcbi.1013901",
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Synthetic SynthMT dataset and pipeline benchmark nine microtubule segmentation methods on IRM images; SAM3Text after tuning on synthetic data reaches…",
+  "title": "Synthetic data enables human-grade microtubule analysis with foundation models for segmentation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.09.698597"
+}

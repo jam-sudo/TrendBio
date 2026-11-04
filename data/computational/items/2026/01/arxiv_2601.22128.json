@@ -1,0 +1,39 @@
+{
+  "abstract": "Large language models (LLMs) trained with next-word-prediction have achieved success as clinical foundation models. Representations from these language backbones yield strong linear probe performance across biomedical tasks, suggesting that patient semantics emerge from next-token prediction at scale. However, this paradigm treats patients as a document to be summarized rather than a dynamical system to be simulated; a patient's trajectory emerges from their state evolving under interventions and time, requiring models that simulate dynamics rather than predict tokens. To address this, we introduce SMB-Structure, a world model for structured EHR that grounds a joint-embedding prediction architecture (JEPA) with next-token prediction (SFT). SFT grounds our model to reconstruct future patient states in token space, while JEPA predicts those futures in latent space from the initial patient representation alone, forcing trajectory dynamics to be encoded before the next state is observed. We validate across two large-scale cohorts: Memorial Sloan Kettering (23,319 oncology patients; 323,000+ patient-years) and INSPECT (19,402 pulmonary embolism patients). Using a linear probe evaluated at multiple points along the disease trajectory, we demonstrate that our training paradigm learns embeddings that capture disease dynamics not recoverable by autoregressive baselines, enabling SMB-Structure to achieve competitive performance on complex tasks characterized by high patient heterogeneity. Model weights are available at https://huggingface.co/standardmodelbio/SMB-v1-1.7B-Structure.",
+  "authors": [
+    "Irsyad Adam",
+    "Zekai Chen",
+    "David Laprade",
+    "Shaun Porwal",
+    "David Laub",
+    "Erik Reinertsen",
+    "Arda Pekis",
+    "Kevin Brown"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-29",
+  "id": "arxiv:2601.22128",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "cs.CE",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.22128v1</ns0:id>\n    <ns0:title>The Patient is not a Moving Document: A World Model Training Paradigm for Longitudinal EHR</ns0:title>\n    <ns0:updated>2026-01-29T18:49:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.22128v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.22128v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Large language models (LLMs) trained with next-word-prediction have achieved success as clinical foundation models. Representations from these language backbones yield strong linear probe performance across biomedical tasks, suggesting that patient semantics emerge from next-token prediction at scale. However, this paradigm treats patients as a document to be summarized rather than a dynamical system to be simulated; a patient's trajectory emerges from their state evolving under interventions and time, requiring models that simulate dynamics rather than predict tokens. To address this, we introduce SMB-Structure, a world model for structured EHR that grounds a joint-embedding prediction architecture (JEPA) with next-token prediction (SFT). SFT grounds our model to reconstruct future patient states in token space, while JEPA predicts those futures in latent space from the initial patient representation alone, forcing trajectory dynamics to be encoded before the next state is observed. We validate across two large-scale cohorts: Memorial Sloan Kettering (23,319 oncology patients; 323,000+ patient-years) and INSPECT (19,402 pulmonary embolism patients). Using a linear probe evaluated at multiple points along the disease trajectory, we demonstrate that our training paradigm learns embeddings that capture disease dynamics not recoverable by autoregressive baselines, enabling SMB-Structure to achieve competitive performance on complex tasks characterized by high patient heterogeneity. Model weights are available at https://huggingface.co/standardmodelbio/SMB-v1-1.7B-Structure.</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-29T18:49:37Z</ns0:published>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Irsyad Adam</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zekai Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>David Laprade</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shaun Porwal</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>David Laub</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Erik Reinertsen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Arda Pekis</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kevin Brown</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "industry"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes SMB-Structure, a JEPA-plus-next-token world model for longitudinal structured EHR that predicts latent patient trajectories; validated on MSK oncology…",
+  "title": "The Patient is not a Moving Document: A World Model Training Paradigm for Longitudinal EHR",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.22128v1"
+}

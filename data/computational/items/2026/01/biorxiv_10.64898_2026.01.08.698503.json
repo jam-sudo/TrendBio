@@ -1,0 +1,45 @@
+{
+  "abstract": "MotivationMost imaging-based spatial transcriptomics methods measure individual genes, which limits scalability and typically requires integration with scRNA-seq to recover full cellular states. Recent approaches such as CISI, FISHnCHIPs, and ATLAS address this limitation by measuring aggregate transcriptional signatures, where multiple genes are pooled into each channel to increase throughput. While aggregate measurements improve scalability, they shift the problem from gene selection to feature design. For effective integration with scRNA-seq, these signatures must be not only discriminative in transcriptional space but also straightforward to measure, with balanced signal, sufficient dynamic range, and robustness to experimental noise. By optimizing decoding accuracy in isolation, existing methods leave substantial performance on the table.\n\nResultsWe present CIPHER (Cell Identity Projection using Hybridization Encoding Rules), a neural-network framework that jointly optimizes the experimental encoding matrix, i.e., the way that genes are aggregated to signatures, and the downstream cell embedding. CIPHER integrates the physical limits of imaging assays directly into its loss function, shaping the latent space to maximize discriminability while maintaining robustness to measurement noise and signal constraints. Using a large-scale mouse brain scRNA-seq reference, we show that CIPHER-designed encodings yield latent spaces with improved cell-type separability, uniform signal utilization, and greater resilience to hybridization variability, resulting in higher decoding accuracy from both simulated and experimental data.\n\nConclusionCIPHER formulates aggregate signature design as a joint optimization problem over decoding accuracy and experimental measurability. This enables systematic, scRNA-seq-aligned feature design for scalable spatial transcriptomics based on aggregate measurements.\n\nAvailabilityCode and documentation are available at https://github.com/wollmanlab/Design/.\n\nAuthor summarySpatial transcriptomics reveals how cells are organized within tissues by mapping where genes are expressed. To achieve both scale and resolution, many approaches now combine spatial imaging with single-cell RNA-seq references to reconstruct complete transcriptomes in situ. New methods such as CISI, FISHnCHIPs, and ATLAS accelerate this process by measuring combinations of co-expressed genes rather than each gene individually. These aggregate measurements simplify experiments but introduce a new challenge: deciding which genes to combine so that the resulting features are both experimentally reliable and computationally informative for integration with scRNA-seq data. We developed CIPHER, a computational framework that learns how to design and decode these aggregate measurements optimally. By integrating experimental constraints and decoding accuracy into a unified neural-network model, CIPHER provides a principled approach for designing signature-based spatial transcriptomics experiments that enable efficient and accurate reconstruction of cellular transcriptomes.",
+  "authors": [
+    "Hemminger, Z.",
+    "De Ocampo, H.",
+    "Xie, F.",
+    "Zhai, Z.",
+    "Li, J. J.",
+    "Wollman, R."
+  ],
+  "doi": "10.64898/2026.01.08.698503",
+  "first_seen": "2026-01-09",
+  "id": "biorxiv:10.64898/2026.01.08.698503",
+  "metadata": {
+    "abstract": "MotivationMost imaging-based spatial transcriptomics methods measure individual genes, which limits scalability and typically requires integration with scRNA-seq to recover full cellular states. Recent approaches such as CISI, FISHnCHIPs, and ATLAS address this limitation by measuring aggregate transcriptional signatures, where multiple genes are pooled into each channel to increase throughput. While aggregate measurements improve scalability, they shift the problem from gene selection to feature design. For effective integration with scRNA-seq, these signatures must be not only discriminative in transcriptional space but also straightforward to measure, with balanced signal, sufficient dynamic range, and robustness to experimental noise. By optimizing decoding accuracy in isolation, existing methods leave substantial performance on the table.\n\nResultsWe present CIPHER (Cell Identity Projection using Hybridization Encoding Rules), a neural-network framework that jointly optimizes the experimental encoding matrix, i.e., the way that genes are aggregated to signatures, and the downstream cell embedding. CIPHER integrates the physical limits of imaging assays directly into its loss function, shaping the latent space to maximize discriminability while maintaining robustness to measurement noise and signal constraints. Using a large-scale mouse brain scRNA-seq reference, we show that CIPHER-designed encodings yield latent spaces with improved cell-type separability, uniform signal utilization, and greater resilience to hybridization variability, resulting in higher decoding accuracy from both simulated and experimental data.\n\nConclusionCIPHER formulates aggregate signature design as a joint optimization problem over decoding accuracy and experimental measurability. This enables systematic, scRNA-seq-aligned feature design for scalable spatial transcriptomics based on aggregate measurements.\n\nAvailabilityCode and documentation are available at https://github.com/wollmanlab/Design/.\n\nAuthor summarySpatial transcriptomics reveals how cells are organized within tissues by mapping where genes are expressed. To achieve both scale and resolution, many approaches now combine spatial imaging with single-cell RNA-seq references to reconstruct complete transcriptomes in situ. New methods such as CISI, FISHnCHIPs, and ATLAS accelerate this process by measuring combinations of co-expressed genes rather than each gene individually. These aggregate measurements simplify experiments but introduce a new challenge: deciding which genes to combine so that the resulting features are both experimentally reliable and computationally informative for integration with scRNA-seq data. We developed CIPHER, a computational framework that learns how to design and decode these aggregate measurements optimally. By integrating experimental constraints and decoding accuracy into a unified neural-network model, CIPHER provides a principled approach for designing signature-based spatial transcriptomics experiments that enable efficient and accurate reconstruction of cellular transcriptomes.",
+    "author_corresponding": "Roy Wollman",
+    "author_corresponding_institution": "University of California, Los Angeles",
+    "authors": "Hemminger, Z.; De Ocampo, H.; Xie, F.; Zhai, Z.; Li, J. J.; Wollman, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-09",
+    "doi": "10.64898/2026.01.08.698503",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/09/2026.01.08.698503.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "10.1371/journal.pcbi.1014362",
+    "server": "bioRxiv",
+    "title": "CIPHER: An end-to-end framework for designing optimized aggregated spatial transcriptomics experiments",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of California, Los Angeles",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-01-09",
+  "published_doi": "10.1371/journal.pcbi.1014362",
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "CIPHER is a neural-network framework that jointly optimizes gene-to-signature encoding matrices and cell embeddings for aggregated spatial transcriptomics,…",
+  "title": "CIPHER: An end-to-end framework for designing optimized aggregated spatial transcriptomics experiments",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.08.698503"
+}

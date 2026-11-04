@@ -1,0 +1,49 @@
+{
+  "abstract": "Genomic and protein foundation models (GFMs and PFMs) have demonstrated strong performance in learning the language of DNA and proteins, but their use in large-scale sequence generation is limited by the latency of autoregressive decoding. Because every token triggers a forward pass of a large Transformer, whose inference is relatively slow, long-sequence generation quickly becomes costly. In this work we adapt speculative decoding to a representative GFM: the DNA model DNAGPT and two representative PFMs: ProGen2 and ProtGPT2. We implement a probabilistic variant of speculative decoding, in which a lightweight draft model proposes short token spans and a larger target model verifies or corrects them in parallel, while preserving the target models sampling distribution. Across all three models we systematically study the effect of speculation window length, temperature, draft architecture and prompt length, and we benchmark tokens per second over multiple runs per configuration. Speculative decoding yields consistent speedups over standard key-value cached decoding, with maximum observed speedup reaching 100% increase, while average gains across models ranging between 20% and 40% (e.g. 1.2x-1.4x), without changing the underlying target model predictions. Our results show that speculative decoding is a practical and model-agnostic strategy for accelerating genomic and proteomic sequence generation without sacrificing prediction quality.",
+  "authors": [
+    "Provatas, K.",
+    "Karatzikos, A.",
+    "Koilakos, C.",
+    "Patsakis, M.",
+    "Tzanakakis, A.",
+    "Nayak, A.",
+    "Mouratidis, I.",
+    "Avgoulas, E.",
+    "Georgakopoulos-Soares, I."
+  ],
+  "doi": "10.64898/2026.01.13.699044",
+  "first_seen": "2026-01-14",
+  "id": "biorxiv:10.64898/2026.01.13.699044",
+  "metadata": {
+    "abstract": "Genomic and protein foundation models (GFMs and PFMs) have demonstrated strong performance in learning the language of DNA and proteins, but their use in large-scale sequence generation is limited by the latency of autoregressive decoding. Because every token triggers a forward pass of a large Transformer, whose inference is relatively slow, long-sequence generation quickly becomes costly. In this work we adapt speculative decoding to a representative GFM: the DNA model DNAGPT and two representative PFMs: ProGen2 and ProtGPT2. We implement a probabilistic variant of speculative decoding, in which a lightweight draft model proposes short token spans and a larger target model verifies or corrects them in parallel, while preserving the target models sampling distribution. Across all three models we systematically study the effect of speculation window length, temperature, draft architecture and prompt length, and we benchmark tokens per second over multiple runs per configuration. Speculative decoding yields consistent speedups over standard key-value cached decoding, with maximum observed speedup reaching 100% increase, while average gains across models ranging between 20% and 40% (e.g. 1.2x-1.4x), without changing the underlying target model predictions. Our results show that speculative decoding is a practical and model-agnostic strategy for accelerating genomic and proteomic sequence generation without sacrificing prediction quality.",
+    "author_corresponding": "Ilias Georgakopoulos-Soares",
+    "author_corresponding_institution": "The University of Texas at Austin",
+    "authors": "Provatas, K.; Karatzikos, A.; Koilakos, C.; Patsakis, M.; Tzanakakis, A.; Nayak, A.; Mouratidis, I.; Avgoulas, E.; Georgakopoulos-Soares, I.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-01-14",
+    "doi": "10.64898/2026.01.13.699044",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/14/2026.01.13.699044.source.xml",
+    "license": "cc_by",
+    "published": "10.1093/bioinformatics/btag579",
+    "server": "bioRxiv",
+    "title": "Accelerating Inference in Genomic Foundation Models via Speculative Decoding",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The University of Texas at Austin",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-14",
+  "published_doi": "10.1093/bioinformatics/btag579",
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Adapts speculative decoding to DNAGPT, ProGen2, and ProtGPT2, using a draft model with a larger verifier to speed up genomic and protein sequence generation…",
+  "title": "Accelerating Inference in Genomic Foundation Models via Speculative Decoding",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.13.699044"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "BackgroundAccurate discrimination of true structural variants (SVs) from artifacts in long-read sequencing data remains a critical bottleneck. Numerous machine learning solutions have been proposed, ranging from classical models using engineered features to advanced deep learning and foundation model interpretability methods. However, a systematic comparison of their performance, efficiency, and practical utility is lacking.\n\nResultsWe conducted a comprehensive benchmark of five machine learning paradigms for SV filtering using standardized Genome in a Bottle (GIAB) data for samples HG002 and HG005. We evaluated classical Random Forest classifiers on 15 genomic features, computer vision models (ResNet/VICReg), diffusion-based anomaly detection, sparse autoencoders (SAEs) on the Evo2-7B foundation model, and multimodal ensembles. A simple Random Forest on interpretable features achieved a peak F1-score of 95.7%, effectively matching all more complex models (ResNet50: 95.9%, Diffusion: 95.8%). This study represents the first application of diffusion-based anomaly detection and sparse autoencoders to structural variant analysis; while diffusion models learned highly discriminative, disentangled representations and SAEs uncovered biologically interpretable features (including atoms that were specific for ALU deletions, chromosome X variants and insertion events), they did not significantly surpass this classification ceiling. Ensemble methods offered no performance benefit but may have future potential given the orthogonality of vision-based and linear features.\n\nConclusionsOur findings demonstrate that for the established task of germline SV filtering, simpler, interpretable models provide an optimal balance of accuracy, speed, and transparency. This benchmark establishes a pragmatic framework for method selection and argues that increased model complexity must be justified by clear, unmet biological needs rather than marginal predictive gains.",
+  "authors": [
+    "Kalra, A.",
+    "Paulin, L.",
+    "SEDLAZECK, F."
+  ],
+  "doi": "10.64898/2026.01.27.702059",
+  "first_seen": "2026-01-30",
+  "id": "biorxiv:10.64898/2026.01.27.702059",
+  "metadata": {
+    "abstract": "BackgroundAccurate discrimination of true structural variants (SVs) from artifacts in long-read sequencing data remains a critical bottleneck. Numerous machine learning solutions have been proposed, ranging from classical models using engineered features to advanced deep learning and foundation model interpretability methods. However, a systematic comparison of their performance, efficiency, and practical utility is lacking.\n\nResultsWe conducted a comprehensive benchmark of five machine learning paradigms for SV filtering using standardized Genome in a Bottle (GIAB) data for samples HG002 and HG005. We evaluated classical Random Forest classifiers on 15 genomic features, computer vision models (ResNet/VICReg), diffusion-based anomaly detection, sparse autoencoders (SAEs) on the Evo2-7B foundation model, and multimodal ensembles. A simple Random Forest on interpretable features achieved a peak F1-score of 95.7%, effectively matching all more complex models (ResNet50: 95.9%, Diffusion: 95.8%). This study represents the first application of diffusion-based anomaly detection and sparse autoencoders to structural variant analysis; while diffusion models learned highly discriminative, disentangled representations and SAEs uncovered biologically interpretable features (including atoms that were specific for ALU deletions, chromosome X variants and insertion events), they did not significantly surpass this classification ceiling. Ensemble methods offered no performance benefit but may have future potential given the orthogonality of vision-based and linear features.\n\nConclusionsOur findings demonstrate that for the established task of germline SV filtering, simpler, interpretable models provide an optimal balance of accuracy, speed, and transparency. This benchmark establishes a pragmatic framework for method selection and argues that increased model complexity must be justified by clear, unmet biological needs rather than marginal predictive gains.",
+    "author_corresponding": "FRITZ SEDLAZECK",
+    "author_corresponding_institution": "Baylor College of Medicine",
+    "authors": "Kalra, A.; Paulin, L.; SEDLAZECK, F.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-01-30",
+    "doi": "10.64898/2026.01.27.702059",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/01/30/2026.01.27.702059.source.xml",
+    "license": "cc_by_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A systematic assessment of machine learning for structural variant filtering",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Baylor College of Medicine",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-01-30",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks five ML paradigms for long-read structural variant filtering on GIAB HG002/HG005; simple Random Forest matches ResNet, diffusion, and ensemble…",
+  "title": "A systematic assessment of machine learning for structural variant filtering",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.01.27.702059"
+}

@@ -1,0 +1,33 @@
+{
+  "abstract": "Aim/background: Continuous glucose monitoring (CGM) generates dense time-series data, posing challenges for efficient storage, transmission, and analysis. This study evaluates novel encoding strategies that reduce CGM profiles to a compact set of landmark points while maintaining fidelity in reconstructed signals and derived glycemic metrics.\n  Methods: We utilized two complementary CGM datasets, synthetic data generated via a Conditional Generative Adversarial Network (CGAN) and real-world measurements from a randomized crossover trial, to develop and validate three encoding approaches: (1) Peaks & Nadirs (PN), (2) Peaks, Nadirs, and Support Points (PN+), and (3) Uniform Downsampling. Each method compresses CGM profiles by selecting key timestamps and glucose values, followed by signal reconstruction via interpolation. Performance was assessed using compression ratio, mean absolute error (MAE), and R^2 between original and reconstructed clinically relevant CGM-derived metrics. Statistical analyses evaluated the preservation of clinically relevant glucose features.\n  Results: Across varying compression settings, PN+ consistently outperformed PN and downsampling, achieving the highest R^2 and lowest MAE. At a compression ratio of 13 (22 landmark points per 24-hour profile), PN+ reduced MAE by a factor of 3.6 compared to downsampling (0.77 vs. 2.75), with notable improvements in metrics sensitive to glucose excursions. Encoding and decoding required an average of 0.13 seconds per profile. Validation on real-world data confirmed these trends.\n  Conclusions: The proposed PN+ method produces a compact CGM representation that retains critical glycemic dynamics while discarding redundant portions of the profiles. The CGM signal can be reconstructed with high precision from the encoding representation.",
+  "authors": [
+    "Clara Bender",
+    "Line Davidsen",
+    "Søren Schou Olesen",
+    "Simon Lebech Cichosz"
+  ],
+  "doi": null,
+  "first_seen": "2026-01-02",
+  "id": "arxiv:2601.00608",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2601.00608v1</ns0:id>\n    <ns0:title>Peak-Nadir Encoding for Efficient CGM Data Compression and High-Fidelity Reconstruction</ns0:title>\n    <ns0:updated>2026-01-02T08:32:54Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2601.00608v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2601.00608v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Aim/background: Continuous glucose monitoring (CGM) generates dense time-series data, posing challenges for efficient storage, transmission, and analysis. This study evaluates novel encoding strategies that reduce CGM profiles to a compact set of landmark points while maintaining fidelity in reconstructed signals and derived glycemic metrics.\n  Methods: We utilized two complementary CGM datasets, synthetic data generated via a Conditional Generative Adversarial Network (CGAN) and real-world measurements from a randomized crossover trial, to develop and validate three encoding approaches: (1) Peaks &amp; Nadirs (PN), (2) Peaks, Nadirs, and Support Points (PN+), and (3) Uniform Downsampling. Each method compresses CGM profiles by selecting key timestamps and glucose values, followed by signal reconstruction via interpolation. Performance was assessed using compression ratio, mean absolute error (MAE), and R^2 between original and reconstructed clinically relevant CGM-derived metrics. Statistical analyses evaluated the preservation of clinically relevant glucose features.\n  Results: Across varying compression settings, PN+ consistently outperformed PN and downsampling, achieving the highest R^2 and lowest MAE. At a compression ratio of 13 (22 landmark points per 24-hour profile), PN+ reduced MAE by a factor of 3.6 compared to downsampling (0.77 vs. 2.75), with notable improvements in metrics sensitive to glucose excursions. Encoding and decoding required an average of 0.13 seconds per profile. Validation on real-world data confirmed these trends.\n  Conclusions: The proposed PN+ method produces a compact CGM representation that retains critical glycemic dynamics while discarding redundant portions of the profiles. The CGM signal can be reconstructed with high precision from the encoding representation.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-01-02T08:32:54Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Clara Bender</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Line Davidsen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Søren Schou Olesen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Simon Lebech Cichosz</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-01-02",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "Introduces Peaks, Nadirs, and Support Points (PN+) encoding to compress CGM time series to landmark points, reconstructing signals with lower MAE than uniform…",
+  "title": "Peak-Nadir Encoding for Efficient CGM Data Compression and High-Fidelity Reconstruction",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2601.00608v1"
+}
