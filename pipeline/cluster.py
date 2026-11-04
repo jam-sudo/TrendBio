@@ -67,23 +67,52 @@ def keyword_slug(titles: list[str], corpus_titles: list[str],
     return label.replace(' ', '-') + '-' + suffix, label
 
 
+def continuity_candidates(cluster_ids: list[str], centroid: np.ndarray, topics: list[Topic],
+                          today: date, cfg: Scoring) -> list[tuple[float, float, Topic]]:
+    candidates = []
+    cluster = set(cluster_ids)
+    for topic in topics:
+        if not topic.history:
+            continue
+        nearest = min((entry.date for entry in topic.history),
+                      key=lambda day: (abs((day - today).days), day))
+        if abs((nearest - today).days) > cfg.continuity_max_gap_days:
+            continue
+        # Read the adjacent week in either direction for newest-to-oldest backfills.
+        start, end = ((nearest - timedelta(days=6), nearest) if nearest <= today
+                      else (nearest, nearest + timedelta(days=6)))
+        recent_ids = {item_id for entry in topic.history if start <= entry.date <= end
+                      for item_id in entry.item_ids}
+        jaccard = len(cluster & recent_ids) / len(cluster | recent_ids)
+        similarity = float(l2_normalize([topic.centroid])[0] @ l2_normalize([centroid])[0])
+        if jaccard >= cfg.continuity_min_jaccard or similarity >= cfg.continuity_threshold:
+            candidates.append((jaccard, similarity, topic))
+    return sorted(candidates, key=lambda row: (-row[0], -row[1], row[2].slug))
+
+
 def match_or_create(cluster_ids: list[str], centroid: np.ndarray, topics: list[Topic],
                     today: date, cfg: Scoring, titles: list[str], corpus_titles: list[str],
-                    items_by_id: dict[str, Item]) -> Topic:
+                    items_by_id: dict[str, Item], *, excluded_slugs: set[str] | None = None) -> Topic:
     counts = Counter(items_by_id[item_id].primary_category for item_id in cluster_ids)
     category = min(counts, key=lambda name: (-counts[name], name))
     secondary = sorted(name for name, count in counts.items()
                        if name != category and count / len(cluster_ids) >= .25)
-    if topics:
-        similarities = l2_normalize([topic.centroid for topic in topics]) @ l2_normalize([centroid])[0]
-        best = int(np.argmax(similarities))
-        if similarities[best] >= cfg.continuity_threshold:
-            topic = topics[best]
-            topic.centroid = l2_normalize([(np.asarray(topic.centroid) + centroid) / 2])[0].tolist()
-            topic.category = category
-            topic.secondary_categories = secondary
-            return topic
+    candidates = continuity_candidates(cluster_ids, centroid, [
+        topic for topic in topics if not excluded_slugs or topic.slug not in excluded_slugs
+    ], today, cfg)
+    if candidates:
+        topic = candidates[0][2]
+        topic.centroid = centroid.tolist()
+        topic.category = category
+        topic.secondary_categories = secondary
+        return topic
     slug, label = keyword_slug(titles, corpus_titles, cluster_ids)
+    occupied = {topic.slug for topic in topics}
+    attempt = 0
+    while slug in occupied:
+        attempt += 1
+        suffix = sha1(('\n'.join(sorted(cluster_ids)) + f'\n{today}\n{attempt}').encode()).hexdigest()[:4]
+        slug = label.replace(' ', '-') + '-' + suffix
     return Topic(
         slug=slug, label=label, category=category, secondary_categories=secondary,
         centroid=centroid.tolist(), history=[], headline=None, summary=None,
@@ -101,13 +130,17 @@ def append_history(topic: Topic, today: date, item_ids: list[str], count_7d: int
                            key=lambda day: day.date)
 
 
-def fill_unranked_days(topic: Topic, today: date) -> None:
+def fill_unranked_days(topic: Topic, today: date, max_gap_days: int = 10) -> None:
     if not topic.history:
         return
     dates = {entry.date for entry in topic.history}
-    # Also repair interior gaps when today's entry has already been appended.
-    day = min(dates) + timedelta(days=1)
-    while day < today:
-        if day not in dates:
-            append_history(topic, day, [], 0)
-        day += timedelta(days=1)
+    # Empty padding must never extend the lifetime of an inactive topic.
+    anchors = sorted({entry.date for entry in topic.history if entry.item_ids} | {today})
+    for first, last in zip(anchors, anchors[1:]):
+        if (last - first).days > max_gap_days:
+            continue
+        day = first + timedelta(days=1)
+        while day < last:
+            if day not in dates:
+                append_history(topic, day, [], 0)
+            day += timedelta(days=1)
