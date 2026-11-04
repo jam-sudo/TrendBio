@@ -770,7 +770,7 @@
     0.0185259822756052,
     -0.05165698751807213
   ],
-  "headline": "Learned DNA sequence models predict methylation, TF binding and enhancer interactions",
+  "headline": "Deep learning models predict regulatory states from DNA sequence and chromatin context",
   "history": [
     {
       "count_7d": 6,
@@ -934,16 +934,16 @@
   "item_one_liners": {},
   "label": "Deep Learning Regulatory Prediction",
   "related": [
-    "inference-gene-4e7e",
-    "omics-integration-network-oriented-e5ce",
-    "untitled-topic-1773"
+    "biclustering-convex-aed0",
+    "neoantigen-personalized-b822",
+    "ancestry-inference-0cee"
   ],
   "secondary_categories": [
     "ml-ai"
   ],
   "slug": "learning-prediction-f8b4",
-  "summary": "Recent preprints extend sequence-based regulatory models to personalized diploid genomes, Hi-C chromatin structure, and synthetic-data fine-tuning.",
-  "synthesis": "The dominant thread is learned DNA sequence representations trained to predict regulatory readouts, spanning plant condition-specific cytosine methylation (DMRU), cross-species domain-adaptive pretraining for methylation (iDNA-DAPHA), ATAC-seq pretrained language modeling fine-tuned with LoRA for TF-DNA affinity (TRAFICA), base-resolution TF binding with a quantum-classical hybrid network (QTFPred), and enhancer-enhancer interaction prediction with cross-cell-line transferability (ETNet). Newer preprints move toward personalized diploid genomes for RNA abundance (VariantFormer) and Hi-C graph attention with polymer-ensemble filtering (CHROME). Synthetic DHS rearrangement data is used to fine-tune Enformer, reducing accessibility error for sequences diverging from reference. Targets, tasks and evaluation differ across items; Clair-Mosaic addresses long-read mosaic variant calling, a distinct task that shares only the deep-learning approach.",
+  "summary": "Recent preprints and papers extend sequence-based regulatory models with chromatin structure, personalized genotypes, and synthetic training data.",
+  "synthesis": "The dominant thread is deep learning applied to DNA sequence to predict epigenomic and regulatory states, spanning DNA methylation (DMRU, iDNA-DAPHA), transcription factor binding (QTFPred, TRAFICA), and enhancer-enhancer interactions (ETNet). Several models use generative or pretrained architectures: DMRU is an explainable encoder-decoder generative model, iDNA-DAPHA uses domain-adaptive pretraining with hierarchical attention, and TRAFICA is an open chromatin language model pretrained on ATAC-seq and fine-tuned with LoRA. The newer entries add context beyond the sequence alone: CHROME incorporates polymer-ensemble-filtered Hi-C structure through graph attention, VariantFormer conditions gene expression prediction on personalized diploid genomes, and Clair-Mosaic uses phased haplotype context for mosaic variant calling. Enformer fine-tuning on synthetic DHS rearrangements reduces accessibility error for sequences diverging from reference. Clair-Mosaic is a variant caller rather than a regulatory predictor, so the shared thread is strongest across the regulatory-prediction items.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2025-11-07"
 }

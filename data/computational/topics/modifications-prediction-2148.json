@@ -770,7 +770,7 @@
     -0.004784636199474335,
     -0.05371580645442009
   ],
-  "headline": "Quantitative parameters recovered from single-molecule and nanopore raw readouts",
+  "headline": "Machine learning and inference applied directly to raw single-trace and image data",
   "history": [
     {
       "count_7d": 4,
@@ -1265,7 +1265,7 @@
         "biorxiv:10.1101/2025.11.17.688909",
         "pubmed:10.1016/j.cels.2025.101448"
       ],
-      "rank": 22,
+      "rank": 24,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.5,
@@ -1311,16 +1311,16 @@
     }
   ],
   "item_one_liners": {},
-  "label": "Single Trace Quantitative Analysis",
+  "label": "Learning From Raw Biological Data",
   "related": [
-    "alignment-biological-discovery-performer-8956",
-    "protein-prediction-3337",
-    "learning-omics-c285"
+    "regulatory-networks-3d-visualisation-2108",
+    "ancestry-inference-0cee",
+    "alignment-biological-discovery-performer-8956"
   ],
   "secondary_categories": [],
   "slug": "modifications-prediction-2148",
-  "summary": "Calibration-free estimators and learned classifiers are now being developed side by side for single-molecule and nanoscale readouts.",
-  "synthesis": "The dominant thread is recovering quantitative parameters from individual raw readouts, where the choice of analysis model determines what can be extracted. mCOAST applies cumulants to a single DNA-PAINT intensity trace to count molecular targets and estimate kinetics without calibration or adjustable parameters. A nanopore study compares threshold-based MSD and spectral entropy against a CNN for classifying current delays in a DNA-barcoded miRNA assay. What is new is that calibration-free estimators and learned classifiers are being developed in parallel for single-molecule and nanoscale readouts. The Piscis deep learning spot detector for RNA FISH images and the ML regressors predicting particle trajectories in DLD microfluidic devices share this trace-level modeling theme only loosely.",
+  "summary": "Near-raw measurements such as intensity traces, current traces, and microscopy images are now analyzed directly by learning and inference methods.",
+  "synthesis": "The common thread is inference applied to primary measurements rather than heavily summarized features. mCOAST applies cumulants to a single DNA-PAINT intensity trace to count molecular targets and estimate kinetics without calibration or adjustable parameters. A nanopore study compares threshold-based MSD and spectral entropy descriptors with a CNN for classifying nanopore current delays in a DNA-barcoded miRNA assay, making it the one item that directly contrasts hand-defined descriptors with a learned classifier. Piscis trains a deep spot detector for RNA FISH images using a differentiable SmoothF1 loss that approximates F1 score. The DLD study uses ML regressors to predict particle trajectories for designing microfluidic separation of cancer cells. What is new is reliance on near-raw data, though the extent to which engineered features are displaced varies across these methods.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2025-11-22"
 }

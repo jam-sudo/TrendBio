@@ -770,7 +770,7 @@
     -0.000996452639810741,
     -0.040302824229002
   ],
-  "headline": "Shrinkage and copula models for high-dimensional omics regression and marker selection",
+  "headline": "Learned interaction and noise structure in high-dimensional omics regression and reduction",
   "history": [
     {
       "count_7d": 3,
@@ -1200,7 +1200,7 @@
         "biorxiv:10.1101/2025.11.19.689125",
         "pubmed:10.1371/journal.pcbi.1013710"
       ],
-      "rank": 8,
+      "rank": 6,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.5,
@@ -1227,7 +1227,7 @@
         "biorxiv:10.1101/2025.11.18.689140",
         "biorxiv:10.1101/2025.11.19.689125"
       ],
-      "rank": 18,
+      "rank": 19,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.25,
@@ -1254,7 +1254,7 @@
         "biorxiv:10.1101/2025.11.18.689140",
         "biorxiv:10.1101/2025.11.19.689125"
       ],
-      "rank": 22,
+      "rank": 25,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.25,
@@ -1274,18 +1274,18 @@
     }
   ],
   "item_one_liners": {},
-  "label": "Sparse Models For Omics Data",
+  "label": "Learning Structure In Omics Data",
   "related": [
-    "untitled-topic-1773",
-    "alignment-biological-discovery-performer-8956",
-    "transcriptomics-single-ab11"
+    "neoantigen-personalized-b822",
+    "ancestry-inference-0cee",
+    "diabetes-type-4df1"
   ],
   "secondary_categories": [
     "single-cell"
   ],
   "slug": "criticality-mechanism-robust-5b90",
-  "summary": "Sparse and shrinkage-based estimators are being tailored to interaction detection, discrete omics outcomes, and spatial transcriptomics.",
-  "synthesis": "The dominant thread is estimation in high-dimensional biological data, where sparsity or shrinkage is imposed to recover interpretable structure. BaGGLS applies group global-local shrinkage to binary regression fitted by variational inference for sparse interaction detection. CBKMR uses copula-based Bayesian kernel machine regression for discrete omics outcomes, with NNCBKMR providing near-linear scaling for marker panel identification from scRNA-seq. AGL treats low-expression genes as auxiliary tasks to estimate spatial transcriptomics expression via DkGSB. The Rayleigh quotient analysis is less directly tied to this thread, recasting contrastive PCA and proposing rho PCA as a faster, more accurate generalized-eigenvector dimension reduction. What is new across these preprints is methodological scalability and interpretability in high-dimensional estimation.",
+  "summary": "Omics regression and dimension reduction increasingly need structure inferred from data rather than fixed in advance.",
+  "synthesis": "The four preprints share a focus on inferring structure that is not specified in advance. BaGGLS fits a Bayesian group global-local shrinkage binary regression with variational inference to detect sparse interactions in high-dimensional biological data. CBKMR uses a copula-based Bayesian kernel machine regression for discrete omics outcomes, with NNCBKMR for near-linear scaling, and yields marker panels from scRNA-seq. AGL estimates spatial expression for low-expression genes as auxiliary tasks, selecting them using DkGSB. The Rayleigh quotient preprint shows that contrastive PCA approximates a Rayleigh quotient and proposes rho PCA, a faster and more accurate generalized-eigenvector dimension reduction. The methods are heterogeneous, so the common thread is dominant rather than universal. What is new is treating noise and interaction structure as learned quantities rather than as fixed assumptions.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2025-11-25"
 }
