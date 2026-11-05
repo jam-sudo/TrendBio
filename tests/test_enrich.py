@@ -437,6 +437,10 @@ def test_enrich_prompt_defines_relevance():
     prompt = Path('pipeline/prompts/enrich.md').read_text(encoding='utf-8')
     assert 'relevant:' in prompt
     assert 'main contribution is computational' in prompt
+    assert 'whose subject is computational biology or AI for biology' in prompt
+    assert 'relevant: false for corporate, community, HR or event posts' in prompt
+    assert 'Benchling Inference powered by Baseten: scalable GPUs for scientific ML' in prompt
+    assert 'Chan Zuckerberg Community Space Night Market' in prompt
 
 
 def test_ungrounded_summary_falls_back_with_grounding_reason(tmp_path, item, taxonomy, caplog):

@@ -192,24 +192,57 @@ github:
   min_stars_for_discovery: 20
 rss:
   backfill_chunk_days: 30
-  # Verified with live GETs on 2026-11-02; company feeds bypass keyword filtering.
+  # Company/institute feeds bypass keyword filtering; news feeds use industry_keywords.
+  # Removed 2026-11-04: CZI, 10 entries; community/philanthropy posts.
+  # Removed 2026-11-04: Google DeepMind science, 100 entries; general AI; tested science filters return the same feed.
+  # Removed 2026-11-04: Microsoft Research health, 10 entries; general research; no verified health feed.
+  # Removed 2026-11-04: Generate Biomedicines, 0 entries; empty feed.
+  # Removed 2026-11-04: NVIDIA generic blog, 18 entries; replaced with BioNeMo tag feed.
   feeds:
+    # Verified 2026-11-04: 10 entries.
     - {name: insitro, url: 'https://www.insitro.com/feed/', kind: company}
-    - {name: CZI, url: 'https://chanzuckerberg.com/feed/', kind: company}
-    - {name: NVIDIA BioNeMo, url: 'https://blogs.nvidia.com/feed/', kind: company}
-    - {name: Google DeepMind science, url: 'https://deepmind.google/blog/rss.xml', kind: company}
-    - {name: Microsoft Research health, url: 'https://www.microsoft.com/en-us/research/feed/', kind: company}
-    # Parseable feed, currently empty.
-    - {name: Generate Biomedicines, url: 'https://generatebiomedicines.com/feed/', kind: company}
+    # Verified 2026-11-04: 41 entries.
+    - {name: NVIDIA BioNeMo, url: 'https://developer.nvidia.com/blog/tag/bionemo/feed/', kind: company}
+    # Verified 2026-11-04: 10 entries.
     - {name: Broad Institute, url: 'https://www.broadinstitute.org/rss/news-blog-feed', kind: company}
+    # Verified 2026-11-04: 9 entries.
     - {name: Wellcome Sanger, url: 'https://sangerinstitute.blog/feed/', kind: company}
+    # Verified 2026-11-04: 167 entries.
     - {name: Chan Zuckerberg Biohub, url: 'https://biohub.org/feed/', kind: company}
+    # Verified 2026-11-04: 300 entries.
     - {name: Benchling, url: 'https://www.benchling.com/feed.rss', kind: company}
+    # Verified 2026-11-04: 20 entries.
     - {name: Latch Bio, url: 'https://blog.latch.bio/feed', kind: company}
+    # Verified 2026-11-04: 10 entries.
     - {name: Certara, url: 'https://www.certara.com/feed/', kind: company}
+    # Added 2026-11-04: 10 entries.
+    # Feed advertised by cradle.bio via RSS autodiscovery.
+    - {name: Cradle, url: 'https://api.feedifyrss.com/cradle-unfolded/blog-posts/feed.xml', kind: company}
+    # Added 2026-11-04: 10 entries.
+    - {name: DNAnexus, url: 'https://blog.dnanexus.com/rss.xml', kind: company}
+    # Added 2026-11-04: 10 entries.
+    - {name: ROSALIND, url: 'https://www.rosalind.bio/blog/rss.xml', kind: company}
+    # Added 2026-11-04: 15 entries.
+    - {name: Open Targets, url: 'https://blog.opentargets.org/rss/', kind: company}
+    # Added 2026-11-04: 10 entries.
+    - {name: scverse, url: 'https://scverse.org/blog/index.xml', kind: company}
+    # Added 2026-11-04: 10 entries.
+    - {name: EMBL-EBI bioinformatics, url: 'https://www.embl.org/news/tag/bioinformatics/feed/', kind: company}
+    # Added 2026-11-04: 16 entries.
+    - {name: UniBio Intelligence, url: 'https://unibiointelligence.com/blog/feed.xml', kind: company}
+    # Added 2026-11-04: 10 entries.
+    - {name: Genialis, url: 'https://www.genialis.com/feed/', kind: company}
+    # Added 2026-11-04: 9 entries.
+    - {name: BioBam, url: 'https://www.biobam.com/blog/feed/', kind: company}
+    # Added 2026-11-04: 10 entries.
+    - {name: BioTuring, url: 'https://bioturing.com/blog/feed/', kind: company}
+    # Verified 2026-11-04: 10 entries.
     - {name: GEN, url: 'https://www.genengnews.com/feed/', kind: news}
+    # Verified 2026-11-04: 20 entries.
     - {name: STAT, url: 'https://www.statnews.com/feed/', kind: news}
+    # Verified 2026-11-04: 8 entries.
     - {name: Nature Biotechnology, url: 'https://www.nature.com/nbt.rss', kind: news}
+    # Verified 2026-11-04: 10 entries.
     - {name: BioPharma Dive, url: 'https://www.biopharmadive.com/feeds/news/', kind: news}
 hints:
   biorxiv_category:

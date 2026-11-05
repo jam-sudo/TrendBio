@@ -8,8 +8,10 @@ def test_industry_source_config():
     config = load_config()
     assert len(config['industry_keywords']) >= 40
     assert all(isinstance(term, str) and term.strip() for term in config['industry_keywords'])
-    assert config['rss']['feeds']
-    for feed in config['rss']['feeds']:
+    feeds = config['rss']['feeds']
+    assert len({feed['name'] for feed in feeds}) == len(feeds)
+    assert sum(feed['kind'] == 'company' for feed in feeds) >= 18
+    for feed in feeds:
         assert feed['name']
         url = urlsplit(feed['url'])
         assert url.scheme == 'https' and url.netloc
