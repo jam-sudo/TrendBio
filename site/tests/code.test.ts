@@ -1,7 +1,7 @@
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { expect, it, vi } from "vitest";
-import { codeItems } from "../src/lib/data";
+import { loadItems } from "../src/lib/data";
 
 const section = (path: string) => readFileSync(`dist/${path}`, "utf8")
   .match(/<section\b[^>]*aria-labelledby="from-code-heading"[^>]*>[\s\S]*?<\/section>/)![0];
@@ -17,7 +17,7 @@ it("renders eight fixture repositories after industry, ordered by gain then tota
     const names = rendered.map(row => row.match(/<a\b[^>]*>([^<]+)<\/a>/)![1]);
     expect(names.slice(0, 4)).toEqual([repo, "trendbio-fixtures/workflow-validation-0020",
       "trendbio-fixtures/enzyme-design-0018", "trendbio-fixtures/chromatin-accessibility-0008"]);
-    const item = codeItems("computational", "2026-11-01")[0];
+    const item = loadItems("computational", [`github:${repo}`])[0];
     expect(rendered[0]).toContain(`href="${item.url}"`);
     expect(rendered[0]).toContain('datetime="2026-10-28"');
     expect(rendered[0]).toContain(item.summary!);
