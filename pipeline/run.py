@@ -19,7 +19,7 @@ import numpy as np
 
 from pipeline.budget import Budget
 from pipeline.cluster import (
-    append_history, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
+    append_history, attach_items, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
 )
 from pipeline.collect import AllPaperSourcesFailed
 from pipeline.config import Scoring, Taxonomy
@@ -254,12 +254,16 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         with _stage('cluster', items=0, clusters=0) as counts:
             linked = {item.preprint_id for item in window if item.type == 'published'}
             window = [item for item in window if item.id not in linked]
-            ids = [item.id for item in window]
+            papers = [item for item in window if item.type in {'preprint', 'published'}]
+            ids = [item.id for item in papers]
             embeddings = store.get_embeddings(ids)
             clusters = cluster_items(ids, embeddings, deps.cfg)
             counts.update(items=len(ids), clusters=len(clusters))
         with _stage('continuity', topics_new=0, topics_continued=0) as counts:
             vectors_by_id = dict(zip(ids, embeddings, strict=True))
+            extras = [item for item in window if item.type in {'code', 'industry'}]
+            vectors_by_id.update(zip([item.id for item in extras],
+                                     store.get_embeddings([item.id for item in extras]), strict=True))
             items_by_id = {item.id: item for item in window}
             topics = {topic.slug: topic for topic in store.all_topics()}
             previous_slugs = set(topics)
@@ -267,6 +271,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             unchanged = set()
             centroids = [l2_normalize([np.mean([vectors_by_id[id] for id in cluster], axis=0)])[0]
                          for cluster in clusters]
+            attached = attach_items(extras, vectors_by_id, centroids, deps.cfg)
             matches = sorted([
                 (jaccard, similarity, index, topic.slug)
                 for index, (cluster, centroid) in enumerate(zip(clusters, centroids, strict=True))
@@ -281,16 +286,17 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             for index, (cluster, centroid) in enumerate(zip(clusters, centroids, strict=True)):
                 existing = topics.get(assignments.get(index))
                 if existing and any(entry.date == day and entry.item_ids == cluster
+                                    and entry.attached_item_ids == attached[index]
                                     for entry in existing.history):
                     unchanged.add(existing.slug)
                 topic = match_or_create(cluster, centroid, list(topics.values()),
                                         day, deps.cfg, [items_by_id[id].title for id in cluster],
-                                        [item.title for item in window], items_by_id,
+                                        [item.title for item in papers], items_by_id,
                                         excluded_slugs=set(topics) - {assignments.get(index)})
-                append_history(topic, day, cluster, len(cluster))
+                append_history(topic, day, cluster, len(cluster), attached[index])
                 fill_unranked_days(topic, day, deps.cfg.continuity_max_gap_days)
                 topics[topic.slug] = topic
-                items_by_topic[topic.slug] = [items_by_id[id] for id in cluster]
+                items_by_topic[topic.slug] = [items_by_id[id] for id in cluster + attached[index]]
             for slug, topic in topics.items():
                 if slug not in items_by_topic:
                     topic.history = [entry for entry in topic.history if entry.date != day]
@@ -299,7 +305,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         with _stage('score_rank'):
             stars = {repo: [(when, count) for when, count in history if when <= day]
                      for repo, history in store.star_counts().items()}
-            topics_today = [(topics[slug], signals_for(topics[slug], items, stars), len(items))
+            topics_today = [(topics[slug], signals_for(topics[slug], items, stars),
+                             sum(item.type in {'preprint', 'published'} for item in items))
                             for slug, items in sorted(items_by_topic.items())]
             yesterday = store.get_day(day - timedelta(days=1))
             scored = score_topics(topics_today, {row.slug for row in yesterday.ranked} if yesterday else set(),
@@ -474,7 +481,8 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                 result = results.get(item.id)
                 if result is None:
                     result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
-                                        primary=next(iter(hints[item.id]), 'ml-ai'), secondary=[], relevant=True)
+                                        primary=next(iter(hints[item.id]), 'ml-ai'), secondary=[],
+                                        relevant=item.type in {'preprint', 'published'})
                     state.setdefault('notes', []).append(f'enrichment-fallback:{item.id}')
                     store._write(path, state)
                 store.put_embedding(item.id, vector)
@@ -573,7 +581,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
                     if result is None:
                         result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
                                             primary=next(iter(hints[item.id]), 'ml-ai'),
-                                            secondary=[], relevant=True)
+                                            secondary=[], relevant=item.type in {'preprint', 'published'})
                         state['notes'].append(f'enrichment-fallback:{item.id}')
                     item.summary, item.primary_category = result.summary, result.primary
                     item.secondary_categories = result.secondary
@@ -626,7 +634,7 @@ def synthesis_repair_targets(store: Store, start: date, end: date):
     def add_job(topic, entry):
         key = (entry.date, topic.slug)
         if key not in jobs:
-            items = [store.get_item(id) for id in entry.item_ids]
+            items = [store.get_item(id) for id in entry.item_ids + entry.attached_item_ids]
             if not items or any(item is None for item in items):
                 raise ValueError(f'missing evidence for topic: {topic.slug} on {entry.date}')
             jobs[key], evidence[key] = entry, items

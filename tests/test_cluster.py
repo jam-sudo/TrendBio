@@ -282,3 +282,28 @@ def test_keyword_slug_rejects_single_title_terms_in_large_clusters():
     titles = ['myopia', 'cancer', 'genomics', 'proteomics']
     _, label = keyword_slug(titles, titles, list('abcd'))
     assert label == 'untitled topic'
+
+
+def test_attach_respects_threshold(cfg):
+    from pipeline.cluster import attach_items
+    from pipeline.models import Item
+
+    cfg = cfg.model_copy(update={'attach_min_similarity': 0.8})
+    items = [Item.model_construct(id=id, type=kind, relevant=relevant)
+             for id, kind, relevant in [('edge', 'code', True), ('below', 'industry', True),
+                                       ('other', 'industry', True), ('paper', 'preprint', True),
+                                       ('irrelevant', 'code', False)]]
+    vectors = {'edge': np.array([.8, .6, 0]), 'below': np.array([.79, 0, np.sqrt(1-.79**2)]),
+               'other': np.array([0, 1, 0])}
+    centroids = [np.array([1, 0, 0]), np.array([0, 1, 0])]
+    assert attach_items(items, vectors, centroids, cfg) == [['edge'], ['other']]
+    assert attach_items(items, vectors, [], cfg) == []
+
+
+def test_old_history_entries_load_without_attached_ids(topic):
+    from pipeline.models import TopicDay
+
+    append_history(topic, date(2026, 11, 5), ['paper'], 1)
+    raw = topic.history[0].model_dump()
+    raw.pop('attached_item_ids')
+    assert TopicDay.model_validate(raw).attached_item_ids == []

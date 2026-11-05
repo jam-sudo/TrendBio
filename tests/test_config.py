@@ -44,6 +44,7 @@ def test_scoring_defaults():
         "cluster_distance_threshold": 0.10,
         "cluster_linkage": "complete",
         "min_cluster_size": 3,
+        "attach_min_similarity": 0.94,
         "continuity_threshold": 0.95,
         "continuity_min_jaccard": 0.25,
         "continuity_max_gap_days": 10,
@@ -77,6 +78,7 @@ def test_scoring_rejects_invalid_tiers_and_display():
     for values in ({'synthesis_tiers': []}, {'synthesis_tiers': [{'to': 20, 'model': 'x'}]},
                    {'synthesis_tiers': [{'to': 40, 'model': 'x'}, {'to': 5, 'model': 'x'}]},
                    {'display_open_n': 4}, {'synthesis_workers': 0}, {'synthesis_workers': -1},
+                   {'attach_min_similarity': -.1}, {'attach_min_similarity': 1.1},
                    {'continuity_threshold': 1.1}, {'continuity_min_jaccard': -.1},
                    {'continuity_max_gap_days': -1}):
         with pytest.raises(ValidationError):

@@ -33,6 +33,7 @@ class Scoring(BaseModel):
     cluster_distance_threshold: float = 0.10
     cluster_linkage: Literal['average', 'complete'] = 'complete'
     min_cluster_size: int = 3
+    attach_min_similarity: float = Field(default=0.94, ge=0, le=1)
     continuity_threshold: float = Field(default=0.95, ge=0, le=1)
     continuity_min_jaccard: float = Field(default=0.25, ge=0, le=1)
     continuity_max_gap_days: int = Field(default=10, ge=0)

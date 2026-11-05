@@ -1,0 +1,25 @@
+---
+import { industryItems } from "../lib/data";
+interface Props { day: string }
+const items = industryItems("computational", Astro.props.day);
+---
+
+{items.length > 0 && <section class="industry-list" aria-labelledby="from-industry-heading">
+  <div class="section-heading"><h2 id="from-industry-heading">From industry</h2></div>
+  <ul>
+    {items.map((item) => <li>
+      <div class="metadata"><time datetime={item.first_seen}>{item.first_seen}</time><span>{item.org ?? item.metadata.source_name}</span></div>
+      <h3><a href={item.url}>{item.title}</a></h3>
+      {item.summary && <p>{item.summary}</p>}
+    </li>)}
+  </ul>
+</section>}
+
+<style>
+  .industry-list { margin-top: 2.5rem; }
+  ul { list-style: none; padding: 0; }
+  li { padding: 1rem 0; border-top: 1px solid var(--border); }
+  .metadata { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; color: var(--muted); font-size: var(--t3); }
+  h3 { margin: 0.4rem 0; font-size: var(--t2); }
+  p { margin: 0; color: var(--muted); font-size: var(--t3); }
+</style>

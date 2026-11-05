@@ -2,12 +2,29 @@ import { execFileSync } from "node:child_process";
 import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { latestDay, loadDays } from "../src/lib/data";
+import { industryItems, latestDay, loadDays } from "../src/lib/data";
 
 const readPage = (path: string) => readFileSync(`dist/${path}`, "utf8");
 const cards = (html: string) => [...html.matchAll(/<a\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map(([card]) => card);
 
 describe("built landing, day and archive pages", () => {
+  it("shows recent fixture industry evidence below the home and day rankings", () => {
+    const day = latestDay("computational")!;
+    const items = industryItems("computational", day.date);
+    expect(items).toHaveLength(8);
+    for (const path of ["index.html", `day/${day.date}/index.html`]) {
+      const html = readPage(path);
+      expect(html).toContain('id="from-industry-heading"');
+      expect(html.indexOf('id="from-industry-heading"')).toBeGreaterThan(html.indexOf('Show 20 more'));
+      for (const item of items) {
+        expect(html).toContain(`href="${item.url}"`);
+        expect(html).toContain(item.title);
+        expect(html).toContain(item.summary!);
+        expect(html).toContain(item.org!);
+      }
+    }
+  });
+
   it("links forty leaderboard rows with twenty open and gives rank one a larger summary", () => {
     const html = readPage("index.html");
     const rendered = cards(html);
@@ -120,6 +137,7 @@ describe("built landing, day and archive pages", () => {
         const html = readFileSync(join(output, page), "utf8");
         expect(html).toContain("Some sources or summaries were unavailable for this run.");
         expect(html).toContain("Code and industry signals are partial for backfilled days.");
+        expect(html).not.toContain('id="from-industry-heading"');
         const rendered = cards(html);
         expect(rendered[0]).toContain("7 preprints · 2 published · 2 tools · 1 industry · ↑ 4.0× vs 4-wk avg");
         expect(rendered[1]).toContain("1 preprint · 1 tool");

@@ -202,6 +202,11 @@ def test_fixtures_regenerate_identically(tmp_path, fixtures_root, monkeypatch):
             data = json.loads(expected[path])
             data.setdefault('relevant', True)
             expected[path] = (json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False) + '\n').encode()
+        if path.parts[:3] == ('data', 'computational', 'topics'):
+            data = json.loads(expected[path])
+            for entry in data['history']:
+                entry.setdefault('attached_item_ids', [])
+            expected[path] = (json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False) + '\n').encode()
         assert actual[path] == expected[path], path
 
 

@@ -50,6 +50,7 @@ class TopicDay(BaseModel):
     date: date
     rank: int | None
     item_ids: list[str]
+    attached_item_ids: list[str] = []
     count_7d: int
     signals: Signals
     scores: Scores

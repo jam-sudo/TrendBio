@@ -17,6 +17,7 @@ export interface Item {
   summary: string | null;
   primary_category: string | null;
   secondary_categories: string[];
+  relevant?: boolean;
   published_doi: string | null;
   preprint_id: string | null;
   metadata: Record<string, unknown>;
@@ -44,6 +45,7 @@ export interface TopicDay {
   date: string;
   rank: number | null;
   item_ids: string[];
+  attached_item_ids?: string[];
   count_7d: number;
   signals: Signals;
   scores: Scores;

@@ -1,4 +1,5 @@
 ---
+import IndustryList from "./IndustryList.astro";
 import CategoryChips from "./CategoryChips.astro";
 import TopicCard from "./TopicCard.astro";
 import { loadTaxonomy } from "../lib/data";
@@ -43,6 +44,8 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
     {more.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
   </div>
 </details>}
+
+{day && <IndustryList day={day.date} />}
 
 <style>
   .topic-list { display: flex; flex-direction: column; gap: 0.5rem; }

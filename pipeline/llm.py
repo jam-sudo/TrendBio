@@ -121,12 +121,20 @@ class LLM:
         self, item: Item, taxonomy: Taxonomy, hints: list[str], model: str = 'claude-haiku-5-5',
     ) -> Enrichment | None:
         self.fallback_reasons.pop(item.id, None)
-        result = self._parse(_output_model(taxonomy), _messages(item, taxonomy, hints), model, 512, 'low',
-                             entity_id=item.id)
-        validated = _validate_categories(result, taxonomy)
-        if result is not None and validated is None:
-            return self._failure(item.id, 'validation:primary')
+        # Adaptive thinking shares the output budget; give the single retry more room.
+        for attempt in range(2):
+            result = self._parse(_output_model(taxonomy), _messages(item, taxonomy, hints), model,
+                                 1024 if attempt else 512, 'low', entity_id=item.id)
+            validated = _validate_categories(result, taxonomy)
+            if result is not None and validated is None:
+                self._failure(item.id, 'validation:primary')
+            reason = self.fallback_reasons.get(item.id, '')
+            if validated is not None or not (reason == 'empty_output' or reason.startswith('validation:')):
+                break
+            if attempt == 0:
+                self.fallback_reasons.pop(item.id, None)
         if validated is not None:
+            self.fallback_reasons.pop(item.id, None)
             bad = grounding.unsupported(validated.summary, item.title + ' ' + item.abstract)
             if bad:
                 return self._failure(item.id, 'grounding', detail=','.join(f'{v:g}' for v in bad))
@@ -206,7 +214,9 @@ class LLM:
             if refused:
                 return self._failure(entity_id, _refusal_reason(response))
             if response.parsed_output is None:
-                return self._failure(entity_id, 'empty_output')
+                return self._failure(entity_id, 'empty_output', detail=(
+                    f'stop_reason={response.stop_reason} usage.output_tokens={response.usage.output_tokens}'
+                ))
             try:
                 return output_model.model_validate(response.parsed_output, from_attributes=True)
             except ValidationError as error:

@@ -1131,7 +1131,8 @@ def test_reprocess_only_missing_preserves_synthesis_without_enrichment(ctx, monk
         topic = ctx.store.get_topic(slug)
         assert (topic.label, topic.headline, topic.summary, topic.synthesis,
                 topic.synthesis_model, topic.synthesized_on, topic.item_one_liners) == fields
-    assert len(ctx.store.get_day(end).ranked) == 40
+    # Removing nonpapers from cluster formation leaves one fewer eligible fixture topic.
+    assert len(ctx.store.get_day(end).ranked) == 39
     assert all(adapter.calls == [] for adapter in ctx.deps.adapters)
 
 
@@ -1470,3 +1471,72 @@ def test_cli_repair_synthesis(ctx, monkeypatch):
     assert initialize.call_args.kwargs == {'synthesis_only': True}
     assert process.call_args.args[:3] == ('computational', TODAY, TODAY)
     assert process.call_args.kwargs == {'model': 'claude-sonnet-5-5'}
+
+
+def test_cluster_excludes_code_and_industry(ctx, monkeypatch):
+    from pipeline.cluster import cluster_items
+
+    extras = [ctx.items[0].model_copy(update={'id': f'{source}:extra', 'source': source, 'type': kind,
+                                               'title': f'{kind} for protein binders'})
+              for source, kind in [('github', 'code'), ('rss', 'industry')]]
+    ctx.deps.adapters.append(FakeAdapter('github', extras))
+    seen = []
+
+    def capture(ids, vectors, cfg):
+        seen.extend(ids)
+        return cluster_items(ids, vectors, cfg)
+
+    monkeypatch.setattr('pipeline.run.cluster_items', capture)
+    run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert set(seen) == {item.id for item in ctx.items}
+
+
+def test_attached_items_do_not_change_rise_volume_or_continuity(ctx, monkeypatch):
+    from pipeline.cluster import continuity_candidates
+
+    first = run_day('computational', TODAY, ctx.store, ctx.deps)
+    before = ctx.store.get_topic(first.ranked[0].slug)
+    extras = [ctx.items[0].model_copy(update={'id': f'{source}:extra', 'source': source, 'type': kind,
+                                               'title': f'{kind} for protein binders'})
+              for source, kind in [('github', 'code'), ('rss', 'industry')]]
+    ctx.deps.adapters.append(FakeAdapter('github', extras))
+    synthesis_items = []
+    original = ctx.deps.llm.synthesize
+
+    def capture(topic, items, *args, **kwargs):
+        synthesis_items.extend(item.id for item in items)
+        return original(topic, items, *args, **kwargs)
+
+    monkeypatch.setattr(ctx.deps.llm, 'synthesize', capture)
+    second = run_day('computational', TODAY, ctx.store, ctx.deps)
+    after = ctx.store.get_topic(second.ranked[0].slug)
+    assert after.slug == before.slug
+    assert after.centroid == before.centroid
+    assert after.history[-1].item_ids == before.history[-1].item_ids
+    assert after.history[-1].count_7d == before.history[-1].count_7d == 3
+    assert set(after.history[-1].attached_item_ids) == {item.id for item in extras}
+    assert set(synthesis_items) == {item.id for item in ctx.items + extras}
+    assert second.ranked[0].scores.rise == first.ranked[0].scores.rise
+    assert second.ranked[0].scores.volume == first.ranked[0].scores.volume
+    candidates = continuity_candidates(before.history[-1].item_ids, np.array(before.centroid),
+                                       [after], TODAY, ctx.deps.cfg)
+    assert candidates[0][0] == 1.0
+    # Even perfect overlap with attached evidence must not establish Jaccard continuity.
+    strict = ctx.deps.cfg.model_copy(update={'continuity_threshold': 1.0})
+    assert not continuity_candidates([item.id for item in extras], -np.array(before.centroid),
+                                     [after], TODAY, strict)
+
+
+def test_signals_count_attached_items(ctx):
+    extras = [ctx.items[0].model_copy(update={'id': f'{source}:extra', 'source': source, 'type': kind,
+                                               'title': f'{kind} for protein binders'})
+              for source, kind in [('github', 'code'), ('rss', 'industry')]]
+    ctx.deps.adapters.append(FakeAdapter('github', extras))
+    ctx.store.put_star_counts({'extra': [(TODAY - timedelta(days=7), 10), (TODAY, 110)]})
+    result = run_day('computational', TODAY, ctx.store, ctx.deps)
+    row = result.ranked[0]
+    assert row.signals.code == row.signals.industry == 1
+    assert row.signals.preprint == 3
+    assert row.signals.star_gain_7d == 100
+    assert row.scores.diversity == .75
+    assert row.scores.code_velocity > 0
