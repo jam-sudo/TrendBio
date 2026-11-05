@@ -174,9 +174,18 @@ def test_enrichment_fallback_threshold(count, attempted, expected):
                        window_item_ids={str(i) for i in range(attempted)}, cfg=load_scoring()) is expected
 
 
-def test_synthesis_fallback_always_degrades():
-    assert is_degraded(['synthesis-fallback:topic'], {},
-                       over_ceiling=False, window_item_ids=set(), cfg=load_scoring())
+@pytest.mark.parametrize('topics,minimum,expected', [
+    ([], 2, False),
+    (['topic'], 2, False),
+    (['topic', 'other'], 2, True),
+    (['topic', 'topic'], 2, False),
+    (['topic'], 1, True),
+    (['topic', 'other'], 3, False),
+])
+def test_synthesis_fallback_threshold(topics, minimum, expected):
+    cfg = load_scoring().model_copy(update={'degraded_synthesis_fallback_min': minimum})
+    assert is_degraded([f'synthesis-fallback:{topic}' for topic in topics], {},
+                       over_ceiling=False, window_item_ids=set(), cfg=cfg) is expected
 
 
 def test_paper_source_failure_always_degrades():
@@ -196,7 +205,15 @@ def test_budget_over_ceiling_always_degrades():
 
 
 @pytest.mark.parametrize('synthesis_fallback', [False, True])
-def test_degraded_when_fallback_note_present(ctx, monkeypatch, synthesis_fallback):
+def test_degraded_when_two_synthesis_fallbacks_present(ctx, monkeypatch, synthesis_fallback):
+    ctx.items.extend(ctx.items[0].model_copy(update={
+        'id': f'biorxiv:test-{i}', 'title': f'Protein binder experiment {i}',
+        'url': f'https://example.org/{i}',
+    }) for i in range(3, 8))
+    monkeypatch.setattr(ctx.deps.embedder, 'embed', lambda texts: np.array([
+        [1, 0, 0, 0, 0] if int(text.split('\n', 1)[0].split()[-1]) < 4 else [0, 1, 0, 0, 0]
+        for text in texts
+    ], dtype=np.float32))
     original = ctx.deps.llm.enrich
     monkeypatch.setattr(ctx.deps.llm, 'enrich', lambda item, *args:
                         None if item.id == ctx.items[0].id else original(item, *args))
@@ -204,7 +221,7 @@ def test_degraded_when_fallback_note_present(ctx, monkeypatch, synthesis_fallbac
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
     assert result.run.status == ('degraded' if synthesis_fallback else 'ok')
     assert sum(note.startswith('enrichment-fallback:') for note in result.run.notes) == 1
-    assert any(note.startswith('synthesis-fallback:') for note in result.run.notes) == synthesis_fallback
+    assert sum(note.startswith('synthesis-fallback:') for note in result.run.notes) == (2 if synthesis_fallback else 0)
     before = tree(ctx.root)
     run_day('computational', TODAY, ctx.store, ctx.deps)
     assert tree(ctx.root) == before
@@ -853,8 +870,9 @@ def test_restatus_rewrites_only_status(ctx):
         day.run.status = 'degraded'
         day.run.source_status['rss'] = 'failed'
         day.run.notes = [f'enrichment-fallback:outside-{i}' for i in range(60)]
+        day.run.notes.append('synthesis-fallback:topic')
         if offset:
-            day.run.notes.append('synthesis-fallback:topic')
+            day.run.notes.append('synthesis-fallback:other')
         ctx.store.put_day(day)
     before = tree(ctx.root)
     result = CliRunner().invoke(app, ['restatus', '--domain', 'computational',
@@ -1385,6 +1403,8 @@ def test_repair_keeps_note_on_item_fallback(ctx, capsys):
     from pipeline.synthesize import top_evidence
 
     day, topic = prepare_synthesis_repair(ctx, bad_row=True)
+    day.run.notes.append('synthesis-fallback:other')
+    ctx.store.put_day(day)
     ctx.deps.llm.fallback = True
     entry = next(entry for entry in topic.history if entry.date == TODAY)
     top = top_evidence([ctx.store.get_item(id) for id in entry.item_ids])
@@ -1392,7 +1412,7 @@ def test_repair_keeps_note_on_item_fallback(ctx, capsys):
     saved = ctx.store.get_day(TODAY)
     assert saved.ranked[0].headline == top.title
     assert saved.ranked[0].summary == top.summary
-    assert saved.run.notes == day.run.notes and saved.run.status == 'degraded'
+    assert set(saved.run.notes) == set(day.run.notes) and saved.run.status == 'degraded'
     assert saved.run.synthesis_model == day.run.synthesis_model
     assert 'rows_on_item_fallback=1' in capsys.readouterr().out
 

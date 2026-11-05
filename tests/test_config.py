@@ -65,6 +65,7 @@ def test_scoring_defaults():
         "monthly_ceiling_usd": 50.0,
         "degraded_fallback_min": 3,
         "degraded_fallback_rate": 0.2,
+        "degraded_synthesis_fallback_min": 2,
         "star_gain_threshold": 100,
     }
     assert load_scoring().model_dump() == expected
@@ -80,6 +81,6 @@ def test_scoring_rejects_invalid_tiers_and_display():
                    {'display_open_n': 4}, {'synthesis_workers': 0}, {'synthesis_workers': -1},
                    {'attach_min_similarity': -.1}, {'attach_min_similarity': 1.1},
                    {'continuity_threshold': 1.1}, {'continuity_min_jaccard': -.1},
-                   {'continuity_max_gap_days': -1}):
+                   {'continuity_max_gap_days': -1}, {'degraded_synthesis_fallback_min': 0}):
         with pytest.raises(ValidationError):
             Scoring(weights={}, **values)

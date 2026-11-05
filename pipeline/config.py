@@ -54,6 +54,7 @@ class Scoring(BaseModel):
     monthly_ceiling_usd: float = 50.0
     degraded_fallback_min: int = 3
     degraded_fallback_rate: float = 0.2
+    degraded_synthesis_fallback_min: int = Field(default=2, ge=1)
     star_gain_threshold: int = 100
 
     @model_validator(mode='after')

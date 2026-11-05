@@ -158,7 +158,7 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
                 for note in set(notes))
     attempted = len(window_item_ids)
     return ((count > cfg.degraded_fallback_min and count > cfg.degraded_fallback_rate * attempted)
-            or any(note.startswith('synthesis-fallback:') for note in notes)
+            or sum(note.startswith('synthesis-fallback:') for note in set(notes)) >= cfg.degraded_synthesis_fallback_min
             or any(source_status.get(name) == 'failed' for name in ('biorxiv', 'arxiv', 'pubmed'))
             or over_ceiling)
 
