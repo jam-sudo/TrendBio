@@ -104,6 +104,12 @@ GitHub from replacing pending runs in the retained concurrency group.
 
 ## Operator notes
 
+The recommended daily trigger is the [Cloudflare Worker in `ops/daily-trigger/`](ops/daily-trigger/),
+which dispatches the Daily pipeline at 06:05 UTC after checking for an active run
+or a success created today (UTC). Enable it with one GitHub token secret using
+the linked setup instructions; keep GitHub's `schedule` as backup because its
+runs can arrive hours late.
+
 Add Markdown at `notes/<slug>.md`, using the slug from the topic URL, and push
 to `main`. The site rebuild displays it as the topic's Editor's note; no
 pipeline run is needed. A note for an unknown slug produces a build warning.
