@@ -8,6 +8,8 @@ machine-generated syntheses for readers familiar with the field.
 
 ## How the pipeline runs
 
+The manual [Bluesky attention probe](.github/workflows/bluesky-probe.yml) uses `BLUESKY_HANDLE` and `BLUESKY_APP_PASSWORD` to report aggregate attention for `days` (default 7), ending on the latest stored day, without changing rankings or data.
+
 GitHub Actions runs the Python pipeline daily at 05:23 UTC with fallbacks at 08:41 and 12:17 UTC; a later slot is skipped when a run already succeeded that UTC day. It collects,
 deduplicates, enriches, clusters, ranks, and synthesizes evidence, then commits
 successful output under `data/computational/`. Failed runs leave the last published data available.

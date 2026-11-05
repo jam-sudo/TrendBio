@@ -1,0 +1,216 @@
+import importlib.util
+import json
+from pathlib import Path
+
+import httpx
+import pytest
+
+SPEC = importlib.util.spec_from_file_location("bluesky_probe", Path(__file__).parents[1] / "ops/bluesky-probe/probe.py")
+probe = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(probe)
+
+
+@pytest.fixture
+def items():
+    return {
+        "biorxiv:10.1101/2026.11.01.123456": {
+            "id": "biorxiv:10.1101/2026.11.01.123456", "doi": "10.1101/2026.11.01.123456",
+            "published_doi": "10.1038/s41586-026-12345-6", "title": "A paper | with a title",
+            "source": "biorxiv", "type": "preprint", "relevant": True,
+            "published_at": "2026-11-01", "metadata": {"pmid": "12345"},
+        },
+        "arxiv:2611.00001": {
+            "id": "arxiv:2611.00001", "title": "Another paper", "source": "arxiv",
+            "type": "preprint", "relevant": True, "published_at": "2026-11-02",
+        },
+    }
+
+
+def post(uri="at://did:plc:private/app.bsky.feed.post/private", author="did:plc:private", links=None):
+    return {
+        "uri": uri, "author": {"did": author, "handle": "private-person.bsky.social"},
+        "record": {"text": "PRIVATE FIXTURE POST TEXT", "facets": [
+            {"features": [{"$type": "app.bsky.richtext.facet#link", "uri": link}]} for link in (
+                links if links is not None else ["https://www.nature.com/articles/s41586-026-12345-6"])
+        ]}, "likeCount": 4, "repostCount": 2,
+    }
+
+
+@pytest.mark.parametrize(("value", "expected"), [
+    ("https://www.biorxiv.org/content/10.1101/2026.11.01.123456v1", "10.1101/2026.11.01.123456"),
+    ("https://www.medrxiv.org/content/10.1101/2026.11.01.123456v12.full.pdf?foo=bar#x", "10.1101/2026.11.01.123456"),
+    ("10.1101/2026.11.01.123456.full", "10.1101/2026.11.01.123456"),
+    ("10.1101/2026.11.01.123456v2.abstract", "10.1101/2026.11.01.123456"),
+    ("https://doi.org/10.1000%2FABC.DEF", "10.1000/abc.def"),
+    ("pubmed:10.1000/ABC", "10.1000/abc"),
+    ("https://arxiv.org/abs/2611.00001v3", "arxiv:2611.00001"),
+    ("https://arxiv.org/pdf/2611.00001v2.pdf", "arxiv:2611.00001"),
+    ("https://arxiv.org/html/2611.00001v1", "arxiv:2611.00001"),
+    ("arxiv:2611.00001v2", "arxiv:2611.00001"),
+    ("https://arxiv.org/abs/q-bio/0601001v2", "arxiv:q-bio/0601001"),
+    ("https://pubmed.ncbi.nlm.nih.gov/12345/", "pmid:12345"),
+    ("https://www.nature.com/articles/S41586-026-12345-6.pdf", "10.1038/s41586-026-12345-6"),
+    (None, None), ("https://example.com/no-paper", None),
+])
+def test_normalization(value, expected):
+    assert probe.normalize(value) == expected
+
+
+def test_link_extraction_facets_and_embeds():
+    fixture = post(links=["https://doi.org/10.1000/facet"])
+    fixture["record"]["facets"].append({"features": [{"$type": "app.bsky.richtext.facet#mention", "did": "did:plc:ignore"}]})
+    fixture["record"]["embed"] = {"$type": "app.bsky.embed.external", "external": {"uri": "https://doi.org/10.1000/record"}}
+    fixture["embed"] = {"$type": "app.bsky.embed.recordWithMedia#view", "media": {
+        "$type": "app.bsky.embed.external#view", "external": {"uri": "https://arxiv.org/abs/2611.00001"}},
+        "record": {"uri": "https://doi.org/10.1000/quoted"}}
+    assert probe.extract_links(fixture) == {"https://doi.org/10.1000/facet", "https://doi.org/10.1000/record", "https://arxiv.org/abs/2611.00001"}
+    fixture["record"]["embed"] = {"$type": "app.bsky.embed.recordWithMedia", "media": {
+        "$type": "app.bsky.embed.external", "external": {"uri": "https://doi.org/10.1000/media"}}}
+    assert "https://doi.org/10.1000/media" in probe.extract_links(fixture)
+
+
+def test_published_doi_pmid_and_preprint_joins(items):
+    index = probe.item_index(items)
+    key = next(iter(items))
+    assert index["10.1038/s41586-026-12345-6"] == {key}
+    assert index["pmid:12345"] == {key}
+    published = {"id": "pubmed:10.1000/published", "preprint_id": key}
+    items[published["id"]] = published
+    assert probe.item_index(items)["10.1101/2026.11.01.123456"] == {key, published["id"]}
+
+
+def test_distinct_authors_and_no_double_counting(items):
+    attention = probe.Attention(items)
+    first = post()
+    attention.add(first)
+    attention.add(first)
+    attention.add(post(uri="second"))
+    attention.add(post(uri="third", author="did:plc:second"))
+    stats = attention.items[next(iter(items))]
+    assert stats == {"posts": 3, "authors": {"did:plc:private", "did:plc:second"}, "engagement": 18}
+    unknown = post(uri="unknown", links=["https://doi.org/10.1000/unknown", "https://arxiv.org/abs/2611.99999v2"])
+    attention.add(unknown)
+    attention.add(unknown)
+    assert attention.unknown_posts == 1
+    assert len(attention.unknown) == 2
+
+
+def test_spearman_known_case_and_ties():
+    assert probe.spearman([1, 2, 3, 4, 5], [5, 6, 7, 8, 7]) == pytest.approx(0.8207826816681233)
+    assert probe.spearman([1, 2, 3], [3, 2, 1]) == pytest.approx(-1)
+    assert probe.spearman([1, 2, 3], [0, 0, 0]) is None
+    assert probe.spearman([], []) is None
+
+
+def api_with(handler, budget=1000):
+    sleeps = []
+    api = probe.Bluesky(httpx.Client(transport=httpx.MockTransport(handler)), sleep=sleeps.append, max_calls=budget)
+    return api, sleeps
+
+
+def test_session_host_and_search_parameters(items):
+    calls = []
+    def handler(request):
+        calls.append(request)
+        if request.url.path.endswith(probe.SESSION):
+            assert json.loads(request.content) == {"identifier": "private-handle", "password": "secret-password"}
+            return httpx.Response(200, json={"accessJwt": "secret-token", "didDoc": {"service": [
+                {"id": "did:plc:private#atproto_pds", "serviceEndpoint": "https://session-host.test"}]}})
+        assert request.url.host == "session-host.test"
+        assert request.headers["Authorization"] == "Bearer secret-token"
+        assert dict(request.url.params) == {"q": "", "domain": probe.HOSTS[len(calls) - 2], "sort": "latest", "since": "2026-10-30", "until": "2026-11-06", "limit": "100"}
+        return httpx.Response(200, json={"posts": []})
+    api, sleeps = api_with(handler)
+    api.login("private-handle", "secret-password")
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    assert api.session_calls == 1 and api.calls == 6
+    assert len(sleeps) == 6 and min(sleeps) > 0
+    assert error is None and all(s["status"] == "cursor end" for s in states.values())
+
+
+def test_budget_stop_reports_partial_and_deduplicates_hosts(items):
+    api, _ = api_with(lambda _: httpx.Response(200, json={"posts": [post()], "cursor": "next"}), budget=2)
+    attention = probe.Attention(items)
+    states, error = probe.sweep(api, attention, "2026-10-30", "2026-11-06")
+    assert api.calls == 2 and error is None
+    assert all(s["partial"] and s["status"] == "budget limit" for s in states.values())
+    assert attention.items[next(iter(items))]["posts"] == 1
+    report = probe.render_report(items, [], attention, states, "2026-10-30", "2026-11-06", api.calls)
+    assert "Partial results: YES" in report
+
+
+def test_cursor_limit_and_repeated_cursor(items):
+    api, _ = api_with(lambda _: httpx.Response(200, json={"posts": [post()], "cursor": "same"}))
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    assert api.calls == 12 and error is None
+    assert all(s["partial"] and s["status"] == "cursor limit" for s in states.values())
+    api, _ = api_with(lambda _: httpx.Response(200, json={"posts": [post()], "hitsTotal": 200}))
+    states, _ = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    assert all(s["partial"] for s in states.values())
+
+
+def test_429_backoff_consumes_budget(items):
+    api, sleeps = api_with(lambda _: httpx.Response(429, headers={"Retry-After": "3"}, text="secret-body"), budget=2)
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    assert error is None and api.calls == 2
+    assert 3 in sleeps and 4 in sleeps
+    assert all(s["partial"] for s in states.values())
+
+
+@pytest.mark.parametrize("status", [401, 403, 500])
+def test_failures_are_diagnostic_and_private(items, status):
+    api, _ = api_with(lambda _: httpx.Response(status, text="SECRET PASSWORD TOKEN DID HANDLE POST"))
+    with pytest.raises(probe.ProbeError, match=f"{probe.SESSION}: HTTP {status}") as exc:
+        api.login("private-handle", "private-password")
+    assert "SECRET" not in str(exc.value)
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    assert error == f"{probe.SEARCH}: HTTP {status}"
+    assert all(s["partial"] for s in states.values())
+
+
+def test_rendered_report_contains_no_social_identity_or_text(items, tmp_path, monkeypatch, capsys):
+    attention = probe.Attention(items)
+    for i in range(3):
+        attention.add(post(uri=f"private-post-{i}", author=f"did:plc:private-{i}", links=[
+            "https://www.nature.com/articles/s41586-026-12345-6", "https://arxiv.org/abs/2611.00001", "https://doi.org/10.1000/unknown"]))
+    rows = [{"rank": rank, "item_ids": set(items)} for rank in (1, 6, 21)]
+    states = {host: {"posts": 3, "calls": 1, "status": "cursor end", "partial": False} for host in probe.HOSTS}
+    report = probe.render_report(items, rows, attention, states, "2026-10-30", "2026-11-06", 6)
+    for private in ("private-person.bsky.social", "did:plc:", "PRIVATE FIXTURE POST TEXT", "private-post-", "at://"):
+        assert private not in report
+    assert "| 1-5 | 1 | 1/1 (100.0%) | 1/1 (100.0%) |" in report
+    assert "| A paper &#124; with a title | 3 | 18 | 1 |" in report
+    assert "Verdict: 2/2 (100.0%)" in report
+    assert "3 unique posts" in report
+    summary = tmp_path / "summary.md"
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
+    probe.emit(report)
+    assert summary.read_text() == report
+    assert capsys.readouterr().out == report + "\n"
+
+
+def test_load_window_and_attached_ids(tmp_path, items):
+    for folder in ("items", "topics", "days"):
+        (tmp_path / folder).mkdir()
+    (tmp_path / "days/2026-11-05.json").write_text('{}')
+    for i, item in enumerate(items.values()):
+        (tmp_path / f"items/{i}.json").write_text(json.dumps(item))
+    topic = {"history": [
+        {"date": "2026-10-29", "rank": 1, "item_ids": []},
+        {"date": "2026-10-30", "rank": 5, "item_ids": ["paper"], "attached_item_ids": ["attached"]},
+        {"date": "2026-11-05", "rank": None, "item_ids": []},
+        {"date": "2026-11-06", "rank": 1, "item_ids": []},
+    ]}
+    (tmp_path / "topics/topic.json").write_text(json.dumps(topic))
+    loaded, rows, start, end = probe.load_store(tmp_path, 7)
+    assert loaded == items and (start, end) == ("2026-10-30", "2026-11-06")
+    assert rows == [{"rank": 5, "item_ids": {"paper", "attached"}}]
+
+
+def test_row_author_count_is_union(items):
+    attention = probe.Attention(items)
+    for i in range(2):
+        attention.add(post(uri=f"post-{i}", author=f"did:plc:{i}", links=[
+            "https://www.nature.com/articles/s41586-026-12345-6", "https://arxiv.org/abs/2611.00001"]))
+    report = probe.render_report(items, [{"rank": 1, "item_ids": set(items)}], attention, {}, "2026-10-30", "2026-11-06", 0)
+    assert "Verdict: 0/1 (0.0%)" in report
