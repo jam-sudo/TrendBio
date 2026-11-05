@@ -73,6 +73,7 @@ it("builds both columns and the empty advert before the footer on every page", (
     expect(html).toContain("SPONSORED");
     expect(html).toContain("Advertise · 10/10 spots left");
     expect(html).toContain('href="mailto:jaemin6013@gmail.com?subject=TrendBio%20sponsorship"');
+    expect(html.match(/<!--email_off-->\s*<a\b[^>]*class="[^"]*advertise-card[^"]*"[^>]*href="mailto:[\s\S]*?<\/a>\s*<!--\/email_off-->/g)).toHaveLength(3);
     expect(html.indexOf('class="sponsors-row"')).toBeLessThan(html.indexOf("<footer"));
   }
 });
@@ -97,13 +98,20 @@ describe("sponsor rendering", () => {
     await fixtureServer?.stop();
   });
 
-  it("aligns sticky columns at the hero and shows the footer row below 1440px", async () => {
-    const page = await browser.newPage({ viewport: { width: 1512, height: 982 }, colorScheme: "dark", reducedMotion: "reduce" });
+  it.each(["dark", "light"] as const)("aligns empty sticky columns at the hero and shows the footer row below 1440px in %s", async theme => {
+    const context = await browser.newContext({ viewport: { width: 1512, height: 982 }, colorScheme: theme, reducedMotion: "reduce" });
+    const page = await context.newPage();
     try {
       await page.goto(`http://127.0.0.1:${server.port}/`);
       await page.evaluate(() => document.fonts.ready);
       expect(await page.locator(".sponsor-column:visible").count()).toBe(2);
       expect(await page.locator(".sponsors-row").isVisible()).toBe(false);
+      for (const side of ["left", "right"]) {
+        const card = page.locator(`.sponsor-${side} .advertise-card:visible`);
+        expect(await card.count()).toBe(1);
+        expect(await card.textContent()).toContain("10/10 spots left");
+        expect(await page.getByRole("complementary", { name: `Sponsors, ${side} column` }).count()).toBe(1);
+      }
       const advert = (await page.locator(".sponsor-right .advertise-card").boundingBox())!;
       const hero = (await page.locator(".hero").boundingBox())!;
       expect(advert.y).toBe(hero.y);
@@ -111,7 +119,15 @@ describe("sponsor rendering", () => {
       expect(advert.x - hero.x - hero.width).toBe(24);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(1512);
       mkdirSync(".playwright-shots", { recursive: true });
-      await page.screenshot({ path: ".playwright-shots/sponsors-1512-dark.png" });
+      await page.screenshot({ path: `.playwright-shots/sponsors-1512-${theme}.png` });
+      expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+      await page.setViewportSize({ width: 1440, height: 982 });
+      const main = (await page.locator("main").boundingBox())!;
+      const left = (await page.locator(".sponsor-left .advertise-card").boundingBox())!;
+      const right = (await page.locator(".sponsor-right .advertise-card").boundingBox())!;
+      expect(left.x + left.width).toBeLessThanOrEqual(main.x);
+      expect(right.x).toBeGreaterThanOrEqual(main.x + main.width);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(1440);
       await page.evaluate(() => window.scrollTo(0, 400));
       expect((await page.locator(".sponsor-right .advertise-card").boundingBox())!.y).toBe(32);
       await page.goto(`http://127.0.0.1:${server.port}/about/`);
@@ -121,8 +137,8 @@ describe("sponsor rendering", () => {
       expect(await page.locator(".sponsor-column:visible").count()).toBe(0);
       expect(await page.locator(".sponsors-row .advertise-card:visible").count()).toBe(1);
       await page.locator(".sponsors-row").scrollIntoViewIfNeeded();
-      await page.screenshot({ path: ".playwright-shots/sponsors-1280-dark.png" });
-    } finally { await page.close(); }
+      await page.screenshot({ path: `.playwright-shots/sponsors-1280-${theme}.png` });
+    } finally { await context.close(); }
   });
 
   it.each(["dark", "light"])("shows two sponsors and eight vacancies, with AA contrast in %s", async theme => {
@@ -131,16 +147,27 @@ describe("sponsor rendering", () => {
     try {
       await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
       await page.goto(`http://127.0.0.1:${fixtureServer.port}/`);
-      for (const width of [1512, 1280, 375]) {
+      for (const width of [1512, 1440, 1280, 375]) {
         await page.setViewportSize({ width, height: 982 });
         expect(await page.locator("[data-sponsor]:visible").count()).toBe(2);
-        expect(await page.locator(".advertise-card:visible").textContent()).toContain("8/10 spots left");
+        for (const placement of width >= 1440 ? [".sponsor-left", ".sponsor-right"] : [".sponsors-row"]) {
+          const card = page.locator(`${placement} .advertise-card:visible`);
+          expect(await card.count()).toBe(1);
+          expect(await card.textContent()).toContain("8/10 spots left");
+        }
+        if (width === 1440) {
+          const main = (await page.locator("main").boundingBox())!;
+          const left = (await page.locator(".sponsor-left .advertise-card").boundingBox())!;
+          const right = (await page.locator(".sponsor-right .advertise-card").boundingBox())!;
+          expect(left.x + left.width).toBeLessThanOrEqual(main.x);
+          expect(right.x).toBeGreaterThanOrEqual(main.x + main.width);
+        }
         for (const card of await page.locator("[data-sponsor]:visible").all()) {
           expect(await card.getAttribute("rel")).toBe("sponsored noopener");
           expect(await card.getAttribute("target")).toBe("_blank");
         }
         expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
-        expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
+        expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
         if (width === 375) expect(await page.locator(".sponsor-scroll").evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true);
       }
     } finally { await context.close(); }

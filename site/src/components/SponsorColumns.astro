@@ -12,7 +12,10 @@ const right = sponsors.slice(left.length);
 ---
 
 <aside class:list={["sponsor-column", "sponsor-left", { "hero-aligned": heroAligned }]} aria-label="Sponsors, left column">
-  <div class="sponsor-stack">{left.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}</div>
+  <div class="sponsor-stack">
+    {left.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}
+    {remaining > 0 && <SponsorCard {...cardProps} />}
+  </div>
 </aside>
 <aside class:list={["sponsor-column", "sponsor-right", { "hero-aligned": heroAligned }]} aria-label="Sponsors, right column">
   <div class="sponsor-stack">
