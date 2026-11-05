@@ -138,6 +138,7 @@ describe("built landing, day and archive pages", () => {
         expect(html).toContain("Some sources or summaries were unavailable for this run.");
         expect(html).toContain("Code and industry signals are partial for backfilled days.");
         expect(html).not.toContain('id="from-industry-heading"');
+        expect(html).not.toContain('id="from-code-heading"');
         const rendered = cards(html);
         expect(rendered[0]).toContain("7 preprints · 2 published · 2 tools · 1 industry · ↑ 4.0× vs 4-wk avg");
         expect(rendered[1]).toContain("1 preprint · 1 tool");

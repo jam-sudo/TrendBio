@@ -1,0 +1,29 @@
+---
+import { codeItems } from "../lib/data";
+interface Props { day: string }
+const items = codeItems("computational", Astro.props.day);
+---
+
+{items.length > 0 && <section class="code-list" aria-labelledby="from-code-heading">
+  <div class="section-heading"><h2 id="from-code-heading">From code</h2></div>
+  <ul>
+    {items.map((item) => <li>
+      <div class="metadata">
+        <time datetime={item.first_seen}>{item.first_seen}</time>
+        {item.stars !== null && <span>{item.stars.toLocaleString("en-US")} stars</span>}
+        {item.star_gain_7d !== null && <span>+{item.star_gain_7d.toLocaleString("en-US")} in 7d</span>}
+      </div>
+      <h3><a href={item.url}>{item.id.slice("github:".length)}</a></h3>
+      {item.summary && <p>{item.summary}</p>}
+    </li>)}
+  </ul>
+</section>}
+
+<style>
+  .code-list { margin-top: 2.5rem; }
+  ul { list-style: none; padding: 0; }
+  li { padding: 1rem 0; border-top: 1px solid var(--border); }
+  .metadata { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; color: var(--muted); font-size: var(--t3); }
+  h3 { margin: 0.4rem 0; font-size: var(--t2); overflow-wrap: anywhere; }
+  p { margin: 0; color: var(--muted); font-size: var(--t3); }
+</style>

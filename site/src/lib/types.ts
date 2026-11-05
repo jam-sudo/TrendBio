@@ -32,6 +32,16 @@ export interface Signals {
   star_gain_7d: number;
 }
 
+export interface GitHubStarSample {
+  date: string;
+  stars: number;
+}
+
+export interface CodeItem extends Item {
+  stars: number | null;
+  star_gain_7d: number | null;
+}
+
 export interface Scores {
   rise: number;
   diversity: number;
