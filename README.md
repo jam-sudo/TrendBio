@@ -14,6 +14,12 @@ successful output under `data/computational/`. Failed runs leave the last publis
 GitHub Actions builds and deploys the Astro site to Cloudflare Pages on every push to `main` via `.github/workflows/deploy.yml`.
 The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
+RSS collects 22 feeds: 18 company/institute feeds and four keyword-filtered news feeds.
+Company coverage includes AI-for-biology models, protein design, and bioinformatics
+platforms; enrichment excludes corporate, community, HR, event, and general AI posts
+without a computational-biology subject. RSS supplies only each feed’s available
+entries, so daily collection builds coverage going forward rather than restoring history.
+
 PubMed collects the computational-biology journals in `pubmed.journals` in full.
 Journals in `pubmed.journals_keyword_filtered` require a title or abstract match to
 `keywords`; no broad MeSH query is used. PubMed copies of bioRxiv and medRxiv
