@@ -770,7 +770,7 @@
     0.014302062802016735,
     -0.03324960544705391
   ],
-  "headline": "Assay-aware preprocessing and annotation tools for long-read and genomic interval data",
+  "headline": "Format-aware compiled kernels and k-mer pre-filtering speed genomic annotation workflows",
   "history": [
     {
       "attached_item_ids": [],
@@ -1971,8 +1971,8 @@
     "transcriptomics"
   ],
   "slug": "bioinformatics-bioworkflow-80e5",
-  "summary": "Long-read transcriptome and compact-genome annotation work requires validated GTF/GFF3 handling and faster interval operations, which these preprints target…",
-  "synthesis": "The dominant thread is tooling that handles the structural specifics of genomic inputs, namely annotation file formats, long-read isoform structure, and interval arithmetic, rather than generic throughput scaling. AEGIS validates and standardises GTF/GFF3 annotations, extracts features, and performs comparative gene ID operations. CORAL and its GAMBA Rust module detect polycistronic units from GTF files to improve annotation of compact Oikopleura dioica genomes. KuPID applies k-mer sketching to pre-filter long RNA-seq reads before full alignment, reporting isoform discovery F1 gains of up to 16.7 points and 2-3x lower runtime. Pyranges v1 supplies Rust-backed overlap, count and slice operations within a Python/Pandas interface, reporting faster speed. What is new is compiled kernels or k-mer pre-filtering embedded in format- or assay-specific logic. Figures are as reported in the source items and were not independently verified.",
+  "summary": "Recent preprints target annotation validation, long-read isoform discovery and interval arithmetic with compiled or pre-filtering implementations.",
+  "synthesis": "The common thread is tooling that handles the structural specifics of genomic inputs, namely annotation file formats, long-read isoform structure and genomic interval arithmetic. AEGIS validates and standardises GTF/GFF3 annotations, extracts features and performs comparative gene ID operations. CORAL, with its GAMBA Rust module, detects polycistronic units from GTF files to improve annotation of compact Oikopleura dioica genomes. KuPID applies k-mer sketching to pre-filter long RNA-seq reads before full alignment, reporting isoform discovery F1 gains of up to 16.7 points and 2-3x lower runtime. Pyranges v1 supplies Rust-backed overlap, count and slice operations within a Python/Pandas interface, reporting faster speed. What is new is compiled kernels or k-mer pre-filtering embedded in format- or assay-specific logic. Reported figures are as stated in the source items and were not independently verified.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2025-12-14"
 }
