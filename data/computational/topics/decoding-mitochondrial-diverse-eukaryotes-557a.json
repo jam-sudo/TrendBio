@@ -770,7 +770,7 @@
     -0.0007956090848892927,
     -0.038053032010793686
   ],
-  "headline": "New methods cut mapping ambiguity and bias in isoform quantification across short and…",
+  "headline": "Reducing mapping ambiguity and bias in transcript-level quantification",
   "history": [
     {
       "attached_item_ids": [],
@@ -1848,8 +1848,8 @@
     "tools-infra"
   ],
   "slug": "decoding-mitochondrial-diverse-eukaryotes-557a",
-  "summary": "Three preprints address transcript-level quantification ambiguity with k-mer self-benchmarking, transcript-specific regions, and context-aware long-read MAPQ…",
-  "synthesis": "The dominant thread is reducing ambiguity and bias in transcript-level quantification. GaussF is alignment-free, uses GC-stratified k-mer Gaussian CDF self-benchmarking, and is benchmarked against Kallisto and Salmon. A minimal-sharing k-mer strategy isolates transcript-specific regions to lower mapping ambiguity. CALMeR replaces fixed long-read MAPQ thresholds with transcript-context-conditioned filtering via zero-one inflated beta regression, improving spike-in transcript recovery. Adjacent long-read work covers neighboring steps: DirectClean handles artifacts and rescues ONT direct-cDNA reads, SQANTI-evidence annotates unannotated genomes, and LRP2 adds mass-spectrometry evidence for protein isoforms. The mitochondrial RNA processing tool, Edi-Set-Flow, Ribotools and tModBase v2.0 address narrower questions outside the quantification focus.",
-  "synthesis_model": "claude-sonnet-5-5",
+  "summary": "New quantification methods target mapping ambiguity and fixed MAPQ thresholds, benchmarked against Kallisto, Salmon, and spike-in transcripts.",
+  "synthesis": "The dominant thread is reducing ambiguity and bias in transcript-level quantification. GaussF is an alignment-free isoform quantification method that uses GC-stratified k-mer Gaussian CDF self-benchmarking and is compared against Kallisto and Salmon. A separate minimal-sharing k-mer strategy isolates transcript-specific regions to reduce mapping ambiguity in RNA-seq isoform quantification. CALMeR addresses long-read quantification by conditioning MAPQ filtering on transcript context with zero-one inflated beta regression, improving spike-in transcript recovery relative to fixed thresholds. Other items address neighboring or distinct steps: DirectClean preprocesses ONT direct-cDNA reads, SQANTI-evidence annotates unannotated genomes, LRP2 integrates mass-spec evidence for protein isoforms, and Edi-Set-Flow, Ribotools, tModBase v2.0 and a mitochondrial RNA intermediate tool address narrower questions.",
+  "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2026-11-05"
 }
