@@ -20,7 +20,7 @@ from pipeline.llm import LLM
 from pipeline.jsonio import day_path
 from pipeline.run import (
     Deps, _related, _stage, _staging, is_degraded, run_backfill, run_day, run_reprocess,
-    run_repair_synthesis,
+    run_repair_synthesis, synthesis_repair_targets,
 )
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
@@ -132,10 +132,17 @@ def reprocess(start: FromDate, end: ToDate, domain: Domain = 'computational',
 @app.command('repair-synthesis')
 def repair_synthesis(start: FromDate, end: ToDate, domain: Domain = 'computational',
                      model: Annotated[str, typer.Option(help='Synthesis repair model.')] = 'claude-haiku-5-5',
-                     data_root: DataRoot = Path('data')):
-    """Fill missing topic and day syntheses without reranking or collecting items."""
+                     data_root: DataRoot = Path('data'),
+                     dry_run: Annotated[bool, typer.Option(help='Count repair targets without LLM calls or writes.')] = False):
+    """Repair missing or formerly truncated syntheses without reranking or collecting items."""
     if start > end:
         raise typer.BadParameter('start must not be after end')
+    if dry_run:
+        _, _, topics, rows, jobs, _ = synthesis_repair_targets(
+            Store(data_root, domain), start.date(), end.date(),
+        )
+        typer.echo(f'repair_synthesis_targets rows={len(rows)} topics={len(topics)} estimated_jobs={len(jobs)}')
+        return
     with _dependencies(domain, data_root, synthesis_only=True) as deps:
         run_repair_synthesis(domain, start.date(), end.date(), Store(data_root, domain), deps, model=model)
 

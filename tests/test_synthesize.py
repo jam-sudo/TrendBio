@@ -119,7 +119,7 @@ def test_synthesis_failure_falls_back_to_item_headline_and_note(context, existin
     assert ctx.budget.month_spend_usd() > 0
 
 
-@pytest.mark.parametrize('field,limit', [('headline', 90), ('summary', 160)])
+@pytest.mark.parametrize('field,limit', [('headline', 120), ('summary', 220)])
 def test_headline_and_summary_are_truncated_not_dropped(context, field, limit):
     ctx = context
     schema = Synthesis.model_json_schema()['properties']
@@ -553,3 +553,15 @@ def test_synthesis_fallback_uses_top_item_title(context, label):
     assert ctx.topic.headline == published.title
     assert ctx.topic.headline not in {label, 'Untitled Topic'}
     assert ctx.topic.summary == published.summary
+
+
+@pytest.mark.parametrize('length', [90, 91, 120])
+def test_synthesis_headline_kept_up_to_120(length):
+    headline = 'h' * length
+    assert Synthesis(**{**OUTPUT, 'headline': headline}).headline == headline
+
+
+@pytest.mark.parametrize('length', [160, 161, 220])
+def test_synthesis_summary_kept_up_to_220(length):
+    summary = 's' * length
+    assert Synthesis(**{**OUTPUT, 'summary': summary}).summary == summary

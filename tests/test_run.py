@@ -19,7 +19,7 @@ from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
 from pipeline.store import Store
 from pipeline.run import (
-    Deps, is_degraded, run_backfill, run_day, run_reprocess, run_repair_synthesis,
+    Deps, is_degraded, run_backfill, run_day, run_reprocess, run_repair_synthesis, synthesis_repair_targets,
 )
 from pipeline.__main__ import app
 
@@ -1435,8 +1435,11 @@ def test_repair_is_idempotent(ctx, fallback, empty_enrichment):
     assert tree(ctx.root) == before
 
 
-def test_repair_uses_latest_ranked_history_and_preserves_map_coordinates(ctx):
+@pytest.mark.parametrize('truncated', [False, True])
+def test_repair_uses_latest_ranked_history_and_preserves_map_coordinates(ctx, truncated):
     day, topic = prepare_synthesis_repair(ctx, blank_topic=True)
+    if truncated:
+        topic.headline, topic.summary = 'Old headline…', 'Old summary…'
     earlier = topic.history[-1].model_copy(update={'date': TODAY - timedelta(days=1), 'item_ids': ['missing:older']})
     later_unranked = topic.history[-1].model_copy(update={'date': TODAY + timedelta(days=1), 'rank': None, 'item_ids': ['missing:later']})
     topic.history = [later_unranked, *topic.history, earlier]
@@ -1560,3 +1563,97 @@ def test_signals_count_attached_items(ctx):
     assert row.signals.star_gain_7d == 100
     assert row.scores.diversity == .75
     assert row.scores.code_velocity > 0
+
+
+@pytest.mark.parametrize('field,length', [('headline', 70), ('headline', 90), ('headline', 91),
+                                         ('summary', 140), ('summary', 160), ('summary', 161)])
+@pytest.mark.parametrize('target', ['row', 'topic'])
+def test_repair_targets_old_truncation_signature(ctx, field, length, target):
+    day, topic = prepare_synthesis_repair(ctx)
+    setattr(day.ranked[0] if target == 'row' else topic, field, 'x' * (length - 1) + '…')
+    ctx.store.put_day(day)
+    ctx.store.put_topic(topic)
+    _, _, topics, rows, jobs, _ = synthesis_repair_targets(ctx.store, TODAY, TODAY)
+    assert len(topics) == (target == 'topic')
+    assert len(rows) == (target == 'row')
+    assert list(jobs) == [(TODAY, topic.slug)]
+
+
+@pytest.mark.parametrize('field,length', [('headline', 92), ('headline', 120),
+                                         ('summary', 162), ('summary', 220)])
+def test_repair_skips_new_limit_truncation(ctx, field, length):
+    day, topic = prepare_synthesis_repair(ctx)
+    for value in (day.ranked[0], topic):
+        setattr(value, field, 'x' * (length - 1) + '…')
+    ctx.store.put_day(day)
+    ctx.store.put_topic(topic)
+    before = tree(ctx.root)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert not ctx.deps.llm.calls
+    assert tree(ctx.root) == before
+
+
+def test_repair_truncation_idempotent(ctx, monkeypatch):
+    day, topic = prepare_synthesis_repair(ctx)
+    for value in (day.ranked[0], topic):
+        value.headline = 'An old headline…'
+        value.summary = 'An old summary…'
+    ctx.store.put_day(day)
+    ctx.store.put_topic(topic)
+    mapping = ctx.store.get_map().model_dump()
+    real_synthesize = FakeLLM.synthesize
+
+    def synthesize(self, *args, **kwargs):
+        result = real_synthesize(self, *args, **kwargs)
+        return Synthesis(**{**result.model_dump(), 'headline': 'h' * 121, 'summary': 's' * 221})
+
+    monkeypatch.setattr(FakeLLM, 'synthesize', synthesize)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert ctx.deps.llm.calls == ['claude-haiku-5-5']  # Row and topic share one job.
+    saved = ctx.store.get_topic(topic.slug)
+    assert saved.headline == 'h' * 119 + '…' and saved.summary == 's' * 219 + '…'
+    assert saved.history == topic.history
+    assert saved.centroid == topic.centroid
+    assert saved.label == topic.label
+    row = ctx.store.get_day(TODAY).ranked[0]
+    assert (row.headline, row.summary) == (saved.headline, saved.summary)
+    assert row.model_dump(exclude={'headline', 'summary'}) == day.ranked[0].model_dump(exclude={'headline', 'summary'})
+    for point in mapping['points']:
+        if point['slug'] == topic.slug:
+            point['headline'] = saved.headline
+    assert ctx.store.get_map().model_dump() == mapping
+    before = tree(ctx.root)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert ctx.deps.llm.calls == ['claude-haiku-5-5']
+    assert tree(ctx.root) == before
+
+
+def test_repair_skips_truncated_item_fallback(ctx):
+    from pipeline.synthesize import top_evidence
+
+    day, topic = prepare_synthesis_repair(ctx)
+    item = top_evidence([ctx.store.get_item(id) for id in topic.history[-1].item_ids])
+    item.summary = 'Enrichment truncated this…'
+    ctx.store.put_item(item)
+    day.ranked[0].headline, day.ranked[0].summary = item.title, item.summary
+    day.run.notes.append(f'synthesis-fallback:{topic.slug}')
+    ctx.store.put_day(day)
+    before = tree(ctx.root)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert not ctx.deps.llm.calls
+    assert tree(ctx.root) == before
+
+
+def test_cli_repair_synthesis_dry_run(ctx, monkeypatch):
+    from unittest.mock import Mock
+
+    prepare_synthesis_repair(ctx, blank_topic=True, bad_row=True)
+    initialize = Mock(side_effect=AssertionError('dry run must not initialize dependencies'))
+    monkeypatch.setattr('pipeline.__main__.build_deps', initialize)
+    before = tree(ctx.root)
+    result = CliRunner().invoke(app, ['repair-synthesis', '--from', str(TODAY), '--to', str(TODAY),
+                                    '--data-root', str(ctx.root), '--dry-run'])
+    assert result.exit_code == 0, result.output
+    assert 'rows=1 topics=1 estimated_jobs=1' in result.output
+    assert not initialize.called and not ctx.deps.llm.calls
+    assert tree(ctx.root) == before
