@@ -60,6 +60,8 @@ Set optional `chain_until` (`YYYY-MM-01`) to automatically backfill previous mon
 Daily and backfill processing steps have limits of 30 and 350 minutes, respectively.
 The manual resynthesize workflow rewrites ranked-topic and day syntheses for inclusive `from`/`to` dates (`YYYY-MM-DD`) using `claude-haiku-5-5` (default) or `claude-opus-5-5` for the featured tier and always Haiku for ranks 6–40, shares the `pipeline` concurrency group, and commits changed data with a 120-minute processing limit.
 
+`repair-synthesis --from YYYY-MM-DD --to YYYY-MM-DD [--model claude-haiku-5-5]` (also in Maintenance) fills missing topic and day syntheses without changing ranks, evidence, or map coordinates.
+
 The manual maintenance workflow supports `restatus` (recompute stored run statuses
 without collection or LLM calls) and `reprocess` (apply current PubMed scope and
 rebuild clustering, ranking and synthesis from stored items). It shares the
@@ -77,12 +79,12 @@ clustering and ranking, and synthesizes only topics without a headline. No LLM
 enrichment is performed. The workflow exposes `only_missing_synthesis` (default false):
 
 For a full continuity rebuild, pass `--rebuild-topics`: it removes every topic's
-history in the requested months, deletes topics left empty, and discards synthesis
-on affected surviving topics before replaying days chronologically. Items and
-embeddings remain cached. Combine with `--only-missing-synthesis` to synthesize new
-or affected topics once with the backfill model (Haiku), while keeping synthesis on
-untouched surviving topics. Rebuild the entire affected date range to replace old
-mega-topics completely.
+history in the requested months, deletes topics left empty, and clears synthesis
+only for topics whose entire history is inside the range before replaying days
+chronologically. Items and embeddings remain cached. Combine with `--only-missing-synthesis` to synthesize new
+topics once with the backfill model (Haiku), while keeping synthesis on
+surviving topics with history outside the range. Rebuild the entire affected date
+range to replace old mega-topics completely.
 
 ```sh
 python -m pipeline restatus --domain computational --from 2026-10-01 --to 2026-10-31

@@ -22,6 +22,14 @@ def tier_model(rank: int, cfg: Scoring, backfill: bool, over_ceiling: bool) -> s
     return next(tier.model for tier in cfg.synthesis_tiers if tier.to >= rank)
 
 
+def top_evidence(items: list[Item]) -> Item:
+    if not items:
+        raise ValueError('synthesis requires evidence items')
+    return min(items, key=lambda item: (
+        item.type == 'preprint', -item.published_at.toordinal(), item.id,
+    ))
+
+
 def synthesize_top(
     ranked: list[tuple[Topic, Signals, Scores]], items_by_topic: dict[str, list[Item]],
     llm: LLM, budget: Budget, cfg: Scoring, today: date, *, backfill: bool,
@@ -79,8 +87,9 @@ def synthesize_top(
     for position, topic_model, result in sorted(results, key=lambda row: row[0]):
         topic = topics[position - 1]
         if result is None:
-            topic.headline = topic.headline or topic.label.title()
-            topic.summary = ''
+            item = top_evidence(items_by_topic[topic.slug])
+            topic.headline = item.title
+            topic.summary = item.summary or ''
             notes.append(f'synthesis-fallback:{topic.slug}')
         else:
             topic.label = result.label

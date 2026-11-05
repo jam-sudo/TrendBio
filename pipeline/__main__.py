@@ -18,7 +18,10 @@ from pipeline.config import load_scoring, load_taxonomy
 from pipeline.embed import Embedder
 from pipeline.llm import LLM
 from pipeline.jsonio import day_path
-from pipeline.run import Deps, _related, _stage, _staging, is_degraded, run_backfill, run_day, run_reprocess
+from pipeline.run import (
+    Deps, _related, _stage, _staging, is_degraded, run_backfill, run_day, run_reprocess,
+    run_repair_synthesis,
+)
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.biorxiv import BiorxivAdapter
@@ -47,7 +50,7 @@ def configure_logging():
         logging.getLogger(name).setLevel(logging.WARNING)
 
 
-def build_deps(domain: str, data_root: Path) -> Deps:
+def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) -> Deps:
     cfg = load_scoring()
     taxonomy = load_taxonomy(domain)
     sources = load_config()
@@ -56,18 +59,19 @@ def build_deps(domain: str, data_root: Path) -> Deps:
         adapters=[BiorxivAdapter(sources), ArxivAdapter(sources), PubmedAdapter(sources),
                   GithubAdapter(sources, star_counts=Store(data_root, domain).star_counts(),
                                 star_gain_threshold=cfg.star_gain_threshold), RssAdapter(sources)],
-        llm=LLM(anthropic.Anthropic(), budget), embedder=Embedder(), budget=budget,
+        llm=LLM(anthropic.Anthropic(), budget), embedder=None if synthesis_only else Embedder(), budget=budget,
         cfg=cfg, taxonomy=taxonomy, hints_cfg=sources.get('hints', {}),
         client=httpx.Client(timeout=30),
     )
 
 
 @contextmanager
-def _dependencies(domain: str, data_root: Path):
+def _dependencies(domain: str, data_root: Path, *, synthesis_only: bool = False):
     deps = None
     try:
         with _stage('initialize'):
-            deps = build_deps(domain, data_root)
+            deps = (build_deps(domain, data_root, synthesis_only=True) if synthesis_only
+                    else build_deps(domain, data_root))
         yield deps
     except Exception as error:
         message = str(error)
@@ -123,6 +127,17 @@ def reprocess(start: FromDate, end: ToDate, domain: Domain = 'computational',
         run_reprocess(domain, start.date(), end.date(), Store(data_root, domain), deps,
                       reenrich=reenrich, model=model, only_missing_synthesis=only_missing_synthesis,
                       rebuild_topics=rebuild_topics)
+
+
+@app.command('repair-synthesis')
+def repair_synthesis(start: FromDate, end: ToDate, domain: Domain = 'computational',
+                     model: Annotated[str, typer.Option(help='Synthesis repair model.')] = 'claude-haiku-5-5',
+                     data_root: DataRoot = Path('data')):
+    """Fill missing topic and day syntheses without reranking or collecting items."""
+    if start > end:
+        raise typer.BadParameter('start must not be after end')
+    with _dependencies(domain, data_root, synthesis_only=True) as deps:
+        run_repair_synthesis(domain, start.date(), end.date(), Store(data_root, domain), deps, model=model)
 
 
 @app.command()

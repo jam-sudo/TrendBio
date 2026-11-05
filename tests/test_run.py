@@ -18,7 +18,9 @@ from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
 from pipeline.store import Store
-from pipeline.run import Deps, is_degraded, run_backfill, run_day, run_reprocess
+from pipeline.run import (
+    Deps, is_degraded, run_backfill, run_day, run_reprocess, run_repair_synthesis,
+)
 from pipeline.__main__ import app
 
 
@@ -1257,7 +1259,8 @@ def test_reprocess_rebuild_topics_recreates_identities(ctx, tmp_path, monkeypatc
     assert attempted == [start, start + timedelta(days=1), start + timedelta(days=2)]
     assert store.get_topic(mega.slug) is None
     surviving = store.get_topic(affected.slug)
-    assert surviving.headline is surviving.synthesis is surviving.synthesized_on is None
+    assert surviving.headline == surviving.synthesis == 'Stale synthesis'
+    assert surviving.synthesized_on is None
     assert [entry.date for entry in surviving.history] == [end + timedelta(days=40)]
     with pytest.raises(ValueError, match='different range or options'):
         run_reprocess('computational', start, end, store, ctx.deps, only_missing_synthesis=True)
@@ -1288,3 +1291,182 @@ def test_cli_reprocess_rebuild_topics(ctx, monkeypatch):
     assert result.exit_code == 0, result.output
     assert process.call_args.kwargs['rebuild_topics'] is True
     assert process.call_args.kwargs['only_missing_synthesis'] is True
+
+
+def test_rebuild_keeps_synthesis_of_topic_with_history_before_range(ctx, monkeypatch):
+    topic = ctx.store.all_topics()[0]
+    start, end = date(2026, 10, 1), date(2026, 10, 31)
+    topic.history = [topic.history[0].model_copy(update={'date': start - timedelta(days=1)})]
+    append_history(topic, start, [], 0)
+    topic.headline = 'Earlier headline'
+    topic.summary = 'Earlier summary'
+    topic.synthesis = 'Earlier synthesis'
+    topic.synthesis_model = 'claude-haiku-5-5'
+    topic.synthesized_on = start - timedelta(days=1)
+    topic.item_one_liners = {'earlier': 'Earlier evidence'}
+    ctx.store.put_topic(topic)
+
+    def stop_after_reset(*args, **kwargs):
+        raise RuntimeError('stop after reset')
+
+    monkeypatch.setattr('pipeline.run.run_day', stop_after_reset)
+    with pytest.raises(RuntimeError, match='stop after reset'):
+        run_reprocess('computational', start, end, ctx.store, ctx.deps, rebuild_topics=True)
+    saved = ctx.store.get_topic(topic.slug)
+    assert [entry.date for entry in saved.history] == [start - timedelta(days=1)]
+    for field in ('headline', 'summary', 'synthesis', 'synthesis_model', 'synthesized_on', 'item_one_liners'):
+        assert getattr(saved, field) == getattr(topic, field)
+
+
+def prepare_synthesis_repair(ctx, *, blank_topic=False, bad_row=False):
+    day = run_day('computational', TODAY, ctx.store, ctx.deps)
+    row = day.ranked[0]
+    topic = ctx.store.get_topic(row.slug)
+    if blank_topic:
+        topic.headline = topic.summary = topic.synthesis = None
+        topic.synthesized_on = topic.synthesis_model = None
+        ctx.store.put_topic(topic)
+    if bad_row:
+        row.headline = 'Untitled Topic'
+        row.summary = ''
+        day.run.notes = [f'synthesis-fallback:{row.slug}']
+        day.run.status = 'degraded'
+        ctx.store.put_day(day)
+    ctx.deps.llm.calls.clear()
+    return day, topic
+
+
+def test_repair_fills_blank_topic_without_changing_ranks(ctx, capsys, monkeypatch):
+    day, topic = prepare_synthesis_repair(ctx, blank_topic=True)
+    before = tree(ctx.root)
+    history = topic.model_dump()['history']
+    map_before = ctx.store.get_map().model_dump()
+    expected_items = next(entry.item_ids for entry in topic.history if entry.date == TODAY)
+    real_synthesize = FakeLLM.synthesize
+
+    def synthesize(self, topic, items, *args, **kwargs):
+        assert [item.id for item in items] == expected_items
+        return real_synthesize(self, topic, items, *args, **kwargs)
+
+    monkeypatch.setattr(FakeLLM, 'synthesize', synthesize)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    saved = ctx.store.get_topic(topic.slug)
+    assert saved.headline == 'Protein design evidence' and saved.summary == 'New evidence.'
+    assert saved.model_dump()['history'] == history
+    assert ctx.store.get_day(TODAY) == day
+    assert len(ctx.deps.llm.calls) == 1
+    after = tree(ctx.root)
+    changed = {path for path in before if before[path] != after[path]}
+    assert changed <= {f'computational/topics/{topic.slug}.json', 'computational/llm_spend.json',
+                       'computational/map.json'}
+    assert ctx.store.get_map().model_dump() == map_before
+    assert 'topics_repaired=1 rows_repaired=0' in capsys.readouterr().out
+
+
+def test_repair_clears_note_and_status_on_success(ctx, capsys):
+    day, topic = prepare_synthesis_repair(ctx, bad_row=True)
+    day.run.notes += ['kept-note']
+    ctx.store.put_day(day)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    saved = ctx.store.get_day(TODAY)
+    row = saved.ranked[0]
+    assert row.headline == 'Protein design evidence' and row.summary == 'New evidence.'
+    assert saved.run.notes == ['kept-note'] and saved.run.status == 'ok'
+    assert saved.run.synthesis_model == day.run.synthesis_model
+    assert saved.run.started == day.run.started and saved.run.finished == day.run.finished
+    assert row.model_dump(exclude={'headline', 'summary'}) == day.ranked[0].model_dump(exclude={'headline', 'summary'})
+    assert ctx.store.get_topic(topic.slug) == topic
+    assert ctx.deps.llm.calls == ['claude-haiku-5-5']
+    assert 'days_degraded_before=1 days_degraded_after=0' in capsys.readouterr().out
+
+
+def test_repair_keeps_note_on_item_fallback(ctx, capsys):
+    from pipeline.synthesize import top_evidence
+
+    day, topic = prepare_synthesis_repair(ctx, bad_row=True)
+    ctx.deps.llm.fallback = True
+    entry = next(entry for entry in topic.history if entry.date == TODAY)
+    top = top_evidence([ctx.store.get_item(id) for id in entry.item_ids])
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    saved = ctx.store.get_day(TODAY)
+    assert saved.ranked[0].headline == top.title
+    assert saved.ranked[0].summary == top.summary
+    assert saved.run.notes == day.run.notes and saved.run.status == 'degraded'
+    assert saved.run.synthesis_model == day.run.synthesis_model
+    assert 'rows_on_item_fallback=1' in capsys.readouterr().out
+
+
+@pytest.mark.parametrize('fallback,empty_enrichment', [(False, False), (True, False), (True, True)])
+def test_repair_is_idempotent(ctx, fallback, empty_enrichment):
+    day, topic = prepare_synthesis_repair(ctx, blank_topic=True, bad_row=True)
+    ctx.deps.llm.fallback = fallback
+    if empty_enrichment:
+        for entry in topic.history:
+            for id in entry.item_ids:
+                item = ctx.store.get_item(id)
+                item.summary = None
+                ctx.store.put_item(item)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert ctx.deps.llm.calls == ['claude-haiku-5-5']
+    before = tree(ctx.root)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert ctx.deps.llm.calls == ['claude-haiku-5-5']
+    assert tree(ctx.root) == before
+
+
+def test_repair_uses_latest_ranked_history_and_preserves_map_coordinates(ctx):
+    day, topic = prepare_synthesis_repair(ctx, blank_topic=True)
+    earlier = topic.history[-1].model_copy(update={'date': TODAY - timedelta(days=1), 'item_ids': ['missing:older']})
+    later_unranked = topic.history[-1].model_copy(update={'date': TODAY + timedelta(days=1), 'rank': None, 'item_ids': ['missing:later']})
+    topic.history = [later_unranked, *topic.history, earlier]
+    ctx.store.put_topic(topic)
+    mapping = ctx.store.get_map()
+    for point in mapping.points:
+        if point.slug == topic.slug:
+            point.headline = topic.label
+    ctx.store.put_map(mapping)
+    before = mapping.model_dump()
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps, model='claude-sonnet-5-5')
+    assert ctx.deps.llm.calls == ['claude-sonnet-5-5']
+    after = ctx.store.get_map().model_dump()
+    for point in before['points']:
+        if point['slug'] == topic.slug:
+            point['headline'] = 'Protein design evidence'
+    assert after == before
+    assert ctx.store.get_topic(topic.slug).history == topic.history
+
+
+@pytest.mark.parametrize('source_failure', [False, True])
+def test_repair_status_preserves_other_degradation_and_ignores_current_budget(ctx, source_failure):
+    day, _ = prepare_synthesis_repair(ctx, bad_row=True)
+    if source_failure:
+        day.run.source_status['pubmed'] = 'failed'
+        ctx.store.put_day(day)
+    ctx.deps.budget.record('claude-opus-5-5', 20_000_000, 0)
+    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert ctx.store.get_day(TODAY).run.status == ('degraded' if source_failure else 'ok')
+
+
+def test_repair_missing_evidence_fails_without_writes_or_llm(ctx):
+    day, topic = prepare_synthesis_repair(ctx, bad_row=True)
+    next(entry for entry in topic.history if entry.date == TODAY).item_ids = ['missing:item']
+    ctx.store.put_topic(topic)
+    before = tree(ctx.root)
+    with pytest.raises(ValueError, match='missing evidence'):
+        run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
+    assert not ctx.deps.llm.calls and tree(ctx.root) == before
+
+
+def test_cli_repair_synthesis(ctx, monkeypatch):
+    from unittest.mock import Mock
+
+    process = Mock()
+    initialize = Mock(return_value=ctx.deps)
+    monkeypatch.setattr('pipeline.__main__.build_deps', initialize)
+    monkeypatch.setattr('pipeline.__main__.run_repair_synthesis', process)
+    result = CliRunner().invoke(app, ['repair-synthesis', '--from', str(TODAY), '--to', str(TODAY),
+                                    '--model', 'claude-sonnet-5-5', '--data-root', str(ctx.root)])
+    assert result.exit_code == 0, result.output
+    assert initialize.call_args.kwargs == {'synthesis_only': True}
+    assert process.call_args.args[:3] == ('computational', TODAY, TODAY)
+    assert process.call_args.kwargs == {'model': 'claude-sonnet-5-5'}
