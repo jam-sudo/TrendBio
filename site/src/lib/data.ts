@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { marked } from "marked";
 import { parse } from "yaml";
-import type { Day, Item, MapData, Topic } from "./types";
+import type { CodeItem, Day, GitHubStarSample, Item, MapData, Topic } from "./types";
 
 export const DATA_ROOT = process.env.TRENDBIO_DATA_ROOT ?? "../data";
 export const NOTES_ROOT = process.env.TRENDBIO_NOTES_ROOT ?? "../notes";
@@ -34,6 +34,8 @@ interface DataIndex {
   rankedTopics: Topic[];
   itemPathById: Map<string, string>;
   industryItems?: Item[];
+  codeItems?: Item[];
+  githubStars: Record<string, GitHubStarSample[]>;
   map: MapData | null;
   notes: Map<string, string | null>;
   orphanNotes: string[];
@@ -95,10 +97,12 @@ export function getDataIndex(domain: string): DataIndex {
     .filter((slug) => !topicsBySlug.has(slug)).sort() : [];
   const builds = (cache.builds.get(key) ?? 0) + 1;
   cache.builds.set(key, builds);
+  const githubStars = readJson<Record<string, GitHubStarSample[]>>(join(DATA_ROOT, domain, "github_stars.json")) ?? {};
+  for (const history of Object.values(githubStars)) history.sort((a, b) => a.date.localeCompare(b.date));
   const index: DataIndex = {
     days, daysByDate: new Map(days.map((day) => [day.date, day])), topics, topicsBySlug,
     rankedTopics: ranked, itemPathById, map: readJson<MapData>(join(DATA_ROOT, domain, "map.json")),
-    notes, orphanNotes, stats: { builds, itemReads: 0 },
+    githubStars, notes, orphanNotes, stats: { builds, itemReads: 0 },
   };
   cache.indexes.set(key, index);
   console.info(`[data-index] ${domain} built #${builds} in ${(performance.now() - started).toFixed(0)}ms`);
@@ -182,4 +186,33 @@ export function industryItems(domain: string, day: string): Item[] {
   start.setUTCDate(start.getUTCDate() - 6);
   const from = start.toISOString().slice(0, 10);
   return index.industryItems.filter((item) => item.first_seen >= from && item.first_seen <= day).slice(0, 8);
+}
+
+export function codeItems(domain: string, day: string): CodeItem[] {
+  const index = getDataIndex(domain);
+  if (!index.codeItems) {
+    index.codeItems = [...new Set(index.itemPathById.values())]
+      .filter((path) => basename(path).startsWith("github_"))
+      .map((path) => { index.stats.itemReads++; return readJson<Item>(path); })
+      .filter((item): item is Item => item !== null && item.type === "code" && item.relevant !== false);
+  }
+  const start = new Date(`${day}T00:00:00Z`);
+  start.setUTCDate(start.getUTCDate() - 6);
+  const from = start.toISOString().slice(0, 10);
+  return index.codeItems.filter((item) => item.first_seen >= from && item.first_seen <= day)
+    .map((item): CodeItem => {
+      const history = index.githubStars[item.id.slice("github:".length)] ?? [];
+      const latest = history.filter((sample) => sample.date <= day).at(-1);
+      let gain: number | null = null;
+      if (latest) {
+        const earlier = new Date(`${latest.date}T00:00:00Z`);
+        earlier.setUTCDate(earlier.getUTCDate() - 7);
+        const baseline = history.find((sample) => sample.date === earlier.toISOString().slice(0, 10));
+        if (baseline) gain = Math.max(latest.stars - baseline.stars, 0);
+      }
+      return { ...item, stars: latest?.stars ?? null, star_gain_7d: gain };
+    })
+    .sort((a, b) => (b.star_gain_7d ?? 0) - (a.star_gain_7d ?? 0)
+      || (b.stars ?? 0) - (a.stars ?? 0) || a.id.localeCompare(b.id))
+    .slice(0, 8);
 }
