@@ -770,7 +770,7 @@
     -0.009953203611075878,
     -0.05539083853363991
   ],
-  "headline": "Classifiers assign microbial taxonomy from long amplicon and metagenomic reads",
+  "headline": "Inferring microbial taxonomy directly from long-read and metagenomic sequencing data",
   "history": [
     {
       "count_7d": 3,
@@ -1558,7 +1558,7 @@
         "biorxiv:10.64898/2026.11.03.763945",
         "pubmed:10.1371/journal.pcbi.1014912"
       ],
-      "rank": 22,
+      "rank": 23,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.5,
@@ -1588,8 +1588,8 @@
     "tools-infra"
   ],
   "slug": "amino-acid-6d41",
-  "summary": "Full-length PacBio 16S and ITS reads and DNA language models are now being benchmarked for species-level taxonomic assignment.",
-  "synthesis": "The common thread is inferring microbial taxonomic identity directly from sequencing reads, using either curated reference databases or learned sequence models. HiFiTaxa provides a Nextflow pipeline for PacBio HiFi full-length 16S rRNA and ITS amplicons, referenced to GTDB and UNITE, and benchmarks it against BLCA, naive Bayes, Emu and EMITS. Taxonova introduces a deep learning classifier for species-level amplicon taxonomy across short and long read lengths, evaluated on mock communities. MicrobeRT takes a different route, fine-tuning Nucleotide Transformer, DNABERT and HyenaDNA for metagenomic read taxonomy and resistance gene detection. What is new is the pairing of long-read full-length amplicons and pretrained genomic language models with explicit comparison against established classifiers. The three studies differ in target, method and evidence, so this describes a shared direction rather than a common algorithm.",
+  "summary": "Long-read amplicons and pretrained genomic language models are being benchmarked for species-level microbial taxonomy from raw reads.",
+  "synthesis": "The shared thread is inferring microbial taxonomic identity directly from sequencing reads, either by referencing curated databases or by applying learned sequence models. HiFiTaxa is a Nextflow pipeline for PacBio HiFi full-length 16S rRNA and ITS amplicons, referenced to GTDB and UNITE, and benchmarked against BLCA, naive Bayes, Emu and EMITS. Taxonova is a deep learning classifier for species-level amplicon taxonomy across short- and long-read lengths, evaluated on mock communities. MicrobeRT fine-tunes Nucleotide Transformer, DNABERT and HyenaDNA for metagenomic read taxonomy and resistance gene detection. What is new is the pairing of long-read full-length amplicons with pretrained genomic language models and explicit comparison against established classifiers. The three studies differ in target, method and evidence, so this reflects a shared direction rather than a common algorithm.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2026-11-04"
 }

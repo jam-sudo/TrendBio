@@ -770,7 +770,7 @@
     9.023904567584395e-05,
     -0.03399151936173439
   ],
-  "headline": "Frozen single-cell foundation models repurposed for cross-modality and trajectory tasks",
+  "headline": "Frozen single-cell foundation models extended to multimodal completion and reconstruction",
   "history": [
     {
       "count_7d": 3,
@@ -1717,7 +1717,7 @@
         "pubmed:10.1016/j.cels.2026.101762",
         "pubmed:10.1093/bib/bbag621"
       ],
-      "rank": 1,
+      "rank": 2,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.5,
@@ -1737,7 +1737,7 @@
     }
   ],
   "item_one_liners": {},
-  "label": "Single Cell Foundation Model Evaluation",
+  "label": "Repurposing Single Cell Foundation Models",
   "related": [
     "omics-biopsies-9eab",
     "insect-technique-4c71",
@@ -1745,8 +1745,8 @@
   ],
   "secondary_categories": [],
   "slug": "design-principle-hypometabolism-df23",
-  "summary": "Recent preprints reuse frozen single-cell foundation models for multiomics completion and RNA-ATAC alignment, alongside new trajectory evaluation metrics.",
-  "synthesis": "The dominant thread is reuse of pretrained single-cell representations beyond their original scope. scAnyOmics distills a frozen single-cell foundation model into a multimodal student for any-to-any completion of RNA, protein, and ATAC modalities, and MUTUAL aligns frozen foundation model embeddings into a shared RNA-ATAC latent space trained on 3.0M multiome cells. Top2All benchmarks a Geneformer-based model that reconstructs transcriptome-wide expression from sparse high-expression genes. Evaluation-focused items include BioTrajX, which introduces Directionality, Order Consistency, and Endpoint Validity metrics for pseudotime plausibility, and a published review categorizing 16 cell potency estimators. Remaining items address trajectory and lineage inference (ManifoldVelo, bowside, LOTUS, lineage inpainting), gene activity quantification (VIGAT), mitochondrial clone inference (CloneVI), and isoform usage (IsoPrism). The set is heterogeneous, so this describes the dominant pattern rather than a shared method.",
-  "synthesis_model": "claude-haiku-5-5",
+  "summary": "scAnyOmics, MUTUAL and Top2All reuse frozen or pretrained single-cell models for cross-modality tasks, while BioTrajX adds trajectory plausibility metrics.",
+  "synthesis": "The dominant thread is reuse of pretrained single-cell representations beyond their original scope. scAnyOmics distills a frozen single-cell foundation model into a multimodal student for any-to-any completion of RNA, protein and ATAC. MUTUAL aligns frozen foundation-model embeddings into a shared RNA-ATAC latent space trained on 3.0M multiome cells, enabling cross-modality analysis. Top2All benchmarks a Geneformer-based model that reconstructs transcriptome-wide expression from sparse high-expression genes in mouse adrenal RNA-seq across sex- and sex-steroid-defined conditions. Evaluation work runs alongside: BioTrajX scores pseudotime plausibility via Directionality, Order Consistency and Endpoint Validity, and a published review gives a unified mathematical categorization of 16 cell potency estimators. A second strand addresses dynamics and lineage through ManifoldVelo (joint pseudotime and RNA velocity), bowside (trajectories coupled to GRNs), LOTUS (lineage-aware unbalanced optimal transport) and lineage inpainting. VIGAT, CloneVI and IsoPrism cover gene activity, mitochondrial clones and isoform usage. The set is heterogeneous, so this is a dominant pattern, not a shared method.",
+  "synthesis_model": "claude-opus-5-5",
   "synthesized_on": "2026-11-04"
 }

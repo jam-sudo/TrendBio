@@ -1,0 +1,33 @@
+{
+  "abstract": "Determining the neutral molecular formula of a precursor ion from its tandem mass (MS/MS) spectrum is the first step in identifying an unknown small molecule. Existing methods trade recall, whether the correct formula is among the candidates, against the cost of examining each candidate. Methods that examine each candidate in depth must first shorten the list, by limiting element counts or truncating it, and that is where the correct formula is lost. End-to-end regressors are fast but guarantee neither validity nor recall. We present FACET, which separates deciding which formulas to consider from deciding which one to choose. A feasibility automaton builds a formula one element count at a time and admits exactly the formulas that fit the precursor mass and satisfy the ring-and-double-bond and valence constraints. Run as an exhaustive search, it enumerates the complete feasible set, so every candidate is valid and recall is fixed by the chemical constraints rather than by a trained model. A small neural scoring head then ranks every feasible formula from one pass of a pretrained spectrum encoder, so no candidate is discarded. On the NPLIB1 benchmark FACET reaches top-1 accuracies of $0.859$ with the adduct known and $0.729$ with it unknown, compared with $0.766$ and $0.660$ for the strongest established method, and its recall is the highest. On the external CASMI 2022 set its recall is $1.000$, and with the adduct unknown it is the most accurate of the methods compared.",
+  "authors": [
+    "Xujun Che",
+    "Depeng Xu",
+    "Xiuxia Du"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-04",
+  "id": "arxiv:2611.01352",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.01352v1</ns0:id>\n    <ns0:title>FACET: Feasibility-Automaton Complete Enumeration and Truncation-Free Scoring of Molecular Formulas from MS/MS</ns0:title>\n    <ns0:updated>2026-10-31T23:45:06Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.01352v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.01352v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Determining the neutral molecular formula of a precursor ion from its tandem mass (MS/MS) spectrum is the first step in identifying an unknown small molecule. Existing methods trade recall, whether the correct formula is among the candidates, against the cost of examining each candidate. Methods that examine each candidate in depth must first shorten the list, by limiting element counts or truncating it, and that is where the correct formula is lost. End-to-end regressors are fast but guarantee neither validity nor recall. We present FACET, which separates deciding which formulas to consider from deciding which one to choose. A feasibility automaton builds a formula one element count at a time and admits exactly the formulas that fit the precursor mass and satisfy the ring-and-double-bond and valence constraints. Run as an exhaustive search, it enumerates the complete feasible set, so every candidate is valid and recall is fixed by the chemical constraints rather than by a trained model. A small neural scoring head then ranks every feasible formula from one pass of a pretrained spectrum encoder, so no candidate is discarded. On the NPLIB1 benchmark FACET reaches top-1 accuracies of $0.859$ with the adduct known and $0.729$ with it unknown, compared with $0.766$ and $0.660$ for the strongest established method, and its recall is the highest. On the external CASMI 2022 set its recall is $1.000$, and with the adduct unknown it is the most accurate of the methods compared.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-10-31T23:45:06Z</ns0:published>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Xujun Che</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Depeng Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xiuxia Du</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "metabolomics",
+  "published_at": "2026-10-31",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "FACET enumerates the complete feasible set of molecular formulas from MS/MS precursor mass via a feasibility automaton, then ranks all candidates with a neural…",
+  "title": "FACET: Feasibility-Automaton Complete Enumeration and Truncation-Free Scoring of Molecular Formulas from MS/MS",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.01352v1"
+}
