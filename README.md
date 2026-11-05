@@ -8,7 +8,7 @@ machine-generated syntheses for readers familiar with the field.
 
 ## How the pipeline runs
 
-GitHub Actions runs the Python pipeline daily at 06:00 UTC. It collects,
+GitHub Actions runs the Python pipeline daily at 05:23 UTC with fallbacks at 08:41 and 12:17 UTC; a later slot is skipped when a run already succeeded that UTC day. It collects,
 deduplicates, enriches, clusters, ranks, and synthesizes evidence, then commits
 successful output under `data/computational/`. Failed runs leave the last published data available.
 GitHub Actions builds and deploys the Astro site to Cloudflare Pages on every push to `main` via `.github/workflows/deploy.yml`.
