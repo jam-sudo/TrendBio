@@ -770,7 +770,7 @@
     0.016366571187973022,
     -0.04924771562218666
   ],
-  "headline": "Sequence models predict chromatin accessibility and variant effects on gene regulation",
+  "headline": "Sequence-to-function models are fine-tuned and extended to score noncoding variants at…",
   "history": [
     {
       "count_7d": 3,
@@ -4176,7 +4176,7 @@
         "pubmed:10.1038/s41588-026-02807-4",
         "pubmed:10.1371/journal.pgen.1012361"
       ],
-      "rank": 5,
+      "rank": 6,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.5,
@@ -4204,8 +4204,8 @@
   ],
   "secondary_categories": [],
   "slug": "graph-neural-networks-a7c7",
-  "summary": "Single-molecule footprinting and cell-type-resolved sequence models now link DNA sequence and genotype to chromatin and expression readouts.",
-  "synthesis": "The dominant thread is predicting regulatory readouts from DNA sequence and variants, with increasing resolution at the level of single molecules and single cells. Several preprints fine-tune or extend large sequence-to-function models: Scooby-2 adapts AlphaGenome with a cell-specific decoder for single-cell RNA-seq and chromatin accessibility tracks, and Borzoi is fine-tuned on synthetic MPRA variant-effect labels to improve CAGI5 and eQTL correlations while preserving pre-trained behavior. Variant prioritization is addressed directly by eQIF, which aggregates Enformer predictions into one unsupervised score per common variant, and by an XGBoost-SHAP study of snATAC-seq that prioritizes noncoding SNPs affecting HNF4A binding. Single-molecule work (FiberBrowser and FiberHMM, ChAI-Net, S2d and Mola) models per-molecule chromatin states and co-accessibility from sequence. What is new relative to sequence-only prediction is explicit coupling to cell-type context, as in CellReg3D's integration of DNA language model embeddings with Hi-C 3D chromatin interactions. CUTTIE, a hierarchical testing method for localizing predictive concepts in neural representations, is methodologically distinct from the rest of the set.",
-  "synthesis_model": "claude-haiku-5-5",
+  "summary": "Preprints extend AlphaGenome, Borzoi and Enformer-based predictors toward variant scoring and finer-resolution chromatin readouts, alongside a Nature Genetics…",
+  "synthesis": "The dominant thread is predicting regulatory readouts and variant effects from DNA sequence. Scooby-2 fine-tunes AlphaGenome for single-cell RNA-seq and accessibility tracks, and Borzoi is fine-tuned on synthetic MPRA labels to improve CAGI5 and eQTL correlations. eQIF aggregates Enformer predictions into an unsupervised per-variant score, and an XGBoost-SHAP analysis prioritizes HNF4A-motif variants in pancreatic progenitors. The Nature Genetics framework pairs a methylation compendium of over 90 tissues and cell types with the deep model Wreath for variant effect prediction. New here are single-molecule targets (ChAI-Net, S2d/Mola, FiberHMM) and cell-type or 3D context (CellReg3D). CUTTIE, a hierarchical testing method for localizing concepts in network representations, is a methodological outlier.",
+  "synthesis_model": "claude-sonnet-5-5",
   "synthesized_on": "2026-11-04"
 }

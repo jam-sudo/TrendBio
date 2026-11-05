@@ -1,0 +1,95 @@
+{
+  "abstract": "<p>A technology built by Biohub scientists uses artificial intelligence to recognize sepsis from images of millions of blood cells, without being told what to look for.</p>\n<p>The post <a href=\"https://biohub.org/blog/ai-sepsis-detection-blood-cells/\">Sepsis is linked to 11 million deaths a year. A new machine-learning platform could help catch it within minutes</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>",
+  "authors": [],
+  "doi": null,
+  "first_seen": "2026-11-04",
+  "id": "rss:https://biohub.org/?p=52684",
+  "metadata": {
+    "author": "jrichmond@contractor.chanzuckerberg.com",
+    "author_detail": {
+      "email": "jrichmond@contractor.chanzuckerberg.com"
+    },
+    "authors": [
+      {
+        "email": "jrichmond@contractor.chanzuckerberg.com"
+      }
+    ],
+    "content": [
+      {
+        "base": "",
+        "language": null,
+        "type": "text/html",
+        "value": "<p class=\"wp-block-paragraph\">Ten microliters of blood flow into a disposable plastic cartridge. Inside a box with the same footprint as a laptop, it spreads into a thin layer and moves through a narrow channel. Over the next 12 minutes, a camera photographs roughly two million blood cells as they stream past.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">No laboratory technician waits for a blood culture. Instead, a new imaging platform, powered by a machine learning model, scans all of those cells for signs of sepsis, a life-threatening systemic response to infection that contributes to roughly 11 million deaths globally each year.&nbsp;&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">Biohub scientists built that model, called Remo-ID, to run on Remoscope, an imaging cytometer the team first designed to diagnose malaria. In an early study of 47 patients and controls, Remo-ID <a href=\"https://www.medrxiv.org/content/10.64898/2026.10.08.26364716v1.full\" rel=\"noreferrer noopener\" target=\"_blank\">correctly distinguished sepsis</a> from other critical illnesses and from healthy blood in 43 cases. It did so without researchers specifying in advance which cells or cellular features to look for.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">The work is part of a larger bet at Biohub: that new ways of measuring biology, paired with computational models that can interpret what these technologies capture, will help scientists cure, prevent, and manage disease.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Sepsis is notoriously hard to pin down. Clinicians can often recognize it from a patient’s condition and laboratory tests, but there is no single gold-standard test that can be used at the moment treatment decisions must be made. “It’s just not well quantified yet,” says Nicholas Bratvold, an engineer at Biohub who has spearheaded the sepsis project.</p>\n\n\n\n<p class=\"wp-block-paragraph\">That uncertainty can mean deadly delays. In septic shock caused by a bacterial infection, every hour that antibiotics are delayed raises the risk of death by 6 to 10 percent. Existing guidelines call for treatment within the first hour of sepsis, yet fewer than half of patients receive that care, even at well-resourced hospitals.</p>\n\n\n\n<h2 class=\"wp-block-heading\" id=\"h-from-malaria-to-an-unknown-signal\">From malaria to an unknown signal</h2>\n\n\n\n<p class=\"wp-block-paragraph\">The <a href=\"https://biohub.org/blog/ai-powers-a-better-way-to-diagnose-malaria/\">Remoscope project</a> began in 2022 as a tool for places where malaria is endemic, and where technicians trained in the century-old diagnostic standard — manually counting parasite-infected cells in stained blood smears under a microscope — are often overburdened.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">Rather than using stains or other reagents, Remoscope images fresh whole blood directly and uses label-free imaging and machine learning to do the counting. Joe DeRisi, president emeritus of Biohub San Francisco and a coauthor of the initial Remoscope papers, recognized the technology’s potential early on: “Nobody can work with the standard technique for long stretches of time without a lot of mental fatigue, and invariably human mistakes start to creep in.”</p>\n\n\n\n<p class=\"wp-block-paragraph\">Malaria was a natural application for machine learning because the parasite leaves visible traces: faint rings inside cells, dark hemoglobin crystals and changes in cell shape. The team trained its model on hundreds of thousands of images of manually annotated cell images, and Remoscope eventually outperformed the average microscopist and approached expert performance in <a href=\"https://pubmed.ncbi.nlm.nih.gov/40631413/\" rel=\"noreferrer noopener\" target=\"_blank\">a year-long study</a> in Tororo, Uganda.</p>\n\n\n\n<figure class=\"wp-block-embed is-type-video is-provider-wistia-inc wp-block-embed-wistia-inc\"><div class=\"wp-block-embed__wrapper\"></div><figcaption class=\"wp-element-caption\" id=\"video-caption-6aebc5c61a140\">Watch a short documentary about Remoscope for malaria.</figcaption></figure>\n\n\n\n<p class=\"wp-block-paragraph\">But as deadly as malaria is, a malaria-only test is only of limited utility in an environment where many other illnesses circulate. To see whether the instrument could do more, the team turned to a more mysterious problem: sepsis.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Sepsis can arise from many different infections and affects multiple populations of blood cells at once. It has no single characteristic cellular signature, and blood from a septic patient and blood from a critically ill patient without an infection often look remarkably similar. “With malaria, we could find the weird cells, but with sepsis we didn’t know what we were looking for,” says Biohub engineer Ilakkiyan Jeyakumar.</p>\n\n\n\n<figure class=\"wp-block-image size-large\"><img alt=\"\" class=\"wp-image-52723\" height=\"462\" src=\"https://biohub.org/wp-content/uploads/2026/10/remo-map-sepsis-blood-cell-landscape.webp?w=1024\" width=\"1024\" /><figcaption class=\"wp-element-caption\" id=\"video-caption-6aebc5c61cbfc\">A Remo-Map showing the average distribution of cell appearances across sepsis samples imaged by Remoscope. Cells with similar shapes and internal features are grouped together, with taller peaks indicating higher concentrations of cells. The resulting landscape reveals the diversity of blood-cell morphology captured by the instrument.</figcaption></figure>\n\n\n\n<h2 class=\"wp-block-heading\" id=\"h-learning-without-labels\">Learning without labels</h2>\n\n\n\n<p class=\"wp-block-paragraph\">Since labeling individual cells wouldn’t solve the problem, the team built a different type of model. Remo-ID doesn’t try to characterize individual cells. Instead, it uses a technique called multiple-instance learning, in which all the images from one run are pooled into a “bag,” each image is converted into a numerical representation, and an attention mechanism learns how to combine them into a single prediction for the patient.</p>\n\n\n\n<p class=\"wp-block-paragraph\">During the model’s initial training on more than 1.2 billion cells, the researchers provided labels only at the sample level, indicating whether the blood came from a patient with sepsis, a critically ill patient with a non-infectious condition, or a healthy donor. They did not tell the model which cellular features it should pay attention to as a way to distinguish these groups.</p>\n\n\n\n<p class=\"wp-block-paragraph\">The initial results, <a href=\"https://www.medrxiv.org/content/10.64898/2026.10.08.26364716v1.full\" rel=\"noreferrer noopener\" target=\"_blank\">published on medRxiv</a> with collaborators including Chaz Langelier, an infectious disease physician at UC San Francisco and a Biohub Investigator, show promise for a future diagnostic tool. Of the 47 samples&nbsp; — 13 with confirmed sepsis, 12 noninfectious controls treated in an Intensive Care Unit, and 22 healthy donors — Remo-ID correctly classified 43.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">In one analysis, cells from the 22 healthy donors occupied a largely overlapping region. Cells from critically ill patients were more widely dispersed, while cells from patients with sepsis formed distinct clusters. &#8220;The model was very good at learning patterns,” says Paul Lebel, who leads the Remoscope project. “Despite the diverse underlying conditions reflected in the samples, the model gets it right more than 90 percent of the time, and can be tuned to find 100 percent of the sepsis cases.”</p>\n\n\n\n<p class=\"wp-block-paragraph\">The sepsis group included only 13 people, meaning a small number of unusual cases could skew the results. Nor do the researchers yet know with certainty which cellular features are driving the model’s predictions. But the results are strong enough to warrant testing the approach in a much larger group, Jeyakumar says. The data also contain intriguing patterns that, if validated in larger studies, could offer new clues about how sepsis affects blood cells.</p>\n\n\n\n<figure class=\"wp-block-jetpack-image-compare\"><div class=\"juxtapose\"><img alt=\"Scatter plot of 1.3 million blood-cell images colored by patient; sepsis images group into islands, often one per patient.\" class=\"image-compare__image-before\" height=\"1000\" id=\"52713\" src=\"https://biohub.org/wp-content/uploads/2026/10/remo-id-umap-blood-cell-images-by-patient.png\" width=\"1000\" /><img alt=\"Scatter plot of 1.3 million blood-cell images colored by condition, with sepsis images in yellow forming distinct clusters\" class=\"image-compare__image-after\" height=\"1000\" id=\"52714\" src=\"https://biohub.org/wp-content/uploads/2026/10/remo-id-umap-blood-cell-images-by-condition.png\" width=\"1000\" /></div><figcaption id=\"video-caption-6aebc5c61d808\">Each dot represents one of 1.3 million raw images of cells, as seen by the deep learning model Remo-ID when trained on the full dataset. Septic patients’ blood images (yellow) scatter into islands. Slide the handle to see that they often cluster by individual patient, a hint that more information lies below the surface that in the future could inform treatment of underlying conditions.</figcaption></figure>\n\n\n\n\n\n<h2 class=\"wp-block-heading\" id=\"h-mapping-what-the-models-see\">Mapping what the models see</h2>\n\n\n\n<p class=\"wp-block-paragraph\">A separate tool, Remo-Map, is helping the team explore those patterns. Remo-Map is trained on datasets the group has collected. Rather than classifying an entire sample, as Remo-ID does, it represents millions of individual cells in a mathematical space according to similarities in their morphology, without first being given diagnoses.&nbsp;</p>\n\n\n\n<p class=\"wp-block-paragraph\">Remo-Map has identified interesting differences in the blood of septic patients that have previously been described in the literature, says Bratvold. These include immature neutrophils — bands and earlier forms — released early from bone marrow; and unusual numbers of immature red blood cells such as reticulocytes and various stages of erythroblasts (red blood cell precursors that haven&#8217;t yet lost their nucleus) moving differently through the flow-cell channel because they are less pliable.</p>\n\n\n\n<p class=\"wp-block-paragraph\">That last set of features is one that Remoscope is uniquely positioned to see. Because it images blood while it flows, rather than dried and fixed on a slide, it captures how cells bend and move – information a conventional smear would miss. Together, these findings suggest an intriguing hypothesis: the sepsis signal may not reside in a single biomarker or cell type, but in the state of the blood as a whole.</p>\n\n\n\n<p class=\"wp-block-paragraph\">These observations are not yet an approved diagnostic, which will require more data and FDA approval. But they illustrate the kinds of differences that can emerge when millions of blood cells are studied at once.</p>\n\n\n\n<h2 class=\"wp-block-heading\" id=\"h-beyond-sepsis\">Beyond sepsis</h2>\n\n\n\n<p class=\"wp-block-paragraph\">“These models see so much more than what we are currently using them for,” says Lebel. Blood disorders are one clear target, he says, including sickle cell disease and other anemias, which distort the size and shape of red cells, as well as blood cancers, most of which affect the white cell population. The team is also piloting a lupus diagnostic, and asking whether the technology can register an immune system in action: the response to a vaccine, for example, or signs of a viral infection.</p>\n\n\n\n<p class=\"wp-block-paragraph\">“What is great about this device is its speed,” says Bratvold. “If we have access to samples from those conditions, we can collect millions to hundreds of millions of cells then train new models and evaluate them in days.”</p>\n<p>The post <a href=\"https://biohub.org/blog/ai-sepsis-detection-blood-cells/\">Sepsis is linked to 11 million deaths a year. A new machine-learning platform could help catch it within minutes</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>"
+      }
+    ],
+    "feed_kind": "company",
+    "feed_name": "Chan Zuckerberg Biohub",
+    "feed_url": "https://biohub.org/feed/",
+    "guidislink": false,
+    "id": "https://biohub.org/?p=52684",
+    "link": "https://biohub.org/blog/ai-sepsis-detection-blood-cells/",
+    "links": [
+      {
+        "href": "https://biohub.org/blog/ai-sepsis-detection-blood-cells/",
+        "rel": "alternate",
+        "type": "text/html"
+      }
+    ],
+    "post-id": "52684",
+    "published": "Thu, 29 Oct 2026 19:50:00 +0000",
+    "published_parsed": [
+      2026,
+      10,
+      29,
+      19,
+      50,
+      0,
+      3,
+      302,
+      0
+    ],
+    "summary": "<p>A technology built by Biohub scientists uses artificial intelligence to recognize sepsis from images of millions of blood cells, without being told what to look for.</p>\n<p>The post <a href=\"https://biohub.org/blog/ai-sepsis-detection-blood-cells/\">Sepsis is linked to 11 million deaths a year. A new machine-learning platform could help catch it within minutes</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>",
+    "summary_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/html",
+      "value": "<p>A technology built by Biohub scientists uses artificial intelligence to recognize sepsis from images of millions of blood cells, without being told what to look for.</p>\n<p>The post <a href=\"https://biohub.org/blog/ai-sepsis-detection-blood-cells/\">Sepsis is linked to 11 million deaths a year. A new machine-learning platform could help catch it within minutes</a> appeared first on <a href=\"https://biohub.org\">Biohub</a>.</p>"
+    },
+    "tags": [
+      {
+        "label": null,
+        "scheme": null,
+        "term": "AI"
+      },
+      {
+        "label": null,
+        "scheme": null,
+        "term": "Imaging"
+      },
+      {
+        "label": null,
+        "scheme": null,
+        "term": "Technology"
+      }
+    ],
+    "title": "Sepsis is linked to 11 million deaths a year. A new machine-learning platform could help catch it within minutes",
+    "title_detail": {
+      "base": "",
+      "language": null,
+      "type": "text/plain",
+      "value": "Sepsis is linked to 11 million deaths a year. A new machine-learning platform could help catch it within minutes"
+    }
+  },
+  "org": "Chan Zuckerberg Biohub",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-10-29",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "rss",
+  "summary": "Biohub researchers describe an AI platform that detects sepsis from images of blood cells without being told what features to look for, aiming for rapid…",
+  "title": "Sepsis is linked to 11 million deaths a year. A new machine-learning platform could help catch it within minutes",
+  "type": "industry",
+  "url": "https://biohub.org/blog/ai-sepsis-detection-blood-cells/"
+}

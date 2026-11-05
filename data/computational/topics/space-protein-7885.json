@@ -770,7 +770,7 @@
     0.0025504454970359802,
     -0.05354805663228035
   ],
-  "headline": "Deep learning and accelerated tools reshape genomic inference from raw sequencing reads",
+  "headline": "Learned and accelerated methods now operate directly on raw reads and pileups",
   "history": [
     {
       "count_7d": 3,
@@ -3278,7 +3278,7 @@
         "biorxiv:10.64898/2026.11.03.764120",
         "pubmed:10.1093/bioinformatics/btag792"
       ],
-      "rank": 26,
+      "rank": 27,
       "scores": {
         "code_velocity": 0.0,
         "diversity": 0.5,
@@ -3298,7 +3298,7 @@
     }
   ],
   "item_one_liners": {},
-  "label": "Deep Learning Genomic Inference",
+  "label": "Scalable Genomic Data Computation",
   "related": [
     "interaction-gene-9a09",
     "annular-mean-passage-f2b7",
@@ -3306,8 +3306,8 @@
   ],
   "secondary_categories": [],
   "slug": "space-protein-7885",
-  "summary": "Deep models now operate on raw reads and pileups rather than aggregated summaries, while mapping and single-cell tools push runtime and memory limits.",
-  "synthesis": "The dominant thread is computation at the level of primary sequencing data, with attention to cost. SomatiX applies deep learning to allele-aware pileups from matched tumor-normal long-read DNA and is reported to outperform DeepSomatic. scRM pretrains a single-cell foundation model on scRNA-seq reads rather than count matrices and is reported as competitive. flashscenic accelerates SCENIC GRN inference on GPU, reporting 12-27x speedups over pySCENIC with r=0.9996 equivalence. brisc runs a multithreaded CPU workflow on 10M cells in 3 minutes. The arXiv workload characterization identifies memory-bound functions and cache behavior in DNA read mapping tools. What is new is the shift toward raw-read and pileup inputs, combined with explicit concern for throughput and memory behavior at scale. The items do not address a single biological question; they share methodological and systems concerns.",
+  "summary": "Raw-read and pileup inputs now feed deep learning models, while throughput and memory behavior are measured explicitly at scale.",
+  "synthesis": "The dominant thread is computation applied to primary sequencing data, with explicit attention to throughput and memory. SomatiX applies deep learning to allele-aware pileups from matched tumor-normal long-read DNA and is reported to outperform DeepSomatic. scRM pretrains a single-cell foundation model directly on scRNA-seq reads rather than count matrices and is reported as competitive. flashscenic accelerates SCENIC GRN inference on GPU, reporting 12-27x speedups over pySCENIC with r=0.9996 equivalence. brisc runs a multithreaded CPU workflow on 10M cells in 3 minutes and is reproducible across thread counts. The arXiv workload characterization profiles WGA, long-read, and short-read mapping tools with VTune and DAMOV-SIM, identifying memory-bound functions and cache behavior. What is new is the shift toward raw-read and pileup inputs combined with systems-level measurement at scale. The items share methodological and systems concerns rather than a single biological question.",
   "synthesis_model": "claude-haiku-5-5",
   "synthesized_on": "2026-11-04"
 }
