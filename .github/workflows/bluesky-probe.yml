@@ -1,0 +1,32 @@
+name: Bluesky attention probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: Days ending on the latest stored day
+        type: number
+        required: true
+        default: 7
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install httpx
+      - name: Measure attention (aggregate output only)
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          PROBE_DAYS: ${{ inputs.days }}
+        run: python ops/bluesky-probe/probe.py --days "$PROBE_DAYS"
