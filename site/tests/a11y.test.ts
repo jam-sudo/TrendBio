@@ -71,7 +71,8 @@ describe("built site accessibility and responsive layout", () => {
       expect(await page.locator("a[href='#main']").evaluate((link) => link === document.activeElement)).toBe(true);
       expect(await page.locator("a[href='#main']").evaluate((link) => getComputedStyle(link).outlineStyle)).toBe("solid");
       await page.keyboard.press("Enter");
-      expect(new URL(page.url()).hash).toBe("#main");
+      await page.waitForURL(url => url.hash === "#main", { timeout: 10_000 });
+      expect(await page.evaluate(() => document.activeElement?.id === "main" || location.hash === "#main")).toBe(true);
       if (path === "/") expect(await page.locator(".helix").getAttribute("aria-hidden")).toBe("true");
       if (path.startsWith("/topic/")) expect(await page.locator(".sparkline").getAttribute("aria-label")).toBeTruthy();
     }, 30_000,
@@ -105,6 +106,7 @@ describe("built site accessibility and responsive layout", () => {
     expect(await toggle.getAttribute("aria-pressed")).toBe("true");
     expect(await page.evaluate(() => localStorage.getItem("trendbio-theme"))).toBe("light");
     await page.locator('.nav-links a[href="/topics"]').click();
+    await page.waitForURL(url => url.pathname === "/topics", { timeout: 10_000 });
     expect(await page.locator("html").getAttribute("data-theme")).toBe("light");
     await page.locator("#theme-toggle").focus();
     await page.keyboard.press("Space");
@@ -187,7 +189,7 @@ describe("built site accessibility and responsive layout", () => {
     expect(await page.locator(".month-nav").evaluate(el => getComputedStyle(el).overflowX)).toBe("auto");
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
     await novemberFirst.click();
-    expect(new URL(page.url()).pathname).toBe("/day/2026-11-01/");
+    await page.waitForURL(url => url.pathname === "/day/2026-11-01/", { timeout: 10_000 });
   });
 
   it("uses equal-width leaderboard rows at 1280px", async () => {
