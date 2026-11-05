@@ -125,3 +125,147 @@ def test_preprint_then_published_links_both_ways(tmp_path, item):
     result = dedupe([without_doi], store)
     assert result == [without_doi.model_copy(update={"preprint_id": preprint.id})]
     assert store.get_item(preprint.id).published_doi == "10.1000/known"
+
+
+def _dedupe_reference(new: list[Item], store: Store) -> list[Item]:
+    def doi(value: str | None) -> str:
+        return value.strip().casefold().removeprefix("https://doi.org/") if isinstance(value, str) else ""
+
+    known = store.items_between(date.min, date.max)
+    result = {}
+    for item in new:
+        title = normalize_title(item.title)
+        duplicate = any(
+            item.id == other.id or (
+                {item.type, other.type} != {"preprint", "published"}
+                and (
+                    (doi(item.doi) and doi(item.doi) == doi(other.doi))
+                    or (title and title == normalize_title(other.title)
+                        and (
+                            (item.source != other.source
+                             and abs((item.published_at - other.published_at).days) <= 30)
+                            or (item.type == other.type == "industry"
+                                and item.published_at == other.published_at)
+                        ))
+                )
+            )
+            for other in known
+        )
+        if not duplicate:
+            item = item.model_copy()
+            known.append(item)
+            result[item.id] = item
+
+    # Link only canonical records, so a duplicate paper cannot replace a valid link.
+    added = set(result)
+    preprints = [item for item in known if item.type == "preprint"]
+    new_preprints = [item for item in preprints if item.id in added]
+    for paper in known:
+        if paper.type != "published":
+            continue
+        identifiers = {doi(value) for value in (
+            paper.preprint_id, paper.doi, paper.published_doi,
+            *(paper.metadata.get(key) for key in ("preprint_id", "preprint_doi", "published_doi", "doi")),
+        )} - {""}
+        by_identifier = by_title = None
+        for preprint in preprints if paper.id in added else new_preprints:
+            if identifiers.intersection(map(doi, (preprint.id, preprint.doi, preprint.published_doi))):
+                by_identifier = preprint
+                break
+            title = normalize_title(paper.title)
+            if by_title is None and title and title == normalize_title(preprint.title):
+                by_title = preprint
+        preprint = by_identifier or by_title
+        if preprint is not None:
+            if paper.doi is not None and preprint.published_doi != paper.doi:
+                preprint.published_doi = paper.doi
+                result[preprint.id] = preprint
+            if paper.preprint_id != preprint.id:
+                paper.preprint_id = preprint.id
+                result[paper.id] = paper
+    return list(result.values())
+
+
+def test_dedupe_is_linear_in_known(tmp_path, item, monkeypatch):
+    from time import perf_counter
+
+    store = Store(tmp_path, "computational")
+    types = ("preprint", "published", "industry", "code")
+    sources = ("biorxiv", "pubmed", "rss", "github")
+    known = [item.model_copy(update={
+        "id": f"known:{number}", "title": f"K {number}", "doi": f"10.0/{number}",
+        "type": types[number % 4], "source": sources[number % 4],
+    }) for number in range(20_000)]
+    new = []
+    for number in range(200):
+        original = known[-200 + number]
+        updates = {"id": f"new:{number}", "title": f"N {number}", "doi": None}
+        mode = number % 8
+        if mode == 0:
+            updates["id"] = original.id
+        elif mode == 1:
+            updates["doi"] = f" HTTPS://DOI.ORG/{original.doi} "
+        elif mode in (2, 3, 4):
+            updates["title"] = f" {original.title.upper()}! "
+            if mode != 3:
+                updates["source"] = "arxiv"
+            if mode == 4:
+                updates["published_at"] = original.published_at + timedelta(days=31)
+        elif mode == 5:
+            updates.update(type="preprint", title=original.title)
+        elif mode == 6:
+            updates.update(type="published", metadata={"preprint_doi": known[0].doi})
+        new.append(original.model_copy(update=updates))
+
+    loads = []
+
+    def load_known(start, end):
+        loads.append((start, end))
+        return [row.model_copy(deep=True) for row in known]
+
+    monkeypatch.setattr(store, "items_between", load_known)
+    started = perf_counter()
+    actual = dedupe(new, store)
+    elapsed = perf_counter() - started
+    assert elapsed < 5
+    assert loads == [(date.min, date.max)]
+    assert actual == _dedupe_reference(new, store)
+
+
+def test_link_indexes_preserve_priority_order_and_mutations(tmp_path, item, monkeypatch):
+    store = Store(tmp_path, "computational")
+    early = item.model_copy(update={"id": "preprint:early", "doi": "10.0/early"})
+    later = item.model_copy(update={"id": "preprint:later", "doi": "10.0/later"})
+    known = [early, later]
+    paper = item.model_copy(update={"type": "published", "source": "pubmed"})
+    new = [
+        paper.model_copy(update={
+            "id": "paper:identifier", "doi": "10.0/linked", "preprint_id": later.id,
+        }),
+        paper.model_copy(update={
+            "id": "paper:added-alias", "title": "Renamed", "doi": "10.0/next",
+            "metadata": {"doi": "10.0/linked"},
+        }),
+        paper.model_copy(update={
+            "id": "paper:removed-alias", "title": "No match", "doi": "10.0/unlinked",
+            "metadata": {"doi": "10.0/linked"},
+        }),
+        paper.model_copy(update={
+            "id": "paper:order", "doi": "10.0/order", "title": "Another name",
+            "metadata": {"preprint_doi": later.doi, "published_doi": early.doi},
+        }),
+        paper.model_copy(update={
+            "id": "paper:title", "doi": "10.0/title", "published_at": date(2026, 12, 1),
+        }),
+    ]
+    monkeypatch.setattr(store, "items_between", lambda *_: [row.model_copy(deep=True) for row in known])
+    actual = dedupe(new, store)
+    assert actual == _dedupe_reference(new, store)
+    rows = {row.id: row for row in actual}
+    assert rows["paper:identifier"].preprint_id == later.id
+    assert rows["paper:added-alias"].preprint_id == later.id
+    assert rows["paper:removed-alias"].preprint_id is None
+    assert rows["paper:order"].preprint_id == early.id
+    assert rows["paper:title"].preprint_id == early.id
+    assert rows[later.id].published_doi == "10.0/next"
+    assert rows[early.id].published_doi == "10.0/title"

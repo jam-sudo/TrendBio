@@ -17,34 +17,57 @@ def dedupe(new: list[Item], store: Store) -> list[Item]:
         return value.strip().casefold().removeprefix("https://doi.org/") if isinstance(value, str) else ""
 
     known = store.items_between(date.min, date.max)
+    by_id: dict[str, Item] = {}
+    by_doi: dict[str, list[Item]] = {}
+    by_title: dict[str, list[Item]] = {}
+
+    def index(item: Item, title: str, identifier: str) -> None:
+        by_id[item.id] = item
+        if identifier:
+            by_doi.setdefault(identifier, []).append(item)
+        if title:
+            by_title.setdefault(title, []).append(item)
+
+    for item in known:
+        index(item, normalize_title(item.title), doi(item.doi))
+
     result = {}
     for item in new:
         title = normalize_title(item.title)
-        duplicate = any(
-            item.id == other.id or (
-                {item.type, other.type} != {"preprint", "published"}
-                and (
-                    (doi(item.doi) and doi(item.doi) == doi(other.doi))
-                    or (title and title == normalize_title(other.title)
-                        and (
-                            (item.source != other.source
-                             and abs((item.published_at - other.published_at).days) <= 30)
-                            or (item.type == other.type == "industry"
-                                and item.published_at == other.published_at)
-                        ))
-                )
+        identifier = doi(item.doi)
+        duplicate = item.id in by_id or any(
+            {item.type, other.type} != {"preprint", "published"}
+            for other in by_doi.get(identifier, ())
+        ) or any(
+            {item.type, other.type} != {"preprint", "published"}
+            and (
+                (item.source != other.source
+                 and abs((item.published_at - other.published_at).days) <= 30)
+                or (item.type == other.type == "industry"
+                    and item.published_at == other.published_at)
             )
-            for other in known
+            for other in by_title.get(title, ())
         )
         if not duplicate:
             item = item.model_copy()
             known.append(item)
+            index(item, title, identifier)
             result[item.id] = item
 
     # Link only canonical records, so a duplicate paper cannot replace a valid link.
     added = set(result)
-    preprints = [item for item in known if item.type == "preprint"]
-    new_preprints = [item for item in preprints if item.id in added]
+    preprint_order = {}
+    by_identifier: dict[str, dict[int, Item]] = {}
+
+    def preprint_identifiers(item: Item) -> set[str]:
+        return {doi(value) for value in (item.id, item.doi, item.published_doi)} - {""}
+
+    for position, item in enumerate(known):
+        if item.type == "preprint":
+            preprint_order[id(item)] = position
+            for identifier in preprint_identifiers(item):
+                by_identifier.setdefault(identifier, {})[position] = item
+
     for paper in known:
         if paper.type != "published":
             continue
@@ -52,18 +75,30 @@ def dedupe(new: list[Item], store: Store) -> list[Item]:
             paper.preprint_id, paper.doi, paper.published_doi,
             *(paper.metadata.get(key) for key in ("preprint_id", "preprint_doi", "published_doi", "doi")),
         )} - {""}
-        by_identifier = by_title = None
-        for preprint in preprints if paper.id in added else new_preprints:
-            if identifiers.intersection(map(doi, (preprint.id, preprint.doi, preprint.published_doi))):
-                by_identifier = preprint
-                break
-            title = normalize_title(paper.title)
-            if by_title is None and title and title == normalize_title(preprint.title):
-                by_title = preprint
-        preprint = by_identifier or by_title
+        # Identifier matches outrank titles; ties retain the original known order.
+        _, preprint = min(
+            ((position, candidate)
+             for identifier in identifiers
+             for position, candidate in by_identifier.get(identifier, {}).items()
+             if paper.id in added or candidate.id in added),
+            key=lambda match: match[0], default=(0, None),
+        )
+        if preprint is None:
+            preprint = next((
+                candidate for candidate in by_title.get(normalize_title(paper.title), ())
+                if candidate.type == "preprint" and (paper.id in added or candidate.id in added)
+            ), None)
         if preprint is not None:
             if paper.doi is not None and preprint.published_doi != paper.doi:
+                previous = preprint_identifiers(preprint)
                 preprint.published_doi = paper.doi
+                current = preprint_identifiers(preprint)
+                position = preprint_order[id(preprint)]
+                # Later papers must see link changes made by earlier papers in this pass.
+                for identifier in previous - current:
+                    del by_identifier[identifier][position]
+                for identifier in current - previous:
+                    by_identifier.setdefault(identifier, {})[position] = preprint
                 result[preprint.id] = preprint
             if paper.preprint_id != preprint.id:
                 paper.preprint_id = preprint.id
