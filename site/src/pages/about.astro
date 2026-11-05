@@ -2,13 +2,15 @@
 import { readFileSync } from "node:fs";
 import { parse } from "yaml";
 import Base from "../layouts/Base.astro";
+import { loadSponsors } from "../lib/sponsors";
 import { latestDay } from "../lib/data";
 
 const { weights, top_n, category_floor, max_per_category } = parse(readFileSync("../config/scoring.yaml", "utf8"));
 const day = latestDay("computational");
+const { contact } = loadSponsors();
 ---
 
-<Base title="About — TrendBio" lastRun={day?.run.finished}>
+<Base description="How TrendBio tracks and ranks computational biology research, tools and industry activity." canonicalPath="/about/" title="About — TrendBio" lastRun={day?.run.finished}>
   <article class="prose" aria-labelledby="about-heading">
     <h1 id="about-heading">About TrendBio</h1>
     <p>TrendBio tracks what is moving in computational biology and bioinformatics. Each day, it groups related research, tools and industry activity into topics and ranks the Top {top_n}, with evidence and a synthesis for readers who already know the field.</p>
@@ -21,6 +23,6 @@ const day = latestDay("computational");
     <h2>Machine-generated summaries</h2>
     <p>Headlines, summaries and syntheses are machine-generated and may contain errors. Follow the evidence links and consult the original sources before relying on a claim.</p>
     <h2>Contact</h2>
-    <p>Contact details will be added before launch.</p>
+    <p><!--email_off--><a href={`mailto:${contact}`}>{contact}</a><!--/email_off--></p>
   </article>
 </Base>

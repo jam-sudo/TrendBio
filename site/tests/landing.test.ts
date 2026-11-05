@@ -114,7 +114,7 @@ describe("built landing, day and archive pages", () => {
       expect(archive.match(/<a\b[^>]*href="\/day\/2026-10-31\/"[^>]*>[\s\S]*?<\/a>/)![0]).toContain("PARTIAL");
       expect(archive).not.toContain("BACKFILLED");
       const novemberHeading = archive.match(/<h2\b[^>]*id="heading-2026-11"[^>]*>[\s\S]*?<\/h2>/)![0];
-      expect(novemberHeading).toContain("backfilled");
+      expect(novemberHeading).toContain("in progress");
       expect(novemberHeading).not.toContain("partly backfilled");
       for (const page of ["index.html", `day/${day.date}/index.html`]) {
         const html = readFileSync(join(output, page), "utf8");

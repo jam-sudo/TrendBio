@@ -3,15 +3,20 @@ import "@fontsource/inconsolata/400.css";
 import "@fontsource/inconsolata/700.css";
 import "../styles/global.css";
 import SponsorColumns from "../components/SponsorColumns.astro";
+import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
 
 interface Props {
   title?: string;
+  description: string;
+  canonicalPath: string;
   lastRun?: string | null;
   heroAligned?: boolean;
 }
 
-const { title = "TrendBio", lastRun, heroAligned = false } = Astro.props;
+const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false } = Astro.props;
+const summary = truncateDescription(description);
+const canonical = new URL(canonicalPath, Astro.site).href;
 ---
 
 <!doctype html>
@@ -21,6 +26,17 @@ const { title = "TrendBio", lastRun, heroAligned = false } = Astro.props;
     <script is:inline>let t;try{t=localStorage.getItem('trendbio-theme')}catch{}document.documentElement.dataset.theme=/^(dark|light)$/.test(t)?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="oklch(14.5% 0 0)" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="description" content={summary} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={summary} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TrendBio" />
+    <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

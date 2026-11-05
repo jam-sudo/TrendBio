@@ -6,7 +6,7 @@ import { latestDay, loadMap, loadTaxonomy } from "../lib/data";
 const domain = "computational";
 const map = loadMap(domain);
 ---
-<Base title="Map — TrendBio" lastRun={latestDay(domain)?.run.finished}>
+<Base description="Explore connections between computational biology research topics on the TrendBio map." canonicalPath="/map/" title="Map — TrendBio" lastRun={latestDay(domain)?.run.finished}>
   <h1>Research map</h1>
   <p>Explore how research topics connect. Nearby topics share similar research; lines link each topic to its three closest neighbours. Larger dots represent more items across its history.</p>
   {map?.points.length ? <TopicMap map={map} categories={loadTaxonomy(domain)} /> :
