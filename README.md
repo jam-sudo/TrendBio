@@ -3,7 +3,7 @@
 ## What this is
 
 TrendBio tracks computational biology research, tools, and industry news.
-It clusters related evidence into a daily ranked Top 40 with linked sources and
+It clusters related papers into a daily ranked Top 40 with attached code/industry evidence and
 machine-generated syntheses for readers familiar with the field.
 
 ## How the pipeline runs
@@ -25,7 +25,22 @@ Journals in `pubmed.journals_keyword_filtered` require a title or abstract match
 `keywords`; no broad MeSH query is used. PubMed copies of bioRxiv and medRxiv
 preprints are excluded. Enrichment excludes routine public-data analyses such as
 hub-gene nomination and prognostic signatures unless they contribute a new method,
-tool, model, dataset, benchmark or resource. Enrichment failures retain relevance.
+tool, model, dataset, benchmark or resource. Sync enrichment retries empty or invalid
+output once, increasing its output allowance from 512 to 1,024 tokens without changing
+the prompt or effort; empty-output warnings include the stop reason and output usage.
+Exhausted enrichment failures retain relevance for papers only; code and industry
+fallbacks remain stored with an `enrichment-fallback:` note but are not relevant.
+
+Paper clusters use complete linkage at cosine distance 0.10, with at least three papers.
+Each relevant code/industry item attaches to only its nearest paper centroid when cosine
+similarity reaches `attach_min_similarity` (0.94; [calibration](tests/evidence/code-industry-2026-11-05.md)).
+Attached IDs are stored separately in `attached_item_ids` (empty for older histories),
+contributing evidence, diversity and code velocity without changing paper centroids,
+counts, rise, volume or continuity. Unattached items do not rank. Home and day pages
+also show up to eight relevant industry items first seen in their trailing seven days,
+newest first, whether attached or not; the Industry chip is omitted when no topic uses it.
+These changes apply to future runs; existing daily results are not rewritten.
+
 The Top 40 reserves `category_floor` (default 1) topic per represented primary category,
 then fills by score up to `max_per_category` (default 8) per category; sparse days can have fewer than 40.
 The selected topics are ranked by score. The first `featured_n` (default 5) get full rows
@@ -36,7 +51,7 @@ Backfill and reprocessed history use `backfill_synthesis_model` (Haiku) for ever
 over-ceiling runs always use Haiku.
 
 Topic continuity requires a history entry within ±10 days (`continuity_max_gap_days`),
-including when backfilling older months. A cluster continues a topic if its item IDs
+including when backfilling older months. A cluster continues a topic if its paper IDs
 have Jaccard overlap ≥0.25 (`continuity_min_jaccard`) with the adjacent seven days of
 that topic's history, or centroid cosine similarity ≥0.95 (`continuity_threshold`).
 Matches are assigned by overlap first, then similarity, with at most one cluster per

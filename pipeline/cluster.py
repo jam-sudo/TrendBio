@@ -30,6 +30,22 @@ def cluster_items(ids: list[str], X: np.ndarray, cfg: Scoring) -> list[list[str]
     return [group for group in groups.values() if len(group) >= cfg.min_cluster_size]
 
 
+def attach_items(items: list[Item], vectors_by_id: dict[str, np.ndarray],
+                 centroids: list[np.ndarray], cfg: Scoring) -> list[list[str]]:
+    attached = [[] for _ in centroids]
+    if not centroids:
+        return attached
+    normalized = l2_normalize(centroids)
+    for item in items:
+        if not item.relevant or item.type not in {'code', 'industry'}:
+            continue
+        similarities = normalized @ l2_normalize([vectors_by_id[item.id]])[0]
+        best = int(np.argmax(similarities))
+        if similarities[best] >= cfg.attach_min_similarity:
+            attached[best].append(item.id)
+    return attached
+
+
 def keyword_slug(titles: list[str], corpus_titles: list[str],
                  item_ids: list[str]) -> tuple[str, str]:
     vectorizer = TfidfVectorizer(
@@ -120,9 +136,11 @@ def match_or_create(cluster_ids: list[str], centroid: np.ndarray, topics: list[T
     )
 
 
-def append_history(topic: Topic, today: date, item_ids: list[str], count_7d: int) -> None:
+def append_history(topic: Topic, today: date, item_ids: list[str], count_7d: int,
+                   attached_item_ids: list[str] | None = None) -> None:
     entry = TopicDay(
         date=today, rank=None, item_ids=item_ids, count_7d=count_7d,
+        attached_item_ids=attached_item_ids or [],
         signals=Signals(published=0, preprint=0, code=0, industry=0, rise_ratio=0.0, star_gain_7d=0),
         scores=Scores(rise=0, diversity=0, code_velocity=0, volume=0, penalty=0, total=0),
     )

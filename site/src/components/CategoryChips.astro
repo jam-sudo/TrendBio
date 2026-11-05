@@ -13,7 +13,7 @@ const { categories, counts } = Astro.props;
 
 <div class="category-chips" role="group" aria-label="Topic categories" data-category-chips>
   <button type="button" data-cat="all" aria-pressed="true">All</button>
-  {categories.map(({ slug, label }) => (
+  {categories.filter(({ slug }) => slug !== "industry" || counts[slug]).map(({ slug, label }) => (
     <button type="button" data-cat={slug} aria-pressed="false" disabled={!counts[slug]} style={`--category-hue: ${categoryStyle(slug).hue}`}>
       <CategoryIcon slug={slug} size={16} /> {label}
     </button>

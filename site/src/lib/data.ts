@@ -33,6 +33,7 @@ interface DataIndex {
   topicsBySlug: Map<string, Topic>;
   rankedTopics: Topic[];
   itemPathById: Map<string, string>;
+  industryItems?: Item[];
   map: MapData | null;
   notes: Map<string, string | null>;
   orphanNotes: string[];
@@ -165,4 +166,20 @@ export function loadTaxonomy(domain: string): Category[] {
   const path = resolve("../config/taxonomy", `${domain}.yaml`);
   if (!cache.taxonomies.has(path)) cache.taxonomies.set(path, parse(readFileSync(path, "utf8")).categories);
   return cache.taxonomies.get(path)!;
+}
+
+export function industryItems(domain: string, day: string): Item[] {
+  const index = getDataIndex(domain);
+  if (!index.industryItems) {
+    // Industry comes from RSS; read those files once, not every paper on every day page.
+    index.industryItems = [...new Set(index.itemPathById.values())]
+      .filter((path) => basename(path).startsWith("rss_"))
+      .map((path) => { index.stats.itemReads++; return readJson<Item>(path); })
+      .filter((item): item is Item => item !== null && item.type === "industry" && item.relevant !== false)
+      .sort((a, b) => b.first_seen.localeCompare(a.first_seen) || a.id.localeCompare(b.id));
+  }
+  const start = new Date(`${day}T00:00:00Z`);
+  start.setUTCDate(start.getUTCDate() - 6);
+  const from = start.toISOString().slice(0, 10);
+  return index.industryItems.filter((item) => item.first_seen >= from && item.first_seen <= day).slice(0, 8);
 }

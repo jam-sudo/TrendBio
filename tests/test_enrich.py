@@ -386,12 +386,13 @@ def test_fallback_reason_logged(tmp_path, item, taxonomy, monkeypatch, caplog, c
     with caplog.at_level('WARNING', logger='pipeline.llm'):
         assert llm.enrich(item, taxonomy, []) is None
     warnings = [record for record in caplog.records if record.name == 'pipeline.llm']
-    assert len(warnings) == 1
+    retried = reason == 'empty_output' or reason.startswith('validation:')
+    assert len(warnings) == (2 if retried else 1)
     assert warnings[0].levelname == 'WARNING'
     assert f'id={item.id} reason={reason}' in warnings[0].getMessage()
     assert item.abstract not in caplog.text and item.title not in caplog.text
     assert llm.fallback_reasons == {item.id: reason}
-    assert len(calls) == (4 if case == 'retry' else 1)
+    assert len(calls) == (4 if case == 'retry' else 2 if retried else 1)
 
 
 @pytest.mark.parametrize('text,limit,expected', [
@@ -529,3 +530,39 @@ def test_enrich_prompt_excludes_routine_analysis(item, taxonomy):
     assert 'hub-gene' in prompt and 'prognostic' in prompt
     assert 'Positive examples (relevant: true)' in prompt
     assert 'Negative examples (relevant: false)' in prompt
+
+
+@pytest.mark.parametrize('reason', ['empty', 'validation', 'sdk_validation', 'category'])
+def test_empty_output_retries_once(tmp_path, item, taxonomy, caplog, reason):
+    calls = []
+
+    def parse(**kwargs):
+        calls.append(kwargs)
+        output = {'summary': 'Pathogen genomics.', 'primary': 'genomics', 'secondary': [], 'relevant': True}
+        if len(calls) == 1:
+            if reason == 'sdk_validation':
+                Enrichment.model_validate({})
+            output = None if reason == 'empty' else {} if reason == 'validation' else {**output, 'primary': 'bad'}
+        return SimpleNamespace(stop_reason='max_tokens' if len(calls) == 1 else 'end_turn',
+                               parsed_output=output, usage=SimpleNamespace(input_tokens=100, output_tokens=512))
+
+    llm = LLM(SimpleNamespace(messages=SimpleNamespace(parse=parse)), Budget(tmp_path / 'spend.json', 50))
+    assert llm.enrich(item, taxonomy, []).primary == 'genomics'
+    assert [call['max_tokens'] for call in calls] == [512, 1024]
+    assert calls[0]['messages'] == calls[1]['messages']
+    assert all(call['output_config'] == {'effort': 'low'} for call in calls)
+    assert not llm.fallback_reasons
+    if reason == 'empty':
+        assert 'stop_reason=max_tokens usage.output_tokens=512' in caplog.text
+
+
+@pytest.mark.parametrize('kind,source', [('industry', 'rss'), ('code', 'github')])
+def test_fallback_industry_item_not_relevant(tmp_path, item, taxonomy, kind, source):
+    item.type, item.source, item.id = kind, source, f'{source}:fallback'
+    messages = FakeMessages()
+    llm = LLM(SimpleNamespace(messages=messages), Budget(tmp_path / 'spend.json', 50))
+    store = Store(tmp_path, 'computational')
+    _, notes, irrelevant = enrich_items([item], store, llm, None, taxonomy, {})
+    assert len(messages.calls) == 2
+    assert store.get_item(item.id).relevant is False
+    assert notes == [f'enrichment-fallback:{item.id}'] and irrelevant == 1

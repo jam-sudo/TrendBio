@@ -35,7 +35,7 @@ const headline = topic.headline ?? topic.label;
     <Sparkline history={topic.history} />
     {topic.synthesis !== null && <p>{topic.synthesis}</p>}
     <EditorNote html={loadNote(topic.slug)} />
-    <EvidenceList items={loadItems(domain, latestEntry?.item_ids ?? [])} oneLiners={topic.item_one_liners} />
+    <EvidenceList items={loadItems(domain, [...(latestEntry?.item_ids ?? []), ...(latestEntry?.attached_item_ids ?? [])])} oneLiners={topic.item_one_liners} />
     {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading">
       <h2 id="related-heading">Related topics</h2>
       <ul>{related.map((entry) => <li>{entry.history.some((day) => day.rank !== null)
