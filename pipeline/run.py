@@ -631,6 +631,10 @@ def synthesis_repair_targets(store: Store, start: date, end: date):
     topics = {topic.slug: topic for topic in store.all_topics()}
     missing, rows, jobs, evidence = {}, {}, {}, {}
 
+    def old_truncation(value):
+        return any(text and text.endswith('…') and len(text) <= limit
+                   for text, limit in ((value.headline, 91), (value.summary, 161)))
+
     def add_job(topic, entry):
         key = (entry.date, topic.slug)
         if key not in jobs:
@@ -645,13 +649,13 @@ def synthesis_repair_targets(store: Store, start: date, end: date):
             topic = topics.get(row.slug)
             if topic is None:
                 raise ValueError(f'missing topic: {row.slug}')
-            if not topic.headline and topic.slug not in missing:
+            if (not topic.headline or old_truncation(topic)) and topic.slug not in missing:
                 entry = max((entry for entry in topic.history if entry.rank is not None),
                             key=lambda entry: entry.date, default=None)
                 if entry is None:
                     raise ValueError(f'missing ranked history for topic: {topic.slug}')
                 missing[topic.slug] = add_job(topic, entry)
-            if (not row.summary or not row.headline
+            if (not row.summary or not row.headline or old_truncation(row)
                     or row.headline.casefold() in {topic.label.casefold(), 'untitled topic'}):
                 entry = next((entry for entry in topic.history if entry.date == day.date), None)
                 if entry is None:

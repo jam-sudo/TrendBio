@@ -71,7 +71,7 @@ class Synthesis(BaseModel):
     @field_validator('headline', 'summary')
     @classmethod
     def shorten_text(cls, value: str, info) -> str:
-        return truncate(value, 90 if info.field_name == 'headline' else 160)
+        return truncate(value, 120 if info.field_name == 'headline' else 220)
 
 
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:

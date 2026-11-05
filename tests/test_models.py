@@ -142,8 +142,8 @@ def test_fixtures_validate(fixtures_root):
         assert set(topic.related) <= topics.keys() - {topic.slug}
         assert len(topic.related) <= 3
         assert topic.item_one_liners.keys() <= items.keys()
-        assert topic.headline and len(topic.headline) <= 90
-        assert topic.summary and len(topic.summary) <= 160
+        assert topic.headline and len(topic.headline) <= 120
+        assert topic.summary and len(topic.summary) <= 220
         assert topic.synthesis and 80 <= len(topic.synthesis.split()) <= 160
         assert sum(value * value for value in topic.centroid) == pytest.approx(1)
         dates = [entry.date for entry in topic.history]

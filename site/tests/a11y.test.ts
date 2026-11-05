@@ -91,6 +91,70 @@ describe("built site accessibility and responsive layout", () => {
     expect(await visible.evaluateAll(rows => rows.every(row => row.getAttribute("data-topic-cats")!.split(" ").includes("tools-infra")))).toBe(true);
   });
 
+  it.each([390, 1280])("fits synthesis hard limits without overflow at %ipx", async (width) => {
+    const headline = "Protocol-matched benchmarks test whether learned molecular models outperform conventional models across diverse targets.";
+    const summary = "New benchmarks compare molecular models with conventional methods using matched protocols, testing how training data and evaluation choices affect performance across targets and experimental conditions in protein design.";
+    expect(headline.length).toBe(120);
+    expect(summary.length).toBe(220);
+    await page.setViewportSize({ width, height: 900 });
+    const screenshots = "/tmp/trendbio-synthesis-layout";
+    mkdirSync(screenshots, { recursive: true });
+    await page.route("**/map/", async route => {
+      const response = await route.fetch();
+      const body = (await response.text()).replace(
+        /(<script[^>]*id="topic-map-data"[^>]*>)([\s\S]*?)(<\/script>)/,
+        (_, open, json, close) => {
+          const map = JSON.parse(json);
+          for (const point of map.points) point.headline = headline;
+          return open + JSON.stringify(map) + close;
+        },
+      );
+      await route.fulfill({ response, body });
+    });
+    for (const [name, path] of [["home", "/"], ["day", "/day/2026-11-01/"],
+      ["topic", "/topic/protein-design-binders-a1b2/"], ["map", "/map/"]]) {
+      await page.goto(`http://127.0.0.1:${server!.port}${path}`);
+      await page.evaluate(() => document.fonts.ready);
+      if (name === "map") {
+        await page.waitForFunction(() => document.querySelector("canvas")!.width > 0);
+        const point = await page.locator("#topic-map-data").evaluate(el => JSON.parse(el.textContent!).points[0]);
+        const canvas = (await page.locator("canvas").boundingBox())!;
+        await page.mouse.move(canvas.x + 24 + point.x * (canvas.width - 48), canvas.y + 24 + point.y * (canvas.height - 48));
+        expect(await page.locator(".map-tooltip").isVisible()).toBe(true);
+        expect(await page.locator(".map-tooltip strong").textContent()).toBe(headline);
+        const tooltip = (await page.locator(".map-tooltip").boundingBox())!;
+        expect(tooltip.x).toBeGreaterThanOrEqual(canvas.x);
+        expect(tooltip.x + tooltip.width).toBeLessThanOrEqual(canvas.x + canvas.width);
+        expect(tooltip.y + tooltip.height).toBeLessThanOrEqual(canvas.y + canvas.height);
+      } else {
+        await page.locator(".topic-card h2, .compact-headline, article.prose h1").evaluateAll(
+          (elements, text) => elements.forEach(el => { el.textContent = text; }), headline,
+        );
+        await page.locator(".topic-card .summary").evaluateAll(
+          (elements, text) => elements.forEach(el => { el.textContent = text; }), summary,
+        );
+        if (name !== "topic") {
+          expect(await page.locator(".topic-card .summary").first().textContent()).toBe(summary);
+          await page.locator("details[data-more-topics]").evaluateAll(elements => elements.forEach(el => el.setAttribute("open", "")));
+          const rows = await page.locator(".compact-row").evaluateAll(elements => elements.map(el => ({
+            height: el.getBoundingClientRect().height, client: el.clientHeight, scroll: el.scrollHeight,
+          })));
+          expect(rows.length).toBeGreaterThan(0);
+          for (const row of rows) {
+            expect(row.height).toBe(40);
+            expect(row.scroll).toBe(row.client);
+          }
+        }
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+      const overflowing = await page.locator(".topic-card, .topic-card h2, .topic-card .summary, article.prose h1, .map-tooltip").evaluateAll(
+        elements => elements.filter(el => el.clientWidth > 0 && (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight)).map(el => el.className || el.tagName),
+      );
+      expect(overflowing).toEqual([]);
+      await page.screenshot({ path: `${screenshots}/${name}-${width}.png`, fullPage: name !== "map" });
+    }
+  });
+
   it("switches themes from the keyboard and remembers the choice across pages", async () => {
     await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
     await page.goto(`http://127.0.0.1:${server!.port}/`);
