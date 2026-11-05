@@ -34,7 +34,7 @@ from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
 from pipeline.store import Store
 from pipeline.topic_map import build_map
-from pipeline.synthesize import synthesize_top, tier_model
+from pipeline.synthesize import synthesize_top, tier_model, top_evidence
 from pipeline.wipe import reset_derived, validate_month_range
 
 
@@ -589,7 +589,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
         with _stage('reset') as counts:
             if rebuild_topics:
                 for topic in store.all_topics():
-                    if any(start <= entry.date <= end for entry in topic.history):
+                    if topic.history and all(start <= entry.date <= end for entry in topic.history):
                         topic.headline = topic.summary = topic.synthesis = None
                         topic.synthesis_model = topic.synthesized_on = None
                         topic.item_one_liners = {}
@@ -613,3 +613,114 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
     print(f"reprocess_summary days={(end - start).days + 1} "
           f"reenriched={state['reenriched']} out_of_scope={state['out_of_scope']}")
     path.unlink()
+
+
+def synthesis_repair_targets(store: Store, start: date, end: date):
+    """Plan repairs without writing data or making LLM calls."""
+    if start > end:
+        raise ValueError('start must not be after end')
+    days = [day for day in store.all_days() if start <= day.date <= end]
+    topics = {topic.slug: topic for topic in store.all_topics()}
+    missing, rows, jobs, evidence = {}, {}, {}, {}
+
+    def add_job(topic, entry):
+        key = (entry.date, topic.slug)
+        if key not in jobs:
+            items = [store.get_item(id) for id in entry.item_ids]
+            if not items or any(item is None for item in items):
+                raise ValueError(f'missing evidence for topic: {topic.slug} on {entry.date}')
+            jobs[key], evidence[key] = entry, items
+        return key
+
+    for day in days:
+        for row in day.ranked:
+            topic = topics.get(row.slug)
+            if topic is None:
+                raise ValueError(f'missing topic: {row.slug}')
+            if not topic.headline and topic.slug not in missing:
+                entry = max((entry for entry in topic.history if entry.rank is not None),
+                            key=lambda entry: entry.date, default=None)
+                if entry is None:
+                    raise ValueError(f'missing ranked history for topic: {topic.slug}')
+                missing[topic.slug] = add_job(topic, entry)
+            if (not row.summary or not row.headline
+                    or row.headline.casefold() in {topic.label.casefold(), 'untitled topic'}):
+                entry = next((entry for entry in topic.history if entry.date == day.date), None)
+                if entry is None:
+                    raise ValueError(f'missing history for topic: {topic.slug} on {day.date}')
+                key = add_job(topic, entry)
+                item = top_evidence(evidence[key])
+                # Recognize a completed item fallback even when enrichment has no summary.
+                if (f'synthesis-fallback:{row.slug}' in day.run.notes
+                        and row.headline == item.title and row.summary == (item.summary or '')):
+                    if key not in missing.values():
+                        jobs.pop(key)
+                        evidence.pop(key)
+                    continue
+                rows[key] = row
+    return days, topics, missing, rows, jobs, evidence
+
+
+def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps: Deps, *,
+                         model: str = 'claude-haiku-5-5') -> None:
+    """Repair synthesis only; preserve historical ranks, evidence, and map coordinates."""
+    if domain != store.domain:
+        raise ValueError('domain does not match store')
+    days, topics, missing, rows, jobs, evidence = synthesis_repair_targets(store, start, end)
+    degraded_before = sum(day.run.status == 'degraded' for day in days)
+    fallback_rows = 0
+    estimated_usd = 0.0
+    if jobs:
+        with _staging(store, deps) as (staged, staged_deps):
+            before = staged_deps.budget.month_spend_usd()
+            # Repair uses the requested model for every job, independent of leaderboard tier.
+            cfg = deps.cfg.model_copy(update={'backfill_synthesis_model': model})
+            for when in sorted({key[0] for key in jobs}):
+                keys = sorted(key for key in jobs if key[0] == when)
+                ranked = [(topics[slug].model_copy(deep=True), jobs[when, slug].signals,
+                           jobs[when, slug].scores) for _, slug in keys]
+                repaired, _, notes = synthesize_top(
+                    ranked, {slug: evidence[when, slug] for _, slug in keys},
+                    staged_deps.llm, staged_deps.budget, cfg, when, backfill=True,
+                )
+                for key, topic in zip(keys, repaired, strict=True):
+                    if missing.get(topic.slug) == key:
+                        topic.label = topics[topic.slug].label
+                        topics[topic.slug] = topic
+                        staged.put_topic(topic)
+                    if key in rows:
+                        row = rows[key]
+                        row.headline, row.summary = topic.headline, topic.summary
+                        day = next(day for day in days if day.date == when)
+                        note = f'synthesis-fallback:{topic.slug}'
+                        day.run.notes = [saved for saved in day.run.notes if saved != note]
+                        if note in notes:
+                            day.run.notes.append(note)
+                            fallback_rows += 1
+            changed_days = [day for day in days if any((day.date, row.slug) in rows for row in day.ranked)]
+            if changed_days:
+                items = staged.items_between(
+                    min(day.date for day in changed_days) - timedelta(days=cfg.window_days - 1),
+                    max(day.date for day in changed_days),
+                )
+                for day in changed_days:
+                    window_start = day.date - timedelta(days=cfg.window_days - 1)
+                    degraded = is_degraded(
+                        day.run.notes, day.run.source_status, over_ceiling=False, cfg=cfg,
+                        window_item_ids={item.id for item in items if window_start <= item.first_seen <= day.date},
+                    )
+                    day.run.status = 'degraded' if degraded else 'ok'
+                    staged.put_day(day)
+            # A map refit can move points; patch only headlines in the existing layout.
+            path = staged.root / domain / 'map.json'
+            if missing and path.exists():
+                payload = json.loads(path.read_text(encoding='utf-8'))
+                for point in payload['points']:
+                    if point['slug'] in missing:
+                        point['headline'] = topics[point['slug']].headline
+                staged._write(path, payload)
+            estimated_usd = staged_deps.budget.month_spend_usd() - before
+    degraded_after = sum(day.run.status == 'degraded' for day in days)
+    print(f'repair_synthesis_summary topics_repaired={len(missing)} rows_repaired={len(rows)} '
+          f'rows_on_item_fallback={fallback_rows} days_degraded_before={degraded_before} '
+          f'days_degraded_after={degraded_after} estimated_usd={estimated_usd:.6f}')

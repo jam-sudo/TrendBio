@@ -97,7 +97,7 @@ def test_uses_opus_normally_and_haiku_when_backfill_or_over_ceiling(context, bac
 
 @pytest.mark.parametrize('existing', [False, True])
 @pytest.mark.parametrize('backfill', [False, True])
-def test_synthesis_failure_falls_back_to_label_headline_and_note(context, existing, backfill):
+def test_synthesis_failure_falls_back_to_item_headline_and_note(context, existing, backfill):
     ctx = context
     if existing:
         ctx.topic.headline = 'Existing headline'
@@ -110,8 +110,8 @@ def test_synthesis_failure_falls_back_to_label_headline_and_note(context, existi
     ctx.plain.output = ctx.beta.output = {'headline': 'x' * 120}
     topics, model, notes = run(ctx, backfill=backfill)
     assert topics == [ctx.topic]
-    assert ctx.topic.headline == (original.headline or ctx.topic.label.title())
-    assert ctx.topic.summary == ''
+    assert ctx.topic.headline == ctx.item.title
+    assert ctx.topic.summary == ctx.item.summary
     assert ctx.topic.synthesis == original.synthesis
     assert ctx.topic.synthesized_on == original.synthesized_on
     assert ctx.topic.synthesis_model == model
@@ -275,7 +275,7 @@ def test_ungrounded_synthesis_retries_once_then_falls_back(context, caplog, fiel
     assert 'Your previous answer stated numbers not present in the items or signals: 47.' in second['messages'][0]['content']
     assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
     assert ctx.topic.synthesis is None
-    assert ctx.topic.headline == 'Protein Design'
+    assert ctx.topic.headline == ctx.item.title
     assert ctx.llm.fallback_reasons[ctx.topic.slug] == 'grounding'
     assert f'llm_grounding_retry id={ctx.topic.slug} values=47' in caplog.text
     assert 'reason=grounding detail=47' in caplog.text
@@ -453,7 +453,7 @@ def test_parallel_fallback_notes_follow_rank(context):
         ctx.budget, load_scoring(), TODAY, backfill=False,
     )
     assert notes == ['synthesis-fallback:z-first', 'synthesis-fallback:a-second']
-    assert all(topic.headline == 'Protein Design' and topic.summary == '' for topic in topics)
+    assert all(topic.headline == ctx.item.title and topic.summary == ctx.item.summary for topic in topics)
 
 
 @pytest.mark.parametrize('workers', [1, 6])
@@ -535,3 +535,21 @@ def test_repeated_429_notification_requires_consecutive_errors(context, monkeypa
                                 on_repeated_429=lambda: notified.append(True))
     assert result is not None
     assert len(notified) == notifications
+
+
+@pytest.mark.parametrize('label', ['Mechanisms Viral', 'Untitled Topic'])
+def test_synthesis_fallback_uses_top_item_title(context, label):
+    ctx = context
+    ctx.topic.label = label
+    ctx.beta.stop_reason = 'refusal'
+    published = ctx.item.model_copy(update={
+        'id': 'pubmed:paper', 'type': 'published', 'published_at': TODAY - timedelta(days=10),
+        'title': 'A specific published finding', 'summary': 'Published enrichment.',
+    })
+    older = published.model_copy(update={'id': 'pubmed:older', 'published_at': TODAY - timedelta(days=11)})
+    synthesize_top([(ctx.topic, ctx.sig, ctx.scores)],
+                   {ctx.topic.slug: [ctx.item, older, published]}, ctx.llm, ctx.budget,
+                   load_scoring(), TODAY, backfill=False)
+    assert ctx.topic.headline == published.title
+    assert ctx.topic.headline not in {label, 'Untitled Topic'}
+    assert ctx.topic.summary == published.summary
