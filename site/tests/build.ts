@@ -12,6 +12,7 @@ export default function setup(project: TestProject) {
   const dataRoot = mkdtempSync(join(tmpdir(), "trendbio-map-fixture-"));
   cpSync("../fixtures/data", dataRoot, { recursive: true });
   cpSync("tests/fixtures/map.json", join(dataRoot, "computational/map.json"));
+  cpSync("tests/fixtures/github_stars.json", join(dataRoot, "computational/github_stars.json"));
   const result = spawnSync(process.execPath, ["node_modules/astro/astro.js", "build"], {
     env: { ...process.env, FORCE_COLOR: "0", NO_COLOR: "1",
       TRENDBIO_DATA_ROOT: dataRoot, TRENDBIO_NOTES_ROOT: "../fixtures/notes" },
