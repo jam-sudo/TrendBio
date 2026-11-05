@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import AxeBuilder from "@axe-core/playwright";
 import { preview } from "astro";
@@ -153,6 +153,24 @@ describe("built site accessibility and responsive layout", () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
   });
 
+  it.each([1200, 1280])("wraps category chips without clipping at %ipx", async (width) => {
+    mkdirSync(".playwright-shots", { recursive: true });
+    await page.setViewportSize({ width, height: 900 });
+    for (const [name, path] of [["home", "/"], ["day", "/day/2026-11-01/"], ["map", "/map/"]]) {
+      await page.goto(`http://127.0.0.1:${server!.port}${path}`);
+      await page.evaluate(() => document.fonts.ready);
+      const chips = await page.locator("[data-category-chips]").evaluate(row => ({
+        wrap: getComputedStyle(row).flexWrap, scroll: row.scrollWidth, width: row.clientWidth,
+        tops: [...row.children].map(chip => chip.getBoundingClientRect().top),
+      }));
+      expect(chips.wrap).toBe("wrap");
+      expect(chips.scroll).toBe(chips.width);
+      expect(new Set(chips.tops).size).toBeGreaterThan(1);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+      await page.screenshot({ path: `.playwright-shots/e2e-${name}-${width}.png` });
+    }
+  });
+
   it("aligns calendar weekdays and keeps mobile cells compact", async () => {
     await page.goto(`http://127.0.0.1:${server!.port}/archive/`);
     const october = page.locator("#month-2026-10");
@@ -228,6 +246,8 @@ describe("built site accessibility and responsive layout", () => {
     await details.locator('summary').focus();
     await page.keyboard.press('Enter');
     expect(await details.evaluate((el) => (el as HTMLDetailsElement).open)).toBe(true);
+    expect(await details.locator('.open-label').isVisible()).toBe(true);
+    expect(await details.locator('.closed-label').isVisible()).toBe(false);
     expect(await page.locator('[data-topic-cats]:visible').count()).toBe(40);
     for (const width of [1280, 375]) {
       await page.setViewportSize({ width, height: 900 });

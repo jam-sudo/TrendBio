@@ -6,16 +6,12 @@ import SignalBadges from "../../components/SignalBadges.astro";
 import Sparkline from "../../components/Sparkline.astro";
 import EditorNote from "../../components/EditorNote.astro";
 import EvidenceList from "../../components/EvidenceList.astro";
-import { rankedTopics, latestDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
-import { loadPeriods } from "../../lib/period-data";
+import { latestDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
+import { topicPages } from "../../lib/period-data";
 import type { Topic } from "../../lib/types";
 
 export function getStaticPaths() {
-  const data = loadPeriods();
-  const selected = new Set([...data.weeks, ...data.months].flatMap(({ topics }) => topics.map(({ slug }) => slug)));
-  const topics = [...rankedTopics("computational"), ...data.topics.filter((topic) =>
-    selected.has(topic.slug) && !topic.history.some(({ rank }) => rank !== null))];
-  return topics.map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
+  return topicPages().map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
 }
 
 interface Props { topic: Topic }
@@ -30,7 +26,7 @@ const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((ent
 const headline = topic.headline ?? topic.label;
 ---
 
-<Base title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
+<Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
   <article class="prose">
     {latestRanked && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
     <p class="rank-category"><CategoryIcon slug={topic.category} size={36} /> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>

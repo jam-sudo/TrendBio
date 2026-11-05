@@ -1,5 +1,5 @@
 import type { Topic } from "./types";
-import { allTopics, loadDays, loadTaxonomy } from "./data";
+import { allTopics, loadDays, loadTaxonomy, rankedTopics } from "./data";
 import { allMonths, allWeeks, indexHistories, rankPeriod, type Period, type PeriodRanked } from "./periods";
 
 export interface RankedPeriod extends Period { topics: PeriodRanked[] }
@@ -26,4 +26,11 @@ export function loadPeriods() {
     cache.set(topics, cached);
   }
   return cached;
+}
+
+export function topicPages(): Topic[] {
+  const data = loadPeriods();
+  const selected = new Set([...data.weeks, ...data.months].flatMap(({ topics }) => topics.map(({ slug }) => slug)));
+  return [...rankedTopics("computational"), ...data.topics.filter((topic) =>
+    selected.has(topic.slug) && !topic.history.some(({ rank }) => rank !== null))];
 }

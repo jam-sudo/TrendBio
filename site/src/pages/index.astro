@@ -9,7 +9,7 @@ import { latestDay } from "../lib/data";
 const day = latestDay("computational");
 ---
 
-<Base heroAligned lastRun={day?.run.finished}>
+<Base description={`Today's leading computational biology topic: ${day?.ranked.find(({ rank }) => rank === 1)?.headline ?? "No topic cleared the bar today"}.`} canonicalPath="/" heroAligned lastRun={day?.run.finished}>
   <Hero slot="hero"
     title="What moved in computational biology today"
     subtitle="bioRxiv, arXiv, PubMed, GitHub and industry."

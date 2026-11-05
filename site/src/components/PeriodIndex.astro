@@ -9,7 +9,7 @@ const data = loadPeriods();
 const periods = kind === "week" ? data.weeks : data.months;
 const title = kind === "week" ? "Weekly rankings" : "Monthly rankings";
 ---
-<Base title={`${title} — TrendBio`} lastRun={data.days[0]?.run.finished}>
+<Base description={`${title}: top topics in computational biology`} canonicalPath={`/${kind}/`} title={`${title} — TrendBio`} lastRun={data.days[0]?.run.finished}>
   <h1>{title}</h1>
   <PeriodLinks current={kind} />
   <ul class="period-list">

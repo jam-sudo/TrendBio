@@ -38,7 +38,7 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
   {compact.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
 </div>}
 {more.length > 0 && <details data-more-topics>
-  <summary>Show {more.length} more</summary>
+  <summary><span class="closed-label">Show {more.length} more</span><span class="open-label">Show less</span></summary>
   <div class="compact-list">
     {more.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
   </div>
@@ -49,6 +49,8 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
   .open-list { margin-top: 0.5rem; }
   details { margin-top: 1rem; }
   summary { cursor: pointer; padding: 0.75rem 0; font-size: var(--t3); }
+  .open-label, details[open] > summary .closed-label { display: none; }
+  details[open] > summary .open-label { display: inline; }
   .compact-list { display: flex; flex-direction: column; gap: 4px; }
   .notice { font-size: var(--t3); color: var(--muted); margin-bottom: 1rem; }
 </style>

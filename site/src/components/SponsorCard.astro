@@ -10,6 +10,7 @@ interface Props {
 const { sponsor, slots, remaining, contact } = Astro.props;
 ---
 
+<!--email_off-->
 <a class:list={["sponsor-card", { "advertise-card": !sponsor }]}
   href={sponsor?.url ?? `mailto:${contact}?subject=TrendBio%20sponsorship`}
   target={sponsor ? "_blank" : undefined}
@@ -30,6 +31,7 @@ const { sponsor, slots, remaining, contact } = Astro.props;
     <span class="advertise-tagline">Reach computational biologists daily</span>
   </>}
 </a>
+<!--/email_off-->
 
 <style>
   .sponsor-card { position: relative; display: flex; flex-direction: column; gap: 8px; width: 200px; flex: none; padding: 30px 12px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--sponsor-lightness) 0.03 var(--sponsor-hue)); color: var(--fg); text-decoration: none; }

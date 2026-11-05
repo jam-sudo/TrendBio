@@ -15,10 +15,22 @@ interface Props {
 }
 
 const { day } = Astro.props;
+const days = loadDays("computational");
+const index = days.findIndex(({ date }) => date === day.date);
+const previous = days[index + 1], next = days[index - 1];
 ---
 
-<Base title={`${day.date} — TrendBio`} lastRun={day.run.finished}>
+<Base description={`Top ${day.ranked.length} computational-biology topics on ${day.date}: ${day.ranked.find(({ rank }) => rank === 1)?.headline ?? "No topic cleared the bar"}`} canonicalPath={`/day/${day.date}/`} title={`${day.date} — TrendBio`} lastRun={day.run.finished}>
   <h1 class="day-title"><time datetime={day.date}>{day.date}</time></h1>
+  <nav class="day-navigation" aria-label="Day navigation">
+    {previous && <a href={`/day/${previous.date}/`} rel="prev">← {previous.date}</a>}
+    {previous && next && <span aria-hidden="true">·</span>}
+    {next && <a href={`/day/${next.date}/`} rel="next">{next.date} →</a>}
+  </nav>
   <PeriodLinks current="day" />
   <DayTopics day={day} topics={dailyRows(day)} />
 </Base>
+
+<style>
+  .day-navigation { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-bottom: 1.5rem; font-size: var(--t3); }
+</style>

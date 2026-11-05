@@ -10,10 +10,9 @@ const months = [...new Set(days.map((day) => day.date.slice(0, 7)))].map((month)
   const first = new Date(`${month}-01T00:00:00Z`);
   const count = new Date(Date.UTC(first.getUTCFullYear(), first.getUTCMonth() + 1, 0)).getUTCDate();
   const monthDays = days.filter((day) => day.date.startsWith(month));
-  const backfilled = monthDays.filter((day) => day.run.backfilled).length;
   return {
     month,
-    backfillNote: backfilled ? (backfilled === monthDays.length ? "backfilled" : "partly backfilled") : null,
+    backfillNote: month === days[0]?.date.slice(0, 7) ? "in progress" : monthDays.length === count ? "backfilled" : "partly backfilled",
     label: first.toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" }),
     chip: first.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" }),
     offset: (first.getUTCDay() + 6) % 7,
@@ -21,13 +20,13 @@ const months = [...new Set(days.map((day) => day.date.slice(0, 7)))].map((month)
   };
 });
 ---
-<Base title="Archive — TrendBio" lastRun={days[0]?.run.finished}>
+<Base description="Browse daily computational biology rankings by date in the TrendBio archive." canonicalPath="/archive/" title="Archive — TrendBio" lastRun={days[0]?.run.finished}>
   <h1>Archive</h1>
   <nav class="month-nav" aria-label="Archive months">
     {months.map(({ month, chip }) => <a href={`#month-${month}`}>{chip}</a>)}
   </nav>
   {months.map(({ month, label, backfillNote, offset, dates }) => <section class="archive-month" id={`month-${month}`} aria-labelledby={`heading-${month}`}>
-    <h2 id={`heading-${month}`}><a href={`/month/${month}/`}>{label}</a>{backfillNote && <span class="backfill-note">{backfillNote}</span>}</h2>
+    <h2 id={`heading-${month}`}><a href={`/month/${month}/`}>{label}</a>{" "}{backfillNote && <span class="backfill-note">{backfillNote}</span>}</h2>
     <p class="mobile-note">Tap a day for its top 5</p>
     <div class="calendar">
       {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((weekday) => <span class="weekday" aria-hidden="true">{weekday}</span>)}

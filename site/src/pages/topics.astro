@@ -16,7 +16,7 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 for (const slug of orphanNotes(domain)) console.warn(`orphan note: ${slug}`);
 ---
 
-<Base title="Topics — TrendBio" lastRun={latestDay(domain)?.run.finished}>
+<Base description="Browse computational biology topics and their latest rankings on TrendBio." canonicalPath="/topics/" title="Topics — TrendBio" lastRun={latestDay(domain)?.run.finished}>
   <h1>Topics</h1>
   <CategoryChips categories={categories} counts={counts} />
   <table class="topics">

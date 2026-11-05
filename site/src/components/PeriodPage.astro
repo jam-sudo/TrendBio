@@ -11,7 +11,7 @@ const periods = kind === "week" ? data.weeks : data.months;
 const index = periods.findIndex(({ id }) => id === period.id);
 const previous = periods[index + 1], next = periods[index - 1];
 ---
-<Base title={`${period.label} — TrendBio`} lastRun={data.days[0]?.run.finished}>
+<Base description={`${period.label}: top topics in computational biology`} canonicalPath={`/${kind}/${period.id}/`} title={`${period.label} — TrendBio`} lastRun={data.days[0]?.run.finished}>
   <h1>{period.label}{period.soFar && <small> · so far</small>}</h1>
   <nav class="period-navigation" aria-label={`${kind === "week" ? "Week" : "Month"} navigation`}>
     {previous && <a href={`/${kind}/${previous.id}/`} rel="prev">← {previous.label}</a>}
