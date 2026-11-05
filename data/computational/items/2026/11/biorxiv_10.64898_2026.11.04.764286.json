@@ -1,0 +1,44 @@
+{
+  "abstract": "In vivo protein-RNA interactions are mapped almost exclusively by CLIP-seq, which profiles one protein in one cell type per experiment and needs a specific antibody; only about 10% of the roughly 2,000 human RNA-binding proteins have been assayed, and the Protein Data Bank holds around 5,000 protein-RNA complexes, a quarter of them ribosomes. Sequence-based prediction could extend coverage to unprofiled, newly discovered, or designed molecules, but existing predictors are not built for that case. One family trains a separate model per protein and cannot move beyond proteins with CLIP data; the other scores pairs but targets a single RNA class. Most are evaluated with random splits and randomly paired negatives that leave near-identical sequences on both sides of the split, and many require structure or read only short windows, discarding the context around a binding site. Their accuracy falls sharply when whole molecules are held out. We address this with two contributions. First, a strict benchmark of 2.1 million examples built from 11.6 million peaks of CLIP experiments targeting 209 proteins, taken from four public databases, in which each RNA is a spliced transcript with nucleotide-level labels, and sequence-similarity clusters are assigned whole to training, validation, and test sets, giving separate slices for unseen RNAs, unseen proteins, and unseen pairs. Negatives are matched to positives in length and in the number of other proteins binding the transcript, removing the shortcut by which a model predicts binding from how popular a transcript is without reading the protein. Second, RPI-Zero, a sequence-only model that reads any full-length protein and RNA jointly in up to 4,096 tokens, so the RNA representation is conditioned on the protein, and describes every protein as a mixture of shared motif prototypes, placing unseen proteins in the same terms as training ones. One model covers all proteins and RNA classes, uses no structure, and needs no interaction data for a new molecule. Compared with five state-of-the-art methods, it achieves the highest score in eight different metrics on unseen RNAs, unseen proteins, and unseen pairs. The model and data are available at https://github.com/ciceklab/RPI-Zero and https://zenodo.org/records/23748141, respectively.",
+  "authors": [
+    "Eren, K.",
+    "Esendemir, E. I.",
+    "Shukueian Tabrizi, S.",
+    "Hashemi Aghdam, H.",
+    "Cicek, A. E."
+  ],
+  "doi": "10.64898/2026.11.04.764286",
+  "first_seen": "2026-11-05",
+  "id": "biorxiv:10.64898/2026.11.04.764286",
+  "metadata": {
+    "abstract": "In vivo protein-RNA interactions are mapped almost exclusively by CLIP-seq, which profiles one protein in one cell type per experiment and needs a specific antibody; only about 10% of the roughly 2,000 human RNA-binding proteins have been assayed, and the Protein Data Bank holds around 5,000 protein-RNA complexes, a quarter of them ribosomes. Sequence-based prediction could extend coverage to unprofiled, newly discovered, or designed molecules, but existing predictors are not built for that case. One family trains a separate model per protein and cannot move beyond proteins with CLIP data; the other scores pairs but targets a single RNA class. Most are evaluated with random splits and randomly paired negatives that leave near-identical sequences on both sides of the split, and many require structure or read only short windows, discarding the context around a binding site. Their accuracy falls sharply when whole molecules are held out. We address this with two contributions. First, a strict benchmark of 2.1 million examples built from 11.6 million peaks of CLIP experiments targeting 209 proteins, taken from four public databases, in which each RNA is a spliced transcript with nucleotide-level labels, and sequence-similarity clusters are assigned whole to training, validation, and test sets, giving separate slices for unseen RNAs, unseen proteins, and unseen pairs. Negatives are matched to positives in length and in the number of other proteins binding the transcript, removing the shortcut by which a model predicts binding from how popular a transcript is without reading the protein. Second, RPI-Zero, a sequence-only model that reads any full-length protein and RNA jointly in up to 4,096 tokens, so the RNA representation is conditioned on the protein, and describes every protein as a mixture of shared motif prototypes, placing unseen proteins in the same terms as training ones. One model covers all proteins and RNA classes, uses no structure, and needs no interaction data for a new molecule. Compared with five state-of-the-art methods, it achieves the highest score in eight different metrics on unseen RNAs, unseen proteins, and unseen pairs. The model and data are available at https://github.com/ciceklab/RPI-Zero and https://zenodo.org/records/23748141, respectively.",
+    "author_corresponding": "A. Ercument Cicek",
+    "author_corresponding_institution": "Bilkent University",
+    "authors": "Eren, K.; Esendemir, E. I.; Shukueian Tabrizi, S.; Hashemi Aghdam, H.; Cicek, A. E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-05",
+    "doi": "10.64898/2026.11.04.764286",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/05/2026.11.04.764286.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RPI-Zero: Zero-shot RNA-Protein Interaction Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Bilkent University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "RPI-Zero: sequence-only zero-shot protein-RNA interaction model with a strict leakage-free CLIP benchmark (2.1M examples, 209 proteins), beating five methods…",
+  "title": "RPI-Zero: Zero-shot RNA-Protein Interaction Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.04.764286"
+}
