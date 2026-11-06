@@ -28,10 +28,11 @@ SESSION = "com.atproto.server.createSession"
 SEARCH = "app.bsky.feed.searchPosts"
 MAX_CALLS = 1000
 PAUSE = 0.3
+QUERY_FORMS = ("*", "domain:{host}", "{host}")
 
 
 class ProbeError(Exception):
-    """Only fixed, non-secret diagnostics belong in this exception."""
+    """Only non-secret diagnostics and API error/message fields belong here."""
 
 
 class BudgetStop(Exception):
@@ -78,6 +79,23 @@ def extract_links(post):
             if isinstance(uri, str):
                 links.add(uri)
     return links
+
+
+def links_to_host(post, host):
+    for link in extract_links(post):
+        parsed = urlsplit(link)
+        hostname = (parsed.hostname or "").rstrip(".")
+        if parsed.scheme in {"http", "https"} and (hostname == host or hostname.endswith("." + host)):
+            return True
+    return False
+
+
+def search_params(host, start, end, form):
+    params = {"q": form.format(host=host), "sort": "latest", "since": start,
+              "until": end, "limit": 100}
+    if form != "domain:{host}":
+        params["domain"] = host
+    return params
 
 
 def item_index(items):
@@ -140,7 +158,15 @@ class Bluesky:
     @staticmethod
     def payload(response, call):
         if response.status_code != 200:
-            raise ProbeError(f"{call}: HTTP {response.status_code}")
+            detail = ""
+            try:
+                data = response.json()
+                if isinstance(data, dict):
+                    detail = "; ".join(f"{key}: {data[key]}" for key in ("error", "message")
+                                       if isinstance(data.get(key), str))[:200]
+            except ValueError:
+                pass
+            raise ProbeError(f"{call}: HTTP {response.status_code}" + (f", {detail}" if detail else ""))
         try:
             data = response.json()
             if not isinstance(data, dict):
@@ -166,13 +192,16 @@ class Bluesky:
                 break
         self.headers = {"Authorization": f"Bearer {token}"}
 
+    def search_response(self, params):
+        if self.calls >= self.max_calls:
+            raise BudgetStop
+        self.sleep(PAUSE)
+        self.calls += 1  # Failed calls and retries consume the same budget.
+        return self.request("GET", SEARCH, params=params, headers=self.headers)
+
     def search(self, params):
         for attempt in range(5):
-            if self.calls >= self.max_calls:
-                raise BudgetStop
-            self.sleep(PAUSE)
-            self.calls += 1  # Failed calls and retries consume the same budget.
-            response = self.request("GET", SEARCH, params=params, headers=self.headers)
+            response = self.search_response(params)
             if response.status_code == 429 and attempt < 4:
                 try:
                     retry_after = float(response.headers.get("Retry-After", "0"))
@@ -189,7 +218,31 @@ class Bluesky:
             return data
 
 
-def sweep(api, attention, start, end):
+def preflight(api, start, end):
+    selected, results = None, []
+    for form in QUERY_FORMS:
+        params = search_params(HOSTS[0], start, end, form)
+        result = {"q": params["q"], "domain": params.get("domain", "—"), "status": "unavailable",
+                  "posts": 0, "linked": 0, "error": "", "selected": False}
+        results.append(result)
+        try:
+            response = api.search_response(params)  # One call per form, without retries.
+            result["status"] = response.status_code
+            data = api.payload(response, SEARCH)
+            if not isinstance(data.get("posts"), list):
+                raise ProbeError(f"{SEARCH}: HTTP 200, missing posts array")
+            result["posts"] = len(data["posts"])
+            result["linked"] = sum(links_to_host(post, HOSTS[0]) for post in data["posts"])
+            if selected is None and result["linked"]:
+                selected, result["selected"] = form, True
+        except BudgetStop:
+            result["error"] = "Search call budget exhausted"
+        except (ProbeError, KeyError, TypeError, ValueError, AttributeError) as exc:
+            result["error"] = str(exc) if isinstance(exc, ProbeError) else f"{SEARCH}: HTTP 200, malformed post response"
+    return selected, results
+
+
+def sweep(api, attention, start, end, form):
     states = {host: {"posts": 0, "calls": 0, "status": "pending", "partial": False,
                      "cursor": None, "cursors": set(), "seen": set(), "hits": 0} for host in HOSTS}
     error = None
@@ -198,8 +251,7 @@ def sweep(api, attention, start, end):
         for host, state in states.items():
             if state["status"] != "pending":
                 continue
-            params = {"q": "", "domain": host, "sort": "latest", "since": start,
-                      "until": end, "limit": 100}
+            params = search_params(host, start, end, form)
             if state["cursor"]:
                 params["cursor"] = state["cursor"]
             before = api.calls
@@ -207,7 +259,8 @@ def sweep(api, attention, start, end):
                 page = api.search(params)
                 posts = page["posts"]
                 for post in posts:
-                    attention.add(post)
+                    if links_to_host(post, host):
+                        attention.add(post)
                     state["seen"].add(post["uri"])
                 state["posts"] = len(state["seen"])
                 state["hits"] = max(state["hits"], page.get("hitsTotal") or 0)
@@ -221,7 +274,7 @@ def sweep(api, attention, start, end):
             except BudgetStop:
                 state["status"], state["partial"] = "budget limit", True
             except (ProbeError, KeyError, TypeError, ValueError, AttributeError) as exc:
-                # Never expose remote bodies, URIs, author objects or exception reprs.
+                # Only ProbeError may expose the API's error/message fields.
                 error = str(exc) if isinstance(exc, ProbeError) else f"{SEARCH}: HTTP 200, malformed post response"
                 state["status"], state["partial"] = "request failed", True
             finally:
@@ -279,13 +332,20 @@ def share(count, total):
     return f"{count}/{total} ({count / total:.1%})" if total else "0/0 (n/a)"
 
 
-def render_report(items, rows, attention, states, start, end, calls, session_calls=1, error=None):
+def render_report(items, rows, attention, states, start, end, calls, session_calls=1, error=None, preflight_results=()):
     partial = bool(error) or any(state["partial"] for state in states.values())
     lines = ["# Bluesky attention probe", f"Window: {start} inclusive to {end} exclusive (UTC).",
              f"Search calls: {calls}/{MAX_CALLS}; session calls: {session_calls}.",
              f"Partial results: {'YES — counts may undercount.' if partial else 'no detected truncation.'}"]
     if error:
         lines.append(f"Failure: {error}")
+    if preflight_results:
+        lines += ["", f"## Query preflight ({HOSTS[0]})", "One call per form; included in the search call budget. Host-linked posts require a facet or external embed link.",
+                  "", "| Query | Domain parameter | HTTP | Posts | Host-linked posts | Result |",
+                  "|---|---|---:|---:|---:|---|"]
+        for result in preflight_results:
+            diagnostic = html.escape(" ".join(result["error"].split())).replace("|", "&#124;")
+            lines.append(f"| {result['q']} | {result['domain']} | {result['status']} | {result['posts']} | {result['linked']} | {diagnostic or ('selected' if result['selected'] else 'not selected')} |")
     lines += ["", "| Host | Search calls | Unique posts swept | Stop | Undercount flag |",
               "|---|---:|---:|---|---|"]
     for host, state in states.items():
@@ -359,8 +419,12 @@ def main():
             error = str(exc) if isinstance(exc, ProbeError) else f"{SESSION}: HTTP 200, malformed session response"
             emit(f"Probe failed: {error}; search calls: 0; no attention measurement available.")
             return 1
-        states, error = sweep(api, attention, start, end)
-    emit(render_report(items, rows, attention, states, start, end, api.calls, api.session_calls, error))
+        form, preflight_results = preflight(api, start, end)
+        if form is None:
+            states, error = {}, "No search query form returned HTTP 200 with a verified link to the first host; sweep not started."
+        else:
+            states, error = sweep(api, attention, start, end, form)
+    emit(render_report(items, rows, attention, states, start, end, api.calls, api.session_calls, error, preflight_results))
     return 1 if error else 0
 
 
