@@ -118,20 +118,22 @@ def test_session_host_and_search_parameters(items):
                 {"id": "did:plc:private#atproto_pds", "serviceEndpoint": "https://session-host.test"}]}})
         assert request.url.host == "session-host.test"
         assert request.headers["Authorization"] == "Bearer secret-token"
-        assert dict(request.url.params) == {"q": "", "domain": probe.HOSTS[len(calls) - 2], "sort": "latest", "since": "2026-10-30", "until": "2026-11-06", "limit": "100"}
+        assert dict(request.url.params) == {"q": "*", "domain": probe.HOSTS[len(calls) - 2], "sort": "latest", "since": "2026-10-30", "until": "2026-11-06", "limit": "100"}
         return httpx.Response(200, json={"posts": []})
     api, sleeps = api_with(handler)
     api.login("private-handle", "secret-password")
-    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06", "*")
     assert api.session_calls == 1 and api.calls == 6
     assert len(sleeps) == 6 and min(sleeps) > 0
     assert error is None and all(s["status"] == "cursor end" for s in states.values())
 
 
 def test_budget_stop_reports_partial_and_deduplicates_hosts(items):
-    api, _ = api_with(lambda _: httpx.Response(200, json={"posts": [post()], "cursor": "next"}), budget=2)
+    api, _ = api_with(lambda _: httpx.Response(200, json={"posts": [post(links=[
+        "https://www.biorxiv.org/content/10.1101/2026.11.01.123456",
+        "https://www.medrxiv.org/content/10.1101/2026.11.01.123456"])], "cursor": "next"}), budget=2)
     attention = probe.Attention(items)
-    states, error = probe.sweep(api, attention, "2026-10-30", "2026-11-06")
+    states, error = probe.sweep(api, attention, "2026-10-30", "2026-11-06", "*")
     assert api.calls == 2 and error is None
     assert all(s["partial"] and s["status"] == "budget limit" for s in states.values())
     assert attention.items[next(iter(items))]["posts"] == 1
@@ -141,17 +143,17 @@ def test_budget_stop_reports_partial_and_deduplicates_hosts(items):
 
 def test_cursor_limit_and_repeated_cursor(items):
     api, _ = api_with(lambda _: httpx.Response(200, json={"posts": [post()], "cursor": "same"}))
-    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06", "*")
     assert api.calls == 12 and error is None
     assert all(s["partial"] and s["status"] == "cursor limit" for s in states.values())
     api, _ = api_with(lambda _: httpx.Response(200, json={"posts": [post()], "hitsTotal": 200}))
-    states, _ = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    states, _ = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06", "*")
     assert all(s["partial"] for s in states.values())
 
 
 def test_429_backoff_consumes_budget(items):
     api, sleeps = api_with(lambda _: httpx.Response(429, headers={"Retry-After": "3"}, text="secret-body"), budget=2)
-    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06", "*")
     assert error is None and api.calls == 2
     assert 3 in sleeps and 4 in sleeps
     assert all(s["partial"] for s in states.values())
@@ -163,9 +165,118 @@ def test_failures_are_diagnostic_and_private(items, status):
     with pytest.raises(probe.ProbeError, match=f"{probe.SESSION}: HTTP {status}") as exc:
         api.login("private-handle", "private-password")
     assert "SECRET" not in str(exc.value)
-    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06")
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06", "*")
     assert error == f"{probe.SEARCH}: HTTP {status}"
     assert all(s["partial"] for s in states.values())
+
+
+def test_json_error_fields_are_reported_and_truncated(items):
+    body = {"error": "InvalidRequest", "message": "Query must not be empty. " + "x" * 300,
+            "accessJwt": "secret-token", "post": post()}
+    api, _ = api_with(lambda _: httpx.Response(400, json=body))
+    api.headers = {"Authorization": "Bearer secret-token"}
+    states, error = probe.sweep(api, probe.Attention(items), "2026-10-30", "2026-11-06", "*")
+    detail = f"error: {body['error']}; message: {body['message']}"[:200]
+    assert error == f"{probe.SEARCH}: HTTP 400, {detail}"
+    assert len(error.split(", ", 1)[1]) == 200
+    report = probe.render_report(items, [], probe.Attention(items), states, "2026-10-30", "2026-11-06", api.calls, error=error)
+    assert f"Failure: {error}" in report
+    for private in ("secret-token", "Authorization", "private-person.bsky.social", "did:plc:", "PRIVATE FIXTURE POST TEXT"):
+        assert private not in report
+
+
+@pytest.mark.parametrize("first_qualifying", [0, 1, 2])
+def test_preflight_picks_first_qualifying_form(first_qualifying):
+    requests = []
+    linked = post(links=["https://www.biorxiv.org/content/10.1101/2026.11.01.123456"])
+    def handler(request):
+        requests.append(request)
+        if len(requests) - 1 < first_qualifying:
+            return httpx.Response(400, json={"error": "InvalidRequest", "message": "Unsupported query"})
+        return httpx.Response(200, json={"posts": [linked]})
+    api, sleeps = api_with(handler)
+    selected, results = probe.preflight(api, "2026-10-30", "2026-11-06")
+    assert selected == probe.QUERY_FORMS[first_qualifying]
+    assert [result["selected"] for result in results] == [i == first_qualifying for i in range(3)]
+    assert [result["linked"] for result in results] == [int(i >= first_qualifying) for i in range(3)]
+    assert api.calls == 3 and len(sleeps) == 3
+    for request, query, domain in zip(requests, ("*", "domain:biorxiv.org", "biorxiv.org"), (True, False, True)):
+        expected = {"q": query, "sort": "latest", "since": "2026-10-30", "until": "2026-11-06", "limit": "100"}
+        if domain:
+            expected["domain"] = "biorxiv.org"
+        assert dict(request.url.params) == expected
+
+
+def test_preflight_rejects_text_only_and_wrong_host_links():
+    text_only = post(links=[])
+    text_only["record"]["text"] = "biorxiv.org https://biorxiv.org/content/10.1101/fake"
+    wrong_host = post(links=["https://biorxiv.org.evil.test/paper", "https://notbiorxiv.org/paper"])
+    embedded = post(links=[])
+    embedded["embed"] = {"$type": "app.bsky.embed.external#view", "external": {"uri": "https://biorxiv.org/paper"}}
+    pages = iter([[text_only, wrong_host], [embedded], [embedded]])
+    api, _ = api_with(lambda _: httpx.Response(200, json={"posts": next(pages)}))
+    selected, results = probe.preflight(api, "2026-10-30", "2026-11-06")
+    assert selected == "domain:{host}"
+    assert [(r["status"], r["posts"], r["linked"]) for r in results] == [(200, 2, 0), (200, 1, 1), (200, 1, 1)]
+
+
+def test_preflight_calls_consume_budget_without_retry():
+    api, sleeps = api_with(lambda _: httpx.Response(429, headers={"Retry-After": "3"}, json={"error": "RateLimitExceeded"}), budget=2)
+    selected, results = probe.preflight(api, "2026-10-30", "2026-11-06")
+    assert selected is None and api.calls == 2
+    assert sleeps == [probe.PAUSE, probe.PAUSE]
+    assert [r["status"] for r in results] == [429, 429, "unavailable"]
+    assert results[-1]["error"] == "Search call budget exhausted"
+
+
+@pytest.mark.parametrize("form", probe.QUERY_FORMS)
+def test_sweep_uses_selected_form_and_counts_only_verified_links(items, form):
+    requests = []
+    text_only = post(uri="text-only", links=[])
+    text_only["record"]["text"] = "https://arxiv.org/abs/2611.00001"
+    def handler(request):
+        host = probe.HOSTS[len(requests)]
+        requests.append(request)
+        assert request.url.params["q"] == form.format(host=host)
+        assert request.url.params.get("domain") == (None if form == "domain:{host}" else host)
+        return httpx.Response(200, json={"posts": [text_only, post()]})
+    api, _ = api_with(handler)
+    attention = probe.Attention(items)
+    states, error = probe.sweep(api, attention, "2026-10-30", "2026-11-06", form)
+    assert error is None and api.calls == 6
+    assert attention.items[next(iter(items))]["posts"] == 1
+    assert attention.items["arxiv:2611.00001"]["posts"] == 0
+    assert "text-only" not in attention.seen
+
+
+@pytest.mark.parametrize("qualifies", [False, True])
+def test_main_reports_preflight_and_fails_if_no_form_qualifies(items, monkeypatch, capsys, qualifies):
+    requests = []
+    def handler(request):
+        requests.append(request)
+        if request.url.path.endswith(probe.SESSION):
+            return httpx.Response(200, json={"accessJwt": "secret-token"})
+        if len(requests) == 2:
+            return httpx.Response(400, json={"error": "InvalidRequest", "message": "Query rejected", "token": "secret-token"})
+        return httpx.Response(200, json={"posts": [post(links=[
+            "https://www.biorxiv.org/content/10.1101/2026.11.01.123456"] if qualifies else [])]})
+    api, _ = api_with(handler)
+    monkeypatch.setattr(probe, "Bluesky", lambda _: api)
+    monkeypatch.setattr(probe, "load_store", lambda *_: (items, [], "2026-10-30", "2026-11-06"))
+    monkeypatch.setattr("sys.argv", ["probe.py"])
+    monkeypatch.setenv("BLUESKY_HANDLE", "private-person.bsky.social")
+    monkeypatch.setenv("BLUESKY_APP_PASSWORD", "secret-password")
+    monkeypatch.delenv("GITHUB_STEP_SUMMARY", raising=False)
+    assert probe.main() == (0 if qualifies else 1)
+    report = capsys.readouterr().out
+    assert f"Search calls: {9 if qualifies else 3}/1000; session calls: 1." in report
+    assert "| * | biorxiv.org | 400 | 0 | 0 |" in report
+    assert "error: InvalidRequest; message: Query rejected" in report
+    assert f"| domain:biorxiv.org | — | 200 | 1 | {int(qualifies)} |" in report
+    assert f"| biorxiv.org | biorxiv.org | 200 | 1 | {int(qualifies)} |" in report
+    assert ("No search query form returned HTTP 200 with a verified link" in report) is not qualifies
+    for private in ("private-person.bsky.social", "did:plc:", "PRIVATE FIXTURE POST TEXT", "at://", "secret-token", "secret-password"):
+        assert private not in report
 
 
 def test_rendered_report_contains_no_social_identity_or_text(items, tmp_path, monkeypatch, capsys):
