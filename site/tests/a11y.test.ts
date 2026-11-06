@@ -91,6 +91,63 @@ describe("built site accessibility and responsive layout", () => {
     expect(await visible.evaluateAll(rows => rows.every(row => row.getAttribute("data-topic-cats")!.split(" ").includes("tools-infra")))).toBe(true);
   });
 
+  it.each(["dark", "light"].flatMap(theme => [320, 390].map(width => ({ theme, width }))))(
+    "shows complete compact headlines and categories at $width px in $theme", async ({ theme, width }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
+      for (const path of ["/", "/week/2026-W44/"]) {
+        await page.goto(`http://127.0.0.1:${server!.port}${path}`);
+        await page.locator("details[data-more-topics]").evaluateAll(elements => elements.forEach(el => el.setAttribute("open", "")));
+        await page.evaluate(() => document.fonts.ready);
+        const rows = await page.locator(".compact-row").evaluateAll(elements => elements.map(row => {
+          const copy = row.querySelector(".compact-copy")!.getBoundingClientRect();
+          const meta = row.querySelector(".compact-meta")!.getBoundingClientRect();
+          return {
+            copyBottom: copy.bottom, metaTop: meta.top,
+            text: [...row.querySelectorAll(".compact-headline, .compact-category")].map(el => ({
+              client: el.clientWidth, scroll: el.scrollWidth,
+              height: el.clientHeight, scrollHeight: el.scrollHeight,
+              overflow: getComputedStyle(el).textOverflow,
+              wrap: getComputedStyle(el).whiteSpace,
+              clamp: getComputedStyle(el).webkitLineClamp,
+            })),
+          };
+        }));
+        expect(rows).toHaveLength(35);
+        for (const row of rows) {
+          expect(row.metaTop).toBeGreaterThanOrEqual(row.copyBottom);
+          for (const text of row.text) {
+            expect(text.client).toBeGreaterThan(0);
+            expect(text.scroll).toBeLessThanOrEqual(text.client);
+            expect(text.scrollHeight).toBeLessThanOrEqual(text.height);
+            expect(text.overflow).not.toBe("ellipsis");
+            expect(text.wrap).toBe("normal");
+            expect(text.clamp).toBe("none");
+          }
+        }
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+        expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
+      }
+    }, 30_000,
+  );
+
+  it.each([640, 1280])("keeps compact headlines on one line at %ipx", async width => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(`http://127.0.0.1:${server!.port}/`);
+    await page.locator("details[data-more-topics]").evaluate(el => el.setAttribute("open", ""));
+    await page.evaluate(() => document.fonts.ready);
+    const headlines = await page.locator(".compact-headline").evaluateAll(elements => elements.map(el => ({
+      height: el.getBoundingClientRect().height,
+      lineHeight: parseFloat(getComputedStyle(el).lineHeight),
+      wrap: getComputedStyle(el).whiteSpace,
+    })));
+    expect(headlines).toHaveLength(35);
+    for (const headline of headlines) {
+      expect(headline.wrap).toBe("nowrap");
+      expect(headline.height).toBeCloseTo(headline.lineHeight, 1);
+    }
+  });
+
   it.each([390, 1280])("fits synthesis hard limits without overflow at %ipx", async (width) => {
     const headline = "Protocol-matched benchmarks test whether learned molecular models outperform conventional models across diverse targets.";
     const summary = "New benchmarks compare molecular models with conventional methods using matched protocols, testing how training data and evaluation choices affect performance across targets and experimental conditions in protein design.";
@@ -141,7 +198,7 @@ describe("built site accessibility and responsive layout", () => {
           })));
           expect(rows.length).toBeGreaterThan(0);
           for (const row of rows) {
-            if (row.names) expect(row.height).toBeGreaterThanOrEqual(56);
+            if (row.names || width < 640) expect(row.height).toBeGreaterThanOrEqual(56);
             else expect(row.height).toBe(40);
             expect(row.scroll).toBe(row.client);
           }
@@ -156,7 +213,8 @@ describe("built site accessibility and responsive layout", () => {
     }
   });
 
-  it("keeps topic and paper links independently clickable with visible keyboard focus", async () => {
+  it.each([320, 390, 1280])("keeps topic and paper links independently clickable with visible keyboard focus at %ipx", async width => {
+    await page.setViewportSize({ width, height: 900 });
     await page.goto(`http://127.0.0.1:${server!.port}/`);
     for (const selector of [".topic-card", ".compact-row"]) {
       const row = page.locator(selector).filter({ has: page.locator(".tool-names") }).first();
@@ -344,7 +402,7 @@ describe("built site accessibility and responsive layout", () => {
       await page.setViewportSize({ width, height: 900 });
       const heights = await page.locator('.compact-row:not(:has(.tool-names))').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
       expect(heights.length).toBeGreaterThanOrEqual(20);
-      expect(heights.every(height => height === 40)).toBe(true);
+      expect(heights.every(height => width < 640 ? height >= 56 : height === 40)).toBe(true);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     }
     expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);

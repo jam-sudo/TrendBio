@@ -20,8 +20,10 @@ const identity = categoryStyle(ranked.category);
     <a class="topic-link" href={`/topic/${ranked.slug}/`}><span class="compact-headline">{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</span></a>
     <ToolNames names={ranked.toolNames} />
   </div>
-  {!period && rise && <span class="badge" aria-label={rise.spoken}>{rise.value}</span>}
-  <span class="compact-category">{category?.label ?? ranked.category}</span>
+  <div class="compact-meta">
+    {!period && rise && <span class="badge" aria-label={rise.spoken}>{rise.value}</span>}
+    <span class="compact-category">{category?.label ?? ranked.category}</span>
+  </div>
   {period && <SignalLine stats={ranked.stats} />}
 </article> : <article class:list={["topic-card", { featured }]}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
@@ -41,6 +43,7 @@ const identity = categoryStyle(ranked.category);
   .topic-link:focus-visible { outline: none; }
   .topic-link:focus-visible::after { outline: 2px solid var(--fg); outline-offset: 4px; }
   .compact-copy { flex: 1; min-width: 0; }
+  .compact-meta { display: contents; }
   .compact-row.has-tool-names { height: auto; min-height: 56px; padding-block: 0.5rem; }
   .auto-label { color: var(--muted); font-size: var(--t3); font-weight: 400; }
   .compact-row.period-row { height: auto; min-height: 64px; flex-wrap: wrap; padding-block: 0.5rem; }
@@ -74,5 +77,12 @@ const identity = categoryStyle(ranked.category);
     .topic-card :global(.signal-line) { grid-column: 1 / -1; padding-top: 0.5rem; border-top: 1px solid var(--border); }
     .rank { align-self: center; }
     .topic-card :global(.category-tile) { grid-column: 2; }
+  }
+  @media (width < 640px) {
+    .compact-row { display: grid; grid-template-columns: 24px 16px minmax(0, 1fr); height: auto; min-height: 56px; padding-block: 0.5rem; }
+    .compact-headline, .compact-category { overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: anywhere; }
+    .compact-meta { grid-column: 3; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; min-width: 0; }
+    .compact-category { max-width: none; }
+    .period-row :global(.signal-line) { grid-column: 3; padding-left: 0; }
   }
 </style>
