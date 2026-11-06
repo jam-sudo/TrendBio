@@ -80,6 +80,7 @@ export interface PeriodRanked {
   label: string;
   category: string;
   secondary_categories: string[];
+  latest_item_ids: string[];
   period_score: number;
   days_ranked: number;
   best_rank: number | null;
@@ -119,9 +120,10 @@ export function rankPeriod(topics: Topic[] | HistoryIndex, start: string, end: s
       if (!total) {
         total = { slug: topic.slug, headline: topic.headline, label: topic.label, category: topic.category,
           secondary_categories: topic.secondary_categories, period_score: 0, days_ranked: 0,
-          best_rank: null, items: 0, rise: 0, rank: 0, itemIds: new Set() };
+          best_rank: null, items: 0, rise: 0, rank: 0, latest_item_ids: [], itemIds: new Set() };
         totals.set(topic.slug, total);
       }
+      total.latest_item_ids = entry.item_ids;
       total.period_score += entry.scores.total;
       if (entry.rank !== null) {
         total.days_ranked++;

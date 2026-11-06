@@ -50,10 +50,11 @@ describe("build data index", () => {
     vi.mocked(readdirSync).mockClear();
     const ids = ["pubmed:fixture-01-05", "biorxiv:10.1101/2026.08.24.010001", "pubmed:fixture-01-05"];
     expect(loadItems(domain, [...ids, "missing-id"]).map(({ id }) => id)).toEqual(ids);
-    expect(index.stats.itemReads - before).toBe(ids.length);
+    expect(index.stats.itemReads - before).toBe(2);
+    expect(loadItems(domain, ids).map(({ id }) => id)).toEqual(ids);
     expect(loadItems(domain, [])).toEqual([]);
-    expect(index.stats.itemReads - before).toBe(ids.length);
-    expect(readFileSync).toHaveBeenCalledTimes(ids.length);
+    expect(index.stats.itemReads - before).toBe(2);
+    expect(readFileSync).toHaveBeenCalledTimes(2);
     expect(readdirSync).not.toHaveBeenCalled();
   });
 

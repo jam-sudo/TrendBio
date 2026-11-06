@@ -11,6 +11,7 @@ declare module "vitest" {
 export default function setup(project: TestProject) {
   const dataRoot = mkdtempSync(join(tmpdir(), "trendbio-map-fixture-"));
   cpSync("../fixtures/data", dataRoot, { recursive: true });
+  cpSync("tests/fixtures/tool-names", join(dataRoot, "computational"), { recursive: true });
   cpSync("tests/fixtures/shared", join(dataRoot, "computational"), { recursive: true });
   cpSync("tests/fixtures/map.json", join(dataRoot, "computational/map.json"));
   cpSync("tests/fixtures/github_stars.json", join(dataRoot, "computational/github_stars.json"));

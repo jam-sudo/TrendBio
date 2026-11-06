@@ -1,4 +1,5 @@
 ---
+import ToolNames from "./ToolNames.astro";
 import CategoryIcon from "./CategoryIcon.astro";
 import SignalLine from "./SignalLine.astro";
 import { loadTaxonomy } from "../lib/data";
@@ -11,35 +12,45 @@ const secondary = ranked.secondary_categories;
 const rise = ranked.stats.find(({ label }) => label === "Rise");
 const identity = categoryStyle(ranked.category);
 ---
-{compact ? <a class:list={["compact-row", { "period-row": period }]} href={`/topic/${ranked.slug}/`}
+{compact ? <article class:list={["compact-row", { "period-row": period, "has-tool-names": ranked.toolNames.length > 0 }]}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span class="sr-only">Rank </span>{ranked.rank}</span>
   <CategoryIcon slug={ranked.category} size={16} />
-  <span class="compact-headline">{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</span>
+  <div class="compact-copy">
+    <a class="topic-link" href={`/topic/${ranked.slug}/`}><span class="compact-headline">{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</span></a>
+    <ToolNames names={ranked.toolNames} />
+  </div>
   {!period && rise && <span class="badge" aria-label={rise.spoken}>{rise.value}</span>}
   <span class="compact-category">{category?.label ?? ranked.category}</span>
   {period && <SignalLine stats={ranked.stats} />}
-</a> : <a class:list={["topic-card", { featured }]} href={`/topic/${ranked.slug}/`}
+</article> : <article class:list={["topic-card", { featured }]}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
   <CategoryIcon slug={ranked.category} size={36} />
   <div class="topic-copy">
     <p class="rank-category">{category?.label ?? ranked.category}</p>
-    <h2>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</h2>
+    <h2><a class="topic-link" href={`/topic/${ranked.slug}/`}>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</a></h2>
+    <ToolNames names={ranked.toolNames} />
     {ranked.summary && <p class="summary">{ranked.summary}</p>}
   </div>
   <SignalLine stats={ranked.stats} />
-</a>}
+</article>}
 <style>
+  .topic-link { text-decoration: none; }
+  .topic-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+  .topic-link:focus-visible { outline: none; }
+  .topic-link:focus-visible::after { outline: 2px solid var(--fg); outline-offset: 4px; }
+  .compact-copy { flex: 1; min-width: 0; }
+  .compact-row.has-tool-names { height: auto; min-height: 56px; padding-block: 0.5rem; }
   .auto-label { color: var(--muted); font-size: var(--t3); font-weight: 400; }
   .compact-row.period-row { height: auto; min-height: 64px; flex-wrap: wrap; padding-block: 0.5rem; }
   @media (max-width: 800px) {
     .period-row :global(.signal-line) { flex-basis: 100%; padding-left: 44px; }
   }
-  .compact-row { display: flex; align-items: center; gap: 0.75rem; height: 40px; padding: 0 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); text-decoration: none; font-size: var(--t3); min-width: 0; }
+  .compact-row { position: relative; display: flex; align-items: center; gap: 0.75rem; height: 40px; padding: 0 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); text-decoration: none; font-size: var(--t3); min-width: 0; }
   .compact-row:hover { border-color: var(--muted); }
   .compact-row .rank { width: 24px; flex-shrink: 0; color: var(--muted); }
-  .compact-headline { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .compact-headline { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .compact-row .badge { flex-shrink: 0; white-space: nowrap; }
   .compact-category { max-width: 210px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: var(--muted); }
   .topic-card { position: relative; display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) auto; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); padding: 1.25rem; min-width: 0; overflow-wrap: anywhere; text-decoration: none; }
