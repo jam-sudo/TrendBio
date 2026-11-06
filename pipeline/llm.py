@@ -71,7 +71,16 @@ class Synthesis(BaseModel):
     @field_validator('headline', 'summary')
     @classmethod
     def shorten_text(cls, value: str, info) -> str:
+        # Batch/backfill parsing keeps truncation because it cannot re-ask inline.
         return truncate(value, 120 if info.field_name == 'headline' else 220)
+
+
+class _SynthesisDraft(Synthesis):
+    @field_validator('headline', 'summary')
+    @classmethod
+    def shorten_text(cls, value: str, info) -> str:
+        # The SDK validates before _parse returns; retain raw text for retry feedback.
+        return value
 
 
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
@@ -160,26 +169,42 @@ class LLM:
                 item.title, item.published_at.isoformat(), item.summary or '', item.abstract,
             )),
         ])
+        # Length and grounding feedback share one retry, charged by _parse as usual.
         for attempt in range(2):
-            result = self._parse(Synthesis, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
+            result = self._parse(_SynthesisDraft, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
                                  entity_id=topic.slug, fallbacks=model in {'claude-opus-5-5', 'claude-sonnet-5-5'},
                                  on_repeated_429=on_repeated_429)
             if result is None:
                 return None
+            overruns = {
+                field: (len(getattr(result, field)), target)
+                for field, limit, target in [('headline', 120, 90), ('summary', 220, 160)]
+                if len(getattr(result, field)) > limit
+            }
+            if attempt:
+                for field, (length, _) in overruns.items():
+                    logger.warning('synthesis_overrun topic=%s field=%s length=%d',
+                                   topic.slug, field, length)
             bad = grounding.unsupported('\n'.join([
                 result.headline, result.summary, result.synthesis, *result.item_one_liners.values(),
             ]), source)
-            if not bad:
-                return result
-            detail = ','.join(f'{v:g}' for v in bad)
-            if attempt:
-                return self._failure(topic.slug, 'grounding', detail=detail)
-            logger.warning('llm_grounding_retry id=%s values=%s', topic.slug, detail)
-            prompt += (
-                '\n\nYour previous answer stated numbers not present in the items or signals: '
-                f'{detail}. Remove or correct them. '
-                'State only numbers that appear in the items, signals, or abstracts.'
-            )
+            if not bad and (not overruns or attempt):
+                return Synthesis.model_validate(result.model_dump())
+            if bad:
+                detail = ','.join(f'{v:g}' for v in bad)
+                if attempt:
+                    return self._failure(topic.slug, 'grounding', detail=detail)
+                logger.warning('llm_grounding_retry id=%s values=%s', topic.slug, detail)
+                prompt += (
+                    '\n\nYour previous answer stated numbers not present in the items or signals: '
+                    f'{detail}. Remove or correct them. '
+                    'State only numbers that appear in the items, signals, or abstracts.'
+                )
+            for field, (length, target) in overruns.items():
+                prompt += (
+                    f'\n\nYour previous {field} was {length} characters. Rewrite the {field} '
+                    f'to at most {target} characters as a complete sentence or phrase, no ellipsis.'
+                )
 
     def _parse[T: BaseModel](
         self, output_model: type[T], messages: list[dict], model: str, max_tokens: int,

@@ -29,9 +29,11 @@ class FakeMessages:
         self.calls.append(kwargs)
         if self.error:
             raise self.error
+        output = self.output[len(self.calls) - 1] if isinstance(self.output, list) else self.output
         return SimpleNamespace(
             stop_reason=self.stop_reason,
-            parsed_output=self.output[len(self.calls) - 1] if isinstance(self.output, list) else self.output,
+            parsed_output=(output if self.stop_reason == 'refusal'
+                           else kwargs['output_format'].model_validate(output)),
             usage=SimpleNamespace(input_tokens=100, output_tokens=20),
         )
 
@@ -79,7 +81,7 @@ def test_uses_opus_normally_and_haiku_when_backfill_or_over_ceiling(context, bac
     assert ctx.topic.synthesis_model == model and ctx.topic.synthesized_on == TODAY
     assert ctx.budget.month_spend_usd() - before == pytest.approx(0.00002 if haiku else 0.0008)
     call = calls[0]
-    assert call['output_format'] is Synthesis and call['max_tokens'] == 4096
+    assert issubclass(call['output_format'], Synthesis) and call['max_tokens'] == 4096
     assert call['output_config'] == {'effort': 'high'}
     assert not {'thinking', 'budget_tokens', 'temperature'} & call.keys()
     if haiku:
@@ -120,7 +122,7 @@ def test_synthesis_failure_falls_back_to_item_headline_and_note(context, existin
 
 
 @pytest.mark.parametrize('field,limit', [('headline', 120), ('summary', 220)])
-def test_headline_and_summary_are_truncated_not_dropped(context, field, limit):
+def test_overrun_after_retry_truncates_and_logs(context, caplog, field, limit):
     ctx = context
     schema = Synthesis.model_json_schema()['properties']
     assert 'maxLength' not in schema[field]
@@ -130,7 +132,76 @@ def test_headline_and_summary_are_truncated_not_dropped(context, field, limit):
     assert getattr(ctx.topic, field).endswith('evidence…')
     assert ctx.topic.synthesis == OUTPUT['synthesis']
     assert notes == []
+    assert len(ctx.beta.calls) == 2
+    assert f'synthesis_overrun topic={ctx.topic.slug} field={field} length=270' in caplog.text
+    assert ctx.budget.month_spend_usd() == pytest.approx(0.0016)
+
+
+@pytest.mark.parametrize('backfill', [False, True])
+def test_overlong_headline_retried_once_then_kept_when_short(context, caplog, backfill):
+    ctx = context
+    messages = ctx.plain if backfill else ctx.beta
+    messages.output = [{**OUTPUT, 'headline': 'evidence ' * 14}, OUTPUT]
+    _, _, notes = run(ctx, backfill=backfill)
+    assert ctx.topic.headline == OUTPUT['headline']
+    assert notes == []
+    assert len(messages.calls) == 2
+    first, second = messages.calls
+    prompt = second['messages'][0]['content']
+    assert prompt.startswith(first['messages'][0]['content'])
+    assert 'previous headline was 126 characters' in prompt
+    assert 'headline to at most 90 characters as a complete sentence or phrase, no ellipsis' in prompt
+    assert second['model'] == first['model']
+    assert 'synthesis_overrun' not in caplog.text
+    assert ctx.budget.month_spend_usd() == pytest.approx(0.00004 if backfill else 0.0016)
+
+
+def test_overlong_summary_retried(context):
+    ctx = context
+    ctx.beta.output = [{**OUTPUT, 'summary': 'evidence ' * 25}, OUTPUT]
+    _, _, notes = run(ctx)
+    assert ctx.topic.summary == OUTPUT['summary']
+    assert notes == []
+    assert len(ctx.beta.calls) == 2
+    prompt = ctx.beta.calls[1]['messages'][0]['content']
+    assert 'previous summary was 225 characters' in prompt
+    assert 'summary to at most 160 characters as a complete sentence or phrase, no ellipsis' in prompt
+
+
+@pytest.mark.parametrize('headline_length,summary_length', [(90, 160), (91, 161), (120, 220)])
+def test_within_limit_makes_no_extra_call(context, headline_length, summary_length):
+    ctx = context
+    ctx.beta.output = {**OUTPUT, 'headline': 'h' * headline_length, 'summary': 's' * summary_length}
+    _, _, notes = run(ctx)
+    assert ctx.topic.headline == ctx.beta.output['headline']
+    assert ctx.topic.summary == ctx.beta.output['summary']
+    assert notes == []
     assert len(ctx.beta.calls) == 1
+    assert ctx.budget.month_spend_usd() == pytest.approx(0.0008)
+
+
+@pytest.mark.parametrize('retry_ungrounded', [False, True])
+def test_overruns_and_grounding_share_one_retry(context, caplog, retry_ungrounded):
+    ctx = context
+    overlong = {**OUTPUT, 'headline': 'evidence ' * 14, 'summary': 'evidence ' * 25}
+    ctx.beta.output = [
+        {**overlong, 'synthesis': '47 datasets'},
+        {**overlong, 'synthesis': '47 datasets'} if retry_ungrounded else overlong,
+    ]
+    _, _, notes = run(ctx)
+    assert len(ctx.beta.calls) == 2
+    prompt = ctx.beta.calls[1]['messages'][0]['content']
+    assert 'numbers not present in the items or signals: 47.' in prompt
+    assert 'previous headline was 126 characters' in prompt
+    assert 'previous summary was 225 characters' in prompt
+    for field, length in [('headline', 126), ('summary', 225)]:
+        assert f'synthesis_overrun topic={ctx.topic.slug} field={field} length={length}' in caplog.text
+    assert notes == ([f'synthesis-fallback:{ctx.topic.slug}'] if retry_ungrounded else [])
+    if retry_ungrounded:
+        assert ctx.llm.fallback_reasons[ctx.topic.slug] == 'grounding'
+    else:
+        assert ctx.topic.headline.endswith('evidence…')
+        assert ctx.topic.summary.endswith('evidence…')
 
 
 def test_unranked_topics_untouched(context):
