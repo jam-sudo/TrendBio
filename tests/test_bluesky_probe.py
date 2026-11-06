@@ -291,7 +291,7 @@ def test_rendered_report_contains_no_social_identity_or_text(items, tmp_path, mo
         assert private not in report
     assert "| 1-5 | 1 | 1/1 (100.0%) | 1/1 (100.0%) |" in report
     assert "| A paper &#124; with a title | 3 | 18 | 1 |" in report
-    assert "Verdict: 2/2 (100.0%)" in report
+    assert "Verdict: at N = 20, 2/2 (100.0%)" in report
     assert "3 unique posts" in report
     summary = tmp_path / "summary.md"
     monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
@@ -324,4 +324,132 @@ def test_row_author_count_is_union(items):
         attention.add(post(uri=f"post-{i}", author=f"did:plc:{i}", links=[
             "https://www.nature.com/articles/s41586-026-12345-6", "https://arxiv.org/abs/2611.00001"]))
     report = probe.render_report(items, [{"rank": 1, "item_ids": set(items)}], attention, {}, "2026-10-30", "2026-11-06", 0)
-    assert "Verdict: 0/1 (0.0%)" in report
+    assert "Verdict: at N = 20, 0/1 (0.0%)" in report
+
+
+@pytest.fixture
+def automated_attention(items):
+    attention = probe.Attention(items)
+    links = ["https://www.biorxiv.org/content/10.1101/2026.11.01.123456v1",
+             "https://arxiv.org/abs/2611.00001v2",
+             "https://www.medrxiv.org/content/10.1101/2026.11.01.999999v1"]
+    links += [f"https://doi.org/10.1000/outside-{i}" for i in range(22)]
+    for i, link in enumerate(links):
+        fixture = post(uri=f"automated-{i}", author="did:plc:automated", links=[link])
+        fixture["likeCount"] = 100
+        fixture["quoteCount"] = 3
+        attention.add(fixture)
+        attention.add(fixture)
+    # Another version/host is the same normalized ID, not a 26th paper.
+    attention.add(post(uri="repeat", author="did:plc:automated", links=[
+        "https://doi.org/10.1101/2026.11.01.123456v2"]))
+    human = post(uri="human", links=links[:2])
+    human["quoteCount"] = 3
+    attention.add(human)
+    return attention
+
+
+@pytest.mark.parametrize(("threshold", "automated"), [(10, True), (20, True), (50, False)])
+def test_automated_accounts_use_all_normalized_ids_and_filter_engagement(items, automated_attention, threshold, automated):
+    attention = automated_attention
+    assert len(attention.author_ids["did:plc:automated"]) == 25
+    filtered, outside, accounts, posts = attention.non_automated(threshold)
+    assert accounts == int(automated)
+    assert posts == (26 if automated else 0)
+    key = next(iter(items))
+    assert filtered[key]["engagement"] == (9 if automated else 120)
+    assert len(filtered[key]["authors"]) == (1 if automated else 2)
+    assert filtered[key]["posts"] == (1 if automated else 3)
+    assert len(outside) == (0 if automated else 23)
+
+
+@pytest.mark.parametrize("threshold", [10, 20, 50])
+def test_automated_threshold_is_inclusive(threshold):
+    attention = probe.Attention({})
+    attention.add(post(links=[f"https://doi.org/10.1000/{i}" for i in range(threshold)]))
+    assert attention.non_automated(threshold)[2:] == (1, 1)
+    assert attention.non_automated(threshold + 1)[2:] == (0, 0)
+
+
+def test_row_metrics_use_paper_count_and_author_union(items, automated_attention):
+    items["repo"] = {"type": "repo"}
+    row = {"rank": 1, "item_ids": {*items, "missing"}}
+    filtered = automated_attention.non_automated(20)[0]
+    assert probe.row_metrics(row, items, filtered) == {
+        "rank": 1, "paper count": 2, "non-automated authors": 1,
+        "non-automated authors per paper": .5, "engagement": 18, "engagement per paper": 9,
+    }
+    empty = probe.row_metrics({"rank": 2, "item_ids": {"repo", "missing"}}, items, filtered)
+    assert empty["paper count"] == 0
+    assert empty["non-automated authors per paper"] is None
+    assert empty["engagement per paper"] is None
+
+
+def test_report_sensitivity_distributions_and_correlations(items, automated_attention):
+    keys = list(items)
+    rows = [{"rank": 1, "item_ids": set(keys)}, {"rank": 6, "item_ids": {keys[0]}},
+            {"rank": 21, "item_ids": set()}]
+    report = probe.render_report(items, rows, automated_attention, {}, "2026-10-30", "2026-11-06", 0)
+    assert "| Automated accounts | 1 | 1 | 0 |" in report
+    assert "| Share of swept unique posts from automated accounts | 26/27 (96.3%) | 26/27 (96.3%) | 0/27 (0.0%) |" in report
+    assert "| all | 2 | Non-automated authors >= 2 | 0/2 (0.0%) | 0/2 (0.0%) | 2/2 (100.0%) |" in report
+    assert "| all | 2 | Non-automated authors median / p90 / max | 1 / 1 / 1 | 1 / 1 / 1 | 2 / 2 / 2 |" in report
+    assert "| all | 2 | Engagement median / p90 / max | 9 / 9 / 9 | 9 / 9 / 9 | 117 / 120 / 120 |" in report
+    assert "| all | 2 | Engagement >= 10 | 0/2 (0.0%) | 0/2 (0.0%) | 2/2 (100.0%) |" in report
+    assert "| 1-5 | 1 | 1/1 (100.0%) | 0/1 (0.0%) | 0/1 (0.0%) | 1/1 (100.0%) |" in report
+    assert "| 6-20 | 1 | 1/1 (100.0%) | 0/1 (0.0%) | 0/1 (0.0%) | 1/1 (100.0%) |" in report
+    assert "| 21-40 | 1 | 0/1 (0.0%) | 0/1 (0.0%) | 0/1 (0.0%) | 0/1 (0.0%) |" in report
+    assert "| paper count | 3 | -1.0000 | -1.0000 | -1.0000 |" in report
+    assert "| non-automated authors | 3 | -0.8660 | -0.8660 | -0.8660 |" in report
+    assert "| non-automated authors per paper | 2 | 1.0000 | 1.0000 | 1.0000 |" in report
+    assert "| engagement | 3 | -1.0000 | -1.0000 | -1.0000 |" in report
+    assert "| engagement per paper | 2 | undefined (too few rows or constant values) |" in report
+    assert "not inflated by cluster size" in report
+    assert "including automated accounts" in report
+    for private in ("private-person.bsky.social", "did:plc:", "PRIVATE FIXTURE POST TEXT", "automated-", "at://"):
+        assert private not in report
+
+
+def test_zero_attention_papers_remain_in_window_denominators(items):
+    attention = probe.Attention(items)
+    attention.add(post())
+    report = probe.render_report(items, [], attention, {}, "2026-10-30", "2026-11-06", 0)
+    assert "| all | 2 | Engagement >= 5 | 1/2 (50.0%) | 1/2 (50.0%) | 1/2 (50.0%) |" in report
+    assert "| all | 2 | Engagement median / p90 / max | 3 / 6 / 6 | 3 / 6 / 6 | 3 / 6 / 6 |" in report
+    assert "| arxiv | 1 | Non-automated authors median / p90 / max | 0 / 0 / 0 |" in report
+
+
+def test_outside_news_exclusion_prefix_groups_and_candidate_order(items):
+    attention = probe.Attention(items)
+    news = "https://www.nature.com/articles/d41586-026-12345-6"
+    attention.add(post(uri="news", links=[news]))
+    assert attention.unknown_posts == 0
+    assert not attention.unknown
+    candidates = [f"{'10.64898' if i % 2 else '10.1101'}/2026.11.01.{i:06d}" for i in range(11)]
+    for i, key in enumerate(candidates):
+        fixture = post(uri=f"candidate-{i}", links=[f"https://doi.org/{key}"])
+        fixture["quoteCount"] = i
+        attention.add(fixture)
+    attention.add(post(uri="others", links=[news, "https://arxiv.org/abs/2611.99999v1",
+                                            "https://doi.org/10.1000/other", "https://pubmed.ncbi.nlm.nih.gov/99999/"]))
+    report = probe.render_report(items, [], attention, {}, "2026-10-30", "2026-11-06", 0)
+    assert "12 unique posts" in report
+    assert "| bioRxiv or medRxiv DOIs | 11 | 11 | 0 | 11 |" in report
+    assert "| arXiv ids | 1 | 1 | 0 | 1 |" in report
+    assert "| other DOIs | 1 | 1 | 0 | 1 |" in report
+    assert [line for line in report.splitlines() if line.startswith("- ")] == [f"- {key}" for key in reversed(candidates[1:])]
+    assert "d41586-026-12345-6" not in report
+
+
+def test_top_papers_sorted_by_engagement_and_unranked_count(items):
+    items["arxiv:2611.00001"]["published_at"] = "2026-10-01"
+    attention = probe.Attention(items)
+    for i in range(3):
+        fixture = post(uri=f"low-{i}", author=f"did:plc:low-{i}")
+        fixture["likeCount"], fixture["repostCount"] = 0, 0
+        attention.add(fixture)
+    attention.add(post(uri="high", links=["https://arxiv.org/abs/2611.00001"]))
+    rows = [{"rank": 6, "item_ids": {next(iter(items))}}, {"rank": 1, "item_ids": {next(iter(items))}}]
+    report = probe.render_report(items, rows, attention, {}, "2026-10-30", "2026-11-06", 0)
+    assert report.index("| Another paper | 1 | 6 | not ranked |") < report.index("| A paper &#124; with a title | 3 | 0 | 1 |")
+    assert "engagement >= 5 absent from every Top 40 row in the window: 1." in report
