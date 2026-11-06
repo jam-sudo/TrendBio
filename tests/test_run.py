@@ -1580,18 +1580,18 @@ def test_repair_targets_old_truncation_signature(ctx, field, length, target):
     assert list(jobs) == [(TODAY, topic.slug)]
 
 
-@pytest.mark.parametrize('field,length', [('headline', 92), ('headline', 120),
-                                         ('summary', 162), ('summary', 220)])
-def test_repair_skips_new_limit_truncation(ctx, field, length):
+@pytest.mark.parametrize('field,length', [('headline', 92), ('headline', 112), ('headline', 120), ('headline', 150),
+                                         ('summary', 162), ('summary', 220), ('summary', 250)])
+@pytest.mark.parametrize('target', ['row', 'topic'])
+def test_repair_targets_any_truncation(ctx, field, length, target):
     day, topic = prepare_synthesis_repair(ctx)
-    for value in (day.ranked[0], topic):
-        setattr(value, field, 'x' * (length - 1) + '…')
+    setattr(day.ranked[0] if target == 'row' else topic, field, 'x' * (length - 1) + '…')
     ctx.store.put_day(day)
     ctx.store.put_topic(topic)
-    before = tree(ctx.root)
-    run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
-    assert not ctx.deps.llm.calls
-    assert tree(ctx.root) == before
+    _, _, topics, rows, jobs, _ = synthesis_repair_targets(ctx.store, TODAY, TODAY)
+    assert len(topics) == (target == 'topic')
+    assert len(rows) == (target == 'row')
+    assert list(jobs) == [(TODAY, topic.slug)]
 
 
 def test_repair_truncation_idempotent(ctx, monkeypatch):
@@ -1606,13 +1606,14 @@ def test_repair_truncation_idempotent(ctx, monkeypatch):
 
     def synthesize(self, *args, **kwargs):
         result = real_synthesize(self, *args, **kwargs)
-        return Synthesis(**{**result.model_dump(), 'headline': 'h' * 121, 'summary': 's' * 221})
+        return Synthesis(**{**result.model_dump(), 'headline': 'h' * 120, 'summary': 's' * 220})
 
     monkeypatch.setattr(FakeLLM, 'synthesize', synthesize)
     run_repair_synthesis('computational', TODAY, TODAY, ctx.store, ctx.deps)
     assert ctx.deps.llm.calls == ['claude-haiku-5-5']  # Row and topic share one job.
     saved = ctx.store.get_topic(topic.slug)
-    assert saved.headline == 'h' * 119 + '…' and saved.summary == 's' * 219 + '…'
+    assert saved.headline == 'h' * 120 and saved.summary == 's' * 220
+    assert synthesis_repair_targets(ctx.store, TODAY, TODAY)[4] == {}
     assert saved.history == topic.history
     assert saved.centroid == topic.centroid
     assert saved.label == topic.label
@@ -1629,12 +1630,13 @@ def test_repair_truncation_idempotent(ctx, monkeypatch):
     assert tree(ctx.root) == before
 
 
-def test_repair_skips_truncated_item_fallback(ctx):
+@pytest.mark.parametrize('field,length', [('title', 112), ('summary', 220)])
+def test_repair_skips_truncated_item_fallback(ctx, field, length):
     from pipeline.synthesize import top_evidence
 
     day, topic = prepare_synthesis_repair(ctx)
     item = top_evidence([ctx.store.get_item(id) for id in topic.history[-1].item_ids])
-    item.summary = 'Enrichment truncated this…'
+    setattr(item, field, 'x' * (length - 1) + '…')
     ctx.store.put_item(item)
     day.ranked[0].headline, day.ranked[0].summary = item.title, item.summary
     day.run.notes.append(f'synthesis-fallback:{topic.slug}')

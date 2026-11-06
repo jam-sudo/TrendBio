@@ -215,3 +215,11 @@ The 80 most frequent candidates and all 100 sampled titles below were read by ha
   - Corresponding `-featured.png` and `-compact.png` crops in the same directory.
 
 No LLM calls, ranking changes, data writes, dependencies or deployment.
+
+## Cut-synthesis repair
+
+- `synthesis_repair_targets` now recognizes any headline or summary ending in `…`, in either a day row or topic, without the former 91/161-character caps. Completed item-fallback rows with their `synthesis-fallback:` note remain excluded.
+- Regression tests cover 112-character headlines, new limits and longer values in both rows/topics, long item-fallback headlines/summaries, and a successfully repaired row/topic producing no further jobs.
+- Full required Python command: `uv run --no-project --python 3.12 --with pydantic --with pytest --with numpy --with pyyaml --with respx --with httpx --with feedparser --with anthropic --with scikit-learn --with typer --with umap-learn python -m pytest -q`: **536 passed**, 101 UMAP random-seed/n_jobs warnings, **101.42 s**.
+- Real-data command (same uv dependencies): `python -m pipeline repair-synthesis --from 2026-11-01 --to 2026-11-06 --data-root data --dry-run` returned **`repair_synthesis_targets rows=1 topics=2 estimated_jobs=2`**.
+- Only the dry run was executed: the existing cut headline in `data/` remains untouched for the coordinator to repair separately if authorized. No live LLM calls, workflow dispatch or push.
