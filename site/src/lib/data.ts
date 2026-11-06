@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { marked } from "marked";
 import { parse } from "yaml";
-import type { CodeItem, Day, GitHubStarSample, Item, MapData, Topic } from "./types";
+import type { Attention, SharedItem, CodeItem, Day, GitHubStarSample, Item, MapData, Topic } from "./types";
 
 export const DATA_ROOT = process.env.TRENDBIO_DATA_ROOT ?? "../data";
 export const NOTES_ROOT = process.env.TRENDBIO_NOTES_ROOT ?? "../notes";
@@ -35,6 +35,7 @@ interface DataIndex {
   itemPathById: Map<string, string>;
   industryItems?: Item[];
   codeItems?: Item[];
+  attentionByDate: Map<string, Attention>;
   githubStars: Record<string, GitHubStarSample[]>;
   map: MapData | null;
   notes: Map<string, string | null>;
@@ -102,6 +103,7 @@ export function getDataIndex(domain: string): DataIndex {
   const index: DataIndex = {
     days, daysByDate: new Map(days.map((day) => [day.date, day])), topics, topicsBySlug,
     rankedTopics: ranked, itemPathById, map: readJson<MapData>(join(DATA_ROOT, domain, "map.json")),
+    attentionByDate: new Map(readRecords<Attention>(join(DATA_ROOT, domain, "attention")).map(record => [record.date, record])),
     githubStars, notes, orphanNotes, stats: { builds, itemReads: 0 },
   };
   cache.indexes.set(key, index);
@@ -215,4 +217,23 @@ export function codeItems(domain: string, day: string): CodeItem[] {
     .sort((a, b) => (b.star_gain_7d ?? 0) - (a.star_gain_7d ?? 0)
       || (b.stars ?? 0) - (a.stars ?? 0) || a.id.localeCompare(b.id))
     .slice(0, 8);
+}
+
+export function sharedItems(domain: string, day: string): SharedItem[] {
+  const index = getDataIndex(domain);
+  const papers = index.attentionByDate.get(day)?.papers.slice(0, 8) ?? [];
+  if (!papers.length) return [];
+  const rankedByItem = new Map<string, { slug: string; rank: number }>();
+  for (const row of [...(index.daysByDate.get(day)?.ranked ?? [])].sort((a, b) => a.rank - b.rank)) {
+    const entry = index.topicsBySlug.get(row.slug)?.history.find(entry => entry.date === day);
+    for (const id of [...(entry?.item_ids ?? []), ...(entry?.attached_item_ids ?? [])]) {
+      if (!rankedByItem.has(id)) rankedByItem.set(id, { slug: row.slug, rank: row.rank });
+    }
+  }
+  const items = new Map(loadItems(domain, papers.map(paper => paper.item_id)).map(item => [item.id, item]));
+  return papers.flatMap(paper => {
+    const item = items.get(paper.item_id);
+    return item && item.relevant !== false && (item.type === "preprint" || item.type === "published")
+      ? [{ ...item, engagement: paper.engagement, people: paper.authors, rankedTopic: rankedByItem.get(item.id) }] : [];
+  });
 }

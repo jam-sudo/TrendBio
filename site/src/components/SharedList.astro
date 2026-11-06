@@ -1,0 +1,31 @@
+---
+import { sharedItems } from "../lib/data";
+interface Props { day: string }
+const items = sharedItems("computational", Astro.props.day);
+---
+
+{items.length > 0 && <section class="shared-list" aria-labelledby="shared-heading">
+  <div class="section-heading"><h2 id="shared-heading">Shared by researchers</h2></div>
+  <p>Papers with the most reactions on Bluesky this week, excluding high-volume posting accounts.</p>
+  <ul>
+    {items.map((item) => <li>
+      <div class="metadata">
+        <span>{item.type}</span>
+        <time datetime={item.first_seen}>{item.first_seen}</time>
+        <span>{item.engagement.toLocaleString("en-US")} reactions</span>
+        <span>{item.people.toLocaleString("en-US")} people</span>
+        {item.rankedTopic && <a href={`/topic/${item.rankedTopic.slug}/`}>#{item.rankedTopic.rank}</a>}
+      </div>
+      <h3><a href={item.url}>{item.title}</a></h3>
+    </li>)}
+  </ul>
+</section>}
+
+<style>
+  .shared-list { margin-top: 2.5rem; }
+  ul { list-style: none; padding: 0; }
+  li { padding: 1rem 0; border-top: 1px solid var(--border); }
+  .metadata { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; color: var(--muted); font-size: var(--t3); }
+  h3 { margin: 0.4rem 0; font-size: var(--t2); overflow-wrap: anywhere; }
+  p { margin: 0; color: var(--muted); font-size: var(--t3); }
+</style>

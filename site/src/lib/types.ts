@@ -121,3 +121,21 @@ export interface MapData {
     neighbors: string[];
   }[];
 }
+
+export interface Attention {
+  date: string;
+  window_start: string;
+  partial: boolean;
+  search_calls: number;
+  posts_swept: number;
+  automated_accounts: number;
+  automated_post_share: number;
+  hosts: Record<string, { partial: boolean; truncated_days: string[] }>;
+  papers: { item_id: string; engagement: number; authors: number }[];
+}
+
+export interface SharedItem extends Item {
+  engagement: number;
+  people: number;
+  rankedTopic?: { slug: string; rank: number };
+}

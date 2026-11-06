@@ -1010,6 +1010,7 @@ def test_reprocess_resets_range_and_reranks(ctx, monkeypatch, capsys, caplog):
     assert len(list((root / 'days').glob('2026-10-*.json'))) == 31
     assert tree(root / 'embeddings') == embeddings
     assert not checkpoint.exists() and not (root / '.reprocess_state.json').exists()
+    assert 'stage=attention' not in caplog.text
     assert ctx.deps.llm.batches == [] and all(adapter.calls == [] for adapter in ctx.deps.adapters)
     out_of_scope = 0
     for item in ctx.store.items_between(date.min, date.max):
@@ -1657,3 +1658,57 @@ def test_cli_repair_synthesis_dry_run(ctx, monkeypatch):
     assert 'rows=1 topics=1 estimated_jobs=1' in result.output
     assert not initialize.called and not ctx.deps.llm.calls
     assert tree(ctx.root) == before
+
+
+@pytest.mark.parametrize('failure', ['credentials', 'login', 'http', 'unexpected', 'write'])
+def test_attention_failure_never_degrades_or_changes_day(ctx, monkeypatch, caplog, failure):
+    from pipeline import attention
+    monkeypatch.delenv('BLUESKY_HANDLE', raising=False)
+    monkeypatch.delenv('BLUESKY_APP_PASSWORD', raising=False)
+    baseline = run_day('computational', TODAY, ctx.store, ctx.deps)
+    calls = len(ctx.deps.llm.calls)
+    usage = ctx.deps.budget.usage()
+    caplog.clear()
+    if failure != 'credentials':
+        monkeypatch.setenv('BLUESKY_HANDLE', 'private-handle')
+        monkeypatch.setenv('BLUESKY_APP_PASSWORD', 'private-password')
+        def handler(request):
+            if failure == 'unexpected':
+                raise RuntimeError('private-password did:plc:secret')
+            if request.url.path.endswith(attention.SESSION) and failure != 'login':
+                return httpx.Response(200, json={'accessJwt': 'private-token'})
+            return httpx.Response(500, json={'message': 'private-handle private-password did:plc:secret'})
+        ctx.deps.client = httpx.Client(transport=httpx.MockTransport(handler))
+        real_api = attention.Bluesky
+        monkeypatch.setattr(attention, 'Bluesky', lambda client, **kwargs: real_api(client, sleep=lambda _: None, **kwargs))
+    if failure == 'write':
+        monkeypatch.setattr('pipeline.run.collect_attention', lambda *args: {'date': str(TODAY), 'partial': False})
+        monkeypatch.setattr(Store, 'put_attention', lambda *args: (_ for _ in ()).throw(OSError('private-token')))
+    result = run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert result == baseline and result.run.status == 'ok'
+    assert ctx.store.get_day(TODAY) == baseline
+    assert len(ctx.deps.llm.calls) == calls and ctx.deps.budget.usage() == usage
+    assert not (ctx.root / 'computational/attention' / f'{TODAY}.json').exists()
+    warnings = [r for r in caplog.records if r.levelname == 'WARNING']
+    assert len(warnings) == 1 and 'stage=attention' in warnings[0].message
+    assert not any(secret in caplog.text for secret in ['private-', 'did:plc:', 'at://'])
+
+
+@pytest.mark.parametrize('backfill,skip_collect,dry_run', [(True, False, False), (True, True, False),
+                                                        (False, True, False), (False, False, True)])
+def test_attention_skipped_outside_daily(ctx, monkeypatch, backfill, skip_collect, dry_run):
+    monkeypatch.setattr('pipeline.run.collect_attention', lambda *args: pytest.fail('unexpected attention stage'))
+    run_day('computational', TODAY, ctx.store, ctx.deps, backfill=backfill,
+            skip_collect=skip_collect, dry_run=dry_run)
+
+
+@pytest.mark.parametrize("partial", [False, True])
+def test_attention_success_does_not_use_llm_or_change_ranking(ctx, monkeypatch, partial):
+    monkeypatch.delenv('BLUESKY_HANDLE', raising=False)
+    baseline = run_day('computational', TODAY, ctx.store, ctx.deps)
+    calls, usage = len(ctx.deps.llm.calls), ctx.deps.budget.usage()
+    payload = {'date': str(TODAY), 'partial': partial, 'papers': []}
+    monkeypatch.setattr('pipeline.run.collect_attention', lambda *args: payload)
+    assert run_day('computational', TODAY, ctx.store, ctx.deps) == baseline
+    assert ctx.deps.budget.usage() == usage and len(ctx.deps.llm.calls) == calls
+    assert json.loads((ctx.root / 'computational/attention' / f'{TODAY}.json').read_text()) == payload

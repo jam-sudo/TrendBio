@@ -43,6 +43,21 @@ also show up to eight relevant industry items first seen in their trailing seven
 newest first, whether attached or not; the Industry chip is omitted when no topic uses it.
 These changes apply to future runs; existing daily results are not rewritten.
 
+“Shared by researchers” is a display-only list below “From code” on home and day
+pages; it never changes rankings or scores and makes no LLM calls. Daily runs with
+`BLUESKY_HANDLE` and `BLUESKY_APP_PASSWORD` sweep six paper hosts on Bluesky in UTC
+day slices over seven days, excluding accounts linking 20 or more distinct paper
+IDs in that window. Relevant stored papers need at least five likes + reposts +
+quotes; the pipeline stores the top 20 and the site shows up to eight, including
+papers outside the Top 40. Authors may be promoting their own work. Settings live
+under `attention` in `config/scoring.yaml` (800 search calls maximum by default).
+Only aggregate counts, paper IDs and per-host coverage go into
+`data/computational/attention/<date>.json`; social identities, post content and
+credentials are never written. Missing credentials or failures leave daily status
+unchanged, with no file or `partial: true` when results exist. Partial sweeps may
+miss high-volume accounts. Backfills, reprocessing, repairs and dry runs skip this
+optional stage; missing attention data simply hides the section.
+
 The Top 40 reserves `category_floor` (default 1) topic per represented primary category,
 then fills by score up to `max_per_category` (default 8) per category; sparse days can have fewer than 40.
 The selected topics are ranked by score. The first `featured_n` (default 5) get full rows
