@@ -770,7 +770,7 @@
     -0.00533474562689662,
     -0.04550575464963913
   ],
-  "headline": "Benchmarks expose shared de novo peptide errors and test fragment-ion priors in MS/MS",
+  "headline": "Benchmarks expose shared de novo peptide errors; MS/MS fragment priors under scrutiny",
   "history": [
     {
       "attached_item_ids": [],
@@ -1929,6 +1929,33 @@
         "rise_ratio": 1.0434782608695652,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 3,
+      "date": "2026-11-06",
+      "item_ids": [
+        "arxiv:2611.01352",
+        "biorxiv:10.64898/2026.10.27.762387",
+        "pubmed:10.1038/s41592-026-03301-9"
+      ],
+      "rank": 40,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.028180085801547516,
+        "rise": 0.8571428571428571,
+        "total": 0.5354216302294028,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 0.8571428571428571,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1942,8 +1969,8 @@
     "metabolomics"
   ],
   "slug": "dna-foundation-4b28",
-  "summary": "Recent benchmarks and preprints test how fragment-ion evidence and learned priors constrain MS/MS molecular identification.",
-  "synthesis": "The common thread is how MS/MS identification depends on fragment-ion evidence and the priors placed on it. A published benchmark of eight deep learning de novo peptide sequencing models across three proteomics datasets reports shared errors linked to limited fragment coverage, suggesting model class alone does not resolve sequence ambiguity. The preprints address this from different directions. Carafe uses deep learning fragment-ion intensity prediction to prune the Comet fragment ion index, reducing index memory and speeding tandem MS database searches. FACET instead enumerates the complete feasible set of molecular formulas from precursor mass through a feasibility automaton before neural ranking. What is new is treating fragment-ion evidence and its priors as variables under validation rather than fixed inputs.",
+  "summary": "A published benchmark of eight de novo models finds shared errors from limited fragment coverage, as new preprints revisit fragment-ion evidence in MS/MS.",
+  "synthesis": "The common thread is how MS/MS identification depends on fragment-ion evidence. A published benchmark of eight deep learning de novo peptide sequencing models across three proteomics datasets reports shared errors tied to limited fragment coverage, suggesting that model class alone does not resolve sequence ambiguity. The two preprints act on this dependence from different directions. Carafe applies deep learning fragment-ion intensity prediction to prune the Comet fragment ion index, reducing index memory and speeding tandem MS database searches. FACET instead enumerates the complete feasible set of molecular formulas from precursor mass through a feasibility automaton, then ranks candidates with a neural model. What is new is the treatment of fragment-ion evidence and its priors as quantities requiring explicit validation rather than fixed inputs.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-05"
+  "synthesized_on": "2026-11-06"
 }
