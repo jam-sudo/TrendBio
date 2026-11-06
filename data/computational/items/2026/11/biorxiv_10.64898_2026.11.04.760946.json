@@ -1,0 +1,40 @@
+{
+  "abstract": "SwiftLD is a drop-in replacement for the pairwise linkage disequilibrium (LD) modes of vcftools 0.1.17, --hap-r2 and --geno-r2, which population-genetic pipelines use to compute r2, D and D' between nearby variants. On three regions of 1000 Genomes chromosome 22 with 503 to 2,504 samples it wrote the same output as vcftools, byte for byte, and was 826-fold faster (geometric mean at two threads on an AVX-512 CPU). It was also 7.6-fold faster than PLINK 2, the fastest alternative, from VCF input to LD output on all five regions tested; PLINK 2 writes a different file, although its r2 values agree with vcftools' within 10^-6. One megabase with 503 samples took vcftools 29 s and SwiftLD 0.049 s, and on an ordinary AVX2 laptop SwiftLD was 102-fold faster than vcftools at 12 threads. vcftools was slow because it repeatedly re-reads genotypes from a temporary file, counts haplotypes individually and flushes every output row. I built SwiftLD with correctness-gated coding agents (Claude Opus 5.5): every change had to keep the output byte-identical to vcftools. No output byte differed in 167,749 differential tests on three machines. On chromosome 22, the best European LD proxy of a GWAS lead kept r2 >= 0.8 for 57.4% of leads in the African panel and 85.6% to 92.7% in other panels (98.1% in a European split-half control). Code and a two-command reproduction: https://github.com/joe-b-christensen/swiftld.",
+  "authors": [
+    "Christensen, J."
+  ],
+  "doi": "10.64898/2026.11.04.760946",
+  "first_seen": "2026-11-06",
+  "id": "biorxiv:10.64898/2026.11.04.760946",
+  "metadata": {
+    "abstract": "SwiftLD is a drop-in replacement for the pairwise linkage disequilibrium (LD) modes of vcftools 0.1.17, --hap-r2 and --geno-r2, which population-genetic pipelines use to compute r2, D and D' between nearby variants. On three regions of 1000 Genomes chromosome 22 with 503 to 2,504 samples it wrote the same output as vcftools, byte for byte, and was 826-fold faster (geometric mean at two threads on an AVX-512 CPU). It was also 7.6-fold faster than PLINK 2, the fastest alternative, from VCF input to LD output on all five regions tested; PLINK 2 writes a different file, although its r2 values agree with vcftools' within 10^-6. One megabase with 503 samples took vcftools 29 s and SwiftLD 0.049 s, and on an ordinary AVX2 laptop SwiftLD was 102-fold faster than vcftools at 12 threads. vcftools was slow because it repeatedly re-reads genotypes from a temporary file, counts haplotypes individually and flushes every output row. I built SwiftLD with correctness-gated coding agents (Claude Opus 5.5): every change had to keep the output byte-identical to vcftools. No output byte differed in 167,749 differential tests on three machines. On chromosome 22, the best European LD proxy of a GWAS lead kept r2 >= 0.8 for 57.4% of leads in the African panel and 85.6% to 92.7% in other panels (98.1% in a European split-half control). Code and a two-command reproduction: https://github.com/joe-b-christensen/swiftld.",
+    "author_corresponding": "Joe Christensen",
+    "author_corresponding_institution": "Translational Neuropsychiatry Unit (TNU), Department of Clinical Medicine, Aarhus University",
+    "authors": "Christensen, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-05",
+    "doi": "10.64898/2026.11.04.760946",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/05/2026.11.04.760946.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "European LD proxies lose tagging for 43% of GWAS leads in the African panel: a chromosome 22 analysis with SwiftLD, an 826-fold faster, byte-identical vcftools LD",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Translational Neuropsychiatry Unit (TNU), Department of Clinical Medicine, Aarhus University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-05",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "SwiftLD: byte-identical vcftools LD drop-in, 826-fold faster on 1000 Genomes chr22 and 7.6-fold faster than PLINK 2.",
+  "title": "European LD proxies lose tagging for 43% of GWAS leads in the African panel: a chromosome 22 analysis with SwiftLD, an 826-fold faster, byte-identical vcftools LD",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.04.760946"
+}
