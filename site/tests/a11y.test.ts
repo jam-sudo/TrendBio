@@ -137,11 +137,12 @@ describe("built site accessibility and responsive layout", () => {
           expect(await page.locator(".topic-card .summary").first().textContent()).toBe(summary);
           await page.locator("details[data-more-topics]").evaluateAll(elements => elements.forEach(el => el.setAttribute("open", "")));
           const rows = await page.locator(".compact-row").evaluateAll(elements => elements.map(el => ({
-            height: el.getBoundingClientRect().height, client: el.clientHeight, scroll: el.scrollHeight,
+            names: !!el.querySelector(".tool-names"), height: el.getBoundingClientRect().height, client: el.clientHeight, scroll: el.scrollHeight,
           })));
           expect(rows.length).toBeGreaterThan(0);
           for (const row of rows) {
-            expect(row.height).toBe(40);
+            if (row.names) expect(row.height).toBeGreaterThanOrEqual(56);
+            else expect(row.height).toBe(40);
             expect(row.scroll).toBe(row.client);
           }
         }
@@ -152,6 +153,32 @@ describe("built site accessibility and responsive layout", () => {
       );
       expect(overflowing).toEqual([]);
       await page.screenshot({ path: `${screenshots}/${name}-${width}.png`, fullPage: name !== "map" });
+    }
+  });
+
+  it("keeps topic and paper links independently clickable with visible keyboard focus", async () => {
+    await page.goto(`http://127.0.0.1:${server!.port}/`);
+    for (const selector of [".topic-card", ".compact-row"]) {
+      const row = page.locator(selector).filter({ has: page.locator(".tool-names") }).first();
+      const main = row.locator(".topic-link");
+      await main.focus();
+      expect(await main.evaluate(el => getComputedStyle(el, "::after").outlineStyle)).toBe("solid");
+      await page.keyboard.press("Tab");
+      const paper = row.locator(".tool-names a").first();
+      expect(await paper.evaluate(el => el === document.activeElement)).toBe(true);
+      expect(await paper.evaluate(el => getComputedStyle(el).outlineStyle)).toBe("solid");
+      await page.context().route("https://**/*", route => route.fulfill({ body: "Paper" }));
+      const popupPromise = page.waitForEvent("popup");
+      await paper.click();
+      const popup = await popupPromise;
+      await popup.waitForLoadState();
+      expect(popup.url()).toBe(await paper.getAttribute("href"));
+      expect(await popup.evaluate(() => window.opener)).toBeNull();
+      await popup.close();
+      const href = await main.getAttribute("href");
+      await row.click({ position: { x: 3, y: 3 } });
+      await page.waitForURL(url => url.pathname === href);
+      await page.goto(`http://127.0.0.1:${server!.port}/`);
     }
   });
 
@@ -315,8 +342,9 @@ describe("built site accessibility and responsive layout", () => {
     expect(await page.locator('[data-topic-cats]:visible').count()).toBe(40);
     for (const width of [1280, 375]) {
       await page.setViewportSize({ width, height: 900 });
-      const heights = await page.locator('.compact-row').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
-      expect(heights).toEqual(Array(35).fill(40));
+      const heights = await page.locator('.compact-row:not(:has(.tool-names))').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
+      expect(heights.length).toBeGreaterThanOrEqual(20);
+      expect(heights.every(height => height === 40)).toBe(true);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     }
     expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);
@@ -334,6 +362,6 @@ describe("built site accessibility and responsive layout", () => {
     const visible = page.locator('[data-topic-cats]:visible');
     expect(await visible.count()).toBe(1);
     expect(await visible.locator('.rank').textContent()).toBe('Rank 21');
-    expect(await visible.getAttribute('href')).toBe('/topic/long-read-assembly-0021/');
+    expect(await visible.locator('.topic-link').getAttribute('href')).toBe('/topic/long-read-assembly-0021/');
   }, 30_000);
 });

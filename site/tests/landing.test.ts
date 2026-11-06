@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { industryItems, latestDay, loadDays } from "../src/lib/data";
 
 const readPage = (path: string) => readFileSync(`dist/${path}`, "utf8");
-const cards = (html: string) => [...html.matchAll(/<a\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map(([card]) => card);
+const cards = (html: string) => [...html.matchAll(/<article\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/article>/g)].map(([card]) => card);
 
 describe("built landing, day and archive pages", () => {
   it("shows recent fixture industry evidence below the home and day rankings", () => {
@@ -44,7 +44,7 @@ describe("built landing, day and archive pages", () => {
       expect(rendered[index]).toContain(topic.headline);
       if (index < 5) expect(rendered[index]).toContain(topic.summary);
       else {
-        expect(rendered[index]).toContain('class="compact-row"');
+        expect(rendered[index]).toMatch(/class="compact-row(?: |")/);
         expect(rendered[index]).not.toContain(topic.summary);
       }
     });

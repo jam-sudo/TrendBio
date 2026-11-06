@@ -33,6 +33,7 @@ interface DataIndex {
   topicsBySlug: Map<string, Topic>;
   rankedTopics: Topic[];
   itemPathById: Map<string, string>;
+  itemsById: Map<string, Item | null>;
   industryItems?: Item[];
   codeItems?: Item[];
   attentionByDate: Map<string, Attention>;
@@ -102,7 +103,7 @@ export function getDataIndex(domain: string): DataIndex {
   for (const history of Object.values(githubStars)) history.sort((a, b) => a.date.localeCompare(b.date));
   const index: DataIndex = {
     days, daysByDate: new Map(days.map((day) => [day.date, day])), topics, topicsBySlug,
-    rankedTopics: ranked, itemPathById, map: readJson<MapData>(join(DATA_ROOT, domain, "map.json")),
+    rankedTopics: ranked, itemPathById, itemsById: new Map(), map: readJson<MapData>(join(DATA_ROOT, domain, "map.json")),
     attentionByDate: new Map(readRecords<Attention>(join(DATA_ROOT, domain, "attention")).map(record => [record.date, record])),
     githubStars, notes, orphanNotes, stats: { builds, itemReads: 0 },
   };
@@ -142,12 +143,14 @@ export function rankedTopics(domain: string): Topic[] {
 export function loadItems(domain: string, ids: string[]): Item[] {
   const index = getDataIndex(domain);
   return ids.map((id) => {
+    if (index.itemsById.has(id)) return index.itemsById.get(id)!;
     // Match pipeline/jsonio.py's filename encoding; sorted paths retain the last shard's copy.
     const path = index.itemPathById.get(id) ?? index.itemPathById.get(id.replace(/[:/]/g, "_"));
-    if (!path) return null;
-    index.stats.itemReads++;
-    const item = readJson<Item>(path);
-    return item?.id === id ? item : null;
+    const item = path ? readJson<Item>(path) : null;
+    if (path) index.stats.itemReads++;
+    const matched = item?.id === id ? item : null;
+    index.itemsById.set(id, matched);
+    return matched;
   }).filter((item): item is Item => item !== null);
 }
 

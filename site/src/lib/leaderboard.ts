@@ -1,4 +1,5 @@
-import { loadTopic } from "./data";
+import { loadItems, loadTopic } from "./data";
+import { selectToolNames, type ToolName } from "./tool-names";
 import type { Day, Signals } from "./types";
 import type { PeriodRanked } from "./periods";
 
@@ -12,6 +13,7 @@ export interface LeaderboardTopic {
   secondary_categories: string[];
   stats: Stat[];
   autoLabel?: boolean;
+  toolNames: ToolName[];
 }
 
 export function signalStats(signals: Signals): Stat[] {
@@ -27,6 +29,8 @@ export function signalStats(signals: Signals): Stat[] {
 
 export function dailyRows(day: Day | null): LeaderboardTopic[] {
   return (day?.ranked ?? []).map((topic) => ({ ...topic,
+    toolNames: selectToolNames(topic.rank <= 20 ? loadItems("computational",
+      loadTopic("computational", topic.slug)?.history.find(entry => entry.date === day!.date)?.item_ids ?? []) : [], topic.rank),
     secondary_categories: loadTopic("computational", topic.slug)?.secondary_categories ?? [], stats: signalStats(topic.signals),
   }));
 }
@@ -35,6 +39,7 @@ export function periodRows(topics: PeriodRanked[]): LeaderboardTopic[] {
   return topics.map((topic) => ({ ...topic,
     headline: topic.headline || topic.label.replace(/\b\p{L}/gu, (letter) => letter.toUpperCase()),
     autoLabel: !topic.headline,
+    toolNames: selectToolNames(topic.rank <= 20 ? loadItems("computational", topic.latest_item_ids) : [], topic.rank),
     stats: [
       { label: "days ranked", value: topic.days_ranked },
       { label: "best rank", value: topic.best_rank === null ? "—" : `#${topic.best_rank}` },

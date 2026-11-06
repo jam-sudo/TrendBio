@@ -1,0 +1,10 @@
+---
+import type { ToolName } from "../lib/tool-names";
+interface Props { names: ToolName[] }
+const { names } = Astro.props;
+---
+{names.length > 0 && <p class="tool-names">{names.map(({ name, url }, index) => <>{index > 0 && " · "}<a href={url} target="_blank" rel="noopener">{name}</a></>)}</p>}
+<style>
+  .tool-names { margin: 0; color: var(--muted); font-size: var(--t3); font-family: inherit; overflow-wrap: anywhere; }
+  a { position: relative; z-index: 1; }
+</style>
