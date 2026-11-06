@@ -17,6 +17,7 @@ from typing import get_args
 import httpx
 import numpy as np
 
+from pipeline.attention import collect_attention
 from pipeline.budget import Budget
 from pipeline.cluster import (
     append_history, attach_items, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
@@ -168,6 +169,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             only_missing_synthesis: bool = False) -> Day:
     if domain != store.domain:
         raise ValueError('domain does not match store')
+    attention_store = store
     started = datetime.now(timezone.utc)
     with _staging(store, deps, dry_run=dry_run) as (store, deps):
         previous = store.get_day(day)
@@ -357,6 +359,18 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         if not backfill:
             with _stage('map'):
                 store.put_map(build_map(store, deps.cfg, previous=store.get_map()))
+    # Optional output commits separately so its write failure cannot roll back the day.
+    if not backfill and not skip_collect and not dry_run:
+        try:
+            with _stage('attention'):
+                payload = collect_attention(day, attention_store, deps.cfg.attention, deps.client)
+                if payload is not None:
+                    attention_store.put_attention(payload)
+                if payload is None or payload['partial']:
+                    logger.warning('stage=attention unavailable or incomplete; daily ranking unchanged')
+        except Exception:
+            # Never interpolate exceptions: remote responses can contain identities or tokens.
+            logger.warning('stage=attention unavailable or incomplete; daily ranking unchanged')
     return result
 
 

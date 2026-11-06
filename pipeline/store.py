@@ -85,6 +85,9 @@ class Store:
         path = self.root / self.domain / 'map.json'
         return load(MapData, path) if path.exists() else None
 
+    def put_attention(self, payload: dict) -> None:
+        self._write(self.root / self.domain / 'attention' / f"{payload['date']}.json", payload)
+
     def put_day(self, day: Day) -> None:
         self._write(day_path(self.root, self.domain, day.date), day)
 

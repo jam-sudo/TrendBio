@@ -24,7 +24,16 @@ class Tier(BaseModel):
     model: str = Field(min_length=1)
 
 
+class AttentionConfig(BaseModel):
+    automated_min_ids: int = Field(default=20, ge=1)
+    min_engagement: int = Field(default=5, ge=0)
+    store_top_n: int = Field(default=20, ge=1)
+    window_days: int = Field(default=7, ge=1)
+    max_search_calls: int = Field(default=800, ge=1, le=1000)
+
+
 class Scoring(BaseModel):
+    attention: AttentionConfig = Field(default_factory=AttentionConfig)
     weights: dict[str, float]
     yesterday_penalty: float = 0.05
     rise_k: int = 3

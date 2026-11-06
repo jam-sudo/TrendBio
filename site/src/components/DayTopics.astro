@@ -1,5 +1,6 @@
 ---
 import IndustryList from "./IndustryList.astro";
+import SharedList from "./SharedList.astro";
 import CodeList from "./CodeList.astro";
 import CategoryChips from "./CategoryChips.astro";
 import TopicCard from "./TopicCard.astro";
@@ -48,6 +49,7 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 
 {day && <IndustryList day={day.date} />}
 {day && <CodeList day={day.date} />}
+{day && <SharedList day={day.date} />}
 
 <style>
   .topic-list { display: flex; flex-direction: column; gap: 0.5rem; }

@@ -36,6 +36,8 @@ def test_taxonomy_has_11_spec_slugs():
 
 def test_scoring_defaults():
     expected = {
+        "attention": {"automated_min_ids": 20, "min_engagement": 5, "store_top_n": 20,
+                      "window_days": 7, "max_search_calls": 800},
         "weights": {"rise": 0.45, "diversity": 0.25, "code_velocity": 0.15, "volume": 0.15},
         "yesterday_penalty": 0.05,
         "rise_k": 3,
