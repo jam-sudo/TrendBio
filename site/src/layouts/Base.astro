@@ -63,8 +63,15 @@ const canonical = new URL(canonicalPath, Astro.site).href;
       {canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
         <label class="sr-only" for="header-search-query">Search topics</label>
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />
+        <div id="header-search-panel" hidden>
+          <div id="header-search-options" role="listbox" aria-label="Topics"></div>
+          <p id="header-search-message"></p>
+          <a id="header-search-all" tabindex="-1">See all results</a>
+        </div>
+        <span id="header-search-status" class="sr-only" role="status" aria-live="polite"></span>
       </form>}
     </header>
+    <script src="../scripts/header-search.js"></script>
     <script is:inline>
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>

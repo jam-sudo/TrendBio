@@ -17,7 +17,7 @@ const finished = () => page.waitForFunction(() => /found\./.test(document.getEle
 
 it.each(["Binder", "  Binder  "])("submits the home search and trims %j on the search page", async query => {
   await visit("/");
-  const input = page.getByRole("searchbox", { name: "Search topics" });
+  const input = page.getByRole("combobox", { name: "Search topics" });
   await input.fill(query);
   await input.press("Enter");
   await page.waitForURL(url => url.pathname === "/search/" && url.search === "?q=Binder");
@@ -30,7 +30,7 @@ it.each(["Binder", "  Binder  "])("submits the home search and trims %j on the s
 
 it.each(["", "   "])("submits an empty home query %j to the focused empty prompt", async query => {
   await visit("/");
-  const input = page.getByRole("searchbox", { name: "Search topics" });
+  const input = page.getByRole("combobox", { name: "Search topics" });
   await input.fill(query);
   await input.press("Enter");
   await page.waitForURL(url => url.pathname === "/search/" && !url.search);
@@ -124,3 +124,142 @@ it("reports a failed index load without leaving a searching state", async () => 
   await visit("/search/?q=Binder");
   await expect.poll(() => page.getByRole("status").textContent()).toBe("Search could not load. Please try again.");
 });
+
+const combo = () => page.getByRole('combobox', { name: 'Search topics' });
+const options = () => page.getByRole('option');
+const dropdownReady = () => page.getByRole('link', { name: 'See all results' }).waitFor();
+
+it('loads dependencies only on focus and shows six headline/category options', async () => {
+  const requests: string[] = [];
+  page.on('request', request => requests.push(new URL(request.url()).pathname));
+  await visit('/');
+  await page.waitForLoadState('networkidle');
+  expect(requests.filter(url => /pagefind|search-match/.test(url))).toEqual([]);
+  await combo().focus();
+  await expect.poll(() => requests.includes('/pagefind/pagefind.js')).toBe(true);
+  await expect.poll(() => requests.includes('/search-match.js')).toBe(true);
+  await combo().fill('r');
+  await page.waitForTimeout(500);
+  expect(await combo().getAttribute('aria-expanded')).toBe('false');
+  await combo().fill('reproducible');
+  await dropdownReady();
+  expect(await options().count()).toBe(6);
+  expect(await options().locator('small').allTextContents()).toHaveLength(6);
+  expect(await combo().getAttribute('aria-expanded')).toBe('true');
+  expect(await combo().getAttribute('aria-activedescendant')).toBeNull();
+  expect(await page.locator('#header-search-status').textContent()).toBe('6 topics shown');
+  expect(await page.getByRole('link', { name: 'See all results' }).getAttribute('href')).toBe('/search/?q=reproducible');
+});
+
+it('shows no topics for nonsense and lets See all results open the full search', async () => {
+  await visit('/');
+  await combo().fill('zzzxqnotaword98765');
+  await dropdownReady();
+  expect(await page.locator('#header-search-message').textContent()).toBe('No topics found');
+  expect(await options().count()).toBe(0);
+  await page.getByRole('link', { name: 'See all results' }).click();
+  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=zzzxqnotaword98765');
+});
+
+it.each(['keyboard', 'click'])('opens a dropdown topic with %s', async action => {
+  await visit('/');
+  await combo().fill('Binder');
+  await dropdownReady();
+  const href = await options().first().getAttribute('href');
+  if (action === 'keyboard') {
+    await combo().press('ArrowDown');
+    expect(await combo().getAttribute('aria-activedescendant')).toBe(await options().first().getAttribute('id'));
+    expect(await options().first().getAttribute('aria-selected')).toBe('true');
+    await combo().press('ArrowUp');
+    expect(await combo().getAttribute('aria-activedescendant')).toBe(await options().last().getAttribute('id'));
+    await combo().press('ArrowDown');
+    await combo().press('Enter');
+  } else await options().first().click();
+  await page.waitForURL(url => url.pathname === href);
+});
+
+it('submits Enter with an open panel and nothing highlighted', async () => {
+  await visit('/');
+  await combo().fill('Binder');
+  await dropdownReady();
+  await combo().press('Enter');
+  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=Binder');
+});
+
+it.each(['Escape', 'Tab', 'outside'])('closes on %s and keeps the text', async action => {
+  await visit('/');
+  await combo().fill('Binder');
+  await dropdownReady();
+  await combo().press('ArrowDown');
+  if (action === 'outside') await page.locator('h1').click();
+  else await combo().press(action);
+  expect(await combo().getAttribute('aria-expanded')).toBe('false');
+  expect(await combo().getAttribute('aria-activedescendant')).toBeNull();
+  expect(await combo().inputValue()).toBe('Binder');
+  expect(await page.locator('#header-search-panel').isVisible()).toBe(false);
+  if (action === 'Tab') expect(await combo().evaluate(el => el === document.activeElement)).toBe(false);
+});
+
+it('silently hides a failed index and preserves Enter fallback', async () => {
+  await page.route('**/pagefind/**', route => route.abort());
+  await visit('/');
+  await combo().fill('Binder');
+  await page.waitForTimeout(700);
+  expect(await page.locator('#header-search-panel').isVisible()).toBe(false);
+  await combo().press('Enter');
+  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=Binder');
+});
+
+it('delays Searching and never lets an older response replace the latest query', async () => {
+  await page.route('**/pagefind/pagefind.js', route => route.fulfill({
+    contentType: 'text/javascript', body: `
+      window.pendingSearches = {};
+      export function search(query) {
+        return new Promise(resolve => { window.pendingSearches[query] = () => resolve({ results: [{ data: async () => ({
+          url: '/topic/' + query + '/', meta: {title: query}, filters: {category: ['Tools']}, content: query
+        }) }] }); });
+      }`,
+  }));
+  await visit('/');
+  await page.clock.install();
+  await combo().fill('older');
+  await page.clock.runFor(150);
+  await page.waitForFunction(() => Boolean((window as any).pendingSearches?.older));
+  expect(await page.locator('#header-search-panel').isVisible()).toBe(false);
+  await page.clock.runFor(299);
+  expect(await page.locator('#header-search-panel').isVisible()).toBe(false);
+  await page.clock.runFor(1);
+  expect(await page.locator('#header-search-message').textContent()).toBe('Searching…');
+  await combo().fill('newer');
+  expect(await combo().getAttribute('aria-expanded')).toBe('false');
+  await page.clock.runFor(150);
+  await page.waitForFunction(() => Boolean((window as any).pendingSearches?.newer));
+  await page.evaluate(() => (window as any).pendingSearches.newer());
+  await dropdownReady();
+  expect(await options().first().textContent()).toBe('newerTools');
+  await page.evaluate(() => (window as any).pendingSearches.older());
+  await page.clock.runFor(1000);
+  expect(await options().allTextContents()).toEqual(['newerTools']);
+});
+
+it.each(['dark', 'light'].flatMap(theme => [320, 390].map(width => ({ theme, width }))))(
+  'has an accessible overlay without overflow in $theme at $width', async ({ theme, width }) => {
+    await page.setViewportSize({ width, height: 600 });
+    await page.addInitScript(theme => localStorage.setItem('trendbio-theme', theme), theme);
+    await visit('/');
+    const mainTop = await page.locator('main').evaluate(el => el.getBoundingClientRect().top + scrollY);
+    await combo().fill('reproducible');
+    await dropdownReady();
+    await combo().press('ArrowDown');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+    expect(await page.locator('main').evaluate(el => el.getBoundingClientRect().top + scrollY)).toBe(mainTop);
+    const box = (await combo().boundingBox())!;
+    const panel = (await page.locator('#header-search-panel').boundingBox())!;
+    expect(box.y).toBeLessThan(96);
+    expect(panel.width).toBe(box.width);
+    expect(panel.y).toBeGreaterThan(box.y + box.height);
+    expect(panel.y + panel.height).toBeLessThanOrEqual(600);
+    expect(await page.locator('#header-search-panel').evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
+    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);
+  },
+);
