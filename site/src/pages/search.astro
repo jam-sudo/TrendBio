@@ -1,0 +1,120 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadTaxonomy } from "../lib/data";
+---
+
+<Base title="Search — TrendBio" description="Search computational biology topics, paper titles and tools." canonicalPath="/search/" noindex>
+  <section class="prose" aria-labelledby="search-heading">
+    <h1 id="search-heading">Search topics</h1>
+    <p id="search-help">Search topic headlines, summaries, syntheses, paper titles and tool names.</p>
+    <noscript><p>Search needs JavaScript. Enable it to search topics.</p></noscript>
+    <form role="search" hidden>
+      <label for="search-query">Search topics</label>
+      <input id="search-query" name="q" type="search" aria-describedby="search-help" />
+      <label for="search-category">Category</label>
+      <select id="search-category">
+        <option value="">All categories</option>
+        {loadTaxonomy("computational").map(category => <option value={category.label}>{category.label}</option>)}
+      </select>
+      <button type="submit">Search</button>
+    </form>
+    <p id="search-status" role="status" aria-live="polite"></p>
+    <ul id="search-results" aria-label="Search results"></ul>
+    <button id="search-more" type="button" hidden>Show more results</button>
+    <template id="search-result">
+      <li><h2><a></a></h2><p class="category"></p><p class="excerpt"></p></li>
+    </template>
+  </section>
+</Base>
+
+<script is:inline type="module">
+  const form = document.querySelector('form[role="search"]');
+  const input = document.getElementById('search-query');
+  const category = document.getElementById('search-category');
+  const status = document.getElementById('search-status');
+  const list = document.getElementById('search-results');
+  const more = document.getElementById('search-more');
+  const template = document.getElementById('search-result');
+  let results = [], shown = 0, request = 0, timer;
+
+  async function showResults(current) {
+    more.hidden = true;
+    const batch = await Promise.all(results.slice(shown, shown + 20).map(result => result.data()));
+    if (current !== request) return;
+    for (const result of batch) {
+      const row = template.content.cloneNode(true);
+      const link = row.querySelector('a');
+      link.href = result.url;
+      link.textContent = result.meta.title;
+      row.querySelector('.category').textContent = result.filters.category.join(', ');
+      // Pagefind escapes indexed text before adding its <mark> highlights.
+      row.querySelector('.excerpt').innerHTML = result.excerpt;
+      list.append(row);
+    }
+    shown += batch.length;
+    more.hidden = shown >= results.length;
+    status.textContent = results.length
+      ? `${results.length} ${results.length === 1 ? 'topic' : 'topics'} found. Showing ${shown}.`
+      : 'No topics found. Try another term or category.';
+  }
+
+  async function search() {
+    clearTimeout(timer);
+    const current = ++request;
+    const query = input.value.trim();
+    const url = new URL(location.href);
+    if (query) url.searchParams.set('q', query);
+    else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
+    list.replaceChildren();
+    more.hidden = true;
+    shown = 0;
+    if (!query) {
+      status.textContent = 'Enter a term to search topic headlines, summaries, syntheses, paper titles and tool names.';
+      return;
+    }
+    status.textContent = 'Searching…';
+    try {
+      const pagefind = await import('/pagefind/pagefind.js');
+      const search = await pagefind.search(query, { filters: category.value ? { category: category.value } : {} });
+      if (current !== request) return;
+      results = search.results;
+      await showResults(current);
+    } catch {
+      if (current === request) status.textContent = 'Search could not load. Please try again.';
+    }
+  }
+
+  form.hidden = false;
+  input.value = new URLSearchParams(location.search).get('q') ?? '';
+  form.addEventListener('submit', event => { event.preventDefault(); search(); });
+  input.addEventListener('input', () => {
+    ++request;
+    clearTimeout(timer);
+    timer = setTimeout(search, 150);
+  });
+  category.addEventListener('change', search);
+  more.addEventListener('click', async () => {
+    const current = request;
+    try { await showResults(current); }
+    catch {
+      if (current === request) {
+        status.textContent = 'More results could not load. Please try again.';
+        more.hidden = false;
+      }
+    }
+  });
+  search();
+</script>
+
+<style>
+  form { display: grid; gap: 0.5rem; margin-bottom: 1.5rem; }
+  input, select, button { min-width: 0; max-width: 100%; padding: 0.65rem; border: 1px solid var(--muted); border-radius: var(--radius-sm); font: inherit; background: var(--card); color: var(--fg); }
+  button { justify-self: start; cursor: pointer; }
+  ul { list-style: none; padding: 0; }
+  li { padding-block: 1.25rem; border-top: 1px solid var(--border); overflow-wrap: anywhere; }
+  h2 { margin: 0 0 0.25rem; }
+  .category { color: var(--muted); font-size: var(--t3); margin-bottom: 0.5rem; }
+  .excerpt { margin: 0; }
+  .excerpt :global(mark) { background: var(--raised); color: var(--fg); font-weight: 700; }
+</style>

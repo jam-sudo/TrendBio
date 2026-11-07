@@ -277,11 +277,11 @@ describe("built site accessibility and responsive layout", () => {
     }
   });
 
-  it("stacks cards and scrolls a single unwrapped chip row at 375px", async () => {
+  it("stacks cards, wraps navigation and scrolls a single unwrapped chip row at 375px", async () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(`http://127.0.0.1:${server!.port}/`);
     const nav = await page.locator(".nav-links").boundingBox();
-    expect(nav!.height).toBeLessThan(40);
+    expect(nav!.height).toBeLessThan(70);
     const title = (await page.locator("#hero-title").boundingBox())!;
     const art = (await page.locator(".hero-art").boundingBox())!;
     expect(art.y).toBeGreaterThan(title.y + title.height);

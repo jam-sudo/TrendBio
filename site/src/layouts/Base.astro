@@ -12,6 +12,7 @@ interface Props {
   canonicalPath: string;
   lastRun?: string | null;
   heroAligned?: boolean;
+  noindex?: boolean;
 }
 
 const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false } = Astro.props;
@@ -30,6 +31,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
     <meta name="theme-color" content="oklch(14.5% 0 0)" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
     <meta name="description" content={summary} />
+    {Astro.props.noindex && <meta name="robots" content="noindex" />}
     <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
@@ -54,6 +56,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
           <a href="/topics">Topics</a>
           <a href="/map/">Map</a>
           <a href="/archive">Archive</a>
+          <a href="/search/">Search</a>
           <a href="/about">About</a>
           <button id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">Theme <span aria-hidden="true">☾</span></button>
         </div>
