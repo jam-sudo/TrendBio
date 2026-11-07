@@ -40,6 +40,8 @@ it("gives every page canonical, description and preview metadata", async () => {
         canonical: doc.querySelector('link[rel="canonical"]')?.getAttribute("href"),
         ogTitle: content('meta[property="og:title"]'), ogDescription: content('meta[property="og:description"]'),
         ogUrl: content('meta[property="og:url"]'), ogType: content('meta[property="og:type"]'),
+        image: content('meta[property="og:image"]'), width: content('meta[property="og:image:width"]'),
+        height: content('meta[property="og:image:height"]'), alt: content('meta[property="og:image:alt"]'),
         site: content('meta[property="og:site_name"]'), card: content('meta[name="twitter:card"]'),
         themes: [...doc.querySelectorAll('meta[name="theme-color"]')].map(el => [el.getAttribute("media"), el.getAttribute("content")]) };
     }, read(path));
@@ -51,7 +53,11 @@ it("gives every page canonical, description and preview metadata", async () => {
     expect(metadata.ogUrl).toBe(metadata.canonical);
     expect(metadata.ogType).toBe("website");
     expect(metadata.site).toBe("TrendBio");
-    expect(metadata.card).toBe("summary");
+    expect(metadata.card).toBe("summary_large_image");
+    expect(metadata.image).toBe("https://trendbio.dev/og.png");
+    expect(metadata.width).toBe("1200");
+    expect(metadata.height).toBe("630");
+    expect(metadata.alt).toBe("TrendBio — What moved in computational biology");
     expect(metadata.themes).toEqual([["(prefers-color-scheme: dark)", "oklch(14.5% 0 0)"], ["(prefers-color-scheme: light)", "#fafafa"]]);
   }
   expect(read("index.html")).toContain(truncateDescription(`Today's leading computational biology topic: ${days[0].ranked[0].headline}.`));
@@ -103,4 +109,13 @@ it("renders native open and closed summary labels and adjacent existing days", a
   }
   await page.setContent(read("archive/index.html"));
   expect(await page.locator(`#heading-${days[0].date.slice(0, 7)}`).textContent()).toBe("November 2026 in progress");
+});
+
+it("ships one PNG link preview at 1200×630 under 200 KB", () => {
+  const png = readFileSync("dist/og.png");
+  expect(png.subarray(1, 4).toString()).toBe("PNG");
+  expect(png.readUInt32BE(16)).toBe(1200);
+  expect(png.readUInt32BE(20)).toBe(630);
+  expect(png.length).toBeLessThan(200_000);
+  expect(png.equals(readFileSync("public/og.png"))).toBe(true);
 });
