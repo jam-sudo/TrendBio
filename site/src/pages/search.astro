@@ -28,6 +28,8 @@ import { loadTaxonomy } from "../lib/data";
 </Base>
 
 <script is:inline type="module">
+  import { filterResults } from '/search-match.js';
+
   const form = document.querySelector('form[role="search"]');
   const input = document.getElementById('search-query');
   const category = document.getElementById('search-category');
@@ -39,7 +41,7 @@ import { loadTaxonomy } from "../lib/data";
 
   async function showResults(current) {
     more.hidden = true;
-    const batch = await Promise.all(results.slice(shown, shown + 20).map(result => result.data()));
+    const batch = results.slice(shown, shown + 20);
     if (current !== request) return;
     for (const result of batch) {
       const row = template.content.cloneNode(true);
@@ -77,8 +79,9 @@ import { loadTaxonomy } from "../lib/data";
     try {
       const pagefind = await import('/pagefind/pagefind.js');
       const search = await pagefind.search(query, { filters: category.value ? { category: category.value } : {} });
+      const filtered = await filterResults(query, search.results);
       if (current !== request) return;
-      results = search.results;
+      results = filtered;
       await showResults(current);
     } catch {
       if (current === request) status.textContent = 'Search could not load. Please try again.';

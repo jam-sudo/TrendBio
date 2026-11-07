@@ -1,0 +1,75 @@
+Search regression evidence — 2026-11-06
+
+Cause (reproduced locally before editing)
+The real ../data build contains 628 indexed topics and 19,337 indexed words.
+Pagefind 1.6.0 returned 11, 16 and 26 results for qqzzxxnomatch, zzzzqqqq and
+xkcdvvv respectively. Querying the browser API and loading the first result
+showed highlighted Q. (Yang, Q.), Z. (Zhang, Z.) and X (Hyper Screening X).
+These are reverse-prefix matches, not semantic matches or edit-distance typos.
+
+Pagefind's find_word_extensions first finds indexed words starting with the
+query; if none exist, it uses the longest indexed word that prefixes the query.
+There is no minimum prefix length in that fallback, so one-letter tokens match.
+Source (v1.6.0), pagefind_web/src/search.rs, find_word_extensions, lines 764–790:
+https://github.com/Pagefind/pagefind/blob/v1.6.0/pagefind_web/src/search.rs#L764-L790
+
+Inspected node_modules/pagefind/lib and types/internal.d.ts, plus its generated
+dist/pagefind/pagefind.js runtime. The API strips punctuation, including dots
+and hyphens, before searching. Its exact-search flag is enabled by quoting the
+whole query; that changes searches to exact phrases and loses word prefixes.
+The documented browser and indexing options provide no reverse-prefix/typo
+switch, and ranking weights alter scores rather than candidate eligibility:
+https://pagefind.app/docs/search-config/
+https://pagefind.app/docs/config-options/
+https://pagefind.app/docs/ranking/
+
+Change
+The search page now loads at most the first 50 candidate data records, verifies
+every normalized query word of at least three characters against indexed content
+at a word start, and uses the filtered data for rendering and the result count.
+Normalization preserves case-insensitive, dotted/hyphenated names, diacritics,
+and common -s/-ies plurals. Existing pagination, category filters, request guards,
+error handling and the empty state remain covered by browser tests.
+Scope: page caller, public pure matcher/filter, unit regression tests, real-data
+browser script and package command; no data, pipeline, workflow or dependency edits.
+
+Real-data browser results after the fix
+Query             Raw Pagefind   Filtered UI   Content assertion
+qqzzxxnomatch      11             0             existing empty state
+zzzzqqqq          16             0             existing empty state
+xkcdvvv           26             0             existing empty state
+PoolParty          1             1             poolparty
+poolparty          1             1             poolparty
+alphafold         42            42             alphafold
+AlphaFold3        17            17             alphafold3
+perturbation      45            41             perturbation
+perturbations     45            41             perturbation
+scRNA-seq         52            50             scrnaseq
+single-cell      130            50             singlecell
+scRNA.seq         52            50             scrnaseq (additional dotted check)
+
+Each real query has a result containing the expected term/stem at a word start.
+The browser check also asserts the displayed count and number of rendered rows
+for every query, and the exact existing empty-state message for nonsense.
+
+Validation
+uv run --no-project --python 3.12 --with pydantic --with pytest --with numpy
+  --with pyyaml --with respx --with httpx --with feedparser --with anthropic
+  --with scikit-learn --with typer --with umap-learn python -m pytest -q
+Exit 0: 536 passed, 101 UMAP seeded-n_jobs warnings in 93.53 seconds.
+
+cd site && npm test && npm run build
+Exit 0: 21 test files passed, 179 tests passed; 21.28 seconds.
+Production build: 1075 pages, 628 indexed topics, 19337 indexed words.
+
+cd site && npm run test:search-real
+Exit 0: rebuilt with ../data and ../notes; all 12 browser queries passed.
+The absent-data branch was separately executed from a temporary directory
+inside site and returned exit 0 with SKIP real-data search: ../data is absent.
+git diff --check passed.
+
+Limits
+Broad queries inspect only the first 50 candidates and report the filtered count
+within that bound. The matcher preserves common plurals, not all of Pagefind's
+English stemming (other inflections may be excluded). No new dependencies,
+deployment, push or workflow dispatch; coordinator owns publication.
