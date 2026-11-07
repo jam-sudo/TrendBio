@@ -30,6 +30,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
     <meta name="theme-color" content="oklch(14.5% 0 0)" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
     <meta name="description" content={summary} />
+    <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={summary} />
@@ -62,7 +63,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
     </div>
     <footer>
       <p>Auto-curated from bioRxiv, arXiv, PubMed, GitHub and industry sources. Summaries are machine-generated.</p>
-      <p><a href="/about">How this works</a></p>
+      <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>
       {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>
   </body>
