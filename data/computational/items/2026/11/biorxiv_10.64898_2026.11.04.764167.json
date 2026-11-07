@@ -1,0 +1,41 @@
+{
+  "abstract": "Motivation: RNA accessibility is the probability that every nucleotide in a contiguous interval is simultaneously unpaired; it is widely used to predict binding sites for RNA-binding proteins and other RNA-RNA interactions, often in the form of the opening energy, an equivalent measure on a logarithmic scale. Existing tools restrict the maximum base-pair span, discarding long-range base pairs that matter biologically. Others sample structures, introducing statistical variance, or compute accessibility exactly without a span limit, at cubic time cost. No existing method computes the accessibility of windows longer than one nucleotide deterministically in linear time while preserving long-range base pairs. We present LinearRaccess, which computes accessibility directly in linear time via beam-pruned inside-outside dynamic programming with a difference-array aggregation step, without restricting base-pair span. Results: For a sequence of length N and a fixed beam width b, LinearRaccess runs in O(N) time and O(Nb) memory. Against exact accessibility on 12,872 bpRNA-1m(90) sequences of 100-1,000 nt, its median opening-energy error is below 0.001 kcal/mol (0.14 kcal/mol for 700-1,000 nt), and it distinguishes windows of very small accessibility, including 35-nt windows, below the resolution of sampling-based estimates. LinearRaccess analyzes the full 29,903-nt SARS-CoV-2 genome in 419 seconds. Conclusion: LinearRaccess is the first method to compute the accessibility of windows longer than one nucleotide deterministically (without sampling) in linear time without restricting base-pair span. Availability: https://github.com/TakumiOtagaki/LinearRaccess, archived at Zenodo (https://doi.org/10.5281/zenodo.23598502).",
+  "authors": [
+    "Otagaki, T.",
+    "Sato, K."
+  ],
+  "doi": "10.64898/2026.11.04.764167",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.04.764167",
+  "metadata": {
+    "abstract": "Motivation: RNA accessibility is the probability that every nucleotide in a contiguous interval is simultaneously unpaired; it is widely used to predict binding sites for RNA-binding proteins and other RNA-RNA interactions, often in the form of the opening energy, an equivalent measure on a logarithmic scale. Existing tools restrict the maximum base-pair span, discarding long-range base pairs that matter biologically. Others sample structures, introducing statistical variance, or compute accessibility exactly without a span limit, at cubic time cost. No existing method computes the accessibility of windows longer than one nucleotide deterministically in linear time while preserving long-range base pairs. We present LinearRaccess, which computes accessibility directly in linear time via beam-pruned inside-outside dynamic programming with a difference-array aggregation step, without restricting base-pair span. Results: For a sequence of length N and a fixed beam width b, LinearRaccess runs in O(N) time and O(Nb) memory. Against exact accessibility on 12,872 bpRNA-1m(90) sequences of 100-1,000 nt, its median opening-energy error is below 0.001 kcal/mol (0.14 kcal/mol for 700-1,000 nt), and it distinguishes windows of very small accessibility, including 35-nt windows, below the resolution of sampling-based estimates. LinearRaccess analyzes the full 29,903-nt SARS-CoV-2 genome in 419 seconds. Conclusion: LinearRaccess is the first method to compute the accessibility of windows longer than one nucleotide deterministically (without sampling) in linear time without restricting base-pair span. Availability: https://github.com/TakumiOtagaki/LinearRaccess, archived at Zenodo (https://doi.org/10.5281/zenodo.23598502).",
+    "author_corresponding": "Kengo Sato",
+    "author_corresponding_institution": "Institute of Science Tokyo",
+    "authors": "Otagaki, T.; Sato, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.04.764167",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.04.764167.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "LinearRaccess: linear-time approximation of RNA accessibility without base-pair span limits",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institute of Science Tokyo",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "LinearRaccess computes RNA accessibility and opening energy deterministically in O(N) time via beam-pruned inside-outside DP, without base-pair span limits;…",
+  "title": "LinearRaccess: linear-time approximation of RNA accessibility without base-pair span limits",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.04.764167"
+}

@@ -1,0 +1,43 @@
+{
+  "abstract": "In a transcriptome, isoforms share most of their sequence, and gene families add further near-copies. Yet most long-read mappers treat each isoform as a separate target and repeat seeding, chaining and alignment for each. We introduce spearfish, a long-read mapper built for this redundancy. Its delta mapping ({Delta}-mapping) computes each target's alignment-score difference from the best candidate. It skips sequence that all candidates share, which cannot change the difference, and aligns where they differ once per distinct sequence rather than once per target. Seeds come from locally consistent parsing (LCP), so every isoform that contains an exon receives the same seeds in its interior. Collapsing them gives a core graph, a de Bruijn-like graph whose size is bounded by the distinct exonic sequence plus a small term per splice junction, independent of the number of isoforms. Over this graph, spearfish computes the exact colinear chaining score of every candidate transcript, sharing dynamic-programming state among transcripts via a procedure which we prove is equivalent to chaining on each transcript separately. Across RNA-seq experiments, using 32 threads, spearfish maps reads 26-83x faster than minimap2 in at most a seventh of the memory, and 2.6-11.3x faster than lr-kallisto's pseudoalignment. On simulated reads it ranks the true transcript first more often than minimap2 on HiFi reads and within 0.5 percentage points of it on ONT reads at 95% accuracy. When using spearfish's {Delta}-mapping with oarfish for abundance estimation, the abundance estimates match or improve on those that make use of minimap2's alignments on both simulated reads (especially when they are untrimmed) and on seven SG-NEx runs with spike-ins, and quantification is 3.0-8.8x faster than lr-kallisto in going from reads to abundances.",
+  "authors": [
+    "Abdelgawad, H.",
+    "Martayan, I.",
+    "MARCHET, C.",
+    "Patro, R."
+  ],
+  "doi": "10.64898/2026.11.05.764698",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.05.764698",
+  "metadata": {
+    "abstract": "In a transcriptome, isoforms share most of their sequence, and gene families add further near-copies. Yet most long-read mappers treat each isoform as a separate target and repeat seeding, chaining and alignment for each. We introduce spearfish, a long-read mapper built for this redundancy. Its delta mapping ({Delta}-mapping) computes each target's alignment-score difference from the best candidate. It skips sequence that all candidates share, which cannot change the difference, and aligns where they differ once per distinct sequence rather than once per target. Seeds come from locally consistent parsing (LCP), so every isoform that contains an exon receives the same seeds in its interior. Collapsing them gives a core graph, a de Bruijn-like graph whose size is bounded by the distinct exonic sequence plus a small term per splice junction, independent of the number of isoforms. Over this graph, spearfish computes the exact colinear chaining score of every candidate transcript, sharing dynamic-programming state among transcripts via a procedure which we prove is equivalent to chaining on each transcript separately. Across RNA-seq experiments, using 32 threads, spearfish maps reads 26-83x faster than minimap2 in at most a seventh of the memory, and 2.6-11.3x faster than lr-kallisto's pseudoalignment. On simulated reads it ranks the true transcript first more often than minimap2 on HiFi reads and within 0.5 percentage points of it on ONT reads at 95% accuracy. When using spearfish's {Delta}-mapping with oarfish for abundance estimation, the abundance estimates match or improve on those that make use of minimap2's alignments on both simulated reads (especially when they are untrimmed) and on seven SG-NEx runs with spike-ins, and quantification is 3.0-8.8x faster than lr-kallisto in going from reads to abundances.",
+    "author_corresponding": "Rob Patro",
+    "author_corresponding_institution": "University of Maryland",
+    "authors": "Abdelgawad, H.; Martayan, I.; MARCHET, C.; Patro, R.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.05.764698",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.05.764698.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "spearfish: ultrafast Δ-mapping of long reads to redundant transcriptomes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Maryland",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "spearfish: long-read mapper using Δ-mapping and a core graph over redundant transcriptomes, 26-83x faster than minimap2 at lower memory, with exact colinear…",
+  "title": "spearfish: ultrafast Δ-mapping of long reads to redundant transcriptomes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.05.764698"
+}

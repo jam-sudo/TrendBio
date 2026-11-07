@@ -1,0 +1,42 @@
+{
+  "abstract": "Background: Language models for cancer reports usually read one document at a time and are tested on tumour types seen in training. Continuous-time sequence models address the first gap, but whether they use visit timing, not just order, is seldom tested. Methods: We developed the Hierarchical Temporal Transformer (HTT), which encodes reports with adapted BiomedBERT and reads the sequence with a cancer-type-conditioned temporal transformer. We evaluated it against best-possible AUROC ceilings on two synthetic benchmarks, one with the label stated in the text and one recoverable only from tumour sizes and visit intervals (ten seeds). Diagnostics led to an interval-aware time code (HTT-IA). On 4,786 TCGA pathology reports in 14 types, three types were withheld, and a text-only HTT was compared with a survival model. Results: On the phrase benchmark HTT reached AUROC 0.931 +/- 0.012 against 0.913 +/- 0.007 for a last-report baseline (+0.018, 95% CI -0.009 to +0.050); dates cannot raise the ceiling there. On the growth benchmark the initial time code scored 0.790, equal to a no-time model (0.787), whereas HTT-IA reached 0.843 (+0.053, 0.026 to 0.082) against ceilings of 0.894 without and 0.979 with dates. On unseen tumour types HTT reached 0.925 +/- 0.007, equal to in-distribution performance and to a single-report baseline. Text-only macro C-index was 0.592 (CALM 0.626-0.652). Conclusion: Cross-type transfer is carried by the pre-trained encoder. Visit timing is used only when the data make it identifiable and the time code is on a clinical scale. Ceilings, order-only ablations and re-dating probes are inexpensive checks for such models.",
+  "authors": [
+    "Brimo, n.",
+    "Anand, R.",
+    "Sabath, A.",
+    "Harb, H.",
+    "Serdaroglu, D. C."
+  ],
+  "doi": "10.64898/2026.11.05.764680",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.05.764680",
+  "metadata": {
+    "abstract": "Background: Language models for cancer reports usually read one document at a time and are tested on tumour types seen in training. Continuous-time sequence models address the first gap, but whether they use visit timing, not just order, is seldom tested. Methods: We developed the Hierarchical Temporal Transformer (HTT), which encodes reports with adapted BiomedBERT and reads the sequence with a cancer-type-conditioned temporal transformer. We evaluated it against best-possible AUROC ceilings on two synthetic benchmarks, one with the label stated in the text and one recoverable only from tumour sizes and visit intervals (ten seeds). Diagnostics led to an interval-aware time code (HTT-IA). On 4,786 TCGA pathology reports in 14 types, three types were withheld, and a text-only HTT was compared with a survival model. Results: On the phrase benchmark HTT reached AUROC 0.931 +/- 0.012 against 0.913 +/- 0.007 for a last-report baseline (+0.018, 95% CI -0.009 to +0.050); dates cannot raise the ceiling there. On the growth benchmark the initial time code scored 0.790, equal to a no-time model (0.787), whereas HTT-IA reached 0.843 (+0.053, 0.026 to 0.082) against ceilings of 0.894 without and 0.979 with dates. On unseen tumour types HTT reached 0.925 +/- 0.007, equal to in-distribution performance and to a single-report baseline. Text-only macro C-index was 0.592 (CALM 0.626-0.652). Conclusion: Cross-type transfer is carried by the pre-trained encoder. Visit timing is used only when the data make it identifiable and the time code is on a clinical scale. Ceilings, order-only ablations and re-dating probes are inexpensive checks for such models.",
+    "author_corresponding": "nura Brimo",
+    "author_corresponding_institution": "Duke University",
+    "authors": "Brimo, n.; Anand, R.; Sabath, A.; Harb, H.; Serdaroglu, D. C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.05.764680",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.05.764680.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Hierarchical Temporal Transformer for Cancer Grade Prediction and Cross-Cancer Transfer Learning from Pathology Reports",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Duke University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "biorxiv",
+  "summary": "Hierarchical Temporal Transformer for cancer pathology report sequences; tests visit timing and transfer to unseen TCGA tumour types.",
+  "title": "Hierarchical Temporal Transformer for Cancer Grade Prediction and Cross-Cancer Transfer Learning from Pathology Reports",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.05.764680"
+}
