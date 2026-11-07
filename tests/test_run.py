@@ -889,7 +889,7 @@ def test_restatus_preserves_budget_degradation(ctx):
     day = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True)
     day.run.status = 'degraded'
     ctx.store.put_day(day)
-    ctx.store._write(ctx.deps.budget.path, {day.run.finished.strftime('%Y-%m'): 51})
+    ctx.store._write(ctx.deps.budget.path, {day.run.finished.strftime('%Y-%m'): 56})
     before = tree(ctx.root)
     result = CliRunner().invoke(app, ['restatus', '--from', str(TODAY), '--to', str(TODAY),
                                     '--data-root', str(ctx.root)])

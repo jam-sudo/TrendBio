@@ -60,7 +60,7 @@ class Scoring(BaseModel):
     backfill_synthesis_model: str = Field(default='claude-haiku-5-5', min_length=1)
     synthesis_max_items: int = Field(default=40, ge=1)
     synthesis_workers: int = Field(default=12, ge=1)
-    monthly_ceiling_usd: float = 50.0
+    monthly_ceiling_usd: float = 55.0
     degraded_fallback_min: int = 3
     degraded_fallback_rate: float = 0.2
     degraded_synthesis_fallback_min: int = Field(default=2, ge=1)
