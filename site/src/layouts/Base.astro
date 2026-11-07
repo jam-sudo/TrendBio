@@ -37,7 +37,11 @@ const canonical = new URL(canonicalPath, Astro.site).href;
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="TrendBio" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={new URL("/og.png", Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="TrendBio — What moved in computational biology" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
