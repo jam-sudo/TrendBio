@@ -119,3 +119,7 @@ it("ships one PNG link preview at 1200×630 under 200 KB", () => {
   expect(png.length).toBeLessThan(200_000);
   expect(png.equals(readFileSync("public/og.png"))).toBe(true);
 });
+
+it("explains cookie-free page-view analytics on About", () => {
+  expect(read("about/index.html")).toContain("The site uses Cloudflare Web Analytics, which sets no cookies, to count page views.");
+});
