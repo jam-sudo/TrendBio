@@ -28,6 +28,7 @@ const { contact } = loadSponsors();
     <p>Headlines, summaries and syntheses are machine-generated and may contain errors. Follow the evidence links and consult the original sources before relying on a claim.</p>
     <h2>Feeds</h2>
     <p>Subscribe to <a href="/feed.xml">/feed.xml</a> for the daily Top 5, or a category feed: {loadTaxonomy("computational").map((category, index) => <>{index > 0 && ", "}<a href={`/feed/${category.slug}.xml`}>{`/feed/${category.slug}.xml`}</a></>)}.</p>
+    <p>The site uses Cloudflare Web Analytics, which sets no cookies, to count page views.</p>
     <h2>Contact</h2>
     <p><!--email_off--><a href={`mailto:${contact}`}>{contact}</a><!--/email_off--></p>
   </article>
