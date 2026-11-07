@@ -1,7 +1,7 @@
 """Optional Bluesky attention; social identities and posts stay in memory."""
 
 from collections import defaultdict
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 import os
 import re
 import time
@@ -15,6 +15,7 @@ SESSION = "com.atproto.server.createSession"
 SEARCH = "app.bsky.feed.searchPosts"
 MAX_CALLS = 1000
 PAUSE = 0.3
+MAX_SECONDS = 600
 
 
 class ProbeError(Exception):
@@ -22,6 +23,10 @@ class ProbeError(Exception):
 
 
 class BudgetStop(Exception):
+    pass
+
+
+class TimeStop(BudgetStop):
     pass
 
 
@@ -156,7 +161,8 @@ class Attention:
 
 
 class Bluesky:
-    def __init__(self, client, sleep=time.sleep, max_calls=MAX_CALLS):
+    def __init__(self, client, sleep=time.sleep, max_calls=MAX_CALLS,
+                 clock=time.monotonic, retry_rate_limits=True):
         self.client = client
         self.sleep = sleep
         self.max_calls = min(max_calls, MAX_CALLS)
@@ -164,8 +170,22 @@ class Bluesky:
         self.session_calls = 0
         self.host = "https://bsky.social"
         self.headers = {}
+        self.clock = clock
+        self.deadline = clock() + MAX_SECONDS
+        self.retry_rate_limits = retry_rate_limits
+
+    def time_left(self):
+        remaining = self.deadline - self.clock()
+        if remaining <= 0:
+            raise TimeStop
+        return remaining
 
     def request(self, method, call, **kwargs):
+        remaining = self.time_left()
+        kwargs['timeout'] = httpx.Timeout(**{
+            key: min(value, remaining) if value is not None else remaining
+            for key, value in self.client.timeout.as_dict().items()
+        })
         try:
             return self.client.request(method, f"{self.host}/xrpc/{call}", **kwargs)
         except httpx.RequestError:
@@ -211,14 +231,15 @@ class Bluesky:
     def search_response(self, params):
         if self.calls >= self.max_calls:
             raise BudgetStop
-        self.sleep(PAUSE)
+        self.sleep(min(PAUSE, self.time_left()))
+        self.time_left()
         self.calls += 1  # Failed calls and retries consume the same budget.
         return self.request("GET", SEARCH, params=params, headers=self.headers)
 
     def search(self, params):
         for attempt in range(5):
             response = self.search_response(params)
-            if response.status_code == 429 and attempt < 4:
+            if response.status_code == 429 and attempt < 4 and self.retry_rate_limits:
                 try:
                     retry_after = float(response.headers.get("Retry-After", "0"))
                 except ValueError:
@@ -226,7 +247,7 @@ class Bluesky:
                 delay = max(2 ** (attempt + 1), retry_after)
                 if delay > 60:
                     raise ProbeError(f"{SEARCH}: HTTP 429, retry delay exceeds 60 seconds")
-                self.sleep(delay)
+                self.sleep(min(delay, self.time_left()))
                 continue
             data = self.payload(response, SEARCH)
             if not isinstance(data.get("posts"), list):
@@ -234,9 +255,9 @@ class Bluesky:
             return data
 
 
-def sweep(api, attention, start, end, form):
+def sweep(api, attention, start, end, form, hosts=HOSTS):
     states = {host: {"posts": 0, "calls": 0, "status": "pending", "partial": False,
-                     "cursor": None, "cursors": set(), "seen": set(), "hits": 0} for host in HOSTS}
+                     "cursor": None, "cursors": set(), "seen": set(), "hits": 0} for host in hosts}
     error = None
     # Round-robin pages prevent the first busy host from consuming the whole budget.
     while any(state["status"] == "pending" for state in states.values()):
@@ -263,6 +284,9 @@ def sweep(api, attention, start, end, form):
                 else:
                     state["partial"] = bool(cursor) or state["hits"] > state["posts"] or len(posts) == 100
                     state["status"] = "cursor limit" if state["partial"] else "cursor end"
+                api.time_left()
+            except TimeStop:
+                state["status"], state["partial"] = "time limit", True
             except BudgetStop:
                 state["status"], state["partial"] = "budget limit", True
             except (ProbeError, KeyError, TypeError, ValueError, AttributeError) as exc:
@@ -271,10 +295,11 @@ def sweep(api, attention, start, end, form):
                 state["status"], state["partial"] = "request failed", True
             finally:
                 state["calls"] += api.calls - before
-            if error or api.calls >= api.max_calls:
+            if error or api.calls >= api.max_calls or state["status"] in {"time limit", "budget limit"}:
+                stopped = "request failed" if error else "time limit" if state["status"] == "time limit" else "budget limit"
                 for remaining in states.values():
                     if remaining["status"] == "pending":
-                        remaining["status"] = "request failed" if error else "budget limit"
+                        remaining["status"] = stopped
                         remaining["partial"] = True
                 return states, error
     return states, error
@@ -282,21 +307,45 @@ def sweep(api, attention, start, end, form):
 
 def sweep_days(api, attention, start, end):
     """Search [start, end) in UTC day slices; publish only aggregate host coverage."""
-    hosts = {host: {"partial": False, "truncated_days": []} for host in HOSTS}
+    hosts = {host: {"partial": False, "truncated_days": [], "split_days": 0} for host in HOSTS}
+    to_split = []
+
+    def split(host, day, start, end, hours):
+        current = end
+        while current > start:
+            previous = current - timedelta(hours=hours)
+            states, error = sweep(api, attention, previous.isoformat(), current.isoformat(), "*", (host,))
+            state = states[host]
+            if error or state["status"] in {"budget limit", "time limit", "request failed"}:
+                raise BudgetStop
+            if state["status"] == "cursor limit":
+                if hours == 6:
+                    split(host, day, previous, current, 1)
+                elif day not in hosts[host]["truncated_days"]:
+                    hosts[host]["truncated_days"].append(day)
+                    hosts[host]["partial"] = True
+            current = previous
+
     current = start
     try:
         while current < end:
             following = current + timedelta(days=1)
             states, error = sweep(api, attention, current.isoformat(), following.isoformat(), "*")
             for host, state in states.items():
-                hosts[host]["partial"] |= state["partial"]
                 if state["status"] == "cursor limit":
-                    hosts[host]["truncated_days"].append(current.isoformat())
+                    to_split.append((current, host))
+                    hosts[host]["split_days"] += 1
+            if error or any(state["status"] in {"budget limit", "time limit", "request failed"}
+                            for state in states.values()):
+                raise BudgetStop
             current = following
-            if error or (api.calls >= api.max_calls and current < end):
-                for host in hosts.values():
-                    host["partial"] = True
-                break
+        # Finish every plain day first; spend recovery calls on recent days, arXiv last.
+        for day, host in sorted(to_split, key=lambda pair: (pair[1] == "arxiv.org", -pair[0].toordinal())):
+            if api.calls >= api.max_calls:
+                raise BudgetStop
+            api.time_left()
+            midnight = datetime.combine(day, datetime.min.time(), timezone.utc)
+            split(host, day.isoformat(), midnight, midnight + timedelta(days=1), 6)
     except Exception:
         # Preserve usable aggregates even when an unexpected response ends the sweep.
         for host in hosts.values():
@@ -308,9 +357,9 @@ def collect_attention(day, store, cfg, client):
     handle, password = os.getenv("BLUESKY_HANDLE"), os.getenv("BLUESKY_APP_PASSWORD")
     if not handle or not password:
         return None
+    api = Bluesky(client, max_calls=cfg.max_search_calls, retry_rate_limits=False)
     items = {item.id: item.model_dump() for item in store.items_between(date.min, day)}
     attention = Attention(items)
-    api = Bluesky(client, max_calls=cfg.max_search_calls)
     api.login(handle, password)
     start = day - timedelta(days=cfg.window_days - 1)
     hosts = sweep_days(api, attention, start, day + timedelta(days=1))
