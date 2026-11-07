@@ -6,7 +6,8 @@ import SignalBadges from "../../components/SignalBadges.astro";
 import Sparkline from "../../components/Sparkline.astro";
 import EditorNote from "../../components/EditorNote.astro";
 import EvidenceList from "../../components/EvidenceList.astro";
-import { latestDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
+import { latestDay, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
+import { hasPapers, topicEvidence } from "../../lib/citations";
 import { topicPages } from "../../lib/period-data";
 import type { Topic } from "../../lib/types";
 
@@ -24,6 +25,7 @@ const latestRanked = ranked[0];
 const category = loadTaxonomy(domain).find(({ slug }) => slug === topic.category)?.label ?? topic.category;
 const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
 const headline = topic.headline ?? topic.label;
+const evidence = topicEvidence(topic);
 ---
 
 <Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
@@ -35,7 +37,8 @@ const headline = topic.headline ?? topic.label;
     <Sparkline history={topic.history} />
     {topic.synthesis !== null && <p>{topic.synthesis}</p>}
     <EditorNote html={loadNote(topic.slug)} />
-    <EvidenceList items={loadItems(domain, [...(latestEntry?.item_ids ?? []), ...(latestEntry?.attached_item_ids ?? [])])} oneLiners={topic.item_one_liners} />
+    {hasPapers(evidence) && <p><a href={`/topic/${topic.slug}/citations.bib`} download>Export citations (BibTeX)</a></p>}
+    <EvidenceList items={evidence} oneLiners={topic.item_one_liners} />
     {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading">
       <h2 id="related-heading">Related topics</h2>
       <ul>{related.map((entry) => <li>{entry.history.some((day) => day.rank !== null)

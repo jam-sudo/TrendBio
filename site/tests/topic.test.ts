@@ -161,6 +161,8 @@ describe("built topic pages", () => {
       expect(short).not.toContain('class="sparkline"');
       expect(short).not.toContain("Editor's note");
       expect(headings(short)).toEqual(["Topic history"]);
+      expect(short).not.toContain("Export citations (BibTeX)");
+      expect(existsSync(join(output, `topic/${other.slug}/citations.bib`))).toBe(false);
       expect(section(short, "topic-history")).toContain("/day/2026-10-31/");
       expect(section(short, "topic-history")).not.toContain("/day/2026-11-01/");
       expect(existsSync(join(output, `topic/${neverRankedSlug}`))).toBe(true);
