@@ -12,18 +12,20 @@ const { title, subtitle, updated } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <a class="wordmark" href="/"><Helix staticMark />TrendBio</a>
   <h1 id="hero-title">{title}</h1>
   <p>{subtitle} <span class="updated">{updated ? <>Updated <time datetime={updated}>{formatEastern(updated)}</time>.</> : "Updated daily."}</span></p>
   <div class="hero-art"><Helix /></div>
 </section>
 
 <style>
-  .hero { position: relative; padding: 0 0 0.5rem; text-align: center; }
-  .wordmark { margin-bottom: 1.5rem; }
-  h1 { position: relative; z-index: 1; max-width: 30ch; margin: 0 auto 1rem; }
-  p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; }
-  .hero-art { pointer-events: none; width: min(320px, 100%); margin: 1rem auto 0; }
-  .updated { display: block; }
-  @media (max-width: 640px) { .hero-art { width: 240px; margin-top: 0.5rem; } .hero-art :global(.helix) { height: 90px; } }
+  .hero { position: relative; margin-top: 1rem; text-align: center; }
+  h1 { position: relative; z-index: 1; font-size: 34px; margin: 0 auto 0.5rem; }
+  p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; font-size: 14px; }
+  .updated { display: inline-block; }
+  .hero-art { pointer-events: none; width: 192px; margin: 0.5rem auto 0; }
+  .hero-art :global(.helix) { width: 100%; height: auto; }
+  @media (max-width: 640px) {
+    h1 { font-size: 26px; max-width: 30ch; }
+    .hero-art { width: 160px; }
+  }
 </style>

@@ -266,3 +266,30 @@ it.each(['dark', 'light'].flatMap(theme => [320, 390].map(width => ({ theme, wid
     expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);
   },
 );
+
+it.each(['dark', 'light'].flatMap(theme => [
+  { width: 1280, height: 800 }, { width: 390, height: 844 },
+].map(viewport => ({ theme, ...viewport }))))(
+  'fits the home search overlay below the box at $width × $height in $theme', async ({ theme, width, height }) => {
+    await page.setViewportSize({ width, height });
+    await page.addInitScript(theme => localStorage.setItem('trendbio-theme', theme), theme);
+    await visit('/');
+    await page.evaluate(() => document.fonts.ready);
+    const rowTop = await page.locator('[data-topic-cats]').first().evaluate(el => el.getBoundingClientRect().top + scrollY);
+    await combo().fill('reproducible');
+    await dropdownReady();
+    const box = (await combo().boundingBox())!;
+    const panel = (await page.locator('#header-search-panel').boundingBox())!;
+    expect(panel.y).toBeCloseTo(box.y + box.height + 4, 1);
+    expect(panel.y + panel.height).toBeLessThanOrEqual(height);
+    expect(panel.x).toBe(box.x);
+    expect(panel.width).toBe(box.width);
+    expect(panel.height).toBeCloseTo(Math.min(420, height - box.y - box.height - 20), 0);
+    expect(await page.locator('[data-topic-cats]').first().evaluate(el => el.getBoundingClientRect().top + scrollY)).toBe(rowTop);
+    expect(await page.locator('#header-search-panel').evaluate(el => {
+      const rect = el.getBoundingClientRect();
+      return el.contains(document.elementFromPoint(rect.x + rect.width / 2, rect.bottom - 5));
+    })).toBe(true);
+    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);
+  },
+);

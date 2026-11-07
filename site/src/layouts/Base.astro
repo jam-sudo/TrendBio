@@ -2,6 +2,7 @@
 import "@fontsource/inconsolata/400.css";
 import "@fontsource/inconsolata/700.css";
 import "../styles/global.css";
+import Helix from "../components/Helix.astro";
 import SponsorColumns from "../components/SponsorColumns.astro";
 import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
@@ -48,8 +49,9 @@ const canonical = new URL(canonicalPath, Astro.site).href;
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="page-shell">
-    <header>
-      {Astro.slots.has("hero") ? <slot name="hero" /> : <a class="wordmark" href="/">TrendBio</a>}
+    <header class:list={{ "home-header": Astro.slots.has("hero") }}>
+      <div class="header-top">
+      <a class="wordmark" href="/">{Astro.slots.has("hero") && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
         <div class="nav-links">
           <a href="/">Today</a>
@@ -60,6 +62,8 @@ const canonical = new URL(canonicalPath, Astro.site).href;
           <button id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">Theme <span aria-hidden="true">☾</span></button>
         </div>
       </nav>
+      </div>
+      <slot name="hero" />
       {canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
         <label class="sr-only" for="header-search-query">Search topics</label>
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />

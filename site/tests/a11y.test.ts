@@ -80,6 +80,43 @@ describe("built site accessibility and responsive layout", () => {
     }, 30_000,
   );
 
+  it.each([
+    { width: 1280, height: 800, maxY: 460 },
+    { width: 390, height: 844, maxY: 620 },
+    { width: 320, height: 640, maxY: 620 },
+  ])("keeps the home rankings visible and helix proportional at $width", async ({ width, height, maxY }) => {
+    await page.setViewportSize({ width, height });
+    await page.goto(`http://127.0.0.1:${server!.port}/`);
+    await page.evaluate(() => document.fonts.ready);
+    expect(await page.locator("h1").count()).toBe(1);
+    expect((await page.locator("[data-topic-cats]").first().boundingBox())!.y).toBeLessThanOrEqual(maxY);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+    const helix = (await page.locator(".helix").boundingBox())!;
+    expect(helix.width / helix.height).toBeCloseTo(320 / 120, 5);
+    expect(helix.x + helix.width / 2).toBeCloseTo(width / 2, 1);
+    expect(helix.height).toBe(width > 640 ? 72 : 60);
+    const title = await page.locator("h1").evaluate(el => ({ height: el.clientHeight, line: parseFloat(getComputedStyle(el).lineHeight) }));
+    if (width >= 390) expect(title.height / title.line).toBeCloseTo(width > 640 ? 1 : 2, 1);
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    expect(await page.locator(".helix-flow").evaluate(el => getComputedStyle(el).animationName)).toBe("helix-turn");
+  });
+
+  it.each(["/", "/week/2026-W44/", "/month/2026-11/"])("aligns ranking controls on %s", async path => {
+    await page.goto(`http://127.0.0.1:${server!.port}${path}`);
+    await page.evaluate(() => document.fonts.ready);
+    const tabs = (await page.locator(".ranking-heading .period-links").boundingBox())!;
+    const heading = (await page.locator(".ranking-heading h2").boundingBox())!;
+    const link = (await page.locator(".ranking-heading > a").boundingBox())!;
+    expect(tabs.x + tabs.width).toBeLessThan(heading.x);
+    expect(heading.x + heading.width).toBeLessThan(link.x);
+    expect(tabs.y + tabs.height / 2).toBeCloseTo(heading.y + heading.height / 2, 1);
+    expect(link.y + link.height / 2).toBeCloseTo(heading.y + heading.height / 2, 1);
+    await page.setViewportSize({ width: 390, height: 844 });
+    const mobileTabs = (await page.locator(".ranking-heading .period-links").boundingBox())!;
+    expect((await page.locator(".ranking-heading h2").boundingBox())!.y).toBeGreaterThan(mobileTabs.y + mobileTabs.height);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
+  });
+
   it.each([320, 390])("fits the header search below navigation without overflow at %ipx", async width => {
     await page.setViewportSize({ width, height: 900 });
     for (const path of ["/", "/day/2026-11-01/", "/topic/protein-design-binders-a1b2/", "/about/"]) {
