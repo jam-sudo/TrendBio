@@ -1,4 +1,5 @@
 ---
+import PeriodLinks from "./PeriodLinks.astro";
 import IndustryList from "./IndustryList.astro";
 import SharedList from "./SharedList.astro";
 import CodeList from "./CodeList.astro";
@@ -29,7 +30,11 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 ]));
 ---
 
-<div class="section-heading"><h2>Top {top_n}</h2><a href={period ? `/${period}/` : "/archive/"}>View all ›</a></div>
+<div class="section-heading ranking-heading">
+  <PeriodLinks current={period ?? "day"} />
+  <h2>Top {top_n}</h2>
+  <a href={period ? `/${period}/` : "/archive/"}>View all ›</a>
+</div>
 {day?.run.status === "degraded" && <p class="notice"><span class="badge">PARTIAL</span> Some sources or summaries were unavailable for this run.</p>}
 {day?.run.backfilled && <p class="notice"><span class="badge">BACKFILLED</span> Code and industry signals are partial for backfilled days.</p>}
 {ranked.length === 0 && <p class="notice"><span class="badge">{period ? "QUIET PERIOD" : "QUIET DAY"}</span> {period ? "No topic history in this period." : "Quiet day: no topic cleared the bar."}</p>}
@@ -52,6 +57,13 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 {day && <SharedList day={day.date} />}
 
 <style>
+  .ranking-heading { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin-bottom: 0.5rem; }
+  .ranking-heading :global(.period-links) { margin-bottom: 0; }
+  .ranking-heading > a { justify-self: end; }
+  @media (max-width: 640px) {
+    .ranking-heading { grid-template-columns: 1fr auto; gap: 0.5rem; }
+    .ranking-heading :global(.period-links) { grid-column: 1 / -1; }
+  }
   .topic-list { display: flex; flex-direction: column; gap: 0.5rem; }
   .open-list { margin-top: 0.5rem; }
   details { margin-top: 1rem; }

@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
 import DayTopics from "./DayTopics.astro";
-import PeriodLinks from "./PeriodLinks.astro";
 import { loadPeriods, type RankedPeriod } from "../lib/period-data";
 import { periodRows } from "../lib/leaderboard";
 interface Props { kind: "week" | "month"; period: RankedPeriod }
@@ -18,7 +17,6 @@ const previous = periods[index + 1], next = periods[index - 1];
     <a href={`/${kind}/`}>All {kind === "week" ? "weeks" : "months"}</a>
     {next && <a href={`/${kind}/${next.id}/`} rel="next">{next.label} →</a>}
   </nav>
-  <PeriodLinks current={kind} />
   <DayTopics topics={periodRows(period.topics)} period={kind} />
 </Base>
 <style>

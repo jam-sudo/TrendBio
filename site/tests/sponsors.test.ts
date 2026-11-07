@@ -113,7 +113,7 @@ describe("sponsor rendering", () => {
         expect(await page.getByRole("complementary", { name: `Sponsors, ${side} column` }).count()).toBe(1);
       }
       const advert = (await page.locator(".sponsor-right .advertise-card").boundingBox())!;
-      const hero = (await page.locator(".hero").boundingBox())!;
+      const hero = (await page.locator(".home-header .header-top").boundingBox())!;
       expect(advert.y).toBe(hero.y);
       expect(advert.width).toBe(200);
       expect(advert.x - hero.x - hero.width).toBe(24);
