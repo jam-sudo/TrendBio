@@ -161,7 +161,7 @@ Hosted dry run on 2026-11-02 (GitHub Actions `ubuntu-latest`, 7-day window, 1,19
 | Enrichment fallbacks | 10 of 1,196 (5 `refusal:bio`, 4 `empty_output`, 1 `validation`) |
 
 Planning estimate for Top 40: 5 Opus + 15 Sonnet + 20 Haiku syntheses/day ≈ USD 0.50/day
-(about USD 15/month), within the USD 50 monthly ceiling; actual usage depends on
+(about USD 15/month), within the USD 55 monthly ceiling; actual usage depends on
 evidence length. History stays on Haiku for cost control.
 
 ## Run locally
