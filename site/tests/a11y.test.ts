@@ -59,7 +59,7 @@ describe("built site accessibility and responsive layout", () => {
       await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
       const response = await page.goto(`http://127.0.0.1:${server!.port}${path}`);
       expect(response?.status()).toBe(200);
-      await page.getByRole("searchbox", { name: "Search topics" }).waitFor({ state: "visible" });
+      await page.locator('input[type="search"]').waitFor({ state: "visible" });
       expect(await page.getByRole("search").count()).toBe(1);
       if (path.startsWith("/week/")) await page.locator("details").evaluate(details => details.setAttribute("open", ""));
       const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
@@ -85,7 +85,7 @@ describe("built site accessibility and responsive layout", () => {
     for (const path of ["/", "/day/2026-11-01/", "/topic/protein-design-binders-a1b2/", "/about/"]) {
       await page.goto(`http://127.0.0.1:${server!.port}${path}`);
       await page.evaluate(() => document.fonts.ready);
-      const input = page.getByRole("searchbox", { name: "Search topics" });
+      const input = page.locator('input[type="search"]');
       const box = (await input.boundingBox())!;
       const nav = (await page.locator("header nav").boundingBox())!;
       expect(box.y).toBeGreaterThan(nav.y + nav.height);

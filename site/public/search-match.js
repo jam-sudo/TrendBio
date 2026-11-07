@@ -23,3 +23,14 @@ export async function filterResults(query, candidates) {
   const results = await Promise.all(candidates.slice(0, 50).map(result => result.data()));
   return results.filter(result => matchesQuery(query, result.content));
 }
+
+export async function firstMatches(query, candidates, isCurrent) {
+  const matches = [];
+  for (const candidate of candidates.slice(0, 50)) {
+    if (!isCurrent()) break;
+    const result = await candidate.data();
+    if (matchesQuery(query, result.content)) matches.push(result);
+    if (matches.length === 6) break;
+  }
+  return matches;
+}

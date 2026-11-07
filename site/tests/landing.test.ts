@@ -25,7 +25,10 @@ describe("built landing, day and archive pages", () => {
       expect(form).toContain('<label class="sr-only" for="header-search-query">Search topics</label>');
       expect(form.match(/<input\b/g)).toHaveLength(1);
       expect(header.indexOf(form)).toBeGreaterThan(header.indexOf('</nav>'));
-      expect(html).not.toMatch(/\/pagefind\/|\/search-match\.js/);
+      expect(html).not.toMatch(/<(?:script|link)[^>]*(?:src|href)="\/(?:pagefind\/|search-match\.js)/);
+      const script = [...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)]
+        .find(([, code]) => code.includes('header-search-query'))![1];
+      expect(Buffer.byteLength(script)).toBeLessThan(3000);
     },
   );
 

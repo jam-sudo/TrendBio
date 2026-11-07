@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { preview } from 'astro';
 import { chromium } from 'playwright';
@@ -11,12 +11,16 @@ if (!existsSync('../data')) {
   process.exit(0);
 }
 
+const buildStarted = performance.now();
 const build = spawnSync('npm', ['run', 'build'], {
   env: { ...process.env, TRENDBIO_DATA_ROOT: '../data', TRENDBIO_NOTES_ROOT: '../notes' },
   stdio: 'inherit',
 });
 if (build.error) throw build.error;
 assert.equal(build.status, 0, 'real-data build failed');
+const buildSeconds = (performance.now() - buildStarted) / 1000;
+assert.ok(buildSeconds < 60, `real-data build took ${buildSeconds}s`);
+console.log(`Real-data build: ${buildSeconds.toFixed(2)}s`);
 
 const queries = [
   ['qqzzxxnomatch', null], ['zzzzqqqq', null], ['xkcdvvv', null],
@@ -56,6 +60,65 @@ try {
     assert.equal(await page.locator('#search-results li').count(), Math.min(20, count), query);
     rows.push({ query, raw: result.raw, filtered: count, content: stem === null ? 'empty' : `contains ${stem}` });
   }
+  const html = readFileSync('dist/index.html', 'utf8');
+  const script = [...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)]
+    .find(([, code]) => code.includes('header-search-query'))[1];
+  const scriptBytes = Buffer.byteLength(script);
+  assert.ok(scriptBytes < 3000, `header script: ${scriptBytes} bytes`);
+  const context = await browser.newContext();
+  const home = await context.newPage();
+  const requests = [];
+  home.on('request', request => {
+    const path = new URL(request.url()).pathname;
+    if (/pagefind|search-match/.test(path)) requests.push(path);
+  });
+  await home.goto(`http://127.0.0.1:${server.port}/`);
+  await home.waitForLoadState('networkidle');
+  assert.deepEqual(requests, [], 'untouched header loaded search dependencies');
+  const untouched = [...requests];
+  const dropdown = [];
+  let firstQuery;
+  for (const query of ['PoolParty', 'alphafold', 'qqzzxxnomatch']) {
+    await home.getByRole('combobox').fill(query);
+    await home.getByRole('link', { name: 'See all results' }).waitFor();
+    const links = await home.getByRole('option').evaluateAll(options => options.map(option => ({
+      title: option.textContent, url: option.getAttribute('href'),
+    })));
+    if (!firstQuery) firstQuery = [...requests];
+    if (query === 'qqzzxxnomatch') {
+      assert.equal(links.length, 0);
+      assert.equal(await home.locator('#header-search-message').textContent(), 'No topics found');
+    } else {
+      assert.ok(links.length > 0 && links.length <= 6, query);
+      const expected = await home.evaluate(async query => {
+        const pagefind = await import('/pagefind/pagefind.js');
+        const { filterResults } = await import('/search-match.js');
+        return (await filterResults(query, (await pagefind.search(query)).results)).slice(0, 6).map(result => result.url);
+      }, query);
+      assert.deepEqual(links.map(link => link.url), expected, query);
+    }
+    dropdown.push({ query, links });
+  }
+  await context.close();
+  mkdirSync('.playwright-shots', { recursive: true });
+  const screenshots = [];
+  for (const [width, theme] of [[1280, 'dark'], [1280, 'light'], [390, 'dark']]) {
+    const shotContext = await browser.newContext({ viewport: { width, height: 900 } });
+    await shotContext.addInitScript(theme => localStorage.setItem('trendbio-theme', theme), theme);
+    const shot = await shotContext.newPage();
+    await shot.goto(`http://127.0.0.1:${server.port}/`);
+    await shot.getByRole('combobox').fill('alphafold');
+    await shot.getByRole('link', { name: 'See all results' }).waitFor();
+    await shot.evaluate(() => document.fonts.ready);
+    assert.equal(await shot.evaluate(() => document.documentElement.scrollWidth), width);
+    const path = `.playwright-shots/instant-search-real-${width}-${theme}.png`;
+    await shot.screenshot({ path });
+    screenshots.push(path);
+    await shotContext.close();
+  }
+  const evidence = { scriptBytes, buildSeconds, untouched, firstQuery, dropdown, screenshots };
+  writeFileSync('.playwright-shots/instant-search-evidence.json', JSON.stringify(evidence, null, 2));
+  console.log(JSON.stringify(evidence, null, 2));
   console.table(rows);
   console.log(`PASS real-data search: ${queries.length} queries (index: ../data)`);
 } finally {

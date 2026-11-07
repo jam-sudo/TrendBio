@@ -34,3 +34,19 @@ it("loads at most 50 candidates and retains only matching data in order", async 
   expect(data).toHaveBeenCalledTimes(49);
   expect(beyondLimit).not.toHaveBeenCalled();
 });
+
+it("stops after six matches without fetching the remaining fragments", async () => {
+  const { firstMatches } = await import('../public/search-match.js');
+  const miss = vi.fn().mockResolvedValue({ content: 'unrelated' });
+  const hit = vi.fn().mockResolvedValue({ content: 'PoolParty' });
+  const candidates = [{ data: miss }, ...Array.from({ length: 70 }, () => ({ data: hit }))];
+  expect(await firstMatches('PoolParty', candidates, () => true)).toHaveLength(6);
+  expect(hit).toHaveBeenCalledTimes(6);
+  expect(miss).toHaveBeenCalledTimes(1);
+  hit.mockClear();
+  expect(await firstMatches('nonsense', candidates, () => true)).toHaveLength(0);
+  expect(hit).toHaveBeenCalledTimes(49);
+  hit.mockClear();
+  expect(await firstMatches('PoolParty', candidates, () => false)).toEqual([]);
+  expect(hit).not.toHaveBeenCalled();
+});
