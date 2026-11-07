@@ -89,7 +89,8 @@ import { loadTaxonomy } from "../lib/data";
   }
 
   form.hidden = false;
-  input.value = new URLSearchParams(location.search).get('q') ?? '';
+  input.value = (new URLSearchParams(location.search).get('q') ?? '').trim();
+  if (!input.value) input.focus();
   form.addEventListener('submit', event => { event.preventDefault(); search(); });
   input.addEventListener('input', () => {
     ++request;

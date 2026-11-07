@@ -54,11 +54,13 @@ describe("built site accessibility and responsive layout", () => {
     await server?.stop();
   });
 
-  it.each(["dark", "light"].flatMap(theme => ["/", "/week/2026-W44/", "/topic/protein-design-binders-a1b2/", "/topics/", "/map/", "/archive/"].map(path => ({ theme, path }))))(
+  it.each(["dark", "light"].flatMap(theme => ["/", "/day/2026-11-01/", "/week/2026-W44/", "/topic/protein-design-binders-a1b2/", "/topics/", "/map/", "/archive/", "/about/", "/search/?q=Binder"].map(path => ({ theme, path }))))(
     "$path in $theme has zero WCAG A/AA violations and accessible landmarks", async ({ theme, path }) => {
       await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
       const response = await page.goto(`http://127.0.0.1:${server!.port}${path}`);
       expect(response?.status()).toBe(200);
+      await page.getByRole("searchbox", { name: "Search topics" }).waitFor({ state: "visible" });
+      expect(await page.getByRole("search").count()).toBe(1);
       if (path.startsWith("/week/")) await page.locator("details").evaluate(details => details.setAttribute("open", ""));
       const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
       console.log(`axe ${theme} ${path}: ${violations.length} wcag2a/wcag2aa violations`);
@@ -77,6 +79,24 @@ describe("built site accessibility and responsive layout", () => {
       if (path.startsWith("/topic/")) expect(await page.locator(".sparkline").getAttribute("aria-label")).toBeTruthy();
     }, 30_000,
   );
+
+  it.each([320, 390])("fits the header search below navigation without overflow at %ipx", async width => {
+    await page.setViewportSize({ width, height: 900 });
+    for (const path of ["/", "/day/2026-11-01/", "/topic/protein-design-binders-a1b2/", "/about/"]) {
+      await page.goto(`http://127.0.0.1:${server!.port}${path}`);
+      await page.evaluate(() => document.fonts.ready);
+      const input = page.getByRole("searchbox", { name: "Search topics" });
+      const box = (await input.boundingBox())!;
+      const nav = (await page.locator("header nav").boundingBox())!;
+      expect(box.y).toBeGreaterThan(nav.y + nav.height);
+      expect(box.width).toBe(Math.min(width - 32, 480));
+      expect(box.x).toBeCloseTo((width - box.width) / 2);
+      expect(box.height).toBeGreaterThanOrEqual(44);
+      await input.focus();
+      expect(await input.evaluate(el => getComputedStyle(el).outlineStyle)).toBe("solid");
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+    }
+  });
 
   it("keeps weekly statistics visible and filters compact rows on mobile", async () => {
     await page.setViewportSize({ width: 375, height: 812 });

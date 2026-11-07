@@ -15,8 +15,33 @@ afterAll(async () => { await browser?.close(); await server?.stop(); });
 const visit = (path: string) => page.goto(`http://127.0.0.1:${server.port}${path}`);
 const finished = () => page.waitForFunction(() => /found\./.test(document.getElementById("search-status")!.textContent!));
 
+it.each(["Binder", "  Binder  "])("submits the home search and trims %j on the search page", async query => {
+  await visit("/");
+  const input = page.getByRole("searchbox", { name: "Search topics" });
+  await input.fill(query);
+  await input.press("Enter");
+  await page.waitForURL(url => url.pathname === "/search/" && url.search === "?q=Binder");
+  await finished();
+  expect(await page.getByRole("searchbox").inputValue()).toBe("Binder");
+  expect(await page.locator('#search-results a[href="/topic/protein-design-binders-a1b2/"]').textContent()).toBe("Binder design gains shared evaluation tools");
+  expect(await page.locator("header form").count()).toBe(0);
+  expect(await page.getByRole("search").count()).toBe(1);
+});
+
+it.each(["", "   "])("submits an empty home query %j to the focused empty prompt", async query => {
+  await visit("/");
+  const input = page.getByRole("searchbox", { name: "Search topics" });
+  await input.fill(query);
+  await input.press("Enter");
+  await page.waitForURL(url => url.pathname === "/search/" && !url.search);
+  await expect.poll(() => page.getByRole("status").textContent()).toContain("Enter a term");
+  expect(await page.getByRole("searchbox").inputValue()).toBe("");
+  expect(await page.getByRole("searchbox").evaluate(el => el === document.activeElement)).toBe(true);
+});
+
 it("searches a fixture headline and displays its category and excerpt", async () => {
   await visit("/search/");
+  await expect.poll(() => page.getByRole("searchbox").evaluate(el => el === document.activeElement)).toBe(true);
   expect(await page.locator("#search-help").textContent()).toContain("paper titles and tool names");
   await page.getByRole("searchbox", { name: "Search topics" }).fill("Binder");
   await finished();
@@ -56,6 +81,8 @@ it.each(["dark", "light"].flatMap(theme => [320, 390].map(width => ({ theme, wid
     await visit("/search/?q=Binder");
     await finished();
     await page.evaluate(() => document.fonts.ready);
+    expect(await page.getByRole("search").count()).toBe(1);
+    expect(await page.getByRole("searchbox").count()).toBe(1);
     expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
   },
@@ -66,7 +93,7 @@ it("loads no Pagefind files on home or before a search and explains the JavaScri
   page.on("request", request => { if (request.url().includes("/pagefind/")) requested.push(request.url()); });
   await visit("/");
   await page.waitForLoadState("networkidle");
-  expect(await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Search" }).getAttribute("href")).toBe("/search/");
+  expect(await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Search", exact: true }).count()).toBe(0);
   expect(requested).toEqual([]);
   await visit("/search/");
   await page.waitForLoadState("networkidle");
@@ -74,7 +101,11 @@ it("loads no Pagefind files on home or before a search and explains the JavaScri
   const noJS = await browser.newContext({ javaScriptEnabled: false });
   try {
     const staticPage = await noJS.newPage();
-    await staticPage.goto(`http://127.0.0.1:${server.port}/search/`);
+    await staticPage.goto(`http://127.0.0.1:${server.port}/`);
+    const input = staticPage.getByRole("searchbox", { name: "Search topics" });
+    await input.fill("Binder");
+    await input.press("Enter");
+    await staticPage.waitForURL(`http://127.0.0.1:${server.port}/search/?q=Binder`);
     await staticPage.locator("noscript p").waitFor({ state: "visible" });
     expect(await staticPage.locator("noscript p").textContent()).toContain("Search needs JavaScript.");
   } finally { await noJS.close(); }
