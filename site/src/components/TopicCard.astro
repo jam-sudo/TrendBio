@@ -1,4 +1,5 @@
 ---
+import RankChange from "./RankChange.astro";
 import ToolNames from "./ToolNames.astro";
 import CategoryIcon from "./CategoryIcon.astro";
 import SignalLine from "./SignalLine.astro";
@@ -21,6 +22,7 @@ const identity = categoryStyle(ranked.category);
     <ToolNames names={ranked.toolNames} />
   </div>
   <div class="compact-meta">
+    <RankChange change={ranked.rankChange} />
     {!period && rise && <span class="badge" aria-label={rise.spoken}>{rise.value}</span>}
     <span class="compact-category">{category?.label ?? ranked.category}</span>
   </div>
@@ -30,7 +32,7 @@ const identity = categoryStyle(ranked.category);
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
   <CategoryIcon slug={ranked.category} size={36} />
   <div class="topic-copy">
-    <p class="rank-category">{category?.label ?? ranked.category}</p>
+    <div class="row-meta"><p class="rank-category">{category?.label ?? ranked.category}</p><RankChange change={ranked.rankChange} /></div>
     <h2><a class="topic-link" href={`/topic/${ranked.slug}/`}>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</a></h2>
     <ToolNames names={ranked.toolNames} />
     {ranked.summary && <p class="summary">{ranked.summary}</p>}
@@ -59,7 +61,8 @@ const identity = categoryStyle(ranked.category);
   .topic-card { position: relative; display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) auto; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); padding: 1.25rem; min-width: 0; overflow-wrap: anywhere; text-decoration: none; }
   .topic-card:hover { border-color: var(--muted); }
   .rank { text-align: center; }
-  .rank-category { width: fit-content; font-size: 9px; font-weight: 700; color: var(--fg); background: oklch(var(--tile-lightness) 0.06 var(--category-hue)); padding: 2px 8px; border-radius: 4px; margin: 0 0 0.5rem; }
+  .row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .rank-category { width: fit-content; font-size: 9px; font-weight: 700; color: var(--fg); background: oklch(var(--tile-lightness) 0.06 var(--category-hue)); padding: 2px 8px; border-radius: 4px; margin: 0; }
   h2 { margin: 0 0 0.375rem; }
   .summary { font-size: var(--t3); color: var(--muted); margin: 0; }
   .featured .summary { font-size: var(--t2); }
@@ -73,7 +76,7 @@ const identity = categoryStyle(ranked.category);
     .compact-row .badge { padding: 2px 4px; }
     .topic-card { grid-template-columns: 24px 36px minmax(0, 1fr); align-items: start; }
     .topic-copy { grid-column: 1 / -1; }
-    .rank-category { position: absolute; top: 1rem; right: 1rem; max-width: calc(100% - 110px); margin: 0; }
+    .row-meta { position: absolute; top: 1rem; right: 1rem; max-width: calc(100% - 110px); margin: 0; }
     .topic-card :global(.signal-line) { grid-column: 1 / -1; padding-top: 0.5rem; border-top: 1px solid var(--border); }
     .rank { align-self: center; }
     .topic-card :global(.category-tile) { grid-column: 2; }
