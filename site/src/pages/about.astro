@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { parse } from "yaml";
 import Base from "../layouts/Base.astro";
 import { loadSponsors } from "../lib/sponsors";
-import { latestDay } from "../lib/data";
+import { latestDay, loadTaxonomy } from "../lib/data";
 
 const { weights, top_n, category_floor, max_per_category } = parse(readFileSync("../config/scoring.yaml", "utf8"));
 const day = latestDay("computational");
@@ -26,6 +26,8 @@ const { contact } = loadSponsors();
     <p>Tool names under Top 20 headlines are copied from paper titles and do not affect ranking.</p>
     <h2>Machine-generated summaries</h2>
     <p>Headlines, summaries and syntheses are machine-generated and may contain errors. Follow the evidence links and consult the original sources before relying on a claim.</p>
+    <h2>Feeds</h2>
+    <p>Subscribe to <a href="/feed.xml">/feed.xml</a> for the daily Top 5, or a category feed: {loadTaxonomy("computational").map((category, index) => <>{index > 0 && ", "}<a href={`/feed/${category.slug}.xml`}>{`/feed/${category.slug}.xml`}</a></>)}.</p>
     <h2>Contact</h2>
     <p><!--email_off--><a href={`mailto:${contact}`}>{contact}</a><!--/email_off--></p>
   </article>
