@@ -1,5 +1,5 @@
 import { expect, it, vi } from "vitest";
-import { filterResults, matchesQuery } from "../public/search-match.js";
+import { filterResults, matchesQuery } from "../src/lib/search-match.js";
 
 it.each(["qqzzxxnomatch", "zzzzqqqq", "xkcdvvv"])("rejects reverse-prefix matches for %s", query => {
   expect(matchesQuery(query, "Yang, Q. Zhang, Z. Hyper Screening X")).toBe(false);
@@ -36,7 +36,7 @@ it("loads at most 50 candidates and retains only matching data in order", async 
 });
 
 it("stops after six matches without fetching the remaining fragments", async () => {
-  const { firstMatches } = await import('../public/search-match.js');
+  const { firstMatches } = await import('../src/lib/search-match.js');
   const miss = vi.fn().mockResolvedValue({ content: 'unrelated' });
   const hit = vi.fn().mockResolvedValue({ content: 'PoolParty' });
   const candidates = [{ data: miss }, ...Array.from({ length: 70 }, () => ({ data: hit }))];

@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { industryItems, latestDay, loadDays } from "../src/lib/data";
@@ -25,12 +25,20 @@ describe("built landing, day and archive pages", () => {
       expect(form).toContain('<label class="sr-only" for="header-search-query">Search topics</label>');
       expect(form.match(/<input\b/g)).toHaveLength(1);
       expect(header.indexOf(form)).toBeGreaterThan(header.indexOf('</nav>'));
-      expect(html).not.toMatch(/<(?:script|link)[^>]*(?:src|href)="\/(?:pagefind\/|search-match\.js)/);
-      const script = [...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)]
-        .find(([, code]) => code.includes('header-search-query'))![1];
-      expect(Buffer.byteLength(script)).toBeLessThan(3000);
+      expect(html).not.toMatch(/\/pagefind\/|search-match/);
+      const scriptPath = html.match(/<script type="module" src="([^"]+)"/)![1];
+      const script = readPage(scriptPath.slice(1));
+      expect(script).toContain('header-search-query');
+      // Includes Vite's dynamic-import preload runtime.
+      expect(Buffer.byteLength(script)).toBeLessThan(4000);
     },
   );
+
+  it("bundles the search helper under a content-hashed URL instead of the public root", () => {
+    expect(existsSync("dist/search-match.js")).toBe(false);
+    expect(readdirSync("dist/_astro").filter(path => /^search-match\.[\w-]+\.js$/.test(path))).toHaveLength(1);
+    expect(readPage("index.html")).not.toMatch(/\/pagefind\/|search-match/);
+  });
 
   it("shows recent fixture industry evidence below the home and day rankings", () => {
     const day = latestDay("computational")!;

@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { preview } from 'astro';
 import { chromium } from 'playwright';
+import { filterResults } from '../src/lib/search-match.js';
 
 process.chdir(fileURLToPath(new URL('../', import.meta.url)));
 if (!existsSync('../data')) {
@@ -38,13 +39,13 @@ try {
   for (const [query, stem] of queries) {
     await page.goto(`http://127.0.0.1:${server.port}/search/?q=${encodeURIComponent(query)}`);
     await page.waitForFunction(() => /found\./.test(document.getElementById('search-status').textContent));
-    const result = await page.evaluate(async query => {
+    const raw = await page.evaluate(async query => {
       const pagefind = await import('/pagefind/pagefind.js');
-      const { filterResults } = await import('/search-match.js');
       const raw = await pagefind.search(query);
-      const filtered = await filterResults(query, raw.results);
-      return { raw: raw.results.length, contents: filtered.map(result => result.content) };
+      return { total: raw.results.length, data: await Promise.all(raw.results.slice(0, 50).map(result => result.data())) };
     }, query);
+    const filtered = await filterResults(query, raw.data.map(data => ({ data: async () => data })));
+    const result = { raw: raw.total, contents: filtered.map(result => result.content) };
     const count = result.contents.length;
     if (stem === null) {
       assert.equal(count, 0, query);
@@ -61,10 +62,13 @@ try {
     rows.push({ query, raw: result.raw, filtered: count, content: stem === null ? 'empty' : `contains ${stem}` });
   }
   const html = readFileSync('dist/index.html', 'utf8');
-  const script = [...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)]
-    .find(([, code]) => code.includes('header-search-query'))[1];
+  assert.equal(existsSync('dist/search-match.js'), false);
+  assert.doesNotMatch(html, /\/pagefind\/|search-match/);
+  const scriptPath = html.match(/<script type="module" src="([^"]+)"/)[1];
+  const script = readFileSync(`dist${scriptPath}`, 'utf8');
+  assert.ok(script.includes('header-search-query'));
   const scriptBytes = Buffer.byteLength(script);
-  assert.ok(scriptBytes < 3000, `header script: ${scriptBytes} bytes`);
+  assert.ok(scriptBytes < 4000, `header script: ${scriptBytes} bytes`);
   const context = await browser.newContext();
   const home = await context.newPage();
   const requests = [];
@@ -90,11 +94,11 @@ try {
       assert.equal(await home.locator('#header-search-message').textContent(), 'No topics found');
     } else {
       assert.ok(links.length > 0 && links.length <= 6, query);
-      const expected = await home.evaluate(async query => {
+      const candidates = await home.evaluate(async query => {
         const pagefind = await import('/pagefind/pagefind.js');
-        const { filterResults } = await import('/search-match.js');
-        return (await filterResults(query, (await pagefind.search(query)).results)).slice(0, 6).map(result => result.url);
+        return Promise.all((await pagefind.search(query)).results.slice(0, 50).map(result => result.data()));
       }, query);
+      const expected = (await filterResults(query, candidates.map(data => ({ data: async () => data })))).slice(0, 6).map(result => result.url);
       assert.deepEqual(links.map(link => link.url), expected, query);
     }
     dropdown.push({ query, links });
