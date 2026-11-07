@@ -8,6 +8,27 @@ const readPage = (path: string) => readFileSync(`dist/${path}`, "utf8");
 const cards = (html: string) => [...html.matchAll(/<article\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/article>/g)].map(([card]) => card);
 
 describe("built landing, day and archive pages", () => {
+  it.each(["index.html", "day/2026-11-01/index.html", "topic/protein-design-binders-a1b2/index.html", "about/index.html", "search/index.html"])(
+    "%s has one search form and no Search navigation link", path => {
+      const html = readPage(path);
+      const header = html.match(/<header\b[^>]*>[\s\S]*?<\/header>/)![0];
+      expect(html.match(/<form\b[^>]*role="search"/g)).toHaveLength(1);
+      expect(header).not.toContain('href="/search/"');
+      if (path === "search/index.html") {
+        expect(header).not.toContain('<form');
+        return;
+      }
+      const form = header.match(/<form\b[^>]*>[\s\S]*?<\/form>/)![0];
+      expect(form).toContain('action="/search/" method="get"');
+      expect(form).toContain('name="q"');
+      expect(form).toContain('placeholder="Search topics, papers, tools"');
+      expect(form).toContain('<label class="sr-only" for="header-search-query">Search topics</label>');
+      expect(form.match(/<input\b/g)).toHaveLength(1);
+      expect(header.indexOf(form)).toBeGreaterThan(header.indexOf('</nav>'));
+      expect(html).not.toMatch(/\/pagefind\/|\/search-match\.js/);
+    },
+  );
+
   it("shows recent fixture industry evidence below the home and day rankings", () => {
     const day = latestDay("computational")!;
     const items = industryItems("computational", day.date);
