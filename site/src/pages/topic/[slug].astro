@@ -29,22 +29,23 @@ const evidence = topicEvidence(topic);
 ---
 
 <Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
-  <article class="prose">
+  <article class="prose" data-pagefind-body data-pagefind-filter={`category:${category}`}>
     {latestRanked && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
     <p class="rank-category"><CategoryIcon slug={topic.category} size={36} /> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>
     <h1>{headline}</h1>
+    {topic.summary && <p>{topic.summary}</p>}
     {latestEntry && <SignalBadges signals={latestEntry.signals} />}
     <Sparkline history={topic.history} />
     {topic.synthesis !== null && <p>{topic.synthesis}</p>}
     <EditorNote html={loadNote(topic.slug)} />
-    {hasPapers(evidence) && <p><a href={`/topic/${topic.slug}/citations.bib`} download>Export citations (BibTeX)</a></p>}
+    {hasPapers(evidence) && <p data-pagefind-ignore><a href={`/topic/${topic.slug}/citations.bib`} download>Export citations (BibTeX)</a></p>}
     <EvidenceList items={evidence} oneLiners={topic.item_one_liners} />
-    {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading">
+    {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading" data-pagefind-ignore>
       <h2 id="related-heading">Related topics</h2>
       <ul>{related.map((entry) => <li>{entry.history.some((day) => day.rank !== null)
         ? <a href={`/topic/${entry.slug}/`}>{entry.label}</a> : entry.label}</li>)}</ul>
     </section>}
-    <section id="topic-history" aria-labelledby="history-heading">
+    <section id="topic-history" aria-labelledby="history-heading" data-pagefind-ignore>
       <h2 id="history-heading">Topic history</h2>
       <table>
         <thead><tr><th scope="col">Date</th><th scope="col">Rank</th></tr></thead>

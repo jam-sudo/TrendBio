@@ -77,7 +77,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   expect(urls.size).toBe(parsed.entries.length);
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
-    expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(true);
+    expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(path !== "search/index.html");
   }
   for (const { date } of days) expect(urls.get(`https://trendbio.dev/day/${date}/`)).toBe(date);
   for (const topic of rankedTopics) expect(urls.get(`https://trendbio.dev/topic/${topic.slug}/`))
