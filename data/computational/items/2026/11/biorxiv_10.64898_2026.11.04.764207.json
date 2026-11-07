@@ -1,0 +1,43 @@
+{
+  "abstract": "DNA has two strands, and for most regulatory label prediction tasks a sequence and its reverse complement should get same answer. Yet DNA language models are tokenized, trained and tested on one strand at a time. We show that this makes them inconsistent. BPE and $k$-mer tokenizers split 92--100\\% of transcription-factor motifs differently on the two strands, and NT-v2, DNABERT-2 and HyenaDNA change 25-31\\% of their predictions when the test sequences are reverse-complemented. We introduce {\\model}, a compact DNA language model with a learned tokenizer that guarantees mirror-symmetric token boundaries across reverse-complement sequences, regardless of its learned parameters. We prove that this symmetry holds through the whole model. As a result, the same model can give identical answers on both strands when the label does not depend on the strand, and can still tell the strands apart when it does, which no strand-blind model can learn. Counting only predictions that are correct on both strands, \\model\\ more than doubles the MCC of NT-v2, DNABERT-2 and HyenaDNA. With 2.3M parameters, it is more accurate than the Caduceus models trained on the same data, and not significantly different from NT-v2 (98M parameters) on Genomic Benchmarks or from DNABERT-2 (117M) on the Nucleotide Transformer tasks. It also stays accurate on inputs sixteen times longer than those it was trained on. The same model trained with reverse-complement augmentation instead still changes about one prediction in ten with the strand, unless its outputs are averaged over both strands. Without any annotation, the tokenizer learns to keep the splice-donor signal \\texttt{AGGT} in a single token. Code: https://github.com/NIRJHOR-DATTA/MirrorDNA.",
+  "authors": [
+    "Datta, N.",
+    "Shatabda, S.",
+    "Bayzid, M. S.",
+    "Rahman, M. S."
+  ],
+  "doi": "10.64898/2026.11.04.764207",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.04.764207",
+  "metadata": {
+    "abstract": "DNA has two strands, and for most regulatory label prediction tasks a sequence and its reverse complement should get same answer. Yet DNA language models are tokenized, trained and tested on one strand at a time. We show that this makes them inconsistent. BPE and $k$-mer tokenizers split 92--100\\% of transcription-factor motifs differently on the two strands, and NT-v2, DNABERT-2 and HyenaDNA change 25-31\\% of their predictions when the test sequences are reverse-complemented. We introduce {\\model}, a compact DNA language model with a learned tokenizer that guarantees mirror-symmetric token boundaries across reverse-complement sequences, regardless of its learned parameters. We prove that this symmetry holds through the whole model. As a result, the same model can give identical answers on both strands when the label does not depend on the strand, and can still tell the strands apart when it does, which no strand-blind model can learn. Counting only predictions that are correct on both strands, \\model\\ more than doubles the MCC of NT-v2, DNABERT-2 and HyenaDNA. With 2.3M parameters, it is more accurate than the Caduceus models trained on the same data, and not significantly different from NT-v2 (98M parameters) on Genomic Benchmarks or from DNABERT-2 (117M) on the Nucleotide Transformer tasks. It also stays accurate on inputs sixteen times longer than those it was trained on. The same model trained with reverse-complement augmentation instead still changes about one prediction in ten with the strand, unless its outputs are averaged over both strands. Without any annotation, the tokenizer learns to keep the splice-donor signal \\texttt{AGGT} in a single token. Code: https://github.com/NIRJHOR-DATTA/MirrorDNA.",
+    "author_corresponding": "M. Sohel Rahman",
+    "author_corresponding_institution": "Department of Computer Science and Engineering, Bangladesh University of Engineering and Technology, Dhaka, Bangladesh",
+    "authors": "Datta, N.; Shatabda, S.; Bayzid, M. S.; Rahman, M. S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.04.764207",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.04.764207.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Learning Strand-Equivariant Tokenizations of DNA with MirrorDNA",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Computer Science and Engineering, Bangladesh University of Engineering and Technology, Dhaka, Bangladesh",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "MirrorDNA: a compact DNA language model with a learned, strand-equivariant tokenizer that enforces reverse-complement symmetry; matches larger models on…",
+  "title": "Learning Strand-Equivariant Tokenizations of DNA with MirrorDNA",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.04.764207"
+}

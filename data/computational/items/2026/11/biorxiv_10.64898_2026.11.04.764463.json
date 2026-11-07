@@ -1,0 +1,44 @@
+{
+  "abstract": "Spatial transcriptomics at single-cell resolution measures every cell in its place in the tissue, but diffusion and segmentation errors also add transcripts of neighboring cells to a cell's counts. This spillover makes a cell resemble its neighbors, and a response to the niche makes cells in the same niche resemble each other. Both tie a cell's expression to its surroundings. The count data alone cannot tell the two apart. Findings from single-cell transcriptomes, such as a gene program that is higher in one niche than in another or signaling genes that change depending on the neighborhood, may therefore be artifacts of spillover. Current models describe a cell by its intrinsic state together with either its niche response or spillover, but none models all three. We present DisCell, the first method that models all three components jointly and measures how robust each finding is to spillover. DisCell is a generative model that describes single-cell gene expression profiles in terms of two latent variables, an intrinsic state and a response to the niche, and adds spillover from its neighbors as a separate term. DisCell fits the model at increasing levels of spillover and recomputes each finding on the spillover-free expression to see how much spillover it withstands. DisCell also estimates the most spillover a section can contain, and a finding that holds even at that amount is not explained by spillover. In simulated tissue, DisCell recovers each cell's intrinsic state and response and tells findings created by spillover apart from genuine responses. On five sections of ovarian and lung tissue, the intrinsic state keeps more of each cell's own properties, measured by its cell-cycle phase, than any competing method that holds as little of its neighborhood. Within each cell type, the model partitions the variation of each gene into intrinsic state, niche response and spillover. Using DisCell, we rank findings about niches by their robustness to spillover and confirm that a previously reported finding withstands spillover, that esophageal cancer cells in niches infiltrated by immune or stromal cells express more of an epithelial-mesenchymal transition program. DisCell also predicts what the gene expression of a cell type would be in another niche, with its spillover part separated, at lower error on most tasks than the competing method built for this purpose. Training the model takes under ten minutes on one consumer GPU for sections of up to 400,000 cells.",
+  "authors": [
+    "Molen, R.",
+    "Toosi, H.",
+    "Ferreira, P. F.",
+    "Lagergren, J."
+  ],
+  "doi": "10.64898/2026.11.04.764463",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.04.764463",
+  "metadata": {
+    "abstract": "Spatial transcriptomics at single-cell resolution measures every cell in its place in the tissue, but diffusion and segmentation errors also add transcripts of neighboring cells to a cell's counts. This spillover makes a cell resemble its neighbors, and a response to the niche makes cells in the same niche resemble each other. Both tie a cell's expression to its surroundings. The count data alone cannot tell the two apart. Findings from single-cell transcriptomes, such as a gene program that is higher in one niche than in another or signaling genes that change depending on the neighborhood, may therefore be artifacts of spillover. Current models describe a cell by its intrinsic state together with either its niche response or spillover, but none models all three. We present DisCell, the first method that models all three components jointly and measures how robust each finding is to spillover. DisCell is a generative model that describes single-cell gene expression profiles in terms of two latent variables, an intrinsic state and a response to the niche, and adds spillover from its neighbors as a separate term. DisCell fits the model at increasing levels of spillover and recomputes each finding on the spillover-free expression to see how much spillover it withstands. DisCell also estimates the most spillover a section can contain, and a finding that holds even at that amount is not explained by spillover. In simulated tissue, DisCell recovers each cell's intrinsic state and response and tells findings created by spillover apart from genuine responses. On five sections of ovarian and lung tissue, the intrinsic state keeps more of each cell's own properties, measured by its cell-cycle phase, than any competing method that holds as little of its neighborhood. Within each cell type, the model partitions the variation of each gene into intrinsic state, niche response and spillover. Using DisCell, we rank findings about niches by their robustness to spillover and confirm that a previously reported finding withstands spillover, that esophageal cancer cells in niches infiltrated by immune or stromal cells express more of an epithelial-mesenchymal transition program. DisCell also predicts what the gene expression of a cell type would be in another niche, with its spillover part separated, at lower error on most tasks than the competing method built for this purpose. Training the model takes under ten minutes on one consumer GPU for sections of up to 400,000 cells.",
+    "author_corresponding": "Ricky Molen",
+    "author_corresponding_institution": "KTH royal institute of technology stockholm, SciLifeLab",
+    "authors": "Molen, R.; Toosi, H.; Ferreira, P. F.; Lagergren, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.04.764463",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.04.764463.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DisCell: Separating Spillover from Niche Response in Spatial Transcriptomics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "KTH royal institute of technology stockholm, SciLifeLab",
+  "preprint_id": null,
+  "primary_category": "transcriptomics",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "DisCell is a generative model separating intrinsic cell state, niche response, and neighbor spillover in spatial transcriptomics, ranking findings by…",
+  "title": "DisCell: Separating Spillover from Niche Response in Spatial Transcriptomics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.04.764463"
+}

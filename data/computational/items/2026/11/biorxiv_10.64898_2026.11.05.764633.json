@@ -1,0 +1,43 @@
+{
+  "abstract": "Searching current petabase-scale sequence repositories requires indexes that combine compact storage with high query throughput. Although exact colored indexes retain complete sequence information, their construction and storage costs can become substantial for highly diverse collections. Indexes based on approximate membership query (AMQ) filters offer a compact alternative with fast construction and queries. Being hash-based, these indexes support different seeding schemes without structural changes, while sampling can reduce storage requirements, construction time and query time by an order of magnitude. Within the AMQ framework, querying many independent filters causes scattered memory accesses, reducing throughput. This motivates interleaved filters, which address this weakness by storing filter slots contiguously by position, enabling cache-friendly access and simultaneous membership queries. However, existing implementations face a trade-off between guaranteed construction and space-efficiency. Here, we introduce a new indexing framework based on interleaved ZOR filters, fingerprint-based structures with guaranteed construction that require only approximately 1% more space than the theoretical minimum for AMQ. To exploit redundancy between genomes, we introduce a color-preserving merging mechanism that extends fingerprints with membership bits, allowing multiple genomes to share a filter while retaining their individual identities. Together with a lightweight, sketch-based layout planner, this mechanism yields a compact index structure that accommodates collections with widely varying genome sizes and degrees of similarity. Our third contribution extends the AMQ framework beyond contiguous -mers through a low-density minimizer scheme alongside efficient implementations of sensitive seeds, including gapped -mers and randstrobes. We implement these methods in Zindex, a parallel, SIMD-accelerated Rust index that scales to millions of genomes while supporting diverse seeding and sampling schemes. Zindex indexes the latest RefSeq release of 564,401 assembled genomes in under 22 hours, producing a 289.5 GB index. It further scales to all 2,763,297 genomes of AllTheBacteria, producing a 406.3 GB index in four days with a peak memory footprint of 43.8 GB. Availability. Zindex is available at https://github.com/Malfoy/Zindex",
+  "authors": [
+    "Okcu, T.",
+    "Alkan, C.",
+    "Limasset, A."
+  ],
+  "doi": "10.64898/2026.11.05.764633",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.05.764633",
+  "metadata": {
+    "abstract": "Searching current petabase-scale sequence repositories requires indexes that combine compact storage with high query throughput. Although exact colored indexes retain complete sequence information, their construction and storage costs can become substantial for highly diverse collections. Indexes based on approximate membership query (AMQ) filters offer a compact alternative with fast construction and queries. Being hash-based, these indexes support different seeding schemes without structural changes, while sampling can reduce storage requirements, construction time and query time by an order of magnitude. Within the AMQ framework, querying many independent filters causes scattered memory accesses, reducing throughput. This motivates interleaved filters, which address this weakness by storing filter slots contiguously by position, enabling cache-friendly access and simultaneous membership queries. However, existing implementations face a trade-off between guaranteed construction and space-efficiency. Here, we introduce a new indexing framework based on interleaved ZOR filters, fingerprint-based structures with guaranteed construction that require only approximately 1% more space than the theoretical minimum for AMQ. To exploit redundancy between genomes, we introduce a color-preserving merging mechanism that extends fingerprints with membership bits, allowing multiple genomes to share a filter while retaining their individual identities. Together with a lightweight, sketch-based layout planner, this mechanism yields a compact index structure that accommodates collections with widely varying genome sizes and degrees of similarity. Our third contribution extends the AMQ framework beyond contiguous -mers through a low-density minimizer scheme alongside efficient implementations of sensitive seeds, including gapped -mers and randstrobes. We implement these methods in Zindex, a parallel, SIMD-accelerated Rust index that scales to millions of genomes while supporting diverse seeding and sampling schemes. Zindex indexes the latest RefSeq release of 564,401 assembled genomes in under 22 hours, producing a 289.5 GB index. It further scales to all 2,763,297 genomes of AllTheBacteria, producing a 406.3 GB index in four days with a peak memory footprint of 43.8 GB. Availability. Zindex is available at https://github.com/Malfoy/Zindex",
+    "author_corresponding": "Antoine Limasset",
+    "author_corresponding_institution": "Univ. Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL, F-59000 Lille, France",
+    "authors": "Okcu, T.; Alkan, C.; Limasset, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.05.764633",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.05.764633.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Toward space-optimal approximate colored indexes at scale",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Univ. Lille, CNRS, Centrale Lille, UMR 9189 CRIStAL, F-59000 Lille, France",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Zindex: a Rust index using interleaved ZOR filters and color-preserving merging for compact, SIMD-accelerated colored sequence search across millions of…",
+  "title": "Toward space-optimal approximate colored indexes at scale",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.05.764633"
+}

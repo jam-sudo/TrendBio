@@ -1,0 +1,42 @@
+{
+  "abstract": "Somatic structural variants (SVs) drive tumorigenesis across most cancers, yet low variant allele frequencies in subclonal populations often necessitate multi-sample sequencing per patient. Existing somatic SV callers rely on whole-genome read alignments against a single linear reference, incurring high computational costs and reference bias. We present JANUS, which discovers somatic SVs directly within a personal pangenome, a colored de Bruijn-like graph of locally consistent parsing (LCP) cores built from matched normal and tumor PacBio HiFi reads. JANUS identifies candidate SV sites traversed exclusively by tumor reads without prior alignment, mapping only short read snippets surrounding each site. Across five tumor-normal pairs in the CASTLE panel, JANUS leads the 18-caller consensus with a mean F1 score of 0.887 (next-best caller: 0.858), widening its lead under low-signal regimes (0.489 versus 0.362 at 5x; 0.683 versus 0.520 at 20% purity). End to end, JANUS analyzes a tumor-normal pair in ~11 minutes on average with 16 threads, which is ~24x faster than read alignment alone on the same machine. In a 20-tumor patient simulation, joint graph calling outperforms independent pairwise runs in speed and accuracy, particularly at low depth. By processing multi-sample cohorts jointly and maintaining sensitivity at low coverage and purity, JANUS provides an efficient, reference-unbiased framework for cancer genomics. JANUS is available at https://github.com/BilkentCompGen/janus.",
+  "authors": [
+    "Kara, M.",
+    "Ashyralyyev, A.",
+    "Alkan, C."
+  ],
+  "doi": "10.64898/2026.11.05.764632",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.05.764632",
+  "metadata": {
+    "abstract": "Somatic structural variants (SVs) drive tumorigenesis across most cancers, yet low variant allele frequencies in subclonal populations often necessitate multi-sample sequencing per patient. Existing somatic SV callers rely on whole-genome read alignments against a single linear reference, incurring high computational costs and reference bias. We present JANUS, which discovers somatic SVs directly within a personal pangenome, a colored de Bruijn-like graph of locally consistent parsing (LCP) cores built from matched normal and tumor PacBio HiFi reads. JANUS identifies candidate SV sites traversed exclusively by tumor reads without prior alignment, mapping only short read snippets surrounding each site. Across five tumor-normal pairs in the CASTLE panel, JANUS leads the 18-caller consensus with a mean F1 score of 0.887 (next-best caller: 0.858), widening its lead under low-signal regimes (0.489 versus 0.362 at 5x; 0.683 versus 0.520 at 20% purity). End to end, JANUS analyzes a tumor-normal pair in ~11 minutes on average with 16 threads, which is ~24x faster than read alignment alone on the same machine. In a 20-tumor patient simulation, joint graph calling outperforms independent pairwise runs in speed and accuracy, particularly at low depth. By processing multi-sample cohorts jointly and maintaining sensitivity at low coverage and purity, JANUS provides an efficient, reference-unbiased framework for cancer genomics. JANUS is available at https://github.com/BilkentCompGen/janus.",
+    "author_corresponding": "Can Alkan",
+    "author_corresponding_institution": "Bilkent University",
+    "authors": "Kara, M.; Ashyralyyev, A.; Alkan, C.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.05.764632",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.05.764632.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Somatic structural variation discovery on cancer pangenome graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Bilkent University",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "JANUS discovers somatic structural variants directly in tumor-normal pangenome graphs from HiFi reads without prior alignment, outperforming 18 callers on…",
+  "title": "Somatic structural variation discovery on cancer pangenome graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.05.764632"
+}

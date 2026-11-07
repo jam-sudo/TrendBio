@@ -1,0 +1,42 @@
+{
+  "abstract": "Pangenome graphs are now a standard reference representation, and tools built on them depend on fast minimum-distance queries between graph positions, for example, when clustering seed matches during read alignment. The baseline distance index, previously used by the vg toolkit, answers such queries based on a decomposition of the graph into nested subgraphs called \"snarls\". Within each snarl, the index uses a dense all-pairs distance matrix. Because such a matrix is quadratic in a snarl's number of children, the large, complex snarls that often occur in many pangenome graphs dominate the overall index size. This means whole-genome graphs can be impractical to index. To mitigate this, the baseline distance index does not fully index the largest snarls, and thus cannot itself answer certain queries involving them. We replace the dense matrix with a hub labeling for snarls above a size limit. Because hub labeling and associated methods are defined for directed graphs, we introduce a directed representation of a snarl's bidirected internal \"net graph\", whose shortest path lengths are the net graph's minimum walk lengths. Hub labels are built using pruned landmark labeling, ordered by a contraction hierarchy. On four human chromosome pangenomes, our hub-labeling-based distance index indexes every snarl in 0.9 GB to 3.0 GB at a snarl limit of 500, an estimated 28x to 119x less space than dense distance matrices would need for those snarls with more than 500 children, and supports the 3-18.6% of node-to-node queries that the previous index cannot answer by itself. On the queries both indexes can answer, query time distributions broadly overlap. We explore the snarl limit parameter space and are able to build indexes under 50 GB for four human whole-genome pangenomes in under 6 hours, where we estimate dense matrices could have required multiple terabytes.",
+  "authors": [
+    "Truong, Z.",
+    "Novak, A.",
+    "Paten, B."
+  ],
+  "doi": "10.64898/2026.11.05.764665",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.05.764665",
+  "metadata": {
+    "abstract": "Pangenome graphs are now a standard reference representation, and tools built on them depend on fast minimum-distance queries between graph positions, for example, when clustering seed matches during read alignment. The baseline distance index, previously used by the vg toolkit, answers such queries based on a decomposition of the graph into nested subgraphs called \"snarls\". Within each snarl, the index uses a dense all-pairs distance matrix. Because such a matrix is quadratic in a snarl's number of children, the large, complex snarls that often occur in many pangenome graphs dominate the overall index size. This means whole-genome graphs can be impractical to index. To mitigate this, the baseline distance index does not fully index the largest snarls, and thus cannot itself answer certain queries involving them. We replace the dense matrix with a hub labeling for snarls above a size limit. Because hub labeling and associated methods are defined for directed graphs, we introduce a directed representation of a snarl's bidirected internal \"net graph\", whose shortest path lengths are the net graph's minimum walk lengths. Hub labels are built using pruned landmark labeling, ordered by a contraction hierarchy. On four human chromosome pangenomes, our hub-labeling-based distance index indexes every snarl in 0.9 GB to 3.0 GB at a snarl limit of 500, an estimated 28x to 119x less space than dense distance matrices would need for those snarls with more than 500 children, and supports the 3-18.6% of node-to-node queries that the previous index cannot answer by itself. On the queries both indexes can answer, query time distributions broadly overlap. We explore the snarl limit parameter space and are able to build indexes under 50 GB for four human whole-genome pangenomes in under 6 hours, where we estimate dense matrices could have required multiple terabytes.",
+    "author_corresponding": "Zia Truong",
+    "author_corresponding_institution": "University of California, Santa Cruz",
+    "authors": "Truong, Z.; Novak, A.; Paten, B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.05.764665",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.05.764665.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Hub labeling makes exact distance calculation practical for large human pangenome graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of California, Santa Cruz",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Replaces dense all-pairs snarl distance matrices in the vg distance index with hub labeling for large snarls, enabling exact distance queries on human…",
+  "title": "Hub labeling makes exact distance calculation practical for large human pangenome graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.05.764665"
+}

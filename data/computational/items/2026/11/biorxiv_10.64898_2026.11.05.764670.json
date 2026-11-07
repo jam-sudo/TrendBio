@@ -1,0 +1,43 @@
+{
+  "abstract": "Identity-by-descent (IBD) detection identifies genomic segments inherited from a common ancestor, and supports studies of relatedness, demographic history, and disease mapping. Existing methods primarily use linear genome representations and do not identify structural variants (SVs) shared within IBD segments. Pangenome graphs encode SVs and store each haplotype as a path through the graph. We present GIBD (Graph Identity-by-Descent), which detects IBD segments in the Graph Burrows-Wheeler Transform (GBWT) of a pangenome graph and annotates each detected segment with the SVs it carries. GIBD enumerates the pairwise-maximal exact matches between all pairs of haplotype paths in a single traversal of the GBWT, and visits each shared subpath once. On graphs of bounded degree, the traversal takes time linear in the number of nodes on the haplotype paths and the number of matches it enumerates. On a standard IBD benchmark, the power and accuracy of GIBD are within 0.009 and 0.001 of hap-ibd, a widely used linear method. Compared with impop_k, a pangenome-based IBD method, GIBD detects more 2-4 cM segments and runs in 33 seconds instead of 9.6 hours. In simulations of 1,000 haplotypes built from assemblies of the Human Pangenome Reference Consortium (HPRC), the insertion, deletion, and inversion labels of GIBD have a precision of 1.000, with and without assembly error. In a real four-generation family, GIBD identifies the inherited allele on parent-offspring segments at all 3,235 SVs on chromosome 20 where the parent is heterozygous, and reports no IBD between unrelated members. It also tracks a disease-associated 900-kb inversion at 17q21.31 across three generations and correctly labels all segments that share it. GIBD makes SVs visible in IBD detection from pangenome graphs.",
+  "authors": [
+    "Islam, U. I.",
+    "Marsico, F.",
+    "Garrison, E.",
+    "Boucher, C."
+  ],
+  "doi": "10.64898/2026.11.05.764670",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.05.764670",
+  "metadata": {
+    "abstract": "Identity-by-descent (IBD) detection identifies genomic segments inherited from a common ancestor, and supports studies of relatedness, demographic history, and disease mapping. Existing methods primarily use linear genome representations and do not identify structural variants (SVs) shared within IBD segments. Pangenome graphs encode SVs and store each haplotype as a path through the graph. We present GIBD (Graph Identity-by-Descent), which detects IBD segments in the Graph Burrows-Wheeler Transform (GBWT) of a pangenome graph and annotates each detected segment with the SVs it carries. GIBD enumerates the pairwise-maximal exact matches between all pairs of haplotype paths in a single traversal of the GBWT, and visits each shared subpath once. On graphs of bounded degree, the traversal takes time linear in the number of nodes on the haplotype paths and the number of matches it enumerates. On a standard IBD benchmark, the power and accuracy of GIBD are within 0.009 and 0.001 of hap-ibd, a widely used linear method. Compared with impop_k, a pangenome-based IBD method, GIBD detects more 2-4 cM segments and runs in 33 seconds instead of 9.6 hours. In simulations of 1,000 haplotypes built from assemblies of the Human Pangenome Reference Consortium (HPRC), the insertion, deletion, and inversion labels of GIBD have a precision of 1.000, with and without assembly error. In a real four-generation family, GIBD identifies the inherited allele on parent-offspring segments at all 3,235 SVs on chromosome 20 where the parent is heterozygous, and reports no IBD between unrelated members. It also tracks a disease-associated 900-kb inversion at 17q21.31 across three generations and correctly labels all segments that share it. GIBD makes SVs visible in IBD detection from pangenome graphs.",
+    "author_corresponding": "Uwaise Ibna Islam",
+    "author_corresponding_institution": "University of Florida",
+    "authors": "Islam, U. I.; Marsico, F.; Garrison, E.; Boucher, C.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.05.764670",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.05.764670.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Structural Variant Aware Identity-by-Descent Detection on Pangenome Graphs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Florida",
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "GIBD detects identity-by-descent segments in a pangenome graph's GBWT and annotates each segment with the structural variants it carries, running far faster…",
+  "title": "Structural Variant Aware Identity-by-Descent Detection on Pangenome Graphs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.05.764670"
+}

@@ -1,0 +1,42 @@
+{
+  "abstract": "Enzyme function prediction is a long-standing problem in biology, and deep learning methods have recently become popular to improve performance on this task. While most of these models focus on classifying enzymes or mapping them to known reactions, predicting unknown biochemical reactions remains underexplored. Here we thoroughly examine an approach that generates reactions absent from the training data from the enzyme alone. Existing methods such as BLASTp or CLIPZyme cannot, by design, output reactions that are absent from their training data or were not supplied at inference. The closest prior model, RxnPred, reports high fingerprint-similarity scores on held-out enzymes, a less stringent criterion than exact recovery, but fails to recover the correct answer on unseen reactions. We present a structure-conditioned generative model that outputs a complete reaction, reactants and products, and evaluate it on EnzymeMap_x, a reaction-disjoint benchmark in which no test reaction appears in training, under exact, stereo-respecting scoring. On this benchmark, within 400 sampled candidates, the model generates the complete, correct reaction for 25.0% of the subset of test enzyme--reaction pairs whose reaction is a new combination of metabolites seen in training. Surprisingly, it also correctly generates a few reactions composed of metabolites it has not seen in training (1.6%), though their embeddings are present in the vocabulary. With a lower budget, re-ranking places the correct reaction first for 5.6% of pairs and in the top ten for 12.4%, when the reaction is assumed not to be already known (0.2% and 8.1% without that assumption) along with confidence scores. Assessed more leniently, the model produces at least one correct reaction known for the enzyme (usually memorised from training) for 71.2% of test pairs. Going further, without any retraining, a sequence-only model given the reactants as well as the enzyme produces the correct product set for 9.5% of pairs within five candidates, without re-ranking. We also present head-to-head comparisons on these tasks with BLASTp, DIAMOND, RxnPred and Horizyn. Structure conditioning improves fingerprint similarity on homology-stratified splits, but a matched sequence-only ablation at the best configuration finds no measurable effect on exact recovery. Data coverage and chemical initialisation of the vocabulary seem to matter more than encoder geometry.",
+  "authors": [
+    "R, R.",
+    "Balamuhunthan, S.",
+    "Raman, K."
+  ],
+  "doi": "10.64898/2026.11.05.759793",
+  "first_seen": "2026-11-07",
+  "id": "biorxiv:10.64898/2026.11.05.759793",
+  "metadata": {
+    "abstract": "Enzyme function prediction is a long-standing problem in biology, and deep learning methods have recently become popular to improve performance on this task. While most of these models focus on classifying enzymes or mapping them to known reactions, predicting unknown biochemical reactions remains underexplored. Here we thoroughly examine an approach that generates reactions absent from the training data from the enzyme alone. Existing methods such as BLASTp or CLIPZyme cannot, by design, output reactions that are absent from their training data or were not supplied at inference. The closest prior model, RxnPred, reports high fingerprint-similarity scores on held-out enzymes, a less stringent criterion than exact recovery, but fails to recover the correct answer on unseen reactions. We present a structure-conditioned generative model that outputs a complete reaction, reactants and products, and evaluate it on EnzymeMap_x, a reaction-disjoint benchmark in which no test reaction appears in training, under exact, stereo-respecting scoring. On this benchmark, within 400 sampled candidates, the model generates the complete, correct reaction for 25.0% of the subset of test enzyme--reaction pairs whose reaction is a new combination of metabolites seen in training. Surprisingly, it also correctly generates a few reactions composed of metabolites it has not seen in training (1.6%), though their embeddings are present in the vocabulary. With a lower budget, re-ranking places the correct reaction first for 5.6% of pairs and in the top ten for 12.4%, when the reaction is assumed not to be already known (0.2% and 8.1% without that assumption) along with confidence scores. Assessed more leniently, the model produces at least one correct reaction known for the enzyme (usually memorised from training) for 71.2% of test pairs. Going further, without any retraining, a sequence-only model given the reactants as well as the enzyme produces the correct product set for 9.5% of pairs within five candidates, without re-ranking. We also present head-to-head comparisons on these tasks with BLASTp, DIAMOND, RxnPred and Horizyn. Structure conditioning improves fingerprint similarity on homology-stratified splits, but a matched sequence-only ablation at the best configuration finds no measurable effect on exact recovery. Data coverage and chemical initialisation of the vocabulary seem to matter more than encoder geometry.",
+    "author_corresponding": "Karthik Raman",
+    "author_corresponding_institution": "Indian Institute of Technology Madras, Chennai, India",
+    "authors": "R, R.; Balamuhunthan, S.; Raman, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-06",
+    "doi": "10.64898/2026.11.05.759793",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/06/2026.11.05.759793.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Generative Models for Novel Enzymatic Reactions: How Far Do They Go?",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Indian Institute of Technology Madras, Chennai, India",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-06",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Evaluates a structure-conditioned generative model that predicts complete enzymatic reactions absent from training, using a reaction-disjoint benchmark…",
+  "title": "Generative Models for Novel Enzymatic Reactions: How Far Do They Go?",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.05.759793"
+}
