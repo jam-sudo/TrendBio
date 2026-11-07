@@ -27,8 +27,8 @@ import { loadTaxonomy } from "../lib/data";
   </section>
 </Base>
 
-<script is:inline type="module">
-  import { filterResults } from '/search-match.js';
+<script>
+  import { filterResults } from '../lib/search-match.js';
 
   const form = document.querySelector('form[role="search"]');
   const input = document.getElementById('search-query');
@@ -77,7 +77,8 @@ import { loadTaxonomy } from "../lib/data";
     }
     status.textContent = 'Searching…';
     try {
-      const pagefind = await import('/pagefind/pagefind.js');
+      const pagefindPath = '/pagefind/pagefind.js';
+      const pagefind = await import(/* @vite-ignore */ pagefindPath);
       const search = await pagefind.search(query, { filters: category.value ? { category: category.value } : {} });
       const filtered = await filterResults(query, search.results);
       if (current !== request) return;

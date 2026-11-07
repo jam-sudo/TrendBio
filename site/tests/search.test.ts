@@ -137,7 +137,7 @@ it('loads dependencies only on focus and shows six headline/category options', a
   expect(requests.filter(url => /pagefind|search-match/.test(url))).toEqual([]);
   await combo().focus();
   await expect.poll(() => requests.includes('/pagefind/pagefind.js')).toBe(true);
-  await expect.poll(() => requests.includes('/search-match.js')).toBe(true);
+  await expect.poll(() => requests.some(url => /^\/_astro\/search-match\.[\w-]+\.js$/.test(url))).toBe(true);
   await combo().fill('r');
   await page.waitForTimeout(500);
   expect(await combo().getAttribute('aria-expanded')).toBe('false');
@@ -221,25 +221,28 @@ it('delays Searching and never lets an older response replace the latest query',
       }`,
   }));
   await visit('/');
-  await page.clock.install();
+  // Freeze elapsed time while imports and browser assertions use real time.
+  await page.clock.pauseAt(new Date());
+  await combo().focus();
+  await expect.poll(() => page.evaluate(() => Boolean((window as any).pendingSearches))).toBe(true);
   await combo().fill('older');
   await page.clock.runFor(150);
-  await page.waitForFunction(() => Boolean((window as any).pendingSearches?.older));
-  expect(await page.locator('#header-search-panel').isVisible()).toBe(false);
+  await expect.poll(() => page.evaluate(() => Boolean((window as any).pendingSearches?.older))).toBe(true);
   await page.clock.runFor(299);
-  expect(await page.locator('#header-search-panel').isVisible()).toBe(false);
+  await expect.poll(() => page.locator('#header-search-panel').isVisible()).toBe(false);
   await page.clock.runFor(1);
-  expect(await page.locator('#header-search-message').textContent()).toBe('Searching…');
+  await expect.poll(() => page.locator('#header-search-message').textContent()).toBe('Searching…');
+  await expect.poll(() => page.locator('#header-search-panel').isVisible()).toBe(true);
   await combo().fill('newer');
   expect(await combo().getAttribute('aria-expanded')).toBe('false');
   await page.clock.runFor(150);
-  await page.waitForFunction(() => Boolean((window as any).pendingSearches?.newer));
+  await expect.poll(() => page.evaluate(() => Boolean((window as any).pendingSearches?.newer))).toBe(true);
   await page.evaluate(() => (window as any).pendingSearches.newer());
   await dropdownReady();
-  expect(await options().first().textContent()).toBe('newerTools');
+  await expect.poll(() => options().allTextContents()).toEqual(['newerTools']);
   await page.evaluate(() => (window as any).pendingSearches.older());
   await page.clock.runFor(1000);
-  expect(await options().allTextContents()).toEqual(['newerTools']);
+  await expect.poll(() => options().allTextContents()).toEqual(['newerTools']);
 });
 
 it.each(['dark', 'light'].flatMap(theme => [320, 390].map(width => ({ theme, width }))))(

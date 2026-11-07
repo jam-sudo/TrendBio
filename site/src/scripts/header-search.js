@@ -73,7 +73,11 @@ if (input) {
     }, 150);
   }
   input.addEventListener('focus', () => {
-    modules ??= Promise.all(['/pagefind/pagefind.js', '/search-match.js'].map(path => import(/* @vite-ignore */ path))).catch(() => null);
+    const pagefindPath = '/pagefind/pagefind.js';
+    modules ??= Promise.all([
+      import(/* @vite-ignore */ pagefindPath),
+      import('../lib/search-match.js'),
+    ]).catch(() => null);
     if (innerWidth <= 640 && input.getBoundingClientRect().top > 96) form.scrollIntoView({ block: 'start' });
     schedule();
   });
