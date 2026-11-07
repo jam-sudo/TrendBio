@@ -177,7 +177,7 @@ export function loadTaxonomy(domain: string): Category[] {
   return cache.taxonomies.get(path)!;
 }
 
-export function industryItems(domain: string, day: string): Item[] {
+export function industryItems(domain: string, day: string, windowDays = 7, limit = 8): Item[] {
   const index = getDataIndex(domain);
   if (!index.industryItems) {
     // Industry comes from RSS; read those files once, not every paper on every day page.
@@ -188,9 +188,9 @@ export function industryItems(domain: string, day: string): Item[] {
       .sort((a, b) => b.first_seen.localeCompare(a.first_seen) || a.id.localeCompare(b.id));
   }
   const start = new Date(`${day}T00:00:00Z`);
-  start.setUTCDate(start.getUTCDate() - 6);
+  start.setUTCDate(start.getUTCDate() - windowDays + 1);
   const from = start.toISOString().slice(0, 10);
-  return index.industryItems.filter((item) => item.first_seen >= from && item.first_seen <= day).slice(0, 8);
+  return index.industryItems.filter((item) => item.first_seen >= from && item.first_seen <= day).slice(0, limit);
 }
 
 export function codeItems(domain: string, day: string): CodeItem[] {

@@ -1,4 +1,4 @@
-import { loadItems, loadTopic } from "./data";
+import { industryItems, loadItems, loadTopic } from "./data";
 import { selectToolNames } from "./tool-names";
 import type { Day } from "./types";
 
@@ -17,7 +17,11 @@ export function atomFeed(days: Day[], site: URL, category?: { slug: string; labe
 <title>${escapeXml(category ? `TrendBio — ${category.label}` : "TrendBio — Top 5")}</title>
 <id>${escapeXml(self)}</id><link rel="self" href="${escapeXml(self)}"/><link href="${escapeXml(site.href)}"/>
 <updated>${escapeXml(updated(recent[0]))}</updated><author><name>TrendBio</name></author>
-${rows.map(({ day, row }) => {
+${category?.slug === "industry" ? (recent[0] ? industryItems(recent[0].domain, recent[0].date, 30, 100) : []).map(item =>
+    `<entry><id>${escapeXml(`tag:trendbio.dev,${item.first_seen}:${item.id}`)}</id>
+<title>${escapeXml(item.title)}</title><link href="${escapeXml(item.url)}"/>
+<updated>${escapeXml(item.first_seen)}T00:00:00Z</updated><summary type="text">${escapeXml(item.summary ?? "")}</summary>
+<author><name>${escapeXml(item.org ?? "TrendBio")}</name></author></entry>`).join("\n") : rows.map(({ day, row }) => {
     const entry = loadTopic(day.domain, row.slug)?.history.find(entry => entry.date === day.date);
     const names = selectToolNames(loadItems(day.domain, entry?.item_ids ?? []), 1).map(tool => tool.name);
     const summary = row.summary + (names.length ? ` Tools: ${names.join(", ")}.` : "");
