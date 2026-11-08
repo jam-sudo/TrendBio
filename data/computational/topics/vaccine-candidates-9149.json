@@ -770,7 +770,7 @@
     0.011173473671078682,
     -0.05822702497243881
   ],
-  "headline": "Pangenome references and long reads reshape somatic variant and SV calling in cancer",
+  "headline": "Long reads and pangenome references reshape somatic variant detection in tumors",
   "history": [
     {
       "attached_item_ids": [],
@@ -3130,6 +3130,36 @@
         "rise_ratio": 2.4,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 6,
+      "date": "2026-11-08",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.05.764632",
+        "biorxiv:10.64898/2026.11.06.764802",
+        "pubmed:10.1016/j.xgen.2026.101418",
+        "pubmed:10.1016/j.xgen.2026.101419",
+        "pubmed:10.1093/bioinformatics/btag792",
+        "pubmed:10.1101/gr.282262.126"
+      ],
+      "rank": 22,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.03889041612393311,
+        "rise": 1.2857142857142858,
+        "total": 0.7389179063547291,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 4,
+        "rise_ratio": 1.2857142857142858,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -3141,8 +3171,8 @@
   ],
   "secondary_categories": [],
   "slug": "vaccine-candidates-9149",
-  "summary": "New tools call somatic SVs on tumor-normal pangenome graphs and composite references, as benchmarks show pangenome alignment improves somatic calling.",
-  "synthesis": "The dominant thread is somatic variant discovery that moves beyond GRCh38-centric short-read pipelines toward long reads and sample-aware references. A published benchmark shows that graph and personalized pangenomes outperform GRCh38 for somatic variant calling. Two preprints push this into structural variation. JANUS calls somatic SVs directly on tumor-normal pangenome graphs from HiFi reads without prior alignment and reports outperforming 18 callers. VESPA-SS detects tumor-specific strings against a draft composite germline reference. At the SNV level, SomatiX applies deep learning on allele-aware pileups from matched tumor-normal long reads and outperforms DeepSomatic. Adjacent work covers complex somatic events. One study builds a multi-platform framework for somatic mobile element insertions that benchmarks long-read and MEI-targeted sequencing with phasing. Cycle-Extractor reconstructs ecDNA cycles from breakpoint graphs using MILP and outperforms AmpliconArchitect and Decoil. What is new is the use of germline-matched or graph references as the primary coordinate system for somatic analysis, rather than as a post-hoc refinement.",
-  "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-07"
+  "summary": "Matched tumor-normal long-read sequencing and pangenome graphs are now benchmarked and used to call somatic SNVs and SVs directly.",
+  "synthesis": "The common thread is somatic variant discovery that uses long reads and germline-informed references. A published benchmark reports that graph and personalized pangenomes improve somatic variant calling relative to GRCh38, with pangenome alignment improving accuracy. Two preprints extend this to structural variation: JANUS calls somatic SVs directly on tumor-normal pangenome graphs from HiFi reads without prior alignment, while VESPA-SS detects tumor-specific strings against a draft composite germline reference. At the SNV level, SomatiX applies deep learning to allele-aware pileups from matched tumor-normal long reads and outperforms DeepSomatic. Adjacent work addresses complex events: a multi-platform framework maps somatic mobile element insertions in human tissues, and Cycle-Extractor reconstructs ecDNA cycles from breakpoint graphs, outperforming AmpliconArchitect and Decoil. What is new is the use of germline-matched or graph references as the primary coordinate system for somatic analysis rather than a post-hoc refinement.",
+  "synthesis_model": "claude-haiku-5-5",
+  "synthesized_on": "2026-11-08"
 }

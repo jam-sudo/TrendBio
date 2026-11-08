@@ -770,7 +770,7 @@
     0.0047589135356247425,
     -0.03876582905650139
   ],
-  "headline": "Reducing transcript mapping ambiguity and resolving isoforms from RNA-seq reads",
+  "headline": "Tools assign reads and signals to specific isoforms across short-read, long-read, proteomic and single-cell data",
   "history": [
     {
       "attached_item_ids": [],
@@ -1901,6 +1901,38 @@
         "rise_ratio": 1.1578947368421053,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 8,
+      "date": "2026-11-08",
+      "item_ids": [
+        "biorxiv:10.64898/2026.10.28.762701",
+        "biorxiv:10.64898/2026.10.30.762958",
+        "biorxiv:10.64898/2026.11.01.763455",
+        "biorxiv:10.64898/2026.11.02.763838",
+        "biorxiv:10.64898/2026.11.05.764473",
+        "pubmed:10.1093/bioinformatics/btag790",
+        "pubmed:10.1093/nar/gkag1107",
+        "pubmed:10.1093/nargab/lqag132"
+      ],
+      "rank": 17,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.04044122969057084,
+        "rise": 1.3333333333333333,
+        "total": 0.7683833641208458,
+        "volume": 0.5588306254094444
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 3,
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1914,8 +1946,8 @@
     "tools-infra"
   ],
   "slug": "decoding-mitochondrial-diverse-eukaryotes-557a",
-  "summary": "Recent RNA-seq tools target isoform ambiguity, splicing, annotation and editing using transcript-specific sequence features and evidence tiers.",
-  "synthesis": "The common thread is resolving which transcript a read or signal belongs to. The quantification-focused preprint isolates transcript-specific k-mers to cut mapping ambiguity in isoform quantification, while MOCHI applies a reference-independent k-mer framework to curate candidate independent intronic transcripts from strand-specific short reads. Other items operate on adjacent steps. DirectClean handles artifacts in ONT direct-cDNA reads and rescues recoverable ones, and SQANTI-evidence annotates unannotated genomes from long-read RNA-seq alone. LRP2 links long-read isoform discovery and differential isoform usage to mass-spec evidence. splicelogic converts transcript-set differences into discrete splicing events, scSpAS provides a single-cell and spatial isoform regulation resource, and Edi-Set-Flow addresses A-to-I editing rather than isoform identity.",
-  "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-07"
+  "summary": "New tools address isoform ambiguity from quantification and read cleanup through annotation, event calling and proteogenomic validation, with atlas-scale resources.",
+  "synthesis": "The dominant thread is assigning reads and signals to specific transcripts and carrying isoform identity downstream. For short reads, one preprint uses minimal-shared k-mer regions to reduce mapping ambiguity in quantification, while MOCHI uses a reference-independent k-mer framework to curate candidate independent intronic transcripts. For long reads, DirectClean rescues ONT direct-cDNA reads and handles chimeras, and SQANTI-evidence annotates unannotated genomes from long-read RNA-seq with SQANTI3-curated isoforms plus AUGUSTUS predictions. Downstream, splicelogic converts transcript-set differences into discrete splicing events, LRP2 ties long-read isoforms and differential isoform usage to mass-spec evidence, and scSpAS compiles single-cell and spatial isoform regulation. Edi-Set-Flow addresses A-to-I editing and is adjacent to this isoform-resolution thread.",
+  "synthesis_model": "claude-sonnet-5-5",
+  "synthesized_on": "2026-11-08"
 }

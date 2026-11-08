@@ -770,7 +770,7 @@
     -0.0009731439640745521,
     -0.044374581426382065
   ],
-  "headline": "Evaluation protocol, not architecture, drives molecular property benchmark conclusions",
+  "headline": "Leakage-controlled benchmarks reveal task dependence in protein language model evaluation",
   "history": [
     {
       "attached_item_ids": [],
@@ -1529,21 +1529,49 @@
         "rise_ratio": 1.1666666666666667,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 4,
+      "date": "2026-11-08",
+      "item_ids": [
+        "biorxiv:10.64898/2026.10.30.763022",
+        "biorxiv:10.64898/2026.10.31.763304",
+        "biorxiv:10.64898/2026.11.03.764142",
+        "biorxiv:10.64898/2026.11.04.764373"
+      ],
+      "rank": 24,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.3333333333333333,
+        "total": 0.7239004051593306,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Admet Prediction Benchmark Design",
+  "label": "Protein Language Model Benchmarking",
   "related": [
     "learning-biology-small-c2ee",
     "protein-generation-b3ca",
-    "foundation-models-encoder-9f80"
+    "rna-prediction-7112"
   ],
   "secondary_categories": [
     "tools-infra"
   ],
   "slug": "optimal-transport-flow-matching-ea35",
-  "summary": "Matched-protocol ADMET benchmarks now show model, acquisition and tuning gains are endpoint-dependent rather than uniform.",
-  "synthesis": "The dominant thread treats evaluation protocol, not architecture, as the experimental variable in molecular property prediction. A protocol-matched study of seven active-learning acquisition strategies and two uncertainty methods across eight ADMET regression endpoints asks when acquisition actually improves prediction. A matched-budget, scaffold-split comparison of GNNs, frozen ChemBERTa and MolCLR embeddings, and fingerprints across six TDC endpoints finds no model family dominant. Ark-ADMET extends this to tuning, reporting that endpoint-specific choice of fingerprints, descriptors, GIN/MiniMol embeddings and CatBoost hyperparameters matches or beats leaderboard scores on 7 of 21 endpoints. PeptSol applies benchmark construction to protected-peptide solubility, with 1388 curated measurements and chemistry-aware splits over frozen encoders. Adjacent single-cell and antibody immunogenicity studies apply the same auditing stance, benchmarking foundation models against simple baselines and showing a format lookup beats sequence predictors.",
+  "summary": "Protein language models are being evaluated under leakage-controlled splits, exposing homology confounds across variant, epitope, and interaction tasks.",
+  "synthesis": "The common thread across these preprints is rigor in evaluating protein language models and related predictors, with homology leakage and task dependence as the central concerns. A leakage-controlled benchmark of variant effect predictors yields a gradient-boosting consensus model. FedEpitope adapts ESM-2 with LoRA in a federated setting for linear B-cell epitope prediction, comparing FedAvg and FedProx on homology-aware splits. PPI-Caliper applies conformal calibration to protein language model interaction scores, controlling false discovery rate without retraining across five species. Protify standardizes benchmarking across zero-shot, supervised, and transfer settings and reports task dependence and homology leakage. What is new is the use of calibrated error control and standardized, leakage-aware protocols as the basis for judging what these models actually predict.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-04"
+  "synthesized_on": "2026-11-08"
 }
