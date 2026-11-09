@@ -43,7 +43,7 @@ Discovered repos with matching normalized descriptions and variant names, or ide
 
 ## Clustering, attachment and continuity
 
-Paper clusters use complete linkage at cosine distance 0.10, with at least three papers.
+Paper clusters use SPECTER2 (`allenai/specter2_base`) embeddings and complete linkage at cosine distance 0.10, with at least three papers.
 Each relevant code/industry item attaches to only its nearest paper centroid when cosine
 similarity reaches `attach_min_similarity` (0.94; [calibration](../tests/evidence/code-industry-2026-11-05.md)).
 Attached IDs are stored separately in `attached_item_ids` (empty for older histories),
