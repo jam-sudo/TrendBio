@@ -113,4 +113,8 @@ docs/       design spec, implementation plans, operations guide
 - [Operations](docs/operations.md) — sources, thresholds, workflows, degraded days, sponsors, measured costs
 - [Implementation plans](docs/superpowers/plans/) — one file per shipped change
 
+## License
+
+Code is [MIT](LICENSE). Everything the pipeline produces under `data/` — headlines, summaries, syntheses, clusters, scores and rankings — is [CC BY 4.0](data/LICENSE); cite it as TrendBio (trendbio.dev). Paper titles, abstracts and author names in `data/` belong to their authors and publishers and are not covered.
+
 Headlines, summaries and syntheses are machine-generated and can be wrong; follow the evidence links before relying on a claim. Contact: jaemin6013@gmail.com
