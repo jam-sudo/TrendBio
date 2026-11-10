@@ -1,0 +1,43 @@
+{
+  "abstract": "We introduce MELD (Mutation Effect Learning through Differential Embeddings), a compact model for predicting the functional consequences of single nucleotide variants (SNVs) by training directly on the wild-type (WT) versus mutant differential. Interpreting SNVs is central to clinical genomics, yet experimental characterization cannot scale to millions of observed variants. Leading sequence-to-function models (Enformer, Borzoi, AlphaGenome) are trained on absolute genomic tracks and score variants post hoc through in-silico mutagenesis (ISM), so the WT-mutant difference never enters the training loss. MELD instead places the logit difference {Delta}z = zmut - zwt inside the supervised objective. It combines a shared CNN-Transformer encoder, a mutant-specific mutation-mask boost, multiscale mutation-centered pooling, and a learned adaptive amplification factor . On ClinVar (1.57M variants), MELD (1.9M parameters) reached an AUROC of 0.986 versus 0.800 for a same-data, same-backbone ISM baseline, with ablations confirming the contribution of each component. On a shared benchmark, it outperformed frozen foundation models with 3-1,300x more parameters (AUROC 0.967 vs. 0.924 for AlphaGenome and 0.936 for Nucleotide Transformer). With only 50, 000 training variants, it exceeded the ISM baseline trained on all 1.48M (AUROC 0.903 vs. 0.796) variants. On BRCA1 saturation genome editing, frozen MELD achieved a Spearman {rho} of 0.42, above Borzoi (0.40), and ClinVar transfer raised it to 0.45. These results demonstrate that direct differential supervision is a compact, data-efficient alternative to post-hoc ISM scoring with substantially larger pretrained models.",
+  "authors": [
+    "Alajji, A.",
+    "Jashil, R.",
+    "Mall, R.",
+    "Elshrif, M."
+  ],
+  "doi": "10.64898/2026.10.29.762727",
+  "first_seen": "2026-11-10",
+  "id": "biorxiv:10.64898/2026.10.29.762727",
+  "metadata": {
+    "abstract": "We introduce MELD (Mutation Effect Learning through Differential Embeddings), a compact model for predicting the functional consequences of single nucleotide variants (SNVs) by training directly on the wild-type (WT) versus mutant differential. Interpreting SNVs is central to clinical genomics, yet experimental characterization cannot scale to millions of observed variants. Leading sequence-to-function models (Enformer, Borzoi, AlphaGenome) are trained on absolute genomic tracks and score variants post hoc through in-silico mutagenesis (ISM), so the WT-mutant difference never enters the training loss. MELD instead places the logit difference {Delta}z = zmut - zwt inside the supervised objective. It combines a shared CNN-Transformer encoder, a mutant-specific mutation-mask boost, multiscale mutation-centered pooling, and a learned adaptive amplification factor . On ClinVar (1.57M variants), MELD (1.9M parameters) reached an AUROC of 0.986 versus 0.800 for a same-data, same-backbone ISM baseline, with ablations confirming the contribution of each component. On a shared benchmark, it outperformed frozen foundation models with 3-1,300x more parameters (AUROC 0.967 vs. 0.924 for AlphaGenome and 0.936 for Nucleotide Transformer). With only 50, 000 training variants, it exceeded the ISM baseline trained on all 1.48M (AUROC 0.903 vs. 0.796) variants. On BRCA1 saturation genome editing, frozen MELD achieved a Spearman {rho} of 0.42, above Borzoi (0.40), and ClinVar transfer raised it to 0.45. These results demonstrate that direct differential supervision is a compact, data-efficient alternative to post-hoc ISM scoring with substantially larger pretrained models.",
+    "author_corresponding": "Mohamed Elshrif",
+    "author_corresponding_institution": "Qatar Computing Research Institute",
+    "authors": "Alajji, A.; Jashil, R.; Mall, R.; Elshrif, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-09",
+    "doi": "10.64898/2026.10.29.762727",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/09/2026.10.29.762727.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MELD: Mutation Effect Learning through Differential embeddings",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Qatar Computing Research Institute",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "MELD trains a compact CNN-Transformer on wild-type vs mutant logit differences to predict SNV effects, reaching AUROC 0.986 on ClinVar and beating larger…",
+  "title": "MELD: Mutation Effect Learning through Differential embeddings",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.29.762727"
+}

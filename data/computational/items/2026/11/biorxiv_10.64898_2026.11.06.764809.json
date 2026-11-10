@@ -1,0 +1,41 @@
+{
+  "abstract": "Motivation: A pseudoknot is an arrangement of crossing base pairs. Pseudoknots complicate structure prediction and calculations over possible structures (an ensemble). CParty sums structure weights for hierarchical pseudoknots that keep a supplied pseudoknot-free structure (scaffold). Its time is cubic in sequence length. Results: LinearKnot approximates CParty with beam pruning. It combines at most two partial structures in each step and keeps the highest-ranked candidates. At fixed beam width, hairpin length limit, and scaffold search limit, partition functions, minimum-free-energy (MFE) predictions, and representative {gamma}-centroid structures from base-pairing probabilities take linear time in sequence length. Loop profiles give probabilities for pairing and six unpaired loop types, including gaps between crossing stems (PseudoLoop). Window accessibility is the probability that a window is unpaired. For each RNA, we compared each base's distributions over pairing partners (including the unpaired state) and structural contexts with exact probabilities and averaged their total variation (TV) distances over bases unpaired in the scaffold. At width 200, the 90th percentiles of these RNA averages among 300-399-base RNAs were 0.0015 for pairing and 0.0017 for contexts. At width 100, LinearKnot completed partition functions for all 107 real RNAs through 29 kilobases. Under our settings, CParty completed RNAs up to about 1 kilobase and was faster on them. For the RNAcentral long non-coding RNA URS00023A4DB9 (29,106 nt), partition-function, pairing-probability, and MFE calculations at width 100 took about 7 minutes and 3.22 GiB. We compared free energy and pairing probabilities before and after each increase in beam width and local limits. These changes generally became smaller at larger widths. At width 200, the calculations for URS00023A4DB9 took about 20 minutes and 5.68 GiB. In rat telomerase RNA, a four-base window next to a pseudoknot was mostly unpaired as part of a PseudoLoop. A pseudoknot-free calculation with the same scaffold gave lower accessibility and placed the window mainly in a hairpin when unpaired. Availability and implementation: LinearKnot provides the linearknot command at https://github.com/TakumiOtagaki/LinearKnot. Experiment scripts and data are at https://github.com/TakumiOtagaki/LinearKnotExperiments.",
+  "authors": [
+    "Otagaki, T.",
+    "Sato, K."
+  ],
+  "doi": "10.64898/2026.11.06.764809",
+  "first_seen": "2026-11-10",
+  "id": "biorxiv:10.64898/2026.11.06.764809",
+  "metadata": {
+    "abstract": "Motivation: A pseudoknot is an arrangement of crossing base pairs. Pseudoknots complicate structure prediction and calculations over possible structures (an ensemble). CParty sums structure weights for hierarchical pseudoknots that keep a supplied pseudoknot-free structure (scaffold). Its time is cubic in sequence length. Results: LinearKnot approximates CParty with beam pruning. It combines at most two partial structures in each step and keeps the highest-ranked candidates. At fixed beam width, hairpin length limit, and scaffold search limit, partition functions, minimum-free-energy (MFE) predictions, and representative {gamma}-centroid structures from base-pairing probabilities take linear time in sequence length. Loop profiles give probabilities for pairing and six unpaired loop types, including gaps between crossing stems (PseudoLoop). Window accessibility is the probability that a window is unpaired. For each RNA, we compared each base's distributions over pairing partners (including the unpaired state) and structural contexts with exact probabilities and averaged their total variation (TV) distances over bases unpaired in the scaffold. At width 200, the 90th percentiles of these RNA averages among 300-399-base RNAs were 0.0015 for pairing and 0.0017 for contexts. At width 100, LinearKnot completed partition functions for all 107 real RNAs through 29 kilobases. Under our settings, CParty completed RNAs up to about 1 kilobase and was faster on them. For the RNAcentral long non-coding RNA URS00023A4DB9 (29,106 nt), partition-function, pairing-probability, and MFE calculations at width 100 took about 7 minutes and 3.22 GiB. We compared free energy and pairing probabilities before and after each increase in beam width and local limits. These changes generally became smaller at larger widths. At width 200, the calculations for URS00023A4DB9 took about 20 minutes and 5.68 GiB. In rat telomerase RNA, a four-base window next to a pseudoknot was mostly unpaired as part of a PseudoLoop. A pseudoknot-free calculation with the same scaffold gave lower accessibility and placed the window mainly in a hairpin when unpaired. Availability and implementation: LinearKnot provides the linearknot command at https://github.com/TakumiOtagaki/LinearKnot. Experiment scripts and data are at https://github.com/TakumiOtagaki/LinearKnotExperiments.",
+    "author_corresponding": "Kengo Sato",
+    "author_corresponding_institution": "Institute of Science Tokyo",
+    "authors": "Otagaki, T.; Sato, K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-09",
+    "doi": "10.64898/2026.11.06.764809",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/09/2026.11.06.764809.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "LinearKnot: linear-time ensemble analysis of RNA density-2 pseudoknots under hierarchical folding",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Institute of Science Tokyo",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "LinearKnot approximates CParty's hierarchical pseudoknot ensemble with beam pruning, giving linear-time partition functions, MFE, and loop probabilities for…",
+  "title": "LinearKnot: linear-time ensemble analysis of RNA density-2 pseudoknots under hierarchical folding",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.06.764809"
+}

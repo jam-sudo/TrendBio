@@ -770,7 +770,7 @@
     0.006366966757923365,
     -0.0250078272074461
   ],
-  "headline": "Graph and network models link metabolite structures, microbes, and protein interactions",
+  "headline": "Knowledge networks are scaffolding annotation and interpretation of omics data",
   "history": [
     {
       "attached_item_ids": [],
@@ -2100,10 +2100,38 @@
         "rise_ratio": 0.875,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 4,
+      "date": "2026-11-10",
+      "item_ids": [
+        "biorxiv:10.64898/2026.10.30.763199",
+        "biorxiv:10.64898/2026.11.04.764154",
+        "biorxiv:10.64898/2026.11.04.764165",
+        "pubmed:10.1093/nar/gkag1127"
+      ],
+      "rank": 29,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.0769230769230769,
+        "total": 0.6710157897747152,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 1,
+        "rise_ratio": 1.0769230769230769,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Network Guided Deep Learning",
+  "label": "Network Guided Biomedical Knowledge",
   "related": [
     "coding-rnas-generates-6c5b",
     "protein-topic-60fa",
@@ -2113,8 +2141,8 @@
     "metabolomics"
   ],
   "slug": "rna-seq-single-8a97",
-  "summary": "Recent preprints apply network-based deep learning to metabolite annotation, biomarker nomination, and interaction prediction.",
-  "synthesis": "The common thread is conditioning learned models on biological network structure, whether protein networks, microbial association networks, molecular neighborhoods, or knowledge graphs. A CNN over a protein network nominates COPD-comorbidity biomarker candidates, which are tested on public transcriptomic data. A graph neural network applied to individual microbial association networks from HMP2/iHMP metagenomes identifies a co-abundant Bacteroidales module driving IBD prediction, with interpretation of learned patterns as a central output. In metabolomics, DEEPNET-LLM restricts de novo structure prediction from MS/MS spectra to molecular-community neighborhoods, and FeatureMAP applies network guidance to LC-MS annotation and module discovery. A random forest using MINT embeddings predicts differential protein-protein interactions across cell conditions. What is new across these items is the explicit use of network neighborhoods as the constraint on prediction, annotation, or interpretation.",
+  "summary": "Public omics resources and metabolomics tools are increasingly built around explicit network or knowledge-graph structure to make annotations traceable.",
+  "synthesis": "The dominant thread is the use of explicit network or knowledge-graph structure as the scaffold for interpreting heterogeneous omics data. NLM-CKN links single-cell-derived cell phenotypes across 88 datasets and 10 human organs to Cell Ontology terms, genes, diseases and drugs, forming a semantic network that can be traversed from phenotype to therapeutic context. FeatureMAP applies network guidance to untargeted LC-MS, pairing metabolite annotation with module discovery over the PhenoMAP knowledge graph. What is new relative to network-conditioned prediction is the emphasis on the network as a reusable resource for annotation and traceability rather than only a model constraint. TRACE addresses provenance in public omics curation, demonstrated on a harmonised single-cell glaucoma resource, while Met-SC offers a metabolomics database with standardized deposition, spectral libraries and 27 online analysis tools. These two focus on resource construction rather than network-guided inference, so they extend the thread rather than fully share it.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-05"
+  "synthesized_on": "2026-11-10"
 }

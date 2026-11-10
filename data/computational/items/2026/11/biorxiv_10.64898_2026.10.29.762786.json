@@ -1,0 +1,43 @@
+{
+  "abstract": "Vertex models link cell division, neighbour exchange, and intercellular forces to epithelial tissue form through parameters such as junctional line tension and perimeter contractility. Bayesian inference of these parameters from data quantifies their uncertainty, but for stochastic models of proliferating tissues it requires many costly simulations. Multi-fidelity simulation-based inference reduces this cost by training on many runs of a cheaper, less accurate ('low-fidelity') simulator before refining with a few full ('high-fidelity') runs. Low-fidelity versions can be constructed in several ways, for example by stopping simulations early, coarsening the timestep, or averaging fewer replicates, but it is unclear which to choose before committing to costly training. To address this, we introduce PRISM (Paired Ranking Index for Simulator Matching), a screen that compares each candidate with the full simulator on paired runs, scoring  agreement in cell-packing statistics against cost. For a vertex model of a proliferating tissue, PRISM flags stopping early as unreliable before training; once trained, this choice can produce confidently wrong parameter estimates. By contrast, a coarser timestep, within the range tested, is cheap and accurate; while fewer replicates are accurate but too costly. Using a screened low-fidelity simulator, multi-fidelity inference outperforms approximate Bayesian computation and neural-network inference trained on full simulations alone, at matched cost and with well-calibrated uncertainty. The same pattern recurs for a second vertex model fitted to published Drosophila pupal-wing imaging data, although there stopping halfway proves safe. Together, our findings suggest that which approximations are safe depends on the model, and that screening them before training makes multi-fidelity inference of tissue mechanics practical.",
+  "authors": [
+    "Amini, M.",
+    "Jennings, J. L.",
+    "Xing, W.",
+    "Fletcher, A. G."
+  ],
+  "doi": "10.64898/2026.10.29.762786",
+  "first_seen": "2026-11-10",
+  "id": "biorxiv:10.64898/2026.10.29.762786",
+  "metadata": {
+    "abstract": "Vertex models link cell division, neighbour exchange, and intercellular forces to epithelial tissue form through parameters such as junctional line tension and perimeter contractility. Bayesian inference of these parameters from data quantifies their uncertainty, but for stochastic models of proliferating tissues it requires many costly simulations. Multi-fidelity simulation-based inference reduces this cost by training on many runs of a cheaper, less accurate ('low-fidelity') simulator before refining with a few full ('high-fidelity') runs. Low-fidelity versions can be constructed in several ways, for example by stopping simulations early, coarsening the timestep, or averaging fewer replicates, but it is unclear which to choose before committing to costly training. To address this, we introduce PRISM (Paired Ranking Index for Simulator Matching), a screen that compares each candidate with the full simulator on paired runs, scoring  agreement in cell-packing statistics against cost. For a vertex model of a proliferating tissue, PRISM flags stopping early as unreliable before training; once trained, this choice can produce confidently wrong parameter estimates. By contrast, a coarser timestep, within the range tested, is cheap and accurate; while fewer replicates are accurate but too costly. Using a screened low-fidelity simulator, multi-fidelity inference outperforms approximate Bayesian computation and neural-network inference trained on full simulations alone, at matched cost and with well-calibrated uncertainty. The same pattern recurs for a second vertex model fitted to published Drosophila pupal-wing imaging data, although there stopping halfway proves safe. Together, our findings suggest that which approximations are safe depends on the model, and that screening them before training makes multi-fidelity inference of tissue mechanics practical.",
+    "author_corresponding": "Alexander  George Fletcher",
+    "author_corresponding_institution": "University of Sheffield",
+    "authors": "Amini, M.; Jennings, J. L.; Xing, W.; Fletcher, A. G.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-11-09",
+    "doi": "10.64898/2026.10.29.762786",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/09/2026.10.29.762786.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Low-fidelity simulator selection for multi-fidelity inference of epithelial vertex models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Sheffield",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-11-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces PRISM, a paired-run screen for choosing low-fidelity simulators in multi-fidelity simulation-based inference of epithelial vertex models,…",
+  "title": "Low-fidelity simulator selection for multi-fidelity inference of epithelial vertex models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.29.762786"
+}
