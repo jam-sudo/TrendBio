@@ -1,0 +1,43 @@
+{
+  "abstract": "Colored k-mer indexes record, for every k-mer of a collection of genomes, the genomes or species that contain it, and underpin pseudoalignment and sequence search against large collections. Construction of such an index is expensive, yet the collection it represents is rarely final: genomes are retracted or found to be contaminated, users need an index of a single species or clade, and new genomes keep arriving. Rebuilding the index after every such change requires the original sequences and repeats the costly construction. We show that colored indexes based on the spectral Burrows-Wheeler transform (SBWT) can instead be updated efficiently in batches, without the original sequences, and with a result equivalent to the index built from scratch. Given an SBWT and any subset of its k-mers, we first extract the SBWT of this subset directly from the input, in one linear pass and without building a new index. Removing genomes, intersection and difference all reduce to this operation. We then carry the colors through every operation, by finding from the inputs alone where the color sets of the result change, so that removing or extracting genomes, as well as the union, intersection and difference of two colored indexes, each directly yield a complete colored index. In our experiments, editing paid off for large results: removing a genome from an index of 3,682 E. coli genomes took 54 seconds instead of 13 minutes for a rebuild, and adding one took about a minute. On AllTheBacteria, with 192 billion k-mers and 12,733 species, extracting M. tuberculosis, with 180,094 genomes, took less than four hours, and set operations then traced contamination of its color, some of which the next release of AllTheBacteria still contains. Our work turns large colored k-mer indexes from static snapshots of a collection into resources that can be maintained as the collection evolves. Our implementation is available at https://github.com/LoreDepuydt/colored-sbwt-setops.",
+  "authors": [
+    "Depuydt, L.",
+    "Alanko, J. N.",
+    "Marchet, C.",
+    "Puglisi, S. J."
+  ],
+  "doi": "10.64898/2026.11.06.764792",
+  "first_seen": "2026-11-10",
+  "id": "biorxiv:10.64898/2026.11.06.764792",
+  "metadata": {
+    "abstract": "Colored k-mer indexes record, for every k-mer of a collection of genomes, the genomes or species that contain it, and underpin pseudoalignment and sequence search against large collections. Construction of such an index is expensive, yet the collection it represents is rarely final: genomes are retracted or found to be contaminated, users need an index of a single species or clade, and new genomes keep arriving. Rebuilding the index after every such change requires the original sequences and repeats the costly construction. We show that colored indexes based on the spectral Burrows-Wheeler transform (SBWT) can instead be updated efficiently in batches, without the original sequences, and with a result equivalent to the index built from scratch. Given an SBWT and any subset of its k-mers, we first extract the SBWT of this subset directly from the input, in one linear pass and without building a new index. Removing genomes, intersection and difference all reduce to this operation. We then carry the colors through every operation, by finding from the inputs alone where the color sets of the result change, so that removing or extracting genomes, as well as the union, intersection and difference of two colored indexes, each directly yield a complete colored index. In our experiments, editing paid off for large results: removing a genome from an index of 3,682 E. coli genomes took 54 seconds instead of 13 minutes for a rebuild, and adding one took about a minute. On AllTheBacteria, with 192 billion k-mers and 12,733 species, extracting M. tuberculosis, with 180,094 genomes, took less than four hours, and set operations then traced contamination of its color, some of which the next release of AllTheBacteria still contains. Our work turns large colored k-mer indexes from static snapshots of a collection into resources that can be maintained as the collection evolves. Our implementation is available at https://github.com/LoreDepuydt/colored-sbwt-setops.",
+    "author_corresponding": "Lore Depuydt",
+    "author_corresponding_institution": "University of Lille",
+    "authors": "Depuydt, L.; Alanko, J. N.; Marchet, C.; Puglisi, S. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-09",
+    "doi": "10.64898/2026.11.06.764792",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/09/2026.11.06.764792.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Extracting and Updating Compact Colored k-mer Indexes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Lille",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Methods to extract, remove genomes from, and set-combine SBWT-based colored k-mer indexes in batches without original sequences, matching from-scratch builds;…",
+  "title": "Extracting and Updating Compact Colored k-mer Indexes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.06.764792"
+}

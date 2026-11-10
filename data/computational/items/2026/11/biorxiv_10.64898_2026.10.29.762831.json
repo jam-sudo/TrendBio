@@ -1,0 +1,48 @@
+{
+  "abstract": "High-throughput screening of HLA class I epitopes underpins neoantigen vaccine design, T cell therapies, and pathogen immune monitoring, yet proteome-scale prioritization remains challenging under severe class imbalance. We present TriStageHLA, a compact three-stage framework that decomposes epitope discovery into peptide-only screening (PRE), allele-specific binding/presentation prediction (BIND), and immunogenicity prediction (IM). PRE performs early pruning via a LoRA-adapted ESM-2 classifier; BIND integrates quantitative binding affinity and eluted ligand data with a dual-branch architecture combining global cross-attention and local motif extraction; IM is fine-tuned on curated human T-cell assay data with a decoupled LoRA head. Trained on IEDB-derived datasets with per-allele balancing and allele-discordant supervision, TriStageHLA-BIND achieves AUROC of 96.2% and AUPRC of 95.2% on combined BA/EL evaluation, while TriStageHLA-IM reaches AUROC of 81.4\\% and AUPRC of 73.8\\% on held-out immunogenicity data, improving over the strongest immunogenicity baselines ImmuneApp (70.7% / 63.6%) and BigMHC-IM (60.1% / 51.5%). With substantially fewer trainable parameters than prior models, TriStageHLA enables efficient, calibrated epitope prioritization across binding, presentation, and immunogenicity. Code and pretrained weights are available at https://github.com/SkywalkerLuke/TriStageHLA.",
+  "authors": [
+    "LU, T.",
+    "Wang, Z.",
+    "Wang, Y.",
+    "Li, Z.",
+    "Chen, T.",
+    "Cho, K.",
+    "Yao, Z.",
+    "Li, X.",
+    "Wong, K.-C."
+  ],
+  "doi": "10.64898/2026.10.29.762831",
+  "first_seen": "2026-11-10",
+  "id": "biorxiv:10.64898/2026.10.29.762831",
+  "metadata": {
+    "abstract": "High-throughput screening of HLA class I epitopes underpins neoantigen vaccine design, T cell therapies, and pathogen immune monitoring, yet proteome-scale prioritization remains challenging under severe class imbalance. We present TriStageHLA, a compact three-stage framework that decomposes epitope discovery into peptide-only screening (PRE), allele-specific binding/presentation prediction (BIND), and immunogenicity prediction (IM). PRE performs early pruning via a LoRA-adapted ESM-2 classifier; BIND integrates quantitative binding affinity and eluted ligand data with a dual-branch architecture combining global cross-attention and local motif extraction; IM is fine-tuned on curated human T-cell assay data with a decoupled LoRA head. Trained on IEDB-derived datasets with per-allele balancing and allele-discordant supervision, TriStageHLA-BIND achieves AUROC of 96.2% and AUPRC of 95.2% on combined BA/EL evaluation, while TriStageHLA-IM reaches AUROC of 81.4\\% and AUPRC of 73.8\\% on held-out immunogenicity data, improving over the strongest immunogenicity baselines ImmuneApp (70.7% / 63.6%) and BigMHC-IM (60.1% / 51.5%). With substantially fewer trainable parameters than prior models, TriStageHLA enables efficient, calibrated epitope prioritization across binding, presentation, and immunogenicity. Code and pretrained weights are available at https://github.com/SkywalkerLuke/TriStageHLA.",
+    "author_corresponding": "Ka-Chun Wong",
+    "author_corresponding_institution": "City University of Hong Kong",
+    "authors": "LU, T.; Wang, Z.; Wang, Y.; Li, Z.; Chen, T.; Cho, K.; Yao, Z.; Li, X.; Wong, K.-C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-09",
+    "doi": "10.64898/2026.10.29.762831",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/09/2026.10.29.762831.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Unveiling immune targets via TriStageHLA: high-throughput screening of peptide presentation, peptide-HLA binding, and immunogenicity",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "City University of Hong Kong",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-09",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "TriStageHLA is a three-stage framework (peptide pruning via LoRA-tuned ESM-2, HLA class I binding/presentation, immunogenicity) for high-throughput epitope…",
+  "title": "Unveiling immune targets via TriStageHLA: high-throughput screening of peptide presentation, peptide-HLA binding, and immunogenicity",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.10.29.762831"
+}

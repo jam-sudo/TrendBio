@@ -770,7 +770,7 @@
     -0.008740308694541454,
     -0.029076309874653816
   ],
-  "headline": "Benchmarks and resampling-based nulls tighten calibration of inference in compositional omics",
+  "headline": "Compositional omics methods extend integration, covariate modeling and longitudinal analysis",
   "history": [
     {
       "attached_item_ids": [],
@@ -1229,22 +1229,49 @@
         "rise_ratio": 1.0434782608695652,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 3,
+      "date": "2026-11-10",
+      "item_ids": [
+        "biorxiv:10.64898/2026.10.29.762935",
+        "biorxiv:10.64898/2026.11.03.763745",
+        "biorxiv:10.64898/2026.11.04.764349"
+      ],
+      "rank": 32,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.2,
+        "total": 0.6553874303166647,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.2,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Calibrated Inference For Compositional Omics",
+  "label": "Compositional Omics Inference",
   "related": [
     "fungal-calibrated-8715",
-    "optimal-transport-flow-matching-ea35",
-    "viral-fast-5f30"
+    "scalable-commodity-1353",
+    "mitochondrial-resource-16ed"
   ],
   "secondary_categories": [
     "tools-infra",
     "transcriptomics"
   ],
   "slug": "learning-causation-2f3a",
-  "summary": "Seven items pair benchmarks of confounder-aware abundance and composition tests with new null models and compositional frameworks for omics inference.",
-  "synthesis": "The dominant thread is statistical calibration and confounder handling for compositional and high-dimensional omics. Two benchmarks compare methods systematically: 71 single-cohort and 63 multi-cohort confounder-aware microbiome differential abundance strategies (releasing xConDA), and 12 differential composition methods on three population-scale scRNA-seq datasets using real data, permutations and simulations. ssGSEA3.0 replaces feature-label permutation with feature-level bootstrap resampling for per-sample significance. Method development addresses compositional structure directly: RoDPAA integrates multi-view microbiome data without log-ratio transforms, IsoVita learns compositional features along continuous covariates with change point and spline tests, and a structural equation framework links microbiome cohorts to smaller paired metabolome data using ALR. TensorPLS extends PLS-DA to longitudinal omics with nested cross-validation. New here is the emphasis on empirical calibration across cohort settings and alternatives to permutation nulls.",
-  "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-08"
+  "summary": "Compositional omics methods are moving beyond log-ratio transforms toward multi-view, longitudinal and covariate-aware feature inference.",
+  "synthesis": "The shared thread across these three preprints is statistical inference on compositional omics data that accounts for the constraint structure of relative abundances while modeling additional sources of variation. RoDPAA integrates multi-view microbiome data through a dissimilarity-based principal angle framework that avoids log-ratio transforms, with validation on simulations. IsoVita learns interpretable compositional features along continuous covariates, adding change point and spline tests for isoform analysis. TensorPLS extends PLS-DA to longitudinal omics, incorporating missing-data imputation, nested cross-validation and feature-time VIP interpretation. The distinguishing element is direct treatment of compositionality within integration, covariate-dependent modeling and temporal analysis, rather than reliance on transformed features alone. Together these methods address representation and interpretability for multi-source, time-resolved or covariate-structured omics data.",
+  "synthesis_model": "claude-haiku-5-5",
+  "synthesized_on": "2026-11-10"
 }
