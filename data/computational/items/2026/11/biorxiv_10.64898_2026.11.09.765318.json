@@ -1,0 +1,43 @@
+{
+  "abstract": "Looking up k-mers in an index is a core operation in genomics, underlying read mapping, metagenomic classification, and many other tasks. Queries are often streaming: the k-mers come from a longer sequence such as a sequencing read, and consecutive k-mers overlap. The fastest index for such queries is currently the hashing-based SSHash; indexes based on the spectral Burrows-Wheeler transform (SBWT) are competitive in space but slower. We show how to make SBWT indexes both faster and smaller. First, we process queries in small batches and prefetch the memory each will need next, hiding the latency of the dependent random accesses that dominate a lookup; together with a new rank structure that reads one cache line per query, this makes k-mer lookups about seven times faster than unbatched SBWT search. Second, we extend batching to streaming search and show that one failed lookup can rule out many k-mers of a read at once, which removes the need for the longest common suffix array. Third, we build an SBWT that stores only one orientation of each k-mer, thereby halving its size, with a modified search that exploits how rarely the orientation changes along a read. Finally, we adapt a compact subset rank structure to batched search. On the collections of the SSHash benchmark, and on two collections up to 15 times larger, our fastest index answers streaming queries for 31-mers faster than SSHash on every read set, by up to 4.9 times, using 12 bits per canonical k-mer against SSHash's 7.4-11.1. We also show that a 6.1-bit index is still faster than SSHash on most read sets, and that our smallest index needs about 4 bits per canonical k-mer. Unlike that of SSHash, the space of our indexes barely varies across collections. Our code is available at https://github.com/anadis504/sbwt-squeeze-rs.",
+  "authors": [
+    "Diseth, A. C.",
+    "Alanko, J. N.",
+    "Mackenzie, J.",
+    "Puglisi, S. J."
+  ],
+  "doi": "10.64898/2026.11.09.765318",
+  "first_seen": "2026-11-11",
+  "id": "biorxiv:10.64898/2026.11.09.765318",
+  "metadata": {
+    "abstract": "Looking up k-mers in an index is a core operation in genomics, underlying read mapping, metagenomic classification, and many other tasks. Queries are often streaming: the k-mers come from a longer sequence such as a sequencing read, and consecutive k-mers overlap. The fastest index for such queries is currently the hashing-based SSHash; indexes based on the spectral Burrows-Wheeler transform (SBWT) are competitive in space but slower. We show how to make SBWT indexes both faster and smaller. First, we process queries in small batches and prefetch the memory each will need next, hiding the latency of the dependent random accesses that dominate a lookup; together with a new rank structure that reads one cache line per query, this makes k-mer lookups about seven times faster than unbatched SBWT search. Second, we extend batching to streaming search and show that one failed lookup can rule out many k-mers of a read at once, which removes the need for the longest common suffix array. Third, we build an SBWT that stores only one orientation of each k-mer, thereby halving its size, with a modified search that exploits how rarely the orientation changes along a read. Finally, we adapt a compact subset rank structure to batched search. On the collections of the SSHash benchmark, and on two collections up to 15 times larger, our fastest index answers streaming queries for 31-mers faster than SSHash on every read set, by up to 4.9 times, using 12 bits per canonical k-mer against SSHash's 7.4-11.1. We also show that a 6.1-bit index is still faster than SSHash on most read sets, and that our smallest index needs about 4 bits per canonical k-mer. Unlike that of SSHash, the space of our indexes barely varies across collections. Our code is available at https://github.com/anadis504/sbwt-squeeze-rs.",
+    "author_corresponding": "Simon J. Puglisi",
+    "author_corresponding_institution": "University of Helsinki",
+    "authors": "Diseth, A. C.; Alanko, J. N.; Mackenzie, J.; Puglisi, S. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-10",
+    "doi": "10.64898/2026.11.09.765318",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/10/2026.11.09.765318.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Batch, Prefetch, Skip, Orient, Squeeze: Faster, Smaller k-mer dictionaries via the Spectral Burrows-Wheeler transform",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Helsinki",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Batched, prefetching SBWT k-mer index with single-orientation storage; streaming 31-mer queries up to 4.9x faster than SSHash at 12 bits per canonical k-mer.",
+  "title": "Batch, Prefetch, Skip, Orient, Squeeze: Faster, Smaller k-mer dictionaries via the Spectral Burrows-Wheeler transform",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.09.765318"
+}

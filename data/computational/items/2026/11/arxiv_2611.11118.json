@@ -1,0 +1,35 @@
+{
+  "abstract": "A gene summary can contain the very annotations used to evaluate an embedding of its text. The Alliance of Genome Resources converts Gene Ontology (GO) annotations into sentences, which NCBI Gene displays and GenePT includes in its input. These summaries covered 6,172 of 19,256 human protein-coding genes (32.1%), including 58% of genes with one to ten linked publications. We embedded the same corpus with and without the generated summaries and refitted a function-prediction probe on each version. Among genes with one to ten publications, removal reduced the reported per-gene area under the receiver operating characteristic curve (AUROC) by 0.078 with a linear probe (95% bootstrap interval 0.072-0.084) and by 0.033 with a multilayer perceptron. These estimates use a historical GO scorer that mishandled ties. The original predictions are unavailable for rescoring. A simple TF-IDF encoder also benefited from the summaries, as did models evaluated only on experimental annotations. Replacing generated summaries with UniProt function descriptions recovered much of the lost performance despite little verbatim overlap. UniProt also curates many of the evaluation labels. In mouse and yeast, we found a similar dependence on the source of the description. We introduce GeneProv to compare encoders on matched text and to examine how representation rankings change across GO recovery, non-GO endpoints and co-essentiality.",
+  "authors": [
+    "Jiawei Wu",
+    "Huishu Wang",
+    "Junlin Chen",
+    "Hongyi Wang"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-11",
+  "id": "arxiv:2611.11118",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.GN"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.11118v1</ns0:id>\n    <ns0:title>When gene summaries reveal the answers: Gene Ontology circularity in gene embedding benchmarks</ns0:title>\n    <ns0:updated>2026-11-08T04:05:52Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.11118v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.11118v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>A gene summary can contain the very annotations used to evaluate an embedding of its text. The Alliance of Genome Resources converts Gene Ontology (GO) annotations into sentences, which NCBI Gene displays and GenePT includes in its input. These summaries covered 6,172 of 19,256 human protein-coding genes (32.1%), including 58% of genes with one to ten linked publications. We embedded the same corpus with and without the generated summaries and refitted a function-prediction probe on each version. Among genes with one to ten publications, removal reduced the reported per-gene area under the receiver operating characteristic curve (AUROC) by 0.078 with a linear probe (95% bootstrap interval 0.072-0.084) and by 0.033 with a multilayer perceptron. These estimates use a historical GO scorer that mishandled ties. The original predictions are unavailable for rescoring. A simple TF-IDF encoder also benefited from the summaries, as did models evaluated only on experimental annotations. Replacing generated summaries with UniProt function descriptions recovered much of the lost performance despite little verbatim overlap. UniProt also curates many of the evaluation labels. In mouse and yeast, we found a similar dependence on the source of the description. We introduce GeneProv to compare encoders on matched text and to examine how representation rankings change across GO recovery, non-GO endpoints and co-essentiality.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-08T04:05:52Z</ns0:published>\n    <ns1:comment>31 pages, including supplementary material. GeneProv benchmark and leaderboard: https://hwang595.github.io/gene-embedding-exposure/</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Jiawei Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Huishu Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Junlin Chen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hongyi Wang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-08",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Shows GO-derived NCBI/Alliance gene summaries leak evaluation labels into gene-text embedding benchmarks, inflating AUROC; introduces GeneProv for matched…",
+  "title": "When gene summaries reveal the answers: Gene Ontology circularity in gene embedding benchmarks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.11118v1"
+}
