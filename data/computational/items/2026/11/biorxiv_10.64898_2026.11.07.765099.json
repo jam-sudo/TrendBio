@@ -1,0 +1,43 @@
+{
+  "abstract": "Master-regulator analysis of 34 TCGA tumour cohorts (cancer x molecular subtype; n between 27 and 562 tumours) requires one regulatory network per cohort. Mutual-information (MI) networks inferred with ARACNe3 are the usual choice, but they are not available for the smallest cohorts; filling the gap with correlation networks would mix two methods inside the very comparison between subtypes that the analysis is meant to make. We therefore infer every network with a single procedure, fixed-size Spearman regulons (FSR): rank correlation between regulator and target, a fixed effect-size threshold rho >= 0.2, the per-target data-processing-inequality (DPI) pruning implemented in corto, bootstrap support, and truncation to the 100 best-supported targets per regulator. We quantify what this choice concedes and what it provides, labelling each claim as a standard result, a heuristic, or an empirical result. Rank correlation is more powerful than the MI estimators we simulated for n < 200 but cannot see non-monotone dependence, which in a synthetic worst case costs at most about 0.05-0.10 of the master regulators recovered; the per-target DPI is a heuristic with a measurable disagreement rate with the MI-based one; and pairwise dependence is not direct interaction, for MI and correlation alike. Where both methods are feasible (n >= 95) they overlap in 0.7 of the top-20 regulators, the same as two filterings of the same ARACNe3 network, although the rank correlation of the full score vector shows a measurable method effect in the tail. Subsampling large real cohorts indicates that networks inferred from fewer than 60 tumours do not reliably reproduce their own cohort's master regulators, that 60-100 is a grey zone, and that a cancer-wide network does not rescue small subtypes. We present FSR as an adequate and uniform choice for multi-cohort analysis, not as a statistically superior one.",
+  "authors": [
+    "Tovar, H.",
+    "Barrios-Cervantes, P. C.",
+    "Perez-Calixto, D.",
+    "Hernandez-Lemus, E."
+  ],
+  "doi": "10.64898/2026.11.07.765099",
+  "first_seen": "2026-11-11",
+  "id": "biorxiv:10.64898/2026.11.07.765099",
+  "metadata": {
+    "abstract": "Master-regulator analysis of 34 TCGA tumour cohorts (cancer x molecular subtype; n between 27 and 562 tumours) requires one regulatory network per cohort. Mutual-information (MI) networks inferred with ARACNe3 are the usual choice, but they are not available for the smallest cohorts; filling the gap with correlation networks would mix two methods inside the very comparison between subtypes that the analysis is meant to make. We therefore infer every network with a single procedure, fixed-size Spearman regulons (FSR): rank correlation between regulator and target, a fixed effect-size threshold rho >= 0.2, the per-target data-processing-inequality (DPI) pruning implemented in corto, bootstrap support, and truncation to the 100 best-supported targets per regulator. We quantify what this choice concedes and what it provides, labelling each claim as a standard result, a heuristic, or an empirical result. Rank correlation is more powerful than the MI estimators we simulated for n < 200 but cannot see non-monotone dependence, which in a synthetic worst case costs at most about 0.05-0.10 of the master regulators recovered; the per-target DPI is a heuristic with a measurable disagreement rate with the MI-based one; and pairwise dependence is not direct interaction, for MI and correlation alike. Where both methods are feasible (n >= 95) they overlap in 0.7 of the top-20 regulators, the same as two filterings of the same ARACNe3 network, although the rank correlation of the full score vector shows a measurable method effect in the tail. Subsampling large real cohorts indicates that networks inferred from fewer than 60 tumours do not reliably reproduce their own cohort's master regulators, that 60-100 is a grey zone, and that a cancer-wide network does not rescue small subtypes. We present FSR as an adequate and uniform choice for multi-cohort analysis, not as a statistically superior one.",
+    "author_corresponding": "Enrique Hernandez-Lemus",
+    "author_corresponding_institution": "INMEGEN",
+    "authors": "Tovar, H.; Barrios-Cervantes, P. C.; Perez-Calixto, D.; Hernandez-Lemus, E.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-11-10",
+    "doi": "10.64898/2026.11.07.765099",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/10/2026.11.07.765099.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Homogeneous network inference for subtype-stratified master regulator analysis in cancer",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "INMEGEN",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-11-10",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Proposes fixed-size Spearman regulon (FSR) networks for uniform master-regulator analysis across 34 TCGA cohorts, comparing against ARACNe3 MI networks and…",
+  "title": "Homogeneous network inference for subtype-stratified master regulator analysis in cancer",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.07.765099"
+}
