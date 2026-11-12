@@ -1,0 +1,44 @@
+{
+  "abstract": "Detection of long exact matches between a pair of genomes has historically been a fundamental operation in genomics. Similarly, detection of long exact matches between all pairs of haplotypes in a large panel of genotyping array data or whole-genome sequencing variant calls is a fundamental operation in population genetics. Thanks to various recent pangenome efforts, for the first time, large panels of high-quality genome assemblies are being constructed. Therefore, we propose the intersection of these two approaches: detection of long exact matches between all pairs of assemblies in panels of hundreds to thousands of high-quality assemblies. Since these datasets would contain trillions of basepairs, practically detecting all exact matches requires algorithms operating in at most linear time and compressed space. Previous methods such as Mumemto achieve this, but running them on terabase-sized pangenomes still took very large space and long time. Here, we describe more efficient algorithms for outputting all long exact matches between all pairs of assemblies in compressed space and sublinear time given a compressed index of the panel. Given the construction of an O(r) space compressed index--a one-time cost that can be done in compressed space and close to linear time with previous work--we describe three algorithms taking O(r) words of memory: (1) computing all supermaximal exact matches (SMEMs) in O(r) time, (2) computing all supermaximal exact matches and their occurrences in O(r + occ) time, and (3) computing all maximal exact matches (MEMs) in O(r + occ) time, where r is the number of runs in the Burrows-Wheeler transform of the panel of assemblies and occ is the number of occurrences or matches outputted. Our algorithms use 7.5 times less memory than state-of-the-art competitors on a dataset of human centromere assemblies from 625 haplotypes. They are also 20 times faster if index construction time is counted, and 2,500 times faster if index construction is excluded. Finally, we perform an analysis of all-vs-all MEMs in all well-assembled centromeres of the Human Pangenome Reference Consortium Release 2 dataset that reveals multiple novel insights into structural variation in centromeres. For example, we find that the active -satellite higher-order repeat (HOR) array of Chromosome 2 is flanked by a ~200 kbp inversion on one side and a ~200-300 kbp pseudopalindromic sequence on the other. We also detect large segmental duplications in the centromere of every chromosome except Chromosome Y. These segmental duplications range in size from hundreds of kbp to multiple Mbp and occur both in and out of the active -satellite HOR arrays. Our computational results make pairwise MEM analyses possible in pangenomes, while our biological results show they are likely to be useful. Our algorithms are implemented as TeraMEM in the TeraTools suite available at https://github.com/ucfcbb/TeraTools.",
+  "authors": [
+    "Sanaullah, A.",
+    "Zhi, D.",
+    "Li, H.",
+    "Zhang, S."
+  ],
+  "doi": "10.64898/2026.11.10.765459",
+  "first_seen": "2026-11-12",
+  "id": "biorxiv:10.64898/2026.11.10.765459",
+  "metadata": {
+    "abstract": "Detection of long exact matches between a pair of genomes has historically been a fundamental operation in genomics. Similarly, detection of long exact matches between all pairs of haplotypes in a large panel of genotyping array data or whole-genome sequencing variant calls is a fundamental operation in population genetics. Thanks to various recent pangenome efforts, for the first time, large panels of high-quality genome assemblies are being constructed. Therefore, we propose the intersection of these two approaches: detection of long exact matches between all pairs of assemblies in panels of hundreds to thousands of high-quality assemblies. Since these datasets would contain trillions of basepairs, practically detecting all exact matches requires algorithms operating in at most linear time and compressed space. Previous methods such as Mumemto achieve this, but running them on terabase-sized pangenomes still took very large space and long time. Here, we describe more efficient algorithms for outputting all long exact matches between all pairs of assemblies in compressed space and sublinear time given a compressed index of the panel. Given the construction of an O(r) space compressed index--a one-time cost that can be done in compressed space and close to linear time with previous work--we describe three algorithms taking O(r) words of memory: (1) computing all supermaximal exact matches (SMEMs) in O(r) time, (2) computing all supermaximal exact matches and their occurrences in O(r + occ) time, and (3) computing all maximal exact matches (MEMs) in O(r + occ) time, where r is the number of runs in the Burrows-Wheeler transform of the panel of assemblies and occ is the number of occurrences or matches outputted. Our algorithms use 7.5 times less memory than state-of-the-art competitors on a dataset of human centromere assemblies from 625 haplotypes. They are also 20 times faster if index construction time is counted, and 2,500 times faster if index construction is excluded. Finally, we perform an analysis of all-vs-all MEMs in all well-assembled centromeres of the Human Pangenome Reference Consortium Release 2 dataset that reveals multiple novel insights into structural variation in centromeres. For example, we find that the active -satellite higher-order repeat (HOR) array of Chromosome 2 is flanked by a ~200 kbp inversion on one side and a ~200-300 kbp pseudopalindromic sequence on the other. We also detect large segmental duplications in the centromere of every chromosome except Chromosome Y. These segmental duplications range in size from hundreds of kbp to multiple Mbp and occur both in and out of the active -satellite HOR arrays. Our computational results make pairwise MEM analyses possible in pangenomes, while our biological results show they are likely to be useful. Our algorithms are implemented as TeraMEM in the TeraTools suite available at https://github.com/ucfcbb/TeraTools.",
+    "author_corresponding": "Ahsan Sanaullah",
+    "author_corresponding_institution": "Dana-Farber Cancer Institute",
+    "authors": "Sanaullah, A.; Zhi, D.; Li, H.; Zhang, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-11",
+    "doi": "10.64898/2026.11.10.765459",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/11/2026.11.10.765459.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Detection of Maximal Exact Matches in Terabases of Genome Assemblies in Compressed Space and Sublinear Time",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Dana-Farber Cancer Institute",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Presents compressed-space, sublinear-time algorithms (SMEMs and MEMs via BWT run-length index) for all-vs-all exact matches across terabase pangenome assembly…",
+  "title": "Detection of Maximal Exact Matches in Terabases of Genome Assemblies in Compressed Space and Sublinear Time",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.10.765459"
+}

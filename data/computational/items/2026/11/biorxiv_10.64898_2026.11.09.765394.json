@@ -1,0 +1,45 @@
+{
+  "abstract": "Genome patching improves the completeness of fragmented assemblies by filling unresolved gaps with sequences from reference genomes. Pangenome panels provide diverse candidate haplotypes for this task, but identifying suitable references efficiently becomes increasingly challenging as these panels grow. We present SIFT, a compressed indexing method for selecting reference haplotypes for genome patching with ImpuT2T. SIFT combines closed-syncmer parsing, phrase-level indexing, and pseudo-maximal exact match (pseudo-MEM) queries. Closed syncmers provide a context-independent parsing rule with bounded distances between consecutive selected positions, enabling consistent parsing of reference and query sequences. We demonstrate that two closed syncmers determine the distance at which they can occur consecutively in any string, so that equal substrings of two parses represent identical sequences and no gap sequence need be stored. SIFT indexes the reference parse and its reverse using run-length compressed suffix arrays and adapts the Boyer-Moore-Li search procedure to identify pseudo-MEMs between the reference parse and query parse. It then aggregates matching evidence to identify candidate reference haplotypes for downstream patching. This framework connects compressed sequence indexing with haplotype selection and provides a basis for querying large reference panels at the phrase level. SIFT is publicly available under the GNU license at https://github.com/EddieFerro/SIFT.",
+  "authors": [
+    "Ferro, E. A.",
+    "Varki, R.",
+    "Lin, M.-J.",
+    "Gagie, T.",
+    "Langmead, B.",
+    "Boucher, C. A."
+  ],
+  "doi": "10.64898/2026.11.09.765394",
+  "first_seen": "2026-11-12",
+  "id": "biorxiv:10.64898/2026.11.09.765394",
+  "metadata": {
+    "abstract": "Genome patching improves the completeness of fragmented assemblies by filling unresolved gaps with sequences from reference genomes. Pangenome panels provide diverse candidate haplotypes for this task, but identifying suitable references efficiently becomes increasingly challenging as these panels grow. We present SIFT, a compressed indexing method for selecting reference haplotypes for genome patching with ImpuT2T. SIFT combines closed-syncmer parsing, phrase-level indexing, and pseudo-maximal exact match (pseudo-MEM) queries. Closed syncmers provide a context-independent parsing rule with bounded distances between consecutive selected positions, enabling consistent parsing of reference and query sequences. We demonstrate that two closed syncmers determine the distance at which they can occur consecutively in any string, so that equal substrings of two parses represent identical sequences and no gap sequence need be stored. SIFT indexes the reference parse and its reverse using run-length compressed suffix arrays and adapts the Boyer-Moore-Li search procedure to identify pseudo-MEMs between the reference parse and query parse. It then aggregates matching evidence to identify candidate reference haplotypes for downstream patching. This framework connects compressed sequence indexing with haplotype selection and provides a basis for querying large reference panels at the phrase level. SIFT is publicly available under the GNU license at https://github.com/EddieFerro/SIFT.",
+    "author_corresponding": "Eddie A Ferro",
+    "author_corresponding_institution": "University of Florida",
+    "authors": "Ferro, E. A.; Varki, R.; Lin, M.-J.; Gagie, T.; Langmead, B.; Boucher, C. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-11",
+    "doi": "10.64898/2026.11.09.765394",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/11/2026.11.09.765394.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SIFT: Syncmer-Informed Selection of Haplotypes for T2T Imputation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Florida",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "SIFT is a compressed indexing method using closed-syncmer parsing and pseudo-MEM queries to select reference haplotypes for T2T genome patching with ImpuT2T.",
+  "title": "SIFT: Syncmer-Informed Selection of Haplotypes for T2T Imputation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.09.765394"
+}
