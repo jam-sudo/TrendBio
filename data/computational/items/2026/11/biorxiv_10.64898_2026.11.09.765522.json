@@ -1,0 +1,45 @@
+{
+  "abstract": "Differential expression (DE) methods for bulk RNA-seq differ in their statistical assumptions, input data requirements, and supported study designs. Large language model (LLM) agents can automate DE analysis, but they may default to popular methods without checking whether these methods are appropriate for the data. We introduce DE-Rigor-Agent, an assumption-aware agent that organizes DE analysis into three stages: input standardization, method filtering, and method execution. Before executing any DE method, the agent uses expert-curated criteria and dataset-specific diagnostics to evaluate six commonly used methods, documents the reasons for retaining or excluding each method, and executes all retained methods. We evaluated DE-Rigor-Agent on 140 simulated datasets spanning 14 challenging scenarios involving small sample sizes, zero inflation, expression outliers, pre-normalized inputs, and confounded batch effects. Benchmarks showed that method-dataset incompatibilities could lead to inflated false discovery rates (FDRs) or reduced statistical power. Two general-purpose LLM agent baselines, including one explicitly prompted to consider statistical assumptions, selected DESeq2 or edgeR for nearly all datasets. In contrast, DE-Rigor-Agent's filtering decisions closely matched the incompatibilities introduced in the simulations and remained consistent across random seeds, with little additional computational cost. These results demonstrate that DE-Rigor-Agent provides an automated approach to assessing method suitability, making DE analysis more rigorous and transparent.",
+  "authors": [
+    "Rong, Z.",
+    "Wang, C.",
+    "Jiang, C. F.",
+    "Yang, Y.",
+    "Li, J. J."
+  ],
+  "doi": "10.64898/2026.11.09.765522",
+  "first_seen": "2026-11-12",
+  "id": "biorxiv:10.64898/2026.11.09.765522",
+  "metadata": {
+    "abstract": "Differential expression (DE) methods for bulk RNA-seq differ in their statistical assumptions, input data requirements, and supported study designs. Large language model (LLM) agents can automate DE analysis, but they may default to popular methods without checking whether these methods are appropriate for the data. We introduce DE-Rigor-Agent, an assumption-aware agent that organizes DE analysis into three stages: input standardization, method filtering, and method execution. Before executing any DE method, the agent uses expert-curated criteria and dataset-specific diagnostics to evaluate six commonly used methods, documents the reasons for retaining or excluding each method, and executes all retained methods. We evaluated DE-Rigor-Agent on 140 simulated datasets spanning 14 challenging scenarios involving small sample sizes, zero inflation, expression outliers, pre-normalized inputs, and confounded batch effects. Benchmarks showed that method-dataset incompatibilities could lead to inflated false discovery rates (FDRs) or reduced statistical power. Two general-purpose LLM agent baselines, including one explicitly prompted to consider statistical assumptions, selected DESeq2 or edgeR for nearly all datasets. In contrast, DE-Rigor-Agent's filtering decisions closely matched the incompatibilities introduced in the simulations and remained consistent across random seeds, with little additional computational cost. These results demonstrate that DE-Rigor-Agent provides an automated approach to assessing method suitability, making DE analysis more rigorous and transparent.",
+    "author_corresponding": "Jingyi Jessica Li",
+    "author_corresponding_institution": "Fred Hutchinson Cancer Center",
+    "authors": "Rong, Z.; Wang, C.; Jiang, C. F.; Yang, Y.; Li, J. J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-11",
+    "doi": "10.64898/2026.11.09.765522",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/11/2026.11.09.765522.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DE-Rigor-Agent: An Agentic Workflow for Assumption-Aware Differential Expression Analysis of Bulk RNA-seq Data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Fred Hutchinson Cancer Center",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "DE-Rigor-Agent, an LLM-agent workflow that screens six bulk RNA-seq differential expression methods for assumption compatibility before execution; benchmarked…",
+  "title": "DE-Rigor-Agent: An Agentic Workflow for Assumption-Aware Differential Expression Analysis of Bulk RNA-seq Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.09.765522"
+}

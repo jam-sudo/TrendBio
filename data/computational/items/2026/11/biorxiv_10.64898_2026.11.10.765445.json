@@ -1,0 +1,47 @@
+{
+  "abstract": "Summary: Identifying epigenetically modified bases (e.g., methylation) is crucial for many important applications such as discovering mechanisms of cancer development, cell differentiation, and bacterial defense. Nanopore sequencing generates electrical signals that can differentiate canonical bases from modified ones. To detect base modifications from signals, machine learning (ML) methods and statistical approaches are commonly used. These methods can either detect a specific modification type or require an additional unmodified copy of the same DNA as a control group. However, no released model detects modification types beyond those it was trained for, which makes it difficult to detect rare modification types without an unmodified control. Our goal is to accurately identify the presence of modified sites regardless of their modification type, which we define as modification-agnostic detection. To this end, we propose RawMod, a transformer-based modification-agnostic and control-free method for detecting epigenetically modified genomic positions. The key idea of RawMod is to compare the raw signals of many reads at each site with the unmodified reference sequence, using a small model that learns many modification types as a single modified class. Based on our extensive evaluations on the detection of various modification types (5mC, 5hmC, 4mC, 6mA, and 5hmU) using various genomes, RawMod achieves the highest mean AUROC across modifications compared to control-based methods and control-free modification models. A single RawMod model with 0.23M parameters detects five modification types with a mean AUROC of 0.964, against 0.799 for the best released model. When a modification type is withheld from training, RawMod still detects it (AUROC 0.91--0.98), provided another modification of the same base was seen in training. We use RawMod to map 5hmU without a control across a 7.7 Mb contig of the Amphidinium carterae genome, consistent with two published trends. Further, we show that the modification-aware embeddings from RawMod can be used to differentiate read origin (e.g., cell types, tumor/normal origin, and native/PCR-amplified DNA). We discuss how RawMod can enable further work on label-free classification of cell types using these modification-aware embeddings. Availability and Implementation: RawMod is available at https://github.com/STORMgroup/RawMod and at https://huggingface.co/STORMResearch/RawMod. We also provide the scripts to fully reproduce our results on our GitHub page and release our datasets on SquiDBase.",
+  "authors": [
+    "Srinivasan, B.",
+    "Nazar, S.",
+    "Gandhi, V.",
+    "Zhang, E.",
+    "Bachvaroff, T.",
+    "Kolmogorov, M.",
+    "Place, A.",
+    "Firtina, C."
+  ],
+  "doi": "10.64898/2026.11.10.765445",
+  "first_seen": "2026-11-12",
+  "id": "biorxiv:10.64898/2026.11.10.765445",
+  "metadata": {
+    "abstract": "Summary: Identifying epigenetically modified bases (e.g., methylation) is crucial for many important applications such as discovering mechanisms of cancer development, cell differentiation, and bacterial defense. Nanopore sequencing generates electrical signals that can differentiate canonical bases from modified ones. To detect base modifications from signals, machine learning (ML) methods and statistical approaches are commonly used. These methods can either detect a specific modification type or require an additional unmodified copy of the same DNA as a control group. However, no released model detects modification types beyond those it was trained for, which makes it difficult to detect rare modification types without an unmodified control. Our goal is to accurately identify the presence of modified sites regardless of their modification type, which we define as modification-agnostic detection. To this end, we propose RawMod, a transformer-based modification-agnostic and control-free method for detecting epigenetically modified genomic positions. The key idea of RawMod is to compare the raw signals of many reads at each site with the unmodified reference sequence, using a small model that learns many modification types as a single modified class. Based on our extensive evaluations on the detection of various modification types (5mC, 5hmC, 4mC, 6mA, and 5hmU) using various genomes, RawMod achieves the highest mean AUROC across modifications compared to control-based methods and control-free modification models. A single RawMod model with 0.23M parameters detects five modification types with a mean AUROC of 0.964, against 0.799 for the best released model. When a modification type is withheld from training, RawMod still detects it (AUROC 0.91--0.98), provided another modification of the same base was seen in training. We use RawMod to map 5hmU without a control across a 7.7 Mb contig of the Amphidinium carterae genome, consistent with two published trends. Further, we show that the modification-aware embeddings from RawMod can be used to differentiate read origin (e.g., cell types, tumor/normal origin, and native/PCR-amplified DNA). We discuss how RawMod can enable further work on label-free classification of cell types using these modification-aware embeddings. Availability and Implementation: RawMod is available at https://github.com/STORMgroup/RawMod and at https://huggingface.co/STORMResearch/RawMod. We also provide the scripts to fully reproduce our results on our GitHub page and release our datasets on SquiDBase.",
+    "author_corresponding": "Bhargav Srinivasan",
+    "author_corresponding_institution": "University of Maryland, College Park, MD, USA",
+    "authors": "Srinivasan, B.; Nazar, S.; Gandhi, V.; Zhang, E.; Bachvaroff, T.; Kolmogorov, M.; Place, A.; Firtina, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-11",
+    "doi": "10.64898/2026.11.10.765445",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/11/2026.11.10.765445.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RawMod: Modification-Agnostic Detection of DNA Base Modifications from Nanopore Signal Pileups",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Maryland, College Park, MD, USA",
+  "preprint_id": null,
+  "primary_category": "epigenomics",
+  "published_at": "2026-11-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "RawMod is a transformer-based, control-free method that detects DNA base modifications from nanopore raw-signal pileups by learning all modification types as…",
+  "title": "RawMod: Modification-Agnostic Detection of DNA Base Modifications from Nanopore Signal Pileups",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.10.765445"
+}

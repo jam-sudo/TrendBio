@@ -1,0 +1,45 @@
+{
+  "abstract": "Matching statistics and supermaximal exact matches (SMEMs) are key inputs for sequence homology search and classification. Methods such as MONI, PHONI, and ropebwt3 compute these statistics using compressed pangenome indexes, but are substantially slower than methods that compute approximations of matching statistics, such as pseudo-matching lengths (PMLs). PMLs can be computed quickly in a single pass, but SMEM computation can require overlapping forward or backward passes over the query. We present ms2, a suite of algorithms that use \"move structures\" to compute matching statistics and SMEMs efficiently in compressed space. Our four algorithms compose move structures for the LF, {Psi}, {varphi}, and {varphi}-1 permutations with additional longest common prefix (LCP) array summaries and samples. The algorithms offer different tradeoffs among speed, index size, and support for reporting SMEM offsets. They inherit the move structure's fast, constant-time operations and achieve high throughput by leveraging the move structure's locality of reference. Thanks to recent advances, move structures can be constructed in optimal time and compressed space, including the LCP information needed for \"match recovery\" during SMEM computation. On 100 haplotypes of human chromosome 22, ms2's fastest algorithm computes matching statistics 35 to 48 times as fast as PHONI's online approach, while using an index of similar size. On the 472-haplotype HPRC2 pangenome and human reads, three ms2 modes achieve speedups of at least 22, 19, and 15 times over ropebwt3, whose index is about 15% the size of ms2's fastest mode. When additionally reporting SMEMs and their offsets, ms2 achieves speedups of 25 to 34 times over ropebwt3. Together, these advances enable online computation of matching statistics and SMEMs at a throughput that supports real-time processing of approximately 21 PromethION nanopore flow cells on a single thread. The ms2 software is open source and available at https://github.com/langmead-lab/ms2. It builds on the open-source TeraTools suite (https://github.com/ucfcbb/TeraTools) and Orbit library (https://github.com/drnatebrown/orbit). Experimental scripts and other details are described in: https://github.com/langmead-lab/ms2-experiments.",
+  "authors": [
+    "Brown, N. K.",
+    "Sanaullah, A.",
+    "Shakya, P.",
+    "Zhang, S.",
+    "Langmead, B."
+  ],
+  "doi": "10.64898/2026.11.10.765781",
+  "first_seen": "2026-11-12",
+  "id": "biorxiv:10.64898/2026.11.10.765781",
+  "metadata": {
+    "abstract": "Matching statistics and supermaximal exact matches (SMEMs) are key inputs for sequence homology search and classification. Methods such as MONI, PHONI, and ropebwt3 compute these statistics using compressed pangenome indexes, but are substantially slower than methods that compute approximations of matching statistics, such as pseudo-matching lengths (PMLs). PMLs can be computed quickly in a single pass, but SMEM computation can require overlapping forward or backward passes over the query. We present ms2, a suite of algorithms that use \"move structures\" to compute matching statistics and SMEMs efficiently in compressed space. Our four algorithms compose move structures for the LF, {Psi}, {varphi}, and {varphi}-1 permutations with additional longest common prefix (LCP) array summaries and samples. The algorithms offer different tradeoffs among speed, index size, and support for reporting SMEM offsets. They inherit the move structure's fast, constant-time operations and achieve high throughput by leveraging the move structure's locality of reference. Thanks to recent advances, move structures can be constructed in optimal time and compressed space, including the LCP information needed for \"match recovery\" during SMEM computation. On 100 haplotypes of human chromosome 22, ms2's fastest algorithm computes matching statistics 35 to 48 times as fast as PHONI's online approach, while using an index of similar size. On the 472-haplotype HPRC2 pangenome and human reads, three ms2 modes achieve speedups of at least 22, 19, and 15 times over ropebwt3, whose index is about 15% the size of ms2's fastest mode. When additionally reporting SMEMs and their offsets, ms2 achieves speedups of 25 to 34 times over ropebwt3. Together, these advances enable online computation of matching statistics and SMEMs at a throughput that supports real-time processing of approximately 21 PromethION nanopore flow cells on a single thread. The ms2 software is open source and available at https://github.com/langmead-lab/ms2. It builds on the open-source TeraTools suite (https://github.com/ucfcbb/TeraTools) and Orbit library (https://github.com/drnatebrown/orbit). Experimental scripts and other details are described in: https://github.com/langmead-lab/ms2-experiments.",
+    "author_corresponding": "Nathaniel K Brown",
+    "author_corresponding_institution": "Johns Hopkins University",
+    "authors": "Brown, N. K.; Sanaullah, A.; Shakya, P.; Zhang, S.; Langmead, B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-11",
+    "doi": "10.64898/2026.11.10.765781",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/11/2026.11.10.765781.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Fast Pangenome Matching Statistics in Compressed Space with Move Structures",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "ms2 uses move structures to compute matching statistics and SMEMs in compressed space, reporting large speedups over PHONI and ropebwt3 on pangenome and read…",
+  "title": "Fast Pangenome Matching Statistics in Compressed Space with Move Structures",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.10.765781"
+}

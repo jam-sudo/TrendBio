@@ -1,0 +1,49 @@
+{
+  "abstract": "Three-dimensional (3D) segmentation of subcellular structures from fluorescence microscopy images is the foundation of many analyses in quantitative cell biology. The prevailing approach addresses 3D segmentation one structure at a time, with a separate model trained for each structure type. By developing SubCellSeg, we demonstrate that a single model, trained jointly across a diverse range of structures, substantially and consistently outperforms structure-specific specialist models. SubCellSeg is a 3D segmentation model trained on expert-curated fluorescence images and their computationally generated reference masks, of 13 morphologically distinct subcellular structures in human induced pluripotent stem (hiPS) cell lines from the Allen Cell Collection, spanning compact puncta, planar junctions, reticular networks, and tubular structures. Without any structure-specific input, SubCellSeg achieves a mean Dice score of 0.909 across the 13 structures and outperforms each of the 13 specialist models on the structure it was trained for (specialist mean Dice 0.773). SubCellSeg also achieves zero-shot generalization, segmenting subcellular structures with morphologies not represented in the training data. This generalization extends to images acquired on different microscopes and with different imaging configurations, to cells under drug perturbation, and to a morphologically distinct cell type, hiPS cell-derived cardiomyocytes. Where zero-shot results are insufficient for a specific application, SubCellSeg can be fine-tuned: starting from its pretrained weights, 10% of the labeled images (16 images) gave better results than training a new model from scratch on all of them. SubCellSeg is distributed through the napari plugin allencell-segmenter-ml[1] with pretrained checkpoints, so it can be run on new data without any training; the training and evaluation code is available at https://github.com/AllenCell/SubCellSeg.",
+  "authors": [
+    "Mishra, S.",
+    "Samudre, A.",
+    "Khan, A.",
+    "Hookway, C.",
+    "Borensztejn, A.",
+    "Thirstrup, D.",
+    "Chen, J.",
+    "Rafelski, S.",
+    "Viana, M. P."
+  ],
+  "doi": "10.64898/2026.11.10.765799",
+  "first_seen": "2026-11-12",
+  "id": "biorxiv:10.64898/2026.11.10.765799",
+  "metadata": {
+    "abstract": "Three-dimensional (3D) segmentation of subcellular structures from fluorescence microscopy images is the foundation of many analyses in quantitative cell biology. The prevailing approach addresses 3D segmentation one structure at a time, with a separate model trained for each structure type. By developing SubCellSeg, we demonstrate that a single model, trained jointly across a diverse range of structures, substantially and consistently outperforms structure-specific specialist models. SubCellSeg is a 3D segmentation model trained on expert-curated fluorescence images and their computationally generated reference masks, of 13 morphologically distinct subcellular structures in human induced pluripotent stem (hiPS) cell lines from the Allen Cell Collection, spanning compact puncta, planar junctions, reticular networks, and tubular structures. Without any structure-specific input, SubCellSeg achieves a mean Dice score of 0.909 across the 13 structures and outperforms each of the 13 specialist models on the structure it was trained for (specialist mean Dice 0.773). SubCellSeg also achieves zero-shot generalization, segmenting subcellular structures with morphologies not represented in the training data. This generalization extends to images acquired on different microscopes and with different imaging configurations, to cells under drug perturbation, and to a morphologically distinct cell type, hiPS cell-derived cardiomyocytes. Where zero-shot results are insufficient for a specific application, SubCellSeg can be fine-tuned: starting from its pretrained weights, 10% of the labeled images (16 images) gave better results than training a new model from scratch on all of them. SubCellSeg is distributed through the napari plugin allencell-segmenter-ml[1] with pretrained checkpoints, so it can be run on new data without any training; the training and evaluation code is available at https://github.com/AllenCell/SubCellSeg.",
+    "author_corresponding": "Suraj Mishra",
+    "author_corresponding_institution": "Allen Institute",
+    "authors": "Mishra, S.; Samudre, A.; Khan, A.; Hookway, C.; Borensztejn, A.; Thirstrup, D.; Chen, J.; Rafelski, S.; Viana, M. P.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-11",
+    "doi": "10.64898/2026.11.10.765799",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/11/2026.11.10.765799.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SubCellSeg: A generalist model for subcellular structure segmentation in 3D fluorescence microscopy",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Allen Institute",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-11",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "SubCellSeg, a single jointly trained 3D model for subcellular structure segmentation in hiPS cell fluorescence images, reports mean Dice 0.909 across 13…",
+  "title": "SubCellSeg: A generalist model for subcellular structure segmentation in 3D fluorescence microscopy",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.10.765799"
+}

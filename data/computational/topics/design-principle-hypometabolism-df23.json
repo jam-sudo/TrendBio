@@ -770,7 +770,7 @@
     -0.011079782620072365,
     -0.03228287026286125
   ],
-  "headline": "Unbalanced optimal transport and bridge models recover continuous dynamics from snapshot omics",
+  "headline": "Generative models enable biomedical counterfactuals in simulation and single-cell data",
   "history": [
     {
       "attached_item_ids": [],
@@ -1959,10 +1959,37 @@
         "rise_ratio": 0.75,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 3,
+      "date": "2026-11-12",
+      "item_ids": [
+        "arxiv:2611.07995",
+        "arxiv:2611.10955",
+        "arxiv:2611.13748"
+      ],
+      "rank": 34,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.1428571428571428,
+        "total": 0.6296731446023789,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Constrained Dynamics From Snapshots",
+  "label": "Generative Models For Biomedical Counterfactuals",
   "related": [
     "genomic-aneuploid-6b50",
     "regulatory-gene-9c82",
@@ -1972,8 +1999,8 @@
     "single-cell"
   ],
   "slug": "design-principle-hypometabolism-df23",
-  "summary": "New preprints add lineage barcodes, chromatin coupling, spatial context and interpretable states to trajectory inference from static single-cell and spatial snapshots.",
-  "synthesis": "The dominant thread is reconstructing continuous cell dynamics from discrete snapshots using unbalanced transport formulations. COATI uses synchronized optimal transport to couple scRNA and scATAC trajectories across held-out stages. LOTUS adds lineage barcodes to unbalanced optimal transport for clonal fate dynamics. CytoBridge applies an unbalanced mean-field Schrodinger bridge to spatial transcriptomics snapshots. A Latent Cell-State Model instead treats transitions as a Markov chain with interpretable states. What is new is the extra constraint layered onto trajectory inference: multimodal coupling, clonal lineage, spatial interaction and state interpretability. CloneVI, CRISP, OncoSpot and scDisentangle address related single-cell and spatial problems (mitochondrial clones, cross-signal interactions, simulation benchmarking, perturbation prediction) but do not share the dynamics framing.",
-  "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-09"
+  "summary": "Counterfactual estimation and agent-level emulation both demand generative or causal models that retain dynamics and adjust for confounders in biomedical data.",
+  "synthesis": "The shared thread is using learned generative and causal models to answer counterfactual questions in biomedical settings where direct intervention or full simulation is costly. A conditional tabular GAN emulates individual road-injury agents inside a multi-disease agent-based model, reporting an 86.6% run-time reduction while retaining the model's dynamics. SCOUT targets treatment effects, learning a treatment-responsive outcome with two-dimensional confounder adjustment for ATE and CATE estimation in observational biomedical data. A kernel-based regularizer using normalized HSIC is proposed for concept bottleneck generative models to better separate known from unknown factors in single-cell counterfactuals. What is new across these items is the move from covariance-based adjustment toward nonlinear dependence control and agent-level emulation, with counterfactual reasoning as the common target.",
+  "synthesis_model": "claude-haiku-5-5",
+  "synthesized_on": "2026-11-12"
 }
