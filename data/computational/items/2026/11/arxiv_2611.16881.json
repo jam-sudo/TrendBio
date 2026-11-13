@@ -1,0 +1,32 @@
+{
+  "abstract": "Protein language models (pLMs) produce highly accurate contact maps from single-sequence inputs. People often take this accuracy as proof that these models implicitly learn invariant coevolutionary statistics, extracting the same signals as classical alignment-based methods like Potts. In this work, we introduce a diagnostic framework around a global bijective relabeling of the amino-acid alphabet. This transformation permutes residue letters while leaving all alignment-level information, column entropies, and pairwise edit distances unchanged. Pseudolikelihood Potts models and inverse-covariance estimators remain invariant under this transformation, but pLMs fail the test. Across multiple architectures (ESM-2, MSA Transformer, AMPLIFY) and model scales (8M to 3B parameters), pLM contact maps collapse under arbitrary relabeling. Using Hamming distance controls and biochemical grouping interventions, we attempt to isolate what likely causes this degradation and find that these models rely on explicit, canonical residue identities (``alphabet anchoring'') rather than pure coevolutionary statistics. Increasing scale makes models more responsive to biochemical classes, but their performance still degrades under relabeling. Our findings show a gap between how pLMs and classical coevolutionary models compute contacts. More broadly, our work shows how diagnostic perturbations that leave classical models provably unchanged can expose hidden representation biases and prevent over-reliance on neural black boxes in biological modeling.",
+  "authors": [
+    "Paarth Batra",
+    "Aryan Keluskar"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-13",
+  "id": "arxiv:2611.16881",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.16881v1</ns0:id>\n    <ns0:title>Protein Language Models Fail To Capture Contact Predictions Under Invariant Relabeling</ns0:title>\n    <ns0:updated>2026-11-12T14:45:07Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.16881v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.16881v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Protein language models (pLMs) produce highly accurate contact maps from single-sequence inputs. People often take this accuracy as proof that these models implicitly learn invariant coevolutionary statistics, extracting the same signals as classical alignment-based methods like Potts. In this work, we introduce a diagnostic framework around a global bijective relabeling of the amino-acid alphabet. This transformation permutes residue letters while leaving all alignment-level information, column entropies, and pairwise edit distances unchanged. Pseudolikelihood Potts models and inverse-covariance estimators remain invariant under this transformation, but pLMs fail the test. Across multiple architectures (ESM-2, MSA Transformer, AMPLIFY) and model scales (8M to 3B parameters), pLM contact maps collapse under arbitrary relabeling. Using Hamming distance controls and biochemical grouping interventions, we attempt to isolate what likely causes this degradation and find that these models rely on explicit, canonical residue identities (``alphabet anchoring'') rather than pure coevolutionary statistics. Increasing scale makes models more responsive to biochemical classes, but their performance still degrades under relabeling. Our findings show a gap between how pLMs and classical coevolutionary models compute contacts. More broadly, our work shows how diagnostic perturbations that leave classical models provably unchanged can expose hidden representation biases and prevent over-reliance on neural black boxes in biological modeling.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-12T14:45:07Z</ns0:published>\n    <ns1:comment>Accepted to the ICBINB - Failure Modes of AI in Biology Workshop at NeurIPS 2026. 15 pages, 6 figures</ns1:comment>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Paarth Batra</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Aryan Keluskar</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Shows protein language models' contact maps collapse under bijective amino-acid relabeling, unlike invariant Potts and inverse-covariance methods, implicating…",
+  "title": "Protein Language Models Fail To Capture Contact Predictions Under Invariant Relabeling",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.16881v1"
+}
