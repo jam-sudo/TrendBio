@@ -770,7 +770,7 @@
     0.01322082057595253,
     -0.03542393818497658
   ],
-  "headline": "Compressed colored indexes gain faster updates, queries, and matching statistics",
+  "headline": "Compressed indexes for colored sequence and k-mer search at genome-collection scale",
   "history": [
     {
       "attached_item_ids": [],
@@ -854,6 +854,35 @@
         "rise_ratio": 1.1428571428571428,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 5,
+      "date": "2026-11-13",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.05.764633",
+        "biorxiv:10.64898/2026.11.05.764756",
+        "biorxiv:10.64898/2026.11.06.764792",
+        "biorxiv:10.64898/2026.11.09.765318",
+        "biorxiv:10.64898/2026.11.10.765781"
+      ],
+      "rank": 34,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03225708631748774,
+        "rise": 1.1428571428571428,
+        "total": 0.6128846400322672,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -865,8 +894,8 @@
   ],
   "secondary_categories": [],
   "slug": "colored-indexes-832d",
-  "summary": "Recent preprints extend compact colored indexes to batch updates, SIMD-accelerated search, and move-structure matching on pangenomes.",
-  "synthesis": "The dominant thread is compressed, sequence-aware indexing for large collections of genomes and sequences. Zindex targets colored sequence search with interleaved ZOR filters and color-preserving merging, reporting compact, SIMD-accelerated search across large collections. Two SBWT-based works address colored and k-mer dictionaries. One extracts, removes, and set-combines colored k-mer indexes in batches without original sequences, matching from-scratch builds. The other pairs batched, prefetching queries with single-orientation storage at 12 bits per canonical k-mer, reported up to 4.9x faster than SSHash for streaming 31-mer queries. ms2 applies move structures to matching statistics and SMEMs in compressed space on pangenome and read data, with large reported speedups over PHONI and ropebwt3. RabbitCD-HIT is a distinct distributed clustering tool for billion-scale protein sequences, reporting 2.1-6.6x speedup over CD-HIT. What is new is batch updating of colored indexes without original sequences and smaller, faster k-mer dictionaries.",
+  "summary": "Expanding sequence collections demand compact colored indexes that can be updated and queried faster without original sequences.",
+  "synthesis": "The dominant thread is compressed, sequence-aware indexing for large sequence collections. Zindex combines interleaved ZOR filters with color-preserving merging for approximate colored sequence search, with SIMD acceleration. Two SBWT-based works address colored and k-mer dictionaries: one extracts, removes, and set-combines colored k-mer indexes in batches without original sequences, matching from-scratch builds, while the other pairs batched, prefetching queries with single-orientation storage at 12 bits per canonical k-mer, reporting up to 4.9x faster streaming 31-mer queries than SSHash. ms2 applies move structures to matching statistics and SMEMs in compressed space, with reported speedups over PHONI and ropebwt3. RabbitCD-HIT is a distinct distributed clustering tool for billion-scale protein sequences, reporting 2.1-6.6x speedup over CD-HIT. What is new is batch updating of colored indexes without original sequences and smaller, faster k-mer dictionaries.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-12"
+  "synthesized_on": "2026-11-13"
 }

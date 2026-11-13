@@ -770,7 +770,7 @@
     0.010745663195848465,
     -0.04832163453102112
   ],
-  "headline": "Scalable algorithms for pangenome graphs span decomposition, distance, IBD and matching",
+  "headline": "Compressed and graph-native indexes make exact pangenome queries tractable at scale",
   "history": [
     {
       "attached_item_ids": [],
@@ -827,6 +827,35 @@
         "rise_ratio": 1.1428571428571428,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 5,
+      "date": "2026-11-13",
+      "item_ids": [
+        "arxiv:2611.09533",
+        "biorxiv:10.64898/2026.11.05.764665",
+        "biorxiv:10.64898/2026.11.05.764670",
+        "biorxiv:10.64898/2026.11.09.765394",
+        "biorxiv:10.64898/2026.11.10.765459"
+      ],
+      "rank": 35,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03225708631748774,
+        "rise": 1.1428571428571428,
+        "total": 0.6128846400322672,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -840,8 +869,8 @@
     "genomics"
   ],
   "slug": "pangenome-graphs-bd3e",
-  "summary": "Human and terabase-scale assembly collections increasingly require graph-native tools that operate beyond linear reference coordinates.",
-  "synthesis": "The dominant thread is making pangenome graph operations tractable at human and terabase scale through compressed or graph-native data structures. Hub labeling replaces dense all-pairs snarl distance matrices in the vg distance index, enabling exact distance queries on large human pangenome graphs. GIBD detects identity-by-descent segments directly in the GBWT and annotates each segment with the structural variants it carries. SIFT applies closed-syncmer parsing and pseudo-MEM queries in a compressed index to select reference haplotypes for T2T genome patching with ImpuT2T. A related line of work provides compressed-space, sublinear-time SMEM and MEM detection via a BWT run-length index across terabase assembly collections. Pangenome peeling addresses the inverse problem, decomposing weighted adjacency graphs into path-forest linear genomes with two reconstruction methods. Together these items extend graph-based analysis from reference-coordinate workflows toward exact and variant-aware queries across whole assembly collections.",
+  "summary": "Human and terabase-scale assembly collections call for exact, variant-aware queries beyond reference-coordinate workflows.",
+  "synthesis": "The common thread is making pangenome graph operations tractable at human and terabase scale through compressed or graph-native data structures. Hub labeling replaces dense all-pairs snarl distance matrices in the vg distance index with exact distance queries on large human pangenome graphs. GIBD detects identity-by-descent segments directly in the GBWT and annotates each segment with the structural variants it carries. SIFT uses closed-syncmer parsing and pseudo-MEM queries in a compressed index to select reference haplotypes for T2T genome patching with ImpuT2T. A separate preprint presents compressed-space, sublinear-time SMEM and MEM detection via a BWT run-length index for all-vs-all exact matches across terabase assembly collections. Pangenome peeling addresses the inverse problem, decomposing weighted adjacency graphs into path-forest linear genomes using two reconstruction methods. Together these works extend graph-based analysis from reference-coordinate workflows toward exact and variant-aware queries across whole assembly collections.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-12"
+  "synthesized_on": "2026-11-13"
 }

@@ -770,7 +770,7 @@
     0.013371423818171024,
     -0.043558843433856964
   ],
-  "headline": "Predictive models are re-scored against exposure, resistance and transporter outcomes",
+  "headline": "ML predictions validated against resistance, transport, and experimental spectroscopic endpoints",
   "history": [
     {
       "attached_item_ids": [],
@@ -1540,19 +1540,46 @@
         "rise_ratio": 1.0,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 3,
+      "date": "2026-11-13",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.05.764763",
+        "pubmed:10.1021/acs.jcim.6c02183",
+        "pubmed:10.1021/acs.jcim.6c02847"
+      ],
+      "rank": 29,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.0909090909090908,
+        "total": 0.6687965212257555,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 1,
+        "published": 2,
+        "rise_ratio": 1.0909090909090908,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
   "label": "Predictive Model Validation Benchmarks",
   "related": [
     "screening-web-server-dda8",
-    "learning-biology-small-c2ee",
+    "optimal-transport-flow-matching-ea35",
     "infection-dynamics-5c07"
   ],
   "secondary_categories": [],
   "slug": "ai-agents-biological-4390",
-  "summary": "Generative and predictive drug models are increasingly tested against PBPK exposure, measured resistance and transporter risk endpoints.",
-  "synthesis": "The shared thread is evaluating computational predictions against downstream criteria rather than a single predicted score. Exposure-aware evaluation re-scores PARP1 generated molecules with PBPK simulations, showing that dose-driven exposure and safety limits reorder which candidates look promising. HEDGEHOG applies a six-stage workflow to 22 generative models on KRAS G12D and reveals stage-wise attrition that standard metrics miss. Leave-one-out cross-validated classifiers predict artemisinin resistance in P. falciparum K13 mutants from structure-derived physicochemical features, while classic and graph-based QSAR models trained on P-gp, BCRP and MRP1 inhibition data target ABC transporter drug-drug interaction risk. What is new is the explicit move of validation toward pharmacokinetic, resistance and transport endpoints rather than ranking on predicted activity alone. The items are heterogeneous in task, so this describes a dominant methodological trend rather than a uniform finding.",
+  "summary": "Recent ML studies benchmark predictions against resistance phenotypes, transporter inhibition data, and experimental Mössbauer measurements rather than predicted activity alone.",
+  "synthesis": "The common thread across these items is that predictive models are assessed against experimentally or clinically grounded endpoints rather than ranked on a single computed score. A leave-one-out cross-validated classifier predicts artemisinin resistance in P. falciparum Kelch13 mutants from structure-derived physicochemical features, targeting a phenotype of direct clinical relevance. Classic and graph-based QSAR models trained on P-gp, BCRP and MRP1 inhibition data address transporter-mediated drug-drug interaction risk. Chemprop models predict experimental Mössbauer isomer shift and quadrupole splitting for Fe complexes and protein sites, with accuracy reported as matching DFT. The items are heterogeneous in task, so this reflects a dominant methodological direction rather than a uniform finding. What is new is the explicit orientation of validation toward resistance, transport and spectroscopic endpoints.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-11"
+  "synthesized_on": "2026-11-13"
 }
