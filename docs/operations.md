@@ -8,7 +8,7 @@ or a success created today (UTC). Enable it with one GitHub token secret using
 the linked setup instructions; keep GitHub's `schedule` as backup because its
 runs can arrive hours late.
 
-GitHub Actions runs the Python pipeline daily at 05:23 UTC with fallbacks at 08:41 and 12:17 UTC; a later slot is skipped when a run already succeeded that UTC day. It collects,
+GitHub Actions runs the Python pipeline daily at 05:23 UTC with fallbacks at 08:41 and 12:17 UTC; a later slot is skipped when a run already succeeded that UTC day, unless bioRxiv, arXiv or PubMed failed in it, in which case the slot redoes the day. It collects,
 deduplicates, enriches, clusters, ranks, and synthesizes evidence, then commits
 successful output under `data/computational/`. Failed runs leave the last published data available.
 GitHub Actions builds and deploys the Astro site to Cloudflare Pages on pushes to `main` and after Daily pipeline, Backfill, Resynthesize or Maintenance completes via `.github/workflows/deploy.yml`.
