@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Skip if today's run already succeeded
+      - name: Skip if today's run already succeeded with every core source
         id: ran-today
         if: ${{ github.event_name == 'schedule' }}
         env:
@@ -41,7 +41,11 @@ jobs:
           today=$(date -u +%F)
           previous_run=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow daily.yml --status success --json databaseId,createdAt --limit 20 |
             jq -r --arg today "$today" '[.[] | select(.createdAt | startswith($today))][0] // empty | "\(.databaseId) \(.createdAt)"')
-          if [[ -n "$previous_run" ]]; then
+          # A core source that failed is usually back within hours; let the later slots redo the day.
+          failed=$(jq -r '[.run.source_status | to_entries[] | select(.value == "failed" and (.key | IN("biorxiv", "arxiv", "pubmed"))) | .key] | join(",")' "data/computational/days/$today.json" 2>/dev/null || true)
+          if [[ -n "$previous_run" && -n "$failed" ]]; then
+            echo "retrying today: $failed failed in the earlier run"
+          elif [[ -n "$previous_run" ]]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "already ran today: $previous_run"
           fi

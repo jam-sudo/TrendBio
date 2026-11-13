@@ -59,7 +59,7 @@ Astro 5 on Cloudflare Pages. No cookies: Cloudflare Web Analytics counts page vi
 
 ## Schedule and cost
 
-A [Cloudflare Worker](ops/daily-trigger/) starts the run at 06:05 UTC; GitHub's own schedule is the late-arriving backup and skips when a run already succeeded that UTC day. About ten minutes later the run commits to `data/computational/` and the site rebuilds.
+A [Cloudflare Worker](ops/daily-trigger/) starts the run at 06:05 UTC; GitHub's own schedule is the late-arriving backup and skips when a run already succeeded that UTC day with every core source; if bioRxiv, arXiv or PubMed failed, it redoes the day. About ten minutes later the run commits to `data/computational/` and the site rebuilds.
 
 LLM spend is about USD 0.50 a day against a USD 55 monthly ceiling; past the ceiling, new syntheses fall back to Haiku and the day is marked degraded. From Bluesky only aggregate counts, paper IDs and per-host coverage are kept, never identities, post text or credentials.
 
