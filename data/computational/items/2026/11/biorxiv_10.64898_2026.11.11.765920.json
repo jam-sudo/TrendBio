@@ -1,0 +1,42 @@
+{
+  "abstract": "Pediatric brain tumor subregion segmentation is strongly imbalanced: whole-tumor anatomy is comparatively stable, whereas enhancing tumor (ET), cystic component (CC), and edema (ED) may be absent or small. We present an anatomy-preserving multi-stage system for BraTS-PEDs 2026 Task 2. A five-fold residual-encoder nnU-Net supplies robust anatomy and calibrated out-of-fold priors. Candidate ET and CC regions are recovered by independent fold agreement and component-level filters. A rare-aware residual adapter then operates only inside voxels labeled non-enhancing tumor core (NETC), using MRI, signed inter-modality contrasts, probability uncertainty, spatial anatomy, and coordinates. Its constrained assembly permits only NETC-to-ET or NETC-to-CC transitions; therefore background, ED, tumor core, and whole tumor are invariant. On 236 out-of-fold cases, the adapter improved CC Dice from 0.223 to 0.253 and CC normalized surface Dice from 0.233 to 0.263, while preserving tumor-core and whole-tumor scores exactly. The frozen Docker submission achieved Dice scores of 0.510, 0.908, 0.144, 0.000, 0.937, and 0.937 for ET, NETC, CC, ED, tumor core, and whole tumor, respectively, on the 91-case challenge validation set. The results show that constrained rare-subtype correction can improve difficult labels without sacrificing strong anatomical predictions, while also exposing persistent domain shift for CC and ED.",
+  "authors": [
+    "Rai, H. M.",
+    "Omarbekov, D.",
+    "Gul, M."
+  ],
+  "doi": "10.64898/2026.11.11.765920",
+  "first_seen": "2026-11-14",
+  "id": "biorxiv:10.64898/2026.11.11.765920",
+  "metadata": {
+    "abstract": "Pediatric brain tumor subregion segmentation is strongly imbalanced: whole-tumor anatomy is comparatively stable, whereas enhancing tumor (ET), cystic component (CC), and edema (ED) may be absent or small. We present an anatomy-preserving multi-stage system for BraTS-PEDs 2026 Task 2. A five-fold residual-encoder nnU-Net supplies robust anatomy and calibrated out-of-fold priors. Candidate ET and CC regions are recovered by independent fold agreement and component-level filters. A rare-aware residual adapter then operates only inside voxels labeled non-enhancing tumor core (NETC), using MRI, signed inter-modality contrasts, probability uncertainty, spatial anatomy, and coordinates. Its constrained assembly permits only NETC-to-ET or NETC-to-CC transitions; therefore background, ED, tumor core, and whole tumor are invariant. On 236 out-of-fold cases, the adapter improved CC Dice from 0.223 to 0.253 and CC normalized surface Dice from 0.233 to 0.263, while preserving tumor-core and whole-tumor scores exactly. The frozen Docker submission achieved Dice scores of 0.510, 0.908, 0.144, 0.000, 0.937, and 0.937 for ET, NETC, CC, ED, tumor core, and whole tumor, respectively, on the 91-case challenge validation set. The results show that constrained rare-subtype correction can improve difficult labels without sacrificing strong anatomical predictions, while also exposing persistent domain shift for CC and ED.",
+    "author_corresponding": "Hari Mohan Rai",
+    "author_corresponding_institution": "Nazarbayev University",
+    "authors": "Rai, H. M.; Omarbekov, D.; Gul, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-13",
+    "doi": "10.64898/2026.11.11.765920",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/13/2026.11.11.765920.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Anatomy-preserving rare-subregion correction for pediatric brain tumor segmentation on multiparametric MRI: a BraTS-PEDs 2026 challenge study",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Nazarbayev University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Anatomy-preserving multi-stage nnU-Net system with a constrained rare-aware residual adapter for pediatric brain tumor subregion segmentation on…",
+  "title": "Anatomy-preserving rare-subregion correction for pediatric brain tumor segmentation on multiparametric MRI: a BraTS-PEDs 2026 challenge study",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.11.765920"
+}

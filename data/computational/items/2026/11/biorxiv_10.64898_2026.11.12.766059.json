@@ -1,0 +1,43 @@
+{
+  "abstract": "Spatial transcriptomics (ST) has unlocked new avenues for biological discovery by jointly capturing gene expression and spatial context. ST datasets are typically stored as gene expression matrices paired with spatial coordinates, supporting queries based on expression levels at individual locations. However, characterizing how genes vary together requires representations of relationships between genes, such as covariance matrices computed over spatial neighborhoods. These gene--gene co-expression patterns capture coordinated biological variation and can reveal spatially localized gene programs. As datasets grow to atlas scale, efficiently searching for such patterns becomes a central computational bottleneck due to the combination of high dimensionality, extreme sparsity, and variability in gene expression across large numbers of spatial regions. Such searches require repeated access to second-order statistics, motivating a compact, searchable representation of spatial co-expression. We address this problem with Spindle, a platform-agnostic indexing algorithm for efficiently searching spatial gene co-expression patterns. Spindle exploits the approximate block-diagonal structure of gene--gene covariance matrices over spatial regions, in which covariances between blocks are small in magnitude, to selectively store informative components while compactly representing recurring covariance patterns. This yields a compressed yet searchable index suitable for atlas-scale spatial datasets. Across multiple real-world biological datasets (87,000--817,000 cells), Spindle indexes are 113--197 times smaller than the whole covariance matrices. A complete query, including query preprocessing, takes 2.8--28 ms on one CPU core, 5.1--16 times faster than a scan over the whole covariance matrices, and the tiles it returns recover a median of 81% of the exact near neighbors. In breast cancer, the regions retrieved by covariance search closely match the cell-type composition of the query (median cell-type composition difference 0.15, compared with 0.54 for random regions). Spindle supports both partial covariance queries and queries specified as gene lists, as well as retrieval across measurement platforms.",
+  "authors": [
+    "Ghosh, S.",
+    "Sintos, S.",
+    "Chakraborti, A.",
+    "Sarkar, H."
+  ],
+  "doi": "10.64898/2026.11.12.766059",
+  "first_seen": "2026-11-14",
+  "id": "biorxiv:10.64898/2026.11.12.766059",
+  "metadata": {
+    "abstract": "Spatial transcriptomics (ST) has unlocked new avenues for biological discovery by jointly capturing gene expression and spatial context. ST datasets are typically stored as gene expression matrices paired with spatial coordinates, supporting queries based on expression levels at individual locations. However, characterizing how genes vary together requires representations of relationships between genes, such as covariance matrices computed over spatial neighborhoods. These gene--gene co-expression patterns capture coordinated biological variation and can reveal spatially localized gene programs. As datasets grow to atlas scale, efficiently searching for such patterns becomes a central computational bottleneck due to the combination of high dimensionality, extreme sparsity, and variability in gene expression across large numbers of spatial regions. Such searches require repeated access to second-order statistics, motivating a compact, searchable representation of spatial co-expression. We address this problem with Spindle, a platform-agnostic indexing algorithm for efficiently searching spatial gene co-expression patterns. Spindle exploits the approximate block-diagonal structure of gene--gene covariance matrices over spatial regions, in which covariances between blocks are small in magnitude, to selectively store informative components while compactly representing recurring covariance patterns. This yields a compressed yet searchable index suitable for atlas-scale spatial datasets. Across multiple real-world biological datasets (87,000--817,000 cells), Spindle indexes are 113--197 times smaller than the whole covariance matrices. A complete query, including query preprocessing, takes 2.8--28 ms on one CPU core, 5.1--16 times faster than a scan over the whole covariance matrices, and the tiles it returns recover a median of 81% of the exact near neighbors. In breast cancer, the regions retrieved by covariance search closely match the cell-type composition of the query (median cell-type composition difference 0.15, compared with 0.54 for random regions). Spindle supports both partial covariance queries and queries specified as gene lists, as well as retrieval across measurement platforms.",
+    "author_corresponding": "Hirak Sarkar",
+    "author_corresponding_institution": "Vanderbilt University",
+    "authors": "Ghosh, S.; Sintos, S.; Chakraborti, A.; Sarkar, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-13",
+    "doi": "10.64898/2026.11.12.766059",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/13/2026.11.12.766059.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Spindle: Scalable Indexing of Spatial-Omics Data for Fast Querying",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Vanderbilt University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "transcriptomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Spindle is a platform-agnostic indexing algorithm that compresses spatial gene co-expression covariance matrices into a searchable index, enabling fast…",
+  "title": "Spindle: Scalable Indexing of Spatial-Omics Data for Fast Querying",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.12.766059"
+}
