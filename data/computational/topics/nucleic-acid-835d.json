@@ -770,7 +770,7 @@
     -0.02682221122086048,
     -0.033212803304195404
   ],
-  "headline": "Model-brain and cross-subject comparisons show evaluation choices change conclusions",
+  "headline": "Analysis and split choices, not just models, determine apparent performance in biological modelling",
   "history": [
     {
       "attached_item_ids": [],
@@ -2952,10 +2952,37 @@
         "rise_ratio": 1.3333333333333333,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 3,
+      "date": "2026-11-14",
+      "item_ids": [
+        "arxiv:2611.15204",
+        "arxiv:2611.15533",
+        "arxiv:2611.15966"
+      ],
+      "rank": 20,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.039519371515833235,
+        "rise": 1.5,
+        "total": 0.7508680588008314,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Evaluating Biological Model Representations",
+  "label": "Evaluation Protocol Sensitivity",
   "related": [
     "cross-aligned-3a51",
     "detector-models-2bef",
@@ -2965,8 +2992,8 @@
     "systems"
   ],
   "slug": "nucleic-acid-835d",
-  "summary": "Split design, preprocessing choices, and recentering each change reported model performance, so held-out and multiverse checks are needed.",
-  "synthesis": "The dominant thread is that evaluation outcomes in biological modelling depend on analysis and split decisions as much as on the model itself. In the EEG study, recentering removes subject identity from covariance representations while leaving Riemannian RDMs unchanged, so de-identification does not establish alignment. The RSA multiverse reanalysis finds that analysis choices such as centring can flip whether untrained CNNs outperform trained ones as V1 and LOC models on THINGS fMRI data. The ground reaction force study shows that trial-level splits inflate R² and that cross-laboratory transfer fails when subjects are held out. What is new across these preprints is explicit testing of evaluation protocol as a source of apparent model advantage. The GRF study is the most direct demonstration of leakage, while the RSA study isolates analysis sensitivity. All three remain preprints, so these findings are preliminary.",
-  "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-13"
+  "summary": "Three preprints show that centring, recentering and trial-level splits can change or inflate conclusions about neural and biomechanical model performance.",
+  "synthesis": "The common thread is that evaluation design can drive apparent model results. In EEG covariance representations, recentering removes subject identity yet leaves Riemannian RDMs unchanged, so de-identification does not imply alignment. A multiverse RSA reanalysis on THINGS fMRI shows that choices such as centring can flip whether untrained CNNs beat trained ones as V1 models. In ground reaction force estimation, trial-level splits inflate R² and cross-laboratory transfer fails under subject-held-out evaluation. The new element is the explicit treatment of protocol, whether analysis pipeline or data partitioning, as a tested variable rather than a fixed background. The GRF work addresses leakage most directly, while the RSA work addresses analytic sensitivity. All three are preprints, so the findings are preliminary.",
+  "synthesis_model": "claude-sonnet-5-5",
+  "synthesized_on": "2026-11-14"
 }

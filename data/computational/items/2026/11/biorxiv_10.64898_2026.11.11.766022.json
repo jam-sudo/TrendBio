@@ -1,0 +1,41 @@
+{
+  "abstract": "Conformational dynamics of biomolecules, including proteins and nucleic acids, are often coupled to changes in protonation states. All-atom particle-mesh Ewald continuous constant-pH molecular dynamics (PME-CpHMD) enables proton-coupled dynamics, but its routine use has been limited by computational cost. Here we report a second-generation CUDA implementation of PME-CpHMD in Amber, in which the CpHMD-specific nonbonded corrections are evaluated in a separate kernel. Across protein systems ranging from 45 to 1,338 residues, the new implementation increases throughput by 1.5-2 fold relative to the previous fused-kernel implementation and limits the overhead relative to conventional MD to 12-18%. We also implemented the asynchronous pH replica-exchange (pH-REX) algorithm natively in pmemd.cuda.MPI, allowing simulations to run on fewer GPUs than replicas without the overhead of the previous Python wrapper. Furthermore, we derived CpHMD titration parameters for all six titratable residue types (Asp, Glu, His, Cys, Tyr, and Lys) for use with three protein force fields: CHARMM c22/CMAP, Amber ff14sb and ff19sb. The new implementations and parameterization were validated using pKa calculations of model peptides and hen egg white lysozyme (HEWL). The HEWL simulations revealed force-field-specific limitations, including overestimation of the pKa downshift 20 of H15 and sensitivity of the proton donor assignment in coupled E35/D52 dyad. Comparison with our previous work and the PME-CpHMD simulations in GROMACS with the CHARMM c36m force field demonstrated the robustness and sampling efficiency of pH-REX PME-CpHMD simulations. The new implementation provides a foundation for routine all-atom constant-pH simulations in Amber. The analysis highlights the need for continued development of protein force fields to more accurately balance intramolecular electrostatics and solvation of charged residues.",
+  "authors": [
+    "Dayhoff, G. W.",
+    "Shen, J."
+  ],
+  "doi": "10.64898/2026.11.11.766022",
+  "first_seen": "2026-11-14",
+  "id": "biorxiv:10.64898/2026.11.11.766022",
+  "metadata": {
+    "abstract": "Conformational dynamics of biomolecules, including proteins and nucleic acids, are often coupled to changes in protonation states. All-atom particle-mesh Ewald continuous constant-pH molecular dynamics (PME-CpHMD) enables proton-coupled dynamics, but its routine use has been limited by computational cost. Here we report a second-generation CUDA implementation of PME-CpHMD in Amber, in which the CpHMD-specific nonbonded corrections are evaluated in a separate kernel. Across protein systems ranging from 45 to 1,338 residues, the new implementation increases throughput by 1.5-2 fold relative to the previous fused-kernel implementation and limits the overhead relative to conventional MD to 12-18%. We also implemented the asynchronous pH replica-exchange (pH-REX) algorithm natively in pmemd.cuda.MPI, allowing simulations to run on fewer GPUs than replicas without the overhead of the previous Python wrapper. Furthermore, we derived CpHMD titration parameters for all six titratable residue types (Asp, Glu, His, Cys, Tyr, and Lys) for use with three protein force fields: CHARMM c22/CMAP, Amber ff14sb and ff19sb. The new implementations and parameterization were validated using pKa calculations of model peptides and hen egg white lysozyme (HEWL). The HEWL simulations revealed force-field-specific limitations, including overestimation of the pKa downshift 20 of H15 and sensitivity of the proton donor assignment in coupled E35/D52 dyad. Comparison with our previous work and the PME-CpHMD simulations in GROMACS with the CHARMM c36m force field demonstrated the robustness and sampling efficiency of pH-REX PME-CpHMD simulations. The new implementation provides a foundation for routine all-atom constant-pH simulations in Amber. The analysis highlights the need for continued development of protein force fields to more accurately balance intramolecular electrostatics and solvation of charged residues.",
+    "author_corresponding": "Jana Shen",
+    "author_corresponding_institution": "University of Maryland School of Pharmacy",
+    "authors": "Dayhoff, G. W.; Shen, J.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-11-13",
+    "doi": "10.64898/2026.11.11.766022",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/13/2026.11.11.766022.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "High-Performance All-Atom Continuous Constant-pH Molecular Dynamics and Native Asynchronous Replica Exchange in Amber",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Maryland School of Pharmacy",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Second-generation CUDA implementation of all-atom PME continuous constant-pH MD in Amber, with native asynchronous pH replica exchange and new titration…",
+  "title": "High-Performance All-Atom Continuous Constant-pH Molecular Dynamics and Native Asynchronous Replica Exchange in Amber",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.11.766022"
+}
