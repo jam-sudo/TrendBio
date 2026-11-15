@@ -770,7 +770,7 @@
     0.014962263405323029,
     -0.037522658705711365
   ],
-  "headline": "Compressed indexes accelerate k-mer lookup and pangenome exact matching",
+  "headline": "Compressed indexes for k-mer dictionaries and pangenome exact-match search",
   "history": [
     {
       "attached_item_ids": [],
@@ -912,6 +912,35 @@
         "rise_ratio": 1.1428571428571428,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 5,
+      "date": "2026-11-15",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.06.764792",
+        "biorxiv:10.64898/2026.11.09.765318",
+        "biorxiv:10.64898/2026.11.09.765394",
+        "biorxiv:10.64898/2026.11.10.765459",
+        "biorxiv:10.64898/2026.11.10.765781"
+      ],
+      "rank": 36,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03225708631748774,
+        "rise": 1.1428571428571428,
+        "total": 0.6128846400322672,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -923,8 +952,8 @@
   ],
   "secondary_categories": [],
   "slug": "colored-indexes-832d",
-  "summary": "Recent preprints report batch-updatable colored indexes, faster and smaller k-mer dictionaries, and compressed-space matching across pangenome assemblies.",
-  "synthesis": "The shared thread is compressed, sequence-aware indexing for large collections of genomes and k-mers. Two SBWT-based works address colored and k-mer dictionaries. One extracts, removes, and set-combines colored k-mer indexes in batches without original sequences, with results matching from-scratch builds. The other pairs batched, prefetching queries with single-orientation storage, reporting 12 bits per canonical k-mer and streaming 31-mer queries up to 4.9x faster than SSHash. Three further preprints apply compressed-space matching to assemblies and reads: an algorithm for SMEMs and MEMs across terabase pangenome assemblies via BWT run-length indexing, ms2 with move structures for matching statistics and SMEMs, and SIFT, which uses closed-syncmer parsing to select haplotypes for T2T patching. What is new is batch updating of colored indexes without original sequences and smaller, faster k-mer dictionaries.",
+  "summary": "Recent preprints extend SBWT colored indexes and move-structure matching to terabase-scale assemblies and compact k-mer dictionaries.",
+  "synthesis": "The common thread is compressed, sequence-aware indexing of large genome and k-mer collections, with several methods operating in compressed space. Two SBWT-based preprints address k-mer structures directly. One extracts, removes, and set-combines colored k-mer indexes in batches without original sequences, with results matching from-scratch builds. The other pairs batched, prefetching queries with single-orientation storage, reporting 12 bits per canonical k-mer and streaming 31-mer queries up to 4.9x faster than SSHash. Three further preprints apply compressed-space matching to assemblies and reads: BWT run-length indexing for SMEMs and MEMs across terabase pangenome assemblies, ms2 with move structures for matching statistics and SMEMs, and SIFT, which uses closed-syncmer parsing and pseudo-MEM queries to select haplotypes for T2T patching. What is new is batch updating of colored indexes without original sequences and smaller, faster k-mer dictionaries.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-14"
+  "synthesized_on": "2026-11-15"
 }

@@ -770,7 +770,7 @@
     -0.011584031395614147,
     -0.03952265903353691
   ],
-  "headline": "Biomolecular language models get smaller and cheaper as benchmarks expose leakage",
+  "headline": "Pretraining inputs and readout design reshape compact biomolecular model performance",
   "history": [
     {
       "attached_item_ids": [],
@@ -1001,19 +1001,48 @@
         "rise_ratio": 1.1428571428571428,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 5,
+      "date": "2026-11-15",
+      "item_ids": [
+        "arxiv:2611.10658",
+        "biorxiv:10.64898/2026.10.29.762727",
+        "biorxiv:10.64898/2026.11.07.765043",
+        "biorxiv:10.64898/2026.11.09.765464",
+        "biorxiv:10.64898/2026.11.12.766253"
+      ],
+      "rank": 35,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.1428571428571428,
+        "total": 0.6451417263497549,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
   "label": "Compact Biomolecular Language Models",
   "related": [
     "spatial-transcriptomics-7369",
-    "conformational-protein-8241",
-    "dataset-foundation-0719"
+    "dataset-foundation-0719",
+    "conformational-protein-8241"
   ],
   "secondary_categories": [],
   "slug": "zero-dna-mirrordna-8a09",
-  "summary": "New preprints cut DNA and protein language-model cost via data pruning, learned tokenizers and small backbones, as benchmarks expose homology leakage.",
-  "synthesis": "The dominant thread is reducing the cost of biomolecular language models without losing accuracy. Sequence Pruning dynamically drops DNA pretraining data, reducing processing by up to 96%. MirrorDNA learns a tokenizer that enforces reverse-complement symmetry and matches larger models while staying compact. HyPLM-Flash (650M parameters, 726B tokens) matches ESM-2 and ESM C on ProteinGym and contact precision at lower cost. The 1.96M-parameter HyInv inverse-folding network and the MELD mutation-effect model, trained on wild-type versus mutant logit differences, also report gains over larger baselines. The Biophysical Transformer changes the pretraining input itself, using Poisson-Boltzmann electrostatic fields. A second strand questions how these gains are measured: Protify reports task dependence and homology leakage in PLM evaluation, and RPFace introduces a stratified protein-RNA interface benchmark that exposes structural bias. LESS-PseU and TriTower-m6Am apply DNABERT2 and RNA-FM embeddings to RNA modification-site prediction.",
-  "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-12"
+  "summary": "Benchmarks now show global metrics can overstate gains, so compact models are being judged on region-aware and delta-level readouts.",
+  "synthesis": "The common thread is that compact biomolecular models are being refined through what is fed into them and what is read out of them, rather than through scale alone. The Delta Gap paper shows that global Pearson correlation overstates perturbation-response performance: GEARS reaches delta Pearson 0.076 against 0.267 for a mean-delta baseline on Replogle K562. Several other entries move toward more targeted readouts. MELD scores single-nucleotide variants from wild-type versus mutant logit differences in a compact CNN-Transformer, reporting AUROC 0.986 on ClinVar. The region-aware mRNA proposal averages foundation-model embeddings separately over 5' UTR, CDS and 3' UTR. The Biophysical Transformer changes the pretraining input to Poisson-Boltzmann electrostatic fields, while BioMeme substitutes a memory of measured experiments for a learned state-to-response layer. What is new is joint attention to input representation, readout definition and evaluation fidelity.",
+  "synthesis_model": "claude-haiku-5-5",
+  "synthesized_on": "2026-11-15"
 }
