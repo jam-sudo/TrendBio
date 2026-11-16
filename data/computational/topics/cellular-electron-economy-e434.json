@@ -770,7 +770,7 @@
     0.005181039217859507,
     -0.03201896697282791
   ],
-  "headline": "Compact structure-derived surrogates approximate fluctuations and molecular properties at lower cost",
+  "headline": "Pretrained generative models repurposed for protein, DNA and molecular design tasks",
   "history": [
     {
       "attached_item_ids": [],
@@ -1835,10 +1835,37 @@
         "rise_ratio": 0.96,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 3,
+      "date": "2026-11-16",
+      "item_ids": [
+        "arxiv:2611.10424",
+        "arxiv:2611.15109",
+        "biorxiv:10.64898/2026.11.07.765118"
+      ],
+      "rank": 26,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.263157894736842,
+        "total": 0.6838084829482436,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.263157894736842,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Surrogate Models Replacing Costly Computation",
+  "label": "Adapting Pretrained Generative Biomolecular Models",
   "related": [
     "protein-folding-pathway-a90a",
     "autoregressive-diffusion-mol-3e64",
@@ -1848,8 +1875,8 @@
     "structural"
   ],
   "slug": "cellular-electron-economy-e434",
-  "summary": "A C-alpha B-factor model cuts factorization from O(N^3) to O(Nk^3), alongside ML surrogates for solubility, Mössbauer and retention index prediction.",
-  "synthesis": "Only the preprint addresses reduced protein dynamics directly: a local magnitude representation predicts B-factors from C-alpha structure and lowers factorization cost from O(N^3) to O(Nk^3), replacing dense global computation with local description. The published studies address other observables but share a surrogate-for-expensive-calculation motif. QM-derived σ-moment surface descriptors improve held-out solvent R2 from 0.541 on a fixed solvent-level OOD benchmark of 103,262 BigSolDB v2.1 records. ML models, notably Chemprop, predict Mössbauer isomer shift and quadrupole splitting for Fe complexes and protein sites at DFT-level accuracy with 218-fold lower cost. ViSRTI uses 3D geometry-aware representations to approximate NORMAN-predicted retention time indices. These are not a common benchmark, so the dynamics-reduction thread rests on the B-factor work.",
-  "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-11"
+  "summary": "Three recent preprints reuse pretrained generative backbones across protein complexes, molecular inference and phage genome modeling.",
+  "synthesis": "The dominant thread is repurposing pretrained generative models for biomolecular tasks beyond their original training objective. ZeUS converts pretrained SE(3)-equivariant generative backbones into zero-shot generators of symmetric protein complexes via quotient-space symmetrization. Structured Re-Decoding is training-free: it recombines candidate outputs to enlarge the feasible output set for molecule, protein, RNA and antibody inference. CPDD adapts an autoregressive phage DNA language model into a bidirectional discrete diffusion model for masked and corrupted base restoration. What is new across these items is the emphasis on adapting existing generative architectures or their outputs rather than building task-specific models, although the three differ in modality and mechanism and share only this adaptation theme.",
+  "synthesis_model": "claude-haiku-5-5",
+  "synthesized_on": "2026-11-16"
 }

@@ -770,7 +770,7 @@
     0.008083688095211983,
     -0.05415445938706398
   ],
-  "headline": "Sequence-based deep learning advances protein, DNA, and epitope prediction",
+  "headline": "Protein and DNA language models applied to design, epitope prediction and data pruning",
   "history": [
     {
       "attached_item_ids": [],
@@ -908,19 +908,48 @@
         "rise_ratio": 1.1428571428571428,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 5,
+      "date": "2026-11-16",
+      "item_ids": [
+        "arxiv:2611.10386",
+        "arxiv:2611.11997",
+        "arxiv:2611.12000",
+        "biorxiv:10.64898/2026.10.29.762831",
+        "pubmed:10.1093/bioinformatics/btag813"
+      ],
+      "rank": 30,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.035382086317487745,
+        "rise": 1.1428571428571428,
+        "total": 0.6722596400322671,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 1,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
   "label": "Biological Sequence Machine Learning",
   "related": [
-    "protein-generation-b3ca",
     "conformational-protein-8241",
-    "rna-prediction-7112"
+    "rna-prediction-7112",
+    "zero-dna-mirrordna-8a09"
   ],
   "secondary_categories": [],
   "slug": "report-technical-4b00",
-  "summary": "Language-model pretraining, structure-aware graphs, and reinforcement learning are being applied across DNA, protein, and immunology tasks.",
-  "synthesis": "The dominant thread is learned sequence representations, mostly protein language models, applied to prediction and design tasks where training data curation, sampling strategy, or structural context is treated as a modeling lever. HyPLM-Flash reports matching ESM-2 and ESM C on ProteinGym and contact precision at lower cost, with 650M parameters trained on 726B tokens. SeekRBP fuses protein language and structure embeddings and recasts negative sampling as a multi-armed bandit for receptor-binding protein identification. HyInv applies reinforcement learning and grouped draft-and-rewrite sampling in a 1.96M-parameter backbone-conditioned graph network for inverse folding. TriStageHLA uses LoRA-tuned ESM-2 for peptide pruning ahead of HLA binding and immunogenicity stages. Sequence Pruning is the distinct contribution for DNA language-model pretraining, reporting up to 96% reduction in data processing. Evidence is preliminary and largely from preprints; the items report benchmark comparisons without independent validation here.",
+  "summary": "Recent preprints and one published study test how data pruning, sampling strategy, and structural context affect sequence model performance.",
+  "synthesis": "The dominant thread is learned sequence representations, mostly protein language models, applied where training data curation, sampling strategy, or structural context serves as a modeling lever. HyPLM-Flash, a 650M-parameter open protein language model trained on 726B tokens, reports matching ESM-2 and ESM C on ProteinGym and contact precision at lower cost. SeekRBP fuses protein language and structure embeddings and recasts negative sampling as a multi-armed bandit for receptor-binding protein identification. HyInv applies reinforcement learning and grouped draft-and-rewrite sampling within a 1.96M-parameter backbone-conditioned graph network for inverse folding. TriStageHLA uses LoRA-tuned ESM-2 for peptide pruning ahead of HLA binding and immunogenicity stages. Sequence Pruning is distinct in targeting DNA language-model pretraining, reporting up to 96% reduction in data processing. Evidence is largely preprint-based, and the benchmark comparisons are reported by the authors without independent validation here.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-15"
+  "synthesized_on": "2026-11-16"
 }

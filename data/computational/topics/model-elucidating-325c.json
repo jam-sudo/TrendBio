@@ -770,7 +770,7 @@
     -0.004795748274773359,
     -0.051643144339323044
   ],
-  "headline": "Graph models couple network topology with pairwise and multi-view relations in biology",
+  "headline": "Graph models couple network topology with local features in biological prediction tasks",
   "history": [
     {
       "attached_item_ids": [],
@@ -3685,6 +3685,35 @@
         "rise_ratio": 0.9696969696969697,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 5,
+      "date": "2026-11-16",
+      "item_ids": [
+        "arxiv:2611.11017",
+        "arxiv:2611.13801",
+        "biorxiv:10.64898/2026.11.08.765214",
+        "pubmed:10.1021/acs.jcim.6c02413",
+        "pubmed:10.1093/bioinformatics/btag827"
+      ],
+      "rank": 24,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.1428571428571428,
+        "total": 0.7076417263497549,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 2,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -3698,8 +3727,8 @@
     "single-cell"
   ],
   "slug": "model-elucidating-325c",
-  "summary": "Recent work applies graph neural and hypergraph models to gene regulatory, drug response, and host-virus interaction prediction.",
-  "synthesis": "The dominant thread is explicit modeling of relational topology in biological networks rather than flat feature tables. In gene regulatory work, scGPL pairs global regulatory graph structure with pairwise TF-target interactions on scRNA-seq data, and scAdaG2M applies graph-to-MLP distillation to scRNA-seq clustering to address over-smoothing. Drug-centred items use multi-view designs: GLH2Syn combines global diffusion with structure-aware local learning on a heterogeneous hypergraph, MTDKF fuses metapath topology with domain knowledge for miRNA-drug-disease triplets, and MulDR preserves omics-specific cell-line relations. HV-MultiScaleGNN compares local, global, and combined graph views for host-virus protein interactions. The distinctive element is the separation and recombination of local and global relational views, or of topology and auxiliary knowledge, rather than a single pooled graph.",
+  "summary": "Recent preprints and publications apply graph neural networks and hypergraph models to protein, gene regulatory, drug synergy, and single-cell problems.",
+  "synthesis": "The dominant thread is explicit modeling of relational structure rather than flat feature tables. Several items separate and recombine relational views: GLH2Syn pairs global diffusion with structure-aware local learning on a heterogeneous hypergraph for drug synergy, and HV-MultiScaleGNN compares local, global, and combined graph views for host-virus protein interactions. scGPL jointly models global regulatory graph topology with pairwise TF-target interactions for GRN inference from scRNA-seq. ProtLink instead augments PPI topology with frozen ESM-2 sequence features and cross-species orthogroup edges, with HGT reaching AP 0.970 on human PPI. scAdaG2M transfers graph structure into an MLP via distillation to address over-smoothing in scRNA-seq clustering. The shared element is the decomposition of relational information into topological, auxiliary, and local-versus-global components rather than a single pooled graph.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-14"
+  "synthesized_on": "2026-11-16"
 }

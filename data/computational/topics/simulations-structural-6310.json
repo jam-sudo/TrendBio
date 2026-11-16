@@ -770,7 +770,7 @@
     0.0011208361247554421,
     -0.05942583456635475
   ],
-  "headline": "Predicted and designed structures are being judged against membrane, energetic and ensemble criteria",
+  "headline": "Predicted structures are judged by membrane geometry, ensembles, energetics and loop flexibility",
   "history": [
     {
       "attached_item_ids": [],
@@ -1252,6 +1252,34 @@
         "rise_ratio": 1.4736842105263157,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 4,
+      "date": "2026-11-16",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.05.764545",
+        "biorxiv:10.64898/2026.11.06.764892",
+        "biorxiv:10.64898/2026.11.09.765245",
+        "pubmed:10.1021/acs.jcim.6c02489"
+      ],
+      "rank": 17,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.040820020257966536,
+        "rise": 1.4,
+        "total": 0.7755803849013642,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 1,
+        "rise_ratio": 1.4,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1259,14 +1287,14 @@
   "related": [
     "framework-deep-residual-b311",
     "diffusion-models-biomolecular-60b0",
-    "cryo-structure-34d6"
+    "reference-learning-6805"
   ],
   "secondary_categories": [
     "tools-infra"
   ],
   "slug": "simulations-structural-6310",
-  "summary": "New studies test AlphaFold outputs and design models against bilayer geometry, beta-sheet organization and local frustration, with GPU tooling enabling proteome-scale analysis.",
-  "synthesis": "These items evaluate structural models with physical or energetic criteria rather than a single static fold. One preprint assesses membrane compatibility of roughly 189k AlphaFold-Multimer transmembrane complexes in the AFDB, finding most have plausible bilayer geometry while noting limitations. A published study tests whether AlphaFold3 pseudo-ensembles recover parallel versus antiparallel beta-sheet organization and polymorphism in short amyloidogenic peptides. The PyTorch Frustratometer reimplements local energetic frustration analysis with 70-13,000x GPU speedups and near-identical results to the original, which makes proteome-scale use feasible. The Omega-loop preprint adds a sequence-level view, reporting Gly/Pro enrichment and interface-dependent conservation using ProteinMPNN design modelling. The methods differ, but together they extend evaluation toward geometry, flexibility and energetics at scale.",
+  "summary": "New work tests AlphaFold outputs against membrane geometry and beta-sheet polymorphism, while a GPU frustratometer makes energetic analysis feasible proteome-wide.",
+  "synthesis": "The common thread is evaluating structural models with physical or energetic criteria rather than accepting a single predicted fold. One preprint checks bilayer compatibility across ~189k AlphaFold-Multimer transmembrane complexes in the AFDB, finding most geometrically plausible but also identifying limitations. A published study tests whether AlphaFold3 pseudo-ensembles capture parallel versus antiparallel beta-sheet organization and polymorphism in short amyloidogenic peptides. The PyTorch Frustratometer reimplements local energetic frustration analysis with 70-13,000x GPU speedups and near-identical results to the original, enabling proteome-scale use. The Omega-loop preprint contributes a sequence-level view of flexibility, reporting Gly/Pro enrichment and interface-dependent conservation using ProteinMPNN design modelling. The methods differ, but together they push validation toward geometry, flexibility and energetics at scale.",
   "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-15"
+  "synthesized_on": "2026-11-16"
 }

@@ -770,7 +770,7 @@
     0.0029512515757232904,
     -0.050033994019031525
   ],
-  "headline": "Alignment-free and sketch-based tools reduce cost of viral and sequence inference",
+  "headline": "Alignment-free and sketch-based methods cut the cost of viral and sequence-level inference",
   "history": [
     {
       "attached_item_ids": [],
@@ -2375,10 +2375,38 @@
         "rise_ratio": 1.1666666666666667,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 4,
+      "date": "2026-11-16",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.05.764740",
+        "biorxiv:10.64898/2026.11.05.764756",
+        "biorxiv:10.64898/2026.11.09.765303",
+        "pubmed:10.1101/gr.282104.126"
+      ],
+      "rank": 20,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.039320020257966534,
+        "rise": 1.3333333333333333,
+        "total": 0.7470803849013641,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 1,
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Viral Genomics Inference Methods",
+  "label": "Alignment Light Sequence Inference",
   "related": [
     "adna-alignment-sensitivity-dbd7",
     "bacterial-genetic-32fc",
@@ -2388,8 +2416,8 @@
     "genomics"
   ],
   "slug": "genome-nuclear-4f5c",
-  "summary": "Recent preprints and a publication report tools that avoid full alignment or exhaustive comparison to scale viral and protein sequence analysis.",
-  "synthesis": "The dominant thread is reducing computational cost of sequence inference by avoiding full alignment or exhaustive pairwise comparison and operating on reads, seeds, or sketches. bronko detects viral SNPs, indels and minor variants directly from reads without alignment, with near-linear scaling in sequencing depth. TurboANI estimates average nucleotide identity using SIMD seeding and bitset minwise hashing, reporting up to ~40,000-fold speedup. EMtrace runs offline on a laptop, classifying nanopore reads, estimating abundance via expectation-maximisation, and assembling consensus genomes. RabbitCD-HIT applies distributed greedy incremental clustering to billion-scale protein sequences, reporting 2.1-6.6x speedup over CD-HIT. What is new is the explicit targeting of tractable inference at the read, seed, or sketch level. The items differ in data modality and task, so this describes the dominant emphasis rather than a shared method.",
-  "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-15"
+  "summary": "Four new tools replace full alignment or exhaustive comparison with read-, seed- or sketch-level inference, with reported speedups and laptop-scale deployment.",
+  "synthesis": "The dominant thread is lowering computational cost by avoiding full alignment or exhaustive pairwise comparison. bronko detects viral SNPs, indels and minor variants directly from reads, with near-linear scaling in sequencing depth. TurboANI combines SIMD seeding with bitset minwise hashing for homology-aware ANI, reporting up to ~40,000-fold speedup. RabbitCD-HIT distributes greedy incremental clustering across billion-scale protein sets, reporting 2.1-6.6x speedup over CD-HIT. EMtrace packages read classification, EM-based abundance estimation and consensus assembly into an offline laptop nanopore pipeline. The items differ in modality and task (variant calling, ANI, protein clustering, diagnostics), so the shared emphasis is on tractable, scalable inference rather than a common method.",
+  "synthesis_model": "claude-sonnet-5-5",
+  "synthesized_on": "2026-11-16"
 }
