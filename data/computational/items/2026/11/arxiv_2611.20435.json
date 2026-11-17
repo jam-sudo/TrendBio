@@ -1,0 +1,38 @@
+{
+  "abstract": "Scalp electroencephalography (EEG) is a cornerstone of clinical brain monitoring, making the quality of its signal fundamental to downstream tasks and models. However, that signal is heavily contaminated by non-neural interference and blurred by volume conduction. Existing methods operate almost exclusively within the scalp modality, so they inherit the contamination they would need to overcome. In practice, intracranial EEG (iEEG) observes the neural activity with far higher fidelity, yet it is invasive and therefore scarce, and the two modalities are rarely recorded as pairs at scale, share no common channel space, and offer no clean ground truth to directly supervise a mapping. Motivated by the neuronal synchronization mechanism shared by the two modalities, we propose a reprogramming approach that fits a signal-to-signal model on iEEG alone and freezes it as a cross-modal prior. We introduce ReBrain, a framework to transfer an iEEG-learned prior to scalp EEG, which re-expresses any scalp signal through that prior and can be inserted upstream of any downstream model with no pairing or fine-tuning. ReBrain consistently improves host models across recordings from multiple hospitals and across architecture families, and our analysis traces this gain to genuine neural structure carried by iEEG rather than to the architecture itself. This work provides evidence that a scarce clean modality can serve as a transferable prior for an abundant noisy one, offering a general recipe for cross-modal transfer among biosignals. Our code is available at https://github.com/Xianglong-Bao/ReBrain.",
+  "authors": [
+    "Xianglong Bao",
+    "Yi Ding",
+    "Zengxiang Li",
+    "Nan Liu",
+    "Kewen Wang",
+    "Zhe Wang",
+    "Ming Jin"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-17",
+  "id": "arxiv:2611.20435",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "eess.SP",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.20435v1</ns0:id>\n    <ns0:title>iEEG Can Help EEG: Improving Clinical Scalp EEG Analysis through Intracranial Priors</ns0:title>\n    <ns0:updated>2026-11-16T02:54:16Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.20435v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.20435v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Scalp electroencephalography (EEG) is a cornerstone of clinical brain monitoring, making the quality of its signal fundamental to downstream tasks and models. However, that signal is heavily contaminated by non-neural interference and blurred by volume conduction. Existing methods operate almost exclusively within the scalp modality, so they inherit the contamination they would need to overcome. In practice, intracranial EEG (iEEG) observes the neural activity with far higher fidelity, yet it is invasive and therefore scarce, and the two modalities are rarely recorded as pairs at scale, share no common channel space, and offer no clean ground truth to directly supervise a mapping. Motivated by the neuronal synchronization mechanism shared by the two modalities, we propose a reprogramming approach that fits a signal-to-signal model on iEEG alone and freezes it as a cross-modal prior. We introduce ReBrain, a framework to transfer an iEEG-learned prior to scalp EEG, which re-expresses any scalp signal through that prior and can be inserted upstream of any downstream model with no pairing or fine-tuning. ReBrain consistently improves host models across recordings from multiple hospitals and across architecture families, and our analysis traces this gain to genuine neural structure carried by iEEG rather than to the architecture itself. This work provides evidence that a scarce clean modality can serve as a transferable prior for an abundant noisy one, offering a general recipe for cross-modal transfer among biosignals. Our code is available at https://github.com/Xianglong-Bao/ReBrain.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-16T02:54:16Z</ns0:published>\n    <ns1:comment>Accepted at KDD 2027</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Xianglong Bao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yi Ding</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zengxiang Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nan Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kewen Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhe Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ming Jin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "arxiv",
+  "summary": "ReBrain transfers a prior learned from intracranial EEG to clean noisy scalp EEG signals without paired data or fine-tuning, improving downstream clinical EEG…",
+  "title": "iEEG Can Help EEG: Improving Clinical Scalp EEG Analysis through Intracranial Priors",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.20435v1"
+}

@@ -1,0 +1,43 @@
+{
+  "abstract": "Antibiotic resistance gene (ARG) classifiers are typically developed and evaluated within a single curated database, leaving open how much two independently curated databases agree and what that implies for apparent cross-database generalization. We trained an XGBoost classifier on amino acid trigram frequencies and physicochemical descriptors using the Comprehensive Antibiotic Resistance Database (CARD), the field's largest curated ARG resource. The model separated resistance genes from non-resistance proteins with near-ceiling accuracy (AUROC = 0.982, MCC = 0.886); a label-shuffling null baseline collapsed to chance (AUROC = 0.508) and bootstrap confidence intervals were narrow, confirming genuine signal rather than data leakage or overfitting. SHAP analysis attributed this performance to biologically interpretable features, notably the trigram KTG, isoelectric point, and aromaticity, each consistent with known catalytic motifs in resistance enzymes. Before testing the classifier against ResFinder, one of CARD's most widely used counterparts, we assessed database independence by clustering sequences with CD-HIT, finding that 96.8-98.7% of ResFinder sequences shared substantial protein identity with CARD even at a permissive 50% identity threshold, indicating the two databases largely represent the same sequence population, with direct implications for how cross-database generalization should be measured. On the small subset of ResFinder sequences genuinely non-redundant with CARD (40-100 sequences, depending on threshold), the classifier failed completely, never classifying any as resistance genes; SHAP traced this failure to sequence length, as non-redundant sequences are nearly three times longer than training proteins, and length is among the model's most influential features. The same pattern emerged by resistance mechanism: the model achieved perfect accuracy on beta-lactamases, compact single-domain enzymes well represented in training (100%, n = 351), but correctly identified only 38.5% of efflux pump components (n = 13), a mechanism built from large, multi-domain transporters rather than compact catalytic enzymes. Together, these results describe a capable, interpretable ARG classifier alongside a quantified methodological caution: cross-database redundancy must be measured rather than assumed, and when a sequence-composition classifier fails, the failure is often explained by protein architecture rather than database origin.",
+  "authors": [
+    "Ruthbah, C. A.",
+    "Sadi, T. H.",
+    "Jahan, N. E. S.",
+    "Tanzim Adib, A. N. M."
+  ],
+  "doi": "10.64898/2026.11.13.766601",
+  "first_seen": "2026-11-17",
+  "id": "biorxiv:10.64898/2026.11.13.766601",
+  "metadata": {
+    "abstract": "Antibiotic resistance gene (ARG) classifiers are typically developed and evaluated within a single curated database, leaving open how much two independently curated databases agree and what that implies for apparent cross-database generalization. We trained an XGBoost classifier on amino acid trigram frequencies and physicochemical descriptors using the Comprehensive Antibiotic Resistance Database (CARD), the field's largest curated ARG resource. The model separated resistance genes from non-resistance proteins with near-ceiling accuracy (AUROC = 0.982, MCC = 0.886); a label-shuffling null baseline collapsed to chance (AUROC = 0.508) and bootstrap confidence intervals were narrow, confirming genuine signal rather than data leakage or overfitting. SHAP analysis attributed this performance to biologically interpretable features, notably the trigram KTG, isoelectric point, and aromaticity, each consistent with known catalytic motifs in resistance enzymes. Before testing the classifier against ResFinder, one of CARD's most widely used counterparts, we assessed database independence by clustering sequences with CD-HIT, finding that 96.8-98.7% of ResFinder sequences shared substantial protein identity with CARD even at a permissive 50% identity threshold, indicating the two databases largely represent the same sequence population, with direct implications for how cross-database generalization should be measured. On the small subset of ResFinder sequences genuinely non-redundant with CARD (40-100 sequences, depending on threshold), the classifier failed completely, never classifying any as resistance genes; SHAP traced this failure to sequence length, as non-redundant sequences are nearly three times longer than training proteins, and length is among the model's most influential features. The same pattern emerged by resistance mechanism: the model achieved perfect accuracy on beta-lactamases, compact single-domain enzymes well represented in training (100%, n = 351), but correctly identified only 38.5% of efflux pump components (n = 13), a mechanism built from large, multi-domain transporters rather than compact catalytic enzymes. Together, these results describe a capable, interpretable ARG classifier alongside a quantified methodological caution: cross-database redundancy must be measured rather than assumed, and when a sequence-composition classifier fails, the failure is often explained by protein architecture rather than database origin.",
+    "author_corresponding": "Chowdhury Aseer Ruthbah",
+    "author_corresponding_institution": "BRAC University",
+    "authors": "Ruthbah, C. A.; Sadi, T. H.; Jahan, N. E. S.; Tanzim Adib, A. N. M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-17",
+    "doi": "10.64898/2026.11.13.766601",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/17/2026.11.13.766601.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Machine Learning Prediction of Antibiotic Resistance Genes: Performance, Interpretability, and Cross-Database Redundancy",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "BRAC University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "XGBoost classifier on trigram and physicochemical features separates CARD resistance genes (AUROC 0.982) but fails on ResFinder sequences non-redundant with…",
+  "title": "Machine Learning Prediction of Antibiotic Resistance Genes: Performance, Interpretability, and Cross-Database Redundancy",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.13.766601"
+}

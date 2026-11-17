@@ -1,0 +1,31 @@
+{
+  "abstract": "Early assessment of antibody developability is critical in drug discovery, but computational approaches remain limited by the scarcity of experimental data. We explore two strategies for working within that limit. First, we designed per-residue physicochemical descriptors encoding the local structural environment, including new terms such as directional charge asymmetry and screened electrostatic potential. These feed a convolutional network, combined with protein language model (PLM) embeddings in a two-stream architecture: the two are encoded and predicted independently and merged only at the prediction stage. Second, a shared trunk with per-assay heads passes information between related assays. Both are implemented in the Multi-Assay Developability Model (MADM) and evaluated on eight assays: HIC, heparin affinity (HAC), AC-SINS, and polyspecificity ELISA against BVP, dsDNA, insulin, ovalbumin and soluble membrane proteins (SMP), with labels from 29 open sources. Structural descriptors match or exceed PLM embeddings (AbLang2, ESM2) on several assays; combining the streams gives a small but consistent gain in accuracy and reduces seed-to-seed variance. Multi-assay training raises Spearman rho for ovalbumin and SMP by about 0.1, where assays correlate and share sequence space. Under cluster-split cross-validation the strongest results are for HAC, ovalbumin, insulin, SMP and HIC (rho = 0.70-0.82); AC-SINS, BVP and dsDNA are weaker (0.50-0.55). In these three, sequence clusters largely coincide with data source, so a held-out fold measures transfer to differently calibrated measurements as well as to new sequences. On the 80-antibody GDPa3 hold-out, performance falls by rho around 0.1 for all but SMP (0.22). Transfer to the VHH panel of Ginkgo GDPa5 gives comparable results, and scFv validation against binary SMP labels yields F1 = 0.89, AUC = 0.95.",
+  "authors": [
+    "Daria B. Kokh"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-17",
+  "id": "arxiv:2611.18846",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.BM",
+    "categories": [
+      "q-bio.BM",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.18846v1</ns0:id>\n    <ns0:title>Multi-Assay Antibody Developability Prediction with Shared Structure-Language Representations</ns0:title>\n    <ns0:updated>2026-11-13T19:04:39Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.18846v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.18846v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Early assessment of antibody developability is critical in drug discovery, but computational approaches remain limited by the scarcity of experimental data. We explore two strategies for working within that limit. First, we designed per-residue physicochemical descriptors encoding the local structural environment, including new terms such as directional charge asymmetry and screened electrostatic potential. These feed a convolutional network, combined with protein language model (PLM) embeddings in a two-stream architecture: the two are encoded and predicted independently and merged only at the prediction stage. Second, a shared trunk with per-assay heads passes information between related assays. Both are implemented in the Multi-Assay Developability Model (MADM) and evaluated on eight assays: HIC, heparin affinity (HAC), AC-SINS, and polyspecificity ELISA against BVP, dsDNA, insulin, ovalbumin and soluble membrane proteins (SMP), with labels from 29 open sources. Structural descriptors match or exceed PLM embeddings (AbLang2, ESM2) on several assays; combining the streams gives a small but consistent gain in accuracy and reduces seed-to-seed variance. Multi-assay training raises Spearman rho for ovalbumin and SMP by about 0.1, where assays correlate and share sequence space. Under cluster-split cross-validation the strongest results are for HAC, ovalbumin, insulin, SMP and HIC (rho = 0.70-0.82); AC-SINS, BVP and dsDNA are weaker (0.50-0.55). In these three, sequence clusters largely coincide with data source, so a held-out fold measures transfer to differently calibrated measurements as well as to new sequences. On the 80-antibody GDPa3 hold-out, performance falls by rho around 0.1 for all but SMP (0.22). Transfer to the VHH panel of Ginkgo GDPa5 gives comparable results, and scFv validation against binary SMP labels yields F1 = 0.89, AUC = 0.95.</ns0:summary>\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-13T19:04:39Z</ns0:published>\n    <ns1:comment>27 pages, 11 figures, 4 tables, Supplementary Material</ns1:comment>\n    <ns1:primary_category term=\"q-bio.BM\" />\n    <ns0:author>\n      <ns0:name>Daria B. Kokh</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "MADM predicts eight antibody developability assays using per-residue structural descriptors and PLM embeddings in a two-stream model, with shared multi-assay…",
+  "title": "Multi-Assay Antibody Developability Prediction with Shared Structure-Language Representations",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.18846v1"
+}
