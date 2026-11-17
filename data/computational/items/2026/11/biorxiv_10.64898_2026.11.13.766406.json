@@ -1,0 +1,42 @@
+{
+  "abstract": "Protein language models and related variant effect predictors (VEPs) increasingly classify missense variants in proteins evolutionarily distant from those used for calibration. Split conformal prediction over variants is valid for its own target, a random variant dominated by well-studied families, but deployment needs coverage for a variant of a new family. On ProteinGym clinical substitutions with five zero-shot predictors, Mondrian conformal comes within 0.005 of that target for four predictors, yet family-weighted pathogenic coverage is only 0.823-0.873 at a 0.90 target for all five, without any shift. We present ProtCOVER, a conformal procedure that treats homology families, rather than individual variants, as the exchangeable unit. ProtCOVER (i) calibrates at the family level over label-free homology clusters, giving marginal coverage for a new family under family exchangeability; (ii) adapts to descriptor shift by calibrating conditionally on an estimated density ratio of label-free descriptors (sequence similarity, alignment depth and embedding distance; a variant reweights by the ratio instead), with finite-sample family-weighted coverage, valid as computed, whenever the true ratio is a nonnegative affine function of the estimate; and (iii) can abstain at low effective calibration support, which proved no better than random abstention. Under a shift of its descriptors, ProtCOVER's mean worse-class shortfall below the target is 0.000, against 0.010 for group-weighted and 0.029 for hierarchical conformal prediction, with larger sets (about equal at matched coverage); on orphan families and held-out embedding regions it matches group weighting (0.002 against 0.003). In evaluations following pre-registered protocols, every shift-aware method met the target on new ClinVar variants of benchmark proteins, which ESM-1b separated better; on 12,225 proteins outside the benchmark, every method fell short for pathogenic variants with either of two predictors, ProtCOVER and a variant conditioned on the descriptors the least, within the 0.01 margin of group weighting.",
+  "authors": [
+    "Fahmy, W.",
+    "Krikun, E.",
+    "Alkhateeb, A."
+  ],
+  "doi": "10.64898/2026.11.13.766406",
+  "first_seen": "2026-11-17",
+  "id": "biorxiv:10.64898/2026.11.13.766406",
+  "metadata": {
+    "abstract": "Protein language models and related variant effect predictors (VEPs) increasingly classify missense variants in proteins evolutionarily distant from those used for calibration. Split conformal prediction over variants is valid for its own target, a random variant dominated by well-studied families, but deployment needs coverage for a variant of a new family. On ProteinGym clinical substitutions with five zero-shot predictors, Mondrian conformal comes within 0.005 of that target for four predictors, yet family-weighted pathogenic coverage is only 0.823-0.873 at a 0.90 target for all five, without any shift. We present ProtCOVER, a conformal procedure that treats homology families, rather than individual variants, as the exchangeable unit. ProtCOVER (i) calibrates at the family level over label-free homology clusters, giving marginal coverage for a new family under family exchangeability; (ii) adapts to descriptor shift by calibrating conditionally on an estimated density ratio of label-free descriptors (sequence similarity, alignment depth and embedding distance; a variant reweights by the ratio instead), with finite-sample family-weighted coverage, valid as computed, whenever the true ratio is a nonnegative affine function of the estimate; and (iii) can abstain at low effective calibration support, which proved no better than random abstention. Under a shift of its descriptors, ProtCOVER's mean worse-class shortfall below the target is 0.000, against 0.010 for group-weighted and 0.029 for hierarchical conformal prediction, with larger sets (about equal at matched coverage); on orphan families and held-out embedding regions it matches group weighting (0.002 against 0.003). In evaluations following pre-registered protocols, every shift-aware method met the target on new ClinVar variants of benchmark proteins, which ESM-1b separated better; on 12,225 proteins outside the benchmark, every method fell short for pathogenic variants with either of two predictors, ProtCOVER and a variant conditioned on the descriptors the least, within the 0.01 margin of group weighting.",
+    "author_corresponding": "Wael Fahmy",
+    "author_corresponding_institution": "Lakehead University",
+    "authors": "Fahmy, W.; Krikun, E.; Alkhateeb, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-16",
+    "doi": "10.64898/2026.11.13.766406",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/16/2026.11.13.766406.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ProtCOVER: Family-Aware Conformal Prediction for Variant Effect Predictors on Unseen Protein Families",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Lakehead University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "ProtCOVER: family-level conformal calibration for variant effect predictors on unseen protein families, with density-ratio reweighting under descriptor shift…",
+  "title": "ProtCOVER: Family-Aware Conformal Prediction for Variant Effect Predictors on Unseen Protein Families",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.13.766406"
+}

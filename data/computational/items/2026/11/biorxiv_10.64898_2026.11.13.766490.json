@@ -1,0 +1,42 @@
+{
+  "abstract": "Periodicity is ubiquitous in genomic data. Assembled sequences are dense with homopolymers, microsatellites, and large satellite arrays, which contribute to phenotype, variation, and disease. Third-generation sequencing technologies, such as Oxford Nanopore (ONT) and PacBio HiFi, has enabled longer and increasingly accurate reads, but have brought with them systematic error biases in repetitive regions, where insertions and deletions can distort array lengths and mimic or obscure biological variation. This periodicity is not benign: local repetitiveness makes sequence alignment ambiguous and genome assembly error-prone. In sequence analysis, these two manifestations of periodicity are simultaneously at play, each compounding the challenges of the other; a unified representation of repetitive and non-repetitive sequence is necessary to account for their combined effects consistently. We propose a paradigm under which (either repetitive and non-repetitive) DNA is split into its identity (its irreducible components) and its geometry (how its components are realized). A genomic tessellation {tau} is a canonical factorization of any sequence S of length n over the DNA alphabet into a sequence of tiles partitioning S, where each t in {tau}S is described as a quasi-periodic run of a canonical unit identity ut with geometry consisting of span st, phase {varphi}t, and a set of exceptions Xt. We show that, for a prescribed error bound k [&ge;] 1 and fixed maximum unit length P, S can be tessellated in O(n) time such that every tile has a unique identity whose periodic expansion differs from the tiled sequence by at most k edits, and that tiles sharing an identity are related by a bounded number of geometric adjustments. We introduce the tessellated Burrows-Wheeler transform (tBWT), which indexes {tau}S by concatenating, over all tiles in order, the identity ut of each tile. For a tessellated query q of m tiles, the tBWT counts the repeat-agnostic occurrences of q in O(m) time, and for sampling interval r locates its h occurrences in {tau}S in O(m + hr) time. We demonstrate that tessellations avoid the well-known speed-accuracy tradeoff and outperform state-of-the-art long-read mappers in repeat-dense regions in both speed and accuracy. On a 20x simulated set of both ONT and HiFi reads on the HG002 maternal X chromosome with synthetically-expanded repeat arrays, locating and chaining exact tile identity matches obtained from the tBWT is up to 57x and 83x faster, respectively, than the state-of-the-art mappers minimap2 and Winnowmap2, with comparable accuracy. Furthermore, by abstracting away differences in geometry, tessellations of a set of input sequences onto itself (an autotessellation) reveals homology otherwise obscured by array-length variation and local sequence divergence. A geometry-only polishing of an an ONT-only assembly of the HG002 maternal X chromosome with [~]50x PacBio HiFi reads improves assembly QV from 45.4 to 60.6 in under a minute using less than 10GB of memory. Tessellated-read evidence over the autotessellation of this assembly organizes 167 mitochondrial contigs totaling [~]4 Mbp into a single family with a [~]16.5kbp representative, which aligns to the HG002 Q100 mitochondrial genome with 100% identity. Genomic tessellations provide a canonical representation of repetitive and non-repetitive DNA and enable efficient sequence analyses while preserving homology.",
+  "authors": [
+    "Ekim, B.",
+    "Cheng, H."
+  ],
+  "doi": "10.64898/2026.11.13.766490",
+  "first_seen": "2026-11-17",
+  "id": "biorxiv:10.64898/2026.11.13.766490",
+  "metadata": {
+    "abstract": "Periodicity is ubiquitous in genomic data. Assembled sequences are dense with homopolymers, microsatellites, and large satellite arrays, which contribute to phenotype, variation, and disease. Third-generation sequencing technologies, such as Oxford Nanopore (ONT) and PacBio HiFi, has enabled longer and increasingly accurate reads, but have brought with them systematic error biases in repetitive regions, where insertions and deletions can distort array lengths and mimic or obscure biological variation. This periodicity is not benign: local repetitiveness makes sequence alignment ambiguous and genome assembly error-prone. In sequence analysis, these two manifestations of periodicity are simultaneously at play, each compounding the challenges of the other; a unified representation of repetitive and non-repetitive sequence is necessary to account for their combined effects consistently. We propose a paradigm under which (either repetitive and non-repetitive) DNA is split into its identity (its irreducible components) and its geometry (how its components are realized). A genomic tessellation {tau} is a canonical factorization of any sequence S of length n over the DNA alphabet into a sequence of tiles partitioning S, where each t in {tau}S is described as a quasi-periodic run of a canonical unit identity ut with geometry consisting of span st, phase {varphi}t, and a set of exceptions Xt. We show that, for a prescribed error bound k [&ge;] 1 and fixed maximum unit length P, S can be tessellated in O(n) time such that every tile has a unique identity whose periodic expansion differs from the tiled sequence by at most k edits, and that tiles sharing an identity are related by a bounded number of geometric adjustments. We introduce the tessellated Burrows-Wheeler transform (tBWT), which indexes {tau}S by concatenating, over all tiles in order, the identity ut of each tile. For a tessellated query q of m tiles, the tBWT counts the repeat-agnostic occurrences of q in O(m) time, and for sampling interval r locates its h occurrences in {tau}S in O(m + hr) time. We demonstrate that tessellations avoid the well-known speed-accuracy tradeoff and outperform state-of-the-art long-read mappers in repeat-dense regions in both speed and accuracy. On a 20x simulated set of both ONT and HiFi reads on the HG002 maternal X chromosome with synthetically-expanded repeat arrays, locating and chaining exact tile identity matches obtained from the tBWT is up to 57x and 83x faster, respectively, than the state-of-the-art mappers minimap2 and Winnowmap2, with comparable accuracy. Furthermore, by abstracting away differences in geometry, tessellations of a set of input sequences onto itself (an autotessellation) reveals homology otherwise obscured by array-length variation and local sequence divergence. A geometry-only polishing of an an ONT-only assembly of the HG002 maternal X chromosome with [~]50x PacBio HiFi reads improves assembly QV from 45.4 to 60.6 in under a minute using less than 10GB of memory. Tessellated-read evidence over the autotessellation of this assembly organizes 167 mitochondrial contigs totaling [~]4 Mbp into a single family with a [~]16.5kbp representative, which aligns to the HG002 Q100 mitochondrial genome with 100% identity. Genomic tessellations provide a canonical representation of repetitive and non-repetitive DNA and enable efficient sequence analyses while preserving homology.",
+    "author_corresponding": "Haoyu Cheng",
+    "author_corresponding_institution": "Yale University",
+    "authors": "Ekim, B.; Cheng, H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-16",
+    "doi": "10.64898/2026.11.13.766490",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/16/2026.11.13.766490.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Genomic tessellations",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Yale University",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces genomic tessellations, a canonical factorization of DNA into quasi-periodic tiles with a tessellated BWT index, enabling faster long-read mapping…",
+  "title": "Genomic tessellations",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.13.766490"
+}
