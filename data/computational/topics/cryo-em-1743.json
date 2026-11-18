@@ -879,6 +879,33 @@
         "rise_ratio": 0.8571428571428571,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "count_7d": 3,
+      "date": "2026-11-18",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.12.766036",
+        "pubmed:10.1093/bioinformatics/btag823",
+        "pubmed:10.1093/bioinformatics/btag824"
+      ],
+      "rank": 35,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 0.8571428571428571,
+        "total": 0.5636017160309503,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 1,
+        "published": 2,
+        "rise_ratio": 0.8571428571428571,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -892,8 +919,8 @@
     "tools-infra"
   ],
   "slug": "cryo-em-1743",
-  "summary": "Learned models with data-derived constraints are being applied to cryo-EM/ET particle classification and cryo-ET tilt-series denoising.",
-  "synthesis": "The dominant thread is the use of learned models to recover structural information from noisy, heterogeneous microscopy data. The unsupervised autoencoder preprint jointly optimizes particle pose and structure to classify cryo-EM/ET particles and separate contamination. CryoET-DDM applies a diffusion model to cryo-ET tilt series, drawing noise patches from the same tilt series and using a fidelity-guided loss to preserve underlying features. ROOF, a published method, is a semi-blind NMF approach to fluorescence bleed-through correction regularized by a reference crosstalk matrix; it falls outside cryo-EM but shares the emphasis on constrained decomposition of mixed imaging data. What is new is the explicit use of same-sample noise statistics and fidelity constraints to guide learned denoising and classification.",
+  "summary": "Learned models now recover structural information from noisy, heterogeneous microscopy data using same-sample noise statistics and fidelity constraints.",
+  "synthesis": "The common thread is learned models that extract structural information from noisy, heterogeneous microscopy data. An unsupervised autoencoder preprint jointly optimizes particle pose and structure to classify cryo-EM/ET particles and separate contamination. CryoET-DDM, a published diffusion model, denoises cryo-ET tilt series by drawing noise patches from the same tilt series and applying a fidelity-guided loss to preserve underlying features. ROOF, also published, is a semi-blind NMF method that corrects fluorescence bleed-through, regularized by a reference crosstalk matrix; it lies outside cryo-EM but shares constrained decomposition of mixed imaging data. What is new is the explicit use of same-sample noise statistics and fidelity constraints to guide learned denoising and classification.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-17"
+  "synthesized_on": "2026-11-18"
 }

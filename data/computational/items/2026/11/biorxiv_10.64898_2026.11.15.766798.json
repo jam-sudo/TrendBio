@@ -1,0 +1,45 @@
+{
+  "abstract": "Identifying essential genes in bacteria is crucial for drug discovery and synthetic biology. Genome-scale metabolic models (GEMs) evaluated via flux balance analysis remain standard, yet they rely on the often-invalid premise that mutant strains optimize for maximum growth. Recent machine learning approaches circumvent this limitation using random forests or graph neural networks on mass flow graphs (MFGs). However, data-driven tools like random forests discard network topology, while graph-based tools like MFGs decompose multi-component biochemical reactions into pairwise interactions, misrepresenting complex stoichiometry and limiting interpretability. Furthermore, existing methods remain largely uncharacterised in data-scarce regimes and cross-environmental conditions. Here, we introduce HyperGenie, a framework that integrates genome-scale metabolic models with directed hypergraph neural networks by representing metabolites as nodes and reactions as hyperedges. Operating directly on wild-type flux features, HyperGenie eliminates post-knockout optimality assumptions, achieves a 13% PR-AUC improvement over prior objective-dependent methods, and matches computationally demanding, state-of-the-art flux-sampling baselines. Using HyperGenie to guide targeted growth curve assays, we identified latent essentiality misannotations across three genes in the benchmark iML1515 dataset, which we then reconciled and validated experimentally via PCR. In data-scarce regimes, HyperGenie retained robust predictive performance (> 90% PR-AUC) when trained on as little as 40% of the data. To isolate the value of hypergraph message passing, we benchmarked HyperGenie against an independent-reaction multilayer perceptron (MLPGenie) across diverse nutrient environments and uptake rates, where HyperGenie's hypergraph inductive bias yielded consistent accuracy gains (> 2% in glucose; > 4% across six alternative carbon sources). Notably, HyperGenie exhibits robust zero-shot cross-nutrient generalization, accurately forecasting gain-of-essentiality phenotypes on novel carbon sources, though loss-of-essentiality remains challenging. Finally, coupling hypergraph representations with SHAP attribution provides actionable mechanistic insights into metabolic rewiring, establishing a data-efficient, interpretable platform for discovering novel antibiotic targets.",
+  "authors": [
+    "Ioannou, P.",
+    "Duta, I.",
+    "Verma, S.",
+    "Cicuta, P.",
+    "Lio, P.",
+    "Angione, C."
+  ],
+  "doi": "10.64898/2026.11.15.766798",
+  "first_seen": "2026-11-18",
+  "id": "biorxiv:10.64898/2026.11.15.766798",
+  "metadata": {
+    "abstract": "Identifying essential genes in bacteria is crucial for drug discovery and synthetic biology. Genome-scale metabolic models (GEMs) evaluated via flux balance analysis remain standard, yet they rely on the often-invalid premise that mutant strains optimize for maximum growth. Recent machine learning approaches circumvent this limitation using random forests or graph neural networks on mass flow graphs (MFGs). However, data-driven tools like random forests discard network topology, while graph-based tools like MFGs decompose multi-component biochemical reactions into pairwise interactions, misrepresenting complex stoichiometry and limiting interpretability. Furthermore, existing methods remain largely uncharacterised in data-scarce regimes and cross-environmental conditions. Here, we introduce HyperGenie, a framework that integrates genome-scale metabolic models with directed hypergraph neural networks by representing metabolites as nodes and reactions as hyperedges. Operating directly on wild-type flux features, HyperGenie eliminates post-knockout optimality assumptions, achieves a 13% PR-AUC improvement over prior objective-dependent methods, and matches computationally demanding, state-of-the-art flux-sampling baselines. Using HyperGenie to guide targeted growth curve assays, we identified latent essentiality misannotations across three genes in the benchmark iML1515 dataset, which we then reconciled and validated experimentally via PCR. In data-scarce regimes, HyperGenie retained robust predictive performance (> 90% PR-AUC) when trained on as little as 40% of the data. To isolate the value of hypergraph message passing, we benchmarked HyperGenie against an independent-reaction multilayer perceptron (MLPGenie) across diverse nutrient environments and uptake rates, where HyperGenie's hypergraph inductive bias yielded consistent accuracy gains (> 2% in glucose; > 4% across six alternative carbon sources). Notably, HyperGenie exhibits robust zero-shot cross-nutrient generalization, accurately forecasting gain-of-essentiality phenotypes on novel carbon sources, though loss-of-essentiality remains challenging. Finally, coupling hypergraph representations with SHAP attribution provides actionable mechanistic insights into metabolic rewiring, establishing a data-efficient, interpretable platform for discovering novel antibiotic targets.",
+    "author_corresponding": "Claudio Angione",
+    "author_corresponding_institution": "Teesside Unversity",
+    "authors": "Ioannou, P.; Duta, I.; Verma, S.; Cicuta, P.; Lio, P.; Angione, C.",
+    "biorxiv_category": "systems biology",
+    "category": "systems biology",
+    "date": "2026-11-17",
+    "doi": "10.64898/2026.11.15.766798",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/17/2026.11.15.766798.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "HyperGenie: A method for predicting enzymatic gene essentiality using hypergraph neural networks and genome-scale metabolic models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Teesside Unversity",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "HyperGenie uses directed hypergraph neural networks on genome-scale metabolic models to predict bacterial gene essentiality from wild-type flux features,…",
+  "title": "HyperGenie: A method for predicting enzymatic gene essentiality using hypergraph neural networks and genome-scale metabolic models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.15.766798"
+}

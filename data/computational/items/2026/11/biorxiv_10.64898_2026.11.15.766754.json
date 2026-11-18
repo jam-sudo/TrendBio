@@ -1,0 +1,46 @@
+{
+  "abstract": "Covariance models (CMs) find structured RNAs by scoring sequence and base pairing together, and they underlie the Infernal software and the Rfam database. Their dynamic programming is expensive, so Infernal relies on two approximations: E-values are calibrated on a short stretch of random sequence, and fast sequence-only filters decide which parts of a target the CM examines. How much accuracy these approximations cost, and where, is largely unknown, because removing them on CPUs is prohibitively slow. We present Infernal-GPU, a GPU implementation of Infernal's CM dynamic programming that matches Infernal's results. Its key step evaluates the one serial recurrence of CM scoring, the self-loop of insert-left states, as two parallel prefix scans. One GPU calibrates all 4,227 Rfam models overnight, which makes calibrations on ten times more random sequence routine. These longer calibrations show that the E-values distributed with Rfam are off by more than twofold for one model in eight. An exhaustive search reference shows that sequence filters discard remote homologs whose similarity lies almost entirely in base pairing; behind permissive filters, Infernal-GPU recovers them with a third of the CPU work that Infernal needs at the same setting. Infernal-GPU is freely available at https://github.com/void-echo/infernal-gpu and from PyPI, together with Rfam 15.0 recalibrated on ten times more random sequence.",
+  "authors": [
+    "Wang, D.",
+    "Jin, J.",
+    "Qiao, J.",
+    "Wei, L.",
+    "Wu, S.",
+    "Liu, Q."
+  ],
+  "doi": "10.64898/2026.11.15.766754",
+  "first_seen": "2026-11-18",
+  "id": "biorxiv:10.64898/2026.11.15.766754",
+  "metadata": {
+    "abstract": "Covariance models (CMs) find structured RNAs by scoring sequence and base pairing together, and they underlie the Infernal software and the Rfam database. Their dynamic programming is expensive, so Infernal relies on two approximations: E-values are calibrated on a short stretch of random sequence, and fast sequence-only filters decide which parts of a target the CM examines. How much accuracy these approximations cost, and where, is largely unknown, because removing them on CPUs is prohibitively slow. We present Infernal-GPU, a GPU implementation of Infernal's CM dynamic programming that matches Infernal's results. Its key step evaluates the one serial recurrence of CM scoring, the self-loop of insert-left states, as two parallel prefix scans. One GPU calibrates all 4,227 Rfam models overnight, which makes calibrations on ten times more random sequence routine. These longer calibrations show that the E-values distributed with Rfam are off by more than twofold for one model in eight. An exhaustive search reference shows that sequence filters discard remote homologs whose similarity lies almost entirely in base pairing; behind permissive filters, Infernal-GPU recovers them with a third of the CPU work that Infernal needs at the same setting. Infernal-GPU is freely available at https://github.com/void-echo/infernal-gpu and from PyPI, together with Rfam 15.0 recalibrated on ten times more random sequence.",
+    "author_corresponding": "Qiang Liu",
+    "author_corresponding_institution": "NLPR, State Key Laboratory of Multimodal Artificial Intelligence Systems (MAIS), Institute of Automation, Chinese Academy of Sciences, Beijing, China; School of",
+    "authors": "Wang, D.; Jin, J.; Qiao, J.; Wei, L.; Wu, S.; Liu, Q.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-17",
+    "doi": "10.64898/2026.11.15.766754",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/17/2026.11.15.766754.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Infernal-GPU: accurate E-values and sensitive covariance-model search for structured RNAs",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "NLPR, State Key Laboratory of Multimodal Artificial Intelligence Systems (MAIS), Institute of Automation, Chinese Academy of Sciences, Beijing, China; School of",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Infernal-GPU parallelizes covariance-model dynamic programming on GPUs, recalibrating Rfam E-values and recovering remote structured-RNA homologs missed by…",
+  "title": "Infernal-GPU: accurate E-values and sensitive covariance-model search for structured RNAs",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.15.766754"
+}

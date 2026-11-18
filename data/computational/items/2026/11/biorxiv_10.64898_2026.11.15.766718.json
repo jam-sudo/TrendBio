@@ -1,0 +1,45 @@
+{
+  "abstract": "Predicting enzyme turnover numbers ($k_{\\mathrm{cat}}$) from protein sequences and reaction chemistry helps prioritize candidates in virtual screening. Reliable ranking requires distinguishing activity differences between enzyme--reaction pairs. Recent interaction models combine enzyme and chemical information, but two representation challenges remain. First, reactants and products have distinct roles in catalysis: reactants are recognized and transformed, whereas products are formed and released. Yet these models merge the two sides before enzyme interaction, leaving the enzyme's response to each role implicit. Second, enzyme representations produced by cross-attention mix reaction-dependent changes with an enzyme-specific background shared across chemical conditions. This mixture can obscure activity-relevant differences between samples. To address these challenges, we introduce EnzRef, a lightweight multimodal framework that adapts frozen protein language models by decomposing reaction chemistry into reactant and product conditions, expressing each conditioned enzyme response relative to that enzyme's background, and recomposing the responses for activity prediction. Reference-Centered Cross-Attention uses each enzyme's average residue response as an internal reference to expose role-specific conditional deviations. Symmetry-Aware Semantic Recomposition encodes the mean deviation and directed role contrast into a joint activity representation. With 1.72M trainable parameters beyond the frozen encoder, EnzRef achieves state-of-the-art source-domain prediction on CatPred-DB and zero-shot transfer to TurNuP-DB. On unseen enzymes, it improves mean $R^2$ by 19.8% relative to MCKcat, the strongest baseline, without target-domain adaptation.",
+  "authors": [
+    "Ding, A.",
+    "Ma, T.",
+    "Lin, X.",
+    "Lin, S.",
+    "Liu, X.",
+    "Wei, L."
+  ],
+  "doi": "10.64898/2026.11.15.766718",
+  "first_seen": "2026-11-18",
+  "id": "biorxiv:10.64898/2026.11.15.766718",
+  "metadata": {
+    "abstract": "Predicting enzyme turnover numbers ($k_{\\mathrm{cat}}$) from protein sequences and reaction chemistry helps prioritize candidates in virtual screening. Reliable ranking requires distinguishing activity differences between enzyme--reaction pairs. Recent interaction models combine enzyme and chemical information, but two representation challenges remain. First, reactants and products have distinct roles in catalysis: reactants are recognized and transformed, whereas products are formed and released. Yet these models merge the two sides before enzyme interaction, leaving the enzyme's response to each role implicit. Second, enzyme representations produced by cross-attention mix reaction-dependent changes with an enzyme-specific background shared across chemical conditions. This mixture can obscure activity-relevant differences between samples. To address these challenges, we introduce EnzRef, a lightweight multimodal framework that adapts frozen protein language models by decomposing reaction chemistry into reactant and product conditions, expressing each conditioned enzyme response relative to that enzyme's background, and recomposing the responses for activity prediction. Reference-Centered Cross-Attention uses each enzyme's average residue response as an internal reference to expose role-specific conditional deviations. Symmetry-Aware Semantic Recomposition encodes the mean deviation and directed role contrast into a joint activity representation. With 1.72M trainable parameters beyond the frozen encoder, EnzRef achieves state-of-the-art source-domain prediction on CatPred-DB and zero-shot transfer to TurNuP-DB. On unseen enzymes, it improves mean $R^2$ by 19.8% relative to MCKcat, the strongest baseline, without target-domain adaptation.",
+    "author_corresponding": "Leyi Wei",
+    "author_corresponding_institution": "Faculty of Applied Sciences, Macao Polytechnic University, Macao SAR, China",
+    "authors": "Ding, A.; Ma, T.; Lin, X.; Lin, S.; Liu, X.; Wei, L.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-17",
+    "doi": "10.64898/2026.11.15.766718",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/17/2026.11.15.766718.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Decompose and Recompose: Reference-Centered Multimodal Adaptation of Protein Language Models for Enzyme Turnover Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Faculty of Applied Sciences, Macao Polytechnic University, Macao SAR, China",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "EnzRef adapts frozen protein language models with reference-centered cross-attention and role-aware recomposition of reactant/product conditions to predict…",
+  "title": "Decompose and Recompose: Reference-Centered Multimodal Adaptation of Protein Language Models for Enzyme Turnover Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.15.766718"
+}
