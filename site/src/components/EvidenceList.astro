@@ -1,12 +1,26 @@
 ---
-import type { Item, ItemType } from "../lib/types";
+import type { Item, ItemType, TopicDay } from "../lib/types";
 
-interface Props { items: Item[]; oneLiners: Record<string, string> }
-const { items, oneLiners } = Astro.props;
+interface Props { items: Item[]; oneLiners: Record<string, string>; previousRanked?: TopicDay }
+const { items, oneLiners, previousRanked } = Astro.props;
 const linkedPreprints = new Set(items.filter((item) => item.type === "published").map((item) => item.preprint_id));
-const sections: [ItemType, string][] = [
+const visible = items.filter((item) => item.type !== "preprint" || !linkedPreprints.has(item.id));
+const previousIds = new Set([...(previousRanked?.item_ids ?? []), ...(previousRanked?.attached_item_ids ?? [])]);
+const added = new Set(visible.filter((item) => previousRanked &&
+  (item.type === "preprint" || item.type === "published") &&
+  !previousIds.has(item.id) && !(item.preprint_id && previousIds.has(item.preprint_id))));
+const types: [ItemType, string][] = [
   ["published", "Published papers"], ["preprint", "Preprints"], ["code", "Code & tools"], ["industry", "Industry"],
 ];
+const sections: { id: string; heading: string; evidence: Item[] }[] = types.map(([id, heading]) => ({
+  id, heading, evidence: visible.filter((item) => item.type === id && !added.has(item)),
+}));
+if (previousRanked && added.size) {
+  const since = new Date(previousRanked.date).toLocaleDateString("en-US", {
+    month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
+  });
+  sections.unshift({ id: "added", heading: `Papers added since ${since}`, evidence: [...added] });
+}
 const badge = (item: Item) => {
   if (item.type === "published") return item.metadata.journal;
   if (item.type === "preprint") return item.source === "biorxiv" ? "bioRxiv" : "arXiv";
@@ -15,10 +29,9 @@ const badge = (item: Item) => {
 };
 ---
 
-{sections.map(([type, heading]) => {
-  const evidence = items.filter((item) => item.type === type && !(type === "preprint" && linkedPreprints.has(item.id)));
-  return evidence.length > 0 && <section id={type} aria-labelledby={`${type}-heading`}>
-    <h2 id={`${type}-heading`}>{heading}</h2>
+{sections.map(({ id, heading, evidence }) => {
+  return evidence.length > 0 && <section id={id} aria-labelledby={`${id}-heading`}>
+    <h2 id={`${id}-heading`}>{heading}</h2>
     <ul>
       {evidence.map((item) => {
         const preprint = item.type === "published" && items.find((entry) => entry.type === "preprint" && entry.id === item.preprint_id);

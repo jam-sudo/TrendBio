@@ -142,10 +142,24 @@ describe("built topic pages", () => {
       other.headline = other.synthesis = null;
       other.related = [];
       writeFileSync(join(data, domain, "topics", `${other.slug}.json`), JSON.stringify(other));
+      const returning = structuredClone(rankedTopics(domain).find((entry) =>
+        entry.slug !== slug && entry.slug !== other.slug)!);
+      const addedPaper = items.find((item) => item.type === "preprint" && item.id !== published.preprint_id)!;
+      returning.history = [
+        latest,
+        { ...latest, date: "2026-10-31", rank: null },
+        { ...latest, date: "2026-10-30", item_ids: [published.preprint_id!] },
+      ];
+      writeFileSync(join(data, domain, "topics", `${returning.slug}.json`), JSON.stringify(returning));
       const output = join(temporary, "dist");
       execFileSync(process.execPath, ["node_modules/astro/astro.js", "build", "--outDir", output], {
         env: { ...process.env, TRENDBIO_DATA_ROOT: data },
       });
+      const reentry = readFileSync(join(output, `topic/${returning.slug}/index.html`), "utf8");
+      expect(headings(reentry).slice(0, 2)).toEqual(["Papers added since Oct 30, 2026", "Published papers"]);
+      expect(section(reentry, "added")).toContain(addedPaper.url);
+      expect(section(reentry, "added")).not.toContain(published.url);
+      expect(reentry.split(`href="${addedPaper.url}"`)).toHaveLength(2);
       const html = readFileSync(join(output, `topic/${slug}/index.html`), "utf8");
       expect(headings(html)).toEqual(["Editor's note", "Published papers", "Topic history"]);
       expect(html).toContain("#2 ·");

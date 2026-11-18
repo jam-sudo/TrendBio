@@ -25,8 +25,8 @@ console.log(`Real-data build: ${buildSeconds.toFixed(2)}s`);
 
 const queries = [
   ['qqzzxxnomatch', null], ['zzzzqqqq', null], ['xkcdvvv', null],
-  ['PoolParty', 'poolparty'], ['poolparty', 'poolparty'],
-  ['alphafold', 'alphafold'], ['AlphaFold3', 'alphafold3'],
+  ['AlphaFold', 'alphafold'], ['alphafold', 'alphafold'],
+  ['AlphaFold3', 'alphafold3'],
   ['perturbation', 'perturbation'], ['perturbations', 'perturbation'],
   ['scRNA-seq', 'scrnaseq'], ['single-cell', 'singlecell'], ['scRNA.seq', 'scrnaseq'],
 ];
@@ -82,7 +82,7 @@ try {
   const untouched = [...requests];
   const dropdown = [];
   let firstQuery;
-  for (const query of ['PoolParty', 'alphafold', 'qqzzxxnomatch']) {
+  for (const query of ['AlphaFold3', 'alphafold', 'qqzzxxnomatch']) {
     await home.getByRole('combobox').fill(query);
     await home.getByRole('link', { name: 'See all results' }).waitFor();
     const links = await home.getByRole('option').evaluateAll(options => options.map(option => ({

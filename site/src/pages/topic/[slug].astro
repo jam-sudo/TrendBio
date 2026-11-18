@@ -26,6 +26,7 @@ const category = loadTaxonomy(domain).find(({ slug }) => slug === topic.category
 const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
 const headline = topic.headline ?? topic.label;
 const evidence = topicEvidence(topic);
+const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
 ---
 
 <Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
@@ -39,7 +40,7 @@ const evidence = topicEvidence(topic);
     {topic.synthesis !== null && <p>{topic.synthesis}</p>}
     <EditorNote html={loadNote(topic.slug)} />
     {hasPapers(evidence) && <p data-pagefind-ignore><a href={`/topic/${topic.slug}/citations.bib`} download>Export citations (BibTeX)</a></p>}
-    <EvidenceList items={evidence} oneLiners={topic.item_one_liners} />
+    <EvidenceList items={evidence} oneLiners={topic.item_one_liners} previousRanked={previousRanked} />
     {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading" data-pagefind-ignore>
       <h2 id="related-heading">Related topics</h2>
       <ul>{related.map((entry) => <li>{entry.history.some((day) => day.rank !== null)
