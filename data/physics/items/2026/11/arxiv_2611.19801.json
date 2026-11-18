@@ -1,0 +1,33 @@
+{
+  "abstract": "Finite matrix-product-state sweep algorithms, such as the density-matrix renormalization group (DMRG) and the time-dependent variational principle (TDVP), store one environment tensor per site. At the bond dimensions needed for frustrated and two-dimensional systems this stack, rather than the state itself, exhausts the memory of the device. We adapt checkpointing to these sweeps: every $k$-th environment is kept, with $k\\approx\\sqrt{N}$ for $N$ sites, and the blocks in between are rebuilt when the sweep returns to them. The rebuild repeats the original contractions, so energies and states are reproduced bit for bit when the contractions are deterministic. Environment memory falls by 4.6-10x on cylinders of 96-384 sites. Bond-dimension searches with an implementation that rebuilds checkpoints at each half-sweep give gains of 1.77 for one level and 2.07 for two levels with eight contraction chunks on a single 141 GB GPU, using a 144-site triangular $J_1$-$J_2$ cylinder and stored baselines with matching chunking. Separate timings with checkpoints retained across half-sweeps give a one-level overhead of 6-15%, depending on the local eigensolver. At $D=1536$ the two-level schedule with eight chunks takes 1.42 times the sweep time of the equally chunked stored baseline, or 1.79 times that of the unchunked stored baseline. Simple models of the memory and the run time reproduce the measurements to within a few per cent. Unlike offloading, the method needs no host memory or disk, and the two can be combined. Implementations are provided for ITensorMPS.jl, TeNPy, MPSKit.jl and quimb.",
+  "authors": [
+    "Nihal Krishna Shrivastava",
+    "Rudranil Basu"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-18",
+  "id": "arxiv:2611.19801",
+  "metadata": {
+    "arxiv_primary_category": "cond-mat.str-el",
+    "categories": [
+      "cond-mat.str-el",
+      "physics.comp-ph",
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.19801v1</ns0:id>\n    <ns0:title>Exact environment checkpointing for memory-limited DMRG and TDVP</ns0:title>\n    <ns0:updated>2026-11-15T05:21:29Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.19801v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.19801v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Finite matrix-product-state sweep algorithms, such as the density-matrix renormalization group (DMRG) and the time-dependent variational principle (TDVP), store one environment tensor per site. At the bond dimensions needed for frustrated and two-dimensional systems this stack, rather than the state itself, exhausts the memory of the device. We adapt checkpointing to these sweeps: every $k$-th environment is kept, with $k\\approx\\sqrt{N}$ for $N$ sites, and the blocks in between are rebuilt when the sweep returns to them. The rebuild repeats the original contractions, so energies and states are reproduced bit for bit when the contractions are deterministic. Environment memory falls by 4.6-10x on cylinders of 96-384 sites. Bond-dimension searches with an implementation that rebuilds checkpoints at each half-sweep give gains of 1.77 for one level and 2.07 for two levels with eight contraction chunks on a single 141 GB GPU, using a 144-site triangular $J_1$-$J_2$ cylinder and stored baselines with matching chunking. Separate timings with checkpoints retained across half-sweeps give a one-level overhead of 6-15%, depending on the local eigensolver. At $D=1536$ the two-level schedule with eight chunks takes 1.42 times the sweep time of the equally chunked stored baseline, or 1.79 times that of the unchunked stored baseline. Simple models of the memory and the run time reproduce the measurements to within a few per cent. Unlike offloading, the method needs no host memory or disk, and the two can be combined. Implementations are provided for ITensorMPS.jl, TeNPy, MPSKit.jl and quimb.</ns0:summary>\n    <ns0:category term=\"cond-mat.str-el\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.comp-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-15T05:21:29Z</ns0:published>\n    <ns1:comment>13 pages, 6 figures. Code and data: https://github.com/NihalShriv/envcheckpoint (doi:10.5281/zenodo.24193745)</ns1:comment>\n    <ns1:primary_category term=\"cond-mat.str-el\" />\n    <ns0:author>\n      <ns0:name>Nihal Krishna Shrivastava</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Rudranil Basu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-15",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "condensed-matter"
+  ],
+  "source": "arxiv",
+  "summary": "Adapts checkpointing to DMRG and TDVP sweeps, storing every k-th environment with k near sqrt(N) to cut memory 4.6-10x while reproducing results bit for bit.",
+  "title": "Exact environment checkpointing for memory-limited DMRG and TDVP",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.19801v1"
+}

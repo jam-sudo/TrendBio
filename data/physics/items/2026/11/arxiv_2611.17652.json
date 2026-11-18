@@ -1,0 +1,35 @@
+{
+  "abstract": "Quantum computers need real-time classical processing to convert measurement data into feedback within device-specific timing constraints. We introduce the quantum data processing unit (QDPU), an architecture between a quantum device and its controller. Its core is a machine-learned quantum data model (QDM), adapted to the measurement response and noise characteristics of the device. We implement an FPGA pipeline for neutral-atom array assembly that performs occupancy detection and rearrangement scheduling in FPGA logic. One calibrated matched-filter lane classifies a $50\\times50$ array in 12.5 $μ$s. An atom-loss model using a software reference planner evaluates a $35\\times35$ target with a 60 s trap lifetime and 0.1% loss per moved atom. Removing an assumed 150 ms host round trip raises the predicted assembly success from 8% to 85% and reduces the wall-clock time per successful assembly from 19 s to 0.16 s. A GPU-based outer loop is proposed for refitting model parameters between runs. Its NVQLink transport is measured on the board: over 10 GbE to an NVIDIA DGX Spark, the median FPGA-to-host-to-FPGA round trip is 2.74 $μ$s for 128-byte messages forwarded by a CPU core. A separate 12-bit learned qLDPC kernel is placed and routed for the same FPGA target, with a derived latency of 0.84 ms per round for a $[[1122,148]]$ lifted-product code under code-capacity noise. A quantised GraphMP ranking kernel for the same code runs on the board with a median host-to-FPGA-to-host latency of 50.5 $μ$s with one shot in flight, excluding host-side BP+OSD post-processing. Together, these implementations illustrate a shared architecture with workload-specific models and timing requirements.",
+  "authors": [
+    "Pranav Srinivas Murali",
+    "Russell Marroquin Solares",
+    "Warren Zhou",
+    "Wanda Hou",
+    "Anil Bilgin",
+    "Yi-Zhuang You"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-18",
+  "id": "arxiv:2611.17652",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.17652v1</ns0:id>\n    <ns0:title>Quantum Data Processing Unit for Neutral-Atom Quantum Computers</ns0:title>\n    <ns0:updated>2026-11-13T01:57:48Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.17652v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.17652v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Quantum computers need real-time classical processing to convert measurement data into feedback within device-specific timing constraints. We introduce the quantum data processing unit (QDPU), an architecture between a quantum device and its controller. Its core is a machine-learned quantum data model (QDM), adapted to the measurement response and noise characteristics of the device. We implement an FPGA pipeline for neutral-atom array assembly that performs occupancy detection and rearrangement scheduling in FPGA logic. One calibrated matched-filter lane classifies a $50\\times50$ array in 12.5 $μ$s. An atom-loss model using a software reference planner evaluates a $35\\times35$ target with a 60 s trap lifetime and 0.1% loss per moved atom. Removing an assumed 150 ms host round trip raises the predicted assembly success from 8% to 85% and reduces the wall-clock time per successful assembly from 19 s to 0.16 s. A GPU-based outer loop is proposed for refitting model parameters between runs. Its NVQLink transport is measured on the board: over 10 GbE to an NVIDIA DGX Spark, the median FPGA-to-host-to-FPGA round trip is 2.74 $μ$s for 128-byte messages forwarded by a CPU core. A separate 12-bit learned qLDPC kernel is placed and routed for the same FPGA target, with a derived latency of 0.84 ms per round for a $[[1122,148]]$ lifted-product code under code-capacity noise. A quantised GraphMP ranking kernel for the same code runs on the board with a median host-to-FPGA-to-host latency of 50.5 $μ$s with one shot in flight, excluding host-side BP+OSD post-processing. Together, these implementations illustrate a shared architecture with workload-specific models and timing requirements.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-13T01:57:48Z</ns0:published>\n    <ns1:comment>95 pages, 13 figures, 48 tables</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Pranav Srinivas Murali</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Russell Marroquin Solares</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Warren Zhou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wanda Hou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anil Bilgin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yi-Zhuang You</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-13",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "optics"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes a quantum data processing unit (FPGA-based, machine-learned model) for neutral-atom arrays, cutting assembly latency and measuring NVQLink round-trip…",
+  "title": "Quantum Data Processing Unit for Neutral-Atom Quantum Computers",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.17652v1"
+}

@@ -1,0 +1,34 @@
+{
+  "abstract": "We describe and test a new numerical method to solve the Vlasov/Boltzmann equation in systems with arbitrary levels of collisionality. The method combines recent ideas to evolve the distribution function (DF) directly in 6+1 dimensional phase-space in a manner which is Lagrangian in both position+velocity. The 'particles' of traditional Monte-Carlo/Particle-In-Cell/N-body (MC/PIC/NB) methods become mesh-generating points defining a volume partition, each of which carries a set of momentum-Lagrangian basis functions representing a local anisotropic momentum DF. The DF is then integrated between cells and bases via a higher-order reconstruction and Godunov-type method, evolving a 10 or 13-moment representation of each basis to ensure manifest mass/momentum/energy conservation. The method allows one to represent arbitrary DFs, including multiple independent streams but also collisional or phase-mixed or thermal distributions (unlike traditional 'moments' or waterbag/tessellation methods), and the cost is bounded to a modest multiplier of MC/PIC/NB costs. We provide an example implementation which uses a spatially-Lagrangian volume partition, second-order reconstruction, and simple set of bases which ensure constant cell masses and couple directly to existing MC/PIC/NB machinery, made public in the code GIZMO. We validate in a series of test problems, demonstrating manifest conservation, Galilean and translation and rotation invariance, and ability to represent complex DFs without spurious dissipation or instability. We discuss applications where this method can have advantages compared to traditional algorithms for simulations of dark matter, stellar, weakly-collisional neutral gas, and particulate/dust dynamics; multiphase/polydisperse flows; cosmic ray and radiation transport/hydrodynamics; and plasma physics.",
+  "authors": [
+    "Philip F. Hopkins"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-18",
+  "id": "arxiv:2611.23084",
+  "metadata": {
+    "arxiv_primary_category": "astro-ph.CO",
+    "categories": [
+      "astro-ph.CO",
+      "astro-ph.HE",
+      "astro-ph.IM",
+      "physics.plasm-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.23084v1</ns0:id>\n    <ns0:title>An Efficient Method for Directly Integrating the Vlasov Equation in Collisionless and Weakly-Collisional Simulations</ns0:title>\n    <ns0:updated>2026-11-17T17:09:37Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.23084v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.23084v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We describe and test a new numerical method to solve the Vlasov/Boltzmann equation in systems with arbitrary levels of collisionality. The method combines recent ideas to evolve the distribution function (DF) directly in 6+1 dimensional phase-space in a manner which is Lagrangian in both position+velocity. The 'particles' of traditional Monte-Carlo/Particle-In-Cell/N-body (MC/PIC/NB) methods become mesh-generating points defining a volume partition, each of which carries a set of momentum-Lagrangian basis functions representing a local anisotropic momentum DF. The DF is then integrated between cells and bases via a higher-order reconstruction and Godunov-type method, evolving a 10 or 13-moment representation of each basis to ensure manifest mass/momentum/energy conservation. The method allows one to represent arbitrary DFs, including multiple independent streams but also collisional or phase-mixed or thermal distributions (unlike traditional 'moments' or waterbag/tessellation methods), and the cost is bounded to a modest multiplier of MC/PIC/NB costs. We provide an example implementation which uses a spatially-Lagrangian volume partition, second-order reconstruction, and simple set of bases which ensure constant cell masses and couple directly to existing MC/PIC/NB machinery, made public in the code GIZMO. We validate in a series of test problems, demonstrating manifest conservation, Galilean and translation and rotation invariance, and ability to represent complex DFs without spurious dissipation or instability. We discuss applications where this method can have advantages compared to traditional algorithms for simulations of dark matter, stellar, weakly-collisional neutral gas, and particulate/dust dynamics; multiphase/polydisperse flows; cosmic ray and radiation transport/hydrodynamics; and plasma physics.</ns0:summary>\n    <ns0:category term=\"astro-ph.CO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"astro-ph.HE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"astro-ph.IM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.plasm-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-17T17:09:37Z</ns0:published>\n    <ns1:comment>31 pages, 20 figures, submitted to the Open Journal of Astrophysics. Comments welcome. Implementation in the public GIZMO code available at http://www.tapir.caltech.edu/~phopkins/Site/GIZMO.html</ns1:comment>\n    <ns1:primary_category term=\"astro-ph.CO\" />\n    <ns0:author>\n      <ns0:name>Philip F. Hopkins</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "other-physics",
+  "published_at": "2026-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "cosmology",
+    "quantum"
+  ],
+  "source": "arxiv",
+  "summary": "Introduces a Lagrangian phase-space method for solving the Vlasov/Boltzmann equation across collisionality regimes, implemented in GIZMO and validated on test…",
+  "title": "An Efficient Method for Directly Integrating the Vlasov Equation in Collisionless and Weakly-Collisional Simulations",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.23084v1"
+}

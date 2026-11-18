@@ -1,0 +1,33 @@
+{
+  "abstract": "Multireference calculations on transition-metal complexes, on classical or quantum hardware, depend on the choice of active space. The orbitals that belong in it are those that are strongly entangled in the correlated wavefunction, but measuring this entanglement requires the very correlated calculation that the active space is meant to make affordable. Here we present SpinAware, a machine-learning model that predicts density-matrix renormalization group (DMRG) single-orbital entropies and orbital-pair mutual information from the unrestricted Hartree-Fock (UHF) solution of each spin state, without any correlated calculation. Each of the 20 highest occupied and 20 lowest unoccupied orbitals is described by 60 descriptors computed from the UHF solution, among them the differences between its alpha and beta occupations and energies, its metal-d and ligand character, and its exchange coupling to the other orbitals, and a transformer predicts the entropy of each orbital in the context of all others. Trained on 3454 spin-pure DMRG calculations on mononuclear Cr-Ni complexes, the model transfers to experimentally characterized complexes with ligands, binding topologies, oxidation states and metals absent from training. Over 11 spin states it reproduces the DMRG entropy profiles with a mean absolute error of 0.027, and combining the predicted entropies with the predicted mutual information gives a candidate pool that contains 99% of the DMRG-active orbitals of the benchmark spin states while keeping, on average, only 15 of the 40 orbitals. Natural-orbital occupation scans then select compact active spaces from this pool for a nickel and a cobalt complex. Sample-based quantum diagonalization with samples from IBM quantum processors reproduces the exact CASCI energies of these spaces to within 0.3 kcal/mol and their spin-state gaps to within 0.10 kcal/mol for up to 32 qubits.",
+  "authors": [
+    "Muhammad Arsalan Ali Akbar",
+    "Thomas D. Kühne",
+    "Sabre Kais",
+    "Werner Dobrautz"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-18",
+  "id": "arxiv:2611.19049",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.19049v1</ns0:id>\n    <ns0:title>Machine-learned active spaces enable quantum calculations of spin-state energetics of transition-metal complexes on quantum hardware</ns0:title>\n    <ns0:updated>2026-11-14T00:44:57Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.19049v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.19049v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Multireference calculations on transition-metal complexes, on classical or quantum hardware, depend on the choice of active space. The orbitals that belong in it are those that are strongly entangled in the correlated wavefunction, but measuring this entanglement requires the very correlated calculation that the active space is meant to make affordable. Here we present SpinAware, a machine-learning model that predicts density-matrix renormalization group (DMRG) single-orbital entropies and orbital-pair mutual information from the unrestricted Hartree-Fock (UHF) solution of each spin state, without any correlated calculation. Each of the 20 highest occupied and 20 lowest unoccupied orbitals is described by 60 descriptors computed from the UHF solution, among them the differences between its alpha and beta occupations and energies, its metal-d and ligand character, and its exchange coupling to the other orbitals, and a transformer predicts the entropy of each orbital in the context of all others. Trained on 3454 spin-pure DMRG calculations on mononuclear Cr-Ni complexes, the model transfers to experimentally characterized complexes with ligands, binding topologies, oxidation states and metals absent from training. Over 11 spin states it reproduces the DMRG entropy profiles with a mean absolute error of 0.027, and combining the predicted entropies with the predicted mutual information gives a candidate pool that contains 99% of the DMRG-active orbitals of the benchmark spin states while keeping, on average, only 15 of the 40 orbitals. Natural-orbital occupation scans then select compact active spaces from this pool for a nickel and a cobalt complex. Sample-based quantum diagonalization with samples from IBM quantum processors reproduces the exact CASCI energies of these spaces to within 0.3 kcal/mol and their spin-state gaps to within 0.10 kcal/mol for up to 32 qubits.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-14T00:44:57Z</ns0:published>\n    <ns1:comment>37 pages, 21 figures; Supplementary Information (54 pages) included</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Muhammad Arsalan Ali Akbar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Thomas D. Kühne</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sabre Kais</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Werner Dobrautz</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-14",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "SpinAware ML model predicts DMRG orbital entropies from UHF solutions to pick compact active spaces; quantum (IBM hardware) SQD reproduces spin-state gaps of…",
+  "title": "Machine-learned active spaces enable quantum calculations of spin-state energetics of transition-metal complexes on quantum hardware",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.19049v1"
+}

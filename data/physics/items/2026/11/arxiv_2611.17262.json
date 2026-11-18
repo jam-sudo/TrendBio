@@ -1,0 +1,32 @@
+{
+  "abstract": "Pauli propagation simulates quantum circuits and many-body dynamics by evolving observables in the Heisenberg picture as sparse sums of Pauli strings. As Pauli-string operations reduce to bit manipulations, its performance is limited by memory bandwidth and capacity rather than computational throughput. Pooling the memory of many cores and nodes is hindered by the deduplication step after every gate, which can require global synchronization. We avoid this bottleneck by partitioning the strings with an $\\mathbb{F}_2$-linear hash function, which guarantees that a $k$-qubit channel couples each partition to at most $4^k$ partitions fixed by the gate, decomposing gate application into independent tasks with bounded communication. Benchmarks of our open-source implementation demonstrate efficient parallel scaling within and across compute nodes, enabling simulations with over $10^{11}$ Pauli strings and extending the accessible timescales of quantum many-body dynamics.",
+  "authors": [
+    "Alev Orfi",
+    "Andrew Kille",
+    "J. Clayton Peacock",
+    "Jack Dunham",
+    "Lukas Devos"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-18",
+  "id": "arxiv:2611.17262",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.17262v1</ns0:id>\n    <ns0:title>Scalable Pauli propagation through $\\mathbb{F}_2$-linear partitioning</ns0:title>\n    <ns0:updated>2026-11-12T18:43:30Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.17262v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.17262v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Pauli propagation simulates quantum circuits and many-body dynamics by evolving observables in the Heisenberg picture as sparse sums of Pauli strings. As Pauli-string operations reduce to bit manipulations, its performance is limited by memory bandwidth and capacity rather than computational throughput. Pooling the memory of many cores and nodes is hindered by the deduplication step after every gate, which can require global synchronization. We avoid this bottleneck by partitioning the strings with an $\\mathbb{F}_2$-linear hash function, which guarantees that a $k$-qubit channel couples each partition to at most $4^k$ partitions fixed by the gate, decomposing gate application into independent tasks with bounded communication. Benchmarks of our open-source implementation demonstrate efficient parallel scaling within and across compute nodes, enabling simulations with over $10^{11}$ Pauli strings and extending the accessible timescales of quantum many-body dynamics.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-12T18:43:30Z</ns0:published>\n    <ns1:comment>11 pages, 8 figures</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Alev Orfi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Andrew Kille</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>J. Clayton Peacock</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jack Dunham</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Lukas Devos</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-12",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Introduces an F2-linear hash partitioning scheme for parallel Pauli propagation, enabling simulations with over 10^11 Pauli strings across cores and nodes.",
+  "title": "Scalable Pauli propagation through $\\mathbb{F}_2$-linear partitioning",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.17262v1"
+}

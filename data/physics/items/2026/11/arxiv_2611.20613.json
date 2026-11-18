@@ -1,0 +1,32 @@
+{
+  "abstract": "Testing quantum programs on Noisy Intermediate-Scale Quantum (NISQ) devices faces a test-oracle problem: hardware noise and finite-shot sampling make the runs of a correct program vary as much as those of a faulty one, so oracles with a fixed acceptance threshold produce false positives that depend on the program and the backend. We present a noise-aware testing framework built on self-baseline calibration: each run of the program under test is compared with repeated executions of a trusted reference program on the same backend, and the acceptance threshold is the $(1-α)$ quantile of the finite-shot null distribution of the Jensen-Shannon divergence, so the oracle's false-positive rate is a level set in advance. A noncentral chi-square model predicts detection power, a homogeneity test and a two-run sentinel detect drift, a mutation engine labels every mutant exactly within a three-class noise-aware taxonomy, and zero-noise extrapolation attributes rejections to faults or noise. In simulation on nine core benchmarks, 32 QASMBench programs, ten real bugs, seven noise regimes and three device snapshots, the oracle's false-positive rate is 0.0011 at $α= 10^{-3}$ over 9,000 correct runs, against 36-74% for fixed thresholds, 8.9% for a QOIN-style filter and 10.8% for a globally calibrated threshold, while attaining the highest F1 on non-equivalent faults (0.941). On an IBM Heron device, using about 14 minutes of QPU time, it rejected none of 82 correct runs and detected 120 of 121 faults and semantic mutants, and a two-run sentinel reduced drift-induced false positives from 27.4% to 1.8%.",
+  "authors": [
+    "Mir Mohammad Yousuf",
+    "Shabir Ahmad Sofi"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-18",
+  "id": "arxiv:2611.20613",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph",
+      "cs.SE"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.20613v1</ns0:id>\n    <ns0:title>Noise-Aware Testing of NISQ Quantum Programs: Self-Baseline Oracle with a Controlled False-Positive Rate</ns0:title>\n    <ns0:updated>2026-11-16T06:38:12Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.20613v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.20613v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Testing quantum programs on Noisy Intermediate-Scale Quantum (NISQ) devices faces a test-oracle problem: hardware noise and finite-shot sampling make the runs of a correct program vary as much as those of a faulty one, so oracles with a fixed acceptance threshold produce false positives that depend on the program and the backend. We present a noise-aware testing framework built on self-baseline calibration: each run of the program under test is compared with repeated executions of a trusted reference program on the same backend, and the acceptance threshold is the $(1-α)$ quantile of the finite-shot null distribution of the Jensen-Shannon divergence, so the oracle's false-positive rate is a level set in advance. A noncentral chi-square model predicts detection power, a homogeneity test and a two-run sentinel detect drift, a mutation engine labels every mutant exactly within a three-class noise-aware taxonomy, and zero-noise extrapolation attributes rejections to faults or noise. In simulation on nine core benchmarks, 32 QASMBench programs, ten real bugs, seven noise regimes and three device snapshots, the oracle's false-positive rate is 0.0011 at $α= 10^{-3}$ over 9,000 correct runs, against 36-74% for fixed thresholds, 8.9% for a QOIN-style filter and 10.8% for a globally calibrated threshold, while attaining the highest F1 on non-equivalent faults (0.941). On an IBM Heron device, using about 14 minutes of QPU time, it rejected none of 82 correct runs and detected 120 of 121 faults and semantic mutants, and a two-run sentinel reduced drift-induced false positives from 27.4% to 1.8%.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.SE\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-16T06:38:12Z</ns0:published>\n    <ns1:comment>53 pages, 7 figures</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Mir Mohammad Yousuf</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shabir Ahmad Sofi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "Noise-aware testing framework for NISQ quantum programs using self-baseline calibration and Jensen-Shannon thresholds, giving a controlled false-positive rate.",
+  "title": "Noise-Aware Testing of NISQ Quantum Programs: Self-Baseline Oracle with a Controlled False-Positive Rate",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.20613v1"
+}

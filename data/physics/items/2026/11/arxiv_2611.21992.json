@@ -1,0 +1,32 @@
+{
+  "abstract": "We develop an algorithm to propagate auxiliary-field quantum Monte Carlo (AFQMC) wavefunctions in mixed precision. We target NVIDIA Tensor Cores using the TensorFloat-32 (TF32) format. We approximate each full-precision array by a TF32 leading term and a TF32 residual, and each full-precision matrix product by three TF32 products accumulated in full precision. Benchmarks on hydrogen chains show that mixed-precision propagation is consistently faster than double-precision GPU propagation, with an increasing advantage as the system size grows. The resulting local-energy deviations remain small over the propagation windows considered here. These results identify the stochastic two-body propagator as a particularly effective target for reduced precision, while our method allows higher precision to be retained for accuracy-sensitive operations. Hence, our algorithm provides a practical way to speed up AFQMC calculations and demonstrates where reduced precision can be applied without adverse effects on the method's accuracy.",
+  "authors": [
+    "Jacob Z. Williams",
+    "Yu Zhang"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-18",
+  "id": "arxiv:2611.21992",
+  "metadata": {
+    "arxiv_primary_category": "physics.chem-ph",
+    "categories": [
+      "physics.chem-ph",
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.21992v1</ns0:id>\n    <ns0:title>Accelerating auxiliary-field quantum Monte Carlo with mixed-precision random propagators</ns0:title>\n    <ns0:updated>2026-11-16T23:22:58Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.21992v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.21992v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We develop an algorithm to propagate auxiliary-field quantum Monte Carlo (AFQMC) wavefunctions in mixed precision. We target NVIDIA Tensor Cores using the TensorFloat-32 (TF32) format. We approximate each full-precision array by a TF32 leading term and a TF32 residual, and each full-precision matrix product by three TF32 products accumulated in full precision. Benchmarks on hydrogen chains show that mixed-precision propagation is consistently faster than double-precision GPU propagation, with an increasing advantage as the system size grows. The resulting local-energy deviations remain small over the propagation windows considered here. These results identify the stochastic two-body propagator as a particularly effective target for reduced precision, while our method allows higher precision to be retained for accuracy-sensitive operations. Hence, our algorithm provides a practical way to speed up AFQMC calculations and demonstrates where reduced precision can be applied without adverse effects on the method's accuracy.</ns0:summary>\n    <ns0:category term=\"physics.chem-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-16T23:22:58Z</ns0:published>\n    <ns1:comment>11 pages, 5 figures; + supplementary 2 pages, 3 figures</ns1:comment>\n    <ns1:primary_category term=\"physics.chem-ph\" />\n    <ns0:author>\n      <ns0:name>Jacob Z. Williams</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yu Zhang</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "condensed-matter"
+  ],
+  "source": "arxiv",
+  "summary": "Mixed-precision TF32 propagation of random auxiliary-field walkers speeds up AFQMC on GPUs; hydrogen-chain benchmarks show faster runs with small local-energy…",
+  "title": "Accelerating auxiliary-field quantum Monte Carlo with mixed-precision random propagators",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.21992v1"
+}
