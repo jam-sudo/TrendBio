@@ -15,7 +15,8 @@ def test_pubmed(source_config, fixture_text, fixture_json, respx_mock, monkeypat
     monkeypatch.setenv('NCBI_API_KEY', 'test-ncbi-secret')
     base = source_config['pubmed']['endpoint']
     search = respx_mock.post(f'{base}/esearch.fcgi').respond(json=fixture_json('pubmed_search.json'))
-    fetch = respx_mock.post(f'{base}/efetch.fcgi').respond(text=fixture_text('pubmed.xml'))
+    xml = fixture_text('pubmed.xml').replace('</ArticleTitle>', ' https://example.org/?id=1&amp;reviewer=private-test</ArticleTitle>')
+    fetch = respx_mock.post(f'{base}/efetch.fcgi').respond(text=xml)
     with httpx.Client() as client:
         items = PubmedAdapter(source_config).fetch(date(2020, 1, 1), date(2024, 12, 31), client)
     assert len(items) == 2
@@ -26,6 +27,7 @@ def test_pubmed(source_config, fixture_text, fixture_json, respx_mock, monkeypat
     assert item.metadata['journal'] == 'Methods in molecular biology (Clifton, N.J.)'
     assert items[1].published_at == date(2020, 7, 6)
     assert item.summary is item.primary_category is None
+    assert all("private-test" not in entry.model_dump_json() for entry in items)
     assert item.first_seen == date(2024, 12, 31)
     assert search.call_count == 1
     assert fetch.call_count == 1

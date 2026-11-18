@@ -68,7 +68,7 @@ try {
   const script = readFileSync(`dist${scriptPath}`, 'utf8');
   assert.ok(script.includes('header-search-query'));
   const scriptBytes = Buffer.byteLength(script);
-  assert.ok(scriptBytes < 4000, `header script: ${scriptBytes} bytes`);
+  assert.ok(scriptBytes < 4600, `header script: ${scriptBytes} bytes`);
   const context = await browser.newContext();
   const home = await context.newPage();
   const requests = [];

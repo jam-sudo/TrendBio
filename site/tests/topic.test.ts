@@ -152,7 +152,7 @@ describe("built topic pages", () => {
       ];
       writeFileSync(join(data, domain, "topics", `${returning.slug}.json`), JSON.stringify(returning));
       const output = join(temporary, "dist");
-      execFileSync(process.execPath, ["node_modules/astro/astro.js", "build", "--outDir", output], {
+      execFileSync(process.execPath, ["node_modules/.bin/astro", "build", "--outDir", output], {
         env: { ...process.env, TRENDBIO_DATA_ROOT: data },
       });
       const reentry = readFileSync(join(output, `topic/${returning.slug}/index.html`), "utf8");

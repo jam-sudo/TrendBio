@@ -8,7 +8,7 @@ import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest
 import { loadSponsors } from "../src/lib/sponsors";
 
 const sponsor = { name: "Example Bio", tagline: "Tools for computational biology", url: "https://example.com", logo: "🧪", hue: 150 };
-const config = { slots: 10, contact: "[contact removed]", sponsors: [sponsor] };
+const config = { slots: 10, contact: "sponsor@example.org", sponsors: [sponsor] };
 const temporary = mkdtempSync(resolve(".sponsors-test-"));
 const fixture = join(temporary, "sponsors.json");
 function useFixture(data: unknown) {
@@ -19,7 +19,7 @@ afterEach(() => vi.unstubAllEnvs());
 afterAll(() => rmSync(temporary, { recursive: true, force: true }));
 
 it("loads the shipped empty inventory", () => {
-  expect(loadSponsors()).toEqual({ slots: 10, contact: "[contact removed]", sponsors: [] });
+  expect(loadSponsors()).toEqual({ slots: 10, contact: null, sponsors: [] });
 });
 
 it.each([
@@ -59,60 +59,57 @@ it("accepts a local image source and rejects files larger than 20 KB", () => {
 
 it("fails the build for an entry missing url", () => {
   useFixture({ ...config, sponsors: [{ ...sponsor, url: undefined }] });
-  const result = spawnSync(process.execPath, ["node_modules/astro/astro.js", "build", "--outDir", join(temporary, "invalid")], { env: process.env, encoding: "utf8" });
+  const result = spawnSync(process.execPath, ["node_modules/.bin/astro", "build", "--outDir", join(temporary, "invalid")], { env: process.env, encoding: "utf8" });
   expect(result.status).not.toBe(0);
   expect(result.stdout + result.stderr).toMatch(/Invalid sponsors file.*sponsors\[0\]\.url/);
 });
 
-it("builds both columns and the empty advert before the footer on every page", () => {
+it("omits the sponsor inventory when no sponsors or contact are configured", () => {
   for (const path of ["index.html", "about/index.html", "archive/index.html"]) {
     const html = readFileSync(`dist/${path}`, "utf8");
-    expect(html).toContain("sponsor-left");
-    expect(html).toContain("sponsor-right");
-    expect(html).toContain("sponsored-badge");
-    expect(html).toContain("SPONSORED");
-    expect(html).toContain("Advertise · 10/10 spots left");
-    expect(html).toContain('href="mailto:[contact removed]?subject=TrendBio%20sponsorship"');
-    expect(html.match(/<!--email_off-->\s*<a\b[^>]*class="[^"]*advertise-card[^"]*"[^>]*href="mailto:[\s\S]*?<\/a>\s*<!--\/email_off-->/g)).toHaveLength(3);
-    expect(html.indexOf('class="sponsors-row"')).toBeLessThan(html.indexOf("<footer"));
+    expect(html).not.toContain('href="mailto:');
+    expect(html).not.toContain('class="sponsors-row"');
   }
 });
 
 describe("sponsor rendering", () => {
   let browser: Awaited<ReturnType<typeof chromium.launch>>;
-  let server: Awaited<ReturnType<typeof preview>>;
   let fixtureServer: Awaited<ReturnType<typeof preview>>;
   beforeAll(async () => {
     const output = join(temporary, "dist");
     writeFileSync(fixture, JSON.stringify({ ...config, sponsors: [sponsor, { ...sponsor, name: "Protein Lab", hue: 280, logo: "🧬" }] }));
-    execFileSync(process.execPath, ["node_modules/astro/astro.js", "build", "--outDir", output], {
+    execFileSync(process.execPath, ["node_modules/.bin/astro", "build", "--outDir", output], {
       env: { ...process.env, TRENDBIO_SPONSORS_FILE: fixture },
     });
+    for (const path of ["index.html", "about/index.html"]) {
+      const html = readFileSync(join(output, path), "utf8");
+      const contacts = html.match(/<!--email_off-->\s*<a\b[^>]*href="mailto:sponsor@example.org[^"]*"[^>]*>[\s\S]*?<\/a>\s*<!--\/email_off-->/g) ?? [];
+      expect(contacts.length).toBeGreaterThan(0);
+      expect(contacts).toHaveLength((html.match(/href="mailto:/g) ?? []).length);
+    }
     browser = await chromium.launch({ executablePath: chromium.executablePath() });
-    server = await preview({ server: { host: "127.0.0.1", port: 4330 }, logLevel: "error" });
     fixtureServer = await preview({ outDir: output, server: { host: "127.0.0.1", port: 4331 }, logLevel: "error" });
   });
   afterAll(async () => {
     await browser?.close();
-    await server?.stop();
     await fixtureServer?.stop();
   });
 
-  it.each(["dark", "light"] as const)("aligns empty sticky columns at the hero and shows the footer row below 1440px in %s", async theme => {
+  it.each(["dark", "light"] as const)("aligns sticky columns at the hero and shows the footer row below 1440px in %s", async theme => {
     const context = await browser.newContext({ viewport: { width: 1512, height: 982 }, colorScheme: theme, reducedMotion: "reduce" });
     const page = await context.newPage();
     try {
-      await page.goto(`http://127.0.0.1:${server.port}/`);
+      await page.goto(`http://127.0.0.1:${fixtureServer.port}/`);
       await page.evaluate(() => document.fonts.ready);
       expect(await page.locator(".sponsor-column:visible").count()).toBe(2);
       expect(await page.locator(".sponsors-row").isVisible()).toBe(false);
       for (const side of ["left", "right"]) {
         const card = page.locator(`.sponsor-${side} .advertise-card:visible`);
         expect(await card.count()).toBe(1);
-        expect(await card.textContent()).toContain("10/10 spots left");
+        expect(await card.textContent()).toContain("8/10 spots left");
         expect(await page.getByRole("complementary", { name: `Sponsors, ${side} column` }).count()).toBe(1);
       }
-      const advert = (await page.locator(".sponsor-right .advertise-card").boundingBox())!;
+      const advert = (await page.locator(".sponsor-right .sponsor-card").first().boundingBox())!;
       const hero = (await page.locator(".home-header .header-top").boundingBox())!;
       expect(advert.y).toBe(hero.y);
       expect(advert.width).toBe(200);
@@ -124,16 +121,16 @@ describe("sponsor rendering", () => {
       await page.setViewportSize({ width: 1440, height: 982 });
       const main = (await page.locator("main").boundingBox())!;
       const left = (await page.locator(".sponsor-left .advertise-card").boundingBox())!;
-      const right = (await page.locator(".sponsor-right .advertise-card").boundingBox())!;
+      const right = (await page.locator(".sponsor-right .sponsor-card").first().boundingBox())!;
       expect(left.x + left.width).toBeLessThanOrEqual(main.x);
       expect(right.x).toBeGreaterThanOrEqual(main.x + main.width);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(1440);
       await page.evaluate(() => window.scrollTo(0, 400));
-      expect((await page.locator(".sponsor-right .advertise-card").boundingBox())!.y).toBe(32);
-      await page.goto(`http://127.0.0.1:${server.port}/about/`);
+      expect((await page.locator(".sponsor-right .sponsor-card").first().boundingBox())!.y).toBe(32);
+      await page.goto(`http://127.0.0.1:${fixtureServer.port}/about/`);
       expect((await page.locator(".sponsor-right").boundingBox())!.y).toBe((await page.locator("main").boundingBox())!.y);
       await page.setViewportSize({ width: 1280, height: 900 });
-      await page.goto(`http://127.0.0.1:${server.port}/`);
+      await page.goto(`http://127.0.0.1:${fixtureServer.port}/`);
       expect(await page.locator(".sponsor-column:visible").count()).toBe(0);
       expect(await page.locator(".sponsors-row .advertise-card:visible").count()).toBe(1);
       await page.locator(".sponsors-row").scrollIntoViewIfNeeded();

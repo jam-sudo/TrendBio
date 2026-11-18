@@ -96,7 +96,9 @@ class PubmedAdapter:
             response = request(client, f"{cfg['endpoint']}/efetch.fcgi", method='POST', data={
                 'db': 'pubmed', 'id': ','.join(ids[offset:offset + 200]), 'retmode': 'xml', **auth,
             })
-            root = ET.fromstring(response.content)
+            # PubMed citations can include private reviewer links in their text or attributes.
+            xml = re.sub(rb'([?&](?:amp;)?reviewer=)[^&\s<>"\'#]+', rb'\1', response.content, flags=re.I)
+            root = ET.fromstring(xml)
             if root.tag != 'PubmedArticleSet' or root.find('.//ERROR') is not None:
                 raise ValueError('PubMed fetch failed')
             for record in root.findall('PubmedArticle'):

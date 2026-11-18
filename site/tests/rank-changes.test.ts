@@ -24,7 +24,7 @@ beforeAll(async () => {
     mkdirSync(join(root, "data/computational", kind), { recursive: true });
     for (const entry of entries) writeFileSync(join(root, "data/computational", kind, `${"date" in entry ? entry.date : entry.slug}.json`), JSON.stringify(entry));
   }
-  execFileSync(process.execPath, ["node_modules/astro/astro.js", "build", "--outDir", join(root, "dist")], {
+  execFileSync(process.execPath, ["node_modules/.bin/astro", "build", "--outDir", join(root, "dist")], {
     env: { ...process.env, TRENDBIO_DATA_ROOT: join(root, "data") }, stdio: "pipe",
   });
   server = await preview({ outDir: join(root, "dist"), server: { host: "127.0.0.1", port: 4332 }, logLevel: "error" });

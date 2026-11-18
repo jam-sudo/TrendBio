@@ -9,7 +9,7 @@ export interface Sponsor {
   hue: number;
 }
 
-export function loadSponsors(): { slots: number; contact: string; sponsors: Sponsor[] } {
+export function loadSponsors(): { slots: number; contact: string | null; sponsors: Sponsor[] } {
   const file = process.env.TRENDBIO_SPONSORS_FILE || resolve("src/content/sponsors.json");
   const check = (valid: unknown, message: string) => {
     if (!valid) throw new Error(message);
@@ -18,7 +18,7 @@ export function loadSponsors(): { slots: number; contact: string; sponsors: Spon
     const data = JSON.parse(readFileSync(file, "utf8"));
     check(data && typeof data === "object" && !Array.isArray(data), "expected an object");
     check(Number.isSafeInteger(data.slots) && data.slots >= 0 && data.slots % 2 === 0, "slots must be a non-negative even integer");
-    check(typeof data.contact === "string" && /^[^\s@?&#]+@[^\s@?&#]+\.[^\s@?&#]+$/.test(data.contact), "contact must be an email address");
+    check(data.contact === null || typeof data.contact === "string" && /^[^\s@?&#]+@[^\s@?&#]+\.[^\s@?&#]+$/.test(data.contact), "contact must be an email address");
     check(Array.isArray(data.sponsors) && data.sponsors.length <= data.slots, "sponsors must be an array with no more entries than slots");
     for (const [index, sponsor] of data.sponsors.entries()) {
       const label = `sponsors[${index}]`;

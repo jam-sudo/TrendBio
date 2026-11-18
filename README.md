@@ -55,7 +55,7 @@ A topic keeps its page across days when a new cluster shares its recent papers (
 
 Full rows for the Top 5 and compact rows to 20, with rank changes and the tool names each topic mentions; forty on request. Every topic links its evidence, exports BibTeX and keeps a day-by-day history. Weekly and monthly rankings, a topic map and a year of archive pages sit beside it. Three side lists catch what clustering misses: **From code**, **From industry** and **Shared by researchers**, the last from Bluesky and display only. Search is instant and local (Pagefind), feeds are Atom (daily Top 5 and per category), times are US Eastern, and the theme follows yours.
 
-Astro 5 on Cloudflare Pages. No cookies: Cloudflare Web Analytics counts page views.
+Astro on Cloudflare Pages. Cloudflare Web Analytics counts page views without analytics cookies. Cloudflare may set a security cookie for bot protection.
 
 ## Schedule and cost
 
@@ -101,4 +101,4 @@ docs/       design spec, implementation plans, operations guide
 
 Code is [MIT](LICENSE). What the pipeline produces under `data/`, from headlines to rankings, is [CC BY 4.0](data/LICENSE), cited as TrendBio (trendbio.dev). Paper titles, abstracts and author names belong to their authors and publishers.
 
-<p align="center"><sub>Headlines, summaries and syntheses are machine-generated and can be wrong; follow the evidence links before relying on a claim.&ensp;·&ensp;[contact removed]</sub></p>
+<p align="center"><sub>Headlines, summaries and syntheses are machine-generated and can be wrong; follow the evidence links before relying on a claim.</sub></p>

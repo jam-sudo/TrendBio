@@ -11,25 +11,27 @@ const left = sponsors.slice(0, Math.ceil(sponsors.length / 2));
 const right = sponsors.slice(left.length);
 ---
 
+{(sponsors.length > 0 || (contact && remaining > 0)) && <>
 <aside class:list={["sponsor-column", "sponsor-left", { "hero-aligned": heroAligned }]} aria-label="Sponsors, left column">
   <div class="sponsor-stack">
     {left.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}
-    {remaining > 0 && <SponsorCard {...cardProps} />}
+    {contact && remaining > 0 && <SponsorCard {...cardProps} />}
   </div>
 </aside>
 <aside class:list={["sponsor-column", "sponsor-right", { "hero-aligned": heroAligned }]} aria-label="Sponsors, right column">
   <div class="sponsor-stack">
     {right.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}
-    {remaining > 0 && <SponsorCard {...cardProps} />}
+    {contact && remaining > 0 && <SponsorCard {...cardProps} />}
   </div>
 </aside>
-{sponsors.length + remaining > 0 && <section class="sponsors-row" aria-labelledby="sponsors-heading">
+<section class="sponsors-row" aria-labelledby="sponsors-heading">
   <h2 id="sponsors-heading">Sponsors</h2>
   <div class="sponsor-scroll" tabindex="0" role="region" aria-label="Sponsor cards">
     {sponsors.map(sponsor => <SponsorCard sponsor={sponsor} {...cardProps} />)}
-    {remaining > 0 && <SponsorCard {...cardProps} />}
+    {contact && remaining > 0 && <SponsorCard {...cardProps} />}
   </div>
-</section>}
+</section>
+</>}
 
 <style>
   .sponsor-column { display: none; }

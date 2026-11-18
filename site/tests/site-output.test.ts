@@ -86,15 +86,6 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   expect(read("robots.txt")).toContain("Sitemap: https://trendbio.dev/sitemap.xml");
 });
 
-it("preserves email_off immediately around all mailto anchors", () => {
-  for (const path of ["index.html", "about/index.html"]) {
-    const html = read(path);
-    const protectedAnchors = html.match(/<!--email_off-->\s*<a\b[^>]*href="mailto:[^"]+"[^>]*>[\s\S]*?<\/a>\s*<!--\/email_off-->/g) ?? [];
-    expect(protectedAnchors.length).toBeGreaterThan(0);
-    expect(protectedAnchors).toHaveLength((html.match(/href="mailto:/g) ?? []).length);
-  }
-});
-
 it("renders native open and closed summary labels and adjacent existing days", async () => {
   const latest = read(`day/${days[0].date}/index.html`);
   expect(latest).toMatch(/<summary[^>]*><span class="closed-label"[^>]*>Show 20 more<\/span><span class="open-label"[^>]*>Show less<\/span><\/summary>/);

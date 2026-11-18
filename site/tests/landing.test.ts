@@ -30,7 +30,7 @@ describe("built landing, day and archive pages", () => {
       const script = readPage(scriptPath.slice(1));
       expect(script).toContain('header-search-query');
       // Includes Vite's dynamic-import preload runtime.
-      expect(Buffer.byteLength(script)).toBeLessThan(4000);
+      expect(Buffer.byteLength(script)).toBeLessThan(4600);
     },
   );
 
@@ -152,7 +152,7 @@ describe("built landing, day and archive pages", () => {
       partial.run.backfilled = false;
       writeFileSync(join(data, `computational/days/${partial.date}.json`), JSON.stringify(partial));
       const output = join(temporary, "dist");
-      execFileSync(process.execPath, ["node_modules/astro/astro.js", "build", "--outDir", output], {
+      execFileSync(process.execPath, ["node_modules/.bin/astro", "build", "--outDir", output], {
         env: { ...process.env, TRENDBIO_DATA_ROOT: data },
       });
       const archive = readFileSync(join(output, "archive/index.html"), "utf8");

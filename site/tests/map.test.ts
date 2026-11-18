@@ -41,7 +41,7 @@ it('fetches maps over 600 KB and escapes embedded script terminators', () => {
     for (const large of [false, true]) {
       if (large) hostile.points[0].label = 'x'.repeat(600_001);
       writeFileSync(join(data, 'computational/map.json'), JSON.stringify(hostile));
-      execFileSync(process.execPath, ['node_modules/astro/astro.js', 'build', '--outDir', output], {
+      execFileSync(process.execPath, ['node_modules/.bin/astro', 'build', '--outDir', output], {
         env: { ...process.env, TRENDBIO_DATA_ROOT: data }, stdio: 'pipe',
       });
       const content = readFileSync(join(output, 'map/index.html'), 'utf8');
