@@ -45,7 +45,7 @@ def enrich_items(
             hints = hints_for(item, hints_cfg)
             results[index] = Enrichment(
                 summary=truncate(first_sentence(item.abstract or item.title), 160),
-                primary=hints[0] if hints else 'ml-ai', secondary=[],
+                primary=hints[0] if hints else taxonomy.fallback_category, secondary=[],
                 relevant=item.type in {'preprint', 'published'},
             )
             notes.append(f'enrichment-fallback:{item.id}')

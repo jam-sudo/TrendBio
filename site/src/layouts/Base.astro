@@ -14,9 +14,10 @@ interface Props {
   lastRun?: string | null;
   heroAligned?: boolean;
   noindex?: boolean;
+  physics?: boolean;
 }
 
-const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false } = Astro.props;
+const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, physics = false } = Astro.props;
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
 ---
@@ -33,7 +34,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
     <meta name="description" content={summary} />
     {Astro.props.noindex && <meta name="robots" content="noindex" />}
-    <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />
+    {!physics && <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={summary} />
@@ -54,17 +55,20 @@ const canonical = new URL(canonicalPath, Astro.site).href;
       <a class="wordmark" href="/">{Astro.slots.has("hero") && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
         <div class="nav-links">
-          <a href="/">Today</a>
-          <a href="/topics">Topics</a>
-          <a href="/map/">Map</a>
-          <a href="/archive">Archive</a>
-          <a href="/about">About</a>
+          {physics ? <a href="/">Computational biology</a> : <>
+            <a href="/">Today</a>
+            <a href="/topics">Topics</a>
+            <a href="/map/">Map</a>
+            <a href="/archive">Archive</a>
+            <a href="/about">About</a>
+          </>}
+          <a href="/physics/" aria-current={canonicalPath === "/physics/" ? "page" : undefined}>Physics</a>
           <button id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">Theme <span aria-hidden="true">☾</span></button>
         </div>
       </nav>
       </div>
       <slot name="hero" />
-      {canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
+      {!physics && canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
         <label class="sr-only" for="header-search-query">Search topics</label>
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />
         <div id="header-search-panel" hidden>
@@ -80,11 +84,11 @@ const canonical = new URL(canonicalPath, Astro.site).href;
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <main id="main"><slot /></main>
-    <SponsorColumns {heroAligned} />
+    {!physics && <SponsorColumns {heroAligned} />}
     </div>
     <footer>
-      <p>Auto-curated from bioRxiv, arXiv, PubMed, GitHub and industry sources. Summaries are machine-generated.</p>
-      <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>
+      <p>Auto-curated from {physics ? "arXiv" : "bioRxiv, arXiv, PubMed, GitHub and industry sources"}. Summaries are machine-generated.</p>
+      {!physics && <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>}
       {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>
   </body>

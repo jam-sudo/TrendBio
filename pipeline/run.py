@@ -22,7 +22,7 @@ from pipeline.budget import Budget
 from pipeline.cluster import (
     append_history, attach_items, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
 )
-from pipeline.collect import AllPaperSourcesFailed
+from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed
 from pipeline.config import Scoring, Taxonomy
 from pipeline.dedupe import dedupe
 from pipeline.embed import l2_normalize
@@ -160,7 +160,7 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
     attempted = len(window_item_ids)
     return ((count > cfg.degraded_fallback_min and count > cfg.degraded_fallback_rate * attempted)
             or sum(note.startswith('synthesis-fallback:') for note in set(notes)) >= cfg.degraded_synthesis_fallback_min
-            or any(source_status.get(name) == 'failed' for name in ('biorxiv', 'arxiv', 'pubmed'))
+            or any(source_status.get(name) == 'failed' for name in PAPER_SOURCES)
             or over_ceiling)
 
 
@@ -212,7 +212,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                         source_status[adapter.name] = 'ok'
                         counts['items'] = len(items)
                     counts['source_status'] = source_status[adapter.name]
-            if all(source_status[name] == 'failed' for name in ('biorxiv', 'arxiv', 'pubmed')):
+            if all_paper_sources_failed(source_status):
                 raise AllPaperSourcesFailed('All paper sources failed')
             with _stage('dedupe', items=len(collected_items)) as counts:
                 new_items = dedupe(collected_items, store)
@@ -466,8 +466,8 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                 chunk_start = chunk_end + timedelta(days=1)
             state['done_sources'].append(adapter.name)
             store._write(path, state)
-    papers = {'biorxiv', 'arxiv', 'pubmed'}
-    if papers <= set(adapters) and not papers.intersection(state['successful_sources']):
+    papers = PAPER_SOURCES.intersection(adapters)
+    if papers and not papers.intersection(state['successful_sources']):
         raise AllPaperSourcesFailed('All paper source chunks failed')
     if state['stage'] == 'collect':
         state['stage'] = 'enrich'
@@ -495,7 +495,7 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                 result = results.get(item.id)
                 if result is None:
                     result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
-                                        primary=next(iter(hints[item.id]), 'ml-ai'), secondary=[],
+                                        primary=next(iter(hints[item.id]), deps.taxonomy.fallback_category), secondary=[],
                                         relevant=item.type in {'preprint', 'published'})
                     state.setdefault('notes', []).append(f'enrichment-fallback:{item.id}')
                     store._write(path, state)
@@ -559,7 +559,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
     source_cfg = next((adapter.config for adapter in deps.adapters
                        if isinstance(adapter, PubmedAdapter)), None)
     if source_cfg is None:
-        source_cfg = load_config()
+        source_cfg = load_config(domain)
     if state['stage'] == 'scope':
         with _stage('pubmed_scope', items=len(items), out_of_scope=0) as counts:
             for item in items:
@@ -594,7 +594,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
                     result = results.get(item.id)
                     if result is None:
                         result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
-                                            primary=next(iter(hints[item.id]), 'ml-ai'),
+                                            primary=next(iter(hints[item.id]), deps.taxonomy.fallback_category),
                                             secondary=[], relevant=item.type in {'preprint', 'published'})
                         state['notes'].append(f'enrichment-fallback:{item.id}')
                     item.summary, item.primary_category = result.summary, result.primary

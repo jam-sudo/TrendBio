@@ -1,7 +1,6 @@
 import json
 import re
 from datetime import date
-from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -434,8 +433,10 @@ def test_fallback_marks_item_relevant(tmp_path, item, taxonomy):
     assert irrelevant == 0
 
 
-def test_enrich_prompt_defines_relevance():
-    prompt = Path('pipeline/prompts/enrich.md').read_text(encoding='utf-8')
+def test_enrich_prompt_defines_relevance(item, taxonomy):
+    from pipeline.llm import _messages
+
+    prompt = _messages(item, taxonomy, [])[0]['content']
     assert 'relevant:' in prompt
     assert 'main contribution is computational' in prompt
     assert 'whose subject is computational biology or AI for biology' in prompt

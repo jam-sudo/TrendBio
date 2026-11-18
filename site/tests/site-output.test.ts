@@ -73,7 +73,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   expect(parsed.error).toBeUndefined();
   const { weeks, months } = loadPeriods();
   const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
-  expect(parsed.entries).toHaveLength(7 + days.length + weeks.length + months.length + topicSlugs.size);
+  expect(parsed.entries).toHaveLength(8 + getDataIndex("physics").days.length + days.length + weeks.length + months.length + topicSlugs.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   expect(urls.size).toBe(parsed.entries.length);
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
@@ -113,4 +113,18 @@ it("ships one PNG link preview at 1200×630 under 200 KB", () => {
 
 it("explains cookie-free page-view analytics on About", () => {
   expect(read("about/index.html")).toContain("The site uses Cloudflare Web Analytics, which sets no cookies, to count page views.");
+});
+
+it("links the Physics edition, its dated ranking and its own supporting papers", async () => {
+  await page.setContent(read("index.html"));
+  expect(await page.getByRole("navigation").getByText("Physics", { exact: true }).getAttribute("href")).toBe("/physics/");
+  for (const path of ["physics/index.html", "physics/day/2026-11-01/index.html"]) {
+    await page.setContent(read(path));
+    const main = page.locator("main");
+    expect(await main.locator("h1").textContent()).toBe("Physics");
+    expect(await main.locator("ol h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
+    expect(await main.locator('a[href^="https://example.org/physics/"]').count()).toBe(3);
+    const archiveLink = path === "physics/index.html" ? "/physics/day/2026-11-01/" : "/physics/#editions";
+    expect(await main.locator(`a[href="${archiveLink}"]`).count()).toBe(1);
+  }
 });

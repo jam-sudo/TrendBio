@@ -7,7 +7,7 @@
 
 <h1 align="center">TrendBio</h1>
 
-<p align="center">What is moving in computational biology, ranked every day.</p>
+<p align="center">Daily research trends in computational biology and physics.</p>
 
 <p align="center">
   <a href="https://trendbio.dev">trendbio.dev</a>&ensp;·&ensp;<a href="https://trendbio.dev/feed.xml">Atom feed</a>&ensp;·&ensp;<a href="https://trendbio.dev/about">How it works</a>
@@ -23,6 +23,8 @@
 <br>
 
 TrendBio reads each day's new preprints, papers, repositories and company posts in computational biology, groups them into research topics, ranks the Top 40 and writes a short synthesis for each. One page a day, for readers who already know the field, with history back to 1 November 2025.
+
+The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes both fields independently and writes Physics results to `data/physics/`.
 
 ## How a day is made
 
@@ -59,9 +61,9 @@ Astro on Cloudflare Pages. Cloudflare Web Analytics counts page views without an
 
 ## Schedule and cost
 
-A [Cloudflare Worker](ops/daily-trigger/) starts the run at 06:05 UTC; GitHub's own schedule is the late-arriving backup and skips when a run already succeeded that UTC day with every core source; if bioRxiv, arXiv or PubMed failed, it redoes the day. About ten minutes later the run commits to `data/computational/` and the site rebuilds.
+A [Cloudflare Worker](ops/daily-trigger/) starts the run at 06:05 UTC; GitHub's own schedule is the late-arriving backup and skips when a run already succeeded that UTC day with every core source; if bioRxiv, arXiv or PubMed failed, it redoes the day. Each completed field commits to its own data directory, then the site rebuilds.
 
-LLM spend is about USD 0.50 a day against a USD 55 monthly ceiling; past the ceiling, new syntheses fall back to Haiku and the day is marked degraded. From Bluesky only aggregate counts, paper IDs and per-host coverage are kept, never identities, post text or credentials.
+Computational biology has averaged about USD 0.50 a day. Each field tracks its own spend against a USD 55 monthly threshold; past the ceiling, new syntheses fall back to Haiku and the day is marked degraded. From Bluesky only aggregate counts, paper IDs and per-host coverage are kept, never identities, post text or credentials.
 
 ## Run it yourself
 

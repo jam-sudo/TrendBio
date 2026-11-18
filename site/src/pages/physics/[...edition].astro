@@ -1,0 +1,71 @@
+---
+import Base from "../../layouts/Base.astro";
+import { loadDays, loadItems, loadTaxonomy, loadTopic } from "../../lib/data";
+import type { Day } from "../../lib/types";
+import sources from "../../../../config/sources/physics.yaml?raw";
+import { parse } from "yaml";
+
+export function getStaticPaths() {
+  const days = loadDays("physics");
+  return [
+    { params: { edition: undefined }, props: { day: days[0] ?? null } },
+    ...days.map(day => ({ params: { edition: `day/${day.date}` }, props: { day } })),
+  ];
+}
+
+interface Props { day: Day | null }
+const { day } = Astro.props;
+const days = loadDays("physics");
+const categories = new Map(loadTaxonomy("physics").map(category => [category.slug, category.label]));
+const source = parse(sources);
+const archives: string[] = source.arxiv.categories;
+const path = Astro.params.edition ? `/physics/${Astro.params.edition}/` : "/physics/";
+const rows = (day?.ranked ?? []).map(row => {
+  const topic = loadTopic("physics", row.slug);
+  const entry = topic?.history.find(entry => entry.date === day?.date);
+  const papers = loadItems("physics", entry?.item_ids ?? []);
+  return { row, papers, synthesis: topic && topic.synthesized_on === day?.date ? topic.synthesis : null };
+});
+---
+
+<Base physics title={day ? `Physics · ${day.date} — TrendBio` : "Physics — TrendBio"}
+  description="Daily physics research trends with the arXiv preprints behind each ranking."
+  canonicalPath={path} lastRun={day?.run.finished}>
+  <div class="prose">
+    <h1>Physics</h1>
+    <p class="coverage">Following {archives.map((archive, i) => <>{i > 0 && " · "}<a href={`https://arxiv.org/list/${archive}/recent`}>{categories.get(source.hints.arxiv_category[archive][0])}</a></>)} on arXiv.</p>
+    {day ? <>
+      <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
+      {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
+      {rows.length === 0 && <p>No physics topic cleared the ranking threshold for this date.</p>}
+      <ol class="rankings">
+        {rows.map(({ row, synthesis, papers }) => <li value={row.rank}>
+          <p class="category">{categories.get(row.category) ?? row.category}</p>
+          <h3>{row.headline}</h3>
+          <p>{row.summary}</p>
+          {papers.length > 0 && <details>
+            <summary>{papers.length} supporting {papers.length === 1 ? "paper" : "papers"}</summary>
+            {synthesis && <p>{synthesis}</p>}
+            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a></li>)}</ul>
+          </details>}
+        </li>)}
+      </ol>
+      {Astro.params.edition ? <p><a href="/physics/#editions">Browse physics editions</a></p> : <details class="archive" id="editions"><summary>Physics editions by date</summary>
+        <ul>{days.map(({ date }) => <li><a href={`/physics/day/${date}/`}>{date}</a></li>)}</ul>
+      </details>}
+    </> : <p>The first physics ranking will appear after the first collection run.</p>}
+  </div>
+</Base>
+
+<style>
+  .coverage, .category { color: var(--muted); }
+  .rankings { padding-inline-start: 2.5rem; }
+  .rankings > li { border-top: 1px solid var(--border); padding: 1rem 0 1rem .5rem; }
+  .rankings > li::marker { font-weight: 700; }
+  .category { margin: 0; font-size: var(--t3); }
+  h3 { margin: .25rem 0; font-size: 1.15rem; }
+  .rankings p { margin-bottom: .5rem; }
+  details p { margin-top: .75rem; }
+  summary { cursor: pointer; }
+  .archive { margin-block-start: 2rem; }
+</style>

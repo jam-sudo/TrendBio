@@ -3,6 +3,11 @@ name: Resynthesize
 on:
   workflow_dispatch:
     inputs:
+      domain:
+        description: Research field
+        type: choice
+        options: [computational, physics]
+        default: computational
       from:
         description: First date (YYYY-MM-DD)
         type: string
@@ -33,6 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     env:
+      DOMAIN: ${{ inputs.domain }}
       FROM: ${{ inputs.from }}
       TO: ${{ inputs.to }}
       MODEL: ${{ inputs.model }}
@@ -61,7 +67,7 @@ jobs:
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python -m pipeline resynthesize --domain computational --from "$FROM" --to "$TO" --model "$MODEL"
+          python -m pipeline resynthesize --domain "$DOMAIN" --from "$FROM" --to "$TO" --model "$MODEL"
       - name: Commit data
         run: |
           if [[ -n "$(git status --porcelain data)" ]]; then

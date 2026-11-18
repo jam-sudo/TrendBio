@@ -3,6 +3,11 @@ name: Backfill
 on:
   workflow_dispatch:
     inputs:
+      domain:
+        description: Research field
+        type: choice
+        options: [computational, physics]
+        default: computational
       from:
         description: First date (YYYY-MM-DD)
         type: string
@@ -34,6 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     env:
+      DOMAIN: ${{ inputs.domain }}
       FROM_DATE: ${{ inputs.from }}
       TO_DATE: ${{ inputs.to }}
     steps:
@@ -62,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RESUME: ${{ inputs.resume }}
         run: |
-          args=(backfill --domain computational --from "$FROM_DATE" --to "$TO_DATE")
+          args=(backfill --domain "$DOMAIN" --from "$FROM_DATE" --to "$TO_DATE")
           if [[ "$RESUME" == "true" ]]; then
             args+=(--resume)
           fi
@@ -99,4 +105,4 @@ jobs:
           EOF
           )
           if [[ "$PREV_FROM" < "$CHAIN_UNTIL" ]]; then echo "::notice::chain finished at $FROM"; exit 0; fi
-          gh workflow run backfill.yml -f from="$PREV_FROM" -f to="$PREV_TO" -f resume=false -f chain_until="$CHAIN_UNTIL"
+          gh workflow run backfill.yml -f domain="$DOMAIN" -f from="$PREV_FROM" -f to="$PREV_TO" -f resume=false -f chain_until="$CHAIN_UNTIL"

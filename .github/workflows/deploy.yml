@@ -33,7 +33,7 @@ jobs:
         working-directory: site
       - name: Choose data roots
         run: |
-          if [ -d data/computational/days ] && [ -n "$(ls -A data/computational/days)" ]; then
+          if compgen -G 'data/*/days/*.json' > /dev/null; then
             mkdir -p notes
             touch notes/.gitkeep
             echo "TRENDBIO_DATA_ROOT=../data" >> "$GITHUB_ENV"

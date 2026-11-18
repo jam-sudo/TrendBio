@@ -25,8 +25,8 @@ it('embeds the fixture points, canvas, native slider and a fallback link per top
   expect(loadMap('missing-domain')).toBeNull();
 });
 
-it('includes the Map navigation link on every HTML page', () => {
-  for (const path of readdirSync('dist', { recursive: true, encoding: 'utf8' }).filter(p => p.endsWith('.html'))) {
+it('includes the computational biology Map link throughout that edition', () => {
+  for (const path of readdirSync('dist', { recursive: true, encoding: 'utf8' }).filter(p => p.endsWith('.html') && !p.startsWith('physics/'))) {
     expect(readFileSync(join('dist', path), 'utf8'), path).toMatch(/<nav\b[\s\S]*href="\/map\/"[^>]*>Map<\/a>/);
   }
 });

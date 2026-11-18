@@ -97,6 +97,7 @@ def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
 def _messages(item: Item, taxonomy: Taxonomy, hints: list[str]) -> list[dict]:
     template = Path(__file__).with_name('prompts').joinpath('enrich.md').read_text(encoding='utf-8')
     prompt = template.format(
+        field=taxonomy.label, relevance=taxonomy.relevance,
         categories='\n'.join(f'{c.slug}: {c.label} — {c.covers}' for c in taxonomy.categories),
         hints=json.dumps(hints, ensure_ascii=False),
         item=json.dumps({'title': item.title, 'abstract': item.abstract}, ensure_ascii=False),
@@ -113,10 +114,11 @@ def _validate_categories(result: Enrichment | None, taxonomy: Taxonomy) -> Enric
 
 
 class LLM:
-    def __init__(self, client: anthropic.Anthropic, budget: Budget):
+    def __init__(self, client: anthropic.Anthropic, budget: Budget, *, field: str = 'computational biology'):
         # Own retries here so the SDK does not multiply attempts or retry other statuses.
         self.client = client.with_options(max_retries=0) if isinstance(client, anthropic.Anthropic) else client
         self.budget = budget
+        self.field = field
         self.fallback_reasons: dict[str, str] = {}
 
     def _failure(self, entity_id: str, reason: str, detail: str | None = None) -> None:
@@ -156,7 +158,7 @@ class LLM:
         self.fallback_reasons.pop(topic.slug, None)
         template = Path(__file__).with_name('prompts').joinpath('synthesize.md').read_text(encoding='utf-8')
         prompt = template.format(
-            category=topic.category, label=topic.label, signals=signals.model_dump_json(),
+            field=self.field, category=topic.category, label=topic.label, signals=signals.model_dump_json(),
             items='\n'.join(
                 f'{item.id} | {item.type} | {item.published_at} | {item.title} | {item.summary or ""}'
                 for item in items

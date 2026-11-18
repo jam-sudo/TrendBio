@@ -13,6 +13,9 @@ class Category(BaseModel):
 
 class Taxonomy(BaseModel):
     domain: str
+    label: str
+    relevance: str
+    fallback_category: str
     categories: list[Category]
 
     def slugs(self) -> list[str]:

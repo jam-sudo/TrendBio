@@ -14,6 +14,14 @@ class AllPaperSourcesFailed(Exception):
     pass
 
 
+PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed'}
+
+
+def all_paper_sources_failed(status: dict[str, str]) -> bool:
+    attempted = {status[name] for name in PAPER_SOURCES if status.get(name, 'skipped') != 'skipped'}
+    return attempted == {'failed'}
+
+
 def collect(
     domain: str, start: date, end: date, store: Store,
     adapters: list[SourceAdapter], client,
@@ -28,6 +36,6 @@ def collect(
             source_status[adapter.name] = "failed"
         else:
             source_status[adapter.name] = "ok"
-    if all(source_status[name] == "failed" for name in ("biorxiv", "arxiv", "pubmed")):
+    if all_paper_sources_failed(source_status):
         raise AllPaperSourcesFailed("All paper sources failed")
     return dedupe(items, store), source_status

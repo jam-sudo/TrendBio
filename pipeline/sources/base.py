@@ -21,8 +21,8 @@ class SourceAdapter(Protocol):
     def fetch(self, start: date, end: date, client: httpx.Client) -> list[Item]: ...
 
 
-def load_config() -> dict:
-    path = Path(__file__).resolve().parents[2] / 'config/sources/computational.yaml'
+def load_config(domain: str = 'computational') -> dict:
+    path = Path(__file__).resolve().parents[2] / 'config/sources' / f'{domain}.yaml'
     return yaml.safe_load(path.read_text(encoding='utf-8'))
 
 

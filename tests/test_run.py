@@ -1714,3 +1714,38 @@ def test_attention_success_does_not_use_llm_or_change_ranking(ctx, monkeypatch, 
     assert run_day('computational', TODAY, ctx.store, ctx.deps) == baseline
     assert ctx.deps.budget.usage() == usage and len(ctx.deps.llm.calls) == calls
     assert json.loads((ctx.root / 'computational/attention' / f'{TODAY}.json').read_text()) == payload
+
+
+def test_physics_uses_its_own_source_prompt_categories_and_store(ctx, monkeypatch):
+    from pipeline.__main__ import build_deps
+    from pipeline.llm import _messages
+
+    monkeypatch.setenv('ANTHROPIC_API_KEY', 'fixture')
+    deps = build_deps('physics', ctx.root, synthesis_only=True)
+    try:
+        assert [adapter.name for adapter in deps.adapters] == ['arxiv']
+        assert deps.budget.path == ctx.root / 'physics/llm_spend.json'
+        prompt = _messages(ctx.items[0], deps.taxonomy, [])[0]['content']
+        assert 'Physics' in prompt and 'experimental' in prompt and 'biomedicine' not in prompt
+        items = [item.model_copy(update={
+            'source': 'arxiv', 'id': f'arxiv:fixture-{i}', 'title': f'Quantum measurement {i}',
+            'abstract': 'Measurements of entangled photons.', 'metadata': {'arxiv_primary_category': 'quant-ph'},
+        }) for i, item in enumerate(ctx.items)]
+        deps.adapters = [FakeAdapter('arxiv', items)]
+        deps.embedder, deps.llm = FakeEmbedder(), ctx.deps.llm
+        monkeypatch.setattr(deps.llm, 'enrich', lambda *args: None)
+        monkeypatch.setattr(deps.llm, 'synthesize', lambda *args, **kwargs: None)
+        monkeypatch.setattr('pipeline.run.collect_attention', lambda *args: None)
+        before = tree(ctx.store.root / 'computational')
+        store = Store(ctx.root, 'physics')
+        day = run_day('physics', TODAY, store, deps)
+        assert store.get_day(TODAY) == day and day.ranked[0].category == 'quantum'
+        assert day.run.source_status['biorxiv'] == 'skipped'
+        assert tree(ctx.store.root / 'computational') == before
+        deps.adapters[0].error = RuntimeError('offline')
+        from pipeline.collect import AllPaperSourcesFailed
+        with pytest.raises(AllPaperSourcesFailed):
+            run_day('physics', TODAY, store, deps)
+        assert store.get_day(TODAY) == day
+    finally:
+        deps.client.close()

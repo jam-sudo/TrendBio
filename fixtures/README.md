@@ -17,6 +17,7 @@ No network requests or LLM calls generate this dataset.
 - `data/computational/items/YYYY/MM/`: 320 items across all five sources. Each
   topic has a linked preprint/published pair counted once as published. Paths use
   `first_seen`, with both `:` and `/` in the ID replaced by `_`.
+- `data/physics/`: one optics ranking on November 1 with three synthetic arXiv records.
 - `notes/`: one editor note and one deliberate orphan, `nonexistent-topic-zzzz`.
 
 Centroids are synthetic five-dimensional unit vectors, not scientific embeddings.

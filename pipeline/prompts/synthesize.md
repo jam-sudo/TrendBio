@@ -1,4 +1,4 @@
-Synthesize this computational biology topic for expert readers with graduate-level familiarity.
+Synthesize this {field} topic for expert readers with graduate-level familiarity.
 Use a precise, expert tone without introductory explanations or hype.
 
 Topic category (context only): {category}

@@ -34,7 +34,7 @@ from pipeline.synthesize import synthesize_top
 from pipeline.wipe import validate_month_range, wipe as wipe_store
 
 
-app = typer.Typer(help='Collect, rank, and synthesize computational biology trends.', no_args_is_help=True)
+app = typer.Typer(help='Collect, rank, and synthesize research trends.', no_args_is_help=True)
 Domain = Annotated[str, typer.Option(help='Configured taxonomy domain.')]
 DataRoot = Annotated[Path, typer.Option(help='Root directory for pipeline data.')]
 FromDate = Annotated[datetime, typer.Option('--from', formats=['%Y-%m-%d'])]
@@ -53,13 +53,21 @@ def configure_logging():
 def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) -> Deps:
     cfg = load_scoring()
     taxonomy = load_taxonomy(domain)
-    sources = load_config()
+    sources = load_config(domain)
+    adapters = []
+    for adapter in (BiorxivAdapter, ArxivAdapter, PubmedAdapter, GithubAdapter, RssAdapter):
+        if adapter.name not in sources:
+            continue
+        if adapter is GithubAdapter:
+            adapters.append(adapter(sources, star_counts=Store(data_root, domain).star_counts(),
+                                    star_gain_threshold=cfg.star_gain_threshold))
+        else:
+            adapters.append(adapter(sources))
     budget = Budget(data_root / domain / 'llm_spend.json', cfg.monthly_ceiling_usd)
     return Deps(
-        adapters=[BiorxivAdapter(sources), ArxivAdapter(sources), PubmedAdapter(sources),
-                  GithubAdapter(sources, star_counts=Store(data_root, domain).star_counts(),
-                                star_gain_threshold=cfg.star_gain_threshold), RssAdapter(sources)],
-        llm=LLM(anthropic.Anthropic(), budget), embedder=None if synthesis_only else Embedder(), budget=budget,
+        adapters=adapters,
+        llm=LLM(anthropic.Anthropic(), budget, field=taxonomy.label),
+        embedder=None if synthesis_only else Embedder(), budget=budget,
         cfg=cfg, taxonomy=taxonomy, hints_cfg=sources.get('hints', {}),
         client=httpx.Client(timeout=30),
     )

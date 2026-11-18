@@ -3,6 +3,11 @@ name: Maintenance
 on:
   workflow_dispatch:
     inputs:
+      domain:
+        description: Research field
+        type: choice
+        options: [computational, physics]
+        default: computational
       command:
         description: Maintenance command
         type: choice
@@ -51,6 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     env:
+      DOMAIN: ${{ inputs.domain }}
       COMMAND: ${{ inputs.command }}
       REENRICH: ${{ inputs.reenrich }}
       ONLY_MISSING_SYNTHESIS: ${{ inputs.only_missing_synthesis }}
@@ -83,7 +89,7 @@ jobs:
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          args=(--domain computational)
+          args=(--domain "$DOMAIN")
           if [[ "$COMMAND" != "map" ]]; then args+=(--from "$FROM" --to "$TO"); fi
           case "$COMMAND" in
             reprocess)
