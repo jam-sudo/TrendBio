@@ -1,0 +1,41 @@
+{
+  "abstract": "Background: MRI-guided laser interstitial thermal therapy (LITT) provides minimally invasive option for surgical treatment of recurrent brain tumors. While patient-specific prediction of thermal dose distributions would improve treatment planning, no quantitative methods currently exist for this purpose. Although conventional numerical solvers are being widely investigated, these methods are computationally expensive and often limited by accuracy and reliability. Purpose: Here we propose DeepoLITT, a rapid and accurate model to predict quantitatively heat propagation in LITT procedures. This study represents the first phase of the investigation which focuses on training and validating synthetic datasets to test model,s accuracy, robustness, and computational efficiency. Methods: We built DeepoLITT on a branch-trunk neural network architecture, where the first branch extracts feature from tumor images, the second branch encodes laser parameters (power, duration, and probe orientation), and the trunk models the mapping from spatial coordinates to the resulting temperature field. To train and test the model, we generated synthetic datasets with different noise levels (0~20%) to mimic LITT procedures with two distinct laser probe types (FullFire and SideFire [Monteris, Inc.]) by a FEM (finite element method) solver. The dataset consisted of 400 samples, of which 90% were used for training and validation and 10% for testing. To evaluate spatial similarity of predicted thermal dose distribution against the ground truth, we employed Dice Similarity Coefficient (DSC) and Hausdorff Distance (HD) computed on CEM43 (Cumulative Equivalent Minutes at 43 {degrees}C) isodose contours at thresholds of 2, 10, and 60 minutes. Finally, we evaluated the model,s inference speed with a representative image grid. Results: For the FullFire laser probe, the DeepoLITT model achieved temperature prediction error with average values ranging from 1.16{+/-}0.40% to 2.92{+/-}0.25%, and peak values ranging from 4.26{+/-}1.31% to 14.94{+/-}0.43% as data noise increased from 0% to 20%. For the SideFire laser probe, the model achieved temperature prediction error with average values ranging from 3.79{+/-}0.53% to 5.13{+/-}1.00% and peak values ranging from 15.18{+/-}7.15% to 20.75{+/-}2.84%. For thermal dose assessment, at the noise-free level for the FullFire laser probe, the model exhibited strong spatial agreement with FEM references, yielding DSCs of 0.96{+/-}0.02, 0.97{+/-}0.21, and 0.96{+/-}0.21 with corresponding HDs of 0.09{+/-}0.08 mm, 0.07{+/-}0.07 mm, and 0.06{+/-}0.08 mm at 2-, 10-, and 60-minute CEM43 thresholds. For the SideFire laser probe, the model achieved DSCs of 0.96{+/-}0.02, 0.97{+/-}0.21, and 0.96{+/-}0.21, with corresponding HDs of 0.20{+/-}0.31mm, 0.11{+/-}0.30 mm, and 0.15{+/-}0.31 mm, respectively. As the noise level increases, these DSC values show a decreasing trend, and the HD values increase. In terms of computational efficiency, the DeepoLITT model inferences temperature maps with 0.04{+/-}0.05 seconds per 3D sample ([31 x 31 x 3] grid), compared to 24.32{+/-}2.12 seconds required by the FEM solver. Conclusions: The study with synthetic data demonstrates the proposed model is an accurate and rapid method in predicting thermal dose. After testing clinical data, the method has high feasibility to be deployed in real clinical environment.",
+  "authors": [
+    "Lu, Y.",
+    "Krucoff, M. O."
+  ],
+  "doi": "10.64898/2026.11.17.767113",
+  "first_seen": "2026-11-19",
+  "id": "biorxiv:10.64898/2026.11.17.767113",
+  "metadata": {
+    "abstract": "Background: MRI-guided laser interstitial thermal therapy (LITT) provides minimally invasive option for surgical treatment of recurrent brain tumors. While patient-specific prediction of thermal dose distributions would improve treatment planning, no quantitative methods currently exist for this purpose. Although conventional numerical solvers are being widely investigated, these methods are computationally expensive and often limited by accuracy and reliability. Purpose: Here we propose DeepoLITT, a rapid and accurate model to predict quantitatively heat propagation in LITT procedures. This study represents the first phase of the investigation which focuses on training and validating synthetic datasets to test model,s accuracy, robustness, and computational efficiency. Methods: We built DeepoLITT on a branch-trunk neural network architecture, where the first branch extracts feature from tumor images, the second branch encodes laser parameters (power, duration, and probe orientation), and the trunk models the mapping from spatial coordinates to the resulting temperature field. To train and test the model, we generated synthetic datasets with different noise levels (0~20%) to mimic LITT procedures with two distinct laser probe types (FullFire and SideFire [Monteris, Inc.]) by a FEM (finite element method) solver. The dataset consisted of 400 samples, of which 90% were used for training and validation and 10% for testing. To evaluate spatial similarity of predicted thermal dose distribution against the ground truth, we employed Dice Similarity Coefficient (DSC) and Hausdorff Distance (HD) computed on CEM43 (Cumulative Equivalent Minutes at 43 {degrees}C) isodose contours at thresholds of 2, 10, and 60 minutes. Finally, we evaluated the model,s inference speed with a representative image grid. Results: For the FullFire laser probe, the DeepoLITT model achieved temperature prediction error with average values ranging from 1.16{+/-}0.40% to 2.92{+/-}0.25%, and peak values ranging from 4.26{+/-}1.31% to 14.94{+/-}0.43% as data noise increased from 0% to 20%. For the SideFire laser probe, the model achieved temperature prediction error with average values ranging from 3.79{+/-}0.53% to 5.13{+/-}1.00% and peak values ranging from 15.18{+/-}7.15% to 20.75{+/-}2.84%. For thermal dose assessment, at the noise-free level for the FullFire laser probe, the model exhibited strong spatial agreement with FEM references, yielding DSCs of 0.96{+/-}0.02, 0.97{+/-}0.21, and 0.96{+/-}0.21 with corresponding HDs of 0.09{+/-}0.08 mm, 0.07{+/-}0.07 mm, and 0.06{+/-}0.08 mm at 2-, 10-, and 60-minute CEM43 thresholds. For the SideFire laser probe, the model achieved DSCs of 0.96{+/-}0.02, 0.97{+/-}0.21, and 0.96{+/-}0.21, with corresponding HDs of 0.20{+/-}0.31mm, 0.11{+/-}0.30 mm, and 0.15{+/-}0.31 mm, respectively. As the noise level increases, these DSC values show a decreasing trend, and the HD values increase. In terms of computational efficiency, the DeepoLITT model inferences temperature maps with 0.04{+/-}0.05 seconds per 3D sample ([31 x 31 x 3] grid), compared to 24.32{+/-}2.12 seconds required by the FEM solver. Conclusions: The study with synthetic data demonstrates the proposed model is an accurate and rapid method in predicting thermal dose. After testing clinical data, the method has high feasibility to be deployed in real clinical environment.",
+    "author_corresponding": "Yonggang Lu",
+    "author_corresponding_institution": "Medical College Of Wisconsin",
+    "authors": "Lu, Y.; Krucoff, M. O.",
+    "biorxiv_category": "biophysics",
+    "category": "biophysics",
+    "date": "2026-11-18",
+    "doi": "10.64898/2026.11.17.767113",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/18/2026.11.17.767113.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A Deep Operator Network to Predict Thermal Dose on Brain Tumors in MRI-Guided Laser Induced Thermal Therapy: with Synthetic Data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Medical College Of Wisconsin",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "DeepoLITT, a branch-trunk deep operator network, predicts thermal dose in MRI-guided laser therapy of brain tumors, trained on FEM synthetic data with high DSC…",
+  "title": "A Deep Operator Network to Predict Thermal Dose on Brain Tumors in MRI-Guided Laser Induced Thermal Therapy: with Synthetic Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.17.767113"
+}

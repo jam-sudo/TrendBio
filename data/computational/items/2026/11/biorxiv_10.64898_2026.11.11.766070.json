@@ -1,0 +1,46 @@
+{
+  "abstract": "Researchers formulate mechanistic hypotheses in slides and figures long before they write them as text, yet knowledge-graph (KG) tools expect a query in the vocabulary of the graph. We present BiomedCAT, an open-source workflow that turns biomedical slides into a subgraph of the RTX-KG2c knowledge graph shaped by the user's research profile, on a laptop and without sending the documents out. A small vision-language model describes each slide; a 4-billion-parameter agent types the terms into the classes of the Biolink model; an existence gate removes invented entities; identifiers are retrieved from Translator services or from a local table and selected, never generated, by a judge model; and a profile-weighted two-hop expansion builds the context graph. On a synthetic Biolink typing benchmark whose labels were audited by an expert, the local agent reaches 0.71 accuracy on 517 non-ambiguous mentions, 4 points below Claude Opus 5 (0.75), level with DeepSeek-V4-Flash (0.69) and above open-weight models of 24 and 31 billion parameters; the audit also showed that 55\\% of the generated labels were wrong or ambiguous. On expert-annotated slide decks, the reading stage recovers 81 to 94\\% of the explicit terms of the English deck, less on French decks, and linking assigns the expert identifier to 65\\% of the found terms online and 26\\% in the fully local mode. A one-slide run takes 33 to 42 minutes, with peaks of 9.8~GB of system RAM above idle and 5.3~GB of GPU memory. In a facioscapulohumeral muscular dystrophy (FSHD) case, three slides that each draw one pathway from DUX4 at a different biological scale give graphs that overlap by 7 to 15\\% of their nodes, each recovering its own pathway's expected nodes, and expose sourced paths from DUX4, such as a DUX4--HMGB1 interaction from IntAct. Of 21 compounds tested in FSHD, seven, including every agent that targets DUX4, are absent from RTX-KG2c, which bounds what a graph-based approach can propose. BiomedCAT lets a researcher set a working hypothesis against curated knowledge, with every edge traceable to its source.",
+  "authors": [
+    "Muller, S.",
+    "Chahma, S. E.",
+    "Hoogenbosch, L.",
+    "Torlay, L.",
+    "Dumonceaux, J.",
+    "Hourde, C."
+  ],
+  "doi": "10.64898/2026.11.11.766070",
+  "first_seen": "2026-11-19",
+  "id": "biorxiv:10.64898/2026.11.11.766070",
+  "metadata": {
+    "abstract": "Researchers formulate mechanistic hypotheses in slides and figures long before they write them as text, yet knowledge-graph (KG) tools expect a query in the vocabulary of the graph. We present BiomedCAT, an open-source workflow that turns biomedical slides into a subgraph of the RTX-KG2c knowledge graph shaped by the user's research profile, on a laptop and without sending the documents out. A small vision-language model describes each slide; a 4-billion-parameter agent types the terms into the classes of the Biolink model; an existence gate removes invented entities; identifiers are retrieved from Translator services or from a local table and selected, never generated, by a judge model; and a profile-weighted two-hop expansion builds the context graph. On a synthetic Biolink typing benchmark whose labels were audited by an expert, the local agent reaches 0.71 accuracy on 517 non-ambiguous mentions, 4 points below Claude Opus 5 (0.75), level with DeepSeek-V4-Flash (0.69) and above open-weight models of 24 and 31 billion parameters; the audit also showed that 55\\% of the generated labels were wrong or ambiguous. On expert-annotated slide decks, the reading stage recovers 81 to 94\\% of the explicit terms of the English deck, less on French decks, and linking assigns the expert identifier to 65\\% of the found terms online and 26\\% in the fully local mode. A one-slide run takes 33 to 42 minutes, with peaks of 9.8~GB of system RAM above idle and 5.3~GB of GPU memory. In a facioscapulohumeral muscular dystrophy (FSHD) case, three slides that each draw one pathway from DUX4 at a different biological scale give graphs that overlap by 7 to 15\\% of their nodes, each recovering its own pathway's expected nodes, and expose sourced paths from DUX4, such as a DUX4--HMGB1 interaction from IntAct. Of 21 compounds tested in FSHD, seven, including every agent that targets DUX4, are absent from RTX-KG2c, which bounds what a graph-based approach can propose. BiomedCAT lets a researcher set a working hypothesis against curated knowledge, with every edge traceable to its source.",
+    "author_corresponding": "Sandrine Muller",
+    "author_corresponding_institution": "Univ. Grenoble Alpes, CNRS, Grenoble INP, LIG, 38000 Grenoble, France",
+    "authors": "Muller, S.; Chahma, S. E.; Hoogenbosch, L.; Torlay, L.; Dumonceaux, J.; Hourde, C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-18",
+    "doi": "10.64898/2026.11.11.766070",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/18/2026.11.11.766070.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BiomedCAT: Biomedical Context Analysis Tool for Supporting Mechanistic Hypothesis Generation via User-defined Contextual Subgraph Extraction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Univ. Grenoble Alpes, CNRS, Grenoble INP, LIG, 38000 Grenoble, France",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai",
+    "systems"
+  ],
+  "source": "biorxiv",
+  "summary": "BiomedCAT is an open-source local workflow turning biomedical slides into user-shaped RTX-KG2c subgraphs using a vision-language model, a typing agent, and…",
+  "title": "BiomedCAT: Biomedical Context Analysis Tool for Supporting Mechanistic Hypothesis Generation via User-defined Contextual Subgraph Extraction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.11.766070"
+}

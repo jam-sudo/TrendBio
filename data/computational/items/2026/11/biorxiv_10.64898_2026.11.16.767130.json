@@ -1,0 +1,44 @@
+{
+  "abstract": "Genomic assays now produce per-base signals for cohorts comprising thousands of samples. However, existing genomic data storage formats (e.g., D4, bigWig) were designed primarily for single samples or individual datasets. Consequently, cohort-scale analyses across samples, populations, or species require opening, reading, and merging thousands of files before proceeding to downstream computational analyses. Here, we present pbzarr, a format and toolkit that stores per-base genomic data from many samples and assays as a single Zarr store. Across multiple datasets, pbzarr simplified cohort construction to a single command and created cohort-scale datasets up to 2.1x faster than existing approaches while simultaneously using 5-6x less memory. More importantly, pbzarr compresses signal tracks to only a fraction of the input data size, using only 3.3% of the input size to store per-base coverage for 1,024 short-read genomes. Despite this smaller storage footprint, pbzarr maintains fast access to underlying genomic data: region-based queries complete 61x faster than D4 and 6x faster than bigWig, and full-genome scans are as fast or faster than existing formats. Finally, because pbzarr stores are native Zarr arrays, it integrates directly with widely used array libraries (e.g., Xarray and Dask), allowing cohort-scale analyses to be expressed in a single line of Python code using standard array operations instead of a complex, custom pipeline. Together, our results suggest that pbzarr is dramatically smaller, substantially simpler, and faster than competing formats for biobank-scale analysis. pbzarr is open source and available at https://github.com/pbzarr/pbzarr.",
+  "authors": [
+    "Mirchandani, C.",
+    "Meyer, W.",
+    "Garretson, A.",
+    "Quinlan, A. R.",
+    "Vollger, M. R."
+  ],
+  "doi": "10.64898/2026.11.16.767130",
+  "first_seen": "2026-11-19",
+  "id": "biorxiv:10.64898/2026.11.16.767130",
+  "metadata": {
+    "abstract": "Genomic assays now produce per-base signals for cohorts comprising thousands of samples. However, existing genomic data storage formats (e.g., D4, bigWig) were designed primarily for single samples or individual datasets. Consequently, cohort-scale analyses across samples, populations, or species require opening, reading, and merging thousands of files before proceeding to downstream computational analyses. Here, we present pbzarr, a format and toolkit that stores per-base genomic data from many samples and assays as a single Zarr store. Across multiple datasets, pbzarr simplified cohort construction to a single command and created cohort-scale datasets up to 2.1x faster than existing approaches while simultaneously using 5-6x less memory. More importantly, pbzarr compresses signal tracks to only a fraction of the input data size, using only 3.3% of the input size to store per-base coverage for 1,024 short-read genomes. Despite this smaller storage footprint, pbzarr maintains fast access to underlying genomic data: region-based queries complete 61x faster than D4 and 6x faster than bigWig, and full-genome scans are as fast or faster than existing formats. Finally, because pbzarr stores are native Zarr arrays, it integrates directly with widely used array libraries (e.g., Xarray and Dask), allowing cohort-scale analyses to be expressed in a single line of Python code using standard array operations instead of a complex, custom pipeline. Together, our results suggest that pbzarr is dramatically smaller, substantially simpler, and faster than competing formats for biobank-scale analysis. pbzarr is open source and available at https://github.com/pbzarr/pbzarr.",
+    "author_corresponding": "Mitchell R. Vollger",
+    "author_corresponding_institution": "Department of Human Genetics and Utah Center for Genetic Discovery, University of Utah, Salt Lake City, UT, USA",
+    "authors": "Mirchandani, C.; Meyer, W.; Garretson, A.; Quinlan, A. R.; Vollger, M. R.",
+    "biorxiv_category": "genomics",
+    "category": "genomics",
+    "date": "2026-11-18",
+    "doi": "10.64898/2026.11.16.767130",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/18/2026.11.16.767130.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "pbzarr: cohort-scale storage and analysis of per-base genomic data with Zarr",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Department of Human Genetics and Utah Center for Genetic Discovery, University of Utah, Salt Lake City, UT, USA",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-18",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "pbzarr: a Zarr-based format and toolkit storing per-base genomic data for thousands of samples, faster and smaller than D4 and bigWig.",
+  "title": "pbzarr: cohort-scale storage and analysis of per-base genomic data with Zarr",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.16.767130"
+}
