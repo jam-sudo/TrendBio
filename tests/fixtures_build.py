@@ -190,8 +190,8 @@ def build(root: Path) -> None:
                       source_status={source: "ok" for source in ("biorxiv", "arxiv", "pubmed", "github", "rss")})
         dump(Day(domain="computational", date=today, ranked=sorted(ranked, key=lambda row: row.rank), run=run),
              day_path(root / "data", "computational", today))
-    build_arxiv_edition(root / "data", days[-1], "physics")
-    build_arxiv_edition(root / "data", days[-1], "math")
+    for domain in ("physics", "math", "earth-environment"):
+        build_field_edition(root / "data", days[-1], domain)
     notes = root / "notes"
     notes.mkdir(parents=True, exist_ok=True)
     (notes / "protein-design-binders-a1b2.md").write_text(
@@ -200,28 +200,42 @@ def build(root: Path) -> None:
         "This deliberate orphan note verifies that a missing topic produces a warning, not a failed build.\n", encoding="utf-8")
 
 
-def build_arxiv_edition(root: Path, day: date, domain: str) -> None:
+def build_field_edition(root: Path, day: date, domain: str) -> None:
     if domain == "physics":
         titles = ("Readout noise in an optical cavity", "Cavity linewidth and readout noise", "Measuring optical cavity losses")
         category, prefix, slug, label = "optics", "cavity", "cavity-readout-fixture", "Cavity readout"
         headline = "Optical cavities reveal sources of readout noise"
         summary = "Three fixture papers examine light losses and readout noise."
         synthesis = "The fixture papers compare measurements of light loss in optical cavities."
-    else:
+    elif domain == "math":
         titles = ("Quadrature bounds for smooth curves", "Error estimates for smooth quadrature", "Convergence of smooth quadrature rules")
         category, prefix, slug, label = "numerical-analysis", "quadrature", "quadrature-fixture", "Quadrature error"
         headline = "Quadrature error bounds depend on smoothness"
         summary = "The fixture papers examine quadrature error for smooth functions."
         synthesis = "Each example assumes that the integrand is smooth."
+    else:
+        titles = tuple(f"Coastal temperature record at example station {i}" for i in range(1, 4))
+        category, prefix, slug, label = "oceans", "ocean", "ocean-observations-fixture", "Ocean observations"
+        headline = "Coastal temperature observations across three stations"
+        summary = "Three reports document regional coastal temperature measurements."
+        synthesis = "Each station supplies a record from its local coastline."
+    earth = domain == "earth-environment"
     papers = []
     for i, title in enumerate(titles, 1):
         paper = Item(id=f"arxiv:{category}-fixture-{i}", source="arxiv", type="preprint", title=title,
                      url=f"https://example.org/{domain}/{prefix}-{i}", doi=None, published_at=day,
                      first_seen=day, authors=[], org=None, abstract=title, summary=title,
                      primary_category=category, published_doi=None, preprint_id=None)
+        if earth:
+            paper.doi = f"10.5555/example-earth-{i}"
+            paper.id, paper.type, paper.source = f"doi:{paper.doi}", "published", "crossref"
+            paper.url, paper.authors = f"https://example.org/earth/ocean-{i}", ["Example Ocean Group"]
+            paper.metadata = {"journal": "Ocean Science", "license": "https://creativecommons.org/licenses/by/4.0/",
+                              "dataset_dois": ["10.5555/example-data"] if i == 1 else []}
         dump(paper, item_path(root, domain, paper))
         papers.append(paper.id)
-    signals = Signals(preprint=len(papers), published=0, code=0, industry=0, rise_ratio=1, star_gain_7d=0)
+    signals = Signals(preprint=0 if earth else len(papers), published=len(papers) if earth else 0,
+                      code=0, industry=0, rise_ratio=1, star_gain_7d=0)
     scores = Scores(rise=1, volume=0.35, diversity=0.25, code_velocity=0, penalty=0, total=0.565)
     row = RankedTopic(slug=slug, category=category, rank=1, headline=headline, summary=summary,
                       signals=signals, scores=scores)
@@ -233,7 +247,7 @@ def build_arxiv_edition(root: Path, day: date, domain: str) -> None:
     dump(topic, topic_path(root, domain, topic.slug))
     stamp = datetime.combine(day, time(6), tzinfo=timezone.utc)
     run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False,
-                  synthesis_model="fixture", source_status={"arxiv": "ok"})
+                  synthesis_model="fixture", source_status={"crossref" if earth else "arxiv": "ok"})
     dump(Day(domain=domain, date=day, ranked=[row], run=run), day_path(root, domain, day))
 
 
