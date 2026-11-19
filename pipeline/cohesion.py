@@ -5,26 +5,31 @@ import json
 from pathlib import Path
 
 
-def review_clusters(clusters, papers, store, deps):
+def review_clusters(clusters, papers, store, deps, day):
     template = Path(__file__).with_name('prompts').joinpath('cohesion.md').read_text()
     minimum = deps.cfg.min_cluster_size
     by_id = {p.id: p for p in papers}
 
     def review(ids):
         items = [by_id[i] for i in sorted(ids)]
-        records = [{'id': i.id, 'title': i.title, 'abstract': i.abstract} for i in items]
-        prompt = template.format(field=deps.taxonomy.label, minimum=minimum, records=json.dumps(records, ensure_ascii=False))
-        key = sha256(('claude-haiku-5-5\n' + prompt).encode()).hexdigest()
+        records = [{'paper': n, 'title': i.title, 'abstract': i.abstract} for n, i in enumerate(items, 1)]
+        prompt = template.format(field=deps.taxonomy.label, records=json.dumps(records, ensure_ascii=False))
+        key = sha256(json.dumps(['claude-haiku-5-5', sorted(ids), prompt]).encode()).hexdigest()
         path = store.root / store.domain / 'cohesion' / (key + '.json')
         if path.exists():
             result = json.loads(path.read_text())
         else:
-            result = deps.llm.review_cohesion(prompt, items, minimum, key)
+            result = deps.llm.review_cohesion(prompt, items, key)
             if result is None:
-                return [], 'cohesion-review-failed:' + key
+                return key, [], 'cohesion-review-failed:' + key
             store._write(path, {**result, 'candidates': sorted(ids)})
-        return result['retained'], None
+        groups = [sorted(e['id'] for e in g['evidence']) for g in result['groups'] if len(g['evidence']) >= minimum]
+        return key, sorted(groups), None
 
     with ThreadPoolExecutor(max_workers=deps.cfg.synthesis_workers) as pool:
         reviewed = list(pool.map(review, clusters))
-    return [ids for ids, _ in reviewed if ids], [error for _, error in reviewed if error]
+    candidates = [{'review': key, 'items': sorted(ids), 'qualified': groups, 'failed': bool(error)}
+                  for ids, (key, groups, error) in zip(clusters, reviewed, strict=True)]
+    store._write(store.root / store.domain / 'audits' / f'cohesion-{day}.json',
+                 {'minimum': minimum, 'candidates': candidates})
+    return [ids for _, groups, _ in reviewed for ids in groups], [error for _, _, error in reviewed if error]

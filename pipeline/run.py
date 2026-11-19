@@ -265,7 +265,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             clusters = cluster_items(ids, embeddings, deps.cfg)
             if deps.taxonomy.review_cluster_cohesion:
                 counts['candidates'] = len(clusters)
-                clusters, review_notes = review_clusters(clusters, papers, store, deps)
+                clusters, review_notes = review_clusters(clusters, papers, store, deps, day)
                 notes.extend(review_notes)
             counts.update(items=len(ids), clusters=len(clusters))
         with _stage('continuity', topics_new=0, topics_continued=0) as counts:

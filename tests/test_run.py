@@ -53,9 +53,9 @@ class FakeLLM:
         return Enrichment(summary=item.title, primary='structural', secondary=[],
                           relevant=item.id not in self.irrelevant_ids)
 
-    def review_cohesion(self, prompt, items, minimum, key):
-        assert all(item.id in prompt for item in items)
-        return {'question': 'Fixture shared research question', 'retained': [item.id for item in items]}
+    def review_cohesion(self, prompt, items, key):
+        assert all(item.title in prompt for item in items)
+        return {'groups': [{'topic': 'Fixture shared research question', 'evidence': [{'id': i.id} for i in items]}]}
 
     def enrich_batch(self, items, taxonomy, hints_by_id, model='claude-haiku-5-5'):
         self.batches.append([item.id for item in items])

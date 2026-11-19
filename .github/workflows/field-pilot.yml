@@ -16,7 +16,7 @@ on:
         options: [rank, audit, repair-summaries, rerank]
         default: rank
       prior_run:
-        description: Successful pilot run ID for audit, repair or rerank
+        description: Prior pilot ID. Rank can start from the previous UTC day. Other actions use the requested day.
         type: string
 
 permissions:
@@ -39,7 +39,7 @@ jobs:
           [[ "$DOMAIN" == math || "$DOMAIN" == earth-environment ]]
           [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
           [[ "$(date -u -d "$RUN_DATE" +%F)" == "$RUN_DATE" && "$RUN_DATE" < "$(date -u -d tomorrow +%F)" ]]
-          if [[ "$PILOT_ACTION" == rank ]]; then [[ -z "$PRIOR_RUN" ]]; else [[ "$PRIOR_RUN" =~ ^[0-9]+$ ]]; fi
+          if [[ -n "$PRIOR_RUN" || "$PILOT_ACTION" != rank ]]; then [[ "$PRIOR_RUN" =~ ^[0-9]+$ ]]; fi
       - name: Restore the reviewed date
         if: ${{ inputs.prior_run != '' }}
         env:
@@ -49,8 +49,14 @@ jobs:
             (.path == ".github/workflows/daily.yml" or .path == ".github/workflows/field-pilot.yml")
             and .head_branch == "main" and .event == "workflow_dispatch" and .conclusion == "success"' >/dev/null
           gh run download "$PRIOR_RUN" --pattern "$DOMAIN-pilot-$PRIOR_RUN-*" --dir "$RUNNER_TEMP/prior-pilot"
-          mapfile -t days < <(find "$RUNNER_TEMP/prior-pilot" -type f -path "*/$DOMAIN/days/$RUN_DATE.json")
+          restore_date="$RUN_DATE"
+          if [[ "$PILOT_ACTION" == rank ]]; then restore_date="$(date -u -d "$RUN_DATE -1 day" +%F)"; fi
+          mapfile -t days < <(find "$RUNNER_TEMP/prior-pilot" -type f -path "*/$DOMAIN/days/$restore_date.json")
           [[ ${#days[@]} == 1 ]]
+          if [[ "$PILOT_ACTION" == rank ]]; then
+            latest="$(find "$(dirname "${days[0]}")" -maxdepth 1 -name '*.json' -printf '%f\n' | sort | tail -1)"
+            [[ "$latest" == "$restore_date.json" ]]
+          fi
           mkdir science-pilot
           cp -R "$(dirname "$(dirname "${days[0]}")")" "science-pilot/$DOMAIN"
       - uses: actions/setup-python@v5

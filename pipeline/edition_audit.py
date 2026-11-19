@@ -2,6 +2,7 @@
 from collections import Counter, defaultdict, deque
 from datetime import date, timedelta
 from hashlib import sha256
+import json
 
 from pipeline.cluster import cluster_items
 from pipeline.config import load_scoring, load_taxonomy
@@ -72,8 +73,17 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                   and item.first_seen <= when and first <= (item.published_at if taxonomy.window_by_publication
                                                             else item.first_seen) <= when}
         ranks = {r.slug: r for r in day.ranked}
-        top = {r.slug for r in day.ranked[:10]}
+        official_top = {r.slug for r in day.ranked[:10]}
+        split = min(10, (len(day.ranked) + 1) // 2)
+        top = {r.slug for r in day.ranked[:split]}
         bottom = {r.slug for r in day.ranked[-10:]} - top
+        receipt = store.root / store.domain / 'audits' / f'cohesion-{when}.json'
+        reasons = {}
+        candidates = json.loads(receipt.read_text())['candidates'] if receipt.exists() else None
+        for candidate in candidates or []:
+            qualified = {i for group in candidate['qualified'] for i in group}
+            for identifier in set(candidate['items']) - qualified:
+                reasons[identifier] = 'review-failed' if candidate['failed'] else 'below-minimum-reviewed-group'
         counts, venues = defaultdict(Counter), Counter()
         for paper in papers.values():
             cat = paper.primary_category or taxonomy.fallback_category
@@ -97,7 +107,7 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                 assignments[paper.primary_category or taxonomy.fallback_category][cat] += 1
             if row:
                 ranked_ids.update(entry.item_ids)
-            if topic.slug in top:
+            if topic.slug in official_top:
                 top_ids.update(entry.item_ids)
             bucket = 'top' if topic.slug in top else 'bottom' if topic.slug in bottom else 'excluded' if not row else None
             if bucket:
@@ -110,7 +120,7 @@ def audit_edition(store: Store, start: date, end: date, references=()):
         for paper in papers.values():
             if paper.id not in clustered:
                 samples['excluded'].append({'date': str(when), 'id': paper.id, 'category': paper.primary_category,
-                                            'decision': 'unclustered' if paper.relevant else 'irrelevant',
+                                            'decision': reasons.get(paper.id, 'unclustered' if paper.relevant else 'irrelevant'),
                                             'evidence': [paper.id]})
         alternative = {t.slug for t, _, _ in rank(alt_rows, cfg)[:10]}
         metrics = {'date': str(when), 'status': day.run.status, 'backfilled': day.run.backfilled,
@@ -119,7 +129,11 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                    'categories': dict(counts), 'venues': venues, 'paper_to_cluster_categories': dict(assignments),
                    'top10_evidence_venues': Counter(papers[i].metadata.get('journal') or papers[i].source for i in top_ids),
                    'top10_evidence_items': len(top_ids), 'legacy_unranked_categories': unsaved_categories,
-                   'alternative_top10': {'retained': len(top & alternative), 'official': len(top)}}
+                   'alternative_top10': {'retained': len(official_top & alternative), 'official': len(official_top)}}
+        if candidates is not None:
+            metrics['cohesion'] = {'candidates': len(candidates), 'failures': sum(c['failed'] for c in candidates),
+                                   'qualified_groups': sum(len(c['qualified']) for c in candidates),
+                                   'excluded_papers': dict(Counter(reasons.values()))}
         if store.domain == 'biology':
             comp = Store(store.root, 'computational')
             other = comp.get_day(when)

@@ -84,13 +84,17 @@ class _SynthesisDraft(Synthesis):
 
 
 class CohesionEvidence(BaseModel):
-    id: str
+    paper: int
     quote: str
 
 
-class CohesionReview(BaseModel):
-    question: str
+class CohesionGroup(BaseModel):
+    topic: str
     evidence: list[CohesionEvidence]
+
+
+class CohesionReview(BaseModel):
+    groups: list[CohesionGroup]
 
 
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
@@ -163,22 +167,32 @@ class LLM:
                 return self._failure(item.id, 'grounding', detail=','.join(f'{v:g}' for v in bad))
         return validated
 
-    def review_cohesion(self, prompt, items, minimum, key):
+    def review_cohesion(self, prompt, items, key):
         result = self._parse(CohesionReview, [{'role': 'user', 'content': prompt}], 'claude-haiku-5-5',
-                             2048, 'low', entity_id=key)
+                             4096, 'low', entity_id=key)
         if result is None:
             return None
-        if not result.evidence and not result.question.strip():
-            return {'question': '', 'retained': []}
-        texts = {i.id: ' '.join((i.title + ' ' + i.abstract).split()) for i in items}
-        retained = [e.id for e in result.evidence]
-        if not result.question.strip() or len(set(retained)) != len(retained) or len(retained) < minimum:
-            return self._failure(key, 'validation:cohesion')
-        for e in result.evidence:
-            quote = ' '.join(e.quote.split())
-            if e.id not in texts or len(quote) < 12 or quote not in texts[e.id]:
-                return self._failure(key, 'validation:cohesion-evidence')
-        return {'question': result.question.strip(), 'retained': sorted(retained)}
+        numbers = [e.paper for group in result.groups for e in group.evidence]
+        if sorted(numbers) != list(range(1, len(items) + 1)):
+            return self._failure(key, 'validation:cohesion-membership')
+        groups = []
+        for group in result.groups:
+            if not group.topic.strip() or not group.evidence:
+                return self._failure(key, 'validation:cohesion-group')
+            evidence = []
+            for entry in group.evidence:
+                item = items[entry.paper - 1]
+                passage = ' '.join(entry.quote.split())
+                for field in ('title', 'abstract'):
+                    source = ' '.join(getattr(item, field).split())
+                    offset = source.find(passage)
+                    if len(passage) >= 12 and offset >= 0:
+                        evidence.append({'id': item.id, 'field': field, 'start': offset, 'length': len(passage)})
+                        break
+                else:
+                    return self._failure(key, 'validation:cohesion-evidence')
+            groups.append({'topic': group.topic.strip(), 'evidence': evidence})
+        return {'groups': groups}
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,

@@ -26,7 +26,7 @@ python -m pipeline trial-windows --domain humanities-arts --to 2026-11-18
 python -m pipeline audit-beta --domain biology --to 2026-11-19
 ```
 
-Both pilots check that each retained paper directly supports one concrete research question before applying the shared scoring rules. The Earth pilot admits published records with an exact date, a usable abstract and a current CC BY version-of-record licence. It links confirmed DataCite datasets alongside their papers. [Measured pilot coverage](science-expansion-plan.ko.md)
+Both pilots partition every candidate into specific shared research problems or phenomena. An exact source passage supports each assignment. Groups meeting the configured minimum enter the shared ranking. The dated audit records smaller groups and review failures separately. To measure the cost of the next edition, use `rank` with the previous UTC day's pilot run ID. This restores the item cache and ledger before collecting the next day's papers. Use `rerank` to reassess the same edition. The Earth pilot admits published records with an exact date, a usable abstract and a current CC BY version-of-record licence. It links confirmed DataCite datasets alongside their papers. [Measured pilot coverage](science-expansion-plan.ko.md)
 
 ## Sources
 
