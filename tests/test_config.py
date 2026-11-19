@@ -34,6 +34,20 @@ def test_taxonomy_has_11_spec_slugs():
     ]
 
 
+def test_physics_trial_preserves_the_four_public_archives_and_maps_each_new_archive():
+    public = load_config('physics')
+    trial = load_config('physics-expanded')
+    existing = set(public['arxiv']['categories'])
+    added = {'astro-ph.SR', 'astro-ph.GA', 'gr-qc', 'hep-ex', 'hep-ph', 'hep-th', 'hep-lat',
+             'nucl-ex', 'nucl-th', 'physics.flu-dyn', 'physics.plasm-ph', 'cond-mat.stat-mech'}
+    assert public['arxiv']['require_complete'] and trial['arxiv']['require_complete']
+    assert set(trial['arxiv']['categories']) == existing | added and existing.isdisjoint(added)
+    hints = trial['hints']['arxiv_category']
+    assert set(hints) == set(trial['arxiv']['categories'])
+    assert all(hints[code] == public['hints']['arxiv_category'][code] for code in existing)
+    assert {category for values in hints.values() for category in values} == set(load_taxonomy('physics-expanded').slugs()) - {'other-physics'}
+
+
 def test_scoring_defaults():
     expected = {
         "attention": {"automated_min_ids": 20, "min_engagement": 5, "store_top_n": 20,

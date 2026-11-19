@@ -28,6 +28,7 @@ const days = loadDays(field);
 const categories = new Map(loadTaxonomy(field).map(category => [category.slug, category.label]));
 const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
 const archives: string[] = source.arxiv?.categories ?? [];
+const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
 const journals: string[] = source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
 const conferences: string[] = source.drops?.conferences ?? [];
@@ -51,7 +52,10 @@ const rows = (day?.ranked ?? []).map(row => {
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
-    {archives.length > 0 && <p class="coverage">Following {archives.map((archive, i) => <>{i > 0 && " · "}<a href={`https://arxiv.org/list/${archive}/recent`}>{categories.get(source.hints.arxiv_category[archive][0])}</a></>)} on arXiv.</p>}
+    {archives.length > 0 && <p class="coverage">Following {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
+      {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
+        <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
+      </>}</>)} on arXiv.</p>}
     {source.crossref && journals.length > 0 && <p class="coverage">{source.crossref.data_journals ? "Research articles and data papers from" : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
     {source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}

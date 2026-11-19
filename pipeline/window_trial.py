@@ -17,7 +17,7 @@ from pipeline.sources.thoth import ThothAdapter
 from pipeline.sources.openedition import OpenEditionAdapter
 
 
-PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information', 'engineering',
+PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'physics-expanded', 'computer-information', 'engineering',
                  'agriculture-food-veterinary', 'medicine-health', 'social-sciences', 'humanities-arts'}
 
 
