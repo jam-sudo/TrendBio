@@ -111,6 +111,9 @@ def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
 def _messages(item: Item, taxonomy: Taxonomy, hints: list[str]) -> list[dict]:
     template = Path(__file__).with_name('prompts').joinpath('enrich.md').read_text(encoding='utf-8')
     source = {'title': item.title, 'abstract': item.abstract}
+    if 'description_source' in item.metadata:
+        source['publication type'] = item.metadata['publication_type']
+        source['description source'] = item.metadata['description_source']
     if item.source == 'europepmc':
         source['indexed publication types'] = item.metadata.get('publication_types', [])
         source['linked corrections'] = item.metadata.get('correction_links', [])
@@ -220,6 +223,8 @@ class LLM:
             items='\n'.join(
                 f'{item.id} | {item.type} | {item.published_at} | {item.title} | {item.summary or ""}'
                 + (f'\nAbstract: {item.abstract}' if self.synthesis_guidance and item.abstract else '')
+                + (f"\n{item.metadata['publication_type']}. Evidence: {item.metadata['description_source']}."
+                   if 'description_source' in item.metadata else '')
                 + (f"\nIndexed publication types: {', '.join(item.metadata.get('publication_types', []))}."
                    f" Linked corrections: {', '.join(item.metadata.get('correction_links', [])) or 'none listed'}."
                    if item.source == 'europepmc' else '')

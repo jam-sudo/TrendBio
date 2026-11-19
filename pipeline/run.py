@@ -22,7 +22,7 @@ from pipeline.cohesion import review_clusters
 from pipeline.cluster import (
     append_history, attach_items, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
 )
-from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, prepare_collected
+from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, intake_status, prepare_collected
 from pipeline.config import Scoring, Taxonomy
 from pipeline.embed import l2_normalize
 from pipeline.enrich import enrich_items, first_sentence, hints_for
@@ -160,7 +160,7 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
     return ((count > cfg.degraded_fallback_min and count > cfg.degraded_fallback_rate * attempted)
             or sum(note.startswith('synthesis-fallback:') for note in set(notes)) >= cfg.degraded_synthesis_fallback_min
             or any(note.startswith('cohesion-review-failed:') for note in notes)
-            or any(source_status.get(name) == 'failed' for name in PAPER_SOURCES)
+            or any(source_status.get(name) in {'partial', 'failed'} for name in PAPER_SOURCES)
             or over_ceiling)
 
 
@@ -210,7 +210,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                         source_status[adapter.name] = 'failed'
                     else:
                         collected_items.extend(items)
-                        source_status[adapter.name] = 'ok'
+                        source_status[adapter.name] = intake_status(adapter)
+                        notes.extend(f'book-date-source-unavailable:{adapter.name}:{key}' for key, reason in
+                                     getattr(adapter, 'decisions', {}).items() if reason == 'book-date-source-unavailable')
                         counts['items'] = len(items)
                     counts['source_status'] = source_status[adapter.name]
             if all_paper_sources_failed(source_status):
@@ -433,6 +435,8 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                 items = prepare_collected(sorted(items, key=lambda item: item.id), store, chunk_start, chunk_end, [adapter])
                 for item in items:
                     store.put_item(item)
+                if intake_status(adapter) == 'partial':
+                    raise ValueError('Book publication dates still require verification')
             except Exception as error:
                 logger.warning('stage=collect event=chunk_failed source=%s chunk=%s..%s error=%s',
                                adapter.name, chunk_start, chunk_end, type(error).__name__)

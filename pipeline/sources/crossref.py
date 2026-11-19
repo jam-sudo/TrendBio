@@ -6,6 +6,7 @@ from urllib.parse import quote
 
 import httpx
 
+from pipeline.dedupe import normalize_title
 from pipeline.models import Item, Source
 from pipeline.sources.base import collected, request
 
@@ -63,7 +64,7 @@ def plain_text(fragment):
     return ' '.join(''.join(parser.parts).split())
 
 
-class _ArticleHead(HTMLParser):
+class CitationHead(HTMLParser):
     def __init__(self):
         super().__init__()
         self.fields = {}
@@ -77,7 +78,7 @@ class _ArticleHead(HTMLParser):
 
 def _publisher_abstract(client, base, doi, issn, day):
     response = request(client, base + quote(doi, safe='/') + '.html')
-    head = _ArticleHead()
+    head = CitationHead()
     head.feed(response.text)
     head.close()
     fields = head.fields
@@ -112,6 +113,49 @@ def datacite_type(client, doi):
         return 'not-in-public-datacite' if exc.response.status_code == 404 else 'unverified'
     except (httpx.TransportError, KeyError, ValueError):
         return 'unverified'
+
+
+def normalized_isbn(code):
+    value = (code or '').replace('-', '').replace(' ', '').upper()
+    return value if re.fullmatch(r'(?:97[89]\d{10}|\d{9}[\dX])', value) else ''
+
+
+def _registry_match(work, day, titles, isbns):
+    raw = (work.get('title') or [''])[0]
+    variants = [raw, raw + ' ' + ' '.join(work.get('subtitle') or [])]
+    edition = str(work.get('edition-number') or '').strip().lower()
+    dates = [(work.get(k, {}).get('date-parts') or [[]])[0] for k in ('published-print', 'published-online')]
+    stamp = [day.year, day.month, day.day]
+    return (work.get('type') in {'book', 'monograph', 'edited-book', 'reference-book'} and not work.get('update-to')
+            and edition in {'', '1', '1st', '1st edition', 'first', 'first edition'} and full_date(work, 'published') == day
+            and all(parts >= stamp[:len(parts)] for parts in dates)
+            and any(normalize_title(plain_text(t)) in titles for t in variants)
+            and bool(isbns & {normalized_isbn(i) for i in work.get('ISBN', [])}))
+
+
+class BookDateSourceUnavailable(Exception):
+    """The registry could not answer after retries."""
+
+
+def registered_book(client, day, titles, isbns, doi):
+    if not isbns:
+        return None
+    # Crossref joins alternative formats of the same filter with OR.
+    filters = ['isbn:' + isbn for isbn in sorted(isbns)]
+    filters += ['type:' + kind for kind in ('book', 'monograph', 'edited-book', 'reference-book')]
+    try:
+        matches = {key for key, rec in crossref_works(client, 'https://api.crossref.org/works', ','.join(filters))
+                   if (not doi or key == doi) and _registry_match(rec, day, titles, isbns)}
+    except httpx.HTTPStatusError as exc:
+        if exc.response.status_code == 429 or exc.response.status_code >= 500:
+            raise BookDateSourceUnavailable from exc
+        raise
+    except httpx.TransportError as exc:
+        raise BookDateSourceUnavailable from exc
+    if len(matches) == 1:
+        identifier = matches.pop()
+        return identifier, 'https://api.crossref.org/works/' + identifier
+    return None
 
 
 class CrossrefAdapter:

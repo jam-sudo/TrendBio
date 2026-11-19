@@ -12,21 +12,24 @@ from pipeline.sources.drops import DropsAdapter
 from pipeline.sources.oai import OaiAdapter
 from pipeline.sources.europepmc import EuropePmcAdapter
 from pipeline.sources.worldbank import WorldBankAdapter
+from pipeline.sources.thoth import ThothAdapter
+from pipeline.sources.openedition import OpenEditionAdapter
 
 
 PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information', 'engineering',
-                 'agriculture-food-veterinary', 'medicine-health', 'social-sciences'}
+                 'agriculture-food-veterinary', 'medicine-health', 'social-sciences', 'humanities-arts'}
 
 
 def trial_records(domain, venues, start, end, client):
     if domain in PILOT_DOMAINS:
         config = load_config(domain)
         records = []
-        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter, EuropePmcAdapter, WorldBankAdapter):
+        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter, EuropePmcAdapter, WorldBankAdapter, ThothAdapter, OpenEditionAdapter):
             if source.name in config:
                 records.extend(source(config).fetch(start, end, client))
         for item in dedupe(records):
-            yield item.id, item.published_at, item.title, item.abstract, item.type, item.preprint_id, hints_for(item, config['hints'])
+            kind = item.metadata.get('publication_type', 'Journal article') if domain == 'humanities-arts' else item.type
+            yield item.id, item.published_at, item.title, item.abstract, kind, item.preprint_id, hints_for(item, config['hints'])
         return
 
     for venue in venues:

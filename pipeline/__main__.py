@@ -31,6 +31,8 @@ from pipeline.sources.drops import DropsAdapter
 from pipeline.sources.oai import OaiAdapter
 from pipeline.sources.europepmc import EuropePmcAdapter
 from pipeline.sources.worldbank import WorldBankAdapter
+from pipeline.sources.thoth import ThothAdapter
+from pipeline.sources.openedition import OpenEditionAdapter
 from pipeline.sources.github import GithubAdapter
 from pipeline.sources.pubmed import PubmedAdapter
 from pipeline.sources.rss import RssAdapter
@@ -63,7 +65,7 @@ def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) ->
     sources = load_config(domain)
     adapters = []
     for adapter in (BiorxivAdapter, ArxivAdapter, PubmedAdapter, GithubAdapter, RssAdapter, CrossrefAdapter,
-                    DropsAdapter, OaiAdapter, EuropePmcAdapter, WorldBankAdapter):
+                    DropsAdapter, OaiAdapter, EuropePmcAdapter, WorldBankAdapter, ThothAdapter, OpenEditionAdapter):
         if adapter.name not in sources:
             continue
         if adapter is GithubAdapter:

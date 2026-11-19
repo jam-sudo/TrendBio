@@ -89,7 +89,7 @@ def audit_edition(store: Store, start: date, end: date, references=()):
             cat = paper.primary_category or taxonomy.fallback_category
             counts[cat]['stored'] += 1
             counts[cat]['relevant'] += int(paper.relevant)
-            venues[paper.metadata.get('journal') or paper.source] += 1
+            venues[paper.metadata.get('journal') or paper.metadata.get('imprint') or paper.source] += 1
         yesterday = store.get_day(when - timedelta(days=1))
         previous = {r.slug for r in yesterday.ranked} if yesterday else set()
         clustered, ranked_ids, top_ids, alt_rows = set(), set(), set(), []
@@ -127,7 +127,7 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                    'elapsed_seconds': (day.run.finished - day.run.started).total_seconds(),
                    'model_cost_usd': day.run.model_cost_usd, 'source_status': day.run.source_status,
                    'categories': dict(counts), 'venues': venues, 'paper_to_cluster_categories': dict(assignments),
-                   'top10_evidence_venues': Counter(papers[i].metadata.get('journal') or papers[i].source for i in top_ids),
+                   'top10_evidence_venues': Counter(papers[i].metadata.get('journal') or papers[i].metadata.get('imprint') or papers[i].source for i in top_ids),
                    'top10_evidence_items': len(top_ids), 'legacy_unranked_categories': unsaved_categories,
                    'alternative_top10': {'retained': len(official_top & alternative), 'official': len(official_top)}}
         if candidates is not None:

@@ -13,6 +13,7 @@ import yaml
 from pipeline.models import Item, Source
 
 logger = logging.getLogger(__name__)
+CC0 = 'https://creativecommons.org/publicdomain/zero/1.0/'
 
 
 class SourceAdapter(Protocol):

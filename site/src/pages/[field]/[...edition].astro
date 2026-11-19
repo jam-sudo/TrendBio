@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import PublicationEvidence from "../../components/PublicationEvidence.astro";
 import { loadDays, loadItems, loadTaxonomy, loadTopic } from "../../lib/data";
 import type { Day } from "../../lib/types";
 import { readFileSync } from "node:fs";
@@ -21,6 +22,7 @@ interface Props { day: Day | null }
 const { day } = Astro.props;
 const field = Astro.params.field as Edition;
 const biology = field === "biology";
+const humanities = field === "humanities-arts";
 const { label, stage } = editionInfo[field];
 const days = loadDays(field);
 const categories = new Map(loadTaxonomy(field).map(category => [category.slug, category.label]));
@@ -30,6 +32,7 @@ const journals: string[] = source.crossref?.journal_titles ?? Object.keys(source
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
 const conferences: string[] = source.drops?.conferences ?? [];
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
+const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
 const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
 const rows = (day?.ranked ?? []).map(row => {
@@ -43,7 +46,7 @@ const rows = (day?.ranked ?? []).map(row => {
 ---
 
 <Base edition={field} title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
-  description={`Daily ${label.toLowerCase()} research trends with the papers behind each ranking.`}
+  description={humanities ? "Humanities and arts research from journals and scholarly books." : `Daily ${label.toLowerCase()} research trends with the papers behind each ranking.`}
   canonicalPath={path} lastRun={day?.run.finished}>
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
@@ -54,6 +57,11 @@ const rows = (day?.ranked ?? []).map(row => {
     {source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
     {conferences.length > 0 && <p class="coverage">Regular conference papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
     {publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
+    {source.thoth && <p class="coverage">Monographs and edited books from <a href="https://thoth.pub/books" translate="no">Thoth</a>.</p>}
+    {collections.length > 0 && <p class="coverage">OpenEdition journals and presses in this pilot {collections.map(({ set, title }, i) => {
+      const [platform, name] = set.split(":");
+      return <>{i > 0 && " · "}<a href={`https://${platform}.openedition.org/${name}/`} translate="no">{title}</a></>;
+    })}.</p>}
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
@@ -64,9 +72,9 @@ const rows = (day?.ranked ?? []).map(row => {
           <h3>{row.headline}</h3>
           <p>{row.summary}</p>
           {papers.length > 0 && <details>
-            <summary>{papers.length} supporting {papers.length === 1 ? "paper" : "papers"}</summary>
+            <summary>{papers.length} supporting {humanities ? (papers.length === 1 ? "work" : "works") : (papers.length === 1 ? "paper" : "papers")}</summary>
             {synthesis && <p>{synthesis}</p>}
-            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a>{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>CC BY</a></>}
+            <ul>{papers.map(paper => <li><a href={paper.url} translate={humanities && paper.metadata.abstract_language && paper.metadata.abstract_language !== "en" ? "no" : undefined}>{paper.title}</a>{humanities && <PublicationEvidence paper={paper} />}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>CC BY</a></>}
               {paper.source === "worldbank" && <> · <span>Working paper</span></>}
               {paper.source === "europepmc" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher article</a></>}
               {paper.source === "europepmc" && typeof paper.metadata.screening_status === "string" && <> · <strong>Currently excluded from new editions</strong></>}

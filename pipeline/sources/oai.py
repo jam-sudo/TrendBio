@@ -59,6 +59,40 @@ def _paper(dc, journal, start, end):
                           'abstract_language': lang or None, 'abstract_languages': sorted(k for k in abstracts if k)})
 
 
+def oai_records(client, endpoint, params):
+    seen, tokens = set(), set()
+    expected = None
+    while True:
+        root = ET.fromstring(request(client, endpoint, params=params).content)
+        error = root.find(OAI + 'error')
+        if error is not None and error.get('code') == 'noRecordsMatch' and not tokens:
+            break
+        page = root.find(OAI + 'ListRecords')
+        if error is not None or page is None or not page.findall(OAI + 'record'):
+            raise ValueError('Incomplete OAI-PMH record list')
+        for rec in page.findall(OAI + 'record'):
+            header = rec.find(OAI + 'header')
+            identifier = header.findtext(OAI + 'identifier') if header is not None else None
+            if not identifier or identifier in seen:
+                raise ValueError('Missing or repeated OAI record identifier')
+            seen.add(identifier)
+            if header.get('status') == 'deleted':
+                continue
+            yield identifier, rec
+        cursor = page.find(OAI + 'resumptionToken')
+        if cursor is not None and cursor.get('completeListSize') is not None:
+            expected = int(cursor.get('completeListSize'))
+        token = (cursor.text or '').strip() if cursor is not None else ''
+        if not token:
+            if expected is not None and len(seen) != expected:
+                raise ValueError('OAI-PMH pagination ended before the declared record count')
+            break
+        if token in tokens:
+            raise ValueError('Repeated OAI-PMH resumption token')
+        tokens.add(token)
+        params = {'verb': 'ListRecords', 'resumptionToken': token}
+
+
 class OaiAdapter:
     name: Source = 'oai'
 
@@ -70,40 +104,11 @@ class OaiAdapter:
         for journal in self.journals:
             # OAI datestamps are updates. Later edits can describe an earlier publication.
             params = {'verb': 'ListRecords', 'metadataPrefix': 'oai_dc', 'from': start.isoformat()}
-            seen, tokens = set(), set()
-            expected = None
-            while True:
-                root = ET.fromstring(request(client, journal['endpoint'], params=params).content)
-                error = root.find(OAI + 'error')
-                if error is not None and error.get('code') == 'noRecordsMatch' and not tokens:
-                    break
-                page = root.find(OAI + 'ListRecords')
-                if error is not None or page is None or not page.findall(OAI + 'record'):
-                    raise ValueError('Incomplete OAI-PMH record list')
-                for rec in page.findall(OAI + 'record'):
-                    header = rec.find(OAI + 'header')
-                    identifier = header.findtext(OAI + 'identifier') if header is not None else None
-                    if not identifier or identifier in seen:
-                        raise ValueError('Missing or repeated OAI record identifier')
-                    seen.add(identifier)
-                    if header.get('status') == 'deleted':
-                        continue
-                    dc = rec.find(f'{OAI}metadata/{OAI_DC}dc')
-                    if dc is None:
-                        raise ValueError('Missing OAI Dublin Core metadata')
-                    paper = _paper(dc, journal, start, end)
-                    if paper:
-                        papers[paper.id] = paper
-                cursor = page.find(OAI + 'resumptionToken')
-                if cursor is not None and cursor.get('completeListSize') is not None:
-                    expected = int(cursor.get('completeListSize'))
-                token = (cursor.text or '').strip() if cursor is not None else ''
-                if not token:
-                    if expected is not None and len(seen) != expected:
-                        raise ValueError('OAI-PMH pagination ended before the declared record count')
-                    break
-                if token in tokens:
-                    raise ValueError('Repeated OAI-PMH resumption token')
-                tokens.add(token)
-                params = {'verb': 'ListRecords', 'resumptionToken': token}
+            for _, rec in oai_records(client, journal['endpoint'], params):
+                dc = rec.find(f'{OAI}metadata/{OAI_DC}dc')
+                if dc is None:
+                    raise ValueError('Missing OAI Dublin Core metadata')
+                paper = _paper(dc, journal, start, end)
+                if paper:
+                    papers[paper.id] = paper
         return collected(self.name, list(papers.values()))

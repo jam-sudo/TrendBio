@@ -1,6 +1,6 @@
 // Mirrors pipeline/models.py. Dates and datetimes are ISO 8601 strings.
 export type ItemType = "published" | "preprint" | "code" | "industry";
-export type Source = "biorxiv" | "arxiv" | "pubmed" | "github" | "rss" | "crossref" | "drops" | "oai" | "europepmc" | "worldbank";
+export type Source = "biorxiv" | "arxiv" | "pubmed" | "github" | "rss" | "crossref" | "drops" | "oai" | "europepmc" | "worldbank" | "thoth" | "openedition";
 
 export interface Item {
   id: string;
@@ -96,7 +96,7 @@ export interface RunInfo {
   backfilled: boolean;
   model_cost_usd?: number | null;
   synthesis_model: string;
-  source_status: Record<string, "ok" | "failed" | "skipped">;
+  source_status: Record<string, "ok" | "partial" | "failed" | "skipped">;
   notes: string[];
 }
 

@@ -4,7 +4,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field
 
 ItemType = Literal["published", "preprint", "code", "industry"]
-Source = Literal["biorxiv", "arxiv", "pubmed", "github", "rss", "crossref", "drops", "oai", "europepmc", "worldbank"]
+Source = Literal["biorxiv", "arxiv", "pubmed", "github", "rss", "crossref", "drops", "oai", "europepmc", "worldbank", "thoth", "openedition"]
 
 
 class Item(BaseModel):
@@ -91,7 +91,7 @@ class RunInfo(BaseModel):
     backfilled: bool
     model_cost_usd: float | None = Field(default=None, ge=0)
     synthesis_model: str
-    source_status: dict[str, Literal["ok", "failed", "skipped"]]
+    source_status: dict[str, Literal["ok", "partial", "failed", "skipped"]]
     notes: list[str] = []
 
 

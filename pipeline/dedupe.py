@@ -35,9 +35,11 @@ def dedupe(new: list[Item], store: Store | None = None) -> list[Item]:
     by_id: dict[str, Item] = {}
     by_doi: dict[str, list[Item]] = {}
     by_title: dict[str, list[Item]] = {}
+    book_isbns: set[str] = set()
 
     def index(item: Item, title: str, identifier: str) -> None:
         by_id[item.id] = item
+        book_isbns.update(item.metadata.get('isbns', []))
         if identifier:
             by_doi.setdefault(identifier, []).append(item)
         if title:
@@ -55,7 +57,7 @@ def dedupe(new: list[Item], store: Store | None = None) -> list[Item]:
         item = disambiguate(original)
         title = normalize_title(item.title)
         identifier = doi(item.doi)
-        duplicate = item.id in by_id or any(
+        duplicate = item.id in by_id or bool(book_isbns.intersection(item.metadata.get('isbns', []))) or any(
             {item.type, other.type} != {"preprint", "published"}
             for other in by_doi.get(identifier, ())
         ) or any(

@@ -102,6 +102,7 @@ function korean(text) {
   if ((v = /^(Up|Down) (\d+) places? since the previous day$/.exec(s)))
     return '전날보다 ' + v[2] + '계단 ' + (v[1] === 'Up' ? '상승' : '하락');
   if ((v = /^(\d+) supporting papers?$/.exec(s))) return '근거 논문 ' + v[1] + '편';
+  if ((v = /^(\d+) supporting works?$/.exec(s))) return '근거 문헌 ' + v[1] + '건';
   if ((v = /^([\d,]+) (people|reactions|stars)$/.exec(s)))
     return (
       { people: '참여자 ', reactions: '반응 ', stars: '별 ' }[v[2]] +

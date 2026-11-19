@@ -12,6 +12,7 @@ export const editionInfo = {
   "agriculture-food-veterinary": { label: "Agriculture, Food & Veterinary Science", source: "Crossref and journal publishers", stage: "Pilot" },
   "medicine-health": { label: "Medicine & Health", source: "Europe PMC and Crossref", stage: "Pilot" },
   "social-sciences": { label: "Economics & Psychology", source: "arXiv, the World Bank and Crossref", stage: "Pilot" },
+  "humanities-arts": { label: "Humanities & Arts", source: "Thoth, OpenEdition and Crossref", stage: "Pilot" },
 } as const;
 export type Edition = keyof typeof editionInfo;
 export const editions = (Object.keys(editionInfo) as Edition[]).filter(field =>

@@ -15,18 +15,22 @@ class AllPaperSourcesFailed(Exception):
     pass
 
 
-PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed', 'crossref', 'drops', 'oai', 'europepmc', 'worldbank'}
+PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed', 'crossref', 'drops', 'oai', 'europepmc', 'worldbank', 'thoth', 'openedition'}
 
 
 def initial_source_status(adapters):
     # Older editions expose five source keys. Include the new intake only in editions that use it.
-    return dict.fromkeys((name for name in get_args(Source) if name not in {'crossref', 'drops', 'oai', 'europepmc', 'worldbank'}
+    return dict.fromkeys((name for name in get_args(Source) if name not in {'crossref', 'drops', 'oai', 'europepmc', 'worldbank', 'thoth', 'openedition'}
                           or any(a.name == name for a in adapters)), 'skipped')
 
 
 def all_paper_sources_failed(status: dict[str, str]) -> bool:
     attempted = {status[name] for name in PAPER_SOURCES if status.get(name, 'skipped') != 'skipped'}
     return attempted == {'failed'}
+
+
+def intake_status(adapter):
+    return 'partial' if 'book-date-source-unavailable' in getattr(adapter, 'decisions', {}).values() else 'ok'
 
 
 def prepare_collected(items, store, start, end, successful_adapters):
@@ -51,7 +55,7 @@ def collect(
             logger.warning("%s failed (%s)", adapter.name, type(exc).__name__)
             source_status[adapter.name] = "failed"
         else:
-            source_status[adapter.name] = "ok"
+            source_status[adapter.name] = intake_status(adapter)
     if all_paper_sources_failed(source_status):
         raise AllPaperSourcesFailed("All paper sources failed")
     successful = [a for a in adapters if source_status[a.name] == 'ok']
