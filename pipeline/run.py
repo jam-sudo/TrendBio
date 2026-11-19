@@ -359,7 +359,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 cost += max(0.0, deps.budget.total_spend_usd() - spend_before)
             result = Day(domain=domain, date=day, ranked=[RankedTopic(
                 slug=topic.slug, rank=index, headline=topic.headline or topic.label.title(),
-                summary=topic.summary or '', synthesis=topic.synthesis if topic.synthesized_on == day else None,
+                summary=topic.summary or '', synthesis=topic.synthesis if topic.synthesized_on == day
+                and f'synthesis-fallback:{topic.slug}' not in notes else None,
                 category=topic.category, signals=signals, scores=scores,
             ) for index, (topic, signals, scores) in enumerate(ranked, 1)], run=RunInfo(
                 started=previous.run.started if previous else started,

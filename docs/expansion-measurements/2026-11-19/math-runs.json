@@ -1,0 +1,111 @@
+{
+  "edition": "math",
+  "edition_date": "2026-11-19",
+  "model_cost_basis": "Pipeline token ledger at repository prices, USD. Three runs on one input date.",
+  "runs": [
+    {
+      "purpose": "initial",
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44578442119",
+      "stored": 382,
+      "relevant": 378,
+      "ranked": 24,
+      "status": "degraded",
+      "notes": {
+        "enrichment-fallback": 3,
+        "synthesis-fallback": 4
+      },
+      "incremental_usd": 0.9610439,
+      "cumulative_usd": 0.9610439,
+      "usage_to_date": {
+        "claude-haiku-5-5": {
+          "input_tokens": 541034,
+          "output_tokens": 68333
+        },
+        "claude-opus-5-5": {
+          "input_tokens": 48370,
+          "output_tokens": 14938
+        },
+        "claude-sonnet-5-5": {
+          "input_tokens": 86372,
+          "output_tokens": 20779
+        }
+      }
+    },
+    {
+      "purpose": "retry-four-summaries",
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44581768045",
+      "stored": 382,
+      "relevant": 378,
+      "ranked": 24,
+      "status": "ok",
+      "notes": {
+        "enrichment-fallback": 3
+      },
+      "incremental_usd": 0.0078296,
+      "cumulative_usd": 0.9688735,
+      "usage_to_date": {
+        "claude-haiku-5-5": {
+          "input_tokens": 552530,
+          "output_tokens": 81693
+        },
+        "claude-opus-5-5": {
+          "input_tokens": 48370,
+          "output_tokens": 14938
+        },
+        "claude-sonnet-5-5": {
+          "input_tokens": 86372,
+          "output_tokens": 20779
+        }
+      }
+    },
+    {
+      "purpose": "recheck-candidate-cohesion",
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44584872483",
+      "stored": 382,
+      "relevant": 378,
+      "ranked": 1,
+      "status": "ok",
+      "notes": {
+        "enrichment-fallback": 3
+      },
+      "incremental_usd": 0.0586348,
+      "cumulative_usd": 1.0275083,
+      "usage_to_date": {
+        "claude-haiku-5-5": {
+          "input_tokens": 658213,
+          "output_tokens": 90754
+        },
+        "claude-opus-5-5": {
+          "input_tokens": 51479,
+          "output_tokens": 16493
+        },
+        "claude-sonnet-5-5": {
+          "input_tokens": 86372,
+          "output_tokens": 20779
+        }
+      },
+      "candidates_checked": 41,
+      "retained_groups": [
+        {
+          "candidates": [
+            "arxiv:2611.17759",
+            "arxiv:2611.18992",
+            "arxiv:2611.20883",
+            "arxiv:2611.21469",
+            "arxiv:2611.22066",
+            "arxiv:2611.22398",
+            "arxiv:2611.22979",
+            "arxiv:2611.24355"
+          ],
+          "question": "Does minimizing a discrete residual-based (PINN-type) loss over a neural trial class yield convergence to, or control of, the true PDE solution error?",
+          "retained": [
+            "arxiv:2611.17759",
+            "arxiv:2611.21469",
+            "arxiv:2611.24355"
+          ]
+        }
+      ]
+    }
+  ],
+  "field_budget_status": "defer until pilot evidence supports recurring publication"
+}

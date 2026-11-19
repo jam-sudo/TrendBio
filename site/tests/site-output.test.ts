@@ -152,3 +152,14 @@ it("links the mathematics pilot to its three arXiv subjects and its own dated ev
   expect(await main.locator('a[href^="https://example.org/math/"]').count()).toBe(3);
   expect(await main.getByRole("heading", { name: "Quadrature error bounds depend on smoothness" }).count()).toBe(1);
 });
+
+it("credits the Earth pilot papers and links their datasets as supporting material", async () => {
+  await page.setContent(read("earth-environment/day/2026-11-01/index.html"));
+  const main = page.getByRole("main");
+  expect(await main.locator(".coverage").textContent()).toContain("Ocean Science");
+  expect(await main.locator("summary").first().textContent()).toBe("3 supporting papers");
+  await main.locator("summary").first().click();
+  expect(await main.locator('a[href^="https://example.org/earth/"]').count()).toBe(3);
+  expect(await main.getByRole("link", { name: "CC BY" }).count()).toBe(3);
+  expect(await main.locator('a[href="https://doi.org/10.5555/example-data"]').count()).toBe(1);
+});

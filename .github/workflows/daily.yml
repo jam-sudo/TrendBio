@@ -10,7 +10,7 @@ on:
       domain:
         description: Research field
         type: choice
-        options: [all, computational, physics, biology, math, earth-environment]
+        options: [all, computational, physics, biology]
         default: all
       date:
         description: UTC date to process (YYYY-MM-DD; defaults to today)
@@ -20,15 +20,6 @@ on:
         description: Print usage and cost without committing data
         type: boolean
         default: false
-      repair_pilot_run:
-        description: Prior math dry-run ID to reuse in staging (requires date and dry_run)
-        type: string
-        required: false
-      pilot_action:
-        description: Action when reusing a prior pilot
-        type: choice
-        options: [repair-summaries, rerank]
-        default: repair-summaries
 
 concurrency:
   group: pipeline
@@ -56,11 +47,6 @@ jobs:
       - uses: ./.github/actions/wait-for-pipeline
       - name: Refresh data after waiting
         run: git pull --ff-only origin main
-      - name: Keep pilot editions in staging
-        if: ${{ (matrix.domain == 'math' || matrix.domain == 'earth-environment') && !inputs.dry_run }}
-        run: |
-          echo '::error::Select dry_run for a pilot edition. Recurring editions are set separately.'
-          exit 1
       - name: Skip a scheduled field with complete paper sources
         id: ran-today
         if: ${{ github.event_name == 'schedule' }}
@@ -82,21 +68,6 @@ jobs:
           key: ${{ runner.os }}-specter2
       - run: pip install -e .
         if: ${{ steps.ran-today.outputs.skip != 'true' }}
-      - name: Restore a prior pilot for targeted repair
-        if: ${{ inputs.repair_pilot_run != '' }}
-        env:
-          PRIOR_RUN: ${{ inputs.repair_pilot_run }}
-          RUN_DATE: ${{ inputs.date }}
-          DRY_RUN: ${{ inputs.dry_run }}
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          [[ "$DOMAIN" == "math" && "$DRY_RUN" == "true" && "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ && "$PRIOR_RUN" =~ ^[0-9]+$ ]]
-          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRIOR_RUN" --jq '[.path,.head_branch,.conclusion] | @tsv' | grep -Fx $'.github/workflows/daily.yml\tmain\tsuccess'
-          gh run download "$PRIOR_RUN" --pattern "math-pilot-$PRIOR_RUN-*" --dir "$RUNNER_TEMP/prior-pilot"
-          mapfile -t days < <(find "$RUNNER_TEMP/prior-pilot" -path "*/math/days/$RUN_DATE.json" -type f)
-          [[ ${#days[@]} == 1 ]]
-          mkdir -p .pipeline-stage-review
-          cp -R "$(dirname "$(dirname "${days[0]}")")" .pipeline-stage-review/math
       - name: Run pipeline
         if: ${{ steps.ran-today.outputs.skip != 'true' }}
         timeout-minutes: 30
@@ -109,17 +80,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_DATE: ${{ inputs.date }}
           DRY_RUN: ${{ inputs.dry_run }}
-          PRIOR_RUN: ${{ inputs.repair_pilot_run }}
-          PILOT_ACTION: ${{ inputs.pilot_action }}
         run: |
-          if [[ -n "$PRIOR_RUN" ]]; then
-            if [[ "$PILOT_ACTION" == "rerank" ]]; then
-              python -m pipeline run --domain math --data-root .pipeline-stage-review --date "$RUN_DATE"
-            else
-              python -m pipeline repair-synthesis --domain math --data-root .pipeline-stage-review --from "$RUN_DATE" --to "$RUN_DATE" --retry-fallbacks
-            fi
-            exit
-          fi
           args=(run --domain "$DOMAIN")
           if [[ -n "$RUN_DATE" ]]; then
             args+=(--date "$RUN_DATE")
@@ -128,15 +89,6 @@ jobs:
             args+=(--dry-run)
           fi
           python -m pipeline "${args[@]}"
-      - name: Retain the staged pilot for evidence review
-        if: ${{ inputs.dry_run && (matrix.domain == 'math' || matrix.domain == 'earth-environment') }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.domain }}-pilot-${{ github.run_id }}-${{ github.run_attempt }}
-          path: .pipeline-stage-*/${{ matrix.domain }}/
-          include-hidden-files: true
-          if-no-files-found: error
-          retention-days: 14
       - name: Record edition coverage and evidence samples
         id: audit
         if: ${{ steps.ran-today.outputs.skip != 'true' && !inputs.dry_run && matrix.domain != 'computational' }}
@@ -147,6 +99,11 @@ jobs:
           python -m pipeline audit-edition --domain "$DOMAIN" --from "$day" --to "$day" > "$RUNNER_TEMP/coverage.json"
           mkdir -p "data/$DOMAIN/audits"
           mv "$RUNNER_TEMP/coverage.json" "data/$DOMAIN/audits/$day.json"
+          beta="data/$DOMAIN/audits/first-14.json"
+          if [[ ! -f "$beta" ]] || ! jq -e '.live_editions >= .target_editions' "$beta" >/dev/null; then
+            python -m pipeline audit-beta --domain "$DOMAIN" --to "$day" > "$RUNNER_TEMP/beta.json"
+            mv "$RUNNER_TEMP/beta.json" "$beta"
+          fi
       - name: Commit data
         if: ${{ (success() || steps.audit.outcome == 'failure') && steps.ran-today.outputs.skip != 'true' && !inputs.dry_run }}
         run: |

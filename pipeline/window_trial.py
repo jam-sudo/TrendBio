@@ -52,5 +52,5 @@ def run_window_trial(domain, records, end, embedder):
     result = cluster_publication_windows(ids, dates, vectors, end)
     result.update(domain=domain, collection='retrospective-publication-date', unique_source_works=len(works),
                   work_types=dict(Counter(r[4] for r in works.values())), excluded=dict(omitted),
-                  eligible_by_subject=dict(Counter(s for r in eligible for s in r[6])))
+                  eligible_by_subject=dict(Counter(s for r in eligible for s in (r[6] or ['unmapped-primary']))))
     return result

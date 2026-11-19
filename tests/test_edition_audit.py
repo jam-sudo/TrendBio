@@ -2,7 +2,7 @@ from datetime import date
 
 import httpx
 
-from pipeline.edition_audit import audit_edition, compare_windows
+from pipeline.edition_audit import audit_beta, audit_edition, compare_windows
 from pipeline.store import Store
 from pipeline.survey import reference_dois, survey_venue
 
@@ -18,6 +18,21 @@ def test_dated_audit_preserves_missing_days_and_checks_independent_ids(fixtures_
     assert report['review_samples']['top'][0]['id'] == 'quadrature-fixture'
     assert report['days'][0]['paper_to_cluster_categories'] == {'numerical-analysis': {'numerical-analysis': 3}}
     assert report['projected_30d_usd'] is None
+
+
+def test_beta_tracks_live_dates_and_excludes_backfills(tmp_path, fixtures_root):
+    import shutil
+    shutil.copytree(fixtures_root / 'data' / 'math', tmp_path / 'math')
+    store = Store(tmp_path, 'math')
+    day = store.get_day(date(2026, 11, 1))
+    day.run.backfilled = False
+    store.put_day(day)
+    day = day.model_copy(deep=True, update={'date': date(2026, 11, 3), 'ranked': []})
+    day.run.backfilled = True
+    store.put_day(day)
+    result = audit_beta(store, date(2026, 11, 3))
+    assert result['live_editions'] == 1 and result['backfilled_dates'] == ['2026-11-03']
+    assert result['missing_days'] == ['2026-11-02'] and result['target_editions'] == 14
 
 
 def test_28_day_experiment_recovers_a_sparse_group(tmp_path, fixtures_root):

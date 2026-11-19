@@ -109,7 +109,10 @@ th, td { padding: 1rem; border-bottom: 1px solid var(--border); vertical-align: 
 th:first-child, td:first-child { padding-left: 0; }
 th:last-child, td:last-child { padding-right: 0; }
 @media (max-width: 640px) {
-  header nav { flex-direction: column; gap: .25rem; }
+  header nav { flex-direction: column; gap: .25rem; max-width: 100%; }
+  .field-bar, .field-links { max-width: 100%; }
+  .field-links { overflow-x: auto; }
+  .field-links a { flex: none; white-space: nowrap; }
   :root { --t1: 32px; }
   main { padding-block: 2rem; }
   .nav-links { gap: 0.375rem; font-size: 14px; }

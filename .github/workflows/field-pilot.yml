@@ -1,0 +1,86 @@
+name: Field pilot
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        type: choice
+        options: [math, earth-environment]
+        required: true
+      date:
+        description: Edition UTC date (YYYY-MM-DD)
+        type: string
+        required: true
+      action:
+        type: choice
+        options: [rank, audit, repair-summaries, rerank]
+        default: rank
+      prior_run:
+        description: Successful pilot run ID for audit, repair or rerank
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      DOMAIN: ${{ inputs.domain }}
+      RUN_DATE: ${{ inputs.date }}
+      PILOT_ACTION: ${{ inputs.action }}
+      PRIOR_RUN: ${{ inputs.prior_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pilot inputs
+        run: |
+          [[ "$DOMAIN" == math || "$DOMAIN" == earth-environment ]]
+          [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
+          [[ "$(date -u -d "$RUN_DATE" +%F)" == "$RUN_DATE" && "$RUN_DATE" < "$(date -u -d tomorrow +%F)" ]]
+          if [[ "$PILOT_ACTION" == rank ]]; then [[ -z "$PRIOR_RUN" ]]; else [[ "$PRIOR_RUN" =~ ^[0-9]+$ ]]; fi
+      - name: Restore the reviewed date
+        if: ${{ inputs.prior_run != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRIOR_RUN" | jq -e '
+            (.path == ".github/workflows/daily.yml" or .path == ".github/workflows/field-pilot.yml")
+            and .head_branch == "main" and .event == "workflow_dispatch" and .conclusion == "success"' >/dev/null
+          gh run download "$PRIOR_RUN" --pattern "$DOMAIN-pilot-$PRIOR_RUN-*" --dir "$RUNNER_TEMP/prior-pilot"
+          mapfile -t days < <(find "$RUNNER_TEMP/prior-pilot" -type f -path "*/$DOMAIN/days/$RUN_DATE.json")
+          [[ ${#days[@]} == 1 ]]
+          mkdir science-pilot
+          cp -R "$(dirname "$(dirname "${days[0]}")")" "science-pilot/$DOMAIN"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - uses: actions/cache@v4
+        if: ${{ inputs.action == 'rank' || inputs.action == 'rerank' }}
+        with:
+          path: ~/.cache/huggingface
+          key: ${{ runner.os }}-specter2
+      - run: pip install -e .
+      - name: Process the pilot
+        if: ${{ inputs.action != 'audit' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [[ "$PILOT_ACTION" == repair-summaries ]]; then
+            python -m pipeline repair-synthesis --domain "$DOMAIN" --data-root science-pilot --from "$RUN_DATE" --to "$RUN_DATE" --retry-fallbacks
+          else
+            python -m pipeline run --domain "$DOMAIN" --data-root science-pilot --date "$RUN_DATE"
+          fi
+      - name: Audit the result
+        run: |
+          mkdir -p "science-pilot/$DOMAIN/audits"
+          python -m pipeline audit-edition --domain "$DOMAIN" --data-root science-pilot --from "$RUN_DATE" --to "$RUN_DATE" > "science-pilot/$DOMAIN/audits/$RUN_DATE.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.domain }}-pilot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: science-pilot/
+          if-no-files-found: error
+          retention-days: 14

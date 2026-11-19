@@ -31,7 +31,8 @@ const rows = (day?.ranked ?? []).map(row => {
   const topic = loadTopic(field, row.slug);
   const entry = topic?.history.find(entry => entry.date === day?.date);
   const papers = loadItems(field, entry?.item_ids ?? []);
-  const synthesis = row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
+  const synthesis = day?.run.notes.includes(`synthesis-fallback:${row.slug}`) ? null
+    : row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
   return { row, papers, synthesis };
 });
 ---
@@ -56,7 +57,9 @@ const rows = (day?.ranked ?? []).map(row => {
           {papers.length > 0 && <details>
             <summary>{papers.length} supporting {papers.length === 1 ? "paper" : "papers"}</summary>
             {synthesis && <p>{synthesis}</p>}
-            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a>{paper.source === "crossref" && typeof paper.metadata.license === "string" && <> · {paper.authors.join(", ")} · <a href={paper.metadata.license}>CC BY</a></>}</li>)}</ul>
+            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a>{paper.source === "crossref" && typeof paper.metadata.license === "string" && <> · {paper.authors.join(", ")} · <a href={paper.metadata.license}>CC BY</a></>}
+              {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}
+            </li>)}</ul>
           </details>}
         </li>)}
       </ol>

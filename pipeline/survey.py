@@ -2,11 +2,12 @@
 from collections import Counter
 from datetime import date, datetime, timedelta
 import re
+from hashlib import sha256
 
 import httpx
 
 from pipeline.sources.base import request
-from pipeline.sources.crossref import crossref_works, full_date
+from pipeline.sources.crossref import crossref_works, datacite_type, full_date, related_dois, related_work_dois
 
 
 def reference_dois(client, venue, start, end):
@@ -60,6 +61,7 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
               'published': 0, 'with_abstract': 0, 'created': 0, 'created_imprecise_publication_day': 0,
               'languages': Counter(), 'types': Counter()} for i in range(4)]
     published, discovered, abstracts, pub_filter = set(), set(), set(), set()
+    linked_works = {}
     for axis, field in [('pub', 'published'), ('created', 'created')]:
         filters = f'type:{work_type},from-{axis}-date:{start},until-{axis}-date:{end}'
         for doi, work in crossref_works(client, endpoint, filters):
@@ -78,6 +80,10 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
                 week['languages'][work.get('language') or 'und'] += 1
                 week['types'][work['type']] += 1
                 published.add(doi)
+                if venue.get('data_link_sample'):
+                    links = related_work_dois(work)
+                    if links:
+                        linked_works[doi] = (related_dois(work, 'has-preprint'), links)
             else:
                 week['created'] += 1
                 week['created_imprecise_publication_day'] += int(full_date(work, 'published') is None)
@@ -85,6 +91,15 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
               'unique_discovered': len(discovered), 'publication_filter_records': len(pub_filter),
               'publication_filter_without_exact_day_in_window': len(pub_filter - published),
               'status': 'ok', 'reference': None}
+    if venue.get('data_link_sample'):
+        key = lambda text: sha256(text.encode()).digest()
+        sample = []
+        for paper in sorted(linked_works, key=key)[:venue['data_link_sample']]:
+            preprints, links = linked_works[paper]
+            identifier = min(links, key=key)
+            sample.append({'paper': paper, 'preprints': preprints, 'related': identifier,
+                           'datacite_type': datacite_type(client, identifier)})
+        result['related_works'] = {'papers_with_related_dois': len(linked_works), 'sample': sample}
     try:
         refs = reference_dois(client, venue, start, end)
     except (httpx.HTTPError, KeyError, ValueError) as exc:

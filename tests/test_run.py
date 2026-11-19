@@ -53,6 +53,10 @@ class FakeLLM:
         return Enrichment(summary=item.title, primary='structural', secondary=[],
                           relevant=item.id not in self.irrelevant_ids)
 
+    def review_cohesion(self, prompt, items, minimum, key):
+        assert all(item.id in prompt for item in items)
+        return {'question': 'Fixture shared research question', 'retained': [item.id for item in items]}
+
     def enrich_batch(self, items, taxonomy, hints_by_id, model='claude-haiku-5-5'):
         self.batches.append([item.id for item in items])
         self.budget.record('claude-haiku-5-5', 100 * len(items), 20 * len(items), batch=True)
@@ -1720,6 +1724,7 @@ def test_attention_success_does_not_use_llm_or_change_ranking(ctx, monkeypatch, 
     ("physics", "arxiv", "quant-ph", "quantum"),
     ("biology", "biorxiv", "ecology", "ecology"),
     ("math", "arxiv", "math.NA", "numerical-analysis"),
+    ("earth-environment", "crossref", "Ocean Science", "oceans"),
 ])
 def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, domain, source, category, expected):
     from pipeline.__main__ import build_deps
@@ -1728,13 +1733,13 @@ def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, dom
     monkeypatch.setenv('ANTHROPIC_API_KEY', 'fixture')
     deps = build_deps(domain, ctx.root, synthesis_only=True)
     try:
-        assert [adapter.name for adapter in deps.adapters] == (['arxiv'] if source == 'arxiv' else ['biorxiv', 'pubmed'])
+        assert [adapter.name for adapter in deps.adapters] == (['biorxiv', 'pubmed'] if source == 'biorxiv' else [source])
         assert deps.budget.path == ctx.root / domain / 'llm_spend.json'
         prompt = _messages(ctx.items[0], deps.taxonomy, [])[0]['content']
-        assert deps.taxonomy.label in prompt and 'experimental' in prompt and 'biomedicine' not in prompt
+        assert deps.taxonomy.label in prompt and deps.taxonomy.relevance.strip() in prompt and 'biomedicine' not in prompt
         title = {'physics': 'Quantum measurement', 'biology': 'Forest canopy survey',
-                 'math': 'Error bounds for quadrature'}[domain]
-        hint = 'arxiv_primary_category' if source == 'arxiv' else 'biorxiv_category'
+                 'math': 'Error bounds for quadrature', 'earth-environment': 'Ocean temperature observations'}[domain]
+        hint = {'arxiv': 'arxiv_primary_category', 'biorxiv': 'biorxiv_category', 'crossref': 'journal'}[source]
         items = [item.model_copy(update={
             'source': source, 'id': f'{source}:fixture-{i}', 'title': f'{title} {i}',
             'abstract': title, 'metadata': {hint: category},

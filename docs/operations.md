@@ -16,8 +16,17 @@ The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
-The daily workflow accepts a field selector, an optional `date` and a `dry_run` switch. The scheduled fields are computational biology, Physics and All Biology. Select `math` for the three-subject Math & Stats pilot. A manual math dry run uploads its staged data as a review artifact with the usage ledger, evidence and rankings. Backfill and maintenance default to `computational`. Storage, spend and checkpoints are isolated under `data/<domain>/`.
-Use a dry run before the first real run to inspect usage and estimated cost.
+The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs Math & Stats and the five-journal Earth pilot in a temporary directory. It has read-only repository access. Each pilot artifact contains the dated rank, source records, review decisions when applicable, and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)
+
+Use these commands from the repository root to reproduce the metadata and window comparisons. The window trial embeds titles and abstracts locally. The seven-day and 28-day results count candidate groups before editorial screening.
+
+```sh
+python -m pipeline survey --domain chemistry --to 2026-11-18
+python -m pipeline trial-windows --domain humanities-arts --to 2026-11-18
+python -m pipeline audit-beta --domain biology --to 2026-11-19
+```
+
+The Math & Stats pilot checks that each retained paper directly supports one concrete research question before applying the shared scoring rules. The Earth pilot admits published records with an exact date, a usable abstract and a current CC BY version-of-record licence. It links confirmed DataCite datasets alongside their papers. [Measured pilot coverage](science-expansion-plan.ko.md)
 
 ## Sources
 

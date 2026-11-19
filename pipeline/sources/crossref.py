@@ -2,6 +2,9 @@
 from datetime import date
 from html.parser import HTMLParser
 import re
+from urllib.parse import quote
+
+import httpx
 
 from pipeline.models import Item, Source
 from pipeline.sources.base import collected, request
@@ -59,6 +62,23 @@ def related_dois(work, relation):
                    if r.get('id-type') == 'doi' and r.get('id')})
 
 
+def related_work_dois(work):
+    return sorted({doi for rel in ('is-part-of', 'has-part', 'is-supplemented-by', 'is-supplement-to')
+                   for doi in related_dois(work, rel)})
+
+
+def datacite_type(client, doi):
+    try:
+        record = request(client, 'https://api.datacite.org/dois/' + quote(doi, safe='/'), attempts=2, timeout=8).json()['data']
+        if record['id'].lower() != doi:
+            return 'unverified'
+        return record['attributes']['types']['resourceTypeGeneral']
+    except httpx.HTTPStatusError as exc:
+        return 'not-in-public-datacite' if exc.response.status_code == 404 else 'unverified'
+    except (httpx.TransportError, KeyError, ValueError):
+        return 'unverified'
+
+
 class CrossrefAdapter:
     name: Source = 'crossref'
 
@@ -67,6 +87,7 @@ class CrossrefAdapter:
 
     def fetch(self, start, end, client):
         items = {}
+        resource_types = {}
         filters = f'type:journal-article,from-pub-date:{start},until-pub-date:{end}'
         for issn in self.config[self.name]['journals']:
             endpoint = f'https://api.crossref.org/journals/{issn}/works'
@@ -89,6 +110,13 @@ class CrossrefAdapter:
                 preprints = related_dois(work, 'has-preprint')
                 metadata = {'journal': journal, 'issn': issn, 'license': licence, 'preprint_dois': preprints,
                             'language': work.get('language'), 'relations': work.get('relation', {})}
+                if issn in self.config[self.name].get('data_journals', []):
+                    links = related_work_dois(work)
+                    for link in links:
+                        if link not in resource_types:
+                            resource_types[link] = datacite_type(client, link)
+                    metadata['dataset_dois'] = [link for link in links if resource_types[link] == 'Dataset']
+                    metadata['unverified_related_dois'] = [link for link in links if resource_types[link] == 'unverified']
                 if preprints:
                     metadata['preprint_doi'] = preprints[0]
                 items[doi] = Item(id=f'doi:{doi}', source=self.name, type='published', title=title,

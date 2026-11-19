@@ -146,6 +146,18 @@ def audit_edition(store: Store, start: date, end: date, references=()):
     return report
 
 
+def audit_beta(store: Store, through: date):
+    live = sorted((d for d in store.all_days() if not d.run.backfilled and d.date <= through), key=lambda d: d.date)[:14]
+    if not live:
+        return {'domain': store.domain, 'through': str(through), 'live_editions': 0, 'target_editions': 14}
+    end = live[-1].date if len(live) == 14 else through
+    report = audit_edition(store, live[0].date, end)
+    report.update(live_editions=len(live), target_editions=14, through=str(end),
+                  live_statuses=dict(Counter(d.run.status for d in live)),
+                  backfilled_dates=[d['date'] for d in report['days'] if d['backfilled']])
+    return report
+
+
 def compare_windows(store: Store, end: date):
     """Recluster the same dated cohort once over 28 days and in four separate weeks."""
     start = end - timedelta(days=27)
