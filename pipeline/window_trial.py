@@ -11,17 +11,18 @@ from pipeline.sources.crossref import CrossrefAdapter, crossref_works, full_date
 from pipeline.sources.drops import DropsAdapter
 from pipeline.sources.oai import OaiAdapter
 from pipeline.sources.europepmc import EuropePmcAdapter
+from pipeline.sources.worldbank import WorldBankAdapter
 
 
 PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information', 'engineering',
-                 'agriculture-food-veterinary', 'medicine-health'}
+                 'agriculture-food-veterinary', 'medicine-health', 'social-sciences'}
 
 
 def trial_records(domain, venues, start, end, client):
     if domain in PILOT_DOMAINS:
         config = load_config(domain)
         records = []
-        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter, EuropePmcAdapter):
+        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter, EuropePmcAdapter, WorldBankAdapter):
             if source.name in config:
                 records.extend(source(config).fetch(start, end, client))
         for item in dedupe(records):

@@ -6,7 +6,7 @@ on:
     inputs:
       domain:
         type: choice
-        options: [math, earth-environment, chemistry, astronomy, computer-information, engineering, agriculture-food-veterinary, medicine-health]
+        options: [math, earth-environment, chemistry, astronomy, computer-information, engineering, agriculture-food-veterinary, medicine-health, social-sciences]
         required: true
       date:
         description: Edition UTC date (YYYY-MM-DD)
@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate pilot inputs
         run: |
-          case "$DOMAIN" in math|earth-environment|chemistry|astronomy|computer-information|engineering|agriculture-food-veterinary|medicine-health) ;; *) exit 1 ;; esac
+          case "$DOMAIN" in math|earth-environment|chemistry|astronomy|computer-information|engineering|agriculture-food-veterinary|medicine-health|social-sciences) ;; *) exit 1 ;; esac
           [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
           [[ "$(date -u -d "$RUN_DATE" +%F)" == "$RUN_DATE" && "$RUN_DATE" < "$(date -u -d tomorrow +%F)" ]]
           if [[ -n "$PRIOR_RUN" || "$PILOT_ACTION" != rank ]]; then [[ "$PRIOR_RUN" =~ ^[0-9]+$ ]]; fi
