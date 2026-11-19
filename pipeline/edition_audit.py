@@ -52,7 +52,7 @@ def audit_edition(store: Store, start: date, end: date, references=()):
     histories = defaultdict(list)
     for topic in topics:
         for entry in topic.history:
-            if start <= entry.date <= end:
+            if entry.item_ids and start <= entry.date <= end:
                 histories[entry.date].append((topic, entry))
     records = store.items_between(start - timedelta(days=cfg.window_days - 1), end,
                                   by_publication=taxonomy.window_by_publication)
@@ -82,7 +82,8 @@ def audit_edition(store: Store, start: date, end: date, references=()):
             venues[paper.metadata.get('journal') or paper.source] += 1
         yesterday = store.get_day(when - timedelta(days=1))
         previous = {r.slug for r in yesterday.ranked} if yesterday else set()
-        clustered, ranked_ids, alt_rows = set(), set(), []
+        clustered, ranked_ids, top_ids, alt_rows = set(), set(), set(), []
+        assignments = defaultdict(Counter)
         unsaved_categories = 0
         for topic, entry in histories[when]:
             row = ranks.get(topic.slug)
@@ -91,8 +92,13 @@ def audit_edition(store: Store, start: date, end: date, references=()):
             counts[cat]['clusters'] += 1
             counts[cat]['ranked'] += int(row is not None)
             clustered.update(entry.item_ids)
+            for identifier in entry.item_ids:
+                paper = papers[identifier]
+                assignments[paper.primary_category or taxonomy.fallback_category][cat] += 1
             if row:
                 ranked_ids.update(entry.item_ids)
+            if topic.slug in top:
+                top_ids.update(entry.item_ids)
             bucket = 'top' if topic.slug in top else 'bottom' if topic.slug in bottom else 'excluded' if not row else None
             if bucket:
                 samples[bucket].append({'date': str(when), 'id': topic.slug, 'category': cat,
@@ -110,7 +116,9 @@ def audit_edition(store: Store, start: date, end: date, references=()):
         metrics = {'date': str(when), 'status': day.run.status, 'backfilled': day.run.backfilled,
                    'elapsed_seconds': (day.run.finished - day.run.started).total_seconds(),
                    'model_cost_usd': day.run.model_cost_usd, 'source_status': day.run.source_status,
-                   'categories': dict(counts), 'venues': venues, 'legacy_unranked_categories': unsaved_categories,
+                   'categories': dict(counts), 'venues': venues, 'paper_to_cluster_categories': dict(assignments),
+                   'top10_evidence_venues': Counter(papers[i].metadata.get('journal') or papers[i].source for i in top_ids),
+                   'top10_evidence_items': len(top_ids), 'legacy_unranked_categories': unsaved_categories,
                    'alternative_top10': {'retained': len(top & alternative), 'official': len(top)}}
         if store.domain == 'biology':
             comp = Store(store.root, 'computational')
@@ -140,23 +148,29 @@ def audit_edition(store: Store, start: date, end: date, references=()):
 
 def compare_windows(store: Store, end: date):
     """Recluster the same dated cohort once over 28 days and in four separate weeks."""
-    cfg = load_scoring()
     start = end - timedelta(days=27)
     papers = [p for p in store.items_between(start, end, by_publication=True)
               if p.relevant and p.type in {'preprint', 'published'}]
     linked = {p.preprint_id for p in papers if p.type == 'published'}
     papers = sorted((p for p in papers if p.id not in linked), key=lambda p: p.id)
     ids = [p.id for p in papers]
-    vectors = store.get_embeddings(ids)
+    return cluster_publication_windows(ids, [p.published_at for p in papers], store.get_embeddings(ids), end)
+
+
+def cluster_publication_windows(ids, dates, vectors, end):
+    cfg = load_scoring()
+    start = end - timedelta(days=27)
+    if not len(ids) == len(set(ids)) == len(dates) == len(vectors) or any(not start <= d <= end for d in dates):
+        raise ValueError('Window trial requires unique dated works and one embedding per work')
     long = cluster_items(ids, vectors, cfg)
     weekly = []
     for week in range(4):
-        idx = [i for i, p in enumerate(papers) if (p.published_at - start).days // 7 == week]
+        idx = [i for i, day in enumerate(dates) if (day - start).days // 7 == week]
         weekly.append(cluster_items([ids[i] for i in idx], vectors[idx], cfg))
     short_ids = {identifier for groups in weekly for group in groups for identifier in group}
     long_ids = {identifier for group in long for identifier in group}
     return {'from': str(start), 'to': str(end), 'papers_with_embeddings': len(ids),
-            'weekly_papers': [sum((p.published_at - start).days // 7 == i for p in papers) for i in range(4)],
+            'weekly_papers': [sum((d - start).days // 7 == i for d in dates) for i in range(4)],
             'weekly_clusters': list(map(len, weekly)), 'clusters_28d': len(long),
             'newly_clustered_ids': sorted(long_ids - short_ids),
             'lost_clustered_ids': sorted(short_ids - long_ids),

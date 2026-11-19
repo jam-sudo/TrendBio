@@ -14,7 +14,13 @@ class AllPaperSourcesFailed(Exception):
     pass
 
 
-PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed'}
+PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed', 'crossref'}
+
+
+def initial_source_status(adapters):
+    # Older editions expose five source keys. Include the new intake only in editions that use it.
+    return dict.fromkeys((name for name in get_args(Source) if name != 'crossref'
+                          or any(a.name == name for a in adapters)), 'skipped')
 
 
 def all_paper_sources_failed(status: dict[str, str]) -> bool:
@@ -26,7 +32,7 @@ def collect(
     domain: str, start: date, end: date, store: Store,
     adapters: list[SourceAdapter], client,
 ) -> tuple[list[Item], dict[str, str]]:
-    source_status = dict.fromkeys(get_args(Source), "skipped")
+    source_status = initial_source_status(adapters)
     items = []
     for adapter in adapters:
         try:

@@ -16,6 +16,7 @@ def test_dated_audit_preserves_missing_days_and_checks_independent_ids(fixtures_
     assert [r['ranked'] for r in report['references']] == [None, True]
     assert report['days'][0]['categories']['numerical-analysis'] == {'stored': 3, 'relevant': 3, 'ranked': 1, 'clusters': 1}
     assert report['review_samples']['top'][0]['id'] == 'quadrature-fixture'
+    assert report['days'][0]['paper_to_cluster_categories'] == {'numerical-analysis': {'numerical-analysis': 3}}
     assert report['projected_30d_usd'] is None
 
 
@@ -63,3 +64,22 @@ def test_publisher_contents_uses_article_publication_dates():
     with httpx.Client(transport=httpx.MockTransport(reply)) as client:
         assert reference_dois(client, {'copernicus': 'se'}, date(2026, 10, 22),
                               date(2026, 11, 18)) == ({'10.5194/se-17-a-2026'}, 1)
+
+
+def test_trial_counts_a_book_and_its_chapters_once():
+    import numpy as np
+    from pipeline.window_trial import run_window_trial
+
+    day = date(2026, 11, 18)
+    records = [(doi, day, 'Title', 'Abstract text', kind, parent, ['heritage']) for doi, kind, parent in [
+        ('book', 'edited-book', None), ('ch1', 'book-chapter', 'book'), ('ch2', 'book-chapter', 'book'),
+        ('ch3', 'book-chapter', None)]]
+
+    class Embedder:
+        def embed(self, texts):
+            assert len(texts) == 1
+            return np.array([[1, 0]])
+
+    result = run_window_trial('humanities-arts', records, day, Embedder())
+    assert result['unique_source_works'] == 4 and result['clusters_28d'] == 0
+    assert result['excluded'] == {'chapter_with_sampled_parent': 2, 'chapter_without_sampled_parent': 1}

@@ -41,7 +41,9 @@ const rows = (day?.ranked ?? []).map(row => {
   canonicalPath={path} lastRun={day?.run.finished}>
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
-    {biology ? <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p> : <p class="coverage">Following {archives.map((archive, i) => <>{i > 0 && " · "}<a href={`https://arxiv.org/list/${archive}/recent`}>{categories.get(source.hints.arxiv_category[archive][0])}</a></>)} on arXiv.</p>}
+    {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
+    {archives.length > 0 && <p class="coverage">Following {archives.map((archive, i) => <>{i > 0 && " · "}<a href={`https://arxiv.org/list/${archive}/recent`}>{categories.get(source.hints.arxiv_category[archive][0])}</a></>)} on arXiv.</p>}
+    {source.crossref && <p class="coverage">Research articles and data papers from {Object.keys(source.hints.journal).join(", ")}.</p>}
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
@@ -54,7 +56,7 @@ const rows = (day?.ranked ?? []).map(row => {
           {papers.length > 0 && <details>
             <summary>{papers.length} supporting {papers.length === 1 ? "paper" : "papers"}</summary>
             {synthesis && <p>{synthesis}</p>}
-            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a></li>)}</ul>
+            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a>{paper.source === "crossref" && typeof paper.metadata.license === "string" && <> · {paper.authors.join(", ")} · <a href={paper.metadata.license}>CC BY</a></>}</li>)}</ul>
           </details>}
         </li>)}
       </ol>

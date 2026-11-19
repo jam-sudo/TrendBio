@@ -12,23 +12,23 @@ from contextlib import contextmanager
 from dataclasses import dataclass, replace
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import get_args
 
 import httpx
 import numpy as np
 
 from pipeline.attention import collect_attention
 from pipeline.budget import Budget
+from pipeline.cohesion import review_clusters
 from pipeline.cluster import (
     append_history, attach_items, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
 )
-from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed
+from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status
 from pipeline.config import Scoring, Taxonomy
 from pipeline.dedupe import dedupe
 from pipeline.embed import l2_normalize
 from pipeline.enrich import enrich_items, first_sentence, hints_for
 from pipeline.llm import Enrichment, LLM
-from pipeline.models import Day, RankedTopic, RunInfo, Source
+from pipeline.models import Day, RankedTopic, RunInfo
 from pipeline.score import rank, score_topics, signals_for
 from pipeline.sources.base import load_config
 from pipeline.sources.github import GithubAdapter, seed_star_history
@@ -160,6 +160,7 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
     attempted = len(window_item_ids)
     return ((count > cfg.degraded_fallback_min and count > cfg.degraded_fallback_rate * attempted)
             or sum(note.startswith('synthesis-fallback:') for note in set(notes)) >= cfg.degraded_synthesis_fallback_min
+            or any(note.startswith('cohesion-review-failed:') for note in notes)
             or any(source_status.get(name) == 'failed' for name in PAPER_SOURCES)
             or over_ceiling)
 
@@ -176,7 +177,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         spend_before = deps.budget.total_spend_usd()
         start = day - timedelta(days=deps.cfg.window_days - 1)
         notes = []
-        source_status = dict.fromkeys(get_args(Source), 'skipped')
+        source_status = initial_source_status(deps.adapters)
         if skip_collect:
             checkpoint = store.root / domain / '.backfill_state.json'
             if checkpoint.exists():
@@ -262,6 +263,10 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             ids = [item.id for item in papers]
             embeddings = store.get_embeddings(ids)
             clusters = cluster_items(ids, embeddings, deps.cfg)
+            if deps.taxonomy.review_cluster_cohesion:
+                counts['candidates'] = len(clusters)
+                clusters, review_notes = review_clusters(clusters, papers, store, deps)
+                notes.extend(review_notes)
             counts.update(items=len(ids), clusters=len(clusters))
         with _stage('continuity', topics_new=0, topics_continued=0) as counts:
             vectors_by_id = dict(zip(ids, embeddings, strict=True))

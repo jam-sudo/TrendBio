@@ -6,33 +6,7 @@ import re
 import httpx
 
 from pipeline.sources.base import request
-
-
-def crossref_works(client, endpoint, filters):
-    # Crossref returns language on full records but does not support it in select.
-    params = {'filter': filters, 'rows': 200, 'cursor': '*'}
-    seen = set()
-    while True:
-        page = request(client, endpoint, params=params).json()['message']
-        rows = page['items']
-        count = len(seen)
-        for work in rows:
-            doi = work['DOI'].strip().lower()
-            if doi not in seen:
-                seen.add(doi)
-                yield doi, work
-        if not rows or len(rows) < params['rows']:
-            if len(seen) < page['total-results']:
-                raise ValueError(f'Incomplete Crossref response: {len(seen)} of {page["total-results"]} records')
-            return
-        if len(seen) == count:
-            raise ValueError('Crossref cursor repeated a page')
-        params['cursor'] = page['next-cursor']
-
-
-def full_date(work, field):
-    parts = work.get(field, {}).get('date-parts', [[]])[0]
-    return date(*parts) if len(parts) == 3 else None
+from pipeline.sources.crossref import crossref_works, full_date
 
 
 def reference_dois(client, venue, start, end):
@@ -79,13 +53,15 @@ def reference_dois(client, venue, start, end):
 
 def survey_venue(client: httpx.Client, venue: dict, end: date):
     start = end - timedelta(days=27)
-    endpoint = f'https://api.crossref.org/journals/{venue["issn"]}/works'
+    container = 'journals/' + venue['issn'] if 'issn' in venue else 'prefixes/' + str(venue['prefix'])
+    endpoint = f'https://api.crossref.org/{container}/works'
+    work_type = venue.get('type', 'journal-article')
     weeks = [{'from': str(start + timedelta(weeks=i)), 'to': str(start + timedelta(weeks=i, days=6)),
               'published': 0, 'with_abstract': 0, 'created': 0, 'created_imprecise_publication_day': 0,
               'languages': Counter(), 'types': Counter()} for i in range(4)]
     published, discovered, abstracts, pub_filter = set(), set(), set(), set()
     for axis, field in [('pub', 'published'), ('created', 'created')]:
-        filters = f'type:journal-article,from-{axis}-date:{start},until-{axis}-date:{end}'
+        filters = f'type:{work_type},from-{axis}-date:{start},until-{axis}-date:{end}'
         for doi, work in crossref_works(client, endpoint, filters):
             discovered.add(doi)
             if field == 'published':
@@ -105,7 +81,7 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
             else:
                 week['created'] += 1
                 week['created_imprecise_publication_day'] += int(full_date(work, 'published') is None)
-    result = {'subject': venue['subject'], 'issn': venue['issn'], 'weeks': weeks,
+    result = {'subject': venue['subject'], 'container': container, 'work_type': work_type, 'weeks': weeks,
               'unique_discovered': len(discovered), 'publication_filter_records': len(pub_filter),
               'publication_filter_without_exact_day_in_window': len(pub_filter - published),
               'status': 'ok', 'reference': None}

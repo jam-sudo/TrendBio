@@ -83,6 +83,16 @@ class _SynthesisDraft(Synthesis):
         return value
 
 
+class CohesionEvidence(BaseModel):
+    id: str
+    quote: str
+
+
+class CohesionReview(BaseModel):
+    question: str
+    evidence: list[CohesionEvidence]
+
+
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
     slugs = taxonomy.slugs()
     return create_model(
@@ -152,6 +162,23 @@ class LLM:
             if bad:
                 return self._failure(item.id, 'grounding', detail=','.join(f'{v:g}' for v in bad))
         return validated
+
+    def review_cohesion(self, prompt, items, minimum, key):
+        result = self._parse(CohesionReview, [{'role': 'user', 'content': prompt}], 'claude-haiku-5-5',
+                             2048, 'low', entity_id=key)
+        if result is None:
+            return None
+        if not result.evidence and not result.question.strip():
+            return {'question': '', 'retained': []}
+        texts = {i.id: ' '.join((i.title + ' ' + i.abstract).split()) for i in items}
+        retained = [e.id for e in result.evidence]
+        if not result.question.strip() or len(set(retained)) != len(retained) or len(retained) < minimum:
+            return self._failure(key, 'validation:cohesion')
+        for e in result.evidence:
+            quote = ' '.join(e.quote.split())
+            if e.id not in texts or len(quote) < 12 or quote not in texts[e.id]:
+                return self._failure(key, 'validation:cohesion-evidence')
+        return {'question': result.question.strip(), 'retained': sorted(retained)}
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,

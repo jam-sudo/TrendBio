@@ -26,6 +26,7 @@ from pipeline.run import (
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.biorxiv import BiorxivAdapter
+from pipeline.sources.crossref import CrossrefAdapter
 from pipeline.sources.github import GithubAdapter
 from pipeline.sources.pubmed import PubmedAdapter
 from pipeline.sources.rss import RssAdapter
@@ -43,8 +44,8 @@ ToDate = Annotated[datetime, typer.Option('--to', formats=['%Y-%m-%d'])]
 
 
 @app.callback()
-def configure_logging(ctx: typer.Context):
-    stream = sys.stderr if ctx.invoked_subcommand in {'audit-edition', 'survey'} else sys.stdout
+def configure_logging(ctx: typer.Context = None):
+    stream = sys.stderr if ctx and ctx.invoked_subcommand in {'audit-edition', 'survey', 'trial-windows'} else sys.stdout
     logging.basicConfig(level=logging.INFO, stream=stream,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     # HTTP request logs include query strings, which can contain API credentials.
@@ -57,7 +58,7 @@ def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) ->
     taxonomy = load_taxonomy(domain)
     sources = load_config(domain)
     adapters = []
-    for adapter in (BiorxivAdapter, ArxivAdapter, PubmedAdapter, GithubAdapter, RssAdapter):
+    for adapter in (BiorxivAdapter, ArxivAdapter, PubmedAdapter, GithubAdapter, RssAdapter, CrossrefAdapter):
         if adapter.name not in sources:
             continue
         if adapter is GithubAdapter:
@@ -107,6 +108,20 @@ def run(domain: Domain = 'computational',
         run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run)
 
 
+@app.command('trial-windows')
+def trial_windows(domain: Domain, end: ToDate):
+    """Run the same clustering on four disjoint weeks and on their union using public metadata and local embeddings."""
+    from pipeline.window_trial import run_window_trial, trial_records
+
+    fields = yaml.safe_load(Path('config/expansion-venues.yaml').read_text())
+    if domain != 'math' and domain not in fields:
+        raise typer.BadParameter('Unknown trial field')
+    day = end.date()
+    with httpx.Client(timeout=40, headers={'User-Agent': 'TrendBio metadata survey (https://trendbio.dev)'}) as client:
+        records = list(trial_records(domain, fields.get(domain, []), day - timedelta(days=27), day, client))
+    typer.echo(json.dumps(run_window_trial(domain, records, day, Embedder()), ensure_ascii=False, indent=2))
+
+
 @app.command()
 def survey(end: ToDate,
            domain: Annotated[str | None, typer.Option(help='Survey one field from config/expansion-venues.yaml.')] = None):
@@ -127,7 +142,7 @@ def survey(end: ToDate,
                 try:
                     record = survey_venue(client, venue, end.date())
                 except (httpx.HTTPError, KeyError, ValueError) as exc:
-                    record = {'issn': venue['issn'], 'subject': venue['subject'], 'status': 'failed', 'reason': str(exc)}
+                    record = {**venue, 'status': 'failed', 'reason': str(exc)}
                 failed |= record['status'] == 'failed' or (record.get('reference') or {}).get('status') == 'failed'
                 results.append(record)
             report['fields'][field] = results

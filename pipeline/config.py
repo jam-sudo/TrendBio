@@ -17,6 +17,7 @@ class Taxonomy(BaseModel):
     relevance: str
     synthesis_guidance: str = ''
     window_by_publication: bool = False
+    review_cluster_cohesion: bool = False
     fallback_category: str
     categories: list[Category]
 
