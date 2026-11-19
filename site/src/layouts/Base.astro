@@ -7,6 +7,8 @@ import SponsorColumns from "../components/SponsorColumns.astro";
 import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
 
+import type { Edition } from "../lib/editions";
+
 interface Props {
   title?: string;
   description: string;
@@ -14,10 +16,10 @@ interface Props {
   lastRun?: string | null;
   heroAligned?: boolean;
   noindex?: boolean;
-  physics?: boolean;
+  edition?: Edition;
 }
 
-const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, physics = false } = Astro.props;
+const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, edition } = Astro.props;
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
 ---
@@ -34,7 +36,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
     <meta name="description" content={summary} />
     {Astro.props.noindex && <meta name="robots" content="noindex" />}
-    {!physics && <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />}
+    {!edition && <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={summary} />
@@ -54,21 +56,30 @@ const canonical = new URL(canonicalPath, Astro.site).href;
       <div class="header-top">
       <a class="wordmark" href="/">{Astro.slots.has("hero") && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
+        <div class="field-bar">
+          <span class="field-links" role="group" aria-label="Science field">
+            <a href="/" aria-current={edition !== "physics" ? "true" : undefined}>Biology</a>
+            <a href="/physics/" aria-current={edition === "physics" ? "true" : undefined}>Physics</a>
+          </span>
+          {edition !== "physics" && <span class="field-links" role="group" aria-label="Biology edition">
+            <a href="/biology/" aria-current={edition === "biology" ? "true" : undefined}>All Biology (beta)</a>
+            <a href="/" aria-current={!edition ? "true" : undefined}>CompBio</a>
+          </span>}
+        </div>
         <div class="nav-links">
-          {physics ? <a href="/">Computational biology</a> : <>
+          {!edition && <>
             <a href="/">Today</a>
             <a href="/topics">Topics</a>
             <a href="/map/">Map</a>
             <a href="/archive">Archive</a>
             <a href="/about">About</a>
           </>}
-          <a href="/physics/" aria-current={canonicalPath === "/physics/" ? "page" : undefined}>Physics</a>
           <button id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">Theme <span aria-hidden="true">☾</span></button>
         </div>
       </nav>
       </div>
       <slot name="hero" />
-      {!physics && canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
+      {!edition && canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
         <label class="sr-only" for="header-search-query">Search topics</label>
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />
         <div id="header-search-panel" hidden>
@@ -84,11 +95,11 @@ const canonical = new URL(canonicalPath, Astro.site).href;
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <main id="main"><slot /></main>
-    {!physics && <SponsorColumns {heroAligned} />}
+    {!edition && <SponsorColumns {heroAligned} />}
     </div>
     <footer>
-      <p>Auto-curated from {physics ? "arXiv" : "bioRxiv, arXiv, PubMed, GitHub and industry sources"}. Summaries are machine-generated.</p>
-      {!physics && <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>}
+      <p>Auto-curated from {edition === "physics" ? "arXiv" : edition === "biology" ? "bioRxiv and PubMed" : "bioRxiv, arXiv, PubMed, GitHub and industry sources"}. Summaries are machine-generated.</p>
+      {!edition && <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>}
       {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>
   </body>

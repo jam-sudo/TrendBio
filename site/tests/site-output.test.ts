@@ -73,7 +73,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   expect(parsed.error).toBeUndefined();
   const { weeks, months } = loadPeriods();
   const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
-  expect(parsed.entries).toHaveLength(8 + getDataIndex("physics").days.length + days.length + weeks.length + months.length + topicSlugs.size);
+  expect(parsed.entries).toHaveLength(9 + getDataIndex("biology").days.length + getDataIndex("physics").days.length + days.length + weeks.length + months.length + topicSlugs.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   expect(urls.size).toBe(parsed.entries.length);
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
@@ -126,5 +126,16 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
     expect(await main.locator('a[href^="https://example.org/physics/"]').count()).toBe(3);
     const archiveLink = path === "physics/index.html" ? "/physics/day/2026-11-01/" : "/physics/#editions";
     expect(await main.locator(`a[href="${archiveLink}"]`).count()).toBe(1);
+  }
+});
+
+
+it("keeps the Biology beta and CompBio as distinct editions", async () => {
+  for (const [path, current] of [["biology/index.html", "All Biology (beta)"], ["index.html", "CompBio"]]) {
+    await page.setContent(read(path));
+    const switcher = page.getByRole("group", { name: "Biology edition" });
+    expect(await switcher.locator("[aria-current]").textContent()).toBe(current);
+    expect(await switcher.getByText("All Biology (beta)").getAttribute("href")).toBe("/biology/");
+    expect(await switcher.getByText("CompBio").getAttribute("href")).toBe("/");
   }
 });

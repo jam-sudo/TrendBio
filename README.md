@@ -7,7 +7,7 @@
 
 <h1 align="center">TrendBio</h1>
 
-<p align="center">Daily research trends in computational biology and physics.</p>
+<p align="center">Daily research trends in biology and physics.</p>
 
 <p align="center">
   <a href="https://trendbio.dev">trendbio.dev</a>&ensp;·&ensp;<a href="https://trendbio.dev/feed.xml">Atom feed</a>&ensp;·&ensp;<a href="https://trendbio.dev/about">How it works</a>
@@ -24,7 +24,9 @@
 
 TrendBio reads each day's new preprints, papers, repositories and company posts in computational biology, groups them into research topics, ranks the Top 40 and writes a short synthesis for each. One page a day, for readers who already know the field, with history back to 1 November 2025.
 
-The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes both fields independently and writes Physics results to `data/physics/`.
+All Biology (beta) at `/biology/` has its own daily rankings, dated editions and evidence from bioRxiv and PubMed. CompBio remains the default at `/`. Run the beta with `python -m pipeline run --domain biology`. The [science expansion roadmap and coverage audit](docs/science-expansion-plan.ko.md) describes the proposed rollout.
+
+The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes each edition independently and writes Physics results to `data/physics/`.
 
 ## How a day is made
 

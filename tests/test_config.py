@@ -86,3 +86,15 @@ def test_scoring_rejects_invalid_tiers_and_display():
                    {'continuity_max_gap_days': -1}, {'degraded_synthesis_fallback_min': 0}):
         with pytest.raises(ValidationError):
             Scoring(weights={}, **values)
+
+
+def test_biology_source_categories_match_the_general_biology_taxonomy():
+    taxonomy = load_taxonomy('biology')
+    config = load_config('biology')
+    categories = set(config['biorxiv']['categories'])
+    hints = config['hints']['biorxiv_category']
+    assert {'cell biology', 'developmental biology', 'ecology', 'evolutionary biology'} <= categories
+    assert set(hints) == categories
+    assert {slug for slugs in hints.values() for slug in slugs} <= set(taxonomy.slugs())
+    assert taxonomy.fallback_category in taxonomy.slugs()
+    assert 'observational' in taxonomy.relevance and config['pubmed']['journals']

@@ -8,7 +8,7 @@ or a success created today (UTC). Enable it with one GitHub token secret using
 the linked setup instructions; keep GitHub's `schedule` as backup because its
 runs can arrive hours late.
 
-GitHub Actions runs both fields daily at 05:23 UTC with fallbacks at 08:41 and 12:17 UTC.
+GitHub Actions runs the computational biology, Physics and All Biology editions daily at 05:23 UTC with fallbacks at 08:41 and 12:17 UTC.
 Each fallback checks the stored edition for that field. Missing editions and failed paper sources are retried.
 Each successful field commits under `data/<domain>/`. Failed runs leave the last published edition available.
 GitHub Actions builds and deploys the Astro site to Cloudflare Pages on pushes to `main` and after Daily pipeline, Backfill, Resynthesize or Maintenance completes via `.github/workflows/deploy.yml`.
@@ -16,7 +16,7 @@ The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
-The daily workflow also accepts a field selector (`all`, `computational`, or `physics`), an optional `date` and a `dry_run` switch. Backfill and maintenance default to `computational`; select `physics` to operate on that edition.
+The daily workflow also accepts a field selector (`all`, `computational`, `physics`, or `biology`), an optional `date` and a `dry_run` switch. Backfill and maintenance default to `computational`; select the intended domain to operate on another edition. The general Biology beta stores its days, topics, spend and checkpoints under `data/biology/`.
 Use a dry run before the first real run to inspect usage and estimated cost.
 
 ## Sources

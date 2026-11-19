@@ -1,14 +1,19 @@
 import type { APIRoute } from "astro";
+import { editions } from "../lib/editions";
 import { loadDays } from "../lib/data";
 import { loadPeriods, topicPages } from "../lib/period-data";
 
 export const GET: APIRoute = ({ site }) => {
   const { days, weeks, months } = loadPeriods();
   const today = new Date().toISOString().slice(0, 10);
-  const physics = loadDays("physics");
   const entries = [
-    { path: "/physics/", date: physics[0]?.date ?? today },
-    ...physics.map(({ date }) => ({ path: `/physics/day/${date}/`, date })),
+    ...editions.flatMap(field => {
+      const editionsByDate = loadDays(field);
+      return [
+        { path: `/${field}/`, date: editionsByDate[0]?.date ?? today },
+        ...editionsByDate.map(({ date }) => ({ path: `/${field}/day/${date}/`, date })),
+      ];
+    }),
     ...["/", "/topics/", "/map/", "/archive/", "/about/", "/week/", "/month/"].map(path => ({ path, date: today })),
     ...days.map(({ date }) => ({ path: `/day/${date}/`, date })),
     ...([["week", weeks], ["month", months]] as const).flatMap(([kind, periods]) =>
