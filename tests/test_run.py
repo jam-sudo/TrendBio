@@ -826,7 +826,7 @@ def test_backfill_day_counts_only_window_fallbacks(ctx, monkeypatch, window_size
     ctx.store._write(ctx.root / 'computational/.backfill_state.json', {
         'done_sources': ['biorxiv', 'arxiv', 'pubmed'], 'failed_chunks': [], 'notes': notes,
     })
-    monkeypatch.setattr(Store, 'items_between', lambda self, start, end: window)
+    monkeypatch.setattr(Store, 'items_between', lambda self, start, end, **kwargs: window)
     result = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True, skip_collect=True)
     assert result.run.status == ('degraded' if window_size == 20 else 'ok')
 
@@ -1494,7 +1494,7 @@ def test_cli_repair_synthesis(ctx, monkeypatch):
     assert result.exit_code == 0, result.output
     assert initialize.call_args.kwargs == {'synthesis_only': True}
     assert process.call_args.args[:3] == ('computational', TODAY, TODAY)
-    assert process.call_args.kwargs == {'model': 'claude-sonnet-5-5'}
+    assert process.call_args.kwargs == {'model': 'claude-sonnet-5-5', 'retry_fallbacks': False}
 
 
 def test_cluster_excludes_code_and_industry(ctx, monkeypatch):

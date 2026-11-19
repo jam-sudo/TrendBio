@@ -48,6 +48,7 @@ class Scores(BaseModel):
 
 class TopicDay(BaseModel):
     date: date
+    category: str | None = None
     rank: int | None
     item_ids: list[str]
     attached_item_ids: list[str] = []
@@ -77,6 +78,7 @@ class RankedTopic(BaseModel):
     rank: int
     headline: str
     summary: str
+    synthesis: str | None = None
     category: str
     signals: Signals
     scores: Scores
@@ -87,6 +89,7 @@ class RunInfo(BaseModel):
     finished: datetime
     status: Literal["ok", "degraded"]
     backfilled: bool
+    model_cost_usd: float | None = Field(default=None, ge=0)
     synthesis_model: str
     source_status: dict[str, Literal["ok", "failed", "skipped"]]
     notes: list[str] = []

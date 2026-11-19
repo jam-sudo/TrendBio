@@ -12,6 +12,7 @@ from typing import Annotated
 import anthropic
 import httpx
 import typer
+import yaml
 
 from pipeline.budget import Budget
 from pipeline.config import load_scoring, load_taxonomy
@@ -42,8 +43,9 @@ ToDate = Annotated[datetime, typer.Option('--to', formats=['%Y-%m-%d'])]
 
 
 @app.callback()
-def configure_logging():
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout,
+def configure_logging(ctx: typer.Context):
+    stream = sys.stderr if ctx.invoked_subcommand in {'audit-edition', 'survey'} else sys.stdout
+    logging.basicConfig(level=logging.INFO, stream=stream,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     # HTTP request logs include query strings, which can contain API credentials.
     for name in ("httpx", "httpcore", "httpx2", "httpcore2"):
@@ -105,6 +107,35 @@ def run(domain: Domain = 'computational',
         run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run)
 
 
+@app.command()
+def survey(end: ToDate,
+           domain: Annotated[str | None, typer.Option(help='Survey one field from config/expansion-venues.yaml.')] = None):
+    """Compare four non-overlapping weeks against independent indexes and publisher records."""
+    from pipeline.survey import survey_venue
+
+    fields = yaml.safe_load(Path('config/expansion-venues.yaml').read_text())
+    if domain and domain not in fields:
+        raise typer.BadParameter('Unknown survey field')
+    report = {'from': str(end.date() - timedelta(days=27)), 'to': str(end.date()), 'fields': {}}
+    failed = False
+    with httpx.Client(timeout=40, headers={'User-Agent': 'TrendBio metadata survey (https://trendbio.dev)'}) as client:
+        for field, venues in fields.items():
+            if domain and field != domain:
+                continue
+            results = []
+            for venue in venues:
+                try:
+                    record = survey_venue(client, venue, end.date())
+                except (httpx.HTTPError, KeyError, ValueError) as exc:
+                    record = {'issn': venue['issn'], 'subject': venue['subject'], 'status': 'failed', 'reason': str(exc)}
+                failed |= record['status'] == 'failed' or (record.get('reference') or {}).get('status') == 'failed'
+                results.append(record)
+            report['fields'][field] = results
+    typer.echo(json.dumps(report, ensure_ascii=False, indent=2))
+    if failed:
+        raise typer.Exit(1)
+
+
 @app.command('map')
 def topic_map(domain: Domain = 'computational', data_root: DataRoot = Path('data')):
     """Rebuild the topic map from stored centroids, without LLM calls."""
@@ -112,6 +143,26 @@ def topic_map(domain: Domain = 'computational', data_root: DataRoot = Path('data
     store = Store(data_root, domain)
     with _stage('map'):
         store.put_map(build_map(store, load_scoring(), previous=store.get_map()))
+
+
+@app.command('audit-edition')
+def audit_edition_cmd(start: FromDate, end: ToDate, domain: Domain, data_root: DataRoot = Path('data'),
+                     references: Annotated[Path | None, typer.Option(help='JSON array of dated IDs or DOIs from independent lists.')] = None,
+                     compare_windows: Annotated[bool, typer.Option(help='Recluster the last 28 days of available publication data.')] = False):
+    """Measure field coverage, costs and selection. Emit review cases with their evidence IDs."""
+    from pipeline.edition_audit import audit_edition, compare_windows as cluster_windows
+
+    refs = json.loads(references.read_text()) if references else []
+    if not isinstance(refs, list) or any(not isinstance(r, dict) or not all(
+            isinstance(r.get(key), str) and r[key].strip() for key in ('date', 'id', 'source')) for r in refs):
+        raise typer.BadParameter('Each reference needs a date, an ID or DOI, and its source')
+    if any(not str(start.date()) <= r['date'] <= str(end.date()) for r in refs):
+        raise typer.BadParameter('Reference date outside audit interval')
+    store = Store(data_root, domain)
+    report = audit_edition(store, start.date(), end.date(), refs)
+    if compare_windows:
+        report['window_comparison'] = cluster_windows(store, end.date())
+    typer.echo(json.dumps(report, ensure_ascii=False, indent=2))
 
 
 @app.command()
@@ -141,6 +192,7 @@ def reprocess(start: FromDate, end: ToDate, domain: Domain = 'computational',
 @app.command('repair-synthesis')
 def repair_synthesis(start: FromDate, end: ToDate, domain: Domain = 'computational',
                      model: Annotated[str, typer.Option(help='Synthesis repair model.')] = 'claude-haiku-5-5',
+                     retry_fallbacks: Annotated[bool, typer.Option(help='Retry complete item-title fallbacks as well.')] = False,
                      data_root: DataRoot = Path('data'),
                      dry_run: Annotated[bool, typer.Option(help='Count repair targets without LLM calls or writes.')] = False):
     """Repair missing or formerly truncated syntheses without reranking or collecting items."""
@@ -148,12 +200,13 @@ def repair_synthesis(start: FromDate, end: ToDate, domain: Domain = 'computation
         raise typer.BadParameter('start must not be after end')
     if dry_run:
         _, _, topics, rows, jobs, _ = synthesis_repair_targets(
-            Store(data_root, domain), start.date(), end.date(),
+            Store(data_root, domain), start.date(), end.date(), retry_fallbacks=retry_fallbacks,
         )
         typer.echo(f'repair_synthesis_targets rows={len(rows)} topics={len(topics)} estimated_jobs={len(jobs)}')
         return
     with _dependencies(domain, data_root, synthesis_only=True) as deps:
-        run_repair_synthesis(domain, start.date(), end.date(), Store(data_root, domain), deps, model=model)
+        run_repair_synthesis(domain, start.date(), end.date(), Store(data_root, domain), deps,
+                             model=model, retry_fallbacks=retry_fallbacks)
 
 
 @app.command()
@@ -172,13 +225,14 @@ def restatus(start: FromDate, end: ToDate, domain: Domain = 'computational',
         raise typer.BadParameter('start must not be after end')
     cfg = load_scoring()
     store = Store(data_root, domain)
+    by_publication = load_taxonomy(domain).window_by_publication
     budget = Budget(data_root / domain / 'llm_spend.json', cfg.monthly_ceiling_usd)
     days = degraded_days = 0
     day = start.date()
     while day <= end.date():
         result = store.get_day(day)
         if result is not None:
-            window = store.items_between(day - timedelta(days=cfg.window_days - 1), day)
+            window = store.items_between(day - timedelta(days=cfg.window_days - 1), day, by_publication=by_publication)
             degraded = is_degraded(
                 result.run.notes, result.run.source_status,
                 window_item_ids={item.id for item in window}, cfg=cfg,
@@ -226,12 +280,14 @@ def resynthesize(start: FromDate, end: ToDate, model: Annotated[str, typer.Optio
                     )
                     for row, topic in zip(result.ranked, topics, strict=True):
                         row.headline, row.summary = topic.headline, topic.summary
+                        row.synthesis = topic.synthesis if topic.synthesized_on == day else None
                         staged.put_topic(topic)
                     result.run.synthesis_model = selected
                     result.run.notes = sorted(set([
                         note for note in result.run.notes if not note.startswith('synthesis-fallback:')
                     ] + notes))
-                    window = staged.items_between(day - timedelta(days=deps.cfg.window_days - 1), day)
+                    window = staged.items_between(day - timedelta(days=deps.cfg.window_days - 1), day,
+                                                  by_publication=deps.taxonomy.window_by_publication)
                     degraded = is_degraded(result.run.notes, result.run.source_status,
                                            over_ceiling=staged_deps.budget.over_ceiling(),
                                            window_item_ids={item.id for item in window}, cfg=deps.cfg)

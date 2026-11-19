@@ -1,0 +1,65 @@
+from datetime import date
+
+import httpx
+
+from pipeline.edition_audit import audit_edition, compare_windows
+from pipeline.store import Store
+from pipeline.survey import reference_dois, survey_venue
+
+
+def test_dated_audit_preserves_missing_days_and_checks_independent_ids(fixtures_root):
+    first, last = date(2026, 10, 31), date(2026, 11, 1)
+    refs = [{'date': str(d), 'id': 'arxiv:numerical-analysis-fixture-1', 'source': 'independent fixture'}
+            for d in [first, last]]
+    report = audit_edition(Store(fixtures_root / 'data', 'math'), first, last, refs)
+    assert report['missing_days'] == [str(first)]
+    assert [r['ranked'] for r in report['references']] == [None, True]
+    assert report['days'][0]['categories']['numerical-analysis'] == {'stored': 3, 'relevant': 3, 'ranked': 1, 'clusters': 1}
+    assert report['review_samples']['top'][0]['id'] == 'quadrature-fixture'
+    assert report['projected_30d_usd'] is None
+
+
+def test_28_day_experiment_recovers_a_sparse_group(tmp_path, fixtures_root):
+    import numpy as np
+
+    store = Store(tmp_path, 'math')
+    item = Store(fixtures_root / 'data', 'math').get_item('arxiv:numerical-analysis-fixture-1')
+    for i, d in enumerate([1, 10, 20]):
+        when = date(2026, 11, d)
+        paper = item.model_copy(update={'id': f'example:{i}', 'type': 'published', 'relevant': True,
+                                        'first_seen': when, 'published_at': when})
+        store.put_item(paper)
+        store.put_embedding(paper.id, np.array([1.0, 0.0]))
+    result = compare_windows(store, date(2026, 11, 28))
+    assert result['weekly_clusters'] == [0, 0, 0, 0]
+    assert result['clusters_28d'] == 1 and len(result['newly_clustered_ids']) == 3
+
+
+def test_survey_keeps_date_precision_and_reference_denominators():
+    full = {'DOI': '10.1/A', 'created': {'date-parts': [[2026, 10, 22]]},
+            'published': {'date-parts': [[2026, 10, 22]]}, 'abstract': 'text', 'type': 'journal-article'}
+    partial = {**full, 'DOI': '10.1/B', 'published': {'date-parts': [[2026]]}}
+
+    def reply(req):
+        if req.url.path.endswith('/search'):
+            return httpx.Response(200, json={'hitCount': 2, 'resultList': {'result': [
+                {'source': 'MED', 'id': '1', 'doi': '10.1/a'}, {'source': 'MED', 'id': '2'}]}})
+        return httpx.Response(200, json={'message': {'items': [full, partial], 'total-results': 2}})
+
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        result = survey_venue(client, {'issn': '0000-0000', 'subject': 'fixture', 'reference': 'europepmc'}, date(2026, 11, 18))
+    assert result['unique_discovered'] == 2 and result['publication_filter_without_exact_day_in_window'] == 1
+    assert [(w['published'], w['created']) for w in result['weeks']] == [(1, 2), (0, 0), (0, 0), (0, 0)]
+    assert result['reference']['records'] == 2 and result['reference']['found_with_abstract'] == 1
+
+
+def test_publisher_contents_uses_article_publication_dates():
+    def reply(req):
+        page = ('<a>Volume 17</a>, 2026' if req.url.path == '/articles/' else
+                '<div class="published-date">18 Nov 2026</div> https://doi.org/10.5194/se-17-a-2026,'
+                '<div class="published-date">18 Dec 2026</div> https://doi.org/10.5194/se-17-b-2026,')
+        return httpx.Response(200, text=page)
+
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        assert reference_dois(client, {'copernicus': 'se'}, date(2026, 10, 22),
+                              date(2026, 11, 18)) == ({'10.5194/se-17-a-2026'}, 1)

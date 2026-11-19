@@ -173,6 +173,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
     started = datetime.now(timezone.utc)
     with _staging(store, deps, dry_run=dry_run) as (store, deps):
         previous = store.get_day(day)
+        spend_before = deps.budget.total_spend_usd()
         start = day - timedelta(days=deps.cfg.window_days - 1)
         notes = []
         source_status = dict.fromkeys(get_args(Source), 'skipped')
@@ -239,7 +240,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             ))
             counts['irrelevant'] = irrelevant
         with _stage('embed', items=0) as counts:
-            window = sorted(store.items_between(start, day), key=lambda item: item.id)
+            window = sorted(store.items_between(start, day, by_publication=deps.taxonomy.window_by_publication),
+                            key=lambda item: item.id)
             window_item_ids = {item.id for item in window}
             window = [item for item in window if item.relevant]
             missing = []
@@ -340,19 +342,25 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             for topic, signals, scores in scored:
                 entry = next(entry for entry in topic.history if entry.date == day)
                 entry.rank, entry.signals, entry.scores = ranks.get(topic.slug), signals, scores
+                entry.category = topic.category
             _related(list(topics.values()))
             for topic in topics.values():
                 store.put_topic(topic)
             degraded = is_degraded(notes, source_status,
                                    over_ceiling=deps.budget.over_ceiling(),
                                    window_item_ids=window_item_ids, cfg=deps.cfg)
+            cost = previous.run.model_cost_usd if previous else 0.0
+            if cost is not None:
+                cost += max(0.0, deps.budget.total_spend_usd() - spend_before)
             result = Day(domain=domain, date=day, ranked=[RankedTopic(
                 slug=topic.slug, rank=index, headline=topic.headline or topic.label.title(),
-                summary=topic.summary or '', category=topic.category, signals=signals, scores=scores,
+                summary=topic.summary or '', synthesis=topic.synthesis if topic.synthesized_on == day else None,
+                category=topic.category, signals=signals, scores=scores,
             ) for index, (topic, signals, scores) in enumerate(ranked, 1)], run=RunInfo(
                 started=previous.run.started if previous else started,
                 finished=previous.run.finished if previous else datetime.now(timezone.utc),
                 status='degraded' if degraded else 'ok', backfilled=backfill, synthesis_model=model,
+                model_cost_usd=None if backfill else cost,
                 source_status=source_status, notes=sorted(set(notes)),
             ))
             store.put_day(result)
@@ -637,7 +645,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
     path.unlink()
 
 
-def synthesis_repair_targets(store: Store, start: date, end: date):
+def synthesis_repair_targets(store: Store, start: date, end: date, *, retry_fallbacks: bool = False):
     """Plan repairs without writing data or making LLM calls."""
     if start > end:
         raise ValueError('start must not be after end')
@@ -668,15 +676,18 @@ def synthesis_repair_targets(store: Store, start: date, end: date):
                 if entry is None:
                     raise ValueError(f'missing ranked history for topic: {topic.slug}')
                 missing[topic.slug] = add_job(topic, entry)
-            if (not row.summary or not row.headline or truncated(row)
+            retry = retry_fallbacks and f'synthesis-fallback:{row.slug}' in day.run.notes
+            if (retry or not row.summary or not row.headline or truncated(row)
                     or row.headline.casefold() in {topic.label.casefold(), 'untitled topic'}):
                 entry = next((entry for entry in topic.history if entry.date == day.date), None)
                 if entry is None:
                     raise ValueError(f'missing history for topic: {topic.slug} on {day.date}')
                 key = add_job(topic, entry)
+                if retry and max(e.date for e in topic.history if e.rank is not None) == day.date:
+                    missing[topic.slug] = key
                 item = top_evidence(evidence[key])
                 # Recognize a completed item fallback even when enrichment has no summary.
-                if (f'synthesis-fallback:{row.slug}' in day.run.notes
+                if (not retry and f'synthesis-fallback:{row.slug}' in day.run.notes
                         and row.headline == item.title and row.summary == (item.summary or '')):
                     if key not in missing.values():
                         jobs.pop(key)
@@ -687,11 +698,11 @@ def synthesis_repair_targets(store: Store, start: date, end: date):
 
 
 def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps: Deps, *,
-                         model: str = 'claude-haiku-5-5') -> None:
+                         model: str = 'claude-haiku-5-5', retry_fallbacks: bool = False) -> None:
     """Repair synthesis only; preserve historical ranks, evidence, and map coordinates."""
     if domain != store.domain:
         raise ValueError('domain does not match store')
-    days, topics, missing, rows, jobs, evidence = synthesis_repair_targets(store, start, end)
+    days, topics, missing, rows, jobs, evidence = synthesis_repair_targets(store, start, end, retry_fallbacks=retry_fallbacks)
     degraded_before = sum(day.run.status == 'degraded' for day in days)
     fallback_rows = 0
     estimated_usd = 0.0
@@ -716,6 +727,7 @@ def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps
                     if key in rows:
                         row = rows[key]
                         row.headline, row.summary = topic.headline, topic.summary
+                        row.synthesis = topic.synthesis if topic.synthesized_on == when else None
                         day = next(day for day in days if day.date == when)
                         note = f'synthesis-fallback:{topic.slug}'
                         day.run.notes = [saved for saved in day.run.notes if saved != note]
@@ -727,12 +739,15 @@ def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps
                 items = staged.items_between(
                     min(day.date for day in changed_days) - timedelta(days=cfg.window_days - 1),
                     max(day.date for day in changed_days),
+                    by_publication=deps.taxonomy.window_by_publication,
                 )
                 for day in changed_days:
                     window_start = day.date - timedelta(days=cfg.window_days - 1)
                     degraded = is_degraded(
                         day.run.notes, day.run.source_status, over_ceiling=False, cfg=cfg,
-                        window_item_ids={item.id for item in items if window_start <= item.first_seen <= day.date},
+                        window_item_ids={item.id for item in items if item.first_seen <= day.date
+                                         and window_start <= (item.published_at if deps.taxonomy.window_by_publication
+                                                              else item.first_seen) <= day.date},
                     )
                     day.run.status = 'degraded' if degraded else 'ok'
                     staged.put_day(day)

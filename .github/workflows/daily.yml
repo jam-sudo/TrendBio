@@ -20,6 +20,10 @@ on:
         description: Print usage and cost without committing data
         type: boolean
         default: false
+      repair_pilot_run:
+        description: Prior math dry-run ID to repair in staging (requires date and dry_run)
+        type: string
+        required: false
 
 concurrency:
   group: pipeline
@@ -68,6 +72,21 @@ jobs:
           key: ${{ runner.os }}-specter2
       - run: pip install -e .
         if: ${{ steps.ran-today.outputs.skip != 'true' }}
+      - name: Restore a prior pilot for targeted repair
+        if: ${{ inputs.repair_pilot_run != '' }}
+        env:
+          PRIOR_RUN: ${{ inputs.repair_pilot_run }}
+          RUN_DATE: ${{ inputs.date }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [[ "$DOMAIN" == "math" && "$DRY_RUN" == "true" && "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ && "$PRIOR_RUN" =~ ^[0-9]+$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRIOR_RUN" --jq '[.path,.head_branch,.conclusion] | @tsv' | grep -Fx $'.github/workflows/daily.yml\tmain\tsuccess'
+          gh run download "$PRIOR_RUN" --pattern "math-pilot-$PRIOR_RUN-*" --dir "$RUNNER_TEMP/prior-pilot"
+          mapfile -t days < <(find "$RUNNER_TEMP/prior-pilot" -path "*/math/days/$RUN_DATE.json" -type f)
+          [[ ${#days[@]} == 1 ]]
+          mkdir -p .pipeline-stage-review
+          cp -R "$(dirname "$(dirname "${days[0]}")")" .pipeline-stage-review/math
       - name: Run pipeline
         if: ${{ steps.ran-today.outputs.skip != 'true' }}
         timeout-minutes: 30
@@ -80,7 +99,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_DATE: ${{ inputs.date }}
           DRY_RUN: ${{ inputs.dry_run }}
+          PRIOR_RUN: ${{ inputs.repair_pilot_run }}
         run: |
+          if [[ -n "$PRIOR_RUN" ]]; then
+            python -m pipeline repair-synthesis --domain math --data-root .pipeline-stage-review --from "$RUN_DATE" --to "$RUN_DATE" --retry-fallbacks
+            exit
+          fi
           args=(run --domain "$DOMAIN")
           if [[ -n "$RUN_DATE" ]]; then
             args+=(--date "$RUN_DATE")
@@ -98,8 +122,18 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
+      - name: Record edition coverage and evidence samples
+        id: audit
+        if: ${{ steps.ran-today.outputs.skip != 'true' && !inputs.dry_run && matrix.domain != 'computational' }}
+        env:
+          RUN_DATE: ${{ inputs.date }}
+        run: |
+          day="${RUN_DATE:-$(date -u +%F)}"
+          python -m pipeline audit-edition --domain "$DOMAIN" --from "$day" --to "$day" > "$RUNNER_TEMP/coverage.json"
+          mkdir -p "data/$DOMAIN/audits"
+          mv "$RUNNER_TEMP/coverage.json" "data/$DOMAIN/audits/$day.json"
       - name: Commit data
-        if: ${{ steps.ran-today.outputs.skip != 'true' && !inputs.dry_run }}
+        if: ${{ (success() || steps.audit.outcome == 'failure') && steps.ran-today.outputs.skip != 'true' && !inputs.dry_run }}
         run: |
           if [[ -n "$(git status --porcelain data)" ]]; then
             git config user.name 'github-actions[bot]'

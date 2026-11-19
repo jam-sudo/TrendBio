@@ -176,12 +176,19 @@ class LLM:
                 item.title, item.published_at.isoformat(), item.summary or '', item.abstract,
             )),
         ])
+        arxiv_ids = {value.lower() for item in items if item.source == 'arxiv'
+                     for value in (item.id.removeprefix('arxiv:'), item.url.rsplit('/', 1)[-1])}
+        output_limit = 4096
         # Length and grounding feedback share one retry, charged by _parse as usual.
         for attempt in range(2):
-            result = self._parse(_SynthesisDraft, [{'role': 'user', 'content': prompt}], model, 4096, 'high',
+            result = self._parse(_SynthesisDraft, [{'role': 'user', 'content': prompt}], model, output_limit, 'high',
                                  entity_id=topic.slug, fallbacks=model in {'claude-opus-5-5', 'claude-sonnet-5-5'},
                                  on_repeated_429=on_repeated_429)
             if result is None:
+                if not attempt and self.synthesis_guidance and self.fallback_reasons.get(topic.slug) == 'empty_output':
+                    self.fallback_reasons.pop(topic.slug, None)
+                    output_limit *= 2
+                    continue
                 return None
             overruns = {
                 field: (len(getattr(result, field)), target)
@@ -192,11 +199,16 @@ class LLM:
                 for field, (length, _) in overruns.items():
                     logger.warning('synthesis_overrun topic=%s field=%s length=%d',
                                    topic.slug, field, length)
-            bad = grounding.unsupported('\n'.join([
+            claims, missing_citations = grounding.check_citations('\n'.join([
                 result.headline, result.summary, result.synthesis, *result.item_one_liners.values(),
-            ]), source)
-            if not bad and (not overruns or attempt):
+            ]), arxiv_ids)
+            bad = grounding.unsupported(claims, source)
+            if not bad and not missing_citations and (not overruns or attempt):
                 return Synthesis.model_validate(result.model_dump())
+            if missing_citations:
+                if attempt:
+                    return self._failure(topic.slug, 'citation', detail=','.join(missing_citations))
+                prompt += '\n\nUse only exact arXiv identifiers from the supplied items.'
             if bad:
                 detail = ','.join(f'{v:g}' for v in bad)
                 if attempt:

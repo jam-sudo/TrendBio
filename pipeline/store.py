@@ -57,10 +57,11 @@ class Store:
                 return item
         return None
 
-    def items_between(self, start: date, end: date) -> list[Item]:
+    def items_between(self, start: date, end: date, *, by_publication: bool = False) -> list[Item]:
         items = (load(Item, path) for path in self._item_paths())
         return sorted(
-            (item for item in items if start <= item.first_seen <= end),
+            (item for item in items if item.first_seen <= end
+             and start <= (item.published_at if by_publication else item.first_seen) <= end),
             key=lambda item: (item.first_seen, item.id),
         )
 

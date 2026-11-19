@@ -58,3 +58,11 @@ def test_unsupported_flags_invented_value():
 def test_unsupported_keeps_order_and_deduplicates():
     assert unsupported('twelve groups, 47 samples, twelve groups, 47 samples', '') == [12, 47]
     assert unsupported('3 datasets and 12 samples', '', min_value=3) == [3, 12]
+
+
+def test_only_exact_arxiv_citations_are_removed_before_checking_quantities():
+    from pipeline.grounding import check_citations, unsupported
+
+    text, invalid = check_citations('ArXiv:2611.12345. See arXiv:2611.12346 for 73 trials.', {'2611.12345'})
+    assert invalid == ['2611.12346']
+    assert '2611.12345' not in text and 73 in unsupported(text, '')

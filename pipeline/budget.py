@@ -55,6 +55,10 @@ class Budget:
         spend = json.loads(self.path.read_text(encoding='utf-8')) if self.path.exists() else {}
         return float(spend.get(month, 0.0))
 
+    def total_spend_usd(self) -> float:
+        spend = json.loads(self.path.read_text(encoding='utf-8')) if self.path.exists() else {}
+        return math.fsum(value for value in spend.values() if isinstance(value, (float, int)))
+
     def over_ceiling(self) -> bool:
         return self.month_spend_usd() > self.ceiling_usd
 

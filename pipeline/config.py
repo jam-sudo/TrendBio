@@ -16,6 +16,7 @@ class Taxonomy(BaseModel):
     label: str
     relevance: str
     synthesis_guidance: str = ''
+    window_by_publication: bool = False
     fallback_category: str
     categories: list[Category]
 

@@ -53,6 +53,7 @@ export interface Scores {
 
 export interface TopicDay {
   date: string;
+  category?: string | null;
   rank: number | null;
   item_ids: string[];
   attached_item_ids?: string[];
@@ -82,6 +83,7 @@ export interface RankedTopic {
   rank: number;
   headline: string;
   summary: string;
+  synthesis?: string | null;
   category: string;
   signals: Signals;
   scores: Scores;
@@ -92,6 +94,7 @@ export interface RunInfo {
   finished: string;
   status: "ok" | "degraded";
   backfilled: boolean;
+  model_cost_usd?: number | null;
   synthesis_model: string;
   source_status: Record<string, "ok" | "failed" | "skipped">;
   notes: string[];

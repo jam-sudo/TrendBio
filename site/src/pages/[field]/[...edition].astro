@@ -31,7 +31,8 @@ const rows = (day?.ranked ?? []).map(row => {
   const topic = loadTopic(field, row.slug);
   const entry = topic?.history.find(entry => entry.date === day?.date);
   const papers = loadItems(field, entry?.item_ids ?? []);
-  return { row, papers, synthesis: topic && topic.synthesized_on === day?.date ? topic.synthesis : null };
+  const synthesis = row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
+  return { row, papers, synthesis };
 });
 ---
 
