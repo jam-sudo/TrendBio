@@ -169,6 +169,11 @@ it("publishes a Korean topic map and a distinct valid Korean Atom feed", async (
   const koMap = JSON.parse(read("ko/map.json"));
   expect(koMap.points.map((point: { slug: string }) => point.slug)).toEqual(map.points.map((point: { slug: string }) => point.slug));
   expect(koMap.points.some((point: { headline: string }) => /[가-힣]/.test(point.headline))).toBe(true);
+  await page.setContent(read("ko/map/index.html"));
+  const point = koMap.points[0];
+  const label = await page.locator(`.map-links a[href="/ko/topic/${point.slug}/"]`).textContent();
+  expect(label).toContain(point.headline + " — ");
+  expect(label).toMatch(/마지막 순위 진입 \d{4}년 \d+월 \d+일$/);
   const feed = await page.evaluate(xml => {
     const doc = new DOMParser().parseFromString(xml, "application/xml");
     return { valid: !doc.querySelector("parsererror"), lang: doc.documentElement.getAttribute("xml:lang"),

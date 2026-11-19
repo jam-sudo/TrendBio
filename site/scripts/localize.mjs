@@ -89,6 +89,8 @@ function korean(text) {
     );
   }
   if (!/[A-Za-z]/.test(s)) return s;
+  if ((v = /^(.+) — (.+), last ranked (\d{4}-\d{2}-\d{2})$/.exec(s)))
+    return korean(v[1]) + ' — ' + korean(v[2]) + ' · 마지막 순위 진입 ' + korean(v[3]);
   if ((v = /^(.+) — TrendBio$/.exec(s))) return korean(v[1]) + ' — TrendBio';
   if (s.startsWith('TrendBio — ')) return 'TrendBio — ' + korean(s.slice('TrendBio — '.length));
   if ((v = /^(.+) Tools: (.+)$/.exec(s))) return korean(v[1]) + ' 도구 ' + v[2];
