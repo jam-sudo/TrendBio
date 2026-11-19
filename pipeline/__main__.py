@@ -27,6 +27,7 @@ from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.biorxiv import BiorxivAdapter
 from pipeline.sources.crossref import CrossrefAdapter
+from pipeline.sources.drops import DropsAdapter
 from pipeline.sources.github import GithubAdapter
 from pipeline.sources.pubmed import PubmedAdapter
 from pipeline.sources.rss import RssAdapter
@@ -58,7 +59,7 @@ def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) ->
     taxonomy = load_taxonomy(domain)
     sources = load_config(domain)
     adapters = []
-    for adapter in (BiorxivAdapter, ArxivAdapter, PubmedAdapter, GithubAdapter, RssAdapter, CrossrefAdapter):
+    for adapter in (BiorxivAdapter, ArxivAdapter, PubmedAdapter, GithubAdapter, RssAdapter, CrossrefAdapter, DropsAdapter):
         if adapter.name not in sources:
             continue
         if adapter is GithubAdapter:
@@ -111,10 +112,10 @@ def run(domain: Domain = 'computational',
 @app.command('trial-windows')
 def trial_windows(domain: Domain, end: ToDate):
     """Run the same clustering on four disjoint weeks and on their union using public metadata and local embeddings."""
-    from pipeline.window_trial import run_window_trial, trial_records
+    from pipeline.window_trial import PILOT_DOMAINS, run_window_trial, trial_records
 
     fields = yaml.safe_load(Path('config/expansion-venues.yaml').read_text())
-    if domain not in {'math', 'astronomy'} and domain not in fields:
+    if domain not in PILOT_DOMAINS and domain not in fields:
         raise typer.BadParameter('Unknown trial field')
     day = end.date()
     with httpx.Client(timeout=40, headers={'User-Agent': 'TrendBio metadata survey (https://trendbio.dev)'}) as client:

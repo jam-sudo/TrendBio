@@ -14,12 +14,12 @@ class AllPaperSourcesFailed(Exception):
     pass
 
 
-PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed', 'crossref'}
+PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed', 'crossref', 'drops'}
 
 
 def initial_source_status(adapters):
     # Older editions expose five source keys. Include the new intake only in editions that use it.
-    return dict.fromkeys((name for name in get_args(Source) if name != 'crossref'
+    return dict.fromkeys((name for name in get_args(Source) if name not in {'crossref', 'drops'}
                           or any(a.name == name for a in adapters)), 'skipped')
 
 

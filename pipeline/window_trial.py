@@ -3,18 +3,26 @@ from collections import Counter
 from datetime import timedelta
 
 from pipeline.edition_audit import cluster_publication_windows
+from pipeline.dedupe import dedupe
 from pipeline.enrich import hints_for
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.crossref import CrossrefAdapter, crossref_works, full_date, plain_text, related_dois
+from pipeline.sources.drops import DropsAdapter
+
+
+PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information'}
 
 
 def trial_records(domain, venues, start, end, client):
-    if domain in {'earth-environment', 'math', 'chemistry', 'astronomy'}:
+    if domain in PILOT_DOMAINS:
         config = load_config(domain)
-        adapter = (ArxivAdapter if 'arxiv' in config else CrossrefAdapter)(config)
-        for item in adapter.fetch(start, end, client):
-            yield item.id, item.published_at, item.title, item.abstract, item.type, None, hints_for(item, config['hints'])
+        records = []
+        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter):
+            if source.name in config:
+                records.extend(source(config).fetch(start, end, client))
+        for item in dedupe(records):
+            yield item.id, item.published_at, item.title, item.abstract, item.type, item.preprint_id, hints_for(item, config['hints'])
         return
 
     for venue in venues:
@@ -51,7 +59,8 @@ def run_window_trial(domain, records, end, embedder):
     ids = [r[0] for r in eligible]
     dates = [r[1] for r in eligible]
     vectors = embedder.embed([r[2] + '\n' + r[3] for r in eligible])
-    result = cluster_publication_windows(ids, dates, vectors, end)
+    versions = {r[0]: r[5] for r in eligible if r[4] == 'published' and r[5] in works}
+    result = cluster_publication_windows(ids, dates, vectors, end, versions)
     result.update(domain=domain, collection='retrospective-publication-date', unique_source_works=len(works),
                   work_types=dict(Counter(r[4] for r in works.values())), excluded=dict(omitted),
                   eligible_by_subject=dict(Counter(s for r in eligible for s in (r[6] or ['unmapped-primary']))))

@@ -183,19 +183,25 @@ def compare_windows(store: Store, end: date):
     return cluster_publication_windows(ids, [p.published_at for p in papers], store.get_embeddings(ids), end)
 
 
-def cluster_publication_windows(ids, dates, vectors, end):
+def cluster_publication_windows(ids, dates, vectors, end, versions=None):
     cfg = load_scoring()
     start = end - timedelta(days=27)
     if not len(ids) == len(set(ids)) == len(dates) == len(vectors) or any(not start <= d <= end for d in dates):
         raise ValueError('Window trial requires unique dated works and one embedding per work')
-    long = cluster_items(ids, vectors, cfg)
-    weekly = []
-    for week in range(4):
-        idx = [i for i, day in enumerate(dates) if (day - start).days // 7 == week]
-        weekly.append(cluster_items([ids[i] for i in idx], vectors[idx], cfg))
+    def group(indices):
+        # A later conference version only supersedes a preprint in windows containing both.
+        linked = {versions[ids[i]] for i in indices if versions and ids[i] in versions}
+        selected = [i for i in indices if ids[i] not in linked]
+        return cluster_items([ids[i] for i in selected], vectors[selected], cfg), len(indices) - len(selected)
+
+    long, suppressed = group(range(len(ids)))
+    trials = [group([i for i, day in enumerate(dates) if (day - start).days // 7 == week]) for week in range(4)]
+    weekly = [groups for groups, _ in trials]
     short_ids = {identifier for groups in weekly for group in groups for identifier in group}
     long_ids = {identifier for group in long for identifier in group}
     return {'from': str(start), 'to': str(end), 'papers_with_embeddings': len(ids),
+            'linked_preprints_suppressed_28d': suppressed,
+            'weekly_linked_preprints_suppressed': [count for _, count in trials],
             'weekly_papers': [sum((d - start).days // 7 == i for d in dates) for i in range(4)],
             'weekly_clusters': list(map(len, weekly)), 'clusters_28d': len(long),
             'newly_clustered_ids': sorted(long_ids - short_ids),

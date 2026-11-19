@@ -4,7 +4,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field
 
 ItemType = Literal["published", "preprint", "code", "industry"]
-Source = Literal["biorxiv", "arxiv", "pubmed", "github", "rss", "crossref"]
+Source = Literal["biorxiv", "arxiv", "pubmed", "github", "rss", "crossref", "drops"]
 
 
 class Item(BaseModel):

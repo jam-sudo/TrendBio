@@ -142,3 +142,18 @@ def test_trial_counts_a_book_and_its_chapters_once():
     result = run_window_trial('humanities-arts', records, day, Embedder())
     assert result['unique_source_works'] == 4 and result['clusters_28d'] == 0
     assert result['excluded'] == {'chapter_with_sampled_parent': 2, 'chapter_without_sampled_parent': 1}
+
+
+def test_publication_version_replaces_a_preprint_only_inside_the_same_trial_window():
+    from datetime import date, timedelta
+    import numpy as np
+    from pipeline.edition_audit import cluster_publication_windows
+
+    start = date(2026, 10, 1)
+    ids = ['arxiv:a', 'doi:b', 'arxiv:c', 'doi:d']
+    dates = [start, start + timedelta(days=9), start, start]
+    result = cluster_publication_windows(ids, dates, np.array([[1., 0.]] * len(ids)), start + timedelta(days=27),
+                                         {'doi:b': 'arxiv:a', 'doi:d': 'arxiv:c'})
+    assert result['linked_preprints_suppressed_28d'] == 2
+    assert result['weekly_linked_preprints_suppressed'] == [1, 0, 0, 0]
+    assert result['clusters_28d'] == 0

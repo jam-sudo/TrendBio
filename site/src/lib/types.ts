@@ -1,6 +1,6 @@
 // Mirrors pipeline/models.py. Dates and datetimes are ISO 8601 strings.
 export type ItemType = "published" | "preprint" | "code" | "industry";
-export type Source = "biorxiv" | "arxiv" | "pubmed" | "github" | "rss" | "crossref";
+export type Source = "biorxiv" | "arxiv" | "pubmed" | "github" | "rss" | "crossref" | "drops";
 
 export interface Item {
   id: string;

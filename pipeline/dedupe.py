@@ -12,11 +12,11 @@ def normalize_title(s: str) -> str:
     ).split())
 
 
-def dedupe(new: list[Item], store: Store) -> list[Item]:
+def dedupe(new: list[Item], store: Store | None = None) -> list[Item]:
     def doi(value: str | None) -> str:
         return value.strip().casefold().removeprefix("https://doi.org/") if isinstance(value, str) else ""
 
-    known = store.items_between(date.min, date.max)
+    known = store.items_between(date.min, date.max) if store is not None else []
     by_id: dict[str, Item] = {}
     by_doi: dict[str, list[Item]] = {}
     by_title: dict[str, list[Item]] = {}

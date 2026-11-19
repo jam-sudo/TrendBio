@@ -14,6 +14,7 @@ def hints_for(item: Item, hints_cfg: dict) -> list[str]:
         ('biorxiv_category', metadata.get('biorxiv_category')),
         ('arxiv_category', metadata.get('arxiv_primary_category')),
         ('journal', metadata.get('journal')),
+        ('conference', metadata.get('conference')),
         ('issn', metadata.get('issn')),
         *(('github_topic', topic) for topic in metadata.get('github_topics', [])),
     ]
