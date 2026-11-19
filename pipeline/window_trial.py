@@ -10,9 +10,9 @@ from pipeline.sources.crossref import CrossrefAdapter, crossref_works, full_date
 
 
 def trial_records(domain, venues, start, end, client):
-    if domain in {'earth-environment', 'math', 'chemistry'}:
+    if domain in {'earth-environment', 'math', 'chemistry', 'astronomy'}:
         config = load_config(domain)
-        adapter = (ArxivAdapter if domain == 'math' else CrossrefAdapter)(config)
+        adapter = (ArxivAdapter if 'arxiv' in config else CrossrefAdapter)(config)
         for item in adapter.fetch(start, end, client):
             yield item.id, item.published_at, item.title, item.abstract, item.type, None, hints_for(item, config['hints'])
         return

@@ -114,7 +114,7 @@ def trial_windows(domain: Domain, end: ToDate):
     from pipeline.window_trial import run_window_trial, trial_records
 
     fields = yaml.safe_load(Path('config/expansion-venues.yaml').read_text())
-    if domain != 'math' and domain not in fields:
+    if domain not in {'math', 'astronomy'} and domain not in fields:
         raise typer.BadParameter('Unknown trial field')
     day = end.date()
     with httpx.Client(timeout=40, headers={'User-Agent': 'TrendBio metadata survey (https://trendbio.dev)'}) as client:
