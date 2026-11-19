@@ -17,6 +17,7 @@ from pipeline.embed import l2_normalize
 from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
+from pipeline.sources.europepmc import EuropePmcAdapter
 from pipeline.store import Store
 from pipeline.run import (
     Deps, is_degraded, run_backfill, run_day, run_reprocess, run_repair_synthesis, synthesis_repair_targets,
@@ -102,6 +103,24 @@ def ctx(tmp_path, fixtures_root):
                 llm, FakeEmbedder(), budget, load_scoring(), load_taxonomy('computational'), {}, client)
     yield SimpleNamespace(store=store, deps=deps, items=items, root=root)
     client.close()
+
+
+def test_retracted_clinical_study_cannot_reenter_a_restored_daily_window(ctx, monkeypatch):
+    adapter = EuropePmcAdapter({'europepmc': {'journals': []}})
+    report = [item.model_copy(update={'source': 'europepmc', 'type': 'published', 'id': f'med:{n}',
+                                      'metadata': {'pmid': str(n)}}) for n, item in enumerate(ctx.items)]
+    def fetch(self, start, end, client):
+        self.screening = {'0': {'status': 'retracted'}} if end > TODAY else {}
+        return report[1:] if end > TODAY else report
+
+    monkeypatch.setattr(EuropePmcAdapter, 'fetch', fetch)
+    ctx.deps.adapters = [adapter]
+    assert run_day('computational', TODAY, ctx.store, ctx.deps).ranked
+    next_day = run_day('computational', TODAY + timedelta(days=1), ctx.store, ctx.deps)
+    assert not next_day.ranked
+    assert ctx.store.get_day(TODAY).ranked
+    assert not ctx.store.get_item('med:0').relevant
+    assert ctx.store.get_item('med:0').metadata['screening_status'] == 'retracted'
 
 
 def test_run_day_writes_day_topics_items(ctx):

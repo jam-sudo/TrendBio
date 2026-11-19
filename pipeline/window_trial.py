@@ -10,17 +10,18 @@ from pipeline.sources.base import load_config
 from pipeline.sources.crossref import CrossrefAdapter, crossref_works, full_date, plain_text, related_dois
 from pipeline.sources.drops import DropsAdapter
 from pipeline.sources.oai import OaiAdapter
+from pipeline.sources.europepmc import EuropePmcAdapter
 
 
 PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information', 'engineering',
-                 'agriculture-food-veterinary'}
+                 'agriculture-food-veterinary', 'medicine-health'}
 
 
 def trial_records(domain, venues, start, end, client):
     if domain in PILOT_DOMAINS:
         config = load_config(domain)
         records = []
-        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter):
+        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter, EuropePmcAdapter):
             if source.name in config:
                 records.extend(source(config).fetch(start, end, client))
         for item in dedupe(records):

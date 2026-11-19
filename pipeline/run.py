@@ -22,9 +22,8 @@ from pipeline.cohesion import review_clusters
 from pipeline.cluster import (
     append_history, attach_items, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
 )
-from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status
+from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, prepare_collected
 from pipeline.config import Scoring, Taxonomy
-from pipeline.dedupe import dedupe
 from pipeline.embed import l2_normalize
 from pipeline.enrich import enrich_items, first_sentence, hints_for
 from pipeline.llm import Enrichment, LLM
@@ -217,7 +216,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             if all_paper_sources_failed(source_status):
                 raise AllPaperSourcesFailed('All paper sources failed')
             with _stage('dedupe', items=len(collected_items)) as counts:
-                new_items = dedupe(collected_items, store)
+                successful = [a for a in deps.adapters if source_status[a.name] == 'ok']
+                new_items = prepare_collected(collected_items, store, start, day, successful)
                 counts['items'] = len(new_items)
             for adapter in deps.adapters:
                 if isinstance(adapter, GithubAdapter) and source_status[adapter.name] == 'ok':
@@ -240,6 +240,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 reasons.get(note.split(':', 1)[1], 'unknown') for note in enrichment_notes
             ))
             counts['irrelevant'] = irrelevant
+        refreshed_medical = {i.id for i in new_items if i.source == 'europepmc' and i.relevant}
         with _stage('embed', items=0) as counts:
             window = sorted(store.items_between(start, day, by_publication=deps.taxonomy.window_by_publication),
                             key=lambda item: item.id)
@@ -247,6 +248,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             window = [item for item in window if item.relevant]
             missing = []
             for item in window:
+                if item.id in refreshed_medical:
+                    missing.append(item)
+                    continue
                 try:
                     store.get_embeddings([item.id])
                 except KeyError:
@@ -329,6 +333,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                       and previous.run.backfilled == backfill}
             if only_missing_synthesis:
                 cached = {topic.slug for topic, _, _ in ranked if topic.headline}
+            if refreshed_medical:
+                cached = {slug for slug in cached if not any(i.id in refreshed_medical for i in items_by_topic[slug])}
         with _stage('synthesize', model=tier_model(1, deps.cfg, backfill, deps.budget.over_ceiling())) as counts:
             _, model, synthesis_notes = synthesize_top(
                 ranked, items_by_topic,
@@ -424,7 +430,7 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                 # Historical first-seen dates must not collapse onto the chunk's final day.
                 items = [item.model_copy(update={'first_seen': item.published_at}) for item in items
                          if chunk_start <= item.published_at <= chunk_end]
-                items = dedupe(sorted(items, key=lambda item: item.id), store)
+                items = prepare_collected(sorted(items, key=lambda item: item.id), store, chunk_start, chunk_end, [adapter])
                 for item in items:
                     store.put_item(item)
             except Exception as error:

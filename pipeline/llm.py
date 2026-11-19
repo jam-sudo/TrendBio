@@ -110,11 +110,15 @@ def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
 
 def _messages(item: Item, taxonomy: Taxonomy, hints: list[str]) -> list[dict]:
     template = Path(__file__).with_name('prompts').joinpath('enrich.md').read_text(encoding='utf-8')
+    source = {'title': item.title, 'abstract': item.abstract}
+    if item.source == 'europepmc':
+        source['indexed publication types'] = item.metadata.get('publication_types', [])
+        source['linked corrections'] = item.metadata.get('correction_links', [])
     prompt = template.format(
         field=taxonomy.label, relevance=taxonomy.relevance,
         categories='\n'.join(f'{c.slug}: {c.label} — {c.covers}' for c in taxonomy.categories),
         hints=json.dumps(hints, ensure_ascii=False),
-        item=json.dumps({'title': item.title, 'abstract': item.abstract}, ensure_ascii=False),
+        item=json.dumps(source, ensure_ascii=False),
     )
     return [{'role': 'user', 'content': prompt}]
 
@@ -216,6 +220,9 @@ class LLM:
             items='\n'.join(
                 f'{item.id} | {item.type} | {item.published_at} | {item.title} | {item.summary or ""}'
                 + (f'\nAbstract: {item.abstract}' if self.synthesis_guidance and item.abstract else '')
+                + (f"\nIndexed publication types: {', '.join(item.metadata.get('publication_types', []))}."
+                   f" Linked corrections: {', '.join(item.metadata.get('correction_links', [])) or 'none listed'}."
+                   if item.source == 'europepmc' else '')
                 for item in items
             ),
             previous=f'Previous synthesis (context only, not evidence):\n{previous}' if previous else '',
