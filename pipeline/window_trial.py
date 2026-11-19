@@ -9,16 +9,18 @@ from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.crossref import CrossrefAdapter, crossref_works, full_date, plain_text, related_dois
 from pipeline.sources.drops import DropsAdapter
+from pipeline.sources.oai import OaiAdapter
 
 
-PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information', 'engineering'}
+PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information', 'engineering',
+                 'agriculture-food-veterinary'}
 
 
 def trial_records(domain, venues, start, end, client):
     if domain in PILOT_DOMAINS:
         config = load_config(domain)
         records = []
-        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter):
+        for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter):
             if source.name in config:
                 records.extend(source(config).fetch(start, end, client))
         for item in dedupe(records):

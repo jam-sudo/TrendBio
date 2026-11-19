@@ -28,6 +28,8 @@ const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`),
 const archives: string[] = source.arxiv?.categories ?? [];
 const journals: string[] = source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const conferences: string[] = source.drops?.conferences ?? [];
+const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
+const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
 const rows = (day?.ranked ?? []).map(row => {
   const topic = loadTopic(field, row.slug);
@@ -48,6 +50,7 @@ const rows = (day?.ranked ?? []).map(row => {
     {archives.length > 0 && <p class="coverage">Following {archives.map((archive, i) => <>{i > 0 && " · "}<a href={`https://arxiv.org/list/${archive}/recent`}>{categories.get(source.hints.arxiv_category[archive][0])}</a></>)} on arXiv.</p>}
     {source.crossref && journals.length > 0 && <p class="coverage">{source.crossref.data_journals ? "Research articles and data papers from" : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {conferences.length > 0 && <p class="coverage">Regular conference papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
+    {publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
@@ -60,7 +63,8 @@ const rows = (day?.ranked ?? []).map(row => {
           {papers.length > 0 && <details>
             <summary>{papers.length} supporting {papers.length === 1 ? "paper" : "papers"}</summary>
             {synthesis && <p>{synthesis}</p>}
-            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a>{(paper.source === "crossref" || paper.source === "drops") && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>CC BY</a></>}
+            <ul>{papers.map(paper => <li><a href={paper.url}>{paper.title}</a>{["crossref", "drops", "oai"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>CC BY</a></>}
+              {paper.source === "oai" && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Original publication in ${languageNames.of(paper.metadata.language)}`}</span></>}
               {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}
             </li>)}</ul>
           </details>}

@@ -1,5 +1,5 @@
 """Publication-day intake for openly licensed journal articles in field pilots."""
-from datetime import date
+from datetime import date, datetime
 from html.parser import HTMLParser
 import re
 from urllib.parse import quote
@@ -63,6 +63,35 @@ def plain_text(fragment):
     return ' '.join(''.join(parser.parts).split())
 
 
+class _ArticleHead(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.fields = {}
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'meta':
+            meta = dict(attrs)
+            if meta.get('name') and meta.get('content'):
+                self.fields.setdefault(meta['name'].lower(), []).append(meta['content'].strip())
+
+
+def _publisher_abstract(client, base, doi, issn, day):
+    response = request(client, base + quote(doi, safe='/') + '.html')
+    head = _ArticleHead()
+    head.feed(response.text)
+    head.close()
+    fields = head.fields
+    dates = fields.get('citation_date', [])
+    if (response.url.host != httpx.URL(base).host or [v.lower() for v in fields.get('citation_doi', [])] != [doi]
+            or issn.replace('-', '') not in [v.replace('-', '') for v in fields.get('citation_issn', [])]
+            or len(dates) != 1 or datetime.strptime(dates[0], '%Y/%m/%d').date() != day):
+        raise ValueError('Publisher abstract does not match the registered article')
+    descriptions = fields.get('dc.description', [])
+    languages = fields.get('dc.language', [])
+    return (plain_text(descriptions[0]) if len(descriptions) == 1 else '', str(response.url),
+            languages[0] if len(languages) == 1 else None)
+
+
 def related_dois(work, relation):
     return sorted({r['id'].strip().lower().removeprefix('https://doi.org/') for r in work.get('relation', {}).get(relation, [])
                    if r.get('id-type') == 'doi' and r.get('id')})
@@ -104,14 +133,24 @@ class CrossrefAdapter:
                 licence = vor_cc_by(work, end)
                 title = plain_text((work.get('title') or [''])[0])
                 abstract = plain_text(work.get('abstract'))
-                if not (licence and title and abstract):
+                if not (licence and title):
+                    continue
+                abstract_url = None
+                language = work.get('language')
+                base = self.config[self.name].get('publisher_abstracts', {}).get(issn)
+                if not abstract and base:
+                    abstract, abstract_url, native_language = _publisher_abstract(client, base, doi, issn, day)
+                    language = language or native_language
+                if not abstract:
                     continue
                 journal = (work.get('container-title') or [issn])[0]
                 authors = [a.get('name') or ' '.join(filter(None, [a.get('given'), a.get('family')]))
                            for a in work.get('author', [])]
                 preprints = related_dois(work, 'has-preprint')
                 metadata = {'journal': journal, 'issn': issn, 'license': licence, 'preprint_dois': preprints,
-                            'language': work.get('language'), 'relations': work.get('relation', {})}
+                            'language': language, 'relations': work.get('relation', {})}
+                if abstract_url:
+                    metadata['abstract_url'] = abstract_url
                 if issn in self.config[self.name].get('data_journals', []):
                     links = related_work_dois(work)
                     for link in links:

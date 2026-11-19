@@ -40,3 +40,30 @@ def test_crossref_short_response_cannot_silently_truncate():
             'message': {'items': [], 'total-results': 1}}))) as client:
         with pytest.raises(ValueError, match='Incomplete Crossref'):
             list(crossref_works(client, 'https://example.org', 'type:journal-article'))
+
+
+@pytest.mark.parametrize('page_doi', ['10.1234/test', '10.1234/other'])
+def test_missing_registry_abstract_uses_the_matching_licensed_publisher_article(page_doi):
+    day = date(2026, 11, 4)
+    stamp = {'date-parts': [[2026, 11, 4]]}
+    work = {'DOI': '10.1234/test', 'title': ['An orchard field trial'], 'published': stamp,
+            'license': [{'content-version': 'vor', 'URL': 'https://creativecommons.org/licenses/by/4.0/', 'start': stamp}]}
+    def reply(req):
+        if req.url.host == 'api.crossref.org':
+            return httpx.Response(200, json={'message': {'items': [work, {**work, 'DOI': '10.1234/closed', 'license': []}], 'total-results': 2}})
+        assert req.url.path == '/doi/10.1234/test.html'
+        return httpx.Response(200, text=f'''<meta name="citation_doi" content="{page_doi}">
+          <meta name="citation_issn" content="12345678"><meta name="citation_date" content="2026/11/4">
+          <meta name="description" content="Short preview..."><meta name="dc.Description" content="Full orchard measurements.">
+          <meta name="DC.Language" content="en">''')
+
+    config = {'crossref': {'journals': ['1234-5678'], 'publisher_abstracts': {'1234-5678': 'https://journal.example/doi/'}}}
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        if page_doi != work['DOI']:
+            with pytest.raises(ValueError, match='does not match'):
+                CrossrefAdapter(config).fetch(day, day, client)
+        else:
+            paper, = CrossrefAdapter(config).fetch(day, day, client)
+            assert paper.abstract == 'Full orchard measurements.'
+            assert paper.metadata['language'] == 'en'
+            assert paper.metadata['abstract_url'] == 'https://journal.example/doi/10.1234/test.html'
