@@ -8,9 +8,10 @@ from xml.etree import ElementTree as ET
 
 import httpx
 
+from pipeline.dedupe import normalize_title
 from pipeline.models import Item, Source
 from pipeline.sources.base import collected, request
-from pipeline.sources.crossref import plain_text
+from pipeline.sources.crossref import CrossrefAdapter, plain_text
 
 API = 'https://www.ebi.ac.uk/europepmc/webservices/rest'
 HREF = '{http://www.w3.org/1999/xlink}href'
@@ -157,13 +158,13 @@ class EuropePmcAdapter:
             status, corrections = screen_record(record)
             journal = record['journalInfo']['journal']
             issn = next((k for k in (journal.get('essn'), journal.get('issn')) if k in self.journals), None)
-            detail = {'doi': record.get('doi'), 'date': record['firstPublicationDate'],
-                      'issn': issn, 'correction_links': ['https://pubmed.ncbi.nlm.nih.gov/' + pmid + '/' for pmid in corrections],
+            detail = {'doi': record.get('doi'), 'date': record['firstPublicationDate'], 'issn': issn,
+                      'correction_links': ['https://pubmed.ncbi.nlm.nih.gov/' + pmid + '/' for pmid in corrections],
                       'linked_notices': [{'type': r['type'], 'pmid': r['id']} for r in
                                          record.get('commentCorrectionList', {}).get('commentCorrection', [])
                                          if r.get('source') == 'MED' and re.fullmatch(r'\d+', r.get('id') or '')
                                          and any(term in r['type'].lower() for term in ('erratum', 'retract', 'concern', 'republished'))]}
-            item = None
+            evidence = None
             if not issn or not start.isoformat() <= detail['date'] <= end.isoformat():
                 status = 'outside-source-window'
             if status == 'candidate':
@@ -176,28 +177,52 @@ class EuropePmcAdapter:
                 else:
                     evidence, status = licensed_abstract(ET.fromstring(response.content), record)
                     if evidence:
-                        if not detail['correction_links']:
-                            detail['correction_links'] = evidence['correction_links']
-                        authors = [a.get('fullName') or a.get('collectiveName') for a in record.get('authorList', {}).get('author', [])]
-                        authors = [a for a in authors if a]
-                        if not authors and record.get('authorString'):
-                            authors = [record['authorString']]
-                        metadata = {'journal': self.journals[issn], 'issn': issn, 'pmid': record['pmid'], 'pmcid': record['pmcid'],
-                                    'language': evidence['language'], 'license': evidence['license'],
-                                    'publication_types': sorted(record.get('pubTypeList', {}).get('pubType', [])),
-                                    'article_type': evidence['article_type'], 'correction_links': detail['correction_links']}
-                        item = Item(id='med:' + record['pmid'], source=self.name, type='published', title=plain_text(record['title']),
-                                    doi=record['doi'].lower(), url='https://pubmed.ncbi.nlm.nih.gov/' + record['pmid'] + '/',
-                                    published_at=evidence['day'], first_seen=end, abstract=evidence['abstract'],
-                                    authors=authors, org=None, summary=None, primary_category=None,
-                                    published_doi=None, preprint_id=None, metadata=metadata)
-            return record['pmid'], {**detail, 'status': status}, item
+                        detail['abstract_source'] = 'pmc'
+            return record['pmid'], {**detail, 'status': status}, evidence
+
+        evidence_by_id = {}
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            for pmid, detail, evidence in pool.map(process, records.values()):
+                self.screening[pmid] = detail
+                if evidence:
+                    evidence_by_id[pmid] = evidence
+
+        # Publishers can deposit a licensed abstract before the full text receives a PMCID.
+        pending = [pmid for pmid, decision in self.screening.items()
+                   if decision['status'] in {'no-verified-open-article', 'fulltext-unavailable', 'missing-abstract'}
+                   and records[pmid].get('license') in (None, '', 'cc by') and decision['doi']]
+        if pending:
+            issns = sorted({self.screening[pmid]['issn'] for pmid in pending})
+            adapter = CrossrefAdapter({'crossref': {'journals': issns}})
+            registry = {article.doi: article for article in adapter.fetch(start, end, client)}
+            for pmid in pending:
+                record, decision = records[pmid], self.screening[pmid]
+                article = registry.get(decision['doi'].lower())
+                if (article is None or article.metadata['issn'] != decision['issn']
+                        or article.published_at.isoformat() != decision['date']
+                        or normalize_title(article.title) != normalize_title(plain_text(record['title']))):
+                    continue
+                evidence_by_id[pmid] = {'day': article.published_at, 'abstract': article.abstract,
+                                        'license': article.metadata['license'], 'language': article.metadata.get('language'),
+                                        'article_type': 'journal-article', 'correction_links': [], 'authors': article.authors}
+                decision.update(status='eligible', abstract_source='crossref-vor')
 
         items = []
-        with ThreadPoolExecutor(max_workers=3) as pool:
-            for pmid, decision, item in pool.map(process, records.values()):
-                self.screening[pmid] = decision
-                if item:
-                    items.append(item)
+        for pmid, evidence in evidence_by_id.items():
+            record, detail = records[pmid], self.screening[pmid]
+            if not detail['correction_links']:
+                detail['correction_links'] = evidence['correction_links']
+            authors = evidence.get('authors') or [a.get('fullName') or a.get('collectiveName') for a in
+                                                  record.get('authorList', {}).get('author', [])]
+            authors = [a for a in authors if a] or ([record['authorString']] if record.get('authorString') else [])
+            metadata = {'journal': self.journals[detail['issn']], 'issn': detail['issn'], 'pmid': pmid,
+                        'pmcid': record.get('pmcid'), 'language': evidence['language'], 'license': evidence['license'],
+                        'publication_types': sorted(record.get('pubTypeList', {}).get('pubType', [])),
+                        'article_type': evidence['article_type'], 'abstract_source': detail['abstract_source'],
+                        'correction_links': detail['correction_links']}
+            items.append(Item(id='med:' + pmid, source=self.name, type='published', title=plain_text(record['title']),
+                              doi=record['doi'].lower(), url='https://pubmed.ncbi.nlm.nih.gov/' + pmid + '/',
+                              published_at=evidence['day'], first_seen=end, abstract=evidence['abstract'], authors=authors,
+                              org=None, summary=None, primary_category=None, published_doi=None, preprint_id=None, metadata=metadata))
         logging.getLogger(__name__).info('Europe PMC screening %s', dict(Counter(r['status'] for r in self.screening.values())))
         return collected(self.name, items)

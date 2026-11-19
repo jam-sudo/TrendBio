@@ -89,3 +89,24 @@ def test_incomplete_medical_index_cannot_retire_stored_records():
     with httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(200, json=page))) as client:
         with pytest.raises(ValueError, match='Incomplete'):
             adapter.fetch(DAY, DAY, client)
+
+
+def test_publisher_deposit_before_pmc_preserves_notice_and_cannot_override_license_or_wrong_title():
+    records = [{**RECORD, 'pmid': str(k), 'pmcid': None, 'license': lic, 'doi': '10.1234/'+str(k)}
+               for k, lic in [(1, ''), (2, 'cc by-nc-nd'), (3, 'cc by'), (4, 'cc by')]]
+    works = [{'DOI': r['doi'], 'title': [r['title'] if r['pmid'] != '3' else 'Unrelated study'], 'abstract': 'Complete abstract.',
+              'published': {'date-parts': [[2026, 11, 4]]}, 'license': [{'content-version': 'vor',
+              'start': {'date-parts': [[2026, 11, 5 if r['pmid']=='4' else 4]]},
+              'URL': 'https://creativecommons.org/licenses/by/4.0/'}]} for r in records]
+    def respond(req):
+        if req.url.host == 'api.crossref.org':
+            return httpx.Response(200, json={'message': {'items': works, 'total-results': len(works)}})
+        assert req.url.path.endswith('/search')
+        return httpx.Response(200, json={'hitCount': 4, 'resultList': {'result': records}})
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        adapter = EuropePmcAdapter(JOURNALS)
+        paper, = adapter.fetch(DAY, DAY, client)
+    assert paper.id == 'med:1' and paper.abstract == 'Complete abstract.'
+    assert paper.metadata['abstract_source'] == 'crossref-vor'
+    assert paper.metadata['correction_links'] == ['https://pubmed.ncbi.nlm.nih.gov/52/']
+    assert adapter.screening['4']['status'] == 'no-verified-open-article'
