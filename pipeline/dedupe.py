@@ -1,4 +1,5 @@
 from datetime import date
+from itertools import chain
 import unicodedata
 
 from pipeline.models import Item
@@ -17,6 +18,20 @@ def dedupe(new: list[Item], store: Store | None = None) -> list[Item]:
         return value.strip().casefold().removeprefix("https://doi.org/") if isinstance(value, str) else ""
 
     known = store.items_between(date.min, date.max) if store is not None else []
+    claims: dict[str, dict[str, str]] = {}
+    for item in chain(known, new):
+        if item.source == 'arxiv' and item.type == 'preprint':
+            reported = doi(item.doi or item.metadata.get('arxiv_reported_doi'))
+            if reported and item.title:
+                claims.setdefault(reported, {})[item.id] = normalize_title(item.title)
+    shared = {identifier for identifier, titles in claims.items() if len(set(titles.values())) > 1}
+
+    def disambiguate(item: Item) -> Item:
+        if item.source == 'arxiv' and item.type == 'preprint' and doi(item.doi) in shared:
+            # Distinct arXiv reports can cite one repository deposit for the entire project.
+            return item.model_copy(update={'doi': None, 'metadata': {**item.metadata, 'arxiv_reported_doi': item.doi}})
+        return item
+
     by_id: dict[str, Item] = {}
     by_doi: dict[str, list[Item]] = {}
     by_title: dict[str, list[Item]] = {}
@@ -28,11 +43,16 @@ def dedupe(new: list[Item], store: Store | None = None) -> list[Item]:
         if title:
             by_title.setdefault(title, []).append(item)
 
-    for item in known:
+    result = {}
+    for position, original in enumerate(known):
+        item = disambiguate(original)
+        if item is not original:
+            known[position] = item
+            result[item.id] = item
         index(item, normalize_title(item.title), doi(item.doi))
 
-    result = {}
-    for item in new:
+    for original in new:
+        item = disambiguate(original)
         title = normalize_title(item.title)
         identifier = doi(item.doi)
         duplicate = item.id in by_id or any(

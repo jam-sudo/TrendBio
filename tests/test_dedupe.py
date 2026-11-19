@@ -7,6 +7,26 @@ from pipeline.models import Item
 from pipeline.store import Store
 
 
+def test_distinct_arxiv_reports_sharing_a_deposit_survive_a_later_run(tmp_path, item):
+    store = Store(tmp_path, 'engineering')
+    reported = '10.5281/zenodo.99999'
+    one = item.model_copy(update={'id': 'arxiv:one', 'source': 'arxiv', 'doi': reported, 'title': 'First field study'})
+    two = one.model_copy(update={'id': 'arxiv:two', 'title': 'Second field study'})
+    deposit = one.model_copy(update={'id': 'doi:' + reported, 'type': 'published', 'source': 'crossref', 'title': 'Project outputs'})
+    store.put_item(one)
+    changed = {r.id: r for r in dedupe([two, deposit], store)}
+    assert set(changed) == {one.id, two.id, deposit.id}
+    for original in [one, two]:
+        corrected = changed[original.id]
+        assert corrected.doi is None and corrected.metadata['arxiv_reported_doi'] == reported
+        assert corrected.summary == original.summary and original.doi == reported
+    assert changed[deposit.id].preprint_id is None
+    for record in changed.values():
+        store.put_item(record)
+    assert dedupe([one, two, deposit], store) == []
+    assert {r.id for r in dedupe([one, two])} == {one.id, two.id}
+
+
 @pytest.fixture
 def item():
     return Item(
