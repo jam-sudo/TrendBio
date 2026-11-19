@@ -1,0 +1,20 @@
+domain: math
+label: Mathematics and Statistics
+fallback_category: other-math
+relevance: >
+  Include original number theory, numerical analysis and statistical methodology.
+  Classify by the main contribution, including rigorous theory and experimental
+  evaluation of a numerical or statistical method. Exclude a routine application
+  without a contribution in these fields. Preserve assumptions and distinguish a
+  proved theorem, a conjecture, an error bound and an empirical observation.
+synthesis_guidance: >
+  Preserve the hypotheses needed for each theorem, its conclusion, the conditions
+  on numerical convergence or error, and the sampling assumptions for statistical
+  guarantees. Attribute different guarantees to the papers that establish them.
+  Identify a conjecture or simulation as such. Omit a claim whose conditions
+  cannot be established from the supplied abstracts.
+categories:
+  - {slug: number-theory, label: Number theory, covers: "arithmetic, prime numbers, Diophantine equations and arithmetic geometry"}
+  - {slug: numerical-analysis, label: Numerical analysis, covers: "numerical methods, approximation, stability, convergence and error analysis"}
+  - {slug: statistical-methodology, label: Statistical methodology, covers: "estimation, inference, identification, experimental design and uncertainty"}
+  - {slug: other-math, label: Cross-disciplinary methods, covers: "relevant contributions spanning the pilot areas without a dominant category"}

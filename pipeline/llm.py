@@ -114,11 +114,13 @@ def _validate_categories(result: Enrichment | None, taxonomy: Taxonomy) -> Enric
 
 
 class LLM:
-    def __init__(self, client: anthropic.Anthropic, budget: Budget, *, field: str = 'computational biology'):
+    def __init__(self, client: anthropic.Anthropic, budget: Budget, *, field: str = 'computational biology',
+                 synthesis_guidance: str = ''):
         # Own retries here so the SDK does not multiply attempts or retry other statuses.
         self.client = client.with_options(max_retries=0) if isinstance(client, anthropic.Anthropic) else client
         self.budget = budget
         self.field = field
+        self.synthesis_guidance = synthesis_guidance
         self.fallback_reasons: dict[str, str] = {}
 
     def _failure(self, entity_id: str, reason: str, detail: str | None = None) -> None:
@@ -161,10 +163,13 @@ class LLM:
             field=self.field, category=topic.category, label=topic.label, signals=signals.model_dump_json(),
             items='\n'.join(
                 f'{item.id} | {item.type} | {item.published_at} | {item.title} | {item.summary or ""}'
+                + (f'\nAbstract: {item.abstract}' if self.synthesis_guidance and item.abstract else '')
                 for item in items
             ),
             previous=f'Previous synthesis (context only, not evidence):\n{previous}' if previous else '',
         )
+        if self.synthesis_guidance:
+            prompt = self.synthesis_guidance + '\n\n' + prompt
         source = '\n'.join([
             signals.model_dump_json(), topic.label,
             *(text for item in items for text in (

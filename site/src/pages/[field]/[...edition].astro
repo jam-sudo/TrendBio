@@ -2,9 +2,10 @@
 import Base from "../../layouts/Base.astro";
 import { loadDays, loadItems, loadTaxonomy, loadTopic } from "../../lib/data";
 import type { Day } from "../../lib/types";
-import sources from "../../../../config/sources/physics.yaml?raw";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { parse } from "yaml";
-import { editions, type Edition } from "../../lib/editions";
+import { editionInfo, editions, type Edition } from "../../lib/editions";
 
 export function getStaticPaths() {
   return editions.flatMap(field => {
@@ -20,11 +21,11 @@ interface Props { day: Day | null }
 const { day } = Astro.props;
 const field = Astro.params.field as Edition;
 const biology = field === "biology";
-const label = biology ? "Biology" : "Physics";
+const { label, stage } = editionInfo[field];
 const days = loadDays(field);
 const categories = new Map(loadTaxonomy(field).map(category => [category.slug, category.label]));
-const source = parse(sources);
-const archives: string[] = source.arxiv.categories;
+const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
+const archives: string[] = source.arxiv?.categories ?? [];
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
 const rows = (day?.ranked ?? []).map(row => {
   const topic = loadTopic(field, row.slug);
@@ -38,12 +39,12 @@ const rows = (day?.ranked ?? []).map(row => {
   description={`Daily ${label.toLowerCase()} research trends with the papers behind each ranking.`}
   canonicalPath={path} lastRun={day?.run.finished}>
   <div class="prose">
-    <h1>{label}{biology && <small> Beta</small>}</h1>
+    <h1>{label}{stage && <small> {stage}</small>}</h1>
     {biology ? <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p> : <p class="coverage">Following {archives.map((archive, i) => <>{i > 0 && " · "}<a href={`https://arxiv.org/list/${archive}/recent`}>{categories.get(source.hints.arxiv_category[archive][0])}</a></>)} on arXiv.</p>}
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
-      {rows.length === 0 && <p>No {field} topic cleared the ranking threshold for this date.</p>}
+      {rows.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
       <ol class="rankings">
         {rows.map(({ row, synthesis, papers }) => <li value={row.rank}>
           <p class="category">{categories.get(row.category) ?? row.category}</p>

@@ -7,7 +7,7 @@ import SponsorColumns from "../components/SponsorColumns.astro";
 import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
 
-import type { Edition } from "../lib/editions";
+import { editionInfo, editions, type Edition } from "../lib/editions";
 
 interface Props {
   title?: string;
@@ -22,6 +22,7 @@ interface Props {
 const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, edition } = Astro.props;
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
+const biology = !edition || edition === "biology";
 ---
 
 <!doctype html>
@@ -58,10 +59,11 @@ const canonical = new URL(canonicalPath, Astro.site).href;
       <nav aria-label="Main navigation">
         <div class="field-bar">
           <span class="field-links" role="group" aria-label="Science field">
-            <a href="/" aria-current={edition !== "physics" ? "true" : undefined}>Biology</a>
-            <a href="/physics/" aria-current={edition === "physics" ? "true" : undefined}>Physics</a>
+            <a href="/" aria-current={biology ? "true" : undefined}>Biology</a>
+            {editions.filter(field => field !== "biology").map(field =>
+              <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}
           </span>
-          {edition !== "physics" && <span class="field-links" role="group" aria-label="Biology edition">
+          {biology && <span class="field-links" role="group" aria-label="Biology edition">
             <a href="/biology/" aria-current={edition === "biology" ? "true" : undefined}>All Biology (beta)</a>
             <a href="/" aria-current={!edition ? "true" : undefined}>CompBio</a>
           </span>}
@@ -98,7 +100,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
     {!edition && <SponsorColumns {heroAligned} />}
     </div>
     <footer>
-      <p>Auto-curated from {edition === "physics" ? "arXiv" : edition === "biology" ? "bioRxiv and PubMed" : "bioRxiv, arXiv, PubMed, GitHub and industry sources"}. Summaries are machine-generated.</p>
+      <p>Auto-curated from {edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources"}. Summaries are machine-generated.</p>
       {!edition && <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>}
       {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>

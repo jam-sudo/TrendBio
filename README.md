@@ -28,6 +28,8 @@ All Biology (beta) at `/biology/` has its own daily rankings, dated editions and
 
 The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes each edition independently and writes Physics results to `data/physics/`.
 
+The Math & Stats pilot covers arXiv number theory, numerical analysis and statistical methodology. Run `python -m pipeline run --domain math --dry-run` to review ranked topics, their assumptions and the cost in an isolated staging directory. The site builds `/math/` and its dated editions when reviewed days are present in `data/math/`.
+
 ## How a day is made
 
 <picture>

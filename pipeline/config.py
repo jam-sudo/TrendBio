@@ -15,6 +15,7 @@ class Taxonomy(BaseModel):
     domain: str
     label: str
     relevance: str
+    synthesis_guidance: str = ''
     fallback_category: str
     categories: list[Category]
 

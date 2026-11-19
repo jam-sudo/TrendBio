@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { editions } from "../src/lib/editions";
 import { cpSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -26,7 +27,7 @@ it('embeds the fixture points, canvas, native slider and a fallback link per top
 });
 
 it('includes the computational biology Map link throughout that edition', () => {
-  for (const path of readdirSync('dist', { recursive: true, encoding: 'utf8' }).filter(p => p.endsWith('.html') && !p.startsWith('physics/') && !p.startsWith('biology/'))) {
+  for (const path of readdirSync('dist', { recursive: true, encoding: 'utf8' }).filter(p => p.endsWith('.html') && !editions.some(field => p.startsWith(field + '/')))) {
     expect(readFileSync(join('dist', path), 'utf8'), path).toMatch(/<nav\b[\s\S]*href="\/map\/"[^>]*>Map<\/a>/);
   }
 });

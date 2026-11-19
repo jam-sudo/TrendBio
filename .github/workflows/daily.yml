@@ -10,7 +10,7 @@ on:
       domain:
         description: Research field
         type: choice
-        options: [all, computational, physics, biology]
+        options: [all, computational, physics, biology, math]
         default: all
       date:
         description: UTC date to process (YYYY-MM-DD; defaults to today)
@@ -89,6 +89,15 @@ jobs:
             args+=(--dry-run)
           fi
           python -m pipeline "${args[@]}"
+      - name: Retain the staged pilot for evidence review
+        if: ${{ inputs.dry_run && matrix.domain == 'math' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: math-pilot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .pipeline-stage-*/math/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
       - name: Commit data
         if: ${{ steps.ran-today.outputs.skip != 'true' && !inputs.dry_run }}
         run: |

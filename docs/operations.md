@@ -16,7 +16,7 @@ The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
-The daily workflow also accepts a field selector (`all`, `computational`, `physics`, or `biology`), an optional `date` and a `dry_run` switch. Backfill and maintenance default to `computational`; select the intended domain to operate on another edition. The general Biology beta stores its days, topics, spend and checkpoints under `data/biology/`.
+The daily workflow accepts a field selector, an optional `date` and a `dry_run` switch. The scheduled fields are computational biology, Physics and All Biology. Select `math` for the three-subject Math & Stats pilot. A manual math dry run uploads its staged data as a review artifact with the usage ledger, evidence and rankings. Backfill and maintenance default to `computational`. Storage, spend and checkpoints are isolated under `data/<domain>/`.
 Use a dry run before the first real run to inspect usage and estimated cost.
 
 ## Sources

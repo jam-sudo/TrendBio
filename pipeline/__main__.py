@@ -66,7 +66,8 @@ def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) ->
     budget = Budget(data_root / domain / 'llm_spend.json', cfg.monthly_ceiling_usd)
     return Deps(
         adapters=adapters,
-        llm=LLM(anthropic.Anthropic(), budget, field=taxonomy.label),
+        llm=LLM(anthropic.Anthropic(), budget, field=taxonomy.label,
+                synthesis_guidance=taxonomy.synthesis_guidance),
         embedder=None if synthesis_only else Embedder(), budget=budget,
         cfg=cfg, taxonomy=taxonomy, hints_cfg=sources.get('hints', {}),
         client=httpx.Client(timeout=30),

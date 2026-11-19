@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { chromium, type Browser, type Page } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { getDataIndex } from "../src/lib/data";
+import { editions } from "../src/lib/editions";
 import { loadPeriods } from "../src/lib/period-data";
 import { truncateDescription } from "../src/lib/metadata";
 
@@ -73,7 +74,8 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   expect(parsed.error).toBeUndefined();
   const { weeks, months } = loadPeriods();
   const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
-  expect(parsed.entries).toHaveLength(9 + getDataIndex("biology").days.length + getDataIndex("physics").days.length + days.length + weeks.length + months.length + topicSlugs.size);
+  const fieldPages = editions.reduce((n, field) => n + 1 + getDataIndex(field).days.length, 0);
+  expect(parsed.entries).toHaveLength(7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   expect(urls.size).toBe(parsed.entries.length);
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
@@ -138,4 +140,15 @@ it("keeps the Biology beta and CompBio as distinct editions", async () => {
     expect(await switcher.getByText("All Biology (beta)").getAttribute("href")).toBe("/biology/");
     expect(await switcher.getByText("CompBio").getAttribute("href")).toBe("/");
   }
+});
+
+it("links the mathematics pilot to its three arXiv subjects and its own dated evidence", async () => {
+  await page.setContent(read("math/day/2026-11-01/index.html"));
+  expect(await page.getByRole("group", { name: "Science field" }).locator("[aria-current]").textContent()).toBe("Math & Stats");
+  expect(await page.getByRole("group", { name: "Biology edition" }).count()).toBe(0);
+  const main = page.getByRole("main");
+  expect(await main.locator(".coverage a").evaluateAll(links => links.map(a => a.getAttribute("href")))).toEqual(
+    ["math.NT", "math.NA", "stat.ME"].map(code => `https://arxiv.org/list/${code}/recent`));
+  expect(await main.locator('a[href^="https://example.org/math/"]').count()).toBe(3);
+  expect(await main.getByRole("heading", { name: "Quadrature error bounds depend on smoothness" }).count()).toBe(1);
 });

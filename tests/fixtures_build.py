@@ -190,7 +190,8 @@ def build(root: Path) -> None:
                       source_status={source: "ok" for source in ("biorxiv", "arxiv", "pubmed", "github", "rss")})
         dump(Day(domain="computational", date=today, ranked=sorted(ranked, key=lambda row: row.rank), run=run),
              day_path(root / "data", "computational", today))
-    build_physics(root / "data", days[-1])
+    build_arxiv_edition(root / "data", days[-1], "physics")
+    build_arxiv_edition(root / "data", days[-1], "math")
     notes = root / "notes"
     notes.mkdir(parents=True, exist_ok=True)
     (notes / "protein-design-binders-a1b2.md").write_text(
@@ -199,32 +200,41 @@ def build(root: Path) -> None:
         "This deliberate orphan note verifies that a missing topic produces a warning, not a failed build.\n", encoding="utf-8")
 
 
-def build_physics(root: Path, day: date) -> None:
+def build_arxiv_edition(root: Path, day: date, domain: str) -> None:
+    if domain == "physics":
+        titles = ("Readout noise in an optical cavity", "Cavity linewidth and readout noise", "Measuring optical cavity losses")
+        category, prefix, slug, label = "optics", "cavity", "cavity-readout-fixture", "Cavity readout"
+        headline = "Optical cavities reveal sources of readout noise"
+        summary = "Three fixture papers examine light losses and readout noise."
+        synthesis = "The fixture papers compare measurements of light loss in optical cavities."
+    else:
+        titles = ("Quadrature bounds for smooth curves", "Error estimates for smooth quadrature", "Convergence of smooth quadrature rules")
+        category, prefix, slug, label = "numerical-analysis", "quadrature", "quadrature-fixture", "Quadrature error"
+        headline = "Quadrature error bounds depend on smoothness"
+        summary = "The fixture papers examine quadrature error for smooth functions."
+        synthesis = "Each example assumes that the integrand is smooth."
     papers = []
-    for i, title in enumerate(("Readout noise in an optical cavity", "Cavity linewidth and readout noise",
-                               "Measuring optical cavity losses"), 1):
-        paper = Item(id=f"arxiv:optics-fixture-{i}", source="arxiv", type="preprint", title=title,
-                     url=f"https://example.org/physics/cavity-{i}", doi=None, published_at=day,
+    for i, title in enumerate(titles, 1):
+        paper = Item(id=f"arxiv:{category}-fixture-{i}", source="arxiv", type="preprint", title=title,
+                     url=f"https://example.org/{domain}/{prefix}-{i}", doi=None, published_at=day,
                      first_seen=day, authors=[], org=None, abstract=title, summary=title,
-                     primary_category="optics", published_doi=None, preprint_id=None)
-        dump(paper, item_path(root, "physics", paper))
+                     primary_category=category, published_doi=None, preprint_id=None)
+        dump(paper, item_path(root, domain, paper))
         papers.append(paper.id)
     signals = Signals(preprint=len(papers), published=0, code=0, industry=0, rise_ratio=1, star_gain_7d=0)
     scores = Scores(rise=1, volume=0.35, diversity=0.25, code_velocity=0, penalty=0, total=0.565)
-    row = RankedTopic(slug="cavity-readout-fixture", category="optics", rank=1,
-                      headline="Optical cavities reveal sources of readout noise",
-                      summary="Three fixture papers examine light losses and readout noise.",
+    row = RankedTopic(slug=slug, category=category, rank=1, headline=headline, summary=summary,
                       signals=signals, scores=scores)
     history = TopicDay(date=day, rank=1, item_ids=papers, count_7d=len(papers), signals=signals, scores=scores)
-    topic = Topic(slug=row.slug, label="Cavity readout", category=row.category, secondary_categories=[],
+    topic = Topic(slug=row.slug, label=label, category=row.category, secondary_categories=[],
                   centroid=[1, 0, 0, 0, 0], history=[history], headline=row.headline, summary=row.summary,
-                  synthesis="The fixture papers compare measurements of light loss in optical cavities.",
+                  synthesis=synthesis,
                   synthesis_model="fixture", synthesized_on=day)
-    dump(topic, topic_path(root, "physics", topic.slug))
+    dump(topic, topic_path(root, domain, topic.slug))
     stamp = datetime.combine(day, time(6), tzinfo=timezone.utc)
     run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False,
                   synthesis_model="fixture", source_status={"arxiv": "ok"})
-    dump(Day(domain="physics", date=day, ranked=[row], run=run), day_path(root, "physics", day))
+    dump(Day(domain=domain, date=day, ranked=[row], run=run), day_path(root, domain, day))
 
 
 if __name__ == "__main__":

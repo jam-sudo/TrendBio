@@ -1719,6 +1719,7 @@ def test_attention_success_does_not_use_llm_or_change_ranking(ctx, monkeypatch, 
 @pytest.mark.parametrize("domain,source,category,expected", [
     ("physics", "arxiv", "quant-ph", "quantum"),
     ("biology", "biorxiv", "ecology", "ecology"),
+    ("math", "arxiv", "math.NA", "numerical-analysis"),
 ])
 def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, domain, source, category, expected):
     from pipeline.__main__ import build_deps
@@ -1727,11 +1728,12 @@ def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, dom
     monkeypatch.setenv('ANTHROPIC_API_KEY', 'fixture')
     deps = build_deps(domain, ctx.root, synthesis_only=True)
     try:
-        assert [adapter.name for adapter in deps.adapters] == (['arxiv'] if domain == 'physics' else ['biorxiv', 'pubmed'])
+        assert [adapter.name for adapter in deps.adapters] == (['arxiv'] if source == 'arxiv' else ['biorxiv', 'pubmed'])
         assert deps.budget.path == ctx.root / domain / 'llm_spend.json'
         prompt = _messages(ctx.items[0], deps.taxonomy, [])[0]['content']
         assert deps.taxonomy.label in prompt and 'experimental' in prompt and 'biomedicine' not in prompt
-        title = 'Quantum measurement' if domain == 'physics' else 'Forest canopy survey'
+        title = {'physics': 'Quantum measurement', 'biology': 'Forest canopy survey',
+                 'math': 'Error bounds for quadrature'}[domain]
         hint = 'arxiv_primary_category' if source == 'arxiv' else 'biorxiv_category'
         items = [item.model_copy(update={
             'source': source, 'id': f'{source}:fixture-{i}', 'title': f'{title} {i}',

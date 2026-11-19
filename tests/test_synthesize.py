@@ -61,6 +61,17 @@ def run(ctx, *, backfill=False):
                           ctx.llm, ctx.budget, load_scoring(), TODAY, backfill=backfill)
 
 
+def test_math_synthesis_receives_original_assumptions(context):
+    from pipeline.config import load_taxonomy
+
+    ctx = context
+    ctx.llm.synthesis_guidance = load_taxonomy('math').synthesis_guidance
+    ctx.item.abstract = 'The estimate requires independent observations with bounded variance.'
+    run(ctx)
+    prompt = (ctx.plain.calls + ctx.beta.calls)[0]['messages'][0]['content']
+    assert 'hypotheses' in prompt and ctx.item.abstract in prompt
+
+
 @pytest.mark.parametrize('backfill,over_ceiling', [(False, False), (True, False), (False, True)])
 def test_uses_opus_normally_and_haiku_when_backfill_or_over_ceiling(context, backfill, over_ceiling):
     ctx = context
