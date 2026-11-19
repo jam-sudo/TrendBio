@@ -155,6 +155,15 @@ it("pairs the same dated rankings in Korean and English and retains the evidence
   }
 });
 
+it("reads the counts and the four-week comparison in Korean", async () => {
+  await page.setContent(read("ko/day/2026-10-30/index.html"));
+  const daily = await page.locator(".signal-line .sr-only").first().textContent();
+  expect(daily).toContain("프리프린트 1편");
+  expect(daily).toContain("최근 4주 평균의 4.3배");
+  await page.setContent(read("ko/week/2026-W44/index.html"));
+  expect(await page.locator(".signal-line .sr-only").first().textContent()).toMatch(/순위 진입 \d+일 · 최고 \d+위 · 자료 \d+건 · 증가율 [\d.]+배/);
+});
+
 it("publishes a Korean topic map and a distinct valid Korean Atom feed", async () => {
   const map = JSON.parse(read("map.json"));
   const koMap = JSON.parse(read("ko/map.json"));

@@ -175,12 +175,11 @@ def audit_beta(store: Store, through: date):
 def compare_windows(store: Store, end: date):
     """Recluster the same dated cohort once over 28 days and in four separate weeks."""
     start = end - timedelta(days=27)
-    papers = [p for p in store.items_between(start, end, by_publication=True)
-              if p.relevant and p.type in {'preprint', 'published'}]
-    linked = {p.preprint_id for p in papers if p.type == 'published'}
-    papers = sorted((p for p in papers if p.id not in linked), key=lambda p: p.id)
+    papers = sorted((p for p in store.items_between(start, end, by_publication=True)
+                     if p.relevant and p.type in {'preprint', 'published'}), key=lambda p: p.id)
+    versions = {p.id: p.preprint_id for p in papers if p.type == 'published' and p.preprint_id}
     ids = [p.id for p in papers]
-    return cluster_publication_windows(ids, [p.published_at for p in papers], store.get_embeddings(ids), end)
+    return cluster_publication_windows(ids, [p.published_at for p in papers], store.get_embeddings(ids), end, versions)
 
 
 def cluster_publication_windows(ids, dates, vectors, end, versions=None):

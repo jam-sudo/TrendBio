@@ -36,13 +36,15 @@ The first build that encounters new text downloads and verifies the original mod
 
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
-The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs Math & Stats, Earth observations and Chemistry pilots in a temporary directory. It has read-only repository access. Each pilot artifact contains the dated rank, source records, review decisions and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)
+The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs private pilots in Math & Stats, Earth observations, Chemistry, stellar and galactic astronomy, and Computing & Information. It has read-only repository access. Each artifact contains the dated rank, source records, review decisions and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. Build the site with `TRENDBIO_DATA_ROOT` pointing at the folder containing the downloaded domain to preview the corresponding English and Korean editions. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)
 
 Use these commands from the repository root to reproduce the metadata and window comparisons. The window trial embeds titles and abstracts locally. The seven-day and 28-day results count candidate groups before editorial screening.
 
 ```sh
 python -m pipeline survey --domain chemistry --to 2026-11-18
 python -m pipeline trial-windows --domain humanities-arts --to 2026-11-18
+python -m pipeline trial-windows --domain astronomy --to 2026-11-18
+python -m pipeline trial-windows --domain computer-information --to 2026-11-18
 python -m pipeline audit-beta --domain biology --to 2026-11-19
 ```
 

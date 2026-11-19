@@ -108,9 +108,9 @@ function korean(text) {
     );
   if ((v = /^\+([\d,]+) (?:in 7d|★ this week)$/.exec(s))) return '최근 7일간 별 +' + v[1] + '개';
   if ((v = /^Papers added since (.+)$/.exec(s))) return korean(v[1]) + ' 이후 추가된 논문';
-  if ((v = /^(Physics|Biology|Math & Stats|Earth & Environment) editions by date$/.exec(s)))
-    return korean(v[1]) + ' 날짜별 순위';
-  if ((v = /^Browse (physics|biology|math|earth-environment) editions$/.exec(s))) return '날짜별 순위 보기';
+  if ((v = /^(.+) editions by date$/.exec(s))) return korean(v[1]) + ' 날짜별 순위';
+  if (/^Browse [a-z-]+ editions$/.test(s)) return '날짜별 순위 보기';
+  if ((v = /^(.+) · (\d{4}-\d{2}-\d{2})$/.exec(s))) return korean(v[1]) + ' · ' + korean(v[2]);
   if ((v = /^(\d+) (preprints?|published|items|topics)$/.exec(s)))
     return (
       {
@@ -124,8 +124,16 @@ function korean(text) {
       v[1] +
       (['preprint', 'preprints', 'published'].includes(v[2]) ? '편' : '개')
     );
-  if (s.includes(' · ') && /^(?:\d+ (?:preprints?|published)|Biology ·|Physics ·)/.test(s))
+  if (s.includes(' · ') && /^(?:\d+ (?:preprints?|published|tools?|industry)\b|days ranked:|Biology ·|Physics ·)/.test(s))
     return s.split(' · ').map(korean).join(' · ');
+  if ((v = /^↑ ([\d.]+)× vs 4-wk avg$/.exec(s))) return '최근 4주 평균의 ' + v[1] + '배';
+  if ((v = /^(\d+) tools?$/.exec(s))) return '도구 ' + v[1] + '개';
+  if ((v = /^(\d+) industry$/.exec(s))) return '산업계 소식 ' + v[1] + '건';
+  if ((v = /^days ranked: (\d+)$/.exec(s))) return '순위 진입 ' + v[1] + '일';
+  if ((v = /^best rank: #(\d+)$/.exec(s))) return '최고 ' + v[1] + '위';
+  if (s === 'best rank: —') return '최고 순위 없음';
+  if ((v = /^items: (\d+)$/.exec(s))) return '자료 ' + v[1] + '건';
+  if ((v = /^Rise: ([\d.]+)×$/.exec(s))) return '증가율 ' + v[1] + '배';
   if (/^[\w.+#/-]+$/.test(s) || /^[A-Z0-9 &+._/-]+$/.test(s) || /^\S+@\S+\.\S+$/.test(s)) return s;
   if (Object.hasOwn(cache, s)) return cache[s];
   needed.add(s);
