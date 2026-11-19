@@ -119,7 +119,9 @@ def trial_windows(domain: Domain, end: ToDate):
     day = end.date()
     with httpx.Client(timeout=40, headers={'User-Agent': 'TrendBio metadata survey (https://trendbio.dev)'}) as client:
         records = list(trial_records(domain, fields.get(domain, []), day - timedelta(days=27), day, client))
-    typer.echo(json.dumps(run_window_trial(domain, records, day, Embedder()), ensure_ascii=False, indent=2))
+    result = run_window_trial(domain, records, day, Embedder())
+    result['survey_only'] = {v['subject']: v['survey_only'] for v in fields.get(domain, []) if v.get('survey_only')}
+    typer.echo(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 @app.command()

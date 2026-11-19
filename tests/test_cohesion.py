@@ -37,7 +37,11 @@ def test_partition_checks_all_evidence_and_only_ranks_groups_with_three_sources(
     for _ in range(2):
         groups, notes = review_clusters([ids], changed, store, deps, day)
         assert not groups and notes[0].startswith('cohesion-review-failed:')
-    assert llm._parse.call_count == 3
+    assert llm._parse.call_count == 5
+    llm._parse.side_effect = [response, CohesionReview(groups=[group([n]) for n in range(1, 8)])]
+    assert llm.review_cohesion('Original request', changed, 'retry')['groups']
+    assert 'retry' not in llm.fallback_reasons
+    llm._parse.side_effect = None
     llm._parse.return_value = CohesionReview(groups=[group([1, 2, 3]), group([1, 4, 5, 6])])
     assert review_clusters([ids], changed, store, deps, day)[1]
     llm._parse.return_value = CohesionReview(groups=[group([n]) for n in range(1, 8)])

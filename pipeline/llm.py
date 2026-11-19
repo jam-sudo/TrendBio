@@ -168,6 +168,17 @@ class LLM:
         return validated
 
     def review_cohesion(self, prompt, items, key):
+        self.fallback_reasons.pop(key, None)
+        result = self._cohesion_partition(prompt, items, key)
+        if result is None and self.fallback_reasons.get(key) == 'validation:cohesion-evidence':
+            correction = ('A passage could not be located in its original source. Copy a continuous passage of at least '
+                          '12 characters exactly. The complete original title is acceptable when it supports the group.')
+            result = self._cohesion_partition(prompt + '\n\n' + correction, items, key)
+        if result is not None:
+            self.fallback_reasons.pop(key, None)
+        return result
+
+    def _cohesion_partition(self, prompt, items, key):
         result = self._parse(CohesionReview, [{'role': 'user', 'content': prompt}], 'claude-haiku-5-5',
                              4096, 'low', entity_id=key)
         if result is None:

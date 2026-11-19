@@ -17,6 +17,12 @@
 
 ### 후속 분야 자료원 4주 점검
 
+**화학 파일럿의 실제 모집단은 다섯 저널의 재이용 표시가 확인된 논문이다.** 10월 22일~11월 18일에 초록·정확한 발행일·발효된 출판본 CC BY 표시를 갖춘 논문은 유기 19편, 무기 27편, 물리 26편, 분석 28편, 종합 저널 79편이었다. ChemRxiv의 같은 기간 DOI 1,502건은 식별자 기준 1,381개 연구에 해당했고, 첫 버전은 1,201건이었다. 초록이 있는 1,479건을 포함해 Crossref에 라이선스 URL이 기록된 건수는 0건이었고, 출판사 페이지 표본 4건은 자동 조회에서 403을 반환했다. 저널판을 가리킨 34개 관계는 31개 저널 논문 DOI로 확인했다. ChemRxiv는 판본과 서지 링크를 점검하는 자료원으로 사용한다. [출처·권리·판본 실측](expansion-measurements/2026-11-19/chemistry-rights-versions.json) · [ACS의 ChemRxiv 이전 안내](https://connect.acspubs.org/chemrxiv-migration-FAQ)
+
+화학 179편을 운영과 같은 임베딩으로 묶자 네 주에 각각 3·2·3·3개, 28일에 19개 후보가 생겼다. 두 출판사에서 고른 다섯 저널 표본으로 일회성 비공개 판을 시험할 수 있다. [실제 수집 조건의 7일·28일 비교](expansion-measurements/2026-11-19/windows-chemistry-licensed.json)
+
+컴퓨터·정보 분야에서는 학회별 수집 방식의 차이를 확인했다. CHI 2026의 본 논문집과 확장 초록집은 각각 ISBN으로 하위 논문을 검색하면 0건이었다. 4월 6~19일 ACM 레코드에서 논문집 DOI와 서명을 함께 대조하자 본 논문집 1,702건과 확장 초록집 1,005건이 나왔다. 모두 발행일이 4월 13일에 집중됐다. USENIX OSDI 프로그램에는 논문 발표 카드 137개가 있었다. 두 학회에서 각 6개를 독립 표집해 제목과 제1저자 성이 일치하는 arXiv 판을 각각 2개 찾았다. 이 방식으로 연결되지 않은 8개는 개별 대조가 필요하다. [표집한 학회 레코드와 arXiv 식별자](expansion-measurements/2026-11-19/computing-conferences.json) · [CHI 출판 지침](https://chi2026.acm.org/authors/papers/) · [OSDI 공식 프로그램](https://www.usenix.org/conference/osdi26/technical-sessions)
+
 10월 22일~11월 18일을 겹치지 않는 7일 구간 네 개로 나눴다. 47개 조합은 저널과 출판사·자료 유형을 구분한 측정 단위다. 아래 건수는 선택한 조합에서 정확한 발행일을 확인한 Crossref 기록이다. 분야 전체 논문 수까지 추정하기에는 표본이 작다. [주별 집계·날짜 정밀도·실패 기록](expansion-measurements/2026-11-19/venues.json) · [Crossref 날짜 필터](https://www.crossref.org/documentation/retrieve-metadata/rest-api/rest-api-filters/)
 
 | 분야 | 자료원·유형 조합 | 정확한 발행일 | 그중 초록 있음 | 후속 검증 |

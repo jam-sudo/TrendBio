@@ -35,6 +35,31 @@ def test_beta_tracks_live_dates_and_excludes_backfills(tmp_path, fixtures_root):
     assert result['missing_days'] == ['2026-11-02'] and result['target_editions'] == 14
 
 
+def test_sparse_edition_samples_disjoint_ranks_and_reports_review_exclusions(tmp_path, fixtures_root):
+    import shutil
+    shutil.copytree(fixtures_root / 'data' / 'math', tmp_path / 'math')
+    store = Store(tmp_path, 'math')
+    when = date(2026, 11, 1)
+    day = store.get_day(when)
+    first = day.ranked[0]
+    topic = store.get_topic(first.slug)
+    for i in range(2, 7):
+        slug = f'topic-{i}'
+        store.put_topic(topic.model_copy(update={'slug': slug}))
+        day.ranked.append(first.model_copy(update={'slug': slug, 'rank': i}))
+    store.put_day(day)
+    paper = store.get_item(topic.history[-1].item_ids[0]).model_copy(update={'id': 'unqualified'})
+    store.put_item(paper)
+    store._write(tmp_path / 'math/audits' / f'cohesion-{when}.json',
+                 {'minimum': 3, 'candidates': [{'review': 'example', 'items': [paper.id], 'qualified': [], 'failed': False}]})
+    result = audit_edition(store, when, when)
+    samples = result['review_samples']
+    assert {s['id'] for s in samples['top']} == {first.slug, 'topic-2', 'topic-3'}
+    assert {s['id'] for s in samples['bottom']} == {'topic-4', 'topic-5', 'topic-6'}
+    assert next(s for s in samples['excluded'] if s['id'] == paper.id)['decision'] == 'below-minimum-reviewed-group'
+    assert result['days'][0]['alternative_top10']['official'] == 6
+
+
 def test_28_day_experiment_recovers_a_sparse_group(tmp_path, fixtures_root):
     import numpy as np
 
@@ -79,6 +104,25 @@ def test_publisher_contents_uses_article_publication_dates():
     with httpx.Client(transport=httpx.MockTransport(reply)) as client:
         assert reference_dois(client, {'copernicus': 'se'}, date(2026, 10, 22),
                               date(2026, 11, 18)) == ({'10.5194/se-17-a-2026'}, 1)
+
+
+def test_chemrxiv_survey_separates_revisions_and_explicit_journal_links():
+    from pipeline.window_trial import trial_records
+    stamp = {'date-parts': [[2026, 11, 1]]}
+    base = {'published': stamp, 'created': stamp, 'type': 'posted-content', 'abstract': 'Summary'}
+    records = [{**base, 'DOI': '10.26434/chemrxiv.99/v1'},
+               {**base, 'DOI': '10.26434/chemrxiv.99/v2',
+                'relation': {'is-preprint-of': [{'id-type': 'doi', 'id': '10.1/J'}]}}]
+    venue = {'subject': 'chemistry-preprints', 'prefix': '10.26434', 'type': 'posted-content', 'survey_only': 'licences'}
+    with httpx.Client(transport=httpx.MockTransport(
+        lambda req: httpx.Response(200, json={'message': {'items': records, 'total-results': len(records)}})
+    )) as client:
+        report = survey_venue(client, venue, date(2026, 11, 18))
+        assert list(trial_records('other-field', [venue], date(2026, 10, 22), date(2026, 11, 18), client)) == []
+    assert report['versions'] == {'doi_records': 2, 'distinct_roots_in_window': 1, 'first_versions': 1,
+                                  'later_versions': 1, 'unparsed': 0,
+                                  'journal_links': {'10.26434/chemrxiv.99/v2': ['10.1/j']}}
+    assert sum(w['with_license_url'] for w in report['weeks']) == 0
 
 
 def test_trial_counts_a_book_and_its_chapters_once():

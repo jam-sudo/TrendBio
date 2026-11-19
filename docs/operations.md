@@ -16,7 +16,7 @@ The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
-The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs Math & Stats and the five-journal Earth pilot in a temporary directory. It has read-only repository access. Each pilot artifact contains the dated rank, source records, review decisions when applicable, and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)
+The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs Math & Stats, Earth observations and Chemistry pilots in a temporary directory. It has read-only repository access. Each pilot artifact contains the dated rank, source records, review decisions and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)
 
 Use these commands from the repository root to reproduce the metadata and window comparisons. The window trial embeds titles and abstracts locally. The seven-day and 28-day results count candidate groups before editorial screening.
 
@@ -26,7 +26,7 @@ python -m pipeline trial-windows --domain humanities-arts --to 2026-11-18
 python -m pipeline audit-beta --domain biology --to 2026-11-19
 ```
 
-Both pilots partition every candidate into specific shared research problems or phenomena. An exact source passage supports each assignment. Groups meeting the configured minimum enter the shared ranking. The dated audit records smaller groups and review failures separately. To measure the cost of the next edition, use `rank` with the previous UTC day's pilot run ID. This restores the item cache and ledger before collecting the next day's papers. Use `rerank` to reassess the same edition. The Earth pilot admits published records with an exact date, a usable abstract and a current CC BY version-of-record licence. It links confirmed DataCite datasets alongside their papers. [Measured pilot coverage](science-expansion-plan.ko.md)
+The pilots partition every candidate into specific shared research problems or phenomena. An exact source passage supports each assignment. Groups meeting the configured minimum enter the shared ranking. The dated audit records smaller groups and review failures separately. To measure the cost of the next edition, use `rank` with the previous UTC day's pilot run ID. This restores the item cache and ledger before collecting the next day's papers. Use `rerank` to reassess the same edition. Earth and Chemistry each sample five journals and admit records with an exact date, an abstract and a current CC BY version-of-record licence. Earth also links confirmed DataCite datasets. The chemistry source survey counts ChemRxiv revisions and journal links separately. [Measured pilot coverage](science-expansion-plan.ko.md)
 
 ## Sources
 

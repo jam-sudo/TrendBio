@@ -10,7 +10,7 @@ from pipeline.sources.crossref import CrossrefAdapter, crossref_works, full_date
 
 
 def trial_records(domain, venues, start, end, client):
-    if domain in {'earth-environment', 'math'}:
+    if domain in {'earth-environment', 'math', 'chemistry'}:
         config = load_config(domain)
         adapter = (ArxivAdapter if domain == 'math' else CrossrefAdapter)(config)
         for item in adapter.fetch(start, end, client):
@@ -18,6 +18,8 @@ def trial_records(domain, venues, start, end, client):
         return
 
     for venue in venues:
+        if venue.get('survey_only'):
+            continue
         container = 'journals/' + venue['issn'] if 'issn' in venue else 'prefixes/' + venue['prefix']
         kind = venue.get('type', 'journal-article')
         filters = f'type:{kind},from-pub-date:{start},until-pub-date:{end}'

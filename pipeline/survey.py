@@ -7,7 +7,7 @@ from hashlib import sha256
 import httpx
 
 from pipeline.sources.base import request
-from pipeline.sources.crossref import crossref_works, datacite_type, full_date, related_dois, related_work_dois
+from pipeline.sources.crossref import crossref_works, datacite_type, full_date, related_dois, related_work_dois, vor_cc_by
 
 
 def reference_dois(client, venue, start, end):
@@ -59,9 +59,11 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
     work_type = venue.get('type', 'journal-article')
     weeks = [{'from': str(start + timedelta(weeks=i)), 'to': str(start + timedelta(weeks=i, days=6)),
               'published': 0, 'with_abstract': 0, 'created': 0, 'created_imprecise_publication_day': 0,
-              'languages': Counter(), 'types': Counter()} for i in range(4)]
+              'languages': Counter(), 'types': Counter(), 'with_license_url': 0,
+              'with_abstract_and_vor_cc_by': 0} for i in range(4)]
     published, discovered, abstracts, pub_filter = set(), set(), set(), set()
     linked_works = {}
+    versions = {}
     for axis, field in [('pub', 'published'), ('created', 'created')]:
         filters = f'type:{work_type},from-{axis}-date:{start},until-{axis}-date:{end}'
         for doi, work in crossref_works(client, endpoint, filters):
@@ -77,9 +79,15 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
             if field == 'published':
                 week['published'] += 1
                 week['with_abstract'] += int(doi in abstracts)
+                week['with_license_url'] += int(any(lic.get('URL') for lic in work.get('license', [])))
+                week['with_abstract_and_vor_cc_by'] += int(doi in abstracts and bool(vor_cc_by(work, end)))
                 week['languages'][work.get('language') or 'und'] += 1
                 week['types'][work['type']] += 1
                 published.add(doi)
+                if container == 'prefixes/10.26434' and work_type == 'posted-content':
+                    version = re.fullmatch(r'(10\.26434/chemrxiv[.-].+?)(?:/v|[.-]v)([1-9]\d*)', doi)
+                    versions[doi] = (version[1] if version else doi, int(version[2]) if version else None,
+                                     related_dois(work, 'is-preprint-of'))
                 if venue.get('data_link_sample'):
                     links = related_work_dois(work)
                     if links:
@@ -91,6 +99,12 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
               'unique_discovered': len(discovered), 'publication_filter_records': len(pub_filter),
               'publication_filter_without_exact_day_in_window': len(pub_filter - published),
               'status': 'ok', 'reference': None}
+    if versions:
+        result['versions'] = {'doi_records': len(versions), 'distinct_roots_in_window': len({r for r, _, _ in versions.values()}),
+                              'first_versions': sum(v == 1 for _, v, _ in versions.values()),
+                              'later_versions': sum(v is not None and v > 1 for _, v, _ in versions.values()),
+                              'unparsed': sum(v is None for _, v, _ in versions.values()),
+                              'journal_links': {doi: links for doi, (_, _, links) in sorted(versions.items()) if links}}
     if venue.get('data_link_sample'):
         key = lambda text: sha256(text.encode()).digest()
         sample = []

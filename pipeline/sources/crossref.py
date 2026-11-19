@@ -1,4 +1,4 @@
-"""Publication-day intake for the open Earth journals in the pilot."""
+"""Publication-day intake for openly licensed journal articles in field pilots."""
 from datetime import date
 from html.parser import HTMLParser
 import re
@@ -35,6 +35,12 @@ def crossref_works(client, endpoint, filters):
 def full_date(work, field):
     parts = (work.get(field, {}).get('date-parts') or [[]])[0]
     return date(*parts) if len(parts) == 3 else None
+
+
+def vor_cc_by(work, as_of):
+    return next((lic['URL'] for lic in work.get('license', [])
+                 if lic.get('content-version') == 'vor' and (full_date(lic, 'start') or date.max) <= as_of
+                 and re.fullmatch(r'https?://creativecommons\.org/licenses/by/(?:3|4)\.0/?', lic.get('URL', ''))), None)
 
 
 class _Text(HTMLParser):
@@ -95,11 +101,7 @@ class CrossrefAdapter:
                 day = full_date(work, 'published')
                 if day is None or not start <= day <= end or work.get('update-to'):
                     continue
-                licence = next((lic['URL'] for lic in work.get('license', [])
-                                if lic.get('content-version') == 'vor'
-                                and (full_date(lic, 'start') or date.max) <= end
-                                and re.fullmatch(r'https?://creativecommons\.org/licenses/by/(?:3|4)\.0/?',
-                                                 lic.get('URL', ''))), None)
+                licence = vor_cc_by(work, end)
                 title = plain_text((work.get('title') or [''])[0])
                 abstract = plain_text(work.get('abstract'))
                 if not (licence and title and abstract):

@@ -5,7 +5,7 @@ on:
     inputs:
       domain:
         type: choice
-        options: [math, earth-environment]
+        options: [math, earth-environment, chemistry]
         required: true
       date:
         description: Edition UTC date (YYYY-MM-DD)
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate pilot inputs
         run: |
-          [[ "$DOMAIN" == math || "$DOMAIN" == earth-environment ]]
+          [[ "$DOMAIN" == math || "$DOMAIN" == earth-environment || "$DOMAIN" == chemistry ]]
           [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
           [[ "$(date -u -d "$RUN_DATE" +%F)" == "$RUN_DATE" && "$RUN_DATE" < "$(date -u -d tomorrow +%F)" ]]
           if [[ -n "$PRIOR_RUN" || "$PILOT_ACTION" != rank ]]; then [[ "$PRIOR_RUN" =~ ^[0-9]+$ ]]; fi

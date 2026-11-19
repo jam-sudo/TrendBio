@@ -1725,6 +1725,7 @@ def test_attention_success_does_not_use_llm_or_change_ranking(ctx, monkeypatch, 
     ("biology", "biorxiv", "ecology", "ecology"),
     ("math", "arxiv", "math.NA", "numerical-analysis"),
     ("earth-environment", "crossref", "Ocean Science", "oceans"),
+    ("chemistry", "crossref", "0003-2700", "analytical"),
 ])
 def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, domain, source, category, expected):
     from pipeline.__main__ import build_deps
@@ -1738,8 +1739,11 @@ def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, dom
         prompt = _messages(ctx.items[0], deps.taxonomy, [])[0]['content']
         assert deps.taxonomy.label in prompt and deps.taxonomy.relevance.strip() in prompt and 'biomedicine' not in prompt
         title = {'physics': 'Quantum measurement', 'biology': 'Forest canopy survey',
-                 'math': 'Error bounds for quadrature', 'earth-environment': 'Ocean temperature observations'}[domain]
+                 'math': 'Error bounds for quadrature', 'earth-environment': 'Ocean temperature observations',
+                 'chemistry': 'Spectroscopic measurements of solutions'}[domain]
         hint = {'arxiv': 'arxiv_primary_category', 'biorxiv': 'biorxiv_category', 'crossref': 'journal'}[source]
+        if domain == 'chemistry':
+            hint = 'issn'
         items = [item.model_copy(update={
             'source': source, 'id': f'{source}:fixture-{i}', 'title': f'{title} {i}',
             'abstract': title, 'metadata': {hint: category},
