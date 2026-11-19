@@ -10,7 +10,7 @@
 <p align="center">Daily research trends in biology and physics.</p>
 
 <p align="center">
-  <a href="https://trendbio.dev">trendbio.dev</a>&ensp;·&ensp;<a href="https://trendbio.dev/feed.xml">Atom feed</a>&ensp;·&ensp;<a href="https://trendbio.dev/about">How it works</a>
+  <a href="https://trendbio.dev/">English</a>&ensp;·&ensp;<a href="https://trendbio.dev/ko/">한국어</a>&ensp;·&ensp;<a href="https://trendbio.dev/feed.xml">Atom feed</a>&ensp;·&ensp;<a href="https://trendbio.dev/about">How it works</a>
 </p>
 
 <br>
@@ -28,7 +28,7 @@ All Biology (beta) at `/biology/` has its own daily rankings, dated editions and
 
 The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes each edition independently and writes Physics results to `data/physics/`.
 
-The Math & Stats pilot covers arXiv number theory, numerical analysis and statistical methodology. Run `python -m pipeline run --domain math --dry-run` to review ranked topics, their assumptions and the cost in an isolated staging directory. The site builds `/math/` and its dated editions when reviewed days are present in `data/math/`. The independent Field pilot workflow also runs the five-journal Earth & Environment pilot. See the source coverage, editorial checks and recorded spend in the [science expansion plan](docs/science-expansion-plan.ko.md).
+The Math & Stats pilot covers arXiv number theory, numerical analysis and statistical methodology. Run `python -m pipeline run --domain math --dry-run` to review ranked topics, their assumptions and the cost in an isolated staging directory. The site builds `/math/` and its dated editions when reviewed days are present in `data/math/`. The independent Field pilot workflow also runs the five-journal Earth & Environment pilot. See the source coverage, editorial checks and recorded spend in the science expansion plan. [English](docs/science-expansion-plan.en.md) · [한국어](docs/science-expansion-plan.ko.md)
 
 ## How a day is made
 

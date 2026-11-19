@@ -14,6 +14,26 @@ Each successful field commits under `data/<domain>/`. Failed runs leave the last
 GitHub Actions builds and deploys the Astro site to Cloudflare Pages on pushes to `main` and after Daily pipeline, Backfill, Resynthesize or Maintenance completes via `.github/workflows/deploy.yml`.
 The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
+### English and Korean editions
+
+The existing paths serve English. Add `/ko` before the path to read the same edition, date or topic in Korean. The language links preserve the search query and section. Both languages use the same stored rankings, evidence and paper links. Search indexes the two languages separately. [English](https://trendbio.dev/) · [한국어](https://trendbio.dev/ko/)
+
+The static build uses reviewed interface labels in `site/i18n/ko.json`, editorial corrections in `ko-reviewed.json` and the compressed archive of translations in the same directory. For new text it runs Helsinki-NLP OPUS-MT locally on the build runner. Deployment caches the model and new translations under `~/.cache/trendbio/`. The translator has no paid API dependency. [Model and attribution](https://huggingface.co/Helsinki-NLP/opus-mt-tc-big-en-ko)
+
+For a local preview of both editions, use Python 3.12 and the project's Node 22 version. From the repository root run the following commands.
+
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r site/scripts/translation-requirements.txt
+cd site
+npm ci
+TRENDBIO_DATA_ROOT=../data TRENDBIO_NOTES_ROOT=../notes npm run build
+npm run preview
+```
+
+The first build that encounters new text downloads and verifies the original model. A failed translation stops the build before publication.
+
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
 The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs Math & Stats, Earth observations and Chemistry pilots in a temporary directory. It has read-only repository access. Each pilot artifact contains the dated rank, source records, review decisions and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)

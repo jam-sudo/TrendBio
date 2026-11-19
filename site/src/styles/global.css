@@ -57,7 +57,7 @@ h2, h3, h4, h5, h6 { font-size: var(--t2); line-height: 1.4; }
 small { font-size: var(--t3); }
 p { margin-block: 0 1.5rem; max-width: 80ch; }
 header, main, footer { width: min(100% - 2rem, 1120px); margin-inline: auto; }
-header { padding-block: 2rem 0; text-align: center; }
+header { position: relative; padding-block: 2rem 0; text-align: center; }
 header nav { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; justify-content: center; margin-top: 1rem; }
 .home-header .header-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 1.5rem; }
 .home-header nav { margin-top: 0; }
@@ -126,3 +126,8 @@ th:last-child, td:last-child { padding-right: 0; }
   .page-shell > main { grid-row: 2; }
   footer { width: min(100% - 480px, 1120px); }
 }
+.language-links { position: absolute; inset-block-start: .2rem; inset-inline-end: 0; display: flex; gap: .65rem; align-items: baseline; font-size: 14px; white-space: nowrap; }
+.language-links a { padding-block: .15rem; text-decoration: none; }
+.language-links [aria-current="true"] { text-decoration: underline; text-underline-offset: .2em; font-weight: 700; }
+html:lang(ko) { font-family: Inconsolata, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif; }
+html:lang(ko) :is(h1, h2, h3, p, summary) { word-break: keep-all; overflow-wrap: anywhere; }

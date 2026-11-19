@@ -38,13 +38,13 @@ if (input) {
     close();
     list.replaceChildren();
     const query = input.value.trim();
-    if (query.length < 2) return;
+    if (query.length < 2 && !/[가-힣]/.test(query)) return;
     const current = request;
     const isCurrent = () => current === request;
-    all.href = `/search/?q=${encodeURIComponent(query)}`;
+    all.href = `${form.getAttribute('action')}?q=${encodeURIComponent(query)}`;
     all.hidden = true;
     timer = setTimeout(async () => {
-      loading = setTimeout(() => { if (isCurrent()) open('Searching…'); }, 300);
+      loading = setTimeout(() => { if (isCurrent()) open(message.dataset.loading); }, 300);
       try {
         const [pagefind, match] = await modules;
         if (!isCurrent()) return;
@@ -66,8 +66,8 @@ if (input) {
           link.append(category);
           list.append(link);
         }
-        open(results.length ? '' : 'No topics found');
-        status.textContent = results.length ? `${results.length} topics shown` : 'No topics found';
+        open(results.length ? '' : message.dataset.empty);
+        if (results.length) status.textContent = message.dataset.count.replace('{n}', results.length);
         all.hidden = false;
       } catch { if (isCurrent()) close(); }
     }, 150);

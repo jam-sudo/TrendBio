@@ -1,6 +1,6 @@
 function words(text) {
   // Match Pagefind's punctuation removal, including hyphenated and dotted names.
-  return text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '')
+  return text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC')
     .replace(/[\p{Pd}\p{Pe}\p{Pf}\p{Pi}\p{Po}\p{Ps}]/gu, '')
     .match(/[\p{L}\p{N}]+/gu) ?? [];
 }
@@ -12,7 +12,7 @@ function singular(word) {
 }
 
 export function matchesQuery(query, content) {
-  const terms = words(query).filter(word => word.length >= 3).map(singular);
+  const terms = words(query).filter(word => word.length >= 3 || /[가-힣]/.test(word)).map(singular);
   const indexedWords = words(content).map(singular);
   // shortcut: preserve regular plurals, add fuller stemming if other inflections are needed.
   return terms.every(term => indexedWords.some(word => word.startsWith(term)));

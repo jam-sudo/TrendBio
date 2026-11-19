@@ -12,6 +12,7 @@ it.each([
   ["scRNA-seq", "scRNAseq"], ["single-cell", "single-cell"],
   ["Evo.2", "Evo.2"], ["evo.2", "Evo2"], ["antibodies", "antibody"],
   ["cafe", "café"], ["in PoolParty", "PoolParty"],
+  ["뼈", "뼈의 구조"], ["양자", "양자물리학"], ["유전체".normalize("NFD"), "유전체 분석"],
 ])("matches %s against %s", (query, content) => {
   expect(matchesQuery(query, content)).toBe(true);
 });
@@ -22,6 +23,7 @@ it("requires every long query word at a word boundary", () => {
   expect(matchesQuery("fold", "AlphaFold3")).toBe(false);
   expect(matchesQuery("AlphaFold3", "AlphaFold")).toBe(false);
   expect(matchesQuery("perturbations", "perturb")).toBe(false);
+  expect(matchesQuery("양자", "세포와 유전체")).toBe(false);
 });
 
 it("loads at most 50 candidates and retains only matching data in order", async () => {

@@ -15,6 +15,19 @@ afterAll(async () => { await browser?.close(); await server?.stop(); });
 const visit = (path: string) => page.goto(`http://127.0.0.1:${server.port}${path}`);
 const finished = () => page.waitForFunction(() => /found\./.test(document.getElementById("search-status")!.textContent!));
 
+it("searches Korean topics and keeps the query and section when switching languages", async () => {
+  await visit("/ko/search/?q=" + encodeURIComponent("단백질") + "#search-results");
+  await page.locator('#search-results a[href^="/ko/topic/"]').first().waitFor();
+  expect(await page.locator("#search-results a").evaluateAll(links => links.every(a => a.getAttribute("href")?.startsWith("/ko/topic/")))).toBe(true);
+  await page.getByRole("link", { name: "English", exact: true }).click();
+  expect(new URL(page.url()).searchParams.get("q")).toBe("단백질");
+  expect(new URL(page.url()).hash).toBe("#search-results");
+  expect(await page.locator("html").getAttribute("lang")).toBe("en");
+  await page.getByRole("link", { name: "한국어", exact: true }).click();
+  expect(await page.locator("html").getAttribute("lang")).toBe("ko");
+  expect(await page.getByRole("searchbox").inputValue()).toBe("단백질");
+});
+
 it.each(["Binder", "  Binder  "])("submits the home search and trims %j on the search page", async query => {
   await visit("/");
   const input = page.getByRole("combobox", { name: "Search topics" });
@@ -113,7 +126,7 @@ it("loads no Pagefind files on home or before a search and explains the JavaScri
 
 it("indexes only topic pages and keeps search out of the sitemap with noindex", () => {
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith(".html"))) {
-    expect(readFileSync(`dist/${path}`, "utf8").includes("data-pagefind-body"), path).toBe(path.startsWith("topic/"));
+    expect(readFileSync(`dist/${path}`, "utf8").includes("data-pagefind-body"), path).toBe(/^(ko\/)?topic\//.test(path));
   }
   expect(readFileSync("dist/search/index.html", "utf8")).toContain('name="robots" content="noindex"');
   expect(readFileSync("dist/sitemap.xml", "utf8")).not.toContain("/search/");

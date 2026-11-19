@@ -58,7 +58,7 @@ it("gives every page canonical, description and preview metadata", async () => {
     expect(metadata.image).toBe("https://trendbio.dev/og.png");
     expect(metadata.width).toBe("1200");
     expect(metadata.height).toBe("630");
-    expect(metadata.alt).toBe("TrendBio — What moved in computational biology");
+    expect(metadata.alt).toBe(path.startsWith("ko/") ? "TrendBio — 계산생물학 연구 동향" : "TrendBio — What moved in computational biology");
     expect(metadata.themes).toEqual([["(prefers-color-scheme: dark)", "oklch(14.5% 0 0)"], ["(prefers-color-scheme: light)", "#fafafa"]]);
   }
   expect(read("index.html")).toContain(truncateDescription(`Today's leading computational biology topic: ${days[0].ranked[0].headline}.`));
@@ -75,11 +75,11 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   const { weeks, months } = loadPeriods();
   const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
   const fieldPages = editions.reduce((n, field) => n + 1 + getDataIndex(field).days.length, 0);
-  expect(parsed.entries).toHaveLength(7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size);
+  expect(parsed.entries).toHaveLength(2 * (7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size));
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   expect(urls.size).toBe(parsed.entries.length);
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
-    expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(path !== "search/index.html");
+    expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(!/^(ko\/)?search\/index\.html$/.test(path));
   }
   for (const { date } of days) expect(urls.get(`https://trendbio.dev/day/${date}/`)).toBe(date);
   for (const topic of rankedTopics) expect(urls.get(`https://trendbio.dev/topic/${topic.slug}/`))
@@ -131,6 +131,44 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
   }
 });
 
+it("pairs the same dated rankings in Korean and English and retains the evidence links", async () => {
+  const path = "/physics/day/2026-11-01/";
+  let englishPapers: string[] = [];
+  for (const [lang, prefix, heading] of [["en", "", "Physics"], ["ko", "/ko", "물리학"]]) {
+    await page.setContent(read(`${prefix}${path}index.html`.slice(1)));
+    expect(await page.locator("html").getAttribute("lang")).toBe(lang);
+    expect(await page.locator("main h1").textContent()).toBe(heading);
+    expect(await page.locator("[data-language][aria-current]").getAttribute("data-language")).toBe(lang);
+    for (const [code, target] of [["en", path], ["ko", "/ko" + path]]) {
+      expect(await page.locator(`a[data-language=${code}]`).getAttribute("href")).toBe(target);
+      expect(await page.locator(`link[hreflang=${code}]`).getAttribute("href")).toBe("https://trendbio.dev" + target);
+    }
+    const rows = page.locator("ol.rankings > li");
+    expect(await rows.count()).toBe(1);
+    const papers = await rows.locator('a[href^="https://example.org/physics/"]').evaluateAll(links => links.map(link => link.getAttribute("href")!));
+    if (lang === "en") { englishPapers = papers; continue; }
+    expect(papers).toEqual(englishPapers);
+    expect(await rows.locator("h3").textContent()).toMatch(/[가-힣]/);
+    expect(await rows.locator("p").first().textContent()).toMatch(/[가-힣]/);
+    expect(await rows.locator("summary").textContent()).toBe("근거 논문 3편");
+    expect(await page.locator('main a[href="/ko/physics/#editions"]').count()).toBe(1);
+  }
+});
+
+it("publishes a Korean topic map and a distinct valid Korean Atom feed", async () => {
+  const map = JSON.parse(read("map.json"));
+  const koMap = JSON.parse(read("ko/map.json"));
+  expect(koMap.points.map((point: { slug: string }) => point.slug)).toEqual(map.points.map((point: { slug: string }) => point.slug));
+  expect(koMap.points.some((point: { headline: string }) => /[가-힣]/.test(point.headline))).toBe(true);
+  const feed = await page.evaluate(xml => {
+    const doc = new DOMParser().parseFromString(xml, "application/xml");
+    return { valid: !doc.querySelector("parsererror"), lang: doc.documentElement.getAttribute("xml:lang"),
+      title: doc.querySelector("entry title")?.textContent, link: doc.querySelector("entry link")?.getAttribute("href") };
+  }, read("ko/feed.xml"));
+  expect(feed).toMatchObject({ valid: true, lang: "ko" });
+  expect(feed.title).toMatch(/[가-힣]/);
+  expect(feed.link).toMatch(/^https:\/\/trendbio\.dev\/ko\//);
+});
 
 it("keeps the Biology beta and CompBio as distinct editions", async () => {
   for (const [path, current] of [["biology/index.html", "All Biology (beta)"], ["index.html", "CompBio"]]) {

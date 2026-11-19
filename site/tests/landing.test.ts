@@ -13,7 +13,7 @@ describe("built landing, day and archive pages", () => {
       const html = readPage(path);
       const header = html.match(/<header\b[^>]*>[\s\S]*?<\/header>/)![0];
       expect(html.match(/<form\b[^>]*role="search"/g)).toHaveLength(1);
-      expect(header).not.toContain('href="/search/"');
+      expect(header.match(/<nav\b[^>]*>[\s\S]*?<\/nav>/)![0]).not.toContain('href="/search/"');
       if (path === "search/index.html") {
         expect(header).not.toContain('<form');
         return;

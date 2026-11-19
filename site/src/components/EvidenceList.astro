@@ -38,11 +38,11 @@ const badge = (item: Item) => {
         return <li>
           <h3><a href={item.url}>{item.title}</a>{preprint && <> <small><a href={preprint.url}>preprint</a></small></>}</h3>
           <div class="metadata">
-            {badge(item) && <span class="badge">{badge(item)}</span>}
+            {badge(item) && <span class="badge" translate="no">{badge(item)}</span>}
             <time datetime={item.published_at}>{item.published_at}</time>
-            {item.authors.length > 0 && <span>{item.authors[0]}{item.authors.length > 1 && " et al."}</span>}
+            {item.authors.length > 0 && <span translate="no">{item.authors[0]}{item.authors.length > 1 && " et al."}</span>}
             {item.type === "code" && item.metadata.star_gain_7d != null && <span>+{item.metadata.star_gain_7d} ★ this week</span>}
-            {item.type === "code" && item.metadata.license && <span>{item.metadata.license}</span>}
+            {item.type === "code" && item.metadata.license && <span translate="no">{item.metadata.license}</span>}
           </div>
           {(oneLiners[item.id] ?? item.summary) != null && <p>{oneLiners[item.id] ?? item.summary}</p>}
         </li>;
