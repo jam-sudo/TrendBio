@@ -67,6 +67,12 @@ def _work(record, venue, identifier, start, end, client):
             'metadata_license': CC0, 'work_license': licence.get('valueURI') if licence is not None else None,
             'date_basis': 'Online publication date' if len(issued) < 10 else 'Publication date',
             'original_issued': issued, 'online_date': online, 'description_source': 'Publisher-supplied abstract'}
+    host = doc.find(MODS + 'relatedItem[@type="host"]')
+    if kind == 'article' and host is not None:
+        issue = host.findtext(f'{MODS}identifier[@type="hdl"]', '')
+        if re.fullmatch(r'20\.500\.13089/[\w.-]+', issue):
+            meta['issue_url'] = 'https://hdl.handle.net/' + issue
+            meta['issue'] = host.findtext(f'{MODS}part/{MODS}detail[@type="volume"]/{MODS}number', '')
     if kind == 'book':
         isbns = {normalized_isbn(n.text) for n in doc.findall(MODS + 'identifier') if n.get('type') in {'eisbn', 'pisbn'}} - {''}
         if len(issued) < 10:

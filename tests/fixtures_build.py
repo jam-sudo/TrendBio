@@ -190,7 +190,7 @@ def build(root: Path) -> None:
                       source_status={source: "ok" for source in ("biorxiv", "arxiv", "pubmed", "github", "rss")})
         dump(Day(domain="computational", date=today, ranked=sorted(ranked, key=lambda row: row.rank), run=run),
              day_path(root / "data", "computational", today))
-    for domain in ("physics", "math", "earth-environment"):
+    for domain in ("physics", "math", "earth-environment", "humanities-arts"):
         build_field_edition(root / "data", days[-1], domain)
     notes = root / "notes"
     notes.mkdir(parents=True, exist_ok=True)
@@ -213,28 +213,48 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
         headline = "Quadrature error bounds depend on smoothness"
         summary = "The fixture papers examine quadrature error for smooth functions."
         synthesis = "Each example assumes that the integrand is smooth."
+    elif domain == "humanities-arts":
+        titles = ("Liederhandschriften", "Songs in manuscript", "Manuscript evidence")
+        category, prefix, slug, label = "languages-literature", "songbooks", "songbook-editions-fixture", "Songbook editions"
+        headline = "Editing early songbooks"
+        summary = "Three studies compare manuscript witnesses."
+        synthesis = None
     else:
         titles = tuple(f"Coastal temperature record at example station {i}" for i in range(1, 4))
         category, prefix, slug, label = "oceans", "ocean", "ocean-observations-fixture", "Ocean observations"
         headline = "Coastal temperature observations across three stations"
         summary = "Three reports document regional coastal temperature measurements."
         synthesis = "Each station supplies a record from its local coastline."
-    earth = domain == "earth-environment"
+    published = domain in {"earth-environment", "humanities-arts"}
     papers = []
+    sources = set()
     for i, title in enumerate(titles, 1):
         paper = Item(id=f"arxiv:{category}-fixture-{i}", source="arxiv", type="preprint", title=title,
                      url=f"https://example.org/{domain}/{prefix}-{i}", doi=None, published_at=day,
                      first_seen=day, authors=[], org=None, abstract=title, summary=title,
                      primary_category=category, published_doi=None, preprint_id=None)
-        if earth:
+        if domain == "earth-environment":
             paper.doi = f"10.5555/example-earth-{i}"
             paper.id, paper.type, paper.source = f"doi:{paper.doi}", "published", "crossref"
             paper.url, paper.authors = f"https://example.org/earth/ocean-{i}", ["Example Ocean Group"]
             paper.metadata = {"journal": "Ocean Science", "license": "https://creativecommons.org/licenses/by/4.0/",
                               "dataset_dois": ["10.5555/example-data"] if i == 1 else []}
+        if domain == "humanities-arts":
+            paper.source = ("thoth", "openedition", "crossref")[i - 1]
+            paper.id, paper.type = f"{paper.source}:fixture-{i}", "published"
+            paper.authors = ["Example Author"]
+            if i == 3:
+                paper.metadata = {"license": "https://creativecommons.org/licenses/by/4.0/"}
+            else:
+                paper.metadata = {"publication_type": "Monograph" if i == 1 else "Journal article",
+                                  "original_title": title if i == 1 else "Chansons en manuscrit",
+                                  "abstract_language": "en", "original_languages": ["ger" if i == 1 else "fr"],
+                                  "metadata_license": "https://creativecommons.org/publicdomain/zero/1.0/",
+                                  "work_license": "https://creativecommons.org/licenses/by-nc/4.0/"}
         dump(paper, item_path(root, domain, paper))
         papers.append(paper.id)
-    signals = Signals(preprint=0 if earth else len(papers), published=len(papers) if earth else 0,
+        sources.add(paper.source)
+    signals = Signals(preprint=0 if published else len(papers), published=len(papers) if published else 0,
                       code=0, industry=0, rise_ratio=1, star_gain_7d=0)
     scores = Scores(rise=1, volume=0.35, diversity=0.25, code_velocity=0, penalty=0, total=0.565)
     row = RankedTopic(slug=slug, category=category, rank=1, headline=headline, summary=summary,
@@ -247,7 +267,7 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
     dump(topic, topic_path(root, domain, topic.slug))
     stamp = datetime.combine(day, time(6), tzinfo=timezone.utc)
     run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False,
-                  synthesis_model="fixture", source_status={"crossref" if earth else "arxiv": "ok"})
+                  synthesis_model="fixture", source_status=dict.fromkeys(sources, "ok"))
     dump(Day(domain=domain, date=day, ranked=[row], run=run), day_path(root, domain, day))
 
 

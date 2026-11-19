@@ -24,6 +24,7 @@ const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
 const koreanPath = "/ko" + canonicalPath;
 const biology = !edition || edition === "biology";
+const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
 ---
 
 <!doctype html>
@@ -68,11 +69,15 @@ const biology = !edition || edition === "biology";
       <a class="wordmark" href="/">{Astro.slots.has("hero") && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
         <div class="field-bar">
-          <span class="field-links" role="group" aria-label="Science field">
+          <div class="field-links" role="group" aria-label="Science field">
             <a href="/" aria-current={biology ? "true" : undefined}>Biology</a>
-            {editions.filter(field => field !== "biology").map(field =>
+            {editions.filter(field => field !== "biology" && editionInfo[field].stage !== "Pilot").map(field =>
               <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}
-          </span>
+            {pilots.length > 0 && <details class="pilot-fields">
+              <summary>Pilot editions</summary>
+              <div>{pilots.map(field => <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}</div>
+            </details>}
+          </div>
           {biology && <span class="field-links" role="group" aria-label="Biology edition">
             <a href="/biology/" aria-current={edition === "biology" ? "true" : undefined}>All Biology (beta)</a>
             <a href="/" aria-current={!edition ? "true" : undefined}>CompBio</a>

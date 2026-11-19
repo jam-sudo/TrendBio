@@ -6,15 +6,18 @@ const { metadata } = paper;
 const native = paper.source === "thoth" || paper.source === "openedition";
 const languages = new Intl.DisplayNames(["en"], { type: "language" });
 const original = Array.isArray(metadata.original_languages) ? metadata.original_languages : [];
+const preserveTitle = metadata.abstract_language && (metadata.abstract_language !== "en" ||
+  (metadata.original_title === paper.title && original.length > 0 && !original.some(code => code === "eng" || code === "en")));
 const workLicense = typeof metadata.work_license === "string" && /^https?:\/\/creativecommons\.org\/(?:licenses|publicdomain)\//.test(metadata.work_license) ? metadata.work_license : null;
 ---
- · <span>{metadata.publication_type ?? "Journal article"}</span>
+<a href={paper.url} translate={preserveTitle ? "no" : undefined}>{paper.title}</a> · <span>{metadata.publication_type ?? "Journal article"}</span>
 {native && <>
   {typeof metadata.original_title === "string" && metadata.original_title !== paper.title && <> · <span>Original title</span> <cite translate="no">{metadata.original_title}</cite></>}
   {original.filter(code => typeof code === "string" && /^[a-z]{2,3}$/.test(code)).map(code => <> · <span>{`Original publication in ${languages.of(code)}`}</span></>)}
   {paper.authors.length > 0 && <> · <span translate="no">{paper.authors.join(", ")}</span></>}
   {typeof metadata.date_basis === "string" && <> · <span>{metadata.date_basis}</span> <time datetime={paper.published_at}>{paper.published_at}</time></>}
   {typeof metadata.date_evidence === "string" && <> · <a href={metadata.date_evidence}>Publication date source</a></>}
+  {typeof metadata.issue_url === "string" && <> · <a href={metadata.issue_url}>Journal issue</a></>}
   {paper.source === "thoth" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher record</a></>}
   {typeof metadata.metadata_license === "string" && <> · <a href={metadata.metadata_license}>Catalogue metadata (CC0)</a></>}
   {workLicense && <> · <a href={workLicense}>License for the work</a></>}

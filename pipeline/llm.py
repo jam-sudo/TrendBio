@@ -223,7 +223,9 @@ class LLM:
             items='\n'.join(
                 f'{item.id} | {item.type} | {item.published_at} | {item.title} | {item.summary or ""}'
                 + (f'\nAbstract: {item.abstract}' if self.synthesis_guidance and item.abstract else '')
-                + (f"\n{item.metadata['publication_type']}. Evidence: {item.metadata['description_source']}."
+                + (f"\n{item.metadata['publication_type']}. Evidence: {item.metadata['description_source']}. "
+                   f"Credited contributors: {', '.join(item.authors)}. "
+                   f"Venue: {item.metadata.get('journal') or item.metadata.get('imprint')}. Issue: {item.metadata.get('issue') or 'unspecified'}."
                    if 'description_source' in item.metadata else '')
                 + (f"\nIndexed publication types: {', '.join(item.metadata.get('publication_types', []))}."
                    f" Linked corrections: {', '.join(item.metadata.get('correction_links', [])) or 'none listed'}."
@@ -237,7 +239,7 @@ class LLM:
         source = '\n'.join([
             signals.model_dump_json(), topic.label,
             *(text for item in items for text in (
-                item.title, item.published_at.isoformat(), item.summary or '', item.abstract,
+                item.title, item.published_at.isoformat(), item.summary or '', item.abstract, str(item.metadata.get('issue') or ''),
             )),
         ])
         arxiv_ids = {value.lower() for item in items if item.source == 'arxiv'

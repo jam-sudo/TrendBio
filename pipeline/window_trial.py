@@ -2,6 +2,7 @@
 from collections import Counter
 from datetime import timedelta
 
+from pipeline.collect import intake_status
 from pipeline.edition_audit import cluster_publication_windows
 from pipeline.dedupe import dedupe
 from pipeline.enrich import hints_for
@@ -26,7 +27,10 @@ def trial_records(domain, venues, start, end, client):
         records = []
         for source in (ArxivAdapter, CrossrefAdapter, DropsAdapter, OaiAdapter, EuropePmcAdapter, WorldBankAdapter, ThothAdapter, OpenEditionAdapter):
             if source.name in config:
-                records.extend(source(config).fetch(start, end, client))
+                adapter = source(config)
+                records.extend(adapter.fetch(start, end, client))
+                if intake_status(adapter) == 'partial':
+                    raise ValueError(f'Incomplete {adapter.name} publication date checks')
         for item in dedupe(records):
             kind = item.metadata.get('publication_type', 'Journal article') if domain == 'humanities-arts' else item.type
             yield item.id, item.published_at, item.title, item.abstract, kind, item.preprint_id, hints_for(item, config['hints'])

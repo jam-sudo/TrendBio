@@ -84,6 +84,15 @@ def test_native_publisher_date_wins_over_a_later_catalogue_date():
         assert status == 'eligible' and book.doi is None and book.metadata['date_evidence'] == landing
 
 
+def test_portuguese_title_and_brazilian_portuguese_description_share_a_language():
+    record = {**BOOK, 'titles': [{'localeCode': 'PT', 'canonical': True, 'fullTitle': 'Escritos'}],
+              'subjects': [{'subjectType': 'BIC', 'subjectCode': 'DS'}],
+              'abstracts': [{'localeCode': 'PT_BR', 'abstractType': 'LONG', 'content': 'Uma análise.'}]}
+    with httpx.Client(transport=httpx.MockTransport(lambda req: registry([{**REGISTERED, 'title': ['Escritos']}]))) as client:
+        book, status = ThothAdapter(load_config('humanities-arts')).book(record, DAY, DAY, client)
+        assert status == 'eligible' and book.abstract == 'Uma análise.' and book.metadata['abstract_language'] == 'pt'
+
+
 def test_transient_registry_outage_is_reported_and_other_books_survive(monkeypatch):
     def reply(req):
         if '9781805118688' in req.url.params['filter']:
@@ -108,6 +117,7 @@ def native_record(key, kind='article', issued='2026', platform='journals'):
     <originInfo><dateIssued>{issued}</dateIssued><dateOther type="published_on_openedition">{DAY}</dateOther></originInfo>
     <titleInfo><title>Écrits</title></titleInfo><titleInfo type="translated"><title xml:lang="en">Writings</title></titleInfo>
     <abstract type="summary" xml:lang="en">One argument.</abstract><abstract type="excerpt" xml:lang="fr">Extrait.</abstract>
+    <relatedItem type="host"><identifier type="hdl">20.500.13089/issue</identifier><part><detail type="volume"><number>30-3</number></detail></part></relatedItem>
     <name><namePart>A. Author</namePart><role><roleTerm>aut</roleTerm></role></name>
     <accessCondition type="license" valueURI="https://creativecommons.org/licenses/by-nc/4.0/"/>
     </mods></metadata></record>'''
@@ -131,6 +141,7 @@ def test_openedition_requires_scholarly_type_and_source_date_and_counts_a_volume
         article, book = adapter.fetch(DAY, DAY, client)
         assert article.metadata['original_title'] == 'Écrits' and article.metadata['abstract_language'] == 'en'
         assert article.metadata['date_basis'] == 'Online publication date'
+        assert article.metadata['issue'] == '30-3' and article.metadata['issue_url'] == 'https://hdl.handle.net/20.500.13089/issue'
         assert book.metadata['date_basis'] == 'Confirmed publication date' and book.metadata['metadata_license'] == CC0
         assert sorted(adapter.decisions.values()) == ['chapter', 'eligible', 'eligible', 'outside-window-or-backlist', 'review']
         monkeypatch.setattr('pipeline.window_trial.load_config', lambda domain: cfg)

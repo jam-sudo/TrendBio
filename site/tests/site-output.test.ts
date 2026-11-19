@@ -164,6 +164,30 @@ it("reads the counts and the four-week comparison in Korean", async () => {
   expect(await page.locator(".signal-line .sr-only").first().textContent()).toMatch(/순위 진입 \d+일 · 최고 \d+위 · 자료 \d+건 · 증가율 [\d.]+배/);
 });
 
+it("preserves original book titles and distinguishes catalogue and text rights in both languages", async () => {
+  const route = "/humanities-arts/day/2026-11-01/";
+  let englishLinks: string[] = [];
+  for (const [prefix, count, metadata, rights] of [
+    ["", "3 supporting works", "Catalogue metadata (CC0)", "License for the work"],
+    ["/ko", "근거 문헌 3건", "서지 정보 이용 조건(CC0)", "저작물 이용 조건"],
+  ]) {
+    await page.setContent(read((prefix + route).slice(1) + "index.html"));
+    const picker = page.locator(".pilot-fields");
+    await picker.locator("summary").click();
+    expect(await picker.locator('a[aria-current="true"]').getAttribute("href")).toBe(prefix + "/humanities-arts/");
+    const list = page.locator("ol.rankings");
+    expect(await list.locator("summary").textContent()).toBe(count);
+    expect(await list.getByText("Liederhandschriften").textContent()).toBe("Liederhandschriften");
+    expect(await list.locator("cite").textContent()).toBe("Chansons en manuscrit");
+    const book = list.locator("details ul > li").first();
+    expect(await book.getByRole("link", { name: metadata, includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/publicdomain/zero/1.0/");
+    expect(await book.getByRole("link", { name: rights, includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/licenses/by-nc/4.0/");
+    const links = await list.locator("a").evaluateAll(elements => elements.map(a => a.href));
+    if (prefix) expect(links).toEqual(englishLinks);
+    else englishLinks = links;
+  }
+});
+
 it("publishes a Korean topic map and a distinct valid Korean Atom feed", async () => {
   const map = JSON.parse(read("map.json"));
   const koMap = JSON.parse(read("ko/map.json"));

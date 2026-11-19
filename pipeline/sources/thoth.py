@@ -96,10 +96,14 @@ class ThothAdapter:
         originals = [t['localeCode'] for t in work['titles'] if t['canonical']]
         descriptions = {a['localeCode']: plain_text(a['content']) for a in sorted(work['abstracts'],
                         key=lambda a: a['abstractType'] == 'LONG') if a['abstractType'] in {'LONG', 'SHORT'} and a['content']}
-        lang = next((l for l in ['EN', *originals, *titles] if titles.get(l) and descriptions.get(l)), None)
+        for locale, description in list(descriptions.items()):
+            descriptions.setdefault(locale.split('_')[0], description)
+        lang = next((l for l in ['EN', *originals, *titles] if titles.get(l) and
+                     (descriptions.get(l) or descriptions.get(l.split('_')[0]))), None)
         authors = list(dict.fromkeys(c['fullName'] for c in work['contributions'] if c['fullName'] and c['contributionType'] in {'AUTHOR', 'EDITOR'}))
         if not lang or not authors:
             return None, 'missing-description-title-or-contributors'
+        abstract = descriptions.get(lang) or descriptions[lang.split('_')[0]]
         isbns = {normalized_isbn(p['isbn']) for p in work['publications']} - {''}
         doi = (work.get('doi') or '').lower().removeprefix('https://doi.org/')
         if doi and not re.fullmatch(r'10\.\d{4,9}/[^\s?#]+', doi):
@@ -111,7 +115,7 @@ class ThothAdapter:
         identifier = str(UUID(work['workId']))
         languages = [l['languageCode'].lower() for l in work['languages'] if l['languageRelation'] == 'ORIGINAL']
         return Item(id='thoth:' + identifier, source=self.name, type='published', doi=doi, published_doi=None,
-                    preprint_id=None, title=titles[lang], abstract=descriptions[lang], published_at=day, first_seen=end,
+                    preprint_id=None, title=titles[lang], abstract=abstract, published_at=day, first_seen=end,
                     authors=authors, org=None, primary_category=None, summary=None, url='https://thoth.pub/books/' + identifier,
                     metadata={'publication_type': 'Monograph' if work['workType'] == 'MONOGRAPH' else 'Edited book',
                               'imprint': work['imprint']['imprintName'], 'original_languages': languages,

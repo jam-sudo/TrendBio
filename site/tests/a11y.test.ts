@@ -61,7 +61,7 @@ describe("built site accessibility and responsive layout", () => {
       expect(response?.status()).toBe(200);
       await page.locator('input[type="search"]').waitFor({ state: "visible" });
       expect(await page.getByRole("search").count()).toBe(1);
-      if (path.startsWith("/week/")) await page.locator("details").evaluate(details => details.setAttribute("open", ""));
+      if (path.startsWith("/week/")) await page.locator("main details").evaluate(details => details.setAttribute("open", ""));
       const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
       console.log(`axe ${theme} ${path}: ${violations.length} wcag2a/wcag2aa violations`);
       expect(violations).toEqual([]);
@@ -138,7 +138,7 @@ describe("built site accessibility and responsive layout", () => {
   it("keeps weekly statistics visible and filters compact rows on mobile", async () => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(`http://127.0.0.1:${server!.port}/week/2026-W44/`);
-    await page.locator("details summary").click();
+    await page.locator("main details summary").click();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
     expect(await page.locator("details .stat-row").first().isVisible()).toBe(true);
     const chip = page.locator('[data-cat="tools-infra"]');
