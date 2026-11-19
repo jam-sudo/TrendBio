@@ -1,0 +1,45 @@
+{
+  "abstract": "Protein design campaigns are often run as multi-stage pipelines with a generative backbone model, an inverse-folding model, and a structure predictor chained together in that order. The stages differ by one to two orders of magnitude in cost per candidate, and the allocation of sampling effort across them is fixed before a campaign begins. Such a filter cascade can only discard candidates. It cannot redirect sampling toward the regions of design space a model stack can reach, and for targets whose constraints are far from the generative model's training distribution it may return no solution at any practical sample count. We present IMPRESS (Integrated Machine-learning for PRotein Structures at Scale), a framework in which design pipelines are stateful objects that halt, continue, resample, or branch at runtime from their own accumulated results. Adaptive decisions are evaluated asynchronously with respect to execution, so a campaign refines itself without global synchronization. We apply IMPRESS to three problems: backbone generation on discontinuous enzyme active-site motifs, de novo small molecule binder design, and PDZ binder redesign. Adaptive parameterization solves active-site motifs carried on three or more discontinuous residue islands that a fixed cascade does not solve, shifts the realized task mix toward inexpensive sequence exploration, and produces sequence ensembles that explore broadly but stay near their inputs. All comparisons reported here are between in silico metrics. We expect that adaptive parameterization will matter most for targets furthest from the training distributions of the underlying models, and that the same primitives will accommodate experimental measurement as a steering signal.",
+  "authors": [
+    "Khare, S.",
+    "Jha, S.",
+    "Hooten, M.",
+    "Liyanaarachchi, A.",
+    "Alsaadi, A.",
+    "Goliyad, M."
+  ],
+  "doi": "10.64898/2026.11.13.766417",
+  "first_seen": "2026-11-19",
+  "id": "biorxiv:10.64898/2026.11.13.766417",
+  "metadata": {
+    "abstract": "Protein design campaigns are often run as multi-stage pipelines with a generative backbone model, an inverse-folding model, and a structure predictor chained together in that order. The stages differ by one to two orders of magnitude in cost per candidate, and the allocation of sampling effort across them is fixed before a campaign begins. Such a filter cascade can only discard candidates. It cannot redirect sampling toward the regions of design space a model stack can reach, and for targets whose constraints are far from the generative model's training distribution it may return no solution at any practical sample count. We present IMPRESS (Integrated Machine-learning for PRotein Structures at Scale), a framework in which design pipelines are stateful objects that halt, continue, resample, or branch at runtime from their own accumulated results. Adaptive decisions are evaluated asynchronously with respect to execution, so a campaign refines itself without global synchronization. We apply IMPRESS to three problems: backbone generation on discontinuous enzyme active-site motifs, de novo small molecule binder design, and PDZ binder redesign. Adaptive parameterization solves active-site motifs carried on three or more discontinuous residue islands that a fixed cascade does not solve, shifts the realized task mix toward inexpensive sequence exploration, and produces sequence ensembles that explore broadly but stay near their inputs. All comparisons reported here are between in silico metrics. We expect that adaptive parameterization will matter most for targets furthest from the training distributions of the underlying models, and that the same primitives will accommodate experimental measurement as a steering signal.",
+    "author_corresponding": "Shantenu Jha",
+    "author_corresponding_institution": "Rutgers, the State University of New Jersey",
+    "authors": "Khare, S.; Jha, S.; Hooten, M.; Liyanaarachchi, A.; Alsaadi, A.; Goliyad, M.",
+    "biorxiv_category": "biochemistry",
+    "category": "biochemistry",
+    "date": "2026-11-17",
+    "doi": "10.64898/2026.11.13.766417",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/17/2026.11.13.766417.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "IMPRESS: AI-coupled HPC workflows for protein design",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Rutgers, the State University of New Jersey",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "molecular-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "IMPRESS is a framework making protein design pipelines adaptive at runtime, solving enzyme motifs a fixed cascade misses; comparisons are in silico only.",
+  "title": "IMPRESS: AI-coupled HPC workflows for protein design",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.13.766417"
+}

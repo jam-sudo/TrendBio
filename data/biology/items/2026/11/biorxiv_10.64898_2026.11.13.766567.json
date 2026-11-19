@@ -1,0 +1,41 @@
+{
+  "abstract": "Genomic sequence-to-function (S2F) models show promise for interpreting noncoding genetic variation, yet they currently underestimate the effects of most causal variants. This leads to fine-mapping failures that are reflected in their underperformance relative to linear baselines at predicting gene expression across individuals from personal genome sequences. Improving personal genome predictions, which reflect this underestimation, is therefore critical. There is broad interest in post-training S2F models to improve these predictions, yet many groups have shown that doing so with personal genome sequences and paired expression values does not meaningfully improve predictions on held-out genes and people (HOGP). Why these post-training efforts to improve predictions on HOGP, and therefore causal variant underestimation, remains unclear. To understand why, we introduce LAMP (Learning of Artificial Motif Perturbations), a framework in which artificial SNVs (aSNVs) perturbing transcription factor motifs are substituted into personal genome datasets genome-wide with large, consistent, and causal effects on gene expression. These aSNVs are designed to be deliberately easy to learn, yet fine-tuning Enformer using this LAMP framework led to persistent underperformance on HOGP, which suggests fundamental challenges for learning variant effects during post-training that are independent of the complexity of natural genetic variation. Our findings suggest this underperformance is caused in part due to challenges learning to strengthen enhancer-gene links during post-training. In particular, models struggle with learning to rewire attention weights to relate aSNV detection, over distance, to a change in expression of the target gene. This limitation is caused by strong pre-trained priors that downweight distal regulatory elements, causing extreme data inefficiency in learning to attend to distal elements, and variants within them, during post-training. Second, sequence variability between loci containing different instances of the same TF motif obscures otherwise easy-to-learn motif perturbation patterns and also hinder learning of variant effects. Our results suggest that the scale of observed human genetic variation is vastly insufficient to maximize S2F model accuracy on HOGP via simple fine-tuning, consistent with past outcomes. We propose data augmentation strategies that, under LAMP, significantly improve learning of aSNV effects by strategically targeting the limitations we identified. We release LAMP as a tool to troubleshoot and optimize future S2F post-training objectives.",
+  "authors": [
+    "Drusinsky, S.",
+    "Pollard, K. S."
+  ],
+  "doi": "10.64898/2026.11.13.766567",
+  "first_seen": "2026-11-19",
+  "id": "biorxiv:10.64898/2026.11.13.766567",
+  "metadata": {
+    "abstract": "Genomic sequence-to-function (S2F) models show promise for interpreting noncoding genetic variation, yet they currently underestimate the effects of most causal variants. This leads to fine-mapping failures that are reflected in their underperformance relative to linear baselines at predicting gene expression across individuals from personal genome sequences. Improving personal genome predictions, which reflect this underestimation, is therefore critical. There is broad interest in post-training S2F models to improve these predictions, yet many groups have shown that doing so with personal genome sequences and paired expression values does not meaningfully improve predictions on held-out genes and people (HOGP). Why these post-training efforts to improve predictions on HOGP, and therefore causal variant underestimation, remains unclear. To understand why, we introduce LAMP (Learning of Artificial Motif Perturbations), a framework in which artificial SNVs (aSNVs) perturbing transcription factor motifs are substituted into personal genome datasets genome-wide with large, consistent, and causal effects on gene expression. These aSNVs are designed to be deliberately easy to learn, yet fine-tuning Enformer using this LAMP framework led to persistent underperformance on HOGP, which suggests fundamental challenges for learning variant effects during post-training that are independent of the complexity of natural genetic variation. Our findings suggest this underperformance is caused in part due to challenges learning to strengthen enhancer-gene links during post-training. In particular, models struggle with learning to rewire attention weights to relate aSNV detection, over distance, to a change in expression of the target gene. This limitation is caused by strong pre-trained priors that downweight distal regulatory elements, causing extreme data inefficiency in learning to attend to distal elements, and variants within them, during post-training. Second, sequence variability between loci containing different instances of the same TF motif obscures otherwise easy-to-learn motif perturbation patterns and also hinder learning of variant effects. Our results suggest that the scale of observed human genetic variation is vastly insufficient to maximize S2F model accuracy on HOGP via simple fine-tuning, consistent with past outcomes. We propose data augmentation strategies that, under LAMP, significantly improve learning of aSNV effects by strategically targeting the limitations we identified. We release LAMP as a tool to troubleshoot and optimize future S2F post-training objectives.",
+    "author_corresponding": "Katherine S. Pollard",
+    "author_corresponding_institution": "Gladstone Institutes & UCSF",
+    "authors": "Drusinsky, S.; Pollard, K. S.",
+    "biorxiv_category": "genetics",
+    "category": "genetics",
+    "date": "2026-11-17",
+    "doi": "10.64898/2026.11.13.766567",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/17/2026.11.13.766567.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "LAMP sheds light on how sequence to function models learn variant effects during post-training",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Gladstone Institutes & UCSF",
+  "preprint_id": null,
+  "primary_category": "genetics",
+  "published_at": "2026-11-17",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "quantitative"
+  ],
+  "source": "biorxiv",
+  "summary": "LAMP framework tests why fine-tuning sequence-to-function models on personal genomes fails to improve gene expression prediction, linking it to distal…",
+  "title": "LAMP sheds light on how sequence to function models learn variant effects during post-training",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.13.766567"
+}

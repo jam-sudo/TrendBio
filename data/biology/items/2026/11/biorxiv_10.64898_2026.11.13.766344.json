@@ -1,0 +1,41 @@
+{
+  "abstract": "Functional annotation using protein language models (`pLMs') usually proceeds by transferring the function of a query's nearest neighbour in a reference database. A major drawback is that embedding-based annotation transfer has no null model, i.e. no accepted way to set a cosine-similarity threshold to control false positives. This contrasts with traditional bioinformatics methods, including sequence- and structure-based alignment tools, which rank hits with E-values derived from explicit null models. Here, we benchmark final-layer, mean-pooled embeddings from twelve models against MMseqs2 and Foldseek for remote-homology retrieval on curated datasets based on Swiss-Prot and SCOPe, fixing per-model thresholds at a 1% false-positive rate and probing the score with a ladder of synthetic decoys. On Swiss-Prot, pLMs without retrieval training recover at most 15% of remote homologs at this operating point, against 85% for MMseqs2, and for the ESM-2 and ESM-C families shuffled decoys have higher cosine similarities to their nearest database hits than real remote homologs do. These two pLM families exhibit extreme anisotropy, using fewer than 15 effective dimensions out of 640-2560, and low effective dimensionality is strongly associated with poor performance across models. Applying ZCA whitening, fit on the reference database, to the embeddings sharply raises threshold-free Top-1 superfamily retrieval, e.g. for ESM-2 650M from 59% to 88% on SCOPe, and generally improves remote homology sensitivity at a fixed false-positive rate. As correcting embedding anisotropy requires only the reference database and is compute cheap, it should be considered and tested for any pLM embedding-based annotation task.",
+  "authors": [
+    "Bouras, G.",
+    "Edwards, R. A."
+  ],
+  "doi": "10.64898/2026.11.13.766344",
+  "first_seen": "2026-11-19",
+  "id": "biorxiv:10.64898/2026.11.13.766344",
+  "metadata": {
+    "abstract": "Functional annotation using protein language models (`pLMs') usually proceeds by transferring the function of a query's nearest neighbour in a reference database. A major drawback is that embedding-based annotation transfer has no null model, i.e. no accepted way to set a cosine-similarity threshold to control false positives. This contrasts with traditional bioinformatics methods, including sequence- and structure-based alignment tools, which rank hits with E-values derived from explicit null models. Here, we benchmark final-layer, mean-pooled embeddings from twelve models against MMseqs2 and Foldseek for remote-homology retrieval on curated datasets based on Swiss-Prot and SCOPe, fixing per-model thresholds at a 1% false-positive rate and probing the score with a ladder of synthetic decoys. On Swiss-Prot, pLMs without retrieval training recover at most 15% of remote homologs at this operating point, against 85% for MMseqs2, and for the ESM-2 and ESM-C families shuffled decoys have higher cosine similarities to their nearest database hits than real remote homologs do. These two pLM families exhibit extreme anisotropy, using fewer than 15 effective dimensions out of 640-2560, and low effective dimensionality is strongly associated with poor performance across models. Applying ZCA whitening, fit on the reference database, to the embeddings sharply raises threshold-free Top-1 superfamily retrieval, e.g. for ESM-2 650M from 59% to 88% on SCOPe, and generally improves remote homology sensitivity at a fixed false-positive rate. As correcting embedding anisotropy requires only the reference database and is compute cheap, it should be considered and tested for any pLM embedding-based annotation task.",
+    "author_corresponding": "George Bouras",
+    "author_corresponding_institution": "Adelaide University",
+    "authors": "Bouras, G.; Edwards, R. A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-16",
+    "doi": "10.64898/2026.11.13.766344",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/16/2026.11.13.766344.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Know Thy Neighbour: Benchmarking Protein Language Model Embedding-Based Annotation Reveals Anisotropy Substantially Impacts Retrieval",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Adelaide University",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genetics"
+  ],
+  "source": "biorxiv",
+  "summary": "Benchmarks protein language model embeddings against MMseqs2 and Foldseek for remote-homology retrieval; finds anisotropy hurts performance and ZCA whitening…",
+  "title": "Know Thy Neighbour: Benchmarking Protein Language Model Embedding-Based Annotation Reveals Anisotropy Substantially Impacts Retrieval",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.13.766344"
+}

@@ -1,0 +1,45 @@
+{
+  "abstract": "The baseline regime of a neural circuit shapes its dynamical behavior. Establishing an appropriate baseline is therefore an important part of tuning a computational circuit model. This baseline can be specified in terms of target population firing rates and achieved by adjusting the background inputs to each population. Due to recurrent coupling, these inputs need to be tuned jointly, requiring a high-dimensional search that is especially costly for biophysically detailed circuit models. This remains a major bottleneck since current optimization methods are limited in their ability to tackle this problem. Decoupling the circuit by removing all the connections between its cells allows background inputs to be tuned independently, but the solution may not hold when the connectivity is restored. We developed a compensated decoupling method in which missing recurrent inputs are replaced by surrogate inputs from spike generators firing at the corresponding target rates. The resulting input approximates the recurrent drive expected at the target regime, so the background inputs tuned in this setup may remain valid after restoring connectivity. We applied the method to a 43-population biophysically detailed model of the macaque auditory thalamocortical circuit, which had previously proved challenging to fit closely to experimental data. First, we tuned the background input independently for each population in the fully decoupled setup. Next, we tested the solution in the isolated cortical and thalamic subcircuits, preserving recurrent connections within each subcircuit. The cortical subcircuit had two coexisting regimes and settled into the off-target one by default. A gradual transition from surrogate to recurrent self-excitation allowed it to reach the near-target regime. The thalamic subcircuit exhibited a single regime deviating from the target due to imperfect surrogate compensation. Jointly tuning a separate tonic input correction for each thalamic population substantially reduced the errors. Finally, we tested the solution in the full thalamocortical circuit, combining the tuned background inputs, thalamic corrections, and gradual restoration of self-excitation. The full circuit consistently reached a near-target regime across multiple random model realizations. The approach yielded an improved macaque auditory thalamocortical baseline model, providing a community resource for investigating the auditory thalamocortical system's dynamics. Together, the results demonstrate that our method can facilitate baseline tuning in a biophysically detailed model by enabling decoupled optimization and guiding subsequent refinement.",
+  "authors": [
+    "Novikov, N.",
+    "McElroy, S.",
+    "Chen, J.",
+    "Irby, E.",
+    "Dura-Bernal, S.",
+    "Neymotin, S. A."
+  ],
+  "doi": "10.64898/2026.11.13.766494",
+  "first_seen": "2026-11-19",
+  "id": "biorxiv:10.64898/2026.11.13.766494",
+  "metadata": {
+    "abstract": "The baseline regime of a neural circuit shapes its dynamical behavior. Establishing an appropriate baseline is therefore an important part of tuning a computational circuit model. This baseline can be specified in terms of target population firing rates and achieved by adjusting the background inputs to each population. Due to recurrent coupling, these inputs need to be tuned jointly, requiring a high-dimensional search that is especially costly for biophysically detailed circuit models. This remains a major bottleneck since current optimization methods are limited in their ability to tackle this problem. Decoupling the circuit by removing all the connections between its cells allows background inputs to be tuned independently, but the solution may not hold when the connectivity is restored. We developed a compensated decoupling method in which missing recurrent inputs are replaced by surrogate inputs from spike generators firing at the corresponding target rates. The resulting input approximates the recurrent drive expected at the target regime, so the background inputs tuned in this setup may remain valid after restoring connectivity. We applied the method to a 43-population biophysically detailed model of the macaque auditory thalamocortical circuit, which had previously proved challenging to fit closely to experimental data. First, we tuned the background input independently for each population in the fully decoupled setup. Next, we tested the solution in the isolated cortical and thalamic subcircuits, preserving recurrent connections within each subcircuit. The cortical subcircuit had two coexisting regimes and settled into the off-target one by default. A gradual transition from surrogate to recurrent self-excitation allowed it to reach the near-target regime. The thalamic subcircuit exhibited a single regime deviating from the target due to imperfect surrogate compensation. Jointly tuning a separate tonic input correction for each thalamic population substantially reduced the errors. Finally, we tested the solution in the full thalamocortical circuit, combining the tuned background inputs, thalamic corrections, and gradual restoration of self-excitation. The full circuit consistently reached a near-target regime across multiple random model realizations. The approach yielded an improved macaque auditory thalamocortical baseline model, providing a community resource for investigating the auditory thalamocortical system's dynamics. Together, the results demonstrate that our method can facilitate baseline tuning in a biophysically detailed model by enabling decoupled optimization and guiding subsequent refinement.",
+    "author_corresponding": "Nikita Novikov",
+    "author_corresponding_institution": "Center for Biomedical Imaging and Neuromodulation, Nathan Kline Institute for Psychiatric Research, Orangeburg, NY, USA",
+    "authors": "Novikov, N.; McElroy, S.; Chen, J.; Irby, E.; Dura-Bernal, S.; Neymotin, S. A.",
+    "biorxiv_category": "neuroscience",
+    "category": "neuroscience",
+    "date": "2026-11-16",
+    "doi": "10.64898/2026.11.13.766494",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/16/2026.11.13.766494.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Circuit decoupling with surrogate compensation for baseline tuning in biophysically detailed neural models",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Center for Biomedical Imaging and Neuromodulation, Nathan Kline Institute for Psychiatric Research, Orangeburg, NY, USA",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-16",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "neuroscience"
+  ],
+  "source": "biorxiv",
+  "summary": "Introduces compensated decoupling with surrogate inputs to tune background inputs in a 43-population biophysical macaque auditory thalamocortical circuit model.",
+  "title": "Circuit decoupling with surrogate compensation for baseline tuning in biophysically detailed neural models",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.13.766494"
+}
