@@ -36,7 +36,7 @@ The first build that encounters new text downloads and verifies the original mod
 
 Configure the `ANTHROPIC_API_KEY` Actions secret and optionally `NCBI_API_KEY`;
 Actions supplies `GITHUB_TOKEN`. Keep keys out of committed files.
-The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs private pilots in Math & Stats, Earth observations, Chemistry, stellar and galactic astronomy, and Computing & Information. It has read-only repository access. Each artifact contains the dated rank, source records, review decisions and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. Build the site with `TRENDBIO_DATA_ROOT` pointing at the folder containing the downloaded domain to preview the corresponding English and Korean editions. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)
+The daily workflow accepts a field, an optional `date` and a `dry_run` switch. An independent manual workflow runs private pilots in Math & Stats, Earth observations, Chemistry, stellar and galactic astronomy, Computing & Information, Engineering, and Agriculture, Food & Veterinary Science. It has read-only repository access. Each artifact contains the dated rank, source records, review decisions and the model usage ledger. Select `audit` with a previous run ID for a review without model calls. Build the site with `TRENDBIO_DATA_ROOT` pointing at the folder containing the downloaded domain to preview the corresponding English and Korean editions. The two public beta audits accumulate the first 14 live dates under `data/<domain>/audits/first-14.json`. [Field pilot workflow](../.github/workflows/field-pilot.yml)
 
 Use these commands from the repository root to reproduce the metadata and window comparisons. The window trial embeds titles and abstracts locally. The seven-day and 28-day results count candidate groups before editorial screening.
 
@@ -45,8 +45,12 @@ python -m pipeline survey --domain chemistry --to 2026-11-18
 python -m pipeline trial-windows --domain humanities-arts --to 2026-11-18
 python -m pipeline trial-windows --domain astronomy --to 2026-11-18
 python -m pipeline trial-windows --domain computer-information --to 2026-11-18
+python -m pipeline trial-windows --domain engineering --to 2026-11-18
+python -m pipeline trial-windows --domain agriculture-food-veterinary --to 2026-11-18
 python -m pipeline audit-beta --domain biology --to 2026-11-19
 ```
+
+Agricultural publisher records keep the publication date, DOI, original language and the language of the author-supplied abstract. The collector checks reuse terms as of the edition date. Three Czech journals also supply missing abstracts on article pages matched by DOI, ISSN and date. [Coverage and historical edition checks](expansion-measurements/2026-11-19/applied-pilots.json)
 
 The pilots partition every candidate into specific shared research problems or phenomena. An exact source passage supports each assignment. Groups meeting the configured minimum enter the shared ranking. The dated audit records smaller groups and review failures separately. To measure the cost of the next edition, use `rank` with the previous UTC day's pilot run ID. This restores the item cache and ledger before collecting the next day's papers. Use `rerank` to reassess the same edition. Earth and Chemistry each sample five journals and admit records with an exact date, an abstract and a current CC BY version-of-record licence. Earth also links confirmed DataCite datasets. The chemistry source survey counts ChemRxiv revisions and journal links separately. [Measured pilot coverage](science-expansion-plan.ko.md)
 

@@ -28,7 +28,7 @@ All Biology (beta) at `/biology/` has its own daily rankings, dated editions and
 
 The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes each edition independently and writes Physics results to `data/physics/`.
 
-The private Field pilot workflow covers Math & Stats, Earth & Environment, Chemistry, stellar and galactic astronomy, and Computing & Information. Each run stores its ranked topics, evidence, editorial checks and model spend in an isolated artifact. Point the site build at a pilot data root to preview its dated editions in English and Korean. Both languages render the same stored ranking. [English roadmap](docs/science-expansion-plan.en.md) · [한국어 확장 계획](docs/science-expansion-plan.ko.md)
+The private Field pilot workflow covers Math & Stats, Earth & Environment, Chemistry, stellar and galactic astronomy, Computing & Information, Engineering, and Agriculture, Food & Veterinary Science. Each run stores its ranked topics, evidence, editorial checks and model spend in an isolated artifact. Point the site build at a pilot data root to preview its dated editions in English and Korean. Both languages render the same stored ranking. [English roadmap](docs/science-expansion-plan.en.md) · [한국어 확장 계획](docs/science-expansion-plan.ko.md)
 
 ## How a day is made
 
