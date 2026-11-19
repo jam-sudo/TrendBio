@@ -11,7 +11,7 @@ from pipeline.sources.crossref import CrossrefAdapter, crossref_works, full_date
 from pipeline.sources.drops import DropsAdapter
 
 
-PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information'}
+PILOT_DOMAINS = {'earth-environment', 'math', 'chemistry', 'astronomy', 'computer-information', 'engineering'}
 
 
 def trial_records(domain, venues, start, end, client):

@@ -8,6 +8,7 @@ export const editionInfo = {
   chemistry: { label: "Chemistry", source: "five chemistry journals via Crossref", stage: "Pilot" },
   astronomy: { label: "Stellar & Galactic Astronomy", source: "arXiv", stage: "Pilot" },
   "computer-information": { label: "Computing & Information", source: "arXiv, DROPS and Crossref", stage: "Pilot" },
+  engineering: { label: "Engineering", source: "arXiv and five engineering journals via Crossref", stage: "Pilot" },
 } as const;
 export type Edition = keyof typeof editionInfo;
 export const editions = (Object.keys(editionInfo) as Edition[]).filter(field =>
