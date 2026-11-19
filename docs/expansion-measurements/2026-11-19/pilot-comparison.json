@@ -1,0 +1,2852 @@
+{
+  "measurement": "Retrospective edition replays executed 2026-11-19 UTC. The 11/04 empty stores and 11/05 next-day stores use separate recomputed windows. Same-date reranks use previous pilot artifacts. Amounts are USD from model token ledgers at repository pricing, excluding CI and infrastructure. Later metadata revisions may be present.",
+  "sampling": {
+    "math": "Public October and November arXiv listings for math.NT, math.NA and stat.ME, separate from the ingest API. Per listing sample five by SHA-256(ID) from the last fifth of October, first third or last half of November. Read each v1 abstract page for submission day and apply the seven-day window. Listed categories may include cross-listings. There were 45 unique v1 pages in the sample.",
+    "earth-environment": "All DOIs in the five Copernicus journal volume tables for the exact seven publication days. Empty journal windows contribute zero.",
+    "chemistry": "All Europe PMC DOI records returned by ISSN and FIRST_PDATE for the window. Compare by DOI to the restricted Crossref collection; index publication dates and licence/abstract availability differ. Store and rank totals use all DOI references; show up to five DOI examples per journal in hash order."
+  },
+  "total_new_incremental_model_usd": 0.77512,
+  "runs": {
+    "math_recheck": {
+      "domain": "math",
+      "date": "2026-11-19",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44591829045",
+      "previous_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44587708910",
+      "window_publications": 382,
+      "first_seen_on_edition": 382,
+      "relevant": 378,
+      "ranked": 6,
+      "status": "degraded",
+      "source_status": {
+        "arxiv": "ok"
+      },
+      "run_notes": {
+        "cohesion-review-failed": 2,
+        "enrichment-fallback": 3
+      },
+      "cohesion": {
+        "candidates": 41,
+        "failures": 2,
+        "qualified_groups": 6,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 132,
+          "review-failed": 6
+        }
+      },
+      "ledger_usd": 1.2022203,
+      "incremental_usd": 0.174712,
+      "elapsed_seconds": 276.768161,
+      "sample_acquisition": {
+        "math.NA": {
+          "references": 3,
+          "stored": 3,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "math.NT": {
+          "references": 4,
+          "stored": 4,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "stat.ME": {
+          "references": 2,
+          "stored": 2,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.23172",
+          "source": "math.NT",
+          "submitted": "2026-11-17",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.18129",
+          "source": "math.NT",
+          "submitted": "2026-11-13",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.20548",
+          "source": "math.NT",
+          "submitted": "2026-11-16",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.19383",
+          "source": "math.NT",
+          "submitted": "2026-11-14",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.20134",
+          "source": "math.NA",
+          "submitted": "2026-11-15",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.19792",
+          "source": "math.NA",
+          "submitted": "2026-11-15",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.19235",
+          "source": "math.NA",
+          "submitted": "2026-11-14",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.21939",
+          "source": "stat.ME",
+          "submitted": "2026-11-16",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "arxiv:2611.18225",
+          "source": "stat.ME",
+          "submitted": "2026-11-13",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "0ac86cb420b465c9e0fe954fda3dc11429c7c6a2",
+      "new_item_ids_vs_restored_store": 0,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 114390,
+          "output_tokens": 21394
+        },
+        "claude-opus-5-5": {
+          "input_tokens": 13831,
+          "output_tokens": 4353
+        },
+        "claude-sonnet-5-5": {
+          "input_tokens": 2766,
+          "output_tokens": 466
+        }
+      }
+    },
+    "earth_recheck": {
+      "domain": "earth-environment",
+      "date": "2026-11-19",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44591833018",
+      "previous_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44588806160",
+      "window_publications": 40,
+      "first_seen_on_edition": 40,
+      "relevant": 40,
+      "ranked": 0,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok"
+      },
+      "run_notes": {
+        "enrichment-fallback": 1
+      },
+      "cohesion": {
+        "candidates": 5,
+        "failures": 0,
+        "qualified_groups": 0,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 20
+        }
+      },
+      "ledger_usd": 0.1727492,
+      "incremental_usd": 0.0040884,
+      "elapsed_seconds": 57.009252,
+      "sample_acquisition": {
+        "acp": {
+          "references": 21,
+          "stored": 21,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "cp": {
+          "references": 3,
+          "stored": 3,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "essd": {
+          "references": 10,
+          "stored": 10,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "os": {
+          "references": 4,
+          "stored": 4,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "se": {
+          "references": 2,
+          "stored": 2,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/se-17-1271-2026",
+          "source": "se",
+          "listing": "https://se.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/se-17-1325-2026",
+          "source": "se",
+          "listing": "https://se.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16067-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16101-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16125-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16151-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16173-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16203-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16225-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16247-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16261-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16295-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16309-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16325-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16341-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16373-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16389-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16415-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16441-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16465-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16477-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16501-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/acp-26-16521-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/os-22-3693-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/os-22-3723-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/os-22-3747-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/os-22-3771-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/cp-22-2031-2026",
+          "source": "cp",
+          "listing": "https://cp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/cp-22-2045-2026",
+          "source": "cp",
+          "listing": "https://cp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/cp-22-2067-2026",
+          "source": "cp",
+          "listing": "https://cp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8311-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8329-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8345-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8361-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8377-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8407-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8441-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8471-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8497-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-19",
+          "id": "10.5194/essd-18-8537-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "0ac86cb420b465c9e0fe954fda3dc11429c7c6a2",
+      "new_item_ids_vs_restored_store": 0,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 18594,
+          "output_tokens": 4458
+        }
+      }
+    },
+    "math_cold": {
+      "domain": "math",
+      "date": "2026-11-04",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44591837766",
+      "previous_run": null,
+      "window_publications": 559,
+      "first_seen_on_edition": 559,
+      "relevant": 551,
+      "ranked": 9,
+      "status": "degraded",
+      "source_status": {
+        "arxiv": "ok"
+      },
+      "run_notes": {
+        "cohesion-review-failed": 4,
+        "enrichment-fallback": 3
+      },
+      "cohesion": {
+        "candidates": 73,
+        "failures": 4,
+        "qualified_groups": 9,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 251,
+          "review-failed": 17
+        }
+      },
+      "ledger_usd": 0.3436795,
+      "incremental_usd": 0.3436795,
+      "elapsed_seconds": 441.108995,
+      "sample_acquisition": {
+        "math.NA": {
+          "references": 8,
+          "stored": 8,
+          "clustered": 1,
+          "ranked": 1
+        },
+        "math.NT": {
+          "references": 7,
+          "stored": 7,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "stat.ME": {
+          "references": 6,
+          "stored": 6,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40439",
+          "source": "math.NT",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NT/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40152",
+          "source": "math.NT",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NT/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.39315",
+          "source": "math.NT",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NT/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40528",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40313",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.39901",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.39537",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.41886",
+          "source": "stat.ME",
+          "submitted": "2026-10-30",
+          "listing": "https://arxiv.org/list/stat.ME/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02331",
+          "source": "math.NT",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.01291",
+          "source": "math.NT",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.00693",
+          "source": "math.NT",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.04575",
+          "source": "math.NT",
+          "submitted": "2026-11-03",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02994",
+          "source": "math.NA",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02143",
+          "source": "math.NA",
+          "submitted": "2026-11-01",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.05837",
+          "source": "math.NA",
+          "submitted": "2026-11-04",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.00552",
+          "source": "math.NA",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": true,
+          "ranked": true
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.01030",
+          "source": "stat.ME",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02432",
+          "source": "stat.ME",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.03608",
+          "source": "stat.ME",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.06376",
+          "source": "stat.ME",
+          "submitted": "2026-11-04",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.00760",
+          "source": "stat.ME",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "0ac86cb420b465c9e0fe954fda3dc11429c7c6a2",
+      "new_item_ids_vs_restored_store": 559,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 976970,
+          "output_tokens": 108005
+        },
+        "claude-opus-5-5": {
+          "input_tokens": 14111,
+          "output_tokens": 4807
+        },
+        "claude-sonnet-5-5": {
+          "input_tokens": 10473,
+          "output_tokens": 1845
+        }
+      }
+    },
+    "earth_cold": {
+      "domain": "earth-environment",
+      "date": "2026-11-04",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44591843822",
+      "previous_run": null,
+      "window_publications": 33,
+      "first_seen_on_edition": 33,
+      "relevant": 33,
+      "ranked": 1,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok"
+      },
+      "run_notes": {},
+      "cohesion": {
+        "candidates": 4,
+        "failures": 0,
+        "qualified_groups": 1,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 11
+        }
+      },
+      "ledger_usd": 0.0349439,
+      "incremental_usd": 0.0349439,
+      "elapsed_seconds": 47.25883,
+      "sample_acquisition": {
+        "acp": {
+          "references": 17,
+          "stored": 17,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "essd": {
+          "references": 10,
+          "stored": 10,
+          "clustered": 3,
+          "ranked": 3
+        },
+        "os": {
+          "references": 4,
+          "stored": 4,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "se": {
+          "references": 2,
+          "stored": 2,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/se-17-1219-2026",
+          "source": "se",
+          "listing": "https://se.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/se-17-1239-2026",
+          "source": "se",
+          "listing": "https://se.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15179-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15201-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15223-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15257-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15273-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15291-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15309-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15333-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15349-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15375-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15405-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15423-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15445-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15461-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15479-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15495-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/acp-26-15523-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/os-22-3499-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/os-22-3521-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/os-22-3537-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/os-22-3567-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7787-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7817-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": true,
+          "ranked": true
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7839-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": true,
+          "ranked": true
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7861-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7883-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7915-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7941-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7963-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": true,
+          "ranked": true
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-7981-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.5194/essd-18-8003-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "0ac86cb420b465c9e0fe954fda3dc11429c7c6a2",
+      "new_item_ids_vs_restored_store": 33,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 68144,
+          "output_tokens": 6251
+        },
+        "claude-opus-5-5": {
+          "input_tokens": 3691,
+          "output_tokens": 512
+        }
+      }
+    },
+    "chemistry_cold": {
+      "domain": "chemistry",
+      "date": "2026-11-04",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44593950234",
+      "previous_run": null,
+      "window_publications": 48,
+      "first_seen_on_edition": 48,
+      "relevant": 47,
+      "ranked": 0,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok"
+      },
+      "run_notes": {},
+      "cohesion": {
+        "candidates": 2,
+        "failures": 0,
+        "qualified_groups": 0,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 6
+        }
+      },
+      "ledger_usd": 0.0117001,
+      "incremental_usd": 0.0117001,
+      "elapsed_seconds": 47.116238,
+      "sample_acquisition": {
+        "0002-7863": {
+          "references": 212,
+          "stored": 8,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "0003-2700": {
+          "references": 318,
+          "stored": 9,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "0020-1669": {
+          "references": 147,
+          "stored": 7,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "1089-5639": {
+          "references": 44,
+          "stored": 4,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "1860-5397": {
+          "references": 5,
+          "stored": 5,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/jacs.6c16762",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/jacs.6c17884",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/jacs.6c12396",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/jacs.6c17339",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/jacs.6c14863",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.analchem.6c04943",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.analchem.6c05521",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.analchem.6c05269",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.analchem.6c05973",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.analchem.6c05101",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.inorgchem.6c04142",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.inorgchem.6c03730",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.inorgchem.6c04188",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.inorgchem.6c03876",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.inorgchem.6c03776",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.jpca.6c06053",
+          "source": "1089-5639",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.jpca.6c05082",
+          "source": "1089-5639",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.jpca.6c05120",
+          "source": "1089-5639",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.jpca.6c03932",
+          "source": "1089-5639",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.1021/acs.jpca.6c04773",
+          "source": "1089-5639",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.3762/bjoc.22.124",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.3762/bjoc.22.125",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.3762/bjoc.22.126",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.3762/bjoc.22.123",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "10.3762/bjoc.22.122",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "eae8d683703a9d926e8c8a95a55cfe27554ef789",
+      "new_item_ids_vs_restored_store": 48,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 74416,
+          "output_tokens": 8517
+        }
+      }
+    },
+    "math_next": {
+      "domain": "math",
+      "date": "2026-11-05",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44593698826",
+      "previous_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44591837766",
+      "window_publications": 513,
+      "first_seen_on_edition": 65,
+      "relevant": 507,
+      "ranked": 7,
+      "status": "degraded",
+      "source_status": {
+        "arxiv": "ok"
+      },
+      "run_notes": {
+        "cohesion-review-failed": 2
+      },
+      "cohesion": {
+        "candidates": 61,
+        "failures": 2,
+        "qualified_groups": 7,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 217,
+          "review-failed": 16
+        }
+      },
+      "ledger_usd": 0.5426675,
+      "incremental_usd": 0.198988,
+      "elapsed_seconds": 90.240385,
+      "sample_acquisition": {
+        "math.NA": {
+          "references": 4,
+          "stored": 4,
+          "clustered": 1,
+          "ranked": 1
+        },
+        "math.NT": {
+          "references": 5,
+          "stored": 5,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "stat.ME": {
+          "references": 6,
+          "stored": 6,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2610.41886",
+          "source": "stat.ME",
+          "submitted": "2026-10-30",
+          "listing": "https://arxiv.org/list/stat.ME/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.02331",
+          "source": "math.NT",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.01291",
+          "source": "math.NT",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.00693",
+          "source": "math.NT",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.07625",
+          "source": "math.NT",
+          "submitted": "2026-11-05",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.04575",
+          "source": "math.NT",
+          "submitted": "2026-11-03",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.02994",
+          "source": "math.NA",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.02143",
+          "source": "math.NA",
+          "submitted": "2026-11-01",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.05837",
+          "source": "math.NA",
+          "submitted": "2026-11-04",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.00552",
+          "source": "math.NA",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": true,
+          "ranked": true
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.01030",
+          "source": "stat.ME",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.02432",
+          "source": "stat.ME",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.03608",
+          "source": "stat.ME",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.06376",
+          "source": "stat.ME",
+          "submitted": "2026-11-04",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "arxiv:2611.00760",
+          "source": "stat.ME",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "0ac86cb420b465c9e0fe954fda3dc11429c7c6a2",
+      "new_item_ids_vs_restored_store": 65,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 230475,
+          "output_tokens": 37105
+        },
+        "claude-opus-5-5": {
+          "input_tokens": 15402,
+          "output_tokens": 3254
+        },
+        "claude-sonnet-5-5": {
+          "input_tokens": 6370,
+          "output_tokens": 1796
+        }
+      }
+    },
+    "earth_next": {
+      "domain": "earth-environment",
+      "date": "2026-11-05",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44592508447",
+      "previous_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44591843822",
+      "window_publications": 28,
+      "first_seen_on_edition": 7,
+      "relevant": 28,
+      "ranked": 0,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok"
+      },
+      "run_notes": {
+        "enrichment-fallback": 1
+      },
+      "cohesion": {
+        "candidates": 2,
+        "failures": 0,
+        "qualified_groups": 0,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 6
+        }
+      },
+      "ledger_usd": 0.0369356,
+      "incremental_usd": 0.0019917,
+      "elapsed_seconds": 11.149402,
+      "sample_acquisition": {
+        "acp": {
+          "references": 15,
+          "stored": 15,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "cp": {
+          "references": 1,
+          "stored": 1,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "essd": {
+          "references": 7,
+          "stored": 7,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "os": {
+          "references": 3,
+          "stored": 3,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "se": {
+          "references": 2,
+          "stored": 2,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/se-17-1219-2026",
+          "source": "se",
+          "listing": "https://se.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/se-17-1239-2026",
+          "source": "se",
+          "listing": "https://se.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15309-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15333-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15349-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15375-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15405-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15423-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15445-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15461-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15479-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15495-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15523-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15543-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15563-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15583-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/acp-26-15593-2026",
+          "source": "acp",
+          "listing": "https://acp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/os-22-3521-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/os-22-3537-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/os-22-3567-2026",
+          "source": "os",
+          "listing": "https://os.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/cp-22-1941-2026",
+          "source": "cp",
+          "listing": "https://cp.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/essd-18-7915-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/essd-18-7941-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/essd-18-7963-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/essd-18-7981-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/essd-18-8003-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/essd-18-8107-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.5194/essd-18-8129-2026",
+          "source": "essd",
+          "listing": "https://essd.copernicus.org/articles/",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "0ac86cb420b465c9e0fe954fda3dc11429c7c6a2",
+      "new_item_ids_vs_restored_store": 7,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 14032,
+          "output_tokens": 1177
+        }
+      }
+    },
+    "chemistry_next": {
+      "domain": "chemistry",
+      "date": "2026-11-05",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44594657569",
+      "previous_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44593950234",
+      "window_publications": 46,
+      "first_seen_on_edition": 8,
+      "relevant": 43,
+      "ranked": 0,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok"
+      },
+      "run_notes": {},
+      "cohesion": {
+        "candidates": 2,
+        "failures": 0,
+        "qualified_groups": 0,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 7
+        }
+      },
+      "ledger_usd": 0.0144327,
+      "incremental_usd": 0.0027326,
+      "elapsed_seconds": 14.316818,
+      "sample_acquisition": {
+        "0002-7863": {
+          "references": 215,
+          "stored": 4,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "0003-2700": {
+          "references": 318,
+          "stored": 9,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "0020-1669": {
+          "references": 147,
+          "stored": 6,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "1089-5639": {
+          "references": 44,
+          "stored": 2,
+          "clustered": 0,
+          "ranked": 0
+        },
+        "1860-5397": {
+          "references": 6,
+          "stored": 6,
+          "clustered": 0,
+          "ranked": 0
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/jacs.6c16762",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/jacs.6c17884",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/jacs.6c12396",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/jacs.6c17339",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/jacs.6c14863",
+          "source": "0002-7863",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.analchem.6c04943",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.analchem.6c05521",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.analchem.6c05269",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.analchem.6c05973",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.analchem.6c05101",
+          "source": "0003-2700",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.inorgchem.6c04142",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.inorgchem.6c03730",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.inorgchem.6c04188",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.inorgchem.6c03876",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.inorgchem.6c03776",
+          "source": "0020-1669",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.jpca.6c06053",
+          "source": "1089-5639",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.jpca.6c05082",
+          "source": "1089-5639",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.jpca.6c05120",
+          "source": "1089-5639",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.jpca.6c03932",
+          "source": "1089-5639",
+          "stored": false,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.1021/acs.jpca.6c04773",
+          "source": "1089-5639",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.3762/bjoc.22.124",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.3762/bjoc.22.128",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.3762/bjoc.22.125",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.3762/bjoc.22.126",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-05",
+          "id": "10.3762/bjoc.22.123",
+          "source": "1860-5397",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "eae8d683703a9d926e8c8a95a55cfe27554ef789",
+      "new_item_ids_vs_restored_store": 8,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 14126,
+          "output_tokens": 2640
+        }
+      }
+    },
+    "math_quote_recheck": {
+      "domain": "math",
+      "date": "2026-11-04",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44595121475",
+      "previous_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44591837766",
+      "window_publications": 559,
+      "first_seen_on_edition": 559,
+      "relevant": 551,
+      "ranked": 9,
+      "status": "ok",
+      "source_status": {
+        "arxiv": "ok"
+      },
+      "run_notes": {
+        "enrichment-fallback": 3
+      },
+      "cohesion": {
+        "candidates": 73,
+        "failures": 0,
+        "qualified_groups": 9,
+        "excluded_papers": {
+          "below-minimum-reviewed-group": 268
+        }
+      },
+      "ledger_usd": 0.3459633,
+      "incremental_usd": 0.0022838,
+      "elapsed_seconds": 441.108995,
+      "sample_acquisition": {
+        "math.NA": {
+          "stored": 8,
+          "clustered": 1,
+          "ranked": 1,
+          "references": 8
+        },
+        "math.NT": {
+          "stored": 7,
+          "clustered": 0,
+          "ranked": 0,
+          "references": 7
+        },
+        "stat.ME": {
+          "stored": 6,
+          "clustered": 0,
+          "ranked": 0,
+          "references": 6
+        }
+      },
+      "reference_results": [
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40439",
+          "source": "math.NT",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NT/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40152",
+          "source": "math.NT",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NT/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.39315",
+          "source": "math.NT",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NT/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40528",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.40313",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.39901",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.39537",
+          "source": "math.NA",
+          "submitted": "2026-10-29",
+          "listing": "https://arxiv.org/list/math.NA/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2610.41886",
+          "source": "stat.ME",
+          "submitted": "2026-10-30",
+          "listing": "https://arxiv.org/list/stat.ME/2026-10?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02331",
+          "source": "math.NT",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.01291",
+          "source": "math.NT",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.00693",
+          "source": "math.NT",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.04575",
+          "source": "math.NT",
+          "submitted": "2026-11-03",
+          "listing": "https://arxiv.org/list/math.NT/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02994",
+          "source": "math.NA",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02143",
+          "source": "math.NA",
+          "submitted": "2026-11-01",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.05837",
+          "source": "math.NA",
+          "submitted": "2026-11-04",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.00552",
+          "source": "math.NA",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/math.NA/2026-11?show=2000",
+          "stored": true,
+          "clustered": true,
+          "ranked": true
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.01030",
+          "source": "stat.ME",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.02432",
+          "source": "stat.ME",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.03608",
+          "source": "stat.ME",
+          "submitted": "2026-11-02",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.06376",
+          "source": "stat.ME",
+          "submitted": "2026-11-04",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        },
+        {
+          "date": "2026-11-04",
+          "id": "arxiv:2611.00760",
+          "source": "stat.ME",
+          "submitted": "2026-10-31",
+          "listing": "https://arxiv.org/list/stat.ME/2026-11?show=2000",
+          "stored": true,
+          "clustered": false,
+          "ranked": false
+        }
+      ],
+      "commit": "eae8d683703a9d926e8c8a95a55cfe27554ef789",
+      "new_item_ids_vs_restored_store": 0,
+      "model_tokens_incremental": {
+        "claude-haiku-5-5": {
+          "input_tokens": 11888,
+          "output_tokens": 2190
+        }
+      }
+    }
+  },
+  "chemistry_external_index": {
+    "2026-11-04": {
+      "1860-5397": {
+        "references": 5,
+        "doi_references": 5,
+        "exact_date_intersection": 5,
+        "eligible_intersection": 5,
+        "eligible_crossref": 5,
+        "found_only_by_crossref": 0
+      },
+      "0020-1669": {
+        "references": 147,
+        "doi_references": 147,
+        "exact_date_intersection": 47,
+        "eligible_intersection": 7,
+        "eligible_crossref": 7,
+        "found_only_by_crossref": 0
+      },
+      "1089-5639": {
+        "references": 44,
+        "doi_references": 44,
+        "exact_date_intersection": 17,
+        "eligible_intersection": 4,
+        "eligible_crossref": 7,
+        "found_only_by_crossref": 3
+      },
+      "0003-2700": {
+        "references": 318,
+        "doi_references": 318,
+        "exact_date_intersection": 59,
+        "eligible_intersection": 9,
+        "eligible_crossref": 9,
+        "found_only_by_crossref": 0
+      },
+      "0002-7863": {
+        "references": 212,
+        "doi_references": 212,
+        "exact_date_intersection": 53,
+        "eligible_intersection": 8,
+        "eligible_crossref": 20,
+        "found_only_by_crossref": 12
+      }
+    },
+    "2026-11-05": {
+      "1860-5397": {
+        "references": 6,
+        "doi_references": 6,
+        "exact_date_intersection": 6,
+        "eligible_intersection": 6,
+        "eligible_crossref": 6,
+        "found_only_by_crossref": 0
+      },
+      "0020-1669": {
+        "references": 147,
+        "doi_references": 147,
+        "exact_date_intersection": 47,
+        "eligible_intersection": 6,
+        "eligible_crossref": 7,
+        "found_only_by_crossref": 1
+      },
+      "1089-5639": {
+        "references": 44,
+        "doi_references": 44,
+        "exact_date_intersection": 13,
+        "eligible_intersection": 2,
+        "eligible_crossref": 6,
+        "found_only_by_crossref": 4
+      },
+      "0003-2700": {
+        "references": 318,
+        "doi_references": 318,
+        "exact_date_intersection": 59,
+        "eligible_intersection": 9,
+        "eligible_crossref": 9,
+        "found_only_by_crossref": 0
+      },
+      "0002-7863": {
+        "references": 215,
+        "doi_references": 215,
+        "exact_date_intersection": 34,
+        "eligible_intersection": 4,
+        "eligible_crossref": 18,
+        "found_only_by_crossref": 14
+      }
+    },
+    "europepmc_first_publication_dates": {
+      "2026-11-04": {
+        "1860-5397": {
+          "2026-10-29": 1,
+          "2026-10-30": 1,
+          "2026-11-02": 1,
+          "2026-11-03": 1,
+          "2026-11-04": 1
+        },
+        "0020-1669": {
+          "2026-11-01": 147
+        },
+        "1089-5639": {
+          "2026-11-01": 44
+        },
+        "0003-2700": {
+          "2026-11-01": 318
+        },
+        "0002-7863": {
+          "2026-11-01": 210,
+          "2026-11-02": 2
+        }
+      },
+      "2026-11-05": {
+        "1860-5397": {
+          "2026-10-30": 1,
+          "2026-11-02": 1,
+          "2026-11-03": 1,
+          "2026-11-04": 1,
+          "2026-11-05": 2
+        },
+        "0020-1669": {
+          "2026-11-01": 147
+        },
+        "1089-5639": {
+          "2026-11-01": 44
+        },
+        "0003-2700": {
+          "2026-11-01": 318
+        },
+        "0002-7863": {
+          "2026-11-01": 210,
+          "2026-11-02": 2,
+          "2026-11-05": 3
+        }
+      }
+    }
+  },
+  "calibration_2026_11_19": [
+    {
+      "domain": "math",
+      "topic": "zero sums",
+      "positive_control": true,
+      "ids": [
+        "arxiv:2611.19508",
+        "arxiv:2611.23852",
+        "arxiv:2611.24775"
+      ],
+      "in_ranked_topics": {
+        "constant-conjecture-337b": [
+          "arxiv:2611.19508",
+          "arxiv:2611.23852",
+          "arxiv:2611.24775"
+        ]
+      },
+      "max_together": 3,
+      "technical_review_failures": []
+    },
+    {
+      "domain": "math",
+      "topic": "finite elements",
+      "positive_control": true,
+      "ids": [
+        "arxiv:2611.17700",
+        "arxiv:2611.17822",
+        "arxiv:2611.20833",
+        "arxiv:2611.21169"
+      ],
+      "in_ranked_topics": {},
+      "max_together": 0,
+      "technical_review_failures": []
+    },
+    {
+      "domain": "math",
+      "topic": "forecast calibration",
+      "positive_control": true,
+      "ids": [
+        "arxiv:2611.19452",
+        "arxiv:2611.19970",
+        "arxiv:2611.20905",
+        "arxiv:2611.20972"
+      ],
+      "in_ranked_topics": {
+        "time-prediction-1670": [
+          "arxiv:2611.19452",
+          "arxiv:2611.20905",
+          "arxiv:2611.20972"
+        ]
+      },
+      "max_together": 3,
+      "technical_review_failures": []
+    },
+    {
+      "domain": "math",
+      "topic": "neural PDEs",
+      "positive_control": true,
+      "ids": [
+        "arxiv:2611.17759",
+        "arxiv:2611.21469",
+        "arxiv:2611.24355"
+      ],
+      "in_ranked_topics": {},
+      "max_together": 0,
+      "technical_review_failures": []
+    },
+    {
+      "domain": "math",
+      "topic": "quadrature / eigenvalues / ODE",
+      "positive_control": false,
+      "ids": [
+        "arxiv:2611.21004",
+        "arxiv:2611.21055",
+        "arxiv:2611.23027"
+      ],
+      "in_ranked_topics": {},
+      "max_together": 0,
+      "technical_review_failures": [
+        "48ea619c35d50566bdad92700513a65730540fe4b5abab3ea2b19e0bcae75c40"
+      ]
+    },
+    {
+      "domain": "math",
+      "topic": "lattice mass / L-functions / matrices",
+      "positive_control": false,
+      "ids": [
+        "arxiv:2611.17706",
+        "arxiv:2611.19749",
+        "arxiv:2611.23465"
+      ],
+      "in_ranked_topics": {},
+      "max_together": 0,
+      "technical_review_failures": [
+        "0df999a9095711f36fc550b69c3ac470e5393a68d2c634107af7e3c3a1959cd7"
+      ]
+    },
+    {
+      "domain": "math",
+      "topic": "Jacquet module / Chabauty-Kim / lattice actions",
+      "positive_control": false,
+      "ids": [
+        "arxiv:2611.18218",
+        "arxiv:2611.23579",
+        "arxiv:2611.24215"
+      ],
+      "in_ranked_topics": {},
+      "max_together": 0,
+      "technical_review_failures": []
+    },
+    {
+      "domain": "earth-environment",
+      "topic": "surface ozone",
+      "positive_control": true,
+      "ids": [
+        "doi:10.5194/acp-26-16203-2026",
+        "doi:10.5194/acp-26-16225-2026",
+        "doi:10.5194/acp-26-16521-2026"
+      ],
+      "in_ranked_topics": {},
+      "max_together": 0,
+      "technical_review_failures": []
+    },
+    {
+      "domain": "earth-environment",
+      "topic": "ozone outliers",
+      "positive_control": false,
+      "ids": [
+        "doi:10.5194/acp-26-16295-2026",
+        "doi:10.5194/acp-26-16325-2026"
+      ],
+      "in_ranked_topics": {},
+      "max_together": 0,
+      "technical_review_failures": []
+    }
+  ]
+}

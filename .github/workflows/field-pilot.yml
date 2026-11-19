@@ -53,7 +53,7 @@ jobs:
           if [[ "$PILOT_ACTION" == rank ]]; then restore_date="$(date -u -d "$RUN_DATE -1 day" +%F)"; fi
           mapfile -t days < <(find "$RUNNER_TEMP/prior-pilot" -type f -path "*/$DOMAIN/days/$restore_date.json")
           [[ ${#days[@]} == 1 ]]
-          if [[ "$PILOT_ACTION" == rank ]]; then
+          if [[ "$PILOT_ACTION" != audit ]]; then
             latest="$(find "$(dirname "${days[0]}")" -maxdepth 1 -name '*.json' -printf '%f\n' | sort | tail -1)"
             [[ "$latest" == "$restore_date.json" ]]
           fi
