@@ -1,0 +1,42 @@
+{
+  "abstract": "Human mitochondrial DNA (mtDNA) analysis from short-read sequencing is complicated by nuclear mitochondrial DNA segments (NUMTs), circular-reference coordinates, sequencing depth, and variant-caller configuration. We developed MitoArc, a Nextflow workflow that accepts paired-end FASTQ files or pre-aligned BAM and CRAM files, retains available nuclear mapping context, and performs standard and shifted-coordinate processing. It runs Genome Analysis Toolkit (GATK) Mutect2 and mutserve2 independently and reports mitochondrial quality metrics, NUMT evidence, haplogroups, contamination estimates, functional annotations, consensus sequences, and reproducibility outputs. We evaluated MitoArc using 18 controlled datasets, spanning three technical replicates and six sequencing depths (100x-5000x), with 648 allele-level truth observations. Requiring confident primary mitochondrial mapping eliminated 33 observable synthetic NUMT-associated false-positive calls but reduced recall from 0.894 to 0.796. In a matched evaluation comprising 108 truth observations, standard-only and standard-plus-shifted GATK processing produced identical variant recovery and allele-fraction estimates. GATK recall increased from 0.741 at 100x to 0.917 at 5000x, while temporary working storage increased approximately 20-fold. Against the complete truth set, GATK recovered 548 observations and mutserve2 recovered 311 under the evaluated configurations; mutserve2 insertion and deletion modes were not enabled. The benchmark used synthetic data without a background sequencing-error model. A reduced HG002 dataset demonstrated end-to-end operation of the pre-aligned workflow, subject to incomplete nuclear context. MitoArc preserves caller-specific evidence and the analytical context needed to interpret mitochondrial variants. The software is publicly available at https://github.com/sarvezh1/mitoarc.",
+  "authors": [
+    "Galgale, S.",
+    "Vats, I.",
+    "Haldar, A."
+  ],
+  "doi": "10.64898/2026.11.19.767817",
+  "first_seen": "2026-11-20",
+  "id": "biorxiv:10.64898/2026.11.19.767817",
+  "metadata": {
+    "abstract": "Human mitochondrial DNA (mtDNA) analysis from short-read sequencing is complicated by nuclear mitochondrial DNA segments (NUMTs), circular-reference coordinates, sequencing depth, and variant-caller configuration. We developed MitoArc, a Nextflow workflow that accepts paired-end FASTQ files or pre-aligned BAM and CRAM files, retains available nuclear mapping context, and performs standard and shifted-coordinate processing. It runs Genome Analysis Toolkit (GATK) Mutect2 and mutserve2 independently and reports mitochondrial quality metrics, NUMT evidence, haplogroups, contamination estimates, functional annotations, consensus sequences, and reproducibility outputs. We evaluated MitoArc using 18 controlled datasets, spanning three technical replicates and six sequencing depths (100x-5000x), with 648 allele-level truth observations. Requiring confident primary mitochondrial mapping eliminated 33 observable synthetic NUMT-associated false-positive calls but reduced recall from 0.894 to 0.796. In a matched evaluation comprising 108 truth observations, standard-only and standard-plus-shifted GATK processing produced identical variant recovery and allele-fraction estimates. GATK recall increased from 0.741 at 100x to 0.917 at 5000x, while temporary working storage increased approximately 20-fold. Against the complete truth set, GATK recovered 548 observations and mutserve2 recovered 311 under the evaluated configurations; mutserve2 insertion and deletion modes were not enabled. The benchmark used synthetic data without a background sequencing-error model. A reduced HG002 dataset demonstrated end-to-end operation of the pre-aligned workflow, subject to incomplete nuclear context. MitoArc preserves caller-specific evidence and the analytical context needed to interpret mitochondrial variants. The software is publicly available at https://github.com/sarvezh1/mitoarc.",
+    "author_corresponding": "Agnik Haldar",
+    "author_corresponding_institution": "REVA University",
+    "authors": "Galgale, S.; Vats, I.; Haldar, A.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-19",
+    "doi": "10.64898/2026.11.19.767817",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/19/2026.11.19.767817.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "MitoArc: A Reproducible Short-Read Workflow for Human Mitochondrial Genome Analysis with Circular-Coordinate and NUMT-Aware Evaluation",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "REVA University",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genetics"
+  ],
+  "source": "biorxiv",
+  "summary": "MitoArc, a Nextflow workflow for human mtDNA short-read analysis, tests NUMT-aware filtering and shifted-coordinate processing using synthetic benchmarks…",
+  "title": "MitoArc: A Reproducible Short-Read Workflow for Human Mitochondrial Genome Analysis with Circular-Coordinate and NUMT-Aware Evaluation",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.19.767817"
+}

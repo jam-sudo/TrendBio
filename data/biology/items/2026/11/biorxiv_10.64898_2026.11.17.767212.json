@@ -1,0 +1,46 @@
+{
+  "abstract": "Antibody-antigen structure prediction commonly relies on sampling a single co-folding predictor deeply and selecting its highest-confidence output using model-specific confidence scores. We introduce AbPoolRank, a predictor-agnostic structural selector that ranks mixed pools using cross-pose agreement, within-source reproducibility and interface geometry, without native confidence, predictor identities or predictor-specific parameters. On 103 cluster-disjoint, post-2021 antibody-antigen complexes from SAbDab2, three structures each from Boltz-2, Promera, Protenix-v2, ESMFold2-Fast and OpenDDE form a 15-structure pool that reaches 58.0% medium-or-better Success@1 (DockQ [&ge;] 0.49), exceeding confidence-based selection from every individual predictor sampled 100 times (26-52%). Existing ranking methods did not rescue deep single-predictor sampling or surpass our selector on mixed pools, with no method exceeding 51.5% on 100 structures from one co-folder and AbPoolRank matching the strongest single-structure methods while significantly outperforming consensus methods. AbPoolRank trained without one predictor lost at most 3.0 percentage points, and the frozen model accepted full MSA-conditioned ESMFold2, a sixth predictor absent from method development, without retraining or loss of accuracy. Diversification also improved the accuracy-compute frontier, with the 15-structure pool using 1.8-fold less aggregate GPU time than the most accurate single-predictor setting in our compute benchmark and 3.3-fold less than sampling that predictor 100 times. Together, these results show that shallow sampling across complementary co-folders, coupled with a confidence-free selector, provides an accurate and computationally efficient inference strategy for antibody-antigen structure prediction.",
+  "authors": [
+    "Ullanat, V.",
+    "Gupta, A.",
+    "Li, R.",
+    "Amengual-Rigo, P.",
+    "Furtmann, N.",
+    "Bryson, B. D.",
+    "Berger, B."
+  ],
+  "doi": "10.64898/2026.11.17.767212",
+  "first_seen": "2026-11-20",
+  "id": "biorxiv:10.64898/2026.11.17.767212",
+  "metadata": {
+    "abstract": "Antibody-antigen structure prediction commonly relies on sampling a single co-folding predictor deeply and selecting its highest-confidence output using model-specific confidence scores. We introduce AbPoolRank, a predictor-agnostic structural selector that ranks mixed pools using cross-pose agreement, within-source reproducibility and interface geometry, without native confidence, predictor identities or predictor-specific parameters. On 103 cluster-disjoint, post-2021 antibody-antigen complexes from SAbDab2, three structures each from Boltz-2, Promera, Protenix-v2, ESMFold2-Fast and OpenDDE form a 15-structure pool that reaches 58.0% medium-or-better Success@1 (DockQ [&ge;] 0.49), exceeding confidence-based selection from every individual predictor sampled 100 times (26-52%). Existing ranking methods did not rescue deep single-predictor sampling or surpass our selector on mixed pools, with no method exceeding 51.5% on 100 structures from one co-folder and AbPoolRank matching the strongest single-structure methods while significantly outperforming consensus methods. AbPoolRank trained without one predictor lost at most 3.0 percentage points, and the frozen model accepted full MSA-conditioned ESMFold2, a sixth predictor absent from method development, without retraining or loss of accuracy. Diversification also improved the accuracy-compute frontier, with the 15-structure pool using 1.8-fold less aggregate GPU time than the most accurate single-predictor setting in our compute benchmark and 3.3-fold less than sampling that predictor 100 times. Together, these results show that shallow sampling across complementary co-folders, coupled with a confidence-free selector, provides an accurate and computationally efficient inference strategy for antibody-antigen structure prediction.",
+    "author_corresponding": "Bonnie Berger",
+    "author_corresponding_institution": "Massachusetts Institute of Technology",
+    "authors": "Ullanat, V.; Gupta, A.; Li, R.; Amengual-Rigo, P.; Furtmann, N.; Bryson, B. D.; Berger, B.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-19",
+    "doi": "10.64898/2026.11.17.767212",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/19/2026.11.17.767212.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Breadth over Depth: Predictor-Agnostic Consensus for Improved Antibody--Antigen Structure Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Massachusetts Institute of Technology",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "immunity"
+  ],
+  "source": "biorxiv",
+  "summary": "AbPoolRank, a predictor-agnostic selector, ranks mixed structure pools for antibody-antigen complexes, reaching 58.0% Success@1 and outperforming deep…",
+  "title": "Breadth over Depth: Predictor-Agnostic Consensus for Improved Antibody--Antigen Structure Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.17.767212"
+}

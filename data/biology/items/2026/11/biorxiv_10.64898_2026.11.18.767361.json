@@ -1,0 +1,41 @@
+{
+  "abstract": "Taxonomic abundance data derived from 16S rRNA gene sequencing data are fundamental in microbiome research. To perform downstream statistical analysis and visualization, raw abundance data must typically be converted into standardized data structures, such as phyloseq S4 objects or BIOM files. This conversion requires three input data files: an Operational Taxonomic Unit (OTU) table (count of specific taxa across samples), a Taxonomy table (hierarchical lineage from Kingdom to Species), and a Sample Data table (experimental metadata). For Oxford Nanopore (ONT) 16S data, the two commonly used classifiers, Emu and the EPI2ME wf-16s workflow (Minimap2/Kraken2), generate output files with different formats and column schemas. We found no web-based tool that accepts these classifier outputs directly. Experienced users can reshape them with a script. Researchers who do not program cannot, and for them, this step remains a hurdle. We introduce VPHYL(Versatile PHYLogenetic Standardizer), an R Shiny web application that accepts abundance outputs directly from Emu and EPI2ME wf-16s, splits the lineage into standard ranks, attaches sample metadata, and generates phyloseq objects or BIOM files. VPHYL integrates multi-file aggregation and produces automated HTML reports comprising read statistics, alpha diversity metrics, and taxonomic abundance visualizations. VPHYL output was identical to that of an independently written R script for all nine supported classifier-database combinations. We validated the framework by processing raw abundance datasets processed using the EPI2ME Labs 16S Workflow from a published respiratory microbiome study comprising both porcine and human microbiota composition samples. The published tables were processed by VPHYL without modification, and the resulting alpha diversity indices and taxonomic profiles were consistent with the reported findings; small differences reflect read filtering applied in the original study. The application is publicly available at https://venkat-247.shinyapps.io/VPHYL/.",
+  "authors": [
+    "Ramireddy, V. S. R.",
+    "Srivastava, S. K."
+  ],
+  "doi": "10.64898/2026.11.18.767361",
+  "first_seen": "2026-11-20",
+  "id": "biorxiv:10.64898/2026.11.18.767361",
+  "metadata": {
+    "abstract": "Taxonomic abundance data derived from 16S rRNA gene sequencing data are fundamental in microbiome research. To perform downstream statistical analysis and visualization, raw abundance data must typically be converted into standardized data structures, such as phyloseq S4 objects or BIOM files. This conversion requires three input data files: an Operational Taxonomic Unit (OTU) table (count of specific taxa across samples), a Taxonomy table (hierarchical lineage from Kingdom to Species), and a Sample Data table (experimental metadata). For Oxford Nanopore (ONT) 16S data, the two commonly used classifiers, Emu and the EPI2ME wf-16s workflow (Minimap2/Kraken2), generate output files with different formats and column schemas. We found no web-based tool that accepts these classifier outputs directly. Experienced users can reshape them with a script. Researchers who do not program cannot, and for them, this step remains a hurdle. We introduce VPHYL(Versatile PHYLogenetic Standardizer), an R Shiny web application that accepts abundance outputs directly from Emu and EPI2ME wf-16s, splits the lineage into standard ranks, attaches sample metadata, and generates phyloseq objects or BIOM files. VPHYL integrates multi-file aggregation and produces automated HTML reports comprising read statistics, alpha diversity metrics, and taxonomic abundance visualizations. VPHYL output was identical to that of an independently written R script for all nine supported classifier-database combinations. We validated the framework by processing raw abundance datasets processed using the EPI2ME Labs 16S Workflow from a published respiratory microbiome study comprising both porcine and human microbiota composition samples. The published tables were processed by VPHYL without modification, and the resulting alpha diversity indices and taxonomic profiles were consistent with the reported findings; small differences reflect read filtering applied in the original study. The application is publicly available at https://venkat-247.shinyapps.io/VPHYL/.",
+    "author_corresponding": "Sarvesh Kumar Srivastava",
+    "author_corresponding_institution": "Indian Institute of Technology (IIT), Delhi",
+    "authors": "Ramireddy, V. S. R.; Srivastava, S. K.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-19",
+    "doi": "10.64898/2026.11.18.767361",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/19/2026.11.18.767361.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "VPHYL: A Web Application for Converting Emu and EPI2ME wf-16s Nanopore 16S rRNA Abundance Tables into phyloseq and BIOM Objects",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Indian Institute of Technology (IIT), Delhi",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "microbial-ecology"
+  ],
+  "source": "biorxiv",
+  "summary": "R Shiny app VPHYL converts Emu and EPI2ME wf-16s nanopore 16S abundance tables into phyloseq or BIOM objects with automated HTML reports.",
+  "title": "VPHYL: A Web Application for Converting Emu and EPI2ME wf-16s Nanopore 16S rRNA Abundance Tables into phyloseq and BIOM Objects",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.18.767361"
+}
