@@ -103,7 +103,7 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
     <script is:inline>
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
-    <main id="main"><slot /></main>
+    <main id="main"><!--email_off--><slot /><!--/email_off--></main>
     {!edition && <SponsorColumns {heroAligned} />}
     </div>
     <footer>
