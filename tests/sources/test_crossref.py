@@ -89,6 +89,10 @@ def test_registered_updates_refresh_stored_evidence_and_preserve_its_history(tmp
         assert linked.metadata['correction_links'] == [f'https://doi.org/{doi}'] and linked.summary == 'Prior brief.'
         store.put_item(linked)
         assert collect() == []
+        del work['update-to'], work['updated-by']
+        unlinked, = collect()
+        assert 'correction_links' not in unlinked.metadata and unlinked.summary == linked.summary
+        work.update({'update-to': [notice], 'updated-by': [notice]})
         work['abstract'] = 'Corrected observations.'
         revised, = collect()
         assert revised.first_seen == revised.published_at == day and revised.abstract == work['abstract']

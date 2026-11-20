@@ -153,7 +153,8 @@ class EuropePmcAdapter:
             if current is not None:
                 fields = ('title', 'abstract', 'authors', 'doi', 'metadata', 'published_at')
                 if any(getattr(old, f) != getattr(current, f) for f in fields):
-                    yield current.model_copy(update={'first_seen': old.first_seen})
+                    yield current.model_copy(update={'first_seen': old.first_seen, 'preprint_id': old.preprint_id,
+                                                     'published_doi': old.published_doi})
             else:
                 decision = self.screening.get(old.metadata['pmid'], {})
                 status = decision.get('status', 'absent-from-current-index')

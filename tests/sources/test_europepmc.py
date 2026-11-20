@@ -47,11 +47,11 @@ def test_medical_collection_validates_fulltext_and_updates_existing_evidence(tmp
         assert item.metadata['publication_types'] == ['Journal Article', 'Observational Study']
         assert item.abstract == 'Methods\nA cohort of older adults.\nResults\nUncertain estimates.'
         assert item.authors == ['A. Writer']
-        store.put_item(item.model_copy(update={'summary': 'Initial summary'}))
+        store.put_item(item.model_copy(update={'summary': 'Initial summary', 'preprint_id': 'arxiv:linked'}))
         assert prepare_collected(items, store, DAY, DAY, [adapter]) == []
         body = JATS.replace('Uncertain estimates.', 'Revised estimates.')
         changed, = prepare_collected(adapter.fetch(DAY, DAY, client), store, DAY, DAY, [adapter])
-        assert changed.summary is None and changed.abstract.endswith('Revised estimates.')
+        assert changed.summary is None and changed.abstract.endswith('Revised estimates.') and changed.preprint_id == 'arxiv:linked'
         store.put_item(changed)
         records[0] = {**RECORD, 'commentCorrectionList': {'commentCorrection': [{'type': 'Retraction in', 'source': 'MED', 'id': '54'}]}}
         withdrawn, = prepare_collected(adapter.fetch(DAY, DAY, client), store, DAY, DAY, [adapter])

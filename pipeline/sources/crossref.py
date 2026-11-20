@@ -253,7 +253,8 @@ class CrossrefAdapter:
                                                  'metadata': {**old.metadata, 'screening_status': 'publication-update'}})
                 continue
             current = fresh.get(old.id)
-            if current is None or not (current.metadata.get('correction_links') or old.metadata.get('screening_status')):
+            if current is None or not (current.metadata.get('correction_links') or old.metadata.get('correction_links')
+                                       or old.metadata.get('screening_status')):
                 continue
             changes = {k: getattr(current, k) for k in ('title', 'abstract', 'authors', 'metadata')
                        if getattr(old, k) != getattr(current, k)}
