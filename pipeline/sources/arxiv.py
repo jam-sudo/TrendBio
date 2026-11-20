@@ -22,6 +22,18 @@ class ArxivAdapter:
         self.config = config if config is not None else load_config()
 
     def fetch(self, start: date, end: date, client: httpx.Client) -> list[Item]:
+        daily_page_size = self.config['arxiv'].get('daily_page_size')
+        if daily_page_size is not None:
+            if daily_page_size < 1:
+                raise ValueError('arxiv.daily_page_size must be positive')
+            items = []
+            day = start
+            while day <= end:
+                if day != start:
+                    time.sleep(3)
+                items.extend(self._fetch_range(day, day, end, client))
+                day += timedelta(days=1)
+            return collected(self.name, items)
         return collected(self.name, self._fetch_range(start, end, end, client))
 
     def _fetch_range(self, start: date, end: date, seen: date, client: httpx.Client) -> list[Item]:
@@ -45,7 +57,7 @@ class ArxivAdapter:
         while True:
             if offset:
                 time.sleep(3)  # arXiv asks clients to leave three seconds between calls.
-            max_results = min(100, cap - offset)
+            max_results = min(cfg.get('daily_page_size', 100), cap - offset)
             logger.info('source=arxiv chunk=%s..%s offset=%d max_results=%d', start, end, offset, max_results)
             response = request(client, cfg['endpoint'], attempts=5, backoff=5.0, params={
                 'search_query': query, 'start': offset, 'max_results': max_results,
