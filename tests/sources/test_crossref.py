@@ -17,6 +17,11 @@ def test_journal_equations_keep_one_notation_and_preserve_the_exponent():
     assert plain_text('<alternatives><tex-math> </tex-math><math><mi>x</mi></math></alternatives>') == 'x'
 
 
+def test_double_escaped_comparisons_remain_plain_text():
+    value = '<jats:p>Soil &amp; water: p &amp;lt; 0.05, A &amp;gt; B, z &lt; 1. The label is &amp;lt;unit&amp;gt;.</jats:p>'
+    assert plain_text(value) == 'Soil & water: p < 0.05, A > B, z < 1. The label is <unit>.'
+
+
 def test_open_edition_requires_current_vor_license_abstract_and_publication_day():
     d = {'date-parts': [[2026, 11, 18]]}
     licence = {'content-version': 'vor', 'URL': 'https://creativecommons.org/licenses/by/4.0/', 'start': d}

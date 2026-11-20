@@ -74,7 +74,8 @@ class _Text(HTMLParser):
             self.alternatives[-1].tex_start = len(self.parts)
 
     def handle_data(self, data):
-        self.parts.append(data)
+        # Some publisher deposits escape inequality signs twice inside JATS text.
+        self.parts.append(data.replace('&lt;', '<').replace('&gt;', '>'))
 
     def unknown_decl(self, data):
         if data.startswith('CDATA['):
