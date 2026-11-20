@@ -1,0 +1,34 @@
+{
+  "abstract": "Quantum frameworks each define their own Multi-Level Intermediate Representation (MLIR) dialect, so porting a circuit to a Quantum Intermediate Representation (QIR) runtime needs a hand-written pass per dialect. Our translator selects among three paths: a deterministic compiler path for known grammars (Catalyst and Quake), a large language model (LLM) agentic path for unseen dialects, and a repair path invoked when deterministic output fails testing. A dual-backend pipeline executes the source MLIR and generated QIR on independent simulators, comparing output distributions by total variation distance (TVD). For smaller open-weight models we replace retrieval-augmented generation with inline context engineering and add a guardrail-assembler that rebuilds valid QIR from incomplete output. Across 41 circuits spanning three dialects and 1-100 qubits, the deterministic path is gate-exact on all 70 circuit-dialect pairs, averaging above 95% TVD similarity (1-TVD). On an unseen fault-tolerant (FTQC) dialect, four of six models produce valid logical-level QIR on the first iteration.",
+  "authors": [
+    "Sharmin Afrose",
+    "Vicente Leyton-Ortega",
+    "Narasinga Rao Miniskar",
+    "Elaine Wong",
+    "Travis S. Humble"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-20",
+  "id": "arxiv:2611.25106",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.25106v1</ns0:id>\n    <ns0:title>Agentic MLIR-to-QIR Translation with Dual-Backend Testing: A Hybrid Deterministic and LLM Approach</ns0:title>\n    <ns0:updated>2026-11-18T19:41:31Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.25106v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.25106v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Quantum frameworks each define their own Multi-Level Intermediate Representation (MLIR) dialect, so porting a circuit to a Quantum Intermediate Representation (QIR) runtime needs a hand-written pass per dialect. Our translator selects among three paths: a deterministic compiler path for known grammars (Catalyst and Quake), a large language model (LLM) agentic path for unseen dialects, and a repair path invoked when deterministic output fails testing. A dual-backend pipeline executes the source MLIR and generated QIR on independent simulators, comparing output distributions by total variation distance (TVD). For smaller open-weight models we replace retrieval-augmented generation with inline context engineering and add a guardrail-assembler that rebuilds valid QIR from incomplete output. Across 41 circuits spanning three dialects and 1-100 qubits, the deterministic path is gate-exact on all 70 circuit-dialect pairs, averaging above 95% TVD similarity (1-TVD). On an unseen fault-tolerant (FTQC) dialect, four of six models produce valid logical-level QIR on the first iteration.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-18T19:41:31Z</ns0:published>\n    <ns1:comment>Accepted at SC'26 workshop (AgenticAI4HPC Workshop)</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Sharmin Afrose</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Vicente Leyton-Ortega</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Narasinga Rao Miniskar</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Elaine Wong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Travis S. Humble</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-18",
+  "published_doi": null,
+  "relevant": false,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "Hybrid deterministic and LLM-agentic translator converts quantum MLIR dialects to QIR, validated by dual-backend simulation with total variation distance…",
+  "title": "Agentic MLIR-to-QIR Translation with Dual-Backend Testing: A Hybrid Deterministic and LLM Approach",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.25106v1"
+}

@@ -1,0 +1,36 @@
+{
+  "abstract": "Multimode optical fibres can image through a thin, flexible probe once their transmission matrix (TM) has been measured, but a TM is large and must be re-measured whenever the fibre moves. A compact model of feasible TMs would make storing and re-estimating them cheaper, so we ask how compactly TMs can be represented, and from how few measured TMs. Here we benchmark a permutation-equivariant autoencoder, pretrained on simulated fibres and adapted to measured TMs, against principal component analysis (PCA). At 62x compression, adapting the pretrained autoencoder with just two measured TMs reconstructs the TM of a 50um fibre well enough to focus light at 98% of the ideal enhancement, and it stays accurate when the TMs are shifted by 25 pixels or zoomed by 10%, which quickly degrades a linear basis. It is not, however, a better compressor: PCA is about ten times more accurate when fitted on all 163 real TMs (1.1% against 11.9% error on held-out TMs) and is already more accurate from ten. The autoencoder's value is as a prior when few or no real TMs exist: with none it reaches 29% error, against 91% for PCA fitted on the same simulation. Transfer to a different fibre is only partial. The most important extension, not yet tested, is to recover pixel-basis TMs from fewer measurements than a full TM, which would turn the pretrained prior from a compressor into a measurement-saving tool.",
+  "authors": [
+    "Callum J. Wilson",
+    "Terry Wright",
+    "Qing Yang",
+    "Zhong Wen",
+    "Michael P. Pound",
+    "George S. D. Gordon"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-20",
+  "id": "arxiv:2611.26391",
+  "metadata": {
+    "arxiv_primary_category": "physics.optics",
+    "categories": [
+      "physics.optics",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.26391v1</ns0:id>\n    <ns0:title>Simulation-pretrained autoencoders versus PCA for compressing multimode fibre transmission matrices</ns0:title>\n    <ns0:updated>2026-11-19T16:45:05Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.26391v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.26391v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Multimode optical fibres can image through a thin, flexible probe once their transmission matrix (TM) has been measured, but a TM is large and must be re-measured whenever the fibre moves. A compact model of feasible TMs would make storing and re-estimating them cheaper, so we ask how compactly TMs can be represented, and from how few measured TMs. Here we benchmark a permutation-equivariant autoencoder, pretrained on simulated fibres and adapted to measured TMs, against principal component analysis (PCA). At 62x compression, adapting the pretrained autoencoder with just two measured TMs reconstructs the TM of a 50um fibre well enough to focus light at 98% of the ideal enhancement, and it stays accurate when the TMs are shifted by 25 pixels or zoomed by 10%, which quickly degrades a linear basis. It is not, however, a better compressor: PCA is about ten times more accurate when fitted on all 163 real TMs (1.1% against 11.9% error on held-out TMs) and is already more accurate from ten. The autoencoder's value is as a prior when few or no real TMs exist: with none it reaches 29% error, against 91% for PCA fitted on the same simulation. Transfer to a different fibre is only partial. The most important extension, not yet tested, is to recover pixel-basis TMs from fewer measurements than a full TM, which would turn the pretrained prior from a compressor into a measurement-saving tool.</ns0:summary>\n    <ns0:category term=\"physics.optics\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-19T16:45:05Z</ns0:published>\n    <ns1:comment>31 pages, 14 figures, including supplementary material. Code, trained weights and data are linked in the Data and code availability section</ns1:comment>\n    <ns1:primary_category term=\"physics.optics\" />\n    <ns0:author>\n      <ns0:name>Callum J. Wilson</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Terry Wright</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Qing Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhong Wen</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Michael P. Pound</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>George S. D. Gordon</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "optics",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "Benchmarks a simulation-pretrained autoencoder against PCA for compressing multimode fibre transmission matrices; PCA is more accurate with real data, while…",
+  "title": "Simulation-pretrained autoencoders versus PCA for compressing multimode fibre transmission matrices",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.26391v1"
+}

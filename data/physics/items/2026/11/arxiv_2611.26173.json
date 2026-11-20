@@ -1,0 +1,29 @@
+{
+  "abstract": "Qubit loss and leakage are persistent errors: while a qubit remains lost or leaked, every operation acting on it is dropped. Consequently, the Clifford circuit executed differs from shot to shot. This variation breaks Pauli-frame simulation, which constructs each shot by XORing sampled Pauli flips onto a single \\emph{common reference} measurement record. By rethinking the roles of tableau simulation and Pauli-frame simulation, we show that many key fault-tolerant primitives nevertheless retain a common reference under loss. These include CSS code memory, lattice surgery, and transversal CNOT. Such circuits can therefore be simulated exactly under Pauli noise and loss by a Pauli frame with per-shot masks for the dropped operations. We define \\emph{frame-CSS} circuits as those that are CSS up to local single-qubit basis changes, given a loss model that specifies where qubits can be lost and reloaded. We prove that every frame-CSS circuit has a common reference, and we give a practically near-linear-time procedure that certifies whether a circuit is frame-CSS. We implement the certifier and a high-performance simulator in the open-source package \\href{https://github.com/isaachyw/ELLIS}{\\textsc{Ellis}} (Efficient Loss and Leakage Invariant-reference Simulation). On the gross code under qubit loss and Pauli errors, \\ellis{} samples 952{,}000 shots per second on a single CPU core, at least $1000\\times$ faster than Clifft~\\cite{chase2026} and PPVM~\\cite{luo2026ppvm}.",
+  "authors": [
+    "Yuewen Hou",
+    "Gokul Subramanian Ravi"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-20",
+  "id": "arxiv:2611.26173",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.26173v1</ns0:id>\n    <ns0:title>Ellis: Extremely Fast Quantum Circuit Simulation under Qubit Loss and Leakage</ns0:title>\n    <ns0:updated>2026-11-19T14:24:36Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.26173v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.26173v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Qubit loss and leakage are persistent errors: while a qubit remains lost or leaked, every operation acting on it is dropped. Consequently, the Clifford circuit executed differs from shot to shot. This variation breaks Pauli-frame simulation, which constructs each shot by XORing sampled Pauli flips onto a single \\emph{common reference} measurement record. By rethinking the roles of tableau simulation and Pauli-frame simulation, we show that many key fault-tolerant primitives nevertheless retain a common reference under loss. These include CSS code memory, lattice surgery, and transversal CNOT. Such circuits can therefore be simulated exactly under Pauli noise and loss by a Pauli frame with per-shot masks for the dropped operations. We define \\emph{frame-CSS} circuits as those that are CSS up to local single-qubit basis changes, given a loss model that specifies where qubits can be lost and reloaded. We prove that every frame-CSS circuit has a common reference, and we give a practically near-linear-time procedure that certifies whether a circuit is frame-CSS. We implement the certifier and a high-performance simulator in the open-source package \\href{https://github.com/isaachyw/ELLIS}{\\textsc{Ellis}} (Efficient Loss and Leakage Invariant-reference Simulation). On the gross code under qubit loss and Pauli errors, \\ellis{} samples 952{,}000 shots per second on a single CPU core, at least $1000\\times$ faster than Clifft~\\cite{chase2026} and PPVM~\\cite{luo2026ppvm}.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-19T14:24:36Z</ns0:published>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Yuewen Hou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Gokul Subramanian Ravi</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Introduces Ellis, a Pauli-frame simulator for fault-tolerant quantum circuits under qubit loss, using frame-CSS certification to enable exact, fast shot…",
+  "title": "Ellis: Extremely Fast Quantum Circuit Simulation under Qubit Loss and Leakage",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.26173v1"
+}
