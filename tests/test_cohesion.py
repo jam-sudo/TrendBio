@@ -87,8 +87,10 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     ids = sorted(p.id for p in papers)
     good = ids[:3]
     question = 'Which physical quantity can the three sensors recover?'
+    titles = {p.id: p.title for p in papers}
     def group(members, label):
-        return {'topic': label, 'evidence': [{'id': i} for i in members]}
+        return {'topic': label, 'evidence': [{'id': i, 'field': 'title', 'start': 0, 'length': len(titles[i])}
+                                            for i in members]}
     llm, budget = Mock(), Mock()
     budget.over_ceiling.return_value = False
     llm.review_cohesion.side_effect = [
@@ -110,6 +112,11 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
         options['compare_results'] = True
     assert check.kwargs == options
     assert 'Original grouping hypothesis' in check.args[0]
+    records = json.loads(check.args[0].split('\n\n')[-1])
+    if domain == 'physics-expanded':
+        assert all(r['first_review_passage'] == r['title'] for r in records)
+    else:
+        assert all('first_review_passage' not in r for r in records)
     assert all(p.title in check.args[0] for p in papers)
     recovered = json.loads(audit_path.read_text())['candidates'][0]
     assert not recovered['failed'] and recovered['qualified'] == [good] and recovered['comparisons'][0]['items'] == ids
@@ -125,21 +132,24 @@ def test_result_comparison_joins_every_paper_to_its_own_reported_passage(fixture
     papers = Store(fixtures_root / 'data', 'physics').items_between(date.min, date.max)
     entries = [{'paper': n, 'quote': p.title, 'result': 'Measured cavity readout'} for n, p in enumerate(papers, 1)]
     groups = [{'topic': 'How is cavity readout measured?', 'papers': [3, 1, 2]}]
-    review = ResultComparison.model_validate({'results': entries[::-1], 'groups': groups})
+    review = ResultComparison.model_validate({'observable': 'cavity readout', 'results': entries[::-1], 'groups': groups})
     llm = LLM(Mock(), Mock())
     llm._parse = Mock(return_value=review)
     def evaluate():
         return llm.review_cohesion('Compare reported outputs', papers, 'test', compare_results=True)
 
     stored, = evaluate()['groups']
+    assert evaluate()['observable'] == 'cavity readout'
     assert llm._parse.call_args.args[0] is ResultComparison
     assert [e['id'] for e in stored['evidence']] == [papers[n - 1].id for n in groups[0]['papers']]
     assert all(e['field'] == 'title' and e['start'] == 0 and e['reported_output'] == 'Measured cavity readout'
                for e in stored['evidence'])
     for outputs, members in [(entries[:-1], [1, 2, 3]), (entries, [1, 1, 3]), (entries, [1, 2, 4])]:
         llm._parse.return_value = ResultComparison.model_validate({
-            'results': outputs, 'groups': [{'topic': 'Question', 'papers': members}]})
+            'observable': 'cavity readout', 'results': outputs, 'groups': [{'topic': 'Question', 'papers': members}]})
         assert evaluate() is None and llm.fallback_reasons['test'] == 'validation:cohesion-membership'
+    llm._parse.return_value = review.model_copy(update={'observable': ' '})
+    assert evaluate() is None and llm.fallback_reasons['test'] == 'validation:cohesion-group'
     review.results[0].quote = 'A passage belonging to no paper'
     llm._parse.return_value = review
     assert evaluate() is None and llm.fallback_reasons['test'] == 'validation:cohesion-evidence'

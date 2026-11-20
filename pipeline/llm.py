@@ -109,6 +109,7 @@ class ComparisonGroup(BaseModel):
 
 
 class ResultComparison(BaseModel):
+    observable: str = Field(description='A concrete observable, evaluated detection task or theoretical result to test across these papers.')
     results: list[ReportedOutput]
     groups: list[ComparisonGroup]
 
@@ -226,6 +227,8 @@ class LLM:
             return None, []
         expected = list(range(1, len(items) + 1))
         if isinstance(result, ResultComparison):
+            if not result.observable.strip():
+                return self._failure(key, 'validation:cohesion-group'), []
             if (sorted(e.paper for e in result.results) != expected
                     or sorted(n for g in result.groups for n in g.papers) != expected):
                 return self._failure(key, 'validation:cohesion-membership'), []
@@ -260,7 +263,10 @@ class LLM:
             groups.append({'topic': topic.strip(), 'evidence': evidence})
         if unmatched:
             return self._failure(key, 'validation:cohesion-evidence', detail=','.join(map(str, unmatched))), unmatched
-        return {'groups': groups}, []
+        receipt = {'groups': groups}
+        if isinstance(result, ResultComparison):
+            receipt['observable'] = result.observable.strip()
+        return receipt, []
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,
