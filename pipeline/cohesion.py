@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from pipeline.llm import shared_byline_note
+from pipeline.sources.arxiv import submission_comment
 
 
 def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False):
@@ -21,6 +22,8 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
         if proposal is not None and deps.taxonomy.compare_reported_results:
             anchors = {entry['id']: entry for entry in proposal['evidence']}
             for item, record in zip(items, evidence, strict=True):
+                if deps.taxonomy.domain == 'physics-expanded' and (comment := submission_comment(item)):
+                    record['arxiv_submission_comment'] = comment
                 anchor = anchors[item.id]
                 if anchor.get('field') in ('title', 'abstract'):
                     text = ' '.join(getattr(item, anchor['field']).split())

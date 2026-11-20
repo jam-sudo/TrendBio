@@ -104,6 +104,13 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     papers = papers + [papers[-1].model_copy(update={'id': 'extra', 'title': 'An unrelated detector target'})]
     papers[0].authors = ['Alex Example']
     papers[-1].authors = ['Alex Example']
+    papers[0].url = 'https://arxiv.org/abs/2610.12345v1'
+    xml = ('<entry xmlns="http://www.w3.org/2005/Atom" xmlns:a="http://arxiv.org/schemas/atom">'
+           '<id>http://arxiv.org/abs/2610.12345v1</id><a:comment>Conference   contribution</a:comment></entry>')
+    papers[0].metadata = {'xml': xml}
+    papers[1].url = 'https://arxiv.org/abs/2610.12345v2'
+    papers[1].metadata = {'xml': xml}
+    papers[2].metadata = {'xml': '<incomplete'}
     ids = sorted(p.id for p in papers)
     good = ids[:3]
     question = 'Which physical quantity can the three sensors recover?'
@@ -137,6 +144,9 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     assert ('share a credited author name' in check.args[0]) == compare_results
     assert 'Original grouping hypothesis' in check.args[0]
     records = json.loads(check.args[0].split('\n\n')[-1])
+    assert 'arxiv_submission_comment' not in llm.review_cohesion.call_args_list[0].args[0]
+    assert [(r['title'], r['arxiv_submission_comment']) for r in records if 'arxiv_submission_comment' in r] == (
+        [(papers[0].title, 'Conference contribution')] if domain == 'physics-expanded' else [])
     if compare_results:
         assert all(r['first_review_passage'] == r['title'] for r in records)
     else:

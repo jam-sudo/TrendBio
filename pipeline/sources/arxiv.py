@@ -15,6 +15,21 @@ NS = {'atom': 'http://www.w3.org/2005/Atom', 'arxiv': 'http://arxiv.org/schemas/
 logger = logging.getLogger(__name__)
 
 
+def submission_comment(item: Item) -> str:
+    """Read the author’s note from the same arXiv record that supplied the paper."""
+    xml = item.metadata.get('xml')
+    if item.source != 'arxiv' or not isinstance(xml, str):
+        return ''
+    try:
+        entry = ET.fromstring(xml)
+    except ET.ParseError:
+        return ''
+    version = item.url.partition('/abs/')[2]
+    if not version or entry.findtext('atom:id', '', NS).partition('/abs/')[2] != version:
+        return ''
+    return ' '.join(entry.findtext('arxiv:comment', '', NS).split())
+
+
 class ArxivAdapter:
     name: Source = 'arxiv'
 
