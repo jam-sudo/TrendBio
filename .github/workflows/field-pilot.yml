@@ -32,8 +32,8 @@ permissions:
 jobs:
   pilot:
     runs-on: ubuntu-latest
-    # The audited CPU run embedded 1,694 papers in 16 minutes. A broad week can exceed 4,000.
-    timeout-minutes: ${{ contains(fromJSON('["computer-information","math","physics-expanded"]'), inputs.domain) && startsWith(inputs.action, 'rank') && 90 || 40 }}
+    # A fresh or reranked broad week can exceed 4,000 papers when its source list grows.
+    timeout-minutes: ${{ contains(fromJSON('["computer-information","math","physics-expanded"]'), inputs.domain) && (startsWith(inputs.action, 'rank') || inputs.action == 'rerank') && 90 || 40 }}
     concurrency:
       group: ${{ (inputs.domain == 'computer-information' || inputs.domain == 'math') && (startsWith(inputs.action, 'rank') || inputs.action == 'rerank') && format('pilot-decisions-{0}-{1}', github.ref, inputs.domain) || format('pilot-{0}', github.run_id) }}
       queue: max
