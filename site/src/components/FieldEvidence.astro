@@ -32,7 +32,7 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
     {Array.isArray(paper.metadata.correction_links) && paper.metadata.correction_links.filter(link => typeof link === "string" && /^https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov|doi\.org)\//.test(link)).map(link => <> · {paper.doi && link === `https://doi.org/${paper.doi}`
       ? <a href={`https://crossmark.crossref.org/dialog/?doi=${encodeURIComponent(paper.doi)}`}>Publisher correction history</a>
       : <a href={link}>Linked correction</a>}</>)}
-    {["oai", "europepmc"].includes(paper.source) && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Original publication in ${languageNames.of(paper.metadata.language)}`}</span></>}
+    {["oai", "europepmc"].includes(paper.source) && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Source lists the publication language as ${languageNames.of(paper.metadata.language)}`}</span></>}
     {Array.isArray(paper.metadata.preprint_dois) && paper.metadata.preprint_dois.filter(doi => typeof doi === "string" && /^10\.\d{4,9}\/\S+$/i.test(doi)).map(doi => <> · <a href={`https://doi.org/${doi}`}>Preprint version</a></>)}
     {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}
   </li>)}</ul>
