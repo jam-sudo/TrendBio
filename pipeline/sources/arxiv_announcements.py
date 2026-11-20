@@ -76,7 +76,15 @@ class PhysicsAnnouncements(ArxivAdapter):
         rows, sections, total, page = {}, {}, None, 1
         while total is None or len(rows) < total:
             result = _Mailing(day)
-            result.feed(self._get(client, url, page=page).text)
+            try:
+                response = self._get(client, url, page=page)
+            except httpx.HTTPStatusError as exc:
+                limit = re.search(r'Catchup only allowed for past (\d+) days', exc.response.text)
+                if exc.response.status_code == 400 and limit:
+                    raise ValueError(f'arXiv retains {limit[1]} days of Physics mailings. {day} is outside the archive. '
+                                     'Choose a recent window or replay a saved edition.') from exc
+                raise
+            result.feed(response.text)
             result.close()
             if (not result.correct_title or result.total is None or total not in (None, result.total) or rows.keys() & result.rows.keys()
                     or (not result.rows and result.total)):

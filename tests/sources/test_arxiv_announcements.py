@@ -77,3 +77,18 @@ def test_fails_before_returning_a_partial_or_mislabeled_collection(error, monkey
     monkeypatch.setattr(adapter, '_get', reply)
     with pytest.raises(ValueError, match='arXiv'):
         adapter.fetch(DAY, DAY, None)
+
+
+@pytest.mark.parametrize('body, expected', [
+    ('<title>Invalid date. Catchup only allowed for past 90 days</title>', ValueError),
+    ('Bad query', httpx.HTTPStatusError),
+])
+def test_expired_mailing_distinguished_from_other_bad_requests(body, expected, monkeypatch):
+    adapter = PhysicsAnnouncements(load_config('physics-expanded'))
+    monkeypatch.setattr('pipeline.sources.arxiv_announcements.time.sleep', lambda _: None)
+    transport = httpx.MockTransport(lambda request: httpx.Response(400, text=body))
+    with httpx.Client(transport=transport) as client, pytest.raises(expected) as error:
+        adapter.fetch(DAY, DAY, client)
+    if expected is ValueError:
+        assert f'90 days of Physics mailings. {DAY} is outside the archive' in str(error.value)
+    assert adapter.mailings == {}
