@@ -100,6 +100,10 @@ class Store:
         directory = day_path(self.root, self.domain, date.min).parent
         return [load(Day, path) for path in sorted(directory.glob("*.json"))]
 
+    def latest_day(self) -> Day | None:
+        path = max(day_path(self.root, self.domain, date.min).parent.glob('*.json'), default=None)
+        return load(Day, path) if path else None
+
     def put_embedding(self, item_id: str, vec: np.ndarray) -> None:
         item = self.get_item(item_id)
         if item is None:

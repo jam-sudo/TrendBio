@@ -43,12 +43,14 @@ const conferences: string[] = source.drops?.conferences ?? [];
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
 const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
 const isPublic = publicEditions.includes(field);
+const windowDays = day?.run.window_days ?? 7;
+const windowStart = day && new Date(Date.parse(day.date + "T00:00:00Z") - (windowDays - 1) * 86_400_000).toISOString().slice(0, 10);
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
 ---
 
 <Base edition={field} editionSources={["physics-expanded", "math"].includes(field) && !followsCrossref ? "arXiv" : undefined}
   title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
-  description={humanities ? "Humanities and arts research from journals and scholarly books." : `Daily ${label.toLowerCase()} research trends with the papers behind each ranking.`}
+  description={humanities ? "Humanities and arts research from journals and scholarly books." : `${windowDays === 28 ? "28-day" : "Daily"} ${label.toLowerCase()} research trends with the papers behind each ranking.`}
   canonicalPath={path} lastRun={day?.run.finished}>
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
@@ -74,6 +76,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
     })}.</p>}
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
+      {!isPublic && <p data-window-days={windowDays}>Evidence window of {windowDays} days from {windowStart} through {day.date} (UTC).</p>}
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
       {day.ranked.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
       <ol class="rankings">
@@ -93,7 +96,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
 </Base>
 
 <style>
-  .coverage, .category { color: var(--muted); }
+  .coverage, .category, [data-window-days] { color: var(--muted); }
   .rankings { padding-inline-start: 2.5rem; }
   .rankings > li { border-top: 1px solid var(--border); padding: 1rem 0 1rem .5rem; }
   .rankings > li::marker { font-weight: 700; }

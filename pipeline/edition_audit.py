@@ -79,20 +79,21 @@ def audit_edition(store: Store, start: date, end: date, references=()):
         for entry in topic.history:
             if entry.item_ids and start <= entry.date <= end:
                 histories[entry.date].append((topic, entry))
-    records = store.items_between(start - timedelta(days=cfg.window_days - 1), end,
+    dates = [start + timedelta(days=i) for i in range((end - start).days + 1)]
+    editions = {when: store.get_day(when) for when in dates}
+    earliest = min((d.window_start for d in editions.values() if d is not None), default=start)
+    records = store.items_between(earliest, end,
                                   by_publication=taxonomy.window_by_publication)
     samples = {k: [] for k in ('top', 'bottom', 'excluded')}
     report = {'domain': store.domain, 'from': str(start), 'to': str(end), 'days': [], 'missing_days': []}
     ref_results = []
-    for i in range((end - start).days + 1):
-        when = start + timedelta(days=i)
-        day = store.get_day(when)
+    for when, day in editions.items():
         if day is None:
             report['missing_days'].append(str(when))
             ref_results.extend({**ref, 'stored': None, 'clustered': None, 'ranked': None}
                                for ref in references if ref['date'] == str(when))
             continue
-        first = when - timedelta(days=cfg.window_days - 1)
+        first = day.window_start
         papers = {item.id: item for item in records if item.type in {'preprint', 'published'}
                   and item.first_seen <= when and first <= (item.published_at if taxonomy.window_by_publication
                                                             else item.first_seen) <= when}
@@ -152,7 +153,8 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                                             'decision': reasons.get(paper.id, 'unclustered' if paper.relevant else 'irrelevant'),
                                             'evidence': [paper.id]})
         alternative = {t.slug for t, _, _ in rank(alt_rows, cfg)[:10]}
-        metrics = {'date': str(when), 'status': day.run.status, 'backfilled': day.run.backfilled,
+        metrics = {'date': str(when), 'window_start': str(first), 'window_days': day.run.window_days,
+                   'status': day.run.status, 'backfilled': day.run.backfilled,
                    'publication_kind': publication_kind(when, day.run.started, day.run.backfilled),
                    'elapsed_seconds': (day.run.finished - day.run.started).total_seconds(),
                    'model_cost_usd': day.run.model_cost_usd, 'source_status': day.run.source_status,
@@ -189,7 +191,8 @@ def audit_edition(store: Store, start: date, end: date, references=()):
     report['references'] = ref_results
     measured = [d for d in report['days'] if not d['backfilled'] and d['model_cost_usd'] is not None]
     report['measured_cost_days'] = len(measured)
-    report['projected_30d_usd'] = project_month([d['model_cost_usd'] for d in measured if d['publication_kind'] == 'live'])
+    report['projected_30d_usd'] = project_month([d['model_cost_usd'] for d in measured
+                                                if d['publication_kind'] == 'live' and d['window_days'] == 7])
     return report
 
 

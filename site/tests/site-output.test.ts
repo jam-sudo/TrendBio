@@ -224,6 +224,7 @@ it("links the mathematics pilot to its three arXiv subjects and its own dated ev
 
 it("credits the Earth pilot papers and links their datasets as supporting material", async () => {
   await page.setContent(read("earth-environment/day/2026-11-01/index.html"));
+  expect(await page.locator("[data-window-days=\"28\"]").textContent()).toBe("Evidence window of 28 days from 2026-10-05 through 2026-11-01 (UTC).");
   const main = page.getByRole("main");
   expect(await main.locator(".coverage").textContent()).toBe("Journals represented in this edition’s collection include Ocean Science.");
   expect(await main.locator("summary").first().textContent()).toBe("3 supporting papers");

@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import re
 from typing import Any, Literal
 
@@ -101,6 +101,7 @@ class RunInfo(BaseModel):
     finished: datetime
     status: Literal["ok", "degraded"]
     backfilled: bool
+    window_days: int = Field(default=7, ge=1)
     model_cost_usd: float | None = Field(default=None, ge=0)
     synthesis_model: str
     source_status: dict[str, Literal["ok", "partial", "failed", "skipped"]]
@@ -112,6 +113,10 @@ class Day(BaseModel):
     date: date
     ranked: list[RankedTopic]
     run: RunInfo
+
+    @property
+    def window_start(self) -> date:
+        return self.date - timedelta(days=self.run.window_days - 1)
 
 
 class MapData(BaseModel):

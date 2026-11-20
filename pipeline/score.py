@@ -31,11 +31,18 @@ def signals_for(topic: Topic, items: list[Item],
 
 def rise(topic: Topic, count_7d: int, today: date, cfg: Scoring,
          global_median: float) -> float:
-    history = {day.date: day.count_7d for day in topic.history if day.date <= today}
     baseline = global_median
-    if history and (today - min(history)).days >= cfg.history_days_for_own_baseline:
-        baseline = sum(history.get(today - timedelta(weeks=week), 0)
-                       for week in range(1, 5)) / 4
+    if cfg.window_days == 7:
+        history = {day.date: day.count_7d for day in topic.history if day.date <= today}
+        if history and (today - min(history)).days >= cfg.history_days_for_own_baseline:
+            baseline = sum(history.get(today - timedelta(weeks=week), 0)
+                           for week in range(1, 5)) / 4
+    else:
+        # Sparse pilot editions need measured, non-overlapping comparison periods.
+        prior_dates = {today - timedelta(days=i * cfg.window_days) for i in range(1, 5)}
+        counts = [len(day.item_ids) for day in topic.history if day.date in prior_dates and day.item_ids]
+        if len(counts) >= 2:
+            baseline = sum(counts) / len(counts)
     return min((count_7d + cfg.rise_k) / (baseline + cfg.rise_k), cfg.rise_cap)
 
 

@@ -96,6 +96,7 @@ export interface RunInfo {
   finished: string;
   status: "ok" | "degraded";
   backfilled: boolean;
+  window_days?: number;
   model_cost_usd?: number | null;
   synthesis_model: string;
   source_status: Record<string, "ok" | "partial" | "failed" | "skipped">;

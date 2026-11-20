@@ -5,7 +5,7 @@ import { parse, serializeOuter } from 'parse5';
 
 const [dist, dayFile, out] = process.argv.slice(2);
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
-const { domain, date, ranked } = read(dayFile);
+const { domain, date, ranked, run } = read(dayFile);
 const store = dirname(dirname(dayFile));
 
 function* elements(node) {
@@ -22,6 +22,14 @@ assert.equal(attr(nodes.find(n => n.tagName === 'html'), 'lang'), 'en');
 const main = nodes.find(n => n.tagName === 'main');
 const contents = [...elements(main)];
 assert.equal(attr(contents.find(n => n.tagName === 'time'), 'datetime'), date);
+const windowLabel = contents.find(n => attr(n, 'data-window-days') !== undefined);
+if (windowLabel || run.window_days === 28) {
+  assert.ok(windowLabel, 'Missing evidence window in the reading copy');
+  const days = run.window_days ?? 7;
+  const start = new Date(Date.parse(date + 'T00:00:00Z') - (days - 1) * 86_400_000).toISOString().slice(0, 10);
+  assert.equal(attr(windowLabel, 'data-window-days'), String(days));
+  assert.equal(text(windowLabel), `Evidence window of ${days} days from ${start} through ${date} (UTC).`);
+}
 const list = contents.find(n => n.tagName === 'ol' && attr(n, 'class') === 'rankings');
 const rows = list ? children(list, 'li') : [];
 assert.deepEqual(rows.map(n => [attr(n, 'id'), Number(attr(n, 'value'))]), ranked.map(r => [r.slug, r.rank]));

@@ -69,6 +69,15 @@ def test_rise_capped_at_10(topic, sig, cfg):
     assert scores.rise == 10.0
 
 
+def test_long_window_compares_complete_periods_with_sufficient_history(topic, cfg):
+    cfg = cfg.model_copy(update={'window_days': 28})
+    for age in (7, 28):
+        append_history(topic, TODAY - timedelta(days=age), ['a', 'b', 'c', 'd'], 1)
+    assert rise(topic, 7, TODAY, cfg, global_median=7) == 1
+    append_history(topic, TODAY - timedelta(days=56), ['e', 'f'], 1)
+    assert rise(topic, 7, TODAY, cfg, global_median=7) == pytest.approx(10 / 6)
+
+
 def test_diversity_counts_linked_pair_once(topic, preprint):
     published = preprint.model_copy(update={
         'id': 'pubmed:paper', 'source': 'pubmed', 'type': 'published',

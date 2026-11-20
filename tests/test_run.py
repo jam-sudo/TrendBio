@@ -141,6 +141,37 @@ def test_replay_uses_only_the_latest_saved_snapshot(ctx, monkeypatch):
         run_day('computational', TODAY, ctx.store, ctx.deps, replay=True)
 
 
+def test_28_day_collection_audit_replay_and_store_isolation(ctx, tmp_path):
+    from pipeline.edition_audit import audit_edition, compare_windows
+
+    field = 'earth-environment'
+    store = Store(tmp_path / 'monthly', field)
+    papers = [ctx.items[0].model_copy(update={
+        'id': f'doi:10.1234/river-{age}', 'source': 'crossref', 'type': 'published',
+        'title': f'River level observations at station {age}', 'abstract': 'Water levels were measured.',
+        'published_at': TODAY - timedelta(days=age),
+    }) for age in (28, 27, 14, 0)]
+    ctx.deps.adapters = [FakeAdapter('crossref', papers)]
+    ctx.deps.taxonomy = load_taxonomy(field).model_copy(update={'review_cluster_cohesion': False})
+    result = run_day(field, TODAY, store, ctx.deps, window_days=28)
+    assert result.run.window_days == 28 and result.window_start == papers[1].published_at
+    assert not store.has_item(papers[0].id)
+    ranked, = result.ranked
+    entry, = store.get_topic(ranked.slug).history
+    assert set(entry.item_ids) == {p.id for p in papers[1:]} and entry.count_7d == 1
+    assert ranked.signals.published == 3
+    report, = audit_edition(store, TODAY, TODAY)['days']
+    assert report['window_start'] == str(result.window_start) and report['top10_evidence_items'] == 3
+    assert compare_windows(store, TODAY)['weekly_clusters'] == [0, 0, 0, 0]
+    assert run_day(field, TODAY, store, ctx.deps, replay=True).ranked == result.ranked
+    before = tree(store.root)
+    with pytest.raises(ValueError, match='separate data root'):
+        run_day(field, TODAY, store, ctx.deps, window_days=7)
+    assert tree(store.root) == before
+    next_day = run_day(field, TODAY + timedelta(days=28), store, ctx.deps)
+    assert next_day.run.window_days == 28 and not next_day.ranked
+
+
 def test_physics_replay_resynthesizes_when_the_reviewed_passage_changes(ctx, monkeypatch, tmp_path):
     field = 'physics-expanded'
     store = Store(tmp_path / 'reviewed', field)

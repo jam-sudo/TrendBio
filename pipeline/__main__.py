@@ -61,6 +61,9 @@ def configure_logging(ctx: typer.Context = None):
 
 def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) -> Deps:
     cfg = load_scoring()
+    latest = Store(data_root, domain).latest_day()
+    if latest:
+        cfg.window_days = latest.run.window_days
     taxonomy = load_taxonomy(domain)
     sources = load_config(domain)
     adapters = []
@@ -109,11 +112,12 @@ def run(domain: Domain = 'computational',
         run_date: Annotated[datetime | None, typer.Option('--date', formats=['%Y-%m-%d'])] = None,
         dry_run: Annotated[bool, typer.Option(help='Keep staged output and print usage and cost.')] = False,
         replay: Annotated[bool, typer.Option(help='Rerank the latest saved edition from its stored papers and source statuses.')] = False,
+        window_days: Annotated[int | None, typer.Option(help='Evidence window for a new store. Existing editions retain their window.')] = None,
         data_root: DataRoot = Path('data')):
     """Run collection, enrichment, clustering, ranking, and synthesis for one UTC day."""
     day = (run_date or datetime.now(timezone.utc)).date()
     with _dependencies(domain, data_root) as deps:
-        run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run, replay=replay)
+        run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run, replay=replay, window_days=window_days)
 
 
 @app.command('trial-windows')
@@ -274,7 +278,7 @@ def restatus(start: FromDate, end: ToDate, domain: Domain = 'computational',
     while day <= end.date():
         result = store.get_day(day)
         if result is not None:
-            window = store.items_between(day - timedelta(days=cfg.window_days - 1), day, by_publication=by_publication)
+            window = store.items_between(result.window_start, day, by_publication=by_publication)
             degraded = is_degraded(
                 result.run.notes, result.run.source_status,
                 window_item_ids={item.id for item in window}, cfg=cfg,
@@ -328,7 +332,7 @@ def resynthesize(start: FromDate, end: ToDate, model: Annotated[str, typer.Optio
                     result.run.notes = sorted(set([
                         note for note in result.run.notes if not note.startswith('synthesis-fallback:')
                     ] + notes))
-                    window = staged.items_between(day - timedelta(days=deps.cfg.window_days - 1), day,
+                    window = staged.items_between(result.window_start, day,
                                                   by_publication=deps.taxonomy.window_by_publication)
                     degraded = is_degraded(result.run.notes, result.run.source_status,
                                            over_ceiling=staged_deps.budget.over_ceiling(),

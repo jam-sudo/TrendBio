@@ -167,19 +167,28 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
 
 def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool = False,
             dry_run: bool = False, skip_collect: bool = False,
-            only_missing_synthesis: bool = False, replay: bool = False) -> Day:
+            only_missing_synthesis: bool = False, replay: bool = False, window_days: int | None = None) -> Day:
     if domain != store.domain:
         raise ValueError('domain does not match store')
     attention_store = store
     started = datetime.now(timezone.utc)
     with _staging(store, deps, dry_run=dry_run) as (store, deps):
         previous = store.get_day(day)
+        latest = store.latest_day()
+        if window_days is not None:
+            if window_days not in (7, 28):
+                raise ValueError('Choose a 7-day or 28-day evidence window')
+            if latest and latest.run.window_days != window_days:
+                raise ValueError('Use a separate data root for a different evidence window')
+        else:
+            window_days = latest.run.window_days if latest else deps.cfg.window_days
+        deps = replace(deps, cfg=deps.cfg.model_copy(update={'window_days': window_days}))
         spend_before = deps.budget.total_spend_usd()
         start = day - timedelta(days=deps.cfg.window_days - 1)
         notes = []
         source_status = initial_source_status(deps.adapters)
         if replay:
-            if previous is None or any(saved.date > day for saved in store.all_days()):
+            if previous is None or latest.date != day:
                 raise ValueError('replay requires the latest saved edition for this field')
             backfill, skip_collect = previous.run.backfilled, True
             source_status = previous.run.source_status.copy()
@@ -317,6 +326,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 if index not in assignments and slug not in used:
                     assignments[index] = slug
                     used.add(slug)
+            week_start = day - timedelta(days=6)
             for index, (cluster, centroid) in enumerate(zip(clusters, centroids, strict=True)):
                 existing = topics.get(assignments.get(index))
                 comparison = comparisons.get(tuple(cluster), {})
@@ -335,7 +345,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                                         day, deps.cfg, [items_by_id[id].title for id in cluster],
                                         [item.title for item in papers], items_by_id,
                                         excluded_slugs=set(topics) - {assignments.get(index)})
-                append_history(topic, day, cluster, len(cluster), attached[index],
+                count_7d = sum((items_by_id[i].published_at if deps.taxonomy.window_by_publication
+                                else items_by_id[i].first_seen) >= week_start for i in cluster)
+                append_history(topic, day, cluster, count_7d, attached[index],
                                research_question=question, result_passages=passages)
                 fill_unranked_days(topic, day, deps.cfg.continuity_max_gap_days)
                 topics[topic.slug] = topic
@@ -402,7 +414,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             ) for index, (topic, signals, scores) in enumerate(ranked, 1)], run=RunInfo(
                 started=previous.run.started if same_mode else started,
                 finished=previous.run.finished if same_mode else datetime.now(timezone.utc),
-                status='degraded' if degraded else 'ok', backfilled=backfill, synthesis_model=model,
+                status='degraded' if degraded else 'ok', backfilled=backfill, synthesis_model=model, window_days=window_days,
                 model_cost_usd=None if backfill else cost,
                 source_status=source_status, notes=sorted(set(notes)),
             ))
@@ -782,12 +794,12 @@ def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps
             changed_days = [day for day in days if any((day.date, row.slug) in rows for row in day.ranked)]
             if changed_days:
                 items = staged.items_between(
-                    min(day.date for day in changed_days) - timedelta(days=cfg.window_days - 1),
+                    min(day.window_start for day in changed_days),
                     max(day.date for day in changed_days),
                     by_publication=deps.taxonomy.window_by_publication,
                 )
                 for day in changed_days:
-                    window_start = day.date - timedelta(days=cfg.window_days - 1)
+                    window_start = day.window_start
                     degraded = is_degraded(
                         day.run.notes, day.run.source_status, over_ceiling=False, cfg=cfg,
                         window_item_ids={item.id for item in items if item.first_seen <= day.date
