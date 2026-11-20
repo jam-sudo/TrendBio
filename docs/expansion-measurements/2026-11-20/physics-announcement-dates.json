@@ -1,0 +1,2531 @@
+{
+  "study": "The date of an arXiv Physics announcement and the version available to readers",
+  "checked_on": "2026-11-20",
+  "language": "en",
+  "registered": {
+    "commit": "65941e74775e99d7987ec3a5cf8ae833bff84592",
+    "plan": "https://github.com/jam-sudo/TrendBio/blob/65941e74775e99d7987ec3a5cf8ae833bff84592/docs/science-expansion-plan.en.md#testing-the-date-when-a-paper-became-public",
+    "implementation": "https://github.com/jam-sudo/TrendBio/commit/8415f95de93f505a53502a1e15441c0b1ff9bd51",
+    "ranked_weeks": [
+      "2026-09-23",
+      "2026-11-18"
+    ],
+    "editorial_selection": "The highest and lowest announcement-arm ranks whose complete supporting-paper set had no exact match in the submission arm on the same issue date."
+  },
+  "method": {
+    "field": "Expanded Physics",
+    "arxiv_subjects": [
+      "astro-ph.CO",
+      "astro-ph.GA",
+      "astro-ph.SR",
+      "cond-mat.mes-hall",
+      "cond-mat.stat-mech",
+      "gr-qc",
+      "hep-ex",
+      "hep-lat",
+      "hep-ph",
+      "hep-th",
+      "nucl-ex",
+      "nucl-th",
+      "physics.atm-clus",
+      "physics.atom-ph",
+      "physics.flu-dyn",
+      "physics.optics",
+      "physics.plasm-ph",
+      "quant-ph"
+    ],
+    "journals": [
+      "Physical Review A",
+      "Physical Review B"
+    ],
+    "source_references": [
+      "https://arxiv.org/catchup",
+      "https://info.arxiv.org/help/availability.html",
+      "https://info.arxiv.org/help/api/user-manual.html#511-a-note-on-article-versions",
+      "https://harvest.aps.org/docs/harvest-api"
+    ],
+    "submission_arm": "Each UTC submission day in the seven-day window was queried independently against the 18 configured subjects using submittedDate. Versions reflect the live API on November 20, 2026.",
+    "announcement_arm": "Read every date and page of the native grp_physics list. Count new, cross-listed and replacement sections. Keep each identifier at its first new or cross-list entry in the window. Load its v1 title, abstract and category tags directly from the Atom API. Apply the 18 subjects to that version. A Physics cross-list can follow an earlier public release elsewhere.",
+    "source_checks": "An independent HTML DOM parser enumerated the official lists. Versioned Atom ID batches, eight native subject lists and the subsequent available mailing days provided cross-checks. For each weekly arm, hash sorted bare identifiers separated by newlines with a final newline. Provenance digests include the identifier, listed day, versioned identifier and a SHA-256 of the whitespace-normalized title, newline and abstract. Dates are the source’s UTC calendar labels.",
+    "landing_sample": "For one announcement-only paper and one shared paper with a later revised title or abstract in each week, choose the lexicographically smallest SHA-256 of the week ending, one space and the bare arXiv ID. Add the predeclared molecular-lattice control. Compare the title, abstract and first submission date with each v1 landing page. Three pages spell Greek symbols with TeX commands where the Atom feed uses Unicode.",
+    "revision_check": "For every shared paper with differing texts and a latest version submitted after cutoff, obtain intermediate Atom versions. Compare the last version submitted by the cutoff against the latest version retrieved on November 20. This checks the introduction of later wording. It does not establish the announcement date of every individual revision.",
+    "observation_limits": "The catchup form currently accepts the past 90 days. July queries returned HTTP 400. To trace late announcements, check up to seven following days, through November 20 at the latest. A missing match in that interval leaves the actual date open. The trial deliberately fixes version 1 even when a later revision was available during the window."
+  },
+  "counts": {
+    "announced_in_subjects": 7180,
+    "submitted_in_subjects": 7000,
+    "shared_ids": 5396,
+    "only_announced": 1784,
+    "only_submitted": 1604,
+    "only_announced_submitted_before_window": 1784,
+    "only_submitted_listed_in_next_available_days": 1561,
+    "current_versions_submitted_after_window": 699,
+    "common_with_different_title_or_abstract": 313,
+    "common_with_different_text_and_later_version": 258,
+    "common_changed_since_last_version_submitted_by_cutoff": 255,
+    "empty_mailing_dates": 9,
+    "native_subject_list_entries_checked": 201
+  },
+  "manifest": {
+    "file": "physics-announcement-papers.tsv.gz",
+    "rows": 8784,
+    "uncompressed_sha256": "48988d0a7da249c0b4ff5095d6b8b483ae834534bc2003721f2e3744a098eb76",
+    "columns": [
+      "week_ending",
+      "arxiv_id",
+      "first_submitted_utc",
+      "physics_mailing_date",
+      "mailing_section",
+      "submission_query_version",
+      "version_submitted_utc",
+      "same_title_and_abstract"
+    ],
+    "unit": "One arXiv identifier per UTC comparison week in either collection. Empty cells mean the paper was absent from that collection. The mailing arm uses v1 throughout. A shared paper is compared after collapsing whitespace in both titles and abstracts."
+  },
+  "weeks": {
+    "2026-09-16": {
+      "from": "2026-09-10",
+      "to": "2026-09-16",
+      "announced_in_subjects": 1747,
+      "submitted_in_subjects": 1709,
+      "shared_ids": 1302,
+      "only_announced": 445,
+      "only_submitted": 407,
+      "only_announced_submitted_before_window": 445,
+      "only_submitted_listed_in_next_available_days": 389,
+      "following_list_dates": {
+        "2026-09-17": 290,
+        "2026-09-18": 93,
+        "2026-09-21": 4,
+        "2026-09-22": 1,
+        "2026-09-23": 1
+      },
+      "following_observation_end": "2026-09-23",
+      "current_versions_submitted_after_window": 306,
+      "common_with_different_title_or_abstract": 128,
+      "common_with_different_text_and_later_version": 110,
+      "announced_id_sha256": "84a77565ba6f4a190c876107fe1d9d4f4c904f0c4c44190b7b11894d6e25dfee",
+      "submitted_id_sha256": "27057feb257c7eba86f542e5b3abd15ca0d70d950b6551b2580f18ab1b01714f",
+      "announced_provenance_sha256": "9ab036049fef1a36c129597b6799deb72eec708ee14373647c39bea39efd245a",
+      "native_checks": {
+        "physics.atom-ph": {
+          "listing": "https://arxiv.org/catchup/physics.atom-ph/2026-09-11",
+          "date": "2026-09-11",
+          "new_or_cross_listed": 7,
+          "matched": 7,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "e9c20a34936224a4bfae7bd4b443590402e2f18cbb36279500ea70affaeac357"
+        },
+        "astro-ph.GA": {
+          "listing": "https://arxiv.org/catchup/astro-ph.GA/2026-09-11",
+          "date": "2026-09-11",
+          "new_or_cross_listed": 25,
+          "matched": 25,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "a2ee6f097cf9d23b4af5c595df0aca53b1fc9ecf39485e9c10399c017631f7a0"
+        }
+      },
+      "asserted_control": {
+        "id": "arxiv:2609.20286",
+        "url": "https://arxiv.org/abs/2609.20286v1",
+        "in_submitted": false,
+        "in_announced": false,
+        "listed_on": null
+      },
+      "days": [
+        {
+          "date": "2026-09-10",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-10",
+          "group_new": 430,
+          "group_cross": 40,
+          "group_replacements": 268,
+          "in_configured_subjects": 320,
+          "id_set_sha256": "d34c536fd8deab93fcfa47096bd9c7c2698d3b6eb94a3671855467f598150f5e",
+          "full_page_sha256": "868272da721cd24335a745def90d4afd0be43989b0a1506fa721564d17c059da"
+        },
+        {
+          "date": "2026-09-11",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-11",
+          "group_new": 415,
+          "group_cross": 24,
+          "group_replacements": 266,
+          "in_configured_subjects": 315,
+          "id_set_sha256": "d15eb23b083004695414c46e79545c422827511e45167a60972e11d63ad1cfbc",
+          "full_page_sha256": "a72bbcb5d3fa9bc48ac5f7260e886f750e83a2aaff342f902e720b4479aea7db"
+        },
+        {
+          "date": "2026-09-12",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-12",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "47770b8af462a39ee97e638adcd3a4fe4637fb23dc7986d3f3b953070166fb29"
+        },
+        {
+          "date": "2026-09-13",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-13",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "9a25e7b8ac67863d22e7d2e04ca61216be482e60a7567337a50d28d677fd4431"
+        },
+        {
+          "date": "2026-09-14",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-14",
+          "group_new": 342,
+          "group_cross": 28,
+          "group_replacements": 221,
+          "in_configured_subjects": 252,
+          "id_set_sha256": "764404925e59372c56fbc3bd67d01d1e7f0da0ab36d47d737617ce21727d5043",
+          "full_page_sha256": "fba0fa60ec647f110e709e08815ce5439f5a87c0ea1943cb3764bb2c3094b2e4"
+        },
+        {
+          "date": "2026-09-15",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-15",
+          "group_new": 684,
+          "group_cross": 63,
+          "group_replacements": 428,
+          "in_configured_subjects": 507,
+          "id_set_sha256": "a9eba16f8a71dcddd07ec74c6f8013d81603e69a027d505159eb737b34cc778a",
+          "full_page_sha256": "b6025c60a56e40b00df5a66298618766949663f7b977b9d775ac4aa44c806e67"
+        },
+        {
+          "date": "2026-09-16",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-16",
+          "group_new": 454,
+          "group_cross": 49,
+          "group_replacements": 282,
+          "in_configured_subjects": 353,
+          "id_set_sha256": "15172534481fa63a06975c092e14db7f8e56fbf581b59f2477ddfc4e9a6af5c1",
+          "full_page_sha256": "2e6b5289c66285d13618ba39ff069935086f536447c8a3a6d9d29399878f974f"
+        }
+      ],
+      "versions": {
+        "landing_pages": {
+          "earlier_submission": {
+            "url": "https://arxiv.org/abs/2609.10398v1",
+            "title": "Development of the {\\gamma} strength function with the neutron number",
+            "first_submission": "2026-09-09",
+            "public_listing": "2026-09-10",
+            "section": "New",
+            "matches_atom_title_and_abstract": false,
+            "atom_text_sha256": "570045ed24c6057a3f97efed52ad7ac68539cc6bc04f41839a9500d22781363c",
+            "page_sha256": "096e80a1bb17d696f6b00c297591af3462c88a6cd17276a83d9a9c81b4803988",
+            "equivalent_after_greek_math_markup": true
+          },
+          "later_revised_text": {
+            "url": "https://arxiv.org/abs/2609.15742v1",
+            "title": "Explain the LZ High-Energy Recoil Event with Inelastic Sneutrino Dark Matter in Supersymmetry",
+            "first_submission": "2026-09-14",
+            "public_listing": "2026-09-15",
+            "section": "New",
+            "matches_atom_title_and_abstract": true,
+            "atom_text_sha256": "d245b00bbb5b8416989934a17554e6817c6bfaa0ed1aef47d15a7f26e5015318",
+            "page_sha256": "7d58020a17cca4520a54134087d30148cce89bbaa55efe16b30be5a93dd20f29",
+            "equivalent_after_greek_math_markup": true
+          }
+        },
+        "shared_with_v1_difference_and_latest_revision_after_cutoff": 110,
+        "changed_since_last_version_submitted_by_cutoff": 109,
+        "already_revised_to_current_text_by_cutoff": 1
+      },
+      "journals": {
+        "pra": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=pra&date=published&from=2026-09-10&until=2026-09-16&per_page=100",
+          "all_published": 66,
+          "cc_by": 13,
+          "cc_by_with_abstract": 13,
+          "eligible_doi_and_publication_date": {
+            "10.1103/2kdj-6pdz": "2026-09-11",
+            "10.1103/6mwq-8j4j": "2026-09-15",
+            "10.1103/8s3y-pqbd": "2026-09-14",
+            "10.1103/bgdw-3bln": "2026-09-14",
+            "10.1103/gkc7-tkbq": "2026-09-16",
+            "10.1103/h3bj-35kf": "2026-09-10",
+            "10.1103/hf5j-t83v": "2026-09-14",
+            "10.1103/jkmy-8zwr": "2026-09-16",
+            "10.1103/l1pv-hmwx": "2026-09-15",
+            "10.1103/pn45-bxlh": "2026-09-14",
+            "10.1103/qhyv-x54g": "2026-09-16",
+            "10.1103/rwgb-rpjh": "2026-09-14",
+            "10.1103/ybl1-j3td": "2026-09-14"
+          }
+        },
+        "prb": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=prb&date=published&from=2026-09-10&until=2026-09-16&per_page=100",
+          "all_published": 110,
+          "cc_by": 19,
+          "cc_by_with_abstract": 18,
+          "eligible_doi_and_publication_date": {
+            "10.1103/33km-cp5r": "2026-09-15",
+            "10.1103/4hpr-dmmf": "2026-09-10",
+            "10.1103/6t8r-svlf": "2026-09-15",
+            "10.1103/fwlr-sthl": "2026-09-14",
+            "10.1103/gglf-wx5w": "2026-09-14",
+            "10.1103/hnqs-xh69": "2026-09-16",
+            "10.1103/kkn6-t2jq": "2026-09-15",
+            "10.1103/lwg4-6tq8": "2026-09-16",
+            "10.1103/mrpm-nkms": "2026-09-14",
+            "10.1103/myy9-7pm5": "2026-09-15",
+            "10.1103/psjh-gjh8": "2026-09-11",
+            "10.1103/pyhy-lc7r": "2026-09-11",
+            "10.1103/qc3z-k45l": "2026-09-16",
+            "10.1103/rxjt-nhxc": "2026-09-16",
+            "10.1103/t16y-3mf9": "2026-09-11",
+            "10.1103/x4tm-9249": "2026-09-16",
+            "10.1103/xbcw-n8sc": "2026-09-16",
+            "10.1103/yvcr-2yj8": "2026-09-11"
+          }
+        }
+      }
+    },
+    "2026-09-23": {
+      "from": "2026-09-17",
+      "to": "2026-09-23",
+      "announced_in_subjects": 1808,
+      "submitted_in_subjects": 1745,
+      "shared_ids": 1321,
+      "only_announced": 487,
+      "only_submitted": 424,
+      "only_announced_submitted_before_window": 487,
+      "only_submitted_listed_in_next_available_days": 402,
+      "following_list_dates": {
+        "2026-09-24": 307,
+        "2026-09-25": 85,
+        "2026-09-28": 5,
+        "2026-09-29": 3,
+        "2026-09-30": 2
+      },
+      "following_observation_end": "2026-09-30",
+      "current_versions_submitted_after_window": 234,
+      "common_with_different_title_or_abstract": 102,
+      "common_with_different_text_and_later_version": 92,
+      "announced_id_sha256": "a958cb767a6ee95678a90a42ca752515b3cb9151c58dff432f6074ad64bf9a6e",
+      "submitted_id_sha256": "f293aadca9d7f6e04458c078bfd2b2e69912af1d2c1d2c38bb25c100946ad84c",
+      "announced_provenance_sha256": "5464f5c53f6e0350e6b4d301a0e517bacac859a0ea7e9f78cbf9e49f64df9dcc",
+      "native_checks": {
+        "physics.atom-ph": {
+          "listing": "https://arxiv.org/catchup/physics.atom-ph/2026-09-18",
+          "date": "2026-09-18",
+          "new_or_cross_listed": 7,
+          "matched": 7,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "404f9f99d1e023f02b29417b0ce2d4ea8f00e0468c9f5ac2c3ce8142cc47f52b"
+        },
+        "astro-ph.GA": {
+          "listing": "https://arxiv.org/catchup/astro-ph.GA/2026-09-18",
+          "date": "2026-09-18",
+          "new_or_cross_listed": 43,
+          "matched": 43,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "3dfa4756f09b739ff15b7e556d923af02472578adb5a606b385d75c7548517cc"
+        }
+      },
+      "asserted_control": {
+        "id": "arxiv:2609.20286",
+        "url": "https://arxiv.org/abs/2609.20286v1",
+        "in_submitted": false,
+        "in_announced": true,
+        "listed_on": "2026-09-18"
+      },
+      "days": [
+        {
+          "date": "2026-09-17",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-17",
+          "group_new": 422,
+          "group_cross": 40,
+          "group_replacements": 254,
+          "in_configured_subjects": 322,
+          "id_set_sha256": "74de9d9f11af07de2470164a362597747c4884496258293bd3c3bdf89b80467a",
+          "full_page_sha256": "94430c8a719948870a87d3c6144141af85d4d490d38bd691c145aa618f296d1c"
+        },
+        {
+          "date": "2026-09-18",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-18",
+          "group_new": 477,
+          "group_cross": 35,
+          "group_replacements": 274,
+          "in_configured_subjects": 361,
+          "id_set_sha256": "ea567bcb51791f3a63d8f4d44d50cdf786edbb48dc6207e7e49040467e2aa48f",
+          "full_page_sha256": "3d1852b37d9da0c088aecb232fe8baffc02e08f64e2796f4632d9b2cc6c4f50d"
+        },
+        {
+          "date": "2026-09-19",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-19",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "f29a2bdafc1d524f3ff14386dcaf2f0bae987f784ebbff656f3ef308676139c2"
+        },
+        {
+          "date": "2026-09-20",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-20",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "c9e8953862ebc4ceb52449bffc46c10a90584196dcd96a86fa97ea3827848f02"
+        },
+        {
+          "date": "2026-09-21",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-21",
+          "group_new": 367,
+          "group_cross": 19,
+          "group_replacements": 199,
+          "in_configured_subjects": 266,
+          "id_set_sha256": "0c27850729adc7e6492c8c748fbc505cae82e3729b3113443630b14ac1734127",
+          "full_page_sha256": "a648fb5e2c6b9d3cc1da22d72c024653fa8ba1d2cecd1a3c585eaa3e6c0a540c"
+        },
+        {
+          "date": "2026-09-22",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-22",
+          "group_new": 700,
+          "group_cross": 51,
+          "group_replacements": 496,
+          "in_configured_subjects": 515,
+          "id_set_sha256": "78ed832918ee53765033b1581d5e93c8cce2782321f4854c5bbc2ccdc97aac5d",
+          "full_page_sha256": "e57d517062b8f8a5ccdeac48ac023b219ada60bdc2bc505205ec1da094dc485a"
+        },
+        {
+          "date": "2026-09-23",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-09-23",
+          "group_new": 459,
+          "group_cross": 34,
+          "group_replacements": 247,
+          "in_configured_subjects": 344,
+          "id_set_sha256": "d100d370d10cfa31a83c52fe0d400a3597b78ee8c4530ee13e2225fa01bf4637",
+          "full_page_sha256": "9f847295aeeadaa1e925452aa38810ea9333f1c36a4770b0db8e0de8f2ec04bf"
+        }
+      ],
+      "versions": {
+        "landing_pages": {
+          "earlier_submission": {
+            "url": "https://arxiv.org/abs/2609.22181v1",
+            "title": "Localizable Bipartite Rank-One Ideal Measurements Have a Block-Replicated Nice-Bell Structure",
+            "first_submission": "2026-08-27",
+            "public_listing": "2026-09-22",
+            "section": "New",
+            "matches_atom_title_and_abstract": true,
+            "atom_text_sha256": "9e3bea231e53585dc63ed237e40232edaf33182d3f250d8acdd785de0c3d5365",
+            "page_sha256": "cb09eff2d8bc9fbed1dbf3019531a50caf04a279dfbd052c27553b80801bca7d",
+            "equivalent_after_greek_math_markup": true
+          },
+          "later_revised_text": {
+            "url": "https://arxiv.org/abs/2609.19814v1",
+            "title": "Long-horizon autoformalization of a core theorem underlying MIP* = RE",
+            "first_submission": "2026-09-17",
+            "public_listing": "2026-09-18",
+            "section": "New",
+            "matches_atom_title_and_abstract": true,
+            "atom_text_sha256": "db317e708363e46ce737bd485f41cb1e5aeb4fc9a742922b0af3b4a418e960a9",
+            "page_sha256": "d137bcc7aa8881b3bc355b1835cbcc5d0ce5568b541bde74f64390ec1ae0fd94",
+            "equivalent_after_greek_math_markup": true
+          },
+          "known_control": {
+            "url": "https://arxiv.org/abs/2609.20286v1",
+            "title": "Hubbard models with ultracold shielded molecules in optical lattices",
+            "first_submission": "2026-07-29",
+            "public_listing": "2026-09-18",
+            "section": "New",
+            "matches_atom_title_and_abstract": true,
+            "atom_text_sha256": "594f41dc8cdc8bc3f022b03f312989aab6f4870ab1a65187a486ca9c18ebc26c",
+            "page_sha256": "e0d7e50dff6851895c301591919421f902df0279296107f2ef6849a877d1f9b9",
+            "equivalent_after_greek_math_markup": true
+          }
+        },
+        "shared_with_v1_difference_and_latest_revision_after_cutoff": 92,
+        "changed_since_last_version_submitted_by_cutoff": 92,
+        "already_revised_to_current_text_by_cutoff": 0
+      },
+      "journals": {
+        "pra": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=pra&date=published&from=2026-09-17&until=2026-09-23&per_page=100",
+          "all_published": 52,
+          "cc_by": 8,
+          "cc_by_with_abstract": 8,
+          "eligible_doi_and_publication_date": {
+            "10.1103/2z98-6bsp": "2026-09-17",
+            "10.1103/535c-7l68": "2026-09-22",
+            "10.1103/8ndz-tsr9": "2026-09-21",
+            "10.1103/brt1-c8yd": "2026-09-17",
+            "10.1103/c98g-6f84": "2026-09-17",
+            "10.1103/hr8d-ttj8": "2026-09-17",
+            "10.1103/j9v5-fsbc": "2026-09-22",
+            "10.1103/xzwl-qlbj": "2026-09-23"
+          }
+        },
+        "prb": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=prb&date=published&from=2026-09-17&until=2026-09-23&per_page=100",
+          "all_published": 112,
+          "cc_by": 19,
+          "cc_by_with_abstract": 19,
+          "eligible_doi_and_publication_date": {
+            "10.1103/1bht-9h21": "2026-09-22",
+            "10.1103/2cq3-66ny": "2026-09-23",
+            "10.1103/6bgc-gwzd": "2026-09-23",
+            "10.1103/9fs1-5gxq": "2026-09-21",
+            "10.1103/c7bd-ghcb": "2026-09-17",
+            "10.1103/chbx-wzvl": "2026-09-22",
+            "10.1103/f2d8-csrg": "2026-09-17",
+            "10.1103/f744-f6bq": "2026-09-23",
+            "10.1103/g22d-99w7": "2026-09-22",
+            "10.1103/kskv-9mhr": "2026-09-18",
+            "10.1103/m2gf-nrsn": "2026-09-22",
+            "10.1103/s1jn-fq4d": "2026-09-17",
+            "10.1103/sjrs-3fjz": "2026-09-17",
+            "10.1103/t8x5-t8bg": "2026-09-17",
+            "10.1103/t9y2-h8th": "2026-09-21",
+            "10.1103/wm33-yhyl": "2026-09-23",
+            "10.1103/xl2d-88z7": "2026-09-22",
+            "10.1103/z3hk-wrgl": "2026-09-17",
+            "10.1103/z8tf-fwfn": "2026-09-17"
+          }
+        }
+      }
+    },
+    "2026-10-28": {
+      "from": "2026-10-22",
+      "to": "2026-10-28",
+      "announced_in_subjects": 1714,
+      "submitted_in_subjects": 1653,
+      "shared_ids": 1312,
+      "only_announced": 402,
+      "only_submitted": 341,
+      "only_announced_submitted_before_window": 402,
+      "only_submitted_listed_in_next_available_days": 338,
+      "following_list_dates": {
+        "2026-10-30": 326,
+        "2026-11-02": 3,
+        "2026-11-03": 6,
+        "2026-11-04": 3
+      },
+      "following_observation_end": "2026-11-04",
+      "current_versions_submitted_after_window": 145,
+      "common_with_different_title_or_abstract": 63,
+      "common_with_different_text_and_later_version": 53,
+      "announced_id_sha256": "8afaa4a99484a7b644838658e3db6f827d786f221292906a70437b6f1fe375ec",
+      "submitted_id_sha256": "1e061221b1385084a988955c7088b18244e8207f424d5b9aee50cdd02c355953",
+      "announced_provenance_sha256": "cab919d2248bc6ecfd1a82cd444d73def37eadc1bd552e5f9c90395c91750f00",
+      "native_checks": {
+        "physics.atom-ph": {
+          "listing": "https://arxiv.org/catchup/physics.atom-ph/2026-10-23",
+          "date": "2026-10-23",
+          "new_or_cross_listed": 7,
+          "matched": 7,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "9a05736019af9f8ea0bbbdec395c265c10af3792317b430e7cd92bf78e4233ef"
+        },
+        "astro-ph.GA": {
+          "listing": "https://arxiv.org/catchup/astro-ph.GA/2026-10-23",
+          "date": "2026-10-23",
+          "new_or_cross_listed": 35,
+          "matched": 35,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "dacffa9d9dd06b3739d70c25d82e00acfe74e9dcd09f7ea8c833d7aaa5674cc7"
+        }
+      },
+      "asserted_control": {
+        "id": "arxiv:2609.20286",
+        "url": "https://arxiv.org/abs/2609.20286v1",
+        "in_submitted": false,
+        "in_announced": false,
+        "listed_on": null
+      },
+      "days": [
+        {
+          "date": "2026-10-22",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-10-22",
+          "group_new": 392,
+          "group_cross": 31,
+          "group_replacements": 243,
+          "in_configured_subjects": 271,
+          "id_set_sha256": "a721c3356434c31be25363b88cfa6873d086ce95387c2bab2956a586aab192b5",
+          "full_page_sha256": "213788d049701caa6927561191ab5bd77baa3fc1f85a9fbf77fb212d2e05f6dd"
+        },
+        {
+          "date": "2026-10-23",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-10-23",
+          "group_new": 436,
+          "group_cross": 28,
+          "group_replacements": 234,
+          "in_configured_subjects": 333,
+          "id_set_sha256": "1acc413f61eb701037811487c50b2775ddd3ba1f605b10eb4fc2cfc4e4eab75a",
+          "full_page_sha256": "ffbe512f38ca7d26617091dc51c5f065f6a081177340188b5b4ce2c867178b3c"
+        },
+        {
+          "date": "2026-10-24",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-10-24",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "023cf96606956db3fbbbb657732a43de92aaf649b706165739431cf331baaa48"
+        },
+        {
+          "date": "2026-10-25",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-10-25",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "73b44b4256d6e8e8c5f997ad2838a188aa5425811a9b8bab15f63f1b05f07f96"
+        },
+        {
+          "date": "2026-10-26",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-10-26",
+          "group_new": 340,
+          "group_cross": 29,
+          "group_replacements": 196,
+          "in_configured_subjects": 258,
+          "id_set_sha256": "91386346d64281ea122f61558d5595bfa70b333c5a4c73a36a9d6ceeefc546f7",
+          "full_page_sha256": "88847d4cf57757d0b021ffd4538c664bd9fe374f3ffdb0dd88acf455e339424f"
+        },
+        {
+          "date": "2026-10-27",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-10-27",
+          "group_new": 639,
+          "group_cross": 59,
+          "group_replacements": 468,
+          "in_configured_subjects": 471,
+          "id_set_sha256": "fbb917a3a04ebb37a900268784cb9d2ae4ac6b59899b9d92382d79f0acce9215",
+          "full_page_sha256": "5dbcf71dc89751cde79ce9cb2ef371ee7a6d9b2dbb4e218544563cfc4fa23402"
+        },
+        {
+          "date": "2026-10-28",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-10-28",
+          "group_new": 510,
+          "group_cross": 52,
+          "group_replacements": 277,
+          "in_configured_subjects": 381,
+          "id_set_sha256": "a87c43a5133023701283ffa86f08cd10fd17a56ac3f61d293862fbe546620ce8",
+          "full_page_sha256": "e18609af0e9fed085a6327c0b989fee837e89d04e8d959d15be4b3788eec8c22"
+        }
+      ],
+      "versions": {
+        "landing_pages": {
+          "earlier_submission": {
+            "url": "https://arxiv.org/abs/2610.31688v1",
+            "title": "Alignment-driven binary evolution in warped circumbinary discs: 3D moving-mesh hydrodynamics of eccentric and inclined binaries",
+            "first_submission": "2026-10-14",
+            "public_listing": "2026-10-26",
+            "section": "New",
+            "matches_atom_title_and_abstract": false,
+            "atom_text_sha256": "b12bd117ea1614813f23913b0fc8d7153b9f0ee3871a131d7d7ba4548d5865d6",
+            "page_sha256": "a21ba8d4db360c6afacfeaecccdd4be0d2e12147ec7bc7f03cd3d656500a6f28",
+            "equivalent_after_greek_math_markup": true
+          },
+          "later_revised_text": {
+            "url": "https://arxiv.org/abs/2610.34366v1",
+            "title": "The origin and distribution of diffuse HI in the close interacting MHONGOOSE galaxy systems",
+            "first_submission": "2026-10-25",
+            "public_listing": "2026-10-27",
+            "section": "New",
+            "matches_atom_title_and_abstract": false,
+            "atom_text_sha256": "c07843d2265a55dc448f25ed5bf988b2654d9876fd67b587f873159bfbf782e7",
+            "page_sha256": "a1b742548b5d350584a05b5177b4909e1cb559cd0a28cb7d3987d19a7c56370a",
+            "equivalent_after_greek_math_markup": true
+          }
+        },
+        "shared_with_v1_difference_and_latest_revision_after_cutoff": 53,
+        "changed_since_last_version_submitted_by_cutoff": 51,
+        "already_revised_to_current_text_by_cutoff": 2
+      },
+      "journals": {
+        "pra": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=pra&date=published&from=2026-10-22&until=2026-10-28&per_page=100",
+          "all_published": 53,
+          "cc_by": 9,
+          "cc_by_with_abstract": 9,
+          "eligible_doi_and_publication_date": {
+            "10.1103/4hm3-tqwr": "2026-10-27",
+            "10.1103/6tm7-3tn4": "2026-10-26",
+            "10.1103/grcg-sjkp": "2026-10-23",
+            "10.1103/lbj6-bts5": "2026-10-26",
+            "10.1103/nghz-hps6": "2026-10-27",
+            "10.1103/pllp-htg3": "2026-10-22",
+            "10.1103/r632-zl7s": "2026-10-27",
+            "10.1103/s4cm-rhrm": "2026-10-26",
+            "10.1103/v53z-9gtm": "2026-10-28"
+          }
+        },
+        "prb": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=prb&date=published&from=2026-10-22&until=2026-10-28&per_page=100",
+          "all_published": 109,
+          "cc_by": 18,
+          "cc_by_with_abstract": 18,
+          "eligible_doi_and_publication_date": {
+            "10.1103/2vfq-tr9g": "2026-10-23",
+            "10.1103/4l86-w61k": "2026-10-27",
+            "10.1103/7bgl-6lpb": "2026-10-26",
+            "10.1103/81fz-49c6": "2026-10-26",
+            "10.1103/9snx-cp83": "2026-10-26",
+            "10.1103/cbt5-xjgb": "2026-10-26",
+            "10.1103/cprf-rwsn": "2026-10-27",
+            "10.1103/dd19-921m": "2026-10-22",
+            "10.1103/ggbl-t6d7": "2026-10-28",
+            "10.1103/ggnj-y9lb": "2026-10-22",
+            "10.1103/gxr7-xtsr": "2026-10-26",
+            "10.1103/jsvt-jc4l": "2026-10-23",
+            "10.1103/m86k-4m6v": "2026-10-22",
+            "10.1103/n6zn-xvsw": "2026-10-26",
+            "10.1103/s8w3-plc1": "2026-10-27",
+            "10.1103/w78h-24wx": "2026-10-26",
+            "10.1103/yrmp-j9h2": "2026-10-23",
+            "10.1103/zgw5-99k2": "2026-10-23"
+          }
+        }
+      }
+    },
+    "2026-11-18": {
+      "from": "2026-11-12",
+      "to": "2026-11-18",
+      "announced_in_subjects": 1911,
+      "submitted_in_subjects": 1893,
+      "shared_ids": 1461,
+      "only_announced": 450,
+      "only_submitted": 432,
+      "only_announced_submitted_before_window": 450,
+      "only_submitted_listed_in_next_available_days": 432,
+      "following_list_dates": {
+        "2026-11-19": 344,
+        "2026-11-20": 88
+      },
+      "following_observation_end": "2026-11-20",
+      "current_versions_submitted_after_window": 14,
+      "common_with_different_title_or_abstract": 20,
+      "common_with_different_text_and_later_version": 3,
+      "announced_id_sha256": "cede8ccf604f490f54d2807712a14e1d29bc63ada560b3baed50e5bc70d21bbf",
+      "submitted_id_sha256": "d2c539a3c34c6dfbf337f65fc7fa678ef0d9126b224972caa878f105fb455a03",
+      "announced_provenance_sha256": "b29bd9638bbf2616091aa70b68b723e28b72f605767f7d511739ec925c38912d",
+      "native_checks": {
+        "physics.atom-ph": {
+          "listing": "https://arxiv.org/catchup/physics.atom-ph/2026-11-13",
+          "date": "2026-11-13",
+          "new_or_cross_listed": 8,
+          "matched": 8,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "8296bf199f99dbb963be94ce089933d0f5a8fb31ea4c87b452d49250a20ca366"
+        },
+        "astro-ph.GA": {
+          "listing": "https://arxiv.org/catchup/astro-ph.GA/2026-11-13",
+          "date": "2026-11-13",
+          "new_or_cross_listed": 69,
+          "matched": 69,
+          "only_subject_list": [],
+          "only_group_plus_v1": [],
+          "id_set_sha256": "353c705294d5f7c298ba7aaffae4f75628edc5d948cedb570d48627952b61028"
+        }
+      },
+      "asserted_control": {
+        "id": "arxiv:2609.20286",
+        "url": "https://arxiv.org/abs/2609.20286v1",
+        "in_submitted": false,
+        "in_announced": false,
+        "listed_on": null
+      },
+      "days": [
+        {
+          "date": "2026-11-12",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-11-12",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "bc240fdbe750584c406ea1c0fac45c9a8da42190ef4e4afe453f3158b7f88212"
+        },
+        {
+          "date": "2026-11-13",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-11-13",
+          "group_new": 887,
+          "group_cross": 69,
+          "group_replacements": 536,
+          "in_configured_subjects": 696,
+          "id_set_sha256": "967a968e54c29e0291dfed2e74e79b13341082c33b4160033b24b0ab6c7223e9",
+          "full_page_sha256": "6fddf87b1da3a96325eb2c32d26415b46bb2f49c15c3d8e6f8211398c15dcc6c"
+        },
+        {
+          "date": "2026-11-14",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-11-14",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "a9e372726b080c414e29879c8aeb1fd5e36b6e7fb69b74e1c39969e78ccc7df8"
+        },
+        {
+          "date": "2026-11-15",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-11-15",
+          "group_new": 0,
+          "group_cross": 0,
+          "group_replacements": 0,
+          "in_configured_subjects": 0,
+          "id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "full_page_sha256": "c5cd0fa59bd251f7f5eba1ce63e6de2e30f7915d4dfe543435fca80753568d2c"
+        },
+        {
+          "date": "2026-11-16",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-11-16",
+          "group_new": 396,
+          "group_cross": 43,
+          "group_replacements": 232,
+          "in_configured_subjects": 303,
+          "id_set_sha256": "3eb8d1983bfa11e7584195d26dc97b03f8fbbb580a45a24962eabe04305ff95e",
+          "full_page_sha256": "24e2c0d6dfa8089f235510d6fdaf4f1a01a8cae9dcc6de6992dc4aa08d3c8313"
+        },
+        {
+          "date": "2026-11-17",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-11-17",
+          "group_new": 746,
+          "group_cross": 74,
+          "group_replacements": 482,
+          "in_configured_subjects": 558,
+          "id_set_sha256": "6ba17801db505a2548c674c1176b2d3ead7e4132f3a354d1df69e002ded48739",
+          "full_page_sha256": "f21440aaaff5d1b9b7491651a5c7cb0be0efd202604382a49cd10a2189644c94"
+        },
+        {
+          "date": "2026-11-18",
+          "source": "https://arxiv.org/catchup/grp_physics/2026-11-18",
+          "group_new": 469,
+          "group_cross": 39,
+          "group_replacements": 308,
+          "in_configured_subjects": 354,
+          "id_set_sha256": "3f556d673d5540deb7409d3f4f0863109594bb64d5fbc3d4e104712f9cd4817b",
+          "full_page_sha256": "5ecf8dac626504184eb3ef2115e2c24b493a4c0e25b857f47174881172246656"
+        }
+      ],
+      "versions": {
+        "landing_pages": {
+          "earlier_submission": {
+            "url": "https://arxiv.org/abs/2611.15933v1",
+            "title": "Imaging the two-sided black hole interior with four-point correlators",
+            "first_submission": "2026-11-11",
+            "public_listing": "2026-11-13",
+            "section": "New",
+            "matches_atom_title_and_abstract": true,
+            "atom_text_sha256": "2d835cf3064f7093864f21092cc28b895d7a3a331f4f99782f06f7fd5d87913a",
+            "page_sha256": "0594d70be115e0ef908ff2466cc8e35f843d96478f22dd10e6e16bd352818f6c",
+            "equivalent_after_greek_math_markup": true
+          },
+          "later_revised_text": {
+            "url": "https://arxiv.org/abs/2611.19283v1",
+            "title": "Fourier Crosstalk and Leakage Correction for Binary-Encoded Fourier Single-Pixel Imaging",
+            "first_submission": "2026-11-14",
+            "public_listing": "2026-11-17",
+            "section": "New",
+            "matches_atom_title_and_abstract": true,
+            "atom_text_sha256": "1a58013e7de416af0b47521a7a3de798de2de5da5dd8bf3535934041eedf7852",
+            "page_sha256": "8913365fab623e448ff573c28b8084858ca65a32ada5dd0d7daa51e6c7a6ad20",
+            "equivalent_after_greek_math_markup": true
+          }
+        },
+        "shared_with_v1_difference_and_latest_revision_after_cutoff": 3,
+        "changed_since_last_version_submitted_by_cutoff": 3,
+        "already_revised_to_current_text_by_cutoff": 0
+      },
+      "journals": {
+        "pra": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=pra&date=published&from=2026-11-12&until=2026-11-18&per_page=100",
+          "all_published": 58,
+          "cc_by": 9,
+          "cc_by_with_abstract": 9,
+          "eligible_doi_and_publication_date": {
+            "10.1103/5fh1-nrmh": "2026-11-12",
+            "10.1103/j473-hql6": "2026-11-18",
+            "10.1103/jl5y-q2q2": "2026-11-16",
+            "10.1103/n299-png4": "2026-11-17",
+            "10.1103/n4rw-wgx1": "2026-11-13",
+            "10.1103/vyqz-mtmc": "2026-11-12",
+            "10.1103/wdz1-sbgg": "2026-11-16",
+            "10.1103/y9ln-b4t9": "2026-11-13",
+            "10.1103/zqfd-jr8l": "2026-11-13"
+          }
+        },
+        "prb": {
+          "catalogue": "https://harvest.aps.org/v2/journals/articles?journals=prb&date=published&from=2026-11-12&until=2026-11-18&per_page=100",
+          "all_published": 117,
+          "cc_by": 16,
+          "cc_by_with_abstract": 16,
+          "eligible_doi_and_publication_date": {
+            "10.1103/1d2y-fpbl": "2026-11-18",
+            "10.1103/27h2-qnt8": "2026-11-17",
+            "10.1103/5yrq-qjkh": "2026-11-12",
+            "10.1103/7k6p-rld9": "2026-11-16",
+            "10.1103/7zl4-35wd": "2026-11-12",
+            "10.1103/9x2v-9sb1": "2026-11-17",
+            "10.1103/bbps-dcjq": "2026-11-13",
+            "10.1103/cx29-r8ht": "2026-11-12",
+            "10.1103/n93t-5lw8": "2026-11-17",
+            "10.1103/q4q1-q4g8": "2026-11-16",
+            "10.1103/q8w8-y7fk": "2026-11-17",
+            "10.1103/rz4d-3yjc": "2026-11-12",
+            "10.1103/sqws-q32r": "2026-11-17",
+            "10.1103/x7x6-16cs": "2026-11-12",
+            "10.1103/xcx4-prvh": "2026-11-12",
+            "10.1103/znzs-rccp": "2026-11-17"
+          }
+        }
+      }
+    }
+  },
+  "initial_run_recorded_model_cost_usd": 5.605665900000003,
+  "restored_september_reviews": [
+    {
+      "parent_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44766962279",
+      "pipeline_attempt_receipt": {
+        "domain": "physics-expanded",
+        "date": "2026-09-23",
+        "status": "degraded",
+        "source_status": {
+          "arxiv": "ok",
+          "biorxiv": "skipped",
+          "crossref": "ok",
+          "github": "skipped",
+          "pubmed": "skipped",
+          "rss": "skipped"
+        },
+        "attempt_model_cost_usd": 0.004934600000000122,
+        "cumulative_model_cost_usd": 1.4715050000000005
+      },
+      "quotation_validation_warnings": 2,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44771845579",
+      "source_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44771845579/artifacts/14646843516",
+      "paper_and_embedding_files_byte_identical": {
+        "items": 1835,
+        "embeddings": 2
+      },
+      "mailing_dates_and_source_scope_identical": true,
+      "identical_candidate_memberships": 241,
+      "successful_candidate_reviews_unchanged": 239,
+      "retried": [
+        {
+          "candidate_review_id": "170c4e619ad4b23cf43d4a422ff1fa04d0d28d235ddbe79094109e6a059b6447",
+          "paper_ids": [
+            "arxiv:2609.17667",
+            "arxiv:2609.18000",
+            "arxiv:2609.18408",
+            "arxiv:2609.19246",
+            "arxiv:2609.19253",
+            "arxiv:2609.20079",
+            "arxiv:2609.20931",
+            "arxiv:2609.21658",
+            "arxiv:2609.21981",
+            "arxiv:2609.22071",
+            "arxiv:2609.22431",
+            "arxiv:2609.25259",
+            "arxiv:2609.25455",
+            "arxiv:2609.26697"
+          ],
+          "resolved": true,
+          "qualified_groups": []
+        },
+        {
+          "candidate_review_id": "573df613bf88105ba80b5810fc356e33d33e2c9c5a9a1a04b8930b792fefad37",
+          "paper_ids": [
+            "arxiv:2609.18761",
+            "arxiv:2609.18918",
+            "arxiv:2609.22420",
+            "arxiv:2609.24282",
+            "arxiv:2609.25246",
+            "arxiv:2609.25276",
+            "arxiv:2609.25368"
+          ],
+          "resolved": false,
+          "qualified_groups": []
+        }
+      ],
+      "run_status": "degraded",
+      "remaining_review_failures": 1,
+      "recorded_additional_model_cost_usd": 0.0049346000000001,
+      "resulting_ledger_usd": 1.4715050000000005,
+      "original_rank_count": 14,
+      "final_rank_count": 14,
+      "same_ranked_paper_sets": 14,
+      "same_sets_in_same_position": 14,
+      "ordered_english_rows_identical": true,
+      "same_ranked_paper_sets_as_submission": 3,
+      "identical_to_submission_at_same_rank": 0,
+      "original_and_final_sample": [
+        {
+          "before": 1,
+          "after": 1,
+          "same_papers": true,
+          "same_brief_and_synthesis": true,
+          "same_slug": true
+        },
+        {
+          "before": 13,
+          "after": 13,
+          "same_papers": true,
+          "same_brief_and_synthesis": true,
+          "same_slug": true
+        }
+      ],
+      "final_ranked": [
+        {
+          "rank": 1,
+          "slug": "black-holes-3d8b",
+          "category": "gravitation",
+          "ids": [
+            "arxiv:2609.17570",
+            "arxiv:2609.17585",
+            "arxiv:2609.18377",
+            "arxiv:2609.24926",
+            "arxiv:2609.25097",
+            "arxiv:2609.25113",
+            "arxiv:2609.25161"
+          ]
+        },
+        {
+          "rank": 2,
+          "slug": "dark-black-8eb2",
+          "category": "cosmology",
+          "ids": [
+            "arxiv:2609.20021",
+            "arxiv:2609.20022",
+            "arxiv:2609.22758"
+          ]
+        },
+        {
+          "rank": 3,
+          "slug": "dark-high-recoil-a734",
+          "category": "particle",
+          "ids": [
+            "arxiv:2609.24988",
+            "arxiv:2609.25114",
+            "arxiv:2609.26698"
+          ]
+        },
+        {
+          "rank": 4,
+          "slug": "dark-matter-lux-0db2",
+          "category": "particle",
+          "ids": [
+            "arxiv:2609.17935",
+            "arxiv:2609.23096",
+            "arxiv:2609.23477"
+          ]
+        },
+        {
+          "rank": 5,
+          "slug": "dynamics-rydberg-502b",
+          "category": "quantum",
+          "ids": [
+            "arxiv:2609.22673",
+            "arxiv:2609.23648",
+            "arxiv:2609.23651"
+          ]
+        },
+        {
+          "rank": 6,
+          "slug": "emission-galaxy-gama-b068",
+          "category": "galactic",
+          "ids": [
+            "arxiv:2609.17662",
+            "arxiv:2609.22427",
+            "arxiv:2609.23140"
+          ]
+        },
+        {
+          "rank": 7,
+          "slug": "inflation-gravity-928f",
+          "category": "cosmology",
+          "ids": [
+            "arxiv:2609.20622",
+            "arxiv:2609.22933",
+            "arxiv:2609.23511"
+          ]
+        },
+        {
+          "rank": 8,
+          "slug": "inflation-qcd-lukewarm-1ff2",
+          "category": "cosmology",
+          "ids": [
+            "arxiv:2609.19284",
+            "arxiv:2609.20918",
+            "arxiv:2609.21745"
+          ]
+        },
+        {
+          "rank": 9,
+          "slug": "light-black-hole-f74f",
+          "category": "gravitation",
+          "ids": [
+            "arxiv:2609.18615",
+            "arxiv:2609.21990",
+            "arxiv:2609.25667"
+          ]
+        },
+        {
+          "rank": 10,
+          "slug": "metallicity-galaxies-ace-c918",
+          "category": "galactic",
+          "ids": [
+            "arxiv:2609.20926",
+            "arxiv:2609.21040",
+            "arxiv:2609.21072"
+          ]
+        },
+        {
+          "rank": 11,
+          "slug": "otto-information-engine-778a",
+          "category": "quantum",
+          "ids": [
+            "arxiv:2609.22821",
+            "arxiv:2609.22826",
+            "arxiv:2609.22831"
+          ]
+        },
+        {
+          "rank": 12,
+          "slug": "quantum-battery-selection-stochastic-3e58",
+          "category": "quantum",
+          "ids": [
+            "arxiv:2609.20613",
+            "arxiv:2609.25699",
+            "arxiv:2609.26341"
+          ]
+        },
+        {
+          "rank": 13,
+          "slug": "reheating-dark-7ed3",
+          "category": "particle",
+          "ids": [
+            "arxiv:2609.17672",
+            "arxiv:2609.21196",
+            "arxiv:2609.23475"
+          ]
+        },
+        {
+          "rank": 14,
+          "slug": "resetting-diffusion-dc94",
+          "category": "statistical",
+          "ids": [
+            "arxiv:2609.21124",
+            "arxiv:2609.22527",
+            "arxiv:2609.24427"
+          ]
+        }
+      ],
+      "source_notes": [
+        "cohesion-review-failed:573df613bf88105ba80b5810fc356e33d33e2c9c5a9a1a04b8930b792fefad37",
+        "enrichment-fallback:arxiv:2609.17683",
+        "enrichment-fallback:arxiv:2609.18008",
+        "enrichment-fallback:arxiv:2609.18246",
+        "enrichment-fallback:arxiv:2609.18450",
+        "enrichment-fallback:arxiv:2609.18696",
+        "enrichment-fallback:arxiv:2609.19898",
+        "enrichment-fallback:arxiv:2609.20801",
+        "enrichment-fallback:arxiv:2609.21030",
+        "enrichment-fallback:arxiv:2609.21087",
+        "enrichment-fallback:arxiv:2609.21947",
+        "enrichment-fallback:arxiv:2609.22029",
+        "enrichment-fallback:arxiv:2609.22572",
+        "enrichment-fallback:arxiv:2609.24722",
+        "enrichment-fallback:arxiv:2609.24866",
+        "enrichment-fallback:arxiv:2609.24946",
+        "enrichment-fallback:arxiv:2609.25158",
+        "enrichment-fallback:arxiv:2609.25239",
+        "enrichment-fallback:arxiv:2609.26553"
+      ]
+    },
+    {
+      "parent_run": "https://github.com/jam-sudo/TrendBio/actions/runs/44771845579",
+      "pipeline_attempt_receipt": {
+        "domain": "physics-expanded",
+        "date": "2026-09-23",
+        "status": "ok",
+        "source_status": {
+          "arxiv": "ok",
+          "biorxiv": "skipped",
+          "crossref": "ok",
+          "github": "skipped",
+          "pubmed": "skipped",
+          "rss": "skipped"
+        },
+        "attempt_model_cost_usd": 0.0008334999999999315,
+        "cumulative_model_cost_usd": 1.4723385000000004
+      },
+      "quotation_validation_warnings": 0,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44772761729",
+      "source_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44772761729/artifacts/14647803929",
+      "paper_and_embedding_files_byte_identical": {
+        "items": 1835,
+        "embeddings": 2
+      },
+      "mailing_dates_and_source_scope_identical": true,
+      "identical_candidate_memberships": 241,
+      "successful_candidate_reviews_unchanged": 239,
+      "retried": [
+        {
+          "candidate_review_id": "170c4e619ad4b23cf43d4a422ff1fa04d0d28d235ddbe79094109e6a059b6447",
+          "paper_ids": [
+            "arxiv:2609.17667",
+            "arxiv:2609.18000",
+            "arxiv:2609.18408",
+            "arxiv:2609.19246",
+            "arxiv:2609.19253",
+            "arxiv:2609.20079",
+            "arxiv:2609.20931",
+            "arxiv:2609.21658",
+            "arxiv:2609.21981",
+            "arxiv:2609.22071",
+            "arxiv:2609.22431",
+            "arxiv:2609.25259",
+            "arxiv:2609.25455",
+            "arxiv:2609.26697"
+          ],
+          "resolved": true,
+          "qualified_groups": []
+        },
+        {
+          "candidate_review_id": "573df613bf88105ba80b5810fc356e33d33e2c9c5a9a1a04b8930b792fefad37",
+          "paper_ids": [
+            "arxiv:2609.18761",
+            "arxiv:2609.18918",
+            "arxiv:2609.22420",
+            "arxiv:2609.24282",
+            "arxiv:2609.25246",
+            "arxiv:2609.25276",
+            "arxiv:2609.25368"
+          ],
+          "resolved": true,
+          "qualified_groups": []
+        }
+      ],
+      "run_status": "ok",
+      "remaining_review_failures": 0,
+      "recorded_additional_model_cost_usd": 0.0008334999999999,
+      "resulting_ledger_usd": 1.4723385000000004,
+      "original_rank_count": 14,
+      "final_rank_count": 14,
+      "same_ranked_paper_sets": 14,
+      "same_sets_in_same_position": 14,
+      "ordered_english_rows_identical": true,
+      "same_ranked_paper_sets_as_submission": 3,
+      "identical_to_submission_at_same_rank": 0,
+      "original_and_final_sample": [
+        {
+          "before": 1,
+          "after": 1,
+          "same_papers": true,
+          "same_brief_and_synthesis": true,
+          "same_slug": true
+        },
+        {
+          "before": 13,
+          "after": 13,
+          "same_papers": true,
+          "same_brief_and_synthesis": true,
+          "same_slug": true
+        }
+      ],
+      "final_ranked": [
+        {
+          "rank": 1,
+          "slug": "black-holes-3d8b",
+          "category": "gravitation",
+          "ids": [
+            "arxiv:2609.17570",
+            "arxiv:2609.17585",
+            "arxiv:2609.18377",
+            "arxiv:2609.24926",
+            "arxiv:2609.25097",
+            "arxiv:2609.25113",
+            "arxiv:2609.25161"
+          ]
+        },
+        {
+          "rank": 2,
+          "slug": "dark-black-8eb2",
+          "category": "cosmology",
+          "ids": [
+            "arxiv:2609.20021",
+            "arxiv:2609.20022",
+            "arxiv:2609.22758"
+          ]
+        },
+        {
+          "rank": 3,
+          "slug": "dark-high-recoil-a734",
+          "category": "particle",
+          "ids": [
+            "arxiv:2609.24988",
+            "arxiv:2609.25114",
+            "arxiv:2609.26698"
+          ]
+        },
+        {
+          "rank": 4,
+          "slug": "dark-matter-lux-0db2",
+          "category": "particle",
+          "ids": [
+            "arxiv:2609.17935",
+            "arxiv:2609.23096",
+            "arxiv:2609.23477"
+          ]
+        },
+        {
+          "rank": 5,
+          "slug": "dynamics-rydberg-502b",
+          "category": "quantum",
+          "ids": [
+            "arxiv:2609.22673",
+            "arxiv:2609.23648",
+            "arxiv:2609.23651"
+          ]
+        },
+        {
+          "rank": 6,
+          "slug": "emission-galaxy-gama-b068",
+          "category": "galactic",
+          "ids": [
+            "arxiv:2609.17662",
+            "arxiv:2609.22427",
+            "arxiv:2609.23140"
+          ]
+        },
+        {
+          "rank": 7,
+          "slug": "inflation-gravity-928f",
+          "category": "cosmology",
+          "ids": [
+            "arxiv:2609.20622",
+            "arxiv:2609.22933",
+            "arxiv:2609.23511"
+          ]
+        },
+        {
+          "rank": 8,
+          "slug": "inflation-qcd-lukewarm-1ff2",
+          "category": "cosmology",
+          "ids": [
+            "arxiv:2609.19284",
+            "arxiv:2609.20918",
+            "arxiv:2609.21745"
+          ]
+        },
+        {
+          "rank": 9,
+          "slug": "light-black-hole-f74f",
+          "category": "gravitation",
+          "ids": [
+            "arxiv:2609.18615",
+            "arxiv:2609.21990",
+            "arxiv:2609.25667"
+          ]
+        },
+        {
+          "rank": 10,
+          "slug": "metallicity-galaxies-ace-c918",
+          "category": "galactic",
+          "ids": [
+            "arxiv:2609.20926",
+            "arxiv:2609.21040",
+            "arxiv:2609.21072"
+          ]
+        },
+        {
+          "rank": 11,
+          "slug": "otto-information-engine-778a",
+          "category": "quantum",
+          "ids": [
+            "arxiv:2609.22821",
+            "arxiv:2609.22826",
+            "arxiv:2609.22831"
+          ]
+        },
+        {
+          "rank": 12,
+          "slug": "quantum-battery-selection-stochastic-3e58",
+          "category": "quantum",
+          "ids": [
+            "arxiv:2609.20613",
+            "arxiv:2609.25699",
+            "arxiv:2609.26341"
+          ]
+        },
+        {
+          "rank": 13,
+          "slug": "reheating-dark-7ed3",
+          "category": "particle",
+          "ids": [
+            "arxiv:2609.17672",
+            "arxiv:2609.21196",
+            "arxiv:2609.23475"
+          ]
+        },
+        {
+          "rank": 14,
+          "slug": "resetting-diffusion-dc94",
+          "category": "statistical",
+          "ids": [
+            "arxiv:2609.21124",
+            "arxiv:2609.22527",
+            "arxiv:2609.24427"
+          ]
+        }
+      ],
+      "source_notes": [
+        "enrichment-fallback:arxiv:2609.17683",
+        "enrichment-fallback:arxiv:2609.18008",
+        "enrichment-fallback:arxiv:2609.18246",
+        "enrichment-fallback:arxiv:2609.18450",
+        "enrichment-fallback:arxiv:2609.18696",
+        "enrichment-fallback:arxiv:2609.19898",
+        "enrichment-fallback:arxiv:2609.20801",
+        "enrichment-fallback:arxiv:2609.21030",
+        "enrichment-fallback:arxiv:2609.21087",
+        "enrichment-fallback:arxiv:2609.21947",
+        "enrichment-fallback:arxiv:2609.22029",
+        "enrichment-fallback:arxiv:2609.22572",
+        "enrichment-fallback:arxiv:2609.24722",
+        "enrichment-fallback:arxiv:2609.24866",
+        "enrichment-fallback:arxiv:2609.24946",
+        "enrichment-fallback:arxiv:2609.25158",
+        "enrichment-fallback:arxiv:2609.25239",
+        "enrichment-fallback:arxiv:2609.26553"
+      ]
+    }
+  ],
+  "enrichment_and_lattice_control": {
+    "controls-2026-09-23": {
+      "fallback_enriched_ranked_papers": {}
+    },
+    "announced-2026-09-23": {
+      "fallback_enriched_ranked_papers": {},
+      "control_relevance": {
+        "relevant": true,
+        "primary_category": "atomic-molecular",
+        "first_submission": "2026-07-29",
+        "physics_mailing": "2026-09-18",
+        "mailing_section": "new"
+      }
+    },
+    "controls-2026-11-18": {
+      "fallback_enriched_ranked_papers": {}
+    },
+    "announced-2026-11-18": {
+      "fallback_enriched_ranked_papers": {
+        "arxiv:2611.16119": {
+          "ranks": [
+            1
+          ],
+          "url": "https://arxiv.org/abs/2611.16119v1"
+        }
+      }
+    }
+  },
+  "production_adapter_replay_against_raw_source_responses": {
+    "2026-09-16": {
+      "official_raw_responses_checked_through_pipeline": true,
+      "eligible_versioned_records": 1747,
+      "mailing_dates": 7
+    },
+    "2026-09-23": {
+      "official_raw_responses_checked_through_pipeline": true,
+      "eligible_versioned_records": 1808,
+      "mailing_dates": 7
+    },
+    "2026-10-28": {
+      "official_raw_responses_checked_through_pipeline": true,
+      "eligible_versioned_records": 1714,
+      "mailing_dates": 7
+    },
+    "2026-11-18": {
+      "official_raw_responses_checked_through_pipeline": true,
+      "eligible_versioned_records": 1911,
+      "mailing_dates": 7
+    }
+  },
+  "ranked_editions": {
+    "2026-09-23": {
+      "controls": {
+        "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44765339072",
+        "commit": "65941e74775e99d7987ec3a5cf8ae833bff84592",
+        "data": "https://github.com/jam-sudo/TrendBio/actions/runs/44765339072/artifacts/14644924776",
+        "reader": "https://github.com/jam-sudo/TrendBio/actions/runs/44765339072/artifacts/14647480016",
+        "recorded_model_cost_usd": 1.3519377999999993,
+        "status": "ok",
+        "source_status": {
+          "arxiv": "ok",
+          "biorxiv": "skipped",
+          "crossref": "ok",
+          "github": "skipped",
+          "pubmed": "skipped",
+          "rss": "skipped"
+        },
+        "arxiv_records": 1745,
+        "journal_records": 27,
+        "missing_publisher_eligible_dois": [],
+        "source_records_missing_after_deduplication": [],
+        "paper_total": 1772,
+        "relevant": 1694,
+        "initial_candidates": 242,
+        "candidates_reaching_comparison": 27,
+        "review_failures": 0,
+        "enrichment_fallbacks": 13,
+        "enrichment_fallbacks_in_ranks": 0,
+        "synthesis_fallbacks": 0,
+        "confirmed_groups": 15,
+        "ranked_groups": 15,
+        "ranked": [
+          {
+            "rank": 1,
+            "slug": "lz-solar-capture-8c09",
+            "category": "particle",
+            "ids": [
+              "arxiv:2609.21823",
+              "arxiv:2609.22063",
+              "arxiv:2609.28129",
+              "arxiv:2609.28218",
+              "arxiv:2609.28616"
+            ]
+          },
+          {
+            "rank": 2,
+            "slug": "quantum-batteries-7d40",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2609.20966",
+              "arxiv:2609.24425",
+              "arxiv:2609.25699",
+              "arxiv:2609.26573",
+              "arxiv:2609.27407"
+            ]
+          },
+          {
+            "rank": 3,
+            "slug": "hl-lhc-e98f",
+            "category": "particle",
+            "ids": [
+              "arxiv:2609.20135",
+              "arxiv:2609.26376",
+              "arxiv:2609.26383",
+              "arxiv:2609.28043"
+            ]
+          },
+          {
+            "rank": 4,
+            "slug": "reservoir-computing-quantum-1e0f",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2609.20345",
+              "arxiv:2609.23429",
+              "arxiv:2609.27072",
+              "arxiv:2609.28441"
+            ]
+          },
+          {
+            "rank": 5,
+            "slug": "electronic-structure-1ad5",
+            "category": "condensed-matter",
+            "ids": [
+              "arxiv:2609.24843",
+              "arxiv:2609.27672",
+              "doi:10.1103/sjrs-3fjz"
+            ]
+          },
+          {
+            "rank": 6,
+            "slug": "black-hair-5af8",
+            "category": "gravitation",
+            "ids": [
+              "arxiv:2609.21990",
+              "arxiv:2609.25667",
+              "arxiv:2609.28583"
+            ]
+          },
+          {
+            "rank": 7,
+            "slug": "dark-high-recoil-a734",
+            "category": "particle",
+            "ids": [
+              "arxiv:2609.24988",
+              "arxiv:2609.25114",
+              "arxiv:2609.26698"
+            ]
+          },
+          {
+            "rank": 8,
+            "slug": "dark-matter-aab7",
+            "category": "cosmology",
+            "ids": [
+              "arxiv:2609.23477",
+              "arxiv:2609.26570",
+              "arxiv:2609.28415"
+            ]
+          },
+          {
+            "rank": 9,
+            "slug": "efficient-learning-clifford-3ed2",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2609.27128",
+              "arxiv:2609.27177",
+              "arxiv:2609.27565"
+            ]
+          },
+          {
+            "rank": 10,
+            "slug": "gravitational-lenses-strong-b04b",
+            "category": "gravitation",
+            "ids": [
+              "arxiv:2609.21660",
+              "arxiv:2609.21661",
+              "arxiv:2609.24891"
+            ]
+          },
+          {
+            "rank": 11,
+            "slug": "higgsino-dark-matter-9d23",
+            "category": "particle",
+            "ids": [
+              "arxiv:2609.23691",
+              "arxiv:2609.28740",
+              "arxiv:2610.00226"
+            ]
+          },
+          {
+            "rank": 12,
+            "slug": "ionization-selected-0f09",
+            "category": "galactic",
+            "ids": [
+              "arxiv:2609.20963",
+              "arxiv:2609.27130",
+              "arxiv:2609.28329"
+            ]
+          },
+          {
+            "rank": 13,
+            "slug": "otto-information-engine-778a",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2609.22821",
+              "arxiv:2609.22826",
+              "arxiv:2609.22831"
+            ]
+          },
+          {
+            "rank": 14,
+            "slug": "quantum-black-hole-0770",
+            "category": "gravitation",
+            "ids": [
+              "arxiv:2609.20788",
+              "arxiv:2609.23776",
+              "arxiv:2609.26724"
+            ]
+          },
+          {
+            "rank": 15,
+            "slug": "resetting-diffusion-dc94",
+            "category": "statistical",
+            "ids": [
+              "arxiv:2609.21124",
+              "arxiv:2609.22527",
+              "arxiv:2609.24427"
+            ]
+          }
+        ],
+        "known_late_announcement": {
+          "in_collection": false,
+          "candidates": [],
+          "first_stage": [],
+          "confirmed": false,
+          "ranked": []
+        },
+        "synthesis_model": "claude-opus-5-5",
+        "recorded_tokens_by_month_and_model": {
+          "2026-11": {
+            "claude-haiku-5-5": {
+              "input_tokens": 4261523,
+              "output_tokens": 413151
+            },
+            "claude-opus-5-5": {
+              "input_tokens": 20933,
+              "output_tokens": 6229
+            },
+            "claude-sonnet-5-5": {
+              "input_tokens": 123144,
+              "output_tokens": 26461
+            }
+          }
+        }
+      },
+      "announced": {
+        "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44766962279",
+        "commit": "8415f95de93f505a53502a1e15441c0b1ff9bd51",
+        "data": "https://github.com/jam-sudo/TrendBio/actions/runs/44766962279/artifacts/14647027566",
+        "reader": "https://github.com/jam-sudo/TrendBio/actions/runs/44766962279/artifacts/14646877452",
+        "recorded_model_cost_usd": 1.4665704000000004,
+        "status": "degraded",
+        "source_status": {
+          "arxiv": "ok",
+          "biorxiv": "skipped",
+          "crossref": "ok",
+          "github": "skipped",
+          "pubmed": "skipped",
+          "rss": "skipped"
+        },
+        "arxiv_records": 1808,
+        "journal_records": 27,
+        "missing_publisher_eligible_dois": [],
+        "source_records_missing_after_deduplication": [],
+        "paper_total": 1835,
+        "relevant": 1750,
+        "initial_candidates": 241,
+        "candidates_reaching_comparison": 34,
+        "review_failures": 2,
+        "enrichment_fallbacks": 18,
+        "enrichment_fallbacks_in_ranks": 0,
+        "synthesis_fallbacks": 0,
+        "confirmed_groups": 14,
+        "ranked_groups": 14,
+        "ranked": [
+          {
+            "rank": 1,
+            "slug": "black-holes-3d8b",
+            "category": "gravitation",
+            "ids": [
+              "arxiv:2609.17570",
+              "arxiv:2609.17585",
+              "arxiv:2609.18377",
+              "arxiv:2609.24926",
+              "arxiv:2609.25097",
+              "arxiv:2609.25113",
+              "arxiv:2609.25161"
+            ]
+          },
+          {
+            "rank": 2,
+            "slug": "dark-black-8eb2",
+            "category": "cosmology",
+            "ids": [
+              "arxiv:2609.20021",
+              "arxiv:2609.20022",
+              "arxiv:2609.22758"
+            ]
+          },
+          {
+            "rank": 3,
+            "slug": "dark-high-recoil-a734",
+            "category": "particle",
+            "ids": [
+              "arxiv:2609.24988",
+              "arxiv:2609.25114",
+              "arxiv:2609.26698"
+            ]
+          },
+          {
+            "rank": 4,
+            "slug": "dark-matter-lux-0db2",
+            "category": "particle",
+            "ids": [
+              "arxiv:2609.17935",
+              "arxiv:2609.23096",
+              "arxiv:2609.23477"
+            ]
+          },
+          {
+            "rank": 5,
+            "slug": "dynamics-rydberg-502b",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2609.22673",
+              "arxiv:2609.23648",
+              "arxiv:2609.23651"
+            ]
+          },
+          {
+            "rank": 6,
+            "slug": "emission-galaxy-gama-b068",
+            "category": "galactic",
+            "ids": [
+              "arxiv:2609.17662",
+              "arxiv:2609.22427",
+              "arxiv:2609.23140"
+            ]
+          },
+          {
+            "rank": 7,
+            "slug": "inflation-gravity-928f",
+            "category": "cosmology",
+            "ids": [
+              "arxiv:2609.20622",
+              "arxiv:2609.22933",
+              "arxiv:2609.23511"
+            ]
+          },
+          {
+            "rank": 8,
+            "slug": "inflation-qcd-lukewarm-1ff2",
+            "category": "cosmology",
+            "ids": [
+              "arxiv:2609.19284",
+              "arxiv:2609.20918",
+              "arxiv:2609.21745"
+            ]
+          },
+          {
+            "rank": 9,
+            "slug": "light-black-hole-f74f",
+            "category": "gravitation",
+            "ids": [
+              "arxiv:2609.18615",
+              "arxiv:2609.21990",
+              "arxiv:2609.25667"
+            ]
+          },
+          {
+            "rank": 10,
+            "slug": "metallicity-galaxies-ace-c918",
+            "category": "galactic",
+            "ids": [
+              "arxiv:2609.20926",
+              "arxiv:2609.21040",
+              "arxiv:2609.21072"
+            ]
+          },
+          {
+            "rank": 11,
+            "slug": "otto-information-engine-778a",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2609.22821",
+              "arxiv:2609.22826",
+              "arxiv:2609.22831"
+            ]
+          },
+          {
+            "rank": 12,
+            "slug": "quantum-battery-selection-stochastic-3e58",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2609.20613",
+              "arxiv:2609.25699",
+              "arxiv:2609.26341"
+            ]
+          },
+          {
+            "rank": 13,
+            "slug": "reheating-dark-7ed3",
+            "category": "particle",
+            "ids": [
+              "arxiv:2609.17672",
+              "arxiv:2609.21196",
+              "arxiv:2609.23475"
+            ]
+          },
+          {
+            "rank": 14,
+            "slug": "resetting-diffusion-dc94",
+            "category": "statistical",
+            "ids": [
+              "arxiv:2609.21124",
+              "arxiv:2609.22527",
+              "arxiv:2609.24427"
+            ]
+          }
+        ],
+        "known_late_announcement": {
+          "in_collection": true,
+          "candidates": [],
+          "first_stage": [],
+          "confirmed": false,
+          "ranked": []
+        },
+        "synthesis_model": "claude-opus-5-5",
+        "recorded_tokens_by_month_and_model": {
+          "2026-11": {
+            "claude-haiku-5-5": {
+              "input_tokens": 4411564,
+              "output_tokens": 437360
+            },
+            "claude-opus-5-5": {
+              "input_tokens": 21399,
+              "output_tokens": 6541
+            },
+            "claude-sonnet-5-5": {
+              "input_tokens": 139154,
+              "output_tokens": 31201
+            }
+          }
+        }
+      },
+      "comparison": {
+        "identical_journal_records": 27,
+        "identical_ranked_paper_sets": 3,
+        "at_same_rank": 0,
+        "identical_groups_in_both_top_tens": 1,
+        "only_submission_groups": 12,
+        "only_announcement_groups": 11,
+        "new_groups_with_paper_absent_from_submission_collection": 6,
+        "new_groups_with_all_papers_in_submission_but_changed_source_text": 4,
+        "new_groups_with_all_source_text_also_in_submission_collection": 1
+      }
+    },
+    "2026-11-18": {
+      "controls": {
+        "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44765343744",
+        "commit": "65941e74775e99d7987ec3a5cf8ae833bff84592",
+        "data": "https://github.com/jam-sudo/TrendBio/actions/runs/44765343744/artifacts/14646133265",
+        "reader": "https://github.com/jam-sudo/TrendBio/actions/runs/44765343744/artifacts/14647575353",
+        "recorded_model_cost_usd": 1.3684709000000017,
+        "status": "ok",
+        "source_status": {
+          "arxiv": "ok",
+          "biorxiv": "skipped",
+          "crossref": "ok",
+          "github": "skipped",
+          "pubmed": "skipped",
+          "rss": "skipped"
+        },
+        "arxiv_records": 1893,
+        "journal_records": 25,
+        "missing_publisher_eligible_dois": [],
+        "source_records_missing_after_deduplication": [],
+        "paper_total": 1918,
+        "relevant": 1837,
+        "initial_candidates": 227,
+        "candidates_reaching_comparison": 27,
+        "review_failures": 0,
+        "enrichment_fallbacks": 12,
+        "enrichment_fallbacks_in_ranks": 0,
+        "synthesis_fallbacks": 0,
+        "confirmed_groups": 8,
+        "ranked_groups": 8,
+        "ranked": [
+          {
+            "rank": 1,
+            "slug": "decoding-real-time-0db6",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2611.19130",
+              "arxiv:2611.21086",
+              "arxiv:2611.21321",
+              "arxiv:2611.21906"
+            ]
+          },
+          {
+            "rank": 2,
+            "slug": "black-hole-keck-95e1",
+            "category": "galactic",
+            "ids": [
+              "arxiv:2611.16490",
+              "arxiv:2611.24393",
+              "arxiv:2611.24608"
+            ]
+          },
+          {
+            "rank": 3,
+            "slug": "calibration-euclid-release-4c95",
+            "category": "cosmology",
+            "ids": [
+              "arxiv:2611.16486",
+              "arxiv:2611.16546",
+              "arxiv:2611.17305"
+            ]
+          },
+          {
+            "rank": 4,
+            "slug": "clifford-sampling-1546",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2611.22232",
+              "arxiv:2611.23923",
+              "arxiv:2611.24044"
+            ]
+          },
+          {
+            "rank": 5,
+            "slug": "dark-model-f567",
+            "category": "cosmology",
+            "ids": [
+              "arxiv:2611.16407",
+              "arxiv:2611.17422",
+              "arxiv:2611.24900"
+            ]
+          },
+          {
+            "rank": 6,
+            "slug": "diquark-nucleon-a865",
+            "category": "nuclear",
+            "ids": [
+              "arxiv:2611.19819",
+              "arxiv:2611.23834",
+              "arxiv:2611.25009"
+            ]
+          },
+          {
+            "rank": 7,
+            "slug": "future-collider-d385",
+            "category": "particle",
+            "ids": [
+              "arxiv:2611.21278",
+              "arxiv:2611.23993",
+              "arxiv:2611.24241"
+            ]
+          },
+          {
+            "rank": 8,
+            "slug": "quantum-nonlinear-bde5",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2611.17913",
+              "arxiv:2611.21552",
+              "arxiv:2611.22389"
+            ]
+          }
+        ],
+        "known_late_announcement": {
+          "in_collection": false,
+          "candidates": [],
+          "first_stage": [],
+          "confirmed": false,
+          "ranked": []
+        },
+        "synthesis_model": "claude-opus-5-5",
+        "recorded_tokens_by_month_and_model": {
+          "2026-11": {
+            "claude-haiku-5-5": {
+              "input_tokens": 4535774,
+              "output_tokens": 415683
+            },
+            "claude-opus-5-5": {
+              "input_tokens": 23516,
+              "output_tokens": 7742
+            },
+            "claude-sonnet-5-5": {
+              "input_tokens": 101854,
+              "output_tokens": 25444
+            }
+          }
+        }
+      },
+      "announced": {
+        "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44766965975",
+        "commit": "8415f95de93f505a53502a1e15441c0b1ff9bd51",
+        "data": "https://github.com/jam-sudo/TrendBio/actions/runs/44766965975/artifacts/14648161413",
+        "reader": "https://github.com/jam-sudo/TrendBio/actions/runs/44766965975/artifacts/14648475883",
+        "recorded_model_cost_usd": 1.418686800000001,
+        "status": "ok",
+        "source_status": {
+          "arxiv": "ok",
+          "biorxiv": "skipped",
+          "crossref": "ok",
+          "github": "skipped",
+          "pubmed": "skipped",
+          "rss": "skipped"
+        },
+        "arxiv_records": 1911,
+        "journal_records": 25,
+        "missing_publisher_eligible_dois": [],
+        "source_records_missing_after_deduplication": [],
+        "paper_total": 1936,
+        "relevant": 1860,
+        "initial_candidates": 227,
+        "candidates_reaching_comparison": 27,
+        "review_failures": 0,
+        "enrichment_fallbacks": 16,
+        "enrichment_fallbacks_in_ranks": 1,
+        "synthesis_fallbacks": 0,
+        "confirmed_groups": 11,
+        "ranked_groups": 11,
+        "ranked": [
+          {
+            "rank": 1,
+            "slug": "euclid-release-dr1-4aeb",
+            "category": "cosmology",
+            "ids": [
+              "arxiv:2611.15890",
+              "arxiv:2611.16119",
+              "arxiv:2611.16533",
+              "arxiv:2611.16546",
+              "arxiv:2611.16825"
+            ]
+          },
+          {
+            "rank": 2,
+            "slug": "dark-matter-lz-5b63",
+            "category": "particle",
+            "ids": [
+              "arxiv:2611.15957",
+              "arxiv:2611.16553",
+              "arxiv:2611.21737",
+              "arxiv:2611.22890"
+            ]
+          },
+          {
+            "rank": 3,
+            "slug": "decoding-real-time-0db6",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2611.19130",
+              "arxiv:2611.21086",
+              "arxiv:2611.21321",
+              "arxiv:2611.21906"
+            ]
+          },
+          {
+            "rank": 4,
+            "slug": "conservative-cumulative-033c",
+            "category": "fluids",
+            "ids": [
+              "arxiv:2611.15909",
+              "arxiv:2611.16873",
+              "arxiv:2611.21686"
+            ]
+          },
+          {
+            "rank": 5,
+            "slug": "cubic-curvature-deformations-kerr-5a43",
+            "category": "gravitation",
+            "ids": [
+              "arxiv:2611.15331",
+              "arxiv:2611.15876",
+              "arxiv:2611.22459"
+            ]
+          },
+          {
+            "rank": 6,
+            "slug": "distrustful-entanglement-quantum-e619",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2611.21048",
+              "arxiv:2611.21417",
+              "arxiv:2611.21759"
+            ]
+          },
+          {
+            "rank": 7,
+            "slug": "galaxies-release-c92c",
+            "category": "galactic",
+            "ids": [
+              "arxiv:2611.16444",
+              "arxiv:2611.20917",
+              "arxiv:2611.22914"
+            ]
+          },
+          {
+            "rank": 8,
+            "slug": "meson-radiative-e4ff",
+            "category": "particle",
+            "ids": [
+              "arxiv:2611.18202",
+              "arxiv:2611.18204",
+              "arxiv:2611.18206"
+            ]
+          },
+          {
+            "rank": 9,
+            "slug": "modeling-turbulence-beeb",
+            "category": "fluids",
+            "ids": [
+              "arxiv:2611.16082",
+              "arxiv:2611.18858",
+              "arxiv:2611.19676"
+            ]
+          },
+          {
+            "rank": 10,
+            "slug": "neural-fluid-flow-e056",
+            "category": "fluids",
+            "ids": [
+              "arxiv:2611.14534",
+              "arxiv:2611.16341",
+              "arxiv:2611.19753"
+            ]
+          },
+          {
+            "rank": 11,
+            "slug": "quantum-state-cost-9349",
+            "category": "quantum",
+            "ids": [
+              "arxiv:2611.14652",
+              "arxiv:2611.19725",
+              "arxiv:2611.21349"
+            ]
+          }
+        ],
+        "known_late_announcement": {
+          "in_collection": false,
+          "candidates": [],
+          "first_stage": [],
+          "confirmed": false,
+          "ranked": []
+        },
+        "synthesis_model": "claude-opus-5-5",
+        "recorded_tokens_by_month_and_model": {
+          "2026-11": {
+            "claude-haiku-5-5": {
+              "input_tokens": 4580148,
+              "output_tokens": 419256
+            },
+            "claude-opus-5-5": {
+              "input_tokens": 22933,
+              "output_tokens": 8361
+            },
+            "claude-sonnet-5-5": {
+              "input_tokens": 116596,
+              "output_tokens": 25890
+            }
+          }
+        }
+      },
+      "comparison": {
+        "identical_journal_records": 25,
+        "identical_ranked_paper_sets": 1,
+        "at_same_rank": 0,
+        "identical_groups_in_both_top_tens": 1,
+        "only_submission_groups": 7,
+        "only_announcement_groups": 10,
+        "new_groups_with_paper_absent_from_submission_collection": 7,
+        "new_groups_with_all_papers_in_submission_but_changed_source_text": 1,
+        "new_groups_with_all_source_text_also_in_submission_collection": 2
+      }
+    }
+  },
+  "editorial_checks": [
+    {
+      "date": "2026-09-23",
+      "rank": 1,
+      "slug": "black-holes-3d8b",
+      "group_supported": true,
+      "summary_accurate_as_written": false,
+      "disposition": "Scoped reader correction",
+      "finding": "Seven papers calculate shadow observables for specified black-hole metrics. The two studies of individual parameters are correctly described. The brief’s count misses joint constraints in a third EHT comparison. Its table holds the other parameters fixed. Two papers share an author, as the detailed summary discloses.",
+      "full_text": [
+        "https://arxiv.org/html/2609.18377v1#S5"
+      ],
+      "note": "notes/physics-expanded/2026-09-23/black-holes-3d8b.md",
+      "sources": [
+        {
+          "id": "arxiv:2609.17570",
+          "url": "https://arxiv.org/abs/2609.17570v1",
+          "source_sha256": "e4a36f8d8730f633a496ad08012b0613eec58b3005e7253d98bec1175b9d7856"
+        },
+        {
+          "id": "arxiv:2609.17585",
+          "url": "https://arxiv.org/abs/2609.17585v1",
+          "source_sha256": "285fba99d2955bbc7624a3cacfd9b1e6f467281f4691b816251186e6e016dbcf"
+        },
+        {
+          "id": "arxiv:2609.18377",
+          "url": "https://arxiv.org/abs/2609.18377v1",
+          "source_sha256": "3861fb7845eb52999295375f951f3e486928b161867f2f4380314a981c6c26ff"
+        },
+        {
+          "id": "arxiv:2609.24926",
+          "url": "https://arxiv.org/abs/2609.24926v1",
+          "source_sha256": "52ff7ec1c1ff68b2b5aeec894d94d8696e193c0786eed5c8ecd9223fc938a257"
+        },
+        {
+          "id": "arxiv:2609.25097",
+          "url": "https://arxiv.org/abs/2609.25097v1",
+          "source_sha256": "633a23ddfbf198146353e5adbcd4fa94e9c4f89204727d1731028da3129f2898"
+        },
+        {
+          "id": "arxiv:2609.25113",
+          "url": "https://arxiv.org/abs/2609.25113v1",
+          "source_sha256": "785d892aa3d95a792b3000dc4b74efbd0a010cba235fcfca161a697283602dfb"
+        },
+        {
+          "id": "arxiv:2609.25161",
+          "url": "https://arxiv.org/abs/2609.25161v1",
+          "source_sha256": "b5d86e80443d1fce0ff48f0274820afbd98f97f569bef9c0f98f261200c80561"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "rank": 13,
+      "slug": "reheating-dark-7ed3",
+      "group_supported": true,
+      "summary_accurate_as_written": true,
+      "disposition": "Retain",
+      "finding": "All three theoretical studies test how an alternative early thermal history changes the parameters required for the observed dark-matter abundance. The full freeze-in study also confirms larger Yukawa couplings. The brief correctly gives the opposite direction for the dark-photon portal’s kinetic mixing and identifies the enhanced annihilation needed after late particle injection.",
+      "full_text": [
+        "https://arxiv.org/html/2609.21196v1"
+      ],
+      "sources": [
+        {
+          "id": "arxiv:2609.17672",
+          "url": "https://arxiv.org/abs/2609.17672v1",
+          "source_sha256": "fc5201db2e5c98847b13d717c6bf7063b4ada9988b1dc5ab783a38367798df55"
+        },
+        {
+          "id": "arxiv:2609.21196",
+          "url": "https://arxiv.org/abs/2609.21196v1",
+          "source_sha256": "4220f66b62cf12886d9c9e78a3945ab6ee6cf48ca00cea64684d06f1de78cafe"
+        },
+        {
+          "id": "arxiv:2609.23475",
+          "url": "https://arxiv.org/abs/2609.23475v1",
+          "source_sha256": "96a2ec0a8ef41163cc39f7bf4bc7175c075a60edf69d948da5ac503583eb4321"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "rank": 1,
+      "slug": "euclid-release-dr1-4aeb",
+      "group_supported": true,
+      "summary_accurate_as_written": true,
+      "disposition": "Retain as a single release",
+      "finding": "The five Euclid DR1 companion papers validate astrometric or photometric performance against reference observations and mission requirements. The quoted VIS and NISP precision, ground-based photometry thresholds, outstanding calibrations and COSMOS reference-model limits agree with the source results. The copy explicitly identifies the common release.",
+      "full_text": [
+        "https://arxiv.org/abs/2611.15890v1",
+        "https://arxiv.org/abs/2611.16119v1",
+        "https://arxiv.org/abs/2611.16533v1",
+        "https://arxiv.org/abs/2611.16546v1",
+        "https://arxiv.org/abs/2611.16825v1"
+      ],
+      "sources": [
+        {
+          "id": "arxiv:2611.15890",
+          "url": "https://arxiv.org/abs/2611.15890v1",
+          "source_sha256": "95ac217750a76d0e6f8122c67539bdc43b29f073c14c6f95052427674e72e67b"
+        },
+        {
+          "id": "arxiv:2611.16119",
+          "url": "https://arxiv.org/abs/2611.16119v1",
+          "source_sha256": "db2c99a54ecf82bb7bfef8f3710173c29152755f1905e732532a8d8cde89db1d"
+        },
+        {
+          "id": "arxiv:2611.16533",
+          "url": "https://arxiv.org/abs/2611.16533v1",
+          "source_sha256": "c12b0dba4995839f131ed0e582878ef8840316f4219249ddc25a49a9fcb33e0b"
+        },
+        {
+          "id": "arxiv:2611.16546",
+          "url": "https://arxiv.org/abs/2611.16546v1",
+          "source_sha256": "5a1eab193a5cf98c010a61c0fa278e2d9ba0db89ffca68913c59679978fd7726"
+        },
+        {
+          "id": "arxiv:2611.16825",
+          "url": "https://arxiv.org/abs/2611.16825v1",
+          "source_sha256": "d3b590dcad7905c27168733a670cb699bfc367230335f5e7177cac9751f31b8f"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "rank": 11,
+      "slug": "quantum-state-cost-9349",
+      "group_supported": false,
+      "summary_accurate_as_written": false,
+      "disposition": "Withdraw the ranked group and retain its position and reason",
+      "finding": "The detailed copy describes genuine individual results. Memory dimension, entropy production and the size of a classical message alphabet are different resources. The limiting comparisons also differ. There is no single tested resource or common asymptotic result across the three papers.",
+      "full_text": [
+        "https://arxiv.org/abs/2611.14652v1",
+        "https://arxiv.org/abs/2611.19725v1",
+        "https://arxiv.org/abs/2611.21349v1"
+      ],
+      "note": "notes/physics-expanded/withdrawals.json",
+      "sources": [
+        {
+          "id": "arxiv:2611.14652",
+          "url": "https://arxiv.org/abs/2611.14652v1",
+          "source_sha256": "445fbd6d59c8cf8d1d4f2218d0f28fed8721d87164baae8ccf971846f42dde16"
+        },
+        {
+          "id": "arxiv:2611.19725",
+          "url": "https://arxiv.org/abs/2611.19725v1",
+          "source_sha256": "6cbf41071f7a92c36dc58b9040d21ef357ff157340e43699e28f931692dd4365"
+        },
+        {
+          "id": "arxiv:2611.21349",
+          "url": "https://arxiv.org/abs/2611.21349v1",
+          "source_sha256": "50aa2e388a0f0dcaf8880de829ec53ca995dffa267145cacd68ddfaf60eeef75"
+        }
+      ]
+    }
+  ],
+  "english_readers": [
+    {
+      "key": "reader-controls-2026-09-23",
+      "date": "2026-09-23",
+      "run": 44773269021,
+      "rank_source": 44765339072,
+      "topics": 15,
+      "published_topics": 15,
+      "links": 51,
+      "withdrawals": [],
+      "corrections": [],
+      "widths": [
+        320,
+        1280
+      ],
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44773269021/artifacts/14649135150",
+      "expires": "2026-12-04T16:28:18Z",
+      "sha256": "14e087edae565b23b6236e882933c4817473e18e7ed3075bb8f37442bd2a6d31"
+    },
+    {
+      "key": "replay2-announced-2026-09-23",
+      "date": "2026-09-23",
+      "run": 44772761729,
+      "rank_source": 44772761729,
+      "topics": 14,
+      "published_topics": 14,
+      "links": 46,
+      "withdrawals": [],
+      "corrections": [
+        1
+      ],
+      "widths": [
+        320,
+        1280
+      ],
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44772761729/artifacts/14647728936",
+      "expires": "2026-12-04T16:25:34Z",
+      "sha256": "7bbfe54e18a461886655710f21d91039119547245dd86256ab8940bafa420cfe"
+    },
+    {
+      "key": "reader-controls-2026-11-18",
+      "date": "2026-11-18",
+      "run": 44773272885,
+      "rank_source": 44765343744,
+      "topics": 8,
+      "published_topics": 8,
+      "links": 25,
+      "withdrawals": [],
+      "corrections": [],
+      "widths": [
+        320,
+        1280
+      ],
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44773272885/artifacts/14647534815",
+      "expires": "2026-12-04T16:28:35Z",
+      "sha256": "53dcf26d29f01c3fde72766dc0cfdbd7f3d7abc0c8280d181c17788a3ba68714"
+    },
+    {
+      "key": "reader-announced-2026-11-18",
+      "date": "2026-11-18",
+      "run": 44772373106,
+      "rank_source": 44766965975,
+      "topics": 11,
+      "published_topics": 10,
+      "links": 34,
+      "withdrawals": [
+        11
+      ],
+      "corrections": [],
+      "widths": [
+        320,
+        1280
+      ],
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44772373106/artifacts/14647788285",
+      "expires": "2026-12-04T16:22:35Z",
+      "sha256": "e7ef499226857831dbd0a246fd880b09e990c70c2f8e25a87553cea594a3f3f3"
+    }
+  ],
+  "total_recorded_model_cost_usd": 5.611434000000003,
+  "bundle": {
+    "editions": 91,
+    "ranked_entries": 553,
+    "ordered_paper_links": 1724,
+    "sha256": "615a36ef8f129a9c287bb4a331e284a9d36b701e08880c465f2b07c8a1b5d397",
+    "prior_editions_byte_identical": 87
+  },
+  "english_site_and_archive": {
+    "public_stored_editions_scanned": 390,
+    "public_nonempty_headlines_briefs_and_syntheses_scanned": 30330,
+    "pilot_downloads_scanned": {
+      "editions": 91,
+      "ranked_entries": 553,
+      "editorial_blocks": 1709
+    },
+    "hangul_in_scanned_editorial_text": 0,
+    "sitemap_urls": 1243,
+    "english_search_pages": 775,
+    "english_canonical_paths_sampled": {
+      "/": 200,
+      "/biology/": 200,
+      "/physics/": 200,
+      "/search/": 200,
+      "/about/": 200
+    },
+    "former_korean_urls_redirecting_to_english": {
+      "/ko": "/",
+      "/ko/": "/",
+      "/ko/biology/": "/biology/",
+      "/ko/physics/": "/physics/",
+      "/ko/search/": "/search/",
+      "/ko/feed.xml": "/feed.xml"
+    },
+    "paper_titles": "Cited works retain their original title where an English title is unavailable.",
+    "bookmarked_search_and_dated_rank": {
+      "search": {
+        "target": "/search/?q=Rydberg&field=physics&category=Quantum+physics",
+        "visible_results": 3,
+        "status": "3 topics found. Showing 3."
+      },
+      "ranked_paper": {
+        "target": "/physics/day/2026-11-20/#quantum-rydberg-6779",
+        "headline": "Logical-gate architectures and mediator-assisted control push toward fault tolerance"
+      }
+    },
+    "public_atom_feed_count": 31,
+    "browser_redirects_in_korean_locale": [
+      {
+        "old": "/ko/",
+        "target": "/",
+        "status": 301
+      },
+      {
+        "old": "/ko/biology/",
+        "target": "/biology/",
+        "status": 301
+      },
+      {
+        "old": "/ko/physics/",
+        "target": "/physics/",
+        "status": 301
+      },
+      {
+        "old": "/ko/search/",
+        "target": "/search/",
+        "status": 301
+      },
+      {
+        "old": "/ko/day/2026-11-20/",
+        "target": "/day/2026-11-20/",
+        "status": 301
+      },
+      {
+        "old": "/ko/biology/day/2026-11-20/",
+        "target": "/biology/day/2026-11-20/",
+        "status": 301
+      },
+      {
+        "old": "/ko/physics/day/2026-11-20/",
+        "target": "/physics/day/2026-11-20/",
+        "status": 301
+      },
+      {
+        "old": "/ko/physics/topic/galaxy-clustering-cc66/",
+        "target": "/physics/topic/galaxy-clustering-cc66/",
+        "status": 301
+      }
+    ]
+  },
+  "public_decision": "Use these public-mailing dates and versioned links for further historical expanded Physics trials. Expanded Physics continues on demand. The registered independent high-, low- and excluded-group editorial review and 14 genuine shared live operating dates remain conditions for scheduling. The owner will select the service-wide model budget after measurement.",
+  "interpretation": "A ranked group match requires identical paper membership. Model review, clustering inputs and downstream summaries may differ between independent runs. Groups containing an absent paper cannot be reproduced intact from the other collection. Counts with identical underlying source texts describe the limit of direct attribution to changed papers. Charges are the recorded model ledger for each new snapshot. The two source-preserving September retries are reported separately. The three audit reruns only rendered stored results and used no model calls. The November first-version NISP paper had an enrichment fallback. Its reported performance was independently verified in the upper-rank review."
+}
