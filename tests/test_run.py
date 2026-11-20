@@ -1965,7 +1965,13 @@ def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, dom
         }) for i, item in enumerate(ctx.items)]
         deps.adapters = [FakeAdapter(source, items)]
         deps.embedder, deps.llm = FakeEmbedder(), ctx.deps.llm
-        monkeypatch.setattr(deps.llm, 'enrich', lambda *args: None)
+        def classify(item, taxonomy, hints):
+            if taxonomy.share_editorial_decisions:
+                from pipeline.llm import Enrichment
+                return Enrichment(summary=item.title, primary=hints[0], secondary=[], relevant=True)
+            return None
+
+        monkeypatch.setattr(deps.llm, 'enrich', classify)
         monkeypatch.setattr(deps.llm, 'synthesize', lambda *args, **kwargs: None)
         monkeypatch.setattr('pipeline.run.collect_attention', lambda *args: None)
         before = tree(ctx.store.root / 'computational')

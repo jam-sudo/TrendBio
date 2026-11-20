@@ -8,10 +8,17 @@ import { editionInfo, fieldLabel, scienceGroups, type Field } from "../lib/editi
     <p>Choose a field to read its rankings and supporting papers. Pilot editions cover selected dates.</p>
     {Object.entries(scienceGroups).map(([group, fields]) => <section>
       <h2>{group}</h2>
-      <dl>{(Object.keys(fields) as Field[]).map(field => <div>
+      <dl>{(Object.keys(fields) as Field[]).filter(field => !fields[field]?.parent).map(field => <div>
         <dt><a href={field === "computational" ? "/" : `/${field}/`}>{fieldLabel(field)}</a>
           <small>{field === "computational" || !editionInfo[field].stage ? "Daily" : field === "biology" ? "Daily · Beta" : "Pilot"}</small></dt>
-        <dd>{fields[field]}</dd>
+        <dd>{fields[field]?.scope}
+          {Object.values(fields).some(child => child?.parent === field) && <ul aria-label={`${fieldLabel(field)} editions`}>
+            {(Object.keys(fields) as Field[]).filter(child => fields[child]?.parent === field).map(child =>
+              <li><a href={child === "computational" ? "/" : `/${child}/`}>{fieldLabel(child)}</a>
+                <small>{child === "computational" ? "Daily" : "Pilot"}</small>
+                <p>{fields[child]?.scope}</p></li>)}
+          </ul>}
+        </dd>
       </div>)}</dl>
     </section>)}
   </article>
@@ -20,5 +27,7 @@ import { editionInfo, fieldLabel, scienceGroups, type Field } from "../lib/editi
   dl > div { margin-block: .9rem; }
   dt { font-weight: 600; }
   small { margin-inline-start: .7em; color: var(--muted); font-weight: normal; }
+  li { margin-block: .5rem; }
+  li p { margin: .15rem 0; }
   dd { margin: .2em 0 0; }
 </style>

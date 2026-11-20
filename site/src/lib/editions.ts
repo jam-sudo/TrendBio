@@ -18,7 +18,7 @@ export const editionInfo = {
 } as const;
 export type Edition = keyof typeof editionInfo;
 export type Field = Edition | "computational";
-export const scienceGroups: Record<string, Partial<Record<Field, string>>> =
+export const scienceGroups: Record<string, Partial<Record<Field, { scope: string; parent?: Field }>>> =
   parse(readFileSync("../config/science-fields.yaml", "utf8"));
 const configured = Object.values(scienceGroups).flatMap(fields =>
   (Object.keys(fields) as Field[]).filter((field): field is Edition => field !== "computational"));

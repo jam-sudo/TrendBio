@@ -215,9 +215,11 @@ it("withdraws pilot ranks by a dated claim or the complete set of reviewed sourc
 it("links each science field and its dated pilots while omitting retired fields", async () => {
   await page.setContent(read("fields/index.html"));
   const directory = page.locator("main");
-  const links = await directory.locator("dt a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href")));
+  const links = await directory.locator("dl a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href")));
   expect(new Set(links)).toEqual(new Set(["/", ...editions.map(field => `/${field}/`)]));
   expect(await directory.getByRole("link", { name: "Computer Science", exact: true }).getAttribute("href")).toBe("/computer-information/");
+  expect(await directory.getByRole("list", { name: "Physics editions" }).getByRole("link").count()).toBe(2);
+  expect(await directory.getByRole("list", { name: "All Biology editions" }).getByRole("link", { name: "CompBio" }).getAttribute("href")).toBe("/");
   for (const field of ["social-sciences", "humanities-arts"]) {
     expect(existsSync(`dist/${field}/index.html`)).toBe(false);
     expect(read("sitemap.xml")).not.toContain(`/${field}/`);
