@@ -142,6 +142,8 @@ Compare the earlier Economics and Psychology scope with the additional journals 
 
 Review up to ten high ranks and ten low ranks across the five separate weeks. Split each edition at its midpoint, then take cases in turn from each date, starting at opposite ends. Sample ten excluded candidates across those dates in the SHA-256 order of their sorted paper IDs within each date. Read the underlying abstracts and check the shared question, population or jurisdiction, study design and claims. Compare weekly and 28-day candidate membership, concentration by journal and the cost of adding the next date before choosing a publication cadence.
 
+The first review found an original sociological argument excluded on November 11. Rerun that week from an empty store with the revised guidance. Check the decision for the article on functional illegality and the three Frontiers papers labelled Original Research in the publisher sample. Also recheck the three platform-labour papers from Madrid, Hamburg and Vienna. Keep this same-date calibration separate from the initial five-week editorial sample. [Sociological argument](https://doi.org/10.3389/fsoc.2026.1909210)
+
 ## Reader editions and rollout order
 
 | Stage | Scope | Evidence required for the next decision |
