@@ -61,6 +61,20 @@ def run(ctx, *, backfill=False):
                           ctx.llm, ctx.budget, load_scoring(), TODAY, backfill=backfill)
 
 
+def test_dated_summary_uses_the_question_reviewed_for_that_edition(context):
+    ctx = context
+    entry = TopicDay(date=TODAY, rank=1, item_ids=[ctx.item.id], count_7d=1, signals=ctx.sig, scores=ctx.scores)
+    assert 'research_question' not in entry.model_dump()
+    questions = ['How precisely can the sensor measure time?', 'How long is each calibration stable?']
+    ctx.topic.history = [
+        entry.model_copy(update={'research_question': questions[0]}),
+        entry.model_copy(update={'date': TODAY + timedelta(days=1), 'research_question': questions[1]}),
+    ]
+    run(ctx)
+    prompt = ctx.beta.calls[0]['messages'][0]['content']
+    assert questions[0] in prompt and questions[1] not in prompt
+
+
 def test_math_synthesis_receives_original_assumptions(context):
     from pipeline.config import load_taxonomy
 

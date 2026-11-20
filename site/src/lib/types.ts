@@ -54,6 +54,7 @@ export interface Scores {
 export interface TopicDay {
   date: string;
   category?: string | null;
+  research_question?: string | null;
   rank: number | null;
   item_ids: string[];
   attached_item_ids?: string[];

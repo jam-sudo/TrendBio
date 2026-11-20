@@ -70,8 +70,9 @@ def synthesize_top(
             condition.wait_for(lambda: active < workers)
             active += 1
         try:
+            question = next((entry.research_question for entry in topic.history if entry.date == today), None)
             result = llm.synthesize(topic, items, signals, previous, topic_model,
-                                    on_repeated_429=throttle)
+                                    on_repeated_429=throttle, **({'research_question': question} if question else {}))
         finally:
             with condition:
                 active -= 1

@@ -82,8 +82,13 @@ def audit_edition(store: Store, start: date, end: date, references=()):
         candidates = json.loads(receipt.read_text())['candidates'] if receipt.exists() else None
         for candidate in candidates or []:
             qualified = {i for group in candidate['qualified'] for i in group}
+            comparisons = candidate.get('comparisons', [])
+            partition_failed = candidate['failed'] and not comparisons
             for identifier in set(candidate['items']) - qualified:
-                reasons[identifier] = 'review-failed' if candidate['failed'] else 'below-minimum-reviewed-group'
+                reasons[identifier] = 'review-failed' if partition_failed else 'below-minimum-reviewed-group'
+            for check in comparisons:
+                for identifier in set(check['items']) - qualified:
+                    reasons[identifier] = 'review-failed' if check['failed'] else 'below-minimum-confirmed-group'
         counts, venues = defaultdict(Counter), Counter()
         for paper in papers.values():
             cat = paper.primary_category or taxonomy.fallback_category

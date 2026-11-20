@@ -49,6 +49,7 @@ class Scores(BaseModel):
 class TopicDay(BaseModel):
     date: date
     category: str | None = None
+    research_question: str | None = Field(default=None, exclude_if=lambda question: question is None)
     rank: int | None
     item_ids: list[str]
     attached_item_ids: list[str] = []

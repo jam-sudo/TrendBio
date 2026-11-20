@@ -174,20 +174,20 @@ class LLM:
                 return self._failure(item.id, 'grounding', detail=','.join(f'{v:g}' for v in bad))
         return validated
 
-    def review_cohesion(self, prompt, items, key):
+    def review_cohesion(self, prompt, items, key, *, model='claude-haiku-5-5', effort='low'):
         self.fallback_reasons.pop(key, None)
-        result = self._cohesion_partition(prompt, items, key)
+        result = self._cohesion_partition(prompt, items, key, model, effort)
         if result is None and self.fallback_reasons.get(key) == 'validation:cohesion-evidence':
             correction = ('A passage could not be located in its original source. Copy a continuous passage of at least '
                           '12 characters exactly. The complete original title is acceptable when it supports the group.')
-            result = self._cohesion_partition(prompt + '\n\n' + correction, items, key)
+            result = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort)
         if result is not None:
             self.fallback_reasons.pop(key, None)
         return result
 
-    def _cohesion_partition(self, prompt, items, key):
-        result = self._parse(CohesionReview, [{'role': 'user', 'content': prompt}], 'claude-haiku-5-5',
-                             4096, 'low', entity_id=key)
+    def _cohesion_partition(self, prompt, items, key, model, effort):
+        result = self._parse(CohesionReview, [{'role': 'user', 'content': prompt}], model,
+                             4096, effort, entity_id=key)
         if result is None:
             return None
         numbers = [e.paper for group in result.groups for e in group.evidence]
@@ -214,7 +214,7 @@ class LLM:
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,
-        *, on_repeated_429: Callable[[], None] | None = None,
+        *, on_repeated_429: Callable[[], None] | None = None, research_question: str | None = None,
     ) -> Synthesis | None:
         self.fallback_reasons.pop(topic.slug, None)
         template = Path(__file__).with_name('prompts').joinpath('synthesize.md').read_text(encoding='utf-8')
@@ -236,6 +236,10 @@ class LLM:
         )
         if self.synthesis_guidance:
             prompt = self.synthesis_guidance + '\n\n' + prompt
+        if research_question:
+            prompt += (f'\n\nReviewed question for these papers: {research_question}\n'
+                       'Frame the headline and short summary around this question. Attribute an answer '
+                       'to the study that found it. A shared question can have different answers.')
         source = '\n'.join([
             signals.model_dump_json(), topic.label,
             *(text for item in items for text in (

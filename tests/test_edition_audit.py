@@ -58,6 +58,13 @@ def test_sparse_edition_samples_disjoint_ranks_and_reports_review_exclusions(tmp
     assert {s['id'] for s in samples['bottom']} == {'topic-4', 'topic-5', 'topic-6'}
     assert next(s for s in samples['excluded'] if s['id'] == paper.id)['decision'] == 'below-minimum-reviewed-group'
     assert result['days'][0]['alternative_top10']['official'] == 6
+    store._write(tmp_path / 'math/audits' / f'cohesion-{when}.json', {
+        'minimum': 3, 'candidates': [{'items': [paper.id, 'still-to-check', 'split-on-first-review'],
+        'qualified': [], 'failed': True, 'comparisons': [
+            {'items': [paper.id], 'failed': False}, {'items': ['still-to-check'], 'failed': True}]}],
+    })
+    counts = audit_edition(store, when, when)['days'][0]['cohesion']['excluded_papers']
+    assert counts == {'below-minimum-confirmed-group': 1, 'review-failed': 1, 'below-minimum-reviewed-group': 1}
 
 
 def test_28_day_experiment_recovers_a_sparse_group(tmp_path, fixtures_root):

@@ -269,9 +269,10 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             ids = [item.id for item in papers]
             embeddings = store.get_embeddings(ids)
             clusters = cluster_items(ids, embeddings, deps.cfg)
+            questions = {}
             if deps.taxonomy.review_cluster_cohesion:
                 counts['candidates'] = len(clusters)
-                clusters, review_notes = review_clusters(clusters, papers, store, deps, day)
+                clusters, review_notes, questions = review_clusters(clusters, papers, store, deps, day)
                 notes.extend(review_notes)
             counts.update(items=len(ids), clusters=len(clusters))
         with _stage('continuity', topics_new=0, topics_continued=0) as counts:
@@ -300,15 +301,17 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                     used.add(slug)
             for index, (cluster, centroid) in enumerate(zip(clusters, centroids, strict=True)):
                 existing = topics.get(assignments.get(index))
+                question = questions.get(tuple(cluster))
                 if existing and any(entry.date == day and entry.item_ids == cluster
                                     and entry.attached_item_ids == attached[index]
+                                    and entry.research_question == question
                                     for entry in existing.history):
                     unchanged.add(existing.slug)
                 topic = match_or_create(cluster, centroid, list(topics.values()),
                                         day, deps.cfg, [items_by_id[id].title for id in cluster],
                                         [item.title for item in papers], items_by_id,
                                         excluded_slugs=set(topics) - {assignments.get(index)})
-                append_history(topic, day, cluster, len(cluster), attached[index])
+                append_history(topic, day, cluster, len(cluster), attached[index], research_question=question)
                 fill_unranked_days(topic, day, deps.cfg.continuity_max_gap_days)
                 topics[topic.slug] = topic
                 items_by_topic[topic.slug] = [items_by_id[id] for id in cluster + attached[index]]

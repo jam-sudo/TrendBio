@@ -19,6 +19,7 @@ class Taxonomy(BaseModel):
     window_by_publication: bool = False
     review_cluster_cohesion: bool = False
     cohesion_guidance: str = ''
+    comparison_guidance: str = ''
     fallback_category: str
     categories: list[Category]
 
