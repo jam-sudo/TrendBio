@@ -261,6 +261,7 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
                               "dataset_dois": ["10.5555/example-data"] if i == 1 else []}
             if i == 1:
                 paper.metadata["preprint_dois"] = ["10.5555/example-preprint"]
+                paper.metadata["correction_links"] = [f"https://doi.org/{paper.doi}", "https://doi.org/10.5555/example-erratum"]
             if i == 3:
                 paper.metadata["license"] = "https://creativecommons.org/publicdomain/zero/1.0/"
         if domain == "humanities-arts":
