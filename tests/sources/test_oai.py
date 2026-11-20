@@ -43,6 +43,24 @@ def test_journal_uses_publication_date_one_doi_and_a_paired_title_and_abstract()
     assert (paper.metadata['language'], paper.metadata['abstract_language'], paper.metadata['abstract_languages']) == ('es', 'en', ['en', 'es'])
 
 
+@pytest.mark.parametrize('section', ['journal:ART', 'journal:EDI'])
+def test_requested_article_section_matches_each_record(section):
+    journal = {**JOURNAL, 'article_set': 'journal:ART'}
+    def reply(req):
+        assert req.url.params.get('set') == 'journal:ART'
+        record = RECORD.format(id=1, day=DAY, rights='by').replace('</header>', f'<setSpec>{section}</setSpec></header>')
+        return httpx.Response(200, text=envelope('<ListRecords>' + record + '</ListRecords>'))
+
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        adapter = OaiAdapter({'oai': {'journals': [journal]}})
+        if section == 'journal:ART':
+            paper, = adapter.fetch(DAY, DAY, client)
+            assert paper.doi == '10.1234/sample'
+        else:
+            with pytest.raises(ValueError, match='another OAI-PMH section'):
+                adapter.fetch(DAY, DAY, client)
+
+
 @pytest.mark.parametrize(('body', 'valid'), [
     ('<error code="noRecordsMatch">Empty</error>', True),
     ('<error code="badArgument">Bad date</error>', False),

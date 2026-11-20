@@ -233,7 +233,7 @@ class CrossrefAdapter:
                         abstract, indexed = match
                 if not abstract:
                     continue
-                journal = (work.get('container-title') or [issn])[0]
+                journal = plain_text((work.get('container-title') or [''])[0]) or issn
                 authors = [a.get('name') or ' '.join(filter(None, [a.get('given'), a.get('family')]))
                            for a in work.get('author', [])]
                 preprints = related_dois(work, 'has-preprint')

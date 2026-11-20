@@ -11,7 +11,7 @@ def test_open_edition_requires_current_vor_license_abstract_and_publication_day(
     d = {'date-parts': [[2026, 11, 18]]}
     licence = {'content-version': 'vor', 'URL': 'https://creativecommons.org/licenses/by/4.0/', 'start': d}
     item = {'DOI': '10.5194/Example', 'title': ['Surface CO<sub>2</sub>'], 'abstract': '<jats:p>Ocean &amp; air.</jats:p>',
-            'published': d, 'container-title': ['Ocean Science'], 'license': [licence], 'author': [{'name': 'Ocean Group'}],
+            'published': d, 'container-title': ['Ocean &amp;\nCoastal Science'], 'license': [licence], 'author': [{'name': 'Ocean Group'}],
             'relation': {'has-preprint': [{'id-type': 'doi', 'id': 'https://doi.org/10.5194/PRE'}],
                          'is-part-of': [{'id-type': 'doi', 'id': '10.1/data'}, {'id-type': 'doi', 'id': '10.1/book'}]}}
     cases = [item, {**item, 'DOI': '10.5194/month', 'published': {'date-parts': [[2026, 11]]}},
@@ -30,6 +30,7 @@ def test_open_edition_requires_current_vor_license_abstract_and_publication_day(
         article, = CrossrefAdapter({'crossref': {'journals': ['test'], 'data_journals': ['test']}}).fetch(
             date(2026, 11, 18), date(2026, 11, 18), client)
     assert (article.id, article.title, article.abstract) == ('doi:10.5194/example', 'Surface CO2', 'Ocean & air.')
+    assert article.metadata['journal'] == 'Ocean & Coastal Science'
     assert article.metadata['preprint_doi'] == '10.5194/pre' and article.authors == ['Ocean Group']
     assert article.metadata['dataset_dois'] == ['10.1/data'] and article.metadata['unverified_related_dois'] == []
     assert all_paper_sources_failed({'crossref': 'failed', 'arxiv': 'skipped'})

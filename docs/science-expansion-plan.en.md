@@ -136,6 +136,12 @@ The new journals contributed 30 of 206 papers across the four weeks. Eight abstr
 
 Of 40 sampled first-version ChemRxiv DOIs, OpenAlex labelled the exact submitted version CC BY in 30, CC BY-NC in two and CC BY-NC-ND in eight. Crossref supplied zero license URLs and Europe PMC returned zero exact records. The four publisher landing pages checked returned HTTP 403, leaving first-party confirmation open. The trial ledger added $0.1284 including rechecks. The incremental November 5 run collected nine new records and added $0.0031. Chemistry remains available on demand. [License checks, edition costs and source queries](expansion-measurements/2026-11-20/chemistry-analytical-coverage.json) · [English reading copies](expansion-measurements/2026-11-20/reading-copies.md)
 
+### Social science field trial
+
+Compare the earlier Economics and Psychology scope with the additional journals covering education, sociology, law, political science, human geography and media. Use four nonoverlapping weeks ending October 28 and November 4, 11 and 18, a held-out week ending September 16 and one incremental run for November 5. For each branch, count collected papers, papers passing the relevance screen, candidate membership and ranked evidence. Keep the original scope as a comparison using the same stored embeddings and dates. Reconcile the four Cogitatio journals with their publisher sections and check original research, publication dates and licenses against publisher records in the other branches. [Configured journals and publisher sections](../config/sources/social-sciences.yaml)
+
+Review up to ten high ranks and ten low ranks across the five separate weeks. Split each edition at its midpoint, then take cases in turn from each date, starting at opposite ends. Sample ten excluded candidates across those dates in the SHA-256 order of their sorted paper IDs within each date. Read the underlying abstracts and check the shared question, population or jurisdiction, study design and claims. Compare weekly and 28-day candidate membership, concentration by journal and the cost of adding the next date before choosing a publication cadence.
+
 ## Reader editions and rollout order
 
 | Stage | Scope | Evidence required for the next decision |

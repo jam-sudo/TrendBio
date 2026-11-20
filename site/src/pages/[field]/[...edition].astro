@@ -31,6 +31,7 @@ const archives: string[] = source.arxiv?.categories ?? [];
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
 const showCollectedJournals = field === "earth-environment" || field === "chemistry";
 const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date) : null;
+const socialVenues = field === "social-sciences" && day ? loadEditionVenues(field, day.date) : null;
 const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
@@ -62,17 +63,18 @@ const rows = (day?.ranked ?? []).map(row => {
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
-    {archives.length > 0 && <p class="coverage">Following {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
+    {socialVenues && socialVenues.length > 0 && <p class="coverage">Sources in this edition’s collection include <span translate="no">{socialVenues.map(name => name === "arxiv" ? "arXiv" : name).join(", ")}</span>.</p>}
+    {!socialVenues && archives.length > 0 && <p class="coverage">Following {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
-    {followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
+    {!socialVenues && followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
       ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
       : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
-    {source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
+    {!socialVenues && source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
     {conferences.length > 0 && <p class="coverage">Regular conference papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
-    {publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
+    {!socialVenues && publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
     {source.thoth && <p class="coverage">Monographs and edited books from <a href="https://thoth.pub/books" translate="no">Thoth</a>.</p>}
     {collections.length > 0 && <p class="coverage">OpenEdition journals and presses in this pilot {collections.map(({ set, title }, i) => {
       const [platform, name] = set.split(":");

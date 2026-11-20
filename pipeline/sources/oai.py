@@ -104,7 +104,12 @@ class OaiAdapter:
         for journal in self.journals:
             # OAI datestamps are updates. Later edits can describe an earlier publication.
             params = {'verb': 'ListRecords', 'metadataPrefix': 'oai_dc', 'from': start.isoformat()}
+            section = journal.get('article_set')
+            if section:
+                params['set'] = section
             for _, rec in oai_records(client, journal['endpoint'], params):
+                if section and section not in {s.text for s in rec.findall(f'{OAI}header/{OAI}setSpec')}:
+                    raise ValueError('Journal record came from another OAI-PMH section')
                 dc = rec.find(f'{OAI}metadata/{OAI_DC}dc')
                 if dc is None:
                     raise ValueError('Missing OAI Dublin Core metadata')

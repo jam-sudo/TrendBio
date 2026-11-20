@@ -128,7 +128,7 @@ export function loadEditionVenues(domain: string, date: string): string[] | null
   const report = readJson<{ days: { date: string; venues: Record<string, number> }[] }>(
     join(DATA_ROOT, domain, "audits", `${date}.json`));
   const venues = report?.days.find(day => day.date === date)?.venues;
-  return venues ? [...new Set(Object.keys(venues).map(name => name.trim().replace(/\s+/g, " ")))].sort() : null;
+  return venues ? [...new Set(Object.keys(venues).map(name => name.replaceAll("&amp;", "&").trim().replace(/\s+/g, " ")))].sort() : null;
 }
 
 export function latestDay(domain: string): Day | null {
