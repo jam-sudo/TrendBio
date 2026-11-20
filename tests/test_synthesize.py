@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -94,6 +95,17 @@ def test_cited_background_paper_stays_outside_the_edition_evidence(context):
     prompt = ctx.beta.calls[0]['messages'][0]['content']
     assert 'arxiv:2610.23676' in prompt and 'fit in the cited work' in prompt
     assert '1204.6184' not in prompt and '1104.5678' in prompt and '1204.6184' in ctx.item.abstract
+
+
+def test_result_synthesis_identifies_works_with_overlapping_bylines(context):
+    ctx = context
+    papers = [ctx.item.model_copy(update={'id': name, 'authors': authors, 'abstract': 'Measured power output.'})
+              for name, authors in [('one', ['René Example', 'René Example']), ('two', ['RENE\u0301  EXAMPLE']),
+                                    ('three', ['Mei Example'])]]
+    ctx.llm.synthesize(ctx.topic, papers, ctx.sig, None, 'claude-haiku-5-5',
+                       result_passages={paper.id: paper.abstract for paper in papers})
+    prompt = (ctx.plain.calls + ctx.beta.calls)[0]['messages'][0]['content']
+    assert json.loads(prompt.split('only a name match.\n')[1]) == [[{'paper': 1, 'id': 'one'}, {'paper': 2, 'id': 'two'}]]
 
 
 def test_synthesis_accepts_a_supporting_doi_but_not_its_digits_as_a_result(context):

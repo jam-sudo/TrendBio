@@ -33,7 +33,7 @@ const archives: string[] = source.arxiv?.categories ?? [];
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
 const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
 const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
-const observedVenues = ["social-sciences", "computer-information"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
+const observedVenues = ["social-sciences", "computer-information", "engineering"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
 const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
@@ -57,7 +57,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
     <h1>{label}{stage && <small> {stage}</small>}</h1>
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
     {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map(name => name === "arxiv" ? "arXiv" : name).join(", ")}</span>.</p>}
-    {(!observedVenues || field === "computer-information") && archives.length > 0 && <p class="coverage">Following {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
+    {(!observedVenues || field !== "social-sciences") && archives.length > 0 && <p class="coverage">Following {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}

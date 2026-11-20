@@ -331,6 +331,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 existing = topics.get(assignments.get(index))
                 comparison = comparisons.get(tuple(cluster), {})
                 question = comparison.get('topic')
+                review = comparison.get('result_review')
                 passages = {}
                 for anchor in comparison.get('evidence', []):
                     if 'reported_output' in anchor:
@@ -339,6 +340,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 if existing and any(entry.date == day and entry.item_ids == cluster
                                     and entry.attached_item_ids == attached[index]
                                     and entry.research_question == question and entry.result_passages == passages
+                                    and entry.result_review == review
                                     for entry in existing.history):
                     unchanged.add(existing.slug)
                 topic = match_or_create(cluster, centroid, list(topics.values()),
@@ -348,7 +350,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 count_7d = sum((items_by_id[i].published_at if deps.taxonomy.window_by_publication
                                 else items_by_id[i].first_seen) >= week_start for i in cluster)
                 append_history(topic, day, cluster, count_7d, attached[index],
-                               research_question=question, result_passages=passages)
+                               research_question=question, result_passages=passages, result_review=review)
                 fill_unranked_days(topic, day, deps.cfg.continuity_max_gap_days)
                 topics[topic.slug] = topic
                 items_by_topic[topic.slug] = [items_by_id[id] for id in cluster + attached[index]]

@@ -3,6 +3,7 @@ import logging
 import random
 import re
 import time
+import unicodedata
 from collections.abc import Callable
 from hashlib import sha256
 from pathlib import Path
@@ -112,6 +113,22 @@ class ResultComparison(BaseModel):
     observable: str = Field(description='A concrete observable, evaluated detection task or theoretical result to test across these papers.')
     results: list[ReportedOutput]
     groups: list[ComparisonGroup]
+
+
+def shared_byline_note(items: list[Item]) -> str:
+    credits = {}
+    for number, item in enumerate(items, 1):
+        for author in item.authors:
+            name = ' '.join(unicodedata.normalize('NFC', author).casefold().split())
+            if name:
+                credits.setdefault(name, set()).add(number)
+    groups = sorted({tuple(sorted(papers)) for papers in credits.values() if len(papers) > 1})
+    if not groups:
+        return ''
+    references = [[{'paper': n, 'id': items[n - 1].id} for n in group] for group in groups]
+    return ('\n\nThese papers share a credited author name. Check for companion studies or common data '
+            'before describing independent replication. The byline alone establishes only a name match.\n'
+            + json.dumps(references))
 
 
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
@@ -303,7 +320,7 @@ class LLM:
             if quotes:
                 prompt += ('\n\nSource passages for the reported results, by paper. Use the surrounding abstract '
                            'to check the observable, population and conditions in the headline and short summary.\n'
-                           + json.dumps(quotes, ensure_ascii=False))
+                           + json.dumps(quotes, ensure_ascii=False) + shared_byline_note(items))
         source = '\n'.join([
             signals.model_dump_json(), topic.label,
             *(text for item in items for text in (

@@ -4,6 +4,8 @@ from hashlib import sha256
 import json
 from pathlib import Path
 
+from pipeline.llm import shared_byline_note
+
 
 def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False):
     template = Path(__file__).with_name('prompts').joinpath('cohesion.md').read_text()
@@ -27,7 +29,8 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
                         record['first_review_passage'] = text[start:start + length]
         records = json.dumps(evidence, ensure_ascii=False)
         if proposal is not None:
-            prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposal['topic'], ensure_ascii=False) + '\n\n' + records
+            bylines = shared_byline_note(items) if deps.taxonomy.compare_reported_results else ''
+            prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposal['topic'], ensure_ascii=False) + bylines + '\n\n' + records
             options = {'model': comparison_model, 'effort': 'medium'}
             cache_inputs = [comparison_model, 'medium', sorted(ids), prompt]
             if deps.taxonomy.compare_reported_results:
@@ -74,6 +77,9 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
                 if confirmed is None:
                     failures.append(check)
                 else:
+                    if deps.taxonomy.compare_reported_results:
+                        for group in confirmed.values():
+                            group['result_review'] = check
                     accepted.update(confirmed)
         candidate.update(qualified=[list(group) for group in sorted(accepted)], failed=bool(failures))
         return candidate, failures, accepted

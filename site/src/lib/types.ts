@@ -56,6 +56,7 @@ export interface TopicDay {
   category?: string | null;
   research_question?: string | null;
   result_passages?: Record<string, string>;
+  result_review?: string | null;
   rank: number | null;
   item_ids: string[];
   attached_item_ids?: string[];

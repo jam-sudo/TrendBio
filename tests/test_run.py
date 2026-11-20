@@ -204,6 +204,11 @@ def test_physics_replay_resynthesizes_when_the_reviewed_passage_changes(ctx, mon
     ctx.deps.taxonomy.comparison_guidance += ' Also identify the reported uncertainty.'
     run_day(field, TODAY, store, ctx.deps, replay=True)
     assert len(received) == 2 and received[-1] == {p.id: passage for p in papers}
+    first_review = store.get_topic(day.ranked[0].slug).history[-1].result_review
+    ctx.deps.taxonomy.comparison_guidance += ' Compare the observing programs.'
+    run_day(field, TODAY, store, ctx.deps, replay=True)
+    assert len(received) == 3 and received[-1] == received[-2]
+    assert store.get_topic(day.ranked[0].slug).history[-1].result_review != first_review
 
 
 def test_run_day_writes_day_topics_items(ctx):

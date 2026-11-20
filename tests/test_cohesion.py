@@ -84,6 +84,8 @@ def test_field_review_instructions_change_the_cached_partition(tmp_path, fixture
 def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_question(tmp_path, fixtures_root, domain, compare_results):
     papers = Store(fixtures_root / 'data', 'physics').items_between(date.min, date.max)
     papers = papers + [papers[-1].model_copy(update={'id': 'extra', 'title': 'An unrelated detector target'})]
+    papers[0].authors = ['Alex Example']
+    papers[-1].authors = ['Alex Example']
     ids = sorted(p.id for p in papers)
     good = ids[:3]
     question = 'Which physical quantity can the three sensors recover?'
@@ -104,13 +106,17 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     audit_path = tmp_path / taxonomy.domain / 'audits' / f'cohesion-{day}.json'
     failed = json.loads(audit_path.read_text())['candidates'][0]['comparisons'][0]
     assert failed['failed'] and not groups and not questions and notes == ['cohesion-review-failed:' + failed['review']]
-    expected = ([good], [], {tuple(good): group(good, question)})
+    topic = group(good, question)
+    if compare_results:
+        topic['result_review'] = failed['review']
+    expected = ([good], [], {tuple(good): topic})
     assert review_clusters([ids], papers, store, deps, day) == expected
     check = llm.review_cohesion.call_args
     options = {'model': 'claude-sonnet-5-5', 'effort': 'medium'}
     if compare_results:
         options['compare_results'] = True
     assert check.kwargs == options
+    assert ('share a credited author name' in check.args[0]) == compare_results
     assert 'Original grouping hypothesis' in check.args[0]
     records = json.loads(check.args[0].split('\n\n')[-1])
     if compare_results:
