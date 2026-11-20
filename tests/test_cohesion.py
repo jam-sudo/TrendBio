@@ -45,7 +45,8 @@ def test_partition_checks_all_evidence_and_only_ranks_groups_with_three_sources(
     assert llm.review_cohesion('Original request', changed, 'retry')['groups']
     assert 'retry' not in llm.fallback_reasons
     retry = llm._parse.call_args.args[1][0]['content']
-    assert json.loads(retry.splitlines()[-1]) == [{'paper': 2, 'title': changed[1].title}]
+    choices = json.loads(retry.splitlines()[-1])
+    assert list(choices) == ['2'] and choices['2']['P2.0'] == changed[1].title
     llm._parse.side_effect = None
     llm._parse.return_value = CohesionReview(groups=[group([1, 2, 3]), group([1, 4, 5, 6])])
     assert review_clusters([ids], changed, store, deps, day)[1]
@@ -57,6 +58,23 @@ def test_partition_checks_all_evidence_and_only_ranks_groups_with_three_sources(
     llm._parse.side_effect = None
     llm._parse.return_value = CohesionReview(groups=[group([n]) for n in range(1, 8)])
     assert review_clusters([ids], changed, store, deps, day) == ([], [], {})
+
+
+def test_quote_retry_resolves_only_a_passage_offered_for_that_paper(fixtures_root):
+    items = Store(fixtures_root / 'data', 'physics').items_between(date.min, date.max)[:2]
+    items[1].abstract = 'We measured the sensor response. The observed response was stable.'
+    def answer(second):
+        return CohesionReview(groups=[CohesionGroup(topic='Sensor response', evidence=[
+            CohesionEvidence(paper=1, quote=items[0].title), CohesionEvidence(paper=2, quote=second)])])
+    llm = LLM(Mock(), Mock())
+    for invalid in ('P1.0', 'P2.9'):
+        llm._parse = Mock(side_effect=[answer('Unmatched wording.'), answer(invalid)])
+        assert llm.review_cohesion('Compare results.', items, 'retry') is None
+    llm._parse = Mock(side_effect=[answer('Unmatched wording.'), answer('P2.2')])
+    result = llm.review_cohesion('Compare results.', items, 'retry')
+    anchor = result['groups'][0]['evidence'][1]
+    assert anchor == {'id': items[1].id, 'field': 'abstract', 'start': 33, 'length': 33}
+    assert items[1].abstract[anchor['start']:] == 'The observed response was stable.'
 
 
 def test_field_review_instructions_change_the_cached_partition(tmp_path, fixtures_root):

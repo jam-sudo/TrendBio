@@ -219,25 +219,29 @@ class LLM:
         result, unmatched = self._cohesion_partition(prompt, items, key, model, effort, compare_results)
         reason = self.fallback_reasons.get(key)
         if result is None and reason in {'validation:cohesion-evidence', 'validation:cohesion-membership'}:
+            choices = {}
             if reason == 'validation:cohesion-membership':
                 numbers = ', '.join(str(i) for i in range(1, len(items) + 1))
                 correction = f'The partition omitted or repeated a paper. Use each of these numbers exactly once: {numbers}.'
                 if compare_results:
                     correction += ' Also include one result and its source passage for every paper.'
             else:
-                titles = [{'paper': n, 'title': items[n - 1].title} for n in unmatched]
-                correction = ('The quotations for the papers below could not be located. For each, copy a continuous '
-                              'passage of at least 12 characters from its own title or abstract, preserving capitalization, '
-                              'punctuation and notation. You may copy the exact title below if it supports the group. '
-                              'Return the complete partition.\n' + json.dumps(titles, ensure_ascii=False))
+                for n in unmatched:
+                    item = items[n - 1]
+                    sentences = re.split(r'(?<=[.!?])\s+', ' '.join(item.abstract.split()))
+                    choices[n] = {f'P{n}.{i}': text for i, text in enumerate([' '.join(item.title.split()), *sentences])
+                                  if len(text) >= 12}
+                correction = ('For each paper below, choose a passage supporting its assignment. In the quote field '
+                              'give its passage key or copy exact source text. Split off papers with a different '
+                              'result. Return all papers in the partition.\n' + json.dumps(choices, ensure_ascii=False))
                 if compare_results:
                     correction += '\nInclude a specific reported output with each source passage.'
-            result, _ = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort, compare_results)
+            result, _ = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort, compare_results, choices)
         if result is not None:
             self.fallback_reasons.pop(key, None)
         return result
 
-    def _cohesion_partition(self, prompt, items, key, model, effort, compare_results):
+    def _cohesion_partition(self, prompt, items, key, model, effort, compare_results, choices=None):
         result = self._parse(ResultComparison if compare_results else CohesionReview, [{'role': 'user', 'content': prompt}], model,
                              4096, effort, entity_id=key)
         if result is None:
@@ -263,6 +267,8 @@ class LLM:
             for entry in entries:
                 item = items[entry.paper - 1]
                 passage = ' '.join(entry.quote.split())
+                if choices:
+                    passage = choices.get(entry.paper, {}).get(passage, passage)
                 if isinstance(entry, ReportedOutput) and not entry.result.strip():
                     unmatched.append(entry.paper)
                     continue
