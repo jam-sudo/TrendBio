@@ -2,7 +2,7 @@
 from datetime import date
 import re
 
-from pipeline.dedupe import normalize_title
+from pipeline.dedupe import normalize_title, parallel_openedition_ids
 from pipeline.models import Item, Source
 from pipeline.sources.base import CC0, collected
 from pipeline.sources.crossref import BookDateSourceUnavailable, normalized_isbn, plain_text, registered_book
@@ -69,6 +69,8 @@ def _work(record, venue, identifier, start, end, client):
             'original_issued': issued, 'online_date': online, 'description_source': 'Publisher-supplied abstract'}
     host = doc.find(MODS + 'relatedItem[@type="host"]')
     if kind == 'article' and host is not None:
+        if any(e.text == 'trl' for e in doc.findall(f'{MODS}name/{MODS}role/{MODS}roleTerm')):
+            meta['has_translator'] = True
         issue = host.findtext(f'{MODS}identifier[@type="hdl"]', '')
         if re.fullmatch(r'20\.500\.13089/[\w.-]+', issue):
             meta['issue_url'] = 'https://hdl.handle.net/' + issue
@@ -108,4 +110,7 @@ class OpenEditionAdapter:
                 self.decisions[identifier] = status
                 if item:
                     items.append(item)
-        return collected(self.name, items)
+        translated = parallel_openedition_ids(items)
+        for identifier in translated:
+            self.decisions[identifier.removeprefix('openedition:')] = 'parallel-language-edition'
+        return collected(self.name, [item for item in items if item.id not in translated])

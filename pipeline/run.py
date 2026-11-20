@@ -24,6 +24,7 @@ from pipeline.cluster import (
 )
 from pipeline.collect import PAPER_SOURCES, PARTIAL_REASONS, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, intake_status, prepare_collected
 from pipeline.config import Scoring, Taxonomy
+from pipeline.dedupe import parallel_openedition_ids
 from pipeline.embed import l2_normalize
 from pipeline.enrich import enrich_items, fallback_summary, hints_for, screen_window
 from pipeline.llm import Enrichment, LLM
@@ -276,6 +277,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             counts['items'] = len(missing)
         with _stage('cluster', items=0, clusters=0) as counts:
             linked = {item.preprint_id for item in window if item.type == 'published'}
+            if store.domain == 'humanities-arts':
+                linked.update(parallel_openedition_ids(window))
             window = [item for item in window if item.id not in linked]
             papers = [item for item in window if item.type in {'preprint', 'published'}]
             ids = [item.id for item in papers]

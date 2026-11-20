@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import date
 from itertools import chain
 import unicodedata
@@ -11,6 +12,28 @@ def normalize_title(s: str) -> str:
     return " ".join("".join(
         char for char in text if not unicodedata.category(char).startswith("P")
     ).split())
+
+
+def parallel_openedition_ids(items: list[Item]) -> set[str]:
+    groups = defaultdict(list)
+    for item in items:
+        meta = item.metadata
+        if (item.source == 'openedition' and meta.get('issue_url') and item.authors and item.title and item.abstract
+                and meta.get('abstract_language') and len(meta.get('original_languages', [])) == 1):
+            key = (meta['issue_url'], item.published_at, tuple(item.authors), normalize_title(item.title),
+                   meta['abstract_language'], item.abstract)
+            groups[key].append(item)
+
+    duplicates = set()
+    for versions in groups.values():
+        languages = {v.metadata['original_languages'][0] for v in versions}
+        if len(languages) < 2 or len(languages) != len(versions):
+            continue
+        # Older stored records predate translator credits. Prefer the version in the abstract's language on ties.
+        keep = min(versions, key=lambda v: (bool(v.metadata.get('has_translator')),
+                   v.metadata['original_languages'][0] != v.metadata['abstract_language'], v.id))
+        duplicates.update(v.id for v in versions if v.id != keep.id)
+    return duplicates
 
 
 def dedupe(new: list[Item], store: Store | None = None) -> list[Item]:

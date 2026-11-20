@@ -6,7 +6,7 @@ import httpx
 import pytest
 
 from pipeline.collect import intake_status
-from pipeline.dedupe import dedupe
+from pipeline.dedupe import dedupe, parallel_openedition_ids
 from pipeline.sources.base import CC0, load_config
 from pipeline.sources.openedition import OpenEditionAdapter
 from pipeline.sources.thoth import ThothAdapter
@@ -123,6 +123,36 @@ def native_record(key, kind='article', issued='2026', platform='journals'):
     <name><namePart>A. Author</namePart><role><roleTerm>aut</roleTerm></role></name>
     <accessCondition type="license" valueURI="https://creativecommons.org/licenses/by-nc/4.0/"/>
     </mods></metadata></record>'''
+
+
+def test_openedition_counts_parallel_language_versions_once_and_keeps_distinct_articles():
+    english = native_record('english').replace('type="code">fr', 'type="code">en')
+    translated = native_record('french').replace(DOI, DOI + '.fr').replace('</mods>', '''
+        <name><namePart>Translator</namePart><role><roleTerm>trl</roleTerm></role></name></mods>''')
+    controls = native_record('other-argument').replace('One argument.', 'Another argument.').replace(DOI, DOI + '.other')
+    cfg = {'openedition': {'venues': [{'set': 'journals:demo', 'title': 'Journal'}]}}
+    records = [translated, controls, english]
+    def reply(req):
+        return httpx.Response(200, text='<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"><ListRecords>'
+                              + ''.join(records) + '</ListRecords></OAI-PMH>')
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        adapter = OpenEditionAdapter(cfg)
+        control, original = adapter.fetch(DAY, DAY, client)
+        assert [p.id.rsplit('/', 1)[1] for p in [control, original]] == ['other-argument', 'english']
+        assert adapter.decisions['20.500.13089/french'] == 'parallel-language-edition'
+        records[:] = [translated]
+        translation, = adapter.fetch(DAY, DAY, client)
+        assert translation.metadata['has_translator'] and adapter.decisions['20.500.13089/french'] == 'eligible'
+
+    legacy = translation.model_copy(update={'metadata': {k: v for k, v in translation.metadata.items() if k != 'has_translator'}})
+    assert parallel_openedition_ids([original, legacy]) == {legacy.id}
+    assert parallel_openedition_ids([legacy, original, control]) == {legacy.id}
+    for metadata in [{'issue_url': 'another-issue'}, {'original_languages': ['en']}, {'original_languages': []}]:
+        different = legacy.model_copy(update={'metadata': {**legacy.metadata, **metadata}})
+        assert not parallel_openedition_ids([original, different])
+    assert not parallel_openedition_ids([original, legacy.model_copy(update={'authors': ['Another author']})])
+    assert parallel_openedition_ids([original.model_copy(update={'metadata': {**original.metadata, 'has_translator': True}}),
+                                    legacy]) == {original.id}
 
 
 def test_openedition_requires_scholarly_type_and_source_date_and_counts_a_volume_once(monkeypatch):
