@@ -80,8 +80,8 @@ def test_field_review_instructions_change_the_cached_partition(tmp_path, fixture
     assert llm.review_cohesion.call_count == 2
 
 
-@pytest.mark.parametrize('domain', ['physics-expanded', 'math'])
-def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_question(tmp_path, fixtures_root, domain):
+@pytest.mark.parametrize(('domain', 'compare_results'), [('physics-expanded', True), ('engineering', True), ('math', False)])
+def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_question(tmp_path, fixtures_root, domain, compare_results):
     papers = Store(fixtures_root / 'data', 'physics').items_between(date.min, date.max)
     papers = papers + [papers[-1].model_copy(update={'id': 'extra', 'title': 'An unrelated detector target'})]
     ids = sorted(p.id for p in papers)
@@ -108,12 +108,12 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     assert review_clusters([ids], papers, store, deps, day) == expected
     check = llm.review_cohesion.call_args
     options = {'model': 'claude-sonnet-5-5', 'effort': 'medium'}
-    if domain == 'physics-expanded':
+    if compare_results:
         options['compare_results'] = True
     assert check.kwargs == options
     assert 'Original grouping hypothesis' in check.args[0]
     records = json.loads(check.args[0].split('\n\n')[-1])
-    if domain == 'physics-expanded':
+    if compare_results:
         assert all(r['first_review_passage'] == r['title'] for r in records)
     else:
         assert all('first_review_passage' not in r for r in records)

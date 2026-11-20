@@ -16,7 +16,7 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
         items = [by_id[i] for i in sorted(ids)]
         evidence = [{'paper': n, 'title': item.title, 'abstract': item.abstract}
                     for n, item in enumerate(items, 1)]
-        if proposal is not None and deps.taxonomy.domain == 'physics-expanded':
+        if proposal is not None and deps.taxonomy.compare_reported_results:
             anchors = {entry['id']: entry for entry in proposal['evidence']}
             for item, record in zip(items, evidence, strict=True):
                 anchor = anchors[item.id]
@@ -30,7 +30,7 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
             prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposal['topic'], ensure_ascii=False) + '\n\n' + records
             options = {'model': comparison_model, 'effort': 'medium'}
             cache_inputs = [comparison_model, 'medium', sorted(ids), prompt]
-            if deps.taxonomy.domain == 'physics-expanded':
+            if deps.taxonomy.compare_reported_results:
                 options['compare_results'] = True
                 cache_inputs.append('reported-results')
         else:

@@ -21,6 +21,7 @@ class Taxonomy(BaseModel):
     share_editorial_decisions: bool = False
     cohesion_guidance: str = ''
     comparison_guidance: str = ''
+    compare_reported_results: bool = False
     fallback_category: str
     categories: list[Category]
 
