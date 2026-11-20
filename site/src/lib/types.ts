@@ -101,6 +101,7 @@ export interface RunInfo {
   model_cost_usd?: number | null;
   synthesis_model: string;
   source_status: Record<string, "ok" | "partial" | "failed" | "skipped">;
+  arxiv_categories?: string[];
   notes: string[];
 }
 

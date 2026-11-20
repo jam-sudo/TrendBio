@@ -17,6 +17,7 @@ from pipeline.embed import l2_normalize
 from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
+from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.europepmc import EuropePmcAdapter
 from pipeline.store import Store
 from pipeline.run import (
@@ -139,6 +140,22 @@ def test_replay_uses_only_the_latest_saved_snapshot(ctx, monkeypatch):
     ctx.store.put_day(original.model_copy(update={'date': TODAY + timedelta(days=1)}))
     with pytest.raises(ValueError, match='latest saved edition'):
         run_day('computational', TODAY, ctx.store, ctx.deps, replay=True)
+
+
+def test_edition_keeps_the_arxiv_subjects_actually_queried(ctx, monkeypatch):
+    arxiv = ArxivAdapter({'arxiv': {'categories': ['quant-ph']}})
+    monkeypatch.setattr(arxiv, 'fetch', lambda *args: [])
+    ctx.deps.adapters = [a for a in ctx.deps.adapters if a.name != 'arxiv'] + [arxiv]
+    original = run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert original.run.arxiv_categories == ['quant-ph']
+    arxiv.config['arxiv']['categories'].append('physics.atom-ph')
+    replay = run_day('computational', TODAY, ctx.store, ctx.deps, replay=True)
+    assert replay.run.arxiv_categories == ['quant-ph']
+    recollected = run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert recollected.run.arxiv_categories == ['quant-ph', 'physics.atom-ph']
+    recollected.run.arxiv_categories = None
+    ctx.store.put_day(recollected)
+    assert 'arxiv_categories' not in run_day('computational', TODAY, ctx.store, ctx.deps, replay=True).run.model_dump()
 
 
 def test_28_day_collection_audit_replay_and_store_isolation(ctx, tmp_path):

@@ -30,6 +30,7 @@ from pipeline.enrich import enrich_items, fallback_summary, hints_for, screen_wi
 from pipeline.llm import Enrichment, LLM
 from pipeline.models import Day, RankedTopic, RunInfo
 from pipeline.score import rank, score_topics, signals_for
+from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.base import load_config
 from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
@@ -165,6 +166,10 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
             or over_ceiling)
 
 
+def _arxiv_categories(adapters) -> list[str] | None:
+    return next((a.config['arxiv']['categories'] for a in adapters if isinstance(a, ArxivAdapter)), None)
+
+
 def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool = False,
             dry_run: bool = False, skip_collect: bool = False,
             only_missing_synthesis: bool = False, replay: bool = False, window_days: int | None = None) -> Day:
@@ -187,6 +192,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         start = day - timedelta(days=deps.cfg.window_days - 1)
         notes = []
         source_status = initial_source_status(deps.adapters)
+        arxiv_categories = previous.run.arxiv_categories if previous else None
         if replay:
             if previous is None or latest.date != day:
                 raise ValueError('replay requires the latest saved edition for this field')
@@ -198,6 +204,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             checkpoint = store.root / domain / '.backfill_state.json'
             if checkpoint.exists():
                 state = json.loads(checkpoint.read_text(encoding='utf-8'))
+                arxiv_categories = state.get('arxiv_categories')
                 source_status.update(dict.fromkeys(state['done_sources'], 'ok'))
                 for chunk in state.get('failed_chunks', []):
                     if date.fromisoformat(chunk['start']) <= day and date.fromisoformat(chunk['end']) >= start:
@@ -208,11 +215,13 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 state = json.loads(checkpoint.read_text(encoding='utf-8'))
                 if state['range']['from'] <= day.isoformat() <= state['range']['to']:
                     original = state['runs'].get(day.isoformat(), {})
+                    arxiv_categories = original.get('arxiv_categories', arxiv_categories)
                     source_status.update(original.get('source_status', {}))
                     notes.extend(original.get('notes', []))
                     notes.extend(state.get('notes', []))
             new_items = []
         else:
+            arxiv_categories = _arxiv_categories(deps.adapters)
             collected_items = []
             for adapter in deps.adapters:
                 if isinstance(adapter, GithubAdapter):
@@ -418,7 +427,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 finished=previous.run.finished if same_mode else datetime.now(timezone.utc),
                 status='degraded' if degraded else 'ok', backfilled=backfill, synthesis_model=model, window_days=window_days,
                 model_cost_usd=None if backfill else cost,
-                source_status=source_status, notes=sorted(set(notes)),
+                source_status=source_status, arxiv_categories=arxiv_categories, notes=sorted(set(notes)),
             ))
             store.put_day(result)
         if not backfill:
@@ -448,10 +457,13 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
     requested_range = {'from': start.isoformat(), 'to': end.isoformat()}
     state = {
         'range': requested_range, 'stage': 'collect', 'done_sources': [], 'last_day': None,
+        'arxiv_categories': _arxiv_categories(deps.adapters),
     }
     if resume and path.exists():
         saved = json.loads(path.read_text(encoding='utf-8'))
         if saved.get('range') == requested_range:
+            if saved['stage'] == 'collect' and saved.get('arxiv_categories') != state['arxiv_categories']:
+                saved['arxiv_categories'] = None
             state = saved
         else:
             previous = saved.get('range') or {}
@@ -615,6 +627,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
             if start <= result.date <= end:
                 runs[str(result.date)] = {
                     'source_status': result.run.source_status,
+                    'arxiv_categories': result.run.arxiv_categories,
                     'notes': [note for note in result.run.notes
                               if not note.startswith('synthesis-fallback:')
                               and not (reenrich and note.startswith('enrichment-fallback:')

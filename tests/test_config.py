@@ -43,7 +43,8 @@ def test_physics_trial_preserves_the_four_public_archives_and_maps_each_new_arch
     assert public['arxiv']['require_complete'] and trial['arxiv']['require_complete']
     assert set(trial['arxiv']['categories']) == existing | added and existing.isdisjoint(added)
     hints = trial['hints']['arxiv_category']
-    assert set(hints) == set(trial['arxiv']['categories'])
+    assert set(hints) == set(trial['arxiv']['categories']) | {'physics.atom-ph', 'physics.atm-clus'}
+    assert hints['physics.atom-ph'] == hints['physics.atm-clus'] == ['atomic-molecular']
     assert all(hints[code] == public['hints']['arxiv_category'][code] for code in existing)
     assert {category for values in hints.values() for category in values} == set(load_taxonomy('physics-expanded').slugs()) - {'other-physics'}
 
