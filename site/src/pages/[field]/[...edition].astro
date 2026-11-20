@@ -34,7 +34,7 @@ const subjectCounts = field === "physics-expanded" && day ? loadEditionAudit(fie
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints?.arxiv_category?.[code]?.[0]) ?? code);
 const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
 const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
-const observedVenues = ["social-sciences", "computer-information", "engineering"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
+const observedVenues = ["social-sciences", "computer-information", "engineering", "agriculture-food-veterinary"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
 const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
@@ -43,6 +43,7 @@ const collectedVenues = presses.length && day ? loadEditionVenues(field, day.dat
 const conferences: string[] = source.drops?.conferences ?? [];
 const halVolumes: { title: string; volume_doi: string; conference: string; collection: string }[] = source.crossref?.hal_proceedings ?? [];
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
+const publisherUrls = new Map(publishers.map(journal => [journal.title, new URL(".", journal.endpoint).href]));
 const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
 const isPublic = publicEditions.includes(field);
 const windowDays = day?.run.window_days ?? 7;
@@ -57,7 +58,9 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
-    {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map(name => name === "arxiv" ? "arXiv" : name).join(", ")}</span>.</p>}
+    {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map((name, i) => <>{i > 0 && ", "}{publisherUrls.has(name)
+      ? <a href={publisherUrls.get(name)}>{name}</a>
+      : name === "arxiv" ? "arXiv" : name}</>)}</span>.</p>}
     {(!observedVenues || field !== "social-sciences") && archives.length > 0 && <p class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"}>{day?.run.arxiv_mailings ? "This edition selected first versions in" : day?.run.arxiv_categories ? "This edition queried" : "Current coverage includes"} {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})

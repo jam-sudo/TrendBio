@@ -249,6 +249,15 @@ it("shows the sources collected for a Computing edition even when no group ranks
   expect(await main.locator("ol.rankings li").count()).toBe(0);
 });
 
+it("lists the journals represented in a dated Agriculture pilot and links its regional publisher", async () => {
+  await page.setContent(read("agriculture-food-veterinary/day/2026-09-30/index.html"));
+  const coverage = page.locator("main .coverage");
+  expect(await coverage.count()).toBe(1);
+  expect(await coverage.locator("span").textContent()).toBe("Agrociencia Uruguay, Agronomy");
+  expect(await coverage.getByRole("link", { name: "Agrociencia Uruguay" }).getAttribute("href"))
+    .toBe("https://agrocienciauruguay.uy/index.php/agrociencia/");
+});
+
 it("links a dated mathematics edition to the arXiv subjects queried at the time", async () => {
   await page.setContent(read("math/day/2026-11-01/index.html"));
   expect(await page.getByRole("group", { name: "Science field" }).locator("[aria-current]").textContent()).toBe("Math & Stats");
