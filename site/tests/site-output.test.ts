@@ -190,6 +190,13 @@ it("preserves original book titles and distinguishes catalogue and text rights",
   const book = list.locator("details ul > li").first();
   expect(await book.getByRole("link", { name: "Catalogue metadata (CC0)", includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/publicdomain/zero/1.0/");
   expect(await book.getByRole("link", { name: "License for the work", includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/licenses/by-nc/4.0/");
+  const press = list.locator("details ul > li").last();
+  expect(await press.getByText("Manuscritos e memória").getAttribute("translate")).toBe("no");
+  expect(await press.textContent()).toContain("Original publication in Portuguese");
+  expect(await press.textContent()).toContain("Book series · Livros");
+  expect(await press.getByRole("link", { name: "Publication date source", includeHidden: true }).getAttribute("href")).toBe("https://example.org/registered-book");
+  expect(await press.getByRole("link", { name: "Catalogue metadata (CC0)", includeHidden: true }).count()).toBe(0);
+  expect(await page.locator(".coverage a", { hasText: "UMinho Editora" }).getAttribute("href")).toBe("https://ebooks.uminho.pt/uminho/pt/catalog");
 });
 
 it("keeps the Biology beta and CompBio as distinct editions", async () => {

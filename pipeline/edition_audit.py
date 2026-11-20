@@ -15,6 +15,28 @@ def _doi(value):
     return (value or '').strip().lower().removeprefix('https://doi.org/').removeprefix('doi:')
 
 
+def publication_groups(papers):
+    issues, series = Counter(), Counter()
+    articles = books = books_in_series = 0
+    for paper in papers:
+        meta = paper.metadata
+        imprint = meta.get('imprint')
+        if imprint or paper.source == 'thoth' or meta.get('publication_type') in {'Monograph', 'Edited book', 'Scholarly book'}:
+            books += 1
+            names = {name for name in meta.get('book_series', []) if name and imprint}
+            books_in_series += bool(names)
+            series.update(f'{imprint} · {name}' for name in names)
+        else:
+            articles += 1
+            issue = meta.get('issue_url')
+            if not issue and meta.get('issn') and meta.get('volume') and meta.get('issue'):
+                issue = f"{meta['issn']} · volume {meta['volume']} · issue {meta['issue']}"
+            if issue:
+                issues[issue] += 1
+    return {'articles': articles, 'articles_with_issue': sum(issues.values()), 'journal_issues': dict(issues),
+            'books': books, 'books_with_series': books_in_series, 'book_series': dict(series)}
+
+
 def top_dois(store, day):
     identifiers = set()
     for row in day.ranked[:10]:
@@ -141,6 +163,9 @@ def audit_edition(store: Store, start: date, end: date, references=()):
             metrics['cohesion'] = {'candidates': len(candidates), 'failures': sum(c['failed'] for c in candidates),
                                    'qualified_groups': sum(len(c['qualified']) for c in candidates),
                                    'excluded_papers': dict(Counter(reasons.values()))}
+        if store.domain == 'humanities-arts':
+            metrics['publication_groups'] = {stage: publication_groups(papers[i] for i in sorted(ids))
+                                              for stage, ids in [('collected', papers), ('ranked', ranked_ids), ('top10', top_ids)]}
         if store.domain == 'biology':
             comp = Store(store.root, 'computational')
             other = comp.get_day(when)

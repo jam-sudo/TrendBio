@@ -3,7 +3,7 @@ import type { Item } from "../lib/types";
 
 const { paper } = Astro.props as { paper: Item };
 const { metadata } = paper;
-const native = paper.source === "thoth" || paper.source === "openedition";
+const native = paper.source === "thoth" || paper.source === "openedition" || (paper.source === "crossref" && typeof metadata.imprint === "string");
 const languages = new Intl.DisplayNames(["en"], { type: "language" });
 const original = Array.isArray(metadata.original_languages) ? metadata.original_languages : [];
 const preserveTitle = metadata.abstract_language && (metadata.abstract_language !== "en" ||
@@ -18,6 +18,7 @@ const workLicense = typeof metadata.work_license === "string" && /^https?:\/\/cr
   {typeof metadata.date_basis === "string" && <> · <span>{metadata.date_basis}</span> <time datetime={paper.published_at}>{paper.published_at}</time></>}
   {typeof metadata.date_evidence === "string" && <> · <a href={metadata.date_evidence}>Publication date source</a></>}
   {typeof metadata.issue_url === "string" && <> · <a href={metadata.issue_url}>Journal issue</a></>}
+  {Array.isArray(metadata.book_series) && metadata.book_series.length > 0 && <> · <span>Book series · <span translate="no">{metadata.book_series.join(", ")}</span></span></>}
   {paper.source === "thoth" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher record</a></>}
   {typeof metadata.metadata_license === "string" && <> · <a href={metadata.metadata_license}>Catalogue metadata (CC0)</a></>}
   {workLicense && <> · <a href={workLicense}>License for the work</a></>}

@@ -26,6 +26,7 @@ BOOK = {
     'contributions': [{'contributionType': 'EDITOR', 'fullName': 'A. Editor'}],
     'subjects': [{'subjectType': 'THEMA', 'subjectCode': 'DS'}],
     'publications': [{'isbn': ISBN}], 'imprint': {'imprintName': 'A Press'},
+    'issues': [{'series': {'seriesName': 'Manuscript studies'}}],
     'license': 'https://creativecommons.org/licenses/by-nc/4.0/',
 }
 REGISTERED = {'DOI': DOI, 'type': 'edited-book', 'published': {'date-parts': [[2026, 11, 4]]},
@@ -55,6 +56,7 @@ def test_thoth_confirms_the_whole_book_by_isbn_and_keeps_native_credit_and_right
     assert (item.doi, item.title, item.abstract, item.authors) == (DOI, 'Writings', 'Edited manuscripts.', ['A. Editor'])
     assert (item.metadata['original_title'], item.metadata['original_languages'], item.metadata['publication_type']) == ('Écrits', ['fre'], 'Edited book')
     assert item.metadata['work_license'] == BOOK['license'] and item.metadata['metadata_license'] == CC0
+    assert item.metadata['book_series'] == ['Manuscript studies']
     assert item.metadata['date_evidence'] == 'https://api.crossref.org/works/' + DOI
     other_language = item.model_copy(update={'source': 'openedition', 'id': 'openedition:other', 'doi': None, 'title': 'Écrits'})
     assert [w.id for w in dedupe([item, other_language])] == [item.id]

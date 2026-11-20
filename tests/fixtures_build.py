@@ -231,7 +231,7 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
         summary = "The fixture papers examine quadrature error for smooth functions."
         synthesis = "Each example assumes that the integrand is smooth."
     elif domain == "humanities-arts":
-        titles = ("Liederhandschriften", "Songs in manuscript", "Manuscript evidence")
+        titles = ("Liederhandschriften", "Songs in manuscript", "Manuscritos e memória")
         category, prefix, slug, label = "languages-literature", "songbooks", "songbook-editions-fixture", "Songbook editions"
         headline = "Editing early songbooks"
         summary = "Three studies compare manuscript witnesses."
@@ -268,7 +268,12 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
             paper.id, paper.type = f"{paper.source}:fixture-{i}", "published"
             paper.authors = ["Example Author"]
             if i == 3:
-                paper.metadata = {"license": "https://creativecommons.org/licenses/by/4.0/"}
+                paper.summary = "A study of manuscripts and memory."
+                paper.metadata = {"publication_type": "Edited book", "imprint": "UMinho Editora",
+                                  "original_title": title, "abstract_language": "pt", "original_languages": ["pt"],
+                                  "book_series": ["Livros"], "work_license": "https://creativecommons.org/licenses/by/4.0/",
+                                  "date_basis": "Confirmed publication date", "date_evidence": "https://example.org/registered-book"}
+                venues["UMinho Editora"] += 1
             else:
                 paper.metadata = {"publication_type": "Monograph" if i == 1 else "Journal article",
                                   "original_title": title if i == 1 else "Chansons en manuscrit",
@@ -293,7 +298,7 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
     run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False,
                   synthesis_model="fixture", source_status=dict.fromkeys(sources, "ok"))
     dump(Day(domain=domain, date=day, ranked=[row], run=run), day_path(root, domain, day))
-    if domain == "earth-environment":
+    if domain in {"earth-environment", "humanities-arts"}:
         audit = root / domain / "audits" / f"{day}.json"
         audit.parent.mkdir(exist_ok=True)
         audit.write_text(json.dumps({"days": [{"date": str(day), "venues": venues}]}, indent=2) + "\n")

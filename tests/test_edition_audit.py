@@ -20,6 +20,15 @@ def test_dated_audit_preserves_missing_days_and_checks_independent_ids(fixtures_
     assert report['projected_30d_usd'] is None
 
 
+def test_dated_humanities_counts_books_even_when_older_series_and_issue_metadata_are_missing(fixtures_root):
+    day = date(2026, 11, 1)
+    audit = audit_edition(Store(fixtures_root / 'data', 'humanities-arts'), day, day)
+    stages = audit['days'][0]['publication_groups']
+    expected = {'books': 2, 'books_with_series': 1, 'book_series': {'UMinho Editora · Livros': 1},
+                'articles': 1, 'articles_with_issue': 0, 'journal_issues': {}}
+    assert stages == dict.fromkeys(['collected', 'ranked', 'top10'], expected)
+
+
 def test_beta_tracks_live_dates_and_excludes_backfills(tmp_path, fixtures_root):
     import shutil
     shutil.copytree(fixtures_root / 'data' / 'math', tmp_path / 'math')

@@ -17,7 +17,7 @@ _QUERY = '''query($start:Timestamp!, $offset:Int!, $limit:Int!) {
     workId workType workStatus edition doi publicationDate landingPage license imprint{imprintName}
     titles{localeCode canonical fullTitle} abstracts{localeCode abstractType content}
     languages{languageCode languageRelation} subjects{subjectType subjectCode}
-    contributions{contributionType fullName} relations{relationType} publications{isbn}
+    contributions{contributionType fullName} relations{relationType} publications{isbn} issues{series{seriesName}}
   }
 }'''
 
@@ -120,6 +120,7 @@ class ThothAdapter:
                     metadata={'publication_type': 'Monograph' if work['workType'] == 'MONOGRAPH' else 'Edited book',
                               'imprint': work['imprint']['imprintName'], 'original_languages': languages,
                               'original_title': next((titles[l] for l in originals if l in titles), None),
+                              'book_series': sorted({i['series']['seriesName'] for i in work.get('issues', []) if i['series']['seriesName']}),
                               'abstract_language': lang.split('_')[0].lower(), 'book_subjects': hints, 'isbns': sorted(isbns),
                               'metadata_license': CC0, 'work_license': work.get('license'),
                               'date_basis': 'Confirmed publication date', 'date_evidence': proof,

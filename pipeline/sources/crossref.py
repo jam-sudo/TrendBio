@@ -180,7 +180,7 @@ def normalized_isbn(code):
     return value if re.fullmatch(r'(?:97[89]\d{10}|\d{9}[\dX])', value) else ''
 
 
-def _registry_match(work, day, titles, isbns):
+def first_book_edition(work, day, titles):
     raw = (work.get('title') or [''])[0]
     variants = [raw, raw + ' ' + ' '.join(work.get('subtitle') or [])]
     edition = str(work.get('edition-number') or '').strip().lower()
@@ -189,8 +189,7 @@ def _registry_match(work, day, titles, isbns):
     return (work.get('type') in {'book', 'monograph', 'edited-book', 'reference-book'} and not work.get('update-to')
             and edition in {'', '1', '1st', '1st edition', 'first', 'first edition'} and full_date(work, 'published') == day
             and all(parts >= stamp[:len(parts)] for parts in dates)
-            and any(normalize_title(plain_text(t)) in titles for t in variants)
-            and bool(isbns & {normalized_isbn(i) for i in work.get('ISBN', [])}))
+            and any(normalize_title(plain_text(t)) in titles for t in variants))
 
 
 class BookDateSourceUnavailable(Exception):
@@ -205,7 +204,8 @@ def registered_book(client, day, titles, isbns, doi):
     filters += ['type:' + kind for kind in ('book', 'monograph', 'edited-book', 'reference-book')]
     try:
         matches = {key for key, rec in crossref_works(client, 'https://api.crossref.org/works', ','.join(filters))
-                   if (not doi or key == doi) and _registry_match(rec, day, titles, isbns)}
+                   if (not doi or key == doi) and first_book_edition(rec, day, titles)
+                   and isbns & {normalized_isbn(i) for i in rec.get('ISBN', [])}}
     except httpx.HTTPStatusError as exc:
         if exc.response.status_code == 429 or exc.response.status_code >= 500:
             raise BookDateSourceUnavailable from exc
@@ -227,6 +227,7 @@ class CrossrefAdapter:
 
     def fetch(self, start, end, client):
         from pipeline.sources.europepmc import matched_medline_abstract
+        from pipeline.sources.press_books import press_books
 
         self.decisions.clear()
         items = {}
@@ -268,6 +269,8 @@ class CrossrefAdapter:
                 preprints = related_dois(work, 'has-preprint')
                 metadata = {'journal': journal, 'issn': issn, 'license': licence, 'preprint_dois': preprints,
                             'language': language, 'relations': work.get('relation', {}), **indexed}
+                if work.get('volume') and work.get('issue'):
+                    metadata.update(volume=work['volume'], issue=work['issue'])
                 if type_page:
                     genre = _publisher_article_type(client, type_page, work, doi, issn, day)
                     if genre is None:
@@ -288,4 +291,7 @@ class CrossrefAdapter:
                                   abstract=abstract, published_at=day, first_seen=end, url=f'https://doi.org/{doi}',
                                   doi=doi, authors=[a for a in authors if a], org=None, summary=None,
                                   primary_category=None, published_doi=None, preprint_id=None, metadata=metadata)
+        for press in self.config[self.name].get('book_presses', []):
+            for book in press_books(client, press, start, end, self.decisions):
+                items[book.doi] = book
         return collected(self.name, list(items.values()))
