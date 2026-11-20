@@ -50,6 +50,7 @@ body { max-width: 72ch; margin: 1.5rem auto; padding: 0 1rem; overflow-wrap: any
 header a { margin-inline-end: .75rem } [aria-current] { font-weight: bold }
 h1, h2, h3 { line-height: 1.3 } li:target { outline: 2px solid; outline-offset: .25rem }
 ol.rankings > li { padding: .6rem 0; border-top: 1px solid GrayText } summary { cursor: pointer }
+.correction { border-inline-start: 3px solid; padding-inline-start: .75rem; margin: 1rem 0 }
 </style></head><body><header>${serializeOuter(languages)}</header>${serializeOuter(main)}
 <script>for (const a of document.querySelectorAll('[data-language]')) a.addEventListener('click', () => { a.hash = location.hash; });</script>
 </body></html>\n`);

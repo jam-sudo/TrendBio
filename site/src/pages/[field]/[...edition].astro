@@ -1,9 +1,9 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PublicationEvidence from "../../components/PublicationEvidence.astro";
-import { loadDays, loadItems, loadTaxonomy, loadTopic } from "../../lib/data";
+import { loadDays, loadItems, loadNote, loadTaxonomy, loadTopic, NOTES_ROOT } from "../../lib/data";
 import type { Day } from "../../lib/types";
-import { readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parse } from "yaml";
 import { editionInfo, editions, type Edition } from "../../lib/editions";
@@ -36,13 +36,16 @@ const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?
 const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
 const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
+const correctionDir = day && resolve(NOTES_ROOT, field, day.date);
+const corrections = new Set(correctionDir && existsSync(correctionDir) ? readdirSync(correctionDir) : []);
 const rows = (day?.ranked ?? []).map(row => {
   const topic = loadTopic(field, row.slug);
   const entry = topic?.history.find(entry => entry.date === day?.date);
   const papers = loadItems(field, entry?.item_ids ?? []);
   const synthesis = day?.run.notes.includes(`synthesis-fallback:${row.slug}`) ? null
     : row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
-  return { row, papers, synthesis };
+  const correction = corrections.has(`${row.slug}.md`) ? loadNote(`${field}/${day!.date}/${row.slug}`) : null;
+  return { row, papers, synthesis, correction };
 });
 ---
 
@@ -71,10 +74,11 @@ const rows = (day?.ranked ?? []).map(row => {
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
       {rows.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
       <ol class="rankings">
-        {rows.map(({ row, synthesis, papers }) => <li value={row.rank} id={row.slug}>
+        {rows.map(({ row, synthesis, papers, correction }) => <li value={row.rank} id={row.slug}>
           <p class="category">{categories.get(row.category) ?? row.category}</p>
           <h3>{row.headline}</h3>
           <p>{row.summary}</p>
+          {correction && <aside class="correction" role="note"><strong>Editorial correction</strong><div set:html={correction} /></aside>}
           {papers.length > 0 && <details>
             <summary>{papers.length} supporting {humanities ? (papers.length === 1 ? "work" : "works") : (papers.length === 1 ? "paper" : "papers")}</summary>
             {synthesis && <p>{synthesis}</p>}
@@ -104,6 +108,7 @@ const rows = (day?.ranked ?? []).map(row => {
   .category { margin: 0; font-size: var(--t3); }
   h3 { margin: .25rem 0; font-size: 1.15rem; }
   .rankings p { margin-bottom: .5rem; }
+  .correction { border-inline-start: 3px solid currentColor; padding-inline-start: .75rem; margin: 1rem 0; }
   details p { margin-top: .75rem; }
   summary { cursor: pointer; }
   .archive { margin-block-start: 2rem; }
