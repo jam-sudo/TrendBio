@@ -238,13 +238,16 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                         stars[repo] = sorted(history.items())
                     store.put_star_counts(stars)
         share_decisions = deps.taxonomy.share_editorial_decisions and not skip_collect
+        refreshed = {i.id for i in new_items if i.source == 'europepmc' or
+                     (i.source == 'crossref' and (i.summary is None or i.metadata.get('correction_links')))}
         with _stage('enrich', new=sum(item.summary is None for item in new_items), llm_fallbacks=0) as counts:
             new_items.sort(key=lambda item: item.id)
             for item in new_items:
                 store.put_item(item)
             if share_decisions:
                 active = store.items_between(start, day, by_publication=deps.taxonomy.window_by_publication)
-                enrichment_notes, irrelevant = screen_window(active, store, deps.llm, deps.taxonomy, deps.hints_cfg, day)
+                eligible = [i for i in active if not i.metadata.get('screening_status')]
+                enrichment_notes, irrelevant = screen_window(eligible, store, deps.llm, deps.taxonomy, deps.hints_cfg, day)
             else:
                 _, enrichment_notes, irrelevant = enrich_items(new_items, store, deps.llm, None,
                                                                deps.taxonomy, deps.hints_cfg)
@@ -255,7 +258,6 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 reasons.get(note.split(':', 1)[1], 'unknown') for note in enrichment_notes
             ))
             counts['irrelevant'] = irrelevant
-        refreshed_medical = {i.id for i in new_items if i.source == 'europepmc' and i.relevant}
         with _stage('embed', items=0) as counts:
             window = sorted(store.items_between(start, day, by_publication=deps.taxonomy.window_by_publication),
                             key=lambda item: item.id)
@@ -263,7 +265,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             window = [item for item in window if item.relevant]
             missing = []
             for item in window:
-                if item.id in refreshed_medical:
+                if item.id in refreshed:
                     missing.append(item)
                     continue
                 try:
@@ -361,8 +363,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                       and previous.run.backfilled == backfill}
             if only_missing_synthesis:
                 cached = {topic.slug for topic, _, _ in ranked if topic.headline}
-            if refreshed_medical:
-                cached = {slug for slug in cached if not any(i.id in refreshed_medical for i in items_by_topic[slug])}
+            if refreshed:
+                cached = {slug for slug in cached if not any(i.id in refreshed for i in items_by_topic[slug])}
         with _stage('synthesize', model=tier_model(1, deps.cfg, backfill, deps.budget.over_ceiling())) as counts:
             _, model, synthesis_notes = synthesize_top(
                 ranked, items_by_topic,
@@ -650,7 +652,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
                         state['notes'].append(f'enrichment-fallback:{item.id}')
                     item.summary, item.primary_category = result.summary, result.primary
                     item.secondary_categories = result.secondary
-                    item.relevant = result.relevant and pubmed_in_scope(item, source_cfg)
+                    item.relevant = result.relevant and not item.metadata.get('screening_status') and pubmed_in_scope(item, source_cfg)
                     store.put_item(item)
                 counts['irrelevant'] = sum(not item.relevant for item in chunk)
             state['next_item'] = offset + len(chunk)

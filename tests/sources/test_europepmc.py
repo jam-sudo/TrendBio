@@ -95,6 +95,7 @@ def test_publisher_deposit_before_pmc_preserves_notice_and_cannot_override_licen
     records = [{**RECORD, 'pmid': str(k), 'pmcid': None, 'license': lic, 'doi': '10.1234/'+str(k)}
                for k, lic in [(1, ''), (2, 'cc by-nc-nd'), (3, 'cc by'), (4, 'cc by')]]
     works = [{'DOI': r['doi'], 'title': [r['title'] if r['pmid'] != '3' else 'Unrelated study'], 'abstract': 'Complete abstract.',
+              'update-to': [{'type': 'correction', 'DOI': r['doi']}],
               'published': {'date-parts': [[2026, 11, 4]]}, 'license': [{'content-version': 'vor',
               'start': {'date-parts': [[2026, 11, 5 if r['pmid']=='4' else 4]]},
               'URL': 'https://creativecommons.org/licenses/by/4.0/'}]} for r in records]
@@ -108,5 +109,5 @@ def test_publisher_deposit_before_pmc_preserves_notice_and_cannot_override_licen
         paper, = adapter.fetch(DAY, DAY, client)
     assert paper.id == 'med:1' and paper.abstract == 'Complete abstract.'
     assert paper.metadata['abstract_source'] == 'crossref-vor'
-    assert paper.metadata['correction_links'] == ['https://pubmed.ncbi.nlm.nih.gov/52/']
+    assert paper.metadata['correction_links'] == ['https://pubmed.ncbi.nlm.nih.gov/52/', 'https://doi.org/10.1234/1']
     assert adapter.screening['4']['status'] == 'no-verified-open-article'

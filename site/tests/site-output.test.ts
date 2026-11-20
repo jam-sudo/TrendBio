@@ -233,4 +233,6 @@ it("credits the Earth pilot papers and links their datasets as supporting materi
   expect(await main.getByRole("link", { name: "CC0" }).getAttribute("href")).toBe("https://creativecommons.org/publicdomain/zero/1.0/");
   expect(await main.locator('a[href="https://doi.org/10.5555/example-data"]').count()).toBe(1);
   expect(await main.getByRole("link", { name: "Preprint version" }).getAttribute("href")).toBe("https://doi.org/10.5555/example-preprint");
+  expect(await main.getByRole("link", { name: "Publisher correction history" }).getAttribute("href")).toBe("https://crossmark.crossref.org/dialog/?doi=10.5555%2Fexample-earth-1");
+  expect(await main.getByRole("link", { name: "Linked correction" }).getAttribute("href")).toBe("https://doi.org/10.5555/example-erratum");
 });

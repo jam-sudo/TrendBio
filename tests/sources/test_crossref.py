@@ -3,8 +3,9 @@ from datetime import date
 import httpx
 import pytest
 
-from pipeline.collect import all_paper_sources_failed, intake_status
-from pipeline.sources.crossref import CrossrefAdapter, crossref_works, plain_text
+from pipeline.collect import all_paper_sources_failed, intake_status, prepare_collected
+from pipeline.sources.crossref import CrossrefAdapter, crossref_works, journal_corrections, plain_text
+from pipeline.store import Store
 
 
 def test_journal_equations_keep_one_notation_and_preserve_the_exponent():
@@ -50,6 +51,57 @@ def test_crossref_short_response_cannot_silently_truncate():
             'message': {'items': [], 'total-results': 1}}))) as client:
         with pytest.raises(ValueError, match='Incomplete Crossref'):
             list(crossref_works(client, 'https://example.org', 'type:journal-article'))
+
+
+@pytest.mark.parametrize(('direction', 'kind', 'target', 'expected'), [
+    ('update-to', 'correction', 'https://doi.org/10.1234/PAPER', ['https://doi.org/10.1234/paper']),
+    ('update-to', 'erratum', '10.1234/paper', ['https://doi.org/10.1234/paper']),
+    ('update-to', 'correction', '10.1234/other', None),
+    ('update-to', 'correction', '', None),
+    ('update-to', 'withdrawal', '10.1234/paper', None),
+    ('updated-by', 'correction', '10.1234/notice', ['https://doi.org/10.1234/notice']),
+    ('updated-by', 'partial_retraction', '10.1234/notice', None),
+    ('updated-by', 'expression_of_concern', '10.1234/notice', None),
+])
+def test_crossmark_distinguishes_notices_from_in_place_updates(direction, kind, target, expected):
+    assert journal_corrections({direction: [{'type': kind, 'DOI': target}]}, '10.1234/paper') == expected
+
+
+def test_registered_updates_refresh_stored_evidence_and_preserve_its_history(tmp_path):
+    day = date(2026, 9, 17)
+    end = date(2026, 9, 23)
+    stamp = {'date-parts': [[2026, 9, 17]]}
+    doi = '10.1103/c7bd-ghcb'
+    work = {'DOI': doi, 'title': ['Anisotropic magnons'], 'abstract': 'Original observations.', 'published': stamp,
+            'license': [{'content-version': 'vor', 'URL': 'https://creativecommons.org/licenses/by/4.0/', 'start': stamp}]}
+    adapter = CrossrefAdapter({'crossref': {'journals': ['2469-9950']}})
+    store = Store(tmp_path, 'physics-expanded')
+    with httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(
+            200, json={'message': {'items': [work], 'total-results': 1}}))) as client:
+        paper, = adapter.fetch(day, day, client)
+        store.put_item(paper.model_copy(update={'summary': 'Prior brief.', 'preprint_id': 'arxiv:linked'}))
+        notice = {'type': 'correction', 'DOI': doi}
+        work.update({'update-to': [notice], 'updated-by': [notice]})
+        def collect():
+            return prepare_collected(adapter.fetch(day, end, client), store, day, end, [adapter])
+
+        linked, = collect()
+        assert linked.metadata['correction_links'] == [f'https://doi.org/{doi}'] and linked.summary == 'Prior brief.'
+        store.put_item(linked)
+        assert collect() == []
+        work['abstract'] = 'Corrected observations.'
+        revised, = collect()
+        assert revised.first_seen == revised.published_at == day and revised.abstract == work['abstract']
+        assert revised.summary is None and revised.preprint_id == 'arxiv:linked'
+        store.put_item(revised)
+        work['updated-by'].append({'type': 'retraction', 'DOI': '10.1234/notice'})
+        withheld, = collect()
+        assert not withheld.relevant and withheld.metadata['screening_status'] == 'publication-update'
+        store.put_item(withheld)
+        assert collect() == []
+        del work['update-to'], work['updated-by']
+        restored, = collect()
+        assert restored.relevant and restored.summary is None and 'screening_status' not in restored.metadata
 
 
 @pytest.mark.parametrize('publisher', ['plos', 'pensoft'])

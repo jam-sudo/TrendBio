@@ -5,6 +5,7 @@ from typing import get_args
 from pipeline.dedupe import dedupe
 from pipeline.models import Item, Source
 from pipeline.sources.base import SourceAdapter
+from pipeline.sources.crossref import CrossrefAdapter
 from pipeline.sources.europepmc import EuropePmcAdapter
 from pipeline.store import Store
 
@@ -37,8 +38,11 @@ def intake_status(adapter):
 def prepare_collected(items, store, start, end, successful_adapters):
     result = {item.id: item for item in dedupe(items, store)}
     for adapter in successful_adapters:
-        if isinstance(adapter, EuropePmcAdapter):
+        if isinstance(adapter, (CrossrefAdapter, EuropePmcAdapter)):
             for item in adapter.reconcile(store, start, end, items):
+                if item.id in result:
+                    linked = result[item.id]
+                    item = item.model_copy(update={'preprint_id': linked.preprint_id, 'published_doi': linked.published_doi})
                 result[item.id] = item
     return list(result.values())
 

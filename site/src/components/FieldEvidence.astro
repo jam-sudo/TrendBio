@@ -25,8 +25,10 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
     {paper.source === "worldbank" && <> · <span>Working paper</span></>}
     {paper.source === "europepmc" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher article</a></>}
     {paper.source === "crossref" && typeof paper.metadata.pmid === "string" && /^\d+$/.test(paper.metadata.pmid) && <> · <a href={`https://pubmed.ncbi.nlm.nih.gov/${paper.metadata.pmid}/`}>Indexed abstract</a></>}
-    {paper.source === "europepmc" && typeof paper.metadata.screening_status === "string" && <> · <strong>Currently excluded from new editions</strong></>}
-    {Array.isArray(paper.metadata.correction_links) && paper.metadata.correction_links.filter(link => typeof link === "string" && /^https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov|doi\.org)\//.test(link)).map(link => <> · <a href={link}>Linked correction</a></>)}
+    {typeof paper.metadata.screening_status === "string" && <> · <strong>Currently excluded from new editions</strong></>}
+    {Array.isArray(paper.metadata.correction_links) && paper.metadata.correction_links.filter(link => typeof link === "string" && /^https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov|doi\.org)\//.test(link)).map(link => <> · {paper.doi && link === `https://doi.org/${paper.doi}`
+      ? <a href={`https://crossmark.crossref.org/dialog/?doi=${encodeURIComponent(paper.doi)}`}>Publisher correction history</a>
+      : <a href={link}>Linked correction</a>}</>)}
     {["oai", "europepmc"].includes(paper.source) && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Original publication in ${languageNames.of(paper.metadata.language)}`}</span></>}
     {Array.isArray(paper.metadata.preprint_dois) && paper.metadata.preprint_dois.filter(doi => typeof doi === "string" && /^10\.\d{4,9}\/\S+$/i.test(doi)).map(doi => <> · <a href={`https://doi.org/${doi}`}>Preprint version</a></>)}
     {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}

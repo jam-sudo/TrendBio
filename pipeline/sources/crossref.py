@@ -163,6 +163,23 @@ def related_work_dois(work):
                    for doi in related_dois(work, rel)})
 
 
+def journal_corrections(work, doi):
+    links = set()
+    for direction in ('update-to', 'updated-by'):
+        for update in work.get(direction) or []:
+            kind = (update.get('type') or '').lower().replace('-', '_').replace(' ', '_')
+            target = (update.get('DOI') or '').strip().lower().removeprefix('https://doi.org/')
+            correction = kind in {'correction', 'erratum'}
+            if kind in {'withdrawal', 'removal', 'retraction', 'partial_retraction', 'expression_of_concern'}:
+                return None
+            # A separate outgoing DOI identifies a notice. A self-correction updates the original in place.
+            if direction == 'update-to' and (not correction or target != doi):
+                return None
+            if correction and re.fullmatch(r'10\.\d{4,9}/\S+', target):
+                links.add('https://doi.org/' + target)
+    return sorted(links)
+
+
 def datacite_type(client, doi):
     try:
         record = request(client, 'https://api.datacite.org/dois/' + quote(doi, safe='/'), attempts=2, timeout=8).json()['data']
@@ -225,6 +242,26 @@ class CrossrefAdapter:
         self.config = config
         self.decisions = {}
 
+    def reconcile(self, store, start, end, items):
+        fresh = {i.id: i for i in items if i.source == self.name}
+        for old in store.items_between(start, end, by_publication=True):
+            if old.source != self.name or not old.metadata.get('issn'):
+                continue
+            if self.decisions.get(old.doi) == 'publication-update':
+                if old.metadata.get('screening_status') != 'publication-update':
+                    yield old.model_copy(update={'relevant': False, 'summary': old.summary or '',
+                                                 'metadata': {**old.metadata, 'screening_status': 'publication-update'}})
+                continue
+            current = fresh.get(old.id)
+            if current is None or not (current.metadata.get('correction_links') or old.metadata.get('screening_status')):
+                continue
+            changes = {k: getattr(current, k) for k in ('title', 'abstract', 'authors', 'metadata')
+                       if getattr(old, k) != getattr(current, k)}
+            if changes:
+                if 'title' in changes or 'abstract' in changes or old.metadata.get('screening_status'):
+                    changes.update(summary=None, primary_category=None, secondary_categories=[], relevant=True)
+                yield old.model_copy(update=changes)
+
     def fetch(self, start, end, client):
         from pipeline.sources.europepmc import matched_medline_abstract
         from pipeline.sources.press_books import press_books
@@ -238,7 +275,11 @@ class CrossrefAdapter:
             endpoint = f'https://api.crossref.org/journals/{issn}/works'
             for doi, work in crossref_works(client, endpoint, filters):
                 day = full_date(work, 'published')
-                if day is None or not start <= day <= end or work.get('update-to'):
+                if day is None or not start <= day <= end:
+                    continue
+                corrections = journal_corrections(work, doi)
+                if corrections is None:
+                    self.decisions[doi] = 'publication-update'
                     continue
                 licence = vor_license(work, end, allow_cc0=bool(type_page))
                 title = plain_text((work.get('title') or [''])[0])
@@ -269,6 +310,8 @@ class CrossrefAdapter:
                 preprints = related_dois(work, 'has-preprint')
                 metadata = {'journal': journal, 'issn': issn, 'license': licence, 'preprint_dois': preprints,
                             'language': language, 'relations': work.get('relation', {}), **indexed}
+                if corrections:
+                    metadata['correction_links'] = list(dict.fromkeys([*metadata.get('correction_links', []), *corrections]))
                 if work.get('volume') and work.get('issue'):
                     metadata.update(volume=work['volume'], issue=work['issue'])
                 if type_page:

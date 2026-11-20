@@ -231,14 +231,14 @@ class EuropePmcAdapter:
                     continue
                 evidence_by_id[pmid] = {'day': article.published_at, 'abstract': article.abstract,
                                         'license': article.metadata['license'], 'language': article.metadata.get('language'),
-                                        'article_type': 'journal-article', 'correction_links': [], 'authors': article.authors}
+                                        'article_type': 'journal-article', 'correction_links': article.metadata.get('correction_links', []),
+                                        'authors': article.authors}
                 decision.update(status='eligible', abstract_source='crossref-vor')
 
         items = []
         for pmid, evidence in evidence_by_id.items():
             record, detail = records[pmid], self.screening[pmid]
-            if not detail['correction_links']:
-                detail['correction_links'] = evidence['correction_links']
+            detail['correction_links'] = list(dict.fromkeys([*detail['correction_links'], *evidence['correction_links']]))
             authors = evidence.get('authors') or [a.get('fullName') or a.get('collectiveName') for a in
                                                   record.get('authorList', {}).get('author', [])]
             authors = [a for a in authors if a] or ([record['authorString']] if record.get('authorString') else [])
