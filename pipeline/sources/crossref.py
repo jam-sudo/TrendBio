@@ -113,23 +113,31 @@ class CitationHead(HTMLParser):
                 self.fields.setdefault(meta['name'].lower(), []).append(meta['content'].strip())
 
 
-def _copernicus_article_type(client, url, doi, issn, day, licence):
-    response = request(client, url.rstrip('/') + '/' + quote(doi.rsplit('/', 1)[-1], safe='') + '.xml')
+def _jats_article_type(client, url, doi, issn, day, licence):
+    response = request(client, url, headers={'Accept': 'application/xml, text/xml', 'User-Agent': 'TrendBio (https://trendbio.dev/about/)'})
     if response.url.host != httpx.URL(url).host:
         return None
     root = ET.fromstring(response.content)
     article = root.find('front/article-meta')
     kind = root.get('article-type')
-    if article is None or kind not in {'research-article', 'methods-article'}:
+    if article is None:
         return None
     registered = article.findall("article-id[@pub-id-type='doi']")
     published = article.findall('pub-date')
+    if response.url.host == 'www.frontiersin.org':
+        genres = [s.text for s in article.findall("article-categories/subj-group[@subj-group-type='heading']/subject")]
+        if kind not in {'research-article', 'brief-report'} or genres not in (['Original Research'], ['Brief Research Report']):
+            return None
+        kind = genres[0]
+        published = article.findall("pub-date[@date-type='pub'][@publication-format='electronic']")
+    elif kind not in {'research-article', 'methods-article'}:
+        return None
     licenses = article.findall('permissions/license/license-p/ext-link')
     href = '{http://www.w3.org/1999/xlink}href'
     if (issn not in [e.text for e in root.findall('front/journal-meta/issn')]
             or [(e.text or '').strip().lower() for e in registered] != [doi]
             or len(published) != 1 or published[0].findtext('year') != str(day.year)
-            or published[0].findtext('month') != day.strftime('%B')
+            or published[0].findtext('month') not in {day.strftime('%B'), day.strftime('%m'), str(day.month)}
             or (published[0].findtext('day') or '').zfill(2) != day.strftime('%d')
             or licence.rstrip('/') not in {e.get(href, '').rstrip('/') for e in licenses}):
         return None
@@ -139,12 +147,15 @@ def _copernicus_article_type(client, url, doi, issn, day, licence):
 def _publisher_article_type(client, base, work, doi, issn, day, licence):
     if '{doi}' in base:
         url = base.format(doi=quote(doi, safe='/'))
+        if url.endswith('/xml'):
+            return _jats_article_type(client, url, doi, issn, day, licence)
     else:
         url = work.get('resource', {}).get('primary', {}).get('URL', '')
         if not url.startswith(base):
             return None
         if httpx.URL(base).host == 'hess.copernicus.org':
-            return _copernicus_article_type(client, url, doi, issn, day, licence)
+            xml_url = url.rstrip('/') + '/' + quote(doi.rsplit('/', 1)[-1], safe='') + '.xml'
+            return _jats_article_type(client, xml_url, doi, issn, day, licence)
     response = request(client, url)
     head = CitationHead()
     head.feed(response.text)
@@ -347,7 +358,8 @@ class CrossrefAdapter:
                         genre = _publisher_article_type(client, type_page, work, doi, issn, day, licence)
                     except (httpx.HTTPError, ET.ParseError) as exc:
                         self.decisions[doi] = 'article-type-source-unavailable'
-                        logging.getLogger(__name__).warning('Publisher type lookup failed for %s (%s)', doi, type(exc).__name__)
+                        reason = exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else type(exc).__name__
+                        logging.getLogger(__name__).warning('Publisher type lookup failed for %s (%s)', doi, reason)
                         continue
                     if genre is None:
                         continue

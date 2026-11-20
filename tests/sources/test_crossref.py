@@ -186,6 +186,29 @@ def test_hess_checks_original_contribution_identity_publication_day_and_licence(
     assert intake_status(adapter) == 'partial'
 
 
+@pytest.mark.parametrize(('kind', 'genre', 'pubday', 'accepted'), [
+    ('research-article', 'Original Research', '19', True), ('brief-report', 'Brief Research Report', '19', True),
+    ('brief-report', 'Perspective', '19', False), ('correction', 'Original Research', '19', False),
+    ('research-article', 'Original Research', '18', False),
+])
+def test_frontiers_uses_its_publisher_genre_and_article_publication_day(kind, genre, pubday, accepted):
+    from pipeline.sources.crossref import _publisher_article_type
+
+    licence = 'https://creativecommons.org/licenses/by/4.0/'
+    base = 'https://www.frontiersin.org/journals/conservation-science/articles/{doi}/xml'
+    doi = '10.3389/fcosc.example'
+    content = f'''<article article-type="{kind}" xmlns:xlink="http://www.w3.org/1999/xlink"><front>
+      <journal-meta><issn>2673-611X</issn></journal-meta><article-meta><article-id pub-id-type="doi">{doi}</article-id>
+      <article-categories><subj-group subj-group-type="heading"><subject>{genre}</subject></subj-group></article-categories>
+      <pub-date publication-format="electronic" date-type="pub"><year>2026</year><month>08</month><day>{pubday}</day></pub-date>
+      <pub-date publication-format="electronic" date-type="collection"><year>2026</year></pub-date>
+      <permissions><license><license-p><ext-link xlink:href="{licence}"/></license-p></license></permissions>
+      </article-meta></front></article>'''
+    with httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(200, text=content))) as client:
+        record = _publisher_article_type(client, base, {}, doi, '2673-611X', date(2026, 8, 19), licence)
+    assert record == ({'article_type': genre, 'article_type_url': base.format(doi=doi)} if accepted else None)
+
+
 @pytest.mark.parametrize('page_doi', ['10.1234/test', '10.1234/other'])
 def test_missing_registry_abstract_uses_the_matching_licensed_publisher_article(page_doi):
     day = date(2026, 11, 4)
