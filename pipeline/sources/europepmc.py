@@ -45,6 +45,33 @@ def screen_record(record):
     return 'candidate', corrections
 
 
+def matched_medline_abstract(client, doi, issn, day, title):
+    """Find the MED abstract for a journal article already licensed by its publisher."""
+    page = request(client, API + '/search', params={
+        'query': f'SRC:MED AND DOI:"{doi}"', 'format': 'json', 'resultType': 'core', 'pageSize': 2,
+    }).json()
+    if page['hitCount'] != 1:
+        return None
+    record, = page['resultList']['result']
+    journal = record.get('journalInfo', {}).get('journal', {})
+    pmid = record.get('pmid') or ''
+    types = {v.casefold() for v in record.get('pubTypeList', {}).get('pubType', [])}
+    status, corrections = screen_record(record)
+    if (record.get('source') != 'MED' or not re.fullmatch(r'\d+', pmid) or record.get('id') != pmid
+            or (record.get('doi') or '').lower() != doi or issn not in (journal.get('issn'), journal.get('essn'))
+            or record.get('electronicPublicationDate') != day.isoformat()
+            or normalize_title(plain_text(record.get('title'))) != normalize_title(title)
+            or record.get('license') not in (None, '', 'cc by')
+            or status not in {'candidate', 'no-verified-open-article'} or 'journal article' not in types
+            or types & {'review', 'systematic review', 'scoping review', 'meta-analysis'}):
+        return None
+    abstract = plain_text(record.get('abstractText'))
+    if abstract:
+        return abstract, {'pmid': pmid, 'abstract_url': f'https://pubmed.ncbi.nlm.nih.gov/{pmid}/',
+                          'correction_links': [f'https://pubmed.ncbi.nlm.nih.gov/{pid}/' for pid in corrections]}
+    return None
+
+
 def article_text(node):
     return ' '.join(''.join(node.itertext()).split()) if node is not None else ''
 

@@ -30,7 +30,7 @@ def trial_records(domain, venues, start, end, client):
                 adapter = source(config)
                 records.extend(adapter.fetch(start, end, client))
                 if intake_status(adapter) == 'partial':
-                    raise ValueError(f'Incomplete {adapter.name} publication date checks')
+                    raise ValueError(f'Incomplete {adapter.name} collection')
         for item in dedupe(records):
             kind = item.metadata.get('publication_type', 'Journal article') if domain == 'humanities-arts' else item.type
             yield item.id, item.published_at, item.title, item.abstract, kind, item.preprint_id, hints_for(item, config['hints'])

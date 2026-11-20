@@ -3,7 +3,7 @@ from datetime import date
 import httpx
 import pytest
 
-from pipeline.collect import all_paper_sources_failed
+from pipeline.collect import all_paper_sources_failed, intake_status
 from pipeline.sources.crossref import CrossrefAdapter, crossref_works
 
 
@@ -106,3 +106,58 @@ def test_missing_registry_abstract_uses_the_matching_licensed_publisher_article(
             assert paper.abstract == 'Full orchard measurements.'
             assert paper.metadata['language'] == 'en'
             assert paper.metadata['abstract_url'] == 'https://journal.example/doi/10.1234/test.html'
+
+
+@pytest.mark.parametrize('change', [
+    {}, {'doi': '10.1234/other'}, {'pmid': '999'}, {'source': 'PPR'}, {'title': 'Different target'},
+    {'journalInfo': {'journal': {'issn': '8765-4321'}}}, {'electronicPublicationDate': '2026-11-01'},
+    {'license': 'cc by-nc'}, {'pubTypeList': {'pubType': ['Review', 'Journal Article']}},
+    {'commentCorrectionList': {'commentCorrection': [{'type': 'Retraction in', 'source': 'MED', 'id': '125'}]}},
+])
+def test_chemistry_uses_med_abstract_only_for_the_same_licensed_research_article(change):
+    day = date(2026, 11, 4)
+    stamp = {'date-parts': [[2026, 11, 4]]}
+    work = {'DOI': '10.1234/test', 'title': ['Measuring calcium'], 'published': stamp,
+            'license': [{'content-version': 'vor', 'URL': 'https://creativecommons.org/licenses/by/4.0/', 'start': stamp}]}
+    med = {'source': 'MED', 'id': '123', 'pmid': '123', 'doi': work['DOI'], 'title': 'Measuring calcium.',
+           'journalInfo': {'journal': {'essn': '1234-5678'}}, 'firstPublicationDate': '2026-11-01',
+           'electronicPublicationDate': day.isoformat(), 'pubTypeList': {'pubType': ['Journal Article']},
+           'abstractText': '<p>Agreement with an independent measurement.</p>',
+           'commentCorrectionList': {'commentCorrection': [{'type': 'Erratum in', 'source': 'MED', 'id': '124'}]}, **change}
+    def reply(req):
+        if req.url.host == 'api.crossref.org':
+            return httpx.Response(200, json={'message': {'items': [work, {**work, 'DOI': '10.1234/closed', 'license': []}],
+                                                         'total-results': 2}})
+        assert req.url.params['query'] == 'SRC:MED AND DOI:"10.1234/test"'
+        return httpx.Response(200, json={'hitCount': 1, 'resultList': {'result': [med]}})
+
+    config = {'crossref': {'journals': ['1234-5678'], 'medline_abstracts': ['1234-5678']}}
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        items = CrossrefAdapter(config).fetch(day, day, client)
+    if change:
+        assert not items
+    else:
+        paper, = items
+        assert paper.abstract == 'Agreement with an independent measurement.' and paper.published_at == day
+        assert paper.metadata['abstract_url'] == 'https://pubmed.ncbi.nlm.nih.gov/123/'
+        assert paper.metadata['correction_links'] == ['https://pubmed.ncbi.nlm.nih.gov/124/']
+
+
+def test_med_lookup_failure_preserves_registry_abstracts_and_retries_on_next_collection():
+    day = date(2026, 11, 4)
+    stamp = {'date-parts': [[2026, 11, 4]]}
+    work = {'DOI': '10.1234/known', 'title': ['Known reference'], 'published': stamp,
+            'license': [{'content-version': 'vor', 'URL': 'https://creativecommons.org/licenses/by/4.0/', 'start': stamp}]}
+    responses = iter([httpx.Response(403), httpx.Response(200, json={'hitCount': 0, 'resultList': {'result': []}})])
+    def reply(req):
+        if req.url.host == 'api.crossref.org':
+            return httpx.Response(200, json={'message': {'items': [{**work, 'abstract': 'Publisher text.'},
+                                                                   {**work, 'DOI': '10.1234/missing'}], 'total-results': 2}})
+        return next(responses)
+
+    adapter = CrossrefAdapter({'crossref': {'journals': ['1234-5678'], 'medline_abstracts': ['1234-5678']}})
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        for status in ('partial', 'ok'):
+            paper, = adapter.fetch(day, day, client)
+            assert paper.doi == '10.1234/known' and paper.abstract == 'Publisher text.'
+            assert intake_status(adapter) == status

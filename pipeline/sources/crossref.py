@@ -1,6 +1,7 @@
 """Publication-day intake for openly licensed journal articles in field pilots."""
 from datetime import date, datetime
 from html.parser import HTMLParser
+import logging
 import re
 from urllib.parse import quote
 
@@ -193,8 +194,12 @@ class CrossrefAdapter:
 
     def __init__(self, config):
         self.config = config
+        self.decisions = {}
 
     def fetch(self, start, end, client):
+        from pipeline.sources.europepmc import matched_medline_abstract
+
+        self.decisions.clear()
         items = {}
         resource_types = {}
         filters = f'type:journal-article,from-pub-date:{start},until-pub-date:{end}'
@@ -216,6 +221,16 @@ class CrossrefAdapter:
                 if not abstract and base:
                     abstract, abstract_url, native_language = _publisher_abstract(client, base, doi, issn, day)
                     language = language or native_language
+                indexed = {}
+                if not abstract and issn in self.config[self.name].get('medline_abstracts', []):
+                    try:
+                        match = matched_medline_abstract(client, doi, issn, day, title)
+                    except (httpx.HTTPError, ValueError, KeyError) as exc:
+                        self.decisions[doi] = 'abstract-source-unavailable'
+                        logging.getLogger(__name__).warning('MED abstract lookup failed for %s (%s)', doi, type(exc).__name__)
+                        continue
+                    if match:
+                        abstract, indexed = match
                 if not abstract:
                     continue
                 journal = (work.get('container-title') or [issn])[0]
@@ -223,7 +238,7 @@ class CrossrefAdapter:
                            for a in work.get('author', [])]
                 preprints = related_dois(work, 'has-preprint')
                 metadata = {'journal': journal, 'issn': issn, 'license': licence, 'preprint_dois': preprints,
-                            'language': language, 'relations': work.get('relation', {})}
+                            'language': language, 'relations': work.get('relation', {}), **indexed}
                 if type_page:
                     genre = _publisher_article_type(client, type_page, work, doi, issn, day)
                     if genre is None:

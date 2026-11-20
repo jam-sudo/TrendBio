@@ -22,7 +22,7 @@ from pipeline.cohesion import review_clusters
 from pipeline.cluster import (
     append_history, attach_items, cluster_items, continuity_candidates, fill_unranked_days, match_or_create,
 )
-from pipeline.collect import PAPER_SOURCES, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, intake_status, prepare_collected
+from pipeline.collect import PAPER_SOURCES, PARTIAL_REASONS, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, intake_status, prepare_collected
 from pipeline.config import Scoring, Taxonomy
 from pipeline.embed import l2_normalize
 from pipeline.enrich import enrich_items, first_sentence, hints_for
@@ -218,8 +218,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                     else:
                         collected_items.extend(items)
                         source_status[adapter.name] = intake_status(adapter)
-                        notes.extend(f'book-date-source-unavailable:{adapter.name}:{key}' for key, reason in
-                                     getattr(adapter, 'decisions', {}).items() if reason == 'book-date-source-unavailable')
+                        notes.extend(f'{reason}:{adapter.name}:{key}' for key, reason in
+                                     getattr(adapter, 'decisions', {}).items() if reason in PARTIAL_REASONS)
                         counts['items'] = len(items)
                     counts['source_status'] = source_status[adapter.name]
             if all_paper_sources_failed(source_status):
@@ -446,7 +446,7 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
                 for item in items:
                     store.put_item(item)
                 if intake_status(adapter) == 'partial':
-                    raise ValueError('Book publication dates still require verification')
+                    raise ValueError(f'Incomplete {adapter.name} collection')
             except Exception as error:
                 logger.warning('stage=collect event=chunk_failed source=%s chunk=%s..%s error=%s',
                                adapter.name, chunk_start, chunk_end, type(error).__name__)

@@ -29,8 +29,8 @@ const categories = new Map(loadTaxonomy(field).map(category => [category.slug, c
 const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
 const archives: string[] = source.arxiv?.categories ?? [];
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
-const earth = field === "earth-environment";
-const editionVenues = earth && day ? loadEditionVenues(field, day.date) : null;
+const showCollectedJournals = field === "earth-environment" || field === "chemistry";
+const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date) : null;
 const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
@@ -66,7 +66,7 @@ const rows = (day?.ranked ?? []).map(row => {
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
-    {followsCrossref && journals.length > 0 && <p class="coverage">{earth
+    {followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
       ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
       : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
@@ -95,8 +95,9 @@ const rows = (day?.ranked ?? []).map(row => {
             <ul>{papers.map(paper => <li>{humanities ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
               {paper.source === "worldbank" && <> · <span>Working paper</span></>}
               {paper.source === "europepmc" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher article</a></>}
+              {paper.source === "crossref" && typeof paper.metadata.pmid === "string" && /^\d+$/.test(paper.metadata.pmid) && <> · <a href={`https://pubmed.ncbi.nlm.nih.gov/${paper.metadata.pmid}/`}>Indexed abstract</a></>}
               {paper.source === "europepmc" && typeof paper.metadata.screening_status === "string" && <> · <strong>Currently excluded from new editions</strong></>}
-              {paper.source === "europepmc" && Array.isArray(paper.metadata.correction_links) && paper.metadata.correction_links.filter(link => typeof link === "string" && /^https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov|doi\.org)\//.test(link)).map(link => <> · <a href={link}>Linked correction</a></>)}
+              {Array.isArray(paper.metadata.correction_links) && paper.metadata.correction_links.filter(link => typeof link === "string" && /^https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov|doi\.org)\//.test(link)).map(link => <> · <a href={link}>Linked correction</a></>)}
               {["oai", "europepmc"].includes(paper.source) && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Original publication in ${languageNames.of(paper.metadata.language)}`}</span></>}
               {Array.isArray(paper.metadata.preprint_dois) && paper.metadata.preprint_dois.filter(doi => typeof doi === "string" && /^10\.\d{4,9}\/\S+$/i.test(doi)).map(doi => <> · <a href={`https://doi.org/${doi}`}>Preprint version</a></>)}
               {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}

@@ -128,6 +128,10 @@ PANGAEA’s 2026 catalogue contained 341 records with a publisher release date i
 
 Starting from the publisher’s release dates recovered more material. Across all 341 records, 42 datasets and five collections passed the initial access and relationship checks. They produced one candidate group in each of the four weeks. None supplied three independent studies with a common research result. For example, a vehicle survey in Jamaica Bay and its validation samples came from the same day and team. In another week, three deposits repackaged data from published studies that measured different responses to ocean acidification. Keep the links to original studies and check the expedition, observing program and measured outcome before counting a dataset toward a trend. [All four weekly decisions and the 28-day comparison](expansion-measurements/2026-11-20/earth-datasets.json) · [Jamaica Bay survey and paired samples](https://doi.pangaea.de/10.1594/PANGAEA.998044)
 
+### Analytical chemistry source trial
+
+Compare the five existing journals with a trial adding Chemosensors, ACS Measurement Science Au, Analytical Science Advances, Analytical Sciences, and Analytical and Bioanalytical Chemistry. Reconcile publication dates, article types and licences with publisher lists or indexed records. For the four weeks ending October 28, November 4, 11 and 18, count which additional records pass screening, join a candidate and reach a ranking. Review all ranked groups when there are fewer than ten. Inspect whether studies compare a common analyte, system or measurement and whether claims identify the sample and method used. Reserve the week ending September 16 as an independent check and the day after November 4 for incremental cost. Check a fixed sample of first-version ChemRxiv DOIs for verifiable rights separately. [Configured sources](../config/sources/chemistry.yaml)
+
 ## Reader editions and rollout order
 
 | Stage | Scope | Evidence required for the next decision |

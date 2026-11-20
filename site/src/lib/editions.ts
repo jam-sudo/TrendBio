@@ -5,7 +5,7 @@ export const editionInfo = {
   biology: { label: "Biology", source: "bioRxiv and PubMed", stage: "Beta" },
   math: { label: "Math & Stats", source: "arXiv", stage: "Pilot" },
   "earth-environment": { label: "Earth & Environment", source: "Earth and environmental journals via Crossref", stage: "Pilot" },
-  chemistry: { label: "Chemistry", source: "five chemistry journals via Crossref", stage: "Pilot" },
+  chemistry: { label: "Chemistry", source: "Chemistry journals via Crossref", stage: "Pilot" },
   astronomy: { label: "Stellar & Galactic Astronomy", source: "arXiv", stage: "Pilot" },
   "physics-expanded": { label: "Expanded Physics", source: "arXiv and two physics journals via Crossref", stage: "Pilot" },
   "computer-information": { label: "Computing & Information", source: "arXiv, DROPS and Crossref", stage: "Pilot" },
