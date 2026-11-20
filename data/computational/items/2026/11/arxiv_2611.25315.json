@@ -1,0 +1,32 @@
+{
+  "abstract": "When should a deployed MI decoder spend adaptation resources-not only how to adapt under shift? We study a thin control layer outside a frozen encoder: a resource ladder (factory -> Bayesian head -> affine map, with full fine-tune as an escape hatch) governed by regime-aware gating under a utility that prices accuracy, fit time, and label cost. The head is Bayesian in the conjugate sense: a Normal-Inverse-Wishart prior over the class conditional Gaussians in embedding space, updated in closed form (no gradients) as labelled trials arrive. Full estimators, constants, and the reanalysis code are in the companion paper and the ancillary bundle of this submission. Thesis: adaptation should be gated and capped, not always-on and not blindly fine-tuned. Evidence: (i) utility-max gating over-adapts on clean data that already carries session drift; a clean-referenced gate restores low false-entry rates (e.g. dropping the adaptation rate from 0.56 to 0.11 on field-like sessions, with the cascade staying on the factory decoder for ~87% of clean cells). (ii) Under severe synthetic stress, a lightweight LDA head matches or exceeds the frozen trunk's accuracy across five encoder architectures (n=155 subject x trunk cells, pooled across shared subjects), at ~23x lower fit time than full warm-start fine-tuning. Always-on baselines favor capping the default below full fine-tune. (iii) In two no-perturbation BNCI session checks the factory model transferred without intervention (no reliable head gain), so the control layer's value under natural drift is cost-efficiency and clean-safety rather than demonstrated accuracy gains. (iv) Adaptation severity does not follow a universal ordinal ladder across datasets, highlighting the need for dynamic gating over fixed adaptation policies.",
+  "authors": [
+    "Sergey Musienko"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-20",
+  "id": "arxiv:2611.25315",
+  "metadata": {
+    "arxiv_primary_category": "cs.HC",
+    "categories": [
+      "cs.HC",
+      "cs.LG",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.25315v1</ns0:id>\n    <ns0:title>When Should Deployed BCI Decoders Adapt? A Resource-Priced Ladder for Frozen EEG Trunks</ns0:title>\n    <ns0:updated>2026-11-19T00:34:41Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.25315v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.25315v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>When should a deployed MI decoder spend adaptation resources-not only how to adapt under shift? We study a thin control layer outside a frozen encoder: a resource ladder (factory -&gt; Bayesian head -&gt; affine map, with full fine-tune as an escape hatch) governed by regime-aware gating under a utility that prices accuracy, fit time, and label cost. The head is Bayesian in the conjugate sense: a Normal-Inverse-Wishart prior over the class conditional Gaussians in embedding space, updated in closed form (no gradients) as labelled trials arrive. Full estimators, constants, and the reanalysis code are in the companion paper and the ancillary bundle of this submission. Thesis: adaptation should be gated and capped, not always-on and not blindly fine-tuned. Evidence: (i) utility-max gating over-adapts on clean data that already carries session drift; a clean-referenced gate restores low false-entry rates (e.g. dropping the adaptation rate from 0.56 to 0.11 on field-like sessions, with the cascade staying on the factory decoder for ~87% of clean cells). (ii) Under severe synthetic stress, a lightweight LDA head matches or exceeds the frozen trunk's accuracy across five encoder architectures (n=155 subject x trunk cells, pooled across shared subjects), at ~23x lower fit time than full warm-start fine-tuning. Always-on baselines favor capping the default below full fine-tune. (iii) In two no-perturbation BNCI session checks the factory model transferred without intervention (no reliable head gain), so the control layer's value under natural drift is cost-efficiency and clean-safety rather than demonstrated accuracy gains. (iv) Adaptation severity does not follow a universal ordinal ladder across datasets, highlighting the need for dynamic gating over fixed adaptation policies.</ns0:summary>\n    <ns0:category term=\"cs.HC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-19T00:34:41Z</ns0:published>\n    <ns1:comment>16 pages, 7 tables, 5 figures, 1 appendix. Companion paper: arXiv:2607.22397. Code: pip install nimbus-bci (v0.9.0)</ns1:comment>\n    <ns1:primary_category term=\"cs.HC\" />\n    <ns0:author>\n      <ns0:name>Sergey Musienko</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Proposes a resource-priced ladder for adapting frozen EEG encoders in motor-imagery BCI, using gated Bayesian (Normal-Inverse-Wishart) heads updated in closed…",
+  "title": "When Should Deployed BCI Decoders Adapt? A Resource-Priced Ladder for Frozen EEG Trunks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.25315v1"
+}

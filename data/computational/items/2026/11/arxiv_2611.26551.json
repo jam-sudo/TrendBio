@@ -1,0 +1,34 @@
+{
+  "abstract": "High-fidelity simulations generate spatiotemporal data that are difficult to obtain experimentally, yet their outputs are rarely ready for scientific machine learning. Cardiac electrophysiology (EP) exemplifies this challenge: data reside on anatomy-dependent volumetric meshes, propagation follows anisotropic material fields, and relevant events span multiple temporal scales. We introduce GraphEP, a calibrated data system that converts cardiac meshes and simulation protocols into compact, graph-native trajectories of full-field transmembrane potential. GraphEP includes 732 left-ventricular simulations across 20 anatomies, with healthy and scarred substrates of varying severity and multiple pacing configurations. Each sample provides geometry, tissue and material features, stimulation, connectivity, derived activation targets, and provenance in PyTorch Geometric format. We benchmark four inductive biases for predicting transmembrane potential Vm(t): local message passing, global neural operators, multi-scale hierarchical graph transformers (HGT), and physiology-informed models. The latter include HGT-Lag, which separates activation timing from action-potential morphology, and the stateful Graph Aliev-Panfilov Action-Potential ODE (GAP2ODE), which evolves excitation and recovery autoregressively with frame-wise stimulation and graph diffusion. Results show that wider spatial communication improves on local message passing, while physiological structure provides the strongest inductive bias: HGT-Lag and GAP2ODE lead on complementary metrics by explicitly modeling propagation, recovery, and temporal state. GraphEP offers a reproducible pathway from mechanistic cardiac EP simulations to analysis-ready data and a controlled benchmark for learning on irregular anatomical geometries.",
+  "authors": [
+    "Matteo Baldan",
+    "Chiara D'Ercoli",
+    "James Rowbottom",
+    "Pietro Liò",
+    "Stefania Fresca"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-20",
+  "id": "arxiv:2611.26551",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.TO",
+    "categories": [
+      "q-bio.TO"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.26551v1</ns0:id>\n    <ns0:title>GraphEP: A Calibrated Data System and Benchmark for Learning Cardiac Electrophysiology</ns0:title>\n    <ns0:updated>2026-11-19T18:23:10Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.26551v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.26551v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>High-fidelity simulations generate spatiotemporal data that are difficult to obtain experimentally, yet their outputs are rarely ready for scientific machine learning. Cardiac electrophysiology (EP) exemplifies this challenge: data reside on anatomy-dependent volumetric meshes, propagation follows anisotropic material fields, and relevant events span multiple temporal scales. We introduce GraphEP, a calibrated data system that converts cardiac meshes and simulation protocols into compact, graph-native trajectories of full-field transmembrane potential. GraphEP includes 732 left-ventricular simulations across 20 anatomies, with healthy and scarred substrates of varying severity and multiple pacing configurations. Each sample provides geometry, tissue and material features, stimulation, connectivity, derived activation targets, and provenance in PyTorch Geometric format. We benchmark four inductive biases for predicting transmembrane potential Vm(t): local message passing, global neural operators, multi-scale hierarchical graph transformers (HGT), and physiology-informed models. The latter include HGT-Lag, which separates activation timing from action-potential morphology, and the stateful Graph Aliev-Panfilov Action-Potential ODE (GAP2ODE), which evolves excitation and recovery autoregressively with frame-wise stimulation and graph diffusion. Results show that wider spatial communication improves on local message passing, while physiological structure provides the strongest inductive bias: HGT-Lag and GAP2ODE lead on complementary metrics by explicitly modeling propagation, recovery, and temporal state. GraphEP offers a reproducible pathway from mechanistic cardiac EP simulations to analysis-ready data and a controlled benchmark for learning on irregular anatomical geometries.</ns0:summary>\n    <ns0:category term=\"q-bio.TO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-19T18:23:10Z</ns0:published>\n    <ns1:comment>10 pages, 4 figures,AIDaR 2026 neurips workshop</ns1:comment>\n    <ns1:primary_category term=\"q-bio.TO\" />\n    <ns0:author>\n      <ns0:name>Matteo Baldan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Chiara D'Ercoli</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>James Rowbottom</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Pietro Liò</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Stefania Fresca</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n"
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "GraphEP: a calibrated graph-native dataset of 732 cardiac electrophysiology simulations with a benchmark comparing graph neural and physiology-informed models…",
+  "title": "GraphEP: A Calibrated Data System and Benchmark for Learning Cardiac Electrophysiology",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.26551v1"
+}

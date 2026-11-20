@@ -1,0 +1,33 @@
+{
+  "abstract": "Neural tracking, the temporal alignment between a continuous stimulus and the elicited brain response, enables decoding of attention from electroencephalography (EEG), yet its application to naturalistic video remains largely unexplored and mainly relies on linear canonical correlation analysis (CCA). We investigate whether a temporal contrastive model, pairing pretrained VideoMAE features with a lightweight EEG encoder trained on a correlation-based InfoNCE objective, can strengthen EEG-video alignment. Benchmarked against CCA under three generalization regimes, the model outperforms CCA across subjects (leave-one-subject-out), matches it within the stimulus manifold (leave-video-segment-out), and falls behind CCA when extrapolating to entirely novel videos (leave-one-video-out). Because this advantage appears only for seen stimuli, we probe its basis: a sham control shows that a high accuracy does not certify genuine alignment, as a synthesized correspondence fit to the seen stimuli can reproduce it without genuine temporal alignment in the training pairs. This does not preclude practical use: on a downstream attention-decoding task with seen stimuli, the model remains better than CCA since the decoding only requires a strong statistical coupling, regardless of whether that coupling is physiologically meaningful. Using a group-averaged EEG reference, we further show that genuine, generalizable coupling is nonetheless learned, only buried in the noise of single-subject EEG. These results indicate that progress hinges on data scale, diversity, and single-subject denoising.",
+  "authors": [
+    "Yuanyuan Yao",
+    "Simon Geirnaert",
+    "Alexander Bertrand"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-20",
+  "id": "arxiv:2611.26258",
+  "metadata": {
+    "arxiv_primary_category": "eess.SP",
+    "categories": [
+      "eess.SP",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.26258v1</ns0:id>\n    <ns0:title>Temporal Contrastive Alignment of EEG and Naturalistic Video Only Beats Linear Decoding On In-Sample Stimuli</ns0:title>\n    <ns0:updated>2026-11-19T15:31:27Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.26258v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.26258v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Neural tracking, the temporal alignment between a continuous stimulus and the elicited brain response, enables decoding of attention from electroencephalography (EEG), yet its application to naturalistic video remains largely unexplored and mainly relies on linear canonical correlation analysis (CCA). We investigate whether a temporal contrastive model, pairing pretrained VideoMAE features with a lightweight EEG encoder trained on a correlation-based InfoNCE objective, can strengthen EEG-video alignment. Benchmarked against CCA under three generalization regimes, the model outperforms CCA across subjects (leave-one-subject-out), matches it within the stimulus manifold (leave-video-segment-out), and falls behind CCA when extrapolating to entirely novel videos (leave-one-video-out). Because this advantage appears only for seen stimuli, we probe its basis: a sham control shows that a high accuracy does not certify genuine alignment, as a synthesized correspondence fit to the seen stimuli can reproduce it without genuine temporal alignment in the training pairs. This does not preclude practical use: on a downstream attention-decoding task with seen stimuli, the model remains better than CCA since the decoding only requires a strong statistical coupling, regardless of whether that coupling is physiologically meaningful. Using a group-averaged EEG reference, we further show that genuine, generalizable coupling is nonetheless learned, only buried in the noise of single-subject EEG. These results indicate that progress hinges on data scale, diversity, and single-subject denoising.</ns0:summary>\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-19T15:31:27Z</ns0:published>\n    <ns1:primary_category term=\"eess.SP\" />\n    <ns0:author>\n      <ns0:name>Yuanyuan Yao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Simon Geirnaert</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Alexander Bertrand</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Contrastive EEG-video alignment beats CCA across subjects and seen stimuli, not novel videos; a sham control shows accuracy can be spurious.",
+  "title": "Temporal Contrastive Alignment of EEG and Naturalistic Video Only Beats Linear Decoding On In-Sample Stimuli",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.26258v1"
+}
