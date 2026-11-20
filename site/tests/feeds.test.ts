@@ -12,6 +12,7 @@ afterAll(async () => { await browser?.close(); });
 const parse = (xml: string) => page.evaluate(xml => {
   const doc = new DOMParser().parseFromString(xml, "application/xml");
   return { error: doc.querySelector("parsererror")?.textContent,
+    language: doc.documentElement.getAttribute("xml:lang"),
     self: doc.querySelector('feed > link[rel="self"]')?.getAttribute("href"),
     updated: doc.querySelector("feed > updated")?.textContent,
     entries: [...doc.querySelectorAll("entry")].map(entry => ({
@@ -30,6 +31,7 @@ it("builds parseable Atom feeds with stable IDs, category filtering and absolute
     const expected = days.flatMap(day => day.ranked.filter(row => category ? row.category === category.slug : row.rank <= 5)
       .map(row => ({ row, day }))).slice(0, category ? 100 : 150);
     expect(feed.error).toBeUndefined();
+    expect(feed.language).toBe("en");
     expect(feed.self).toBe(`https://trendbio.dev/${path}`);
     expect(feed.updated).toBe(days[0].run.finished);
     if (category?.slug === "industry") {

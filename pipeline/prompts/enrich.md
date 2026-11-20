@@ -1,4 +1,4 @@
-Summarize the supplied item for experts in {field}.
+Summarize the supplied item in English for experts in {field}, including when the source is in another language.
 Return one factual summary of at most 140 characters, exactly one primary category,
 and zero to two secondary categories. Choose category slugs only from the list below.
 Use each category's covers text to guide classification. Source hints are priors,

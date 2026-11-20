@@ -30,6 +30,12 @@ def top_evidence(items: list[Item]) -> Item:
     ))
 
 
+def fallback_copy(item: Item) -> tuple[str, str]:
+    if item.can_quote_in_english():
+        return item.title, item.summary or ''
+    return 'English summary unavailable', 'Open the supporting work to read the original publication.'
+
+
 def synthesize_top(
     ranked: list[tuple[Topic, Signals, Scores]], items_by_topic: dict[str, list[Item]],
     llm: LLM, budget: Budget, cfg: Scoring, today: date, *, backfill: bool,
@@ -89,8 +95,7 @@ def synthesize_top(
         topic = topics[position - 1]
         if result is None:
             item = top_evidence(items_by_topic[topic.slug])
-            topic.headline = item.title
-            topic.summary = item.summary or ''
+            topic.headline, topic.summary = fallback_copy(item)
             notes.append(f'synthesis-fallback:{topic.slug}')
         else:
             topic.label = result.label

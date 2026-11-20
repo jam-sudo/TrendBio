@@ -13,7 +13,7 @@ export function atomFeed(days: Day[], site: URL, category?: { slug: string; labe
     .filter(row => category ? row.category === category.slug : row.rank >= 1 && row.rank <= 5)
     .map(row => ({ day, row }))).slice(0, category ? 100 : 150);
   return `<?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title>${escapeXml(category ? `TrendBio — ${category.label}` : "TrendBio — Top 5")}</title>
 <id>${escapeXml(self)}</id><link rel="self" href="${escapeXml(self)}"/><link href="${escapeXml(site.href)}"/>
 <updated>${escapeXml(updated(recent[0]))}</updated><author><name>TrendBio</name></author>

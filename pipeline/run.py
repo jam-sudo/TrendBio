@@ -25,7 +25,7 @@ from pipeline.cluster import (
 from pipeline.collect import PAPER_SOURCES, PARTIAL_REASONS, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, intake_status, prepare_collected
 from pipeline.config import Scoring, Taxonomy
 from pipeline.embed import l2_normalize
-from pipeline.enrich import enrich_items, first_sentence, hints_for, screen_window
+from pipeline.enrich import enrich_items, fallback_summary, hints_for, screen_window
 from pipeline.llm import Enrichment, LLM
 from pipeline.models import Day, RankedTopic, RunInfo
 from pipeline.score import rank, score_topics, signals_for
@@ -34,7 +34,7 @@ from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
 from pipeline.store import Store
 from pipeline.topic_map import build_map
-from pipeline.synthesize import synthesize_top, tier_model, top_evidence
+from pipeline.synthesize import fallback_copy, synthesize_top, tier_model, top_evidence
 from pipeline.wipe import reset_derived, validate_month_range
 
 
@@ -534,7 +534,7 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
             for item, vector in zip(chunk, vectors, strict=True):
                 result = results.get(item.id)
                 if result is None:
-                    result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
+                    result = Enrichment(summary=fallback_summary(item)[:160],
                                         primary=next(iter(hints[item.id]), deps.taxonomy.fallback_category), secondary=[],
                                         relevant=item.type in {'preprint', 'published'})
                     state.setdefault('notes', []).append(f'enrichment-fallback:{item.id}')
@@ -633,7 +633,7 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
                 for item in chunk:
                     result = results.get(item.id)
                     if result is None:
-                        result = Enrichment(summary=first_sentence(item.abstract or item.title)[:160],
+                        result = Enrichment(summary=fallback_summary(item)[:160],
                                             primary=next(iter(hints[item.id]), deps.taxonomy.fallback_category),
                                             secondary=[], relevant=item.type in {'preprint', 'published'})
                         state['notes'].append(f'enrichment-fallback:{item.id}')
@@ -720,7 +720,7 @@ def synthesis_repair_targets(store: Store, start: date, end: date, *, retry_fall
                 item = top_evidence(evidence[key])
                 # Recognize a completed item fallback even when enrichment has no summary.
                 if (not retry and f'synthesis-fallback:{row.slug}' in day.run.notes
-                        and row.headline == item.title and row.summary == (item.summary or '')):
+                        and (row.headline, row.summary) == fallback_copy(item)):
                     if key not in missing.values():
                         jobs.pop(key)
                         evidence.pop(key)

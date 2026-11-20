@@ -9,7 +9,7 @@ import pytest
 
 from pipeline.budget import Budget
 from pipeline.config import load_taxonomy
-from pipeline.enrich import enrich_items, hints_for, screen_window
+from pipeline.enrich import enrich_items, fallback_summary, hints_for, screen_window
 from pipeline.llm import Enrichment, LLM, enrichment_key
 from pipeline.models import Item
 from pipeline.store import Store
@@ -144,6 +144,18 @@ def test_enrich_sets_summary_and_categories_within_taxonomy(tmp_path, item, taxo
     assert item.title in prompt and item.abstract in prompt
     assert all(category.covers in prompt for category in taxonomy.categories)
     assert budget.month_spend_usd() == pytest.approx(0.00002)
+
+
+@pytest.mark.parametrize('source,metadata,original,expected', [
+    ('openedition', {'abstract_language': 'fr'}, 'Une étude de deux archives.', 'An English summary is unavailable.'),
+    ('oai', {'language': 'ko', 'abstract_language': 'en-GB'}, 'Two archives were compared.', 'Two archives were compared.'),
+    ('crossref', {}, 'Une étude de deux archives.', 'An English summary is unavailable.'),
+    ('arxiv', {}, '두 가지 추정 방법을 비교했다.', 'An English summary is unavailable.'),
+])
+def test_fallback_summary_uses_the_language_of_the_selected_source_text(item, source, metadata, original, expected):
+    item = item.model_copy(update={'source': source, 'metadata': metadata, 'abstract': original})
+    assert fallback_summary(item) == expected
+    assert item.abstract == original
 
 
 def test_refusal_falls_back_to_abstract_sentence_and_hint_category(tmp_path, item, taxonomy):

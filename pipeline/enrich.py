@@ -30,7 +30,10 @@ def hints_for(item: Item, hints_cfg: dict) -> list[str]:
     return hints
 
 
-def first_sentence(text: str) -> str:
+def fallback_summary(item: Item) -> str:
+    if not item.can_quote_in_english():
+        return 'An English summary is unavailable.'
+    text = item.abstract or item.title
     return re.split(r'(?<=[.!?])\s+', text.strip(), maxsplit=1)[0]
 
 
@@ -58,7 +61,7 @@ def enrich_items(
         if result is None:
             hints = hints_for(item, hints_cfg)
             results[index] = Enrichment(
-                summary=truncate(first_sentence(item.abstract or item.title), 160),
+                summary=truncate(fallback_summary(item), 160),
                 primary=hints[0] if hints else taxonomy.fallback_category, secondary=[],
                 relevant=item.type in {'preprint', 'published'},
             )

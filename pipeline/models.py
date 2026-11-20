@@ -1,4 +1,5 @@
 from datetime import date, datetime
+import re
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
@@ -26,6 +27,15 @@ class Item(BaseModel):
     published_doi: str | None
     preprint_id: str | None
     metadata: dict[str, Any] = {}
+
+    def can_quote_in_english(self) -> bool:
+        language = self.metadata.get('abstract_language') or self.metadata.get('language')
+        if language:
+            code = str(language).strip().lower().replace('_', '-').split('-')[0]
+            return code in {'en', 'eng', 'english'}
+        if self.source in {'crossref', 'europepmc', 'oai', 'openedition', 'thoth'}:
+            return False
+        return not re.search(r'[가-힣ㄱ-ㅎㅏ-ㅣᄀ-ᇿ]', self.title + self.abstract)
 
 
 class Signals(BaseModel):

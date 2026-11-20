@@ -1,4 +1,4 @@
-Synthesize this {field} topic for expert readers with graduate-level familiarity.
+Write all editorial text in English for experts in {field}, including when the cited works use another language.
 Use a precise, expert tone without introductory explanations or hype.
 
 Topic category (context only): {category}

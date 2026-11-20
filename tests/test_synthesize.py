@@ -676,6 +676,19 @@ def test_synthesis_fallback_uses_top_item_title(context, label):
     assert ctx.topic.summary == published.summary
 
 
+def test_unavailable_synthesis_keeps_the_original_title_in_the_evidence(context):
+    ctx = context
+    ctx.item.title = '두 추정량의 비교'
+    ctx.item.summary = '두 추정량의 오차를 비교했다.'
+    ctx.item.metadata = {'language': 'kor'}
+    ctx.beta.stop_reason = 'refusal'
+    _, _, notes = run(ctx)
+    assert ctx.topic.headline == 'English summary unavailable'
+    assert ctx.topic.summary == 'Open the supporting work to read the original publication.'
+    assert ctx.item.title == '두 추정량의 비교'
+    assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
+
+
 @pytest.mark.parametrize('length', [90, 91, 120])
 def test_synthesis_headline_kept_up_to_120(length):
     headline = 'h' * length
