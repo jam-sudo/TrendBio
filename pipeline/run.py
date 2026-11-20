@@ -215,7 +215,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 state = json.loads(checkpoint.read_text(encoding='utf-8'))
                 if state['range']['from'] <= day.isoformat() <= state['range']['to']:
                     original = state['runs'].get(day.isoformat(), {})
-                    arxiv_categories = original.get('arxiv_categories', arxiv_categories)
+                    if original:
+                        arxiv_categories = original.get('arxiv_categories')
                     source_status.update(original.get('source_status', {}))
                     notes.extend(original.get('notes', []))
                     notes.extend(state.get('notes', []))

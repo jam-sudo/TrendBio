@@ -95,6 +95,9 @@ body { max-width: 72ch; margin: 1.5rem auto; padding: 0 1rem; overflow-wrap: any
 h1, h2, h3 { line-height: 1.3 } li:target { outline: 2px solid; outline-offset: .25rem }
 ol.rankings > li { padding: .6rem 0; border-top: 1px solid GrayText } summary { cursor: pointer }
 .correction { border-inline-start: 3px solid; padding-inline-start: .75rem; margin: 1rem 0 }
+.subject-counts table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums }
+.subject-counts caption, .subject-counts th { text-align: start }
+.subject-counts th, .subject-counts td { padding: .25rem; overflow-wrap: anywhere }
 </style></head><body>${serializeOuter(main)}</body></html>\n`;
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, 'en.html'), html);

@@ -140,6 +140,7 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
     await page.setContent(read(path));
     const main = page.locator("main");
     expect(await main.locator("h1").textContent()).toBe("Physics");
+    expect(await main.locator('[data-arxiv-scope="current"]').textContent()).toContain("Current coverage");
     expect(await main.locator("ol h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
     expect(await main.locator("ol h3 a").getAttribute("href")).toBe("/physics/topic/cavity-readout-fixture/");
     expect(await main.locator('a[href^="https://example.org/physics/"]').count()).toBe(3);
@@ -248,13 +249,13 @@ it("shows the sources collected for a Computing edition even when no group ranks
   expect(await main.locator("ol.rankings li").count()).toBe(0);
 });
 
-it("links the mathematics pilot to its three arXiv subjects and its own dated evidence", async () => {
+it("links a dated mathematics edition to the arXiv subjects queried at the time", async () => {
   await page.setContent(read("math/day/2026-11-01/index.html"));
   expect(await page.getByRole("group", { name: "Science field" }).locator("[aria-current]").textContent()).toBe("Math & Stats");
   expect(await page.getByRole("group", { name: "Biology edition" }).count()).toBe(0);
   const main = page.getByRole("main");
-  expect(await main.locator(".coverage a").evaluateAll(links => links.map(a => a.getAttribute("href")))).toEqual(
-    ["math.NT", "math.NA", "stat.ME"].map(code => `https://arxiv.org/list/${code}/recent`));
+  expect(await main.locator('[data-arxiv-scope="edition"] a').evaluateAll(links => links.map(a => a.getAttribute("href"))))
+    .toEqual(["https://arxiv.org/list/math.NA/recent"]);
   expect(await main.locator('a[href^="https://example.org/math/"]').count()).toBe(3);
   expect(await main.locator(".coverage").count()).toBe(1);
   expect(await page.locator("footer").textContent()).toContain("Auto-curated from arXiv.");

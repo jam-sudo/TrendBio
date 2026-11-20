@@ -308,6 +308,7 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
     stamp = datetime.combine(day, time(6), tzinfo=timezone.utc)
     run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False,
                   synthesis_model="fixture", source_status=dict.fromkeys(sources, "ok"),
+                  arxiv_categories=["math.NA"] if domain == "math" else None,
                   window_days=28 if domain == "earth-environment" else 7)
     dump(Day(domain=domain, date=day, ranked=[row], run=run), day_path(root, domain, day))
     if domain in {"earth-environment", "humanities-arts"}:

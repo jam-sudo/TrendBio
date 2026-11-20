@@ -162,6 +162,15 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                    'top10_evidence_venues': Counter(papers[i].metadata.get('journal') or papers[i].metadata.get('imprint') or papers[i].source for i in top_ids),
                    'top10_evidence_items': len(top_ids), 'legacy_unranked_categories': unsaved_categories,
                    'alternative_top10': {'retained': len(official_top & alternative), 'official': len(official_top)}}
+        if store.domain == 'physics-expanded' and day.run.arxiv_categories:
+            subjects = {code: {'primary': 0, 'cross_listed': 0, 'ranked': 0} for code in day.run.arxiv_categories}
+            for paper in papers.values():
+                if paper.source == 'arxiv':
+                    primary = paper.metadata.get('arxiv_primary_category')
+                    for code in subjects.keys() & set(paper.metadata.get('categories', [])):
+                        subjects[code]['primary' if code == primary else 'cross_listed'] += 1
+                        subjects[code]['ranked'] += int(paper.id in ranked_ids)
+            metrics['arxiv_subjects'] = subjects
         if candidates is not None:
             metrics['cohesion'] = {'candidates': len(candidates), 'failures': sum(c['failed'] for c in candidates),
                                    'qualified_groups': sum(len(c['qualified']) for c in candidates),

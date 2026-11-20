@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import FieldEvidence from "../../components/FieldEvidence.astro";
 import CrossCoverage from "../../components/CrossCoverage.astro";
 import { crossCoverage } from "../../lib/shared-papers";
-import { loadDays, loadEditionVenues, loadTaxonomy } from "../../lib/data";
+import { loadDays, loadEditionAudit, loadEditionVenues, loadTaxonomy } from "../../lib/data";
 import type { Day } from "../../lib/types";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -30,6 +30,7 @@ const days = loadDays(field);
 const categories = new Map(loadTaxonomy(field).map(category => [category.slug, category.label]));
 const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
 const archives: string[] = day?.run.arxiv_categories ?? source.arxiv?.categories ?? [];
+const subjectCounts = field === "physics-expanded" && day ? loadEditionAudit(field, day.date)?.arxiv_subjects : null;
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints?.arxiv_category?.[code]?.[0]) ?? code);
 const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
 const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
@@ -61,6 +62,14 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
+    {subjectCounts && <details class="subject-counts"><summary>arXiv papers by subject</summary>
+      <table><caption>Stored preprints for this edition. A cross-listed paper can appear under several subjects. Ranked papers support at least one displayed topic.</caption>
+        <thead><tr><th scope="col">Subject</th><th scope="col">Primary</th><th scope="col">Cross-listed</th><th scope="col">Ranked</th></tr></thead>
+        <tbody>{Object.entries(subjectCounts).map(([code, counts]) => <tr>
+          <th scope="row" translate="no">{code}</th><td>{counts.primary}</td><td>{counts.cross_listed}</td><td>{counts.ranked}</td>
+        </tr>)}</tbody>
+      </table>
+    </details>}
     {!observedVenues && followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
       ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
       : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
@@ -107,5 +116,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
   h3 { margin: .25rem 0; font-size: 1.15rem; }
   .rankings p { margin-bottom: .5rem; }
   summary { cursor: pointer; }
+  .subject-counts caption { margin: .6rem 0; text-align: start; }
+  .subject-counts th, .subject-counts td { padding: .25rem; overflow-wrap: anywhere; }
   .archive { margin-block-start: 2rem; }
 </style>

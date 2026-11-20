@@ -124,10 +124,15 @@ export function loadDay(domain: string, date: string): Day | null {
   return getDataIndex(domain).daysByDate.get(date) ?? null;
 }
 
+export function loadEditionAudit(domain: string, date: string) {
+  const report = readJson<{ days: { date: string; venues: Record<string, number>;
+    arxiv_subjects?: Record<string, { primary: number; cross_listed: number; ranked: number }> }[] }>(
+      join(DATA_ROOT, domain, "audits", `${date}.json`));
+  return report?.days.find(day => day.date === date);
+}
+
 export function loadEditionVenues(domain: string, date: string): string[] | null {
-  const report = readJson<{ days: { date: string; venues: Record<string, number> }[] }>(
-    join(DATA_ROOT, domain, "audits", `${date}.json`));
-  const venues = report?.days.find(day => day.date === date)?.venues;
+  const venues = loadEditionAudit(domain, date)?.venues;
   return venues ? [...new Set(Object.keys(venues).map(name => name.replaceAll("&amp;", "&").trim().replace(/\s+/g, " ")))].sort() : null;
 }
 

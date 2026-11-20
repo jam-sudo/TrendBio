@@ -20,6 +20,30 @@ def test_dated_audit_preserves_missing_days_and_checks_independent_ids(fixtures_
     assert report['projected_30d_usd'] is None
 
 
+def test_physics_subject_counts_separate_cross_lists_and_count_distinct_ranked_papers(tmp_path, fixtures_root):
+    base = Store(fixtures_root / 'data', 'physics')
+    store = Store(tmp_path, 'physics-expanded')
+    when = date(2026, 11, 1)
+    day = base.get_day(when).model_copy(update={'domain': store.domain})
+    day.run.arxiv_categories = ['physics.optics', 'physics.atom-ph', 'physics.atm-clus']
+    store.put_day(day)
+    for topic in base.all_topics():
+        store.put_topic(topic)
+    papers = base.items_between(day.window_start, when)
+    for n, paper in enumerate(papers):
+        primary = 'physics.optics' if n else 'physics.atom-ph'
+        paper.metadata.update(arxiv_primary_category=primary, categories=[primary, 'physics.optics', 'physics.optics'])
+        store.put_item(paper)
+    store.put_item(papers[0].model_copy(update={'id': 'arxiv:unranked', 'metadata': {
+        'arxiv_primary_category': 'physics.atom-ph', 'categories': ['physics.atom-ph']}}))
+    subjects = audit_edition(store, when, when)['days'][0]['arxiv_subjects']
+    assert subjects == {
+        'physics.optics': {'primary': 2, 'cross_listed': 1, 'ranked': 3},
+        'physics.atom-ph': {'primary': 2, 'cross_listed': 0, 'ranked': 1},
+        'physics.atm-clus': {'primary': 0, 'cross_listed': 0, 'ranked': 0},
+    }
+
+
 def test_dated_humanities_counts_books_even_when_older_series_and_issue_metadata_are_missing(fixtures_root):
     day = date(2026, 11, 1)
     audit = audit_edition(Store(fixtures_root / 'data', 'humanities-arts'), day, day)
