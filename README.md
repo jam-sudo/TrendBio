@@ -22,7 +22,7 @@
 
 <br>
 
-TrendBio reads each day's new preprints, papers, repositories and company posts in computational biology, groups them into research topics, ranks the Top 40 and writes a short synthesis for each. One page a day, for readers who already know the field, with history back to 1 November 2025.
+TrendBio publishes daily research rankings for CompBio, All Biology (beta) and Physics. Each edition groups new papers by research topic and writes a short synthesis for each ranked group. CompBio also tracks repositories and company posts. Its Top 40 archive begins on 1 November 2025.
 
 All editions publish in English. Citations keep the original publication titles when an English title is unavailable. Previous Korean edition links open the corresponding English pages. Each public edition offers a daily Top 5 subscription and one feed for each category. [Browse the English feeds](https://trendbio.dev/about/)
 
