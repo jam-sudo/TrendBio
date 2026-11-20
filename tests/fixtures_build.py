@@ -3,6 +3,7 @@
 from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal
 from itertools import combinations
+import json
 from pathlib import Path
 
 import yaml
@@ -250,6 +251,8 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
                               "dataset_dois": ["10.5555/example-data"] if i == 1 else []}
             if i == 1:
                 paper.metadata["preprint_dois"] = ["10.5555/example-preprint"]
+            if i == 3:
+                paper.metadata["license"] = "https://creativecommons.org/publicdomain/zero/1.0/"
         if domain == "humanities-arts":
             paper.source = ("thoth", "openedition", "crossref")[i - 1]
             paper.id, paper.type = f"{paper.source}:fixture-{i}", "published"
@@ -280,6 +283,10 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
     run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False,
                   synthesis_model="fixture", source_status=dict.fromkeys(sources, "ok"))
     dump(Day(domain=domain, date=day, ranked=[row], run=run), day_path(root, domain, day))
+    if domain == "earth-environment":
+        audit = root / domain / "audits" / f"{day}.json"
+        audit.parent.mkdir(exist_ok=True)
+        audit.write_text(json.dumps({"days": [{"date": str(day), "venues": {"Ocean Science": len(papers)}}]}, indent=2) + "\n")
 
 
 if __name__ == "__main__":

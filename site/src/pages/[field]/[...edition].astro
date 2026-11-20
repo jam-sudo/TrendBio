@@ -1,7 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PublicationEvidence from "../../components/PublicationEvidence.astro";
-import { loadCorrection, loadDays, loadItems, loadTaxonomy, loadTopic, NOTES_ROOT } from "../../lib/data";
+import { loadCorrection, loadDays, loadEditionVenues, loadItems, loadTaxonomy, loadTopic, NOTES_ROOT } from "../../lib/data";
 import type { Day } from "../../lib/types";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -29,7 +29,9 @@ const categories = new Map(loadTaxonomy(field).map(category => [category.slug, c
 const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
 const archives: string[] = source.arxiv?.categories ?? [];
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
-const journals: string[] = source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
+const earth = field === "earth-environment";
+const editionVenues = earth && day ? loadEditionVenues(field, day.date) : null;
+const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
 const conferences: string[] = source.drops?.conferences ?? [];
@@ -64,7 +66,9 @@ const rows = (day?.ranked ?? []).map(row => {
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
-    {followsCrossref && journals.length > 0 && <p class="coverage">{source.crossref.data_journals ? "Research articles and data papers from" : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
+    {followsCrossref && journals.length > 0 && <p class="coverage">{earth
+      ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
+      : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
     {source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
     {conferences.length > 0 && <p class="coverage">Regular conference papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
@@ -88,7 +92,7 @@ const rows = (day?.ranked ?? []).map(row => {
           {papers.length > 0 && <details>
             <summary>{papers.length} supporting {humanities ? (papers.length === 1 ? "work" : "works") : (papers.length === 1 ? "paper" : "papers")}</summary>
             {synthesis && <p>{synthesis}</p>}
-            <ul>{papers.map(paper => <li>{humanities ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>CC BY</a></>}
+            <ul>{papers.map(paper => <li>{humanities ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
               {paper.source === "worldbank" && <> · <span>Working paper</span></>}
               {paper.source === "europepmc" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher article</a></>}
               {paper.source === "europepmc" && typeof paper.metadata.screening_status === "string" && <> · <strong>Currently excluded from new editions</strong></>}

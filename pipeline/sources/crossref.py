@@ -38,10 +38,16 @@ def full_date(work, field):
     return date(*parts) if len(parts) == 3 else None
 
 
-def vor_cc_by(work, as_of):
-    return next((lic['URL'] for lic in work.get('license', [])
-                 if lic.get('content-version') == 'vor' and (full_date(lic, 'start') or date.max) <= as_of
-                 and re.fullmatch(r'https?://creativecommons\.org/licenses/by/(?:3|4)\.0/?', lic.get('URL', ''))), None)
+def vor_license(work, as_of, *, allow_cc0=False):
+    for lic in work.get('license', []):
+        if lic.get('content-version') != 'vor' or (full_date(lic, 'start') or date.max) > as_of:
+            continue
+        url = lic.get('URL', '')
+        if re.fullmatch(r'https?://creativecommons\.org/licenses/by/(?:3|4)\.0/?', url):
+            return url
+        if allow_cc0 and re.fullmatch(r'https?://creativecommons\.org/publicdomain/zero/1\.0/?', url):
+            return url
+    return None
 
 
 class _Text(HTMLParser):
@@ -74,6 +80,30 @@ class CitationHead(HTMLParser):
             meta = dict(attrs)
             if meta.get('name') and meta.get('content'):
                 self.fields.setdefault(meta['name'].lower(), []).append(meta['content'].strip())
+
+
+def _publisher_article_type(client, base, work, doi, issn, day):
+    if '{doi}' in base:
+        url = base.format(doi=quote(doi, safe='/'))
+    else:
+        url = work.get('resource', {}).get('primary', {}).get('URL', '')
+        if not url.startswith(base):
+            return None
+    response = request(client, url)
+    head = CitationHead()
+    head.feed(response.text)
+    head.close()
+    fields = head.fields
+    dates = fields.get('citation_publication_date') or fields.get('citation_date', [])
+    allowed_dates = {day.strftime('%Y/%m/%d'), day.strftime('%b %d, %Y'), f'{day:%b} {day.day}, {day.year}'}
+    if (response.url.host != httpx.URL(base).host or issn not in fields.get('citation_issn', [])
+            or [v.lower() for v in fields.get('citation_doi', [])] != [doi]
+            or len(dates) != 1 or dates[0] not in allowed_dates):
+        return None
+    types = fields.get('dc.type') or fields.get('citation_article_type', [])
+    if len(types) == 1 and types[0] in {'Research Article', 'Short Communication', 'Data Paper'}:
+        return {'article_type': types[0], 'article_type_url': str(response.url)}
+    return None
 
 
 def _publisher_abstract(client, base, doi, issn, day):
@@ -169,12 +199,13 @@ class CrossrefAdapter:
         resource_types = {}
         filters = f'type:journal-article,from-pub-date:{start},until-pub-date:{end}'
         for issn in self.config[self.name]['journals']:
+            type_page = self.config[self.name].get('article_type_pages', {}).get(issn)
             endpoint = f'https://api.crossref.org/journals/{issn}/works'
             for doi, work in crossref_works(client, endpoint, filters):
                 day = full_date(work, 'published')
                 if day is None or not start <= day <= end or work.get('update-to'):
                     continue
-                licence = vor_cc_by(work, end)
+                licence = vor_license(work, end, allow_cc0=bool(type_page))
                 title = plain_text((work.get('title') or [''])[0])
                 abstract = plain_text(work.get('abstract'))
                 if not (licence and title):
@@ -193,6 +224,11 @@ class CrossrefAdapter:
                 preprints = related_dois(work, 'has-preprint')
                 metadata = {'journal': journal, 'issn': issn, 'license': licence, 'preprint_dois': preprints,
                             'language': language, 'relations': work.get('relation', {})}
+                if type_page:
+                    genre = _publisher_article_type(client, type_page, work, doi, issn, day)
+                    if genre is None:
+                        continue
+                    metadata.update(genre)
                 if abstract_url:
                     metadata['abstract_url'] = abstract_url
                 if issn in self.config[self.name].get('data_journals', []):

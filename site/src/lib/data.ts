@@ -124,6 +124,13 @@ export function loadDay(domain: string, date: string): Day | null {
   return getDataIndex(domain).daysByDate.get(date) ?? null;
 }
 
+export function loadEditionVenues(domain: string, date: string): string[] | null {
+  const report = readJson<{ days: { date: string; venues: Record<string, number> }[] }>(
+    join(DATA_ROOT, domain, "audits", `${date}.json`));
+  const venues = report?.days.find(day => day.date === date)?.venues;
+  return venues ? Object.keys(venues).sort() : null;
+}
+
 export function latestDay(domain: string): Day | null {
   return loadDays(domain)[0] ?? null;
 }

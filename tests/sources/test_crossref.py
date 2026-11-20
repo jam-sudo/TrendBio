@@ -42,6 +42,45 @@ def test_crossref_short_response_cannot_silently_truncate():
             list(crossref_works(client, 'https://example.org', 'type:journal-article'))
 
 
+@pytest.mark.parametrize('publisher', ['plos', 'pensoft'])
+def test_verified_journals_match_publisher_date_doi_issn_and_genre_before_using_cc0(publisher):
+    day = date(2026, 11, 4)
+    stamp = {'date-parts': [[2026, 11, 4]]}
+    cc0 = 'https://creativecommons.org/publicdomain/zero/1.0/'
+    base = 'https://example.org/article/' + ('?id={doi}' if publisher == 'plos' else '')
+    work = {'published': stamp, 'title': ['Estuary water observations'], 'abstract': 'Field measurements.',
+            'license': [{'content-version': 'vor', 'start': stamp, 'URL': cc0}]}
+    cases = ['research', 'essay', 'other-day', 'other-doi', 'other-journal', 'accepted-manuscript', 'empty']
+    rows = [{**work, 'DOI': '10.1234/' + case, 'resource': {'primary': {'URL': 'https://example.org/article/' + case}}}
+            for case in cases]
+    rows[-2]['license'] = [{**work['license'][0], 'content-version': 'am'}]
+    rows[-1]['abstract'] = ''
+    visited = []
+
+    def reply(req):
+        if req.url.host == 'api.crossref.org':
+            return httpx.Response(200, json={'message': {'items': rows, 'total-results': len(rows)}})
+        case = (req.url.params.get('id') or req.url.path).split('/')[-1]
+        visited.append(case)
+        genre = 'Essay' if case == 'essay' else ('Research Article' if publisher == 'plos' else 'Short Communication')
+        day_field = 'citation_date' if publisher == 'plos' else 'citation_publication_date'
+        genre_field = 'citation_article_type' if publisher == 'plos' else 'dc.type'
+        native_date = 'Nov 4, 2026' if publisher == 'plos' else '2026/11/04'
+        fields = {genre_field: genre, day_field: '2026/11/01' if case == 'other-day' else native_date,
+                  'citation_issn': 'other' if case == 'other-journal' else '1234-5678',
+                  'citation_doi': '10.1234/other' if case == 'other-doi' else '10.1234/' + case}
+        return httpx.Response(200, text=''.join(f'<meta name="{name}" content="{value}">' for name, value in fields.items()))
+
+    config = {'journals': ['1234-5678'], 'article_type_pages': {'1234-5678': base}}
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        paper, = CrossrefAdapter({'crossref': config}).fetch(day, day, client)
+        assert not CrossrefAdapter({'crossref': {'journals': ['1234-5678']}}).fetch(day, day, client)
+    assert paper.doi == '10.1234/research' and paper.metadata['license'] == cc0
+    assert paper.metadata['article_type'] == ('Research Article' if publisher == 'plos' else 'Short Communication')
+    assert paper.metadata['article_type_url'].startswith('https://example.org/article/')
+    assert visited == cases[:5]
+
+
 @pytest.mark.parametrize('page_doi', ['10.1234/test', '10.1234/other'])
 def test_missing_registry_abstract_uses_the_matching_licensed_publisher_article(page_doi):
     day = date(2026, 11, 4)

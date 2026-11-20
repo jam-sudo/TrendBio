@@ -7,7 +7,7 @@ from hashlib import sha256
 import httpx
 
 from pipeline.sources.base import request
-from pipeline.sources.crossref import crossref_works, datacite_type, full_date, related_dois, related_work_dois, vor_cc_by
+from pipeline.sources.crossref import crossref_works, datacite_type, full_date, related_dois, related_work_dois, vor_license
 
 
 def reference_dois(client, venue, start, end):
@@ -80,7 +80,7 @@ def survey_venue(client: httpx.Client, venue: dict, end: date):
                 week['published'] += 1
                 week['with_abstract'] += int(doi in abstracts)
                 week['with_license_url'] += int(any(lic.get('URL') for lic in work.get('license', [])))
-                week['with_abstract_and_vor_cc_by'] += int(doi in abstracts and bool(vor_cc_by(work, end)))
+                week['with_abstract_and_vor_cc_by'] += int(doi in abstracts and bool(vor_license(work, end)))
                 week['languages'][work.get('language') or 'und'] += 1
                 week['types'][work['type']] += 1
                 published.add(doi)
