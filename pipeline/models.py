@@ -101,7 +101,7 @@ class RunInfo(BaseModel):
     finished: datetime
     status: Literal["ok", "degraded"]
     backfilled: bool
-    window_days: int = Field(default=7, ge=1)
+    window_days: int = Field(default=7, ge=1, exclude_if=lambda value: value == 7)
     model_cost_usd: float | None = Field(default=None, ge=0)
     synthesis_model: str
     source_status: dict[str, Literal["ok", "partial", "failed", "skipped"]]
