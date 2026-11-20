@@ -148,7 +148,9 @@ it("opens the downloaded English and Korean pilot files offline at the same rank
     expect(await offline.locator(":target").getAttribute("value")).toBe("1");
     expect(await offline.locator("main .rankings h3").textContent()).toMatch(/[가-힣]/);
     expect(await offline.getByRole("note").locator("strong").textContent()).toBe("정정");
-    expect(await offline.getByRole("note").locator("a").getAttribute("href")).toBe("https://example.org/calibration");
+    expect(await offline.getByRole("note").locator("a").first().getAttribute("href")).toBe("https://example.org/calibration");
+    expect(await offline.getByRole("note").locator("p").last().textContent()).toMatch(/arXiv:2611\.19130.*[가-힣]/);
+    expect(await offline.getByRole("note").locator("a").last().textContent()).toBe("arXiv:2611.19130");
     await offline.locator("main details summary").click();
     expect(await offline.locator('main details a[href^="https://example.org/physics/"]').count()).toBe(3);
     await offline.getByRole("link", { name: "English" }).click();

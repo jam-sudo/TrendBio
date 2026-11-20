@@ -20,7 +20,8 @@ import yaml
 URL = 'https://object.pouta.csc.fi/Tatoeba-MT-models/eng-kor/opusTCv20210807-sepvoc_transformer-big_2022-07-28.zip'
 SHA256 = '41f771fa28e864428dd7589992867b2b6dfa402f1191670e818e019dddfceef7'
 MODEL = Path(os.environ.get('TRENDBIO_KO_MODEL', Path.home() / '.cache/trendbio/opus-en-ko-20220728'))
-PROTECTED = re.compile(r'https?://[^\s<>]+|(?:arXiv:\s*)?\b\d{4}\.\d{4,5}(?:v\d+)?\b|\b10\.\d{4,9}/[^\s<>]+', re.I)
+PROTECTED = re.compile(r'https?://[^\s<>]+|arXiv:\s*[a-z][a-z0-9.-]*/\d{7}(?:v\d+)?\b|'
+                       r'(?:arXiv:\s*)?\b\d{4}\.\d{4,5}(?:v\d+)?\b|\b10\.\d{4,9}/[^\s<>]+', re.I)
 
 
 def prepare():

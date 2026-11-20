@@ -28,7 +28,15 @@ for (const lang of ['en', 'ko']) {
   assert.deepEqual(rows.map(n => [attr(n, 'id'), Number(attr(n, 'value'))]), ranked.map(r => [r.slug, r.rank]));
   const evidence = rows.map(row => [...elements(row)].filter(n => n.tagName === 'a').map(a => attr(a, 'href')));
   if (lang === 'en') englishEvidence = evidence;
-  else assert.deepEqual(evidence, englishEvidence);
+  else {
+    assert.deepEqual(evidence, englishEvidence);
+    for (const [i, row] of rows.entries()) {
+      if (/\b[a-z]{2,}\s+[a-z]{2,}\b/.test(ranked[i].summary)) {
+        const summary = row.childNodes.filter(n => n.tagName === 'p')[1];
+        assert.match(serializeOuter(summary), /[가-힣]/u, `Missing Korean summary at rank ${ranked[i].rank}`);
+      }
+    }
+  }
 
   // The download contains one date. Its language switch and evidence links must work from disk.
   const archive = contents.find(n => n.tagName === 'p' && attr(n, 'class') === 'archive');

@@ -59,7 +59,8 @@ function korean(text) {
   const s = text.trim().replace(/\s+/gu, ' ');
   if (Object.hasOwn(ui, s)) return ui[s];
   if (Object.hasOwn(reviewed, s)) return reviewed[s];
-  if (!s || fixed.has(s) || /^(?:https?:\/\/|mailto:|\/|10\.\d{4,9}\/|arXiv:\d)/i.test(s)) return s;
+  if (!s || fixed.has(s) || /^(?:https?:\/\/|mailto:|\/|10\.\d{4,9}\/)\S*$/i.test(s)) return s;
+  if (/^arXiv:\s*(?:\d{4}\.\d{4,5}|[a-z][a-z0-9.-]*\/\d{7})(?:v\d+)?$/i.test(s)) return s;
   let v = monthDate.exec(s);
   if (v)
     return (
