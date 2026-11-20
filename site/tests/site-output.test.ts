@@ -243,6 +243,17 @@ it("links each science field and its dated pilots while omitting retired fields"
   }
 });
 
+it("retains original ranks and paper versions in the reviewed Computer Science selection", async () => {
+  await page.setContent(read("computer-information/index.html"));
+  const review = page.locator("#ranking-review-2026-11-18");
+  expect(await review.locator("h3").first().isVisible()).toBe(true);
+  const topics = review.locator("ol > li");
+  expect(await topics.evaluateAll(nodes => nodes.map(li => Number(li.getAttribute("value"))))).toEqual([9, 35, 38]);
+  const papers = await topics.locator("a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href") ?? ""));
+  expect(new Set(papers).size).toBe(10);
+  expect(papers.every(url => /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d+v\d+$/.test(url))).toBe(true);
+});
+
 it("keeps the Biology beta and CompBio as distinct editions", async () => {
   for (const [path, current] of [["biology/index.html", "All Biology (beta)"], ["index.html", "CompBio"]]) {
     await page.setContent(read(path));
