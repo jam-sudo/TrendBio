@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 
-def review_clusters(clusters, papers, store, deps, day):
+def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False):
     template = Path(__file__).with_name('prompts').joinpath('cohesion.md').read_text()
     minimum = deps.cfg.min_cluster_size
     by_id = {p.id: p for p in papers}
@@ -27,14 +27,23 @@ def review_clusters(clusters, papers, store, deps, day):
             options = {}
             cache_inputs = ['claude-haiku-5-5', sorted(ids), prompt]
         key = sha256(json.dumps(cache_inputs).encode()).hexdigest()
-        path = store.root / store.domain / 'cohesion' / (key + '.json')
+        root = store.root / store.domain
+        receipt = root / 'cohesion' / (key + '.json')
+        path = root / 'decisions' / 'cohesion' / receipt.name if share_decisions else receipt
         if path.exists():
             result = json.loads(path.read_text())
+            if share_decisions:
+                members = sorted(e['id'] for group in result['groups'] for e in group['evidence'])
+                if result['candidates'] != sorted(ids) or members != sorted(ids):
+                    raise ValueError('Cohesion receipt does not account for the requested papers')
         else:
             result = deps.llm.review_cohesion(prompt, items, key, **options)
             if result is None:
                 return key, None
-            store._write(path, {**result, 'candidates': sorted(ids), **options})
+            result = {**result, 'candidates': sorted(ids), **options}
+            store._write(path, result)
+        if share_decisions:
+            store._write(receipt, result)
         return key, {tuple(sorted(e['id'] for e in g['evidence'])): g['topic']
                      for g in result['groups'] if len(g['evidence']) >= minimum}
 

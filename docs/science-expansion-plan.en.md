@@ -162,6 +162,12 @@ During the November 5 backtest, two arXiv collection attempts failed. The first 
 
 Both complete November 5 runs contained the same 205 titles and abstracts. They agreed on relevance for 192 papers and had 15 identical candidate groups. The restored edition ranked three topics and the previous-day run ranked one, with no shared final group. Their parent stores carried different classifications, embeddings and editorial history. Repeatability across cache histories is an open publication criterion. [Run comparison and evidence for the legal-policy group](expansion-measurements/2026-11-20/social-science-coverage.json)
 
+#### Social science repeatability protocol
+
+Two seven-day windows ending November 5 and November 12 will test whether different collection histories can reproduce an edition. For November 5, rerank the complete archived edition and independently advance the November 4 store. For November 12, advance each of the two November 11 stores, one from before and one from after the calibration. Run the normal collection and ranking in all four cases. Share only saved decisions for an identical classification or group-review request. [November 5 archive](https://github.com/jam-sudo/TrendBio/actions/runs/44679784421) · [November 4 store](https://github.com/jam-sudo/TrendBio/actions/runs/44677459177) · [First November 11 store](https://github.com/jam-sudo/TrendBio/actions/runs/44677462602) · [Calibrated November 11 store](https://github.com/jam-sudo/TrendBio/actions/runs/44679501058)
+
+Compare source completion, paper IDs and text, request fingerprints, classification results, candidate membership, accepted groups and ordered supporting papers. Report scores and historical momentum separately. Count unavailable decisions and incremental model spend. Check the claims in each distinct ranked entry against the cited papers. A pair of empty issues can establish agreement on exclusions but cannot establish rank order. The editorial accuracy and 14-live-date criteria still apply.
+
 ## Reader editions and rollout order
 
 | Stage | Scope | Evidence required for the next decision |

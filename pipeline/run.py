@@ -25,7 +25,7 @@ from pipeline.cluster import (
 from pipeline.collect import PAPER_SOURCES, PARTIAL_REASONS, AllPaperSourcesFailed, all_paper_sources_failed, initial_source_status, intake_status, prepare_collected
 from pipeline.config import Scoring, Taxonomy
 from pipeline.embed import l2_normalize
-from pipeline.enrich import enrich_items, first_sentence, hints_for
+from pipeline.enrich import enrich_items, first_sentence, hints_for, screen_window
 from pipeline.llm import Enrichment, LLM
 from pipeline.models import Day, RankedTopic, RunInfo
 from pipeline.score import rank, score_topics, signals_for
@@ -236,12 +236,17 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                         history[day] = count
                         stars[repo] = sorted(history.items())
                     store.put_star_counts(stars)
+        share_decisions = deps.taxonomy.share_editorial_decisions and not skip_collect
         with _stage('enrich', new=sum(item.summary is None for item in new_items), llm_fallbacks=0) as counts:
             new_items.sort(key=lambda item: item.id)
             for item in new_items:
                 store.put_item(item)
-            _, enrichment_notes, irrelevant = enrich_items(new_items, store, deps.llm, None,
-                                                           deps.taxonomy, deps.hints_cfg)
+            if share_decisions:
+                active = store.items_between(start, day, by_publication=deps.taxonomy.window_by_publication)
+                enrichment_notes, irrelevant = screen_window(active, store, deps.llm, deps.taxonomy, deps.hints_cfg, day)
+            else:
+                _, enrichment_notes, irrelevant = enrich_items(new_items, store, deps.llm, None,
+                                                               deps.taxonomy, deps.hints_cfg)
             notes.extend(enrichment_notes)
             counts['llm_fallbacks'] = len(enrichment_notes)
             reasons = getattr(deps.llm, 'fallback_reasons', {})
@@ -279,7 +284,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             questions = {}
             if deps.taxonomy.review_cluster_cohesion:
                 counts['candidates'] = len(clusters)
-                clusters, review_notes, questions = review_clusters(clusters, papers, store, deps, day)
+                clusters, review_notes, questions = review_clusters(clusters, papers, store, deps, day,
+                                                                    share_decisions=share_decisions)
                 notes.extend(review_notes)
             counts.update(items=len(ids), clusters=len(clusters))
         with _stage('continuity', topics_new=0, topics_continued=0) as counts:
@@ -355,7 +361,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             notes.extend(synthesis_notes)
             if previous:
                 notes.extend(note for note in previous.run.notes if (
-                    note.startswith('enrichment-fallback:') and note.split(':', 1)[1] in window_item_ids
+                    note.startswith('enrichment-fallback:') and not share_decisions and note.split(':', 1)[1] in window_item_ids
                     or note.startswith('synthesis-fallback:') and note.split(':', 1)[1] in cached))
                 if ranked and ranked[0][0].slug in cached:
                     model = ranked[0][0].synthesis_model or previous.run.synthesis_model

@@ -159,6 +159,41 @@ def test_run_day_writes_day_topics_items(ctx):
             assert all(entry.date != TODAY for entry in topic.history)
 
 
+def test_social_editions_share_only_prompt_matched_decisions(ctx, tmp_path, monkeypatch):
+    domain = 'social-sciences'
+    ctx.deps.taxonomy = load_taxonomy(domain)
+    papers = [paper.model_copy(update={
+        'source': 'arxiv', 'id': f'arxiv:classroom-{n}', 'title': f'Classroom attendance survey {n}',
+        'abstract': 'The survey compares attendance across local schools.',
+    }) for n, paper in enumerate(ctx.items)]
+    ctx.deps.adapters = [FakeAdapter('arxiv', papers)]
+    monkeypatch.setattr(FakeLLM, 'enrich', lambda self, item, taxonomy, hints:
+                        Enrichment(summary=item.title, primary='education', secondary=[], relevant=True))
+    first = Store(tmp_path / 'first', domain)
+    second = Store(tmp_path / 'second', domain)
+    for store in (first, second):
+        for paper in papers:
+            store.put_item(paper.model_copy(update={'summary': 'Previously excluded.', 'relevant': False}))
+    baseline = run_day(domain, TODAY, first, ctx.deps)
+    assert len(baseline.ranked) == 1
+    decisions = first.root / domain / 'decisions'
+    assert {p.name for p in decisions.iterdir()} == {'classifications', 'cohesion'}
+    shutil.copytree(decisions, second.root / domain / 'decisions')
+    receipt, = (decisions / 'cohesion').glob('*.json')
+    local = second.root / domain / 'cohesion' / receipt.name
+    second._write(local, {'groups': []})
+    assert second.get_day(TODAY) is None
+    monkeypatch.setattr(FakeLLM, 'enrich', lambda *args: pytest.fail('classified a known request'))
+    monkeypatch.setattr(FakeLLM, 'review_cohesion', lambda *args: pytest.fail('reviewed a known group'))
+    assert run_day(domain, TODAY, second, ctx.deps).ranked == baseline.ranked
+    assert local.read_bytes() == receipt.read_bytes()
+    for store, expected_hits in ((first, 0), (second, len(papers))):
+        audit = json.loads((store.root / domain / 'audits' / f'screening-{TODAY}.json').read_text())
+        assert audit['reused'] == expected_hits and audit['requested'] == len(papers) - expected_hits
+        assert not audit['unavailable']
+        assert all(store.get_item(paper.id).primary_category == 'education' for paper in papers)
+
+
 def test_rerun_same_day_is_idempotent(ctx):
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
     before = tree(ctx.root)

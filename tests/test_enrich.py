@@ -2,14 +2,15 @@ import json
 import re
 from datetime import date
 from types import SimpleNamespace
+from unittest.mock import Mock
 
 import numpy as np
 import pytest
 
 from pipeline.budget import Budget
 from pipeline.config import load_taxonomy
-from pipeline.enrich import enrich_items, hints_for
-from pipeline.llm import Enrichment, LLM
+from pipeline.enrich import enrich_items, hints_for, screen_window
+from pipeline.llm import Enrichment, LLM, enrichment_key
 from pipeline.models import Item
 from pipeline.store import Store
 
@@ -29,6 +30,35 @@ def item():
 @pytest.fixture
 def taxonomy():
     return load_taxonomy('computational')
+
+
+@pytest.mark.parametrize('reason', ['retries_exhausted', 'refusal:none'])
+def test_social_screening_withholds_failures_and_reuses_exact_requests(tmp_path, item, reason):
+    tax = load_taxonomy('social-sciences')
+    paper = item.model_copy(update={'id': 'arxiv:schools', 'source': 'arxiv', 'metadata': {},
+                                    'title': 'Class attendance', 'abstract': 'A census of attendance at local schools.'})
+    store = Store(tmp_path, tax.domain)
+    result = Enrichment(summary=paper.title, primary='education', secondary=[], relevant=True)
+    llm = SimpleNamespace(enrich=Mock(side_effect=[None, result]), fallback_reasons={paper.id: reason})
+    withheld = ([f'enrichment-fallback:{paper.id}'], 1)
+    assert screen_window([paper], store, llm, tax, {}, paper.first_seen) == withheld
+    assert not store.get_item(paper.id).relevant
+    retry = screen_window([paper], store, llm, tax, {}, paper.first_seen)
+    if reason.startswith('refusal:'):
+        assert retry == withheld and llm.enrich.call_count == 1
+    else:
+        assert retry == ([], 0) and store.get_item(paper.id).summary == paper.title
+        assert screen_window([paper], store, llm, tax, {}, paper.first_seen) == ([], 0)
+        assert llm.enrich.call_count == 2
+    key = enrichment_key(paper, tax, [])
+    assert key != enrichment_key(paper.model_copy(update={'abstract': 'Updated publisher abstract.'}), tax, [])
+    assert key != enrichment_key(paper, tax.model_copy(update={'relevance': 'Revised inclusion rules.'}), [])
+    assert key != enrichment_key(paper, tax, ['education'])
+    assert key == enrichment_key(paper, tax.model_copy(update={'synthesis_guidance': 'Other prose.'}), [])
+    path = store.root / tax.domain / 'decisions' / 'classifications' / (key + '.json')
+    store._write(path, {'id': 'different-paper', 'result': result.model_dump()})
+    with pytest.raises(ValueError, match='different paper ID'):
+        screen_window([paper], store, llm, tax, {}, paper.first_seen)
 
 
 class FakeMessages:

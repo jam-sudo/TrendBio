@@ -33,12 +33,16 @@ jobs:
   pilot:
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    concurrency:
+      group: ${{ inputs.domain == 'social-sciences' && (inputs.action == 'rank' || inputs.action == 'rerank') && format('pilot-decisions-{0}-{1}', github.ref, inputs.domain) || format('pilot-{0}', github.run_id) }}
+      queue: max
     env:
       DOMAIN: ${{ inputs.domain }}
       RUN_DATE: ${{ inputs.date }}
       PILOT_ACTION: ${{ inputs.action }}
       PRIOR_RUN: ${{ inputs.prior_run }}
       REPAIR_MODEL: ${{ inputs.repair_model || 'claude-haiku-5-5' }}
+      SHARE_DECISIONS: ${{ github.ref == 'refs/heads/main' && inputs.domain == 'social-sciences' && (inputs.action == 'rank' || inputs.action == 'rerank') }}
     steps:
       - uses: actions/checkout@v4
       - name: Validate pilot inputs
@@ -73,6 +77,27 @@ jobs:
           fi
           mkdir science-pilot
           cp -R "$(dirname "$(dirname "${days[0]}")")" "science-pilot/$DOMAIN"
+      - name: Restore the field's editorial decisions
+        if: env.SHARE_DECISIONS == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          name="$DOMAIN-editorial-decisions"
+          pages=$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/artifacts?name=$name&per_page=100")
+          runs=$(jq -r --argjson repo "$GITHUB_REPOSITORY_ID" '[.[] | .artifacts[] |
+            select(.expired == false and .workflow_run.head_branch == "main" and .workflow_run.head_repository_id == $repo)]
+            | sort_by(.id) | reverse[] | .workflow_run.id' <<< "$pages")
+          for run in $runs; do
+            origin=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run")
+            if jq -e '.event == "workflow_dispatch" and .path == ".github/workflows/field-pilot.yml"' <<< "$origin" >/dev/null; then
+              gh run download "$run" -n "$name" -D "$RUNNER_TEMP/field-decisions"
+              target="science-pilot/$DOMAIN/decisions"
+              mkdir -p "$target"
+              cp -R "$RUNNER_TEMP/field-decisions/." "$target/"
+              echo "Editorial decisions restored from run $run" | tee -a "$GITHUB_STEP_SUMMARY"
+              break
+            fi
+          done
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -135,3 +160,12 @@ jobs:
         run: |
           echo "[English edition]($PREVIEW_URL) · $DOMAIN · $RUN_DATE" >> "$GITHUB_STEP_SUMMARY"
           echo 'Extract the ZIP and open en.html.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain the field's editorial decisions
+        if: env.SHARE_DECISIONS == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.domain }}-editorial-decisions
+          path: science-pilot/${{ inputs.domain }}/decisions/
+          retention-days: 90
+          overwrite: true
+          if-no-files-found: ignore

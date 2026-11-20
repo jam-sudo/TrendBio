@@ -4,6 +4,7 @@ import random
 import re
 import time
 from collections.abc import Callable
+from hashlib import sha256
 from pathlib import Path
 
 import anthropic
@@ -18,6 +19,7 @@ from pipeline.models import Item, Signals, Topic
 
 
 logger = logging.getLogger(__name__)
+ENRICHMENT_MODEL = 'claude-haiku-5-5'
 
 
 def _validation_reason(error: ValidationError) -> str:
@@ -126,6 +128,12 @@ def _messages(item: Item, taxonomy: Taxonomy, hints: list[str]) -> list[dict]:
     return [{'role': 'user', 'content': prompt}]
 
 
+def enrichment_key(item: Item, taxonomy: Taxonomy, hints: list[str]) -> str:
+    request = ['classification-v1', ENRICHMENT_MODEL, 'low', taxonomy.domain, item.id,
+               _messages(item, taxonomy, hints)]
+    return sha256(json.dumps(request, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+
+
 def _validate_categories(result: Enrichment | None, taxonomy: Taxonomy) -> Enrichment | None:
     if result is None or result.primary not in taxonomy.slugs():
         return None
@@ -152,7 +160,7 @@ class LLM:
             logger.warning('llm_fallback id=%s reason=%s detail=%s', entity_id, reason, detail)
 
     def enrich(
-        self, item: Item, taxonomy: Taxonomy, hints: list[str], model: str = 'claude-haiku-5-5',
+        self, item: Item, taxonomy: Taxonomy, hints: list[str], model: str = ENRICHMENT_MODEL,
     ) -> Enrichment | None:
         self.fallback_reasons.pop(item.id, None)
         # Adaptive thinking shares the output budget; give the single retry more room.
