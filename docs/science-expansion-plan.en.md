@@ -1,14 +1,180 @@
-# TrendBio science expansion plan
+# TrendBio all-science expansion plan
 
-Reviewed November 20, 2026 (UTC). **CompBio, All Biology (beta) and Physics publish in English.** Ten pilots run on demand ahead of website publication. Signed-in readers of the public GitHub repository can download their retained workflow artifacts. They cover Mathematics and Statistics, Earth and Environment, Chemistry, stellar and galactic astronomy, Computing and Information, Engineering, Agriculture/Food/Veterinary Science, Medicine and Health, Social Sciences, and Humanities and Arts. Public Physics covers quantum physics, optics, mesoscopic and nanoscale physics, and cosmology. Its on-demand expansion spans 18 arXiv subjects, including stellar and galactic astronomy, atomic physics and atomic and molecular clusters. We will set the total monthly model budget after measuring initial and incremental costs across dates. [Public editions](https://trendbio.dev/)
+Reviewed November 20, 2026 (UTC). **CompBio, All Biology (beta) and Physics publish in English. Mathematics and Statistics is the next candidate for regular publication.** The plan extends through natural sciences, engineering, medicine, agriculture, social sciences, and humanities and the arts. Ten additional field pilots and a wider Physics trial have dated results. The stages below set priorities for future publication decisions. [Public editions](https://trendbio.dev/) · [Field-by-field plan and coverage audit](#coverage-across-research-classifications) · [Pilot results](#what-the-pilots-established)
+
+## Reader editions and rollout order
+
+| Priority | Edition and sources already sampled | Next decision and the evidence it needs |
+|---|---|---|
+| 0 · Public | **CompBio** uses bioRxiv, arXiv, PubMed and research software activity. [Sources](../config/sources/computational.yaml) | Keep the specialist edition at `/`. Measure how often its top ten share papers with All Biology over 14 live dates. |
+| 0 · Public beta | **All Biology** samples 17 bioRxiv subjects and 11 PubMed journals. [Sources](../config/sources/biology.yaml) | Keep the broad edition at `/biology/`. Trace microbiology, immunology and plant papers from collection to rank. The first issue had 18 microbial ecology and 10 immunobiology records but no topic led by either category. |
+| 0 · Public | **Physics** covers quantum physics, optics, mesoscopic and nanoscale physics, and cosmology on arXiv. [Sources](../config/sources/physics.yaml) | Use the four public subjects at `/physics/` as the baseline for judging wider coverage. |
+| 0 · Physics extension on demand | **Stellar and galactic astronomy** has a specialist pilot. **Expanded Physics** tested 18 arXiv subjects and two Physical Review journals. [Astronomy sources](../config/sources/astronomy.yaml) · [Expanded Physics sources](../config/sources/physics-expanded.yaml) | Keep astronomy within the Physics expansion plan. In the final independent edition, grouping and English accuracy passed for 5 of 6 upper ranks and 1 of 6 lower ranks. A broader release would need reliable lower ranks and correct distinctions between observations and predictions. [Final evaluation](expansion-measurements/2026-11-20/physics-original-contributions.json) |
+| 1 · Next candidate | **Mathematics and Statistics** samples three arXiv subjects and five specialist journals. [Sources](../config/sources/math.yaml) | Start with number theory, numerical analysis and statistical methodology. Test whether genuine groups survive review and their English summaries preserve theorem assumptions, error bounds and inference targets. |
+| 2 · On demand | **Earth and Environment** samples eleven journals covering land, air, oceans, climate, water, conservation and data papers. [Sources](../config/sources/earth-environment.yaml) | Compare seven- and 28-day editions. Trace field observations to their papers and associated datasets. Four weekly editions yielded only one topic. |
+| 2 · On demand | **Chemistry** samples ten journals in organic, inorganic, physical and analytical chemistry. [Sources](../config/sources/chemistry.yaml) | Verify that studies grouped around a chemical measurement report comparable quantities. Check the journal's publication date where a registration record gives only a year. |
+| 2 · On demand | **Computing and Information** samples five arXiv subjects, four conference series and two information-science journals. [Sources](../config/sources/computer-information.yaml) | Compare conference release weeks with ordinary weeks. Check that systems papers measure comparable outcomes and that human–computer interaction and library science can reach the ranking. |
+| 3 · On demand | **Engineering and Technology** samples systems papers on arXiv and five journals in mechanics, energy, manufacturing, electronics and buildings. [Sources](../config/sources/engineering.yaml) | Compare simulation, bench and field results under their reported conditions. Add source samples for the engineering branches listed below before widening the edition's label. |
+| 3 · On demand | **Agriculture, Food and Veterinary Science** samples agronomy, forestry, fisheries, animal health and food journals, including two regional publishers. [Sources](../config/sources/agriculture-food-veterinary.yaml) | Compare 28-day editions with regional publication lists. Trace food and veterinary studies to the ranking and measure concentration by journal. One edition drew 28 of its 29 supporting papers from *Agronomy*. |
+| 3 · On demand | **Medicine and Health** samples nine journals through Europe PMC, with publisher text from PMC or Crossref. [Sources](../config/sources/medicine-health.yaml) | Verify population, study design and outcome against each paper. Require enough independent clinical, rehabilitation and public-health examples to assess the proposed scope. |
+| 4 · On demand | **Social Sciences** samples 22 journals, two arXiv subjects and World Bank working papers. [Sources](../config/sources/social-sciences.yaml) | Compare all eight named branches in the field table below, including law, politics, geography and media. Add regional and management sources. One education journal supplied 250 of 395 papers in a four-week sample. |
+| 5 · On demand | **Humanities and Arts** samples Crossref journals, OpenEdition journals and presses, Thoth and UMinho Editora. [Sources](../config/sources/humanities-arts.yaml) | Compare weekly and 28-day collections from distinct publishers. Verify first editions, translations and research outputs in history, languages, philosophy and the arts. The only ranked topic in four weeks came from one journal issue. |
+
+Fields at the same priority can qualify independently. The mathematics pilot has a bounded source set and editions that can be compared across dates. Stage 2 tests three different publication patterns across journals, field surveys and conference proceedings. Stages 3–5 are provisional. Their order depends on reader demand, regional and book coverage, and the cost of verifying claims. Check source access, reuse terms, abstract coverage, pagination and publication dates before adding a source. [arXiv taxonomy](https://arxiv.org/category_taxonomy) · [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api)
+
+## Criteria for regular publication
+
+All editions use the CompBio sequence to collect and deduplicate works, group them by research question, rank the groups and write an English summary linked to the original evidence. The baseline weights are 45% for growth, 25% for diversity of evidence types, 15% for code activity and 15% for volume, with a 5% penalty for a topic ranked the previous day. Field-specific review checks what counts as a comparable result. In fields with little code activity or few preprints, record which signals contributed and compare which topics reach the top ten. [Scoring configuration](../config/scoring.yaml) · [Ranking implementation](../pipeline/score.py)
+
+1. **Collection.** Compare source totals, stored records, duplicates and missing abstracts across four independent weeks, by subfield, language and publication type. Distinguish empty weeks, API failures and truncated results. Follow independent samples from tables of contents, programs and book catalogs through collection, grouping and publication.
+2. **Editing.** Sample ten high-ranked, ten low-ranked and ten excluded cases from different weeks and subfields. Review grouping and summaries for ranked cases and the exclusion reasons for the rest. The initial review target is nine passes per set of ten. Rerun a fresh sample after corrections that change conclusions.
+3. **Ranking and cadence.** Compare all eligible groups with the top ten, single-journal concentration and category caps. Public daily editions require at least three published papers or preprints within seven days. The Earth and Agriculture pilots also test that minimum over 28 days. Test books, chapters and standalone datasets as distinct publication types. Recluster the same collection over seven and 28 days and review recovered and falsely merged topics. The existing weekly and monthly pages aggregate daily rankings. [Daily pipeline](../pipeline/run.py) · [Period aggregation](../site/src/lib/periods.ts)
+4. **Operations.** Track success, duration and cost on 14 shared live dates for the public editions. Use those costs and the candidate's measured first-run and incremental costs to estimate 30-day service spending. Decide the total monthly model budget from those measurements before enabling a recurring new field. The existing USD 55 threshold controls the model fallback within each field. [Operating costs](#live-operating-costs)
+5. **Publication.** Make the scope, sources and actual edition date visible. Verify independent data paths, dated permalinks, source links, retention of the preceding edition on failure and archive regressions. Decide whether to publish, improve sources or change the cadence.
+
+## Coverage across research classifications
+
+The audit maps all 42 second-level OECD fields across six divisions. Each row names the next check for that field. The rollout table above identifies sources already sampled. A proposed journal, conference or catalogue below still needs a coverage test. For each branch, follow a sample from an independent publication list through collection, grouping and rank, and record where eligible work drops out. Use the findings to widen the sources, choose a longer interval or publish with a narrower scope. [OECD Frascati Manual, Table 2.2](https://www.oecd.org/content/dam/oecd/en/publications/reports/2015/10/frascati-manual-2015_g1g57dcb/9789264239012-en.pdf#page=61)
+
+### Natural and formal sciences
+
+| OECD field | Reader edition | Next coverage check |
+|---|---|---|
+| 1.1 Mathematics and statistics | Mathematics and Statistics | After reviewing the first three subjects, sample algebra, geometry and topology, analysis, probability and applied mathematics from specialist journals and arXiv. Check theorem hypotheses or statistical targets in each group. |
+| 1.2 Computing and information | Computing and Information | Sample AI and machine learning proceedings, software engineering, and library or information-retrieval venues alongside the existing theory, systems and interaction sources. Link a conference paper to its preprint. |
+| 1.3 Physics and astronomy | Physics | Use the completed trials to locate weak coverage in stellar and galactic astronomy, gravity, particles and nuclei, fluids, plasmas, statistical physics and atomic physics. For a future scope decision, check less visible branches such as condensed-matter experiments beyond the four public subjects. |
+| 1.4 Chemistry | Chemistry | Compare independently published work across organic, inorganic, physical and analytical chemistry. Check the substance, property measured and experimental conditions before grouping results. |
+| 1.5 Earth and environmental research | Earth and Environment | Compare geology and geophysics, atmosphere and climate, oceans, freshwater and conservation against specialist journal contents. Link data releases to the studies that use them. |
+| 1.6 Biological research | All Biology and CompBio | Trace molecular, cellular, organismal, plant, ecological and evolutionary work through All Biology. Check microbial ecology and immunology against specialist sources. Measure overlap with CompBio for methods and omics papers. |
+| 1.7 Other natural sciences | Closest natural-science edition | Review unmatched papers from multidisciplinary journals. Route by the discovery reported and record recurring subjects that lack a named home. |
+
+### Engineering and technology
+
+The Engineering edition owns these branches at stage 3. Its existing sample concentrates on systems, mechanics, manufacturing and buildings.
+
+| OECD field | Next source and evidence check |
+|---|---|
+| 2.1 Civil infrastructure | Add transport and structural-engineering proceedings to the buildings sample. Check the infrastructure type, loading conditions and field evidence. |
+| 2.2 Electrical, electronic and information engineering | Compare circuits, communications and control proceedings with the systems archive. Separate hardware measurements from algorithm benchmarks. |
+| 2.3 Mechanical systems | Compare mechanical, energy, aerospace and robotics journal studies. Identify which results were simulated, bench-tested or measured in service. |
+| 2.4 Chemical processes | Sample process-engineering journals and compare reported plant or pilot-scale outcomes under the stated conditions. Route work on molecular properties to Chemistry. |
+| 2.5 Engineering materials | Sample materials and manufacturing journals across more than one material class. Check composition, test conditions and the property reported. |
+| 2.6 Biomedical engineering | Sample device-validation journals. Distinguish performance on the bench from validation in a patient population and link the latter to Medicine and Health when relevant. |
+| 2.7 Environmental systems engineering | Sample water, waste and environmental infrastructure journals. Compare field performance across documented sites and operating conditions. |
+| 2.8 Environmental biotechnology | Sample environmental monitoring and treatment studies. Check the environmental outcome, site and observation period before grouping results. |
+| 2.9 Industrial biotechnology | Sample industrial bioprocess and resource-efficiency journals. Compare outcomes measured at a similar scale and under a common system boundary. |
+| 2.10 Nanoscale technology | Sample nanoelectronics and device journals. Route device performance to Engineering, material chemistry to Chemistry and fundamental physical behavior to Physics. |
+| 2.11 Other engineering | Inspect unmatched engineering conference papers, including work on multidisciplinary design. Record the engineering outcome and propose a named branch when it recurs. |
+
+### Medicine and health
+
+These branches belong to Medicine and Health at stage 3. The current nine-journal sample emphasizes clinical care, rehabilitation, health services and public health.
+
+| OECD field | Next source and evidence check |
+|---|---|
+| 3.1 Basic medical research | Add specialist journals in physiology and disease mechanisms. Distinguish preclinical evidence from findings in humans and route primarily biological discoveries to All Biology. |
+| 3.2 Clinical research | Check trial and cohort reports against journal contents. Match the population, comparator and endpoint, and inspect corrections before summarizing. |
+| 3.3 Health research and care | Sample nursing, rehabilitation, epidemiology, nutrition and health services across regions. Check whether studies concern the same care or population outcome. |
+| 3.4 Medical biotechnology | Sample diagnostic and translational research journals. Record whether each validation used laboratory materials, a clinical cohort or routine care. |
+| 3.5 Other medical research | Review unmatched papers from multidisciplinary health journals and regional indexes. Check whether a proposed group shares a health question and a compatible study design. |
+
+### Agriculture, food and veterinary science
+
+The Agriculture, Food and Veterinary Science edition owns these branches at stage 3. Regional journal lists and AGRIS can provide an independent comparison for its publisher samples. [FAO AGRIS](https://www.fao.org/agris/)
+
+| OECD field | Next source and evidence check |
+|---|---|
+| 4.1 Agriculture, forestry and fisheries | Compare crop and soil studies with independent forestry, fisheries and aquaculture lists. Track how many eligible works from each branch reach a group or rank. |
+| 4.2 Animal and dairy research | Sample livestock and dairy journals across regions. Record species, production setting and welfare or production outcome. |
+| 4.3 Veterinary research | Compare companion-animal and farm-animal studies with veterinary journal contents. Keep diagnoses, species and study populations identifiable in a summary. |
+| 4.4 Agricultural biotechnology | Sample crop-variety evaluation journals and independent field-trial reports. Check whether the reported trait and field outcome support the same claim. |
+| 4.5 Other agricultural research | Review food quality and processing, farm systems and regional agricultural studies. Assign the primary question across food production, engineering processes and population nutrition. |
+
+### Social sciences
+
+The Social Sciences edition covers these branches at stage 4. Its original economics and psychology pilot is part of this edition.
+
+| OECD field | Next source and evidence check |
+|---|---|
+| 5.1 Psychology and cognition | Compare experimental, observational and replication studies against psychology journal contents. Record the population, task and outcome. |
+| 5.2 Economics and business | Link working papers to journal versions. Add management, tourism and services journals to the economics sample and check whether firm-level or household-level claims are supported. |
+| 5.3 Education | Compare journals from several publishers and regions. Sample classroom studies at different education levels and measure the share of ranked evidence from the dominant journal. |
+| 5.4 Sociology | Sample qualitative and quantitative sociology, anthropology and demography. Preserve the community, period and method in a grouped claim. |
+| 5.5 Law and legal studies | Sample doctrinal articles and empirical legal scholarship from law journals across jurisdictions. Identify jurisdiction and distinguish a legal argument from a measured outcome. |
+| 5.6 Politics and public administration | Sample political science and public-policy journals. Check country, institution and period before comparing findings. |
+| 5.7 Social and economic geography | Compare urban, rural and regional geography sources. Route inequality and settlement questions here and link related physical geography to Earth and Environment. |
+| 5.8 Media and communication | Sample communication and media journals. Check what audience, medium and behavior were studied and which conclusions concern culture or language. |
+| 5.9 Other social research | Review interdisciplinary social research and methods papers from regional venues. Route by the social question and record recurring gaps. |
+
+### Humanities and arts
+
+The Humanities and Arts edition covers these branches at stage 5. Books, chapters and practice-based research need their own publication-date and version checks.
+
+| OECD field | Next source and evidence check |
+|---|---|
+| 6.1 History, archaeology and heritage | Compare journal articles and press catalogues with archaeological and heritage research. Verify time period, source material and each author’s interpretation. |
+| 6.2 Languages and literature | Sample linguistics, literary criticism and scholarly editions in several source languages. Link translations and reprints to the original work and retain the original title. |
+| 6.3 Philosophy, ethics and religion | Compare books and journals from independent presses across the three branches. Attribute each argument and test whether a shared question extends beyond a themed issue. |
+| 6.4 Arts and creative practice | Sample visual and performing arts, music, design and creative-writing research catalogues. Verify the research contribution and credit the relevant work or performance. |
+| 6.5 Other humanities | Review digital humanities and interdisciplinary monographs. Route by the interpretive question and group multiple editions of one work together. |
+
+### Independent coverage check
+
+We also mapped all 23 ANZSRC 2020 Fields of Research divisions to reader editions. This second classification highlights areas that are easy to overlook inside a broad OECD field. [Australian Bureau of Statistics classification](https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-research-classification-anzsrc/2020) · [Fields of Research, Table 1](https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-research-classification-anzsrc/2020/anzsrc2020_for.xlsx)
+
+| Reader edition | FoR divisions | What the second classification adds |
+|---|---|---|
+| All Biology and CompBio | 31 Biological sciences | Use the biological question and the contribution of a computational method to distinguish the two readerships. |
+| Physics | 51 Physical sciences | Include observational astronomy when measuring the breadth of physical science. |
+| Mathematics and Statistics | 49 Mathematical sciences | Route new statistical methods here and link applications through the field of the discovery. |
+| Earth and Environment | 37 Earth sciences, 41 Environmental sciences | Sample Earth observations as well as ecosystem and conservation studies. |
+| Chemistry | 34 Chemical sciences | Track physical chemistry alongside physical science and materials engineering. |
+| Computing and Information | 46 Information and computing sciences | Include information retrieval, digital libraries and human–computer interaction. |
+| Engineering and Technology | 33 Built environment and design, 40 Engineering | Cover architecture and urban design alongside engineering systems. Route work on urban inequality to Social Sciences. |
+| Agriculture, Food and Veterinary Science | 30 Agricultural, veterinary and food sciences | Give food research a named home and link population nutrition to Medicine and Health. |
+| Medicine and Health | 32 Biomedical and clinical sciences, 42 Health sciences | Check basic medicine, patient research and population and health-service studies separately. |
+| Social Sciences | 35 Commerce, management, tourism and services, 38 Economics, 39 Education, 44 Human society, 48 Law and legal studies, 52 Psychology | Include tourism and services, legal scholarship, classroom research and cognitive science alongside the initial economics and psychology sample. |
+| Humanities and Arts | 36 Creative arts and writing, 43 History, heritage and archaeology, 47 Language, communication and culture, 50 Philosophy and religious studies | Include heritage, performance and creative writing. Route the social effects of media to Social Sciences. |
+| Across editions | 45 Indigenous studies | Retain the field name and route by the research question. Language revitalization, community health and land research need distinct reader destinations. |
+
+**Gaps found in the source audit.** Dedicated sources are still needed for general AI and machine learning in Computing, chemical processes and biomedical devices in Engineering, and basic medicine in Health. Agriculture needs stronger evidence from food and veterinary research because crop studies dominate the rankings. Indigenous studies needs a source sample of its own. Start with a public catalogue curated by the relevant community or institution, check its reuse terms, and trace its works through the appropriate editions. [Current source configurations](../config/sources/) · [Measured pilot coverage](#what-the-pilots-established)
+
+Use the primary research question to route interdisciplinary work. An energy material’s phase transition, a storage device’s performance and an energy policy belong primarily in Physics, Engineering and Social Sciences respectively. A general-purpose algorithm belongs in Computing, a computational biology method in CompBio, and a biological discovery using the method in All Biology. Cross-link relevant editions and count linked versions of the same work once within each edition.
+
+## Checks on the public editions
+
+A dated ranking now links to another public edition when their supporting papers have a common identifier or an explicitly linked version. The disclosure shows the other edition’s rank, headline and shared papers. Across all ranked topics, CompBio and All Biology shared 55 distinct works in 30 topic pairs on November 19 and 50 in 19 pairs on November 20. Physics had no shared paper on the dates checked. The search index covers 651 CompBio topics, 65 All Biology topics and 59 Physics topics. On the 124 All Biology and Physics topic pages, we checked the latest dated rankings and all 659 supporting-paper links. [Dated comparison](expansion-measurements/2026-11-20/public-field-navigation.json) · [Search the public editions](https://trendbio.dev/search/)
+
+**All Biology and CompBio.** Each edition independently filters, clusters and ranks a seven-day collection. All Biology currently samples 17 bioRxiv subjects and 11 PubMed journals. The top ten on November 19 drew on 81 unique papers for All Biology and 93 for CompBio. Each set had 81 distinct DOIs, with 17 shared out of a union of 145. Twelve CompBio papers had no DOI and the editions ran at different times. Keep both editions and track this overlap over 14 live dates before reconsidering the home page. [All Biology data](../data/biology/days/2026-11-19.json) · [CompBio data](../data/computational/days/2026-11-19.json)
+
+All Biology collected 756 bioRxiv and 91 PubMed records on its first date. Of the records, 815 passed relevance, yielding 116 clusters and 40 ranked topics. The code activity signal was zero. Evidence diversity contributed 0.25 for one publication type and 0.50 for both a preprint and a journal publication. Multiple journals of one publication type gave the same diversity value. [Biology sources](../config/sources/biology.yaml) · [Scoring](../pipeline/score.py)
+
+| Primary Biology category | Relevant records | Clusters | Ranked |
+|---|---:|---:|---:|
+| Cell and molecular | 166 | 28 | 8 |
+| Neuroscience | 182 | 29 | 8 |
+| Quantitative biology | 156 | 21 | 8 |
+| Genetics and genomics | 93 | 12 | 7 |
+| Development | 27 | 7 | 4 |
+| Evolution and paleobiology | 38 | 7 | 2 |
+| Ecology | 25 | 3 | 1 |
+| Plants | 59 | 8 | 1 |
+| Organismal and behavioral | 41 | 1 | 1 |
+| Microbial ecology | 18 | 0 | 0 |
+| Immunobiology | 10 | 0 | 0 |
+| Other | 0 | 0 | 0 |
+
+Three microbial ecology and four immunobiology papers contributed to clusters assigned other primary labels. Thirty of the 59 plant papers entered plant clusters. Among the 81 unique papers behind the All Biology top ten, 72 came from bioRxiv and seven from *Plant Physiology*. Check the absence of dedicated microbiology and immunology bioRxiv categories, the two microbial ecology journals and one immunology journal, and the score distribution for the eight plant clusters. Reweighting growth at 75% and volume at 25%, holding clusters and caps fixed, retained nine of the first day’s top ten. The simultaneous-cluster median serves as the first-day baseline. Continue the beta. [All Biology audit](../data/biology/audits/first-14.json)
+
+**Physics.** Of 106 clusters, 68 were quantum, 16 cosmology, 11 optics and 11 mesoscopic/nanoscale physics. A cap of eight per category yielded 32 visible topics. All had 0.25 evidence diversity and zero code activity on that date. Across the same four weeks, the weekly ranges outside the covered subjects were 243–287 for stellar/galactic work, 182–259 for gravity, 273–352 for particle/nuclear work, 145–153 for fluids/plasmas and 104–153 for statistical physics. Cross-listings can overlap. An additional November 4 astronomy edition exposed two more editorial issues. The initial summary omitted the candidate status of the obscured X-ray source and conflated measurements in the OASIS series. A fresh run on the same 287 papers separated observations from a forecast near redshift 14. Its second-ranked group still combined different physical questions around one proposed instrument. The two cold runs cost $0.2150 and $0.2028. [Independent-week editorial comparison](expansion-measurements/2026-11-20/astronomy-editorial.json) Through November 20 the live audit has recorded three Physics dates and two All Biology dates. [Physics source comparison](expansion-measurements/2026-11-19/physics-archives.json) · [Physics audit](../data/physics/audits/first-14.json)
+
+## What the pilots established
 
 Pilot runs produce one dated English file. Open `en.html` after extracting the download. Each export checks the archived ranks and ordered supporting-paper links. Editorial withdrawals retain the original rank number and explain the decision in English. Headlines, summaries, search and feeds use English. Citations retain the original title when an English title is unavailable. Across the ten initial November 4 field pilots, 30 topics cited 91 supporting papers. The five-journal Chemistry edition was empty that day. Its ten-journal follow-up ranked one topic. The 106 English reading copies contain 645 published entries with 2,048 supporting-paper links. Another 12 rank positions carry an editorial withdrawal and its reason. All 1,243 pages in the November 20 sitemap served their English canonical URL. The site’s page headings, navigation and search labels were checked in production. Readers can search 775 topic pages across the three public editions and filter them by field and category. [Dated English editions](expansion-measurements/2026-11-20/reading-copies.md) · [Initial production and download checks](expansion-measurements/2026-11-20/english-previews.json) · [Earth edition checks](expansion-measurements/2026-11-20/earth-journal-coverage.json) · [Source recovery and language checks](expansion-measurements/2026-11-20/math-incremental-operations.json) · [Search and dated ranking checks](expansion-measurements/2026-11-20/public-field-navigation.json)
 
 The three public editions offer 31 English Atom subscriptions across their Top 5 and category feeds. All 176 dated All Biology and Physics entries reached the ranked headline, summary and paper evidence on the corresponding edition page. [Subscriptions by field](https://trendbio.dev/about/) · [Production feed checks](expansion-measurements/2026-11-20/public-field-feeds.json)
 
 On four Engineering and Agriculture dates, 13 entries cited 42 papers. In the Medicine and Health and Economics and Psychology pilots, six historical editions produced five entries and 15 paper links. Neither field had a qualifying group on November 18. [Engineering and Agriculture evidence](expansion-measurements/2026-11-19/applied-pilots.json) · [Health and social science evidence](expansion-measurements/2026-11-19/health-social-pilots.json)
-
-## What the pilots established
 
 | Field | Findings | Publication decision |
 |---|---|---|
@@ -380,20 +546,6 @@ In the primary window, 63 of 86 journal articles identified their issue. *Arts* 
 
 The four primary editions cost $0.0637 in model usage. The November 19 incremental run cost $0.0018 and the November 20 current-date run added zero model charges. Source testing, ranking and repeat reviews across this study used $0.1925 in total. The publication decision still requires evidence from other issues and sources, additional live dates and the service-wide monthly budget. [Dated charges and review samples](expansion-measurements/2026-11-20/humanities-portuguese-books.json)
 
-## Reader editions and rollout order
-
-| Stage | Scope | Evidence required for the next decision |
-|---|---|---|
-| 0 · Public | CompBio, All Biology beta and Physics | Track the two biology audiences and their shared papers for 14 live dates. Public Physics covers quantum, optics, mesoscopic/nanoscale physics and cosmology. In the 18-subject announcement sample, original selection and English copy passed for 7/10 upper and 7/10 lower ranks. The review supported 8/10 exclusions. Keep expanded Physics on demand. [Independent review and operating costs](expansion-measurements/2026-11-20/physics-independent-announcements.json) |
-| 1 · Private mathematics pilot | Number theory, numerical analysis and statistical methodology from three arXiv subjects and five specialist journals | Measure when journal evidence reaches the ranking and whether the reviewer retains genuine groups across dates. Verify theorem hypotheses and numerical claims on additional held-out weeks. [Configured sources](../config/sources/math.yaml) · [Measured results](expansion-measurements/2026-11-20/math-journals-and-proofs.json) |
-| 2 · Natural sciences | Private Earth and Chemistry pilots | In Chemistry, test comparable measurements across independent analytical studies and track the four chemistry branches and general journals. In Earth, compare water and conservation field studies from independent teams and trace related data releases. |
-| 2 · Computing and Information | On-demand pilot using five arXiv categories, ESA, DISC, ECRTS, the IHM 2026 proceedings, and two information-science journals | Test additional HCI and systems release weeks and find library-science evidence beyond the two journals. Check whether each ranked paper measures the same operation, task or outcome in independent work. [Configured sources](../config/sources/computer-information.yaml) · [Release-week comparison](expansion-measurements/2026-11-20/computing-proceedings.json) |
-| 3 · Applied fields | Private pilots for Engineering, Agriculture/Food/Veterinary Science, and Medicine and Health. The medical sample covers nine journals in clinical research, rehabilitation, health services and population health. | Engineering samples mechanical systems, control, materials and buildings. Agriculture samples crops, forestry, fisheries, animal health and food through thirteen journals, including two regional publishers. Follow field studies and regional-language records through ranking. Verify study populations, designs, uncertainty and corrections in clinical and public-health summaries. [FAO AGRIS](https://www.fao.org/agris/) |
-| 4 · Social Sciences | The on-demand edition follows 22 journals, two arXiv subjects and the World Bank working-paper series across economics, psychology, education, sociology, law, politics, human geography and media. | Increase coverage outside the dominant education publisher and sample regional sources, management research and original theoretical work. Review grouping across methods and obtain ten independent high and low cases each before scheduling. [Sources](../config/sources/social-sciences.yaml) · [Measured coverage](expansion-measurements/2026-11-20/social-science-coverage.json) |
-| 5 · Humanities and Arts | Private editions draw on nine Crossref journals, five OpenEdition journals, three OpenEdition presses, Thoth’s scholarly book catalogue and verified first editions from UMinho Editora. The taxonomy covers history and archaeology, languages and literature, philosophy and religion, visual and performing arts, digital humanities and interdisciplinary work. | Test independent sources for each branch. Compare weekly and 28-day groups and distinguish a single journal issue from a field-wide trend. Reconcile book editions and publication dates with the publisher or registration record. [Coverage and historical editions](expansion-measurements/2026-11-19/humanities-pilot.json) |
-
-Stages 3–5 are provisional. Reader demand, access to conferences, books and regional-language material, and the cost of verification can change their order. Before adding a source, verify access and reuse terms, abstract coverage, pagination and date precision. [arXiv taxonomy](https://arxiv.org/category_taxonomy) · [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api) · [OpenAlex](https://help.openalex.org/api/)
-
 ### Source limits that affect the order
 
 | Weekly arXiv submissions, UTC | Oct 22–28 | Oct 29–Nov 4 | Nov 5–11 | Nov 12–18 |
@@ -405,64 +557,3 @@ Stages 3–5 are provisional. Reader demand, access to conferences, books and re
 The per-query limit is 2,000 records. All four weeks exceeded it for all mathematics and statistics and for all computer science. The three mathematics pilot subjects fit each week. The Physics, Mathematics and Computing collectors split oversized windows by date and check unique identifiers against arXiv's reported total for each part. They report an error if one day alone exceeds the limit. The table counts submissions before relevance or grouping. [Collector](../pipeline/sources/arxiv.py) · [arXiv API](https://info.arxiv.org/help/api/user-manual.html)
 
 For the same 28 days, Crossref’s publication-date filter returned 416 articles from JACS (400 with abstracts), 10 from *Analytical Sciences* (zero with abstracts), zero from *Chemical Science*, 35 from *Earth System Science Data* (all with abstracts) and 27 from *Earth and Planetary Science Letters* (zero with abstracts). All 129 newly registered *Chemical Science* records had only the publication year. Registration can surface candidates whose publication date must then be checked with the publisher. [Crossref filters](https://www.crossref.org/documentation/retrieve-metadata/rest-api/rest-api-filters/) · [Chemical Science records](https://api.crossref.org/journals/2041-6539/works?filter=type:journal-article,from-created-date:2026-10-22,until-created-date:2026-11-18&rows=200&select=DOI,published,created)
-
-## Criteria for regular publication
-
-1. **Collection.** Compare source totals, stored records, duplicates and missing abstracts across four independent weeks, by subfield, language and publication type. Distinguish empty weeks, API failures and truncated results. Follow independent samples from tables of contents, programs and book catalogs through collection, grouping and publication.
-2. **Editing.** Sample ten high-ranked, ten low-ranked and ten excluded cases from different weeks and subfields. Review grouping and summaries for ranked cases and the exclusion reasons for the rest. The initial review target is nine passes per set of ten. Rerun a fresh sample after corrections that change conclusions.
-3. **Ranking and cadence.** Compare all eligible groups with the top ten, single-journal concentration and category caps. Public daily editions require at least three published papers or preprints within seven days. The Earth and Agriculture pilots also test that minimum over 28 days. Test books, chapters and standalone datasets as distinct publication types. Recluster the same collection over seven and 28 days and review recovered and falsely merged topics. The existing weekly and monthly pages aggregate daily rankings. [Daily pipeline](../pipeline/run.py) · [Period aggregation](../site/src/lib/periods.ts)
-4. **Operations.** For the first 14 live daily editions track success, duration and cost, then estimate 30-day spending across the service. Review representativeness using non-overlapping weeks because consecutive daily inputs overlap. Decide the total monthly budget from measured usage before enabling a recurring new field.
-5. **Publication.** Make the scope, sources and actual edition date visible. Verify independent data paths, dated permalinks, source links, retention of the preceding edition on failure and archive regressions. Decide whether to publish, improve sources or change the cadence.
-
-## Coverage across research classifications
-
-All 42 second-level OECD categories have an editorial home. Each “other” category feeds a subfield review queue. A persistent body of work can acquire its own named subfield. [OECD Frascati Manual, Table 2.2](https://www.oecd.org/content/dam/oecd/en/publications/reports/2015/10/frascati-manual-2015_g1g57dcb/9789264239012-en.pdf)
-
-| OECD division | Detailed fields and their destination |
-|---|---|
-| Natural sciences | 1.1 mathematics/statistics, 1.2 computing/information, 1.3 physics/astronomy, 1.4 chemistry, 1.5 Earth/environment, 1.6 biology, 1.7 other natural sciences |
-| Engineering and technology | 2.1 civil, 2.2 electrical/electronic/information, 2.3 mechanical, 2.4 chemical, 2.5 materials, 2.6 medical engineering, 2.7 environmental engineering, 2.8 environmental biotechnology, 2.9 industrial biotechnology, 2.10 nanotechnology, 2.11 other engineering |
-| Medicine and health | 3.1 basic medicine, 3.2 clinical medicine, 3.3 health sciences, 3.4 medical biotechnology, 3.5 other medical sciences |
-| Agriculture and veterinary sciences | 4.1 agriculture/forestry/fisheries, 4.2 animal and dairy sciences, 4.3 veterinary sciences, 4.4 agricultural biotechnology, 4.5 other agricultural sciences |
-| Social sciences | 5.1 psychology/cognition, 5.2 economics/business, 5.3 education, 5.4 sociology, 5.5 law, 5.6 politics, 5.7 social/economic geography, 5.8 media/communications, 5.9 other social sciences |
-| Humanities and arts | 6.1 history/archaeology, 6.2 languages/literature, 6.3 philosophy/ethics/religion, 6.4 arts research, 6.5 other humanities |
-
-We also mapped all 23 ANZSRC 2020 Fields of Research divisions to reader editions. [Australian Bureau of Statistics classification](https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-research-classification-anzsrc/2020) · [Fields of Research, Table 1](https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-research-classification-anzsrc/2020/anzsrc2020_for.xlsx)
-
-| Destination | FoR division numbers | Boundary checks |
-|---|---|---|
-| Biology, Physics, Mathematics | 31, 51, 49 | Observational astronomy belongs in Physics. New statistical methods belong in Mathematics. A new biological finding using those methods belongs in Biology. |
-| Chemistry, Earth/Environment, Computing | 34, 37, 41, 46 | Sample Earth observations and environmental/conservation studies separately. Include information retrieval and library science. |
-| Engineering, Agriculture, Medicine | 40, 33, 30, 32, 42 | Cover built environment and urban design in Engineering, urban inequality in Social Sciences, food production in Agriculture/Food, and population nutrition in Health. |
-| Social Sciences | 35, 38, 39, 44, 48, 52 | Include tourism and services, legal and policy research, and classroom-based education studies. |
-| Humanities and Arts | 36, 43, 47, 50 | Cover cultural heritage, performance and writing. Route social effects of media to Social Sciences. |
-| Across editions | 45, Indigenous studies | Tag explicitly and route by the research question. Language revitalization can appear in language/culture and community health in Health. Verify samples against public lists from the relevant communities and institutions. |
-
-Use the primary question to route interdisciplinary work and cross-link other editions. For example, an energy material’s phase transition, an energy-storage device’s performance and an energy policy belong primarily in Physics, Engineering and Social Sciences respectively. Link versions of the same work and count it once within an edition.
-
-## Checks on the public editions
-
-A dated ranking now links to another public edition when their supporting papers have a common identifier or an explicitly linked version. The disclosure shows the other edition’s rank, headline and shared papers. Across all ranked topics, CompBio and All Biology shared 55 distinct works in 30 topic pairs on November 19 and 50 in 19 pairs on November 20. Physics had no shared paper on the dates checked. The search index covers 651 CompBio topics, 65 All Biology topics and 59 Physics topics. On the 124 All Biology and Physics topic pages, we checked the latest dated rankings and all 659 supporting-paper links. [Dated comparison](expansion-measurements/2026-11-20/public-field-navigation.json) · [Search the public editions](https://trendbio.dev/search/)
-
-**All Biology and CompBio.** Each edition independently filters, clusters and ranks a seven-day collection. All Biology currently samples 17 bioRxiv subjects and 11 PubMed journals. The top ten on November 19 drew on 81 unique papers for All Biology and 93 for CompBio. Each set had 81 distinct DOIs, with 17 shared out of a union of 145. Twelve CompBio papers had no DOI and the editions ran at different times. Keep both editions and track this overlap over 14 live dates before reconsidering the home page. [All Biology data](../data/biology/days/2026-11-19.json) · [CompBio data](../data/computational/days/2026-11-19.json)
-
-All Biology collected 756 bioRxiv and 91 PubMed records on its first date. Of the records, 815 passed relevance, yielding 116 clusters and 40 ranked topics. The code activity signal was zero. Evidence diversity contributed 0.25 for one publication type and 0.50 for both a preprint and a journal publication. Multiple journals of one publication type gave the same diversity value. [Biology sources](../config/sources/biology.yaml) · [Scoring](../pipeline/score.py)
-
-| Primary Biology category | Relevant records | Clusters | Ranked |
-|---|---:|---:|---:|
-| Cell and molecular | 166 | 28 | 8 |
-| Neuroscience | 182 | 29 | 8 |
-| Quantitative biology | 156 | 21 | 8 |
-| Genetics and genomics | 93 | 12 | 7 |
-| Development | 27 | 7 | 4 |
-| Evolution and paleobiology | 38 | 7 | 2 |
-| Ecology | 25 | 3 | 1 |
-| Plants | 59 | 8 | 1 |
-| Organismal and behavioral | 41 | 1 | 1 |
-| Microbial ecology | 18 | 0 | 0 |
-| Immunobiology | 10 | 0 | 0 |
-| Other | 0 | 0 | 0 |
-
-Three microbial ecology and four immunobiology papers contributed to clusters assigned other primary labels. Thirty of the 59 plant papers entered plant clusters. Among the 81 unique papers behind the All Biology top ten, 72 came from bioRxiv and seven from *Plant Physiology*. Check the absence of dedicated microbiology and immunology bioRxiv categories, the two microbial ecology journals and one immunology journal, and the score distribution for the eight plant clusters. Reweighting growth at 75% and volume at 25%, holding clusters and caps fixed, retained nine of the first day’s top ten. The simultaneous-cluster median serves as the first-day baseline. Continue the beta. [All Biology audit](../data/biology/audits/first-14.json)
-
-**Physics.** Of 106 clusters, 68 were quantum, 16 cosmology, 11 optics and 11 mesoscopic/nanoscale physics. A cap of eight per category yielded 32 visible topics. All had 0.25 evidence diversity and zero code activity on that date. Across the same four weeks, the weekly ranges outside the covered subjects were 243–287 for stellar/galactic work, 182–259 for gravity, 273–352 for particle/nuclear work, 145–153 for fluids/plasmas and 104–153 for statistical physics. Cross-listings can overlap. An additional November 4 astronomy edition exposed two more editorial issues. The initial summary omitted the candidate status of the obscured X-ray source and conflated measurements in the OASIS series. A fresh run on the same 287 papers separated observations from a forecast near redshift 14. Its second-ranked group still combined different physical questions around one proposed instrument. The two cold runs cost $0.2150 and $0.2028. [Independent-week editorial comparison](expansion-measurements/2026-11-20/astronomy-editorial.json) Through November 20 the live audit has recorded three Physics dates and two All Biology dates. [Physics source comparison](expansion-measurements/2026-11-19/physics-archives.json) · [Physics audit](../data/physics/audits/first-14.json)

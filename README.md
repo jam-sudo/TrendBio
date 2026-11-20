@@ -24,15 +24,17 @@
 
 TrendBio publishes daily research rankings for CompBio, All Biology (beta) and Physics. Each edition groups new papers by research topic and writes a short synthesis for each ranked group. CompBio also tracks repositories and company posts. Its Top 40 archive begins on 1 November 2025.
 
+The expansion plan gives the publication priorities, sources and next coverage check for every field, from mathematics to the arts. [All-science roadmap](docs/science-expansion-plan.en.md) · [Plan for all 42 OECD research fields](docs/science-expansion-plan.en.md#coverage-across-research-classifications)
+
 All editions publish in English. Citations keep the original publication titles when an English title is unavailable. Previous Korean edition links open the corresponding English pages. Each public edition offers a daily Top 5 subscription and one feed for each category. [Browse the English feeds](https://trendbio.dev/about/)
 
 Search covers CompBio, All Biology and Physics. Filter by field or category to find a topic and its supporting papers. When two editions rank the same paper on the same date, “Also covered in” links their rankings and lists the papers they share. [Search all editions](https://trendbio.dev/search/)
 
-All Biology (beta) at `/biology/` has its own daily rankings, dated editions and evidence from bioRxiv and PubMed. CompBio remains the default at `/`. Run the beta with `python -m pipeline run --domain biology`. The [science expansion roadmap and coverage audit](docs/science-expansion-plan.en.md) describes the proposed rollout.
+All Biology (beta) at `/biology/` has its own daily rankings, dated editions and evidence from bioRxiv and PubMed. CompBio remains the default at `/`. Run the beta with `python -m pipeline run --domain biology`.
 
 The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes each edition independently and writes Physics results to `data/physics/`.
 
-The on-demand Field pilot workflow covers Math & Stats, Earth & Environment, Chemistry, stellar and galactic astronomy, Computing & Information, Engineering, Agriculture/Food/Veterinary Science, Medicine & Health, Social Sciences, and Humanities & Arts. Each run stores its ranked topics, evidence, editorial checks and model spend in an Actions artifact that signed-in repository readers can download for 14 days. A second ZIP contains the dated English edition. Extract it and open `en.html` to read the rankings, summaries and research links offline. The broader Physics trial follows 18 arXiv subjects, including atomic physics and atomic and molecular clusters, and tests CC BY journal articles from Physical Review A and B. [Download the English pilot editions](docs/expansion-measurements/2026-11-20/reading-copies.md) · [English roadmap](docs/science-expansion-plan.en.md)
+The on-demand Field pilot workflow covers Math & Stats, Earth & Environment, Chemistry, stellar and galactic astronomy, Computing & Information, Engineering, Agriculture/Food/Veterinary Science, Medicine & Health, Social Sciences, and Humanities & Arts. Each run stores its ranked topics, evidence, editorial checks and model spend in an Actions artifact that signed-in repository readers can download for 14 days. A second ZIP contains the dated English edition. Extract it and open `en.html` to read the rankings, summaries and research links offline. The broader Physics trial follows 18 arXiv subjects, including atomic physics and atomic and molecular clusters, and tests CC BY journal articles from Physical Review A and B. [Download the English pilot editions](docs/expansion-measurements/2026-11-20/reading-copies.md)
 
 ## How a day is made
 
