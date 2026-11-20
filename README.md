@@ -10,7 +10,7 @@
 <p align="center">Daily research trends in biology and physics.</p>
 
 <p align="center">
-  <a href="https://trendbio.dev/">English</a>&ensp;·&ensp;<a href="https://trendbio.dev/ko/">한국어</a>&ensp;·&ensp;<a href="https://trendbio.dev/feed.xml">Atom feed</a>&ensp;·&ensp;<a href="https://trendbio.dev/about">How it works</a>
+  <a href="https://trendbio.dev/">Read TrendBio</a>&ensp;·&ensp;<a href="https://trendbio.dev/feed.xml">Atom feed</a>&ensp;·&ensp;<a href="https://trendbio.dev/about">How it works</a>
 </p>
 
 <br>
@@ -24,11 +24,11 @@
 
 TrendBio reads each day's new preprints, papers, repositories and company posts in computational biology, groups them into research topics, ranks the Top 40 and writes a short synthesis for each. One page a day, for readers who already know the field, with history back to 1 November 2025.
 
-All Biology (beta) at `/biology/` has its own daily rankings, dated editions and evidence from bioRxiv and PubMed. CompBio remains the default at `/`. Run the beta with `python -m pipeline run --domain biology`. The [science expansion roadmap and coverage audit](docs/science-expansion-plan.ko.md) describes the proposed rollout.
+All Biology (beta) at `/biology/` has its own daily rankings, dated editions and evidence from bioRxiv and PubMed. CompBio remains the default at `/`. Run the beta with `python -m pipeline run --domain biology`. The [science expansion roadmap and coverage audit](docs/science-expansion-plan.en.md) describes the proposed rollout.
 
 The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes each edition independently and writes Physics results to `data/physics/`.
 
-The on-demand Field pilot workflow covers Math & Stats, Earth & Environment, Chemistry, stellar and galactic astronomy, Computing & Information, Engineering, Agriculture/Food/Veterinary Science, Medicine & Health, Economics & Psychology, and Humanities & Arts. Each run stores its ranked topics, evidence, editorial checks and model spend in an Actions artifact that signed-in repository readers can download for 14 days. A second ZIP contains the dated edition in both languages. Extract the two files and open `ko.html` or `en.html` in a browser. Both show the same ranking and research links. The broader Physics trial follows 16 arXiv archives and tests CC BY journal articles from Physical Review A and B. [Download the bilingual pilot editions](docs/expansion-measurements/2026-11-20/reading-copies.md) · [English roadmap](docs/science-expansion-plan.en.md) · [한국어 확장 계획](docs/science-expansion-plan.ko.md)
+The on-demand Field pilot workflow covers Math & Stats, Earth & Environment, Chemistry, stellar and galactic astronomy, Computing & Information, Engineering, Agriculture/Food/Veterinary Science, Medicine & Health, Economics & Psychology, and Humanities & Arts. Each run stores its ranked topics, evidence, editorial checks and model spend in an Actions artifact that signed-in repository readers can download for 14 days. A second ZIP contains the dated English edition. Extract it and open `en.html` to read the rankings, summaries and research links offline. The broader Physics trial follows 16 arXiv archives and tests CC BY journal articles from Physical Review A and B. [Download the English pilot editions](docs/expansion-measurements/2026-11-20/reading-copies.md) · [English roadmap](docs/science-expansion-plan.en.md)
 
 ## How a day is made
 

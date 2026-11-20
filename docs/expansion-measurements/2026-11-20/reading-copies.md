@@ -1,26 +1,25 @@
-# 한국어·영어 시험판 / Bilingual pilot editions
+# English pilot editions
 
-각 ZIP에 같은 날짜의 `ko.html`과 `en.html`이 들어 있다. GitHub에 로그인해 압축 파일을 내려받아 풀고 원하는 언어의 파일을 연다. 주제와 요약은 오프라인에서도 읽을 수 있다. 원문 링크는 해당 자료원으로 연결된다. GitHub는 이 파일들을 2026년 12월 4일(UTC)에 만료 처리한다. [한국어 공개판](https://trendbio.dev/ko/) · [한국어 확장 계획](../../science-expansion-plan.ko.md)
+Each download contains one `en.html` file. Extract it and open it in a browser to read the dated ranks, summaries and editorial corrections offline. Paper links open the original sources. GitHub requires sign-in to download these workflow artifacts and retains the files for 14 days. [Live editions](https://trendbio.dev/) · [Expansion plan](../../science-expansion-plan.en.md)
 
-Each ZIP contains `en.html` and `ko.html` for one edition. Sign in to GitHub, extract the ZIP, and open either file in a browser. The topics and summaries work offline. Paper links open the original sources. The downloads expire December 4, 2026 (UTC). [Public English editions](https://trendbio.dev/) · [English roadmap](../../science-expansion-plan.en.md)
+| Field | Week ending (UTC) | Trial | Topics | Download |
+|---|---|---|---:|---|
+| Mathematics and Statistics | 2026-11-04 | Initial trial | 9 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657409183/artifacts/14594685501) |
+| Earth and Environment | 2026-11-04 | Initial trial | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657412078/artifacts/14593462944) |
+| Chemistry | 2026-11-04 | Initial trial | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657414921/artifacts/14593862322) |
+| Stellar and Galactic Astronomy | 2026-11-04 | Initial trial | 3 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657417982/artifacts/14594081909) |
+| Computing and Information | 2026-11-04 | Initial trial | 8 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657420929/artifacts/14594201634) |
+| Engineering | 2026-11-04 | Initial trial | 5 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657424134/artifacts/14594321683) |
+| Agriculture, Food and Veterinary Science | 2026-11-04 | Initial trial | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657426885/artifacts/14593822481) |
+| Medicine and Health | 2026-11-04 | Initial trial | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657430047/artifacts/14594456229) |
+| Economics and Psychology | 2026-11-04 | Initial trial | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657432813/artifacts/14593752652) |
+| Humanities and Arts | 2026-11-04 | Initial trial | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657435247/artifacts/14593887283) |
+| Broader Physics | 2026-11-04 | Initial trial | 33 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657438204/artifacts/14594101840) |
+| Broader Physics | 2026-11-18 | Initial trial | 29 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657440786/artifacts/14593707793) |
+| Broader Physics | 2026-11-19 | Initial trial | 15 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657443717/artifacts/14593892065) |
+| Broader Physics | 2026-10-28 | 16 arXiv archives, revised grouping | 24 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657446673/artifacts/14594665805) |
+| Broader Physics | 2026-11-11 | 16 arXiv archives, revised grouping | 31 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657449408/artifacts/14593239310) |
+| Broader Physics | 2026-11-18 | 16 arXiv archives, revised grouping | 38 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657451943/artifacts/14593857261) |
+| Broader Physics | 2026-11-18 | 16 arXiv archives + two journals | 36 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657454938/artifacts/14594326554) |
 
-| 분야 / Field | 날짜 / Date (UTC) | 주제 / Topics | 파일 / Files |
-|---|---|---:|---|
-| 수학·통계 / Mathematics & Statistics | 2026-11-04 | 9 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44645108025/artifacts/14588905379) |
-| 지구·환경 / Earth & Environment | 2026-11-04 | 1 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44645112222/artifacts/14587169520) |
-| 화학 / Chemistry | 2026-11-04 | 0 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44644372383/artifacts/14587273510) |
-| 항성·은하천문학 / Stellar & Galactic Astronomy | 2026-11-04 | 3 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44648016915/artifacts/14589613294) |
-| 컴퓨터·정보과학 / Computing & Information | 2026-11-04 | 8 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44645115982/artifacts/14588750792) |
-| 공학 / Engineering | 2026-11-04 | 5 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44648012745/artifacts/14590070533) |
-| 농림·수산·식품·수의학 / Agriculture, Food & Veterinary Science | 2026-11-04 | 1 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44644389638/artifacts/14587648983) |
-| 의학·보건 / Medicine & Health | 2026-11-04 | 1 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44644376802/artifacts/14588200928) |
-| 경제학·심리학 / Economics & Psychology | 2026-11-04 | 1 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44644381668/artifacts/14588580054) |
-| 인문·예술 / Humanities & Arts | 2026-11-04 | 1 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44644090317/artifacts/14587643514) |
-
-## 물리학 범위 확대 시험 / Broader Physics trial
-
-| 분야 / Field | 날짜 / Date (UTC) | 주제 / Topics | 파일 / Files |
-|---|---|---:|---|
-| 물리학 확장판 / Broader Physics | 2026-11-04 | 33 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44650286444/artifacts/14591311009) |
-| 물리학 확장판 / Broader Physics | 2026-11-18 | 29 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44646820872/artifacts/14589142359) |
-| 물리학 확장판 / Broader Physics | 2026-11-19 | 15 | [한국어 · English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44648021535/artifacts/14589687480) |
+[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json)
