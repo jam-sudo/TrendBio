@@ -26,5 +26,8 @@ Each download contains one `en.html` file. Extract it and open it in a browser t
 | Earth and Environment | 2026-11-11 | Nine journals | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661257951/artifacts/14595722496) |
 | Earth and Environment | 2026-11-18 | Nine journals | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661261954/artifacts/14596062073) |
 | Earth and Environment | 2026-11-19 | Nine journals, incremental run | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661785525/artifacts/14595863019) |
+| Broader Physics | 2026-10-07 | Independent review of the physical question | 11 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44671235576/artifacts/14600211609) |
+| Broader Physics | 2026-10-21 | Independent review of the physical question | 15 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44668718483/artifacts/14598124300) |
+| Broader Physics | 2026-11-18 | Independent review of the physical question | 22 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44667370737/artifacts/14598392024) |
 
-[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json) · [Earth journal comparison and edition checks](earth-journal-coverage.json)
+[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json) · [Earth journal comparison and edition checks](earth-journal-coverage.json) · [Physics confirmation and English edition checks](physics-confirmation.json)
