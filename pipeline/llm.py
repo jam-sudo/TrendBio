@@ -253,6 +253,7 @@ class LLM:
         ])
         arxiv_ids = {value.lower() for item in items if item.source == 'arxiv'
                      for value in (item.id.removeprefix('arxiv:'), item.url.rsplit('/', 1)[-1])}
+        prompt = grounding.mark_background_citations(prompt, arxiv_ids)
         output_limit = 4096
         # Length and grounding feedback share one retry, charged by _parse as usual.
         for attempt in range(2):
@@ -283,7 +284,8 @@ class LLM:
             if missing_citations:
                 if attempt:
                     return self._failure(topic.slug, 'citation', detail=','.join(missing_citations))
-                prompt += '\n\nUse only exact arXiv identifiers from the supplied items.'
+                prompt += ('\n\nDescribe comparisons to earlier work in words. The only arXiv identifiers '
+                           'available as supporting papers here are ' + (', '.join(sorted(arxiv_ids)) or 'none') + '.')
             if bad:
                 detail = ','.join(f'{v:g}' for v in bad)
                 if attempt:

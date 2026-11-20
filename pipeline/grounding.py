@@ -36,6 +36,12 @@ _LATEX_COMMAND = re.compile(r'\\[A-Za-z]+')
 _ARXIV_ID = re.compile(r'(?<![\w.])(?P<prefix>arxiv\s*[: ]\s*)?(?P<id>\d{2}(?:0[1-9]|1[0-2])\.\d{4,5}(?:v\d+)?)(?!\w|\.\d)', re.I)
 
 
+def mark_background_citations(text: str, evidence_ids: set[str]) -> str:
+    """Keep an abstract's cited work distinguishable from the edition's supporting papers."""
+    return _ARXIV_ID.sub(lambda m: 'the cited work'
+                         if m['prefix'] and m['id'].lower() not in evidence_ids else m[0], text)
+
+
 def check_citations(text: str, allowed: set[str]) -> tuple[str, list[str]]:
     """Remove verified arXiv citations before numeric checks, rejecting unlisted citations."""
     unknown = []

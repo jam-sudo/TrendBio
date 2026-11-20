@@ -75,6 +75,19 @@ def test_dated_summary_uses_the_question_reviewed_for_that_edition(context):
     assert questions[0] in prompt and questions[1] not in prompt
 
 
+def test_cited_background_paper_stays_outside_the_edition_evidence(context):
+    ctx = context
+    ctx.llm.synthesis_guidance = 'Summarize the reported observable.'
+    ctx.item = ctx.item.model_copy(update={
+        'id': 'arxiv:2610.23676', 'source': 'arxiv', 'url': 'https://arxiv.org/abs/2610.23676v1',
+        'abstract': 'The pressure agrees with the fit in arXiv:1204.6184. The measured value is 1104.5678.',
+    })
+    run(ctx)
+    prompt = ctx.beta.calls[0]['messages'][0]['content']
+    assert 'arxiv:2610.23676' in prompt and 'fit in the cited work' in prompt
+    assert '1204.6184' not in prompt and '1104.5678' in prompt and '1204.6184' in ctx.item.abstract
+
+
 def test_math_synthesis_receives_original_assumptions(context):
     from pipeline.config import load_taxonomy
 
