@@ -13,12 +13,14 @@ from pipeline.sources.base import collected, load_config, matches_keywords, requ
 NS = {'atom': 'http://www.w3.org/2005/Atom', 'arxiv': 'http://arxiv.org/schemas/atom',
       'opensearch': 'http://a9.com/-/spec/opensearch/1.1/'}
 logger = logging.getLogger(__name__)
+_RECAP = re.compile(r'\b(?:reviews?|overview|summari[sz](?:e[ds]?|ing)|companion|report(?:s|ed|ing)? on)\b', re.I)
+_VENUE_NOTE = re.compile(r'\b(?:proceedings|conferences?|workshops?|talks?|lectures?|reviews?|tutorials?|symposi(?:um|a))\b', re.I)
 
 
-def submission_comment(item: Item) -> str:
-    """Read the author’s note from the same arXiv record that supplied the paper."""
+def recap_submission_comment(item: Item) -> str:
+    """Return the archived venue note when the abstract could be recounting previous work."""
     xml = item.metadata.get('xml')
-    if item.source != 'arxiv' or not isinstance(xml, str):
+    if item.source != 'arxiv' or not isinstance(xml, str) or not _RECAP.search(item.abstract):
         return ''
     try:
         entry = ET.fromstring(xml)
@@ -27,7 +29,8 @@ def submission_comment(item: Item) -> str:
     version = item.url.partition('/abs/')[2]
     if not version or entry.findtext('atom:id', '', NS).partition('/abs/')[2] != version:
         return ''
-    return ' '.join(entry.findtext('arxiv:comment', '', NS).split())
+    comment = ' '.join(entry.findtext('arxiv:comment', '', NS).split())
+    return comment if _VENUE_NOTE.search(comment) else ''
 
 
 class ArxivAdapter:

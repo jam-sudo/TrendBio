@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from pipeline.llm import shared_byline_note
-from pipeline.sources.arxiv import submission_comment
+from pipeline.sources.arxiv import recap_submission_comment
 
 
 def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False):
@@ -22,7 +22,7 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
         if proposal is not None and deps.taxonomy.compare_reported_results:
             anchors = {entry['id']: entry for entry in proposal['evidence']}
             for item, record in zip(items, evidence, strict=True):
-                if deps.taxonomy.domain == 'physics-expanded' and (comment := submission_comment(item)):
+                if deps.taxonomy.arxiv_recap_guidance and (comment := recap_submission_comment(item)):
                     record['arxiv_submission_comment'] = comment
                 anchor = anchors[item.id]
                 if anchor.get('field') in ('title', 'abstract'):
@@ -33,7 +33,10 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
         records = json.dumps(evidence, ensure_ascii=False)
         if proposal is not None:
             bylines = shared_byline_note(items) if deps.taxonomy.compare_reported_results else ''
-            prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposal['topic'], ensure_ascii=False) + bylines + '\n\n' + records
+            guidance = comparison
+            if any('arxiv_submission_comment' in record for record in evidence):
+                guidance += '\n\n' + deps.taxonomy.arxiv_recap_guidance
+            prompt = guidance + '\n\nProposed topic: ' + json.dumps(proposal['topic'], ensure_ascii=False) + bylines + '\n\n' + records
             options = {'model': comparison_model, 'effort': 'medium'}
             cache_inputs = [comparison_model, 'medium', sorted(ids), prompt]
             if deps.taxonomy.compare_reported_results:

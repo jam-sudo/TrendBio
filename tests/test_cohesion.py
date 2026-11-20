@@ -105,12 +105,18 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     papers[0].authors = ['Alex Example']
     papers[-1].authors = ['Alex Example']
     papers[0].url = 'https://arxiv.org/abs/2610.12345v1'
+    papers[0].abstract = 'We report on two earlier calculations.'
     xml = ('<entry xmlns="http://www.w3.org/2005/Atom" xmlns:a="http://arxiv.org/schemas/atom">'
            '<id>http://arxiv.org/abs/2610.12345v1</id><a:comment>Conference   contribution</a:comment></entry>')
     papers[0].metadata = {'xml': xml}
     papers[1].url = 'https://arxiv.org/abs/2610.12345v2'
+    papers[1].abstract = papers[0].abstract
     papers[1].metadata = {'xml': xml}
     papers[2].metadata = {'xml': '<incomplete'}
+    papers[2].abstract = papers[0].abstract
+    papers[-1].url = papers[0].url
+    papers[-1].metadata = {'xml': xml}
+    papers[-1].abstract = 'We measure a newly observed transition.'
     ids = sorted(p.id for p in papers)
     good = ids[:3]
     question = 'Which physical quantity can the three sensors recover?'
