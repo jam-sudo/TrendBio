@@ -12,12 +12,12 @@ def review_clusters(clusters, papers, store, deps, day):
     comparison = deps.taxonomy.comparison_guidance
     comparison_model = 'claude-haiku-5-5' if comparison and deps.budget.over_ceiling() else 'claude-sonnet-5-5'
 
-    def partition(ids, *, confirm=False):
+    def partition(ids, *, proposed_question=None):
         items = [by_id[i] for i in sorted(ids)]
         records = json.dumps([{'paper': n, 'title': i.title, 'abstract': i.abstract}
                               for n, i in enumerate(items, 1)], ensure_ascii=False)
-        if confirm:
-            prompt = comparison + '\n\n' + records
+        if proposed_question is not None:
+            prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposed_question, ensure_ascii=False) + '\n\n' + records
             options = {'model': comparison_model, 'effort': 'medium'}
             cache_inputs = [comparison_model, 'medium', sorted(ids), prompt]
         else:
@@ -47,7 +47,7 @@ def review_clusters(clusters, papers, store, deps, day):
             accepted = {}
             candidate['comparisons'] = []
             for members in sorted(groups or {}):
-                check, confirmed = partition(members, confirm=True)
+                check, confirmed = partition(members, proposed_question=groups[members])
                 candidate['comparisons'].append({'review': check, 'items': list(members), 'failed': confirmed is None})
                 if confirmed is None:
                     failures.append(check)

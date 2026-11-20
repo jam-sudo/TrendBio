@@ -44,6 +44,12 @@ def test_partition_checks_all_evidence_and_only_ranks_groups_with_three_sources(
     llm._parse.side_effect = None
     llm._parse.return_value = CohesionReview(groups=[group([1, 2, 3]), group([1, 4, 5, 6])])
     assert review_clusters([ids], changed, store, deps, day)[1]
+    llm._parse.side_effect = [CohesionReview(groups=[group([1, 2, 3])]),
+                              CohesionReview(groups=[group([n]) for n in range(1, 8)])]
+    assert llm.review_cohesion('Check the comparison', changed, 'missing', model='claude-sonnet-5-5', effort='medium')
+    assert 'Use each of these numbers exactly once: 1, 2, 3, 4, 5, 6, 7' in llm._parse.call_args.args[1][0]['content']
+    assert llm._parse.call_args.args[2:5] == ('claude-sonnet-5-5', 4096, 'medium')
+    llm._parse.side_effect = None
     llm._parse.return_value = CohesionReview(groups=[group([n]) for n in range(1, 8)])
     assert review_clusters([ids], changed, store, deps, day) == ([], [], {})
 
@@ -94,7 +100,7 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     assert review_clusters([ids], papers, store, deps, day) == expected
     check = llm.review_cohesion.call_args
     assert check.kwargs == {'model': 'claude-sonnet-5-5', 'effort': 'medium'}
-    assert 'Original grouping hypothesis' not in check.args[0]
+    assert 'Original grouping hypothesis' in check.args[0]
     assert all(p.title in check.args[0] for p in papers)
     recovered = json.loads(audit_path.read_text())['candidates'][0]
     assert not recovered['failed'] and recovered['qualified'] == [good] and recovered['comparisons'][0]['items'] == ids

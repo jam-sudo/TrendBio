@@ -177,9 +177,14 @@ class LLM:
     def review_cohesion(self, prompt, items, key, *, model='claude-haiku-5-5', effort='low'):
         self.fallback_reasons.pop(key, None)
         result = self._cohesion_partition(prompt, items, key, model, effort)
-        if result is None and self.fallback_reasons.get(key) == 'validation:cohesion-evidence':
-            correction = ('A passage could not be located in its original source. Copy a continuous passage of at least '
-                          '12 characters exactly. The complete original title is acceptable when it supports the group.')
+        reason = self.fallback_reasons.get(key)
+        if result is None and reason in {'validation:cohesion-evidence', 'validation:cohesion-membership'}:
+            if reason == 'validation:cohesion-membership':
+                numbers = ', '.join(str(i) for i in range(1, len(items) + 1))
+                correction = f'The partition omitted or repeated a paper. Use each of these numbers exactly once: {numbers}.'
+            else:
+                correction = ('A passage could not be located in its original source. Copy a continuous passage of at least '
+                              '12 characters exactly. The complete original title is acceptable when it supports the group.')
             result = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort)
         if result is not None:
             self.fallback_reasons.pop(key, None)

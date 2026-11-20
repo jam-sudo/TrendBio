@@ -166,7 +166,7 @@ def is_degraded(notes: list[str], source_status: dict[str, str], *,
 
 def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool = False,
             dry_run: bool = False, skip_collect: bool = False,
-            only_missing_synthesis: bool = False) -> Day:
+            only_missing_synthesis: bool = False, replay: bool = False) -> Day:
     if domain != store.domain:
         raise ValueError('domain does not match store')
     attention_store = store
@@ -177,7 +177,14 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         start = day - timedelta(days=deps.cfg.window_days - 1)
         notes = []
         source_status = initial_source_status(deps.adapters)
-        if skip_collect:
+        if replay:
+            if previous is None or any(saved.date > day for saved in store.all_days()):
+                raise ValueError('replay requires the latest saved edition for this field')
+            backfill, skip_collect = previous.run.backfilled, True
+            source_status = previous.run.source_status.copy()
+            notes.extend(note for note in previous.run.notes if not note.startswith(('cohesion-review-failed:', 'synthesis-fallback:')))
+            new_items = []
+        elif skip_collect:
             checkpoint = store.root / domain / '.backfill_state.json'
             if checkpoint.exists():
                 state = json.loads(checkpoint.read_text(encoding='utf-8'))

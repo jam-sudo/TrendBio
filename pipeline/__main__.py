@@ -108,11 +108,12 @@ def _dependencies(domain: str, data_root: Path, *, synthesis_only: bool = False)
 def run(domain: Domain = 'computational',
         run_date: Annotated[datetime | None, typer.Option('--date', formats=['%Y-%m-%d'])] = None,
         dry_run: Annotated[bool, typer.Option(help='Keep staged output and print usage and cost.')] = False,
+        replay: Annotated[bool, typer.Option(help='Rerank the latest saved edition from its stored papers and source statuses.')] = False,
         data_root: DataRoot = Path('data')):
     """Run collection, enrichment, clustering, ranking, and synthesis for one UTC day."""
     day = (run_date or datetime.now(timezone.utc)).date()
     with _dependencies(domain, data_root) as deps:
-        run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run)
+        run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run, replay=replay)
 
 
 @app.command('trial-windows')

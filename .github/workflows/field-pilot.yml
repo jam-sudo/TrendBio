@@ -14,7 +14,7 @@ on:
         required: true
       action:
         type: choice
-        options: [rank, audit, repair-summaries, rerank]
+        options: [rank, audit, repair-summaries, rerank, replay]
         default: rank
       prior_run:
         description: Prior pilot ID. Rank can start from the previous UTC day. Other actions use the requested day.
@@ -72,7 +72,7 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
       - uses: actions/cache@v4
-        if: ${{ inputs.action == 'rank' || inputs.action == 'rerank' }}
+        if: ${{ inputs.action == 'rank' || inputs.action == 'rerank' || inputs.action == 'replay' }}
         with:
           path: ~/.cache/huggingface
           key: ${{ runner.os }}-specter2
@@ -84,6 +84,8 @@ jobs:
         run: |
           if [[ "$PILOT_ACTION" == repair-summaries ]]; then
             python -m pipeline repair-synthesis --domain "$DOMAIN" --data-root science-pilot --from "$RUN_DATE" --to "$RUN_DATE" --retry-fallbacks
+          elif [[ "$PILOT_ACTION" == replay ]]; then
+            python -m pipeline run --domain "$DOMAIN" --data-root science-pilot --date "$RUN_DATE" --replay
           else
             python -m pipeline run --domain "$DOMAIN" --data-root science-pilot --date "$RUN_DATE"
           fi

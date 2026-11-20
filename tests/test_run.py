@@ -123,6 +123,24 @@ def test_retracted_clinical_study_cannot_reenter_a_restored_daily_window(ctx, mo
     assert ctx.store.get_item('med:0').metadata['screening_status'] == 'retracted'
 
 
+def test_replay_uses_only_the_latest_saved_snapshot(ctx, monkeypatch):
+    with pytest.raises(ValueError, match='latest saved edition'):
+        run_day('computational', TODAY, ctx.store, ctx.deps, replay=True)
+    original = run_day('computational', TODAY, ctx.store, ctx.deps)
+    original.run.source_status['pubmed'] = 'partial'
+    original.run.notes.extend(['book-date-source-unavailable:test:id', 'cohesion-review-failed:stale'])
+    ctx.store.put_day(original)
+    monkeypatch.setattr(FakeAdapter, 'fetch', lambda *args: pytest.fail('replay fetched new papers'))
+    monkeypatch.setattr('pipeline.run.collect_attention', lambda *args, **kwargs: pytest.fail('replay refreshed attention'))
+    replay = run_day('computational', TODAY, ctx.store, ctx.deps, replay=True)
+    assert replay.ranked == original.ranked and replay.run.source_status == original.run.source_status
+    assert replay.run.status == 'degraded' and replay.run.backfilled == original.run.backfilled
+    assert 'book-date-source-unavailable:test:id' in replay.run.notes and 'cohesion-review-failed:stale' not in replay.run.notes
+    ctx.store.put_day(original.model_copy(update={'date': TODAY + timedelta(days=1)}))
+    with pytest.raises(ValueError, match='latest saved edition'):
+        run_day('computational', TODAY, ctx.store, ctx.deps, replay=True)
+
+
 def test_run_day_writes_day_topics_items(ctx):
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
     assert ctx.store.get_day(TODAY) == result
