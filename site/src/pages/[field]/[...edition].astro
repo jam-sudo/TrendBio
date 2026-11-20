@@ -43,12 +43,13 @@ const rows = (day?.ranked ?? []).map(row => {
   const topic = loadTopic(field, row.slug);
   const entry = topic?.history.find(entry => entry.date === day?.date);
   const papers = loadItems(field, entry?.item_ids ?? []);
-  const synthesis = day?.run.notes.includes(`synthesis-fallback:${row.slug}`) ? null
+  const singleSource = day?.run.notes.includes(`synthesis-fallback:${row.slug}`);
+  const synthesis = singleSource ? null
     : row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
   const correction = corrections.has(`${row.slug}.md`)
     ? loadCorrection(`${field}/${day!.date}/${row.slug}`, [row.headline, row.summary, synthesis ?? ""], entry?.item_ids ?? [])
     : null;
-  return { row, papers, synthesis, correction };
+  return { row, papers, synthesis, correction, singleSource };
 });
 ---
 
@@ -78,10 +79,11 @@ const rows = (day?.ranked ?? []).map(row => {
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
       {rows.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
       <ol class="rankings">
-        {rows.map(({ row, synthesis, papers, correction }) => <li value={row.rank} id={row.slug}>
+        {rows.map(({ row, synthesis, papers, correction, singleSource }) => <li value={row.rank} id={row.slug}>
           <p class="category">{categories.get(row.category) ?? row.category}</p>
           <h3>{row.headline}</h3>
           <p>{row.summary}</p>
+          {singleSource && <p><small>This headline and summary describe one supporting work.</small></p>}
           {correction && <aside class="correction" role="note"><strong>Editorial correction</strong><div set:html={correction} /></aside>}
           {papers.length > 0 && <details>
             <summary>{papers.length} supporting {humanities ? (papers.length === 1 ? "work" : "works") : (papers.length === 1 ? "paper" : "papers")}</summary>
