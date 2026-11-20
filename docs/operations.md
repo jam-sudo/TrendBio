@@ -16,7 +16,7 @@ The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
 ### Website and local preview
 
-The site, Atom feeds and downloadable editions use English. Cloudflare Pages redirects former `/ko/` links to the corresponding English paths. The website build uses Node 22.
+The site, Atom feeds and downloadable editions use English. Each public field has a daily Top 5 feed and a feed for each category. The footer links to the current field’s Top 5. The About page lists the category subscriptions. Cloudflare Pages redirects former `/ko/` links to the corresponding English paths. The website build uses Node 22. [CompBio feed](https://trendbio.dev/feed.xml) · [All Biology feed](https://trendbio.dev/biology/feed.xml) · [Physics feed](https://trendbio.dev/physics/feed.xml)
 
 ```sh
 cd site

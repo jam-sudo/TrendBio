@@ -1,10 +1,11 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { afterAll, beforeAll, expect, it, vi } from "vitest";
 import { chromium, type Browser, type Page } from "playwright";
 import { createContext } from "astro/middleware";
 import { atomFeed } from "../src/lib/feeds";
 import { industryItems, loadDays, loadTaxonomy } from "../src/lib/data";
+import { datedTopic, fieldLabel, publicEditions } from "../src/lib/editions";
 import sample from "./fixtures/feed.json";
 
 let browser: Browser, page: Page;
@@ -15,6 +16,8 @@ const parse = (xml: string) => page.evaluate(xml => {
   return { error: doc.querySelector("parsererror")?.textContent,
     language: doc.documentElement.getAttribute("xml:lang"),
     self: doc.querySelector('feed > link[rel="self"]')?.getAttribute("href"),
+    title: doc.querySelector("feed > title")?.textContent,
+    home: doc.querySelector("feed > link:not([rel])")?.getAttribute("href"),
     updated: doc.querySelector("feed > updated")?.textContent,
     entries: [...doc.querySelectorAll("entry")].map(entry => ({
       id: entry.querySelector("id")?.textContent, title: entry.querySelector("title")?.textContent,
@@ -51,6 +54,34 @@ it("builds parseable Atom feeds with stable IDs, category filtering and absolute
   expect(readFileSync("dist/feed.xml", "utf8")).toContain("Tools: atlas, BetaTool 2.0, DeltaTool.");
   expect(readFileSync("dist/sitemap.xml", "utf8")).not.toContain("/feed");
   expect(readFileSync("dist/index.html", "utf8")).toContain('type="application/atom+xml"');
+});
+
+it("publishes field and category feeds with dated evidence links, including empty editions", async () => {
+  const site = new URL("https://trendbio.dev");
+  for (const field of publicEditions) {
+    const days = loadDays(field).slice(0, 30);
+    for (const category of [undefined, ...loadTaxonomy(field)]) {
+      const path = `/${field}/feed${category ? "/" + category.slug : ""}.xml`;
+      const feed = await parse(readFileSync("dist" + path, "utf8"));
+      const expected = days.flatMap(day => day.ranked
+        .filter(row => category ? row.category === category.slug : row.rank <= 5)
+        .map(row => ({ day, row }))).slice(0, category ? 100 : 150);
+      expect(feed.error).toBeUndefined();
+      expect(feed.language).toBe("en");
+      expect(feed.self).toBe(new URL(path, site).href);
+      expect(feed.home).toBe(new URL(`/${field}/`, site).href);
+      expect(feed.title).toBe(`TrendBio — ${fieldLabel(field)} — ${category?.label ?? "Top 5"}`);
+      expect(feed.entries).toEqual(expected.map(({ day, row }) => ({
+        id: `tag:trendbio.dev,${day.date}:${field}/${row.slug}`, title: row.headline, summary: row.summary,
+        link: new URL(datedTopic(field, day.date, row.slug), site).href, updated: day.run.finished, author: undefined,
+      })));
+      expect(readFileSync("dist/about/index.html", "utf8")).toContain(`href="${path}"`);
+    }
+    await page.setContent(readFileSync(`dist/${field}/index.html`, "utf8"));
+    expect(await page.locator('link[type="application/atom+xml"]').getAttribute("href")).toBe(`/${field}/feed.xml`);
+    expect(await page.locator('footer a[href$="feed.xml"]').getAttribute("href")).toBe(`/${field}/feed.xml`);
+  }
+  expect(existsSync("dist/earth-environment/feed.xml")).toBe(false);
 });
 
 it("uses relevant company posts from the inclusive last 30 days, newest first, capped at 100", async () => {

@@ -7,7 +7,7 @@ import SponsorColumns from "../components/SponsorColumns.astro";
 import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
 
-import { editionInfo, editions, publicEditions, type Edition } from "../lib/editions";
+import { editionInfo, editions, fieldLabel, publicEditions, type Edition } from "../lib/editions";
 
 interface Props {
   title?: string;
@@ -25,6 +25,8 @@ const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
 const biology = !edition || edition === "biology";
 const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
+const feed = !edition ? "/feed.xml" : publicEditions.includes(edition) ? `/${edition}/feed.xml` : undefined;
+const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
 ---
 
 <!doctype html>
@@ -39,7 +41,7 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
     <meta name="description" content={summary} />
     {Astro.props.noindex && <meta name="robots" content="noindex" />}
-    {!edition && <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />}
+    {feed && <link rel="alternate" type="application/atom+xml" title={feedLabel} href={feed} />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={summary} />
@@ -108,7 +110,7 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
     </div>
     <footer>
       <p>Auto-curated from {Astro.props.editionSources ?? (edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources")}. Summaries are machine-generated.</p>
-      {!edition && <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>}
+      {feed && <p>{!edition && <><a href="/about">How this works</a> · </>}<a href={feed}>{edition ? feedLabel : "RSS"}</a></p>}
       {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>
   </body>
