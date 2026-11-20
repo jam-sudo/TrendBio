@@ -108,8 +108,11 @@ def test_registered_updates_refresh_stored_evidence_and_preserve_its_history(tmp
         assert restored.relevant and restored.summary is None and 'screening_status' not in restored.metadata
 
 
-@pytest.mark.parametrize('publisher', ['plos', 'pensoft'])
-def test_verified_journals_match_publisher_date_doi_issn_and_genre_before_using_cc0(publisher):
+@pytest.mark.parametrize(('publisher', 'article_type'), [
+    ('plos', 'Research Article'), ('pensoft', 'Short Communication'), ('frontiers', 'Original Research'),
+    ('frontiers', 'Brief Research Report'),
+])
+def test_verified_journals_match_publisher_date_doi_issn_and_genre_before_using_cc0(publisher, article_type):
     day = date(2026, 11, 4)
     stamp = {'date-parts': [[2026, 11, 4]]}
     cc0 = 'https://creativecommons.org/publicdomain/zero/1.0/'
@@ -128,9 +131,9 @@ def test_verified_journals_match_publisher_date_doi_issn_and_genre_before_using_
             return httpx.Response(200, json={'message': {'items': rows, 'total-results': len(rows)}})
         case = (req.url.params.get('id') or req.url.path).split('/')[-1]
         visited.append(case)
-        genre = 'Essay' if case == 'essay' else ('Research Article' if publisher == 'plos' else 'Short Communication')
+        genre = 'Essay' if case == 'essay' else article_type
         day_field = 'citation_date' if publisher == 'plos' else 'citation_publication_date'
-        genre_field = 'citation_article_type' if publisher == 'plos' else 'dc.type'
+        genre_field = 'dc.type' if publisher == 'pensoft' else 'citation_article_type'
         native_date = 'Nov 4, 2026' if publisher == 'plos' else '2026/11/04'
         fields = {genre_field: genre, day_field: '2026/11/01' if case == 'other-day' else native_date,
                   'citation_issn': 'other' if case == 'other-journal' else '1234-5678',
@@ -142,9 +145,45 @@ def test_verified_journals_match_publisher_date_doi_issn_and_genre_before_using_
         paper, = CrossrefAdapter({'crossref': config}).fetch(day, day, client)
         assert not CrossrefAdapter({'crossref': {'journals': ['1234-5678']}}).fetch(day, day, client)
     assert paper.doi == '10.1234/research' and paper.metadata['license'] == cc0
-    assert paper.metadata['article_type'] == ('Research Article' if publisher == 'plos' else 'Short Communication')
+    assert paper.metadata['article_type'] == article_type
     assert paper.metadata['article_type_url'].startswith('https://example.org/article/')
     assert visited == cases[:5]
+
+
+def test_hess_checks_original_contribution_identity_publication_day_and_licence():
+    day = date(2026, 11, 4)
+    stamp = {'date-parts': [[2026, 11, 4]]}
+    base = 'https://hess.copernicus.org/articles/'
+    licence = 'https://creativecommons.org/licenses/by/4.0/'
+    cases = ('research', 'methods', 'review', 'other-doi', 'other-issn', 'other-date', 'other-license', 'unavailable')
+    rows = [{'DOI': '10.5194/' + case, 'published': stamp, 'title': [case], 'abstract': 'River observations.',
+             'license': [{'content-version': 'vor', 'start': stamp, 'URL': licence}],
+             'resource': {'primary': {'URL': f'{base}30/{i}/2026/'}}} for i, case in enumerate(cases)]
+
+    def reply(req):
+        if req.url.host == 'api.crossref.org':
+            return httpx.Response(200, json={'message': {'items': rows, 'total-results': len(rows)}})
+        case = req.url.path.split('/')[-1].removesuffix('.xml')
+        if case == 'unavailable':
+            return httpx.Response(200, text='<invalid')
+        kind = {'methods': 'methods-article', 'review': 'review-article'}.get(case, 'research-article')
+        doi = '10.5194/' + ('unrelated' if case == 'other-doi' else case)
+        issn = 'unknown' if case == 'other-issn' else '1607-7938'
+        rights = 'closed' if case == 'other-license' else licence
+        return httpx.Response(200, text=f'''<article article-type="{kind}" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <front><journal-meta><issn>{issn}</issn></journal-meta><article-meta><article-id pub-id-type="doi">{doi}</article-id>
+          <pub-date><day>{3 if case == 'other-date' else 4}</day><month>November</month><year>2026</year></pub-date>
+          <permissions><license><license-p><ext-link xlink:href="{rights}"/></license-p></license></permissions>
+          </article-meta></front></article>''')
+
+    adapter = CrossrefAdapter({'crossref': {'journals': ['1607-7938'], 'article_type_pages': {'1607-7938': base}}})
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        collected = adapter.fetch(day, day, client)
+    assert [(row.doi, row.metadata['article_type']) for row in collected] == [
+        ('10.5194/research', 'research-article'), ('10.5194/methods', 'methods-article')]
+    assert collected[0].metadata['article_type_url'] == base + '30/0/2026/research.xml'
+    assert adapter.decisions == {'10.5194/unavailable': 'article-type-source-unavailable'}
+    assert intake_status(adapter) == 'partial'
 
 
 @pytest.mark.parametrize('page_doi', ['10.1234/test', '10.1234/other'])

@@ -17,7 +17,7 @@ class AllPaperSourcesFailed(Exception):
 
 
 PAPER_SOURCES = {'biorxiv', 'arxiv', 'pubmed', 'crossref', 'drops', 'oai', 'europepmc', 'worldbank', 'thoth', 'openedition'}
-PARTIAL_REASONS = {'book-date-source-unavailable', 'abstract-source-unavailable'}
+PARTIAL_REASONS = {'book-date-source-unavailable', 'abstract-source-unavailable', 'article-type-source-unavailable'}
 
 
 def initial_source_status(adapters):

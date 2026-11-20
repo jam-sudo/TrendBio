@@ -5,6 +5,7 @@ from html.parser import HTMLParser
 import logging
 import re
 from urllib.parse import quote
+from xml.etree import ElementTree as ET
 
 import httpx
 
@@ -112,13 +113,38 @@ class CitationHead(HTMLParser):
                 self.fields.setdefault(meta['name'].lower(), []).append(meta['content'].strip())
 
 
-def _publisher_article_type(client, base, work, doi, issn, day):
+def _copernicus_article_type(client, url, doi, issn, day, licence):
+    response = request(client, url.rstrip('/') + '/' + quote(doi.rsplit('/', 1)[-1], safe='') + '.xml')
+    if response.url.host != httpx.URL(url).host:
+        return None
+    root = ET.fromstring(response.content)
+    article = root.find('front/article-meta')
+    kind = root.get('article-type')
+    if article is None or kind not in {'research-article', 'methods-article'}:
+        return None
+    registered = article.findall("article-id[@pub-id-type='doi']")
+    published = article.findall('pub-date')
+    licenses = article.findall('permissions/license/license-p/ext-link')
+    href = '{http://www.w3.org/1999/xlink}href'
+    if (issn not in [e.text for e in root.findall('front/journal-meta/issn')]
+            or [(e.text or '').strip().lower() for e in registered] != [doi]
+            or len(published) != 1 or published[0].findtext('year') != str(day.year)
+            or published[0].findtext('month') != day.strftime('%B')
+            or (published[0].findtext('day') or '').zfill(2) != day.strftime('%d')
+            or licence.rstrip('/') not in {e.get(href, '').rstrip('/') for e in licenses}):
+        return None
+    return {'article_type': kind, 'article_type_url': str(response.url)}
+
+
+def _publisher_article_type(client, base, work, doi, issn, day, licence):
     if '{doi}' in base:
         url = base.format(doi=quote(doi, safe='/'))
     else:
         url = work.get('resource', {}).get('primary', {}).get('URL', '')
         if not url.startswith(base):
             return None
+        if httpx.URL(base).host == 'hess.copernicus.org':
+            return _copernicus_article_type(client, url, doi, issn, day, licence)
     response = request(client, url)
     head = CitationHead()
     head.feed(response.text)
@@ -131,7 +157,8 @@ def _publisher_article_type(client, base, work, doi, issn, day):
             or len(dates) != 1 or dates[0] not in allowed_dates):
         return None
     types = fields.get('dc.type') or fields.get('citation_article_type', [])
-    if len(types) == 1 and types[0] in {'Research Article', 'Short Communication', 'Data Paper'}:
+    if len(types) == 1 and types[0] in {'Research Article', 'Short Communication', 'Data Paper',
+                                       'Original Research', 'Brief Research Report'}:
         return {'article_type': types[0], 'article_type_url': str(response.url)}
     return None
 
@@ -316,7 +343,12 @@ class CrossrefAdapter:
                 if work.get('volume') and work.get('issue'):
                     metadata.update(volume=work['volume'], issue=work['issue'])
                 if type_page:
-                    genre = _publisher_article_type(client, type_page, work, doi, issn, day)
+                    try:
+                        genre = _publisher_article_type(client, type_page, work, doi, issn, day, licence)
+                    except (httpx.HTTPError, ET.ParseError) as exc:
+                        self.decisions[doi] = 'article-type-source-unavailable'
+                        logging.getLogger(__name__).warning('Publisher type lookup failed for %s (%s)', doi, type(exc).__name__)
+                        continue
                     if genre is None:
                         continue
                     metadata.update(genre)
