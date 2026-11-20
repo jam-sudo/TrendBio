@@ -204,6 +204,12 @@ The new journals contributed 30 of 206 papers across the four weeks. Eight abstr
 
 Of 40 sampled first-version ChemRxiv DOIs, OpenAlex labelled the exact submitted version CC BY in 30, CC BY-NC in two and CC BY-NC-ND in eight. Crossref supplied zero license URLs and Europe PMC returned zero exact records. The four publisher landing pages checked returned HTTP 403, leaving first-party confirmation open. The trial ledger added $0.1284 including rechecks. The incremental November 5 run collected nine new records and added $0.0031. Chemistry remains available on demand. [License checks, edition costs and source queries](expansion-measurements/2026-11-20/chemistry-analytical-coverage.json) · [English reading copies](expansion-measurements/2026-11-20/reading-copies.md)
 
+### Computing conference source comparison
+
+Reserve the week ending July 8, 2026 for the ECRTS real-time systems proceedings and the week ending November 11 for the IHM human–computer interaction proceedings. Generate both with the existing Computing sources, then rerun the same dated archives with the additional sources. Compare them with the previously sampled November 18 week, outside both publication windows. Record any changes in the original papers or embeddings before attributing differences to a conference. Compare the proceedings with the organizers’ program, and distinguish print, online publication, repository release and event dates. Check the publisher’s article license and the rights on the abstract used in the reader.
+
+For each date, follow the added papers through collection, field screening, group review and the English ranking. Read every selected group containing a new proceedings paper and inspect every rejected candidate containing at least two added papers. Check the paper’s research question, measured outcome, study participants or workload, original language and date. Record incremental model charges and unresolved source or model calls. The service-wide budget and the editorial publication criteria continue to apply.
+
 ### Social science field trial
 
 From October 22 through November 18, 623 of 719 papers passed the relevance screen. The six added branches contributed 395 papers, including 250 from *Frontiers in Education*. The same papers can be classified differently by their research question. This table follows the source journal through each stage. [Collection and assigned-category counts](expansion-measurements/2026-11-20/social-science-coverage.json)
