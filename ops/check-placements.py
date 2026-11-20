@@ -20,7 +20,8 @@ def main(protocol_path: Path, output: Path) -> None:
     protocol = json.loads(protocol_path.read_text())
     domain = protocol['domain']
     day = date.fromisoformat(protocol['date'])
-    cases = [(group, case) for group in ('cases', 'holdouts', 'cross_field') for case in protocol.get(group, [])]
+    cases = [(group, case) for group in ('cases', 'holdouts', 'cross_field', 'final_holdouts')
+             for case in protocol.get(group, [])]
     ids = [case['id'] for _, case in cases]
     if not ids or len(set(ids)) != len(ids):
         raise ValueError('The review requires a nonempty sample of distinct papers')
