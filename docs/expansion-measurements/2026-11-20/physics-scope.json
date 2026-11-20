@@ -1,0 +1,3011 @@
+{
+  "captured_utc": "2026-11-20",
+  "dates": "Four disjoint UTC weeks from 2026-10-22 through 2026-11-18. Retrospective first-submission dates; text and category versions are those supplied at retrieval.",
+  "archives": {
+    "quant-ph": [
+      "quantum"
+    ],
+    "physics.optics": [
+      "optics"
+    ],
+    "cond-mat.mes-hall": [
+      "condensed-matter"
+    ],
+    "astro-ph.CO": [
+      "cosmology"
+    ],
+    "astro-ph.SR": [
+      "stellar"
+    ],
+    "astro-ph.GA": [
+      "galactic"
+    ],
+    "gr-qc": [
+      "gravitation"
+    ],
+    "hep-ex": [
+      "particle"
+    ],
+    "hep-lat": [
+      "particle"
+    ],
+    "hep-ph": [
+      "particle"
+    ],
+    "hep-th": [
+      "particle"
+    ],
+    "nucl-ex": [
+      "nuclear"
+    ],
+    "nucl-th": [
+      "nuclear"
+    ],
+    "physics.flu-dyn": [
+      "fluids"
+    ],
+    "physics.plasm-ph": [
+      "plasmas"
+    ],
+    "cond-mat.stat-mech": [
+      "statistical"
+    ]
+  },
+  "taxonomy": "https://arxiv.org/category_taxonomy",
+  "api_documentation": "https://info.arxiv.org/help/api/user-manual.html",
+  "intake": "Fetch the union of all 16 archive tags, including cross-listings. Each terminal arXiv request reconciles versionless unique IDs with totalResults. Split date ranges above 2,000, and retry smaller date ranges after HTTP 429. Every admitted record has a title, abstract and first-submission date inside the window. A paper can be counted by more than one archive but only once per arm.",
+  "arm_definitions": {
+    "four": "The four public archive tags and four primary-category labels.",
+    "six": "Also admit astro-ph.SR and astro-ph.GA and use their two labels.",
+    "sixteen": "Sixteen admitted archives and twelve named primary labels.",
+    "sixteen_with_four_labels": "Same works and clusters as sixteen, retaining the four original primary labels."
+  },
+  "controlled_rank": "For each week sort unique arXiv IDs, embed each title + newline + abstract once with allenai/specter2_base, then subset the vectors and run pipeline.cluster.cluster_items. Use complete linkage, cosine distance 0.10 and minimum group size three. Each arm uses the source primary label or other-physics for a cross-listing with an outside primary. Use the majority category with alphabetical tie-breaks and the production keyword_slug, signals_for, score_topics and rank functions with an empty history, category floor one, cap eight and top 40. This isolates source and category sensitivity before editorial selection. The live service uses learned relevance/categories, first-seen dates and topic history. The broader hosted pilot screens cluster cohesion.",
+  "topic_comparison": "Exact topic matches require identical supporting ID sets in the top ten lists. Partial matching considers descending Jaccard, then rank, accepting a one-to-one match at intersection/union of at least 0.5. Counts for new/cross-listed archives overlap.",
+  "windows": [
+    {
+      "through": "2026-10-28",
+      "input_content_sha256": "f011f529b1cc368d9b73d30cba3fee2a1ad154a0240277369e610a8a6d6c9cdb",
+      "by_archive": {
+        "quant-ph": {
+          "listed": 396,
+          "primary": 307,
+          "also_in_public": 396
+        },
+        "physics.optics": {
+          "listed": 115,
+          "primary": 79,
+          "also_in_public": 115
+        },
+        "cond-mat.mes-hall": {
+          "listed": 119,
+          "primary": 73,
+          "also_in_public": 119
+        },
+        "astro-ph.CO": {
+          "listed": 115,
+          "primary": 61,
+          "also_in_public": 115
+        },
+        "astro-ph.SR": {
+          "listed": 122,
+          "primary": 73,
+          "also_in_public": 0
+        },
+        "astro-ph.GA": {
+          "listed": 183,
+          "primary": 119,
+          "also_in_public": 31
+        },
+        "gr-qc": {
+          "listed": 201,
+          "primary": 115,
+          "also_in_public": 44
+        },
+        "hep-ex": {
+          "listed": 87,
+          "primary": 26,
+          "also_in_public": 3
+        },
+        "hep-lat": {
+          "listed": 36,
+          "primary": 18,
+          "also_in_public": 4
+        },
+        "hep-ph": {
+          "listed": 202,
+          "primary": 146,
+          "also_in_public": 37
+        },
+        "hep-th": {
+          "listed": 231,
+          "primary": 137,
+          "also_in_public": 41
+        },
+        "nucl-ex": {
+          "listed": 42,
+          "primary": 15,
+          "also_in_public": 1
+        },
+        "nucl-th": {
+          "listed": 73,
+          "primary": 35,
+          "also_in_public": 5
+        },
+        "physics.flu-dyn": {
+          "listed": 92,
+          "primary": 62,
+          "also_in_public": 4
+        },
+        "physics.plasm-ph": {
+          "listed": 59,
+          "primary": 49,
+          "also_in_public": 3
+        },
+        "cond-mat.stat-mech": {
+          "listed": 104,
+          "primary": 43,
+          "also_in_public": 29
+        }
+      },
+      "arms": {
+        "four": {
+          "records": 703,
+          "candidates": 83,
+          "candidate_categories": {
+            "cosmology": 11,
+            "quantum": 42,
+            "optics": 8,
+            "other-physics": 14,
+            "condensed-matter": 8
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "cosmology": 8,
+            "quantum": 8,
+            "optics": 8,
+            "other-physics": 8,
+            "condensed-matter": 8
+          }
+        },
+        "six": {
+          "records": 942,
+          "candidates": 119,
+          "candidate_categories": {
+            "cosmology": 8,
+            "quantum": 42,
+            "galactic": 23,
+            "stellar": 12,
+            "optics": 7,
+            "other-physics": 19,
+            "condensed-matter": 8
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "cosmology": 5,
+            "quantum": 8,
+            "galactic": 8,
+            "stellar": 5,
+            "optics": 4,
+            "other-physics": 8,
+            "condensed-matter": 2
+          }
+        },
+        "sixteen": {
+          "records": 1639,
+          "candidates": 205,
+          "candidate_categories": {
+            "quantum": 40,
+            "cosmology": 13,
+            "galactic": 22,
+            "stellar": 13,
+            "particle": 38,
+            "gravitation": 15,
+            "optics": 7,
+            "other-physics": 25,
+            "fluids": 10,
+            "statistical": 3,
+            "nuclear": 7,
+            "condensed-matter": 8,
+            "plasmas": 4
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "quantum": 8,
+            "cosmology": 6,
+            "galactic": 6,
+            "stellar": 2,
+            "particle": 8,
+            "gravitation": 2,
+            "optics": 1,
+            "other-physics": 1,
+            "fluids": 2,
+            "statistical": 1,
+            "nuclear": 1,
+            "condensed-matter": 1,
+            "plasmas": 1
+          }
+        },
+        "sixteen_with_four_labels": {
+          "records": 1639,
+          "candidates": 205,
+          "candidate_categories": {
+            "quantum": 39,
+            "cosmology": 12,
+            "other-physics": 139,
+            "optics": 7,
+            "condensed-matter": 8
+          },
+          "ranked": 39,
+          "ranked_categories": {
+            "quantum": 8,
+            "cosmology": 8,
+            "other-physics": 8,
+            "optics": 7,
+            "condensed-matter": 8
+          }
+        }
+      },
+      "top10_membership": {
+        "four--six": {
+          "exact_topics": 3,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 2,
+              "to_rank": 2,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 3,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 7,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 41,
+          "from_papers": 75,
+          "to_papers": 81
+        },
+        "four--sixteen": {
+          "exact_topics": 3,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 2,
+              "to_rank": 1,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 2,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 6,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 39,
+          "from_papers": 75,
+          "to_papers": 79
+        },
+        "four--sixteen_with_four_labels": {
+          "exact_topics": 3,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 2,
+              "to_rank": 1,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 2,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 6,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 39,
+          "from_papers": 75,
+          "to_papers": 79
+        },
+        "sixteen_with_four_labels--sixteen": {
+          "exact_topics": 10,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 1,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 2,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 3,
+              "shared": 9,
+              "union": 9
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 4,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 5,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 6,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 7,
+              "to_rank": 7,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 8,
+              "to_rank": 8,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 9,
+              "to_rank": 9,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 10,
+              "to_rank": 10,
+              "shared": 6,
+              "union": 6
+            }
+          ],
+          "shared_distinct_papers": 79,
+          "from_papers": 79,
+          "to_papers": 79
+        }
+      },
+      "top10_source_papers": {
+        "four": [
+          {
+            "rank": 1,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.31181",
+              "arxiv:2610.31660",
+              "arxiv:2610.31767",
+              "arxiv:2610.32008",
+              "arxiv:2610.32388",
+              "arxiv:2610.36051",
+              "arxiv:2610.37604",
+              "arxiv:2610.37664",
+              "arxiv:2610.37752",
+              "arxiv:2610.37782",
+              "arxiv:2610.37971",
+              "arxiv:2610.38083"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.31515",
+              "arxiv:2610.31885",
+              "arxiv:2610.32595",
+              "arxiv:2610.32908",
+              "arxiv:2610.33246",
+              "arxiv:2610.34003",
+              "arxiv:2610.35665",
+              "arxiv:2610.36597",
+              "arxiv:2610.36965",
+              "arxiv:2610.37772"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.32841",
+              "arxiv:2610.32946",
+              "arxiv:2610.33144",
+              "arxiv:2610.33532",
+              "arxiv:2610.33800",
+              "arxiv:2610.35370",
+              "arxiv:2610.35824",
+              "arxiv:2610.36070",
+              "arxiv:2610.38322",
+              "arxiv:2610.38344"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.31877",
+              "arxiv:2610.32267",
+              "arxiv:2610.32428",
+              "arxiv:2610.32838",
+              "arxiv:2610.33347",
+              "arxiv:2610.35735",
+              "arxiv:2610.38817"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.31044",
+              "arxiv:2610.31081",
+              "arxiv:2610.31761",
+              "arxiv:2610.32436",
+              "arxiv:2610.35503",
+              "arxiv:2610.36087",
+              "arxiv:2610.38733"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.31168",
+              "arxiv:2610.31800",
+              "arxiv:2610.34042",
+              "arxiv:2610.35057",
+              "arxiv:2610.36039",
+              "arxiv:2610.36531"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "optics",
+            "papers": [
+              "arxiv:2610.31643",
+              "arxiv:2610.34195",
+              "arxiv:2610.35646",
+              "arxiv:2610.35672",
+              "arxiv:2610.36182",
+              "arxiv:2610.38156"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.30747",
+              "arxiv:2610.31554",
+              "arxiv:2610.33139",
+              "arxiv:2610.37839",
+              "arxiv:2610.37840",
+              "arxiv:2610.37847"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.31230",
+              "arxiv:2610.32199",
+              "arxiv:2610.35445",
+              "arxiv:2610.35555",
+              "arxiv:2610.36504",
+              "arxiv:2610.36661"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2610.31792",
+              "arxiv:2610.34470",
+              "arxiv:2610.38059",
+              "arxiv:2610.38533",
+              "arxiv:2610.38741"
+            ]
+          }
+        ],
+        "sixteen": [
+          {
+            "rank": 1,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.31515",
+              "arxiv:2610.31885",
+              "arxiv:2610.32595",
+              "arxiv:2610.32908",
+              "arxiv:2610.33246",
+              "arxiv:2610.34003",
+              "arxiv:2610.35665",
+              "arxiv:2610.36597",
+              "arxiv:2610.36965",
+              "arxiv:2610.37772"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.32841",
+              "arxiv:2610.32946",
+              "arxiv:2610.33144",
+              "arxiv:2610.33532",
+              "arxiv:2610.33800",
+              "arxiv:2610.35370",
+              "arxiv:2610.35824",
+              "arxiv:2610.36070",
+              "arxiv:2610.38322",
+              "arxiv:2610.38344"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.31081",
+              "arxiv:2610.31660",
+              "arxiv:2610.32388",
+              "arxiv:2610.32436",
+              "arxiv:2610.37604",
+              "arxiv:2610.37646",
+              "arxiv:2610.37664",
+              "arxiv:2610.38733",
+              "arxiv:2610.38735"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2610.30673",
+              "arxiv:2610.32551",
+              "arxiv:2610.34049",
+              "arxiv:2610.35673",
+              "arxiv:2610.35713",
+              "arxiv:2610.36040",
+              "arxiv:2610.37363",
+              "arxiv:2610.38886"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "stellar",
+            "papers": [
+              "arxiv:2610.31006",
+              "arxiv:2610.31200",
+              "arxiv:2610.32406",
+              "arxiv:2610.34715",
+              "arxiv:2610.36209",
+              "arxiv:2610.36304",
+              "arxiv:2610.38264",
+              "arxiv:2610.38798"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.31877",
+              "arxiv:2610.32267",
+              "arxiv:2610.32428",
+              "arxiv:2610.32838",
+              "arxiv:2610.33347",
+              "arxiv:2610.35735",
+              "arxiv:2610.38817"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "particle",
+            "papers": [
+              "arxiv:2610.31291",
+              "arxiv:2610.34840",
+              "arxiv:2610.36529",
+              "arxiv:2610.36861",
+              "arxiv:2610.37106",
+              "arxiv:2610.38178",
+              "arxiv:2610.38217"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2610.32913",
+              "arxiv:2610.35366",
+              "arxiv:2610.36046",
+              "arxiv:2610.36246",
+              "arxiv:2610.36531",
+              "arxiv:2610.38083",
+              "arxiv:2610.38699"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "particle",
+            "papers": [
+              "arxiv:2610.31254",
+              "arxiv:2610.32084",
+              "arxiv:2610.32747",
+              "arxiv:2610.35619",
+              "arxiv:2610.35620",
+              "arxiv:2610.37744",
+              "arxiv:2610.38734"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.31044",
+              "arxiv:2610.33332",
+              "arxiv:2610.33729",
+              "arxiv:2610.34445",
+              "arxiv:2610.35503",
+              "arxiv:2610.36087"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "through": "2026-11-04",
+      "input_content_sha256": "aeb1b8082f7c31eee1b78ab5eafeee0588a6e94f47fd6e756a5dac82e1179ad7",
+      "by_archive": {
+        "quant-ph": {
+          "listed": 552,
+          "primary": 409,
+          "also_in_public": 552
+        },
+        "physics.optics": {
+          "listed": 148,
+          "primary": 102,
+          "also_in_public": 148
+        },
+        "cond-mat.mes-hall": {
+          "listed": 158,
+          "primary": 95,
+          "also_in_public": 158
+        },
+        "astro-ph.CO": {
+          "listed": 128,
+          "primary": 79,
+          "also_in_public": 128
+        },
+        "astro-ph.SR": {
+          "listed": 107,
+          "primary": 64,
+          "also_in_public": 1
+        },
+        "astro-ph.GA": {
+          "listed": 205,
+          "primary": 157,
+          "also_in_public": 30
+        },
+        "gr-qc": {
+          "listed": 259,
+          "primary": 163,
+          "also_in_public": 54
+        },
+        "hep-ex": {
+          "listed": 76,
+          "primary": 30,
+          "also_in_public": 8
+        },
+        "hep-lat": {
+          "listed": 38,
+          "primary": 15,
+          "also_in_public": 9
+        },
+        "hep-ph": {
+          "listed": 254,
+          "primary": 169,
+          "also_in_public": 38
+        },
+        "hep-th": {
+          "listed": 291,
+          "primary": 159,
+          "also_in_public": 53
+        },
+        "nucl-ex": {
+          "listed": 39,
+          "primary": 14,
+          "also_in_public": 1
+        },
+        "nucl-th": {
+          "listed": 85,
+          "primary": 44,
+          "also_in_public": 6
+        },
+        "physics.flu-dyn": {
+          "listed": 101,
+          "primary": 70,
+          "also_in_public": 2
+        },
+        "physics.plasm-ph": {
+          "listed": 56,
+          "primary": 35,
+          "also_in_public": 2
+        },
+        "cond-mat.stat-mech": {
+          "listed": 153,
+          "primary": 75,
+          "also_in_public": 35
+        }
+      },
+      "arms": {
+        "four": {
+          "records": 910,
+          "candidates": 115,
+          "candidate_categories": {
+            "quantum": 63,
+            "cosmology": 16,
+            "other-physics": 14,
+            "optics": 11,
+            "condensed-matter": 11
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "quantum": 8,
+            "cosmology": 8,
+            "other-physics": 8,
+            "optics": 8,
+            "condensed-matter": 8
+          }
+        },
+        "six": {
+          "records": 1166,
+          "candidates": 155,
+          "candidate_categories": {
+            "quantum": 62,
+            "cosmology": 17,
+            "galactic": 30,
+            "other-physics": 15,
+            "optics": 11,
+            "condensed-matter": 11,
+            "stellar": 9
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "quantum": 8,
+            "cosmology": 7,
+            "galactic": 8,
+            "other-physics": 5,
+            "optics": 3,
+            "condensed-matter": 4,
+            "stellar": 5
+          }
+        },
+        "sixteen": {
+          "records": 2019,
+          "candidates": 258,
+          "candidate_categories": {
+            "quantum": 62,
+            "galactic": 32,
+            "cosmology": 18,
+            "other-physics": 23,
+            "particle": 47,
+            "gravitation": 23,
+            "optics": 12,
+            "nuclear": 6,
+            "stellar": 11,
+            "condensed-matter": 11,
+            "statistical": 3,
+            "fluids": 7,
+            "plasmas": 3
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "quantum": 8,
+            "galactic": 5,
+            "cosmology": 6,
+            "other-physics": 5,
+            "particle": 5,
+            "gravitation": 3,
+            "optics": 1,
+            "nuclear": 1,
+            "stellar": 1,
+            "condensed-matter": 2,
+            "statistical": 1,
+            "fluids": 1,
+            "plasmas": 1
+          }
+        },
+        "sixteen_with_four_labels": {
+          "records": 2019,
+          "candidates": 258,
+          "candidate_categories": {
+            "quantum": 61,
+            "other-physics": 161,
+            "cosmology": 13,
+            "optics": 12,
+            "condensed-matter": 11
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "quantum": 8,
+            "other-physics": 8,
+            "cosmology": 8,
+            "optics": 8,
+            "condensed-matter": 8
+          }
+        }
+      },
+      "top10_membership": {
+        "four--six": {
+          "exact_topics": 9,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 1,
+              "shared": 11,
+              "union": 11
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 2,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 4,
+              "shared": 9,
+              "union": 9
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 6,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 5,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 7,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 7,
+              "to_rank": 8,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 8,
+              "to_rank": 9,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 9,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 74,
+          "from_papers": 80,
+          "to_papers": 83
+        },
+        "four--sixteen": {
+          "exact_topics": 3,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 1,
+              "shared": 11,
+              "union": 11
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 4,
+              "shared": 9,
+              "union": 10
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 7,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 40,
+          "from_papers": 80,
+          "to_papers": 84
+        },
+        "four--sixteen_with_four_labels": {
+          "exact_topics": 3,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 1,
+              "shared": 11,
+              "union": 11
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 4,
+              "shared": 9,
+              "union": 10
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 7,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 40,
+          "from_papers": 80,
+          "to_papers": 84
+        },
+        "sixteen_with_four_labels--sixteen": {
+          "exact_topics": 10,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 1,
+              "shared": 11,
+              "union": 11
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 2,
+              "shared": 9,
+              "union": 9
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 3,
+              "shared": 9,
+              "union": 9
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 4,
+              "shared": 9,
+              "union": 9
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 5,
+              "shared": 9,
+              "union": 9
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 6,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 7,
+              "to_rank": 7,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 8,
+              "to_rank": 8,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 9,
+              "to_rank": 9,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 10,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 84,
+          "from_papers": 84,
+          "to_papers": 84
+        }
+      },
+      "top10_source_papers": {
+        "four": [
+          {
+            "rank": 1,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.39350",
+              "arxiv:2610.39670",
+              "arxiv:2610.39847",
+              "arxiv:2610.40827",
+              "arxiv:2610.40840",
+              "arxiv:2610.40941",
+              "arxiv:2610.41808",
+              "arxiv:2610.41848",
+              "arxiv:2610.42129",
+              "arxiv:2611.00255",
+              "arxiv:2611.04975"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.40341",
+              "arxiv:2611.00225",
+              "arxiv:2611.02627",
+              "arxiv:2611.03497",
+              "arxiv:2611.03537",
+              "arxiv:2611.03556",
+              "arxiv:2611.03786",
+              "arxiv:2611.04419",
+              "arxiv:2611.05338",
+              "arxiv:2611.05351"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.39266",
+              "arxiv:2610.40561",
+              "arxiv:2610.41986",
+              "arxiv:2611.01389",
+              "arxiv:2611.03987",
+              "arxiv:2611.04840",
+              "arxiv:2611.05883",
+              "arxiv:2611.06502",
+              "arxiv:2611.18676"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.41636",
+              "arxiv:2610.41780",
+              "arxiv:2610.41953",
+              "arxiv:2611.01228",
+              "arxiv:2611.03740",
+              "arxiv:2611.05190",
+              "arxiv:2611.05560",
+              "arxiv:2611.07033"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2610.39349",
+              "arxiv:2610.40771",
+              "arxiv:2611.00902",
+              "arxiv:2611.03112",
+              "arxiv:2611.03881",
+              "arxiv:2611.03908",
+              "arxiv:2611.04704",
+              "arxiv:2611.07030"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "optics",
+            "papers": [
+              "arxiv:2610.39565",
+              "arxiv:2610.39860",
+              "arxiv:2611.01080",
+              "arxiv:2611.01852",
+              "arxiv:2611.02549",
+              "arxiv:2611.04827",
+              "arxiv:2611.06400"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.40155",
+              "arxiv:2611.00410",
+              "arxiv:2611.00805",
+              "arxiv:2611.04432",
+              "arxiv:2611.05444",
+              "arxiv:2611.05460",
+              "arxiv:2611.06668"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.40424",
+              "arxiv:2610.41788",
+              "arxiv:2611.00573",
+              "arxiv:2611.00759",
+              "arxiv:2611.03845",
+              "arxiv:2611.05603",
+              "arxiv:2611.06698"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.39912",
+              "arxiv:2610.40141",
+              "arxiv:2611.01737",
+              "arxiv:2611.02754",
+              "arxiv:2611.04047",
+              "arxiv:2611.04128",
+              "arxiv:2611.07153"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "condensed-matter",
+            "papers": [
+              "arxiv:2610.39529",
+              "arxiv:2610.41167",
+              "arxiv:2610.41194",
+              "arxiv:2610.41274",
+              "arxiv:2611.01764",
+              "arxiv:2611.04996"
+            ]
+          }
+        ],
+        "sixteen": [
+          {
+            "rank": 1,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.39350",
+              "arxiv:2610.39670",
+              "arxiv:2610.39847",
+              "arxiv:2610.40827",
+              "arxiv:2610.40840",
+              "arxiv:2610.40941",
+              "arxiv:2610.41808",
+              "arxiv:2610.41848",
+              "arxiv:2610.42129",
+              "arxiv:2611.00255",
+              "arxiv:2611.04975"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2610.39431",
+              "arxiv:2610.39692",
+              "arxiv:2611.01315",
+              "arxiv:2611.03802",
+              "arxiv:2611.03814",
+              "arxiv:2611.06333",
+              "arxiv:2611.06334",
+              "arxiv:2611.07006",
+              "arxiv:2611.07136"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2610.41557",
+              "arxiv:2610.41584",
+              "arxiv:2611.00190",
+              "arxiv:2611.00212",
+              "arxiv:2611.02965",
+              "arxiv:2611.04605",
+              "arxiv:2611.05353",
+              "arxiv:2611.06443",
+              "arxiv:2611.07237"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.40341",
+              "arxiv:2611.00225",
+              "arxiv:2611.03497",
+              "arxiv:2611.03537",
+              "arxiv:2611.03556",
+              "arxiv:2611.03786",
+              "arxiv:2611.04419",
+              "arxiv:2611.05338",
+              "arxiv:2611.05351"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2610.39476",
+              "arxiv:2610.40561",
+              "arxiv:2610.40642",
+              "arxiv:2610.41986",
+              "arxiv:2611.01176",
+              "arxiv:2611.01389",
+              "arxiv:2611.02979",
+              "arxiv:2611.05883",
+              "arxiv:2611.18676"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2610.39579",
+              "arxiv:2610.40347",
+              "arxiv:2611.00415",
+              "arxiv:2611.03770",
+              "arxiv:2611.05367",
+              "arxiv:2611.06399",
+              "arxiv:2611.08523",
+              "arxiv:2611.14556"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2610.39349",
+              "arxiv:2610.40771",
+              "arxiv:2611.00902",
+              "arxiv:2611.03112",
+              "arxiv:2611.03881",
+              "arxiv:2611.03908",
+              "arxiv:2611.04704",
+              "arxiv:2611.07030"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "particle",
+            "papers": [
+              "arxiv:2610.41607",
+              "arxiv:2611.00996",
+              "arxiv:2611.01533",
+              "arxiv:2611.03044",
+              "arxiv:2611.03237",
+              "arxiv:2611.04024",
+              "arxiv:2611.04865"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "gravitation",
+            "papers": [
+              "arxiv:2610.40795",
+              "arxiv:2610.40895",
+              "arxiv:2611.00792",
+              "arxiv:2611.03913",
+              "arxiv:2611.04618",
+              "arxiv:2611.06198",
+              "arxiv:2611.06527"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "optics",
+            "papers": [
+              "arxiv:2610.39565",
+              "arxiv:2610.39860",
+              "arxiv:2611.01080",
+              "arxiv:2611.01852",
+              "arxiv:2611.02549",
+              "arxiv:2611.04827",
+              "arxiv:2611.06400"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "through": "2026-11-11",
+      "input_content_sha256": "46ec6727ec63dfb83aac95e19253b6dd826bc4fe40109d3762c314946d5cb399",
+      "by_archive": {
+        "quant-ph": {
+          "listed": 459,
+          "primary": 346,
+          "also_in_public": 459
+        },
+        "physics.optics": {
+          "listed": 138,
+          "primary": 101,
+          "also_in_public": 138
+        },
+        "cond-mat.mes-hall": {
+          "listed": 132,
+          "primary": 92,
+          "also_in_public": 132
+        },
+        "astro-ph.CO": {
+          "listed": 129,
+          "primary": 71,
+          "also_in_public": 129
+        },
+        "astro-ph.SR": {
+          "listed": 121,
+          "primary": 74,
+          "also_in_public": 3
+        },
+        "astro-ph.GA": {
+          "listed": 164,
+          "primary": 111,
+          "also_in_public": 23
+        },
+        "gr-qc": {
+          "listed": 230,
+          "primary": 127,
+          "also_in_public": 46
+        },
+        "hep-ex": {
+          "listed": 75,
+          "primary": 24,
+          "also_in_public": 9
+        },
+        "hep-lat": {
+          "listed": 37,
+          "primary": 25,
+          "also_in_public": 5
+        },
+        "hep-ph": {
+          "listed": 257,
+          "primary": 177,
+          "also_in_public": 51
+        },
+        "hep-th": {
+          "listed": 275,
+          "primary": 153,
+          "also_in_public": 38
+        },
+        "nucl-ex": {
+          "listed": 32,
+          "primary": 9,
+          "also_in_public": 2
+        },
+        "nucl-th": {
+          "listed": 82,
+          "primary": 42,
+          "also_in_public": 7
+        },
+        "physics.flu-dyn": {
+          "listed": 98,
+          "primary": 76,
+          "also_in_public": 2
+        },
+        "physics.plasm-ph": {
+          "listed": 48,
+          "primary": 26,
+          "also_in_public": 6
+        },
+        "cond-mat.stat-mech": {
+          "listed": 127,
+          "primary": 53,
+          "also_in_public": 42
+        }
+      },
+      "arms": {
+        "four": {
+          "records": 803,
+          "candidates": 102,
+          "candidate_categories": {
+            "other-physics": 12,
+            "quantum": 54,
+            "condensed-matter": 9,
+            "cosmology": 19,
+            "optics": 8
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "other-physics": 8,
+            "quantum": 8,
+            "condensed-matter": 8,
+            "cosmology": 8,
+            "optics": 8
+          }
+        },
+        "six": {
+          "records": 1025,
+          "candidates": 137,
+          "candidate_categories": {
+            "cosmology": 17,
+            "galactic": 18,
+            "other-physics": 18,
+            "quantum": 54,
+            "condensed-matter": 9,
+            "stellar": 13,
+            "optics": 8
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "cosmology": 8,
+            "galactic": 8,
+            "other-physics": 5,
+            "quantum": 8,
+            "condensed-matter": 4,
+            "stellar": 6,
+            "optics": 1
+          }
+        },
+        "sixteen": {
+          "records": 1794,
+          "candidates": 222,
+          "candidate_categories": {
+            "galactic": 19,
+            "cosmology": 15,
+            "other-physics": 22,
+            "quantum": 53,
+            "particle": 47,
+            "gravitation": 18,
+            "plasmas": 1,
+            "nuclear": 4,
+            "condensed-matter": 10,
+            "fluids": 8,
+            "stellar": 12,
+            "statistical": 2,
+            "optics": 11
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "galactic": 7,
+            "cosmology": 6,
+            "other-physics": 1,
+            "quantum": 8,
+            "particle": 8,
+            "gravitation": 2,
+            "plasmas": 1,
+            "nuclear": 1,
+            "condensed-matter": 2,
+            "fluids": 1,
+            "stellar": 1,
+            "statistical": 1,
+            "optics": 1
+          }
+        },
+        "sixteen_with_four_labels": {
+          "records": 1794,
+          "candidates": 222,
+          "candidate_categories": {
+            "other-physics": 137,
+            "cosmology": 13,
+            "quantum": 52,
+            "condensed-matter": 10,
+            "optics": 10
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "other-physics": 8,
+            "cosmology": 8,
+            "quantum": 8,
+            "condensed-matter": 8,
+            "optics": 8
+          }
+        }
+      },
+      "top10_membership": {
+        "four--six": {
+          "exact_topics": 4,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 5,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 8,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 9,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 7,
+              "to_rank": 7,
+              "shared": 5,
+              "union": 8
+            },
+            {
+              "from_rank": 10,
+              "to_rank": 1,
+              "shared": 5,
+              "union": 9
+            }
+          ],
+          "shared_distinct_papers": 41,
+          "from_papers": 65,
+          "to_papers": 76
+        },
+        "four--sixteen": {
+          "exact_topics": 2,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 4,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 27,
+          "from_papers": 65,
+          "to_papers": 83
+        },
+        "four--sixteen_with_four_labels": {
+          "exact_topics": 2,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 4,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 27,
+          "from_papers": 65,
+          "to_papers": 83
+        },
+        "sixteen_with_four_labels--sixteen": {
+          "exact_topics": 10,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 1,
+              "shared": 12,
+              "union": 12
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 2,
+              "shared": 11,
+              "union": 11
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 3,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 4,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 5,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 6,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 7,
+              "to_rank": 7,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 8,
+              "to_rank": 8,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 9,
+              "to_rank": 9,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 10,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 83,
+          "from_papers": 83,
+          "to_papers": 83
+        }
+      },
+      "top10_source_papers": {
+        "four": [
+          {
+            "rank": 1,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2611.07302",
+              "arxiv:2611.07645",
+              "arxiv:2611.10130",
+              "arxiv:2611.11339",
+              "arxiv:2611.12281",
+              "arxiv:2611.12454",
+              "arxiv:2611.13438",
+              "arxiv:2611.13804"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.08247",
+              "arxiv:2611.08646",
+              "arxiv:2611.10527",
+              "arxiv:2611.10529",
+              "arxiv:2611.10588",
+              "arxiv:2611.14923",
+              "arxiv:2611.15663"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.09760",
+              "arxiv:2611.10793",
+              "arxiv:2611.13154",
+              "arxiv:2611.13778",
+              "arxiv:2611.13815",
+              "arxiv:2611.14422",
+              "arxiv:2611.15076"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "condensed-matter",
+            "papers": [
+              "arxiv:2611.07456",
+              "arxiv:2611.07600",
+              "arxiv:2611.08385",
+              "arxiv:2611.09450",
+              "arxiv:2611.09464",
+              "arxiv:2611.09668",
+              "arxiv:2611.10507"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "condensed-matter",
+            "papers": [
+              "arxiv:2611.07330",
+              "arxiv:2611.07841",
+              "arxiv:2611.09462",
+              "arxiv:2611.13508",
+              "arxiv:2611.14067",
+              "arxiv:2611.15214"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.08847",
+              "arxiv:2611.11587",
+              "arxiv:2611.12123",
+              "arxiv:2611.12860",
+              "arxiv:2611.13090",
+              "arxiv:2611.13345"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.08223",
+              "arxiv:2611.08636",
+              "arxiv:2611.09362",
+              "arxiv:2611.11094",
+              "arxiv:2611.14456",
+              "arxiv:2611.15188"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2611.09578",
+              "arxiv:2611.11367",
+              "arxiv:2611.13447",
+              "arxiv:2611.13791",
+              "arxiv:2611.16071",
+              "arxiv:2611.17366"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.07524",
+              "arxiv:2611.08630",
+              "arxiv:2611.09856",
+              "arxiv:2611.15714",
+              "arxiv:2611.15877",
+              "arxiv:2611.15891"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.07794",
+              "arxiv:2611.08633",
+              "arxiv:2611.10084",
+              "arxiv:2611.12179",
+              "arxiv:2611.14343",
+              "arxiv:2611.15987"
+            ]
+          }
+        ],
+        "sixteen": [
+          {
+            "rank": 1,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2611.07794",
+              "arxiv:2611.10084",
+              "arxiv:2611.13095",
+              "arxiv:2611.14229",
+              "arxiv:2611.15056",
+              "arxiv:2611.15166",
+              "arxiv:2611.15850",
+              "arxiv:2611.15877",
+              "arxiv:2611.15883",
+              "arxiv:2611.15886",
+              "arxiv:2611.15888",
+              "arxiv:2611.15987"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.07596",
+              "arxiv:2611.08223",
+              "arxiv:2611.08636",
+              "arxiv:2611.09362",
+              "arxiv:2611.11094",
+              "arxiv:2611.11449",
+              "arxiv:2611.12556",
+              "arxiv:2611.12839",
+              "arxiv:2611.14305",
+              "arxiv:2611.15721",
+              "arxiv:2611.15881"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2611.08563",
+              "arxiv:2611.12284",
+              "arxiv:2611.12860",
+              "arxiv:2611.13181",
+              "arxiv:2611.13518",
+              "arxiv:2611.13837",
+              "arxiv:2611.14635",
+              "arxiv:2611.15560"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2611.07302",
+              "arxiv:2611.07645",
+              "arxiv:2611.10130",
+              "arxiv:2611.11339",
+              "arxiv:2611.12281",
+              "arxiv:2611.12454",
+              "arxiv:2611.13438",
+              "arxiv:2611.13804"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.08220",
+              "arxiv:2611.09779",
+              "arxiv:2611.09822",
+              "arxiv:2611.12098",
+              "arxiv:2611.12779",
+              "arxiv:2611.14114",
+              "arxiv:2611.15000",
+              "arxiv:2611.15080"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2611.07563",
+              "arxiv:2611.08612",
+              "arxiv:2611.09330",
+              "arxiv:2611.10910",
+              "arxiv:2611.12734",
+              "arxiv:2611.13104",
+              "arxiv:2611.13836",
+              "arxiv:2611.15556"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "particle",
+            "papers": [
+              "arxiv:2611.07852",
+              "arxiv:2611.08187",
+              "arxiv:2611.12148",
+              "arxiv:2611.14563",
+              "arxiv:2611.15647",
+              "arxiv:2611.15852",
+              "arxiv:2611.15865"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "gravitation",
+            "papers": [
+              "arxiv:2611.08596",
+              "arxiv:2611.08633",
+              "arxiv:2611.08880",
+              "arxiv:2611.10133",
+              "arxiv:2611.12179",
+              "arxiv:2611.14197",
+              "arxiv:2611.14343"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "particle",
+            "papers": [
+              "arxiv:2611.07819",
+              "arxiv:2611.08194",
+              "arxiv:2611.09797",
+              "arxiv:2611.11474",
+              "arxiv:2611.13222",
+              "arxiv:2611.14567",
+              "arxiv:2611.15274"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.08247",
+              "arxiv:2611.08646",
+              "arxiv:2611.10527",
+              "arxiv:2611.10529",
+              "arxiv:2611.10588",
+              "arxiv:2611.14923",
+              "arxiv:2611.15663"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "through": "2026-11-18",
+      "input_content_sha256": "8961a6c9cca83a0bf302c5405e53223a57108c9b8e8f288e2c4179af509fd84a",
+      "by_archive": {
+        "quant-ph": {
+          "listed": 520,
+          "primary": 414,
+          "also_in_public": 520
+        },
+        "physics.optics": {
+          "listed": 140,
+          "primary": 99,
+          "also_in_public": 140
+        },
+        "cond-mat.mes-hall": {
+          "listed": 137,
+          "primary": 81,
+          "also_in_public": 137
+        },
+        "astro-ph.CO": {
+          "listed": 120,
+          "primary": 71,
+          "also_in_public": 120
+        },
+        "astro-ph.SR": {
+          "listed": 121,
+          "primary": 81,
+          "also_in_public": 0
+        },
+        "astro-ph.GA": {
+          "listed": 163,
+          "primary": 104,
+          "also_in_public": 19
+        },
+        "gr-qc": {
+          "listed": 182,
+          "primary": 99,
+          "also_in_public": 39
+        },
+        "hep-ex": {
+          "listed": 75,
+          "primary": 25,
+          "also_in_public": 6
+        },
+        "hep-lat": {
+          "listed": 44,
+          "primary": 18,
+          "also_in_public": 4
+        },
+        "hep-ph": {
+          "listed": 198,
+          "primary": 135,
+          "also_in_public": 35
+        },
+        "hep-th": {
+          "listed": 261,
+          "primary": 146,
+          "also_in_public": 41
+        },
+        "nucl-ex": {
+          "listed": 33,
+          "primary": 11,
+          "also_in_public": 0
+        },
+        "nucl-th": {
+          "listed": 61,
+          "primary": 36,
+          "also_in_public": 2
+        },
+        "physics.flu-dyn": {
+          "listed": 99,
+          "primary": 72,
+          "also_in_public": 4
+        },
+        "physics.plasm-ph": {
+          "listed": 50,
+          "primary": 37,
+          "also_in_public": 4
+        },
+        "cond-mat.stat-mech": {
+          "listed": 132,
+          "primary": 54,
+          "also_in_public": 43
+        }
+      },
+      "arms": {
+        "four": {
+          "records": 847,
+          "candidates": 108,
+          "candidate_categories": {
+            "quantum": 62,
+            "condensed-matter": 9,
+            "cosmology": 13,
+            "other-physics": 13,
+            "optics": 11
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "quantum": 8,
+            "condensed-matter": 8,
+            "cosmology": 8,
+            "other-physics": 8,
+            "optics": 8
+          }
+        },
+        "six": {
+          "records": 1071,
+          "candidates": 143,
+          "candidate_categories": {
+            "galactic": 22,
+            "quantum": 61,
+            "cosmology": 8,
+            "condensed-matter": 9,
+            "other-physics": 19,
+            "optics": 11,
+            "stellar": 13
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "galactic": 8,
+            "quantum": 8,
+            "cosmology": 7,
+            "condensed-matter": 2,
+            "other-physics": 6,
+            "optics": 6,
+            "stellar": 3
+          }
+        },
+        "sixteen": {
+          "records": 1786,
+          "candidates": 223,
+          "candidate_categories": {
+            "galactic": 23,
+            "cosmology": 7,
+            "quantum": 64,
+            "gravitation": 8,
+            "condensed-matter": 10,
+            "other-physics": 28,
+            "particle": 40,
+            "optics": 11,
+            "nuclear": 9,
+            "stellar": 11,
+            "fluids": 6,
+            "plasmas": 2,
+            "statistical": 4
+          },
+          "ranked": 40,
+          "ranked_categories": {
+            "galactic": 7,
+            "cosmology": 2,
+            "quantum": 8,
+            "gravitation": 2,
+            "condensed-matter": 2,
+            "other-physics": 3,
+            "particle": 5,
+            "optics": 2,
+            "nuclear": 2,
+            "stellar": 3,
+            "fluids": 1,
+            "plasmas": 1,
+            "statistical": 2
+          }
+        },
+        "sixteen_with_four_labels": {
+          "records": 1786,
+          "candidates": 223,
+          "candidate_categories": {
+            "other-physics": 134,
+            "cosmology": 6,
+            "quantum": 62,
+            "condensed-matter": 10,
+            "optics": 11
+          },
+          "ranked": 38,
+          "ranked_categories": {
+            "other-physics": 8,
+            "cosmology": 6,
+            "quantum": 8,
+            "condensed-matter": 8,
+            "optics": 8
+          }
+        }
+      },
+      "top10_membership": {
+        "four--six": {
+          "exact_topics": 5,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 2,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 5,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 6,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 9,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 41,
+          "from_papers": 70,
+          "to_papers": 81
+        },
+        "four--sixteen": {
+          "exact_topics": 2,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 3,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 8,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 2,
+              "shared": 7,
+              "union": 10
+            }
+          ],
+          "shared_distinct_papers": 26,
+          "from_papers": 70,
+          "to_papers": 86
+        },
+        "four--sixteen_with_four_labels": {
+          "exact_topics": 2,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 3,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 8,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 2,
+              "shared": 7,
+              "union": 10
+            }
+          ],
+          "shared_distinct_papers": 26,
+          "from_papers": 70,
+          "to_papers": 86
+        },
+        "sixteen_with_four_labels--sixteen": {
+          "exact_topics": 10,
+          "half_or_better_pairs": [
+            {
+              "from_rank": 1,
+              "to_rank": 1,
+              "shared": 12,
+              "union": 12
+            },
+            {
+              "from_rank": 2,
+              "to_rank": 2,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 3,
+              "to_rank": 3,
+              "shared": 10,
+              "union": 10
+            },
+            {
+              "from_rank": 4,
+              "to_rank": 4,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 5,
+              "to_rank": 5,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 6,
+              "to_rank": 6,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 7,
+              "to_rank": 7,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 8,
+              "to_rank": 8,
+              "shared": 8,
+              "union": 8
+            },
+            {
+              "from_rank": 9,
+              "to_rank": 9,
+              "shared": 7,
+              "union": 7
+            },
+            {
+              "from_rank": 10,
+              "to_rank": 10,
+              "shared": 7,
+              "union": 7
+            }
+          ],
+          "shared_distinct_papers": 86,
+          "from_papers": 86,
+          "to_papers": 86
+        }
+      },
+      "top10_source_papers": {
+        "four": [
+          {
+            "rank": 1,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.16271",
+              "arxiv:2611.16285",
+              "arxiv:2611.18476",
+              "arxiv:2611.19130",
+              "arxiv:2611.21086",
+              "arxiv:2611.21321",
+              "arxiv:2611.21578",
+              "arxiv:2611.21906",
+              "arxiv:2611.22035",
+              "arxiv:2611.22260"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "condensed-matter",
+            "papers": [
+              "arxiv:2611.16440",
+              "arxiv:2611.19012",
+              "arxiv:2611.19582",
+              "arxiv:2611.20952",
+              "arxiv:2611.21066",
+              "arxiv:2611.22750",
+              "arxiv:2611.23178",
+              "arxiv:2611.23405"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.16407",
+              "arxiv:2611.17422",
+              "arxiv:2611.18407",
+              "arxiv:2611.18557",
+              "arxiv:2611.18558",
+              "arxiv:2611.21821",
+              "arxiv:2611.24900"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.16286",
+              "arxiv:2611.17425",
+              "arxiv:2611.17676",
+              "arxiv:2611.18487",
+              "arxiv:2611.18850",
+              "arxiv:2611.19899",
+              "arxiv:2611.21733"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.16738",
+              "arxiv:2611.17057",
+              "arxiv:2611.17322",
+              "arxiv:2611.19033",
+              "arxiv:2611.21341",
+              "arxiv:2611.22125",
+              "arxiv:2611.24890"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.17246",
+              "arxiv:2611.17913",
+              "arxiv:2611.18082",
+              "arxiv:2611.19182",
+              "arxiv:2611.20139",
+              "arxiv:2611.21552",
+              "arxiv:2611.22118"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.19715",
+              "arxiv:2611.20410",
+              "arxiv:2611.21709",
+              "arxiv:2611.23420",
+              "arxiv:2611.23528",
+              "arxiv:2611.24852"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2611.16745",
+              "arxiv:2611.18435",
+              "arxiv:2611.20159",
+              "arxiv:2611.20756",
+              "arxiv:2611.23224",
+              "arxiv:2611.23514"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "optics",
+            "papers": [
+              "arxiv:2611.18045",
+              "arxiv:2611.18775",
+              "arxiv:2611.21748",
+              "arxiv:2611.23610",
+              "arxiv:2611.23875",
+              "arxiv:2611.24798"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.17652",
+              "arxiv:2611.19994",
+              "arxiv:2611.22247",
+              "arxiv:2611.23469",
+              "arxiv:2611.23786",
+              "arxiv:2611.24328"
+            ]
+          }
+        ],
+        "sixteen": [
+          {
+            "rank": 1,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2611.16611",
+              "arxiv:2611.17409",
+              "arxiv:2611.17410",
+              "arxiv:2611.17421",
+              "arxiv:2611.21337",
+              "arxiv:2611.21580",
+              "arxiv:2611.22487",
+              "arxiv:2611.22739",
+              "arxiv:2611.22771",
+              "arxiv:2611.23371",
+              "arxiv:2611.24281",
+              "arxiv:2611.24561"
+            ]
+          },
+          {
+            "rank": 2,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.16407",
+              "arxiv:2611.17422",
+              "arxiv:2611.17676",
+              "arxiv:2611.18407",
+              "arxiv:2611.18557",
+              "arxiv:2611.18558",
+              "arxiv:2611.21368",
+              "arxiv:2611.21714",
+              "arxiv:2611.21821",
+              "arxiv:2611.24900"
+            ]
+          },
+          {
+            "rank": 3,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.16271",
+              "arxiv:2611.16285",
+              "arxiv:2611.18476",
+              "arxiv:2611.19130",
+              "arxiv:2611.21086",
+              "arxiv:2611.21321",
+              "arxiv:2611.21578",
+              "arxiv:2611.21906",
+              "arxiv:2611.22035",
+              "arxiv:2611.22260"
+            ]
+          },
+          {
+            "rank": 4,
+            "category": "gravitation",
+            "papers": [
+              "arxiv:2611.16836",
+              "arxiv:2611.19191",
+              "arxiv:2611.21735",
+              "arxiv:2611.22586",
+              "arxiv:2611.22936",
+              "arxiv:2611.23360",
+              "arxiv:2611.23452",
+              "arxiv:2611.23914"
+            ]
+          },
+          {
+            "rank": 5,
+            "category": "cosmology",
+            "papers": [
+              "arxiv:2611.17085",
+              "arxiv:2611.17299",
+              "arxiv:2611.17538",
+              "arxiv:2611.18211",
+              "arxiv:2611.18281",
+              "arxiv:2611.19006",
+              "arxiv:2611.22719",
+              "arxiv:2611.23104"
+            ]
+          },
+          {
+            "rank": 6,
+            "category": "quantum",
+            "papers": [
+              "arxiv:2611.17262",
+              "arxiv:2611.21450",
+              "arxiv:2611.21928",
+              "arxiv:2611.22232",
+              "arxiv:2611.23165",
+              "arxiv:2611.23923",
+              "arxiv:2611.24044",
+              "arxiv:2611.24448"
+            ]
+          },
+          {
+            "rank": 7,
+            "category": "galactic",
+            "papers": [
+              "arxiv:2611.16444",
+              "arxiv:2611.16602",
+              "arxiv:2611.16825",
+              "arxiv:2611.17960",
+              "arxiv:2611.20917",
+              "arxiv:2611.22914",
+              "arxiv:2611.23636",
+              "arxiv:2611.24937"
+            ]
+          },
+          {
+            "rank": 8,
+            "category": "condensed-matter",
+            "papers": [
+              "arxiv:2611.16440",
+              "arxiv:2611.19012",
+              "arxiv:2611.19582",
+              "arxiv:2611.20952",
+              "arxiv:2611.21066",
+              "arxiv:2611.22750",
+              "arxiv:2611.23178",
+              "arxiv:2611.23405"
+            ]
+          },
+          {
+            "rank": 9,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2611.16119",
+              "arxiv:2611.16486",
+              "arxiv:2611.16510",
+              "arxiv:2611.16533",
+              "arxiv:2611.16546",
+              "arxiv:2611.17040",
+              "arxiv:2611.17305"
+            ]
+          },
+          {
+            "rank": 10,
+            "category": "other-physics",
+            "papers": [
+              "arxiv:2611.17141",
+              "arxiv:2611.17152",
+              "arxiv:2611.19741",
+              "arxiv:2611.19753",
+              "arxiv:2611.20175",
+              "arxiv:2611.23498",
+              "arxiv:2611.24843"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "regrouping_on_identical_embeddings": {
+    "four": {
+      "from": "2026-10-22",
+      "to": "2026-11-18",
+      "papers_with_embeddings": 3263,
+      "linked_preprints_suppressed_28d": 0,
+      "weekly_linked_preprints_suppressed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "weekly_papers": [
+        703,
+        910,
+        803,
+        847
+      ],
+      "weekly_clusters": [
+        83,
+        115,
+        102,
+        108
+      ],
+      "clusters_28d": 459,
+      "newly_clustered_papers": 639,
+      "lost_clustered_papers": 156
+    },
+    "sixteen": {
+      "from": "2026-10-22",
+      "to": "2026-11-18",
+      "papers_with_embeddings": 7238,
+      "linked_preprints_suppressed_28d": 0,
+      "weekly_linked_preprints_suppressed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "weekly_papers": [
+        1639,
+        2019,
+        1794,
+        1786
+      ],
+      "weekly_clusters": [
+        205,
+        258,
+        222,
+        223
+      ],
+      "clusters_28d": 1035,
+      "newly_clustered_papers": 1461,
+      "lost_clustered_papers": 372
+    }
+  },
+  "independent_index": {
+    "reference": "INSPIRE literature index (its records also draw on arXiv). Query each archive for earliest_date in the inclusive UTC window. Enumerate every result and deduplicate across categories by arXiv identifier. A match requires an arXiv versionless identifier, its first-submission date in the same week, and at least one of its queried arXiv categories. Neither source represents journal-only works by this definition.",
+    "api": "https://inspirehep.net/api/literature",
+    "query": "arxiv_eprints.categories:{archive} and earliest_date:{start}->{end}",
+    "coverage": "gr-qc, hep-ex, hep-lat, hep-ph, hep-th, nucl-ex, nucl-th",
+    "unique_inspire_record_ids": 2575,
+    "unique_arxiv_ids": 2575,
+    "matched_in_same_window": 2570,
+    "weeks": [
+      {
+        "start": "2026-10-22",
+        "end": "2026-10-28",
+        "by_archive": {
+          "gr-qc": {
+            "inspire_records": 198,
+            "arxiv_identifiers": 198,
+            "matched_with_same_date_window_and_category": 195
+          },
+          "hep-ex": {
+            "inspire_records": 86,
+            "arxiv_identifiers": 86,
+            "matched_with_same_date_window_and_category": 86
+          },
+          "hep-lat": {
+            "inspire_records": 35,
+            "arxiv_identifiers": 35,
+            "matched_with_same_date_window_and_category": 35
+          },
+          "hep-ph": {
+            "inspire_records": 200,
+            "arxiv_identifiers": 200,
+            "matched_with_same_date_window_and_category": 198
+          },
+          "hep-th": {
+            "inspire_records": 229,
+            "arxiv_identifiers": 229,
+            "matched_with_same_date_window_and_category": 228
+          },
+          "nucl-ex": {
+            "inspire_records": 40,
+            "arxiv_identifiers": 40,
+            "matched_with_same_date_window_and_category": 40
+          },
+          "nucl-th": {
+            "inspire_records": 73,
+            "arxiv_identifiers": 73,
+            "matched_with_same_date_window_and_category": 72
+          }
+        },
+        "distinct_arxiv_ids": 603,
+        "matched_in_same_window": 598,
+        "discrepancies": [
+          {
+            "arxiv": "2610.28790",
+            "inspire": [
+              "3217255"
+            ],
+            "earliest": "2026-10-22",
+            "arxiv_submitted": null,
+            "categories": [
+              "hep-ph",
+              "hep-th"
+            ],
+            "arxiv_v1_date": "2026-10-20",
+            "v1": "https://arxiv.org/abs/2610.28790v1",
+            "reason": "The first submission predates October 22."
+          },
+          {
+            "arxiv": "2610.35405",
+            "inspire": [
+              "3219057"
+            ],
+            "earliest": "2026-10-26",
+            "arxiv_submitted": null,
+            "categories": [
+              "gr-qc"
+            ],
+            "arxiv_v1_date": "2026-10-26",
+            "v1": "https://arxiv.org/abs/2610.35405v1",
+            "reason": "The arXiv v1 abstract lists only General Physics (physics.gen-ph); INSPIRE assigns gr-qc."
+          },
+          {
+            "arxiv": "2610.40205",
+            "inspire": [
+              "3221192"
+            ],
+            "earliest": "2026-10-24",
+            "arxiv_submitted": "2026-10-29",
+            "categories": [
+              "gr-qc"
+            ],
+            "arxiv_v1_date": "2026-10-29",
+            "v1": "https://arxiv.org/abs/2610.40205v1",
+            "reason": "The first arXiv submission belongs to the following week."
+          },
+          {
+            "arxiv": "2611.08043",
+            "inspire": [
+              "3223780"
+            ],
+            "earliest": "2026-10-26",
+            "arxiv_submitted": "2026-11-05",
+            "categories": [
+              "hep-ph",
+              "nucl-th"
+            ],
+            "arxiv_v1_date": "2026-11-05",
+            "v1": "https://arxiv.org/abs/2611.08043v1",
+            "reason": "The first arXiv submission belongs to a later week."
+          },
+          {
+            "arxiv": "2611.09974",
+            "inspire": [
+              "3226346"
+            ],
+            "earliest": "2026-10-28",
+            "arxiv_submitted": "2026-10-31",
+            "categories": [
+              "gr-qc"
+            ],
+            "arxiv_v1_date": "2026-10-31",
+            "v1": "https://arxiv.org/abs/2611.09974v1",
+            "reason": "The first arXiv submission belongs to the following week."
+          }
+        ]
+      },
+      {
+        "start": "2026-10-29",
+        "end": "2026-11-04",
+        "by_archive": {
+          "gr-qc": {
+            "inspire_records": 252,
+            "arxiv_identifiers": 252,
+            "matched_with_same_date_window_and_category": 252
+          },
+          "hep-ex": {
+            "inspire_records": 76,
+            "arxiv_identifiers": 76,
+            "matched_with_same_date_window_and_category": 76
+          },
+          "hep-lat": {
+            "inspire_records": 37,
+            "arxiv_identifiers": 37,
+            "matched_with_same_date_window_and_category": 37
+          },
+          "hep-ph": {
+            "inspire_records": 253,
+            "arxiv_identifiers": 253,
+            "matched_with_same_date_window_and_category": 253
+          },
+          "hep-th": {
+            "inspire_records": 287,
+            "arxiv_identifiers": 287,
+            "matched_with_same_date_window_and_category": 287
+          },
+          "nucl-ex": {
+            "inspire_records": 38,
+            "arxiv_identifiers": 38,
+            "matched_with_same_date_window_and_category": 38
+          },
+          "nucl-th": {
+            "inspire_records": 83,
+            "arxiv_identifiers": 83,
+            "matched_with_same_date_window_and_category": 83
+          }
+        },
+        "distinct_arxiv_ids": 731,
+        "matched_in_same_window": 731,
+        "discrepancies": []
+      },
+      {
+        "start": "2026-11-05",
+        "end": "2026-11-11",
+        "by_archive": {
+          "gr-qc": {
+            "inspire_records": 228,
+            "arxiv_identifiers": 228,
+            "matched_with_same_date_window_and_category": 228
+          },
+          "hep-ex": {
+            "inspire_records": 74,
+            "arxiv_identifiers": 74,
+            "matched_with_same_date_window_and_category": 74
+          },
+          "hep-lat": {
+            "inspire_records": 37,
+            "arxiv_identifiers": 37,
+            "matched_with_same_date_window_and_category": 37
+          },
+          "hep-ph": {
+            "inspire_records": 253,
+            "arxiv_identifiers": 253,
+            "matched_with_same_date_window_and_category": 253
+          },
+          "hep-th": {
+            "inspire_records": 274,
+            "arxiv_identifiers": 274,
+            "matched_with_same_date_window_and_category": 274
+          },
+          "nucl-ex": {
+            "inspire_records": 30,
+            "arxiv_identifiers": 30,
+            "matched_with_same_date_window_and_category": 30
+          },
+          "nucl-th": {
+            "inspire_records": 81,
+            "arxiv_identifiers": 81,
+            "matched_with_same_date_window_and_category": 81
+          }
+        },
+        "distinct_arxiv_ids": 676,
+        "matched_in_same_window": 676,
+        "discrepancies": []
+      },
+      {
+        "start": "2026-11-12",
+        "end": "2026-11-18",
+        "by_archive": {
+          "gr-qc": {
+            "inspire_records": 165,
+            "arxiv_identifiers": 165,
+            "matched_with_same_date_window_and_category": 165
+          },
+          "hep-ex": {
+            "inspire_records": 70,
+            "arxiv_identifiers": 70,
+            "matched_with_same_date_window_and_category": 70
+          },
+          "hep-lat": {
+            "inspire_records": 41,
+            "arxiv_identifiers": 41,
+            "matched_with_same_date_window_and_category": 41
+          },
+          "hep-ph": {
+            "inspire_records": 185,
+            "arxiv_identifiers": 185,
+            "matched_with_same_date_window_and_category": 185
+          },
+          "hep-th": {
+            "inspire_records": 242,
+            "arxiv_identifiers": 242,
+            "matched_with_same_date_window_and_category": 242
+          },
+          "nucl-ex": {
+            "inspire_records": 28,
+            "arxiv_identifiers": 28,
+            "matched_with_same_date_window_and_category": 28
+          },
+          "nucl-th": {
+            "inspire_records": 58,
+            "arxiv_identifiers": 58,
+            "matched_with_same_date_window_and_category": 58
+          }
+        },
+        "distinct_arxiv_ids": 565,
+        "matched_in_same_window": 565,
+        "discrepancies": []
+      }
+    ]
+  },
+  "native_listing_sample": {
+    "method": "On each official November monthly listing take the primary entries, sort by SHA-256 of the versionless ID, then select the first four whose separate v1 abstract page gives a first-submission date within the 28-day window. The sampling frame is the November listing as observed on November 20, not all October submissions. Check membership, date and primary category against the intake.",
+    "archives": {
+      "physics.flu-dyn": {
+        "listing": "https://arxiv.org/list/physics.flu-dyn/2026-11?show=2000",
+        "population_in_monthly_listing": 195,
+        "sample": [
+          {
+            "arxiv": "2611.23539",
+            "date": "2026-11-17",
+            "v1": "https://arxiv.org/abs/2611.23539v1",
+            "title": "Construction of a Deployable Hard-Constrained Turbulence Closure",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.18782",
+            "date": "2026-11-12",
+            "v1": "https://arxiv.org/abs/2611.18782v1",
+            "title": "Relativistic and quantum fluid dynamics: nonlinear momentum evolution",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.07738",
+            "date": "2026-11-05",
+            "v1": "https://arxiv.org/abs/2611.07738v1",
+            "title": "A continuum model of a diffusive compressible gas - Kinetic theory and real gases",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.16303",
+            "date": "2026-11-12",
+            "v1": "https://arxiv.org/abs/2611.16303v1",
+            "title": "Shallow water equations on n-dimensional Riemannian manifolds: a kinetic approach",
+            "matched_same_date_and_primary": true
+          }
+        ]
+      },
+      "physics.plasm-ph": {
+        "listing": "https://arxiv.org/list/physics.plasm-ph/2026-11?show=2000",
+        "population_in_monthly_listing": 87,
+        "sample": [
+          {
+            "arxiv": "2611.19520",
+            "date": "2026-11-14",
+            "v1": "https://arxiv.org/abs/2611.19520v1",
+            "title": "Simulations of turbulent heat and particle transport in stellarator plasmas",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.18093",
+            "date": "2026-11-13",
+            "v1": "https://arxiv.org/abs/2611.18093v1",
+            "title": "Finite-Larmor-radius vortex interaction from {\\delta}f to full-f gyrofluid dynamics",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.17513",
+            "date": "2026-11-12",
+            "v1": "https://arxiv.org/abs/2611.17513v1",
+            "title": "Equilibrium Elongation of Charged Nanoclusters",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.10036",
+            "date": "2026-11-05",
+            "v1": "https://arxiv.org/abs/2611.10036v1",
+            "title": "Magnetohydrodynamic spectra and line invariants in the presence of axions",
+            "matched_same_date_and_primary": true
+          }
+        ]
+      },
+      "cond-mat.stat-mech": {
+        "listing": "https://arxiv.org/list/cond-mat.stat-mech/2026-11?show=2000",
+        "population_in_monthly_listing": 154,
+        "sample": [
+          {
+            "arxiv": "2611.09287",
+            "date": "2026-11-06",
+            "v1": "https://arxiv.org/abs/2611.09287v1",
+            "title": "Thermalization of coarse-grained variables in the Toda lattice: a numerical study",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.13141",
+            "date": "2026-11-09",
+            "v1": "https://arxiv.org/abs/2611.13141v1",
+            "title": "Dynamics of R\\'enyi entanglement entropies and Eigenstate Thermalization",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.14577",
+            "date": "2026-11-10",
+            "v1": "https://arxiv.org/abs/2611.14577v1",
+            "title": "Rational layers in the low temperature expansion of the three-dimensional Ising model",
+            "matched_same_date_and_primary": true
+          },
+          {
+            "arxiv": "2611.08033",
+            "date": "2026-11-05",
+            "v1": "https://arxiv.org/abs/2611.08033v1",
+            "title": "Galois conjugation, droplet growth, and the differential transcendence of the Ising model in nonzero field",
+            "matched_same_date_and_primary": true
+          }
+        ]
+      }
+    }
+  },
+  "limits": "This trial has no journal-only intake. Atomic and molecular physics, physics instrumentation, and much of condensed matter remain outside these 16 archive tags. Neither the source sensitivity calculation nor 28-day group counts establish editorial readiness or daily operating cost."
+}
