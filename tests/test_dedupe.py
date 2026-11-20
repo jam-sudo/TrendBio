@@ -113,6 +113,8 @@ def test_preprint_then_published_links_both_ways(tmp_path, item):
          paper.model_copy(update={"title": "Renamed"})),
         (item, paper.model_copy(update={"title": "Renamed", "doi": "https://doi.org/10.1101/EXAMPLE"})),
         (item, paper.model_copy(update={"title": "Renamed", "metadata": {"preprint_doi": item.doi}})),
+        (item.model_copy(update={"source": "arxiv", "id": "arxiv:2603.12391", "doi": None}),
+         paper.model_copy(update={"title": "Revised title", "metadata": {"preprint_doi": "https://doi.org/10.48550/arXiv.2603.12391"}})),
         (item, paper.model_copy(update={"title": "Renamed", "metadata": {"doi": item.doi}})),
     ]
     for number, (preprint, published) in enumerate(variants):
@@ -145,6 +147,22 @@ def test_preprint_then_published_links_both_ways(tmp_path, item):
     result = dedupe([without_doi], store)
     assert result == [without_doi.model_copy(update={"preprint_id": preprint.id})]
     assert store.get_item(preprint.id).published_doi == "10.1000/known"
+
+
+def test_arxiv_doi_repairs_an_existing_renamed_pair_once(tmp_path, item):
+    store = Store(tmp_path, 'physics-expanded')
+    preprint = item.model_copy(update={'id': 'arxiv:hep-th/9901001', 'source': 'arxiv', 'doi': None})
+    paper = item.model_copy(update={'id': 'doi:10.1000/final', 'doi': '10.1000/final', 'source': 'crossref',
+                                    'type': 'published', 'title': 'Revised title',
+                                    'metadata': {'preprint_doi': '10.48550/arXiv.hep-th/9901001'}})
+    for record in (preprint, paper):
+        store.put_item(record)
+    repaired = {r.id: r for r in dedupe([], store)}
+    assert repaired[preprint.id].published_doi == paper.doi
+    assert repaired[paper.id].preprint_id == preprint.id
+    for record in repaired.values():
+        store.put_item(record)
+    assert dedupe([], store) == []
 
 
 def _dedupe_reference(new: list[Item], store: Store) -> list[Item]:

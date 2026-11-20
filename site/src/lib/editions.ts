@@ -7,7 +7,7 @@ export const editionInfo = {
   "earth-environment": { label: "Earth & Environment", source: "five Copernicus journals via Crossref", stage: "Pilot" },
   chemistry: { label: "Chemistry", source: "five chemistry journals via Crossref", stage: "Pilot" },
   astronomy: { label: "Stellar & Galactic Astronomy", source: "arXiv", stage: "Pilot" },
-  "physics-expanded": { label: "Expanded Physics", source: "arXiv", stage: "Pilot" },
+  "physics-expanded": { label: "Expanded Physics", source: "arXiv and two physics journals via Crossref", stage: "Pilot" },
   "computer-information": { label: "Computing & Information", source: "arXiv, DROPS and Crossref", stage: "Pilot" },
   engineering: { label: "Engineering", source: "arXiv and five engineering journals via Crossref", stage: "Pilot" },
   "agriculture-food-veterinary": { label: "Agriculture, Food & Veterinary Science", source: "Crossref and journal publishers", stage: "Pilot" },

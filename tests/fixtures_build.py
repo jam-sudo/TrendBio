@@ -201,6 +201,8 @@ def build(root: Path) -> None:
     physics_notes = notes / "physics" / days[-1].isoformat()
     physics_notes.mkdir(parents=True, exist_ok=True)
     (physics_notes / "cavity-readout-fixture.md").write_text(
+        "---\nclaim: Three fixture papers examine light losses and readout noise.\n"
+        "papers: [arxiv:optics-fixture-1, arxiv:optics-fixture-2, arxiv:optics-fixture-3]\n---\n"
         "The updated calibration applies to this measurement. [Calibration record](https://example.org/calibration)\n\n"
         "arXiv:2611.19130 reports timing from a simulation. [arXiv:2611.19130](https://arxiv.org/abs/2611.19130)\n",
         encoding="utf-8",
@@ -246,6 +248,8 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
             paper.url, paper.authors = f"https://example.org/earth/ocean-{i}", ["Example Ocean Group"]
             paper.metadata = {"journal": "Ocean Science", "license": "https://creativecommons.org/licenses/by/4.0/",
                               "dataset_dois": ["10.5555/example-data"] if i == 1 else []}
+            if i == 1:
+                paper.metadata["preprint_dois"] = ["10.5555/example-preprint"]
         if domain == "humanities-arts":
             paper.source = ("thoth", "openedition", "crossref")[i - 1]
             paper.id, paper.type = f"{paper.source}:fixture-{i}", "published"

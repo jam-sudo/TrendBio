@@ -212,6 +212,10 @@ OECD 중분류 42개는 모두 한 번씩 배정됐다. 두 번째로 호주·�
 
 다음 검증에서는 11월 18일의 같은 후보에 물리학 주제 선정 기준을 다시 적용한다. 이어 순위와 요약을 검토한 적 없는 10월 28일과 11월 11일 주간에서 각각 상위 5개, 하위 5개, 주분류가 서로 다른 제외 후보 5개를 뽑아 원문과 대조한다. arXiv에서 별도로 표본 추출한 논문도 새 순위까지 추적한다.
 
+학술지 발행 목록도 arXiv와 대조했다. 《Physical Review A》 35편과 《Physical Review B》 66편에서 초록과 정식 출판본의 CC BY 이용 조건을 확인했다. 101편 모두 Crossref와 출판사 APS의 발행일·이용 조건이 일치했다. 프리프린트가 명시된 88편 중 37편은 시험판의 arXiv 분류 16개 밖에 있었고, 88편 모두 조사한 4주 전에 제출됐다. 제출부터 학술지 발행까지의 중앙값은 A가 226일, B가 189일이었다. 12편은 제목이 바뀌고 arXiv에 학술지 DOI가 없어, 출판사가 등록한 arXiv DOI로 판본을 연결했다. 두 학술지는 요청 시 실행하는 물리학 시험판에서 검증한다. [학술지별 수집 내역과 판본 대조](expansion-measurements/2026-11-20/physics-journal-coverage.json) · [APS 서지 API](https://harvest.aps.org/docs/harvest-api)
+
+《Review of Scientific Instruments》에서는 Crossref의 발행일 기준 조회 결과 72편이 모두 11월 1일로 기록됐다. 온라인 발행일을 기준으로 조회하면 네 주에 걸쳐 103편이 나왔고, 두 목록의 공통 DOI는 65개였다. Europe PMC가 수록한 65편도 모두 11월 1일로 표시됐다. 출판사의 호별 목록 요청에는 HTTP 403이 반환됐다. 계측 분야는 온라인 발행일을 독립적으로 확인할 때까지 자료원 비교 대상으로 둔다. [날짜 기준과 사례](expansion-measurements/2026-11-20/physics-journal-coverage.json)
+
 중력·고에너지·핵 분야 7개 분류에서는 INSPIRE에 등재된 고유 arXiv 식별자 2,575개 중 2,570개의 주간과 분류가 일치했다. 나머지는 두 자료원의 날짜 기준 차이 4건, arXiv에서 일반물리로만 분류한 논문 1건이었다. 유체·플라스마·통계물리의 월별 목록에서 따로 고른 12편도 첫 제출일과 주분류까지 모두 일치했다. 학술지에만 실린 연구, 원자·분자물리, 계측, 응집물질물리의 다른 영역은 추가 검증이 필요하다. [대조 기록과 불일치 5건](expansion-measurements/2026-11-20/physics-scope.json) · [arXiv 분야 분류](https://arxiv.org/category_taxonomy) · [INSPIRE 검색 안내](https://help.inspirehep.net/knowledge-base/inspire-paper-search/)
 
 ### Physics 순위에 분류별 상한이 준 영향

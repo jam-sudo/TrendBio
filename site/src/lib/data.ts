@@ -167,6 +167,22 @@ export function loadNote(slug: string): string | null {
   return html;
 }
 
+export function loadCorrection(slug: string, claims: string[], paperIds: string[]): string | null {
+  const source = readFileSync(join(NOTES_ROOT, `${slug}.md`), "utf8");
+  if (!/^---\r?\n/.test(source)) return loadNote(slug);
+  const header = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(source);
+  const scope = header && parse(header[1]);
+  if (!header || typeof scope?.claim !== "string" || !scope.claim.trim() || !Array.isArray(scope.papers)
+      || !scope.papers.length || !scope.papers.every((id: unknown) => typeof id === "string")
+      || new Set(scope.papers).size !== scope.papers.length) {
+    throw new Error(`Invalid editorial correction scope in ${slug}.md`);
+  }
+  const ids = new Set(paperIds);
+  if (ids.size !== scope.papers.length || !scope.papers.every((id: string) => ids.has(id))
+      || !claims.some(claim => claim.includes(scope.claim))) return null;
+  return marked.parse(source.slice(header[0].length), { async: false });
+}
+
 export function orphanNotes(domain: string): string[] {
   return getDataIndex(domain).orphanNotes;
 }

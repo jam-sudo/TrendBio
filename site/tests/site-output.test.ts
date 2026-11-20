@@ -269,4 +269,8 @@ it("credits the Earth pilot papers and links their datasets as supporting materi
   expect(await main.locator('a[href^="https://example.org/earth/"]').count()).toBe(3);
   expect(await main.getByRole("link", { name: "CC BY" }).count()).toBe(3);
   expect(await main.locator('a[href="https://doi.org/10.5555/example-data"]').count()).toBe(1);
+  expect(await main.getByRole("link", { name: "Preprint version" }).getAttribute("href")).toBe("https://doi.org/10.5555/example-preprint");
+  await page.setContent(read("ko/earth-environment/day/2026-11-01/index.html"));
+  await page.getByRole("main").locator("details summary").first().click();
+  expect(await page.getByRole("link", { name: "프리프린트 판본" }).getAttribute("href")).toBe("https://doi.org/10.5555/example-preprint");
 });

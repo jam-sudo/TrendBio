@@ -106,6 +106,13 @@ def dedupe(new: list[Item], store: Store | None = None) -> list[Item]:
             key=lambda match: match[0], default=(0, None),
         )
         if preprint is None:
+            relation = doi(paper.metadata.get('preprint_doi'))
+            if relation.startswith('10.48550/arxiv.'):
+                native = by_id.get('arxiv:' + relation.removeprefix('10.48550/arxiv.'))
+                if (native is not None and native.source == 'arxiv' and native.type == 'preprint'
+                        and paper.preprint_id in (None, native.id) and native.published_doi in (None, paper.doi)):
+                    preprint = native
+        if preprint is None:
             preprint = next((
                 candidate for candidate in by_title.get(normalize_title(paper.title), ())
                 if candidate.type == "preprint" and (paper.id in added or candidate.id in added)

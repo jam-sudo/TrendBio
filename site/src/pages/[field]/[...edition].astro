@@ -1,7 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PublicationEvidence from "../../components/PublicationEvidence.astro";
-import { loadDays, loadItems, loadNote, loadTaxonomy, loadTopic, NOTES_ROOT } from "../../lib/data";
+import { loadCorrection, loadDays, loadItems, loadTaxonomy, loadTopic, NOTES_ROOT } from "../../lib/data";
 import type { Day } from "../../lib/types";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -30,6 +30,7 @@ const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`),
 const archives: string[] = source.arxiv?.categories ?? [];
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
 const journals: string[] = source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
+const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
 const conferences: string[] = source.drops?.conferences ?? [];
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
@@ -44,12 +45,15 @@ const rows = (day?.ranked ?? []).map(row => {
   const papers = loadItems(field, entry?.item_ids ?? []);
   const synthesis = day?.run.notes.includes(`synthesis-fallback:${row.slug}`) ? null
     : row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
-  const correction = corrections.has(`${row.slug}.md`) ? loadNote(`${field}/${day!.date}/${row.slug}`) : null;
+  const correction = corrections.has(`${row.slug}.md`)
+    ? loadCorrection(`${field}/${day!.date}/${row.slug}`, [row.headline, row.summary, synthesis ?? ""], entry?.item_ids ?? [])
+    : null;
   return { row, papers, synthesis, correction };
 });
 ---
 
-<Base edition={field} title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
+<Base edition={field} editionSources={field === "physics-expanded" && !followsCrossref ? "arXiv" : undefined}
+  title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
   description={humanities ? "Humanities and arts research from journals and scholarly books." : `Daily ${label.toLowerCase()} research trends with the papers behind each ranking.`}
   canonicalPath={path} lastRun={day?.run.finished}>
   <div class="prose">
@@ -59,7 +63,7 @@ const rows = (day?.ranked ?? []).map(row => {
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
-    {source.crossref && journals.length > 0 && <p class="coverage">{source.crossref.data_journals ? "Research articles and data papers from" : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
+    {followsCrossref && journals.length > 0 && <p class="coverage">{source.crossref.data_journals ? "Research articles and data papers from" : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
     {source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
     {conferences.length > 0 && <p class="coverage">Regular conference papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
@@ -88,6 +92,7 @@ const rows = (day?.ranked ?? []).map(row => {
               {paper.source === "europepmc" && typeof paper.metadata.screening_status === "string" && <> · <strong>Currently excluded from new editions</strong></>}
               {paper.source === "europepmc" && Array.isArray(paper.metadata.correction_links) && paper.metadata.correction_links.filter(link => typeof link === "string" && /^https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov|doi\.org)\//.test(link)).map(link => <> · <a href={link}>Linked correction</a></>)}
               {["oai", "europepmc"].includes(paper.source) && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Original publication in ${languageNames.of(paper.metadata.language)}`}</span></>}
+              {Array.isArray(paper.metadata.preprint_dois) && paper.metadata.preprint_dois.filter(doi => typeof doi === "string" && /^10\.\d{4,9}\/\S+$/i.test(doi)).map(doi => <> · <a href={`https://doi.org/${doi}`}>Preprint version</a></>)}
               {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}
             </li>)}</ul>
           </details>}

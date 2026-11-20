@@ -1,7 +1,17 @@
 import { describe, expect, it, vi } from "vitest";
-import { allTopics, latestDay, loadDay, loadDays, loadItems, loadNote, loadTaxonomy, loadTopic } from "../src/lib/data";
+import { allTopics, latestDay, loadCorrection, loadDay, loadDays, loadItems, loadNote, loadTaxonomy, loadTopic } from "../src/lib/data";
 
 describe("fixture data", () => {
+  it("keeps a correction with its claim and original evidence across reranking", () => {
+    const slug = "physics/2026-11-01/cavity-readout-fixture";
+    const claim = "Three fixture papers examine light losses and readout noise.";
+    const ids = [3, 1, 2].map(n => `arxiv:optics-fixture-${n}`);
+    expect(loadCorrection(slug, [claim], ids)).toContain("Calibration record");
+    expect(loadCorrection(slug, ["The calibration is up to date."], ids)).toBeNull();
+    expect(loadCorrection(slug, [claim], ids.slice(1))).toBeNull();
+    expect(loadCorrection(slug, [claim], [...ids, "arxiv:fourth"])).toBeNull();
+  });
+
   it("loads the latest day", () => {
     expect(latestDay("computational")?.date).toBe("2026-11-01");
   });

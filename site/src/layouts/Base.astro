@@ -17,6 +17,7 @@ interface Props {
   heroAligned?: boolean;
   noindex?: boolean;
   edition?: Edition;
+  editionSources?: string;
 }
 
 const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, edition } = Astro.props;
@@ -121,7 +122,7 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
     {!edition && <SponsorColumns {heroAligned} />}
     </div>
     <footer>
-      <p>Auto-curated from {edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources"}. Summaries are machine-generated.</p>
+      <p>Auto-curated from {Astro.props.editionSources ?? (edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources")}. Summaries are machine-generated.</p>
       {!edition && <p><a href="/about">How this works</a> · <a href="/feed.xml">RSS</a></p>}
       {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>
