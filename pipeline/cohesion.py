@@ -12,12 +12,22 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
     comparison = deps.taxonomy.comparison_guidance
     comparison_model = 'claude-haiku-5-5' if comparison and deps.budget.over_ceiling() else 'claude-sonnet-5-5'
 
-    def partition(ids, *, proposed_question=None):
+    def partition(ids, *, proposal=None):
         items = [by_id[i] for i in sorted(ids)]
-        records = json.dumps([{'paper': n, 'title': i.title, 'abstract': i.abstract}
-                              for n, i in enumerate(items, 1)], ensure_ascii=False)
-        if proposed_question is not None:
-            prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposed_question, ensure_ascii=False) + '\n\n' + records
+        evidence = [{'paper': n, 'title': item.title, 'abstract': item.abstract}
+                    for n, item in enumerate(items, 1)]
+        if proposal is not None and deps.taxonomy.domain == 'physics-expanded':
+            anchors = {entry['id']: entry for entry in proposal['evidence']}
+            for item, record in zip(items, evidence, strict=True):
+                anchor = anchors[item.id]
+                if anchor.get('field') in ('title', 'abstract'):
+                    text = ' '.join(getattr(item, anchor['field']).split())
+                    start, length = anchor['start'], anchor['length']
+                    if 0 <= start and 12 <= length <= len(text) - start:
+                        record['first_review_passage'] = text[start:start + length]
+        records = json.dumps(evidence, ensure_ascii=False)
+        if proposal is not None:
+            prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposal['topic'], ensure_ascii=False) + '\n\n' + records
             options = {'model': comparison_model, 'effort': 'medium'}
             cache_inputs = [comparison_model, 'medium', sorted(ids), prompt]
             if deps.taxonomy.domain == 'physics-expanded':
@@ -59,7 +69,7 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
             accepted = {}
             candidate['comparisons'] = []
             for members in sorted(groups or {}):
-                check, confirmed = partition(members, proposed_question=groups[members]['topic'])
+                check, confirmed = partition(members, proposal=groups[members])
                 candidate['comparisons'].append({'review': check, 'items': list(members), 'failed': confirmed is None})
                 if confirmed is None:
                     failures.append(check)
