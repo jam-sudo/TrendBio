@@ -184,16 +184,19 @@ class LLM:
 
     def review_cohesion(self, prompt, items, key, *, model='claude-haiku-5-5', effort='low'):
         self.fallback_reasons.pop(key, None)
-        result = self._cohesion_partition(prompt, items, key, model, effort)
+        result, unmatched = self._cohesion_partition(prompt, items, key, model, effort)
         reason = self.fallback_reasons.get(key)
         if result is None and reason in {'validation:cohesion-evidence', 'validation:cohesion-membership'}:
             if reason == 'validation:cohesion-membership':
                 numbers = ', '.join(str(i) for i in range(1, len(items) + 1))
                 correction = f'The partition omitted or repeated a paper. Use each of these numbers exactly once: {numbers}.'
             else:
-                correction = ('A passage could not be located in its original source. Copy a continuous passage of at least '
-                              '12 characters exactly. The complete original title is acceptable when it supports the group.')
-            result = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort)
+                titles = [{'paper': n, 'title': items[n - 1].title} for n in unmatched]
+                correction = ('The quotations for the papers below could not be located. For each, copy a continuous '
+                              'passage of at least 12 characters from its own title or abstract, preserving capitalization, '
+                              'punctuation and notation. You may copy the exact title below if it supports the group. '
+                              'Return the complete partition.\n' + json.dumps(titles, ensure_ascii=False))
+            result, _ = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort)
         if result is not None:
             self.fallback_reasons.pop(key, None)
         return result
@@ -202,14 +205,14 @@ class LLM:
         result = self._parse(CohesionReview, [{'role': 'user', 'content': prompt}], model,
                              4096, effort, entity_id=key)
         if result is None:
-            return None
+            return None, []
         numbers = [e.paper for group in result.groups for e in group.evidence]
         if sorted(numbers) != list(range(1, len(items) + 1)):
-            return self._failure(key, 'validation:cohesion-membership')
-        groups = []
+            return self._failure(key, 'validation:cohesion-membership'), []
+        groups, unmatched = [], []
         for group in result.groups:
             if not group.topic.strip() or not group.evidence:
-                return self._failure(key, 'validation:cohesion-group')
+                return self._failure(key, 'validation:cohesion-group'), []
             evidence = []
             for entry in group.evidence:
                 item = items[entry.paper - 1]
@@ -221,9 +224,11 @@ class LLM:
                         evidence.append({'id': item.id, 'field': field, 'start': offset, 'length': len(passage)})
                         break
                 else:
-                    return self._failure(key, 'validation:cohesion-evidence')
+                    unmatched.append(entry.paper)
             groups.append({'topic': group.topic.strip(), 'evidence': evidence})
-        return {'groups': groups}
+        if unmatched:
+            return self._failure(key, 'validation:cohesion-evidence', detail=','.join(map(str, unmatched))), unmatched
+        return {'groups': groups}, []
 
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,

@@ -19,6 +19,12 @@ def publication_kind(day: date, started: datetime, backfilled: bool) -> str:
     return 'live' if _utc(started).date() == day else 'retrospective'
 
 
+def project_month(daily_costs: list[float]) -> float | None:
+    if len(daily_costs) < TARGET_LIVE_DATES:
+        return None
+    return round(sum(daily_costs[-TARGET_LIVE_DATES:]) * 30 / TARGET_LIVE_DATES, 4)
+
+
 def _edition(root: Path, field: str, day: date) -> dict:
     path = root / field / 'days' / f'{day}.json'
     if not path.is_file():
@@ -64,4 +70,4 @@ def audit_operations(root: Path, end: date, start: date | None = None) -> dict:
     return {'from': str(start), 'to': str(end), 'fields': fields, 'days': days,
             'matched_daily_cost_usd': matched, 'target_live_dates': TARGET_LIVE_DATES,
             'projection_basis_dates': basis,
-            'projected_30d_usd': round(sum(matched[d] for d in basis) * 30 / len(basis), 4) if basis else None}
+            'projected_30d_usd': project_month(list(matched.values()))}

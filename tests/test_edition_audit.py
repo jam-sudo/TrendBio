@@ -40,6 +40,9 @@ def test_beta_tracks_live_dates_and_excludes_backfills(tmp_path, fixtures_root):
     result = audit_beta(store, date(2026, 11, 3))
     assert result['live_editions'] == 1 and result['retrospective_dates'] == ['2026-11-02']
     assert result['measured_cost_days'] == 0 and result['projected_30d_usd'] is None
+    trial = audit_edition(store, date(2026, 11, 1), date(2026, 11, 3))
+    assert [d['publication_kind'] for d in trial['days']] == ['live', 'retrospective', 'backfill']
+    assert trial['measured_cost_days'] == 1 and trial['projected_30d_usd'] is None
 
 
 def test_sparse_edition_samples_disjoint_ranks_and_reports_review_exclusions(tmp_path, fixtures_root):

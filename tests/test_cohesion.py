@@ -44,6 +44,8 @@ def test_partition_checks_all_evidence_and_only_ranks_groups_with_three_sources(
     llm._parse.side_effect = [response, CohesionReview(groups=[group([n]) for n in range(1, 8)])]
     assert llm.review_cohesion('Original request', changed, 'retry')['groups']
     assert 'retry' not in llm.fallback_reasons
+    retry = llm._parse.call_args.args[1][0]['content']
+    assert json.loads(retry.splitlines()[-1]) == [{'paper': 2, 'title': changed[1].title}]
     llm._parse.side_effect = None
     llm._parse.return_value = CohesionReview(groups=[group([1, 2, 3]), group([1, 4, 5, 6])])
     assert review_clusters([ids], changed, store, deps, day)[1]

@@ -209,6 +209,12 @@ def build(root: Path) -> None:
         "arXiv:2611.19130 reports timing from a simulation. [arXiv:2611.19130](https://arxiv.org/abs/2611.19130)\n",
         encoding="utf-8",
     )
+    shared = notes / "physics" / "shared"
+    shared.mkdir(exist_ok=True)
+    (shared / "calibration.md").write_text(
+        "---\nclaim: The original calibration applies to this measurement.\n"
+        "papers: [arxiv:optics-fixture-1, arxiv:optics-fixture-2, arxiv:optics-fixture-3]\n---\n"
+        "The instrument used the updated calibration.\n", encoding="utf-8")
 
 
 def build_field_edition(root: Path, day: date, domain: str) -> None:

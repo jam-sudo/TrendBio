@@ -6,7 +6,7 @@ import json
 
 from pipeline.cluster import cluster_items
 from pipeline.config import load_scoring, load_taxonomy
-from pipeline.operations import TARGET_LIVE_DATES, publication_kind
+from pipeline.operations import TARGET_LIVE_DATES, project_month, publication_kind
 from pipeline.score import rank
 from pipeline.store import Store
 
@@ -130,6 +130,7 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                                             'evidence': [paper.id]})
         alternative = {t.slug for t, _, _ in rank(alt_rows, cfg)[:10]}
         metrics = {'date': str(when), 'status': day.run.status, 'backfilled': day.run.backfilled,
+                   'publication_kind': publication_kind(when, day.run.started, day.run.backfilled),
                    'elapsed_seconds': (day.run.finished - day.run.started).total_seconds(),
                    'model_cost_usd': day.run.model_cost_usd, 'source_status': day.run.source_status,
                    'categories': dict(counts), 'venues': venues, 'paper_to_cluster_categories': dict(assignments),
@@ -160,9 +161,9 @@ def audit_edition(store: Store, start: date, end: date, references=()):
                                 'ranked': bool(matches & ranked_ids)})
     report['review_samples'] = {key: _review_sample(value) for key, value in samples.items()}
     report['references'] = ref_results
-    measured = [d['model_cost_usd'] for d in report['days'] if not d['backfilled'] and d['model_cost_usd'] is not None]
+    measured = [d for d in report['days'] if not d['backfilled'] and d['model_cost_usd'] is not None]
     report['measured_cost_days'] = len(measured)
-    report['projected_30d_usd'] = round(sum(measured) * 30 / len(measured), 4) if measured else None
+    report['projected_30d_usd'] = project_month([d['model_cost_usd'] for d in measured if d['publication_kind'] == 'live'])
     return report
 
 
@@ -176,9 +177,7 @@ def audit_beta(store: Store, through: date):
     if not live:
         return {**progress, 'measured_cost_days': 0, 'projected_30d_usd': None}
     report = audit_edition(store, live[0].date, end)
-    measured = [d.run.model_cost_usd for d in live if d.run.model_cost_usd is not None]
-    report.update(progress, measured_cost_days=len(measured),
-                  projected_30d_usd=round(sum(measured) * 30 / len(measured), 4) if len(measured) == TARGET_LIVE_DATES else None,
+    report.update(progress, measured_cost_days=sum(d.run.model_cost_usd is not None for d in live),
                   live_statuses=dict(Counter(d.run.status for d in live)),
                   backfilled_dates=[d['date'] for d in report['days'] if d['backfilled']])
     return report
