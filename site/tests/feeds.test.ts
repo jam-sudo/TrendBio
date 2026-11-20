@@ -2,6 +2,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "nod
 import { join, resolve } from "node:path";
 import { afterAll, beforeAll, expect, it, vi } from "vitest";
 import { chromium, type Browser, type Page } from "playwright";
+import { createContext } from "astro/middleware";
 import { atomFeed } from "../src/lib/feeds";
 import { industryItems, loadDays, loadTaxonomy } from "../src/lib/data";
 import sample from "./fixtures/feed.json";
@@ -111,11 +112,14 @@ it("caps at 30 stored days and 100 category entries, escapes XML and falls back 
   expect(category.entries.some(entry => entry.id?.endsWith(days[0].ranked[7].slug))).toBe(true);
 });
 
-it("sets the Atom MIME type in endpoints and in the static hosting headers", async () => {
-  const context = { site: new URL("https://trendbio.dev"), props: { category: loadTaxonomy("computational")[0] } };
+it("serves English Atom feeds with the declared MIME type", async () => {
+  const site = new URL("https://trendbio.dev");
+  const context = createContext({ request: new Request(site), defaultLocale: "en" });
+  Object.assign(context, { site, props: { category: loadTaxonomy("computational")[0] } });
   for (const endpoint of [await import("../src/pages/feed.xml"), await import("../src/pages/feed/[category].xml")]) {
-    const response = await endpoint.GET(context as Parameters<typeof endpoint.GET>[0]);
+    const response = await endpoint.GET(context);
     expect(response.headers.get("Content-Type")).toBe("application/atom+xml; charset=utf-8");
+    expect((await parse(await response.text())).language).toBe("en");
   }
   expect(readFileSync("dist/_headers", "utf8")).toContain("/feed.xml\n  Content-Type: application/atom+xml; charset=utf-8\n/feed/*\n  Content-Type: application/atom+xml; charset=utf-8");
 });

@@ -1,25 +1,29 @@
 ---
 import RankChange from "./RankChange.astro";
+import CrossCoverage from "./CrossCoverage.astro";
+import { crossCoverage } from "../lib/shared-papers";
 import ToolNames from "./ToolNames.astro";
 import CategoryIcon from "./CategoryIcon.astro";
 import SignalLine from "./SignalLine.astro";
 import { loadTaxonomy } from "../lib/data";
 import { categoryStyle, rankMedal } from "../lib/categories";
 import type { LeaderboardTopic } from "../lib/leaderboard";
-interface Props { ranked: LeaderboardTopic; featured?: boolean; compact?: boolean; period?: boolean }
-const { ranked, featured = false, compact = false, period = false } = Astro.props;
+interface Props { ranked: LeaderboardTopic; date?: string; featured?: boolean; compact?: boolean; period?: boolean }
+const { ranked, date, featured = false, compact = false, period = false } = Astro.props;
+const matches = date ? crossCoverage("computational", date, ranked.slug) : [];
 const category = loadTaxonomy("computational").find(({ slug }) => slug === ranked.category);
 const secondary = ranked.secondary_categories;
 const rise = ranked.stats.find(({ label }) => label === "Rise");
 const identity = categoryStyle(ranked.category);
 ---
-{compact ? <article class:list={["compact-row", { "period-row": period, "has-tool-names": ranked.toolNames.length > 0 }]}
+{compact ? <article id={date ? ranked.slug : undefined} class:list={["compact-row", { "period-row": period, "has-tool-names": ranked.toolNames.length > 0, "has-coverage": matches.length > 0 }]}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span class="sr-only">Rank </span>{ranked.rank}</span>
   <CategoryIcon slug={ranked.category} size={16} />
   <div class="compact-copy">
     <a class="topic-link" href={`/topic/${ranked.slug}/`}><span class="compact-headline">{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</span></a>
     <ToolNames names={ranked.toolNames} />
+    {date && matches.length > 0 && <CrossCoverage {matches} {date} summary={ranked.summary} />}
   </div>
   <div class="compact-meta">
     <RankChange change={ranked.rankChange} />
@@ -27,7 +31,7 @@ const identity = categoryStyle(ranked.category);
     <span class="compact-category">{category?.label ?? ranked.category}</span>
   </div>
   {period && <SignalLine stats={ranked.stats} />}
-</article> : <article class:list={["topic-card", { featured }]}
+</article> : <article id={date ? ranked.slug : undefined} class:list={["topic-card", { featured }]}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
   <CategoryIcon slug={ranked.category} size={36} />
@@ -36,6 +40,7 @@ const identity = categoryStyle(ranked.category);
     <h2><a class="topic-link" href={`/topic/${ranked.slug}/`}>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</a></h2>
     <ToolNames names={ranked.toolNames} />
     {ranked.summary && <p class="summary">{ranked.summary}</p>}
+    {date && matches.length > 0 && <CrossCoverage {matches} {date} />}
   </div>
   <SignalLine stats={ranked.stats} />
 </article>}
@@ -46,7 +51,7 @@ const identity = categoryStyle(ranked.category);
   .topic-link:focus-visible::after { outline: 2px solid var(--fg); outline-offset: 4px; }
   .compact-copy { flex: 1; min-width: 0; }
   .compact-meta { display: contents; }
-  .compact-row.has-tool-names { height: auto; min-height: 56px; padding-block: 0.5rem; }
+  .compact-row.has-tool-names, .compact-row.has-coverage { height: auto; min-height: 56px; padding-block: 0.5rem; }
   .auto-label { color: var(--muted); font-size: var(--t3); font-weight: 400; }
   .compact-row.period-row { height: auto; min-height: 64px; flex-wrap: wrap; padding-block: 0.5rem; }
   @media (max-width: 800px) {

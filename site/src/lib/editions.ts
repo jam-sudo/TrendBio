@@ -1,4 +1,5 @@
 import { loadDays } from "./data";
+import type { Day, RankedTopic } from "./types";
 
 export const editionInfo = {
   physics: { label: "Physics", source: "arXiv", stage: "" },
@@ -16,5 +17,36 @@ export const editionInfo = {
   "humanities-arts": { label: "Humanities & Arts", source: "Thoth, OpenEdition and Crossref", stage: "Pilot" },
 } as const;
 export type Edition = keyof typeof editionInfo;
-export const editions = (Object.keys(editionInfo) as Edition[]).filter(field =>
+const configured = Object.keys(editionInfo) as Edition[];
+export const publicEditions = configured.filter(field => editionInfo[field].stage !== "Pilot");
+export const editions = configured.filter(field =>
   editionInfo[field].stage !== "Pilot" || loadDays(field).length > 0);
+
+export type Field = Edition | "computational";
+export function fieldLabel(field: Field): string {
+  if (field === "computational") return "CompBio";
+  return field === "biology" ? "All Biology" : editionInfo[field].label;
+}
+
+export function datedTopic(field: Field, date: string, slug: string): string {
+  const prefix = field === "computational" ? "" : `/${field}`;
+  return `${prefix}/day/${date}/#${encodeURIComponent(slug)}`;
+}
+
+const byIssue = new WeakMap<Day[], Map<string, { day: Day; row: RankedTopic }[]>>();
+export function topicAppearances(field: Edition) {
+  const days = loadDays(field);
+  let topics = byIssue.get(days);
+  if (!topics) {
+    topics = new Map();
+    for (const day of days) {
+      for (const row of day.ranked) {
+        const appearances = topics.get(row.slug) ?? [];
+        appearances.push({ day, row });
+        topics.set(row.slug, appearances);
+      }
+    }
+    byIssue.set(days, topics);
+  }
+  return topics;
+}

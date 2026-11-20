@@ -48,7 +48,43 @@ it("searches a fixture headline and displays its category and excerpt", async ()
   const result = page.locator('#search-results li').filter({ hasText: "Binder design gains shared evaluation tools" });
   expect(await result.locator("a").getAttribute("href")).toBe("/topic/protein-design-binders-a1b2/");
   expect(await result.locator(".category").textContent()).toBe("Structural bio & protein design");
+  expect(await result.locator(".result-field").textContent()).toContain("CompBio");
   expect(await result.locator(".excerpt").textContent()).toBeTruthy();
+});
+
+it("finds a dated Physics ranking and its sources from field-filtered search", async () => {
+  await visit("/physics/");
+  await page.getByRole("combobox", { name: "Search topics" }).fill("readout noise");
+  const suggestion = page.getByRole("option").filter({ hasText: "Optical cavities reveal sources of readout noise" });
+  await suggestion.waitFor();
+  expect(await suggestion.locator("small").textContent()).toContain("Physics");
+  await visit("/search/?q=readout+noise&field=physics");
+  await finished();
+  const field = page.getByLabel("Field", { exact: true });
+  const category = page.getByLabel("Category", { exact: true });
+  const result = page.locator('#search-results li').filter({ hasText: "Optical cavities reveal sources of readout noise" });
+  expect(await result.locator(".result-field").textContent()).toContain("Physics");
+  const optics = (await result.locator(".category").textContent())!;
+  await category.selectOption({ label: optics });
+  await result.locator("a").click();
+  expect(new URL(page.url()).pathname).toBe("/physics/topic/cavity-readout-fixture/");
+  expect(await page.locator("html").getAttribute("lang")).toBe("en");
+  expect(await page.locator("main details[open] li > a").count()).toBe(3);
+  expect(await page.getByRole("note").textContent()).toContain("Editorial correction");
+  await page.locator("main a[href*='/day/2026-11-01/#']").click();
+  expect(await page.locator(":target h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
+  await visit("/search/?q=readout+noise&field=physics&category=" + encodeURIComponent(optics));
+  await finished();
+  await field.selectOption("computational");
+  await finished();
+  expect(await category.inputValue()).toBe("");
+  expect(await page.locator('#search-results a[href^="/physics/"]').count()).toBe(0);
+  expect(new URL(page.url()).searchParams.get("field")).toBe("computational");
+  await visit("/search/?q=readout+noise&field=unlisted");
+  await finished();
+  expect(await field.inputValue()).toBe("");
+  expect(new URL(page.url()).searchParams.has("field")).toBe(false);
+  expect(await result.count()).toBe(1);
 });
 
 it("prefills and runs URL queries, and shows an empty state for nonsense", async () => {
@@ -113,7 +149,7 @@ it("loads no Pagefind files on home or before a search and explains the JavaScri
 
 it("indexes only topic pages and keeps search out of the sitemap with noindex", () => {
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith(".html"))) {
-    expect(readFileSync(`dist/${path}`, "utf8").includes("data-pagefind-body"), path).toBe(/^(ko\/)?topic\//.test(path));
+    expect(readFileSync(`dist/${path}`, "utf8").includes("data-pagefind-body"), path).toBe(/^(?:(?:physics|biology)\/)?topic\//.test(path));
   }
   expect(readFileSync("dist/search/index.html", "utf8")).toContain('name="robots" content="noindex"');
   expect(readFileSync("dist/sitemap.xml", "utf8")).not.toContain("/search/");

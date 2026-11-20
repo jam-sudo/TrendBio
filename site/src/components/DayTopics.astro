@@ -40,15 +40,15 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
 {ranked.length === 0 && <p class="notice"><span class="badge">{period ? "QUIET PERIOD" : "QUIET DAY"}</span> {period ? "No topic history in this period." : "Quiet day: no topic cleared the bar."}</p>}
 <CategoryChips categories={categories} counts={counts} />
 <div class="topic-list">
-  {ranked.filter((topic) => topic.rank <= featured_n).map((topic) => <TopicCard ranked={topic} featured={topic.rank === 1} />)}
+  {ranked.filter((topic) => topic.rank <= featured_n).map((topic) => <TopicCard ranked={topic} date={day?.date} featured={topic.rank === 1} />)}
 </div>
 {compact.length > 0 && <div class="compact-list open-list">
-  {compact.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
+  {compact.map((topic) => <TopicCard ranked={topic} date={day?.date} compact period={!!period} />)}
 </div>}
 {more.length > 0 && <details data-more-topics>
   <summary><span class="closed-label">Show {more.length} more</span><span class="open-label">Show less</span></summary>
   <div class="compact-list">
-    {more.map((topic) => <TopicCard ranked={topic} compact period={!!period} />)}
+    {more.map((topic) => <TopicCard ranked={topic} date={day?.date} compact period={!!period} />)}
   </div>
 </details>}
 

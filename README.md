@@ -26,6 +26,8 @@ TrendBio reads each day's new preprints, papers, repositories and company posts 
 
 All editions publish in English. Citations keep the original publication titles when an English title is unavailable. Previous Korean edition links open the corresponding English pages.
 
+Search covers CompBio, All Biology and Physics. Filter by field or category to find a topic and its supporting papers. When two editions rank the same paper on the same date, “Also covered in” links their rankings and lists the papers they share. [Search all editions](https://trendbio.dev/search/)
+
 All Biology (beta) at `/biology/` has its own daily rankings, dated editions and evidence from bioRxiv and PubMed. CompBio remains the default at `/`. Run the beta with `python -m pipeline run --domain biology`. The [science expansion roadmap and coverage audit](docs/science-expansion-plan.en.md) describes the proposed rollout.
 
 The Physics edition at `/physics/` ranks arXiv preprints in quantum physics, optics, mesoscale and nanoscale physics, and cosmology. Each dated edition links its supporting papers. Run it locally with `python -m pipeline run --domain physics`. The daily workflow processes each edition independently and writes Physics results to `data/physics/`.

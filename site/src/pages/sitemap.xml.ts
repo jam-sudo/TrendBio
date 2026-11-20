@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { editions } from "../lib/editions";
+import { editions, publicEditions, topicAppearances } from "../lib/editions";
 import { loadDays } from "../lib/data";
 import { loadPeriods, topicPages } from "../lib/period-data";
 
@@ -14,6 +14,8 @@ export const GET: APIRoute = ({ site }) => {
         ...editionsByDate.map(({ date }) => ({ path: `/${field}/day/${date}/`, date })),
       ];
     }),
+    ...publicEditions.flatMap(field => Array.from(topicAppearances(field), ([slug, appearances]) =>
+      ({ path: `/${field}/topic/${slug}/`, date: appearances[0].day.date }))),
     ...["/", "/topics/", "/map/", "/archive/", "/about/", "/week/", "/month/"].map(path => ({ path, date: today })),
     ...days.map(({ date }) => ({ path: `/day/${date}/`, date })),
     ...([["week", weeks], ["month", months]] as const).flatMap(([kind, periods]) =>

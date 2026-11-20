@@ -7,7 +7,7 @@ import SponsorColumns from "../components/SponsorColumns.astro";
 import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
 
-import { editionInfo, editions, type Edition } from "../lib/editions";
+import { editionInfo, editions, publicEditions, type Edition } from "../lib/editions";
 
 interface Props {
   title?: string;
@@ -63,7 +63,7 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
         <div class="field-bar">
           <div class="field-links" role="group" aria-label="Science field">
             <a href="/" aria-current={biology ? "true" : undefined}>Biology</a>
-            {editions.filter(field => field !== "biology" && editionInfo[field].stage !== "Pilot").map(field =>
+            {publicEditions.filter(field => field !== "biology").map(field =>
               <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}
             {pilots.length > 0 && <details class="pilot-fields">
               <summary>Pilot editions</summary>
@@ -88,7 +88,7 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
       </nav>
       </div>
       <slot name="hero" />
-      {!edition && canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
+      {(!edition || publicEditions.includes(edition)) && canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
         <label class="sr-only" for="header-search-query">Search topics</label>
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />
         <div id="header-search-panel" hidden>

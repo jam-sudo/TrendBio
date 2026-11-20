@@ -1,0 +1,23 @@
+---
+import { datedTopic, fieldLabel } from "../lib/editions";
+import type { SharedRanking } from "../lib/shared-papers";
+
+interface Props { matches: SharedRanking[]; date: string; summary?: string }
+const { matches, date, summary } = Astro.props;
+const fields = [...new Set(matches.map(row => fieldLabel(row.field)))];
+---
+{matches.length > 0 && <details class="cross-coverage" data-edition-navigation data-pagefind-ignore>
+  <summary>Also covered in {fields.join(", ")}</summary>
+  {summary && <p>{summary}</p>}
+  <ul>{matches.map(row => <li>
+    <a href={datedTopic(row.field, date, row.slug)}>{fieldLabel(row.field)} #{row.rank} · {row.headline}</a>
+    <small>{date} · {row.papers.length} shared {row.papers.length === 1 ? "paper" : "papers"}</small>
+    <ul>{row.papers.map(paper => <li><a href={paper.url}>{paper.title}</a></li>)}</ul>
+  </li>)}</ul>
+</details>}
+<style>
+  .cross-coverage { position: relative; z-index: 1; margin-block: .35rem 0; font-size: var(--t3); overflow-wrap: anywhere; }
+  summary { cursor: pointer; width: fit-content; max-width: 100%; }
+  ul { margin: .4rem 0; padding-inline-start: 1.25rem; }
+  small { display: block; color: var(--muted); }
+</style>

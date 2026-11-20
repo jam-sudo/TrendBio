@@ -62,7 +62,7 @@ if (input) {
           link.setAttribute('aria-selected', 'false');
           link.textContent = result.meta.title;
           const category = document.createElement('small');
-          category.textContent = result.filters.category.join(', ');
+          category.textContent = [result.meta.field, result.filters.category.join(', ')].filter(Boolean).join(' · ');
           link.append(category);
           list.append(link);
         }

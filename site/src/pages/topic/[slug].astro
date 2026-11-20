@@ -6,6 +6,8 @@ import SignalBadges from "../../components/SignalBadges.astro";
 import Sparkline from "../../components/Sparkline.astro";
 import EditorNote from "../../components/EditorNote.astro";
 import EvidenceList from "../../components/EvidenceList.astro";
+import CrossCoverage from "../../components/CrossCoverage.astro";
+import { crossCoverage } from "../../lib/shared-papers";
 import { latestDay, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
 import { hasPapers, topicEvidence } from "../../lib/citations";
 import { topicPages } from "../../lib/period-data";
@@ -32,7 +34,7 @@ const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
 <Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
   <article class="prose" data-pagefind-body data-pagefind-filter={`category:${category}`}>
     {latestRanked && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
-    <p class="rank-category"><CategoryIcon slug={topic.category} size={36} /> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>
+    <p class="rank-category" data-pagefind-filter="field:computational" data-pagefind-meta="field:CompBio"><CategoryIcon slug={topic.category} size={36} /> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>
     <h1>{headline}</h1>
     {topic.summary && <p>{topic.summary}</p>}
     {latestEntry && <SignalBadges signals={latestEntry.signals} />}
@@ -41,6 +43,7 @@ const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
     <EditorNote html={loadNote(topic.slug)} />
     {hasPapers(evidence) && <p data-pagefind-ignore><a href={`/topic/${topic.slug}/citations.bib`} download>Export citations (BibTeX)</a></p>}
     <EvidenceList items={evidence} oneLiners={topic.item_one_liners} previousRanked={previousRanked} />
+    {latestRanked && <CrossCoverage date={latestRanked.date} matches={crossCoverage(domain, latestRanked.date, topic.slug)} />}
     {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading" data-pagefind-ignore>
       <h2 id="related-heading">Related topics</h2>
       <ul>{related.map((entry) => <li>{entry.history.some((day) => day.rank !== null)

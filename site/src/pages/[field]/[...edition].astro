@@ -1,12 +1,14 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PublicationEvidence from "../../components/PublicationEvidence.astro";
-import { loadCorrection, loadDays, loadEditionVenues, loadItems, loadTaxonomy, loadTopic } from "../../lib/data";
+import FieldEvidence from "../../components/FieldEvidence.astro";
+import CrossCoverage from "../../components/CrossCoverage.astro";
+import { crossCoverage } from "../../lib/shared-papers";
+import { loadDays, loadEditionVenues, loadTaxonomy } from "../../lib/data";
 import type { Day } from "../../lib/types";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parse } from "yaml";
-import { editionInfo, editions, type Edition } from "../../lib/editions";
+import { editionInfo, editions, publicEditions, type Edition } from "../../lib/editions";
 
 export function getStaticPaths() {
   return editions.flatMap(field => {
@@ -38,18 +40,8 @@ const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
 const conferences: string[] = source.drops?.conferences ?? [];
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
 const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
-const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
+const isPublic = publicEditions.includes(field);
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
-const rows = (day?.ranked ?? []).map(row => {
-  const topic = loadTopic(field, row.slug);
-  const entry = topic?.history.find(entry => entry.date === day?.date);
-  const papers = loadItems(field, entry?.item_ids ?? []);
-  const singleSource = day?.run.notes.includes(`synthesis-fallback:${row.slug}`);
-  const synthesis = singleSource ? null
-    : row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
-  const correction = loadCorrection(field, day!.date, row.slug, [row.headline, row.summary, synthesis ?? ""], entry?.item_ids ?? []);
-  return { row, papers, synthesis, correction, singleSource };
-});
 ---
 
 <Base edition={field} editionSources={["physics-expanded", "math"].includes(field) && !followsCrossref ? "arXiv" : undefined}
@@ -79,28 +71,14 @@ const rows = (day?.ranked ?? []).map(row => {
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
-      {rows.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
+      {day.ranked.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
       <ol class="rankings">
-        {rows.map(({ row, synthesis, papers, correction, singleSource }) => <li value={row.rank} id={row.slug}>
+        {day.ranked.map(row => <li value={row.rank} id={row.slug}>
           <p class="category">{categories.get(row.category) ?? row.category}</p>
-          <h3>{row.headline}</h3>
+          <h3>{isPublic ? <a data-topic-permalink href={`/${field}/topic/${row.slug}/`}>{row.headline}</a> : row.headline}</h3>
           <p>{row.summary}</p>
-          {singleSource && <p><small>This headline and summary describe one supporting work.</small></p>}
-          {correction && <aside class="correction" role="note"><strong>Editorial correction</strong><div set:html={correction} /></aside>}
-          {papers.length > 0 && <details>
-            <summary>{papers.length} supporting {humanities ? (papers.length === 1 ? "work" : "works") : (papers.length === 1 ? "paper" : "papers")}</summary>
-            {synthesis && <p>{synthesis}</p>}
-            <ul>{papers.map(paper => <li>{humanities ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
-              {paper.source === "worldbank" && <> · <span>Working paper</span></>}
-              {paper.source === "europepmc" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher article</a></>}
-              {paper.source === "crossref" && typeof paper.metadata.pmid === "string" && /^\d+$/.test(paper.metadata.pmid) && <> · <a href={`https://pubmed.ncbi.nlm.nih.gov/${paper.metadata.pmid}/`}>Indexed abstract</a></>}
-              {paper.source === "europepmc" && typeof paper.metadata.screening_status === "string" && <> · <strong>Currently excluded from new editions</strong></>}
-              {Array.isArray(paper.metadata.correction_links) && paper.metadata.correction_links.filter(link => typeof link === "string" && /^https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov|doi\.org)\//.test(link)).map(link => <> · <a href={link}>Linked correction</a></>)}
-              {["oai", "europepmc"].includes(paper.source) && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Original publication in ${languageNames.of(paper.metadata.language)}`}</span></>}
-              {Array.isArray(paper.metadata.preprint_dois) && paper.metadata.preprint_dois.filter(doi => typeof doi === "string" && /^10\.\d{4,9}\/\S+$/i.test(doi)).map(doi => <> · <a href={`https://doi.org/${doi}`}>Preprint version</a></>)}
-              {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}
-            </li>)}</ul>
-          </details>}
+          <FieldEvidence {field} {day} {row} />
+          {isPublic && <CrossCoverage date={day.date} matches={crossCoverage(field, day.date, row.slug)} />}
         </li>)}
       </ol>
       {Astro.params.edition ? <p class="archive"><a href={`/${field}/#editions`}>Browse {field} editions</a></p> : <details class="archive" id="editions"><summary>{label} editions by date</summary>
@@ -118,8 +96,6 @@ const rows = (day?.ranked ?? []).map(row => {
   .category { margin: 0; font-size: var(--t3); }
   h3 { margin: .25rem 0; font-size: 1.15rem; }
   .rankings p { margin-bottom: .5rem; }
-  .correction { border-inline-start: 3px solid currentColor; padding-inline-start: .75rem; margin: 1rem 0; }
-  details p { margin-top: .75rem; }
   summary { cursor: pointer; }
   .archive { margin-block-start: 2rem; }
 </style>

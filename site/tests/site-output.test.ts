@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import { chromium, type Browser, type Page } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { getDataIndex } from "../src/lib/data";
-import { editions } from "../src/lib/editions";
+import { editions, publicEditions } from "../src/lib/editions";
 import { loadPeriods } from "../src/lib/period-data";
 import { truncateDescription } from "../src/lib/metadata";
 
@@ -81,8 +81,18 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   const { weeks, months } = loadPeriods();
   const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
   const fieldPages = editions.reduce((n, field) => n + 1 + getDataIndex(field).days.length, 0);
-  expect(parsed.entries).toHaveLength(7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size);
+  const fieldTopics = new Map<string, string>();
+  for (const field of publicEditions) {
+    for (const day of getDataIndex(field).days) {
+      for (const row of day.ranked) {
+        const url = `https://trendbio.dev/${field}/topic/${row.slug}/`;
+        if (!fieldTopics.has(url)) fieldTopics.set(url, day.date);
+      }
+    }
+  }
+  expect(parsed.entries).toHaveLength(7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
+  for (const [url, date] of fieldTopics) expect(urls.get(url)).toBe(date);
   expect(urls.size).toBe(parsed.entries.length);
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
     expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(path !== "search/index.html");
@@ -131,6 +141,7 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
     const main = page.locator("main");
     expect(await main.locator("h1").textContent()).toBe("Physics");
     expect(await main.locator("ol h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
+    expect(await main.locator("ol h3 a").getAttribute("href")).toBe("/physics/topic/cavity-readout-fixture/");
     expect(await main.locator('a[href^="https://example.org/physics/"]').count()).toBe(3);
     const archiveLink = path === "physics/index.html" ? "/physics/day/2026-11-01/" : "/physics/#editions";
     expect(await main.locator(`a[href="${archiveLink}"]`).count()).toBe(1);

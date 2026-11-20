@@ -1,9 +1,17 @@
 ---
 import Base from "../layouts/Base.astro";
 import { loadTaxonomy } from "../lib/data";
+import { fieldLabel, publicEditions, type Field } from "../lib/editions";
+const fields: Field[] = ["computational", ...publicEditions];
+const categories = new Map<string, Field[]>();
+for (const field of fields) {
+  for (const { label } of loadTaxonomy(field)) {
+    categories.set(label, [...(categories.get(label) ?? []), field]);
+  }
+}
 ---
 
-<Base title="Search — TrendBio" description="Search computational biology topics, paper titles and tools." canonicalPath="/search/" noindex>
+<Base title="Search — TrendBio" description="Search research topics, paper titles and tools across TrendBio editions." canonicalPath="/search/" noindex>
   <section class="prose" aria-labelledby="search-heading">
     <h1 id="search-heading">Search topics</h1>
     <p id="search-help">Search topic headlines, summaries, syntheses, paper titles and tool names.</p>
@@ -11,10 +19,15 @@ import { loadTaxonomy } from "../lib/data";
     <form role="search" hidden>
       <label for="search-query">Search topics</label>
       <input id="search-query" name="q" type="search" aria-describedby="search-help" />
+      <label for="search-field">Field</label>
+      <select id="search-field">
+        <option value="">All fields</option>
+        {fields.map(field => <option value={field}>{fieldLabel(field)}</option>)}
+      </select>
       <label for="search-category">Category</label>
       <select id="search-category">
         <option value="">All categories</option>
-        {loadTaxonomy("computational").map(category => <option value={category.label}>{category.label}</option>)}
+        {Array.from(categories, ([label, fields]) => <option value={label} data-fields={fields.join(" ")}>{label}</option>)}
       </select>
       <button type="submit">Search</button>
     </form>
@@ -22,7 +35,7 @@ import { loadTaxonomy } from "../lib/data";
     <ul id="search-results" aria-label="Search results"></ul>
     <button id="search-more" type="button" hidden>Show more results</button>
     <template id="search-result">
-      <li><h2><a></a></h2><p class="category"></p><p class="excerpt"></p></li>
+      <li><h2><a></a></h2><p class="result-meta"><span class="result-field"></span><span class="category"></span></p><p class="excerpt"></p></li>
     </template>
   </section>
 </Base>
@@ -32,6 +45,7 @@ import { loadTaxonomy } from "../lib/data";
 
   const form = document.querySelector('form[role="search"]');
   const input = document.getElementById('search-query');
+  const field = document.getElementById('search-field');
   const category = document.getElementById('search-category');
   const status = document.getElementById('search-status');
   const list = document.getElementById('search-results');
@@ -48,6 +62,7 @@ import { loadTaxonomy } from "../lib/data";
       const link = row.querySelector('a');
       link.href = result.url;
       link.textContent = result.meta.title;
+      row.querySelector('.result-field').textContent = result.meta.field ? result.meta.field + ' · ' : '';
       row.querySelector('.category').textContent = result.filters.category.join(', ');
       // Pagefind escapes indexed text before adding its <mark> highlights.
       row.querySelector('.excerpt').innerHTML = result.excerpt;
@@ -67,6 +82,10 @@ import { loadTaxonomy } from "../lib/data";
     const url = new URL(location.href);
     if (query) url.searchParams.set('q', query);
     else url.searchParams.delete('q');
+    for (const [key, select] of [['field', field], ['category', category]]) {
+      if (select.value) url.searchParams.set(key, select.value);
+      else url.searchParams.delete(key);
+    }
     history.replaceState(null, '', url);
     list.replaceChildren();
     more.hidden = true;
@@ -79,7 +98,8 @@ import { loadTaxonomy } from "../lib/data";
     try {
       const pagefindPath = '/pagefind/pagefind.js';
       const pagefind = await import(/* @vite-ignore */ pagefindPath);
-      const search = await pagefind.search(query, { filters: category.value ? { category: category.value } : {} });
+      const filters = { ...(field.value && { field: field.value }), ...(category.value && { category: category.value }) };
+      const search = await pagefind.search(query, { filters });
       const filtered = await filterResults(query, search.results);
       if (current !== request) return;
       results = filtered;
@@ -90,7 +110,20 @@ import { loadTaxonomy } from "../lib/data";
   }
 
   form.hidden = false;
-  input.value = (new URLSearchParams(location.search).get('q') ?? '').trim();
+  function updateCategories() {
+    for (const option of category.options) {
+      const unavailable = !!(field.value && option.value && !option.dataset.fields.split(' ').includes(field.value));
+      option.hidden = option.disabled = unavailable;
+      if (unavailable && option.selected) category.value = '';
+    }
+  }
+  const params = new URLSearchParams(location.search);
+  input.value = (params.get('q') ?? '').trim();
+  for (const [name, select] of [['field', field], ['category', category]]) {
+    select.value = params.get(name) ?? '';
+    if (select.selectedIndex < 0) select.selectedIndex = 0;
+  }
+  updateCategories();
   if (!input.value) input.focus();
   form.addEventListener('submit', event => { event.preventDefault(); search(); });
   input.addEventListener('input', () => {
@@ -99,6 +132,7 @@ import { loadTaxonomy } from "../lib/data";
     timer = setTimeout(search, 150);
   });
   category.addEventListener('change', search);
+  field.addEventListener('change', () => { updateCategories(); search(); });
   more.addEventListener('click', async () => {
     const current = request;
     try { await showResults(current); }
@@ -119,7 +153,7 @@ import { loadTaxonomy } from "../lib/data";
   ul { list-style: none; padding: 0; }
   li { padding-block: 1.25rem; border-top: 1px solid var(--border); overflow-wrap: anywhere; }
   h2 { margin: 0 0 0.25rem; }
-  .category { color: var(--muted); font-size: var(--t3); margin-bottom: 0.5rem; }
+  .result-meta { color: var(--muted); font-size: var(--t3); margin-bottom: 0.5rem; }
   .excerpt { margin: 0; }
   .excerpt :global(mark) { background: var(--raised); color: var(--fg); font-weight: 700; }
 </style>

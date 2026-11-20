@@ -40,7 +40,8 @@ if (ranked.length) {
     assert.equal(text(children(row, 'p')[1]), summary);
     const topic = read(join(store, 'topics', slug + '.json'));
     const history = topic.history.find(entry => entry.date === date);
-    const sources = [...elements(row)].find(n => n.tagName === 'ul');
+    const evidence = children(row, 'details').find(n => attr(n, 'data-edition-navigation') === undefined);
+    const sources = children(evidence, 'ul')[0];
     const links = children(sources, 'li').map(li => attr(children(li, 'a')[0], 'href'));
     assert.deepEqual(links, history.item_ids.map(id => urls.get(id)), 'Supporting papers for ' + slug);
   }
@@ -49,8 +50,15 @@ if (ranked.length) {
 }
 
 // The download contains one date and retains its external research links.
-const archive = contents.find(n => n.tagName === 'p' && attr(n, 'class') === 'archive');
-archive.parentNode.childNodes = archive.parentNode.childNodes.filter(n => n !== archive);
+for (const n of contents) {
+  if (attr(n, 'data-edition-navigation') !== undefined || (n.tagName === 'p' && attr(n, 'class') === 'archive')) {
+    n.parentNode.childNodes = n.parentNode.childNodes.filter(child => child !== n);
+  } else if (n.tagName === 'a' && attr(n, 'data-topic-permalink') !== undefined) {
+    const siblings = n.parentNode.childNodes;
+    siblings.splice(siblings.indexOf(n), 1, ...n.childNodes);
+    for (const child of n.childNodes) child.parentNode = n.parentNode;
+  }
+}
 for (const a of elements(main)) {
   if (a.tagName === 'a') assert.match(attr(a, 'href'), /^https?:\/\//);
 }
