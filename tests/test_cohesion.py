@@ -3,6 +3,8 @@ import json
 from types import SimpleNamespace
 from unittest.mock import Mock
 
+import pytest
+
 from pipeline.cohesion import review_clusters
 from pipeline.config import load_scoring, load_taxonomy
 from pipeline.llm import CohesionEvidence, CohesionGroup, CohesionReview, LLM
@@ -20,7 +22,8 @@ def test_partition_checks_all_evidence_and_only_ranks_groups_with_three_sources(
     response = CohesionReview(groups=[group([2, 4, 6]), group([1, 3, 5]), group([7])])
     llm = LLM(Mock(), Mock())
     llm._parse = Mock(return_value=response)
-    deps = SimpleNamespace(cfg=load_scoring(), llm=llm, taxonomy=load_taxonomy('math'))
+    deps = SimpleNamespace(cfg=load_scoring(), llm=llm, taxonomy=load_taxonomy('math').model_copy(
+        update={'comparison_guidance': ''}))
     store = Store(tmp_path, 'math')
     day = date(2026, 11, 1)
     expected = ([[ids[0], ids[2], ids[4]], [ids[1], ids[3], ids[5]]], [], {})
@@ -75,7 +78,8 @@ def test_field_review_instructions_change_the_cached_partition(tmp_path, fixture
     assert llm.review_cohesion.call_count == 2
 
 
-def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_question(tmp_path, fixtures_root):
+@pytest.mark.parametrize('domain', ['physics-expanded', 'math'])
+def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_question(tmp_path, fixtures_root, domain):
     papers = Store(fixtures_root / 'data', 'physics').items_between(date.min, date.max)
     papers = papers + [papers[-1].model_copy(update={'id': 'extra', 'title': 'An unrelated detector target'})]
     ids = sorted(p.id for p in papers)
@@ -89,7 +93,7 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
         {'groups': [group(ids, 'Original grouping hypothesis')]}, None,
         {'groups': [group(good, question), group([ids[-1]], 'Other target')]},
     ]
-    taxonomy = load_taxonomy('physics-expanded')
+    taxonomy = load_taxonomy(domain)
     deps = SimpleNamespace(cfg=load_scoring(), llm=llm, taxonomy=taxonomy, budget=budget)
     store, day = Store(tmp_path, taxonomy.domain), date(2026, 11, 1)
     groups, notes, questions = review_clusters([ids], papers, store, deps, day)
