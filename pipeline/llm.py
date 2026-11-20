@@ -254,6 +254,8 @@ class LLM:
         arxiv_ids = {value.lower() for item in items if item.source == 'arxiv'
                      for value in (item.id.removeprefix('arxiv:'), item.url.rsplit('/', 1)[-1])}
         prompt = grounding.mark_background_citations(prompt, arxiv_ids)
+        evidence_ids = arxiv_ids | {doi.lower() for item in items for doi in (item.doi, item.published_doi) if doi}
+        source, _ = grounding.check_citations(source, evidence_ids)
         output_limit = 4096
         # Length and grounding feedback share one retry, charged by _parse as usual.
         for attempt in range(2):
@@ -277,15 +279,15 @@ class LLM:
                                    topic.slug, field, length)
             claims, missing_citations = grounding.check_citations('\n'.join([
                 result.headline, result.summary, result.synthesis, *result.item_one_liners.values(),
-            ]), arxiv_ids)
+            ]), evidence_ids)
             bad = grounding.unsupported(claims, source)
             if not bad and not missing_citations and (not overruns or attempt):
                 return Synthesis.model_validate(result.model_dump())
             if missing_citations:
                 if attempt:
                     return self._failure(topic.slug, 'citation', detail=','.join(missing_citations))
-                prompt += ('\n\nDescribe comparisons to earlier work in words. The only arXiv identifiers '
-                           'available as supporting papers here are ' + (', '.join(sorted(arxiv_ids)) or 'none') + '.')
+                prompt += ('\n\nDescribe comparisons to earlier work in words. The supporting papers have '
+                           'these identifiers: ' + (', '.join(sorted(evidence_ids)) or 'none') + '.')
             if bad:
                 detail = ','.join(f'{v:g}' for v in bad)
                 if attempt:

@@ -88,6 +88,18 @@ def test_cited_background_paper_stays_outside_the_edition_evidence(context):
     assert '1204.6184' not in prompt and '1104.5678' in prompt and '1204.6184' in ctx.item.abstract
 
 
+def test_synthesis_accepts_a_supporting_doi_but_not_its_digits_as_a_result(context):
+    ctx = context
+    ctx.item.doi = '10.1103/r577-33dc'
+    ctx.item.abstract = 'The experiment is reported in doi:10.1103/r577-33dc.'
+    citation = 'The experiment is reported in DOI:10.1103/R577-33dc.'
+    ctx.beta.output = [{**OUTPUT, 'synthesis': citation + ' There were 33 trials.'},
+                       {**OUTPUT, 'synthesis': citation}]
+    _, _, notes = run(ctx)
+    assert not notes and ctx.topic.synthesis == citation
+    assert 'numbers not present in the items or signals: 33.' in ctx.beta.calls[1]['messages'][0]['content']
+
+
 def test_math_synthesis_receives_original_assumptions(context):
     from pipeline.config import load_taxonomy
 

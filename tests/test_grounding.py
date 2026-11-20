@@ -66,3 +66,14 @@ def test_only_exact_arxiv_citations_are_removed_before_checking_quantities():
     text, invalid = check_citations('ArXiv:2611.12345. See arXiv:2611.12346 for 73 trials.', {'2611.12345'})
     assert invalid == ['2611.12346']
     assert '2611.12345' not in text and 73 in unsupported(text, '')
+
+
+def test_doi_citations_keep_registered_punctuation_and_reject_extended_identifiers():
+    from pipeline.grounding import check_citations
+
+    allowed = {'10.1234/example(88)', '10.1103/r577-33dc'}
+    text, invalid = check_citations(
+        '(https://doi.org/10.1234/example(88)). See 10.1103/R577-33dc for 47 trials. '
+        'See also doi:10.1103/r577-33dc.supplement.', allowed)
+    assert invalid == ['10.1103/r577-33dc.supplement']
+    assert '88' not in text and 'R577' not in text and 47 in unsupported(text, '')

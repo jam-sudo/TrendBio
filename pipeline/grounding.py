@@ -34,6 +34,7 @@ _WORD_NUMBER = re.compile(
 _MIDDLE_DOT = re.compile(r'(?<=\d)(?:\{middle dot\}|·)(?=\d)')
 _LATEX_COMMAND = re.compile(r'\\[A-Za-z]+')
 _ARXIV_ID = re.compile(r'(?<![\w.])(?P<prefix>arxiv\s*[: ]\s*)?(?P<id>\d{2}(?:0[1-9]|1[0-2])\.\d{4,5}(?:v\d+)?)(?!\w|\.\d)', re.I)
+_DOI = re.compile(r'(?<![\w.])(?P<prefix>doi\s*:\s*|https?://(?:dx\.)?doi\.org/)?(?P<id>10\.\d{4,9}/[^\s<>"\[\]`]+)', re.I)
 
 
 def mark_background_citations(text: str, evidence_ids: set[str]) -> str:
@@ -43,18 +44,22 @@ def mark_background_citations(text: str, evidence_ids: set[str]) -> str:
 
 
 def check_citations(text: str, allowed: set[str]) -> tuple[str, list[str]]:
-    """Remove verified arXiv citations before numeric checks, rejecting unlisted citations."""
+    """Remove verified citations before numeric checks and flag explicitly cited outside works."""
     unknown = []
 
     def replace(match):
         identifier = match['id'].lower()
+        if match.re is _DOI:
+            # A DOI can itself end in punctuation, including a closing parenthesis.
+            while identifier not in allowed and identifier.endswith(tuple('.,;:!?)')):
+                identifier = identifier[:-1]
         if identifier in allowed:
             return ' '
         if match['prefix']:
             unknown.append(identifier)
         return match[0]
 
-    return _ARXIV_ID.sub(replace, text), unknown
+    return _ARXIV_ID.sub(replace, _DOI.sub(replace, text)), unknown
 
 
 def _token_value(digits: str, separator: str, scale: str) -> float | None:
