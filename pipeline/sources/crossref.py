@@ -45,7 +45,7 @@ def vor_license(work, as_of, *, allow_cc0=False):
     for lic in work.get('license', []):
         if lic.get('content-version') != 'vor' or (full_date(lic, 'start') or date.max) > as_of:
             continue
-        url = lic.get('URL', '')
+        url = re.sub(r'/legalcode/?$', '/', lic.get('URL') or '')
         if re.fullmatch(r'https?://creativecommons\.org/licenses/by/(?:3|4)\.0/?', url):
             return url
         if allow_cc0 and re.fullmatch(r'https?://creativecommons\.org/publicdomain/zero/1\.0/?', url):
@@ -282,17 +282,20 @@ class CrossrefAdapter:
 
     def reconcile(self, store, start, end, items):
         fresh = {i.id: i for i in items if i.source == self.name}
+        volumes = {v['volume_doi'] for v in self.config[self.name].get('hal_proceedings', [])}
         for old in store.items_between(start, end, by_publication=True):
-            if old.source != self.name or not old.metadata.get('issn'):
-                continue
-            if self.decisions.get(old.doi) == 'publication-update':
-                if old.metadata.get('screening_status') != 'publication-update':
-                    yield old.model_copy(update={'relevant': False, 'summary': old.summary or '',
-                                                 'metadata': {**old.metadata, 'screening_status': 'publication-update'}})
+            if old.source != self.name or not (old.metadata.get('issn') or old.metadata.get('volume_doi')):
                 continue
             current = fresh.get(old.id)
-            if current is None or not (current.metadata.get('correction_links') or old.metadata.get('correction_links')
-                                       or old.metadata.get('screening_status')):
+            conference = old.metadata.get('volume_doi') in volumes
+            if self.decisions.get(old.doi) == 'publication-update' or (conference and current is None):
+                reason = self.decisions.get(old.doi, 'absent-from-eligible-proceedings')
+                if old.metadata.get('screening_status') != reason:
+                    yield old.model_copy(update={'relevant': False, 'summary': old.summary or '',
+                                                 'metadata': {**old.metadata, 'screening_status': reason}})
+                continue
+            if current is None or not (conference or current.metadata.get('correction_links')
+                                       or old.metadata.get('correction_links') or old.metadata.get('screening_status')):
                 continue
             changes = {k: getattr(current, k) for k in ('title', 'abstract', 'authors', 'metadata')
                        if getattr(old, k) != getattr(current, k)}
@@ -303,6 +306,7 @@ class CrossrefAdapter:
 
     def fetch(self, start, end, client):
         from pipeline.sources.europepmc import matched_medline_abstract
+        from pipeline.sources.hal_proceedings import conference_papers
         from pipeline.sources.press_books import press_books
 
         self.decisions.clear()
@@ -379,6 +383,9 @@ class CrossrefAdapter:
                                   abstract=abstract, published_at=day, first_seen=end, url=f'https://doi.org/{doi}',
                                   doi=doi, authors=[a for a in authors if a], org=None, summary=None,
                                   primary_category=None, published_doi=None, preprint_id=None, metadata=metadata)
+        for volume in self.config[self.name].get('hal_proceedings', []):
+            for paper in conference_papers(client, volume, start, end, self.decisions):
+                items[paper.doi] = paper
         for press in self.config[self.name].get('book_presses', []):
             for book in press_books(client, press, start, end, self.decisions):
                 items[book.doi] = book

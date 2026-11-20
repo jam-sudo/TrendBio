@@ -21,7 +21,8 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
 {papers.length > 0 && <details open={expanded}>
   <summary>{papers.length} supporting {humanities ? (papers.length === 1 ? "work" : "works") : (papers.length === 1 ? "paper" : "papers")}</summary>
   {synthesis && <p>{synthesis}</p>}
-  <ul>{papers.map(paper => <li>{humanities ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <> · <span translate="no">{paper.authors.join(", ")}</span> · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
+  <ul>{papers.map(paper => <li>{humanities || typeof paper.metadata.conference === "string" ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <>
+    {typeof paper.metadata.conference !== "string" && <> · <span translate="no">{paper.authors.join(", ")}</span></>} · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
     {paper.source === "worldbank" && <> · <span>Working paper</span></>}
     {paper.source === "europepmc" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher article</a></>}
     {paper.source === "crossref" && typeof paper.metadata.pmid === "string" && /^\d+$/.test(paper.metadata.pmid) && <> · <a href={`https://pubmed.ncbi.nlm.nih.gov/${paper.metadata.pmid}/`}>Indexed abstract</a></>}

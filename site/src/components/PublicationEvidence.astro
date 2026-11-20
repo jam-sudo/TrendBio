@@ -3,20 +3,22 @@ import type { Item } from "../lib/types";
 
 const { paper } = Astro.props as { paper: Item };
 const { metadata } = paper;
-const native = paper.source === "thoth" || paper.source === "openedition" || (paper.source === "crossref" && typeof metadata.imprint === "string");
+const conference = typeof metadata.conference === "string" ? metadata.conference : null;
+const native = conference || paper.source === "thoth" || paper.source === "openedition" || (paper.source === "crossref" && typeof metadata.imprint === "string");
 const languages = new Intl.DisplayNames(["en"], { type: "language" });
 const original = Array.isArray(metadata.original_languages) ? metadata.original_languages : [];
 const preserveTitle = metadata.abstract_language && (metadata.abstract_language !== "en" ||
   (metadata.original_title === paper.title && original.length > 0 && !original.some(code => code === "eng" || code === "en")));
 const workLicense = typeof metadata.work_license === "string" && /^https?:\/\/creativecommons\.org\/(?:licenses|publicdomain)\//.test(metadata.work_license) ? metadata.work_license : null;
 ---
-<a href={paper.url} translate={preserveTitle ? "no" : undefined}>{paper.title}</a> · <span>{metadata.publication_type ?? "Journal article"}</span>
+<a href={paper.url} translate={preserveTitle ? "no" : undefined}>{paper.title}</a> · <span>{conference ? `${conference} conference paper` : metadata.publication_type ?? "Journal article"}</span>
 {native && <>
   {typeof metadata.original_title === "string" && metadata.original_title !== paper.title && <> · <span>Original title</span> <cite translate="no">{metadata.original_title}</cite></>}
   {original.filter(code => typeof code === "string" && /^[a-z]{2,3}$/.test(code)).map(code => <> · <span>{`Original publication in ${languages.of(code)}`}</span></>)}
   {paper.authors.length > 0 && <> · <span translate="no">{paper.authors.join(", ")}</span></>}
-  {typeof metadata.date_basis === "string" && <> · <span>{metadata.date_basis}</span> <time datetime={paper.published_at}>{paper.published_at}</time></>}
+  {(conference || typeof metadata.date_basis === "string") && <> · <span>{metadata.date_basis ?? "Publication date"}</span> <time datetime={paper.published_at}>{paper.published_at}</time></>}
   {typeof metadata.date_evidence === "string" && <> · <a href={metadata.date_evidence}>Publication date source</a></>}
+  {conference && typeof metadata.abstract_url === "string" && /^https:\/\/hal\.science\/hal-\d+v\d+$/.test(metadata.abstract_url) && <> · <a href={metadata.abstract_url}>Author-deposited abstract</a></>}
   {typeof metadata.issue_url === "string" && <> · <a href={metadata.issue_url}>Journal issue</a></>}
   {Array.isArray(metadata.book_series) && metadata.book_series.length > 0 && <> · <span>Book series · <span translate="no">{metadata.book_series.join(", ")}</span></span></>}
   {paper.source === "thoth" && paper.doi && <> · <a href={`https://doi.org/${paper.doi}`}>Publisher record</a></>}
