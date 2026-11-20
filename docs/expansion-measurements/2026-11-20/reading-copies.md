@@ -35,5 +35,11 @@ Each download contains one `en.html` file. Extract it and open it in a browser t
 | Chemistry | 2026-11-05 | Ten journals, including analytical chemistry, incremental run | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674849034/artifacts/14601044847) |
 | Chemistry | 2026-11-11 | Ten journals, including analytical chemistry | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674830124/artifacts/14601941621) |
 | Chemistry | 2026-11-18 | Ten journals, including analytical chemistry | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674833754/artifacts/14602211534) |
+| Social Sciences | 2026-09-16 | Held-out week | 5 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44679055308/artifacts/14602848535) |
+| Social Sciences | 2026-10-28 | Expanded journal coverage | 2 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44679058423/artifacts/14603742080) |
+| Social Sciences | 2026-11-04 | Expanded journal coverage | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44679061574/artifacts/14602659501) |
+| Social Sciences | 2026-11-05 | Verified 83 arXiv records after recovery | 3 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44680778294/artifacts/14603479666) |
+| Social Sciences | 2026-11-11 | Revised theory and grouping guidance | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44680631216/artifacts/14604132005) |
+| Social Sciences | 2026-11-18 | Expanded journal coverage | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44677466211/artifacts/14603485897) |
 
-[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json) · [Earth journal comparison and edition checks](earth-journal-coverage.json) · [Physics confirmation and English edition checks](physics-confirmation.json) · [Chemistry source comparison and English edition checks](chemistry-analytical-coverage.json)
+[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json) · [Earth journal comparison and edition checks](earth-journal-coverage.json) · [Physics confirmation and English edition checks](physics-confirmation.json) · [Chemistry source comparison and English edition checks](chemistry-analytical-coverage.json) · [Social science sources, editorial review and edition checks](social-science-coverage.json)
