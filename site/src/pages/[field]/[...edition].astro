@@ -92,7 +92,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {!isPublic && <p data-window-days={windowDays}>Evidence window of {windowDays} days from {windowStart} through {day.date} (UTC).</p>}
-      {day.run.arxiv_mailings && <p data-arxiv-mailings>The arXiv collection follows new and cross-listed papers in the daily Physics announcements. Supporting links open the first arXiv version. <a href="https://info.arxiv.org/help/availability.html">About arXiv announcements</a></p>}
+      {day.run.arxiv_mailings && <p data-arxiv-mailings>This edition uses the date of a new or cross-listed entry in the Physics group mailing and the subject tags returned with version 1. An individual subject can announce the same paper on a later date. Paper links open version 1. <a href="https://info.arxiv.org/help/availability.html">Announcement dates</a> · <a href="https://info.arxiv.org/help/cross.html">Subject cross-listing</a></p>}
       {field === "physics-expanded" && !day.run.arxiv_mailings && <p data-arxiv-submission-dates>The arXiv window uses first submission dates. Paper links open the versions retrieved during collection, which can include revisions made after the edition date.</p>}
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
       {day.ranked.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
