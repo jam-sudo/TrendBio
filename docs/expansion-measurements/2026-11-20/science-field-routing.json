@@ -379,5 +379,120 @@
       "anchor": "https://doi.org/10.3389/ffgc.2026.1897903",
       "screening_hint": "conservation"
     }
+  },
+  "excluded_paper_check": {
+    "selection": "In the same dated stores, select papers explicitly classified irrelevant. Use each edition’s publication-date or first-seen window, omit unavailable classifications, source screening exclusions and non-paper records, then select the smallest SHA-256 of science-scope-exclusions/v1/ followed by the paper ID in each edition. Chemistry had no eligible exclusion in this window.",
+    "cases": [
+      {
+        "edition": "agriculture-food-veterinary",
+        "date": "2026-09-30",
+        "excluded_papers_available": 7,
+        "paper": "https://doi.org/10.3389/ffgc.2026.1947680",
+        "basis": "The outcome is corporate land-asset valuation after a policy change. An agricultural, forestry or ecosystem result is absent."
+      },
+      {
+        "edition": "astronomy",
+        "date": "2026-11-04",
+        "excluded_papers_available": 22,
+        "paper": "https://arxiv.org/abs/2611.00754v1",
+        "basis": "The astronomical observations concern possible isolated giant planets or brown dwarfs. The dedicated stellar and galactic pilot excluded the paper. The expanded Physics collector recovered it under planetary science."
+      },
+      {
+        "edition": "biology",
+        "date": "2026-11-20",
+        "excluded_papers_available": 39,
+        "paper": "https://doi.org/10.64898/2026.11.11.765829",
+        "basis": "The paper evaluates software for managing breeding data. The same record was excluded from All Biology and admitted to CompBio as tools-infra on November 19."
+      },
+      {
+        "edition": "chemistry",
+        "date": "2026-09-16",
+        "excluded_papers_available": 0
+      },
+      {
+        "edition": "computational",
+        "date": "2026-11-20",
+        "excluded_papers_available": 271,
+        "paper": "https://pubmed.ncbi.nlm.nih.gov/43026255/",
+        "basis": "The yeast study reports experimental evidence about chromosome biology. Its primary contribution falls in Biology. A matching DOI was absent from the contemporaneous All Biology store."
+      },
+      {
+        "edition": "computer-information",
+        "date": "2026-07-08",
+        "excluded_papers_available": 11,
+        "paper": "https://arxiv.org/abs/2608.14605v1",
+        "basis": "The study investigates student behavior and academic integrity. It does not evaluate a computing method or system."
+      },
+      {
+        "edition": "earth-environment",
+        "date": "2026-08-19",
+        "excluded_papers_available": 6,
+        "paper": "https://doi.org/10.1371/journal.pclm.0000971",
+        "basis": "The review compares policy ambitions for food advertising and procurement. It reports no measured environmental effect."
+      },
+      {
+        "edition": "engineering",
+        "date": "2026-08-12",
+        "excluded_papers_available": 25,
+        "paper": "https://arxiv.org/abs/2608.08371v1",
+        "basis": "The measured outcome is the valuation of electricity-market bids. System capacity supplies the setting for an economic result."
+      },
+      {
+        "edition": "math",
+        "date": "2026-11-11",
+        "excluded_papers_available": 4,
+        "paper": "https://arxiv.org/abs/2611.14591v1",
+        "basis": "The paper establishes a result in representation theory. It belongs in the expanded Mathematics edition. The original, narrower pilot dropped it despite a number-theory cross-listing."
+      },
+      {
+        "edition": "medicine-health",
+        "date": "2026-11-04",
+        "excluded_papers_available": 5,
+        "paper": "https://pubmed.ncbi.nlm.nih.gov/42957306/",
+        "basis": "The article describes a planned study. Completed health outcomes were unavailable for ranking."
+      },
+      {
+        "edition": "physics",
+        "date": "2026-11-20",
+        "excluded_papers_available": 25,
+        "paper": "https://arxiv.org/abs/2611.18838v1",
+        "basis": "The paper tests the correctness of quantum software and evaluates its ability to detect program faults. Its primary result concerns software testing. It is cross-listed in cs.SE."
+      },
+      {
+        "edition": "physics-expanded",
+        "date": "2026-09-16",
+        "excluded_papers_available": 84,
+        "paper": "https://arxiv.org/abs/2609.14549v1",
+        "basis": "The outcome is the accuracy of allele-frequency statistics in a population-genetic model. This fits quantitative biology. The historical CompBio store also marked the paper irrelevant."
+      }
+    ],
+    "expanded_intake_checks": [
+      {
+        "edition": "math",
+        "from": "2026-11-05",
+        "to": "2026-11-11",
+        "unique_arxiv_records": 2561,
+        "recovered": "https://arxiv.org/abs/2611.14591v1",
+        "hints": [
+          "algebra"
+        ]
+      },
+      {
+        "edition": "physics-expanded",
+        "from": "2026-10-29",
+        "to": "2026-11-04",
+        "unique_arxiv_records": 2867,
+        "recovered": "https://arxiv.org/abs/2611.00754v1",
+        "hints": [
+          "planetary"
+        ]
+      }
+    ],
+    "additional_computer_science_check": {
+      "paper_id": "arxiv:2611.18838",
+      "expected_field": "computer-information",
+      "expected_category": "software",
+      "method": "The independent sample of Physics exclusions selected this paper. Record its expected destination before inspecting the broad November 18 Computer Science model output. Keep it separate from the 20 preselected Computer Science cases."
+    }
   }
 }
