@@ -198,6 +198,13 @@ def build(root: Path) -> None:
         "These **synthetic fixtures** illustrate linked evidence and continuous topic history.\n", encoding="utf-8")
     (notes / "nonexistent-topic-zzzz.md").write_text(
         "This deliberate orphan note verifies that a missing topic produces a warning, not a failed build.\n", encoding="utf-8")
+    physics_notes = notes / "physics" / days[-1].isoformat()
+    physics_notes.mkdir(parents=True, exist_ok=True)
+    (physics_notes / "cavity-readout-fixture.md").write_text(
+        "The updated calibration applies to this measurement. [Calibration record](https://example.org/calibration)\n\n"
+        "arXiv:2611.19130 reports timing from a simulation. [arXiv:2611.19130](https://arxiv.org/abs/2611.19130)\n",
+        encoding="utf-8",
+    )
 
 
 def build_field_edition(root: Path, day: date, domain: str) -> None:
