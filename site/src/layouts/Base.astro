@@ -64,11 +64,12 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
       <nav aria-label="Main navigation">
         <div class="field-bar">
           <div class="field-links" role="group" aria-label="Science field">
-            <a href="/fields/" aria-current={directory ? "page" : undefined}>Science fields</a>
+            <a href="/fields/" aria-label="Browse science fields" aria-current={directory ? "page" : undefined}>Fields</a>
             <a href="/" aria-current={biology ? "true" : undefined}>Biology</a>
             {publicEditions.filter(field => field !== "biology").map(field =>
               <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}
-            {edition && editionInfo[edition].stage === "Pilot" && <a href={`/${edition}/`} aria-current="true">{editionInfo[edition].label}</a>}
+            <a href="/computer-information/" aria-current={edition === "computer-information" ? "true" : undefined}>Computer Science</a>
+            {edition && edition !== "computer-information" && editionInfo[edition].stage === "Pilot" && <a href={`/${edition}/`} aria-current="true">{editionInfo[edition].label}</a>}
           </div>
           {biology && <span class="field-links" role="group" aria-label="Biology edition">
             <a href="/biology/" aria-current={edition === "biology" ? "true" : undefined}>All Biology (beta)</a>
@@ -103,7 +104,7 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
     <script is:inline>
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
-    <main id="main"><!--email_off--><slot /><!--/email_off--></main>
+    <!--email_off--><main id="main"><slot /></main><!--/email_off-->
     {!edition && <SponsorColumns {heroAligned} />}
     </div>
     <footer>

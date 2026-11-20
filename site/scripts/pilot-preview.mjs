@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
-import { parse, serializeOuter } from 'parse5';
+import { parse, serialize, serializeOuter } from 'parse5';
 
-const [dist, dayFile, out] = process.argv.slice(2);
+const [dist, dayFile, out, articleFile] = process.argv.slice(2);
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 const { domain, date, ranked, run } = read(dayFile);
 const store = dirname(dirname(dayFile));
@@ -105,4 +105,11 @@ ol.rankings > li { padding: .6rem 0; border-top: 1px solid GrayText } summary { 
 </style></head><body>${serializeOuter(main)}</body></html>\n`;
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, 'en.html'), html);
+if (articleFile) {
+  for (const node of elements(main)) {
+    node.attrs = node.attrs.filter(({ name }) => !name.startsWith('data-astro-cid-'));
+  }
+  mkdirSync(dirname(articleFile), { recursive: true });
+  writeFileSync(articleFile, serialize(main) + '\n');
+}
 console.log(`Verified the English edition for ${date} with ${ranked.length} ranked topics.`);

@@ -155,6 +155,13 @@ it("opens the English pilot offline at the selected topic with its cited evidenc
   try {
     execFileSync(process.execPath, ["scripts/pilot-preview.mjs", "dist", "../fixtures/data/physics/days/2026-11-01.json", folder]);
     expect(readdirSync(folder)).toEqual(["en.html"]);
+    const article = join(folder, "checked", "sample.html");
+    execFileSync(process.execPath, ["scripts/pilot-preview.mjs", "dist", "../fixtures/data/physics/days/2026-11-01.json", folder, article]);
+    const fragment = readFileSync(article, "utf8");
+    expect(fragment).toContain('class="rankings"');
+    expect(fragment).toContain("Editorial correction");
+    expect(fragment).not.toContain("<html");
+    expect(fragment).not.toContain("data-astro-cid-");
     const row = getDataIndex("physics").days[0].ranked[0];
     await offline.context().setOffline(true);
     await offline.goto(pathToFileURL(join(folder, "en.html")).href + "#" + row.slug);
@@ -214,6 +221,7 @@ it("withdraws pilot ranks by a dated claim or the complete set of reviewed sourc
 
 it("links each science field and its dated pilots while omitting retired fields", async () => {
   await page.setContent(read("fields/index.html"));
+  expect(await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Computer Science" }).getAttribute("href")).toBe("/computer-information/");
   const directory = page.locator("main");
   const links = await directory.locator("dl a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href")));
   expect(new Set(links)).toEqual(new Set(["/", ...editions.map(field => `/${field}/`)]));

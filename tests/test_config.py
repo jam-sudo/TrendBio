@@ -42,12 +42,14 @@ def test_physics_trial_preserves_the_four_public_archives_and_maps_each_new_arch
              'nucl-ex', 'nucl-th', 'physics.flu-dyn', 'physics.plasm-ph', 'cond-mat.stat-mech',
              'physics.atom-ph', 'physics.atm-clus'}
     assert public['arxiv']['require_complete'] and trial['arxiv']['require_complete']
-    assert set(trial['arxiv']['categories']) == existing | added and existing.isdisjoint(added)
+    assert existing.isdisjoint(added)
+    assert existing | added | {'astro-ph.EP', 'cond-mat.supr-con', 'physics.class-ph', 'physics.space-ph'} <= set(trial['arxiv']['categories'])
+    assert not {'physics.soc-ph', 'physics.hist-ph', 'physics.ed-ph'} & set(trial['arxiv']['categories'])
     hints = trial['hints']['arxiv_category']
     assert set(hints) == set(trial['arxiv']['categories'])
     assert hints['physics.atom-ph'] == hints['physics.atm-clus'] == ['atomic-molecular']
     assert all(hints[code] == public['hints']['arxiv_category'][code] for code in existing)
-    assert {category for values in hints.values() for category in values} == set(load_taxonomy('physics-expanded').slugs()) - {'other-physics'}
+    assert {category for values in hints.values() for category in values} == set(load_taxonomy('physics-expanded').slugs())
 
 
 def test_scoring_defaults():

@@ -257,3 +257,13 @@ To re-run a backfilled month after a collection fix, wipe that whole month befor
 ```sh
 python -m pipeline wipe --domain computational --from 2026-10-01 --to 2026-10-31 --data-root data
 ```
+
+## Publishing a dated science pilot
+
+Build the site with the downloaded pilot store as `TRENDBIO_DATA_ROOT` and the reviewed notes as `TRENDBIO_NOTES_ROOT`. From `site/`, run the existing English reading-copy check with its optional fourth argument to retain the reviewed article on the site.
+
+```sh
+node scripts/pilot-preview.mjs dist "$TRENDBIO_DATA_ROOT/$field/days/$date.json" "$preview_dir" "pilot-editions/$field/$date.html"
+```
+
+The check compares the original ranks and ordered paper links and applies editorial withdrawals before writing either copy. Commit the dated article after review. The field overview and sitemap discover it on the next build. The dated article keeps its original source scope when the field later expands.
