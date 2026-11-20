@@ -41,7 +41,7 @@ it("gives every page canonical, description and preview metadata", async () => {
     const metadata = await page.evaluate(html => {
       const doc = new DOMParser().parseFromString(html, "text/html");
       const content = (selector: string) => doc.querySelector(selector)?.getAttribute("content");
-      return { title: doc.title, description: content('meta[name="description"]'),
+      return { lang: doc.documentElement.lang, languageLinks: doc.querySelectorAll("[hreflang], [data-language]").length, title: doc.title, description: content('meta[name="description"]'),
         canonical: doc.querySelector('link[rel="canonical"]')?.getAttribute("href"),
         ogTitle: content('meta[property="og:title"]'), ogDescription: content('meta[property="og:description"]'),
         ogUrl: content('meta[property="og:url"]'), ogType: content('meta[property="og:type"]'),
@@ -50,6 +50,8 @@ it("gives every page canonical, description and preview metadata", async () => {
         site: content('meta[property="og:site_name"]'), card: content('meta[name="twitter:card"]'),
         themes: [...doc.querySelectorAll('meta[name="theme-color"]')].map(el => [el.getAttribute("media"), el.getAttribute("content")]) };
     }, read(path));
+    expect(metadata.lang, path).toBe("en");
+    expect(metadata.languageLinks, path).toBe(0);
     expect(metadata.description, path).toBeTruthy();
     expect(metadata.description!.length, path).toBeLessThanOrEqual(160);
     expect(metadata.canonical).toBe(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`);
@@ -62,7 +64,7 @@ it("gives every page canonical, description and preview metadata", async () => {
     expect(metadata.image).toBe("https://trendbio.dev/og.png");
     expect(metadata.width).toBe("1200");
     expect(metadata.height).toBe("630");
-    expect(metadata.alt).toBe(path.startsWith("ko/") ? "TrendBio — 계산생물학 연구 동향" : "TrendBio — What moved in computational biology");
+    expect(metadata.alt).toBe("TrendBio — What moved in computational biology");
     expect(metadata.themes).toEqual([["(prefers-color-scheme: dark)", "oklch(14.5% 0 0)"], ["(prefers-color-scheme: light)", "#fafafa"]]);
   }
   expect(read("index.html")).toContain(truncateDescription(`Today's leading computational biology topic: ${days[0].ranked[0].headline}.`));
@@ -79,11 +81,11 @@ it("builds valid XML covering the index and every public HTML route with lastmod
   const { weeks, months } = loadPeriods();
   const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
   const fieldPages = editions.reduce((n, field) => n + 1 + getDataIndex(field).days.length, 0);
-  expect(parsed.entries).toHaveLength(2 * (7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size));
+  expect(parsed.entries).toHaveLength(7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   expect(urls.size).toBe(parsed.entries.length);
   for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
-    expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(!/^(ko\/)?search\/index\.html$/.test(path));
+    expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(path !== "search/index.html");
   }
   for (const { date } of days) expect(urls.get(`https://trendbio.dev/day/${date}/`)).toBe(date);
   for (const topic of rankedTopics) expect(urls.get(`https://trendbio.dev/topic/${topic.slug}/`))
@@ -135,108 +137,48 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
   }
 });
 
-it("opens the downloaded English and Korean pilot files offline at the same ranked topic", async () => {
+it("opens the English pilot offline at the selected topic with its cited evidence", async () => {
   const folder = mkdtempSync(join(tmpdir(), "trendbio-pilot-preview-"));
   const offline = await browser.newPage();
   try {
     execFileSync(process.execPath, ["scripts/pilot-preview.mjs", "dist", "../fixtures/data/physics/days/2026-11-01.json", folder]);
-    const slug = getDataIndex("physics").days[0].ranked[0].slug;
-    await offline.goto(pathToFileURL(join(folder, "en.html")).href + "#" + slug);
-    await offline.getByRole("link", { name: "한국어" }).click();
-    expect(offline.url()).toBe(pathToFileURL(join(folder, "ko.html")).href + "#" + slug);
-    expect(await offline.locator("html").getAttribute("lang")).toBe("ko");
+    expect(readdirSync(folder)).toEqual(["en.html"]);
+    const row = getDataIndex("physics").days[0].ranked[0];
+    await offline.context().setOffline(true);
+    await offline.goto(pathToFileURL(join(folder, "en.html")).href + "#" + row.slug);
+    expect(await offline.locator("html").getAttribute("lang")).toBe("en");
     expect(await offline.locator(":target").getAttribute("value")).toBe("1");
-    expect(await offline.locator("main .rankings h3").textContent()).toMatch(/[가-힣]/);
-    expect(await offline.getByRole("note").locator("strong").textContent()).toBe("정정");
-    expect(await offline.getByRole("note").locator("a").first().getAttribute("href")).toBe("https://example.org/calibration");
-    expect(await offline.getByRole("note").locator("p").last().textContent()).toMatch(/arXiv:2611\.19130.*[가-힣]/);
-    expect(await offline.getByRole("note").locator("a").last().textContent()).toBe("arXiv:2611.19130");
+    expect(await offline.locator("main .rankings h3").textContent()).toBe(row.headline);
+    const note = offline.getByRole("note");
+    expect(await note.locator("strong").textContent()).toBe("Editorial correction");
+    expect(await note.locator("a").first().getAttribute("href")).toBe("https://example.org/calibration");
+    expect(await note.locator("a").last().textContent()).toBe("arXiv:2611.19130");
     await offline.locator("main details summary").click();
     expect(await offline.locator('main details a[href^="https://example.org/physics/"]').count()).toBe(3);
-    await offline.getByRole("link", { name: "English" }).click();
-    expect(offline.url()).toBe(pathToFileURL(join(folder, "en.html")).href + "#" + slug);
-    expect(await offline.getByRole("note").locator("strong").textContent()).toBe("Editorial correction");
   } finally {
     await offline.close();
     rmSync(folder, { recursive: true, force: true });
   }
 });
 
-it("pairs the same dated rankings in Korean and English and retains the evidence links", async () => {
-  const path = "/physics/day/2026-11-01/";
-  let englishPapers: string[] = [];
-  for (const [lang, prefix, heading] of [["en", "", "Physics"], ["ko", "/ko", "물리학"]]) {
-    await page.setContent(read(`${prefix}${path}index.html`.slice(1)));
-    expect(await page.locator("html").getAttribute("lang")).toBe(lang);
-    expect(await page.locator("main h1").textContent()).toBe(heading);
-    expect(await page.locator("[data-language][aria-current]").getAttribute("data-language")).toBe(lang);
-    for (const [code, target] of [["en", path], ["ko", "/ko" + path]]) {
-      expect(await page.locator(`a[data-language=${code}]`).getAttribute("href")).toBe(target);
-      expect(await page.locator(`link[hreflang=${code}]`).getAttribute("href")).toBe("https://trendbio.dev" + target);
-    }
-    const rows = page.locator("ol.rankings > li");
-    expect(await rows.count()).toBe(1);
-    const papers = await rows.locator('a[href^="https://example.org/physics/"]').evaluateAll(links => links.map(link => link.getAttribute("href")!));
-    if (lang === "en") { englishPapers = papers; continue; }
-    expect(papers).toEqual(englishPapers);
-    expect(await rows.locator("h3").textContent()).toMatch(/[가-힣]/);
-    expect(await rows.locator("p").first().textContent()).toMatch(/[가-힣]/);
-    expect(await rows.locator("summary").textContent()).toBe("근거 논문 3편");
-    expect(await page.locator('main a[href="/ko/physics/#editions"]').count()).toBe(1);
-  }
+it("publishes an English archive with permanent redirects for former Korean links", () => {
+  expect(readdirSync("dist")).not.toContain("ko");
+  expect(read("sitemap.xml")).not.toContain("trendbio.dev/ko/");
+  expect(read("_redirects").trim().split("\n")).toEqual(["/ko / 301", "/ko/* https://trendbio.dev/:splat 301"]);
 });
 
-it("reads the counts and the four-week comparison in Korean", async () => {
-  await page.setContent(read("ko/day/2026-10-30/index.html"));
-  const daily = await page.locator(".signal-line .sr-only").first().textContent();
-  expect(daily).toContain("프리프린트 1편");
-  expect(daily).toContain("최근 4주 평균의 4.3배");
-  await page.setContent(read("ko/week/2026-W44/index.html"));
-  expect(await page.locator(".signal-line .sr-only").first().textContent()).toMatch(/순위 진입 \d+일 · 최고 \d+위 · 자료 \d+건 · 증가율 [\d.]+배/);
-});
-
-it("preserves original book titles and distinguishes catalogue and text rights in both languages", async () => {
-  const route = "/humanities-arts/day/2026-11-01/";
-  let englishLinks: string[] = [];
-  for (const [prefix, count, metadata, rights] of [
-    ["", "3 supporting works", "Catalogue metadata (CC0)", "License for the work"],
-    ["/ko", "근거 문헌 3건", "서지 정보 이용 조건(CC0)", "저작물 이용 조건"],
-  ]) {
-    await page.setContent(read((prefix + route).slice(1) + "index.html"));
-    const picker = page.locator(".pilot-fields");
-    await picker.locator("summary").click();
-    expect(await picker.locator('a[aria-current="true"]').getAttribute("href")).toBe(prefix + "/humanities-arts/");
-    const list = page.locator("ol.rankings");
-    expect(await list.locator("summary").textContent()).toBe(count);
-    expect(await list.getByText("Liederhandschriften").textContent()).toBe("Liederhandschriften");
-    expect(await list.locator("cite").textContent()).toBe("Chansons en manuscrit");
-    const book = list.locator("details ul > li").first();
-    expect(await book.getByRole("link", { name: metadata, includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/publicdomain/zero/1.0/");
-    expect(await book.getByRole("link", { name: rights, includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/licenses/by-nc/4.0/");
-    const links = await list.locator("a").evaluateAll(elements => elements.map(a => a.href));
-    if (prefix) expect(links).toEqual(englishLinks);
-    else englishLinks = links;
-  }
-});
-
-it("publishes a Korean topic map and a distinct valid Korean Atom feed", async () => {
-  const map = JSON.parse(read("map.json"));
-  const koMap = JSON.parse(read("ko/map.json"));
-  expect(koMap.points.map((point: { slug: string }) => point.slug)).toEqual(map.points.map((point: { slug: string }) => point.slug));
-  expect(koMap.points.some((point: { headline: string }) => /[가-힣]/.test(point.headline))).toBe(true);
-  await page.setContent(read("ko/map/index.html"));
-  const point = koMap.points[0];
-  const label = await page.locator(`.map-links a[href="/ko/topic/${point.slug}/"]`).textContent();
-  expect(label).toContain(point.headline + " — ");
-  expect(label).toMatch(/마지막 순위 진입 \d{4}년 \d+월 \d+일$/);
-  const feed = await page.evaluate(xml => {
-    const doc = new DOMParser().parseFromString(xml, "application/xml");
-    return { valid: !doc.querySelector("parsererror"), lang: doc.documentElement.getAttribute("xml:lang"),
-      title: doc.querySelector("entry title")?.textContent, link: doc.querySelector("entry link")?.getAttribute("href") };
-  }, read("ko/feed.xml"));
-  expect(feed).toMatchObject({ valid: true, lang: "ko" });
-  expect(feed.title).toMatch(/[가-힣]/);
-  expect(feed.link).toMatch(/^https:\/\/trendbio\.dev\/ko\//);
+it("preserves original book titles and distinguishes catalogue and text rights", async () => {
+  await page.setContent(read("humanities-arts/day/2026-11-01/index.html"));
+  const picker = page.locator(".pilot-fields");
+  await picker.locator("summary").click();
+  expect(await picker.locator('a[aria-current="true"]').getAttribute("href")).toBe("/humanities-arts/");
+  const list = page.locator("ol.rankings");
+  expect(await list.locator("summary").textContent()).toBe("3 supporting works");
+  expect(await list.getByText("Liederhandschriften").textContent()).toBe("Liederhandschriften");
+  expect(await list.locator("cite").textContent()).toBe("Chansons en manuscrit");
+  const book = list.locator("details ul > li").first();
+  expect(await book.getByRole("link", { name: "Catalogue metadata (CC0)", includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/publicdomain/zero/1.0/");
+  expect(await book.getByRole("link", { name: "License for the work", includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/licenses/by-nc/4.0/");
 });
 
 it("keeps the Biology beta and CompBio as distinct editions", async () => {
@@ -270,7 +212,4 @@ it("credits the Earth pilot papers and links their datasets as supporting materi
   expect(await main.getByRole("link", { name: "CC BY" }).count()).toBe(3);
   expect(await main.locator('a[href="https://doi.org/10.5555/example-data"]').count()).toBe(1);
   expect(await main.getByRole("link", { name: "Preprint version" }).getAttribute("href")).toBe("https://doi.org/10.5555/example-preprint");
-  await page.setContent(read("ko/earth-environment/day/2026-11-01/index.html"));
-  await page.getByRole("main").locator("details summary").first().click();
-  expect(await page.getByRole("link", { name: "프리프린트 판본" }).getAttribute("href")).toBe("https://doi.org/10.5555/example-preprint");
 });

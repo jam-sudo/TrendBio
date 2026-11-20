@@ -30,7 +30,6 @@ import { loadTaxonomy } from "../lib/data";
 <script>
   import { filterResults } from '../lib/search-match.js';
 
-  const ko = document.documentElement.lang === 'ko';
   const form = document.querySelector('form[role="search"]');
   const input = document.getElementById('search-query');
   const category = document.getElementById('search-category');
@@ -57,8 +56,8 @@ import { loadTaxonomy } from "../lib/data";
     shown += batch.length;
     more.hidden = shown >= results.length;
     status.textContent = results.length
-      ? ko ? `주제 ${results.length}개 중 ${shown}개 표시` : `${results.length} ${results.length === 1 ? 'topic' : 'topics'} found. Showing ${shown}.`
-      : ko ? '검색된 주제가 없습니다. 다른 검색어나 분야를 선택해 보세요.' : 'No topics found. Try another term or category.';
+      ? `${results.length} ${results.length === 1 ? 'topic' : 'topics'} found. Showing ${shown}.`
+      : 'No topics found. Try another term or category.';
   }
 
   async function search() {
@@ -73,10 +72,10 @@ import { loadTaxonomy } from "../lib/data";
     more.hidden = true;
     shown = 0;
     if (!query) {
-      status.textContent = ko ? '주제와 논문, 도구 이름을 검색할 수 있습니다.' : 'Enter a term to search topic headlines, summaries, syntheses, paper titles and tool names.';
+      status.textContent = 'Enter a term to search topic headlines, summaries, syntheses, paper titles and tool names.';
       return;
     }
-    status.textContent = ko ? '검색 중…' : 'Searching…';
+    status.textContent = 'Searching…';
     try {
       const pagefindPath = '/pagefind/pagefind.js';
       const pagefind = await import(/* @vite-ignore */ pagefindPath);
@@ -86,7 +85,7 @@ import { loadTaxonomy } from "../lib/data";
       results = filtered;
       await showResults(current);
     } catch {
-      if (current === request) status.textContent = ko ? '검색을 불러오지 못했습니다. 다시 시도해 주세요.' : 'Search could not load. Please try again.';
+      if (current === request) status.textContent = 'Search could not load. Please try again.';
     }
   }
 
@@ -105,7 +104,7 @@ import { loadTaxonomy } from "../lib/data";
     try { await showResults(current); }
     catch {
       if (current === request) {
-        status.textContent = ko ? '추가 결과를 불러오지 못했습니다. 다시 시도해 주세요.' : 'More results could not load. Please try again.';
+        status.textContent = 'More results could not load. Please try again.';
         more.hidden = false;
       }
     }

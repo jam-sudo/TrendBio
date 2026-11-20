@@ -31,19 +31,6 @@ jobs:
           cache-dependency-path: site/package-lock.json
       - run: npm ci
         working-directory: site
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: python -m pip install -r site/scripts/translation-requirements.txt
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/trendbio/opus-en-ko-20220728
-          key: linux-opus-en-ko-20220728-v1
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/trendbio/ko-delta.json.gz
-          key: ko-translations-v1-${{ github.sha }}
-          restore-keys: ko-translations-v1-
       - name: Choose data roots
         run: |
           if compgen -G 'data/*/days/*.json' > /dev/null; then

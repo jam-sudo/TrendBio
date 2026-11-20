@@ -103,26 +103,20 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: site/package-lock.json
-      - uses: actions/cache/restore@v4
-        with:
-          path: ~/.cache/trendbio/opus-en-ko-20220728
-          key: linux-opus-en-ko-20220728-v1
-      - name: Build and verify the English and Korean reading copies
+      - name: Build and verify the English reading copy
         working-directory: site
         env:
           TRENDBIO_DATA_ROOT: ../science-pilot
           TRENDBIO_NOTES_ROOT: ../notes
         run: |
           npm ci
-          python -m pip install -r scripts/translation-requirements.txt
           npx --no-install astro build
-          node scripts/localize.mjs dist
           node scripts/pilot-preview.mjs dist "../science-pilot/$DOMAIN/days/$RUN_DATE.json" "$RUNNER_TEMP/reading-copy"
-      - name: Save the bilingual reading copy
+      - name: Save the English reading copy
         id: preview
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.domain }}-en-ko-${{ inputs.date }}-${{ github.run_id }}-${{ github.run_attempt }}
+          name: ${{ inputs.domain }}-english-${{ inputs.date }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/reading-copy/
           if-no-files-found: error
           retention-days: 14
@@ -130,5 +124,5 @@ jobs:
         env:
           PREVIEW_URL: ${{ steps.preview.outputs.artifact-url }}
         run: |
-          echo "[한국어 · English]($PREVIEW_URL) · $DOMAIN · $RUN_DATE" >> "$GITHUB_STEP_SUMMARY"
-          echo '압축을 풀고 ko.html 또는 en.html을 여세요. Extract the ZIP and open either HTML file.' >> "$GITHUB_STEP_SUMMARY"
+          echo "[English edition]($PREVIEW_URL) · $DOMAIN · $RUN_DATE" >> "$GITHUB_STEP_SUMMARY"
+          echo 'Extract the ZIP and open en.html.' >> "$GITHUB_STEP_SUMMARY"

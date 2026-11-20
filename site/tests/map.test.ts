@@ -28,8 +28,8 @@ it('embeds the fixture points, canvas, native slider and a fallback link per top
 
 it('includes the computational biology Map link throughout that edition', () => {
   for (const path of readdirSync('dist', { recursive: true, encoding: 'utf8' }).filter(p => p.endsWith('.html'))) {
-    if (editions.some(field => path.replace(/^ko\//, '').startsWith(field + '/'))) continue;
-    const link = path.startsWith('ko/') ? /href="\/ko\/map\/"[^>]*>주제 지도<\/a>/ : /href="\/map\/"[^>]*>Map<\/a>/;
+    if (editions.some(field => path.startsWith(field + '/'))) continue;
+    const link = /href="\/map\/"[^>]*>Map<\/a>/;
     expect(readFileSync(join('dist', path), 'utf8'), path).toMatch(link);
   }
 });

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "TRENDBIO_DATA_ROOT=../fixtures/data TRENDBIO_NOTES_ROOT=../fixtures/notes astro dev",
-    "build": "astro build && node scripts/localize.mjs dist && pagefind --site dist",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "test": "TRENDBIO_DATA_ROOT=../fixtures/data TRENDBIO_NOTES_ROOT=../fixtures/notes vitest run",
     "test:search-real": "node scripts/check-search-real.mjs"

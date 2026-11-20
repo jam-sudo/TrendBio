@@ -37,10 +37,6 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python -m pip install -r scripts/translation-requirements.txt
       - run: npx playwright install --with-deps chromium
       - run: npm test
       - run: npm run build

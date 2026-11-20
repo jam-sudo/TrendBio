@@ -23,7 +23,6 @@ interface Props {
 const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, edition } = Astro.props;
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
-const koreanPath = "/ko" + canonicalPath;
 const biology = !edition || edition === "biology";
 const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
 ---
@@ -42,16 +41,12 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
     {Astro.props.noindex && <meta name="robots" content="noindex" />}
     {!edition && <link rel="alternate" type="application/atom+xml" title="TrendBio RSS" href="/feed.xml" />}
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={canonical} />
-    <link rel="alternate" hreflang="ko" href={new URL(koreanPath, Astro.site).href} />
-    <link rel="alternate" hreflang="x-default" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={summary} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="TrendBio" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="ko_KR" />
     <meta property="og:image" content={new URL("/og.png", Astro.site).href} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -62,10 +57,6 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="page-shell">
     <header class:list={{ "home-header": Astro.slots.has("hero") }}>
-      <span class="language-links" role="group" aria-label="Language">
-        <a href={canonicalPath} data-language="en" lang="en" hreflang="en" aria-current="true">English</a>
-        <a href={koreanPath} data-language="ko" lang="ko" hreflang="ko">한국어</a>
-      </span>
       <div class="header-top">
       <a class="wordmark" href="/">{Astro.slots.has("hero") && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
@@ -110,13 +101,7 @@ const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
     </header>
     <script src="../scripts/header-search.js"></script>
     <script is:inline>
-      (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label',h.lang==='ko'?(l?'어두운 테마로 전환':'밝은 테마로 전환'):'Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
-      for (const link of document.querySelectorAll('[data-language]')) {
-        const path = link.getAttribute('href');
-        const copyLocation = () => link.setAttribute('href', path + location.search + location.hash);
-        copyLocation();
-        link.addEventListener('click', copyLocation);
-      }
+      (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <main id="main"><slot /></main>
     {!edition && <SponsorColumns {heroAligned} />}

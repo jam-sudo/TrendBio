@@ -38,7 +38,6 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
   const root = document.querySelector('[data-map]');
   const data = root.querySelector('#topic-map-data');
   try {
-    const ko = document.documentElement.lang === 'ko';
     const map = data.dataset.src ? await fetch(data.dataset.src).then(response => {
       if (!response.ok) throw new Error('Map unavailable');
       return response.json();
@@ -127,7 +126,7 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
       hovered = hit(event);
       if (!hovered) return clearHover();
       tooltip.querySelector('strong').textContent = hovered.headline;
-      tooltip.querySelector('span').textContent = `${colors[hovered.category]?.label ?? hovered.category} · ${ko ? '마지막 순위 진입' : 'last ranked'} ${hovered.last_ranked}`;
+      tooltip.querySelector('span').textContent = `${colors[hovered.category]?.label ?? hovered.category} · last ranked ${hovered.last_ranked}`;
       tooltip.hidden = false;
       tooltip.style.left = `${Math.max(8, Math.min(width - tooltip.offsetWidth - 8, hovered.px + 16))}px`;
       tooltip.style.top = `${Math.max(8, Math.min(height - tooltip.offsetHeight - 8, hovered.py + 16))}px`;
@@ -136,7 +135,7 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
     canvas.addEventListener('mouseleave', clearHover);
     canvas.addEventListener('click', event => {
       const point = hit(event);
-      if (point) window.location.assign(`${ko ? '/ko' : ''}/topic/${encodeURIComponent(point.slug)}/`);
+      if (point) window.location.assign(`/topic/${encodeURIComponent(point.slug)}/`);
     });
     root.querySelector('[data-category-chips]').addEventListener('click', event => {
       const button = event.target.closest('button[data-cat]');
@@ -145,7 +144,7 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
     });
     slider.addEventListener('input', () => {
       month = months[Number(slider.value)];
-      label.textContent = month ?? (ko ? '전체 기간' : 'All time');
+      label.textContent = month ?? 'All time';
       slider.setAttribute('aria-valuetext', label.textContent); clearHover();
     });
     new ResizeObserver(resize).observe(canvas);
