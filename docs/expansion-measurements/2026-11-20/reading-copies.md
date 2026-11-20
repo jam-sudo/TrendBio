@@ -1,4 +1,6 @@
-# English pilot editions
+# Archived English pilot downloads
+
+The public science directory links to the current reading copies and editorial decisions. The downloads below preserve earlier research trials and their original scope. The public September 30 Agriculture edition includes a subsequent field-placement correction at rank 8. [Science directory](https://trendbio.dev/fields/) · [Corrected agriculture edition](https://trendbio.dev/pilots/agriculture-food-veterinary/2026-09-30/#multifunctionality-soil-b88a)
 
 Each download contains one `en.html` file. Extract it and open it in a browser to read the dated ranks, summaries and editorial corrections offline. Paper links open the original sources. The Topics column counts original rank positions. A withdrawn entry shows the editorial reason at its original position. GitHub requires sign-in to download these workflow artifacts and retains the files for 14 days. [Live editions](https://trendbio.dev/) · [Expansion plan](../../science-expansion-plan.en.md)
 

@@ -7,7 +7,7 @@
 
 <h1 align="center">TrendBio</h1>
 
-<p align="center">Daily research trends in biology and physics.</p>
+<p align="center">Daily biology and physics rankings and dated research editions across the sciences.</p>
 
 <p align="center">
   <a href="https://trendbio.dev/">Read TrendBio</a>&ensp;·&ensp;<a href="https://trendbio.dev/feed.xml">Atom feed</a>&ensp;·&ensp;<a href="https://trendbio.dev/about">How it works</a>
