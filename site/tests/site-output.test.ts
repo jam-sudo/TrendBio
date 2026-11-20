@@ -209,6 +209,15 @@ it("keeps the Biology beta and CompBio as distinct editions", async () => {
   }
 });
 
+it("shows the sources collected for a Computing edition even when no group ranks", async () => {
+  await page.setContent(read("computer-information/day/2026-11-11/index.html"));
+  const main = page.getByRole("main");
+  expect(await main.locator("[data-edition-venues] span").textContent()).toBe("Proceedings of the 37th Conference on l'Interaction Humain-Machine, arXiv");
+  expect(await main.getByRole("link", { name: "IHM proceedings" }).getAttribute("href")).toBe("https://doi.org/10.1145/3845948");
+  expect(await main.getByRole("link", { name: "HAL", exact: true }).getAttribute("href")).toBe("https://hal.science/IHM-2026");
+  expect(await main.locator("ol.rankings li").count()).toBe(0);
+});
+
 it("links the mathematics pilot to its three arXiv subjects and its own dated evidence", async () => {
   await page.setContent(read("math/day/2026-11-01/index.html"));
   expect(await page.getByRole("group", { name: "Science field" }).locator("[aria-current]").textContent()).toBe("Math & Stats");

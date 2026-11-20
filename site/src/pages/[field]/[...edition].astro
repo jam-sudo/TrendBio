@@ -33,13 +33,14 @@ const archives: string[] = source.arxiv?.categories ?? [];
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
 const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
 const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
-const socialVenues = field === "social-sciences" && day ? loadEditionVenues(field, day.date) : null;
+const observedVenues = ["social-sciences", "computer-information"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
 const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
 const presses: { title: string; catalogue: string }[] = source.crossref?.book_presses ?? [];
 const collectedVenues = presses.length && day ? loadEditionVenues(field, day.date) : null;
 const conferences: string[] = source.drops?.conferences ?? [];
+const halVolumes: { title: string; volume_doi: string; conference: string; collection: string }[] = source.crossref?.hal_proceedings ?? [];
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
 const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
 const isPublic = publicEditions.includes(field);
@@ -55,18 +56,20 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
-    {socialVenues && socialVenues.length > 0 && <p class="coverage">Sources in this edition’s collection include <span translate="no">{socialVenues.map(name => name === "arxiv" ? "arXiv" : name).join(", ")}</span>.</p>}
-    {!socialVenues && archives.length > 0 && <p class="coverage">Following {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
+    {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map(name => name === "arxiv" ? "arXiv" : name).join(", ")}</span>.</p>}
+    {(!observedVenues || field === "computer-information") && archives.length > 0 && <p class="coverage">Following {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
-    {!socialVenues && followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
+    {!observedVenues && followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
       ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
       : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
-    {!socialVenues && source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
-    {conferences.length > 0 && <p class="coverage">Regular conference papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
-    {!socialVenues && publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
+    {!observedVenues && source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
+    {conferences.length > 0 && <p class="coverage">The current pilot follows regular papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
+    {halVolumes.filter(volume => !observedVenues || observedVenues.includes(volume.title)).map(volume =>
+      <p class="coverage"><a href={`https://doi.org/${volume.volume_doi}`}>{volume.conference} proceedings</a> with author-deposited abstracts from <a href={`https://hal.science/${volume.collection}`}>HAL</a>.</p>)}
+    {!observedVenues && publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
     {source.thoth && <p class="coverage">Monographs and edited books from <a href="https://thoth.pub/books" translate="no">Thoth</a>.</p>}
     {presses.filter(press => !day || collectedVenues?.includes(press.title)).map(press =>
       <p class="coverage">Books from <a href={press.catalogue} translate="no">{press.title}</a> with publication dates confirmed in the publisher catalogue and Crossref.</p>)}
