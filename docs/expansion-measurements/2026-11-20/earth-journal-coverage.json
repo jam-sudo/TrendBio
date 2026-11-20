@@ -1,0 +1,764 @@
+{
+  "reviewed_utc": "2026-11-20",
+  "scope": "Four additional journals in the private English Earth and Environment edition. Nine titles from three publishers. Four independent seven-day editions plus the adjacent November 19 run.",
+  "implementation": "68d802f6e3130068325c91a205d7093d4c2feb83",
+  "independent_collection": {
+    "period": [
+      "2026-10-22",
+      "2026-11-18"
+    ],
+    "method": "Enumerate complete PLOS article records from Solr (doc_type:full). Read Pensoft journal contents sorted by publication date through the first record before the window. Match identifiers and exact dates against the complete Crossref journal query. The pipeline reads the individual article page for type, DOI, journal ISSN and date; it admits eligible research articles, data papers and short communications with an abstract and an active open licence for the version of record.",
+    "journals": {
+      "PLOS Climate": {
+        "issn": "2767-3200",
+        "publisher_list": "https://api.plos.org/search?q=journal%3A%22PLOS+Climate%22+AND+doc_type%3Afull+AND+publication_date%3A%5B2026-10-22T00%3A00%3A00Z+TO+2026-11-18T23%3A59%3A59Z%5D&fl=id%2Cpublication_date%2Carticle_type&rows=100&wt=json",
+        "crossref": "https://api.crossref.org/journals/2767-3200/works",
+        "records_in_both_lists": 10,
+        "admitted_works": 7,
+        "types": {
+          "Essay": 1,
+          "Research Article": 7,
+          "Opinion": 1,
+          "Editorial": 1
+        }
+      },
+      "PLOS Water": {
+        "issn": "2767-3219",
+        "publisher_list": "https://api.plos.org/search?q=journal%3A%22PLOS+Water%22+AND+doc_type%3Afull+AND+publication_date%3A%5B2026-10-22T00%3A00%3A00Z+TO+2026-11-18T23%3A59%3A59Z%5D&fl=id%2Cpublication_date%2Carticle_type&rows=100&wt=json",
+        "crossref": "https://api.crossref.org/journals/2767-3219/works",
+        "records_in_both_lists": 6,
+        "admitted_works": 4,
+        "types": {
+          "Research Article": 4,
+          "Opinion": 2
+        }
+      },
+      "Nature Conservation": {
+        "issn": "1314-3301",
+        "publisher_list": "https://natureconservation.pensoft.net/articles",
+        "crossref": "https://api.crossref.org/journals/1314-3301/works",
+        "records_in_both_lists": 4,
+        "admitted_works": 4,
+        "types": {
+          "Research Article": 3,
+          "Short Communication": 1
+        }
+      },
+      "One Ecosystem": {
+        "issn": "2367-8194",
+        "publisher_list": "https://oneecosystem.pensoft.net/articles",
+        "crossref": "https://api.crossref.org/journals/2367-8194/works",
+        "records_in_both_lists": 3,
+        "admitted_works": 1,
+        "types": {
+          "Software Description": 1,
+          "Review Article": 1,
+          "Research Article": 1
+        }
+      }
+    },
+    "comparison": {
+      "10.1371/journal.pclm.0001093": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-10-27",
+        "publisher_genre": "Essay",
+        "collected": false,
+        "reference": "https://doi.org/10.1371/journal.pclm.0001093"
+      },
+      "10.1371/journal.pclm.0000961": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-10-28",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pclm.0000961",
+        "article_page": "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000961",
+        "relevant": true,
+        "primary_category": "climate",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pclm.0001100": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-11-03",
+        "publisher_genre": "Opinion",
+        "collected": false,
+        "reference": "https://doi.org/10.1371/journal.pclm.0001100"
+      },
+      "10.1371/journal.pclm.0001087": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-10-27",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pclm.0001087",
+        "article_page": "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0001087",
+        "relevant": false,
+        "primary_category": "climate",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pclm.0000868": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-11-05",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pclm.0000868",
+        "article_page": "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000868",
+        "relevant": false,
+        "primary_category": "other-earth",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pclm.0001085": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-11-05",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pclm.0001085",
+        "article_page": "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0001085",
+        "relevant": false,
+        "primary_category": "climate",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pclm.0001094": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-11-04",
+        "publisher_genre": "Editorial",
+        "collected": false,
+        "reference": "https://doi.org/10.1371/journal.pclm.0001094"
+      },
+      "10.1371/journal.pclm.0000987": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-11-17",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pclm.0000987",
+        "article_page": "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000987",
+        "relevant": false,
+        "primary_category": "other-earth",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pclm.0001089": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-11-18",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pclm.0001089",
+        "article_page": "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0001089",
+        "relevant": false,
+        "primary_category": "climate",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pclm.0001096": {
+        "journal": "PLOS Climate",
+        "publisher_date": "2026-11-17",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pclm.0001096",
+        "article_page": "https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0001096",
+        "relevant": true,
+        "primary_category": "climate",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pwat.0000341": {
+        "journal": "PLOS Water",
+        "publisher_date": "2026-10-23",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pwat.0000341",
+        "article_page": "https://journals.plos.org/water/article?id=10.1371/journal.pwat.0000341",
+        "relevant": true,
+        "primary_category": "freshwater",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pwat.0000565": {
+        "journal": "PLOS Water",
+        "publisher_date": "2026-10-27",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pwat.0000565",
+        "article_page": "https://journals.plos.org/water/article?id=10.1371/journal.pwat.0000565",
+        "relevant": false,
+        "primary_category": "other-earth",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pwat.0000546": {
+        "journal": "PLOS Water",
+        "publisher_date": "2026-11-04",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pwat.0000546",
+        "article_page": "https://journals.plos.org/water/article?id=10.1371/journal.pwat.0000546",
+        "relevant": false,
+        "primary_category": "other-earth",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pwat.0000568": {
+        "journal": "PLOS Water",
+        "publisher_date": "2026-11-06",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.1371/journal.pwat.0000568",
+        "article_page": "https://journals.plos.org/water/article?id=10.1371/journal.pwat.0000568",
+        "relevant": false,
+        "primary_category": "freshwater",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.1371/journal.pwat.0000658": {
+        "journal": "PLOS Water",
+        "publisher_date": "2026-11-11",
+        "publisher_genre": "Opinion",
+        "collected": false,
+        "reference": "https://doi.org/10.1371/journal.pwat.0000658"
+      },
+      "10.1371/journal.pwat.0000663": {
+        "journal": "PLOS Water",
+        "publisher_date": "2026-11-06",
+        "publisher_genre": "Opinion",
+        "collected": false,
+        "reference": "https://doi.org/10.1371/journal.pwat.0000663"
+      },
+      "10.3897/natureconservation.66.200966": {
+        "journal": "Nature Conservation",
+        "publisher_date": "2026-11-18",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.3897/natureconservation.66.200966",
+        "article_page": "https://natureconservation.pensoft.net/article/200966/",
+        "relevant": true,
+        "primary_category": "conservation",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.3897/natureconservation.66.215180": {
+        "journal": "Nature Conservation",
+        "publisher_date": "2026-11-09",
+        "publisher_genre": "Short Communication",
+        "collected": true,
+        "reference": "https://doi.org/10.3897/natureconservation.66.215180",
+        "article_page": "https://natureconservation.pensoft.net/article/215180/",
+        "relevant": true,
+        "primary_category": "conservation",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.3897/natureconservation.66.209306": {
+        "journal": "Nature Conservation",
+        "publisher_date": "2026-11-09",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.3897/natureconservation.66.209306",
+        "article_page": "https://natureconservation.pensoft.net/article/209306/",
+        "relevant": true,
+        "primary_category": "conservation",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.3897/natureconservation.66.198050": {
+        "journal": "Nature Conservation",
+        "publisher_date": "2026-11-03",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.3897/natureconservation.66.198050",
+        "article_page": "https://natureconservation.pensoft.net/article/198050/",
+        "relevant": true,
+        "primary_category": "conservation",
+        "initial_candidate": false,
+        "ranked": false
+      },
+      "10.3897/oneeco.11.e209853": {
+        "journal": "One Ecosystem",
+        "publisher_date": "2026-11-09",
+        "publisher_genre": "Software Description",
+        "collected": false,
+        "reference": "https://doi.org/10.3897/oneeco.11.e209853"
+      },
+      "10.3897/oneeco.11.e200222": {
+        "journal": "One Ecosystem",
+        "publisher_date": "2026-10-30",
+        "publisher_genre": "Review Article",
+        "collected": false,
+        "reference": "https://doi.org/10.3897/oneeco.11.e200222"
+      },
+      "10.3897/oneeco.11.e203814": {
+        "journal": "One Ecosystem",
+        "publisher_date": "2026-10-28",
+        "publisher_genre": "Research Article",
+        "collected": true,
+        "reference": "https://doi.org/10.3897/oneeco.11.e203814",
+        "article_page": "https://oneecosystem.pensoft.net/article/203814/",
+        "relevant": true,
+        "primary_category": "geology",
+        "initial_candidate": false,
+        "ranked": false
+      }
+    }
+  },
+  "source_alternatives": {
+    "Environmental Research Letters": {
+      "crossref_dates": 127,
+      "with_abstract": 118,
+      "with_abstract_and_cc_by": 84,
+      "independent_europe_pmc_records": 2,
+      "example": {
+        "doi": "10.1088/1748-9326/ad2d3c",
+        "created": "2024-02-26",
+        "registered_online_publication": "2026-11-16",
+        "earlier_published_citation": "https://doi.org/10.1029/2025JD044623",
+        "author_copy": "https://arroma.uiowa.edu/docs/publication/paper_pdf/2025/sha_et_al_2025.pdf",
+        "decision": "A 2025 paper already cites the result as a 2024 work. Confirm first public release and version for this case before using the later date as a new result. The broader journal remains in source comparison."
+      }
+    }
+  },
+  "unreviewed_window_comparison": {
+    "Oct28": {
+      "eligible": 37,
+      "candidates": 3,
+      "added_work_groups": []
+    },
+    "Nov04": {
+      "eligible": 35,
+      "candidates": 4,
+      "added_work_groups": []
+    },
+    "Nov11": {
+      "eligible": 41,
+      "candidates": 5,
+      "added_work_groups": []
+    },
+    "Nov18": {
+      "eligible": 45,
+      "candidates": 4,
+      "added_work_groups": []
+    },
+    "pooled": {
+      "eligible": 158,
+      "candidates": 21,
+      "added_work_groups": []
+    }
+  },
+  "hosted_editions": {
+    "oct28": {
+      "edition": "2026-10-28",
+      "run": 44661248570,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44661248570",
+      "action": "rank",
+      "status": "ok",
+      "model_fallbacks": [
+        "enrichment-fallback:doi:10.5194/essd-18-7763-2026"
+      ],
+      "venues": {
+        "PLOS Climate": 2,
+        "PLOS Water": 2,
+        "One Ecosystem": 1,
+        "Atmospheric Chemistry and Physics": 18,
+        "Climate of the Past": 1,
+        "Earth System Science Data": 6,
+        "Ocean Science": 7
+      },
+      "stored": 37,
+      "relevant": 35,
+      "initial_candidates": 3,
+      "failed_candidate_reviews": 0,
+      "ranked": 0,
+      "ranked_papers": {},
+      "new_venue_stored": 5,
+      "new_venue_relevant": 3,
+      "new_venue_in_initial_candidates": 0,
+      "new_venue_ranked": 0,
+      "total_restored_and_new_ledger_usd": 0.0106281,
+      "new_model_charges_usd": 0.0106281
+    },
+    "nov04": {
+      "edition": "2026-11-04",
+      "run": 44661253770,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44661253770",
+      "action": "rank",
+      "status": "degraded",
+      "model_fallbacks": [
+        "cohesion-review-failed:b2836de87697b5c26cf965b837ab8f6798862bcfc404c4d4375d8cabce275ef0"
+      ],
+      "venues": {
+        "PLOS Water": 1,
+        "Nature Conservation": 1,
+        "Atmospheric Chemistry and Physics": 17,
+        "Earth System Science Data": 10,
+        "Ocean Science": 4,
+        "Solid Earth": 2
+      },
+      "stored": 35,
+      "relevant": 34,
+      "initial_candidates": 4,
+      "failed_candidate_reviews": 1,
+      "ranked": 1,
+      "ranked_papers": {
+        "dataset-integrating-8d6a": [
+          "doi:10.5194/essd-18-7817-2026",
+          "doi:10.5194/essd-18-7839-2026",
+          "doi:10.5194/essd-18-7963-2026"
+        ]
+      },
+      "new_venue_stored": 2,
+      "new_venue_relevant": 1,
+      "new_venue_in_initial_candidates": 0,
+      "new_venue_ranked": 0,
+      "total_restored_and_new_ledger_usd": 0.037357,
+      "new_model_charges_usd": 0.037357
+    },
+    "nov11": {
+      "edition": "2026-11-11",
+      "run": 44661257951,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44661257951",
+      "action": "rank",
+      "status": "ok",
+      "model_fallbacks": [
+        "enrichment-fallback:doi:10.5194/acp-26-15563-2026"
+      ],
+      "venues": {
+        "PLOS Climate": 2,
+        "PLOS Water": 1,
+        "Nature Conservation": 2,
+        "Atmospheric Chemistry and Physics": 21,
+        "Climate of the Past": 3,
+        "Earth System Science Data": 9,
+        "Ocean Science": 3
+      },
+      "stored": 41,
+      "relevant": 38,
+      "initial_candidates": 5,
+      "failed_candidate_reviews": 0,
+      "ranked": 0,
+      "ranked_papers": {},
+      "new_venue_stored": 5,
+      "new_venue_relevant": 2,
+      "new_venue_in_initial_candidates": 0,
+      "new_venue_ranked": 0,
+      "total_restored_and_new_ledger_usd": 0.0144813,
+      "new_model_charges_usd": 0.0144813
+    },
+    "nov18": {
+      "edition": "2026-11-18",
+      "run": 44661261954,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44661261954",
+      "action": "rank",
+      "status": "ok",
+      "model_fallbacks": [
+        "enrichment-fallback:doi:10.5194/essd-18-8329-2026"
+      ],
+      "venues": {
+        "PLOS Climate": 3,
+        "Nature Conservation": 1,
+        "Atmospheric Chemistry and Physics": 22,
+        "Climate of the Past": 4,
+        "Earth System Science Data": 10,
+        "Ocean Science": 3,
+        "Solid Earth": 2
+      },
+      "stored": 45,
+      "relevant": 43,
+      "initial_candidates": 4,
+      "failed_candidate_reviews": 0,
+      "ranked": 0,
+      "ranked_papers": {},
+      "new_venue_stored": 4,
+      "new_venue_relevant": 2,
+      "new_venue_in_initial_candidates": 0,
+      "new_venue_ranked": 0,
+      "total_restored_and_new_ledger_usd": 0.0129593,
+      "new_model_charges_usd": 0.0129593
+    },
+    "original": {
+      "edition": "2026-11-04",
+      "run": 44661265812,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44661265812",
+      "action": "audit",
+      "status": "ok",
+      "model_fallbacks": [],
+      "venues": {
+        "Atmospheric Chemistry and Physics": 17,
+        "Earth System Science Data": 10,
+        "Ocean Science": 4,
+        "Solid Earth": 2
+      },
+      "stored": 33,
+      "relevant": 33,
+      "initial_candidates": 4,
+      "failed_candidate_reviews": 0,
+      "ranked": 1,
+      "ranked_papers": {
+        "dataset-integrating-8d6a": [
+          "doi:10.5194/essd-18-7817-2026",
+          "doi:10.5194/essd-18-7839-2026",
+          "doi:10.5194/essd-18-7963-2026"
+        ]
+      },
+      "new_venue_stored": 0,
+      "new_venue_relevant": 0,
+      "new_venue_in_initial_candidates": 0,
+      "new_venue_ranked": 0,
+      "total_restored_and_new_ledger_usd": 0.0349439,
+      "new_model_charges_usd": 0.0
+    },
+    "nov04_retry": {
+      "edition": "2026-11-04",
+      "run": 44661782256,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44661782256",
+      "action": "rerank",
+      "status": "ok",
+      "model_fallbacks": [],
+      "venues": {
+        "PLOS Water": 1,
+        "Nature Conservation": 1,
+        "Atmospheric Chemistry and Physics": 17,
+        "Earth System Science Data": 10,
+        "Ocean Science": 4,
+        "Solid Earth": 2
+      },
+      "stored": 35,
+      "relevant": 34,
+      "initial_candidates": 4,
+      "failed_candidate_reviews": 0,
+      "ranked": 1,
+      "ranked_papers": {
+        "dataset-integrating-8d6a": [
+          "doi:10.5194/essd-18-7817-2026",
+          "doi:10.5194/essd-18-7839-2026",
+          "doi:10.5194/essd-18-7963-2026"
+        ]
+      },
+      "new_venue_stored": 2,
+      "new_venue_relevant": 1,
+      "new_venue_in_initial_candidates": 0,
+      "new_venue_ranked": 0,
+      "total_restored_and_new_ledger_usd": 0.037779,
+      "new_model_charges_usd": 0.000422
+    },
+    "nov19": {
+      "edition": "2026-11-19",
+      "run": 44661785525,
+      "workflow": "https://github.com/jam-sudo/TrendBio/actions/runs/44661785525",
+      "action": "rank",
+      "status": "ok",
+      "model_fallbacks": [],
+      "venues": {
+        "PLOS Climate": 4,
+        "Nature Conservation": 1,
+        "Atmospheric Chemistry and Physics": 21,
+        "Climate of the Past": 3,
+        "Earth System Science Data": 10,
+        "Ocean Science": 4,
+        "Solid Earth": 2,
+        "PLOS Water": 1,
+        "One Ecosystem": 1
+      },
+      "stored": 47,
+      "relevant": 45,
+      "initial_candidates": 4,
+      "failed_candidate_reviews": 0,
+      "ranked": 1,
+      "ranked_papers": {
+        "ozone-conditions-12ee": [
+          "doi:10.5194/acp-26-16203-2026",
+          "doi:10.5194/acp-26-16225-2026",
+          "doi:10.5194/acp-26-16521-2026"
+        ]
+      },
+      "new_venue_stored": 7,
+      "new_venue_relevant": 5,
+      "new_venue_in_initial_candidates": 0,
+      "new_venue_ranked": 0,
+      "total_restored_and_new_ledger_usd": 0.044932,
+      "new_model_charges_usd": 0.0319727
+    }
+  },
+  "incremental_model_cost_usd": 0.1078204,
+  "cost_basis": "Differences between hosted per-field model ledgers. The original audit reused its saved ledger at zero incremental cost. Retrospective collection and local embeddings used no paid model calls.",
+  "editorial_checks": {
+    "nov04": {
+      "grouping": "pass",
+      "revised_summary": "pass",
+      "finding": "Three groups produced distinct ocean reconstructions and profiles by combining in situ observations with models or satellite products. The revised synthesis leaves data overlap unresolved. The original English issue now carries an evidence-scoped correction."
+    },
+    "nov19": {
+      "grouping": "pass",
+      "summary": "pass",
+      "finding": "The preselected three surface-ozone studies all reached the ranking. The two previous outliers did not. Check authors’ statements on modeled chemical sensitivity in Chengdu, the meteorology-dependent simulation in Beijing–Tianjin–Hebei and Shandong, and measured seasonal ozone versus modeled attribution at Leh.",
+      "positive_controls": [
+        "doi:10.5194/acp-26-16203-2026",
+        "doi:10.5194/acp-26-16225-2026",
+        "doi:10.5194/acp-26-16521-2026"
+      ],
+      "negative_controls": [
+        "doi:10.5194/acp-26-16295-2026",
+        "doi:10.5194/acp-26-16325-2026"
+      ],
+      "sampling_limit": "The November 19 date was previously used for calibration and follows the November 18 edition."
+    },
+    "conservation": {
+      "papers": [
+        "10.3897/natureconservation.66.209306",
+        "10.3897/natureconservation.66.215180"
+      ],
+      "finding": "Two November 9 modeling studies estimated climatic habitat suitability for different taxa in different regions of China. Each was relevant. A pair falls below the three-paper publication threshold. The independent studies did not supply a ranked conservation topic."
+    }
+  },
+  "reading_copies": [
+    {
+      "key": "oct28",
+      "date": "2026-10-28",
+      "run": 44661248570,
+      "topics": 0,
+      "links": 0,
+      "venues": [
+        "Atmospheric Chemistry and Physics",
+        "Climate of the Past",
+        "Earth System Science Data",
+        "Ocean Science",
+        "One Ecosystem",
+        "PLOS Climate",
+        "PLOS Water"
+      ],
+      "widths": [
+        320,
+        1280
+      ],
+      "correction": false,
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44661248570/artifacts/14595138462",
+      "expires": "2026-12-04T02:33:19Z",
+      "english_file_sha256": "10dd0f698106b728ac064c0d3a507285e9462aa154482302932e7d13fcb16c04"
+    },
+    {
+      "key": "nov04_retry",
+      "date": "2026-11-04",
+      "run": 44661782256,
+      "topics": 1,
+      "links": 3,
+      "venues": [
+        "Atmospheric Chemistry and Physics",
+        "Earth System Science Data",
+        "Nature Conservation",
+        "Ocean Science",
+        "PLOS Water",
+        "Solid Earth"
+      ],
+      "widths": [
+        320,
+        1280
+      ],
+      "correction": false,
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44661782256/artifacts/14595553361",
+      "expires": "2026-12-04T02:37:29Z",
+      "english_file_sha256": "62b1894f2a5986d2b0f5e3bed82a7fd72951032025972313e190c1a970c4a892"
+    },
+    {
+      "key": "nov11",
+      "date": "2026-11-11",
+      "run": 44661257951,
+      "topics": 0,
+      "links": 0,
+      "venues": [
+        "Atmospheric Chemistry and Physics",
+        "Climate of the Past",
+        "Earth System Science Data",
+        "Nature Conservation",
+        "Ocean Science",
+        "PLOS Climate",
+        "PLOS Water"
+      ],
+      "widths": [
+        320,
+        1280
+      ],
+      "correction": false,
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44661257951/artifacts/14595722496",
+      "expires": "2026-12-04T02:33:50Z",
+      "english_file_sha256": "ce1b09be22d6ff4a971638a5f041707c57a68220bd20051b7de8e210d76b2bb9"
+    },
+    {
+      "key": "nov18",
+      "date": "2026-11-18",
+      "run": 44661261954,
+      "topics": 0,
+      "links": 0,
+      "venues": [
+        "Atmospheric Chemistry and Physics",
+        "Climate of the Past",
+        "Earth System Science Data",
+        "Nature Conservation",
+        "Ocean Science",
+        "PLOS Climate",
+        "Solid Earth"
+      ],
+      "widths": [
+        320,
+        1280
+      ],
+      "correction": false,
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44661261954/artifacts/14596062073",
+      "expires": "2026-12-04T02:33:34Z",
+      "english_file_sha256": "1043842047799d4b35209a99f9aa33f21e762f2f77ca869bc374d2feb3bf34e8"
+    },
+    {
+      "key": "nov19",
+      "date": "2026-11-19",
+      "run": 44661785525,
+      "topics": 1,
+      "links": 3,
+      "venues": [
+        "Atmospheric Chemistry and Physics",
+        "Climate of the Past",
+        "Earth System Science Data",
+        "Nature Conservation",
+        "Ocean Science",
+        "One Ecosystem",
+        "PLOS Climate",
+        "PLOS Water",
+        "Solid Earth"
+      ],
+      "widths": [
+        320,
+        1280
+      ],
+      "correction": false,
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44661785525/artifacts/14595863019",
+      "expires": "2026-12-04T02:37:43Z",
+      "english_file_sha256": "5221e8cdb2a27741a22ac60a4cc892efb551aeac1d71926df89d3b94820cd890"
+    },
+    {
+      "key": "original",
+      "date": "2026-11-04",
+      "run": 44661265812,
+      "topics": 1,
+      "links": 3,
+      "venues": [
+        "Atmospheric Chemistry and Physics",
+        "Earth System Science Data",
+        "Ocean Science",
+        "Solid Earth"
+      ],
+      "widths": [
+        320,
+        1280
+      ],
+      "correction": true,
+      "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44661265812/artifacts/14595522761",
+      "expires": "2026-12-04T02:32:30Z",
+      "english_file_sha256": "232bce1f6d3046323fd9642f55a1a4545b62eef2651d0c79d47e2a476f3682bf"
+    }
+  ],
+  "publication_decision": "Continue on demand. Across the four independent weeks the one ranked group used the original Copernicus journals. The sample cannot establish the required ten high and ten low cases or regular coverage of conservation and water.",
+  "current_archive": {
+    "editions": 22,
+    "ranked_entries": 238,
+    "supporting_paper_link_occurrences": 757,
+    "sha256": "77ef2cf18d608cbbff65f8c27f9b447240a1fe026ef40a5e918f875b1952eba3",
+    "verification": "All 22 offline files matched the GitHub reading copies by SHA-256. The archive index links every file. The six Earth copies were read at widths of 320 and 1280 pixels, checking the dated sources, ranks, summaries, paper links, empty editions and original ocean correction."
+  }
+}

@@ -5,7 +5,7 @@ Each download contains one `en.html` file. Extract it and open it in a browser t
 | Field | Week ending (UTC) | Trial | Topics | Download |
 |---|---|---|---:|---|
 | Mathematics and Statistics | 2026-11-04 | Initial trial | 9 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657409183/artifacts/14594685501) |
-| Earth and Environment | 2026-11-04 | Initial trial | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657412078/artifacts/14593462944) |
+| Earth and Environment | 2026-11-04 | Initial trial with corrected ocean summary | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661265812/artifacts/14595522761) |
 | Chemistry | 2026-11-04 | Initial trial | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657414921/artifacts/14593862322) |
 | Stellar and Galactic Astronomy | 2026-11-04 | Initial trial | 3 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657417982/artifacts/14594081909) |
 | Computing and Information | 2026-11-04 | Initial trial | 8 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657420929/artifacts/14594201634) |
@@ -21,5 +21,10 @@ Each download contains one `en.html` file. Extract it and open it in a browser t
 | Broader Physics | 2026-11-11 | 16 arXiv archives, revised grouping | 31 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657449408/artifacts/14593239310) |
 | Broader Physics | 2026-11-18 | 16 arXiv archives, revised grouping | 38 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657451943/artifacts/14593857261) |
 | Broader Physics | 2026-11-18 | 16 arXiv archives + two journals | 36 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44657454938/artifacts/14594326554) |
+| Earth and Environment | 2026-10-28 | Nine journals | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661248570/artifacts/14595138462) |
+| Earth and Environment | 2026-11-04 | Nine journals | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661782256/artifacts/14595553361) |
+| Earth and Environment | 2026-11-11 | Nine journals | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661257951/artifacts/14595722496) |
+| Earth and Environment | 2026-11-18 | Nine journals | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661261954/artifacts/14596062073) |
+| Earth and Environment | 2026-11-19 | Nine journals, incremental run | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44661785525/artifacts/14595863019) |
 
-[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json)
+[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json) · [Earth journal comparison and edition checks](earth-journal-coverage.json)
