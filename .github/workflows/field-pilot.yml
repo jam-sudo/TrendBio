@@ -46,9 +46,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRIOR_RUN" | jq -e '
+          prior="repos/$GITHUB_REPOSITORY/actions/runs/$PRIOR_RUN"
+          conclusion="$(gh api "$prior" | jq -er 'select(
             (.path == ".github/workflows/daily.yml" or .path == ".github/workflows/field-pilot.yml")
-            and .head_branch == "main" and .event == "workflow_dispatch" and .conclusion == "success"' >/dev/null
+            and .head_branch == "main" and .event == "workflow_dispatch") | .conclusion')"
+          if [[ "$conclusion" != success ]]; then
+            # A preview failure can be retried using the already audited data.
+            [[ "$conclusion" == failure ]]
+            gh api "$prior/jobs?filter=latest" | jq -e 'any(.jobs[].steps[]; .name == "Save audited pilot data" and .conclusion == "success")' >/dev/null
+          fi
           gh run download "$PRIOR_RUN" --pattern "$DOMAIN-pilot-$PRIOR_RUN-*" --dir "$RUNNER_TEMP/prior-pilot"
           restore_date="$RUN_DATE"
           if [[ "$PILOT_ACTION" == rank ]]; then restore_date="$(date -u -d "$RUN_DATE -1 day" +%F)"; fi
@@ -85,9 +91,44 @@ jobs:
         run: |
           mkdir -p "science-pilot/$DOMAIN/audits"
           python -m pipeline audit-edition --domain "$DOMAIN" --data-root science-pilot --from "$RUN_DATE" --to "$RUN_DATE" > "science-pilot/$DOMAIN/audits/$RUN_DATE.json"
-      - uses: actions/upload-artifact@v4
+      - name: Save audited pilot data
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.domain }}-pilot-${{ github.run_id }}-${{ github.run_attempt }}
           path: science-pilot/
           if-no-files-found: error
           retention-days: 14
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.cache/trendbio/opus-en-ko-20220728
+          key: linux-opus-en-ko-20220728-v1
+      - name: Build and verify the English and Korean reading copies
+        working-directory: site
+        env:
+          TRENDBIO_DATA_ROOT: ../science-pilot
+          TRENDBIO_NOTES_ROOT: ../science-pilot/notes
+        run: |
+          npm ci
+          python -m pip install -r scripts/translation-requirements.txt
+          npx --no-install astro build
+          node scripts/localize.mjs dist
+          node scripts/pilot-preview.mjs dist "../science-pilot/$DOMAIN/days/$RUN_DATE.json" "$RUNNER_TEMP/reading-copy"
+      - name: Save the bilingual reading copy
+        id: preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.domain }}-en-ko-${{ inputs.date }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reading-copy/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Link the preview
+        env:
+          PREVIEW_URL: ${{ steps.preview.outputs.artifact-url }}
+        run: |
+          echo "[한국어 · English]($PREVIEW_URL) · $DOMAIN · $RUN_DATE" >> "$GITHUB_STEP_SUMMARY"
+          echo '압축을 풀고 ko.html 또는 en.html을 여세요. Extract the ZIP and open either HTML file.' >> "$GITHUB_STEP_SUMMARY"

@@ -1,4 +1,8 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { mkdtempSync, readFileSync, readdirSync, rmSync, statSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { chromium, type Browser, type Page } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { getDataIndex } from "../src/lib/data";
@@ -128,6 +132,28 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
     expect(await main.locator('a[href^="https://example.org/physics/"]').count()).toBe(3);
     const archiveLink = path === "physics/index.html" ? "/physics/day/2026-11-01/" : "/physics/#editions";
     expect(await main.locator(`a[href="${archiveLink}"]`).count()).toBe(1);
+  }
+});
+
+it("opens the downloaded English and Korean pilot files offline at the same ranked topic", async () => {
+  const folder = mkdtempSync(join(tmpdir(), "trendbio-pilot-preview-"));
+  const offline = await browser.newPage();
+  try {
+    execFileSync(process.execPath, ["scripts/pilot-preview.mjs", "dist", "../fixtures/data/physics/days/2026-11-01.json", folder]);
+    const slug = getDataIndex("physics").days[0].ranked[0].slug;
+    await offline.goto(pathToFileURL(join(folder, "en.html")).href + "#" + slug);
+    await offline.getByRole("link", { name: "한국어" }).click();
+    expect(offline.url()).toBe(pathToFileURL(join(folder, "ko.html")).href + "#" + slug);
+    expect(await offline.locator("html").getAttribute("lang")).toBe("ko");
+    expect(await offline.locator(":target").getAttribute("value")).toBe("1");
+    expect(await offline.locator("main .rankings h3").textContent()).toMatch(/[가-힣]/);
+    await offline.locator("main details summary").click();
+    expect(await offline.locator('main details a[href^="https://example.org/physics/"]').count()).toBe(3);
+    await offline.getByRole("link", { name: "English" }).click();
+    expect(offline.url()).toBe(pathToFileURL(join(folder, "en.html")).href + "#" + slug);
+  } finally {
+    await offline.close();
+    rmSync(folder, { recursive: true, force: true });
   }
 });
 

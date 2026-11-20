@@ -71,7 +71,7 @@ const rows = (day?.ranked ?? []).map(row => {
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
       {rows.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
       <ol class="rankings">
-        {rows.map(({ row, synthesis, papers }) => <li value={row.rank}>
+        {rows.map(({ row, synthesis, papers }) => <li value={row.rank} id={row.slug}>
           <p class="category">{categories.get(row.category) ?? row.category}</p>
           <h3>{row.headline}</h3>
           <p>{row.summary}</p>
@@ -89,7 +89,7 @@ const rows = (day?.ranked ?? []).map(row => {
           </details>}
         </li>)}
       </ol>
-      {Astro.params.edition ? <p><a href={`/${field}/#editions`}>Browse {field} editions</a></p> : <details class="archive" id="editions"><summary>{label} editions by date</summary>
+      {Astro.params.edition ? <p class="archive"><a href={`/${field}/#editions`}>Browse {field} editions</a></p> : <details class="archive" id="editions"><summary>{label} editions by date</summary>
         <ul>{days.map(({ date }) => <li><a href={`/${field}/day/${date}/`}>{date}</a></li>)}</ul>
       </details>}
     </> : <p>The first {field} ranking will appear after the first collection run.</p>}
