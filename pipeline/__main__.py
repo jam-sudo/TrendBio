@@ -175,11 +175,13 @@ def topic_map(domain: Domain = 'computational', data_root: DataRoot = Path('data
 
 
 @app.command('audit-operations')
-def audit_operations_cmd(start: FromDate = None, end: ToDate = None, data_root: DataRoot = Path('data')):
+def audit_operations_cmd(start: FromDate = None, end: ToDate = None, data_root: DataRoot = Path('data'),
+                         actions_repo: Annotated[str | None, typer.Option(help='Include daily workflow attempts from OWNER/REPO.')] = None):
     """Measure live public editions and project spending after 14 shared dates."""
     from pipeline.operations import audit_operations
 
-    report = audit_operations(data_root, (end or datetime.now(timezone.utc)).date(), start.date() if start else None)
+    report = audit_operations(data_root, (end or datetime.now(timezone.utc)).date(), start.date() if start else None,
+                              actions_repo=actions_repo)
     typer.echo(json.dumps(report, indent=2))
 
 

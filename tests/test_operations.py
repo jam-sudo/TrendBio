@@ -61,3 +61,29 @@ def test_cli_shows_missing_historical_and_backfilled_editions(tmp_path):
     path.write_text(path.read_text().replace('"domain": "computational"', '"domain": "biology"'))
     with pytest.raises(ValueError, match='identity'):
         audit_operations(tmp_path, day)
+
+
+def test_failed_commit_with_model_work_keeps_its_date_out_of_the_cost_projection(tmp_path, monkeypatch):
+    first = date(2026, 11, 1)
+    for offset in range(15):
+        for field in PUBLIC_FIELDS:
+            put(tmp_path, field, first + timedelta(days=offset))
+    issue = {'field': 'physics', 'kind': 'live', 'edition_date': str(first), 'started_at': f'{first}T01:00:00Z',
+             'source_status': {}, 'elapsed_seconds': 30, 'reached_model_stage': True, 'attempt_model_cost_usd': None,
+             'step_conclusion': 'success', 'commit_step': 'failure'}
+    history = {'attempts': [issue], 'unfinished_jobs': []}
+    monkeypatch.setattr('pipeline.workflow_attempts.collect_attempts', lambda *args: history)
+    before = audit_operations(tmp_path, first + timedelta(days=13), first, actions_repo='owner/repo')
+    assert len(before['matched_daily_cost_usd']) == 14 and before['projected_30d_usd'] is None
+    after = audit_operations(tmp_path, first + timedelta(days=14), first, actions_repo='owner/repo')
+    assert after['projected_30d_usd'] == 9 and after['projection_basis_dates'][0] == '2026-11-02'
+    paid = {**issue, 'attempt_model_cost_usd': .05}
+    saved = {**issue, 'commit_step': 'success', 'attempt_model_cost_usd': .1}
+    history['attempts'] = [paid, saved]
+    measured = audit_operations(tmp_path, first + timedelta(days=13), first, actions_repo='owner/repo')
+    assert measured['matched_daily_cost_usd'][str(first)] == .3
+    assert measured['reconciled_daily_cost_usd'][str(first)] == .35
+    assert measured['projected_30d_usd'] == 9.1071
+    history['unfinished_jobs'] = [{'date': str(first), 'url': 'https://example.org/jobs/3'}]
+    provisional = audit_operations(tmp_path, first + timedelta(days=13), first, actions_repo='owner/repo')
+    assert provisional['projected_30d_usd'] is None and str(first) not in provisional['reconciled_daily_cost_usd']

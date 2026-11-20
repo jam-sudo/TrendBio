@@ -281,11 +281,17 @@ def test_social_editions_share_only_prompt_matched_decisions(ctx, tmp_path, monk
         assert all(store.get_item(paper.id).primary_category == 'education' for paper in papers)
 
 
-def test_rerun_same_day_is_idempotent(ctx):
+def test_rerun_same_day_is_idempotent(ctx, caplog):
+    caplog.set_level('INFO', logger='pipeline.run')
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
     before = tree(ctx.root)
     run_day('computational', TODAY, ctx.store, ctx.deps)
     assert tree(ctx.root) == before
+    receipts = [json.loads(record.message.split(' edition_receipt=', 1)[1])
+                for record in caplog.records if ' edition_receipt=' in record.message]
+    first, retry = receipts
+    assert first['attempt_model_cost_usd'] == first['cumulative_model_cost_usd'] == result.run.model_cost_usd
+    assert retry == {**first, 'attempt_model_cost_usd': 0}
     topic = ctx.store.get_topic(result.ranked[0].slug)
     assert sum(entry.date == TODAY for entry in topic.history) == 1
 

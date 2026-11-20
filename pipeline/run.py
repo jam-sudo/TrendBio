@@ -402,7 +402,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 if ranked and ranked[0][0].slug in cached:
                     model = ranked[0][0].synthesis_model or previous.run.synthesis_model
             counts['model'] = model
-        with _stage('write'):
+        with _stage('write') as counts:
             ranks = {topic.slug: index for index, (topic, _, _) in enumerate(ranked, 1)}
             for topic, signals, scores in scored:
                 entry = next(entry for entry in topic.history if entry.date == day)
@@ -416,8 +416,9 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                                    window_item_ids=window_item_ids, cfg=deps.cfg)
             same_mode = previous is not None and previous.run.backfilled == backfill
             cost = previous.run.model_cost_usd if same_mode else 0.0
+            run_cost = max(0.0, deps.budget.total_spend_usd() - spend_before)
             if cost is not None:
-                cost += max(0.0, deps.budget.total_spend_usd() - spend_before)
+                cost += run_cost
             result = Day(domain=domain, date=day, ranked=[RankedTopic(
                 slug=topic.slug, rank=index, headline=topic.headline or topic.label.title(),
                 summary=topic.summary or '', synthesis=topic.synthesis if topic.synthesized_on == day
@@ -431,6 +432,10 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 source_status=source_status, arxiv_categories=arxiv_categories, notes=sorted(set(notes)),
             ))
             store.put_day(result)
+            counts['edition_receipt'] = json.dumps({
+                'domain': domain, 'date': str(day), 'status': result.run.status, 'source_status': source_status,
+                'attempt_model_cost_usd': run_cost, 'cumulative_model_cost_usd': result.run.model_cost_usd,
+            }, separators=(',', ':'))
         if not backfill:
             with _stage('map'):
                 store.put_map(build_map(store, deps.cfg, previous=store.get_map()))

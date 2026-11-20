@@ -47,7 +47,7 @@ def _edition(root: Path, field: str, day: date) -> dict:
                               if status not in {'ok', 'skipped'}}}
 
 
-def audit_operations(root: Path, end: date, start: date | None = None) -> dict:
+def audit_operations(root: Path, end: date, start: date | None = None, *, actions_repo: str | None = None) -> dict:
     start = start or end - timedelta(days=29)
     if end < start:
         raise ValueError('End precedes start')
@@ -66,8 +66,20 @@ def audit_operations(root: Path, end: date, start: date | None = None) -> dict:
                          'degraded': sum(e['status'] == 'degraded' for e in live),
                          'measured_cost_days': len(costs), 'recorded_model_cost_usd': round(sum(costs), 7) if costs else None,
                          'mean_elapsed_seconds': round(sum(e['elapsed_seconds'] for e in live) / len(live), 3) if live else None}
-    basis = list(matched)[-TARGET_LIVE_DATES:] if len(matched) >= TARGET_LIVE_DATES else []
+    report_costs = matched
+    workflow = {}
+    if actions_repo:
+        from pipeline.workflow_attempts import collect_attempts, summarize_attempts
+
+        activity = summarize_attempts(collect_attempts(actions_repo, start, end), days)
+        workflow['workflow_activity'] = activity
+        unresolved = set(activity['unreconciled_cost_dates']) | {job['date'] for job in activity['unfinished_jobs']}
+        report_costs = {day: round(amount + sum(field['additional_model_cost_usd'] or 0
+                                                for field in activity['days'].get(day, {}).values()), 7)
+                        for day, amount in matched.items() if day not in unresolved}
+        workflow['reconciled_daily_cost_usd'] = report_costs
+    basis = list(report_costs)[-TARGET_LIVE_DATES:] if len(report_costs) >= TARGET_LIVE_DATES else []
     return {'from': str(start), 'to': str(end), 'fields': fields, 'days': days,
             'matched_daily_cost_usd': matched, 'target_live_dates': TARGET_LIVE_DATES,
             'projection_basis_dates': basis,
-            'projected_30d_usd': project_month(list(matched.values()))}
+            'projected_30d_usd': project_month(list(report_costs.values())), **workflow}

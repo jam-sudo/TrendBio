@@ -13,7 +13,7 @@ on:
         options: [all, computational, physics, biology]
         default: all
       date:
-        description: UTC date to process (YYYY-MM-DD; defaults to today)
+        description: UTC edition date (YYYY-MM-DD, defaults to the workflow creation date)
         type: string
         required: false
       dry_run:
@@ -47,11 +47,26 @@ jobs:
       - uses: ./.github/actions/wait-for-pipeline
       - name: Refresh data after waiting
         run: git pull --ff-only origin main
+      - name: Resolve the UTC edition date
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED_DATE: ${{ inputs.date }}
+        run: |
+          day="$REQUESTED_DATE"
+          if [[ -z "$day" ]]; then
+            day="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --jq '.created_at[0:10]')"
+          fi
+          canonical="$(python3 -c 'from datetime import date; import sys; print(date.fromisoformat(sys.argv[1]))' "$day")"
+          if [[ "$canonical" != "$day" ]]; then
+            echo 'Edition date must use YYYY-MM-DD.' >&2
+            exit 1
+          fi
+          echo "EDITION_DATE=$day" >> "$GITHUB_ENV"
       - name: Skip a scheduled field with complete paper sources
         id: ran-today
         if: ${{ github.event_name == 'schedule' }}
         run: |
-          file="data/$DOMAIN/days/$(date -u +%F).json"
+          file="data/$DOMAIN/days/$EDITION_DATE.json"
           if [[ -f "$file" ]] && jq -e '[.run.source_status | .arxiv, .biorxiv, .pubmed] | any(. == "ok") and all(. == "ok" or . == "skipped")' "$file" >/dev/null; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
@@ -78,13 +93,10 @@ jobs:
           BLUESKY_APP_PASSWORD: ${{ matrix.domain == 'computational' && secrets.BLUESKY_APP_PASSWORD || '' }}
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUN_DATE: ${{ inputs.date }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
-          args=(run --domain "$DOMAIN")
-          if [[ -n "$RUN_DATE" ]]; then
-            args+=(--date "$RUN_DATE")
-          fi
+          args=(run --domain "$DOMAIN" --date "$EDITION_DATE")
+          echo "trendbio_daily_start field=$DOMAIN date=$EDITION_DATE dry=${DRY_RUN:-false}"
           if [[ "$DRY_RUN" == "true" ]]; then
             args+=(--dry-run)
           fi
@@ -92,16 +104,13 @@ jobs:
       - name: Record edition coverage and evidence samples
         id: audit
         if: ${{ steps.ran-today.outputs.skip != 'true' && !inputs.dry_run && matrix.domain != 'computational' }}
-        env:
-          RUN_DATE: ${{ inputs.date }}
         run: |
-          day="${RUN_DATE:-$(date -u +%F)}"
-          python -m pipeline audit-edition --domain "$DOMAIN" --from "$day" --to "$day" > "$RUNNER_TEMP/coverage.json"
+          python -m pipeline audit-edition --domain "$DOMAIN" --from "$EDITION_DATE" --to "$EDITION_DATE" > "$RUNNER_TEMP/coverage.json"
           mkdir -p "data/$DOMAIN/audits"
-          mv "$RUNNER_TEMP/coverage.json" "data/$DOMAIN/audits/$day.json"
+          mv "$RUNNER_TEMP/coverage.json" "data/$DOMAIN/audits/$EDITION_DATE.json"
           beta="data/$DOMAIN/audits/first-14.json"
           if [[ ! -f "$beta" ]] || ! jq -e '.live_editions >= .target_editions' "$beta" >/dev/null; then
-            python -m pipeline audit-beta --domain "$DOMAIN" --to "$day" > "$RUNNER_TEMP/beta.json"
+            python -m pipeline audit-beta --domain "$DOMAIN" --to "$EDITION_DATE" > "$RUNNER_TEMP/beta.json"
             mv "$RUNNER_TEMP/beta.json" "$beta"
           fi
       - name: Commit data
@@ -111,7 +120,7 @@ jobs:
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add data
-            git commit -m "data: $DOMAIN $(date -u +%F) run"
+            git commit -m "data: $DOMAIN $EDITION_DATE run"
             if ! git pull --rebase --autostash origin main; then
               git rebase --abort
               echo '::warning::Data rebase conflicted; retrying once with an ours merge.'

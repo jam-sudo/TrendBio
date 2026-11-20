@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   report:
@@ -25,10 +26,12 @@ jobs:
           sparse-checkout: |
             /pipeline/__init__.py
             /pipeline/operations.py
+            /pipeline/workflow_attempts.py
             /data/*/days/*.json
       - name: Measure the last 30 edition dates
         env:
           END_DATE: ${{ inputs.date }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
           import json
@@ -38,18 +41,35 @@ jobs:
           from pipeline.operations import audit_operations
 
           end = date.fromisoformat(os.environ['END_DATE']) if os.environ['END_DATE'] else datetime.now(UTC).date()
-          report = audit_operations(Path('data'), end)
+          report = audit_operations(Path('data'), end, actions_repo=os.environ['GITHUB_REPOSITORY'])
           Path('public-operations.json').write_text(json.dumps(report, indent=2) + '\n')
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
               print(f"### Public editions through {end} (UTC)\n", file=summary)
-              print("| Field | Live editions | OK | Degraded | Dates with costs | Recorded USD | Mean run seconds |", file=summary)
+              print("| Field | Live editions | OK | Degraded | Dates with costs | Recorded USD | Mean saved edition seconds |", file=summary)
               print("| --- | ---: | ---: | ---: | ---: | ---: | ---: |", file=summary)
               for field, totals in report['fields'].items():
                   cells = (field, totals['live_editions'], totals['ok'], totals['degraded'], totals['measured_cost_days'],
                            totals['recorded_model_cost_usd'], totals['mean_elapsed_seconds'])
                   print("| " + " | ".join("—" if value is None else str(value) for value in cells) + " |", file=summary)
               count = len(report['matched_daily_cost_usd'])
-              print(f"\n{count} dates have recorded costs for all public fields.", file=summary)
+              eligible = len(report['reconciled_daily_cost_usd'])
+              print(f"\nAll public fields have recorded costs on {count} dates. "
+                    f"{eligible} dates qualify for the budget projection.", file=summary)
+              activity = report['workflow_activity']
+              print("\n| Field | Live pipeline steps | Retries | Unsuccessful steps | Completed without a successful save | Steps with source issues | Total step seconds |", file=summary)
+              print("| --- | ---: | ---: | ---: | ---: | ---: | ---: |", file=summary)
+              for field in report['fields']:
+                  rows = [row[field] for row in activity['days'].values() if field in row]
+                  totals = [sum(r[key] for r in rows) for key in
+                            ('attempts', 'retries', 'unsuccessful_steps', 'unsaved_successful_steps', 'attempts_with_source_issues', 'step_seconds')]
+                  print('| ' + ' | '.join(map(str, [field, *totals])) + ' |', file=summary)
+              print(f"\nSkipped jobs: {sum(activity['skipped_jobs_by_utc_date'].values())}. "
+                    f"Executed steps with unknown scope: {activity['counts_by_kind'].get('unknown', 0)}. "
+                    f"Jobs without a measured step: {len(activity['jobs_without_a_measured_step'])}. "
+                    f"Unfinished jobs: {len(activity['unfinished_jobs'])}.", file=summary)
+              if activity['unreconciled_cost_dates']:
+                  print("Dates with uncommitted model work or unavailable cost evidence: " +
+                        ', '.join(activity['unreconciled_cost_dates']) + '.', file=summary)
               projection = report['projected_30d_usd']
               if projection is None:
                   print(f"The 30-day estimate requires {report['target_live_dates']} shared dates.", file=summary)
