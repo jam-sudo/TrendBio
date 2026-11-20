@@ -179,7 +179,7 @@ it("publishes an English archive with permanent redirects for former Korean link
   expect(read("_redirects").trim().split("\n")).toEqual(["/ko / 301", "/ko/* https://trendbio.dev/:splat 301"]);
 });
 
-it("withdraws a pilot ranking only while its original headline and evidence match", async () => {
+it("withdraws pilot ranks by a dated claim or the complete set of reviewed source versions", async () => {
   const folder = mkdtempSync(join(tmpdir(), "trendbio-withdrawal-"));
   try {
     const registry = join(folder, "physics");
@@ -189,21 +189,24 @@ it("withdraws a pilot ranking only while its original headline and evidence matc
     const { headline, slug } = day.ranked[0];
     const papers = [3, 1, 2].map(n => `arxiv:optics-fixture-${n}`);
     const reason = "The studies measure different properties (<noise> and loss).";
-    const render = async (claim: string, ids: string[]) => {
-      writeFileSync(join(registry, "withdrawals.json"), JSON.stringify([
-        { date: day.date, slug, headlines: [claim], papers: ids, reason },
-      ]));
+    const dated = (claim: string, ids: string[]) => ({ date: day.date, slug, headlines: [claim], papers: ids });
+    const render = async (decision: Record<string, unknown>) => {
+      writeFileSync(join(registry, "withdrawals.json"), JSON.stringify([{ ...decision, reason }]));
       execFileSync(process.execPath, ["scripts/pilot-preview.mjs", "dist", dayFile, folder],
         { env: { ...process.env, TRENDBIO_NOTES_ROOT: folder } });
       await page.setContent(readFileSync(join(folder, "en.html"), "utf8"));
       return page.locator("ol.rankings > li").first();
     };
-    const withdrawn = await render(headline, papers);
+    const withdrawn = await render(dated(headline, papers));
     expect(await withdrawn.getAttribute("value")).toBe("1");
     expect(await withdrawn.getByRole("note").textContent()).toBe(reason);
     expect(await withdrawn.locator("details, a").count()).toBe(0);
-    expect(await (await render("A revised headline", papers)).locator("h3").textContent()).toBe(headline);
-    expect(await (await render(headline, [...papers.slice(1), "another-paper"])).locator("details").count()).toBe(1);
+    expect(await (await render(dated("A revised headline", papers))).locator("h3").textContent()).toBe(headline);
+    expect(await (await render(dated(headline, [...papers.slice(1), "another-paper"]))).locator("details").count()).toBe(1);
+    const versions = Object.fromEntries([3, 1, 2].map(n => [`arxiv:optics-fixture-${n}`, `https://example.org/physics/cavity-${n}`]));
+    expect(await (await render({ source_versions: versions })).getByRole("note").textContent()).toBe(reason);
+    expect(await (await render({ source_versions: { ...versions, [papers[0]]: versions[papers[0]] + "v2" } })).locator("h3").textContent()).toBe(headline);
+    expect(await (await render({ source_versions: { ...versions, extra: "https://example.org/extra" } })).locator("details").count()).toBe(1);
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }

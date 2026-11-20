@@ -18,7 +18,7 @@ The site is served at https://trendbio.dev (and https://trendbio.pages.dev).
 
 The site, Atom feeds and downloadable editions use English. Each public field has a daily Top 5 feed and a feed for each category. The footer links to the current field’s Top 5. The About page lists the category subscriptions. Cloudflare Pages redirects former `/ko/` links to the corresponding English paths. The website build uses Node 22. [CompBio feed](https://trendbio.dev/feed.xml) · [All Biology feed](https://trendbio.dev/biology/feed.xml) · [Physics feed](https://trendbio.dev/physics/feed.xml)
 
-An editor can withdraw a ranking from a downloadable pilot when its studies do not support a common result. Record the edition date, topic slug, exact headlines, full list of paper IDs and an English reason in `notes/<domain>/withdrawals.json`. The export checks the original ranking and citations, then shows the reason at the original rank. A revised headline or paper set requires a new editorial decision.
+An editor can withdraw a ranking from a downloadable pilot when its studies do not support a common result. Record the edition date, topic slug, exact headlines, full list of paper IDs and an English reason in `notes/<domain>/withdrawals.json`. For a decision about the eligibility of the source papers themselves, record an English reason and a `source_versions` object mapping every paper ID to its reviewed version URL. That decision follows the same set into later editions only while every ID and version URL matches. The export checks the original ranking and citations, then shows the reason at the original rank.
 
 ```sh
 cd site

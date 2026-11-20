@@ -39,7 +39,7 @@ assert.deepEqual(rows.map(n => [attr(n, 'id'), Number(attr(n, 'value'))]), ranke
 
 if (ranked.length) {
   const withdrawalFile = join(process.env.TRENDBIO_NOTES_ROOT ?? '../notes', domain, 'withdrawals.json');
-  const withdrawals = existsSync(withdrawalFile) ? read(withdrawalFile).filter(note => note.date === date) : [];
+  const withdrawals = existsSync(withdrawalFile) ? read(withdrawalFile).filter(note => note.date === date || note.source_versions) : [];
   const urls = new Map();
   const items = join(store, 'items');
   for (const file of readdirSync(items, { recursive: true })) {
@@ -57,8 +57,10 @@ if (ranked.length) {
     const sources = children(evidence, 'ul')[0];
     const links = children(sources, 'li').map(li => attr(children(li, 'a')[0], 'href'));
     assert.deepEqual(links, history.item_ids.map(id => urls.get(id)), 'Supporting papers for ' + slug);
-    const withdrawal = withdrawals.find(note => note.slug === slug && note.headlines.includes(headline)
-      && isDeepStrictEqual(note.papers.toSorted(), history.item_ids.toSorted()));
+    const sourceVersions = Object.fromEntries(history.item_ids.map(id => [id, urls.get(id)]));
+    const withdrawal = withdrawals.find(note => note.source_versions
+      ? isDeepStrictEqual(note.source_versions, sourceVersions)
+      : note.slug === slug && note.headlines.includes(headline) && isDeepStrictEqual(note.papers.toSorted(), history.item_ids.toSorted()));
     if (withdrawal) {
       assert.ok(typeof withdrawal.reason === 'string' && withdrawal.reason.trim());
       const [category, explanation] = children(row, 'p');
