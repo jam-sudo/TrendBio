@@ -18,6 +18,7 @@ from pipeline.jsonio import item_path
 from pipeline.llm import Enrichment, Synthesis
 from pipeline.models import Item
 from pipeline.sources.arxiv import ArxivAdapter
+from pipeline.sources.arxiv_announcements import PhysicsAnnouncements
 from pipeline.sources.europepmc import EuropePmcAdapter
 from pipeline.store import Store
 from pipeline.run import (
@@ -122,6 +123,39 @@ def test_retracted_clinical_study_cannot_reenter_a_restored_daily_window(ctx, mo
     assert ctx.store.get_day(TODAY).ranked
     assert not ctx.store.get_item('med:0').relevant
     assert ctx.store.get_item('med:0').metadata['screening_status'] == 'retracted'
+
+
+def test_announcement_editions_retain_their_collection_and_survive_source_failure(ctx, tmp_path, monkeypatch):
+    store = Store(tmp_path / 'trial', 'physics-expanded')
+    ctx.deps.adapters = [ArxivAdapter({'arxiv': {'categories': ['physics.atom-ph']}})]
+    seen = []
+    def fetch(adapter, start, day, client):
+        seen.append(day)
+        adapter.mailings = {str(start + timedelta(days=i)): {'new': 0, 'cross': 0, 'replacement': 0}
+                            for i in range((day - start).days + 1)}
+        return []
+    monkeypatch.setattr(PhysicsAnnouncements, 'fetch', fetch)
+    first = run_day(store.domain, TODAY, store, ctx.deps, arxiv_announcements=True)
+    following = TODAY + timedelta(days=1)
+    next_day = run_day(store.domain, following, store, ctx.deps)
+    assert len(first.run.arxiv_mailings) == len(next_day.run.arxiv_mailings) == 7
+    assert str(following) in next_day.run.arxiv_mailings and str(following) not in first.run.arxiv_mailings
+    assert run_day(store.domain, following, store, ctx.deps, replay=True).run.arxiv_mailings == next_day.run.arxiv_mailings
+    assert seen == [TODAY, following]
+    before = tree(store.root)
+    def unavailable(*args):
+        raise ValueError('Missing mailing page')
+    monkeypatch.setattr(PhysicsAnnouncements, 'fetch', unavailable)
+    with pytest.raises(ValueError, match='Missing mailing page'):
+        run_day(store.domain, following + timedelta(days=1), store, ctx.deps)
+    with pytest.raises(ValueError, match='field pilot'):
+        run_backfill(store.domain, TODAY, following, store, ctx.deps, resume=True)
+    assert tree(store.root) == before
+    first.run.arxiv_mailings = None
+    other = Store(tmp_path / 'submission', store.domain)
+    other.put_day(first)
+    with pytest.raises(ValueError, match='separate'):
+        run_day(other.domain, following, other, ctx.deps, arxiv_announcements=True)
 
 
 def test_replay_uses_only_the_latest_saved_snapshot(ctx, monkeypatch):

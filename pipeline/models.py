@@ -107,6 +107,7 @@ class RunInfo(BaseModel):
     synthesis_model: str
     source_status: dict[str, Literal["ok", "partial", "failed", "skipped"]]
     arxiv_categories: list[str] | None = Field(default=None, exclude_if=lambda value: value is None)
+    arxiv_mailings: dict[str, dict[str, int]] | None = Field(default=None, exclude_if=lambda value: value is None)
     notes: list[str] = []
 
 

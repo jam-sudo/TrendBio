@@ -102,6 +102,7 @@ export interface RunInfo {
   synthesis_model: string;
   source_status: Record<string, "ok" | "partial" | "failed" | "skipped">;
   arxiv_categories?: string[];
+  arxiv_mailings?: Record<string, Record<"new" | "cross" | "replacement", number>>;
   notes: string[];
 }
 

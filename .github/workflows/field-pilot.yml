@@ -14,7 +14,7 @@ on:
         required: true
       action:
         type: choice
-        options: [rank, rank-28d, audit, repair-summaries, rerank, replay]
+        options: [rank, rank-28d, rank-announced, audit, repair-summaries, rerank, replay]
         default: rank
       prior_run:
         description: Prior pilot ID. Rank advances one day and rank-28d advances 28 days. Review actions use the requested day.
@@ -50,7 +50,8 @@ jobs:
           case "$DOMAIN" in math|earth-environment|chemistry|astronomy|physics-expanded|computer-information|engineering|agriculture-food-veterinary|medicine-health|social-sciences|humanities-arts) ;; *) exit 1 ;; esac
           [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
           [[ "$(date -u -d "$RUN_DATE" +%F)" == "$RUN_DATE" && "$RUN_DATE" < "$(date -u -d tomorrow +%F)" ]]
-          if [[ -n "$PRIOR_RUN" || ( "$PILOT_ACTION" != rank && "$PILOT_ACTION" != rank-28d ) ]]; then [[ "$PRIOR_RUN" =~ ^[0-9]+$ ]]; fi
+          if [[ "$PILOT_ACTION" == rank-announced ]]; then [[ "$DOMAIN" == physics-expanded ]]; fi
+          if [[ -n "$PRIOR_RUN" || "$PILOT_ACTION" != rank* ]]; then [[ "$PRIOR_RUN" =~ ^[0-9]+$ ]]; fi
           case "$REPAIR_MODEL" in claude-haiku-5-5|claude-sonnet-5-5) ;; *) exit 1 ;; esac
       - name: Restore the reviewed date
         if: ${{ inputs.prior_run != '' }}
@@ -68,7 +69,7 @@ jobs:
           fi
           gh run download "$PRIOR_RUN" --pattern "$DOMAIN-pilot-$PRIOR_RUN-*" --dir "$RUNNER_TEMP/prior-pilot"
           restore_date="$RUN_DATE"
-          if [[ "$PILOT_ACTION" == rank ]]; then restore_date="$(date -u -d "$RUN_DATE -1 day" +%F)"; fi
+          if [[ "$PILOT_ACTION" == rank || "$PILOT_ACTION" == rank-announced ]]; then restore_date="$(date -u -d "$RUN_DATE -1 day" +%F)"; fi
           if [[ "$PILOT_ACTION" == rank-28d ]]; then restore_date="$(date -u -d "$RUN_DATE -28 days" +%F)"; fi
           mapfile -t days < <(find "$RUNNER_TEMP/prior-pilot" -type f -path "*/$DOMAIN/days/$restore_date.json")
           [[ ${#days[@]} == 1 ]]
@@ -124,6 +125,8 @@ jobs:
             python -m pipeline repair-synthesis --domain "$DOMAIN" --data-root science-pilot --from "$RUN_DATE" --to "$RUN_DATE" --retry-fallbacks --model "$REPAIR_MODEL"
           elif [[ "$PILOT_ACTION" == rank-28d ]]; then
             python -m pipeline run --domain "$DOMAIN" --data-root science-pilot --date "$RUN_DATE" --window-days 28
+          elif [[ "$PILOT_ACTION" == rank-announced ]]; then
+            python -m pipeline run --domain "$DOMAIN" --data-root science-pilot --date "$RUN_DATE" --arxiv-announcements
           elif [[ "$PILOT_ACTION" == replay ]]; then
             python -m pipeline run --domain "$DOMAIN" --data-root science-pilot --date "$RUN_DATE" --replay
           else

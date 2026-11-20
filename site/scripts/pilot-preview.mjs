@@ -23,6 +23,7 @@ assert.equal(attr(nodes.find(n => n.tagName === 'html'), 'lang'), 'en');
 const main = nodes.find(n => n.tagName === 'main');
 const contents = [...elements(main)];
 assert.equal(attr(contents.find(n => n.tagName === 'time'), 'datetime'), date);
+assert.equal(contents.some(n => attr(n, 'data-arxiv-mailings') !== undefined), Boolean(run.arxiv_mailings));
 const windowLabel = contents.find(n => attr(n, 'data-window-days') !== undefined);
 if (windowLabel || run.window_days === 28) {
   assert.ok(windowLabel, 'Missing evidence window in the reading copy');

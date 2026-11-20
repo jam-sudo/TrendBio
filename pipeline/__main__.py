@@ -113,11 +113,13 @@ def run(domain: Domain = 'computational',
         dry_run: Annotated[bool, typer.Option(help='Keep staged output and print usage and cost.')] = False,
         replay: Annotated[bool, typer.Option(help='Rerank the latest saved edition from its stored papers and source statuses.')] = False,
         window_days: Annotated[int | None, typer.Option(help='Evidence window for a new store. Existing editions retain their window.')] = None,
+        arxiv_announcements: Annotated[bool, typer.Option(help='Start an expanded Physics pilot from dated arXiv mailings and first versions.')] = False,
         data_root: DataRoot = Path('data')):
     """Run collection, enrichment, clustering, ranking, and synthesis for one UTC day."""
     day = (run_date or datetime.now(timezone.utc)).date()
     with _dependencies(domain, data_root) as deps:
-        run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run, replay=replay, window_days=window_days)
+        run_day(domain, day, Store(data_root, domain), deps, dry_run=dry_run, replay=replay, window_days=window_days,
+                arxiv_announcements=arxiv_announcements)
 
 
 @app.command('trial-windows')

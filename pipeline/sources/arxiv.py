@@ -21,6 +21,29 @@ class ArxivAdapter:
     def __init__(self, config: dict | None = None):
         self.config = config if config is not None else load_config()
 
+    def _item(self, entry, seen: date, window: tuple[date, date] | None = None) -> Item | None:
+        cfg = self.config['arxiv']
+        title = entry.findtext('atom:title', '', NS)
+        abstract = entry.findtext('atom:summary', '', NS)
+        tags = [tag.attrib['term'] for tag in entry.findall('atom:category', NS)]
+        unfiltered = any(fnmatchcase(tag, pattern) for tag in tags for pattern in cfg['categories'])
+        filtered = any(tag in cfg['keyword_filtered'] for tag in tags)
+        if not unfiltered and not (filtered and matches_keywords(title + ' ' + abstract, self.config['keywords'])):
+            return None
+        submitted = date.fromisoformat(entry.findtext('atom:published', namespaces=NS)[:10])
+        if window and not window[0] <= submitted <= window[1]:
+            return None
+        url = entry.findtext('atom:id', namespaces=NS)
+        native_id = re.sub(r'v\d+$', '', url.split('/abs/')[-1])
+        return Item(
+            id=f'arxiv:{native_id}', source=self.name, type='preprint', title=' '.join(title.split()), url=url,
+            doi=entry.findtext('arxiv:doi', namespaces=NS), published_at=submitted,
+            first_seen=seen, authors=[a.text for a in entry.findall('atom:author/atom:name', NS)], org=None,
+            abstract=abstract, summary=None, primary_category=None, published_doi=None, preprint_id=None,
+            metadata={'arxiv_primary_category': entry.find('arxiv:primary_category', NS).attrib['term'],
+                      'categories': tags, 'xml': ET.tostring(entry, encoding='unicode')},
+        )
+
     def fetch(self, start: date, end: date, client: httpx.Client) -> list[Item]:
         daily_page_size = self.config['arxiv'].get('daily_page_size')
         if daily_page_size is not None:
@@ -83,27 +106,9 @@ class ArxivAdapter:
                     if not identifier or '/abs/' not in identifier:
                         raise ValueError('arXiv returned an invalid record identifier')
                     record_ids.add(re.sub(r'v\d+$', '', identifier.split('/abs/')[-1]))
-                title = entry.findtext('atom:title', '', NS)
-                abstract = entry.findtext('atom:summary', '', NS)
-                tags = [tag.attrib['term'] for tag in entry.findall('atom:category', NS)]
-                unfiltered = any(fnmatchcase(tag, pattern) for tag in tags for pattern in cfg['categories'])
-                filtered = any(tag in cfg['keyword_filtered'] for tag in tags)
-                if not unfiltered and not (filtered and matches_keywords(title + ' ' + abstract, self.config['keywords'])):
-                    continue
-                published_at = date.fromisoformat(entry.findtext('atom:published', namespaces=NS)[:10])
-                if not start <= published_at <= end:
-                    continue
-                url = entry.findtext('atom:id', namespaces=NS)
-                native_id = re.sub(r'v\d+$', '', url.split('/abs/')[-1])
-                items.append(Item(
-                    id=f'arxiv:{native_id}', source=self.name, type='preprint',
-                    title=' '.join(title.split()), url=url,
-                    doi=entry.findtext('arxiv:doi', namespaces=NS), published_at=published_at, first_seen=seen,
-                    authors=[a.text for a in entry.findall('atom:author/atom:name', NS)], org=None,
-                    abstract=abstract, summary=None, primary_category=None, published_doi=None, preprint_id=None,
-                    metadata={'arxiv_primary_category': entry.find('arxiv:primary_category', NS).attrib['term'],
-                              'categories': tags, 'xml': ET.tostring(entry, encoding='unicode')},
-                ))
+                item = self._item(entry, seen, (start, end))
+                if item:
+                    items.append(item)
             offset += len(entries)
             if offset >= total or len(entries) < max_results:
                 if complete and len(record_ids) != total:

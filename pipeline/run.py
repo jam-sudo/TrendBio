@@ -31,6 +31,7 @@ from pipeline.llm import Enrichment, LLM
 from pipeline.models import Day, RankedTopic, RunInfo
 from pipeline.score import rank, score_topics, signals_for
 from pipeline.sources.arxiv import ArxivAdapter
+from pipeline.sources.arxiv_announcements import PhysicsAnnouncements
 from pipeline.sources.base import load_config
 from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
@@ -172,7 +173,8 @@ def _arxiv_categories(adapters) -> list[str] | None:
 
 def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool = False,
             dry_run: bool = False, skip_collect: bool = False,
-            only_missing_synthesis: bool = False, replay: bool = False, window_days: int | None = None) -> Day:
+            only_missing_synthesis: bool = False, replay: bool = False, window_days: int | None = None,
+            arxiv_announcements: bool = False) -> Day:
     if domain != store.domain:
         raise ValueError('domain does not match store')
     attention_store = store
@@ -180,6 +182,16 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
     with _staging(store, deps, dry_run=dry_run) as (store, deps):
         previous = store.get_day(day)
         latest = store.latest_day()
+        uses_mailings = latest is not None and latest.run.arxiv_mailings is not None
+        if arxiv_announcements and (domain != 'physics-expanded' or (latest and not uses_mailings)):
+            raise ValueError('Start the Physics announcement comparison in a separate expanded Physics store')
+        if uses_mailings and backfill:
+            raise ValueError('Use the field pilot to advance a Physics announcement edition')
+        if arxiv_announcements or uses_mailings:
+            if not any(isinstance(a, ArxivAdapter) for a in deps.adapters):
+                raise ValueError('The announcement comparison requires an arXiv source')
+            deps = replace(deps, adapters=[PhysicsAnnouncements(a.config) if isinstance(a, ArxivAdapter) else a
+                                           for a in deps.adapters])
         if window_days is not None:
             if window_days not in (7, 28):
                 raise ValueError('Choose a 7-day or 28-day evidence window')
@@ -193,6 +205,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         notes = []
         source_status = initial_source_status(deps.adapters)
         arxiv_categories = previous.run.arxiv_categories if previous else None
+        mailings = previous.run.arxiv_mailings if previous else None
         if replay:
             if previous is None or latest.date != day:
                 raise ValueError('replay requires the latest saved edition for this field')
@@ -231,8 +244,12 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 with _stage('collect', source=adapter.name, items=0) as counts:
                     try:
                         items = adapter.fetch(start, day, deps.client)
+                        if isinstance(adapter, PhysicsAnnouncements):
+                            mailings = adapter.mailings
                         counts['dropped_revisions'] = getattr(adapter, 'dropped_revisions', 0)
                     except Exception as error:
+                        if isinstance(adapter, PhysicsAnnouncements):
+                            raise
                         logger.warning('source=%s failed error=%s', adapter.name, type(error).__name__)
                         source_status[adapter.name] = 'failed'
                     else:
@@ -429,7 +446,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 finished=previous.run.finished if same_mode else datetime.now(timezone.utc),
                 status='degraded' if degraded else 'ok', backfilled=backfill, synthesis_model=model, window_days=window_days,
                 model_cost_usd=None if backfill else cost,
-                source_status=source_status, arxiv_categories=arxiv_categories, notes=sorted(set(notes)),
+                source_status=source_status, arxiv_categories=arxiv_categories, arxiv_mailings=mailings,
+                notes=sorted(set(notes)),
             ))
             store.put_day(result)
             counts['edition_receipt'] = json.dumps({
@@ -459,6 +477,9 @@ def run_backfill(domain: str, start: date, end: date, store: Store, deps: Deps, 
         raise ValueError('start must not be after end')
     if domain != store.domain:
         raise ValueError('domain does not match store')
+    latest = store.latest_day()
+    if latest and latest.run.arxiv_mailings is not None:
+        raise ValueError('Use the field pilot to advance a Physics announcement edition')
     path = store.root / domain / '.backfill_state.json'
     requested_range = {'from': start.isoformat(), 'to': end.isoformat()}
     state = {
@@ -616,6 +637,9 @@ def run_reprocess(domain: str, start: date, end: date, store: Store, deps: Deps,
     validate_month_range(start, end)
     if domain != store.domain:
         raise ValueError('domain does not match store')
+    latest = store.latest_day()
+    if latest and latest.run.arxiv_mailings is not None:
+        raise ValueError('Use replay or repair-synthesis for an existing Physics announcement edition')
     items = sorted(store.items_between(start, end), key=lambda item: item.id)
     item_ids = {item.id for item in items}
     path = store.root / domain / '.reprocess_state.json'

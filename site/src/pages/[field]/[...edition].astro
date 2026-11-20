@@ -58,7 +58,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
     <h1>{label}{stage && <small> {stage}</small>}</h1>
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
     {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map(name => name === "arxiv" ? "arXiv" : name).join(", ")}</span>.</p>}
-    {(!observedVenues || field !== "social-sciences") && archives.length > 0 && <p class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"}>{day?.run.arxiv_categories ? "This edition queried" : "Current coverage includes"} {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
+    {(!observedVenues || field !== "social-sciences") && archives.length > 0 && <p class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"}>{day?.run.arxiv_mailings ? "This edition selected first versions in" : day?.run.arxiv_categories ? "This edition queried" : "Current coverage includes"} {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
@@ -89,6 +89,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {!isPublic && <p data-window-days={windowDays}>Evidence window of {windowDays} days from {windowStart} through {day.date} (UTC).</p>}
+      {day.run.arxiv_mailings && <p data-arxiv-mailings>The arXiv collection follows new and cross-listed papers in the daily Physics announcements. Supporting links open the first arXiv version. <a href="https://info.arxiv.org/help/availability.html">About arXiv announcements</a></p>}
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
       {day.ranked.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
       <ol class="rankings">
