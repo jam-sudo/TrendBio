@@ -46,3 +46,24 @@ def test_partition_checks_all_evidence_and_only_ranks_groups_with_three_sources(
     assert review_clusters([ids], changed, store, deps, day)[1]
     llm._parse.return_value = CohesionReview(groups=[group([n]) for n in range(1, 8)])
     assert review_clusters([ids], changed, store, deps, day) == ([], [])
+
+
+def test_field_review_instructions_change_the_cached_partition(tmp_path, fixtures_root):
+    papers = Store(fixtures_root / 'data', 'physics').items_between(date.min, date.max)
+    ids = sorted(p.id for p in papers)
+    taxonomy = load_taxonomy('physics-expanded')
+    guidance = taxonomy.cohesion_guidance
+    assert guidance
+    llm = Mock()
+    llm.review_cohesion.return_value = {'groups': [{'topic': 'Cavity readout', 'evidence': [{'id': i} for i in ids]}]}
+    deps = SimpleNamespace(cfg=load_scoring(), llm=llm, taxonomy=taxonomy.model_copy(update={'cohesion_guidance': ''}))
+    store = Store(tmp_path, taxonomy.domain)
+    day = date(2026, 11, 1)
+    assert review_clusters([ids], papers, store, deps, day) == ([ids], [])
+    original = llm.review_cohesion.call_args.args[0]
+    deps.taxonomy = taxonomy
+    llm.review_cohesion.return_value = {'groups': [{'topic': i, 'evidence': [{'id': i}]} for i in ids]}
+    assert review_clusters([ids], papers, store, deps, day) == ([], [])
+    assert llm.review_cohesion.call_args.args[0] == guidance + '\n\n' + original
+    assert review_clusters([ids[::-1]], papers, store, deps, day) == ([], [])
+    assert llm.review_cohesion.call_count == 2

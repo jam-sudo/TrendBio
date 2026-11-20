@@ -14,6 +14,8 @@ def review_clusters(clusters, papers, store, deps, day):
         items = [by_id[i] for i in sorted(ids)]
         records = [{'paper': n, 'title': i.title, 'abstract': i.abstract} for n, i in enumerate(items, 1)]
         prompt = template.format(field=deps.taxonomy.label, records=json.dumps(records, ensure_ascii=False))
+        if deps.taxonomy.cohesion_guidance:
+            prompt = deps.taxonomy.cohesion_guidance + '\n\n' + prompt
         key = sha256(json.dumps(['claude-haiku-5-5', sorted(ids), prompt]).encode()).hexdigest()
         path = store.root / store.domain / 'cohesion' / (key + '.json')
         if path.exists():
