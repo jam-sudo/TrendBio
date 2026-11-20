@@ -137,10 +137,11 @@ def match_or_create(cluster_ids: list[str], centroid: np.ndarray, topics: list[T
 
 
 def append_history(topic: Topic, today: date, item_ids: list[str], count_7d: int,
-                   attached_item_ids: list[str] | None = None, *, research_question: str | None = None) -> None:
+                   attached_item_ids: list[str] | None = None, *, research_question: str | None = None,
+                   result_passages: dict[str, str] | None = None) -> None:
     entry = TopicDay(
         date=today, rank=None, item_ids=item_ids, count_7d=count_7d,
-        attached_item_ids=attached_item_ids or [], research_question=research_question,
+        attached_item_ids=attached_item_ids or [], research_question=research_question, result_passages=result_passages or {},
         signals=Signals(published=0, preprint=0, code=0, industry=0, rise_ratio=0.0, star_gain_7d=0),
         scores=Scores(rise=0, diversity=0, code_velocity=0, volume=0, penalty=0, total=0),
     )

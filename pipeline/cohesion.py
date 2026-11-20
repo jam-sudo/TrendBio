@@ -20,6 +20,9 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
             prompt = comparison + '\n\nProposed topic: ' + json.dumps(proposed_question, ensure_ascii=False) + '\n\n' + records
             options = {'model': comparison_model, 'effort': 'medium'}
             cache_inputs = [comparison_model, 'medium', sorted(ids), prompt]
+            if deps.taxonomy.domain == 'physics-expanded':
+                options['compare_results'] = True
+                cache_inputs.append('reported-results')
         else:
             prompt = template.format(field=deps.taxonomy.label, records=records)
             if deps.taxonomy.cohesion_guidance:
@@ -44,7 +47,7 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
             store._write(path, result)
         if share_decisions:
             store._write(receipt, result)
-        return key, {tuple(sorted(e['id'] for e in g['evidence'])): g['topic']
+        return key, {tuple(sorted(e['id'] for e in g['evidence'])): g
                      for g in result['groups'] if len(g['evidence']) >= minimum}
 
     def review(ids):
@@ -56,7 +59,7 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
             accepted = {}
             candidate['comparisons'] = []
             for members in sorted(groups or {}):
-                check, confirmed = partition(members, proposed_question=groups[members])
+                check, confirmed = partition(members, proposed_question=groups[members]['topic'])
                 candidate['comparisons'].append({'review': check, 'items': list(members), 'failed': confirmed is None})
                 if confirmed is None:
                     failures.append(check)
@@ -72,5 +75,5 @@ def review_clusters(clusters, papers, store, deps, day, *, share_decisions=False
                  {'minimum': minimum, 'candidates': candidates})
     clusters = [group for candidate in candidates for group in candidate['qualified']]
     notes = ['cohesion-review-failed:' + key for _, failures, _ in reviewed for key in failures]
-    questions = {ids: question for _, _, groups in reviewed for ids, question in groups.items()} if comparison else {}
-    return clusters, notes, questions
+    comparisons = {ids: group for _, _, groups in reviewed for ids, group in groups.items()} if comparison else {}
+    return clusters, notes, comparisons

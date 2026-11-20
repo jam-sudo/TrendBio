@@ -284,11 +284,11 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             ids = [item.id for item in papers]
             embeddings = store.get_embeddings(ids)
             clusters = cluster_items(ids, embeddings, deps.cfg)
-            questions = {}
+            comparisons = {}
             if deps.taxonomy.review_cluster_cohesion:
                 counts['candidates'] = len(clusters)
-                clusters, review_notes, questions = review_clusters(clusters, papers, store, deps, day,
-                                                                    share_decisions=share_decisions)
+                clusters, review_notes, comparisons = review_clusters(clusters, papers, store, deps, day,
+                                                                      share_decisions=share_decisions)
                 notes.extend(review_notes)
             counts.update(items=len(ids), clusters=len(clusters))
         with _stage('continuity', topics_new=0, topics_continued=0) as counts:
@@ -317,17 +317,24 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                     used.add(slug)
             for index, (cluster, centroid) in enumerate(zip(clusters, centroids, strict=True)):
                 existing = topics.get(assignments.get(index))
-                question = questions.get(tuple(cluster))
+                comparison = comparisons.get(tuple(cluster), {})
+                question = comparison.get('topic')
+                passages = {}
+                for anchor in comparison.get('evidence', []):
+                    if 'reported_output' in anchor:
+                        source = ' '.join(getattr(items_by_id[anchor['id']], anchor['field']).split())
+                        passages[anchor['id']] = source[anchor['start']:anchor['start'] + anchor['length']]
                 if existing and any(entry.date == day and entry.item_ids == cluster
                                     and entry.attached_item_ids == attached[index]
-                                    and entry.research_question == question
+                                    and entry.research_question == question and entry.result_passages == passages
                                     for entry in existing.history):
                     unchanged.add(existing.slug)
                 topic = match_or_create(cluster, centroid, list(topics.values()),
                                         day, deps.cfg, [items_by_id[id].title for id in cluster],
                                         [item.title for item in papers], items_by_id,
                                         excluded_slugs=set(topics) - {assignments.get(index)})
-                append_history(topic, day, cluster, len(cluster), attached[index], research_question=question)
+                append_history(topic, day, cluster, len(cluster), attached[index],
+                               research_question=question, result_passages=passages)
                 fill_unranked_days(topic, day, deps.cfg.continuity_max_gap_days)
                 topics[topic.slug] = topic
                 items_by_topic[topic.slug] = [items_by_id[id] for id in cluster + attached[index]]

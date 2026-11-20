@@ -76,9 +76,14 @@ def synthesize_top(
             condition.wait_for(lambda: active < workers)
             active += 1
         try:
-            question = next((entry.research_question for entry in topic.history if entry.date == today), None)
+            entry = next((entry for entry in topic.history if entry.date == today), None)
+            reviewed = {}
+            if entry and entry.research_question:
+                reviewed['research_question'] = entry.research_question
+            if entry and entry.result_passages:
+                reviewed['result_passages'] = entry.result_passages
             result = llm.synthesize(topic, items, signals, previous, topic_model,
-                                    on_repeated_429=throttle, **({'research_question': question} if question else {}))
+                                    on_repeated_429=throttle, **reviewed)
         finally:
             with condition:
                 active -= 1

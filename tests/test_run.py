@@ -141,6 +141,40 @@ def test_replay_uses_only_the_latest_saved_snapshot(ctx, monkeypatch):
         run_day('computational', TODAY, ctx.store, ctx.deps, replay=True)
 
 
+def test_physics_replay_resynthesizes_when_the_reviewed_passage_changes(ctx, monkeypatch, tmp_path):
+    field = 'physics-expanded'
+    store = Store(tmp_path / 'reviewed', field)
+    ctx.deps.taxonomy = load_taxonomy(field)
+    papers = [paper.model_copy(update={'source': 'arxiv', 'id': f'arxiv:test-{n}', 'primary_category': 'stellar',
+              'title': f'Rotation period in cluster {n}', 'abstract': 'Periods are measured. Uncertainty is reported.',
+              'summary': 'Stellar rotation periods.'}) for n, paper in enumerate(ctx.items)]
+    ctx.deps.adapters = [FakeAdapter('arxiv', papers)]
+    passage = 'Periods are measured.'
+    def review(prompt, items, key, **options):
+        evidence = [{'id': item.id} for item in items]
+        if options.get('compare_results'):
+            for item, anchor in zip(items, evidence, strict=True):
+                anchor.update(field='abstract', start=item.abstract.index(passage), length=len(passage),
+                              reported_output='Stellar rotation period')
+        return {'groups': [{'topic': 'How do stellar rotation periods vary?', 'evidence': evidence}]}
+    monkeypatch.setattr(ctx.deps.llm, 'review_cohesion', review)
+    received = []
+    def write(topic, items, signals, previous, model, **kwargs):
+        received.append(kwargs['result_passages'])
+        return Synthesis(label='Stellar rotation', headline='Measured stellar periods', summary='Rotation periods.',
+                         synthesis='Observed periods in star clusters.', item_one_liners={})
+    monkeypatch.setattr(ctx.deps.llm, 'synthesize', write)
+    day = run_day(field, TODAY, store, ctx.deps)
+    assert len(day.ranked) == 1 and received == [{p.id: passage for p in papers}]
+    assert store.get_topic(day.ranked[0].slug).history[-1].result_passages == received[0]
+    run_day(field, TODAY, store, ctx.deps, replay=True)
+    assert len(received) == 1
+    passage = 'Uncertainty is reported.'
+    ctx.deps.taxonomy.comparison_guidance += ' Also identify the reported uncertainty.'
+    run_day(field, TODAY, store, ctx.deps, replay=True)
+    assert len(received) == 2 and received[-1] == {p.id: passage for p in papers}
+
+
 def test_run_day_writes_day_topics_items(ctx):
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
     assert ctx.store.get_day(TODAY) == result

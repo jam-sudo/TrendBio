@@ -64,15 +64,23 @@ def run(ctx, *, backfill=False):
 def test_dated_summary_uses_the_question_reviewed_for_that_edition(context):
     ctx = context
     entry = TopicDay(date=TODAY, rank=1, item_ids=[ctx.item.id], count_7d=1, signals=ctx.sig, scores=ctx.scores)
-    assert 'research_question' not in entry.model_dump()
+    assert not {'research_question', 'result_passages'}.intersection(entry.model_dump())
     questions = ['How precisely can the sensor measure time?', 'How long is each calibration stable?']
+    ctx.item.abstract = 'The sensor recovers the rotation period.'
+    quotes = {ctx.item.id: 'recovers the rotation period', 'another-paper': 'An unrelated result'}
     ctx.topic.history = [
-        entry.model_copy(update={'research_question': questions[0]}),
-        entry.model_copy(update={'date': TODAY + timedelta(days=1), 'research_question': questions[1]}),
+        entry.model_copy(update={'research_question': questions[0], 'result_passages': quotes}),
+        entry.model_copy(update={'date': TODAY + timedelta(days=1), 'research_question': questions[1],
+                                 'result_passages': {ctx.item.id: 'Later measurement'}}),
     ]
     run(ctx)
     prompt = ctx.beta.calls[0]['messages'][0]['content']
     assert questions[0] in prompt and questions[1] not in prompt
+    assert '"biorxiv:paper": "recovers the rotation period"' in prompt
+    assert 'An unrelated result' not in prompt and 'Later measurement' not in prompt
+    ctx.item.abstract = 'An updated description.'
+    run(ctx)
+    assert 'Source passages for the reported results' not in ctx.beta.calls[-1]['messages'][0]['content']
 
 
 def test_cited_background_paper_stays_outside_the_edition_evidence(context):

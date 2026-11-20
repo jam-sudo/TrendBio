@@ -7,7 +7,7 @@ import pytest
 
 from pipeline.cohesion import review_clusters
 from pipeline.config import load_scoring, load_taxonomy
-from pipeline.llm import CohesionEvidence, CohesionGroup, CohesionReview, LLM
+from pipeline.llm import CohesionEvidence, CohesionGroup, CohesionReview, LLM, ResultComparison
 from pipeline.store import Store
 
 
@@ -102,10 +102,13 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     audit_path = tmp_path / taxonomy.domain / 'audits' / f'cohesion-{day}.json'
     failed = json.loads(audit_path.read_text())['candidates'][0]['comparisons'][0]
     assert failed['failed'] and not groups and not questions and notes == ['cohesion-review-failed:' + failed['review']]
-    expected = ([good], [], {tuple(good): question})
+    expected = ([good], [], {tuple(good): group(good, question)})
     assert review_clusters([ids], papers, store, deps, day) == expected
     check = llm.review_cohesion.call_args
-    assert check.kwargs == {'model': 'claude-sonnet-5-5', 'effort': 'medium'}
+    options = {'model': 'claude-sonnet-5-5', 'effort': 'medium'}
+    if domain == 'physics-expanded':
+        options['compare_results'] = True
+    assert check.kwargs == options
     assert 'Original grouping hypothesis' in check.args[0]
     assert all(p.title in check.args[0] for p in papers)
     recovered = json.loads(audit_path.read_text())['candidates'][0]
@@ -116,3 +119,27 @@ def test_comparison_retries_only_unverified_groups_and_passes_on_the_confirmed_q
     llm.review_cohesion.side_effect = [{'groups': [group([member], 'Only one paper') for member in ids]}]
     assert review_clusters([ids], papers, store, deps, day) == ([], [], {})
     assert llm.review_cohesion.call_args.kwargs['model'] == 'claude-haiku-5-5'
+
+
+def test_result_comparison_joins_every_paper_to_its_own_reported_passage(fixtures_root):
+    papers = Store(fixtures_root / 'data', 'physics').items_between(date.min, date.max)
+    entries = [{'paper': n, 'quote': p.title, 'result': 'Measured cavity readout'} for n, p in enumerate(papers, 1)]
+    groups = [{'topic': 'How is cavity readout measured?', 'papers': [3, 1, 2]}]
+    review = ResultComparison.model_validate({'results': entries[::-1], 'groups': groups})
+    llm = LLM(Mock(), Mock())
+    llm._parse = Mock(return_value=review)
+    def evaluate():
+        return llm.review_cohesion('Compare reported outputs', papers, 'test', compare_results=True)
+
+    stored, = evaluate()['groups']
+    assert llm._parse.call_args.args[0] is ResultComparison
+    assert [e['id'] for e in stored['evidence']] == [papers[n - 1].id for n in groups[0]['papers']]
+    assert all(e['field'] == 'title' and e['start'] == 0 and e['reported_output'] == 'Measured cavity readout'
+               for e in stored['evidence'])
+    for outputs, members in [(entries[:-1], [1, 2, 3]), (entries, [1, 1, 3]), (entries, [1, 2, 4])]:
+        llm._parse.return_value = ResultComparison.model_validate({
+            'results': outputs, 'groups': [{'topic': 'Question', 'papers': members}]})
+        assert evaluate() is None and llm.fallback_reasons['test'] == 'validation:cohesion-membership'
+    review.results[0].quote = 'A passage belonging to no paper'
+    llm._parse.return_value = review
+    assert evaluate() is None and llm.fallback_reasons['test'] == 'validation:cohesion-evidence'

@@ -99,6 +99,20 @@ class CohesionReview(BaseModel):
     groups: list[CohesionGroup]
 
 
+class ReportedOutput(CohesionEvidence):
+    result: str
+
+
+class ComparisonGroup(BaseModel):
+    topic: str
+    papers: list[int]
+
+
+class ResultComparison(BaseModel):
+    results: list[ReportedOutput]
+    groups: list[ComparisonGroup]
+
+
 def _output_model(taxonomy: Taxonomy) -> type[Enrichment]:
     slugs = taxonomy.slugs()
     return create_model(
@@ -182,50 +196,68 @@ class LLM:
                 return self._failure(item.id, 'grounding', detail=','.join(f'{v:g}' for v in bad))
         return validated
 
-    def review_cohesion(self, prompt, items, key, *, model='claude-haiku-5-5', effort='low'):
+    def review_cohesion(self, prompt, items, key, *, model='claude-haiku-5-5', effort='low', compare_results=False):
         self.fallback_reasons.pop(key, None)
-        result, unmatched = self._cohesion_partition(prompt, items, key, model, effort)
+        result, unmatched = self._cohesion_partition(prompt, items, key, model, effort, compare_results)
         reason = self.fallback_reasons.get(key)
         if result is None and reason in {'validation:cohesion-evidence', 'validation:cohesion-membership'}:
             if reason == 'validation:cohesion-membership':
                 numbers = ', '.join(str(i) for i in range(1, len(items) + 1))
                 correction = f'The partition omitted or repeated a paper. Use each of these numbers exactly once: {numbers}.'
+                if compare_results:
+                    correction += ' Also include one result and its source passage for every paper.'
             else:
                 titles = [{'paper': n, 'title': items[n - 1].title} for n in unmatched]
                 correction = ('The quotations for the papers below could not be located. For each, copy a continuous '
                               'passage of at least 12 characters from its own title or abstract, preserving capitalization, '
                               'punctuation and notation. You may copy the exact title below if it supports the group. '
                               'Return the complete partition.\n' + json.dumps(titles, ensure_ascii=False))
-            result, _ = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort)
+                if compare_results:
+                    correction += '\nInclude a specific reported output with each source passage.'
+            result, _ = self._cohesion_partition(prompt + '\n\n' + correction, items, key, model, effort, compare_results)
         if result is not None:
             self.fallback_reasons.pop(key, None)
         return result
 
-    def _cohesion_partition(self, prompt, items, key, model, effort):
-        result = self._parse(CohesionReview, [{'role': 'user', 'content': prompt}], model,
+    def _cohesion_partition(self, prompt, items, key, model, effort, compare_results):
+        result = self._parse(ResultComparison if compare_results else CohesionReview, [{'role': 'user', 'content': prompt}], model,
                              4096, effort, entity_id=key)
         if result is None:
             return None, []
-        numbers = [e.paper for group in result.groups for e in group.evidence]
-        if sorted(numbers) != list(range(1, len(items) + 1)):
-            return self._failure(key, 'validation:cohesion-membership'), []
+        expected = list(range(1, len(items) + 1))
+        if isinstance(result, ResultComparison):
+            if (sorted(e.paper for e in result.results) != expected
+                    or sorted(n for g in result.groups for n in g.papers) != expected):
+                return self._failure(key, 'validation:cohesion-membership'), []
+            outputs = {e.paper: e for e in result.results}
+            partition = [(g.topic, [outputs[n] for n in g.papers]) for g in result.groups]
+        else:
+            partition = [(g.topic, g.evidence) for g in result.groups]
+            if sorted(e.paper for _, entries in partition for e in entries) != expected:
+                return self._failure(key, 'validation:cohesion-membership'), []
         groups, unmatched = [], []
-        for group in result.groups:
-            if not group.topic.strip() or not group.evidence:
+        for topic, entries in partition:
+            if not topic.strip() or not entries:
                 return self._failure(key, 'validation:cohesion-group'), []
             evidence = []
-            for entry in group.evidence:
+            for entry in entries:
                 item = items[entry.paper - 1]
                 passage = ' '.join(entry.quote.split())
+                if isinstance(entry, ReportedOutput) and not entry.result.strip():
+                    unmatched.append(entry.paper)
+                    continue
                 for field in ('title', 'abstract'):
                     source = ' '.join(getattr(item, field).split())
                     offset = source.find(passage)
                     if len(passage) >= 12 and offset >= 0:
-                        evidence.append({'id': item.id, 'field': field, 'start': offset, 'length': len(passage)})
+                        anchor = {'id': item.id, 'field': field, 'start': offset, 'length': len(passage)}
+                        if isinstance(entry, ReportedOutput):
+                            anchor['reported_output'] = entry.result.strip()
+                        evidence.append(anchor)
                         break
                 else:
                     unmatched.append(entry.paper)
-            groups.append({'topic': group.topic.strip(), 'evidence': evidence})
+            groups.append({'topic': topic.strip(), 'evidence': evidence})
         if unmatched:
             return self._failure(key, 'validation:cohesion-evidence', detail=','.join(map(str, unmatched))), unmatched
         return {'groups': groups}, []
@@ -233,6 +265,7 @@ class LLM:
     def synthesize(
         self, topic: Topic, items: list[Item], signals: Signals, previous: str | None, model: str,
         *, on_repeated_429: Callable[[], None] | None = None, research_question: str | None = None,
+        result_passages: dict[str, str] | None = None,
     ) -> Synthesis | None:
         self.fallback_reasons.pop(topic.slug, None)
         template = Path(__file__).with_name('prompts').joinpath('synthesize.md').read_text(encoding='utf-8')
@@ -258,6 +291,13 @@ class LLM:
             prompt += (f'\n\nReviewed question for these papers: {research_question}\n'
                        'Frame the headline and short summary around this question. Attribute an answer '
                        'to the study that found it. A shared question can have different answers.')
+        if result_passages:
+            quotes = {item.id: quote for item in items if (quote := result_passages.get(item.id))
+                      and any(quote in ' '.join(text.split()) for text in (item.title, item.abstract))}
+            if quotes:
+                prompt += ('\n\nSource passages for the reported results, by paper. Use the surrounding abstract '
+                           'to check the observable, population and conditions in the headline and short summary.\n'
+                           + json.dumps(quotes, ensure_ascii=False))
         source = '\n'.join([
             signals.model_dump_json(), topic.label,
             *(text for item in items for text in (
