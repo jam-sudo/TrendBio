@@ -126,6 +126,11 @@ def test_science_registry_matches_pilots_and_cs_intake():
     registry = yaml.safe_load(Path('config/science-fields.yaml').read_text())
     fields = [field for group in registry.values() for field in group]
     assert len(fields) == len(set(fields))
+    for group in registry.values():
+        for field, entry in group.items():
+            assert entry['scope']
+            if parent := entry.get('parent'):
+                assert parent != field and parent in group and 'parent' not in group[parent]
     assert not {'social-sciences', 'humanities-arts'} & set(fields)
     workflow = yaml.load(Path('.github/workflows/field-pilot.yml').read_text(), Loader=yaml.BaseLoader)
     pilots = workflow['on']['workflow_dispatch']['inputs']['domain']['options']
