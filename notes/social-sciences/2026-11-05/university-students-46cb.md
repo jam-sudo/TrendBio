@@ -1,5 +1,5 @@
 ---
-claim: "Survey-based SEM relates perceived usefulness to youth AI and metaverse adoption"
+claim: "self-reported AI-assisted civic decision-making"
 papers:
   - doi:10.3389/feduc.2026.1929091
   - doi:10.3389/feduc.2026.1934981
