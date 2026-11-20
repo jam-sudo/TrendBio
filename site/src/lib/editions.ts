@@ -3,7 +3,7 @@ import { loadDays } from "./data";
 export const editionInfo = {
   physics: { label: "Physics", source: "arXiv", stage: "" },
   biology: { label: "Biology", source: "bioRxiv and PubMed", stage: "Beta" },
-  math: { label: "Math & Stats", source: "arXiv", stage: "Pilot" },
+  math: { label: "Math & Stats", source: "arXiv and mathematics and statistics journals via Crossref", stage: "Pilot" },
   "earth-environment": { label: "Earth & Environment", source: "Earth and environmental journals via Crossref", stage: "Pilot" },
   chemistry: { label: "Chemistry", source: "Chemistry journals via Crossref", stage: "Pilot" },
   astronomy: { label: "Stellar & Galactic Astronomy", source: "arXiv", stage: "Pilot" },

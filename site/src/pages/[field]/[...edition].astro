@@ -29,8 +29,8 @@ const categories = new Map(loadTaxonomy(field).map(category => [category.slug, c
 const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
 const archives: string[] = source.arxiv?.categories ?? [];
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints.arxiv_category[code][0]) ?? code);
-const showCollectedJournals = field === "earth-environment" || field === "chemistry";
-const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date) : null;
+const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
+const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
 const socialVenues = field === "social-sciences" && day ? loadEditionVenues(field, day.date) : null;
 const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
@@ -56,7 +56,7 @@ const rows = (day?.ranked ?? []).map(row => {
 });
 ---
 
-<Base edition={field} editionSources={field === "physics-expanded" && !followsCrossref ? "arXiv" : undefined}
+<Base edition={field} editionSources={["physics-expanded", "math"].includes(field) && !followsCrossref ? "arXiv" : undefined}
   title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
   description={humanities ? "Humanities and arts research from journals and scholarly books." : `Daily ${label.toLowerCase()} research trends with the papers behind each ranking.`}
   canonicalPath={path} lastRun={day?.run.finished}>

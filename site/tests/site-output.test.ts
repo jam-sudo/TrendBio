@@ -199,6 +199,8 @@ it("links the mathematics pilot to its three arXiv subjects and its own dated ev
   expect(await main.locator(".coverage a").evaluateAll(links => links.map(a => a.getAttribute("href")))).toEqual(
     ["math.NT", "math.NA", "stat.ME"].map(code => `https://arxiv.org/list/${code}/recent`));
   expect(await main.locator('a[href^="https://example.org/math/"]').count()).toBe(3);
+  expect(await main.locator(".coverage").count()).toBe(1);
+  expect(await page.locator("footer").textContent()).toContain("Auto-curated from arXiv.");
   expect(await main.getByRole("heading", { name: "Quadrature error bounds depend on smoothness" }).count()).toBe(1);
 });
 

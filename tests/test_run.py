@@ -54,7 +54,7 @@ class FakeLLM:
         return Enrichment(summary=item.title, primary='structural', secondary=[],
                           relevant=item.id not in self.irrelevant_ids)
 
-    def review_cohesion(self, prompt, items, key):
+    def review_cohesion(self, prompt, items, key, *, model='claude-haiku-5-5', effort='low'):
         assert all(item.title in prompt for item in items)
         return {'groups': [{'topic': 'Fixture shared research question', 'evidence': [{'id': i.id} for i in items]}]}
 
@@ -1796,6 +1796,9 @@ def test_attention_success_does_not_use_llm_or_change_ranking(ctx, monkeypatch, 
     ("physics", "arxiv", "quant-ph", "quantum"),
     ("biology", "biorxiv", "ecology", "ecology"),
     ("math", "arxiv", "math.NA", "numerical-analysis"),
+    ("math", "crossref", "2363-9555", "number-theory"),
+    ("math", "crossref", "0006-3835", "numerical-analysis"),
+    ("math", "crossref", "0960-3174", "statistical-methodology"),
     ("earth-environment", "crossref", "Ocean Science", "oceans"),
     ("chemistry", "crossref", "0003-2700", "analytical"),
 ])
@@ -1806,7 +1809,8 @@ def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, dom
     monkeypatch.setenv('ANTHROPIC_API_KEY', 'fixture')
     deps = build_deps(domain, ctx.root, synthesis_only=True)
     try:
-        assert [adapter.name for adapter in deps.adapters] == (['biorxiv', 'pubmed'] if source == 'biorxiv' else [source])
+        expected_sources = {'biology': ['biorxiv', 'pubmed'], 'math': ['arxiv', 'crossref']}.get(domain, [source])
+        assert [adapter.name for adapter in deps.adapters] == expected_sources
         assert deps.budget.path == ctx.root / domain / 'llm_spend.json'
         prompt = _messages(ctx.items[0], deps.taxonomy, [])[0]['content']
         assert deps.taxonomy.label in prompt and deps.taxonomy.relevance.strip() in prompt and 'biomedicine' not in prompt
@@ -1814,7 +1818,7 @@ def test_edition_uses_its_own_sources_categories_and_store(ctx, monkeypatch, dom
                  'math': 'Error bounds for quadrature', 'earth-environment': 'Ocean temperature observations',
                  'chemistry': 'Spectroscopic measurements of solutions'}[domain]
         hint = {'arxiv': 'arxiv_primary_category', 'biorxiv': 'biorxiv_category', 'crossref': 'journal'}[source]
-        if domain == 'chemistry':
+        if source == 'crossref' and domain in {'chemistry', 'math'}:
             hint = 'issn'
         items = [item.model_copy(update={
             'source': source, 'id': f'{source}:fixture-{i}', 'title': f'{title} {i}',

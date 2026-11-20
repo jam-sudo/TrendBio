@@ -1,4 +1,5 @@
 """Publication-day intake for openly licensed journal articles in field pilots."""
+from dataclasses import dataclass
 from datetime import date, datetime
 from html.parser import HTMLParser
 import logging
@@ -51,16 +52,44 @@ def vor_license(work, as_of, *, allow_cc0=False):
     return None
 
 
+@dataclass
+class _Alternative:
+    start: int
+    tex_start: int | None = None
+    tex_end: int | None = None
+
+
 class _Text(HTMLParser):
     def __init__(self):
         super().__init__()
         self.parts = []
+        self.alternatives: list[_Alternative] = []
+
+    def handle_starttag(self, tag, attrs):
+        name = tag.split(':')[-1]
+        if name == 'alternatives':
+            self.alternatives.append(_Alternative(len(self.parts)))
+        elif name == 'tex-math' and self.alternatives:
+            self.alternatives[-1].tex_start = len(self.parts)
 
     def handle_data(self, data):
         self.parts.append(data)
 
+    def unknown_decl(self, data):
+        if data.startswith('CDATA['):
+            self.parts.append(data[6:])
+
     def handle_endtag(self, tag):
-        if tag.split(':')[-1] in {'p', 'div', 'title'}:
+        name = tag.split(':')[-1]
+        if name == 'tex-math' and self.alternatives:
+            self.alternatives[-1].tex_end = len(self.parts)
+        elif name == 'alternatives' and self.alternatives:
+            choice = self.alternatives.pop()
+            if choice.tex_start is not None and choice.tex_end is not None:
+                tex = self.parts[choice.tex_start:choice.tex_end]
+                if ''.join(tex).strip():
+                    self.parts[choice.start:] = tex
+        elif name in {'p', 'div', 'title'}:
             self.parts.append(' ')
 
 

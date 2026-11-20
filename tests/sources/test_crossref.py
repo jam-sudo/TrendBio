@@ -4,7 +4,16 @@ import httpx
 import pytest
 
 from pipeline.collect import all_paper_sources_failed, intake_status
-from pipeline.sources.crossref import CrossrefAdapter, crossref_works
+from pipeline.sources.crossref import CrossrefAdapter, crossref_works, plain_text
+
+
+def test_journal_equations_keep_one_notation_and_preserve_the_exponent():
+    tex = r'<jats:tex-math><![CDATA[$$q^{-1} < x$$]]></jats:tex-math>'
+    mathml = '<mml:math><mml:msup><mml:mi>q</mml:mi><mml:mn>-1</mml:mn></mml:msup></mml:math>'
+    for pair in (tex + mathml, mathml + tex):
+        assert plain_text('For <jats:alternatives>' + pair + '</jats:alternatives>, the bound holds.') == (
+            'For $$q^{-1} < x$$, the bound holds.')
+    assert plain_text('<alternatives><tex-math> </tex-math><math><mi>x</mi></math></alternatives>') == 'x'
 
 
 def test_open_edition_requires_current_vor_license_abstract_and_publication_day():
