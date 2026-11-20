@@ -1,0 +1,30 @@
+---
+import cs from "../../../docs/expansion-measurements/2026-11-20/computer-science-arxiv.json";
+import math from "../../../docs/expansion-measurements/2026-11-20/mathematics-arxiv.json";
+import physics from "../../../docs/expansion-measurements/2026-11-20/physics-arxiv.json";
+import journals from "../../../docs/expansion-measurements/2026-11-20/science-source-expansion.json";
+const { field } = Astro.props as { field: string };
+const reports: Record<string, { start: string; end: string; unique_papers: number; matching_subjects: Record<string, number> }> =
+  { "computer-information": cs, math, "physics-expanded": physics };
+const report = reports[field];
+const sources = journals.sources.filter(source => source.field === field);
+---
+{report && <details class="intake">
+  <summary>Measured arXiv intake · {report.unique_papers.toLocaleString("en-US")} preprints</summary>
+  <p>Unique preprints collected from {report.start} through {report.end}, before relevance screening. A cross-listed preprint can appear under several subjects.</p>
+  <table><thead><tr><th scope="col">arXiv subject</th><th scope="col">Preprints</th></tr></thead>
+    <tbody>{Object.entries(report.matching_subjects).map(([code, count]) => <tr><td><a href={`https://arxiv.org/list/${code}/recent`}>{code}</a></td><td>{count}</td></tr>)}</tbody>
+  </table>
+</details>}
+{sources.length > 0 && <details class="intake">
+  <summary>New journal coverage · {sources.length} sources</summary>
+  <p>Records with eligible dates and source text collected from {journals.from} through {journals.to}, before relevance screening.</p>
+  <table><thead><tr><th scope="col">Journal</th><th scope="col">Records</th></tr></thead>
+    <tbody>{sources.map(source => <tr><td>{source.name}</td><td>{source.eligible}</td></tr>)}</tbody>
+  </table>
+</details>}
+<style>
+  .intake { margin-block: .75rem; }
+  summary { cursor: pointer; }
+  td, th { padding-block: .3em; }
+</style>

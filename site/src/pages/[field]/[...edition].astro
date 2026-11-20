@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import PilotCollection from "../../components/PilotCollection.astro";
 import FieldEvidence from "../../components/FieldEvidence.astro";
 import CrossCoverage from "../../components/CrossCoverage.astro";
 import { crossCoverage } from "../../lib/shared-papers";
@@ -62,6 +63,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
     {!Astro.params.edition && stage === "Pilot" && <details>
       <summary>Research categories</summary><ul>{Array.from(categories.values(), label => <li>{label}</li>)}</ul>
     </details>}
+    {!Astro.params.edition && stage === "Pilot" && <PilotCollection {field} />}
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
     {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map((name, i) => <>{i > 0 && ", "}{publisherUrls.has(name)
       ? <a href={publisherUrls.get(name)}>{name}</a>
