@@ -31,9 +31,14 @@ def top_evidence(items: list[Item]) -> Item:
 
 
 def fallback_copy(item: Item) -> tuple[str, str]:
-    if item.can_quote_in_english():
-        return item.title, item.summary or ''
-    return 'English summary unavailable', 'Open the supporting work to read the original publication.'
+    summary = item.summary or ''
+    has_english_summary = item.can_quote_in_english(summary)
+    source_link_text = 'Open the supporting work to read the original publication.'
+    if item.can_quote_in_english(item.title):
+        return item.title, summary if has_english_summary else source_link_text
+    if summary and has_english_summary:
+        return 'Research summary', summary
+    return 'English summary unavailable', source_link_text
 
 
 def synthesize_top(

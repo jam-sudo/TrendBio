@@ -28,14 +28,14 @@ class Item(BaseModel):
     preprint_id: str | None
     metadata: dict[str, Any] = {}
 
-    def can_quote_in_english(self) -> bool:
+    def can_quote_in_english(self, text: str | None = None) -> bool:
+        if re.search(r'[가-힣ㄱ-ㅎㅏ-ㅣᄀ-ᇿ]', text if text is not None else self.title + self.abstract):
+            return False
         language = self.metadata.get('abstract_language') or self.metadata.get('language')
         if language:
             code = str(language).strip().lower().replace('_', '-').split('-')[0]
             return code in {'en', 'eng', 'english'}
-        if self.source in {'crossref', 'europepmc', 'oai', 'openedition', 'thoth'}:
-            return False
-        return not re.search(r'[가-힣ㄱ-ㅎㅏ-ㅣᄀ-ᇿ]', self.title + self.abstract)
+        return self.source not in {'crossref', 'europepmc', 'oai', 'openedition', 'thoth'}
 
 
 class Signals(BaseModel):

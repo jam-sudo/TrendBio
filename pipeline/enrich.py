@@ -31,9 +31,9 @@ def hints_for(item: Item, hints_cfg: dict) -> list[str]:
 
 
 def fallback_summary(item: Item) -> str:
-    if not item.can_quote_in_english():
-        return 'An English summary is unavailable.'
     text = item.abstract or item.title
+    if not item.can_quote_in_english(text):
+        return 'An English summary is unavailable.'
     return re.split(r'(?<=[.!?])\s+', text.strip(), maxsplit=1)[0]
 
 

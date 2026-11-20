@@ -149,6 +149,7 @@ def test_enrich_sets_summary_and_categories_within_taxonomy(tmp_path, item, taxo
 @pytest.mark.parametrize('source,metadata,original,expected', [
     ('openedition', {'abstract_language': 'fr'}, 'Une étude de deux archives.', 'An English summary is unavailable.'),
     ('oai', {'language': 'ko', 'abstract_language': 'en-GB'}, 'Two archives were compared.', 'Two archives were compared.'),
+    ('oai', {'abstract_language': 'en'}, '두 자료를 비교했다.', 'An English summary is unavailable.'),
     ('crossref', {}, 'Une étude de deux archives.', 'An English summary is unavailable.'),
     ('arxiv', {}, '두 가지 추정 방법을 비교했다.', 'An English summary is unavailable.'),
 ])
@@ -156,6 +157,12 @@ def test_fallback_summary_uses_the_language_of_the_selected_source_text(item, so
     item = item.model_copy(update={'source': source, 'metadata': metadata, 'abstract': original})
     assert fallback_summary(item) == expected
     assert item.abstract == original
+
+
+def test_fallback_can_quote_an_english_abstract_with_an_original_korean_title(item):
+    item.title = '두 자료의 비교'
+    item.abstract = 'The two collections were compared. Both contain field notes.'
+    assert fallback_summary(item) == 'The two collections were compared.'
 
 
 def test_refusal_falls_back_to_abstract_sentence_and_hint_category(tmp_path, item, taxonomy):

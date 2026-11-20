@@ -684,16 +684,26 @@ def test_synthesis_fallback_uses_top_item_title(context, label):
     assert ctx.topic.summary == published.summary
 
 
-def test_unavailable_synthesis_keeps_the_original_title_in_the_evidence(context):
+@pytest.mark.parametrize('title, summary, metadata, expected_headline, expected_summary', [
+    ('두 추정량의 비교', '두 추정량의 오차를 비교했다.', {'language': 'kor'},
+     'English summary unavailable', 'Open the supporting work to read the original publication.'),
+    ('두 추정량의 비교', 'The study compared two estimators.', {'abstract_language': 'en'},
+     'Research summary', 'The study compared two estimators.'),
+    ('A comparison of two estimators', '두 추정량의 오차를 비교했다.', {'language': 'en'},
+     'A comparison of two estimators', 'Open the supporting work to read the original publication.'),
+])
+def test_unavailable_synthesis_keeps_the_original_title_in_the_evidence(
+    context, title, summary, metadata, expected_headline, expected_summary,
+):
     ctx = context
-    ctx.item.title = '두 추정량의 비교'
-    ctx.item.summary = '두 추정량의 오차를 비교했다.'
-    ctx.item.metadata = {'language': 'kor'}
+    ctx.item.title = title
+    ctx.item.summary = summary
+    ctx.item.metadata = metadata
     ctx.beta.stop_reason = 'refusal'
     _, _, notes = run(ctx)
-    assert ctx.topic.headline == 'English summary unavailable'
-    assert ctx.topic.summary == 'Open the supporting work to read the original publication.'
-    assert ctx.item.title == '두 추정량의 비교'
+    assert ctx.topic.headline == expected_headline
+    assert ctx.topic.summary == expected_summary
+    assert ctx.item.title == title
     assert notes == [f'synthesis-fallback:{ctx.topic.slug}']
 
 
