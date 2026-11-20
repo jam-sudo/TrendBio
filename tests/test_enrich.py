@@ -346,11 +346,14 @@ def test_interrupted_embedding_write_is_retryable(tmp_path, item, taxonomy, monk
 
 
 def test_enrichment_parallel_and_writes_sorted(tmp_path, item, taxonomy):
-    from time import perf_counter, sleep
+    from threading import Barrier
     from unittest.mock import Mock
 
-    def slow_enrich(*args):
-        sleep(0.05)
+    overlapping = Barrier(2, timeout=10)
+
+    def enrich(paper, *args):
+        if paper.id in {'biorxiv:00', 'biorxiv:01'}:
+            overlapping.wait()
         return None
 
     items = [item.model_copy(update={'id': f'biorxiv:{i:02d}'}) for i in reversed(range(40))]
@@ -358,9 +361,7 @@ def test_enrichment_parallel_and_writes_sorted(tmp_path, item, taxonomy):
     store.put_item = Mock(wraps=store.put_item)
     embedder = FakeEmbedder()
     embedder.embed = Mock(wraps=embedder.embed)
-    started = perf_counter()
-    _, notes, _ = enrich_items(items, store, SimpleNamespace(enrich=slow_enrich), embedder, taxonomy, {})
-    assert perf_counter() - started < 1.2  # Sequential calls alone would take 2 seconds.
+    _, notes, _ = enrich_items(items, store, SimpleNamespace(enrich=enrich), embedder, taxonomy, {})
     written = [call.args[0].id for call in store.put_item.call_args_list]
     assert written == sorted(written)
     assert notes == sorted(notes)
