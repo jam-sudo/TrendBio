@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 import { parse, serializeOuter } from 'parse5';
 
 const [dist, dayFile, out] = process.argv.slice(2);
@@ -35,6 +36,8 @@ const rows = list ? children(list, 'li') : [];
 assert.deepEqual(rows.map(n => [attr(n, 'id'), Number(attr(n, 'value'))]), ranked.map(r => [r.slug, r.rank]));
 
 if (ranked.length) {
+  const withdrawalFile = join(process.env.TRENDBIO_NOTES_ROOT ?? '../notes', domain, 'withdrawals.json');
+  const withdrawals = existsSync(withdrawalFile) ? read(withdrawalFile).filter(note => note.date === date) : [];
   const urls = new Map();
   const items = join(store, 'items');
   for (const file of readdirSync(items, { recursive: true })) {
@@ -52,6 +55,18 @@ if (ranked.length) {
     const sources = children(evidence, 'ul')[0];
     const links = children(sources, 'li').map(li => attr(children(li, 'a')[0], 'href'));
     assert.deepEqual(links, history.item_ids.map(id => urls.get(id)), 'Supporting papers for ' + slug);
+    const withdrawal = withdrawals.find(note => note.slug === slug && note.headlines.includes(headline)
+      && isDeepStrictEqual(note.papers.toSorted(), history.item_ids.toSorted()));
+    if (withdrawal) {
+      assert.ok(typeof withdrawal.reason === 'string' && withdrawal.reason.trim());
+      const [category, explanation] = children(row, 'p');
+      const heading = children(row, 'h3')[0];
+      explanation.attrs.push({ name: 'data-editorial-withdrawal', value: '' }, { name: 'role', value: 'note' });
+      for (const [node, value] of [[heading, 'Ranking withdrawn after editorial review'], [explanation, withdrawal.reason]]) {
+        node.childNodes = [{ nodeName: '#text', parentNode: node, value }];
+      }
+      row.childNodes = [category, heading, explanation];
+    }
   }
 } else {
   assert.match(text(main), /No topic cleared the ranking threshold/);
