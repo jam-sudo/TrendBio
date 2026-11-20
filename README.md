@@ -24,7 +24,7 @@
 
 TrendBio reads each day's new preprints, papers, repositories and company posts in computational biology, groups them into research topics, ranks the Top 40 and writes a short synthesis for each. One page a day, for readers who already know the field, with history back to 1 November 2025.
 
-All editions publish in English. Citations keep the original publication titles when an English title is unavailable. Previous Korean edition links open the corresponding English pages.
+All editions publish in English. Citations keep the original publication titles when an English title is unavailable. Previous Korean edition links open the corresponding English pages. Each public edition offers a daily Top 5 subscription and one feed for each category. [Browse the English feeds](https://trendbio.dev/about/)
 
 Search covers CompBio, All Biology and Physics. Filter by field or category to find a topic and its supporting papers. When two editions rank the same paper on the same date, “Also covered in” links their rankings and lists the papers they share. [Search all editions](https://trendbio.dev/search/)
 
