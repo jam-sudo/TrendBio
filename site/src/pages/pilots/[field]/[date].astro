@@ -1,0 +1,23 @@
+---
+import { readFileSync } from "node:fs";
+import Base from "../../../layouts/Base.astro";
+import { editions, fieldLabel, pilotDates, type Edition } from "../../../lib/editions";
+
+export function getStaticPaths() {
+  return editions.flatMap(field => pilotDates(field).map(date => ({ params: { field, date } })));
+}
+const field = Astro.params.field as Edition;
+const date = Astro.params.date;
+const label = fieldLabel(field);
+const article = readFileSync(`pilot-editions/${field}/${date}.html`, "utf8");
+---
+<Base edition={field} title={`${label} pilot · ${date} — TrendBio`} description={`Dated ${label} pilot rankings, English summaries and supporting research for ${date}.`} canonicalPath={`/pilots/${field}/${date}/`} editionSources="the sources listed in this dated edition">
+  <p><a href={`/${field}/`}>{label} overview</a></p>
+  <Fragment set:html={article} />
+</Base>
+<style>
+  p { max-width: 720px; margin-inline: auto; }
+  :global(.rankings > li) { padding: .75rem 0; border-top: 1px solid var(--border); }
+  :global(.rankings aside) { border-inline-start: 3px solid var(--muted); padding-inline-start: .75rem; }
+  :global(main .prose) { overflow-wrap: anywhere; }
+</style>

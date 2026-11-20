@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import { editionInfo, fieldLabel, scienceGroups, type Field } from "../lib/editions";
+---
+<Base title="Science fields — TrendBio" description="Browse daily research rankings and dated pilot editions by scientific field." canonicalPath="/fields/">
+  <article class="prose">
+    <h1>Science fields</h1>
+    <p>Choose a field to read its rankings and supporting papers. Pilot editions cover selected dates.</p>
+    {Object.entries(scienceGroups).map(([group, fields]) => <section>
+      <h2>{group}</h2>
+      <dl>{(Object.keys(fields) as Field[]).map(field => <div>
+        <dt><a href={field === "computational" ? "/" : `/${field}/`}>{fieldLabel(field)}</a>
+          <small>{field === "computational" || !editionInfo[field].stage ? "Daily" : field === "biology" ? "Daily · Beta" : "Pilot"}</small></dt>
+        <dd>{fields[field]}</dd>
+      </div>)}</dl>
+    </section>)}
+  </article>
+</Base>
+<style>
+  dl > div { margin-block: .9rem; }
+  dt { font-weight: 600; }
+  small { margin-inline-start: .7em; color: var(--muted); font-weight: normal; }
+  dd { margin: .2em 0 0; }
+</style>

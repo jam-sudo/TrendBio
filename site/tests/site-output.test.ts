@@ -1,12 +1,12 @@
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { chromium, type Browser, type Page } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { getDataIndex } from "../src/lib/data";
-import { editions, publicEditions } from "../src/lib/editions";
+import { editions, pilotDates, publicEditions } from "../src/lib/editions";
 import { loadPeriods } from "../src/lib/period-data";
 import { truncateDescription } from "../src/lib/metadata";
 
@@ -90,7 +90,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
       }
     }
   }
-  expect(parsed.entries).toHaveLength(7 + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
+  expect(parsed.entries).toHaveLength(8 + editions.flatMap(pilotDates).length + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   for (const [url, date] of fieldTopics) expect(urls.get(url)).toBe(date);
   expect(urls.size).toBe(parsed.entries.length);
@@ -212,25 +212,25 @@ it("withdraws pilot ranks by a dated claim or the complete set of reviewed sourc
   }
 });
 
-it("preserves original book titles and distinguishes catalogue and text rights", async () => {
-  await page.setContent(read("humanities-arts/day/2026-11-01/index.html"));
-  const picker = page.locator(".pilot-fields");
-  await picker.locator("summary").click();
-  expect(await picker.locator('a[aria-current="true"]').getAttribute("href")).toBe("/humanities-arts/");
-  const list = page.locator("ol.rankings");
-  expect(await list.locator("summary").textContent()).toBe("3 supporting works");
-  expect(await list.getByText("Liederhandschriften").textContent()).toBe("Liederhandschriften");
-  expect(await list.locator("cite").textContent()).toBe("Chansons en manuscrit");
-  const book = list.locator("details ul > li").first();
-  expect(await book.getByRole("link", { name: "Catalogue metadata (CC0)", includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/publicdomain/zero/1.0/");
-  expect(await book.getByRole("link", { name: "License for the work", includeHidden: true }).getAttribute("href")).toBe("https://creativecommons.org/licenses/by-nc/4.0/");
-  const press = list.locator("details ul > li").last();
-  expect(await press.getByText("Manuscritos e memória").getAttribute("translate")).toBe("no");
-  expect(await press.textContent()).toContain("Original publication in Portuguese");
-  expect(await press.textContent()).toContain("Book series · Livros");
-  expect(await press.getByRole("link", { name: "Publication date source", includeHidden: true }).getAttribute("href")).toBe("https://example.org/registered-book");
-  expect(await press.getByRole("link", { name: "Catalogue metadata (CC0)", includeHidden: true }).count()).toBe(0);
-  expect(await page.locator(".coverage a", { hasText: "UMinho Editora" }).getAttribute("href")).toBe("https://ebooks.uminho.pt/uminho/pt/catalog");
+it("links each science field and its dated pilots while omitting retired fields", async () => {
+  await page.setContent(read("fields/index.html"));
+  const directory = page.locator("main");
+  const links = await directory.locator("dt a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href")));
+  expect(new Set(links)).toEqual(new Set(["/", ...editions.map(field => `/${field}/`)]));
+  expect(await directory.getByRole("link", { name: "Computer Science", exact: true }).getAttribute("href")).toBe("/computer-information/");
+  for (const field of ["social-sciences", "humanities-arts"]) {
+    expect(existsSync(`dist/${field}/index.html`)).toBe(false);
+    expect(read("sitemap.xml")).not.toContain(`/${field}/`);
+  }
+  for (const field of editions.filter(field => !publicEditions.includes(field))) {
+    await page.setContent(read(`${field}/index.html`));
+    const href = await page.locator("main section[aria-label='Dated pilot editions'] a").first().getAttribute("href");
+    expect(href).toMatch(new RegExp(`^/pilots/${field}/\\d{4}-\\d{2}-\\d{2}/$`));
+    const sample = read(href!.slice(1) + "index.html");
+    expect(sample).toContain('lang="en"');
+    expect(sample).toContain('class="rankings"');
+    expect(sample).toContain(`href="/${field}/"`);
+  }
 });
 
 it("keeps the Biology beta and CompBio as distinct editions", async () => {

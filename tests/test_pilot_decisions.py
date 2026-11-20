@@ -34,11 +34,11 @@ def test_workflow_reconciles_earlier_forks_then_restores_latest_snapshot(tmp_pat
     def restore(run):
         (tmp_path / 'pages.json').write_text(json.dumps([{'artifacts': entries}]))
         subprocess.run(['bash', '-ec', gh + step], cwd=tmp_path, check=True, env={
-            **os.environ, 'DOMAIN': 'social-sciences', 'GITHUB_REPOSITORY_ID': '5', 'GITHUB_RUN_ID': str(run),
+            **os.environ, 'DOMAIN': 'computer-information', 'GITHUB_REPOSITORY_ID': '5', 'GITHUB_RUN_ID': str(run),
             'GITHUB_REPOSITORY': 'owner/repo', 'RUNNER_TEMP': str(tmp_path / str(run)),
             'GITHUB_STEP_SUMMARY': str(tmp_path / 'summary'),
         })
-        target = tmp_path / 'science-pilot/social-sciences/decisions'
+        target = tmp_path / 'science-pilot/computer-information/decisions'
         assert (target / 'classifications/shared.json').read_text() == '11'
         assert all((target / f'classifications/{n}.json').is_file() for n in (11, 12, 13))
         return target, json.loads((target / 'lineage.json').read_text())['restored_newest_first']

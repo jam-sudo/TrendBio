@@ -7,7 +7,7 @@ import SponsorColumns from "../components/SponsorColumns.astro";
 import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
 
-import { editionInfo, editions, fieldLabel, publicEditions, type Edition } from "../lib/editions";
+import { editionInfo, fieldLabel, publicEditions, type Edition } from "../lib/editions";
 
 interface Props {
   title?: string;
@@ -23,8 +23,8 @@ interface Props {
 const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, edition } = Astro.props;
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
-const biology = !edition || edition === "biology";
-const pilots = editions.filter(field => editionInfo[field].stage === "Pilot");
+const directory = canonicalPath === "/fields/";
+const biology = (!edition || edition === "biology") && !directory;
 const feed = !edition ? "/feed.xml" : publicEditions.includes(edition) ? `/${edition}/feed.xml` : undefined;
 const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
 ---
@@ -64,13 +64,11 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
       <nav aria-label="Main navigation">
         <div class="field-bar">
           <div class="field-links" role="group" aria-label="Science field">
+            <a href="/fields/" aria-current={directory ? "page" : undefined}>Science fields</a>
             <a href="/" aria-current={biology ? "true" : undefined}>Biology</a>
             {publicEditions.filter(field => field !== "biology").map(field =>
               <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}
-            {pilots.length > 0 && <details class="pilot-fields">
-              <summary>Pilot editions</summary>
-              <div>{pilots.map(field => <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}</div>
-            </details>}
+            {edition && editionInfo[edition].stage === "Pilot" && <a href={`/${edition}/`} aria-current="true">{editionInfo[edition].label}</a>}
           </div>
           {biology && <span class="field-links" role="group" aria-label="Biology edition">
             <a href="/biology/" aria-current={edition === "biology" ? "true" : undefined}>All Biology (beta)</a>

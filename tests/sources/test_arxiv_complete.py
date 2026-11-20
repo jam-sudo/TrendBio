@@ -11,6 +11,7 @@ from pipeline.sources.base import load_config
 
 def test_pilot_splits_capped_ranges_and_rejects_incomplete_pages(fixture_text):
     config = load_config('math')
+    config['arxiv'].pop('daily_page_size', None)  # Exercise the adaptive range splitter.
     config['arxiv']['max_results_per_query'] = 1
     start, end = date(2025, 6, 15), date(2025, 6, 16)
     calls = []

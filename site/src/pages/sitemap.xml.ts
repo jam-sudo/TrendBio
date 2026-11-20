@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { editions, publicEditions, topicAppearances } from "../lib/editions";
+import { editions, pilotDates, publicEditions, topicAppearances } from "../lib/editions";
 import { loadDays } from "../lib/data";
 import { loadPeriods, topicPages } from "../lib/period-data";
 
@@ -11,12 +11,13 @@ export const GET: APIRoute = ({ site }) => {
       const editionsByDate = loadDays(field);
       return [
         { path: `/${field}/`, date: editionsByDate[0]?.date ?? today },
+        ...pilotDates(field).map(date => ({ path: `/pilots/${field}/${date}/`, date })),
         ...editionsByDate.map(({ date }) => ({ path: `/${field}/day/${date}/`, date })),
       ];
     }),
     ...publicEditions.flatMap(field => Array.from(topicAppearances(field), ([slug, appearances]) =>
       ({ path: `/${field}/topic/${slug}/`, date: appearances[0].day.date }))),
-    ...["/", "/topics/", "/map/", "/archive/", "/about/", "/week/", "/month/"].map(path => ({ path, date: today })),
+    ...["/", "/fields/", "/topics/", "/map/", "/archive/", "/about/", "/week/", "/month/"].map(path => ({ path, date: today })),
     ...days.map(({ date }) => ({ path: `/day/${date}/`, date })),
     ...([["week", weeks], ["month", months]] as const).flatMap(([kind, periods]) =>
       periods.map(period => ({ path: `/${kind}/${period.id}/`,

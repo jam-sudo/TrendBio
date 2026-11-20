@@ -1,0 +1,65 @@
+<div class="prose">
+<h1>Engineering<small> Pilot</small>
+</h1>
+<p class="coverage" data-edition-venues="">Sources in this edition’s collection include <span translate="no">Buildings, Flexible and Printed Electronics, Journal of Manufacturing and Materials Processing, Wind Energy Science, arXiv</span>.</p>
+<p class="coverage">Following <a href="https://arxiv.org/list/eess.SY/recent">Electrical and control systems</a> on arXiv.</p>
+<h2>Research trends · <time datetime="2026-08-12">2026-08-12</time>
+</h2>
+<p data-window-days="7">Evidence window of 7 days from 2026-08-06 through 2026-08-12 (UTC).</p>
+<ol class="rankings">
+<li value="1" id="concrete-mix-ae82">
+<p class="category">Buildings and infrastructure</p>
+<h3>Data-driven concrete strength surrogates rank water–binder ratio as the dominant predictor</h3>
+<p>Dataset-based ML surrogates (no new lab tests) rank w/b or w/c ratio first; test R² 0.88–0.96, and only the 3D-printed concrete model is externally checked.</p>
+<aside class="correction" role="note">
+<strong>Editorial correction</strong>
+<div>
+<p>The recycled-aggregate study defines its leading predictor as water mass divided by cement mass. It did not have detailed binder composition for all 407 mixtures. The other two papers use total binder in the denominator. Two studies predict compressive strength, and the printed-concrete study predicts flexural strength. The ratios rank first within their respective models. <a href="https://doi.org/10.3390/buildings16153128">UCI concrete model</a> · <a href="https://doi.org/10.3390/buildings16163151">Printed-concrete model</a> · <a href="https://doi.org/10.3390/buildings16163198">Recycled-aggregate model</a>
+</p>
+</div>
+</aside>
+<details>
+<summary>3 supporting papers</summary>
+<p>All three studies train gradient-boosted surrogates on compiled mix-proportion datasets. None reports new laboratory casting. In each, SHAP-type attribution places water content relative to binder or cement first. On the UCI compressive-strength dataset, the eco-intelligent mix study's LightGBM reaches held-out R² 0.946 and MAE 2.639 MPa, with w/b dominant. Its Monte Carlo/Pareto screening finds 45 MPa candidates with a mean cement content of 164.4 kg/m³, 44.2% below empirical mixtures in the same strength band. The authors treat cement content only as a carbon surrogate, and the mixes are not validated. For flexural strength of 3D-printed concrete (209 records), CatBoost achieves 30-run R² 0.9302±0.0722 and seed-42 RMSE 1.761 MPa. W/B leads in SHAP, ALE and LIME. Validation on a source study withheld from training gives R² 0.769. For recycled aggregate concrete (407 mixes), LightGBM achieves R² 0.8822 and RMSE 4.0276 MPa. W/c ratio, sand ratio and superplasticizer dosage lead, and NSGA-II maps strength–cost–carbon Pareto fronts.</p>
+<ul>
+<li>
+<a href="https://doi.org/10.3390/buildings16153128">Toward Eco-Intelligent Concrete for Resilient Urban Infrastructure: Explainable Surrogate Optimization and LLM-Assisted Low-Clinker Mix Design</a> · <span translate="no">Junyi Zhang, Haidong Yang, Guo Hu, Jun Wu, Xiaotian Wu</span> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>
+</li>
+<li>
+<a href="https://doi.org/10.3390/buildings16163151">Interpretable Machine Learning for Flexural Strength Prediction of 3D-Printed Concrete Incorporating Supplementary Cementitious Materials</a> · <span translate="no">Fengping Qin, Yangping Chen, Mengdi Hou, Jianbo Huang</span> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>
+</li>
+<li>
+<a href="https://doi.org/10.3390/buildings16163198">Sustainable Mix Design of Recycled Aggregate Concrete: Machine Learning-Assisted Multi-Objective Optimization of Strength, Life-Cycle Cost, and Net Carbon Emissions</a> · <span translate="no">Xingyu Zhu, Wen Xu</span> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>
+</li>
+</ul>
+</details>
+</li>
+<li value="2" id="durability-cementitious-50d7">
+<p class="category">Buildings and infrastructure</p>
+<h3>Lab tests and reviews: moderate SCM or expansive-agent levels balance binder durability</h3>
+<p>Bench study finds 6% expansive agent optimal in a 12% slag–fly ash–silica fume binder; reviews favour ~10% calcined sludge and flag sparse long-term data.</p>
+<aside class="correction" role="note">
+<strong>Editorial correction</strong>
+<div>
+<p>The expansive-agent study measured strength, sulfate resistance and chloride transport in its own mixtures. The sludge review’s frequently reported replacement level pertains mainly to mechanical performance. The broader review identifies a lack of long-term durability evidence. Only the first paper directly compares durability across additive levels in one experiment. <a href="https://doi.org/10.3390/buildings16163169">Binder experiment</a> · <a href="https://doi.org/10.3390/buildings16163172">Sludge review</a> · <a href="https://doi.org/10.3390/buildings16163197">Durability review</a>
+</p>
+</div>
+</aside>
+<details>
+<summary>3 supporting papers</summary>
+<p>All three papers report that durability and strength are non-monotonic in replacement or additive level, and two relate this to pore structure. In a laboratory study (doi:10.3390/buildings16163169) of a binder with 12% slag–fly ash–silica fume replacement, a 6% expansive-agent dosage (A4) gave a 28-day compressive strength of 51.6 MPa, the highest sulfate resistance coefficient and the lowest chloride diffusion coefficient among the tested mixes. Excess expansive agent caused over-expansion and pore defects. A systematic review of water treatment sludge (doi:10.3390/buildings16163172) found that 10% calcined sludge, calcined at 600–800 °C, was most often reported as optimal, with dilution limiting C-S-H at higher levels. Durability data for sludge blends remain limited. A review of 48 low-carbon cement studies (doi:10.3390/buildings16163197) found no long-term or integrative durability studies. It links reactive fines to pore refinement and links extensive clinker replacement to lower alkaline reserve and greater carbonation susceptibility. No paper reports field or deployment data.</p>
+<ul>
+<li>
+<a href="https://doi.org/10.3390/buildings16163169">Influence of Composite Mineral Admixtures and Expansive Agent on the Mechanical Properties, Durability and Microstructure of Cementitious Materials</a> · <span translate="no">Xuezhen Wang, Xingze Duan, Ruijie Xia, Wei Li, Ju Liu, Zhou Zhou, Ao Yang, Xin Yin, Guohua Song, Kuangyu Dai</span> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>
+</li>
+<li>
+<a href="https://doi.org/10.3390/buildings16163172">Water Treatment Sludge as a Sustainable Supplementary Cementitious Material: A Review</a> · <span translate="no">Khawla Boutmaghzoute, Tee How Tan, Ayu Haslija Abu Bakar, Shafiq Ishak, Kim Hung Mo</span> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>
+</li>
+<li>
+<a href="https://doi.org/10.3390/buildings16163197">Low-Carbon Cements and Construction Durability: A Systematic Review</a> · <span translate="no">Juliana Gaio Somer, Gersson F. B. Sandoval, Edna Possan</span> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>
+</li>
+</ul>
+</details>
+</li>
+</ol>
+</div>

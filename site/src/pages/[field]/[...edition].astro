@@ -8,7 +8,7 @@ import type { Day } from "../../lib/types";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parse } from "yaml";
-import { editionInfo, editions, publicEditions, type Edition } from "../../lib/editions";
+import { editionInfo, editions, pilotDates, publicEditions, type Edition } from "../../lib/editions";
 
 export function getStaticPaths() {
   return editions.flatMap(field => {
@@ -24,7 +24,7 @@ interface Props { day: Day | null }
 const { day } = Astro.props;
 const field = Astro.params.field as Edition;
 const biology = field === "biology";
-const humanities = field === "humanities-arts";
+
 const { label, stage } = editionInfo[field];
 const days = loadDays(field);
 const categories = new Map(loadTaxonomy(field).map(category => [category.slug, category.label]));
@@ -34,18 +34,16 @@ const subjectCounts = field === "physics-expanded" && day ? loadEditionAudit(fie
 const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints?.arxiv_category?.[code]?.[0]) ?? code);
 const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
 const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
-const observedVenues = ["social-sciences", "computer-information", "engineering", "agriculture-food-veterinary"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
+const observedVenues = ["computer-information", "engineering", "agriculture-food-veterinary"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
 const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
 const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
 const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
-const presses: { title: string; catalogue: string }[] = source.crossref?.book_presses ?? [];
-const collectedVenues = presses.length && day ? loadEditionVenues(field, day.date) : null;
 const conferences: string[] = source.drops?.conferences ?? [];
 const halVolumes: { title: string; volume_doi: string; conference: string; collection: string }[] = source.crossref?.hal_proceedings ?? [];
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
 const publisherUrls = new Map(publishers.map(journal => [journal.title, new URL(".", journal.endpoint).href]));
-const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
 const isPublic = publicEditions.includes(field);
+const samples = Astro.params.edition ? [] : pilotDates(field);
 const windowDays = day?.run.window_days ?? 7;
 const windowStart = day && new Date(Date.parse(day.date + "T00:00:00Z") - (windowDays - 1) * 86_400_000).toISOString().slice(0, 10);
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
@@ -53,15 +51,22 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
 
 <Base edition={field} editionSources={["physics-expanded", "math"].includes(field) && !followsCrossref ? "arXiv" : undefined}
   title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
-  description={humanities ? "Humanities and arts research from journals and scholarly books." : `${windowDays === 28 ? "28-day" : "Daily"} ${label.toLowerCase()} research trends with the papers behind each ranking.`}
+  description={`${stage === "Pilot" ? "Pilot" : "Daily"} ${label.toLowerCase()} research trends with the papers behind each ranking.`}
   canonicalPath={path} lastRun={day?.run.finished}>
   <div class="prose">
     <h1>{label}{stage && <small> {stage}</small>}</h1>
+    {samples.length > 0 && <section aria-label="Dated pilot editions">
+      <h2>Read a pilot edition</h2>
+      <ul>{samples.map(date => <li><a href={`/pilots/${field}/${date}/`}>Rankings and papers · {date}</a></li>)}</ul>
+    </section>}
+    {!Astro.params.edition && stage === "Pilot" && <details>
+      <summary>Research categories</summary><ul>{Array.from(categories.values(), label => <li>{label}</li>)}</ul>
+    </details>}
     {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
     {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map((name, i) => <>{i > 0 && ", "}{publisherUrls.has(name)
       ? <a href={publisherUrls.get(name)}>{name}</a>
       : name === "arxiv" ? "arXiv" : name}</>)}</span>.</p>}
-    {(!observedVenues || field !== "social-sciences") && archives.length > 0 && <p class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"}>{day?.run.arxiv_mailings ? "This edition selected first versions in" : day?.run.arxiv_categories ? "This edition queried" : "Current coverage includes"} {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
+    {archives.length > 0 && <p class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"}>{day?.run.arxiv_mailings ? "This edition selected first versions in" : day?.run.arxiv_categories ? "This edition queried" : "Current coverage includes"} {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
       {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
         <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
       </>}</>)} on arXiv.</p>}
@@ -77,18 +82,10 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
       ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
       : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
     {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
-    {!observedVenues && source.worldbank && <p class="coverage">Working papers from the <a href={`https://openknowledge.worldbank.org/collections/${source.worldbank.collection}`}>World Bank Policy Research Working Papers series</a>.</p>}
     {conferences.length > 0 && <p class="coverage">The current pilot follows regular papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
     {halVolumes.filter(volume => !observedVenues || observedVenues.includes(volume.title)).map(volume =>
       <p class="coverage"><a href={`https://doi.org/${volume.volume_doi}`}>{volume.conference} proceedings</a> with author-deposited abstracts from <a href={`https://hal.science/${volume.collection}`}>HAL</a>.</p>)}
     {!observedVenues && publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
-    {source.thoth && <p class="coverage">Monographs and edited books from <a href="https://thoth.pub/books" translate="no">Thoth</a>.</p>}
-    {presses.filter(press => !day || collectedVenues?.includes(press.title)).map(press =>
-      <p class="coverage">Books from <a href={press.catalogue} translate="no">{press.title}</a> with publication dates confirmed in the publisher catalogue and Crossref.</p>)}
-    {collections.length > 0 && <p class="coverage">OpenEdition journals and presses in this pilot {collections.map(({ set, title }, i) => {
-      const [platform, name] = set.split(":");
-      return <>{i > 0 && " · "}<a href={`https://${platform}.openedition.org/${name}/`} translate="no">{title}</a></>;
-    })}.</p>}
     {day ? <>
       <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
       {!isPublic && <p data-window-days={windowDays}>Evidence window of {windowDays} days from {windowStart} through {day.date} (UTC).</p>}
@@ -108,7 +105,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
       {Astro.params.edition ? <p class="archive"><a href={`/${field}/#editions`}>Browse {field} editions</a></p> : <details class="archive" id="editions"><summary>{label} editions by date</summary>
         <ul>{days.map(({ date }) => <li><a href={`/${field}/day/${date}/`}>{date}</a></li>)}</ul>
       </details>}
-    </> : <p>The first {field} ranking will appear after the first collection run.</p>}
+    </> : !samples.length && <p>The first {field} ranking will appear after the first collection run.</p>}
   </div>
 </Base>
 

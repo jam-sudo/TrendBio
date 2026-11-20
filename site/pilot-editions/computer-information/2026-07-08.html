@@ -1,0 +1,59 @@
+<div class="prose">
+<h1>Computing &amp; Information<small> Pilot</small>
+</h1>
+<p class="coverage" data-edition-venues="">Sources in this edition’s collection include <span translate="no">38th European Conference on Real-Time Systems (ECRTS 2026): ECRTS 2026, Lund, Sweden, July 7-10, 2026, Journal of the Association for Information Science and Technology, arXiv</span>.</p>
+<p class="coverage">Following <a href="https://arxiv.org/list/cs.DS/recent">Algorithms and theory</a> · <span>Computer systems</span> (<a href="https://arxiv.org/list/cs.DC/recent" translate="no">cs.DC</a>, <a href="https://arxiv.org/list/cs.OS/recent" translate="no">cs.OS</a>) · <a href="https://arxiv.org/list/cs.HC/recent">Human-computer interaction</a> · <a href="https://arxiv.org/list/cs.DL/recent">Library and information science</a> on arXiv.</p>
+<p class="coverage">The current pilot follows regular papers from <a href="https://drops.dagstuhl.de/entities/conference/ESA" translate="no">ESA</a> · <a href="https://drops.dagstuhl.de/entities/conference/DISC" translate="no">DISC</a> · <a href="https://drops.dagstuhl.de/entities/conference/ECRTS" translate="no">ECRTS</a> (DROPS).</p>
+<h2>Research trends · <time datetime="2026-07-08">2026-07-08</time>
+</h2>
+<p data-window-days="7">Evidence window of 7 days from 2026-07-02 through 2026-07-08 (UTC).</p>
+<ol class="rankings">
+<li value="1" id="brumm-case-1ea9">
+<p class="category">Computer systems</p>
+<h3>Real-time systems research treats resource-management latency itself as a bounded resource</h3>
+<p>ECRTS 2026 work bounds the timing of memory reclamation, cache and bandwidth allocation, and container orchestration on edge, multicore and serverless platforms.</p>
+<aside class="correction" role="note">
+<strong>Editorial correction</strong>
+<div>
+<p>Only BRUMM budgets the time to reclaim a process group’s memory. MPORA changes cache and memory-bandwidth allocations and measures how often tasks meet deadlines. Its uncertainty estimates have a probabilistic coverage guarantee. PREEMPT-FaaS measures orchestration and service latency under load. Its sixfold improvement is a comparison with the baseline controller on the tested workloads. Each team measured a different operation. <a href="https://doi.org/10.4230/LIPIcs.ECRTS.2026.15">BRUMM</a> · <a href="https://doi.org/10.4230/LIPIcs.ECRTS.2026.17">MPORA</a> · <a href="https://doi.org/10.4230/LIPIcs.ECRTS.2026.22">PREEMPT-FaaS</a>
+</p>
+</div>
+</aside>
+<details>
+<summary>3 supporting papers</summary>
+<p>The dominant thread is making the latency of resource-management operations predictable under contention, rather than only limiting resource quantities. BRUMM adds a reclamation-latency quota object to the L4Re microkernel. It reports consistent overestimation of reclamation latency within the same order of magnitude as measured values. Kernel overhead ranges from 2.4% for simple system calls to 28% in synthetic worst cases. PREEMPT-FaaS applies fixed-priority preemptive scheduling to Kubernetes and Knative orchestration requests. Under high load, including RNN and video-analytics workloads, it reports up to ~6× lower orchestration times and up to ~2 s lower 95th-percentile service latency for critical instances. MPORA allocates last-level cache and memory bandwidth to multi-path real-time tasks. It uses receding-horizon optimization with weighted conformal prediction for uncertainty-aware deadline constraints, implemented as a Linux kernel module with microsecond-scale inference. On SPEC CPU, it improves schedulability and response times over existing methods. All three contributions are supported by empirical evaluations; none reports formal latency proofs.</p>
+<ul>
+<li>
+<a href="https://doi.org/10.4230/lipics.ecrts.2026.15">BRUMM: A Case for Predictable Memory Reclamation</a> · <span>ECRTS conference paper</span> · <span translate="no">Viktor Reusch, Michael Roitzsch, Horst Schirmeier</span> · <span>Publication date</span> <time datetime="2026-07-02">2026-07-02</time> · <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY</a>
+</li>
+<li>
+<a href="https://doi.org/10.4230/lipics.ecrts.2026.17">Uncertainty-Aware Resource Allocation for Multi-Path Programs with In-Kernel Predictions</a> · <span>ECRTS conference paper</span> · <span translate="no">Abigail Eisenklam, Carlos A. Montenegro G., Xian Wang, Yifan Cai, Robert Gifford, Linh Thi Xuan Phan, Ricardo G. Sanfelice</span> · <span>Publication date</span> <time datetime="2026-07-02">2026-07-02</time> · <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY</a>
+</li>
+<li>
+<a href="https://doi.org/10.4230/lipics.ecrts.2026.22">PREEMPT-FaaS: Taming Orchestration Times in Latency-Sensitive Serverless Environments</a> · <span>ECRTS conference paper</span> · <span translate="no">Marcello Cinque, Luigi De Simone, Raffaele Della Corte, Stefano Toscano</span> · <span>Publication date</span> <time datetime="2026-07-02">2026-07-02</time> · <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY</a>
+</li>
+</ul>
+</details>
+</li>
+<li value="2" id="inference-llm-5e53">
+<p class="category">Computer systems</p>
+<h3>Predicting LLM serving cost, power and latency before profiling deployment configurations</h3>
+<p>Three preprints replace exhaustive benchmarking of LLM deployment choices with learned or analytical predictors of throughput, power and latency.</p>
+<details>
+<summary>3 supporting papers</summary>
+<p>The shared question is how to choose GPU type, parallelism, precision or layout for LLM inference without exhaustively measuring every configuration. OmniPilot learns a conformally calibrated quantile cost model from 460 runs on A100/H100/H200 across four precisions, reporting 6.2% throughput MAPE and 95% top-1 accuracy, with an OOD abstention layer that flagged all five unsupported holdout points where error rose to 24–46%. WattGPU instead predicts mean power and inter-token latency from public model and GPU metadata alone; under leave-one-GPU-out and leave-one-LLM-out validation over 42 LLMs and 8 GPUs, it reduces error roughly 2–4× versus load-scaled TDP and roofline baselines. Floor First takes an analytical route, bounding decode latency with a five-resource [max, sum] interval; its H20 case study on a 671B MoE/MLA model shows TP16 KV-capacity-limited to ~70 concurrent 8K requests versus ~644 for EP16+DP-attention. These are empirical and analytical estimates, not proofs.</p>
+<ul>
+<li>
+<a href="http://arxiv.org/abs/2607.01579v1">OmniPilot: An Uncertainty-Aware LLM Inference Advisor for Heterogeneous GPU Clusters</a>
+</li>
+<li>
+<a href="http://arxiv.org/abs/2607.02391v1">WattGPU: Predicting Inference Power and Latency on Unseen GPUs and LLMs</a>
+</li>
+<li>
+<a href="http://arxiv.org/abs/2607.05876v2">Think Before You Grid-Search: Floor-First Triage for LLM Serving</a>
+</li>
+</ul>
+</details>
+</li>
+</ol>
+</div>

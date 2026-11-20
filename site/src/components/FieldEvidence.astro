@@ -6,7 +6,6 @@ import type { Day, RankedTopic } from "../lib/types";
 
 interface Props { field: Edition; day: Day; row: RankedTopic; expanded?: boolean }
 const { field, day, row, expanded = false } = Astro.props;
-const humanities = field === "humanities-arts";
 const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 const topic = loadTopic(field, row.slug);
 const entry = topic?.history.find(entry => entry.date === day.date);
@@ -19,9 +18,9 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
 {singleSource && <p><small>This headline and summary describe one supporting work.</small></p>}
 {correction && <aside class="correction" role="note"><strong>Editorial correction</strong><div set:html={correction} /></aside>}
 {papers.length > 0 && <details open={expanded}>
-  <summary>{papers.length} supporting {humanities ? (papers.length === 1 ? "work" : "works") : (papers.length === 1 ? "paper" : "papers")}</summary>
+  <summary>{papers.length} supporting {(papers.length === 1 ? "paper" : "papers")}</summary>
   {synthesis && <p>{synthesis}</p>}
-  <ul>{papers.map(paper => <li>{humanities || typeof paper.metadata.conference === "string" ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <>
+  <ul>{papers.map(paper => <li>{typeof paper.metadata.conference === "string" ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <>
     {typeof paper.metadata.conference !== "string" && <> · <span translate="no">{paper.authors.join(", ")}</span></>} · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
     {paper.source === "worldbank" && <> · <span>Working paper</span></>}
     {day.run.arxiv_mailings && paper.source === "arxiv" && typeof paper.metadata.arxiv_submitted === "string" && <>
