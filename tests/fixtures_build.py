@@ -1,5 +1,6 @@
 """Regenerate the synthetic contract fixtures: python -m tests.fixtures_build."""
 
+from collections import Counter
 from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal
 from itertools import combinations
@@ -238,6 +239,7 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
     published = domain in {"earth-environment", "humanities-arts"}
     papers = []
     sources = set()
+    venues = Counter()
     for i, title in enumerate(titles, 1):
         paper = Item(id=f"arxiv:{category}-fixture-{i}", source="arxiv", type="preprint", title=title,
                      url=f"https://example.org/{domain}/{prefix}-{i}", doi=None, published_at=day,
@@ -247,7 +249,9 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
             paper.doi = f"10.5555/example-earth-{i}"
             paper.id, paper.type, paper.source = f"doi:{paper.doi}", "published", "crossref"
             paper.url, paper.authors = f"https://example.org/earth/ocean-{i}", ["Example Ocean Group"]
-            paper.metadata = {"journal": "Ocean Science", "license": "https://creativecommons.org/licenses/by/4.0/",
+            journal = "Ocean\nScience" if i == 3 else "Ocean Science"
+            venues[journal] += 1
+            paper.metadata = {"journal": journal, "license": "https://creativecommons.org/licenses/by/4.0/",
                               "dataset_dois": ["10.5555/example-data"] if i == 1 else []}
             if i == 1:
                 paper.metadata["preprint_dois"] = ["10.5555/example-preprint"]
@@ -286,7 +290,7 @@ def build_field_edition(root: Path, day: date, domain: str) -> None:
     if domain == "earth-environment":
         audit = root / domain / "audits" / f"{day}.json"
         audit.parent.mkdir(exist_ok=True)
-        audit.write_text(json.dumps({"days": [{"date": str(day), "venues": {"Ocean Science": len(papers)}}]}, indent=2) + "\n")
+        audit.write_text(json.dumps({"days": [{"date": str(day), "venues": venues}]}, indent=2) + "\n")
 
 
 if __name__ == "__main__":

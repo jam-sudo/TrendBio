@@ -29,5 +29,11 @@ Each download contains one `en.html` file. Extract it and open it in a browser t
 | Broader Physics | 2026-10-07 | Independent review of the physical question | 11 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44671235576/artifacts/14600211609) |
 | Broader Physics | 2026-10-21 | Independent review of the physical question | 15 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44668718483/artifacts/14598124300) |
 | Broader Physics | 2026-11-18 | Independent review of the physical question | 22 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44667370737/artifacts/14598392024) |
+| Chemistry | 2026-09-16 | Ten journals, including analytical chemistry, held-out week | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674841378/artifacts/14601576944) |
+| Chemistry | 2026-10-28 | Ten journals, including analytical chemistry | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674844814/artifacts/14601258227) |
+| Chemistry | 2026-11-04 | Ten journals, including analytical chemistry | 1 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674837594/artifacts/14601921592) |
+| Chemistry | 2026-11-05 | Ten journals, including analytical chemistry, incremental run | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674849034/artifacts/14601044847) |
+| Chemistry | 2026-11-11 | Ten journals, including analytical chemistry | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674830124/artifacts/14601941621) |
+| Chemistry | 2026-11-18 | Ten journals, including analytical chemistry | 0 | [English ZIP](https://github.com/jam-sudo/TrendBio/actions/runs/44674833754/artifacts/14602211534) |
 
-[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json) · [Earth journal comparison and edition checks](earth-journal-coverage.json) · [Physics confirmation and English edition checks](physics-confirmation.json)
+[Verified files, source runs and expiry dates](english-previews.json) · [Physics selection and journal comparison](physics-editorial-comparison.json) · [Earth journal comparison and edition checks](earth-journal-coverage.json) · [Physics confirmation and English edition checks](physics-confirmation.json) · [Chemistry source comparison and English edition checks](chemistry-analytical-coverage.json)
