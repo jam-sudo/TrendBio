@@ -3,13 +3,23 @@ import { allTopics, latestDay, loadCorrection, loadDay, loadDays, loadItems, loa
 
 describe("fixture data", () => {
   it("keeps a correction with its claim and original evidence across reranking", () => {
-    const slug = "physics/2026-11-01/cavity-readout-fixture";
+    const note = (claim: string, ids: string[]) => loadCorrection("physics", "2026-11-01", "cavity-readout-fixture", [claim], ids);
     const claim = "Three fixture papers examine light losses and readout noise.";
     const ids = [3, 1, 2].map(n => `arxiv:optics-fixture-${n}`);
-    expect(loadCorrection(slug, [claim], ids)).toContain("Calibration record");
-    expect(loadCorrection(slug, ["The calibration is up to date."], ids)).toBeNull();
-    expect(loadCorrection(slug, [claim], ids.slice(1))).toBeNull();
-    expect(loadCorrection(slug, [claim], [...ids, "arxiv:fourth"])).toBeNull();
+    expect(note(claim, ids)).toContain("Calibration record");
+    expect(note("The calibration is up to date.", ids)).toBeNull();
+    expect(note(claim, ids.slice(1))).toBeNull();
+    expect(note(claim, [...ids, "arxiv:fourth"])).toBeNull();
+  });
+
+  it("shows a shared field correction on a new date and topic only for the same claim and papers", () => {
+    const claim = "The original calibration applies to this measurement.";
+    const ids = [3, 2, 1].map(n => `arxiv:optics-fixture-${n}`);
+    const next = (field: string, text: string, papers: string[]) => loadCorrection(field, "2026-11-02", "new-topic", [text], papers);
+    expect(next("physics", claim, ids)).toContain("used the updated calibration");
+    expect(next("physics", claim, ids.slice(1))).toBeNull();
+    expect(next("physics", "A different claim.", ids)).toBeNull();
+    expect(next("math", claim, ids)).toBeNull();
   });
 
   it("loads the latest day", () => {

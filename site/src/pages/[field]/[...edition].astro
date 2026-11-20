@@ -1,9 +1,9 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PublicationEvidence from "../../components/PublicationEvidence.astro";
-import { loadCorrection, loadDays, loadEditionVenues, loadItems, loadTaxonomy, loadTopic, NOTES_ROOT } from "../../lib/data";
+import { loadCorrection, loadDays, loadEditionVenues, loadItems, loadTaxonomy, loadTopic } from "../../lib/data";
 import type { Day } from "../../lib/types";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parse } from "yaml";
 import { editionInfo, editions, type Edition } from "../../lib/editions";
@@ -40,8 +40,6 @@ const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?
 const collections: { title: string; set: string }[] = source.openedition?.venues ?? [];
 const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
-const correctionDir = day && resolve(NOTES_ROOT, field, day.date);
-const corrections = new Set(correctionDir && existsSync(correctionDir) ? readdirSync(correctionDir) : []);
 const rows = (day?.ranked ?? []).map(row => {
   const topic = loadTopic(field, row.slug);
   const entry = topic?.history.find(entry => entry.date === day?.date);
@@ -49,9 +47,7 @@ const rows = (day?.ranked ?? []).map(row => {
   const singleSource = day?.run.notes.includes(`synthesis-fallback:${row.slug}`);
   const synthesis = singleSource ? null
     : row.synthesis ?? (topic?.synthesized_on === day?.date ? topic?.synthesis : null);
-  const correction = corrections.has(`${row.slug}.md`)
-    ? loadCorrection(`${field}/${day!.date}/${row.slug}`, [row.headline, row.summary, synthesis ?? ""], entry?.item_ids ?? [])
-    : null;
+  const correction = loadCorrection(field, day!.date, row.slug, [row.headline, row.summary, synthesis ?? ""], entry?.item_ids ?? []);
   return { row, papers, synthesis, correction, singleSource };
 });
 ---

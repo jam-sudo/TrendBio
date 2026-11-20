@@ -174,9 +174,9 @@ export function loadNote(slug: string): string | null {
   return html;
 }
 
-export function loadCorrection(slug: string, claims: string[], paperIds: string[]): string | null {
+function matchCorrection(slug: string, claims: string[], paperIds: string[], shared: boolean): string | null {
   const source = readFileSync(join(NOTES_ROOT, `${slug}.md`), "utf8");
-  if (!/^---\r?\n/.test(source)) return loadNote(slug);
+  if (!shared && !/^---\r?\n/.test(source)) return loadNote(slug);
   const header = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(source);
   const scope = header && parse(header[1]);
   if (!header || typeof scope?.claim !== "string" || !scope.claim.trim() || !Array.isArray(scope.papers)
@@ -188,6 +188,22 @@ export function loadCorrection(slug: string, claims: string[], paperIds: string[
   if (ids.size !== scope.papers.length || !scope.papers.every((id: string) => ids.has(id))
       || !claims.some(claim => claim.includes(scope.claim))) return null;
   return marked.parse(source.slice(header[0].length), { async: false });
+}
+
+export function loadCorrection(field: string, day: string, topic: string, claims: string[], paperIds: string[]): string | null {
+  const dated = `${field}/${day}/${topic}`;
+  if (existsSync(join(NOTES_ROOT, `${dated}.md`))) {
+    const html = matchCorrection(dated, claims, paperIds, false);
+    if (html) return html;
+  }
+  const shared = join(NOTES_ROOT, field, "shared");
+  if (existsSync(shared)) {
+    for (const name of readdirSync(shared).filter(file => file.endsWith(".md")).sort()) {
+      const html = matchCorrection(`${field}/shared/${basename(name, ".md")}`, claims, paperIds, true);
+      if (html) return html;
+    }
+  }
+  return null;
 }
 
 export function orphanNotes(domain: string): string[] {

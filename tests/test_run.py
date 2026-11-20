@@ -203,6 +203,18 @@ def test_rerun_same_day_is_idempotent(ctx):
     assert sum(entry.date == TODAY for entry in topic.history) == 1
 
 
+def test_first_regular_run_after_a_backfill_uses_its_own_clock_and_cost(ctx):
+    old = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True)
+    assert old.run.model_cost_usd is None
+    old.run.started -= timedelta(days=3)
+    old.run.finished -= timedelta(days=3)
+    ctx.store.put_day(old)
+    spend = ctx.deps.budget.total_spend_usd()
+    live = run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert live.run.started > old.run.finished and live.run.finished >= live.run.started
+    assert live.run.model_cost_usd == pytest.approx(ctx.deps.budget.total_spend_usd() - spend)
+
+
 def test_zero_clusters_writes_empty_ranked_ok_status(ctx):
     ctx.deps.adapters[0].items = ctx.items[:1]
     result = run_day('computational', TODAY, ctx.store, ctx.deps)

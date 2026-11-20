@@ -378,7 +378,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             degraded = is_degraded(notes, source_status,
                                    over_ceiling=deps.budget.over_ceiling(),
                                    window_item_ids=window_item_ids, cfg=deps.cfg)
-            cost = previous.run.model_cost_usd if previous else 0.0
+            same_mode = previous is not None and previous.run.backfilled == backfill
+            cost = previous.run.model_cost_usd if same_mode else 0.0
             if cost is not None:
                 cost += max(0.0, deps.budget.total_spend_usd() - spend_before)
             result = Day(domain=domain, date=day, ranked=[RankedTopic(
@@ -387,8 +388,8 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 and f'synthesis-fallback:{topic.slug}' not in notes else None,
                 category=topic.category, signals=signals, scores=scores,
             ) for index, (topic, signals, scores) in enumerate(ranked, 1)], run=RunInfo(
-                started=previous.run.started if previous else started,
-                finished=previous.run.finished if previous else datetime.now(timezone.utc),
+                started=previous.run.started if same_mode else started,
+                finished=previous.run.finished if same_mode else datetime.now(timezone.utc),
                 status='degraded' if degraded else 'ok', backfilled=backfill, synthesis_model=model,
                 model_cost_usd=None if backfill else cost,
                 source_status=source_status, notes=sorted(set(notes)),

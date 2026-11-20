@@ -51,7 +51,7 @@ ToDate = Annotated[datetime, typer.Option('--to', formats=['%Y-%m-%d'])]
 
 @app.callback()
 def configure_logging(ctx: typer.Context = None):
-    stream = sys.stderr if ctx and ctx.invoked_subcommand in {'audit-edition', 'audit-beta', 'survey', 'trial-windows'} else sys.stdout
+    stream = sys.stderr if ctx and ctx.invoked_subcommand in {'audit-edition', 'audit-beta', 'audit-operations', 'survey', 'trial-windows'} else sys.stdout
     logging.basicConfig(level=logging.INFO, stream=stream,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     # HTTP request logs include query strings, which can contain API credentials.
@@ -168,6 +168,15 @@ def topic_map(domain: Domain = 'computational', data_root: DataRoot = Path('data
     store = Store(data_root, domain)
     with _stage('map'):
         store.put_map(build_map(store, load_scoring(), previous=store.get_map()))
+
+
+@app.command('audit-operations')
+def audit_operations_cmd(start: FromDate = None, end: ToDate = None, data_root: DataRoot = Path('data')):
+    """Measure live public editions and project spending after 14 shared dates."""
+    from pipeline.operations import audit_operations
+
+    report = audit_operations(data_root, (end or datetime.now(timezone.utc)).date(), start.date() if start else None)
+    typer.echo(json.dumps(report, indent=2))
 
 
 @app.command('audit-beta')

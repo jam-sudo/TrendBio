@@ -6,6 +6,7 @@ import json
 
 from pipeline.cluster import cluster_items
 from pipeline.config import load_scoring, load_taxonomy
+from pipeline.operations import TARGET_LIVE_DATES, publication_kind
 from pipeline.score import rank
 from pipeline.store import Store
 
@@ -166,12 +167,18 @@ def audit_edition(store: Store, start: date, end: date, references=()):
 
 
 def audit_beta(store: Store, through: date):
-    live = sorted((d for d in store.all_days() if not d.run.backfilled and d.date <= through), key=lambda d: d.date)[:14]
+    days = sorted((d for d in store.all_days() if d.date <= through), key=lambda d: d.date)
+    kinds = {d.date: publication_kind(d.date, d.run.started, d.run.backfilled) for d in days}
+    live = [d for d in days if kinds[d.date] == 'live'][:TARGET_LIVE_DATES]
+    end = live[-1].date if len(live) == TARGET_LIVE_DATES else through
+    progress = {'domain': store.domain, 'through': str(end), 'live_editions': len(live), 'target_editions': TARGET_LIVE_DATES,
+                'retrospective_dates': [str(d) for d, kind in kinds.items() if d <= end and kind == 'retrospective']}
     if not live:
-        return {'domain': store.domain, 'through': str(through), 'live_editions': 0, 'target_editions': 14}
-    end = live[-1].date if len(live) == 14 else through
+        return {**progress, 'measured_cost_days': 0, 'projected_30d_usd': None}
     report = audit_edition(store, live[0].date, end)
-    report.update(live_editions=len(live), target_editions=14, through=str(end),
+    measured = [d.run.model_cost_usd for d in live if d.run.model_cost_usd is not None]
+    report.update(progress, measured_cost_days=len(measured),
+                  projected_30d_usd=round(sum(measured) * 30 / len(measured), 4) if len(measured) == TARGET_LIVE_DATES else None,
                   live_statuses=dict(Counter(d.run.status for d in live)),
                   backfilled_dates=[d['date'] for d in report['days'] if d['backfilled']])
     return report

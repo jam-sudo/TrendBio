@@ -1,0 +1,65 @@
+name: Public edition operations
+
+on:
+  workflow_run:
+    workflows: [Daily pipeline]
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      date:
+        description: Last UTC edition date to include (YYYY-MM-DD, defaults to today)
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /pipeline/__init__.py
+            /pipeline/operations.py
+            /data/*/days/*.json
+      - name: Measure the last 30 edition dates
+        env:
+          END_DATE: ${{ inputs.date }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from datetime import UTC, date, datetime
+          from pathlib import Path
+          from pipeline.operations import audit_operations
+
+          end = date.fromisoformat(os.environ['END_DATE']) if os.environ['END_DATE'] else datetime.now(UTC).date()
+          report = audit_operations(Path('data'), end)
+          Path('public-operations.json').write_text(json.dumps(report, indent=2) + '\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              print(f"### Public editions through {end} (UTC)\n", file=summary)
+              print("| Field | Live editions | OK | Degraded | Dates with costs | Recorded USD | Mean run seconds |", file=summary)
+              print("| --- | ---: | ---: | ---: | ---: | ---: | ---: |", file=summary)
+              for field, totals in report['fields'].items():
+                  cells = (field, totals['live_editions'], totals['ok'], totals['degraded'], totals['measured_cost_days'],
+                           totals['recorded_model_cost_usd'], totals['mean_elapsed_seconds'])
+                  print("| " + " | ".join("—" if value is None else str(value) for value in cells) + " |", file=summary)
+              count = len(report['matched_daily_cost_usd'])
+              print(f"\n{count} dates have recorded costs for all public fields.", file=summary)
+              projection = report['projected_30d_usd']
+              if projection is None:
+                  print(f"The 30-day estimate requires {report['target_live_dates']} shared dates.", file=summary)
+              else:
+                  print(f"Projected 30-day model cost from the latest {report['target_live_dates']} shared dates is ${projection:.4f}.", file=summary)
+          PY
+          git rev-parse HEAD >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-operations-${{ github.run_id }}-${{ github.run_attempt }}
+          path: public-operations.json
+          if-no-files-found: error
+          retention-days: 30
