@@ -1,0 +1,1209 @@
+{
+  "domain": "humanities-arts",
+  "measured_on": "2026-11-20",
+  "edition_language": "en",
+  "selection": {
+    "primary": "Four consecutive non-overlapping seven-day windows from October 22 through November 18, 2026, selected before adding the press. The reference frame is the publisher catalogue with all pages enumerated in publication order.",
+    "august": "August 1–28, 2026 was a separate zero-release control for this press. The June book was a conflicting-date control.",
+    "incremental": "November 19 restored the completed November 18 store. November 20 restored November 19. Only November 20 was a current-date edition.",
+    "publisher_rights": "The collector compared the book-specific rights on the publisher page and required a CC BY license. All six books in the checked windows used CC BY 4.0.",
+    "reproduction": [
+      "python -m pipeline trial-windows --domain humanities-arts --to 2026-11-18",
+      "python -m pipeline audit-edition --domain humanities-arts --data-root <download-root> --from <edition-date> --to <edition-date>"
+    ],
+    "two_release_controls": "September 18–24, 2026 and November 1–7, 2025 were deliberately selected from the release catalogue to include two books each. They test intake and routing. Their output is unsuitable for estimating a typical week."
+  },
+  "source_validation": {
+    "catalogue": "https://ebooks.uminho.pt/uminho/pt/catalog",
+    "complete_catalogue_books": 122,
+    "catalogue_pages": [
+      "https://ebooks.uminho.pt/uminho/pt/catalog",
+      "https://ebooks.uminho.pt/uminho/pt/catalog/page/2",
+      "https://ebooks.uminho.pt/uminho/pt/catalog/page/3"
+    ],
+    "reference_windows": {
+      "2026-10-22_to_2026-11-18": {
+        "native_books": 2,
+        "matched_book_dois": [
+          "10.21814/uminho.ed.161",
+          "10.21814/uminho.ed.205"
+        ],
+        "other_registrations_in_prefix": [
+          "10.21814/pluris26"
+        ],
+        "registry_decisions": {
+          "10.21814/pluris26": "outside-press-catalogue",
+          "10.21814/uminho.ed.205": "eligible",
+          "10.21814/uminho.ed.161": "eligible"
+        }
+      },
+      "2026-08-01_to_2026-08-28": {
+        "native_books": 0,
+        "matched_book_dois": [],
+        "other_registrations_in_prefix": [],
+        "registry_decisions": {}
+      },
+      "2026-09-18_to_2026-09-24": {
+        "native_books": 2,
+        "matched_book_dois": [
+          "10.21814/uminho.ed.133",
+          "10.21814/uminho.ed.190"
+        ],
+        "other_registrations_in_prefix": [
+          "10.21814/1822.103683"
+        ],
+        "registry_decisions": {
+          "10.21814/uminho.ed.133": "eligible",
+          "10.21814/1822.103683": "outside-press-catalogue",
+          "10.21814/uminho.ed.190": "eligible"
+        }
+      },
+      "2025-11-01_to_2025-11-07": {
+        "native_books": 2,
+        "matched_book_dois": [
+          "10.21814/uminho.ed.115",
+          "10.21814/uminho.ed.157"
+        ],
+        "other_registrations_in_prefix": [],
+        "registry_decisions": {
+          "10.21814/uminho.ed.115": "eligible",
+          "10.21814/uminho.ed.157": "eligible"
+        }
+      }
+    },
+    "oai_window": {
+      "query": "https://ebooks.uminho.pt/uminho/pt/oai?verb=ListRecords&metadataPrefix=oai_dc&from=2026-10-22T00%3A00%3A00Z&until=2026-11-18T23%3A59%3A59Z",
+      "response": "noRecordsMatch",
+      "publisher_release_count": 2
+    },
+    "edition_date_control": {
+      "publisher_record": "https://ebooks.uminho.pt/uminho/pt/catalog/book/208",
+      "doi": "10.21814/uminho.ed.208",
+      "publisher_date": "2026-06-23",
+      "crossref_print": "2026-06-23",
+      "crossref_online": "2025-06-23",
+      "result_at_earlier_date": "unconfirmed-book-edition-or-identity",
+      "newer_window_matched_books": 0
+    },
+    "chapter_controls": [
+      {
+        "book": "10.21814/uminho.ed.205",
+        "chapter_dois_on_publisher_page": 6,
+        "checked_chapter": "10.21814/uminho.ed.205.1",
+        "checked_type": "book-chapter"
+      },
+      {
+        "book": "10.21814/uminho.ed.157",
+        "chapter_dois_on_publisher_page": 10,
+        "checked_chapter": "10.21814/uminho.ed.157.1",
+        "checked_type": "book-chapter"
+      }
+    ],
+    "catalogue_records": [
+      {
+        "doi": "10.21814/uminho.ed.161",
+        "date": "2026-11-18",
+        "language": "pt",
+        "series": [
+          "Livros"
+        ],
+        "title": "Como preparar uma Dissertação/Tese",
+        "publisher": "https://ebooks.uminho.pt/uminho/pt/catalog/book/161",
+        "work_rights": [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        "scope_before_model": "exclude",
+        "scope_reason": "The book guides graduate students through planning and writing a dissertation.",
+        "cold_date": "2026-11-18",
+        "pipeline": {
+          "relevant": false,
+          "category": "other-humanities",
+          "candidate": false,
+          "qualified": false,
+          "ranked": false
+        },
+        "observed_dates": [
+          "2026-11-18",
+          "2026-11-19",
+          "2026-11-20"
+        ]
+      },
+      {
+        "doi": "10.21814/uminho.ed.205",
+        "date": "2026-10-22",
+        "language": "pt",
+        "series": [
+          "Livros"
+        ],
+        "title": "Exploração laboral - quando o trabalho viola os direitos humanos",
+        "publisher": "https://ebooks.uminho.pt/uminho/pt/catalog/book/205",
+        "work_rights": [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        "scope_before_model": "exclude",
+        "scope_reason": "The edited volume examines labour law, policy and institutional responses to exploitation. Its primary question belongs in Social Sciences.",
+        "cold_date": "2026-10-28",
+        "pipeline": {
+          "relevant": false,
+          "category": "other-humanities",
+          "candidate": false,
+          "qualified": false,
+          "ranked": false
+        },
+        "observed_dates": [
+          "2026-10-28"
+        ]
+      },
+      {
+        "doi": "10.21814/uminho.ed.190",
+        "date": "2026-09-24",
+        "language": "pt",
+        "series": [
+          "Livros"
+        ],
+        "title": "Elogio do Silêncio",
+        "publisher": "https://ebooks.uminho.pt/uminho/pt/catalog/book/190",
+        "work_rights": [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        "scope_before_model": "uncertain",
+        "scope_reason": "The catalogue quotes David Le Breton on a philosophical work by Alberto Filipe Araújo. The passage does not establish the author’s own argument or method.",
+        "cold_date": "2026-09-24",
+        "pipeline": {
+          "relevant": true,
+          "category": "philosophy-religion",
+          "candidate": false,
+          "qualified": false,
+          "ranked": false
+        },
+        "observed_dates": [
+          "2026-09-24"
+        ]
+      },
+      {
+        "doi": "10.21814/uminho.ed.133",
+        "date": "2026-09-18",
+        "language": "pt",
+        "series": [
+          "Livros"
+        ],
+        "title": "Métodos de Investigação em Comunicação",
+        "publisher": "https://ebooks.uminho.pt/uminho/pt/catalog/book/133",
+        "work_rights": [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        "scope_before_model": "exclude",
+        "scope_reason": "This methods manual teaches communication research with practical exercises.",
+        "cold_date": "2026-09-24",
+        "pipeline": {
+          "relevant": false,
+          "category": "other-humanities",
+          "candidate": false,
+          "qualified": false,
+          "ranked": false
+        },
+        "observed_dates": [
+          "2026-09-24"
+        ]
+      },
+      {
+        "doi": "10.21814/uminho.ed.157",
+        "date": "2025-11-05",
+        "language": "pt",
+        "series": [
+          "Livros"
+        ],
+        "title": "Psicologia Social, Comunicação e Cultura",
+        "publisher": "https://ebooks.uminho.pt/uminho/pt/catalog/book/157",
+        "work_rights": [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        "scope_before_model": "exclude",
+        "scope_reason": "The book introduces social psychology for undergraduates. Some chapters draw on empirical work, but the stated purpose is instructional.",
+        "cold_date": "2025-11-07",
+        "pipeline": {
+          "relevant": false,
+          "category": "other-humanities",
+          "candidate": false,
+          "qualified": false,
+          "ranked": false
+        },
+        "observed_dates": [
+          "2025-11-07"
+        ]
+      },
+      {
+        "doi": "10.21814/uminho.ed.115",
+        "date": "2025-11-04",
+        "language": "pt",
+        "series": [
+          "Livros"
+        ],
+        "title": "Línguas minoritárias em diferentes contextos: Contributos da investigação linguística",
+        "publisher": "https://ebooks.uminho.pt/uminho/pt/catalog/book/115",
+        "work_rights": [
+          "https://creativecommons.org/licenses/by/4.0"
+        ],
+        "scope_before_model": "include",
+        "scope_reason": "The linguistic synthesis compares heritage and majority Portuguese in contact settings. The description gives the scope and does not report a new measured effect.",
+        "cold_date": "2025-11-07",
+        "pipeline": {
+          "relevant": true,
+          "category": "languages-literature",
+          "candidate": false,
+          "qualified": false,
+          "ranked": false
+        },
+        "observed_dates": [
+          "2025-11-07"
+        ]
+      }
+    ],
+    "cohort": {
+      "from": "2026-10-22",
+      "to": "2026-11-18",
+      "previous_source_works": 100,
+      "current_source_works": 102,
+      "additional_ids": [
+        "doi:10.21814/uminho.ed.161",
+        "doi:10.21814/uminho.ed.205"
+      ],
+      "removed_ids": [],
+      "source_counts": {
+        "crossref": 73,
+        "thoth": 14,
+        "openedition": 15
+      },
+      "publication_groups": {
+        "articles": 86,
+        "articles_with_issue": 63,
+        "journal_issues": {
+          "2076-0787 · volume 15 · issue 11": 17,
+          "2076-0752 · volume 15 · issue 11": 31,
+          "https://hdl.handle.net/20.500.13089/174h1": 7,
+          "https://hdl.handle.net/20.500.13089/171qb": 8
+        },
+        "books": 16,
+        "books_with_series": 6,
+        "book_series": {
+          "UMinho Editora · Livros": 2,
+          "University of London Press · Reimagining Law and Justice": 1,
+          "Arc Humanities Press · Premodern Ecosystems--Climate, Environment, People": 1,
+          "intercom Verlag · Mono": 1,
+          "Open Book Publishers · Semitic Languages and Cultures": 1
+        }
+      },
+      "similarity_groups": {
+        "28_days": {
+          "without_press": 16,
+          "with_press": 16,
+          "groups_with_press_books": []
+        },
+        "2026-10-28": {
+          "without_press": 2,
+          "with_press": 2,
+          "groups_with_press_books": [],
+          "source_works_in_window": 23
+        },
+        "2026-11-04": {
+          "without_press": 2,
+          "with_press": 2,
+          "groups_with_press_books": [],
+          "source_works_in_window": 33
+        },
+        "2026-11-11": {
+          "without_press": 2,
+          "with_press": 2,
+          "groups_with_press_books": [],
+          "source_works_in_window": 16
+        },
+        "2026-11-18": {
+          "without_press": 2,
+          "with_press": 3,
+          "groups_with_press_books": [
+            [
+              "doi:10.21814/uminho.ed.161",
+              "doi:10.3390/arts15110268",
+              "doi:10.3390/arts15110270"
+            ]
+          ],
+          "source_works_in_window": 30
+        }
+      }
+    }
+  },
+  "weekly_source_works": [
+    23,
+    33,
+    16,
+    30
+  ],
+  "weekly_groups_before_relevance": [
+    2,
+    2,
+    2,
+    3
+  ],
+  "source_work_types": {
+    "Journal article": 86,
+    "Edited book": 7,
+    "Monograph": 9
+  },
+  "press_screen_summary": "Four definite out-of-scope books were excluded and one in-scope linguistic synthesis was included. One catalogue blurb quotes David Le Breton about Alberto Filipe Araújo. The system kept it for philosophy, but the source cannot independently establish the author’s argument. All six stayed outside ranked evidence.",
+  "parallel_articles": {
+    "issue": "https://hdl.handle.net/20.500.13089/153ri",
+    "pairs": [
+      {
+        "retained": "openedition:20.500.13089/153qy",
+        "parallel_version": "openedition:20.500.13089/153qx",
+        "authors": [
+          "Isabelle Lynch"
+        ],
+        "record_languages": [
+          "fr",
+          "en"
+        ],
+        "issue": "https://hdl.handle.net/20.500.13089/153ri",
+        "retained_record_url": "https://journals.openedition.org/photographica/4539",
+        "parallel_record_url": "https://journals.openedition.org/photographica/4440",
+        "publisher_metadata": [
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153qx&metadataPrefix=mods",
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153qy&metadataPrefix=mods"
+        ],
+        "translator_credits_in": [
+          "fr"
+        ]
+      },
+      {
+        "retained": "openedition:20.500.13089/153qw",
+        "parallel_version": "openedition:20.500.13089/153qv",
+        "authors": [
+          "Sara Dominici"
+        ],
+        "record_languages": [
+          "fr",
+          "en"
+        ],
+        "issue": "https://hdl.handle.net/20.500.13089/153ri",
+        "retained_record_url": "https://journals.openedition.org/photographica/4436",
+        "parallel_record_url": "https://journals.openedition.org/photographica/4313",
+        "publisher_metadata": [
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153qv&metadataPrefix=mods",
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153qw&metadataPrefix=mods"
+        ],
+        "translator_credits_in": []
+      },
+      {
+        "retained": "openedition:20.500.13089/153r2",
+        "parallel_version": "openedition:20.500.13089/153r1",
+        "authors": [
+          "Monica Bravo"
+        ],
+        "record_languages": [
+          "fr",
+          "en"
+        ],
+        "issue": "https://hdl.handle.net/20.500.13089/153ri",
+        "retained_record_url": "https://journals.openedition.org/photographica/4815",
+        "parallel_record_url": "https://journals.openedition.org/photographica/4717",
+        "publisher_metadata": [
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153r1&metadataPrefix=mods",
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153r2&metadataPrefix=mods"
+        ],
+        "translator_credits_in": []
+      },
+      {
+        "retained": "openedition:20.500.13089/153r7",
+        "parallel_version": "openedition:20.500.13089/153r6",
+        "authors": [
+          "Yechen Zhao"
+        ],
+        "record_languages": [
+          "fr",
+          "en"
+        ],
+        "issue": "https://hdl.handle.net/20.500.13089/153ri",
+        "retained_record_url": "https://journals.openedition.org/photographica/5175",
+        "parallel_record_url": "https://journals.openedition.org/photographica/5094",
+        "publisher_metadata": [
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153r6&metadataPrefix=mods",
+          "https://metadata.openedition.org/oai?verb=GetRecord&identifier=20.500.13089%2F153r7&metadataPrefix=mods"
+        ],
+        "translator_credits_in": []
+      }
+    ],
+    "before": {
+      "snapshot": "2025-11-07-before-translation-check",
+      "records": 36
+    },
+    "new_collection": {
+      "snapshot": "2025-11-07-new-collection",
+      "records": 32
+    },
+    "restored_baseline": "2025-11-07-saved-input-replay",
+    "method": "The eight publisher MODS records have four pairs of distinct handles and DOIs. Each pair matches by issue, day, authors, normalized English title and English abstract, and records distinct publication languages. Only one pair explicitly credits a translator. The selection retains a single evidence link for each pair when available together."
+  },
+  "english_reading_keys": [
+    "2025-11-07-reviewed-reading-copy",
+    "2026-09-24",
+    "2026-10-28",
+    "2026-11-04",
+    "2026-11-11",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20"
+  ],
+  "snapshots": {
+    "2025-11-07-reviewed-reading-copy": {
+      "date": "2025-11-07",
+      "action": "audit",
+      "previous_run": 44707848217,
+      "code": "bd57a2275497c7c527e450d95d564011555aa10c",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44708864757",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44708864757/artifacts/14615734725",
+      "kind": "retrospective",
+      "pipeline_seconds": 60.43,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 32,
+      "first_seen_this_day": 32,
+      "relevant": 31,
+      "candidate_groups": 4,
+      "reviewed_groups": 2,
+      "review_failures": 0,
+      "ranked_topics": 2,
+      "ranked_works": 6,
+      "enrichment_fallback_ids": [],
+      "additional_model_usd": 0.0,
+      "dated_model_usd": 0.0497973,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 6,
+        "articles_with_issue": 6,
+        "journal_issues": {
+          "https://hdl.handle.net/20.500.13089/153ri": 6
+        },
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 6,
+        "press_listed": true,
+        "reader_notes": [
+          "flash-1890s-9320"
+        ],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44708864757/artifacts/14615948741",
+        "expires": "2026-12-04T09:16:42Z",
+        "sha256": "216030602f2226eda43ddd7640dea730a515ffdfba386ef6665f84bdad4400c0",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2026-09-24": {
+      "date": "2026-09-24",
+      "action": "rank",
+      "previous_run": null,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44706009004",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706009004/artifacts/14615097409",
+      "kind": "retrospective",
+      "pipeline_seconds": 29.07,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 20,
+      "first_seen_this_day": 20,
+      "relevant": 17,
+      "candidate_groups": 0,
+      "reviewed_groups": 0,
+      "review_failures": 0,
+      "ranked_topics": 0,
+      "ranked_works": 0,
+      "enrichment_fallback_ids": [],
+      "additional_model_usd": 0.0042977,
+      "dated_model_usd": 0.0042977,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 0,
+        "articles_with_issue": 0,
+        "journal_issues": {},
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 0,
+        "press_listed": true,
+        "reader_notes": [],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706009004/artifacts/14614314879",
+        "expires": "2026-12-04T08:56:05Z",
+        "sha256": "b4404f22f1330fad811e6c0ee0d04d00a2de02e88e340384a26f76f4de74b612",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2026-10-28": {
+      "date": "2026-10-28",
+      "action": "rank",
+      "previous_run": null,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44705995286",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44705995286/artifacts/14615630738",
+      "kind": "retrospective",
+      "pipeline_seconds": 35.48,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 23,
+      "first_seen_this_day": 23,
+      "relevant": 22,
+      "candidate_groups": 2,
+      "reviewed_groups": 0,
+      "review_failures": 0,
+      "ranked_topics": 0,
+      "ranked_works": 0,
+      "enrichment_fallback_ids": [
+        "doi:10.3390/arts15110246"
+      ],
+      "additional_model_usd": 0.006484,
+      "dated_model_usd": 0.006484,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 0,
+        "articles_with_issue": 0,
+        "journal_issues": {},
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 0,
+        "press_listed": true,
+        "reader_notes": [],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44705995286/artifacts/14615506468",
+        "expires": "2026-12-04T08:56:29Z",
+        "sha256": "0a5305f6046762e098b7f3fc9f54642cf79465a43ea34c054c266991556d79da",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2026-11-04": {
+      "date": "2026-11-04",
+      "action": "rank",
+      "previous_run": null,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44706000055",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706000055/artifacts/14615122491",
+      "kind": "retrospective",
+      "pipeline_seconds": 60.53,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 33,
+      "first_seen_this_day": 33,
+      "relevant": 31,
+      "candidate_groups": 2,
+      "reviewed_groups": 1,
+      "review_failures": 0,
+      "ranked_topics": 1,
+      "ranked_works": 3,
+      "enrichment_fallback_ids": [
+        "doi:10.3390/h15110160"
+      ],
+      "additional_model_usd": 0.0442581,
+      "dated_model_usd": 0.0442581,
+      "press_listed_in_audited_intake": false,
+      "ranked_issue_and_series_counts": {
+        "articles": 3,
+        "articles_with_issue": 3,
+        "journal_issues": {
+          "https://hdl.handle.net/20.500.13089/171qb": 3
+        },
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 3,
+        "press_listed": false,
+        "reader_notes": [],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706000055/artifacts/14614847541",
+        "expires": "2026-12-04T08:56:54Z",
+        "sha256": "423beea60216c12bac0d1b5c3fc106358b8821414f8231a096cfee312bfed8bc",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2026-11-11": {
+      "date": "2026-11-11",
+      "action": "rank",
+      "previous_run": null,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44706004188",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706004188/artifacts/14614478498",
+      "kind": "retrospective",
+      "pipeline_seconds": 28.28,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 16,
+      "first_seen_this_day": 16,
+      "relevant": 16,
+      "candidate_groups": 2,
+      "reviewed_groups": 0,
+      "review_failures": 0,
+      "ranked_topics": 0,
+      "ranked_works": 0,
+      "enrichment_fallback_ids": [],
+      "additional_model_usd": 0.0047448,
+      "dated_model_usd": 0.0047448,
+      "press_listed_in_audited_intake": false,
+      "ranked_issue_and_series_counts": {
+        "articles": 0,
+        "articles_with_issue": 0,
+        "journal_issues": {},
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 0,
+        "press_listed": false,
+        "reader_notes": [],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706004188/artifacts/14615331685",
+        "expires": "2026-12-04T08:56:13Z",
+        "sha256": "e657aa900e6b8503b47c3dd0d3fd42615df3331b5bc9bf7e4c3d08fa645d44a9",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2026-11-18": {
+      "date": "2026-11-18",
+      "action": "rank",
+      "previous_run": null,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44705990951",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44705990951/artifacts/14614852533",
+      "kind": "retrospective",
+      "pipeline_seconds": 34.45,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 30,
+      "first_seen_this_day": 30,
+      "relevant": 28,
+      "candidate_groups": 2,
+      "reviewed_groups": 0,
+      "review_failures": 0,
+      "ranked_topics": 0,
+      "ranked_works": 0,
+      "enrichment_fallback_ids": [
+        "doi:10.3390/h15110168"
+      ],
+      "additional_model_usd": 0.0082531,
+      "dated_model_usd": 0.0082531,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 0,
+        "articles_with_issue": 0,
+        "journal_issues": {},
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 0,
+        "press_listed": true,
+        "reader_notes": [],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44705990951/artifacts/14615366779",
+        "expires": "2026-12-04T08:56:02Z",
+        "sha256": "5ea8c06c67e84e75c5233292327e5220786d7d3c00843da89c072f78273fff55",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2026-11-19": {
+      "date": "2026-11-19",
+      "action": "rank",
+      "previous_run": 44705990951,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44706511945",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706511945/artifacts/14614948215",
+      "kind": "retrospective",
+      "pipeline_seconds": 14.49,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 24,
+      "first_seen_this_day": 1,
+      "relevant": 22,
+      "candidate_groups": 3,
+      "reviewed_groups": 0,
+      "review_failures": 0,
+      "ranked_topics": 0,
+      "ranked_works": 0,
+      "enrichment_fallback_ids": [
+        "doi:10.3390/h15110173"
+      ],
+      "additional_model_usd": 0.0018274,
+      "dated_model_usd": 0.0018274,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 0,
+        "articles_with_issue": 0,
+        "journal_issues": {},
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 0,
+        "press_listed": true,
+        "reader_notes": [],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706511945/artifacts/14615910572",
+        "expires": "2026-12-04T08:59:37Z",
+        "sha256": "e12f8686a62654b8ed93a322f430ed86f4a4a97656fd0a874b477ace4a163a89",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2026-11-20": {
+      "date": "2026-11-20",
+      "action": "rank",
+      "previous_run": 44706511945,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44706957814",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706957814/artifacts/14615088112",
+      "kind": "live",
+      "pipeline_seconds": 5.6,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 22,
+      "first_seen_this_day": 0,
+      "relevant": 20,
+      "candidate_groups": 2,
+      "reviewed_groups": 0,
+      "review_failures": 0,
+      "ranked_topics": 0,
+      "ranked_works": 0,
+      "enrichment_fallback_ids": [],
+      "additional_model_usd": 0.0,
+      "dated_model_usd": 0.0,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 0,
+        "articles_with_issue": 0,
+        "journal_issues": {},
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      },
+      "offline_reader": {
+        "paper_links": 0,
+        "press_listed": true,
+        "reader_notes": [],
+        "artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706957814/artifacts/14615552496",
+        "expires": "2026-12-04T09:02:56Z",
+        "sha256": "be3e00aa5f015aabf5709d09fd3e484d408689c9374a9da8759fad0add107dff",
+        "offline_widths": [
+          320,
+          1280
+        ]
+      }
+    },
+    "2025-11-07-before-translation-check": {
+      "date": "2025-11-07",
+      "action": "rank",
+      "previous_run": null,
+      "code": "ce3ab5095cafec474f98410f2df4b65b1cfedced",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44706013474",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44706013474/artifacts/14615062203",
+      "kind": "retrospective",
+      "pipeline_seconds": 63.74,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 36,
+      "first_seen_this_day": 36,
+      "relevant": 35,
+      "candidate_groups": 4,
+      "reviewed_groups": 1,
+      "review_failures": 0,
+      "ranked_topics": 1,
+      "ranked_works": 4,
+      "enrichment_fallback_ids": [],
+      "additional_model_usd": 0.0519562,
+      "dated_model_usd": 0.0519562,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 4,
+        "articles_with_issue": 4,
+        "journal_issues": {
+          "https://hdl.handle.net/20.500.13089/153ri": 4
+        },
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      }
+    },
+    "2025-11-07-new-collection": {
+      "date": "2025-11-07",
+      "action": "rank",
+      "previous_run": null,
+      "code": "cb08fe12b560dbb482ff00ec757fc207b2fb7dd5",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44707848217",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44707848217/artifacts/14615687929",
+      "kind": "retrospective",
+      "pipeline_seconds": 60.43,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 32,
+      "first_seen_this_day": 32,
+      "relevant": 31,
+      "candidate_groups": 4,
+      "reviewed_groups": 2,
+      "review_failures": 0,
+      "ranked_topics": 2,
+      "ranked_works": 6,
+      "enrichment_fallback_ids": [],
+      "additional_model_usd": 0.0497973,
+      "dated_model_usd": 0.0497973,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 6,
+        "articles_with_issue": 6,
+        "journal_issues": {
+          "https://hdl.handle.net/20.500.13089/153ri": 6
+        },
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      }
+    },
+    "2025-11-07-saved-input-replay": {
+      "date": "2025-11-07",
+      "action": "replay",
+      "previous_run": 44706013474,
+      "code": "cb08fe12b560dbb482ff00ec757fc207b2fb7dd5",
+      "run": "https://github.com/jam-sudo/TrendBio/actions/runs/44707852209",
+      "data_artifact": "https://github.com/jam-sudo/TrendBio/actions/runs/44707852209/artifacts/14615463731",
+      "kind": "retrospective",
+      "pipeline_seconds": 63.74,
+      "status": "ok",
+      "source_status": {
+        "crossref": "ok",
+        "openedition": "ok",
+        "thoth": "ok"
+      },
+      "stored_in_window": 36,
+      "first_seen_this_day": 36,
+      "relevant": 35,
+      "candidate_groups": 4,
+      "reviewed_groups": 1,
+      "review_failures": 0,
+      "ranked_topics": 1,
+      "ranked_works": 3,
+      "enrichment_fallback_ids": [],
+      "additional_model_usd": 0.0208604,
+      "dated_model_usd": 0.0728166,
+      "press_listed_in_audited_intake": true,
+      "ranked_issue_and_series_counts": {
+        "articles": 3,
+        "articles_with_issue": 3,
+        "journal_issues": {
+          "https://hdl.handle.net/20.500.13089/153ri": 3
+        },
+        "books": 0,
+        "books_with_series": 0,
+        "book_series": {}
+      }
+    }
+  },
+  "ranked_source_checks": [
+    {
+      "date": "2026-11-04",
+      "topic": "century-materialism-4e61",
+      "assessment": "The three studies in Philosophia Scientiæ 30-3 examine historical definitions of materialism within the French philosophical disputes covered by the issue. The English text correctly distinguishes Bernard-Granger’s interpretation of Schelling’s reception, Leonardi’s account of Bonald’s treatment of materialism, and Barancy’s analysis of Laromiguière. The November 4 primary-window edition contributes one issue-level example. Earlier editions with the same papers contribute no additional independent evidence."
+    },
+    {
+      "date": "2025-11-07",
+      "topic": "flash-light-a1fc",
+      "assessment": "Lynch, Triebel and Bernard treat magnesium light as a historical object through the conditions of cave photography, the design and marketing of a studio lamp, and the duration and synchronisation of flashes. Both corrected reviews retained these three separate articles. The fresh collection links Lynch’s English record once. The summary assigns the three interpretations to their authors and names Photographica issue 11."
+    },
+    {
+      "date": "2025-11-07",
+      "topic": "flash-1890s-9320",
+      "assessment": "Dominici uses the language of amateur photographers, Pankin studies Géniaux’s representation of Breton farm interiors, and Morel studies backstage access. Flash, time period and journal issue are shared. The fresh workflow admitted this as a broad historical topic. Replaying the old archive after removing language duplicates used the same four candidate sets and the same relevance decisions on the 32 retained works. Its review grouped Dominici with Morel and separated Pankin, leaving no qualifying group of three. The selected reading copy reports this split beside rank one."
+    }
+  ],
+  "ranked_cases": {
+    "2025-11-07-reviewed-reading-copy": [
+      {
+        "slug": "flash-1890s-9320",
+        "headline": "Flash photography c.1890–1910 reread through amateur discourse, heritage and backstage access",
+        "summary": "Photographica issue 11 gathers three journal articles on flash photography around 1890–1910, spanning Anglophone amateurs, rural Brittany and Paris theatres.",
+        "evidence": [
+          {
+            "id": "openedition:20.500.13089/153qw",
+            "url": "https://journals.openedition.org/photographica/4436",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r4",
+            "url": "https://journals.openedition.org/photographica/5027",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r5",
+            "url": "https://journals.openedition.org/photographica/4958",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          }
+        ]
+      },
+      {
+        "slug": "flash-light-a1fc",
+        "headline": "Historians reframe nineteenth-century magnesium light as technology, commerce and opacity",
+        "summary": "Photographica issue 11 gathers three articles on magnesium artificial light in photography, from Mammoth Cave in 1866 to French flash research around 1900.",
+        "evidence": [
+          {
+            "id": "openedition:20.500.13089/153qy",
+            "url": "https://journals.openedition.org/photographica/4539",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r0",
+            "url": "https://journals.openedition.org/photographica/4637",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r3",
+            "url": "https://journals.openedition.org/photographica/4817",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          }
+        ]
+      }
+    ],
+    "2026-11-04": [
+      {
+        "slug": "century-materialism-4e61",
+        "headline": "Rethinking how nineteenth-century French philosophy constructed and contested materialism",
+        "summary": "Philosophia Scientiæ issue 30-3 re-examines how French spiritualists, sensualists and counter-revolutionaries defined materialism between 1800 and 1870.",
+        "evidence": [
+          {
+            "id": "openedition:20.500.13089/171q3",
+            "url": "https://journals.openedition.org/philosophiascientiae/5465",
+            "issue": "https://hdl.handle.net/20.500.13089/171qb"
+          },
+          {
+            "id": "openedition:20.500.13089/171q7",
+            "url": "https://journals.openedition.org/philosophiascientiae/5513",
+            "issue": "https://hdl.handle.net/20.500.13089/171qb"
+          },
+          {
+            "id": "openedition:20.500.13089/171q9",
+            "url": "https://journals.openedition.org/philosophiascientiae/5538",
+            "issue": "https://hdl.handle.net/20.500.13089/171qb"
+          }
+        ]
+      }
+    ],
+    "2025-11-07-before-translation-check": [
+      {
+        "slug": "light-photography-0adb",
+        "headline": "Histories of magnesium flash: cave labour, studio patents and shutter synchronisation",
+        "summary": "Photographica issue 11 groups three articles on magnesium-light photography, from Waldack's 1866 Mammoth Cave images to Paul Nadar and Albert Londe.",
+        "evidence": [
+          {
+            "id": "openedition:20.500.13089/153qx",
+            "url": "https://journals.openedition.org/photographica/4440",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153qy",
+            "url": "https://journals.openedition.org/photographica/4539",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r0",
+            "url": "https://journals.openedition.org/photographica/4637",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r3",
+            "url": "https://journals.openedition.org/photographica/4817",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          }
+        ]
+      }
+    ],
+    "2025-11-07-saved-input-replay": [
+      {
+        "slug": "light-photography-0adb",
+        "headline": "Magnesium light as material, commercial and technical problem in 19th-century photography",
+        "summary": "Photographica issue 11 gathers three articles reframing magnesium light, from Waldack's 1866 Mammoth Cave views to Paul Nadar's lamp and Albert Londe's flashes.",
+        "evidence": [
+          {
+            "id": "openedition:20.500.13089/153qy",
+            "url": "https://journals.openedition.org/photographica/4539",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r0",
+            "url": "https://journals.openedition.org/photographica/4637",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          },
+          {
+            "id": "openedition:20.500.13089/153r3",
+            "url": "https://journals.openedition.org/photographica/4817",
+            "issue": "https://hdl.handle.net/20.500.13089/153ri"
+          }
+        ]
+      }
+    ]
+  },
+  "excluded_source_checks": {
+    "sampling": "First two entries from the saved stratified excluded sample for each of the four primary weeks and the separate September week. Source checks use the supplied descriptions and the co-candidates. An ungrouped record alone cannot establish whether a separate source would have supplied a match.",
+    "cases": [
+      {
+        "date": "2026-10-28",
+        "id": "thoth:72875878-bc93-4de9-a8f1-d2908531d0e7",
+        "url": "https://thoth.pub/books/72875878-bc93-4de9-a8f1-d2908531d0e7",
+        "decision": "unclustered",
+        "source_check": "A critical edition examines a Franciscan account of colonial Peru. This is an in-scope work with no candidate group in the week."
+      },
+      {
+        "date": "2026-10-28",
+        "id": "thoth:49cf9871-0ff5-485e-892d-49e98850d543",
+        "url": "https://thoth.pub/books/49cf9871-0ff5-485e-892d-49e98850d543",
+        "decision": "below-minimum-reviewed-group",
+        "source_check": "The book covers Chinese migrant workers’ poetry. Its proposed companions concern interspecies poetry and an analysis of the film Zola. The three records do not establish the same interpretive question."
+      },
+      {
+        "date": "2026-11-04",
+        "id": "thoth:90ab8b8f-4dd1-4218-b947-4fb0f7bdef41",
+        "url": "https://thoth.pub/books/90ab8b8f-4dd1-4218-b947-4fb0f7bdef41",
+        "decision": "unclustered",
+        "source_check": "The critical edition collects Yeats’s folklore and early fiction. It passed the screen and had no candidate group."
+      },
+      {
+        "date": "2026-11-04",
+        "id": "thoth:81981454-30d2-4657-81c9-070a33bd6b62",
+        "url": "https://thoth.pub/books/81981454-30d2-4657-81c9-070a33bd6b62",
+        "decision": "irrelevant",
+        "source_check": "The first-person account documents the author’s experiences under apartheid. The description gives no separate scholarly research question or critical apparatus."
+      },
+      {
+        "date": "2026-11-11",
+        "id": "doi:10.3390/h15110166",
+        "url": "https://doi.org/10.3390/h15110166",
+        "decision": "below-minimum-reviewed-group",
+        "source_check": "The paper compares Chinese philosophy in two Turkish literary works. The other two candidates concern Brazilian live cinema and Rebecca Salvadori’s video or performance work."
+      },
+      {
+        "date": "2026-11-11",
+        "id": "thoth:e7b628ed-f5d4-4cee-9508-001e275d6818",
+        "url": "https://thoth.pub/books/e7b628ed-f5d4-4cee-9508-001e275d6818",
+        "decision": "unclustered",
+        "source_check": "The volume examines publishing practice through contributions by publishers. It passed relevance and had no candidate group."
+      },
+      {
+        "date": "2026-11-18",
+        "id": "openedition:20.500.13089/174gt",
+        "url": "https://journals.openedition.org/ilcea/27052",
+        "decision": "below-minimum-reviewed-group",
+        "source_check": "The article uses legal theory to interpret territorial change in Syria. Its proposed companions study oral memory, rap, street art and a Russian secession movement. The broader issue theme does not establish three works addressing its legal question."
+      },
+      {
+        "date": "2026-11-18",
+        "id": "doi:10.1111/phpr.70176",
+        "url": "https://doi.org/10.1111/phpr.70176",
+        "decision": "unclustered",
+        "source_check": "The paper advances a philosophical account of permissive consent. No candidate group contained the work in this window."
+      },
+      {
+        "date": "2026-09-24",
+        "id": "doi:10.1007/s11098-026-02607-w",
+        "url": "https://doi.org/10.1007/s11098-026-02607-w",
+        "decision": "unclustered",
+        "source_check": "The paper uses Persian and Sorani Kurdish to examine the semantics of memory predicates. No candidate group contained it."
+      },
+      {
+        "date": "2026-09-24",
+        "id": "doi:10.3390/arts15090214",
+        "url": "https://doi.org/10.3390/arts15090214",
+        "decision": "irrelevant",
+        "source_check": "The paper proposes a framework for process-based arts interventions and participation. Its stated focus on behavioural and educational outcomes makes this a boundary case for Arts."
+      }
+    ]
+  },
+  "additional_model_usd": {
+    "four_nonoverlapping_weeks": 0.06374,
+    "two_original_release_controls": 0.0562539,
+    "two_incremental_runs": 0.0018274,
+    "new_collection_and_saved_input_correction": 0.0706577,
+    "all_runs": 0.192479,
+    "basis": "Difference from the restored run’s recorded usage ledger. The same-day replay preserves earlier charges in its dated total. One current-date on-demand run cannot establish a monthly operating cost."
+  },
+  "reader_note_refresh": {
+    "snapshot": "2025-11-07-reviewed-reading-copy",
+    "source_snapshot": "2025-11-07-new-collection",
+    "additional_model_usd": 0.0,
+    "decision": "The new collection is the selected edition. Its first-ranked topic carries the outcome of the second, saved-input review. The audit regenerated only the reading copy."
+  },
+  "portable_english_pack": {
+    "editions": 56,
+    "ranked_entries": 332,
+    "ordered_paper_links": 1045,
+    "sha256": "4ba50222976405b8c239381ed0d36c9bb721d7c1cc920d3070d3c2997f600adb",
+    "prior_editions_byte_identical": 48,
+    "verification": "All previously included edition files remained byte-identical. Eight new hosted reading copies were opened offline at 320 and 1280 CSS pixels. Their dated ranks, summaries, full syntheses, ordered paper links and named-press coverage match the saved editions."
+  }
+}
