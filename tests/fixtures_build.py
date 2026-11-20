@@ -194,16 +194,19 @@ def build(root: Path) -> None:
              day_path(root / "data", "computational", today))
     for domain in ("physics", "math", "earth-environment", "humanities-arts"):
         build_field_edition(root / "data", days[-1], domain)
-    computing_day = date(2026, 11, 11)
-    stamp = datetime.combine(computing_day, time(6), tzinfo=timezone.utc)
-    run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False, synthesis_model="fixture",
-                  source_status=dict.fromkeys(["arxiv", "crossref", "drops"], "ok"))
-    dump(Day(domain="computer-information", date=computing_day, ranked=[], run=run),
-         day_path(root / "data", "computer-information", computing_day))
-    venues = {"arxiv": 1, "Proceedings of the 37th Conference on l'Interaction Humain-Machine": 1}
-    audit = root / "data" / "computer-information" / "audits" / f"{computing_day}.json"
-    audit.parent.mkdir(exist_ok=True)
-    audit.write_text(json.dumps({"days": [{"date": str(computing_day), "venues": venues}]}, indent=2) + "\n")
+    for domain, day, sources, venues in (
+        ("computer-information", date(2026, 11, 11), ["arxiv", "crossref", "drops"],
+         {"arxiv": 1, "Proceedings of the 37th Conference on l'Interaction Humain-Machine": 1}),
+        ("agriculture-food-veterinary", date(2026, 9, 30), ["crossref", "oai"],
+         {"Agrociencia Uruguay": 1, "Agronomy": 2}),
+    ):
+        stamp = datetime.combine(day, time(6), tzinfo=timezone.utc)
+        run = RunInfo(started=stamp, finished=stamp, status="ok", backfilled=False, synthesis_model="fixture",
+                      source_status=dict.fromkeys(sources, "ok"))
+        dump(Day(domain=domain, date=day, ranked=[], run=run), day_path(root / "data", domain, day))
+        audit = root / "data" / domain / "audits" / f"{day}.json"
+        audit.parent.mkdir(exist_ok=True)
+        audit.write_text(json.dumps({"days": [{"date": str(day), "venues": venues}]}, indent=2) + "\n")
     notes = root / "notes"
     notes.mkdir(parents=True, exist_ok=True)
     (notes / "protein-design-binders-a1b2.md").write_text(
