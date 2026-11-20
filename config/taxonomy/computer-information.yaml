@@ -1,22 +1,31 @@
 domain: computer-information
-label: Computing and Information Science
+label: Computer Science
 window_by_publication: true
 review_cluster_cohesion: true
 fallback_category: other-computing
 relevance: >
-  Include original work on algorithms, distributed and operating systems, human-computer
-  interaction, digital libraries and information science. Choose the main contribution.
-  A paper using a standard computational tool to answer only a different field's
-  question belongs in that field.
+  Include original computer science research. Classify each work by its main technical
+  contribution and the outcome evaluated. A general learning algorithm belongs in machine
+  learning. A retrieval technique tested with a language model belongs in retrieval when
+  retrieval is the contribution. For interdisciplinary studies require a computing contribution
+  beyond applying an existing tool. Exclude studies solely about social behavior, policy,
+  business or cultural interpretation. For security papers, include defensive evaluation,
+  privacy or cryptographic results. Exclude operational intrusion techniques. Evaluations of interfaces and accessibility qualify.
 synthesis_guidance: >
-  Keep a complexity bound and its assumptions, a system measurement and its workload,
-  or a user-study finding and its participants with the specific paper that reports it.
-  Separate empirical comparisons from proofs. Require a shared research question across
-  independent works. A shared conference, benchmark name or research method alone is
-  insufficient. Describe research findings at the level of the published contribution.
+  Compare the task, performance measure, workload and assumptions. Attribute bounds,
+  user-study findings and benchmark results to the individual papers. Distinguish proofs
+  from experiments. For privacy and security describe defensive findings at a high level.
 categories:
-  - {slug: algorithms, label: Algorithms and theory, covers: "data structures, algorithms, complexity and their formal guarantees"}
-  - {slug: systems, label: Computer systems, covers: "distributed, parallel and operating systems, including their evaluation"}
-  - {slug: hci, label: Human-computer interaction, covers: "interaction design, accessibility, user studies and human-computer collaboration"}
-  - {slug: information, label: Library and information science, covers: "digital libraries, scholarly communication, information seeking and curation"}
-  - {slug: other-computing, label: Other computing research, covers: "contributions spanning the sampled areas without a dominant category"}
+  - {slug: algorithms, label: "Algorithms and theory", covers: "data structures, complexity, discrete algorithms, logic, automata and algorithmic game theory"}
+  - {slug: systems, label: "Computer systems", covers: "computer architecture, operating systems, distributed systems and performance"}
+  - {slug: ai-ml, label: "Artificial intelligence and machine learning", covers: "learning algorithms, inference, representation, planning and multiagent or evolutionary computation"}
+  - {slug: language-vision, label: "Language, vision and multimedia", covers: "language technology, vision, graphics, audio and multimedia representation"}
+  - {slug: software, label: "Programming languages and software engineering", covers: "program semantics, compilers, software analysis, testing and maintenance"}
+  - {slug: data, label: "Databases and information retrieval", covers: "query processing, storage, search and retrieval evaluation"}
+  - {slug: networks, label: "Networks and information theory", covers: "network protocols, coding theory and the computation of network structure"}
+  - {slug: privacy-security, label: "Privacy and security", covers: "privacy-preserving computation, cryptography and evaluation of protective systems"}
+  - {slug: robotics, label: "Robotics and control", covers: "robot navigation, perception for control, and closed-loop computation"}
+  - {slug: scientific-computing, label: "Scientific computing", covers: "computational techniques, numerical or symbolic software and reusable simulation methods"}
+  - {slug: hci, label: "Human-computer interaction", covers: "accessibility, interfaces and evaluation of human interaction with computing systems"}
+  - {slug: information, label: "Library and information science", covers: "digital libraries, information organization and curation"}
+  - {slug: other-computing, label: "Other computing research", covers: "original computing contributions outside the named subjects"}

@@ -114,3 +114,25 @@ def test_biology_source_categories_match_the_general_biology_taxonomy():
     assert {slug for slugs in hints.values() for slug in slugs} <= set(taxonomy.slugs())
     assert taxonomy.fallback_category in taxonomy.slugs()
     assert 'observational' in taxonomy.relevance and config['pubmed']['journals']
+
+
+def test_science_registry_matches_pilots_and_cs_intake():
+    from pathlib import Path
+    import yaml
+    from pipeline.config import science_domains
+
+    registry = yaml.safe_load(Path('config/science-fields.yaml').read_text())
+    fields = [field for group in registry.values() for field in group]
+    assert len(fields) == len(set(fields))
+    assert not {'social-sciences', 'humanities-arts'} & set(fields)
+    workflow = yaml.load(Path('.github/workflows/field-pilot.yml').read_text(), Loader=yaml.BaseLoader)
+    pilots = workflow['on']['workflow_dispatch']['inputs']['domain']['options']
+    assert science_domains() == set(pilots) | {'biology', 'computational', 'physics'}
+    for field in fields:
+        assert load_taxonomy(field).domain == field and load_config(field)
+    cs = load_config('computer-information')
+    hints = cs['hints']['arxiv_category']
+    assert set(hints) == set(cs['arxiv']['categories'])
+    assert {category for tags in hints.values() for category in tags} == set(load_taxonomy('computer-information').slugs())
+    assert hints['cs.LG'] == hints['cs.AI'] == ['ai-ml']
+    assert hints['math.NA'] == ['scientific-computing'] and hints['eess.SY'] == ['robotics']

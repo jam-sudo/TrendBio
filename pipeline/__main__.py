@@ -15,7 +15,7 @@ import typer
 import yaml
 
 from pipeline.budget import Budget
-from pipeline.config import load_scoring, load_taxonomy
+from pipeline.config import load_scoring, load_taxonomy, science_domains
 from pipeline.embed import Embedder
 from pipeline.llm import LLM
 from pipeline.jsonio import day_path
@@ -60,6 +60,8 @@ def configure_logging(ctx: typer.Context = None):
 
 
 def build_deps(domain: str, data_root: Path, *, synthesis_only: bool = False) -> Deps:
+    if domain not in science_domains():
+        raise ValueError(f'Inactive science field: {domain}')
     cfg = load_scoring()
     latest = Store(data_root, domain).latest_day()
     if latest:
@@ -128,7 +130,7 @@ def trial_windows(domain: Domain, end: ToDate):
     from pipeline.window_trial import PILOT_DOMAINS, run_window_trial, trial_records
 
     fields = yaml.safe_load(Path('config/expansion-venues.yaml').read_text())
-    if domain not in PILOT_DOMAINS and domain not in fields:
+    if domain not in science_domains() or (domain not in PILOT_DOMAINS and domain not in fields):
         raise typer.BadParameter('Unknown trial field')
     day = end.date()
     with httpx.Client(timeout=40, headers={'User-Agent': 'TrendBio metadata survey (https://trendbio.dev)'}) as client:

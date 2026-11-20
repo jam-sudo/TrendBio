@@ -617,3 +617,15 @@ def test_fallback_industry_item_not_relevant(tmp_path, item, taxonomy, kind, sou
     assert len(messages.calls) == 2
     assert store.get_item(item.id).relevant is False
     assert notes == [f'enrichment-fallback:{item.id}'] and irrelevant == 1
+
+
+def test_cs_cross_listing_guides_classification_when_primary_is_outside_the_field(item):
+    from pipeline.enrich import hints_for
+    from pipeline.sources.base import load_config
+
+    hints = load_config('computer-information')['hints']
+    paper = item.model_copy(update={'source': 'arxiv', 'metadata': {
+        'arxiv_primary_category': 'astro-ph.IM', 'categories': ['astro-ph.IM', 'cs.CV', 'cs.LG', 'cs.CV']}})
+    assert hints_for(paper, hints) == ['language-vision', 'ai-ml']
+    paper.metadata['arxiv_primary_category'] = 'cs.LG'
+    assert hints_for(paper, hints) == ['ai-ml']

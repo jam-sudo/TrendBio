@@ -87,6 +87,11 @@ class Scoring(BaseModel):
         return self
 
 
+def science_domains(root: Path = Path("config")) -> set[str]:
+    groups = yaml.safe_load((root / "science-fields.yaml").read_text(encoding="utf-8"))
+    return {domain for fields in groups.values() for domain in fields}
+
+
 def load_taxonomy(domain: str, root: Path = Path("config")) -> Taxonomy:
     path = root / "taxonomy" / f"{domain}.yaml"
     return Taxonomy.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")))

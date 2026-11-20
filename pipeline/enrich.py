@@ -27,6 +27,13 @@ def hints_for(item: Item, hints_cfg: dict) -> list[str]:
         for slug in hints_cfg.get(source, {}).get(value, []):
             if slug not in hints:
                 hints.append(slug)
+    # Some interdisciplinary papers list this edition only among their cross-listed subjects.
+    arxiv = hints_cfg.get('arxiv_category', {})
+    if item.source == 'arxiv' and metadata.get('arxiv_primary_category') not in arxiv:
+        for tag in metadata.get('categories', []):
+            for slug in arxiv.get(tag, []):
+                if slug not in hints:
+                    hints.append(slug)
     return hints
 
 
