@@ -770,7 +770,7 @@
     -0.009531673043966293,
     -0.06275571882724762
   ],
-  "headline": "Exact samplers and simulators target noisy, near-Clifford and generative quantum circuits",
+  "headline": "Faster exact classical samplers for noisy and error-corrected quantum circuits",
   "history": [
     {
       "attached_item_ids": [],
@@ -835,10 +835,44 @@
         "rise_ratio": 1.7142857142857142,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantum",
+      "count_7d": 9,
+      "date": "2026-11-21",
+      "item_ids": [
+        "arxiv:2611.17842",
+        "arxiv:2611.18955",
+        "arxiv:2611.20339",
+        "arxiv:2611.22087",
+        "arxiv:2611.22232",
+        "arxiv:2611.23196",
+        "arxiv:2611.23923",
+        "arxiv:2611.24044",
+        "arxiv:2611.26577"
+      ],
+      "rank": 2,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.046088634587311716,
+        "rise": 1.7142857142857142,
+        "total": 0.8756840571589226,
+        "volume": 0.5856274687844196
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 9,
+        "published": 0,
+        "rise_ratio": 1.7142857142857142,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Noisy Quantum Circuit Sampling",
+  "label": "Classical Simulation Of Noisy Circuits",
   "related": [
     "quantum-circuit-compilation-0208",
     "quantum-error-correction-4176",
@@ -846,8 +880,8 @@
   ],
   "secondary_categories": [],
   "slug": "clifford-sampling-345a",
-  "summary": "Several preprints push exact or hybrid sampling of noisy and near-Clifford QEC circuits, alongside work on certifying and training quantum samplers.",
-  "synthesis": "The dominant thread is classical machinery for sampling from noisy quantum circuits, especially for error-correction workloads. MASQ is an exact measurement-adaptive sampler for near-Clifford QEC circuits that materializes only measurement-relevant non-Clifford contributions. Compiled Clifford-augmented MPS accelerate coherent-noise QEC simulation, reaching distance-9 surface codes. Pre-trajectory sampling with batched GPU execution is extended to mid-circuit measurements and general Kraus channels. A second strand treats quantum devices as samplers. One preprint studies how physical qubit embeddings bias annealer sampling of the 2D Ising model and feeds QPU-learned proposals into corrected Monte Carlo. Another trains a hypernetwork that maps Hamiltonian parameters to circuit angles for ground-state samplers. A third finds the Fisher trace uninformative for certifying Born machines and shows that kernel-metric verdicts depend on tolerance. Peripheral items cover noisy Grover stopping thresholds, commutator-guided repair of shallow circuits, and Koopman-von Neumann flow simulation with surface-code resource estimates.",
+  "summary": "Several preprints extend exact noisy-circuit sampling to near-Clifford QEC, coherent noise, mid-circuit measurements and general Kraus channels.",
+  "synthesis": "The dominant thread is classical machinery for sampling noisy quantum circuits, with error-correction workloads as the main target. MASQ is an exact measurement-adaptive sampler for near-Clifford QEC circuits that materializes only the non-Clifford contributions relevant to measurements. Compiled Clifford-augmented matrix product states accelerate coherent-noise QEC simulation and reach distance-9 surface codes. Pre-trajectory sampling with batched GPU execution is generalized to mid-circuit measurements and arbitrary Kraus channels while remaining exact. A second strand treats quantum hardware or circuits as samplers. One study quantifies how physical qubit embeddings affect annealer sampling of the 2D Ising model and feeds QPU-learned proposals into corrected Monte Carlo. Another trains a hypernetwork mapping Hamiltonian parameters to circuit angles for ground-state samplers. A third finds the Fisher trace uninformative for certifying Born machines and shows that kernel verdicts depend on tolerance. Peripheral items cover noisy Grover stopping thresholds, commutator-guided repair of shallow circuits, and Koopman-von Neumann flow simulation with surface-code estimates.",
   "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-20"
+  "synthesized_on": "2026-11-21"
 }
