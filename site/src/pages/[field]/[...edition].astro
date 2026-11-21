@@ -53,18 +53,18 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
 <Base edition={field} editionSources={["physics-expanded", "math"].includes(field) && !followsCrossref ? "arXiv" : undefined}
   title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
   description={`${stage === "Pilot" ? "Pilot" : "Daily"} ${label.toLowerCase()} research trends with the papers behind each ranking.`}
-  canonicalPath={path} lastRun={day?.run.finished}>
+  canonicalPath={path} landing={!Astro.params.edition} lastRun={day?.run.finished}>
   <div class="prose">
-    <h1>{label}{stage && <small> {stage}</small>}</h1>
+    {Astro.params.edition && <h1>{label}{stage && <small> {stage}</small>}</h1>}
     {samples.length > 0 && <section aria-label="Dated pilot editions">
       <h2>Read a pilot edition</h2>
-      <ul>{samples.map(date => <li><a href={`/pilots/${field}/${date}/`}>Rankings and papers · {date}</a></li>)}</ul>
+      <ul>{samples.map(date => <li><a href={`/pilots/${field}/${date}/`}>Rankings and papers · <time datetime={date}>{date}</time></a></li>)}</ul>
     </section>}
     {!Astro.params.edition && stage === "Pilot" && <details>
       <summary>Research categories</summary><ul>{Array.from(categories.values(), label => <li>{label}</li>)}</ul>
     </details>}
     {!Astro.params.edition && stage === "Pilot" && <PilotCollection {field} />}
-    {biology && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
+    {biology && Astro.params.edition && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
     {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map((name, i) => <>{i > 0 && ", "}{publisherUrls.has(name)
       ? <a href={publisherUrls.get(name)}>{name}</a>
       : name === "arxiv" ? "arXiv" : name}</>)}</span>.</p>}
@@ -112,6 +112,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
 </Base>
 
 <style>
+  time { white-space: nowrap; }
   .coverage, .category, [data-window-days] { color: var(--muted); }
   .rankings { padding-inline-start: 2.5rem; }
   .rankings > li { border-top: 1px solid var(--border); padding: 1rem 0 1rem .5rem; }

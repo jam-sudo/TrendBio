@@ -1,0 +1,200 @@
+---
+import type { Edition } from "../lib/editions";
+
+const { field } = Astro.props as { field: Edition };
+const hues = {
+  biology: 152, physics: 245, math: 305, "computer-information": 195, "earth-environment": 160,
+  astronomy: 300, "physics-expanded": 32, chemistry: 205, engineering: 78,
+  "medicine-health": 18, "agriculture-food-veterinary": 112,
+} satisfies Record<Edition, number>;
+
+const indices = (length: number) => Array.from({ length }, (_, i) => i);
+const tau = Math.PI * 2;
+const point = (x: number, y: number) => `${x.toFixed(2)},${y.toFixed(2)}`;
+const polar = (radius: number, angle: number) => point(radius * Math.cos(angle), radius * Math.sin(angle));
+
+function gear(teeth: number, pitch: number) {
+  return indices(teeth).flatMap(tooth =>
+    [[-.5, -2.5], [-.32, -2.5], [-.17, 2.2], [.17, 2.2], [.32, -2.5]].map(([offset, depth]) =>
+      polar(pitch + depth, (tooth + offset) * tau / teeth))).join(" ");
+}
+
+function galaxyArm(arm: number, t: number, spread = 0) {
+  const angle = arm * tau / 3 + t * 4.4 + spread;
+  const radius = 6 + t * 108;
+  return polar(radius, angle);
+}
+
+const density = (x: number) => 98 - 81 * Math.exp(-.5 * ((x - 143) / 40) ** 2);
+const circuitPaths = [
+  "M25 61 H52 L76 30 H108 L144 61 H182 L210 30 H239 L264 61 H287",
+  "M25 61 H52 L76 92 H108 L144 61 H182 L210 92 H239 L264 61 H287",
+  "M108 30 H178 L210 61 H264", "M108 92 H178 L210 61",
+];
+const cell = "M65 65 C61 41 84 22 116 18 C145 15 156 6 185 13 C208 18 218 34 240 49 C260 65 246 89 221 98 C191 110 167 101 147 105 C116 113 77 102 65 65Z";
+const river = "M161 65 C157 70 137 71 144 76 S179 80 165 86 S112 91 129 99 Q139 104 166 108";
+const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L117 24 L125 96 L133 73 L139 77 H152 Q160 77 169 64 Q177 53 187 68 Q194 77 203 77 H288";
+---
+
+<svg class="field-figure" data-field={field} viewBox="0 0 300 120" aria-hidden="true" focusable="false"
+  fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+  style={`--ink: oklch(var(--icon-lightness) .10 ${hues[field]})`}>
+  {field === "biology" && <>
+    <path d={cell} class="wash" />
+    <path d={cell} transform="translate(9 3.8) scale(.94)" class="fine" />
+    <g class="drift">
+      <path d="M122 47 C132 38 151 40 158 52 C166 65 156 80 141 81 C125 82 112 72 114 61 Q114 52 122 47Z" class="tinted" />
+      <ellipse cx="138" cy="61" rx="7" ry="5.5" class="solid" />
+      <path d="M158 64 Q177 71 187 58 T215 54" class="fine" stroke-dasharray="1 4"/>
+      <path d="M158 64 Q177 71 187 58 T215 54" pathLength="100" class="vesicles"/>
+      <path d="M169 40 Q181 33 192 40 M170 45 Q182 38 193 45 M171 50 Q183 43 193 50" class="accent" />
+      <path d="M188 70 C198 61 216 61 218 68 C221 77 202 86 192 82 Q185 80 188 70Z M192 75 l3 -5 3 7 3 -10 4 7 4 -9 3 4"/>
+      <path d="M89 48 q8 -8 13 -2 t-2 12 q-10 8 -14 1 t3 -11Z M90 53 l4 1 0 -5 4 2" class="accent"/>
+      {[[102,75],[109,81],[98,83],[162,87],[172,82],[207,54],[121,32],[227,63]].map(([cx,cy]) => <circle {cx} {cy} r="1.7" class="dot"/>)}
+    </g>
+  </>}
+  {field === "physics" && <>
+    <defs>
+      <clipPath id="slit-window"><rect x="32" y="13" width="236" height="94" rx="6"/></clipPath>
+      <clipPath id="incoming-window"><rect x="32" y="13" width="81" height="94"/></clipPath>
+    </defs>
+    <g clip-path="url(#slit-window)">
+      <g clip-path="url(#incoming-window)"><g class="incoming fine">
+        {indices(7).map(i => <path d={`M${16 + 16 * i} 14v93`}/>)}
+      </g>
+      </g><path d="M113 11V41 M113 47V73 M113 79v30" stroke-width="3.5"/>
+      {[44,76].map((y,j) => <g transform={`translate(115 ${y})`} class:list={[j ? "accent" : ""]}>
+        {indices(11).map(i => <path class="wavefront" style={`--from: ${i * 16 + 2}; --to: ${i * 16 + 18}`}
+          d="M0 -1 A1 1 0 0 1 0 1" transform={`scale(${i*16 + 2})`} vector-effect="non-scaling-stroke" opacity={.84 - i * .055}/>)}
+      </g>)}
+    </g>
+  </>}
+  {field === "computer-information" && <>
+    {circuitPaths.map(d => <path {d} class="fine" />)}
+    {circuitPaths.slice(0,2).map((d,i) => <path {d} pathLength="100" class="signal" style={`--delay: ${i * -3}s`}/>)}
+    {[[25,61],[76,30],[108,30],[76,92],[108,92],[144,61],[182,61],[210,30],[210,61],[210,92],[239,30],[239,92],[287,61]].map(([x,y]) =>
+      <circle cx={x} cy={y} r={x === 144 ? 8 : 4} class={x === 144 ? "tinted" : "socket"}/>)}
+    <circle cx="144" cy="61" r="2.5" class="solid"/>
+  </>}
+  {field === "math" && <>
+    <path d="M24 98H278 M36 105V13" class="fine"/>
+    {indices(15).map(i => {const x = 45 + i * 14; const y = density(x); return <rect x={x - 5.6} {y} width="11.2" height={98 - y} class="tinted"/>})}
+    <path d="M103 99V68 M143 99V17 M183 99V68" stroke-dasharray="2 4" class="fine"/>
+    <path id="density-curve" d={`M${indices(120).map(i => point(24 + i * 2, density(24 + i * 2))).join(" L")}`}/>
+    <use href="#density-curve" class="density-sweep" stroke-width="3.6"/>
+  </>}
+  {field === "earth-environment" && <>
+    <path d="M18 79 L52 52 L65 60 L92 30 L125 53 L150 39 L169 58 L197 29 L234 62 L244 56 L283 82" class="fine"/>
+    <path d="M27 85 L74 58 L91 65 L139 12 L156 31 L165 37 L184 62 L200 48 L229 70 L269 85" class="wash"/>
+    <path d="M109 45 L125 36 L128 40 L138 29 L146 34 L150 30 L157 35 M139 14 L138 28 L128 45 L131 52 L116 64
+      M157 33 L155 43 L170 63 M199 49 L193 62 L200 59 L217 73 M74 59 L69 69 L52 77" class="fine"/>
+    <path d="M22 85 Q51 77 79 82 T134 80 M160 75 Q187 68 211 76 T278 84 M197 83q23 -4 43 3 M55 90q15 -3 30 0" class="fine"/>
+    <path d={river} class="accent" stroke-width="2.2"/>
+    <path d={river} class="river-flow" stroke-width="3.4"/>
+  </>}
+  {field === "astronomy" && <>
+    {[[22,49],[53,90],[70,30],[104,12],[201,102],[238,25],[265,68],[274,92],[96,101],[223,74]].map(([cx,cy],i) => <circle {cx} {cy} r={i % 3 ? 1 : 1.7} class="dot"/>)}
+    <g transform="translate(150 60) rotate(-12) scale(1 .35)">
+      <g class="galaxy spin">
+        {indices(3).map(arm => <g>
+          <polyline points={indices(60).map(i => galaxyArm(arm, i/59)).join(" ")} class="accent" stroke-width="2.7"/>
+          <polyline points={indices(45).map(i => galaxyArm(arm, i/45, .13)).join(" ")} class="fine"/>
+          {indices(76).map(i => {const [cx,cy] = galaxyArm(arm, (i+.5)/76, .36 * Math.sin(2.4*i)).split(","); return <circle {cx} {cy} r={i % 5 ? 1.1 : 1.7} class="solid" opacity=".7"/>})}
+          {indices(33).map(i => {const [cx,cy] = galaxyArm(arm, (i+1)/34, .16 * Math.sin(i * 13.6)).split(","); return <circle {cx} {cy} r={i % 6 ? 1.8 : 3} class="dot"/>})}
+        </g>)}
+      </g>
+      <ellipse rx="16" ry="12" class="tinted"/><ellipse rx="8" ry="7" class="solid"/>
+    </g>
+  </>}
+  {field === "physics-expanded" && <>
+    <path d="M15 86L106 65" class="fine"/>
+    {["M106 65 C147 60 189 34 228 14", "M106 65 C137 39 169 14 192 19 C218 25 199 45 189 36 Q185 30 191 29",
+      "M106 65 C150 70 197 99 235 94 C269 90 272 58 253 55 C234 52 230 70 242 76 Q251 80 255 72",
+      "M106 65 C134 86 136 108 122 108 C106 107 110 89 120 94", "M106 65 C126 59 143 53 147 40 C149 22 129 22 128 35 Q129 45 136 43",
+      "M106 65 L278 48"].map((d,i) => <g>
+      <path {d} class="fine"/><path {d} pathLength="100" class="track" style={`--delay: ${-i * .18}s`}/>
+    </g>)}
+    <circle cx="106" cy="65" r="5" class="tinted"/><circle cx="106" cy="65" r="1.8" class="solid"/>
+  </>}
+  {field === "chemistry" && <g transform="translate(150 76)">
+    {[-1,1].map(side => <g transform={`scale(${side} 1)`}>
+      <path d="M32 -45 Q47 -37 55 -24" class="fine" stroke-dasharray="2 4"/>
+      <g class="bend">
+        <path d="M11 -9 L48 -38" stroke-width="5" class="accent"/>
+        <circle cx="52" cy="-40" r="15" class="socket"/>
+        <text x="52" y="-39" transform={`translate(52 0) scale(${side} 1) translate(-52 0)`}>H</text>
+      </g>
+    </g>)}
+    <circle r="21" class="tinted"/><text y="1">O</text>
+    {[-9,-4,4,9].map((cx,i) => <circle {cx} cy={i === 1 || i === 2 ? 26 : 24} r="1.5" class="dot"/>)}
+  </g>}
+  {field === "engineering" && <>
+    <path d="M47 67 H255 M116 13v97 M182 20v86" class="fine" stroke-dasharray="6 5 1 5"/>
+    {[[116,16,37.5],[181.625,12,28.125]].map(([x,teeth,pitch],i) => <g transform={`translate(${x} 65) rotate(${i ? 15 : 0})`}>
+      <g class:list={["spin", i ? "pinion" : "wheel"]}>
+        <polygon points={gear(teeth, pitch)} class={i ? "tinted" : "wash"}/>
+        <circle r={pitch - 8} class="fine"/>
+        {indices(6).map(spoke => <path transform={`rotate(${spoke * 60})`} d={`M9 0 H${pitch-8}`} stroke-width="3"/>)}
+        <circle r="9" class="socket"/><circle r="3" class="solid"/>
+      </g>
+    </g>)}
+  </>}
+  {field === "medicine-health" && <>
+    <path d={indices(19).map(i => `M${15+i*15} 23v75`).join(" ") + " " + indices(6).map(i => `M15 ${23+i*15}h270`).join(" ")} class="grid"/>
+    <path d={pulse} class="fine"/><path d={pulse} pathLength="100" class="ecg"/>
+  </>}
+  {field === "agriculture-food-veterinary" && <>
+    <path d="M48 79 Q78 75 102 79 T160 79 T212 80 T257 78 M65 85l22 1 M224 85l13 -1" class="fine"/>
+    <path d="M149 78 Q149 91 142 108 M147 89q-15 -4 -20 6l-8 4 M146 94q10 7 18 7l7 4 M143 103l-9 5 M152 80q10 9 20 8l9 4" class="accent"/>
+    <g class="seedling">
+      <path d="M149 79 Q149 60 151 51 T159 27"/>
+      <path d="M150 63 Q127 30 99 35 Q110 62 150 63Z M154 48 Q166 16 198 14 Q186 44 154 48Z" class="tinted"/>
+      <path d="M103 37 Q128 49 150 63 M109 40l14 1 M123 47l4 9 M151 52Q172 31 194 17 M169 35l3 -11 M177 29l10 -2" class="accent"/>
+    </g>
+    {[[78,93],[94,88],[111,104],[190,99],[207,91],[217,104]].map(([cx,cy]) => <circle {cx} {cy} r="1.2" class="dot"/>)}
+  </>}
+</svg>
+
+<style>
+  .field-figure { display: block; width: 100%; height: auto; }
+  .fine { stroke: var(--muted); stroke-width: 1.15; }
+  .grid { stroke: var(--muted); opacity: .26; stroke-width: .8; }
+  .accent, .signal, .track, .density-sweep, .ecg { stroke: var(--ink); }
+  .dot { stroke: none; fill: currentColor; }
+  .solid { stroke: none; fill: var(--ink); }
+  .wash { fill: var(--card); }
+  .socket { fill: var(--bg); }
+  .tinted { fill: color-mix(in srgb, var(--ink) 18%, var(--bg)); stroke: var(--ink); }
+  text { fill: currentColor; stroke: none; font: bold 19px Inconsolata, monospace; text-anchor: middle; dominant-baseline: central; }
+  .signal { stroke-width: 3.6; stroke-dasharray: 16 84; }
+  .vesicles { stroke: var(--ink); stroke-width: 4; stroke-dasharray: .5 49.5; }
+  .track { stroke-dasharray: 72 28; }
+  .river-flow { stroke-dasharray: 10 22; }
+  .density-sweep { stroke-dasharray: 47 250; }
+  .ecg { stroke-width: 2.8; stroke-dasharray: 74 26; }
+  @media (prefers-reduced-motion: no-preference) {
+    .drift { animation: drift 5s ease-in-out infinite alternate; }
+    .incoming { animation: travel 2.4s linear infinite; }
+    .wavefront { animation: ripple 2.4s linear infinite; }
+    .signal, .track, .ecg, .vesicles { animation: trace var(--period, 4s) linear var(--delay, 0s) infinite; }
+    .signal { --period: 6s; }
+    .ecg { --period: 2.8s; }
+    .density-sweep { animation: sweep 5s linear infinite; }
+    .river-flow { animation: runoff 2s linear infinite; }
+    .spin { animation: turn var(--period) linear infinite; }
+    .galaxy { --period: 28s; }
+    .wheel { --period: 16s; }
+    .pinion { --period: 12s; animation-direction: reverse; }
+    .bend { animation: bend 2.8s ease-in-out infinite alternate; }
+    .seedling { transform-origin: 149px 79px; animation: sway 3.5s ease-in-out infinite alternate; }
+  }
+  @keyframes drift { to { transform: translate(3px, -2.5px) rotate(1deg); } }
+  @keyframes travel { to { transform: translateX(16px); } }
+  @keyframes ripple { from { transform: scale(var(--from)); } to { transform: scale(var(--to)); } }
+  @keyframes trace { to { stroke-dashoffset: -100; } }
+  @keyframes sweep { to { stroke-dashoffset: -297; } }
+  @keyframes runoff { to { stroke-dashoffset: -32; } }
+  @keyframes turn { to { transform: rotate(360deg); } }
+  @keyframes bend { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+  @keyframes sway { from { transform: rotate(-2deg); } to { transform: rotate(3deg); } }
+</style>

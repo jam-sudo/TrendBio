@@ -3,6 +3,7 @@ import "@fontsource/inconsolata/400.css";
 import "@fontsource/inconsolata/700.css";
 import "../styles/global.css";
 import Helix from "../components/Helix.astro";
+import Hero from "../components/Hero.astro";
 import SponsorColumns from "../components/SponsorColumns.astro";
 import { truncateDescription } from "../lib/metadata";
 import { formatEastern } from "../lib/time";
@@ -14,13 +15,13 @@ interface Props {
   description: string;
   canonicalPath: string;
   lastRun?: string | null;
-  heroAligned?: boolean;
+  landing?: boolean;
   noindex?: boolean;
   edition?: Edition;
   editionSources?: string;
 }
 
-const { title = "TrendBio", description, canonicalPath, lastRun, heroAligned = false, edition } = Astro.props;
+const { title = "TrendBio", description, canonicalPath, lastRun, landing = false, edition } = Astro.props;
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
 const directory = canonicalPath === "/fields/";
@@ -58,9 +59,9 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="page-shell">
-    <header class:list={{ "home-header": Astro.slots.has("hero") }}>
+    <header class:list={{ "home-header": landing }}>
       <div class="header-top">
-      <a class="wordmark" href="/">{Astro.slots.has("hero") && <Helix staticMark />}TrendBio</a>
+      <a class="wordmark" href="/">{landing && !edition && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
         <div class="field-bar">
           <div class="field-links" role="group" aria-label="Science field">
@@ -88,7 +89,7 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
         </div>
       </nav>
       </div>
-      <slot name="hero" />
+      {landing && <Hero field={edition ?? "computational"} updated={lastRun} />}
       {(!edition || publicEditions.includes(edition)) && canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
         <label class="sr-only" for="header-search-query">Search topics</label>
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />
@@ -105,7 +106,7 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <!--email_off--><main id="main"><slot /></main><!--/email_off-->
-    {!edition && <SponsorColumns {heroAligned} />}
+    {!edition && <SponsorColumns heroAligned={landing} />}
     </div>
     <footer>
       <p>Auto-curated from {Astro.props.editionSources ?? (edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources")}. Summaries are machine-generated.</p>

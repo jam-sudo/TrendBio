@@ -1,31 +1,49 @@
 ---
 import Helix from "./Helix.astro";
+import FieldArt from "./FieldArt.astro";
+import { editionInfo, type Field } from "../lib/editions";
 import { formatEastern } from "../lib/time";
 
-interface Props {
-  title: string;
-  subtitle: string;
-  updated?: string;
-}
-
-const { title, subtitle, updated } = Astro.props;
+const { field, updated } = Astro.props as { field: Field; updated?: string | null };
+const copy = {
+  computational: ["What moved in computational biology today", "bioRxiv, arXiv, PubMed, GitHub and industry."],
+  biology: ["What moved in biology today?", "Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals."],
+  physics: ["What moved in physics today?", "Quantum physics, optics, mesoscopic physics and cosmology."],
+  math: ["What moved in mathematics and statistics?", "New proofs, numerical methods and ways to draw inferences from data."],
+  "computer-information": ["What moved in computer science?", "From algorithms and learning to software, networks and the people who use them."],
+  "earth-environment": ["What moved in Earth and environmental science?", "Research on land, water, climate and ecosystems."],
+  astronomy: ["What moved in stellar and galactic astronomy?", "How stars evolve and galaxies take shape."],
+  "physics-expanded": ["What moved in physics, from nuclei to galaxies?", "Expanded coverage of particles, materials, plasmas and the cosmos."],
+  chemistry: ["What moved in chemistry?", "How bonds form, reactions unfold and materials acquire their properties."],
+  engineering: ["What moved in engineering?", "How devices, structures and systems perform when put to the test."],
+  "medicine-health": ["What moved in medicine and health?", "Disease mechanisms, clinical outcomes and patterns in population health."],
+  "agriculture-food-veterinary": ["What moved in agriculture, food and veterinary science?", "Research on soils, crops, food production and animal health."],
+} satisfies Record<Field, [string, string]>;
+const [title, subtitle] = copy[field];
+const stage = field === "computational" ? "" : editionInfo[field].stage;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <h1 id="hero-title">{title}</h1>
-  <p>{subtitle} <span class="updated">{updated ? <>Updated <time datetime={updated}>{formatEastern(updated)}</time>.</> : "Updated daily."}</span></p>
-  <div class="hero-art"><Helix /></div>
+  <p>{subtitle} <span class="updated">{stage === "Pilot" ? "Pilot editions on selected dates." : <>
+    {stage === "Beta" && "Beta · "}{updated ? <>Updated <time datetime={updated}>{formatEastern(updated)}</time>.</> : "Updated daily."}
+  </>}</span></p>
+  <div class:list={["hero-art", { "field-art": field !== "computational" }]}>
+    {field === "computational" ? <Helix /> : <FieldArt {field} />}
+  </div>
 </section>
 
 <style>
   .hero { position: relative; margin-top: 1rem; text-align: center; }
-  h1 { position: relative; z-index: 1; font-size: 34px; margin: 0 auto 0.5rem; }
-  p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; font-size: 14px; }
+  h1 { position: relative; z-index: 1; font-size: 34px; margin: 0 auto 0.5rem; text-wrap: balance; }
+  p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; font-size: 14px; text-wrap: pretty; }
   .updated { display: inline-block; }
   .hero-art { pointer-events: none; width: 192px; margin: 0.5rem auto 0; }
   .hero-art :global(.helix) { width: 100%; height: auto; }
+  .field-art { width: min(100%, 272px); }
   @media (max-width: 640px) {
     h1 { font-size: 26px; max-width: 30ch; }
     .hero-art { width: 160px; }
+    .field-art { width: min(100%, 232px); }
   }
 </style>

@@ -139,7 +139,8 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
   for (const path of ["physics/index.html", "physics/day/2026-11-01/index.html"]) {
     await page.setContent(read(path));
     const main = page.locator("main");
-    expect(await main.locator("h1").textContent()).toBe("Physics");
+    expect(await page.getByRole("heading", { level: 1 }).textContent()).toBe(path === "physics/index.html" ? "What moved in physics today?" : "Physics");
+    expect(await page.locator(".hero").count()).toBe(path === "physics/index.html" ? 1 : 0);
     expect(await main.locator('[data-arxiv-scope="current"]').textContent()).toContain("Current coverage");
     expect(await main.locator("ol h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
     expect(await main.locator("ol h3 a").getAttribute("href")).toBe("/physics/topic/cavity-readout-fixture/");

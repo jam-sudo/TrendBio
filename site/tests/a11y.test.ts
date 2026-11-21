@@ -1,24 +1,10 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, mkdirSync } from "node:fs";
+import { editions, editionInfo } from "../src/lib/editions";
 import AxeBuilder from "@axe-core/playwright";
 import { preview } from "astro";
 import { chromium, type Browser, type Page } from "playwright";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
-
-it("keeps the only animation rule behind the no-preference motion query", () => {
-  const sources = readdirSync("src", { recursive: true, withFileTypes: true })
-    .filter((entry) => entry.isFile())
-    .map((entry) => ({ path: join(entry.parentPath, entry.name), text: readFileSync(join(entry.parentPath, entry.name), "utf8") }));
-  const declarations = /\banimation(?:-[\w-]+)?\s*:[^;}]+/g;
-  const animated = sources.filter(({ text }) => /\banimation(?:-[\w-]+)?\s*:/.test(text));
-  expect(animated).toHaveLength(1);
-  expect(["src/styles/global.css", "src/components/Helix.astro"]).toContain(animated[0].path);
-  const rule = animated[0].text.match(/@media\s*\(prefers-reduced-motion:\s*no-preference\)\s*\{\s*[^{}]+\{([^{}]+)\}/);
-  expect(rule).not.toBeNull();
-  expect(animated[0].text.match(declarations)).toEqual(rule![1].match(declarations));
-  expect(rule![1].match(/\banimation\s*:/g)).toHaveLength(1);
-});
 
 describe("built site accessibility and responsive layout", () => {
   let server: Awaited<ReturnType<typeof preview>> | undefined;
@@ -79,6 +65,41 @@ describe("built site accessibility and responsive layout", () => {
       if (path.startsWith("/topic/")) expect(await page.locator(".sparkline").getAttribute("aria-label")).toBeTruthy();
     }, 30_000,
   );
+
+  it("keeps hero animations opt-in to the no-preference media query", async () => {
+    for (const path of ["/", "/physics/"]) {
+      await page.goto(`http://127.0.0.1:${server!.port}${path}`);
+      const unguarded = await page.evaluate(() => {
+        function scan(rules: CSSRuleList, motionAllowed: boolean): string[] {
+          return Array.from(rules).flatMap(rule => {
+            if (rule instanceof CSSGroupingRule) {
+              return scan(rule.cssRules, motionAllowed || (rule instanceof CSSMediaRule && rule.conditionText === "(prefers-reduced-motion: no-preference)"));
+            }
+            return !motionAllowed && rule instanceof CSSStyleRule && rule.style.animationName ? [rule.selectorText] : [];
+          });
+        }
+        return Array.from(document.styleSheets).flatMap(sheet => scan(sheet.cssRules, false));
+      });
+      expect(unguarded).toEqual([]);
+    }
+  });
+
+  it.each(editions)("renders a field-specific landing with motion and a still version for %s", async field => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto(`http://127.0.0.1:${server!.port}/${field}/`);
+    const hero = page.locator(".hero");
+    const art = hero.locator(`svg[data-field="${field}"]`);
+    expect(await page.getByRole("heading", { level: 1 }).count()).toBe(1);
+    expect(await hero.locator("h1").textContent()).toContain("What moved");
+    expect(await hero.textContent()).toContain(editionInfo[field].stage === "Pilot" ? "Pilot editions on selected dates." : "today?");
+    expect(await art.getAttribute("aria-hidden")).toBe("true");
+    expect(await art.evaluate(svg => svg.getAnimations({ subtree: true }).length)).toBeGreaterThan(0);
+    const box = (await art.boundingBox())!;
+    expect(box.x + box.width / 2).toBeCloseTo(160, 1);
+    expect(box.y + box.height).toBeLessThan(640);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    expect(await art.evaluate(svg => svg.getAnimations({ subtree: true }).length)).toBe(0);
+  });
 
   it.each([
     { width: 1280, height: 800, maxY: 460 },
