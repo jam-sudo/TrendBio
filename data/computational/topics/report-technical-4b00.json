@@ -770,7 +770,7 @@
     -0.021913161501288414,
     -0.04450678080320358
   ],
-  "headline": "Confidence and length shortcuts challenge validation of biological sequence models",
+  "headline": "Controlled validation exposes confounds in protein and peptide sequence predictors",
   "history": [
     {
       "attached_item_ids": [],
@@ -1062,21 +1062,51 @@
         "rise_ratio": 1.1428571428571428,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "structural",
+      "count_7d": 5,
+      "date": "2026-11-21",
+      "item_ids": [
+        "arxiv:2611.17391",
+        "arxiv:2611.18846",
+        "arxiv:2611.20986",
+        "biorxiv:10.64898/2026.11.13.766406",
+        "biorxiv:10.64898/2026.11.18.767483"
+      ],
+      "rank": 37,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03225708631748774,
+        "rise": 1.1428571428571428,
+        "total": 0.6128846400322672,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
   "label": "Biological Sequence Model Validation",
   "related": [
     "biomedical-knowledge-modern-49a1",
-    "zero-dna-mirrordna-8a09",
-    "colored-indexes-832d"
+    "colored-indexes-832d",
+    "zero-dna-mirrordna-8a09"
   ],
   "secondary_categories": [
     "ml-ai"
   ],
   "slug": "report-technical-4b00",
-  "summary": "Recent preprints test whether structure confidence, sequence length, and homology confounds undermine how biological sequence models are selected and evaluated.",
-  "synthesis": "The dominant thread is whether predictive scores for biological sequences and structures reflect the property of interest once confounds are controlled. The lanmodulin preprint reports that structural confidence (pTM, ipLDDT) is a poor selection filter for REE-binding designs and points to a function-trained model on measured Tb affinity instead. The antimicrobial peptide preprint enforces homology separation and length matching, and reports that length alone separates classes. ProtCOVER applies family-level conformal calibration to variant effect predictors on unseen protein families, with density-ratio reweighting under descriptor shift. MADM and Calpha extend architecture scope: MADM combines per-residue structural descriptors with PLM embeddings across eight developability assays, while Calpha routes LLM residue states to a SimpleFold structure head. What is new is explicit scrutiny of what these models exploit and what they are validated against, rather than headline accuracy alone.",
+  "summary": "Structural confidence and length confounds undermine standard evaluation of biological sequence and structure predictors.",
+  "synthesis": "The dominant thread is whether predictive scores for biological sequences and structures track the property of interest once confounds are controlled. The lanmodulin preprint finds that structural confidence (pTM, ipLDDT) is a poor selection filter for REE-binding designs and points to a function-trained model on measured Tb affinity instead. The antimicrobial peptide preprint enforces homology separation and length matching and reports that length alone separates classes. ProtCOVER applies family-level conformal calibration to variant effect predictors on unseen protein families, with density-ratio reweighting under descriptor shift. MADM and Calpha extend architecture scope, combining per-residue structural descriptors with PLM embeddings across eight developability assays and routing LLM residue states to a SimpleFold structure head, respectively. What is new is explicit scrutiny of what these models exploit and what they are validated against, rather than headline accuracy alone.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-20"
+  "synthesized_on": "2026-11-21"
 }
