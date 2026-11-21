@@ -1,3 +1,4 @@
+import { readingParagraphs } from "../src/lib/reading-paragraphs";
 import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -26,7 +27,7 @@ describe("built topic pages", () => {
     expect(html).toContain(loadNote(slug)!.trim());
     const content = [
       'href="/day/2026-11-01/"', "#2 · Structural bio &amp; protein design", topic.headline!,
-      'class="signal-badges"', 'class="sparkline"', topic.synthesis!, "Editor's note", "Published papers",
+      'class="signal-badges"', 'class="sparkline"', ...readingParagraphs(topic.synthesis!), "Editor's note", "Published papers",
       "Preprints", "Code &amp; tools", "Industry</h2>", "Related topics", "Topic history",
     ];
     const article = html.slice(html.indexOf("<article"));
@@ -44,8 +45,8 @@ describe("built topic pages", () => {
     const dates = [...svg.matchAll(/data-date="([^"]+)"/g)].map((match) => match[1]);
     expect(dates).toEqual(topic.history.slice(-56).map((entry) => entry.date));
     expect(svg).toContain('preserveAspectRatio="none"');
-    expect(html).toContain("Items per day, last 8 weeks");
-    expect(html).toContain(`today: ${latest.count_7d}`);
+    expect(html).toContain("7-day item counts");
+    expect(html).toContain(`Latest (${latest.date}): ${latest.count_7d}`);
     expect(svg).toContain('aria-label="7-day item counts from 2026-09-07 to 2026-11-01"');
     expect(svg.match(/class="today"/g)).toHaveLength(1);
     expect(svg).toMatch(/<rect[^>]*data-date="2026-11-01"[^>]*class="today"/);
@@ -189,4 +190,14 @@ describe("built topic pages", () => {
       rmSync(temporary, { recursive: true, force: true });
     }
   });
+});
+
+it("breaks long scientific prose at a sentence boundary without changing the text", () => {
+  const sentence = "The comparison by Smith et al. reports a mean of 2.75 units across the groups.";
+  const source = Array(9).fill(sentence).join(" ");
+  const paragraphs = readingParagraphs(source);
+  expect(paragraphs.length).toBeGreaterThan(1);
+  expect(paragraphs.join(" ")).toBe(source);
+  expect(paragraphs.every(part => part.endsWith("groups."))).toBe(true);
+  expect(readingParagraphs(sentence)).toEqual([sentence]);
 });

@@ -27,18 +27,19 @@ const months = [...new Set(days.map((day) => day.date.slice(0, 7)))].map((month)
   </nav>
   {months.map(({ month, label, backfillNote, offset, dates }) => <section class="archive-month" id={`month-${month}`} aria-labelledby={`heading-${month}`}>
     <h2 id={`heading-${month}`}><a href={`/month/${month}/`}>{label}</a>{" "}{backfillNote && <span class="backfill-note">{backfillNote}</span>}</h2>
-    <p class="mobile-note">Tap a day for its top 5</p>
+    <p class="mobile-note">Select a date to read its rankings.</p>
     <div class="calendar">
       {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((weekday) => <span class="weekday" aria-hidden="true">{weekday}</span>)}
       {Array.from({ length: offset }, () => <span aria-hidden="true" />)}
       {dates.map((date, index) => {
         const day = byDate.get(date);
         const top = day?.ranked.find((topic) => topic.rank === 1);
-        return day ? <a class="calendar-day" href={`/day/${date}/`} aria-label={`${date}: ${top?.headline ?? "quiet"}`}
+        return day ? <a class="calendar-day" href={`/day/${date}/`}
           style={top ? `--category-hue: ${categoryStyle(top.category).hue}` : undefined}>
-          <span class="day-heading"><time datetime={date}>{index + 1}</time>{top && <CategoryIcon slug={top.category} size={16} />}</span>
+          <span class="day-heading"><time datetime={date}>{index + 1}</time><span class="sr-only"> {label} </span>{top && <CategoryIcon slug={top.category} size={16} />}</span>
           {top ? <span class="headline">{top.headline}</span> : <span class="badge quiet">QUIET</span>}
           {day.run.status === "degraded" && <span class="badge day-badge">PARTIAL</span>}
+          <span class="mobile-name sr-only">{top?.headline ?? "Quiet day"} {day.run.status === "degraded" && "Partial"}</span>
         </a> : <div class="calendar-day missing"><time datetime={date}>{index + 1}</time></div>;
       })}
     </div>
@@ -51,7 +52,7 @@ const months = [...new Set(days.map((day) => day.date.slice(0, 7)))].map((month)
   .archive-month { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
   h2 { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin: 0 0 1rem; }
   .backfill-note { color: var(--muted); font-size: var(--t3); font-weight: 400; }
-  .mobile-note { display: none; }
+  .mobile-name, .mobile-note { display: none; }
   .calendar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-auto-rows: auto; gap: 0.5rem; }
   .weekday { color: var(--muted); font-size: var(--t3); padding: 0 0.625rem 0.25rem; }
   .calendar-day { display: flex; flex-direction: column; min-width: 0; min-height: 112px; padding: 0.625rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: oklch(var(--tint-lightness) 0.015 var(--category-hue, 0)); text-decoration: none; }
@@ -64,6 +65,7 @@ const months = [...new Set(days.map((day) => day.date.slice(0, 7)))].map((month)
   .missing { color: var(--muted); background: none; border-color: transparent; }
   @media (max-width: 640px) {
     h2 { margin-bottom: 0.25rem; }
+    .mobile-name { display: inline; }
     .mobile-note { display: block; color: var(--muted); font-size: var(--t3); margin: 0 0 1rem; }
     .calendar { gap: 4px; }
     .weekday { padding: 0 0 0.25rem; text-align: center; }

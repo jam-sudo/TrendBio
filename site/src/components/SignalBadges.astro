@@ -4,7 +4,7 @@ import type { Signals } from "../lib/types";
 interface Props { signals: Signals }
 const { signals } = Astro.props;
 ---
-<div class="signal-badges" aria-label="Topic signals"><SignalLine signals={signals} /></div>
+<div class="signal-badges" role="group" aria-label="Topic signals"><SignalLine signals={signals} /></div>
 <style>
   .signal-badges { margin-block: 1.5rem; padding-block: 1rem; border-block: 1px solid var(--border); }
 </style>

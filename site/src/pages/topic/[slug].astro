@@ -1,4 +1,5 @@
 ---
+import { readingParagraphs } from "../../lib/reading-paragraphs";
 import CategoryIcon from "../../components/CategoryIcon.astro";
 import { rankMedal } from "../../lib/categories";
 import Base from "../../layouts/Base.astro";
@@ -39,7 +40,7 @@ const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
     {topic.summary && <p>{topic.summary}</p>}
     {latestEntry && <SignalBadges signals={latestEntry.signals} />}
     <Sparkline history={topic.history} />
-    {topic.synthesis !== null && <p>{topic.synthesis}</p>}
+    {topic.synthesis !== null && readingParagraphs(topic.synthesis).map(paragraph => <p>{paragraph}</p>)}
     <EditorNote html={loadNote(topic.slug)} />
     {hasPapers(evidence) && <p data-pagefind-ignore><a href={`/topic/${topic.slug}/citations.bib`} download>Export citations (BibTeX)</a></p>}
     <EvidenceList items={evidence} oneLiners={topic.item_one_liners} previousRanked={previousRanked} />
@@ -51,10 +52,10 @@ const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
     </section>}
     <section id="topic-history" aria-labelledby="history-heading" data-pagefind-ignore>
       <h2 id="history-heading">Topic history</h2>
-      <table>
+      {ranked.length > 0 ? <table>
         <thead><tr><th scope="col">Date</th><th scope="col">Rank</th></tr></thead>
         <tbody>{ranked.map((entry) => <tr><td><a href={`/day/${entry.date}/`} aria-label={`${entry.date} · #${entry.rank}`}><time datetime={entry.date}>{entry.date}</time></a></td><td><span aria-hidden="true">{rankMedal(entry.rank!)}</span><span class="sr-only">#{entry.rank}</span></td></tr>)}</tbody>
-      </table>
+      </table> : <p>No ranked appearances have been recorded for this topic.</p>}
     </section>
   </article>
 </Base>

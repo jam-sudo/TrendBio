@@ -32,18 +32,45 @@ const stage = field === "materials" ? "Collection" : field === "computational" ?
   <div class:list={["hero-art", { "field-art": field !== "computational" }]}>
     {field === "computational" ? <Helix /> : <FieldArt {field} />}
   </div>
+  <button class="motion-toggle" type="button" aria-label="Pause animation" title="Pause animation" hidden><span aria-hidden="true">Ⅱ</span></button>
 </section>
+<script>
+  const hero = document.querySelector<HTMLElement>(".hero");
+  const toggle = hero?.querySelector<HTMLButtonElement>(".motion-toggle");
+  if (hero && toggle) {
+    let paused = false;
+    try { paused = localStorage.getItem("trendbio-motion") === "paused"; } catch {}
+    function update() {
+      hero!.dataset.motion = paused ? "paused" : "playing";
+      toggle!.title = paused ? "Play animation" : "Pause animation";
+      toggle!.setAttribute("aria-label", toggle!.title);
+      toggle!.firstElementChild!.textContent = paused ? "▶" : "Ⅱ";
+    }
+    update();
+    if (paused) hero.dataset.motion = "still";
+    toggle.hidden = false;
+    toggle.addEventListener("click", () => {
+      paused = !paused;
+      update();
+      try { localStorage.setItem("trendbio-motion", paused ? "paused" : "playing"); } catch {}
+    });
+  }
+</script>
 
 <style>
+  .hero:not([data-motion="playing"]) .hero-art :global(*) { animation-play-state: paused !important; }
+  .hero:not([data-motion]), .hero[data-motion="still"] { & .hero-art :global(*) { animation-name: none !important; } }
+  .motion-toggle { position: absolute; inset-inline-end: max(0px, calc(50% - 180px)); bottom: 0; min-height: 32px; min-width: 32px; padding: .125rem; font: inherit; font-weight: 700; color: var(--muted); background: transparent; border: 1px solid var(--muted); border-radius: var(--radius-sm); cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .motion-toggle { display: none; } }
   .hero { position: relative; margin-top: 1rem; text-align: center; }
-  h1 { position: relative; z-index: 1; font-size: 34px; margin: 0 auto 0.5rem; text-wrap: balance; }
-  p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; font-size: 14px; text-wrap: pretty; }
+  h1 { position: relative; z-index: 1; font-size: 2.125rem; margin: 0 auto 0.5rem; text-wrap: balance; }
+  p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; font-size: .875rem; text-wrap: pretty; }
   .updated { display: inline-block; }
   .hero-art { pointer-events: none; width: 192px; margin: 0.5rem auto 0; }
   .hero-art :global(.helix) { width: 100%; height: auto; }
   .field-art { width: min(100%, 272px); }
   @media (max-width: 640px) {
-    h1 { font-size: 26px; max-width: 30ch; }
+    h1 { font-size: 1.625rem; max-width: 30ch; }
     .hero-art { width: 160px; }
     .field-art { width: min(100%, 232px); }
   }

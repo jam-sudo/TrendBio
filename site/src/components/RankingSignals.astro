@@ -11,7 +11,8 @@ const dec = (n: number) => n.toFixed(2);
 {top.length > 0 && <details class="rank-signals">
   <summary>Scoring signals for the top {top.length} · {day.date}</summary>
   <p>Stored component values before weighting. The baseline assigns 45% to growth, 25% to diversity, 15% to code growth and 15% to volume. Total includes the repeat-topic penalty. A fallback uses source text when synthesis is unavailable.</p>
-  <div class="scroll" tabindex="0" role="region" aria-label="Ranking signals">
+  <p class="scroll-hint">Scroll the table horizontally to read all columns.</p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Ranking signals">
     <table><thead><tr>{["Rank", "Growth", "Evidence diversity", "Code growth", "Volume", "Total", "Fallback"].map(col => <th scope="col">{col}</th>)}</tr></thead>
       <tbody>{top.map(row => <tr>
         <th scope="row">#{row.rank}</th>
@@ -30,6 +31,7 @@ const dec = (n: number) => n.toFixed(2);
 <style>
   .rank-signals { margin-block: 1rem; }
   summary { cursor: pointer; }
-  .scroll { overflow-x: auto; }
-  th, td { padding: .35rem .55rem; }
+  .scroll-hint { display: none; }
+  @media (max-width: 40rem) { .scroll-hint { display: block; color: var(--muted); font-size: var(--t3); margin: .5rem 0; } }
+  th, td { padding: .35rem .55rem; white-space: nowrap; }
 </style>

@@ -1,4 +1,5 @@
 ---
+import { readingParagraphs } from "../lib/reading-paragraphs";
 import PublicationEvidence from "./PublicationEvidence.astro";
 import { loadCorrection, loadItems, loadTopic } from "../lib/data";
 import type { Edition } from "../lib/editions";
@@ -19,7 +20,7 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
 {correction && <aside class="correction" role="note"><strong>Editorial correction</strong><div set:html={correction} /></aside>}
 {papers.length > 0 && <details open={expanded}>
   <summary>{papers.length} supporting {(papers.length === 1 ? "paper" : "papers")}</summary>
-  {synthesis && <p>{synthesis}</p>}
+  {synthesis && readingParagraphs(synthesis).map(paragraph => <p>{paragraph}</p>)}
   <ul>{papers.map(paper => <li>{typeof paper.metadata.conference === "string" ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <>
     {typeof paper.metadata.conference !== "string" && <> · <span translate="no">{paper.authors.join(", ")}</span></>} · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
     {paper.source === "worldbank" && <> · <span>Working paper</span></>}

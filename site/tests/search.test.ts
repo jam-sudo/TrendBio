@@ -41,7 +41,8 @@ it.each(["", "   "])("submits an empty home query %j to the focused empty prompt
 
 it("searches a fixture headline and displays its category and excerpt", async () => {
   await visit("/search/");
-  await expect.poll(() => page.getByRole("searchbox").evaluate(el => el === document.activeElement)).toBe(true);
+  await page.keyboard.press("Tab");
+  expect(await page.locator(".skip-link").evaluate(el => el === document.activeElement)).toBe(true);
   expect(await page.locator("#search-help").textContent()).toContain("paper titles and tool names");
   await page.getByRole("searchbox", { name: "Search topics" }).fill("Binder");
   await finished();

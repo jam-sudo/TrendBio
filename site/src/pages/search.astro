@@ -131,7 +131,7 @@ for (const field of fields) {
     if (select.selectedIndex < 0) select.selectedIndex = 0;
   }
   updateCategories();
-  if (!input.value) input.focus();
+  if (!input.value && params.has('q')) input.focus();
   form.addEventListener('submit', event => { event.preventDefault(); search(); });
   input.addEventListener('input', () => {
     ++request;

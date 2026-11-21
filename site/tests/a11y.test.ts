@@ -48,8 +48,8 @@ describe("built site accessibility and responsive layout", () => {
       await page.locator('input[type="search"]').waitFor({ state: "visible" });
       expect(await page.getByRole("search").count()).toBe(1);
       if (path.startsWith("/week/")) await page.locator("main details").evaluate(details => details.setAttribute("open", ""));
-      const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
-      console.log(`axe ${theme} ${path}: ${violations.length} wcag2a/wcag2aa violations`);
+      const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"]).analyze();
+      console.log(`axe ${theme} ${path}: ${violations.length} WCAG 2.2 A/AA violations`);
       expect(violations).toEqual([]);
       expect(await page.locator('header nav a[href="/map/"]').textContent()).toBe("Map");
       for (const selector of ["header", "header nav[aria-label]", "main#main", "footer", "h1"]) {
@@ -60,11 +60,26 @@ describe("built site accessibility and responsive layout", () => {
       expect(await page.locator("a[href='#main']").evaluate((link) => getComputedStyle(link).outlineStyle)).toBe("solid");
       await page.keyboard.press("Enter");
       await page.waitForURL(url => url.hash === "#main", { timeout: 10_000 });
-      expect(await page.evaluate(() => document.activeElement?.id === "main" || location.hash === "#main")).toBe(true);
+      expect(await page.evaluate(() => document.activeElement?.id === "main")).toBe(true);
       if (path === "/") expect(await page.locator(".helix").getAttribute("aria-hidden")).toBe("true");
       if (path.startsWith("/topic/")) expect(await page.locator(".sparkline").getAttribute("aria-label")).toBeTruthy();
     }, 30_000,
   );
+
+  it("pauses hero motion from the keyboard and remembers the choice across fields", async () => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto(`http://127.0.0.1:${server!.port}/`);
+    await page.getByRole("button", { name: "Pause animation" }).focus();
+    await page.keyboard.press("Enter");
+    expect(await page.locator(".helix-flow").evaluate(el => getComputedStyle(el).animationPlayState)).toBe("paused");
+    await page.goto(`http://127.0.0.1:${server!.port}/computer-information/`);
+    const play = page.getByRole("button", { name: "Play animation" });
+    expect(await play.isVisible()).toBe(true);
+    await play.click();
+    expect(await page.locator(".typing").first().evaluate(el => getComputedStyle(el).animationPlayState)).toBe("running");
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    expect(await page.locator(".motion-toggle").isVisible()).toBe(false);
+  });
 
   it("keeps hero animations opt-in to the no-preference media query", async () => {
     for (const path of ["/", "/physics/"]) {
@@ -204,12 +219,12 @@ describe("built site accessibility and responsive layout", () => {
           }
         }
         expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
-        expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
+        expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"]).analyze()).violations).toEqual([]);
       }
     }, 30_000,
   );
 
-  it.each([640, 1280])("keeps compact headlines on one line at %ipx", async width => {
+  it.each([640, 1280])("shows the entire compact headline at %ipx", async width => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(`http://127.0.0.1:${server!.port}/`);
     await page.locator("details[data-more-topics]").evaluate(el => el.setAttribute("open", ""));
@@ -217,12 +232,13 @@ describe("built site accessibility and responsive layout", () => {
     const headlines = await page.locator(".compact-headline").evaluateAll(elements => elements.map(el => ({
       height: el.getBoundingClientRect().height,
       lineHeight: parseFloat(getComputedStyle(el).lineHeight),
-      wrap: getComputedStyle(el).whiteSpace,
+      wrap: getComputedStyle(el).whiteSpace, width: el.clientWidth, scrollWidth: el.scrollWidth,
     })));
     expect(headlines).toHaveLength(35);
     for (const headline of headlines) {
-      expect(headline.wrap).toBe("nowrap");
-      expect(headline.height).toBeCloseTo(headline.lineHeight, 1);
+      expect(headline.wrap).toBe("normal");
+      expect(headline.height).toBeGreaterThanOrEqual(headline.lineHeight - 0.1);
+      expect(headline.scrollWidth).toBeLessThanOrEqual(headline.width + 1);
     }
   });
 
@@ -277,7 +293,7 @@ describe("built site accessibility and responsive layout", () => {
           expect(rows.length).toBeGreaterThan(0);
           for (const row of rows) {
             if (row.names || width < 640) expect(row.height).toBeGreaterThanOrEqual(56);
-            else expect(row.height).toBe(40);
+            else expect(row.height).toBeGreaterThanOrEqual(40);
             expect(row.scroll).toBe(row.client);
           }
         }
@@ -460,7 +476,7 @@ describe("built site accessibility and responsive layout", () => {
     const visible = page.locator("[data-topic-cats]:visible");
     expect(await visible.count()).toBeGreaterThan(0);
     for (const card of await visible.all()) expect((await card.getAttribute("data-topic-cats"))!.split(/\s+/)).toContain(category);
-    expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
+    expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"]).analyze()).violations).toEqual([]);
     await page.keyboard.press("Home");
     expect(await all.getAttribute("aria-pressed")).toBe("true");
     expect(await visible.count()).toBe(40);

@@ -116,7 +116,8 @@ describe("built landing, day and archive pages", () => {
     for (const day of loadDays("computational")) {
       const cell = cells.find(([, date]) => date === day.date)![0];
       const top = day.ranked.find(({ rank }) => rank === 1);
-      expect(cell).toContain(`aria-label="${day.date}: ${top?.headline ?? "quiet"}"`);
+      expect(cell).toContain(`datetime="${day.date}"`);
+      expect(cell).toContain('class="mobile-name sr-only"');
       expect(cell).toContain(top?.headline ?? "quiet");
       if (top) expect(cell).toMatch(/<svg[^>]*width="16"/);
       else expect(cell).toMatch(/class="badge quiet"[^>]*>QUIET<\/span>/);

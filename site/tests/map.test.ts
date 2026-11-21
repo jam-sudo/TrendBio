@@ -116,6 +116,9 @@ describe('interactive topic map', () => {
           expect((await list.boundingBox())!.width).toBeGreaterThan(300);
           expect(await page.locator('canvas').isVisible()).toBe(false);
         } else {
+          const summary = page.getByText('Browse topics as a list', { exact: true });
+          await summary.focus();
+          await page.keyboard.press('Enter');
           await list.locator('a').first().focus();
           expect((await list.boundingBox())!.width).toBeGreaterThan(300);
         }

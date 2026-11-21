@@ -24,11 +24,18 @@ const maximum = Math.max(1, ...entries.map((entry) => entry.count_7d));
         width="8" height={height} data-date={entry.date} class:list={{ today: entry.date === latest!.date }} />;
     })}
   </svg>
-  <figcaption><span>Items per day, last 8 weeks</span><span>today: {latest!.count_7d}</span></figcaption>
+  <figcaption><span>7-day item counts</span><span>Latest ({latest!.date}): {latest!.count_7d}</span></figcaption>
+  <details data-pagefind-ignore><summary>View counts by date</summary>
+    <table><thead><tr><th scope="col">Date</th><th scope="col">Items in preceding 7 days</th></tr></thead>
+      <tbody>{entries.map(entry => <tr><th scope="row"><time datetime={entry.date}>{entry.date}</time></th><td>{entry.count_7d}</td></tr>)}</tbody>
+    </table>
+  </details>
   </figure>
 )}
 
 <style>
+  summary { cursor: pointer; }
+  figcaption { flex-wrap: wrap; }
   figure { width: 100%; margin: 1.5rem 0; }
   figcaption { display: flex; justify-content: space-between; gap: 0.5rem; color: var(--muted); font-size: var(--t3); margin-top: 0.5rem; }
   .sparkline { display: block; width: 100%; height: 80px; }

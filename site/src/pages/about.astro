@@ -22,12 +22,20 @@ const fields: Field[] = ["computational", ...publicEditions];
     <h2>Computational biology sources</h2>
     <p>We collect preprints from bioRxiv and arXiv, published papers from PubMed, code and tool activity from GitHub, and announcements from industry feeds. Each topic links to its underlying evidence, with preprints linked to their published versions when known.</p>
     <h2>How ranking works</h2>
-    <p>Topics are ranked using four weighted terms: rise ({weights.rise * 100}%), diversity ({weights.diversity * 100}%), code velocity ({weights.code_velocity * 100}%), and volume ({weights.volume * 100}%). Rise compares recent paper activity with a topic’s historical baseline, or a typical cluster when history is limited; diversity rewards a mix of evidence types, code velocity measures GitHub star gains, and volume reflects paper count. A small penalty for topics that ranked yesterday encourages rotation.</p>
+    <p>Four signals contribute to a topic’s score.</p>
+    <ul>
+      <li>Growth ({weights.rise * 100}%) compares recent paper activity with the topic’s history. New topics use a typical group of papers as their baseline.</li>
+      <li>Evidence diversity ({weights.diversity * 100}%) rewards a mix of evidence types.</li>
+      <li>Code activity ({weights.code_velocity * 100}%) measures gains in GitHub stars.</li>
+      <li>Volume ({weights.volume * 100}%) reflects the number of papers.</li>
+    </ul>
+    <p>A small penalty applies to topics ranked the day before.</p>
     <p>Code and industry items attach to at most one research topic when their similarity clears a calibrated threshold. They contribute evidence, diversity and code velocity; paper counts, rise and topic continuity stay paper-only. The separate “From industry” list shows up to eight relevant announcements first seen in the preceding seven days, whether or not they attach to a topic.</p>
     <p>Code appears in the “From code” list because repositories rarely join research topics by text similarity.</p>
     <p>“Shared by researchers” covers Bluesky only and never affects rankings or scores. It excludes accounts linking 20 or more papers a week and can include authors promoting their own work.</p>
     <p>Selection reserves {category_floor} topic per represented category, then fills by score with at most {max_per_category} per category. The selected topics appear in score order; quieter days may have fewer than {top_n} topics.</p>
-    <p>Weekly (ISO Monday–Sunday) and calendar-month rankings sum each topic’s stored daily scores, break ties by days ranked then unique items, reserve one place per represented category and cap each at five within the Top 20, and show days ranked, best rank, unique items and maximum rise for the period; incomplete periods are labelled “so far”.</p>
+    <p>Weekly rankings run Monday through Sunday. Monthly rankings use calendar months. Both add up daily scores and break ties by days ranked, then by unique items. Each represented category gets one place and can hold up to five of the Top 20.</p>
+    <p>Each entry shows days ranked, best rank, unique items and maximum rise. “So far” marks a period still in progress.</p>
     <p>Tool names under Top 20 headlines are copied from paper titles and do not affect ranking.</p>
     <h2>Machine-generated summaries</h2>
     <p>Headlines, summaries and syntheses are machine-generated and may contain errors. Follow the evidence links and consult the original sources before relying on a claim.</p>

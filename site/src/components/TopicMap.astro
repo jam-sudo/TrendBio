@@ -9,6 +9,7 @@ const { map, categories } = Astro.props;
 const counts = Object.fromEntries(categories.map(({ slug }) => [slug, map.points.filter(p => p.category === slug).length]));
 const colors = Object.fromEntries(categories.map(({ slug, label }) => [slug, { hue: categoryStyle(slug).hue, label }]));
 const months = [...new Set(map.points.flatMap(p => p.months))].sort();
+const titles = new Map(map.points.map(point => [point.slug, point.headline]));
 const json = JSON.stringify(map).replace(/</g, "\\u003c");
 const external = Buffer.byteLength(json, "utf8") > 600_000;
 ---
@@ -17,20 +18,25 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
   <div class="map-controls">
     <label for="map-month">Activity: <output id="map-month-label" for="map-month">All time</output></label>
     <input id="map-month" type="range" min="0" max={months.length} value={months.length} step="1" aria-valuetext="All time" />
-    <span class="map-count">{map.points.length} topics · updated <time datetime={map.generated_on}>{map.generated_on}</time></span>
+    <span class="map-count"><span role="status">{map.points.length} topics</span> · updated <time datetime={map.generated_on}>{map.generated_on}</time></span>
   </div>
   <div class="map-stage">
-    <canvas aria-label="Research topics and their nearest neighbours. Topic links follow the map." role="img"></canvas>
+    <canvas aria-label="Research topics and their nearest neighbours. The topic list below gives the same relationships and item counts." role="img"></canvas>
     <div class="map-tooltip" role="tooltip" hidden><strong></strong><span></span></div>
   </div>
-  <p class="map-hint">Hover for details · click a topic to explore · filter by category or month</p>
+  <p class="map-hint">Choose a dot to open a topic, or browse the list. The category and month filters apply to both views.</p>
   <p class="map-error" hidden>The map could not load. Browse the topic links below.</p>
-  <ul class="map-links sr-only" aria-label="Research topics">
-    {map.points.map(p => <li><a href={`/topic/${p.slug}/`}>{p.headline} — {categories.find(c => c.slug === p.category)?.label ?? p.category}, last ranked {p.last_ranked}</a></li>)}
-  </ul>
-  <noscript>
-    <style>.topic-map .map-links{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal}.topic-map .map-stage,.topic-map .map-controls,.topic-map .category-chips,.topic-map .map-hint{display:none}</style>
-  </noscript>
+  <details class="map-list" open>
+    <summary>Browse topics as a list</summary>
+    <ul class="map-links" aria-label="Research topics">
+      {map.points.map(point => <li data-map-slug={point.slug}>
+        <a href={`/topic/${point.slug}/`}>{point.headline}</a>
+        <span>{colors[point.category]?.label ?? point.category} · {point.size} items · last ranked {point.last_ranked}</span>
+        {point.neighbors.length > 0 && <span>Nearest topics: {point.neighbors.map(slug => titles.get(slug) ?? slug).join(" · ")}</span>}
+      </li>)}
+    </ul>
+  </details>
+  <noscript><style>.topic-map .map-stage,.topic-map .map-controls,.topic-map .category-chips,.topic-map .map-hint{display:none}</style></noscript>
   <script id="topic-map-data" type="application/json" is:inline data-src={external ? "/map.json" : undefined} set:html={external ? "null" : json} />
 </section>
 
@@ -69,6 +75,16 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
     let width = 0, height = 0, category = 'all', month, hovered;
     function active(p) {
       return (category === 'all' || p.category === category) && (!month || p.months.includes(month));
+    }
+    const listRows = [...root.querySelectorAll('[data-map-slug]')];
+    function filterList() {
+      let shown = 0;
+      for (const row of listRows) {
+        row.hidden = !active(bySlug.get(row.dataset.mapSlug));
+        if (!row.hidden) shown++;
+      }
+      root.querySelector('.map-count [role="status"]').textContent = `${shown} of ${points.length} topics`;
+      clearHover();
     }
     function draw() {
       const style = getComputedStyle(root);
@@ -128,11 +144,12 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
       tooltip.querySelector('strong').textContent = hovered.headline;
       tooltip.querySelector('span').textContent = `${colors[hovered.category]?.label ?? hovered.category} · last ranked ${hovered.last_ranked}`;
       tooltip.hidden = false;
-      tooltip.style.left = `${Math.max(8, Math.min(width - tooltip.offsetWidth - 8, hovered.px + 16))}px`;
-      tooltip.style.top = `${Math.max(8, Math.min(height - tooltip.offsetHeight - 8, hovered.py + 16))}px`;
+      tooltip.style.left = `${Math.max(8, Math.min(width - tooltip.offsetWidth - 8, hovered.px + 4))}px`;
+      tooltip.style.top = `${Math.max(8, Math.min(height - tooltip.offsetHeight - 8, hovered.py + 4))}px`;
       canvas.style.cursor = 'pointer'; draw();
     });
-    canvas.addEventListener('mouseleave', clearHover);
+    root.querySelector('.map-stage').addEventListener('mouseleave', clearHover);
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && hovered) clearHover(); });
     canvas.addEventListener('click', event => {
       const point = hit(event);
       if (point) window.location.assign(`/topic/${encodeURIComponent(point.slug)}/`);
@@ -140,20 +157,22 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
     root.querySelector('[data-category-chips]').addEventListener('click', event => {
       const button = event.target.closest('button[data-cat]');
       if (!button || button.disabled) return;
-      category = button.dataset.cat; clearHover();
+      category = button.dataset.cat; filterList();
     });
     slider.addEventListener('input', () => {
       month = months[Number(slider.value)];
       label.textContent = month ?? 'All time';
-      slider.setAttribute('aria-valuetext', label.textContent); clearHover();
+      slider.setAttribute('aria-valuetext', label.textContent); filterList();
     });
     new ResizeObserver(resize).observe(canvas);
     window.addEventListener('resize', resize);
     new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     resize();
+    root.querySelector('.map-list').open = false;
   } catch (error) {
     root.querySelector('.map-error').hidden = false;
-    root.querySelector('.map-links').classList.remove('sr-only');
+    root.querySelector('.map-list').open = true;
+    for (const el of root.querySelectorAll('.map-controls,.category-chips,.map-hint')) el.hidden = true;
     root.querySelector('.map-stage').hidden = true;
   }
 </script>
@@ -165,9 +184,12 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
   .map-count, .map-hint { color: var(--muted); font-size: var(--t3); }
   .map-stage { position: relative; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); overflow: hidden; }
   canvas { display: block; width: 100%; height: clamp(340px, 55vw, 560px); }
-  .map-tooltip { position: absolute; z-index: 1; max-width: min(320px, calc(100% - 16px)); padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--fg); pointer-events: none; }
+  .map-tooltip { position: absolute; z-index: 1; max-width: min(320px, calc(100% - 16px)); padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--fg); }
   .map-tooltip strong, .map-tooltip span { display: block; }
   .map-tooltip span { color: var(--muted); font-size: var(--t3); }
   .map-hint { margin-top: 0.5rem; }
-  .map-links:focus-within { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; white-space: normal; }
+  .map-list summary { cursor: pointer; }
+  .map-links { max-width: 75ch; padding-left: 1.5rem; overflow-wrap: anywhere; }
+  .map-links li { margin-block: 1rem; }
+  .map-links li span { display: block; color: var(--muted); font-size: var(--t3); }
 </style>

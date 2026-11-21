@@ -84,17 +84,21 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
     {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map((name, i) => <>{i > 0 && ", "}{publisherUrls.has(name)
       ? <a href={publisherUrls.get(name)}>{name}</a>
       : name === "arxiv" ? "arXiv" : name}</>)}</span>.</p>}
-    {archives.length > 0 && <p class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"}>{day?.run.arxiv_mailings ? "This edition selected first versions in" : day?.run.arxiv_categories ? "This edition queried" : "Current coverage includes"} {Array.from(archiveGroups, ([category, codes], i) => <>{i > 0 && " · "}
-      {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
-        <span>{category}</span> ({codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)})
-      </>}</>)} on arXiv.</p>}
+    {archives.length > 0 && <details class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"} open={archiveGroups.size <= 5}>
+      <summary>{day?.run.arxiv_mailings ? "First-version arXiv subjects in this edition" : day?.run.arxiv_categories ? "arXiv subjects queried for this edition" : "Current coverage on arXiv"} ({archives.length})</summary>
+      <ul>{Array.from(archiveGroups, ([category, codes]) => <li>
+        {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
+          {category} · {codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)}
+        </>}
+      </li>)}</ul>
+    </details>}
     {subjectCounts && <details class="subject-counts"><summary>arXiv papers by subject</summary>
-      <table><caption>Stored preprints for this edition. A cross-listed paper can appear under several subjects. Ranked papers support at least one displayed topic.</caption>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Preprints by arXiv subject"><table><caption>Stored preprints for this edition. A cross-listed paper can appear under several subjects. Ranked papers support at least one displayed topic.</caption>
         <thead><tr><th scope="col">Subject</th><th scope="col">Primary</th><th scope="col">Cross-listed</th><th scope="col">Ranked</th></tr></thead>
         <tbody>{Object.entries(subjectCounts).map(([code, counts]) => <tr>
           <th scope="row" translate="no">{code}</th><td>{counts.primary}</td><td>{counts.cross_listed}</td><td>{counts.ranked}</td>
         </tr>)}</tbody>
-      </table>
+      </table></div>
     </details>}
     {!observedVenues && followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
       ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
@@ -140,6 +144,6 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
   .rankings p { margin-bottom: .5rem; }
   summary { cursor: pointer; }
   .subject-counts caption { margin: .6rem 0; text-align: start; }
-  .subject-counts th, .subject-counts td { padding: .25rem; overflow-wrap: anywhere; }
+  .subject-counts th, .subject-counts td { padding: .25rem; overflow-wrap: normal; }
   .archive { margin-block-start: 2rem; }
 </style>
