@@ -26,11 +26,8 @@ function galaxyArm(arm: number, t: number, spread = 0) {
 }
 
 const density = (x: number) => 98 - 81 * Math.exp(-.5 * ((x - 143) / 40) ** 2);
-const circuitPaths = [
-  "M25 61 H52 L76 30 H108 L144 61 H182 L210 30 H239 L264 61 H287",
-  "M25 61 H52 L76 92 H108 L144 61 H182 L210 92 H239 L264 61 H287",
-  "M108 30 H178 L210 61 H264", "M108 92 H178 L210 61",
-];
+const command = "[3, 1, 2].sort()";
+const commandWidth = command.length * 10;
 const cell = "M65 65 C61 41 84 22 116 18 C145 15 156 6 185 13 C208 18 218 34 240 49 C260 65 246 89 221 98 C191 110 167 101 147 105 C116 113 77 102 65 65Z";
 const river = "M161 65 C157 70 137 71 144 76 S179 80 165 86 S112 91 129 99 Q139 104 166 108";
 const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L117 24 L125 96 L133 73 L139 77 H152 Q160 77 169 64 Q177 53 187 68 Q194 77 203 77 H288";
@@ -69,13 +66,22 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
       </g>)}
     </g>
   </>}
-  {field === "computer-information" && <>
-    {circuitPaths.map(d => <path {d} class="fine" />)}
-    {circuitPaths.slice(0,2).map((d,i) => <path {d} pathLength="100" class="signal" style={`--delay: ${i * -3}s`}/>)}
-    {[[25,61],[76,30],[108,30],[76,92],[108,92],[144,61],[182,61],[210,30],[210,61],[210,92],[239,30],[239,92],[287,61]].map(([x,y]) =>
-      <circle cx={x} cy={y} r={x === 144 ? 8 : 4} class={x === 144 ? "tinted" : "socket"}/>)}
-    <circle cx="144" cy="61" r="2.5" class="solid"/>
-  </>}
+  {field === "computer-information" && <g class="terminal" style={`--characters: ${command.length}; --advance: ${commandWidth}px`}>
+    <rect x="28" y="6" width="244" height="108" rx="8" class="wash"/>
+    <path d="M29 28h242" class="fine" opacity=".55"/>
+    {[43,52,61].map(cx => <circle {cx} cy="17" r="2" class="dot" opacity=".55"/>)}
+    <defs><clipPath id="typed-command">
+      <rect x={65 - commandWidth} y="32" width={commandWidth} height="30" class="typing"/>
+    </clipPath></defs>
+    <text x="44" y="48" class="prompt">&gt;</text>
+    <text x="65" y="48" textLength={commandWidth} lengthAdjust="spacingAndGlyphs" clip-path="url(#typed-command)">{command}</text>
+    <g class="typing"><path class="entry-caret accent" d="M66 56h9" stroke-width="2.5"/></g>
+    <g class="terminal-result">
+      <text x="65" y="72">[1, 2, 3]</text>
+      <text x="44" y="96" class="prompt">&gt;</text>
+      <path class="ready-caret accent" d="M66 104h9" stroke-width="2.5"/>
+    </g>
+  </g>}
   {field === "math" && <>
     <path d="M24 98H278 M36 105V13" class="fine"/>
     {indices(15).map(i => {const x = 45 + i * 14; const y = density(x); return <rect x={x - 5.6} {y} width="11.2" height={98 - y} class="tinted"/>})}
@@ -159,14 +165,17 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
   .field-figure { display: block; width: 100%; height: auto; }
   .fine { stroke: var(--muted); stroke-width: 1.15; }
   .grid { stroke: var(--muted); opacity: .26; stroke-width: .8; }
-  .accent, .signal, .track, .density-sweep, .ecg { stroke: var(--ink); }
+  .accent, .track, .density-sweep, .ecg { stroke: var(--ink); }
   .dot { stroke: none; fill: currentColor; }
   .solid { stroke: none; fill: var(--ink); }
   .wash { fill: var(--card); }
   .socket { fill: var(--bg); }
   .tinted { fill: color-mix(in srgb, var(--ink) 18%, var(--bg)); stroke: var(--ink); }
   text { fill: currentColor; stroke: none; font: bold 19px Inconsolata, monospace; text-anchor: middle; dominant-baseline: central; }
-  .signal { stroke-width: 3.6; stroke-dasharray: 16 84; }
+  .terminal text { text-anchor: start; font-weight: 400; }
+  .terminal .prompt { fill: var(--ink); font-weight: 700; }
+  .typing { transform: translateX(var(--advance)); }
+  .entry-caret { opacity: 0; }
   .vesicles { stroke: var(--ink); stroke-width: 4; stroke-dasharray: .5 49.5; }
   .track { stroke-dasharray: 72 28; }
   .river-flow { stroke-dasharray: 10 22; }
@@ -176,8 +185,12 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
     .drift { animation: drift 5s ease-in-out infinite alternate; }
     .incoming { animation: travel 2.4s linear infinite; }
     .wavefront { animation: ripple 2.4s linear infinite; }
-    .signal, .track, .ecg, .vesicles { animation: trace var(--period, 4s) linear var(--delay, 0s) infinite; }
-    .signal { --period: 6s; }
+    .track, .ecg, .vesicles { animation: trace var(--period, 4s) linear var(--delay, 0s) infinite; }
+    .terminal { --period: 6s; }
+    .typing { animation: type-command var(--period) steps(var(--characters), end) infinite; }
+    .terminal-result { animation: show-result var(--period) step-end infinite; }
+    .entry-caret { animation: submit-command var(--period) step-end infinite; }
+    .ready-caret { animation: blink 1.2s step-end infinite; }
     .ecg { --period: 2.8s; }
     .density-sweep { animation: sweep 5s linear infinite; }
     .river-flow { animation: runoff 2s linear infinite; }
@@ -192,6 +205,10 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
   @keyframes travel { to { transform: translateX(16px); } }
   @keyframes ripple { from { transform: scale(var(--from)); } to { transform: scale(var(--to)); } }
   @keyframes trace { to { stroke-dashoffset: -100; } }
+  @keyframes type-command { 0%, 14% { transform: translateX(0); } 58%, 100% { transform: translateX(var(--advance)); } }
+  @keyframes show-result { 0% { opacity: 0; } 68%, 100% { opacity: 1; } }
+  @keyframes submit-command { 0% { opacity: 1; } 68%, 100% { opacity: 0; } }
+  @keyframes blink { 50% { opacity: 0; } }
   @keyframes sweep { to { stroke-dashoffset: -297; } }
   @keyframes runoff { to { stroke-dashoffset: -32; } }
   @keyframes turn { to { transform: rotate(360deg); } }
