@@ -88,7 +88,7 @@ describe("built landing, day and archive pages", () => {
     expect(html).toContain("Code and industry signals are partial for backfilled days.");
     expect(html).not.toContain('class="hero"');
     expect(cards(html)).toHaveLength(5);
-    expect(html.match(/<main\b[\s\S]*?<\/main>/)![0]).not.toMatch(/<details\b/);
+    expect(html.match(/<main\b[\s\S]*?<\/main>/)![0]).not.toMatch(/<details\b[^>]*data-more-topics/);
     expect(html).toContain("1 preprint · 1 published · 1 tool · 1 industry · ↑ 4.3× vs 4-wk avg");
     expect(html).toContain("4 preprints");
   });

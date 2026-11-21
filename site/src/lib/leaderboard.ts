@@ -15,6 +15,7 @@ export interface LeaderboardTopic {
   secondary_categories: string[];
   stats: Stat[];
   autoLabel?: boolean;
+  fallbackSummary?: boolean;
   toolNames: ToolName[];
 }
 
@@ -32,7 +33,7 @@ export function signalStats(signals: Signals): Stat[] {
 export function dailyRows(day: Day | null): LeaderboardTopic[] {
   const changes = day ? rankChanges(day, loadDays(day.domain), allTopics(day.domain)) : new Map();
   return (day?.ranked ?? []).map((topic) => ({ ...topic,
-    rankChange: changes.get(topic.slug),
+    rankChange: changes.get(topic.slug), fallbackSummary: day!.run.notes.includes(`synthesis-fallback:${topic.slug}`),
     toolNames: selectToolNames(topic.rank <= 20 ? loadItems("computational",
       loadTopic("computational", topic.slug)?.history.find(entry => entry.date === day!.date)?.item_ids ?? []) : [], topic.rank),
     secondary_categories: loadTopic("computational", topic.slug)?.secondary_categories ?? [], stats: signalStats(topic.signals),

@@ -1,4 +1,5 @@
 ---
+import RankingSignals from "./RankingSignals.astro";
 import PeriodLinks from "./PeriodLinks.astro";
 import IndustryList from "./IndustryList.astro";
 import SharedList from "./SharedList.astro";
@@ -52,6 +53,7 @@ const counts = Object.fromEntries(categories.map(({ slug }) => [
   </div>
 </details>}
 
+{day && !period && <RankingSignals {day} />}
 {day && <IndustryList day={day.date} />}
 {day && <CodeList day={day.date} />}
 {day && <SharedList day={day.date} />}

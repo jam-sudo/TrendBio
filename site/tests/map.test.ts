@@ -28,7 +28,7 @@ it('embeds the fixture points, canvas, native slider and a fallback link per top
 
 it('includes the computational biology Map link throughout that edition', () => {
   for (const path of readdirSync('dist', { recursive: true, encoding: 'utf8' }).filter(p => p.endsWith('.html'))) {
-    if (path.startsWith('pilots/') || editions.some(field => path.startsWith(field + '/'))) continue;
+    if (path.startsWith('pilots/') || path.startsWith('collections/') || editions.some(field => path.startsWith(field + '/'))) continue;
     const link = /href="\/map\/"[^>]*>Map<\/a>/;
     expect(readFileSync(join('dist', path), 'utf8'), path).toMatch(link);
   }

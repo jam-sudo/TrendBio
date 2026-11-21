@@ -1,11 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
 import { loadTaxonomy } from "../lib/data";
-import { fieldLabel, publicEditions, type Field } from "../lib/editions";
-const fields: Field[] = ["computational", ...publicEditions];
+import { fieldLabel, editions, pilotDates, type Field } from "../lib/editions";
+import { pilotRows } from "../lib/pilot-topics";
+const fields: Field[] = ["computational", ...editions];
 const categories = new Map<string, Field[]>();
 for (const field of fields) {
-  for (const { label } of loadTaxonomy(field)) {
+  const labels = new Set(loadTaxonomy(field).map(c => c.label));
+  if (field !== "computational") for (const date of pilotDates(field)) {
+    for (const row of pilotRows(field, date)) labels.add(row.category);
+  }
+  for (const label of labels) {
     categories.set(label, [...(categories.get(label) ?? []), field]);
   }
 }
@@ -22,11 +27,13 @@ for (const field of fields) {
       <label for="search-field">Field</label>
       <select id="search-field">
         <option value="">All fields</option>
+        <option value="materials">Materials Science collection</option>
         {fields.map(field => <option value={field}>{fieldLabel(field)}</option>)}
       </select>
       <label for="search-category">Category</label>
       <select id="search-category">
         <option value="">All categories</option>
+        <option data-fields="materials">Materials Science</option>
         {Array.from(categories, ([label, fields]) => <option value={label} data-fields={fields.join(" ")}>{label}</option>)}
       </select>
       <button type="submit">Search</button>

@@ -1,12 +1,12 @@
 ---
 import type { Edition } from "../lib/editions";
 
-const { field } = Astro.props as { field: Edition };
+const { field } = Astro.props as { field: Edition | "materials" };
 const hues = {
-  biology: 152, physics: 245, math: 305, "computer-information": 195, "earth-environment": 160,
+  materials: 75, biology: 152, physics: 245, math: 305, "computer-information": 195, "earth-environment": 160,
   astronomy: 300, "physics-expanded": 32, chemistry: 205, engineering: 78,
   "medicine-health": 18, "agriculture-food-veterinary": 112,
-} satisfies Record<Edition, number>;
+} satisfies Record<Edition | "materials", number>;
 
 const indices = (length: number) => Array.from({ length }, (_, i) => i);
 const tau = Math.PI * 2;
@@ -36,6 +36,15 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
 <svg class="field-figure" data-field={field} viewBox="0 0 300 120" aria-hidden="true" focusable="false"
   fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
   style={`--ink: oklch(var(--icon-lightness) .10 ${hues[field]})`}>
+  {field === "materials" && <g transform="translate(48 28)">
+    {indices(4).map(row => <g transform={`translate(${row % 2 * 17} ${row * 22})`}>
+      {indices(6).map(col => <g transform={`translate(${col * 34} 0)`}>
+        {col < 5 && <path class="fine" d="M0 0h34"/>}
+        {row < 3 && <path class="fine" d={`M0 0l${row % 2 ? -17 : 17} 22`}/>}
+        <circle r="5" class="tinted"/><circle r="3" class="lattice solid" style={`--delay: ${-col * .32 - row * .2}s`}/>
+      </g>)}
+    </g>)}
+  </g>}
   {field === "biology" && <>
     <path d={cell} class="wash" />
     <path d={cell} transform="translate(9 3.8) scale(.94)" class="fine" />
@@ -182,6 +191,7 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
   .density-sweep { stroke-dasharray: 47 250; }
   .ecg { stroke-width: 2.8; stroke-dasharray: 74 26; }
   @media (prefers-reduced-motion: no-preference) {
+    .lattice { animation: lattice 2.4s ease-in-out var(--delay) infinite alternate; }
     .drift { animation: drift 5s ease-in-out infinite alternate; }
     .incoming { animation: travel 2.4s linear infinite; }
     .wavefront { animation: ripple 2.4s linear infinite; }
@@ -201,6 +211,7 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
     .bend { animation: bend 2.8s ease-in-out infinite alternate; }
     .seedling { transform-origin: 149px 79px; animation: sway 3.5s ease-in-out infinite alternate; }
   }
+  @keyframes lattice { to { transform: translateY(-2px); opacity: .45; } }
   @keyframes drift { to { transform: translate(3px, -2.5px) rotate(1deg); } }
   @keyframes travel { to { transform: translateX(16px); } }
   @keyframes ripple { from { transform: scale(var(--from)); } to { transform: scale(var(--to)); } }

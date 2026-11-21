@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import { chromium, type Browser, type Page } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { getDataIndex } from "../src/lib/data";
-import { editions, pilotDates, publicEditions } from "../src/lib/editions";
+import { editions, fieldLabel, pilotDates, publicEditions } from "../src/lib/editions";
 import { loadPeriods } from "../src/lib/period-data";
 import { truncateDescription } from "../src/lib/metadata";
 
@@ -35,6 +35,32 @@ it("builds a 404 page with the main landmark and recovery links, plus the favico
   expect(read("favicon.svg")).toContain('viewBox="0 0 16 16"');
 });
 
+it("publishes the selected materials papers and recovered biology originals at their review locations", async () => {
+  await page.setContent(read("collections/materials/index.html"));
+  const groups = page.locator("main section[id]");
+  expect(await groups.count()).toBe(2);
+  const papers = await groups.locator("li a").evaluateAll(links => links.map(link => link.getAttribute("href")));
+  expect(new Set(papers).size).toBe(7);
+  expect(papers.every(url => /^https:\/\/(doi\.org|arxiv\.org)\//.test(url!))).toBe(true);
+  await page.setContent(read("biology/index.html"));
+  expect(await page.locator("#coverage-review li a").count()).toBe(6);
+});
+
+it("displays the stored scoring components and synthesis flags in rank order", async () => {
+  const day = days.find(issue => issue.ranked.length)!;
+  await page.setContent(read(`day/${day.date}/index.html`));
+  const rows = page.locator(".rank-signals tbody tr");
+  const top = day.ranked.filter(row => row.rank <= 10);
+  expect(await rows.count()).toBe(top.length);
+  for (const [i, topic] of top.entries()) {
+    const { rise, diversity, code_velocity, volume, total } = topic.scores;
+    expect(await rows.nth(i).locator("td").allTextContents()).toEqual([
+      ...[rise, diversity, code_velocity, volume, total].map(value => value.toFixed(2)),
+      day.run.notes.includes(`synthesis-fallback:${topic.slug}`) ? "Yes" : "—",
+    ]);
+  }
+});
+
 it("gives every page canonical, description and preview metadata", async () => {
   const paths = readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith(".html"));
   for (const path of paths) {
@@ -61,10 +87,14 @@ it("gives every page canonical, description and preview metadata", async () => {
     expect(metadata.ogType).toBe("website");
     expect(metadata.site).toBe("TrendBio");
     expect(metadata.card).toBe("summary_large_image");
-    expect(metadata.image).toBe("https://trendbio.dev/og.png");
+    const field = editions.find(f => path.startsWith(f + "/") || path.startsWith("pilots/" + f + "/"));
+    const card = path.startsWith("collections/materials/") ? "materials" : field;
+    const image = card ? `/og/${card}.png` : "/og.png";
+    expect(metadata.image).toBe("https://trendbio.dev" + image);
+    expect(existsSync("dist" + image)).toBe(true);
     expect(metadata.width).toBe("1200");
     expect(metadata.height).toBe("630");
-    expect(metadata.alt).toBe("TrendBio — What moved in computational biology");
+    expect(metadata.alt).toBe(field ? `TrendBio — ${fieldLabel(field)}` : card ? "TrendBio — Materials Science" : "TrendBio — What moved in computational biology");
     expect(metadata.themes).toEqual([["(prefers-color-scheme: dark)", "oklch(14.5% 0 0)"], ["(prefers-color-scheme: light)", "#fafafa"]]);
   }
   expect(read("index.html")).toContain(truncateDescription(`Today's leading computational biology topic: ${days[0].ranked[0].headline}.`));
@@ -90,7 +120,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
       }
     }
   }
-  expect(parsed.entries).toHaveLength(8 + editions.flatMap(pilotDates).length + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
+  expect(parsed.entries).toHaveLength(9 + editions.flatMap(pilotDates).length + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   for (const [url, date] of fieldTopics) expect(urls.get(url)).toBe(date);
   expect(urls.size).toBe(parsed.entries.length);
@@ -173,7 +203,7 @@ it("opens the English pilot offline at the selected topic with its cited evidenc
     expect(await note.locator("strong").textContent()).toBe("Editorial correction");
     expect(await note.locator("a").first().getAttribute("href")).toBe("https://example.org/calibration");
     expect(await note.locator("a").last().textContent()).toBe("arXiv:2611.19130");
-    await offline.locator("main details summary").click();
+    await offline.getByText("3 supporting papers", { exact: true }).click();
     expect(await offline.locator('main details a[href^="https://example.org/physics/"]').count()).toBe(3);
   } finally {
     await offline.close();

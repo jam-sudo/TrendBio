@@ -1,0 +1,35 @@
+---
+import { loadDays } from "../lib/data";
+import type { Day } from "../lib/types";
+const { day } = Astro.props as { day: Day };
+const top = day.ranked.filter(row => row.rank <= 10);
+const previousDates = new Set([7, 14, 21].map(offset =>
+  new Date(Date.parse(day.date + "T00:00:00Z") - offset * 86400000).toISOString().slice(0,10)));
+const previous = loadDays(day.domain).filter(d => previousDates.has(d.date) && d.ranked.length);
+const dec = (n: number) => n.toFixed(2);
+---
+{top.length > 0 && <details class="rank-signals">
+  <summary>Scoring signals for the top {top.length} · {day.date}</summary>
+  <p>Stored component values before weighting. The baseline assigns 45% to growth, 25% to diversity, 15% to code growth and 15% to volume. Total includes the repeat-topic penalty. A fallback uses source text when synthesis is unavailable.</p>
+  <div class="scroll" tabindex="0" role="region" aria-label="Ranking signals">
+    <table><thead><tr>{["Rank", "Growth", "Evidence diversity", "Code growth", "Volume", "Total", "Fallback"].map(col => <th scope="col">{col}</th>)}</tr></thead>
+      <tbody>{top.map(row => <tr>
+        <th scope="row">#{row.rank}</th>
+        {[row.scores.rise, row.scores.diversity, row.scores.code_velocity, row.scores.volume, row.scores.total].map(v => <td>{dec(v)}</td>)}
+        <td>{day.run.notes.includes(`synthesis-fallback:${row.slug}`) ? "Yes" : "—"}</td>
+      </tr>)}</tbody></table>
+  </div>
+  {previous.length > 0 && <section data-edition-navigation><h3>Same weekday in earlier weeks</h3>
+    <p>Mean component values among the top ten available ranks. Backfills can have incomplete code signals.</p>
+    <ul>{[day, ...previous].map(issue => {
+      const rows = issue.ranked.filter(r => r.rank <= 10);
+      const mean = (key: "rise" | "diversity" | "code_velocity" | "volume") => dec(rows.reduce((sum,r) => sum + r.scores[key], 0) / rows.length);
+      return <li><a href={`${issue.domain === "computational" ? "" : "/" + issue.domain}/day/${issue.date}/`}>{issue.date}</a>{issue.run.backfilled && " (backfill)"} · growth {mean("rise")} · diversity {mean("diversity")} · code {mean("code_velocity")} · volume {mean("volume")}</li>;
+    })}</ul></section>}
+</details>}
+<style>
+  .rank-signals { margin-block: 1rem; }
+  summary { cursor: pointer; }
+  .scroll { overflow-x: auto; }
+  th, td { padding: .35rem .55rem; }
+</style>

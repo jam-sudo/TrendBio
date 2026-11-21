@@ -16,17 +16,20 @@ interface Props {
   canonicalPath: string;
   lastRun?: string | null;
   landing?: boolean;
+  collection?: "materials";
   noindex?: boolean;
   edition?: Edition;
   editionSources?: string;
 }
 
-const { title = "TrendBio", description, canonicalPath, lastRun, landing = false, edition } = Astro.props;
+const { title = "TrendBio", description, canonicalPath, lastRun, landing = false, edition, collection } = Astro.props;
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
 const directory = canonicalPath === "/fields/";
-const biology = (!edition || edition === "biology") && !directory;
-const feed = !edition ? "/feed.xml" : publicEditions.includes(edition) ? `/${edition}/feed.xml` : undefined;
+const biology = (!edition || edition === "biology") && !directory && !collection;
+const feed = collection ? undefined : !edition ? "/feed.xml" : publicEditions.includes(edition) ? `/${edition}/feed.xml` : undefined;
+const card = collection ?? edition;
+const cardLabel = collection ? "Materials Science" : edition ? fieldLabel(edition) : "Computational Biology";
 const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
 ---
 
@@ -50,10 +53,10 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="TrendBio" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:image" content={new URL("/og.png", Astro.site).href} />
+    <meta property="og:image" content={new URL(card ? `/og/${card}.png` : "/og.png", Astro.site).href} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="TrendBio — What moved in computational biology" />
+    <meta property="og:image:alt" content={card ? `TrendBio — ${cardLabel}` : "TrendBio — What moved in computational biology"} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
@@ -61,7 +64,7 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
     <div class="page-shell">
     <header class:list={{ "home-header": landing }}>
       <div class="header-top">
-      <a class="wordmark" href="/">{landing && !edition && <Helix staticMark />}TrendBio</a>
+      <a class="wordmark" href="/">{landing && !edition && !collection && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
         <div class="field-bar">
           <div class="field-links" role="group" aria-label="Science field">
@@ -78,7 +81,7 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
           </span>}
         </div>
         <div class="nav-links">
-          {!edition && <>
+          {!edition && !collection && <>
             <a href="/">Today</a>
             <a href="/topics">Topics</a>
             <a href="/map/">Map</a>
@@ -89,8 +92,8 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
         </div>
       </nav>
       </div>
-      {landing && <Hero field={edition ?? "computational"} updated={lastRun} />}
-      {(!edition || publicEditions.includes(edition)) && canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
+      {landing && <Hero field={collection ?? edition ?? "computational"} updated={lastRun} />}
+      {canonicalPath !== "/search/" && <form class="header-search" role="search" action="/search/" method="get">
         <label class="sr-only" for="header-search-query">Search topics</label>
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />
         <div id="header-search-panel" hidden>
@@ -106,10 +109,10 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <!--email_off--><main id="main"><slot /></main><!--/email_off-->
-    {!edition && <SponsorColumns heroAligned={landing} />}
+    {!edition && !collection && <SponsorColumns heroAligned={landing} />}
     </div>
     <footer>
-      <p>Auto-curated from {Astro.props.editionSources ?? (edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources")}. Summaries are machine-generated.</p>
+      {collection ? <p>Source records from arXiv and Crossref.</p> : <p>Auto-curated from {Astro.props.editionSources ?? (edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources")}. Summaries are machine-generated.</p>}
       {feed && <p>{!edition && <><a href="/about">How this works</a> · </>}<a href={feed}>{edition ? feedLabel : "RSS"}</a></p>}
       {lastRun && <p>Last pipeline run: <time datetime={lastRun}>{formatEastern(lastRun)}</time></p>}
     </footer>

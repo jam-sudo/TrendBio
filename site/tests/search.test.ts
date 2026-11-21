@@ -329,3 +329,21 @@ it.each(['dark', 'light'].flatMap(theme => [
     expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations).toEqual([]);
   },
 );
+
+it("finds a reviewed pilot topic and opens its exact rank", async () => {
+  await visit("/search/?q=Regret+bounds&field=computer-information");
+  await finished();
+  const link = page.locator('#search-results a[href$="#review-2026-11-18-9"]');
+  expect(await link.count()).toBe(1);
+  expect(await link.locator("../..").textContent()).toContain("Pilot · 2026-11-18");
+  await link.click();
+  expect(await page.locator(":target").getAttribute("value")).toBe("9");
+});
+
+it("includes every published pilot field and excludes withdrawn ranks from search", () => {
+  const records = JSON.parse(readFileSync("dist/pilot-search.json", "utf8")) as {url:string, filters:{field:string[]}}[];
+  const fields = readdirSync("pilot-editions");
+  for (const field of fields) expect(records.some(row => row.filters.field.includes(field))).toBe(true);
+  expect(records.some(row => row.url.includes("multifunctionality-soil-b88a"))).toBe(false);
+  expect(new Set(records.map(row => row.url)).size).toBe(records.length);
+});

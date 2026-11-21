@@ -4,8 +4,9 @@ import FieldArt from "./FieldArt.astro";
 import { editionInfo, type Field } from "../lib/editions";
 import { formatEastern } from "../lib/time";
 
-const { field, updated } = Astro.props as { field: Field; updated?: string | null };
+const { field, updated } = Astro.props as { field: Field | "materials"; updated?: string | null };
 const copy = {
+  materials: ["What connects materials science across fields?", "A reading collection from physics, chemistry and engineering."],
   computational: ["What moved in computational biology today", "bioRxiv, arXiv, PubMed, GitHub and industry."],
   biology: ["What moved in biology today?", "Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals."],
   physics: ["What moved in physics today?", "Quantum physics, optics, mesoscopic physics and cosmology."],
@@ -18,16 +19,16 @@ const copy = {
   engineering: ["What moved in engineering?", "How devices, structures and systems perform when put to the test."],
   "medicine-health": ["What moved in medicine and health?", "Disease mechanisms, clinical outcomes and patterns in population health."],
   "agriculture-food-veterinary": ["What moved in agriculture, food and veterinary science?", "Research on soils, crops, food production and animal health."],
-} satisfies Record<Field, [string, string]>;
+} satisfies Record<Field | "materials", [string, string]>;
 const [title, subtitle] = copy[field];
-const stage = field === "computational" ? "" : editionInfo[field].stage;
+const stage = field === "materials" ? "Collection" : field === "computational" ? "" : editionInfo[field].stage;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <h1 id="hero-title">{title}</h1>
-  <p>{subtitle} <span class="updated">{stage === "Pilot" ? "Pilot editions on selected dates." : <>
+  <p>{subtitle} {stage !== "Collection" && <span class="updated">{stage === "Pilot" ? "Pilot editions on selected dates." : <>
     {stage === "Beta" && "Beta · "}{updated ? <>Updated <time datetime={updated}>{formatEastern(updated)}</time>.</> : "Updated daily."}
-  </>}</span></p>
+  </>}</span>}</p>
   <div class:list={["hero-art", { "field-art": field !== "computational" }]}>
     {field === "computational" ? <Helix /> : <FieldArt {field} />}
   </div>

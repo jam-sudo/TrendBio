@@ -28,6 +28,7 @@ const identity = categoryStyle(ranked.category);
   <div class="compact-meta">
     <RankChange change={ranked.rankChange} />
     {!period && rise && <span class="badge" aria-label={rise.spoken}>{rise.value}</span>}
+    {ranked.fallbackSummary && <small>Fallback summary</small>}
     <span class="compact-category">{category?.label ?? ranked.category}</span>
   </div>
   {period && <SignalLine stats={ranked.stats} />}
@@ -40,6 +41,7 @@ const identity = categoryStyle(ranked.category);
     <h2><a class="topic-link" href={`/topic/${ranked.slug}/`}>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</a></h2>
     <ToolNames names={ranked.toolNames} />
     {ranked.summary && <p class="summary">{ranked.summary}</p>}
+    {ranked.fallbackSummary && <small>Fallback summary from source text</small>}
     {date && matches.length > 0 && <CrossCoverage {matches} {date} />}
   </div>
   <SignalLine stats={ranked.stats} />
