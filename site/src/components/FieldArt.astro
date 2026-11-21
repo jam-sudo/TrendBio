@@ -26,8 +26,8 @@ function galaxyArm(arm: number, t: number, spread = 0) {
 }
 
 const density = (x: number) => 98 - 81 * Math.exp(-.5 * ((x - 143) / 40) ** 2);
-const command = "[3, 1, 2].sort()";
-const commandWidth = command.length * 10;
+const command = 'echo "Hello, world!"';
+const commandWidth = command.length * 9;
 const cell = "M65 65 C61 41 84 22 116 18 C145 15 156 6 185 13 C208 18 218 34 240 49 C260 65 246 89 221 98 C191 110 167 101 147 105 C116 113 77 102 65 65Z";
 const river = "M161 65 C157 70 137 71 144 76 S179 80 165 86 S112 91 129 99 Q139 104 166 108";
 const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L117 24 L125 96 L133 73 L139 77 H152 Q160 77 169 64 Q177 53 187 68 Q194 77 203 77 H288";
@@ -77,7 +77,7 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
     <text x="65" y="48" textLength={commandWidth} lengthAdjust="spacingAndGlyphs" clip-path="url(#typed-command)">{command}</text>
     <g class="typing"><path class="entry-caret accent" d="M66 56h9" stroke-width="2.5"/></g>
     <g class="terminal-result">
-      <text x="65" y="72">[1, 2, 3]</text>
+      <text x="65" y="72">Hello, world!</text>
       <text x="44" y="96" class="prompt">&gt;</text>
       <path class="ready-caret accent" d="M66 104h9" stroke-width="2.5"/>
     </g>
