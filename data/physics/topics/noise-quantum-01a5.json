@@ -770,7 +770,7 @@
     0.00977401901036501,
     -0.05538662523031235
   ],
-  "headline": "Real-time decoders and control hardware co-designed to meet QEC latency bounds",
+  "headline": "Classical hardware co-designed to decode and track QEC within microsecond budgets",
   "history": [
     {
       "attached_item_ids": [],
@@ -898,10 +898,44 @@
         "rise_ratio": 1.7142857142857142,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantum",
+      "count_7d": 9,
+      "date": "2026-11-22",
+      "item_ids": [
+        "arxiv:2611.16271",
+        "arxiv:2611.16285",
+        "arxiv:2611.17652",
+        "arxiv:2611.19994",
+        "arxiv:2611.22247",
+        "arxiv:2611.23469",
+        "arxiv:2611.23786",
+        "arxiv:2611.24328",
+        "arxiv:2611.26447"
+      ],
+      "rank": 5,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.046088634587311716,
+        "rise": 1.7142857142857142,
+        "total": 0.8756840571589226,
+        "volume": 0.5856274687844196
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 9,
+        "published": 0,
+        "rise_ratio": 1.7142857142857142,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Classical Control Stack For Qec",
+  "label": "Real Time Classical Control For",
   "related": [
     "decoding-codes-88bf",
     "quantum-error-correction-4176",
@@ -909,8 +943,8 @@
   ],
   "secondary_categories": [],
   "slug": "noise-quantum-01a5",
-  "summary": "FPGA neural decoding below a microsecond, 1 μs Pauli-frame feedback, and multi-GPU relay-BP decoding treat real-time QEC latency as a hardware design target.",
-  "synthesis": "The dominant thread is co-design of the classical hardware that must keep pace with fault-tolerant quantum processors. On decoding, Rapids pairs a streaming neural decoder with FPGAs to decode surface-code syndromes in under a microsecond, with lower logical error rates than existing decoders. Pêlagos distributes relay belief-propagation decoding across multiple GPUs under real-time constraints, and a survey organizes hierarchical decoding by decoder- and code-level hierarchy, platform and latency trade-offs. CHEQ evaluates decoders concurrently on an FPGA using geometric-skip circuit-level noise sampling, matching Stim firing rates within 0.16%. QuFrame's control microarchitecture closes the QEC loop within 1 μs via real-time Pauli frame tracking. A second strand addresses platform-specific compilation and control: NEAT for AOD transport in neutral-atom arrays, an FPGA quantum data processing unit that cuts assembly latency, Lean-verified QCCD co-design (QCCDCert) scaling to 512 qubits, and MLIR-based circuit cutting (QWeaver). Common to these is treating latency and hardware constraints as primary design targets.",
+  "summary": "FPGA neural decoding, multi-GPU belief propagation and Pauli-frame microarchitectures now target sub-microsecond loops for fault-tolerant control.",
+  "synthesis": "The dominant thread is co-design of the classical hardware that must keep pace with fault-tolerant quantum processors. On decoding, Rapids pairs a streaming neural decoder with FPGAs to decode surface-code syndromes in under a microsecond, with lower logical error rates than existing decoders. Pêlagos orchestrates relay belief-propagation decoding across multiple GPUs under real-time constraints. A survey organizes hierarchical decoding by decoder- and code-level hierarchy, platform and latency trade-offs. CHEQ evaluates decoders concurrently on an FPGA using geometric-skip circuit-level noise sampling, matching Stim firing rates within 0.16%. QuFrame's control microarchitecture closes the QEC loop within 1 μs via real-time Pauli frame tracking. A second strand covers platform-specific compilation and control: NEAT for AOD transport in neutral-atom arrays, an FPGA-based quantum data processing unit that cuts assembly latency and measures NVQLink round-trip, Lean-verified QCCD co-design (QCCDCert) scaling to 512 qubits, and MLIR-based circuit cutting (QWeaver). Latency and hardware constraints are treated as primary design targets throughout.",
   "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-21"
+  "synthesized_on": "2026-11-22"
 }

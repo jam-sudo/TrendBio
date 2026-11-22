@@ -770,7 +770,7 @@
     -0.010345458053052425,
     -0.05687423050403595
   ],
-  "headline": "Compilers target hardware cost directly: pulse latency, routing, and two-qubit depth",
+  "headline": "Compilers target pulse latency, coupling constraints, and native connectivity instead of abstract gate count",
   "history": [
     {
       "attached_item_ids": [],
@@ -897,6 +897,38 @@
         "rise_ratio": 1.4285714285714286,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantum",
+      "count_7d": 7,
+      "date": "2026-11-22",
+      "item_ids": [
+        "arxiv:2611.18002",
+        "arxiv:2611.21270",
+        "arxiv:2611.22315",
+        "arxiv:2611.22630",
+        "arxiv:2611.23505",
+        "arxiv:2611.25341",
+        "arxiv:2611.26219"
+      ],
+      "rank": 11,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.4285714285714286,
+        "total": 0.7846882883321399,
+        "volume": 0.5288743031666463
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 7,
+        "published": 0,
+        "rise_ratio": 1.4285714285714286,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -908,8 +940,8 @@
   ],
   "secondary_categories": [],
   "slug": "quantum-circuit-compilation-0208",
-  "summary": "New preprints tie compilation to hardware cost metrics, reporting gains over Qiskit O3 and EPOC baselines and cutting QAOA two-qubit depth.",
-  "synthesis": "The dominant thread is compilation guided by hardware-level cost rather than abstract gate count. SCOPE uses an operator Schmidt time surrogate to reduce pulse execution latency and reports gains over EPOC on 104 benchmarks. The quspect SDK selects routings after coupling-constrained resynthesis, reaching 0.616x Qiskit O3 two-qubit gates on 55 circuits across five targets. For Max-Cut QAOA on non-native graphs, MinLA surrogates prune interactions to lower two-qubit depth, and classical configuration recovery follows. CAVQS adds variational synthesis with unitary redistribution and mid-circuit dynamic reconstruction. Adjacent items on speed limits, QSVT inversion degree, and quantum Hamiltonian descent are algorithmic or theoretical neighbors rather than compilation results.",
+  "summary": "Preprints from Nov 13–19 tie compilation to execution latency, coupling-constrained resynthesis, and non-native graph connectivity, with benchmark gains over Qiskit O3 and EPOC.",
+  "synthesis": "The dominant thread is compilation optimized against hardware-level cost rather than abstract gate count. SCOPE guides compilation with an operator Schmidt time surrogate to cut pulse execution latency, and is reported to beat EPOC on 104 benchmarks. The quspect SDK selects routings after coupling-constrained resynthesis, using 0.616x the two-qubit gates of Qiskit O3 on 55 circuits across five targets. For Max-Cut QAOA on non-hardware-native graphs, MinLA surrogates prune interactions to reduce two-qubit depth, and classical configuration recovery restores solution quality. CAVQS adds variational synthesis with QR-based unitary redistribution and dynamic reconstruction using mid-circuit operations. The speed-limit, bounded QSVT inversion, and quantum Hamiltonian descent preprints are algorithmic or theoretical neighbors, not compilation results.",
   "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-20"
+  "synthesized_on": "2026-11-22"
 }
