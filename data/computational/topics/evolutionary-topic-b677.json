@@ -770,7 +770,7 @@
     0.0015608406392857432,
     -0.0485321581363678
   ],
-  "headline": "Binder design targets antigen variants, peptide latent spaces and simulated binding data",
+  "headline": "DockQ-style metrics extended to glycan poses and molecular dynamics interfaces",
   "history": [
     {
       "attached_item_ids": [],
@@ -3328,10 +3328,38 @@
         "rise_ratio": 0.8888888888888888,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "structural",
+      "count_7d": 3,
+      "date": "2026-11-22",
+      "item_ids": [
+        "arxiv:2611.18259",
+        "biorxiv:10.64898/2026.11.19.767893",
+        "pubmed:10.1371/journal.pcbi.1014963"
+      ],
+      "rank": 39,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 0.8888888888888888,
+        "total": 0.5778874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 0.8888888888888888,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Computational Binder Design",
+  "label": "Protein Interface Quality Assessment",
   "related": [
     "framework-deep-residual-b311",
     "models-brain-b963",
@@ -3339,8 +3367,8 @@
   ],
   "secondary_categories": [],
   "slug": "evolutionary-topic-b677",
-  "summary": "Recent preprints move binder design beyond single-target affinity toward multi-variant, latent-space and data-scarcity objectives.",
-  "synthesis": "The common thread is binder design conditioned on objectives beyond affinity to one fixed target. Germinal Multi jointly optimizes one antibody paratope against multiple antigen variants, yielding designs that bind EGFR variants and neutralize SARS-CoV-2. The PDZ-binding study designs peptide motifs by moving along directions in a shared PDZ-PBM latent space learned from affinity prediction. VReceptor addresses data scarcity by generating sequence-dependent peptide binding data through pharmacophore-inspired weighting. What is new is the shift from static, single-target optimization toward evolving antigens, latent-space navigation and simulated training data. Modalities and validation standards differ across these preprints, so their results are not directly comparable.",
+  "summary": "Interface-scoring metrics are being adapted to glycan poses, MD frame comparison and protein-protein interface mapping.",
+  "synthesis": "The common thread is quantitative geometry of macromolecular interfaces, specifically how pose correctness and interface similarity are scored. CARVE applies oRMSD, irRMSD and Fnat with DP-scaled thresholds to protein-glycan binding poses, benchmarked on 1,974 complexes. MDQ provides a symmetric, reference-free, DockQ-inspired score for comparing protein-protein interfaces across molecular dynamics frames, yielding a distance metric for clustering. TopoPPI addresses a related but distinct goal, visualization: it extends OptCuts with a contact-weighted penalty to map protein-protein interfaces into low-distortion 2D atlases. What is new is the extension of interface-quality metrics to protein-glycan poses and to reference-free comparison across trajectory frames, alongside contact-weighted geometric mapping. The two preprints and one published article use different outputs and benchmarks, so their results are not directly comparable.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-20"
+  "synthesized_on": "2026-11-22"
 }

@@ -770,7 +770,7 @@
     0.006958817597478628,
     -0.03113020770251751
   ],
-  "headline": "Histology and sliced spatial data used to reconstruct unmeasured gene and protein expression",
+  "headline": "Histology and sparse spatial data used to reconstruct unassayed gene and protein expression",
   "history": [
     {
       "attached_item_ids": [],
@@ -3388,10 +3388,47 @@
         "rise_ratio": 2.727272727272727,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "single-cell",
+      "count_7d": 12,
+      "date": "2026-11-22",
+      "item_ids": [
+        "arxiv:2611.17705",
+        "arxiv:2611.17899",
+        "arxiv:2611.20368",
+        "arxiv:2611.21959",
+        "arxiv:2611.24104",
+        "biorxiv:10.64898/2026.11.10.765653",
+        "biorxiv:10.64898/2026.11.11.765857",
+        "biorxiv:10.64898/2026.11.14.766251",
+        "biorxiv:10.64898/2026.11.17.767145",
+        "biorxiv:10.64898/2026.11.17.767296",
+        "biorxiv:10.64898/2026.11.19.767173",
+        "biorxiv:10.64898/2026.11.19.767979"
+      ],
+      "rank": 4,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.05301766869335513,
+        "rise": 2.0,
+        "total": 1.0073357051737473,
+        "volume": 0.6523558257806837
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 12,
+        "published": 0,
+        "rise_ratio": 2.0,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Histology Driven Expression Reconstruction",
+  "label": "Inferring Unmeasured Expression",
   "related": [
     "immune-aging-cb9d",
     "regulatory-gene-9c82",
@@ -3401,8 +3438,8 @@
     "ml-ai"
   ],
   "slug": "amr-cabbage-cdaf",
-  "summary": "GeneFlow, SCOPE, HoloGene and st2sc extend spatial expression inference to larger panels, single-cell RNA-protein readouts and continuous 3D fields.",
-  "synthesis": "The leading thread treats histology and sparse spatial measurements as inputs for inferring expression that was not assayed. GeneFlow uses flow matching with histology and gene tokenizers to predict panels of up to 1,000 genes. SCOPE predicts single-cell RNA and protein levels from H&E images, using RNA-protein biomarker priors to improve Pearson correlation across 16 organs. Two methods target resolution and geometry rather than histology. st2sc, an attention-based transformer, deconvolves multicellular spots into single-cell profiles. HoloGene, an anisotropic conditional implicit neural representation, estimates continuous 3D gene fields from pre-registered slices. A second strand addresses perturbation response prediction. S1Pert predicts target-specific responses to unseen genetic perturbations, OCCAM combines denoised representations with gene interaction, text and protein features, and CIRCE infers graded signaling activity from combinatorial perturbation structure. Representation work includes MCT's multicellular gene embeddings, scUNVEIL's next-UMI pretraining on about 92M cells, and AlphaGenome 2's cell-state-conditioned variant-effect prediction.",
+  "summary": "New preprints predict large gene panels, single-cell RNA and protein, and 3D gene fields from H&E images and sliced spatial transcriptomics.",
+  "synthesis": "The dominant thread treats histology and sparse spatial measurements as inputs for reconstructing expression that was not directly assayed. GeneFlow applies flow matching with histology and gene tokenizers to predict spatial panels of up to 1,000 genes. SCOPE predicts single-cell RNA and protein levels from H&E images using RNA-protein biomarker priors, reporting improved Pearson correlation across 16 organs. Two methods address resolution and geometry. st2sc, an attention-based transformer, infers single-cell profiles from multicellular spots, and HoloGene, an anisotropic conditional implicit neural representation, lifts pre-registered slices into continuous 3D gene fields. A second strand targets perturbation response. S1Pert predicts target-specific responses to unseen genetic perturbations, OCCAM combines denoised representations with gene interaction, text and protein features, and CIRCE infers graded signaling activity from combinatorial perturbation structure. Representation work includes MCT's multicellular gene embeddings, scUNVEIL's next-UMI pretraining on about 92M cells, and AlphaGenome 2's cell-state-conditioned variant-effect prediction.",
   "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-21"
+  "synthesized_on": "2026-11-22"
 }

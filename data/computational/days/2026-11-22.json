@@ -1,0 +1,985 @@
+{
+  "date": "2026-11-22",
+  "domain": "computational",
+  "ranked": [
+    {
+      "category": "tools-infra",
+      "headline": "Cohort-scale storage, faster regression engines and standardised access to genomic resources",
+      "rank": 1,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.06748431127904105,
+        "rise": 2.526315789473684,
+        "total": 1.2822019143017798,
+        "volume": 0.5856274687844196
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 5,
+        "rise_ratio": 2.526315789473684,
+        "star_gain_7d": 0
+      },
+      "slug": "expanding-glycomics-0644",
+      "summary": "New formats and libraries target cohort-scale per-base data and genome-wide regression, while database updates expand underrepresented population variation.",
+      "synthesis": "The dominant thread is infrastructure that makes established analyses tractable at cohort or genome scale. pbzarr stores per-base data for thousands of samples in Zarr and is reported to be faster and smaller than D4 and bigWig. RapidGLM, a C++ library with multiple interfaces, is reported to accelerate count-regression differential expression, CRISPR screen and eQTL analyses 2.5-17.8x. A second thread is standardised, programmatic access. pyGENIE wraps AACR GENIE flat files with TMB and mutational signature integration. hlafactor integrates HLA functional annotations (tapasin dependency, expression, NK ligand groups) from two-field genotypes. Met4All packages Infinium methylation array QC through copy-number analysis in a dockerised Shiny app. Resource expansion forms a third strand: CNCB-NGDC adds thirteen new databases, and GI-DB catalogues variation in the underrepresented Indian population. A related public dataset provides haploblock-based genomic hashes for 2,548 1000 Genomes individuals. CATEomics adds model selection and ensembling of CATE estimators for high-dimensional omics."
+    },
+    {
+      "category": "genomics",
+      "headline": "New reference genomes and clade databases expand genomics for non-model marine taxa",
+      "rank": 2,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.06182002025796654,
+        "rise": 2.3333333333333335,
+        "total": 1.174580384901364,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 2,
+        "rise_ratio": 2.3333333333333335,
+        "star_gain_7d": 0
+      },
+      "slug": "reveals-genome-9303",
+      "summary": "Fresh tubeworm and red seaweed assemblies arrive alongside updated planarian and new stony coral multi-omics databases in NAR.",
+      "synthesis": "The dominant thread is genomic infrastructure for non-model eukaryotes, mostly marine. Two preprints report primary de novo assemblies. One is a 665 Mb draft genome of the seep tubeworm Lamellibrachia satsuma. It was assembled from Oxford Nanopore and Illumina data into 6,320 scaffolds and annotated, and the scaffold count indicates draft rather than chromosome-level contiguity. The other is a reference genome for the red seaweed Furcellaria lumbricalis, which spans a salinity gradient from the saline NE Atlantic to the brackish Baltic. Two NAR database papers operate at clade level. PlanMine 4.0 adds new planarian genomes, 70 flatworm transcriptomes and expression resources. CoralDB integrates functional and evolutionary multi-omics data for stony corals, which are reef foundation species that have little integrative multi-omics characterization. These items pair single-species references with curated, queryable platforms. Together they support comparative, evolutionary and ecological genomics in taxa without mature model-organism resources."
+    },
+    {
+      "category": "tools-infra",
+      "headline": "Curated microbial reference resources and reproducible genome analysis tooling advance",
+      "rank": 3,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.057667800603202035,
+        "rise": 2.1333333333333333,
+        "total": 1.0956882114608386,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 2,
+        "rise_ratio": 2.1333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "single-brings-9b39",
+      "summary": "New 16S and mOTUs reference resources plus workflow tools for nanopore 16S outputs, pairwise genome alignment and annotation scoring appeared this week.",
+      "synthesis": "The dominant thread is improving microbial taxonomic profiling through curated reference data and interoperable tooling, alongside reproducible comparative-genomics workflows. The mOTUs-db update links microbial taxonomy to genome-encoded function and environmental and geographic distributions, exposing profiling through a CLI and API. RADSuite targets species-level resolution in 16S studies by pairing RADlib, a curated 16S rRNA gene copy database, with RADx, which identifies the variable regions sequenced. VPHYL, an R Shiny app, converts Emu and EPI2ME wf-16s nanopore 16S abundance tables into phyloseq or BIOM objects with automated HTML reports, bridging long-read outputs to standard downstream ecosystems. On the genome side, nf-core/pairgenomealign wraps LAST pairwise whole-genome alignment in a scalable Nextflow pipeline with standard output formats and benchmarking. ABAQS scores annotation quality via completeness, gene model validity and protein profile accuracy, applied to over 1700 fungal genomes. Scopes differ, and the summaries do not support cross-tool performance comparisons."
+    },
+    {
+      "category": "single-cell",
+      "headline": "Histology and sparse spatial data used to reconstruct unassayed gene and protein expression",
+      "rank": 4,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.05301766869335513,
+        "rise": 2.0,
+        "total": 1.0073357051737473,
+        "volume": 0.6523558257806837
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 12,
+        "published": 0,
+        "rise_ratio": 2.0,
+        "star_gain_7d": 0
+      },
+      "slug": "amr-cabbage-cdaf",
+      "summary": "New preprints predict large gene panels, single-cell RNA and protein, and 3D gene fields from H&E images and sliced spatial transcriptomics.",
+      "synthesis": "The dominant thread treats histology and sparse spatial measurements as inputs for reconstructing expression that was not directly assayed. GeneFlow applies flow matching with histology and gene tokenizers to predict spatial panels of up to 1,000 genes. SCOPE predicts single-cell RNA and protein levels from H&E images using RNA-protein biomarker priors, reporting improved Pearson correlation across 16 organs. Two methods address resolution and geometry. st2sc, an attention-based transformer, infers single-cell profiles from multicellular spots, and HoloGene, an anisotropic conditional implicit neural representation, lifts pre-registered slices into continuous 3D gene fields. A second strand targets perturbation response. S1Pert predicts target-specific responses to unseen genetic perturbations, OCCAM combines denoised representations with gene interaction, text and protein features, and CIRCE infers graded signaling activity from combinatorial perturbation structure. Representation work includes MCT's multicellular gene embeddings, scUNVEIL's next-UMI pretraining on about 92M cells, and AlphaGenome 2's cell-state-conditioned variant-effect prediction."
+    },
+    {
+      "category": "genomics",
+      "headline": "Joint models and multi-layer data sharpen gene discovery and effector prioritization",
+      "rank": 5,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.05202074177967262,
+        "rise": 1.8823529411764706,
+        "total": 0.9883940938137797,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 2,
+        "rise_ratio": 1.8823529411764706,
+        "star_gain_7d": 0
+      },
+      "slug": "association-adjusting-2e22",
+      "summary": "New kernel, phenotype-scale and multi-tissue/single-cell frameworks move association analysis beyond marginal single-variant tests toward gene-level inference.",
+      "synthesis": "The dominant thread is association inference that jointly models heterogeneous variant classes, phenotypes or functional layers rather than relying on marginal single-variant tests. PrediXSKAT embeds PrediXcan-predicted expression into the SKAT kernel, testing rare coding and common cis-regulatory variants together to improve gene-level power. GiMat extends multivariate kernel regression to test SNP gene-gene interactions across multiple dichotomous phenotypes. SIQReg addresses a usually fixed upstream choice, learning a phenotype scale transformation that minimizes quantile heterogeneity and improves GWAS, TWAS and polygenic prediction in UK Biobank. A second strand targets post-GWAS effector-gene prioritization at type 2 diabetes loci: CAS-X integrates fine-mapped eQTL PIPs and allelic fold changes across five metabolic tissues, while CELL-X combines fine-mapped T2D genes with single-cell islet atlas data in an out-of-memory framework to prioritize beta-cell-relevant genes by cell type and disease state. SIQReg and GiMat are published; the other three remain preprints."
+    },
+    {
+      "category": "tools-infra",
+      "headline": "Curated biomedical knowledgebases expand content and add ML, AI curation and programmatic access",
+      "rank": 6,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.05169122969057083,
+        "rise": 1.8333333333333333,
+        "total": 0.9821333641208457,
+        "volume": 0.5588306254094444
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 1,
+        "published": 7,
+        "rise_ratio": 1.8333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "discovery-database-1f96",
+      "summary": "November 2026 updates to canSAR, CIViC, DGIdb, HIPPIE, FusionGDB, PRGdb and CiliaHub, plus the IDKG preprint, extend curated resources with new data layers and interfaces.",
+      "synthesis": "The dominant thread is curated domain resources growing in content while adding predictive or machine-oriented layers. canSAR 2026 adds ML predictors, druggability tools and agentic-AI protein tools; CIViC 2026 adds Feature entities, Molecular Profiles, AI-guided curation and ClinVar submission; PRGdb 5.0 adds DREM deep-learning prioritization across 874,967 candidate proteins. DGIdb contributes new sources, Python/R clients, Docker images and versioned releases, improving interoperability and reproducibility. HIPPIE 3.0 reaches about 1.2M experimentally supported PPIs and adds negative training sets, while FusionGDB 3.0 covers 156K fusion genes with personalized fusion protein sequences. CiliaHub curates over 2,500 ciliary genes with ClinVar variants. The IDKG preprint integrates 20 sources into a Neo4j graph (4.6M nodes, 26M edges). Not all resources add AI components."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Latent and probabilistic models add spatial structure, 3D geometry and interpretability to omics",
+      "rank": 7,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0508485510462963,
+        "rise": 1.7647058823529411,
+        "total": 0.9661224698796297,
+        "volume": 0.6523558257806837
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 7,
+        "published": 5,
+        "rise_ratio": 1.7647058823529411,
+        "star_gain_7d": 0
+      },
+      "slug": "size-detection-antimicrobial-da52",
+      "summary": "New spatial omics methods pair latent-variable and foundation models with 3D reconstruction, causal identifiability and statistical tests of embedding fidelity.",
+      "synthesis": "The common thread is structured latent representations for spatial and single-cell omics. multiCAsp places a graph-Laplacian spatial prior on joint multi-omic factors, and CIRCA uses self-supervised causal representation learning to obtain identifiable cell and niche programs. CASTLE adds cell-type-aware spatial graphs to contrastive domain detection. A second thread is 3D and morphology-linked inference: a rotation-equivariant network reconstructs cell shape from transcript point clouds, Space-map aligns serial sections into 3D atlases, and Loki2, GenVinci and sc-HistoMorphomics link H&E images to molecular readouts. Other works address evaluation and interpretability: velotest tests RNA velocity embedding fidelity, MiSA tests spatial dysbiosis, and TMCells and the hybrid mixture model offer probabilistic, non-spatial alternatives. The emphasis falls on identifiable, interpretable spatial representations with explicit statistical assessment."
+    },
+    {
+      "category": "systems",
+      "headline": "Causal discovery methods are benchmarked under latent confounding, partial observation, and perturbation data",
+      "rank": 8,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.04966780060320203,
+        "rise": 1.7777777777777777,
+        "total": 0.9436882114608385,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 2,
+        "rise_ratio": 1.7777777777777777,
+        "star_gain_7d": 0
+      },
+      "slug": "metabolic-trait-robustness-microbial-e869",
+      "summary": "Two new benchmarks compare temporal and interventional causal discovery for biochemical and gene regulatory networks, stressing realistic observability limits.",
+      "synthesis": "The dominant thread is head-to-head evaluation of causal discovery for biological networks under realistic constraints. A bioRxiv preprint benchmarks temporal methods (tMIIC, PCMCI+/LPCMCI, SVAR-FCI) on simulated biochemical kinetic models, in fully and partially observed settings with latent confounders and unobserved variables. A published comparison evaluates interventional causal structure learning algorithms on synthetic and CRISPR perturbation data for gene regulatory network inference. The emphasis is on assessing existing methods under partial observability and interventional data rather than proposing new algorithms. Other items are looser fits: LaMe, a joint linear-Gaussian latent mediation framework for high-dimensional exposure-mediator-outcome systems; a tutorial on neural simulation-based inference for cognitive models; and hierarchical dynamical surrogates of trust-game behavior. They share a model-inference orientation but not the network benchmarking focus."
+    },
+    {
+      "category": "transcriptomics",
+      "headline": "Long-read DNA and RNA methods are benchmarked for SVs, isoforms, and m6A calling",
+      "rank": 9,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.04771655727374985,
+        "rise": 1.6666666666666667,
+        "total": 0.9066145882012471,
+        "volume": 0.5288743031666463
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 4,
+        "rise_ratio": 1.6666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "vaccine-candidates-9149",
+      "summary": "New benchmarks compare local assembly for SV calling, Kinnex RNA-seq for diagnosis, and Dorado m6A calling, while HARICOT assembles nanopore signals without basecalling.",
+      "synthesis": "The dominant thread is benchmarking and calibration of long-read analysis. One preprint compares five local-assembly consensus strategies for SV calling on simulated and real HiFi and ONT data and finds data-type-dependent performance. A Genome Medicine study evaluates PacBio Kinnex RNA-seq against short-read sequencing for Mendelian diagnosis in 50 individuals, with a new isoform pipeline. An eLife study benchmarks Dorado versions for direct-RNA m6A against GLORI and proposes stringent filtering and a best-practice workflow. HARICOT assembles raw nanopore signals without basecalling. GapCNV, TERRACE 2.0 and the Drosophila transposon-isoform study address CNV detection, circular RNA assembly and isoform diversity, and are adjacent to the long-read methods. The items do not show joint variant and modification calling."
+    },
+    {
+      "category": "transcriptomics",
+      "headline": "Tumour transcriptomic atlases and spatial tools converge on queryable, multimodal resources",
+      "rank": 10,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.047386511216648664,
+        "rise": 1.625,
+        "total": 0.9003437131163246,
+        "volume": 0.6098681622198213
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 4,
+        "rise_ratio": 1.625,
+        "star_gain_7d": 0
+      },
+      "slug": "automated-microscopy-2e31",
+      "summary": "New tumour databases and spatial methods pair expanded single-cell and spatial datasets with tools for annotation, imputation and cross-modal integration.",
+      "synthesis": "The dominant thread is the consolidation of tumour transcriptomic data into public, queryable resources, with spatial data increasingly part of the analysis layer. TISCH3 expands to 477 datasets, including 69 spatial transcriptomics collections. A pan-cancer single-cell screen of 42 cancers reports conserved tumour microenvironment programs and releases an atlas with scTME software. PDAC BioPortal merges bulk, single-nucleus and spatial pancreatic cohorts, and DriverDBv5 and X-BCRdb add multi-omics driver and BCR-paired single-cell databases. Methods address data limits: SpaceMACE adds spatial context to tumour-cell annotation, ARC-Impute regularises cell-to-spot mapping for gene imputation, and GatorAnchor and HIT-Fuse target multimodal integration. Siphon-seq is a platelet RNA-seq method and sits outside the tumour-atlas thread."
+    },
+    {
+      "category": "single-cell",
+      "headline": "Conclusions in omics and neural data shift with null models, evaluation depth and replicate noise",
+      "rank": 11,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.04691622969057083,
+        "rise": 1.76,
+        "total": 0.8914083641208458,
+        "volume": 0.5588306254094444
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 8,
+        "published": 0,
+        "rise_ratio": 1.76,
+        "star_gain_7d": 0
+      },
+      "slug": "fate-phenotypic-98f3",
+      "summary": "Preprints show that null construction, evaluation depth and replicate structure can alter apparent effects and method rankings, motivating explicit robustness audits.",
+      "synthesis": "The dominant thread is that reported effects and method rankings depend on analytic and evaluation choices, and several preprints quantify this explicitly. Rich-club analysis of Alzheimer's EEG can create or erase group differences depending on null network construction and hub re-identification. Proteomic co-abundance method rankings change with evaluation depth, with no method dominating. In drug-tolerant PC9 cells, replicate libraries set the noise floor, assessed by a library-level permutation test. The stroke efferocytosis study scores readouts against expression-matched nulls, and the striatal optogenetics reanalysis adds permutation and leave-one-out checks. spicyR v2 offers a permutation-free co-localisation test that corrects image differences. A conditioned sequence model predicts interferon-beta response but not stimulus-dependent genetic effects. Not all items are framed as audits."
+    },
+    {
+      "category": "single-cell",
+      "headline": "Inferring cell movement and ancestry from snapshots, sequencing and spatial lineage data",
+      "rank": 12,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.04432002025796654,
+        "rise": 1.5555555555555556,
+        "total": 0.8420803849013642,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 1,
+        "rise_ratio": 1.5555555555555556,
+        "star_gain_7d": 0
+      },
+      "slug": "scientific-fair-5429",
+      "summary": "New methods reconstruct immune trafficking, metastatic migration histories and lineage-versus-niche effects from static or indirect tumor and tissue measurements.",
+      "synthesis": "The shared thread is recovering dynamic or historical processes from static measurements. CellVADIS applies optimal transport to single-cell snapshots to infer cross-tissue immune cell trafficking. MACH2 enumerates all optimal metastatic migration histories from DNA sequencing data and adds a clone-location parsimony criterion, so the full solution space is characterized rather than a single history. SOUR separates heritable lineage effects from spatial microenvironment effects on tumor cell expression in spatial lineage tracing data. The arginine tumor-immune model, calibrated to mouse data, is the outlier: it is a mechanistic simulation with virtual cohorts predicting immune escape and anti-ARG1/PD-1 synergy, not an inference method for trafficking or lineage. Relative to the previous emphasis on velocity fields and signalling within spatial transcriptomics, the focus moves to inter-tissue trafficking, ambiguity in migration histories, and separating inherited from environmental variation."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Structure-free and language-model-conditioned models target affinity, kinetics and turnover",
+      "rank": 13,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.04395351488891632,
+        "rise": 1.5238095238095237,
+        "total": 0.83511678288941,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 3,
+        "rise_ratio": 1.5238095238095237,
+        "star_gain_7d": 0
+      },
+      "slug": "sequences-promoter-38cf",
+      "summary": "New models predict affinity, dissociation kinetics and turnover from sequence and ligand representations, shifting scoring away from docked structures.",
+      "synthesis": "The common thread is predicting protein-ligand and related molecular quantities from learned representations rather than from explicit complex geometry. STORM is a lightweight structure-free model for binding affinity. MGCA pairs ESM2 embeddings with Morgan fingerprints in a multi-granularity cross-attention mixture-of-experts to predict dissociation kinetics (Koff). EnzRef adapts frozen protein language models with reference-centered cross-attention and role-aware recomposition of reactant/product conditions for enzyme turnover. ReMoD-Mol (multimodal fusion with distillation) and ontology pre-training for metabolites extend the representation question to property prediction. The provided summaries do not describe validation protocols or benchmark diagnostics for binding scores, so evidence on scoring reliability is limited to the baseline comparisons reported, such as ReMoD-Mol against 14 baselines."
+    },
+    {
+      "category": "tools-infra",
+      "headline": "Ground-truth simulation, fast relatedness inference and unified references support comparative genomics",
+      "rank": 14,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.04264437151583324,
+        "rise": 1.5,
+        "total": 0.8102430588008315,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      },
+      "slug": "trees-phylogenetic-d93f",
+      "summary": "New resources pair known-truth simulation, a 1000x faster relatedness method and a consolidated ERV reference to make comparative inference more testable and scalable.",
+      "synthesis": "The items address distinct problems in comparative sequence analysis, so the shared thread is infrastructure for evaluating and scaling evolutionary inference rather than a common algorithm. OrthoSimulator generates empirically calibrated datasets with known orthogroups and gene trees, supplying ground truth for benchmarking orthology inference. fastpmr is a memory-efficient pairwise mismatch-rate method for relatedness inference that runs over 1000x faster than READv2 and is used to screen the global ancient DNA record. ERV Navigator integrates human endogenous retrovirus annotations, nomenclatures and genomic loci into one phylogenetically informed reference. What is new is the combination of explicit truth or reference frameworks with scalable tooling, which makes comparative inference easier to validate and apply at larger scale."
+    },
+    {
+      "category": "single-cell",
+      "headline": "Explicit statistical and mechanistic models infer regulatory, spatial and copy-number structure from expression data",
+      "rank": 15,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.2941176470588236,
+        "total": 0.7911775349878873,
+        "volume": 0.5588306254094444
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 5,
+        "rise_ratio": 1.2941176470588236,
+        "star_gain_7d": 0
+      },
+      "slug": "coding-rnas-generates-6c5b",
+      "summary": "New models span ODE, network-topology, Bayesian and causal frameworks, plus cross-species and stress resources for single-cell transcriptomic inference.",
+      "synthesis": "The common thread is explicit model structure applied to expression data to recover regulatory or causal organization. A topology study finds feedback loops restore heterogeneous expression from homogeneous populations. A semi-mechanistic ODE model fitted to RNA-seq derives zebrafish maternal-to-zygotic transition expression clusters. Echidna jointly infers copy number alterations from scRNA-seq and bulk WGS across samples and treatment time points. Causal-discovery algorithms applied to Visium liver data model local and neighbor-derived effects in senescence. A review curates 161 cell-cell communication methods. LACA (134 species) and CellStressDB (131 studies, Geneformer) supply cross-species and stress-response resources. A Shapley-explained ML analysis of CRISPR-Sirius imaging reports chromosome-specific responses to serum starvation, though it is not an expression model. The items address distinct questions and share no single method."
+    },
+    {
+      "category": "genomics",
+      "headline": "Sequence-based models predict mutation and genome-editing outcomes from local DNA context",
+      "rank": 16,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.039519371515833235,
+        "rise": 1.5,
+        "total": 0.7508680588008314,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      },
+      "slug": "docking-dynamics-049f",
+      "summary": "Three preprints apply sequence models to somatic mutation, Cas9 repair and base-editing outcomes, each conditioning predictions on local sequence context.",
+      "synthesis": "The shared thread is predicting DNA-level outcomes from local sequence context. EAGLE-MUT trains DNA language models on sparse somatic substitution data from esophageal adenocarcinoma and melanoma to learn context-dependent mutation probabilities. In editing, a large Cas9 study covering about 37,000 sites examines single-nucleotide microhomology in precision editing, reports that A-rich PAM editors are predicted better, and introduces the CRIfuser diffusion model. BEguided adds variant-specific guide design and comparison across 38 base-editor profiles, with BEguidedOFF for off-target prediction. What is new is the use of language-model and diffusion architectures, and of systematic cross-editor evaluation, for these tasks. All three are preprints, and the summaries do not report head-to-head benchmarks against established tools."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Benchmarks with inactives and PLM embeddings target enzyme and protein function prediction",
+      "rank": 17,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.038894371515833234,
+        "rise": 1.3333333333333333,
+        "total": 0.7389930588008314,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "end-ampair-ee7c",
+      "summary": "New benchmarks with validated negatives and ESM2-based classification test how well models predict enzyme and protein function beyond curated positives.",
+      "synthesis": "The dominant thread is evaluation and prediction of protein function with curated, bias-aware data. MCDBench supplies 792 medium-chain dehydrogenase enzyme-substrate-cofactor combinations that include validated inactives, enabling comparison of four predictors of catalytic performance with negatives represented. PhageLysClass applies ESM2 embeddings in a hierarchical classifier to recognize phage lytic proteins and separate endolysins, an evidence-aware sequence-based function assignment. HiFiPL-Bench is a looser fit: it addresses protein-ligand scoring functions rather than sequence-based enzyme function, but shares the emphasis on fidelity-first, bias-aware benchmarks built from PDB and BindingDB and used to diagnose nine methods. What is new is the focus on diagnostic benchmark design, including negative cases and bias control, alongside protein language model embeddings."
+    },
+    {
+      "category": "tools-infra",
+      "headline": "Brain cell-resolved atlases and tools link gene regulation to disease, development and connectivity",
+      "rank": 18,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.03889041612393311,
+        "rise": 1.2857142857142858,
+        "total": 0.7389179063547291,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 1,
+        "rise_ratio": 1.2857142857142858,
+        "star_gain_7d": 0
+      },
+      "slug": "basal-ganglia-29a7",
+      "summary": "New brain atlases and tools standardize data and map cell-type regulation across disease, development and connectivity, making cross-study reuse and interpretation easier.",
+      "synthesis": "The dominant thread is resources and tools that place brain cell-type-resolved molecular data in disease, developmental or anatomical context. A harmonized set of wild-type and Alzheimer's disease model mouse sc/snRNA-seq datasets standardizes sample annotations for reuse. A multi-omic QTL atlas from 231 human prefrontal cortex donors links disorder genetic risk to cell-type and developmental regulation, and scCVD integrates scRNA-seq and scATAC-seq across 701 samples and over 4.68 million cells for cerebrovascular disease. Tool-oriented work extends interpretation to other layers: SCOUBI maps axon-dendrite interfaces from extrasomatic RNA in mouse spatial transcriptomics, VEGABrain projects bulk RNA-seq onto developing human brain atlas surfaces with ssGSEA enrichment maps, and CSDX relates human gene expression to mouse connectome strength. Tissue, species and modality differ across these works."
+    },
+    {
+      "category": "proteomics",
+      "headline": "Regional imaging and molecular profiles resolve structured Alzheimer's states and tissue-level changes",
+      "rank": 19,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.2,
+        "total": 0.7178874303166647,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 1.2,
+        "star_gain_7d": 0
+      },
+      "slug": "neuronal-state-4725",
+      "summary": "New work pairs tissue-scale imaging with snRNA-seq and CSF proteomic geometry to resolve disease-relevant structure in Alzheimer's and ageing.",
+      "synthesis": "The dominant thread is resolving disease-related structure by coupling molecular data to anatomically or topologically defined organization, with Alzheimer's disease as the main context. The HypoAD atlas combines MRI from 458 people with 614,403 snRNA-seq nuclei to map hypothalamic volume and cell-type changes in ageing and Alzheimer's disease. A preprint applies diffusion geometry and persistent homology to ADNI CSF proteomics, identifying two dominant Alzheimer's states that differ in tau biomarkers. The corpus callosum work is methodological: it resamples the midsagittal structure onto a standardized grid for spatially detailed diffusion MRI, avoiding inter-subject misalignment. It is not molecular, but it reflects the same emphasis on standardized spatial frameworks. What is new is the pairing of imaging-derived structure with cell-type or state-level molecular resolution, though the items do not jointly integrate these layers."
+    },
+    {
+      "category": "tools-infra",
+      "headline": "Expanded structural databases and comparison tools for RNA, peptide and covalent ligand modeling",
+      "rank": 20,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.1666666666666667,
+        "total": 0.7114004051593307,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 1,
+        "published": 3,
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "cryo-structure-34d6",
+      "summary": "Four November 2026 releases update structure-annotated RNA, protein-peptide and covalent ligand resources, including AlphaFold3 cofolding models in CovPDB 2.0.",
+      "synthesis": "The dominant thread is infrastructure that organizes experimental and predicted 3D structural information for downstream modeling. RR3DD 2.0 expands RNA 3D classification to 15,764 chains, grouped by RMscore into 1,042 clusters and mapped to Rfam. CovPDB 2.0 grows to about 6200 covalent protein-ligand complexes and adds AlphaFold3 cofolding models plus predicted cysteine ligandability. Propedia 26 updates a protein-peptide interaction database explicitly aimed at machine learning applications. RNAcomp2D differs in kind: it is a web tool that runs thermodynamic and deep learning secondary structure predictors and visually compares their outputs. The common emphasis is curated, structure-linked resources and comparison layers; the items do not show physics-based modeling itself, and benchmarking evidence is not given in the summaries."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Testing whether EEG and neural decoders generalize beyond their training conditions",
+      "rank": 21,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.28,
+        "total": 0.7068560120640407,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.28,
+        "star_gain_7d": 0
+      },
+      "slug": "feedback-hysteresis-0fed",
+      "summary": "Recent preprints test whether EEG and neural decoders hold up across subjects, stimuli and transfer settings, not just within the measured conditions.",
+      "synthesis": "The common thread is how far predictive performance in EEG and neural decoding extends beyond the conditions in which it was measured. ReBrain transfers an intracranial EEG prior to scalp recordings without paired data or fine-tuning and reports improved downstream clinical analysis. AMRT reports cross-subject generalization for continuous motor decoding through a shared two-stage design. The BCI adaptation study treats updating frozen EEG encoders as a resource-priced decision, using gated Bayesian heads. The EEG-video study is the most explicit on validity: contrastive alignment beats CCA across subjects and seen stimuli but not novel videos, and a sham control shows that accuracy can be spurious. NeuroSim contributes a simulator that injects disease biomarkers into synthetic multichannel EEG. What is new is the attention to transfer, adaptation cost and controls. None of the items tests a causal or mechanistic account, so mechanistic validity remains open."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Benchmarks and transfer tests reshape how biomedical prediction claims are validated",
+      "rank": 22,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.28,
+        "total": 0.7068560120640407,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.28,
+        "star_gain_7d": 0
+      },
+      "slug": "targeting-design-7b7f",
+      "summary": "Cross-cohort, cross-platform and standardized benchmark designs are now testing whether omics and tabular predictors generalize beyond single cohorts.",
+      "synthesis": "The shared thread is how validation design determines what a predictive claim in biomedical machine learning can support. PRTS evaluates in-context prediction of clinical endpoints from bulk transcriptomes across diseases and platforms without per-cohort training. TabBioMed standardizes preprocessing across 94 public tabular datasets and compares 23 models, reporting that foundation models lead while tree-based methods remain competitive. SNOWS tests transfer to CGGA, where C-index increases from 0.691 to 0.712. In contrast, SOSM reports a C-index of 0.768 on a single 184-patient ccRCC cohort. Elflow is benchmarked on public flow and CyTOF datasets. What is new is the move toward cross-platform and standardized comparison. Whether curated benchmarks reflect real deployment generalization is not established by these items."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Task-specific DNA and RNA language models encode biological constraints",
+      "rank": 23,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.03696184469536168,
+        "rise": 1.2,
+        "total": 0.7022750492118719,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 1,
+        "rise_ratio": 1.2,
+        "star_gain_7d": 0
+      },
+      "slug": "protein-generation-b3ca",
+      "summary": "Recent preprints and one published study pair nucleic acid language models with pretraining domains, conditioning, or functional oracles for specific tasks.",
+      "synthesis": "The shared thread is explicit encoding of biological constraints into nucleic acid language models, rather than reuse of generic embeddings. GPN, pretrained on 455 apicomplexan assemblies, improves epigenomic prediction in Plasmodium falciparum. MARRI couples pretrained RNA foundation model representations with opening penalties and hybridization gains in cross-RNA attention. B-RANKO, a 150M-parameter bidirectional decoder-only ncRNA model, supports both sequence generation and representation learning. GenNA conditions nucleotide generation on natural-language annotations across 2221 eukaryotic species. GENECraft and REGAL pair sequence models with functional oracles to design controllable regulatory DNA and tissue-specific enhancers. The items are heterogeneous in modality and goal; the dominant thread is specialization rather than a single method."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Probing what protein structure and foundation models encode about evolution",
+      "rank": 24,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.03671132460579262,
+        "rise": 1.2173913043478262,
+        "total": 0.6975151675100598,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 1,
+        "published": 3,
+        "rise_ratio": 1.2173913043478262,
+        "star_gain_7d": 0
+      },
+      "slug": "genome-nuclear-4f5c",
+      "summary": "Mechanistic and biological scrutiny of AlphaFold and protein foundation models now tests what they encode about evolution and structure.",
+      "synthesis": "The common thread is how far protein structure and sequence models faithfully capture evolutionary and biophysical reality. For experimentally validated non-globular proteins, AlphaFold predictions diverge from biologically relevant structural states, marking where outputs depart from the structures they aim to represent. AlphaInterp dissects AlphaFold 3 and reports that a few divergent MSA homologues suffice to recover structure, tracing the role of evolutionary information through pairformer latent geometry and confidence outputs. A review of transformer protein foundation models covers residue dependencies, pathogenicity and alignment-free evolutionary analysis. MolEvolvR is a practical tool that links domain-centric searches, phylogenies and domain architecture across superkingdoms. What is new is the shift from reporting performance toward mechanistic and biological scrutiny of what these models encode, paired with tools for evolutionary characterization."
+    },
+    {
+      "category": "genomics",
+      "headline": "Plasmid-host links and phage variation relate to mobile gene content in gut bacteria",
+      "rank": 25,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.03589437151583324,
+        "rise": 1.2,
+        "total": 0.6819930588008315,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 1,
+        "published": 2,
+        "rise_ratio": 1.2,
+        "star_gain_7d": 0
+      },
+      "slug": "amino-acid-6d41",
+      "summary": "Gut phage catalogues from 1,069 samples and 105-strain metabolic models now link mobile elements to host and diet.",
+      "synthesis": "The dominant thread is how mobile genetic elements and their host associations structure gut bacterial genomes. The ETEC preprint examines how plasmid-host associations shape the distribution of enterotoxigenic E. coli colonization factors. The TwinsUK phageome study builds a 116,740-vOTU catalogue from 1,069 gut metagenomes and links phage genomic variation to bacterial species and microbial metabolites. The C. difficile study addresses metabolic interactions rather than mobile elements directly: across genome-scale models of 105 strains under three diets with eight commensals, diet shaped interactions more than strain differences did. Together, the items point to host and environmental context as key determinants of gut genome content, though only the ETEC and phage work address mobile elements explicitly."
+    },
+    {
+      "category": "ml-ai",
+      "headline": "Biomedical knowledge graphs are being grounded in evidence and corrected for hub bias",
+      "rank": 26,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03576541612393311,
+        "rise": 1.2857142857142858,
+        "total": 0.679542906354729,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_ratio": 1.2857142857142858,
+        "star_gain_7d": 0
+      },
+      "slug": "concentrate-contacts-62cb",
+      "summary": "Recent preprints pair knowledge-graph reasoning with PubMed evidence, uncertainty propagation and topology correction for hypothesis generation.",
+      "synthesis": "The dominant thread is making knowledge-graph reasoning more evidence-aware and less distorted by graph structure. SPIDER grounds graph relations in PubMed evidence and maintains SPIDER-KG as an incrementally updated resource, while BiomedCAT derives user-shaped RTX-KG2c subgraphs from biomedical slides to support mechanistic hypothesis generation. The uncertainty-conditioned path-energy framework maps genomic model predictions over AlzKB and Hetionet to phenotype hypotheses. Topological correction appears in two items: Inverse Node Frequency normalises metapath features to reduce hub bias in target-adverse event prediction, and BRIDGE propagates genetic evidence over coupled protein and disease networks, raising target-indication coverage from 5.1% to 9.5%. SigMatch systematically evaluates how sample tissue biases transcriptomic disease-relationship predictions across correlation and rank measures. The tasks and methods differ, so the shared element is provenance, scoping and topological correction rather than a common architecture."
+    },
+    {
+      "category": "genomics",
+      "headline": "Computational RNA analyses address structured ncRNAs, sRNA targets and mRNA partitioning",
+      "rank": 27,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.03557002025796654,
+        "rise": 1.1666666666666667,
+        "total": 0.6758303849013642,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 2,
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "decoding-topic-d276",
+      "summary": "Comparative genomics and integrated sRNA target atlases now yield candidate structured ncRNAs and resources for bacteria and protists, with preprint findings still provisional.",
+      "synthesis": "The common thread is computational analysis of RNA sequence and structure, applied to genomes, transcriptomes and sequence-design problems. Two preprints apply comparative and integrative methods. A comparative genomics screen using CMfinder and R-scape identifies seven candidate structured ncRNA motifs across protist genomes, with covariation-based support. aureoRNA integrates phylogeny, public transcriptomes and computational predictions into an interactive atlas of Staphylococcus aureus sRNAs and their targets. What is new is covariation-based motif screening in protists and the combination of target predictions with public expression data in a reusable S. aureus resource. The other two items are not resources: a Cell study reports that RNA folding drives species-dependent partitioning of host mRNAs into Ebola virus condensates, and a Bioinformatics study models how promoter choice shapes 5' UTR-mediated translation in E. coli. Preprint findings remain provisional."
+    },
+    {
+      "category": "systems",
+      "headline": "Circuit architecture shapes locomotor synchronization and connectivity recovery",
+      "rank": 28,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.034190424147412184,
+        "rise": 1.263157894736842,
+        "total": 0.6496180588008315,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.263157894736842,
+        "star_gain_7d": 0
+      },
+      "slug": "bifurcation-topic-8fba",
+      "summary": "Spiking CPG and spinal-circuit models link architecture to locomotion, while in silico work tests connectivity recovery from activity.",
+      "synthesis": "The common thread is that circuit structure and operating regime determine which dynamics emerge and which connectivity can be inferred from activity. Two preprints move from structure to behavior. One introduces a composite synchronization metric for identifying antiphase locking in a biomorphic spiking CPG embedded in a neuromuscular loop. The other presents Rat v2, a biomechanical body, together with Rat NCAP, a spinal-circuit-based neural architecture, and GPU training infrastructure for simulating rat locomotion. The third preprint runs in the reverse direction: an in silico study shows how spatial constraints and dynamical regime affect recovery of structural connectivity from simulated spiking networks. What is new is the explicit linkage of architectural priors to locomotor control and of regime dependence to structural inference. The items do not share a common method or system, so the connection rests on the architecture-dynamics relationship rather than on shared tooling."
+    },
+    {
+      "category": "tools-infra",
+      "headline": "Open tools assign bacterial genomes to species and transmission groups from sequence data",
+      "rank": 29,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.0434782608695652,
+        "total": 0.647452647707969,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 1.0434782608695652,
+        "star_gain_7d": 0
+      },
+      "slug": "microbe-comprehensive-mapping-583d",
+      "summary": "Recent preprints and a database update offer open, reproducible workflows for bacterial genome typing and comparative resources.",
+      "synthesis": "The dominant thread is open, computationally accessible tools that organize bacterial genomic data into standardized groups. Robust Cluster Typing uses ribosomal proteins in a Snakemake/Python workflow to assign genomes to species-level clusters, demonstrated on Campylobacter. SNP2Cluster-Py is an open-source Python framework for context-aware core SNP clustering of pathogen isolates, tested on Klebsiella and pneumococcal WGS datasets. P2CS-Web is an updated resource linking prokaryotic two-component system repertoires to domain architectures, genomic neighbourhoods and sequence clusters. The items differ in scope: two are preprints presenting analysis workflows, while P2CS-Web is a curated database update. What is new is the pathogen-agnostic, reproducible treatment of species designation and transmission-cluster analysis from whole-genome data, with ribosomal proteins as the basis for species assignment in the first item."
+    },
+    {
+      "category": "genomics",
+      "headline": "Haplotype-resolved references and pangenome graphs reshape genomic inference",
+      "rank": 30,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.033550789488735765,
+        "rise": 1.0769230769230769,
+        "total": 0.6374650002859794,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 1,
+        "rise_ratio": 1.0769230769230769,
+        "star_gain_7d": 0
+      },
+      "slug": "rna-seq-single-8a97",
+      "summary": "Recent preprints and a pig pan-genome paper show that haplotype-aware references change expression, association and structural interpretation.",
+      "synthesis": "The dominant thread is the move from a single linear reference toward haplotype-resolved assemblies and pangenome graphs, and how that representation propagates into downstream inference. A haplotype-resolved Granny Smith apple genome shows that matched, parent-of-origin-resolved references alter RNA-seq differential expression and the biological conclusions drawn from it. A graph-pangenome workflow in Capsicum localizes k-mer GWAS hits and links capsaicinoid and aroma traits to haplotypes and candidate loci. PolyOrigin2 addresses the upstream step of haplotype reconstruction in multi-generational diploid and tetraploid pedigrees using Bayesian phasing and GBS error models. The pig pan-genome, built from three T2T and sixteen high-quality assemblies, extends this framework to centromere evolution, structural variation and genotype-phenotype mapping. What is new is the integration of haplotype-aware representation across reference construction, association testing and expression analysis, although the items occupy different stages of this pipeline."
+    },
+    {
+      "category": "single-cell",
+      "headline": "Single-cell and long-read assays resolve cell-type-specific regulatory states",
+      "rank": 31,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.032653353591299866,
+        "rise": 1.037037037037037,
+        "total": 0.6204137182346975,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 2,
+        "rise_ratio": 1.037037037037037,
+        "star_gain_7d": 0
+      },
+      "slug": "scalable-commodity-1353",
+      "summary": "Joint single-cell readouts of histone marks, Cas9 edits and methylation now link regulatory state to expression within defined cell types.",
+      "synthesis": "None of the four items presents a sequence-to-activity variant-effect model; the shared thread is experimental, cell-type-resolved measurement of regulatory state. Superb-seq jointly captures Cas9 edits and single-cell transcriptomes in K562, linking on- and off-target edits to expression changes. TrES-seq pairs scRNA-seq with nanobody-Tn5 profiling of H3K27ac, H3K27me3 and H3K9me3, relating epigenetic and transcriptional axes within individual cells. COMET assigns individual bulk long reads to cell types using cell-type-specific methylation across human tissues. A single-cell lncRNA atlas of more than 370,000 cells across 18 cancer types connects lncRNAs to regulons, CRISPR screens and survival. What is new is the pairing of perturbation or regulatory readouts with cell identity; such context-specific data could serve as benchmarks for regulatory variant predictors, though none of these items tests that use directly."
+    },
+    {
+      "category": "structural",
+      "headline": "Structure confidence and length bias undermine validation of biological predictors",
+      "rank": 32,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03225708631748774,
+        "rise": 1.1428571428571428,
+        "total": 0.6128846400322672,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_ratio": 1.1428571428571428,
+        "star_gain_7d": 0
+      },
+      "slug": "report-technical-4b00",
+      "summary": "Recent preprints test whether structure confidence, homology, and length confounds inflate reported performance of biological sequence and structure models.",
+      "synthesis": "The dominant thread is whether predictive scores for biological sequences and structures track the property of interest once confounds are controlled. The lanmodulin preprint reports that structural confidence (pTM, ipLDDT) is a poor selection filter for REE-binding designs and points to a function-trained model on measured Tb affinity. The antimicrobial peptide preprint enforces homology separation and length matching and finds that length alone separates classes. ProtCOVER applies family-level conformal calibration to variant effect predictors on unseen protein families, with density-ratio reweighting under descriptor shift. MADM and Calpha extend architecture scope: MADM combines per-residue structural descriptors with PLM embeddings across eight developability assays, while Calpha routes LLM residue states to a SimpleFold structure head for single-chain folding. What is new is explicit scrutiny of what these models exploit and what they are validated against, rather than headline accuracy alone."
+    },
+    {
+      "category": "systems",
+      "headline": "Evolutionary models link protein epistasis, lineage dynamics and codon selection patterns",
+      "rank": 33,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0909090909090908,
+        "total": 0.6062965212257555,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 0,
+        "published": 3,
+        "rise_ratio": 1.0909090909090908,
+        "star_gain_7d": 0
+      },
+      "slug": "protein-graph-835b",
+      "summary": "Three 2026 studies apply continuous-time, Bayesian and codon-model frameworks to protein, B-cell and avian gene evolution.",
+      "synthesis": "The dominant thread across these items is explicit, parameterized modelling of evolutionary processes fitted to sequence or lineage data. The protein study couples a Potts generative model to a continuous-time evolution process simulated by Gillespie algorithm, revealing epistatic signatures in protein evolution. TyCHE is a Bayesian phylogenetics package that infers time-resolved lineage trees with clock rates linked to discrete states, and its SimBLE simulator is applied to B cells and other heterogeneously evolving populations. The avian CYP4 study applies site, branch and branch-site codon models across four subfamilies in 363 genomes to relate selection patterns to lineage-specific evolution. The items differ in scope, and only the CYP4 study is a comparative genome analysis. What is new here is the pairing of epistasis-aware generative dynamics with time-resolved lineage inference, alongside codon-level selection scans across an avian genome set."
+    },
+    {
+      "category": "genomics",
+      "headline": "Latent haplotypes, linkage structure and unsampled phylogeny regions inferred explicitly",
+      "rank": 34,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0909090909090908,
+        "total": 0.6062965212257555,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.0909090909090908,
+        "star_gain_7d": 0
+      },
+      "slug": "therapy-measurement-6c9b",
+      "summary": "Three recent preprints recast pangenome genotyping, viral linkage disequilibrium and phylogenetic gap localization as explicit latent inference problems.",
+      "synthesis": "The common thread is replacing an implicit or simplifying step with an explicit formulation of an unobserved quantity. DiGi casts diploid genotyping on a pangenome haplotype trellis graph as an exact integer program, jointly inferring two haplotype paths from reads. LDEN estimates whole-genome linkage disequilibrium from short-read viral sequencing data by alternating projections onto positive semidefinite matrices, so the target is fitted under explicit constraints rather than read off directly. The third item, which localizes unsampled regions in partially sampled pathogen phylogenies from the observed tree alone, uses machine learning and beam search, so its link to the first two is weaker. What is new is the target itself: haplotype configurations, genome-wide linkage structure and unsampled portions of a phylogeny are each treated as latent objects to be inferred."
+    },
+    {
+      "category": "systems",
+      "headline": "Curated and learned genome-scale metabolic models extend flux and essentiality prediction",
+      "rank": 35,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03139502025796654,
+        "rise": 1.12,
+        "total": 0.5965053849013642,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_ratio": 1.12,
+        "star_gain_7d": 0
+      },
+      "slug": "telomere-genome-63e9",
+      "summary": "Curated genome-scale reconstructions and learned models now operate directly on isotope labeling, flux, and essentiality data.",
+      "synthesis": "The common thread is the construction and extension of genome-scale metabolic frameworks, increasingly coupled to data-driven inference. iJL1143 was built as a curated model of Fusarium venenatum A3/5 from an A. niger template, using rule-based curation and validation against batch fermentation biomass data. coralME v1.3 extends ME-model analysis to non-canonical amino acid translation, protein and RNA degradation reactions, arbitrary coupling coefficients, and cofactor essentiality in bacterial models; it is primarily a software and analysis extension rather than a learning method. On the inference side, HyperGenie applies directed hypergraph neural networks to genome-scale models to predict bacterial gene essentiality from wild-type flux features, and Flux Transformer infers mass-balanced fluxes from isotope labeling and measured reaction rates. The new element is learned models operating directly on curated reconstructions and labeling data. This pattern describes the dominant thread across these four preprints, not every item."
+    },
+    {
+      "category": "structural",
+      "headline": "Ion identity and competition shape structure across RNA condensates, XPR1 and ribosomes",
+      "rank": 36,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.031394371515833235,
+        "rise": 1.0,
+        "total": 0.5964930588008314,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "condensation-dynamics-e624",
+      "summary": "Recent simulation studies treat ion identity and competition as explicit determinants of structure rather than a uniform background.",
+      "synthesis": "The shared thread is the use of molecular simulation to attribute structural and functional behavior to specific ion species and their coordination geometry. In the RNA condensate study, coarse-grained simulations link multidentate Mg2+ phosphate coordination to spatial ion gradients and heterogeneous organization within condensates. The XPR1 study, combining over 110 µs of MD with free-energy calculations, attributes phosphate selectivity between H2PO4- and HPO4^2- to protein-phosphate interactions together with direct ion-ion competition. The bacterial 70S ribosome study shows that K+ versus Mg2+ identity alters flexibility and long-range coupling across the particle. What is new is the explicit treatment of ion identity and competition as determinants of structure, rather than ions as a uniform background. The items span different systems, so the common element is methodological and mechanistic rather than a shared biological context."
+    },
+    {
+      "category": "metabolomics",
+      "headline": "Quality checks and annotation validation for mass spectrometry omics data",
+      "rank": 37,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.031044158189001015,
+        "rise": 0.9655172413793104,
+        "total": 0.5898390055910193,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 1,
+        "rise_ratio": 0.9655172413793104,
+        "star_gain_7d": 0
+      },
+      "slug": "dna-foundation-4b28",
+      "summary": "Untargeted LC-MS workflows increasingly need post-annotation quality checks and accessible tools before results are interpreted or reused.",
+      "synthesis": "The dominant thread is the downstream stage of mass spectrometry analysis, where annotations and feature tables are checked before results are interpreted or reused. LipidRT uses retention time coherence to validate and expand lipid annotations in untargeted reversed-phase LC-MS lipidomics. MetaboRx, an R Shiny application, integrates quality metrics and preprocessing for LC-MS feature tables, flagging formatting errors and unreliable features. OSMSS, a no-code R Shiny application, parses proteomics search outputs and runs guided differential abundance, phosphosite and enrichment analyses. qPTM 3.0 consolidates fragmented quantitative PTM data into a knowledgebase, addressing data reuse rather than identification. What is new is the explicit emphasis on quality checks and accessible Shiny front ends for non-coders. None of the items describes a new identification algorithm or expanded search space."
+    },
+    {
+      "category": "structural",
+      "headline": "Enhanced sampling reveals multimodal binding in disordered and large protein complexes",
+      "rank": 38,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0434782608695652,
+        "total": 0.584952647707969,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.0434782608695652,
+        "star_gain_7d": 0
+      },
+      "slug": "simulations-structural-6310",
+      "summary": "Enhanced-sampling simulations now map multiple binding modes in full-length and disordered protein systems, with learned latent representations added to the analysis.",
+      "synthesis": "The dominant thread is treating biomolecular binding as a conformational ensemble to be sampled rather than a single bound structure. Two preprints apply enhanced sampling to multimodal binding. For full-length CYFIP1-eIF4E, funnel-restrained TAMD on Martini 3 combined with beta-VAE latent-space clustering identifies three recurring binding modes. For the intrinsically disordered FCP1 region binding Rap74, OneOPES simulations reveal a multimodal conformational landscape with thermodynamic characterization and introduce a Divide et impera free-energy decomposition. What is new is the coupling of learned latent representations with physics-based sampling. The simulated annealing preprint on de novo sequence design via Topological Spatial Chunking addresses inverse folding rather than conformational ensembles and sits at the periphery of this thread."
+    },
+    {
+      "category": "structural",
+      "headline": "DockQ-style metrics extended to glycan poses and molecular dynamics interfaces",
+      "rank": 39,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 0.8888888888888888,
+        "total": 0.5778874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 0.8888888888888888,
+        "star_gain_7d": 0
+      },
+      "slug": "evolutionary-topic-b677",
+      "summary": "Interface-scoring metrics are being adapted to glycan poses, MD frame comparison and protein-protein interface mapping.",
+      "synthesis": "The common thread is quantitative geometry of macromolecular interfaces, specifically how pose correctness and interface similarity are scored. CARVE applies oRMSD, irRMSD and Fnat with DP-scaled thresholds to protein-glycan binding poses, benchmarked on 1,974 complexes. MDQ provides a symmetric, reference-free, DockQ-inspired score for comparing protein-protein interfaces across molecular dynamics frames, yielding a distance metric for clustering. TopoPPI addresses a related but distinct goal, visualization: it extends OptCuts with a contact-weighted penalty to map protein-protein interfaces into low-distortion 2D atlases. What is new is the extension of interface-quality metrics to protein-glycan poses and to reference-free comparison across trajectory frames, alongside contact-weighted geometric mapping. The two preprints and one published article use different outputs and benchmarks, so their results are not directly comparable."
+    },
+    {
+      "category": "systems",
+      "headline": "Stochastic gene regulatory networks link expression noise to differentiation landscapes",
+      "rank": 40,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.030314826061287777,
+        "rise": 1.0909090909090908,
+        "total": 0.5759816951644677,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.0909090909090908,
+        "star_gain_7d": 0
+      },
+      "slug": "age-framework-b5f8",
+      "summary": "Recent preprints apply explicit stochastic network models to cell-state heterogeneity, population renewal, and large-scale GPU-based network optimization.",
+      "synthesis": "The common thread is the use of explicit gene regulatory network models to connect stochastic expression with cell-state heterogeneity and differentiation. The unified PDE-integral framework (arXiv:2611.19257) couples stochastic gene-regulatory dynamics with population renewal to define a dynamic Waddington landscape. The jaxgrn framework (arXiv:2611.20172) applies differentiable programming to optimize thousands of gene regulatory networks end-to-end on GPUs using stochastic simulation. The bioRxiv preprint (10.64898/2026.11.18.767571) examines network topology directly, reporting that positive-cycle tangles and mutual inhibition enable hierarchical differentiation patterns in simulated dynamic GRN models. What is new is the joint treatment of population-level renewal, landscape geometry, and large-scale network optimization, although all three items are preprints and remain unreviewed."
+    }
+  ],
+  "run": {
+    "arxiv_categories": [
+      "q-bio.*"
+    ],
+    "backfilled": false,
+    "finished": "2026-11-22T06:10:53.013751Z",
+    "model_cost_usd": 0.2579230999999993,
+    "notes": [],
+    "source_status": {
+      "arxiv": "ok",
+      "biorxiv": "ok",
+      "github": "ok",
+      "pubmed": "ok",
+      "rss": "ok"
+    },
+    "started": "2026-11-22T06:07:36.516348Z",
+    "status": "ok",
+    "synthesis_model": "claude-opus-5-5"
+  }
+}
