@@ -770,7 +770,7 @@
     -0.0018465404864400625,
     -0.051459457725286484
   ],
-  "headline": "Reconstruction and search methods are being reworked to curb error propagation across sequence analysis",
+  "headline": "Upstream reconstruction steps are being rethought to limit downstream error propagation",
   "history": [
     {
       "attached_item_ids": [],
@@ -862,6 +862,37 @@
         "rise_ratio": 1.2857142857142858,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantitative",
+      "count_7d": 6,
+      "date": "2026-11-22",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.06.764988",
+        "biorxiv:10.64898/2026.11.11.765824",
+        "biorxiv:10.64898/2026.11.11.765872",
+        "biorxiv:10.64898/2026.11.12.766154",
+        "biorxiv:10.64898/2026.11.15.765655",
+        "biorxiv:10.64898/2026.11.15.766754"
+      ],
+      "rank": 24,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03576541612393311,
+        "rise": 1.2857142857142858,
+        "total": 0.679542906354729,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_ratio": 1.2857142857142858,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -869,12 +900,12 @@
   "related": [
     "pangenome-reference-d002",
     "copy-number-4e4a",
-    "crispri-responses-25da"
+    "untitled-topic-b83f"
   ],
   "secondary_categories": [],
   "slug": "assembly-read-1791",
-  "summary": "Six preprints revise assembly, alignment and homology-search steps to reduce error propagation, from raw nanopore signals to GPU covariance-model search.",
-  "synthesis": "The shared thread is rethinking a stage of sequence reconstruction or search that normally passes errors downstream. WALRUS in HyPhy 3 estimates codon alignment, phylogeny and selection tests jointly, reducing indel-driven false positives in simulated and avian data. HARICOT assembles raw nanopore signals without basecalling, using fuzzy de Bruijn graphs and Hough-transform overlap detection, and improves contiguity over the comparators. TERRACE 2.0 combines outward paired-end and chimeric reads to assemble circular RNAs from short-read RNA-seq. Infernal-GPU parallelizes covariance-model scoring, recalibrates Rfam E-values and recovers remote structured RNA homologs missed by sequence filters. Two benchmarks address upstream choices: local assembly consensus strategies for long-read structural variant calling depend on read type and error profile, and polymerase choice affects HiFi assembly contiguity and completeness.",
-  "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-21"
+  "summary": "Joint, error-aware reconstruction methods for alignment, assembly and RNA search appear alongside benchmarks of upstream methodological choices.",
+  "synthesis": "The dominant thread is reconstruction stages that have traditionally passed errors downstream being reworked to control them at source. WALRUS in HyPhy 3 estimates codon alignment, phylogeny and selection tests jointly, reducing indel-driven false positives in simulated and avian data. HARICOT assembles raw nanopore signals without basecalling, using fuzzy de Bruijn graphs and Hough-transform overlap detection, and is reported to improve contiguity relative to comparators. TERRACE 2.0 combines outward paired-end and chimeric reads to assemble circular RNAs from short-read RNA-seq. Infernal-GPU parallelizes covariance-model scoring on GPUs, recalibrates Rfam E-values and recovers remote structured RNA homologs missed by sequence filters. Two benchmarks examine upstream choices: local assembly consensus strategies depend on read type and error profile, and polymerase selection affects HiFi assembly contiguity and completeness.",
+  "synthesis_model": "claude-haiku-5-5",
+  "synthesized_on": "2026-11-22"
 }
