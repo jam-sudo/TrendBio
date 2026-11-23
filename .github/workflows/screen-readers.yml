@@ -20,6 +20,8 @@ jobs:
         working-directory: ops/screen-readers
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: ops/screen-readers
       - uses: actions/setup-node@v4
         with:
           node-version: 22
