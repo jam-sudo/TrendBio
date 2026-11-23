@@ -1,0 +1,30 @@
+name: Published screen reader journey
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  read:
+    name: ${{ matrix.reader }} with Chromium
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            reader: NVDA
+          - os: macos-15
+            reader: VoiceOver
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ops/screen-readers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx --yes @guidepup/setup@0.29.2 setup --ci
+      - run: npx --yes @guidepup/setup@0.29.2 install
+      - run: npx playwright install chromium
+      - run: npx playwright test --reporter=line
