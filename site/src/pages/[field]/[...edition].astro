@@ -1,4 +1,7 @@
 ---
+import { editionChanges } from "../../lib/rank-changes";
+import EditionComparison from "../../components/EditionComparison.astro";
+import RankChange from "../../components/RankChange.astro";
 import RankingSignals from "../../components/RankingSignals.astro";
 import biologyAudit from "../../../../docs/expansion-measurements/2026-11-21/biology-source-review.json";
 import { csReview, pilotRows, placementChecks } from "../../lib/pilot-topics";
@@ -47,6 +50,7 @@ const halVolumes: { title: string; volume_doi: string; conference: string; colle
 const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
 const publisherUrls = new Map(publishers.map(journal => [journal.title, new URL(".", journal.endpoint).href]));
 const isPublic = publicEditions.includes(field);
+const comparison = isPublic && day ? editionChanges(day) : null;
 const samples = Astro.params.edition ? [] : pilotDates(field);
 const latestSample = samples[0];
 const sampleRows = latestSample ? pilotRows(field, latestSample) : [];
@@ -62,13 +66,13 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
   canonicalPath={path} landing={!Astro.params.edition} lastRun={day?.run.finished}>
   <div class="prose">
     {Astro.params.edition && <h1>{label}{stage && <small> {stage}</small>}</h1>}
-    {!Astro.params.edition && ["physics-expanded", "chemistry", "engineering"].includes(field) && <p>Related reading · <a href="/collections/materials/">Materials Science collection</a></p>}
-    {latestSample && field === "computer-information" && csReview.edition >= latestSample && <p><a href={`#ranking-review-${csReview.edition}`}>Read the {csReview.edition} ranking review</a> · {csReview.selected_topics.length} source-checked topics</p>}
-    {samples.length > 0 && <section aria-label="Dated pilot editions">
-      <h2>Read a pilot edition</h2>
-      <p>{latestSample} · {sampleRows.length} active {sampleRows.length === 1 ? "topic" : "topics"}{sampleRows.length > 0 && <> · {[...new Set(sampleRows.map(r => r.category))].join(", ")}</>}</p>
-      {checked.length > 0 && <p>Field placement review · November 20, 2026 · one supporting paper checked at {checked.length === 1 ? "rank" : "ranks"} {checked.map(c => c.original_rank).join(" and ")}.</p>}
-      <ul>{samples.map(date => <li><a href={`/pilots/${field}/${date}/`}>Rankings and papers · <time datetime={date}>{date}</time></a></li>)}</ul>
+    {!Astro.params.edition && ["physics-expanded", "chemistry", "engineering"].includes(field) && <p>Related reading · <a href="/collections/materials/">Materials Science collection</a> · <a href="/collections/energy/">Energy Storage &amp; Power Grids collection</a></p>}
+    {latestSample && <section aria-label="Dated pilot editions">
+      <h2>Pilot editions</h2>
+      {field === "computer-information" && csReview.edition >= latestSample && <p>Latest reviewed selection · <a href={`#ranking-review-${csReview.edition}`}><time datetime={csReview.edition}>{csReview.edition}</time> ranking review</a> · {csReview.selected_topics.length} source-checked topics</p>}
+      <p>Last full pilot · <a href={`/pilots/${field}/${latestSample}/`}><time datetime={latestSample}>{latestSample}</time> rankings and papers</a> · {sampleRows.length} active {sampleRows.length === 1 ? "topic" : "topics"}</p>
+      {samples.length > 1 && <details><summary>Earlier full pilots</summary><ul>{samples.slice(1).map(date => <li><a href={`/pilots/${field}/${date}/`}>{date} rankings and papers</a></li>)}</ul></details>}
+      {checked.length > 0 && <details><summary>Field placement review · November 20, 2026</summary><p>One supporting paper checked at {checked.length === 1 ? "rank" : "ranks"} {checked.map(c => c.original_rank).join(" and ")} in the {latestSample} pilot.</p></details>}
     </section>}
     {!Astro.params.edition && stage === "Pilot" && <details>
       <summary>Research categories</summary><ul>{Array.from(categories.values(), label => <li>{label}</li>)}</ul>
@@ -115,10 +119,12 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
       {field === "physics-expanded" && !day.run.arxiv_mailings && <p data-arxiv-submission-dates>The arXiv window uses first submission dates. Paper links open the versions retrieved during collection, which can include revisions made after the edition date.</p>}
       {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
       {day.ranked.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
+      {comparison && <EditionComparison {...comparison} {field} />}
       <ol class="rankings">
         {day.ranked.map(row => <li value={row.rank} id={row.slug}>
           <p class="category">{categories.get(row.category) ?? row.category}</p>
           <h3>{isPublic ? <a data-topic-permalink href={`/${field}/topic/${row.slug}/`}>{row.headline}</a> : row.headline}</h3>
+          {comparison && <div class="movement"><RankChange movement={comparison.rows.get(row.slug)} /></div>}
           <p>{row.summary}</p>
           {day.run.notes.includes(`synthesis-fallback:${row.slug}`) && <small>Fallback summary from source text</small>}
           <FieldEvidence {field} {day} {row} />
@@ -138,6 +144,7 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
   .coverage, .category, [data-window-days] { color: var(--muted); }
   .rankings { padding-inline-start: 2.5rem; }
   .rankings > li { border-top: 1px solid var(--border); padding: 1rem 0 1rem .5rem; }
+  .movement { display: flex; flex-wrap: wrap; gap: .5rem; }
   .rankings > li::marker { font-weight: 700; }
   .category { margin: 0; font-size: var(--t3); }
   h3 { margin: .25rem 0; font-size: 1.15rem; }

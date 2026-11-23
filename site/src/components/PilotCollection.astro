@@ -15,9 +15,9 @@ const sources = journals.sources.filter(source => source.field === field);
   <summary>{csReview.edition} ranking trial · {csReview.selected_topics.length} reviewed topics</summary>
   <p>The trial ranked {csReview.ranking.ranked_topics} topics in {csReview.ranking.ranked_categories} categories. Grouping checks failed for {csReview.ranking.group_review_failures} candidates and {csReview.ranking.fallback_summaries} ranked summaries used fallback text. The examples below keep their original ranks and link every supporting paper.</p>
   <p>After the field criteria were revised, the classifier matched {csReview.classification_checks.final.fresh_matches} of {csReview.classification_checks.final.fresh} previously unseen cases. It placed a study of relationships among AI companies in information science. That paper contributed to none of the ranked topics.</p>
-  <ol>{csReview.selected_topics.map(topic => <li value={topic.rank} id={`review-${csReview.edition}-${topic.rank}`}>
+  <ol>{csReview.selected_topics.map(topic => <li value={topic.rank} tabindex="-1" id={`review-${csReview.edition}-${topic.rank}`}>
     <h3>{topic.headline}</h3>{readingParagraphs(topic.reviewed_summary).map(paragraph => <p>{paragraph}</p>)}
-    <details><summary>Supporting papers ({topic.papers.length})</summary>
+    <details><summary>Supporting papers ({topic.papers.length})<span class="sr-only"> for rank {topic.rank}</span></summary>
       <ul>{topic.papers.map(paper => <li><a href={paper.url}>{paper.title}</a></li>)}</ul>
     </details>
   </li>)}</ol>

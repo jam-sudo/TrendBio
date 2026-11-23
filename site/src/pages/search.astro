@@ -27,18 +27,21 @@ for (const field of fields) {
       <label for="search-field">Field</label>
       <select id="search-field">
         <option value="">All fields</option>
+        <option value="energy">Energy Storage &amp; Power Grids collection</option>
         <option value="materials">Materials Science collection</option>
         {fields.map(field => <option value={field}>{fieldLabel(field)}</option>)}
       </select>
       <label for="search-category">Category</label>
       <select id="search-category">
         <option value="">All categories</option>
+        <option data-fields="energy">Energy Storage &amp; Power Grids</option>
         <option data-fields="materials">Materials Science</option>
         {Array.from(categories, ([label, fields]) => <option value={label} data-fields={fields.join(" ")}>{label}</option>)}
       </select>
       <button type="submit">Search</button>
     </form>
     <p id="search-status" role="status" aria-live="polite"></p>
+    <a id="search-all-fields" hidden>Search all fields</a>
     <ul id="search-results" aria-label="Search results"></ul>
     <button id="search-more" type="button" hidden>Show more results</button>
     <template id="search-result">
@@ -55,6 +58,7 @@ for (const field of fields) {
   const field = document.getElementById('search-field');
   const category = document.getElementById('search-category');
   const status = document.getElementById('search-status');
+  const allFields = document.getElementById('search-all-fields');
   const list = document.getElementById('search-results');
   const more = document.getElementById('search-more');
   const template = document.getElementById('search-result');
@@ -94,6 +98,11 @@ for (const field of fields) {
       else url.searchParams.delete(key);
     }
     history.replaceState(null, '', url);
+    allFields.hidden = !field.value;
+    const allUrl = new URL(url);
+    allUrl.searchParams.delete('field');
+    allUrl.searchParams.delete('category');
+    allFields.href = allUrl.href;
     list.replaceChildren();
     more.hidden = true;
     shown = 0;

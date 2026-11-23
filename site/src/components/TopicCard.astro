@@ -1,4 +1,5 @@
 ---
+import type { TopicMovement } from "../lib/rank-changes";
 import RankChange from "./RankChange.astro";
 import CrossCoverage from "./CrossCoverage.astro";
 import { crossCoverage } from "../lib/shared-papers";
@@ -8,8 +9,8 @@ import SignalLine from "./SignalLine.astro";
 import { loadTaxonomy } from "../lib/data";
 import { categoryStyle, rankMedal } from "../lib/categories";
 import type { LeaderboardTopic } from "../lib/leaderboard";
-interface Props { ranked: LeaderboardTopic; date?: string; featured?: boolean; compact?: boolean; period?: boolean }
-const { ranked, date, featured = false, compact = false, period = false } = Astro.props;
+interface Props { movement?: TopicMovement; ranked: LeaderboardTopic; date?: string; featured?: boolean; compact?: boolean; period?: boolean }
+const { ranked, movement, date, featured = false, compact = false, period = false } = Astro.props;
 const matches = date ? crossCoverage("computational", date, ranked.slug) : [];
 const category = loadTaxonomy("computational").find(({ slug }) => slug === ranked.category);
 const secondary = ranked.secondary_categories;
@@ -26,7 +27,7 @@ const identity = categoryStyle(ranked.category);
     {date && matches.length > 0 && <CrossCoverage {matches} {date} summary={ranked.summary} />}
   </div>
   <div class="compact-meta">
-    <RankChange change={ranked.rankChange} />
+    <RankChange {movement} />
     {!period && rise && <span class="badge"><span aria-hidden="true">{rise.value}</span><span class="sr-only">{rise.spoken ?? rise.value}</span></span>}
     {ranked.fallbackSummary && <small>Fallback summary</small>}
     <span class="compact-category">{category?.label ?? ranked.category}</span>
@@ -37,7 +38,7 @@ const identity = categoryStyle(ranked.category);
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
   <CategoryIcon slug={ranked.category} size={36} />
   <div class="topic-copy">
-    <div class="row-meta"><p class="rank-category">{category?.label ?? ranked.category}</p><RankChange change={ranked.rankChange} /></div>
+    <div class="row-meta"><p class="rank-category">{category?.label ?? ranked.category}</p><RankChange {movement} /></div>
     <h2><a class="topic-link" href={`/topic/${ranked.slug}/`}>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</a></h2>
     <ToolNames names={ranked.toolNames} />
     {ranked.summary && <p class="summary">{ranked.summary}</p>}

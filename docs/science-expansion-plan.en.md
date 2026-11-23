@@ -1,6 +1,10 @@
 # TrendBio science expansion plan
 
-Reviewed November 21, 2026 (UTC). TrendBio covers formal, natural and applied sciences. Computer Science is a first-class field alongside Mathematics and Statistics. The live directory groups related fields by their scientific questions. It distinguishes daily editions from dated pilots with original ranks, paper links and editorial notes. [Science fields](https://trendbio.dev/fields/) · [Active field configuration](../config/science-fields.yaml)
+Reviewed November 23, 2026 (UTC). TrendBio covers formal, natural and applied sciences. Computer Science is a first-class field alongside Mathematics and Statistics. The live directory groups related fields by their scientific questions. It distinguishes daily editions from dated pilots with original ranks, paper links and editorial notes. [Science fields](https://trendbio.dev/fields/) · [Active field configuration](../config/science-fields.yaml)
+
+## November 23 energy collection
+
+Energy Storage & Power Grids now spans electrode processing and grid operation. The October 26–November 22 search returned 61 journal article records from Batteries, 541 from Energies and 12 title-matched arXiv Systems and Control preprints. The nine selected studies cover all four weeks. Both journals share a publisher. A recurring edition still needs an independent source window and a measured publishing cost. [Energy Storage & Power Grids](https://trendbio.dev/collections/energy/) · [Source counts and selected papers](expansion-measurements/2026-11-23/energy.json)
 
 ## November 21 publication and coverage review
 
@@ -12,7 +16,7 @@ The nine dated pilots are searchable by field, topic, paper title and category. 
 
 **Recurring editions.** Compare Computer Science and Mathematics on matched dates and the same operating mode. The expanded CS ranking cost USD 2.03 for its completed attempt, with four failed group reviews and four fallback summaries. Math collected 2,609 unique preprints in its broader intake check, but its incremental operations trial used a narrower source scope and included retrospective runs. Treat neither measurement as the monthly cost of the proposed service. For the November 20 top ten in daily Physics, evidence diversity was 0.25 throughout and code growth was zero. CompBio's mean diversity on the four Fridays ending November 20 ranged from 0.42 to 0.50, with October 30 backfilled. Daily pages now expose the individual raw components, total, fallback flags and available same-weekday comparisons. [Math operations](expansion-measurements/2026-11-20/math-incremental-operations.json) · [CS ranking](expansion-measurements/2026-11-20/computer-science-ranking.json) · [Operating-cost ledger](expansion-measurements/2026-11-20/public-operations.json)
 
-The field directory now points energy systems to Engineering, neuroscience to All Biology, AI and machine learning to Computer Science, and planetary science to Expanded Physics. Materials Science is the first collection that spans editions. Social Sciences would require a separate scope decision. If included, start by testing coverage of psychology and economics and defining their boundaries with medicine and computational methods. [Find a specialty](https://trendbio.dev/fields/)
+On November 21 the field directory pointed energy systems to Engineering, neuroscience to All Biology, AI and machine learning to Computer Science, and planetary science to Expanded Physics. Materials Science is the first collection that spans editions. Social Sciences would require a separate scope decision. If included, start by testing coverage of psychology and economics and defining their boundaries with medicine and computational methods. [Find a specialty](https://trendbio.dev/fields/)
 
 ## Reader editions and rollout order
 

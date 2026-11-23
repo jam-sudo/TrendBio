@@ -1,9 +1,13 @@
 ---
-import type { RankChange } from "../lib/rank-changes";
-interface Props { change?: RankChange }
-const { change } = Astro.props;
+import type { TopicMovement } from "../lib/rank-changes";
+interface Props { movement?: TopicMovement }
+const { movement } = Astro.props;
+const change = movement?.rank;
 ---
 {change && <span class="rank-change"><span aria-hidden="true">{change.label}</span><span class="sr-only">{change.description}</span></span>}
+{movement?.entered && <small>Entered Top 10</small>}
+{movement && movement.papersAdded > 0 && <small>+{movement.papersAdded} supporting {movement.papersAdded === 1 ? "paper" : "papers"}</small>}
 <style>
+  small { color: var(--muted); font-size: .8125rem; }
   .rank-change { color: var(--muted); font-size: .75rem; font-weight: 400; white-space: nowrap; flex-shrink: 0; }
 </style>

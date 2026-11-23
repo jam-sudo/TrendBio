@@ -1,12 +1,12 @@
 ---
 import type { Edition } from "../lib/editions";
 
-const { field } = Astro.props as { field: Edition | "materials" };
+const { field } = Astro.props as { field: Edition | "materials" | "energy" };
 const hues = {
-  materials: 75, biology: 152, physics: 245, math: 305, "computer-information": 195, "earth-environment": 160,
+  energy: 90, materials: 75, biology: 152, physics: 245, math: 305, "computer-information": 195, "earth-environment": 160,
   astronomy: 300, "physics-expanded": 32, chemistry: 205, engineering: 78,
   "medicine-health": 18, "agriculture-food-veterinary": 112,
-} satisfies Record<Edition | "materials", number>;
+} satisfies Record<Edition | "materials" | "energy", number>;
 
 const indices = (length: number) => Array.from({ length }, (_, i) => i);
 const tau = Math.PI * 2;
@@ -36,6 +36,15 @@ const pulse = "M12 77 H48 Q54 77 59 72 Q65 65 71 74 Q73 77 81 77 H100 L108 83 L1
 <svg class="field-figure" data-field={field} viewBox="0 0 300 120" aria-hidden="true" focusable="false"
   fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
   style={`--ink: oklch(var(--icon-lightness) .10 ${hues[field]})`}>
+  {field === "energy" && <>
+    <rect x="22" y="44" width="63" height="34" rx="5" class="wash"/><path d="M85 53h6v15h-6"/>
+    {[32, 46, 60].map(x => <rect {x} y="51" width="9" height="20" rx="1" class="tinted"/>)}
+    {[163, 243].map(x => <g transform={`translate(${x} 19)`}>
+      <path d="M-18 82 0 0 18 82 M-12 29h24L0 17Z M-18 46h36L0 32Z M-12 55l25 13-29 12 M12 55l-25 13 29 12" />
+    </g>)}
+    <path d="M91 60 Q116 78 145 65 M181 65 Q206 79 225 65 M175 48 Q201 60 231 48" class="fine"/>
+    <path d="M91 60 Q116 78 145 65 M181 65 Q206 79 225 65" pathLength="100" class="vesicles"/>
+  </>}
   {field === "materials" && <g transform="translate(48 28)">
     {indices(4).map(row => <g transform={`translate(${row % 2 * 17} ${row * 22})`}>
       {indices(6).map(col => <g transform={`translate(${col * 34} 0)`}>

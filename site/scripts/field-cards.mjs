@@ -12,6 +12,7 @@ try {
     links.map(link => link.pathname).filter(path => path !== "/"));
   await mkdir("public/og", { recursive: true });
   for (const path of new Set(paths)) {
+    if (process.argv[3] && path.split("/").filter(Boolean).at(-1) !== process.argv[3]) continue;
     await page.goto(new URL(path, origin).href);
     const field = await page.locator(".hero svg").getAttribute("data-field");
     if (!field) throw Error(`Missing field art on ${path}`);

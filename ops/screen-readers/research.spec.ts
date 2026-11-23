@@ -19,7 +19,7 @@ test("read a search result and open its supporting paper", async ({ page, screen
   const rank = page.locator(":target");
   await expect(rank).toHaveAttribute("value", "9");
   const summary = rank.locator("details > summary");
-  await hear("rank evidence", () => summary.focus(), /supporting papers/i);
+  await hear("rank evidence", () => summary.focus(), /supporting papers.*rank 9/i);
   await page.keyboard.press("Enter");
   const paper = rank.locator("details a").first();
   await expect(paper).toBeVisible();

@@ -20,7 +20,7 @@ it.each(["Binder", "  Binder  "])("submits the home search and trims %j on the s
   const input = page.getByRole("combobox", { name: "Search topics" });
   await input.fill(query);
   await input.press("Enter");
-  await page.waitForURL(url => url.pathname === "/search/" && url.search === "?q=Binder");
+  await page.waitForURL(url => url.pathname === "/search/" && url.search === "?q=Binder&field=computational");
   await finished();
   expect(await page.getByRole("searchbox").inputValue()).toBe("Binder");
   expect(await page.locator('#search-results a[href="/topic/protein-design-binders-a1b2/"]').textContent()).toBe("Binder design gains shared evaluation tools");
@@ -33,7 +33,7 @@ it.each(["", "   "])("submits an empty home query %j to the focused empty prompt
   const input = page.getByRole("combobox", { name: "Search topics" });
   await input.fill(query);
   await input.press("Enter");
-  await page.waitForURL(url => url.pathname === "/search/" && !url.search);
+  await page.waitForURL(url => url.pathname === "/search/" && url.search === "?field=computational");
   await expect.poll(() => page.getByRole("status").textContent()).toContain("Enter a term");
   expect(await page.getByRole("searchbox").inputValue()).toBe("");
   expect(await page.getByRole("searchbox").evaluate(el => el === document.activeElement)).toBe(true);
@@ -59,7 +59,8 @@ it("finds a dated Physics ranking and its sources from field-filtered search", a
   const suggestion = page.getByRole("option").filter({ hasText: "Optical cavities reveal sources of readout noise" });
   await suggestion.waitFor();
   expect(await suggestion.locator("small").textContent()).toContain("Physics");
-  await visit("/search/?q=readout+noise&field=physics");
+  await page.getByRole("combobox", { name: "Search topics" }).press("Enter");
+  await page.waitForURL(url => url.searchParams.get("field") === "physics" && url.searchParams.get("q") === "readout noise");
   await finished();
   const field = page.getByLabel("Field", { exact: true });
   const category = page.getByLabel("Category", { exact: true });
@@ -81,6 +82,11 @@ it("finds a dated Physics ranking and its sources from field-filtered search", a
   expect(await category.inputValue()).toBe("");
   expect(await page.locator('#search-results a[href^="/physics/"]').count()).toBe(0);
   expect(new URL(page.url()).searchParams.get("field")).toBe("computational");
+  const broaden = page.getByRole("link", { name: "Search all fields" });
+  await broaden.click();
+  await finished();
+  expect(new URL(page.url()).search).toBe("?q=readout+noise");
+  expect(await result.count()).toBe(1);
   await visit("/search/?q=readout+noise&field=unlisted");
   await finished();
   expect(await field.inputValue()).toBe("");
@@ -142,7 +148,7 @@ it("loads no Pagefind files on home or before a search and explains the JavaScri
     const input = staticPage.getByRole("searchbox", { name: "Search topics" });
     await input.fill("Binder");
     await input.press("Enter");
-    await staticPage.waitForURL(`http://127.0.0.1:${server.port}/search/?q=Binder`);
+    await staticPage.waitForURL(`http://127.0.0.1:${server.port}/search/?q=Binder&field=computational`);
     await staticPage.locator("noscript p").waitFor({ state: "visible" });
     expect(await staticPage.locator("noscript p").textContent()).toContain("Search needs JavaScript.");
   } finally { await noJS.close(); }
@@ -185,7 +191,7 @@ it('loads dependencies only on focus and shows six headline/category options', a
   expect(await combo().getAttribute('aria-expanded')).toBe('true');
   expect(await combo().getAttribute('aria-activedescendant')).toBeNull();
   expect(await page.locator('#header-search-status').textContent()).toBe('6 topics shown');
-  expect(await page.getByRole('link', { name: 'See all results' }).getAttribute('href')).toBe('/search/?q=reproducible');
+  expect(await page.getByRole('link', { name: 'See all results' }).getAttribute('href')).toBe('/search/?q=reproducible&field=computational');
 });
 
 it('shows no topics for nonsense and lets See all results open the full search', async () => {
@@ -195,7 +201,7 @@ it('shows no topics for nonsense and lets See all results open the full search',
   expect(await page.locator('#header-search-message').textContent()).toBe('No topics found');
   expect(await options().count()).toBe(0);
   await page.getByRole('link', { name: 'See all results' }).click();
-  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=zzzxqnotaword98765');
+  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=zzzxqnotaword98765&field=computational');
 });
 
 it.each(['keyboard', 'click'])('opens a dropdown topic with %s', async action => {
@@ -220,7 +226,7 @@ it('submits Enter with an open panel and nothing highlighted', async () => {
   await combo().fill('Binder');
   await dropdownReady();
   await combo().press('Enter');
-  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=Binder');
+  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=Binder&field=computational');
 });
 
 it.each(['Escape', 'Tab', 'outside'])('closes on %s and keeps the text', async action => {
@@ -244,7 +250,7 @@ it('silently hides a failed index and preserves Enter fallback', async () => {
   await page.waitForTimeout(700);
   expect(await page.locator('#header-search-panel').isVisible()).toBe(false);
   await combo().press('Enter');
-  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=Binder');
+  await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=Binder&field=computational');
 });
 
 it('delays Searching and never lets an older response replace the latest query', async () => {
@@ -347,4 +353,21 @@ it("includes every published pilot field and excludes withdrawn ranks from searc
   for (const field of fields) expect(records.some(row => row.filters.field.includes(field))).toBe(true);
   expect(records.some(row => row.url.includes("multifunctionality-soil-b88a"))).toBe(false);
   expect(new Set(records.map(row => row.url)).size).toBe(records.length);
+});
+
+
+it("finds both energy collection groups and keeps the query when searching across fields", async () => {
+  await visit("/collections/energy/");
+  const input = page.getByRole("combobox", { name: "Search topics" });
+  await input.fill("energy storage");
+  await dropdownReady();
+  expect(await options().count()).toBe(2);
+  await input.press("Enter");
+  await finished();
+  expect(await page.getByLabel("Field", { exact: true }).inputValue()).toBe("energy");
+  expect(await page.locator('#search-results a[href^="/collections/energy/#"]').count()).toBe(2);
+  await page.getByRole("link", { name: "Search all fields" }).click();
+  await finished();
+  expect(await page.getByRole("searchbox").inputValue()).toBe("energy storage");
+  expect(await page.getByLabel("Field", { exact: true }).inputValue()).toBe("");
 });

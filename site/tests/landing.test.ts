@@ -23,7 +23,8 @@ describe("built landing, day and archive pages", () => {
       expect(form).toContain('name="q"');
       expect(form).toContain('placeholder="Search topics, papers, tools"');
       expect(form).toContain('<label class="sr-only" for="header-search-query">Search topics</label>');
-      expect(form.match(/<input\b/g)).toHaveLength(1);
+      expect(form.match(/<input\b[^>]*type="search"/g)).toHaveLength(1);
+      expect(form.includes('name="field" value="computational"')).toBe(path !== "about/index.html");
       expect(header.indexOf(form)).toBeGreaterThan(header.indexOf('</nav>'));
       expect(html).not.toMatch(/\/pagefind\/|search-match/);
       const scriptPath = html.match(/<script type="module" src="([^"]+)"/)![1];

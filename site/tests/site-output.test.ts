@@ -42,6 +42,9 @@ it("publishes the selected materials papers and recovered biology originals at t
   const papers = await groups.locator("li a").evaluateAll(links => links.map(link => link.getAttribute("href")));
   expect(new Set(papers).size).toBe(7);
   expect(papers.every(url => /^https:\/\/(doi\.org|arxiv\.org)\//.test(url!))).toBe(true);
+  await page.setContent(read("collections/energy/index.html"));
+  expect(await page.locator("#electrode-processing li a").count()).toBe(4);
+  expect(await page.locator("#grid-dispatch li a").count()).toBe(5);
   await page.setContent(read("biology/index.html"));
   expect(await page.locator("#coverage-review li a").count()).toBe(6);
 });
@@ -88,13 +91,13 @@ it("gives every page canonical, description and preview metadata", async () => {
     expect(metadata.site).toBe("TrendBio");
     expect(metadata.card).toBe("summary_large_image");
     const field = editions.find(f => path.startsWith(f + "/") || path.startsWith("pilots/" + f + "/"));
-    const card = path.startsWith("collections/materials/") ? "materials" : field;
+    const card = path.startsWith("collections/") ? path.split("/")[1] : field;
     const image = card ? `/og/${card}.png` : "/og.png";
     expect(metadata.image).toBe("https://trendbio.dev" + image);
     expect(existsSync("dist" + image)).toBe(true);
     expect(metadata.width).toBe("1200");
     expect(metadata.height).toBe("630");
-    expect(metadata.alt).toBe(field ? `TrendBio — ${fieldLabel(field)}` : card ? "TrendBio — Materials Science" : "TrendBio — What moved in computational biology");
+    expect(metadata.alt).toBe(field ? `TrendBio — ${fieldLabel(field)}` : card === "energy" ? "TrendBio — Energy Storage & Power Grids" : card ? "TrendBio — Materials Science" : "TrendBio — What moved in computational biology");
     expect(metadata.themes).toEqual([["(prefers-color-scheme: dark)", "oklch(14.5% 0 0)"], ["(prefers-color-scheme: light)", "#fafafa"]]);
   }
   expect(read("index.html")).toContain(truncateDescription(`Today's leading computational biology topic: ${days[0].ranked[0].headline}.`));
@@ -120,7 +123,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
       }
     }
   }
-  expect(parsed.entries).toHaveLength(9 + editions.flatMap(pilotDates).length + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
+  expect(parsed.entries).toHaveLength(10 + editions.flatMap(pilotDates).length + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   for (const [url, date] of fieldTopics) expect(urls.get(url)).toBe(date);
   expect(urls.size).toBe(parsed.entries.length);
@@ -265,7 +268,7 @@ it("links each science field and its dated pilots while omitting retired fields"
   }
   for (const field of editions.filter(field => !publicEditions.includes(field))) {
     await page.setContent(read(`${field}/index.html`));
-    const href = await page.locator("main section[aria-label='Dated pilot editions'] a").first().getAttribute("href");
+    const href = await page.locator("main section[aria-label='Dated pilot editions'] a[href^='/pilots/']").first().getAttribute("href");
     expect(href).toMatch(new RegExp(`^/pilots/${field}/\\d{4}-\\d{2}-\\d{2}/$`));
     const sample = read(href!.slice(1) + "index.html");
     expect(sample).toContain('lang="en"');
@@ -286,11 +289,11 @@ it("retains original ranks and paper versions in the reviewed Computer Science s
 });
 
 it("keeps the Biology beta and CompBio as distinct editions", async () => {
-  for (const [path, current] of [["biology/index.html", "All Biology (beta)"], ["index.html", "CompBio"]]) {
+  for (const [path, current] of [["biology/index.html", "Biology"], ["index.html", "CompBio"]]) {
     await page.setContent(read(path));
-    const switcher = page.getByRole("group", { name: "Biology edition" });
+    const switcher = page.getByRole("group", { name: "Science field" });
     expect(await switcher.locator("[aria-current]").textContent()).toBe(current);
-    expect(await switcher.getByText("All Biology (beta)").getAttribute("href")).toBe("/biology/");
+    expect(await switcher.getByRole("link", { name: "Biology", exact: true }).getAttribute("href")).toBe("/biology/");
     expect(await switcher.getByText("CompBio").getAttribute("href")).toBe("/");
   }
 });

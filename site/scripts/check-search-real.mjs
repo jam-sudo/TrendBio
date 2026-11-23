@@ -96,7 +96,7 @@ try {
       assert.ok(links.length > 0 && links.length <= 6, query);
       const candidates = await home.evaluate(async query => {
         const pagefind = await import('/pagefind/pagefind.js');
-        return Promise.all((await pagefind.search(query)).results.slice(0, 50).map(result => result.data()));
+        return Promise.all((await pagefind.search(query, { filters: { field: "computational" } })).results.slice(0, 50).map(result => result.data()));
       }, query);
       const expected = (await filterResults(query, candidates.map(data => ({ data: async () => data })))).slice(0, 6).map(result => result.url);
       assert.deepEqual(links.map(link => link.url), expected, query);

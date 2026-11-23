@@ -1,0 +1,7 @@
+---
+interface Props { previousDate: string; entered: number; field: string }
+const { previousDate, entered, field } = Astro.props;
+const prefix = field === "computational" ? "" : `/${field}`;
+---
+<p class="comparison">{entered} {entered === 1 ? "topic" : "topics"} entered the Top 10 since the <a href={`${prefix}/day/${previousDate}/`}>{previousDate} edition</a>.</p>
+<style>.comparison { color: var(--muted); margin: 0; font-size: var(--t3); }</style>

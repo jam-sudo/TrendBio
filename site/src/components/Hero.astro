@@ -4,8 +4,9 @@ import FieldArt from "./FieldArt.astro";
 import { editionInfo, type Field } from "../lib/editions";
 import { formatEastern } from "../lib/time";
 
-const { field, updated } = Astro.props as { field: Field | "materials"; updated?: string | null };
+const { field, updated } = Astro.props as { field: Field | "materials" | "energy"; updated?: string | null };
 const copy = {
+  energy: ["How do batteries store energy and support power grids?", "Research on electrode manufacturing and how grid operators use stored energy."],
   materials: ["What connects materials science across fields?", "A reading collection from physics, chemistry and engineering."],
   computational: ["What moved in computational biology today", "bioRxiv, arXiv, PubMed, GitHub and industry."],
   biology: ["What moved in biology today?", "Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals."],
@@ -19,9 +20,9 @@ const copy = {
   engineering: ["What moved in engineering?", "How devices, structures and systems perform when put to the test."],
   "medicine-health": ["What moved in medicine and health?", "Disease mechanisms, clinical outcomes and patterns in population health."],
   "agriculture-food-veterinary": ["What moved in agriculture, food and veterinary science?", "Research on soils, crops, food production and animal health."],
-} satisfies Record<Field | "materials", [string, string]>;
+} satisfies Record<Field | "materials" | "energy", [string, string]>;
 const [title, subtitle] = copy[field];
-const stage = field === "materials" ? "Collection" : field === "computational" ? "" : editionInfo[field].stage;
+const stage = field === "materials" || field === "energy" ? "Collection" : field === "computational" ? "" : editionInfo[field].stage;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -62,7 +63,7 @@ const stage = field === "materials" ? "Collection" : field === "computational" ?
   .hero:not([data-motion]), .hero[data-motion="still"] { & .hero-art :global(*) { animation-name: none !important; } }
   .motion-toggle { position: absolute; inset-inline-end: max(0px, calc(50% - 180px)); bottom: 0; min-height: 32px; min-width: 32px; padding: .125rem; font: inherit; font-weight: 700; color: var(--muted); background: transparent; border: 1px solid var(--muted); border-radius: var(--radius-sm); cursor: pointer; }
   @media (prefers-reduced-motion: reduce) { .motion-toggle { display: none; } }
-  .hero { position: relative; margin-top: 1rem; text-align: center; }
+  .hero { position: relative; margin-top: .5rem; text-align: center; }
   h1 { position: relative; z-index: 1; font-size: 2.125rem; margin: 0 auto 0.5rem; text-wrap: balance; }
   p { position: relative; z-index: 1; color: var(--muted); margin: 0 auto; font-size: .875rem; text-wrap: pretty; }
   .updated { display: inline-block; }

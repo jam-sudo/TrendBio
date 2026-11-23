@@ -5,7 +5,7 @@ import { preview } from "astro";
 import AxeBuilder from "@axe-core/playwright";
 import { chromium, type Browser } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
-import { rankChanges } from "../src/lib/rank-changes";
+import { editionChanges } from "../src/lib/rank-changes";
 import { loadDays, allTopics } from "../src/lib/data";
 import fixtures from "./fixtures/rank-changes.json";
 
@@ -33,15 +33,31 @@ beforeAll(async () => {
 afterAll(async () => { await browser?.close(); await server?.stop(); if (root) rmSync(root, { recursive: true, force: true }); });
 
 it("compares the previous stored day, distinguishes first-ever from returning and omits unchanged/first-day markers", () => {
-  const changes = rankChanges(days[2], days, topics);
-  expect([...changes].map(([slug, change]) => [slug, change.label])).toEqual([
+  const { rows, previousDate, entered } = editionChanges(days[2], days, topics)!;
+  const changes = [...rows].flatMap(([slug, row]) => row.rank ? [[slug, row.rank.label]] : []);
+  expect(previousDate).toBe("2026-10-03");
+  expect(entered).toBe(2);
+  expect(changes).toEqual([
     ["new", "New"], ["up", "▲3"], ["down", "▼2"], ["back", "Back"],
   ]);
-  expect(changes.get("up")?.description).toBe("Up 3 places since the previous day");
-  expect(rankChanges(days[0], days, topics).size).toBe(0);
+  expect(rows.get("up")?.rank?.description).toBe("Up 3 places since the previous edition");
+  expect(editionChanges(days[0], days, topics)).toBeNull();
   const withHistory = structuredClone(topics);
   withHistory[0].history.unshift({ ...withHistory[0].history[0], date: "2026-09-01", rank: 40 });
-  expect(rankChanges(days[2], days, withHistory).get("new")?.label).toBe("Back");
+  expect(editionChanges(days[2], days, withHistory)?.rows.get("new")?.rank?.label).toBe("Back");
+});
+
+it("recognizes a top-ten crossing and counts distinct newly supporting papers even when another leaves", () => {
+  const editedDays = structuredClone(days);
+  editedDays[1].ranked.find(row => row.slug === "up")!.rank = 11;
+  const editedTopics = structuredClone(topics);
+  const history = editedTopics.find(topic => topic.slug === "up")!.history;
+  history.find(entry => entry.date === days[1].date)!.item_ids = ["arxiv:fixture-02-02"];
+  history.find(entry => entry.date === days[2].date)!.item_ids = ["arxiv:fixture-01-08", "arxiv:fixture-01-08", "missing"];
+  const changes = editionChanges(days[2], editedDays, editedTopics)!;
+  expect(changes.entered).toBe(3);
+  expect(changes.rows.get("up")).toMatchObject({ entered: true, papersAdded: 1, rank: { label: "▲5" } });
+  expect(changes.rows.get("new")?.papersAdded).toBe(0);
 });
 
 it.each(["dark", "light"])("renders each marker without clipping at 320, 390 and 1280px with clean axe in %s", async theme => {

@@ -1,5 +1,4 @@
-import { allTopics, loadDays, loadItems, loadTopic } from "./data";
-import { rankChanges, type RankChange } from "./rank-changes";
+import { loadItems, loadTopic } from "./data";
 import { selectToolNames, type ToolName } from "./tool-names";
 import type { Day, Signals } from "./types";
 import type { PeriodRanked } from "./periods";
@@ -7,7 +6,6 @@ import type { PeriodRanked } from "./periods";
 export interface Stat { label: string; value: string | number; spoken?: string; context?: string }
 export interface LeaderboardTopic {
   rank: number;
-  rankChange?: RankChange;
   slug: string;
   headline: string;
   summary?: string;
@@ -31,9 +29,8 @@ export function signalStats(signals: Signals): Stat[] {
 }
 
 export function dailyRows(day: Day | null): LeaderboardTopic[] {
-  const changes = day ? rankChanges(day, loadDays(day.domain), allTopics(day.domain)) : new Map();
   return (day?.ranked ?? []).map((topic) => ({ ...topic,
-    rankChange: changes.get(topic.slug), fallbackSummary: day!.run.notes.includes(`synthesis-fallback:${topic.slug}`),
+    fallbackSummary: day!.run.notes.includes(`synthesis-fallback:${topic.slug}`),
     toolNames: selectToolNames(topic.rank <= 20 ? loadItems("computational",
       loadTopic("computational", topic.slug)?.history.find(entry => entry.date === day!.date)?.item_ids ?? []) : [], topic.rank),
     secondary_categories: loadTopic("computational", topic.slug)?.secondary_categories ?? [], stats: signalStats(topic.signals),

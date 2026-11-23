@@ -1,11 +1,13 @@
 const input = document.getElementById('header-search-query');
 if (input) {
+  const part = name => document.getElementById('header-search-' + name);
   const form = input.form;
-  const panel = document.getElementById('header-search-panel');
-  const list = document.getElementById('header-search-options');
-  const message = document.getElementById('header-search-message');
-  const status = document.getElementById('header-search-status');
-  const all = document.getElementById('header-search-all');
+  const field = form.elements.namedItem('field')?.value;
+  const panel = part('panel');
+  const list = part('options');
+  const message = part('message');
+  const status = part('status');
+  const all = part('all');
   let modules, request = 0, timer, loading, active = -1;
   input.setAttribute('role', 'combobox');
   input.setAttribute('aria-autocomplete', 'list');
@@ -41,14 +43,14 @@ if (input) {
     if (query.length < 2 && !/[가-힣]/.test(query)) return;
     const current = request;
     const isCurrent = () => current === request;
-    all.href = `${form.getAttribute('action')}?q=${encodeURIComponent(query)}`;
+    all.href = form.getAttribute('action') + '?' + new URLSearchParams({ q: query, ...(field && { field }) });
     all.hidden = true;
     timer = setTimeout(async () => {
       loading = setTimeout(() => { if (isCurrent()) open(message.dataset.loading); }, 300);
       try {
         const [pagefind, match] = await modules;
         if (!isCurrent()) return;
-        const search = await pagefind.search(query);
+        const search = await pagefind.search(query, field ? { filters: { field } } : undefined);
         if (!isCurrent()) return;
         const results = await match.firstMatches(query, search.results, isCurrent);
         if (!isCurrent()) return;

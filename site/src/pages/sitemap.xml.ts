@@ -17,7 +17,7 @@ export const GET: APIRoute = ({ site }) => {
     }),
     ...publicEditions.flatMap(field => Array.from(topicAppearances(field), ([slug, appearances]) =>
       ({ path: `/${field}/topic/${slug}/`, date: appearances[0].day.date }))),
-    ...["/", "/fields/", "/collections/materials/", "/topics/", "/map/", "/archive/", "/about/", "/week/", "/month/"].map(path => ({ path, date: today })),
+    ...["/", "/fields/", "/collections/materials/", "/collections/energy/", "/topics/", "/map/", "/archive/", "/about/", "/week/", "/month/"].map(path => ({ path, date: today })),
     ...days.map(({ date }) => ({ path: `/day/${date}/`, date })),
     ...([["week", weeks], ["month", months]] as const).flatMap(([kind, periods]) =>
       periods.map(period => ({ path: `/${kind}/${period.id}/`,
