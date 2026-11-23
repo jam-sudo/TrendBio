@@ -1,10 +1,11 @@
 ---
 import SignalLine from "./SignalLine.astro";
 import type { Signals } from "../lib/types";
-interface Props { signals: Signals }
-const { signals } = Astro.props;
+import { signalStats } from "../lib/leaderboard";
+interface Props { signals: Signals; context: string }
+const { signals, context } = Astro.props;
 ---
-<div class="signal-badges" role="group" aria-label="Topic signals"><SignalLine signals={signals} /></div>
+<div class="signal-badges" role="group" aria-label="Topic signals"><SignalLine stats={signalStats(signals, context)} /></div>
 <style>
   .signal-badges { margin-block: 1.5rem; padding-block: 1rem; border-block: 1px solid var(--border); }
 </style>

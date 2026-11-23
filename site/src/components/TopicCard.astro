@@ -8,6 +8,7 @@ import CategoryIcon from "./CategoryIcon.astro";
 import SignalLine from "./SignalLine.astro";
 import { loadTaxonomy } from "../lib/data";
 import { categoryStyle, rankMedal } from "../lib/categories";
+import { datedEvidence } from "../lib/editions";
 import type { LeaderboardTopic } from "../lib/leaderboard";
 interface Props { movement?: TopicMovement; ranked: LeaderboardTopic; date?: string; featured?: boolean; compact?: boolean; period?: boolean }
 const { ranked, movement, date, featured = false, compact = false, period = false } = Astro.props;
@@ -16,19 +17,22 @@ const category = loadTaxonomy("computational").find(({ slug }) => slug === ranke
 const secondary = ranked.secondary_categories;
 const rise = ranked.stats.find(({ label }) => label === "Rise");
 const identity = categoryStyle(ranked.category);
+const url = ranked.evidenceDate ? datedEvidence("computational", ranked.evidenceDate, ranked.slug) : `/topic/${ranked.slug}/`;
+const papersHref = date && !ranked.evidenceDate ? datedEvidence("computational", date, ranked.slug) : undefined;
+const fallbackLabel = ranked.autoLabel ? (ranked.evidenceDate ? " (auto label)" : " (auto label) · Latest topic") : "";
 ---
 {compact ? <article id={date ? ranked.slug : undefined} class:list={["compact-row", { "period-row": period, "has-tool-names": ranked.toolNames.length > 0, "has-coverage": matches.length > 0 }]}
   style={`--category-hue: ${identity.hue}`} data-topic-cats={[ranked.category, ...secondary].join(" ")}>
   <span class="rank"><span class="sr-only">Rank </span>{ranked.rank}</span>
   <CategoryIcon slug={ranked.category} size={16} />
   <div class="compact-copy">
-    <a class="topic-link" href={`/topic/${ranked.slug}/`}><span class="compact-headline">{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</span></a>
+    <a class="topic-link" href={url}><span class="compact-headline">{ranked.headline}{fallbackLabel && <span class="auto-label">{fallbackLabel}</span>}</span></a>
     <ToolNames names={ranked.toolNames} />
     {date && matches.length > 0 && <CrossCoverage {matches} {date} summary={ranked.summary} />}
   </div>
   <div class="compact-meta">
-    <RankChange {movement} />
-    {!period && rise && <span class="badge"><span aria-hidden="true">{rise.value}</span><span class="sr-only">{rise.spoken ?? rise.value}</span></span>}
+    <RankChange {movement} {papersHref} />
+    {!period && rise && <span class="badge"><span aria-hidden="true">{rise.value} {rise.context}</span><span class="sr-only">{rise.spoken ?? rise.value}</span></span>}
     {ranked.fallbackSummary && <small>Fallback summary</small>}
     <span class="compact-category">{category?.label ?? ranked.category}</span>
   </div>
@@ -38,8 +42,8 @@ const identity = categoryStyle(ranked.category);
   <span class="rank"><span aria-hidden="true">{rankMedal(ranked.rank)}</span><span class="sr-only">Rank {ranked.rank}</span></span>
   <CategoryIcon slug={ranked.category} size={36} />
   <div class="topic-copy">
-    <div class="row-meta"><p class="rank-category">{category?.label ?? ranked.category}</p><RankChange {movement} /></div>
-    <h2><a class="topic-link" href={`/topic/${ranked.slug}/`}>{ranked.headline}{ranked.autoLabel && <span class="auto-label"> (auto label)</span>}</a></h2>
+    <div class="row-meta"><p class="rank-category">{category?.label ?? ranked.category}</p><RankChange {movement} {papersHref} /></div>
+    <h2><a class="topic-link" href={url}>{ranked.headline}{fallbackLabel && <span class="auto-label">{fallbackLabel}</span>}</a></h2>
     <ToolNames names={ranked.toolNames} />
     {ranked.summary && <p class="summary">{ranked.summary}</p>}
     {ranked.fallbackSummary && <small>Fallback summary from source text</small>}
@@ -65,7 +69,7 @@ const identity = categoryStyle(ranked.category);
   .compact-row .rank { width: 24px; flex-shrink: 0; color: var(--muted); }
   .compact-copy > .topic-link { display: block; min-height: 24px; align-content: center; }
   .compact-headline { display: block; min-width: 0; overflow-wrap: anywhere; }
-  .compact-row .badge { flex-shrink: 0; white-space: nowrap; }
+  .compact-row .badge { max-width: 100%; white-space: normal; }
   .compact-category { max-width: 210px; overflow-wrap: anywhere; font-size: .8125rem; color: var(--muted); }
   .topic-card { position: relative; display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) auto; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); padding: 1.25rem; min-width: 0; overflow-wrap: anywhere; text-decoration: none; }
   .topic-card:hover { border-color: var(--muted); }

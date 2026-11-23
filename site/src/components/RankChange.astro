@@ -1,13 +1,16 @@
 ---
 import type { TopicMovement } from "../lib/rank-changes";
-interface Props { movement?: TopicMovement }
-const { movement } = Astro.props;
+interface Props { movement?: TopicMovement; papersHref?: string }
+const { movement, papersHref } = Astro.props;
 const change = movement?.rank;
+const added = movement?.addedPaperIds.size ?? 0;
+const label = `+${added} supporting ${added === 1 ? "paper" : "papers"}`;
 ---
 {change && <span class="rank-change"><span aria-hidden="true">{change.label}</span><span class="sr-only">{change.description}</span></span>}
 {movement?.entered && <small>Entered Top 10</small>}
-{movement && movement.papersAdded > 0 && <small>+{movement.papersAdded} supporting {movement.papersAdded === 1 ? "paper" : "papers"}</small>}
+{added > 0 && <small>{papersHref ? <a href={papersHref}>{label}</a> : label}</small>}
 <style>
   small { color: var(--muted); font-size: .8125rem; }
+  a { position: relative; z-index: 1; display: inline-block; min-height: 24px; align-content: center; }
   .rank-change { color: var(--muted); font-size: .75rem; font-weight: 400; white-space: nowrap; flex-shrink: 0; }
 </style>

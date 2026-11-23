@@ -11,8 +11,7 @@ import TopicCard from "./TopicCard.astro";
 import { loadTaxonomy } from "../lib/data";
 import type { Day } from "../lib/types";
 import type { LeaderboardTopic } from "../lib/leaderboard";
-import { readFileSync } from "node:fs";
-import { parse } from "yaml";
+import { scoring } from "../lib/scoring";
 
 interface Props {
   topics: LeaderboardTopic[];
@@ -21,7 +20,7 @@ interface Props {
 }
 
 const { day, topics: ranked, period } = Astro.props;
-const { featured_n, display_open_n, top_n } = parse(readFileSync("../config/scoring.yaml", "utf8"));
+const { featured_n, display_open_n, top_n } = scoring;
 const comparison = day && !period ? editionChanges(day) : null;
 const compact = ranked.filter((topic) => topic.rank > featured_n && topic.rank <= display_open_n);
 const more = ranked.filter((topic) => topic.rank > display_open_n);

@@ -5,7 +5,7 @@ from math import log1p
 from statistics import median
 
 from pipeline.config import Scoring
-from pipeline.models import Item, Scores, Signals, Topic
+from pipeline.models import Item, RiseBaseline, Scores, Signals, Topic
 
 
 def signals_for(topic: Topic, items: list[Item],
@@ -29,21 +29,29 @@ def signals_for(topic: Topic, items: list[Item],
                    star_gain_7d=star_gain, rise_ratio=0.0)
 
 
-def rise(topic: Topic, count_7d: int, today: date, cfg: Scoring,
-         global_median: float) -> float:
+def growth_ratio(topic: Topic, count: int, today: date, cfg: Scoring, global_median: float) -> tuple[float, RiseBaseline]:
     baseline = global_median
+    kind: RiseBaseline = "field_median"
     if cfg.window_days == 7:
         history = {day.date: day.count_7d for day in topic.history if day.date <= today}
         if history and (today - min(history)).days >= cfg.history_days_for_own_baseline:
             baseline = sum(history.get(today - timedelta(weeks=week), 0)
                            for week in range(1, 5)) / 4
+            kind = "four_week_mean"
     else:
         # Sparse pilot editions need measured, non-overlapping comparison periods.
         prior_dates = {today - timedelta(days=i * cfg.window_days) for i in range(1, 5)}
         counts = [len(day.item_ids) for day in topic.history if day.date in prior_dates and day.item_ids]
         if len(counts) >= 2:
             baseline = sum(counts) / len(counts)
-    return min((count_7d + cfg.rise_k) / (baseline + cfg.rise_k), cfg.rise_cap)
+            kind = "prior_window_mean"
+    return (count + cfg.rise_k) / (baseline + cfg.rise_k), kind
+
+
+def rise(topic: Topic, count_7d: int, today: date, cfg: Scoring,
+         global_median: float) -> float:
+    ratio, _ = growth_ratio(topic, count_7d, today, cfg, global_median)
+    return min(ratio, cfg.rise_cap)
 
 
 def diversity(sig: Signals) -> float:
@@ -62,11 +70,10 @@ def score_topics(topics_today: list[tuple[Topic, Signals, int]],
                  yesterday_ranked: set[str], cfg: Scoring,
                  today: date) -> list[tuple[Topic, Signals, Scores]]:
     global_median = median(count for _, _, count in topics_today) if topics_today else 0
-    uncapped = cfg.model_copy(update={'rise_cap': float('inf')})
     scored = []
     for topic, signals, count in topics_today:
-        ratio = rise(topic, count, today, uncapped, global_median)
-        signals = signals.model_copy(update={'rise_ratio': ratio})
+        ratio, kind = growth_ratio(topic, count, today, cfg, global_median)
+        signals = signals.model_copy(update={'rise_ratio': ratio, 'rise_baseline': kind})
         components = dict(rise=min(ratio, cfg.rise_cap), diversity=diversity(signals),
                           code_velocity=code_velocity(signals), volume=volume(count))
         subtotal = sum(cfg.weights[key] * value for key, value in components.items())

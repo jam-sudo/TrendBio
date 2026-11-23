@@ -330,6 +330,18 @@ def test_rerun_same_day_is_idempotent(ctx, caplog):
     assert sum(entry.date == TODAY for entry in topic.history) == 1
 
 
+def test_rerun_restores_legacy_growth_labels_without_model_spend(ctx):
+    result = run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert result.ranked
+    for row in result.ranked:
+        row.signals.rise_baseline = None
+    ctx.store.put_day(result)
+    spend = ctx.deps.budget.total_spend_usd()
+    rerun = run_day('computational', TODAY, ctx.store, ctx.deps)
+    assert ctx.deps.budget.total_spend_usd() == spend
+    assert all(row.signals.rise_baseline == "field_median" for row in rerun.ranked)
+
+
 def test_first_regular_run_after_a_backfill_uses_its_own_clock_and_cost(ctx):
     old = run_day('computational', TODAY, ctx.store, ctx.deps, backfill=True)
     assert old.run.model_cost_usd is None

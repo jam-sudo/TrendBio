@@ -28,7 +28,7 @@ from pipeline.dedupe import parallel_openedition_ids
 from pipeline.embed import l2_normalize
 from pipeline.enrich import enrich_items, fallback_summary, hints_for, screen_window
 from pipeline.llm import Enrichment, LLM
-from pipeline.models import Day, RankedTopic, RunInfo
+from pipeline.models import Day, RankedTopic, RunInfo, Signals
 from pipeline.score import rank, score_topics, signals_for
 from pipeline.sources.arxiv import ArxivAdapter
 from pipeline.sources.arxiv_announcements import PhysicsAnnouncements
@@ -71,6 +71,13 @@ class Deps:
     taxonomy: Taxonomy
     hints_cfg: dict
     client: httpx.Client
+
+
+def _same_synthesis_signals(previous: Signals, current: Signals) -> bool:
+    if previous.rise_baseline is None:
+        # Older editions stored the ratio without its baseline name.
+        previous = previous.model_copy(update={'rise_baseline': current.rise_baseline})
+    return previous == current
 
 
 def _commit(staged: Store, store: Store) -> None:
@@ -399,7 +406,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
             previous_ranked = {row.slug: row for row in previous.ranked} if previous else {}
             cached = {topic.slug for topic, signals, scores in ranked
                       if topic.slug in unchanged and topic.slug in previous_ranked
-                      and previous_ranked[topic.slug].signals == signals
+                      and _same_synthesis_signals(previous_ranked[topic.slug].signals, signals)
                       and previous_ranked[topic.slug].scores == scores
                       and previous.run.backfilled == backfill}
             if only_missing_synthesis:

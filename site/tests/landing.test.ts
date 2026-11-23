@@ -2,10 +2,23 @@ import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { industryItems, latestDay, loadDays } from "../src/lib/data";
+import { allTopics, industryItems, latestDay, loadDays } from "../src/lib/data";
+import { growthContext } from "../src/lib/scoring";
 
 const readPage = (path: string) => readFileSync(`dist/${path}`, "utf8");
 const cards = (html: string) => [...html.matchAll(/<article\b[^>]*data-topic-cats="[^"]*"[^>]*>[\s\S]*?<\/article>/g)].map(([card]) => card);
+
+it("reconstructs legacy growth baselines as of the issue and prefers stored provenance", () => {
+  const entry = allTopics("computational")[0].history[0], signals = entry.signals;
+  const date = "2026-11-13";
+  const at = (date: string) => ({ ...entry, date, item_ids: ["paper"] });
+  expect(growthContext(signals, date, [at(date), at("2026-11-02"), at("2026-12-01")])).toBe("vs field median");
+  expect(growthContext(signals, date, [at(date), at("2026-10-30")])).toBe("vs 4-wk avg");
+  expect(growthContext(signals, date, [at(date), at("2026-10-16")], 28)).toBe("vs field median");
+  expect(growthContext(signals, date, [at(date), at("2026-10-16"), at("2026-09-18")], 28)).toBe("vs prior-window avg");
+  expect(growthContext(signals, date, [])).toBe("vs baseline");
+  expect(growthContext({ ...signals, rise_baseline: "field_median" }, date, [])).toBe("vs field median");
+});
 
 describe("built landing, day and archive pages", () => {
   it.each(["index.html", "day/2026-11-01/index.html", "topic/protein-design-binders-a1b2/index.html", "about/index.html", "search/index.html"])(
@@ -174,10 +187,10 @@ describe("built landing, day and archive pages", () => {
         expect(html).not.toContain('id="from-industry-heading"');
         expect(html).not.toContain('id="from-code-heading"');
         const rendered = cards(html);
-        expect(rendered[0]).toContain("7 preprints · 2 published · 2 tools · 1 industry · ↑ 4.0× vs 4-wk avg");
+        expect(rendered[0]).toContain("7 preprints · 2 published · 2 tools · 1 industry · ↑ 4.0× vs field median");
         expect(rendered[1]).toContain("1 preprint · 1 tool");
         expect(rendered[1]).not.toMatch(/↑|0 published|0 industry/);
-        expect(rendered[2]).toContain("↑ 1.5× vs 4-wk avg");
+        expect(rendered[2]).toContain("↑ 1.5× vs field median");
         expect(rendered[2]).not.toMatch(/0 preprints|0 published|0 tools|0 industry/);
         expect(rendered[3]).not.toContain('class="signal-line"');
       }

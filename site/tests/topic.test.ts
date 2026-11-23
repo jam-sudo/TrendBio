@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, inject, it } from "vitest";
-import { allTopics, rankedTopics, loadItems, loadNote, loadTaxonomy, loadTopic } from "../src/lib/data";
+import { allTopics, rankedTopics, loadDay, loadItems, loadNote, loadTaxonomy, loadTopic } from "../src/lib/data";
 
 const domain = "computational";
 const slug = "protein-design-binders-a1b2";
@@ -80,9 +80,10 @@ describe("built topic pages", () => {
     const html = readPage(`topic/${slug}`);
     const history = section(html, "topic-history");
     const ranked = topic.history.filter((entry) => entry.rank !== null).reverse();
-    expect([...history.matchAll(/href="\/day\/([^/]+)\/"/g)].map((match) => match[1]))
-      .toEqual(ranked.map((entry) => entry.date));
-    for (const entry of ranked) expect(history).toContain(`${entry.date} · #${entry.rank}`);
+    const published = ranked.filter(entry => loadDay(domain, entry.date)?.ranked.some(row => row.slug === slug));
+    expect([...history.matchAll(/href="\/day\/([^/]+)\/papers\/#([^"]+)"/g)].map(match => [match[1], match[2]]))
+      .toEqual(published.map(entry => [entry.date, slug]));
+    for (const entry of ranked) expect(history).toContain(`datetime="${entry.date}"`);
     const related = section(html, "related-topics");
     expect(related.match(/<a\b/g)).toHaveLength(2);
     for (const relatedSlug of topic.related.slice(0, 3)) {
@@ -172,7 +173,9 @@ describe("built topic pages", () => {
       expect(short).toContain("#3 ·");
       expect(short).toContain(other.label);
       const week = readFileSync(join(output, "week/2026-W44/index.html"), "utf8");
-      expect(week).toMatch(/Auto Label Example<span class="auto-label"[^>]*> \(auto label\)<\/span>/);
+      const issued = loadDay(domain, "2026-11-01")!.ranked.find(row => row.slug === slug)!;
+      expect(week).toContain(issued.headline);
+      expect(week).not.toContain("Auto Label Example");
       expect(short).not.toContain('class="sparkline"');
       expect(short).not.toContain("Editor's note");
       expect(headings(short)).toEqual(["Topic history"]);

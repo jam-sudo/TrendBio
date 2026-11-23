@@ -27,6 +27,7 @@ const queries = [
   ['qqzzxxnomatch', null], ['zzzzqqqq', null], ['xkcdvvv', null],
   ['AlphaFold', 'alphafold'], ['alphafold', 'alphafold'],
   ['AlphaFold3', 'alphafold3'],
+  ['learning', 'learning'],
   ['perturbation', 'perturbation'], ['perturbations', 'perturbation'],
   ['scRNA-seq', 'scrnaseq'], ['single-cell', 'singlecell'], ['scRNA.seq', 'scrnaseq'],
 ];
@@ -38,11 +39,11 @@ try {
   const rows = [];
   for (const [query, stem] of queries) {
     await page.goto(`http://127.0.0.1:${server.port}/search/?q=${encodeURIComponent(query)}`);
-    await page.waitForFunction(() => /found\./.test(document.getElementById('search-status').textContent));
+    await page.waitForFunction(() => /found(?: so far)?\./.test(document.getElementById('search-status').textContent));
     const raw = await page.evaluate(async query => {
       const pagefind = await import('/pagefind/pagefind.js');
       const raw = await pagefind.search(query);
-      return { total: raw.results.length, data: await Promise.all(raw.results.slice(0, 50).map(result => result.data())) };
+      return { total: raw.results.length, data: await Promise.all(raw.results.map(result => result.data())) };
     }, query);
     const filtered = await filterResults(query, raw.data.map(data => ({ data: async () => data })));
     const result = { raw: raw.total, contents: filtered.map(result => result.content) };
@@ -55,10 +56,18 @@ try {
       // Independent content assertion: the expected term/stem must start an indexed word.
       assert.ok(result.contents.some(content => content.toLowerCase().replace(/[-.]/g, '')
         .split(/[^\p{L}\p{N}]+/u).some(word => word.startsWith(stem))), `${query}: unrelated results`);
-      assert.equal(await page.locator('#search-status').textContent(),
-        `${count} ${count === 1 ? 'topic' : 'topics'} found. Showing ${Math.min(20, count)}.`);
     }
     assert.equal(await page.locator('#search-results li').count(), Math.min(20, count), query);
+    const more = page.getByRole('button', { name: 'Show more results' });
+    while (await more.isVisible()) {
+      const message = await page.locator('#search-status').textContent();
+      await more.click();
+      await page.waitForFunction(before => document.getElementById('search-status').textContent !== before, message);
+    }
+    assert.deepEqual(await page.locator('#search-results a').evaluateAll(links => links.map(a => a.getAttribute('href'))),
+      filtered.map(result => result.url), query);
+    if (count) assert.equal(await page.locator('#search-status').textContent(),
+      `${count} ${count === 1 ? 'topic' : 'topics'} found. Showing ${count}.`);
     rows.push({ query, raw: result.raw, filtered: count, content: stem === null ? 'empty' : `contains ${stem}` });
   }
   const html = readFileSync('dist/index.html', 'utf8');
@@ -96,7 +105,7 @@ try {
       assert.ok(links.length > 0 && links.length <= 6, query);
       const candidates = await home.evaluate(async query => {
         const pagefind = await import('/pagefind/pagefind.js');
-        return Promise.all((await pagefind.search(query, { filters: { field: "computational" } })).results.slice(0, 50).map(result => result.data()));
+        return Promise.all((await pagefind.search(query, { filters: { field: "computational" } })).results.map(result => result.data()));
       }, query);
       const expected = (await filterResults(query, candidates.map(data => ({ data: async () => data })))).slice(0, 6).map(result => result.url);
       assert.deepEqual(links.map(link => link.url), expected, query);

@@ -1,8 +1,7 @@
 ---
-import type { Signals } from "../lib/types";
-import { signalStats, type Stat } from "../lib/leaderboard";
-interface Props { signals?: Signals; stats?: Stat[] }
-const { signals, stats = signals ? signalStats(signals) : [] } = Astro.props;
+import type { Stat } from "../lib/leaderboard";
+interface Props { stats: Stat[] }
+const { stats } = Astro.props;
 const spoken = stats.map(({ label, value, spoken, context }) => spoken ??
   `${label}: ${value}${context ? ` ${context}` : ""}`).join(" · ");
 ---

@@ -83,13 +83,14 @@ describe("built tool names", () => {
         const rank = Number((await row.locator(".rank").textContent())!.replace(/\D/g, ""));
         expect(await row.locator(".tool-names a").count()).toBeLessThanOrEqual(rank <= 20 ? 3 : 0);
       }
-      const first = rows.filter({ has: page.locator('a[href="/topic/single-cell-perturbations-c3d4/"]') });
+      const first = rows.filter({ has: page.locator('a.topic-link[href="/topic/single-cell-perturbations-c3d4/"], a.topic-link[href$="#single-cell-perturbations-c3d4"]') });
       expect(await first.locator(".tool-names a").allTextContents()).toEqual(["atlas", "BetaTool 2.0", "DeltaTool"]);
       for (const link of await page.locator(".tool-names a").all()) {
         expect(await link.getAttribute("target")).toBe("_blank");
         expect(await link.getAttribute("rel")).toBe("noopener");
       }
-      const unnamed = rows.filter({ has: page.locator('a[href="/topic/protein-design-binders-a1b2/"]') });
+      const unnamed = rows.filter({ has: page.locator('a.topic-link[href="/topic/protein-design-binders-a1b2/"], a.topic-link[href$="#protein-design-binders-a1b2"]') });
+      expect(await unnamed.count()).toBe(1);
       expect(await unnamed.locator(".tool-names").count()).toBe(0);
       if (path === "index.html") {
         expect(await rows.nth(19).locator(".tool-names").textContent()).toBe("BoundaryTool");

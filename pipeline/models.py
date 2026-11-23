@@ -5,6 +5,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field
 
 ItemType = Literal["published", "preprint", "code", "industry"]
+RiseBaseline = Literal["field_median", "four_week_mean", "prior_window_mean"]
 Source = Literal["biorxiv", "arxiv", "pubmed", "github", "rss", "crossref", "drops", "oai", "europepmc", "worldbank", "thoth", "openedition"]
 
 
@@ -44,6 +45,7 @@ class Signals(BaseModel):
     code: int
     industry: int
     rise_ratio: float
+    rise_baseline: RiseBaseline | None = Field(default=None, exclude_if=lambda value: value is None)
     star_gain_7d: int
 
 

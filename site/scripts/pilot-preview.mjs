@@ -54,9 +54,14 @@ if (ranked.length) {
     const topic = read(join(store, 'topics', slug + '.json'));
     const history = topic.history.find(entry => entry.date === date);
     const evidence = children(row, 'details').find(n => attr(n, 'data-edition-navigation') === undefined);
-    const sources = children(evidence, 'ul')[0];
-    const links = children(sources, 'li').map(li => attr(children(li, 'a')[0], 'href'));
-    assert.deepEqual(links, history.item_ids.map(id => urls.get(id)), 'Supporting papers for ' + slug);
+    const lists = children(evidence, 'ul');
+    const links = lists.flatMap(list => children(list, 'li').map(li => attr(children(li, 'a')[0], 'href')));
+    const expected = [...new Set(history.item_ids)].map(id => urls.get(id));
+    if (lists.some(list => attr(list, 'aria-label')?.startsWith('Added since '))) {
+      assert.deepEqual(links.toSorted(), expected.toSorted(), 'Supporting papers for ' + slug);
+    } else {
+      assert.deepEqual(links, expected, 'Supporting papers for ' + slug);
+    }
     const sourceVersions = Object.fromEntries(history.item_ids.map(id => [id, urls.get(id)]));
     const withdrawal = withdrawals.find(note => note.source_versions
       ? isDeepStrictEqual(note.source_versions, sourceVersions)

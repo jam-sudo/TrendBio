@@ -19,18 +19,39 @@ export function matchesQuery(query, content) {
 }
 
 export async function filterResults(query, candidates) {
-  // shortcut: inspect only the first 50 candidates; revisit if deeper result browsing is needed.
-  const results = await Promise.all(candidates.slice(0, 50).map(result => result.data()));
+  const results = await Promise.all(candidates.map(result => result.data()));
   return results.filter(result => matchesQuery(query, result.content));
+}
+
+export function matchingPages(query, candidates, size = 20) {
+  let offset = 0, shown = 0;
+  const matches = [];
+  return {
+    async next(isCurrent) {
+      while (matches.length < shown + size && offset < candidates.length) {
+        if (!isCurrent()) return null;
+        const batch = candidates.slice(offset, offset + size);
+        const found = await filterResults(query, batch);
+        if (!isCurrent()) return null;
+        matches.push(...found);
+        offset += batch.length;
+      }
+      if (!isCurrent()) return null;
+      const page = matches.slice(shown, shown + size);
+      shown += page.length;
+      const complete = offset === candidates.length;
+      return { page, shown, count: matches.length, complete, more: !complete || shown < matches.length };
+    },
+  };
 }
 
 export async function firstMatches(query, candidates, isCurrent) {
   const matches = [];
-  for (const candidate of candidates.slice(0, 50)) {
-    if (!isCurrent()) break;
-    const result = await candidate.data();
-    if (matchesQuery(query, result.content)) matches.push(result);
-    if (matches.length === 6) break;
+  let offset = 0;
+  while (matches.length < 6 && offset < candidates.length && isCurrent()) {
+    const batch = candidates.slice(offset, offset + 6 - matches.length);
+    matches.push(...await filterResults(query, batch));
+    offset += batch.length;
   }
-  return matches;
+  return isCurrent() ? matches : [];
 }

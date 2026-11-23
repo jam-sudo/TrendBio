@@ -9,10 +9,12 @@ import EditorNote from "../../components/EditorNote.astro";
 import EvidenceList from "../../components/EvidenceList.astro";
 import CrossCoverage from "../../components/CrossCoverage.astro";
 import { crossCoverage } from "../../lib/shared-papers";
-import { latestDay, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
+import { latestDay, loadDay, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
 import { hasPapers, topicEvidence } from "../../lib/citations";
 import { topicPages } from "../../lib/period-data";
 import type { Topic } from "../../lib/types";
+import { datedEvidence, topicAppearances } from "../../lib/editions";
+import { growthContext } from "../../lib/scoring";
 
 export function getStaticPaths() {
   return topicPages().map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
@@ -28,17 +30,22 @@ const latestRanked = ranked[0];
 const category = loadTaxonomy(domain).find(({ slug }) => slug === topic.category)?.label ?? topic.category;
 const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
 const headline = topic.headline ?? topic.label;
+const publishedDates = new Set(topicAppearances(domain).get(topic.slug)?.map(({ day }) => day.date));
+function historyLink(date: string) {
+  if (publishedDates.has(date)) return datedEvidence(domain, date, topic.slug);
+  return loadDay(domain, date) ? `/day/${date}/` : undefined;
+}
 const evidence = topicEvidence(topic);
 const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
 ---
 
 <Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
   <article class="prose" data-pagefind-body data-pagefind-filter={`category:${category}`}>
-    {latestRanked && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
+    {latestRanked && loadDay(domain, latestRanked.date) && <nav aria-label="Breadcrumb"><a href={`/day/${latestRanked.date}/`}>← {latestRanked.date}</a></nav>}
     <p class="rank-category" data-pagefind-filter="field:computational" data-pagefind-meta="field:CompBio"><CategoryIcon slug={topic.category} size={36} /> <span>{latestRanked ? `#${latestRanked.rank}` : "Topic"} · {category}</span></p>
     <h1>{headline}</h1>
     {topic.summary && <p>{topic.summary}</p>}
-    {latestEntry && <SignalBadges signals={latestEntry.signals} />}
+    {latestEntry && <SignalBadges signals={latestEntry.signals} context={growthContext(latestEntry.signals, latestEntry.date, history)} />}
     <Sparkline history={topic.history} />
     {topic.synthesis !== null && readingParagraphs(topic.synthesis).map(paragraph => <p>{paragraph}</p>)}
     <EditorNote html={loadNote(topic.slug)} />
@@ -54,7 +61,11 @@ const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
       <h2 id="history-heading">Topic history</h2>
       {ranked.length > 0 ? <table>
         <thead><tr><th scope="col">Date</th><th scope="col">Rank</th></tr></thead>
-        <tbody>{ranked.map((entry) => <tr><td><a href={`/day/${entry.date}/`} aria-label={`${entry.date} · #${entry.rank}`}><time datetime={entry.date}>{entry.date}</time></a></td><td><span aria-hidden="true">{rankMedal(entry.rank!)}</span><span class="sr-only">#{entry.rank}</span></td></tr>)}</tbody>
+        <tbody>{ranked.map(entry => {
+          const href = historyLink(entry.date);
+          return <tr><td>{href ? <a {href} aria-label={`${entry.date} · #${entry.rank}`}><time datetime={entry.date}>{entry.date}</time></a>
+            : <time datetime={entry.date}>{entry.date}</time>}</td><td><span aria-hidden="true">{rankMedal(entry.rank!)}</span><span class="sr-only">#{entry.rank}</span></td></tr>;
+        })}</tbody>
       </table> : <p>No ranked appearances have been recorded for this topic.</p>}
     </section>
   </article>

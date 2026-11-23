@@ -1,5 +1,5 @@
 import { industryItems, loadItems, loadTopic } from "./data";
-import { datedTopic, fieldLabel, type Edition } from "./editions";
+import { datedEvidence, fieldLabel, type Edition } from "./editions";
 import { selectToolNames } from "./tool-names";
 import type { Day } from "./types";
 
@@ -32,7 +32,7 @@ ${!edition && category?.slug === "industry" ? (recent[0] ? industryItems(recent[
       if (names.length) summary += ` Tools: ${names.join(", ")}.`;
     }
     const key = edition ? `${edition}/${row.slug}` : row.slug;
-    const path = edition ? datedTopic(edition, day.date, row.slug) : `/topic/${row.slug}/`;
+    const path = datedEvidence(edition ?? "computational", day.date, row.slug);
     return `<entry><id>${escapeXml(`tag:trendbio.dev,${day.date}:${key}`)}</id>
 <title>${escapeXml(row.headline)}</title><link href="${escapeXml(new URL(path, site).href)}"/>
 <updated>${escapeXml(updated(day))}</updated><summary type="text">${escapeXml(summary)}</summary></entry>`;

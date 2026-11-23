@@ -13,7 +13,7 @@ beforeEach(async () => { page = await (await browser.newContext()).newPage(); })
 afterEach(async () => { await page?.context().close(); });
 afterAll(async () => { await browser?.close(); await server?.stop(); });
 const visit = (path: string) => page.goto(`http://127.0.0.1:${server.port}${path}`);
-const finished = () => page.waitForFunction(() => /found\./.test(document.getElementById("search-status")!.textContent!));
+const finished = () => page.waitForFunction(() => /found(?: so far)?\./.test(document.getElementById("search-status")!.textContent!));
 
 it.each(["Binder", "  Binder  "])("submits the home search and trims %j on the search page", async query => {
   await visit("/");

@@ -40,8 +40,12 @@ export function datedTopic(field: Field, date: string, slug: string): string {
   return `${prefix}/day/${date}/#${encodeURIComponent(slug)}`;
 }
 
+export function datedEvidence(field: Field, date: string, slug: string): string {
+  return field === "computational" ? `/day/${date}/papers/#${encodeURIComponent(slug)}` : datedTopic(field, date, slug);
+}
+
 const byIssue = new WeakMap<Day[], Map<string, { day: Day; row: RankedTopic }[]>>();
-export function topicAppearances(field: Edition) {
+export function topicAppearances(field: Field) {
   const days = loadDays(field);
   let topics = byIssue.get(days);
   if (!topics) {

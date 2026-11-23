@@ -48,7 +48,7 @@ it("builds parseable Atom feeds with stable IDs, category filtering and absolute
       continue;
     }
     expect(feed.entries.map(entry => entry.id)).toEqual(expected.map(({ row, day }) => `tag:trendbio.dev,${day.date}:${row.slug}`));
-    expect(feed.entries.map(entry => entry.link)).toEqual(expected.map(({ row }) => `https://trendbio.dev/topic/${row.slug}/`));
+    expect(feed.entries.map(entry => entry.link)).toEqual(expected.map(({ row, day }) => `https://trendbio.dev/day/${day.date}/papers/#${row.slug}`));
     expect(new Set(feed.entries.map(entry => entry.id)).size).toBe(expected.length);
   }
   expect(readFileSync("dist/feed.xml", "utf8")).toContain("Tools: atlas, BetaTool 2.0, DeltaTool.");

@@ -61,10 +61,26 @@ describe("period boundaries and selection", () => {
   });
 
   it("title-cases an auto label and marks it for muted rendering", () => {
-    const topic = { ...topics[0], headline: null, label: "protein design binders" };
+    const topic = { ...topics[0], slug: "protein-design-binders-a1b2", headline: null, label: "Label rewritten by a later edition" };
     const rows = periodRows(rankPeriod([topic], "2026-10-26", "2026-11-01", taxonomy));
     expect(rows[0].headline).toBe("Protein Design Binders");
     expect(rows[0].autoLabel).toBe(true);
+  });
+
+  it("uses the most recent published headline inside each period, including when later history is unranked", () => {
+    const day = loadDays("computational")[0], row = day.ranked[0];
+    const dates = ["2026-10-26", "2026-10-30", "2026-10-31", "2026-11-12"];
+    const topic = { ...topics[0], slug: row.slug, headline: "Updated later", history: dates.map(date => ({
+      ...topics[0].history[0], date, rank: date === "2026-10-31" ? null : 1, item_ids: [date],
+    })) };
+    const issues = dates.filter(date => date !== "2026-10-31").map(date => ({ ...day, date, ranked: [{ ...row, headline: date }] }));
+    const index = indexHistories([topic], issues);
+    for (const end of ["2026-10-31", "2026-11-01"]) {
+      expect(rankPeriod(index, dates[0], end, taxonomy)[0]).toMatchObject({
+        headline: "2026-10-30", evidenceDate: "2026-10-30", latest_item_ids: ["2026-10-30"], items: 3,
+      });
+    }
+    expect(rankPeriod(index, "2026-10-31", "2026-10-31", taxonomy)[0].headline).toBeNull();
   });
 
   it("indexes histories once and ranks a year of periods without traversing histories again", () => {
@@ -97,7 +113,7 @@ describe("built period pages", () => {
     expect(html.replace(details, "").match(/\bdata-topic-cats="/g)).toHaveLength(20);
     expect(details).toContain(`Show ${rows.length - 20} more`);
     if (path.startsWith("week")) expect(rows).toHaveLength(40);
-    for (const label of ["days ranked", "best rank", "items", "Rise"]) expect(details).toContain(label);
+    for (const label of ["days ranked", "best rank", "items", "Peak rise"]) expect(details).toContain(label);
     for (const [, slug] of html.matchAll(/href="\/topic\/([^/]+)\/"/g)) expect(() => page(`topic/${slug}`)).not.toThrow();
     expect(html).toContain("data-category-chips");
   });

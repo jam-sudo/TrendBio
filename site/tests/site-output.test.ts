@@ -5,10 +5,11 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { chromium, type Browser, type Page } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
-import { getDataIndex } from "../src/lib/data";
+import { getDataIndex, loadItems, loadTopic } from "../src/lib/data";
 import { editions, fieldLabel, pilotDates, publicEditions } from "../src/lib/editions";
 import { loadPeriods } from "../src/lib/period-data";
 import { truncateDescription } from "../src/lib/metadata";
+import { growthContext } from "../src/lib/scoring";
 
 const read = (path: string) => readFileSync(`dist/${path}`, "utf8");
 const { days, rankedTopics } = getDataIndex("computational");
@@ -58,6 +59,7 @@ it("displays the stored scoring components and synthesis flags in rank order", a
   for (const [i, topic] of top.entries()) {
     const { rise, diversity, code_velocity, volume, total } = topic.scores;
     expect(await rows.nth(i).locator("td").allTextContents()).toEqual([
+      `${topic.signals.rise_ratio.toFixed(1)}× ${growthContext(topic.signals, day.date, loadTopic(day.domain, topic.slug)?.history ?? [], day.run.window_days)}`,
       ...[rise, diversity, code_velocity, volume, total].map(value => value.toFixed(2)),
       day.run.notes.includes(`synthesis-fallback:${topic.slug}`) ? "Yes" : "—",
     ]);
@@ -111,7 +113,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
       entries: [...doc.querySelectorAll("url")].map(el => ({ loc: el.querySelector("loc")?.textContent, date: el.querySelector("lastmod")?.textContent })) };
   }, read("sitemap.xml"));
   expect(parsed.error).toBeUndefined();
-  const { weeks, months } = loadPeriods();
+  const { weeks, months, paperDays } = loadPeriods();
   const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
   const fieldPages = editions.reduce((n, field) => n + 1 + getDataIndex(field).days.length, 0);
   const fieldTopics = new Map<string, string>();
@@ -123,7 +125,7 @@ it("builds valid XML covering the index and every public HTML route with lastmod
       }
     }
   }
-  expect(parsed.entries).toHaveLength(10 + editions.flatMap(pilotDates).length + fieldPages + days.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
+  expect(parsed.entries).toHaveLength(10 + editions.flatMap(pilotDates).length + fieldPages + days.length + paperDays.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   for (const [url, date] of fieldTopics) expect(urls.get(url)).toBe(date);
   expect(urls.size).toBe(parsed.entries.length);
@@ -162,6 +164,25 @@ it("ships one PNG link preview at 1200×630 under 200 KB", () => {
   expect(png.equals(readFileSync("public/og.png"))).toBe(true);
 });
 
+it("opens every dated CompBio card on the published headline, summary and exact supporting paper records", async () => {
+  for (const day of days.filter(day => day.ranked.length)) {
+    await page.setContent(read(`day/${day.date}/index.html`));
+    const links = await page.locator('article[data-topic-cats] .topic-link').evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
+    expect(links).toEqual(day.ranked.map(row => `/day/${day.date}/papers/#${row.slug}`));
+    await page.setContent(read(`day/${day.date}/papers/index.html`));
+    for (const row of day.ranked) {
+      const section = page.locator(`section[id="${row.slug}"]`);
+      expect(await section.locator('h2').textContent()).toBe(row.headline);
+      if (row.summary) expect(await section.textContent()).toContain(row.summary);
+      const entry = loadTopic("computational", row.slug)?.history.find(entry => entry.date === day.date);
+      const urls = loadItems("computational", [...new Set(entry?.item_ids)]).filter(item => ["preprint", "published"].includes(item.type)).map(item => item.url);
+      const sources = await section.locator("details > ul > li > a:first-child").evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
+      expect(sources.sort()).toEqual(urls.sort());
+      expect(await section.getByRole("link", { name: "Latest topic", exact: true }).getAttribute("href")).toBe(`/topic/${row.slug}/`);
+    }
+  }
+});
+
 it("explains cookie-free page-view analytics on About", () => {
   expect(read("about/index.html")).toContain("The site uses Cloudflare Web Analytics, which sets no cookies, to count page views.");
 });
@@ -176,7 +197,8 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
     expect(await page.locator(".hero").count()).toBe(path === "physics/index.html" ? 1 : 0);
     expect(await main.locator('[data-arxiv-scope="current"]').textContent()).toContain("Current coverage");
     expect(await main.locator("ol h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
-    expect(await main.locator("ol h3 a").getAttribute("href")).toBe("/physics/topic/cavity-readout-fixture/");
+    const latest = path === "physics/index.html" ? main.locator("ol h3 a") : main.getByRole("link", { name: /Latest topic/ });
+    expect(await latest.getAttribute("href")).toBe("/physics/topic/cavity-readout-fixture/");
     expect(await main.locator('a[href^="https://example.org/physics/"]').count()).toBe(3);
     const archiveLink = path === "physics/index.html" ? "/physics/day/2026-11-01/" : "/physics/#editions";
     expect(await main.locator(`a[href="${archiveLink}"]`).count()).toBe(1);

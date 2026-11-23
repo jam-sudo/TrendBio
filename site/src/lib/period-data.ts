@@ -11,10 +11,21 @@ const cache = shared.trendbioRankedPeriods ??= new WeakMap();
 function buildPeriods() {
   const days = loadDays("computational");
   const topics = allTopics("computational");
-  const index = indexHistories(topics);
+  const index = indexHistories(topics, days);
   const taxonomy = loadTaxonomy("computational");
   const rank = (period: Period): RankedPeriod => ({ ...period, topics: rankPeriod(index, period.start, period.end, taxonomy) });
-  return { days, topics, weeks: allWeeks(days).map(rank), months: allMonths(days).map(rank) };
+  const weeks = allWeeks(days).map(rank), months = allMonths(days).map(rank);
+  const supplemental = new Map<string, Map<string, PeriodRanked>>();
+  for (const period of [...weeks, ...months]) {
+    for (const topic of period.topics) {
+      if (topic.headline || !topic.evidenceDate) continue;
+      const rows = supplemental.get(topic.evidenceDate) ?? new Map<string, PeriodRanked>();
+      rows.set(topic.slug, topic);
+      supplemental.set(topic.evidenceDate, rows);
+    }
+  }
+  const paperDays = days.filter(day => day.ranked.length || supplemental.has(day.date));
+  return { days, topics, weeks, months, supplemental, paperDays };
 }
 
 // All period routes share one loaded dataset and one history index; each entry is aggregated once per period kind.

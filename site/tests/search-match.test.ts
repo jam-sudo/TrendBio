@@ -1,5 +1,5 @@
 import { expect, it, vi } from "vitest";
-import { filterResults, matchesQuery } from "../src/lib/search-match.js";
+import { matchingPages, matchesQuery } from "../src/lib/search-match.js";
 
 it.each(["qqzzxxnomatch", "zzzzqqqq", "xkcdvvv"])("rejects reverse-prefix matches for %s", query => {
   expect(matchesQuery(query, "Yang, Q. Zhang, Z. Hyper Screening X")).toBe(false);
@@ -26,15 +26,22 @@ it("requires every long query word at a word boundary", () => {
   expect(matchesQuery("양자", "세포와 유전체")).toBe(false);
 });
 
-it("loads at most 50 candidates and retains only matching data in order", async () => {
-  const data = vi.fn().mockResolvedValue({ content: "Q. unrelated" });
-  const match = { content: "PoolParty", url: "/topic/poolparty/" };
-  const beyondLimit = vi.fn().mockResolvedValue(match);
-  const candidates = Array.from({ length: 50 }, () => ({ data }));
-  candidates[2] = { data: vi.fn().mockResolvedValue(match) };
-  expect(await filterResults("poolparty", [...candidates, { data: beyondLimit }])).toEqual([match]);
-  expect(data).toHaveBeenCalledTimes(49);
-  expect(beyondLimit).not.toHaveBeenCalled();
+it("reads bounded pages through the last candidate, keeping matches ordered across retries", async () => {
+  const candidates = Array.from({ length: 91 }, (_, id) => ({
+    data: vi.fn().mockResolvedValue({ content: id < 20 || id >= 68 ? "PoolParty" : "unrelated", id }),
+  }));
+  const pages = matchingPages("poolparty", candidates);
+  const current = () => true;
+  expect(await pages.next(current)).toMatchObject({ count: 20, shown: 20, more: true, complete: false });
+  expect(candidates[20].data).not.toHaveBeenCalled();
+  candidates[60].data.mockRejectedValueOnce(new Error("offline"));
+  await expect(pages.next(current)).rejects.toThrow("offline");
+  expect(await pages.next(() => false)).toBeNull();
+  const next = await pages.next(current);
+  expect(next!.page.map(row => row.id)).toEqual(Array.from({ length: 20 }, (_, i) => 68 + i));
+  expect(next).toMatchObject({ count: 43, shown: 40, more: true, complete: true });
+  expect(candidates[20].data).toHaveBeenCalledTimes(1);
+  expect((await pages.next(current))!).toMatchObject({ count: 43, shown: 43, more: false });
 });
 
 it("stops after six matches without fetching the remaining fragments", async () => {
@@ -47,7 +54,8 @@ it("stops after six matches without fetching the remaining fragments", async () 
   expect(miss).toHaveBeenCalledTimes(1);
   hit.mockClear();
   expect(await firstMatches('nonsense', candidates, () => true)).toHaveLength(0);
-  expect(hit).toHaveBeenCalledTimes(49);
+  expect(hit).toHaveBeenCalledTimes(70);
+  expect(await firstMatches('PoolParty', [...Array.from({ length: 60 }, () => ({ data: miss })), { data: hit }], () => true)).toHaveLength(1);
   hit.mockClear();
   expect(await firstMatches('PoolParty', candidates, () => false)).toEqual([]);
   expect(hit).not.toHaveBeenCalled();

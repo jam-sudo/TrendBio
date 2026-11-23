@@ -1,9 +1,8 @@
-import { readFileSync } from "node:fs";
-import { parse } from "yaml";
+import { scoring } from "./scoring";
 import type { Category } from "./data";
-import type { Day, Topic, TopicDay } from "./types";
+import type { Day, RankedTopic, Topic, TopicDay } from "./types";
 
-const { top_n, max_per_category, category_floor } = parse(readFileSync("../config/scoring.yaml", "utf8"));
+const { top_n, max_per_category, category_floor } = scoring;
 
 const DAY = 86_400_000;
 const dateString = (date: Date) => date.toISOString().slice(0, 10);
@@ -77,6 +76,7 @@ export function allMonths(days: Pick<Day, "date">[]): Period[] {
 export interface PeriodRanked {
   slug: string;
   headline: string | null;
+  evidenceDate?: string;
   label: string;
   category: string;
   secondary_categories: string[];
@@ -86,23 +86,30 @@ export interface PeriodRanked {
   best_rank: number | null;
   items: number;
   rise: number;
+  rise_date: string;
   rank: number;
 }
 
-export type HistoryIndex = Map<string, { topic: Topic; entry: TopicDay }[]>;
+export function periodHeadline(topic: Pick<PeriodRanked, "headline" | "label">) {
+  return topic.headline || topic.label.replace(/\b\p{L}/gu, letter => letter.toUpperCase());
+}
 
-export function indexHistories(topics: Topic[]): HistoryIndex {
-  const cached = cache.histories.get(topics);
+export type HistoryIndex = Map<string, { topic: Topic; entry: TopicDay; hasIssue: boolean; published?: RankedTopic }[]>;
+
+export function indexHistories(topics: Topic[], days?: Day[]): HistoryIndex {
+  const cached = !days && cache.histories.get(topics);
   if (cached) return cached;
+  const editions = new Map(days?.map(day => [day.date, new Map(day.ranked.map(row => [row.slug, row]))]));
   const index: HistoryIndex = new Map();
   for (const topic of topics) {
     for (const entry of topic.history) {
       const entries = index.get(entry.date) ?? [];
-      entries.push({ topic, entry });
+      const issue = editions.get(entry.date);
+      entries.push({ topic, entry, hasIssue: !!issue, published: issue?.get(topic.slug) });
       index.set(entry.date, entries);
     }
   }
-  cache.histories.set(topics, index);
+  if (!days) cache.histories.set(topics, index);
   return index;
 }
 
@@ -115,15 +122,26 @@ export function rankPeriod(topics: Topic[] | HistoryIndex, start: string, end: s
   if (cached) return cached;
   const totals = new Map<string, PeriodRanked & { itemIds: Set<string> }>();
   for (let date = new Date(`${start}T00:00:00Z`); dateString(date) <= end; date.setUTCDate(date.getUTCDate() + 1)) {
-    for (const { topic, entry } of index.get(dateString(date)) ?? []) {
+    for (const { topic, entry, hasIssue, published } of index.get(dateString(date)) ?? []) {
       let total = totals.get(topic.slug);
       if (!total) {
-        total = { slug: topic.slug, headline: topic.headline, label: topic.label, category: topic.category,
+        // The original keyword label is part of the immutable slug. Synthesis can rewrite topic.label.
+        const label = topic.slug.replace(/-[0-9a-f]{4}$/, "").replaceAll("-", " ");
+        total = { slug: topic.slug, headline: null, label, category: topic.category,
           secondary_categories: topic.secondary_categories, period_score: 0, days_ranked: 0,
-          best_rank: null, items: 0, rise: 0, rank: 0, latest_item_ids: [], itemIds: new Set() };
+          best_rank: null, items: 0, rise: 0, rise_date: entry.date, rank: 0, latest_item_ids: [], itemIds: new Set() };
         totals.set(topic.slug, total);
       }
-      total.latest_item_ids = entry.item_ids;
+      if (published?.headline) {
+        total.headline = published.headline;
+        total.evidenceDate = entry.date;
+        total.latest_item_ids = entry.item_ids;
+      } else if (!total.headline && hasIssue && entry.item_ids.length) {
+        total.evidenceDate = entry.date;
+        total.latest_item_ids = entry.item_ids;
+      } else if (!total.evidenceDate) {
+        total.latest_item_ids = entry.item_ids;
+      }
       total.period_score += entry.scores.total;
       if (entry.rank !== null) {
         total.days_ranked++;
@@ -131,7 +149,10 @@ export function rankPeriod(topics: Topic[] | HistoryIndex, start: string, end: s
       }
       for (const id of entry.item_ids) total.itemIds.add(id);
       total.items = total.itemIds.size;
-      total.rise = Math.max(total.rise, entry.signals.rise_ratio);
+      if (entry.signals.rise_ratio >= total.rise) {
+        total.rise = entry.signals.rise_ratio;
+        total.rise_date = entry.date;
+      }
     }
   }
   const sorted = [...totals.values()].sort((a, b) => b.period_score - a.period_score ||

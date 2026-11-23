@@ -123,11 +123,12 @@ const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${f
       <ol class="rankings">
         {day.ranked.map(row => <li value={row.rank} id={row.slug}>
           <p class="category">{categories.get(row.category) ?? row.category}</p>
-          <h3>{isPublic ? <a data-topic-permalink href={`/${field}/topic/${row.slug}/`}>{row.headline}</a> : row.headline}</h3>
+          <h3>{isPublic && !Astro.params.edition ? <a href={`/${field}/topic/${row.slug}/`}>{row.headline}</a> : row.headline}</h3>
           {comparison && <div class="movement"><RankChange movement={comparison.rows.get(row.slug)} /></div>}
           <p>{row.summary}</p>
           {day.run.notes.includes(`synthesis-fallback:${row.slug}`) && <small>Fallback summary from source text</small>}
           <FieldEvidence {field} {day} {row} />
+          {isPublic && Astro.params.edition && <a data-edition-navigation href={`/${field}/topic/${row.slug}/`} aria-label={`Latest topic: ${row.headline}`}>Latest topic</a>}
           {isPublic && <CrossCoverage date={day.date} matches={crossCoverage(field, day.date, row.slug)} />}
         </li>)}
       </ol>

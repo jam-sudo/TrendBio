@@ -29,6 +29,7 @@ export interface Signals {
   code: number;
   industry: number;
   rise_ratio: number;
+  rise_baseline?: "field_median" | "four_week_mean" | "prior_window_mean" | null;
   star_gain_7d: number;
 }
 

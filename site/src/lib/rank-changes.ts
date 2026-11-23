@@ -2,9 +2,9 @@ import { allTopics, loadDays, loadItems } from "./data";
 import type { Day, Topic } from "./types";
 
 export interface RankChange { label: string; description: string }
-export interface TopicMovement { rank?: RankChange; entered: boolean; papersAdded: number }
+export interface TopicMovement { rank?: RankChange; entered: boolean; addedPaperIds: Set<string> }
 
-export function editionChanges(day: Day, days = loadDays(day.domain), topics: Topic[] = allTopics(day.domain)) {
+function compareEditions(day: Day, days: Day[], topics: Topic[]) {
   const older = days.filter(entry => entry.date < day.date).sort((a, b) => b.date.localeCompare(a.date));
   const previous = older[0];
   if (!previous) return null;
@@ -33,8 +33,16 @@ export function editionChanges(day: Day, days = loadDays(day.domain), topics: To
     const after = history.find(entry => entry.date === day.date);
     const previousIds = new Set(before?.item_ids);
     const additions = before && after ? [...new Set(after.item_ids)].filter(id => !previousIds.has(id)) : [];
-    const papersAdded = loadItems(day.domain, additions).filter(item => item.type === "published" || item.type === "preprint").length;
-    rows.set(row.slug, { rank, entered: joined, papersAdded });
+    const addedPaperIds = new Set(loadItems(day.domain, additions)
+      .filter(item => item.type === "published" || item.type === "preprint").map(item => item.id));
+    rows.set(row.slug, { rank, entered: joined, addedPaperIds });
   }
   return { previousDate: previous.date, entered, rows };
+}
+
+const comparisons = new WeakMap<Day, ReturnType<typeof compareEditions>>();
+export function editionChanges(day: Day, days?: Day[], topics?: Topic[]) {
+  if (days || topics) return compareEditions(day, days ?? loadDays(day.domain), topics ?? allTopics(day.domain));
+  if (!comparisons.has(day)) comparisons.set(day, compareEditions(day, loadDays(day.domain), allTopics(day.domain)));
+  return comparisons.get(day) ?? null;
 }

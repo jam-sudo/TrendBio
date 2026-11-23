@@ -48,6 +48,7 @@ def test_new_topic_uses_global_median_baseline(topic, sig, cfg):
     scored = score_topics([(topic, sig, 7), (other, sig, 3)], set(), cfg, TODAY)
     assert scored[0][2].rise == 10 / 8  # Median of 3 and 7 is 5.
     assert scored[0][1].rise_ratio == 10 / 8
+    assert scored[0][1].rise_baseline == "field_median"
     assert sig.rise_ratio == 0.0
 
 
@@ -66,16 +67,19 @@ def test_rise_capped_at_10(topic, sig, cfg):
     assert rise(topic, 300, TODAY, cfg, 7) == 10.0
     _, signals, scores = score_topics([(topic, sig, 300)], set(), cfg, TODAY)[0]
     assert signals.rise_ratio == 101.0
+    assert signals.rise_baseline == "four_week_mean"
     assert scores.rise == 10.0
 
 
-def test_long_window_compares_complete_periods_with_sufficient_history(topic, cfg):
+def test_long_window_compares_complete_periods_with_sufficient_history(topic, sig, cfg):
     cfg = cfg.model_copy(update={'window_days': 28})
     for age in (7, 28):
         append_history(topic, TODAY - timedelta(days=age), ['a', 'b', 'c', 'd'], 1)
     assert rise(topic, 7, TODAY, cfg, global_median=7) == 1
+    assert score_topics([(topic, sig, 7)], set(), cfg, TODAY)[0][1].rise_baseline == "field_median"
     append_history(topic, TODAY - timedelta(days=56), ['e', 'f'], 1)
     assert rise(topic, 7, TODAY, cfg, global_median=7) == pytest.approx(10 / 6)
+    assert score_topics([(topic, sig, 7)], set(), cfg, TODAY)[0][1].rise_baseline == "prior_window_mean"
 
 
 def test_diversity_counts_linked_pair_once(topic, preprint):

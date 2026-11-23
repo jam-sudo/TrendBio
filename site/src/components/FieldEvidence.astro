@@ -2,15 +2,22 @@
 import { readingParagraphs } from "../lib/reading-paragraphs";
 import PublicationEvidence from "./PublicationEvidence.astro";
 import { loadCorrection, loadItems, loadTopic } from "../lib/data";
-import type { Edition } from "../lib/editions";
+import { publicEditions, type Field } from "../lib/editions";
+import { editionChanges } from "../lib/rank-changes";
 import type { Day, RankedTopic } from "../lib/types";
 
-interface Props { field: Edition; day: Day; row: RankedTopic; expanded?: boolean }
+interface Props { field: Field; day: Day; row: Pick<RankedTopic, "slug" | "headline" | "summary" | "synthesis">; expanded?: boolean }
 const { field, day, row, expanded = false } = Astro.props;
 const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 const topic = loadTopic(field, row.slug);
 const entry = topic?.history.find(entry => entry.date === day.date);
-const papers = loadItems(field, entry?.item_ids ?? []);
+const papers = loadItems(field, [...new Set(entry?.item_ids)]).filter(item => item.type === "published" || item.type === "preprint");
+const comparison = field === "computational" || publicEditions.includes(field) ? editionChanges(day) : null;
+const added = comparison?.rows.get(row.slug)?.addedPaperIds;
+const groups = added?.size ? [
+  { label: `Added since ${comparison!.previousDate}`, papers: papers.filter(paper => added.has(paper.id)) },
+  { label: "Other supporting papers", papers: papers.filter(paper => !added.has(paper.id)) },
+] : [{ label: "", papers }];
 const singleSource = day.run.notes.includes(`synthesis-fallback:${row.slug}`);
 const synthesis = singleSource ? null
   : row.synthesis ?? (topic?.synthesized_on === day.date ? topic?.synthesis : null);
@@ -21,7 +28,9 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
 {papers.length > 0 && <details open={expanded}>
   <summary>{papers.length} supporting {(papers.length === 1 ? "paper" : "papers")}</summary>
   {synthesis && readingParagraphs(synthesis).map(paragraph => <p>{paragraph}</p>)}
-  <ul>{papers.map(paper => <li>{typeof paper.metadata.conference === "string" ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <>
+  {groups.filter(group => group.papers.length).map(group => <>
+  {group.label && <p class="group-label"><strong>{group.label}</strong></p>}
+  <ul aria-label={group.label || undefined}>{group.papers.map(paper => <li>{typeof paper.metadata.conference === "string" ? <PublicationEvidence paper={paper} /> : <a href={paper.url}>{paper.title}</a>}{["crossref", "drops", "oai", "europepmc", "worldbank"].includes(paper.source) && typeof paper.metadata.license === "string" && <>
     {typeof paper.metadata.conference !== "string" && <> · <span translate="no">{paper.authors.join(", ")}</span></>} · <a href={paper.metadata.license}>{paper.metadata.license.includes("/publicdomain/zero/") ? "CC0" : "CC BY"}</a></>}
     {paper.source === "worldbank" && <> · <span>Working paper</span></>}
     {day.run.arxiv_mailings && paper.source === "arxiv" && typeof paper.metadata.arxiv_submitted === "string" && <>
@@ -35,8 +44,9 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
     {["oai", "europepmc"].includes(paper.source) && typeof paper.metadata.language === "string" && /^[a-z]{2,3}$/.test(paper.metadata.language) && <> · <span>{`Source lists the publication language as ${languageNames.of(paper.metadata.language)}`}</span></>}
     {Array.isArray(paper.metadata.preprint_dois) && paper.metadata.preprint_dois.filter(doi => typeof doi === "string" && /^10\.\d{4,9}\/\S+$/i.test(doi)).map(doi => <> · <a href={`https://doi.org/${doi}`}>Preprint version</a></>)}
     {Array.isArray(paper.metadata.dataset_dois) && paper.metadata.dataset_dois.length > 0 && <ul>{paper.metadata.dataset_dois.map(doi => <li><a href={`https://doi.org/${doi}`}>Dataset {doi}</a></li>)}</ul>}
-  </li>)}</ul>
+  </li>)}</ul></>)}
 </details>}
+{expanded && papers.length === 0 && <p>No supporting paper records are available for this edition.</p>}
 <style>
   .correction { border-inline-start: 3px solid currentColor; padding-inline-start: .75rem; margin: 1rem 0; }
   details p { margin-top: .75rem; }

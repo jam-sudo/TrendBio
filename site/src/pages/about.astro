@@ -1,12 +1,11 @@
 ---
-import { readFileSync } from "node:fs";
-import { parse } from "yaml";
+import { scoring } from "../lib/scoring";
 import Base from "../layouts/Base.astro";
 import { loadSponsors } from "../lib/sponsors";
 import { latestDay, loadTaxonomy } from "../lib/data";
 import { fieldLabel, publicEditions, type Field } from "../lib/editions";
 
-const { weights, top_n, category_floor, max_per_category } = parse(readFileSync("../config/scoring.yaml", "utf8"));
+const { weights, top_n, category_floor, max_per_category, history_days_for_own_baseline, rise_k } = scoring;
 const day = latestDay("computational");
 const { contact } = loadSponsors();
 const fields: Field[] = ["computational", ...publicEditions];
@@ -24,18 +23,20 @@ const fields: Field[] = ["computational", ...publicEditions];
     <h2>How ranking works</h2>
     <p>Four signals contribute to a topic’s score.</p>
     <ul>
-      <li>Growth ({weights.rise * 100}%) compares recent paper activity with the topic’s history. New topics use a typical group of papers as their baseline.</li>
+      <li>Growth ({weights.rise * 100}%) compares the topic’s current paper count with a baseline. The ratio adds {rise_k} to both counts so topics with few papers can be compared.</li>
       <li>Evidence diversity ({weights.diversity * 100}%) rewards a mix of evidence types.</li>
       <li>Code activity ({weights.code_velocity * 100}%) measures gains in GitHub stars.</li>
       <li>Volume ({weights.volume * 100}%) reflects the number of papers.</li>
     </ul>
+    <p>In a seven-day edition, topics with less than {history_days_for_own_baseline} days of history use the median paper count across topics scored in that field on that day. Older topics use the average of the counts one, two, three and four weeks earlier. A missing week counts as zero.</p>
+    <p>Longer-window pilots use the average of up to four earlier, non-overlapping windows of the same length when at least two have papers. Otherwise they use the field median.</p>
     <p>A small penalty applies to topics ranked the day before.</p>
     <p>Code and industry items attach to at most one research topic when their similarity clears a calibrated threshold. They contribute evidence, diversity and code velocity; paper counts, rise and topic continuity stay paper-only. The separate “From industry” list shows up to eight relevant announcements first seen in the preceding seven days, whether or not they attach to a topic.</p>
     <p>Code appears in the “From code” list because repositories rarely join research topics by text similarity.</p>
     <p>“Shared by researchers” covers Bluesky only and never affects rankings or scores. It excludes accounts linking 20 or more papers a week and can include authors promoting their own work.</p>
-    <p>Selection reserves {category_floor} topic per represented category, then fills by score with at most {max_per_category} per category. The selected topics appear in score order; quieter days may have fewer than {top_n} topics.</p>
-    <p>Weekly rankings run Monday through Sunday. Monthly rankings use calendar months. Both add up daily scores and break ties by days ranked, then by unique items. Each represented category gets one place and can hold up to five of the Top 20.</p>
-    <p>Each entry shows days ranked, best rank, unique items and maximum rise. “So far” marks a period still in progress.</p>
+    <p>Daily, weekly and monthly rankings select up to {top_n} topics. Selection reserves {category_floor} place per represented category while space is available, then fills the remaining places by score, with at most {max_per_category} per category.</p>
+    <p>Weekly CompBio rankings run Monday through Sunday. Monthly rankings use calendar months. Both add up all daily topic scores in that period, including days a topic missed the daily ranking. Ties go to more days ranked, then more unique items, then alphabetical topic ID.</p>
+    <p>Each entry shows days ranked, best rank, unique items and peak growth. Its headline comes from the last daily edition that ranked it during the period. Topics without a published headline in that period use their automatic label. “So far” marks a period still in progress.</p>
     <p>Tool names under Top 20 headlines are copied from paper titles and do not affect ranking.</p>
     <h2>Machine-generated summaries</h2>
     <p>Headlines, summaries and syntheses are machine-generated and may contain errors. Follow the evidence links and consult the original sources before relying on a claim.</p>

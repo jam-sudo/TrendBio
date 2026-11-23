@@ -1,5 +1,6 @@
 ---
-import { loadDays } from "../lib/data";
+import { loadDays, loadTopic } from "../lib/data";
+import { growthContext, scoring } from "../lib/scoring";
 import type { Day } from "../lib/types";
 const { day } = Astro.props as { day: Day };
 const top = day.ranked.filter(row => row.rank <= 10);
@@ -7,15 +8,17 @@ const previousDates = new Set([7, 14, 21].map(offset =>
   new Date(Date.parse(day.date + "T00:00:00Z") - offset * 86400000).toISOString().slice(0,10)));
 const previous = loadDays(day.domain).filter(d => previousDates.has(d.date) && d.ranked.length);
 const dec = (n: number) => n.toFixed(2);
+const { weights, rise_cap } = scoring;
 ---
 {top.length > 0 && <details class="rank-signals">
   <summary>Scoring signals for the top {top.length} · {day.date}</summary>
-  <p>Stored component values before weighting. The baseline assigns 45% to growth, 25% to diversity, 15% to code growth and 15% to volume. Total includes the repeat-topic penalty. A fallback uses source text when synthesis is unavailable.</p>
+  <p>The default weights are {weights.rise * 100}% for growth, {weights.diversity * 100}% for diversity, {weights.code_velocity * 100}% for code growth and {weights.volume * 100}% for volume. The growth score uses the growth ratio capped at {rise_cap}. Total includes the repeat-topic penalty. A fallback uses source text when synthesis is unavailable.</p>
   <p class="scroll-hint">Scroll the table horizontally to read all columns.</p>
   <div class="table-scroll" tabindex="0" role="region" aria-label="Ranking signals">
-    <table><thead><tr>{["Rank", "Growth", "Evidence diversity", "Code growth", "Volume", "Total", "Fallback"].map(col => <th scope="col">{col}</th>)}</tr></thead>
+    <table><thead><tr>{["Rank", "Growth ratio", "Growth score", "Evidence diversity", "Code growth", "Volume", "Total", "Fallback"].map(col => <th scope="col">{col}</th>)}</tr></thead>
       <tbody>{top.map(row => <tr>
         <th scope="row">#{row.rank}</th>
+        <td>{row.signals.rise_ratio.toFixed(1)}× {growthContext(row.signals, day.date, loadTopic(day.domain, row.slug)?.history ?? [], day.run.window_days)}</td>
         {[row.scores.rise, row.scores.diversity, row.scores.code_velocity, row.scores.volume, row.scores.total].map(v => <td>{dec(v)}</td>)}
         <td>{day.run.notes.includes(`synthesis-fallback:${row.slug}`) ? "Yes" : "—"}</td>
       </tr>)}</tbody></table>

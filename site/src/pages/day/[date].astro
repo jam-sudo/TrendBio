@@ -26,7 +26,7 @@ const previous = days[index + 1], next = days[index - 1];
     {previous && next && <span aria-hidden="true">·</span>}
     {next && <a href={`/day/${next.date}/`} rel="next">{next.date} →</a>}
   </nav>
-  <DayTopics day={day} topics={dailyRows(day)} />
+  <DayTopics day={day} topics={dailyRows(day, true)} />
 </Base>
 
 <style>
