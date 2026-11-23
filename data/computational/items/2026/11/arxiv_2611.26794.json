@@ -1,0 +1,35 @@
+{
+  "abstract": "Readouts of the tumor immune microenvironment (TIME), such as CD8+ T-cell density, intra-epithelial infiltration and the Ki67 index, combine tissue architecture from H&E with cell phenotypes from multiplex immunofluorescence (mIF). Multimodal large language models (MLLMs) could automate these readouts with an explanation, but two gaps remain. Pathology MLLMs read H&E alone, while these readouts need the cell phenotypes that mIF measures. And their reasoning has no step-level truth to be checked against, so R1-style reinforcement learning rewards only the final answer and leaves the reasoning unverified. Same-section H&E and mIF provide what both gaps lack: mIF measures every cell without manual annotation, which gives cell-level ground truth for each step that clinical guidelines prescribe, from delineating a tissue compartment to counting and normalizing the marker-positive cells within it. We therefore present HERMES (H&E-mIF Reasoning with Multimodal Evidence Supervision), an R1-style MLLM that reasons jointly over paired H&E and mIF in guideline steps and is trained with a process reward that checks every stated quantity against this truth. Across four field-level TIME tasks in colorectal cancer, HERMES (4B) reaches an average accuracy of 84.5%, compared with 74.7% for the strongest of twelve proprietary, general, medical and pathology MLLMs, and a higher share of its intermediate quantities is correct than for the strongest open-weight baseline. Without the process reward, reinforcement learning barely improves on supervised fine-tuning (80.0% vs. 78.8%) and fewer stated quantities are correct; editing a decisive stated quantity changes the answer as implied in all 885 test questions. Without retraining, it keeps the highest average accuracy on an external cohort imaged with CODEX (76.4% vs. 67.3%) and on head and neck cancer, a cancer type absent from training (76.7% vs. 72.5%).",
+  "authors": [
+    "Yixuan Duan",
+    "Kexin Geng",
+    "Hanwen Xu",
+    "Wei Qiu"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-23",
+  "id": "arxiv:2611.26794",
+  "metadata": {
+    "arxiv_primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.26794v1</ns0:id>\n    <ns0:title>Beyond Final Answers: Interpretable Tumor Immune Microenvironment Reasoning from H&amp;E and mIF</ns0:title>\n    <ns0:updated>2026-11-19T20:36:13Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.26794v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.26794v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Readouts of the tumor immune microenvironment (TIME), such as CD8+ T-cell density, intra-epithelial infiltration and the Ki67 index, combine tissue architecture from H&amp;E with cell phenotypes from multiplex immunofluorescence (mIF). Multimodal large language models (MLLMs) could automate these readouts with an explanation, but two gaps remain. Pathology MLLMs read H&amp;E alone, while these readouts need the cell phenotypes that mIF measures. And their reasoning has no step-level truth to be checked against, so R1-style reinforcement learning rewards only the final answer and leaves the reasoning unverified. Same-section H&amp;E and mIF provide what both gaps lack: mIF measures every cell without manual annotation, which gives cell-level ground truth for each step that clinical guidelines prescribe, from delineating a tissue compartment to counting and normalizing the marker-positive cells within it. We therefore present HERMES (H&amp;E-mIF Reasoning with Multimodal Evidence Supervision), an R1-style MLLM that reasons jointly over paired H&amp;E and mIF in guideline steps and is trained with a process reward that checks every stated quantity against this truth. Across four field-level TIME tasks in colorectal cancer, HERMES (4B) reaches an average accuracy of 84.5%, compared with 74.7% for the strongest of twelve proprietary, general, medical and pathology MLLMs, and a higher share of its intermediate quantities is correct than for the strongest open-weight baseline. Without the process reward, reinforcement learning barely improves on supervised fine-tuning (80.0% vs. 78.8%) and fewer stated quantities are correct; editing a decisive stated quantity changes the answer as implied in all 885 test questions. Without retraining, it keeps the highest average accuracy on an external cohort imaged with CODEX (76.4% vs. 67.3%) and on head and neck cancer, a cancer type absent from training (76.7% vs. 72.5%).</ns0:summary>\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-19T20:36:13Z</ns0:published>\n    <ns1:comment>23 pages, 12 figures, 13 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.AI\" />\n    <ns0:author>\n      <ns0:name>Yixuan Duan</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kexin Geng</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hanwen Xu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wei Qiu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural",
+    "single-cell"
+  ],
+  "source": "arxiv",
+  "summary": "HERMES: an R1-style multimodal LLM reasoning over paired H&E and mIF with a process reward checking stated quantities against cell-level truth for tumor immune…",
+  "title": "Beyond Final Answers: Interpretable Tumor Immune Microenvironment Reasoning from H&E and mIF",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.26794v1"
+}

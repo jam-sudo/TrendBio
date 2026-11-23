@@ -1,0 +1,43 @@
+{
+  "abstract": "Background: Targeted therapy for patients with suspected respiratory infections traditionally requires bacterial culture followed by phenotypic antimicrobial susceptibility testing (AST), a process that can take up to 5 days. In acute respiratory distress syndrome (ARDS), delays in identifying the causative pathogen and its resistance profile may be especially harmful because patients are critically ill and often receive broad-spectrum empiric antibiotics. The growing burden of antimicrobial resistance (AMR) further complicates clinical decision-making by reducing effective treatment options and increasing the risk of inadequate initial therapy. Culture-free, AI-driven computational metagenomic strategies have the potential to drastically shorten this window, enabling more rapid targeted therapy prescription. To show the feasibility of such approaches, we develop a proof-of-concept framework based on clinical metagenomics. Methods: We simulated respiratory metagenomes using real-world bacterial genomes with associated antimicrobial susceptibility phenotypes. Each simulated metagenome contained a fixed commensal background and one clinically important respiratory pathogen, Acinetobacter baumannii, Klebsiella pneumoniae, or Pseudomonas aeruginosa, at 5% or 10% bacterial read abundance. Realistic reads were simulated for Oxford Nanopore, PacBio, and Illumina sequencing platforms. Random Forest (RF) classifiers were trained and evaluated using five-fold, strain-grouped cross-validation with fold-specific {chi}2-ranked 13-mer features. ResFinder and KARGA were included as reference-based metagenomics benchmarks and evaluated using the same five held-out folds across the three sequencing platforms and two pathogen-abundance conditions. Results: RF performance varied substantially across species, antibiotics, and sequencing platforms. The strongest and most consistent results were observed for K. pneumoniae, with accuracy reaching approximately 0.96 for ceftazidime, 0.93 for amikacin, and 0.92 for ciprofloxacin. Performance for P. aeruginosa was more heterogeneous: long-read models performed well for amikacin, reaching 0.89 with PacBio and 0.88 with Nanopore, whereas Illumina performed substantially better for ciprofloxacin, ceftazidime, and levofloxacin, reaching accuracies of approximately 0.87, 0.77, and 0.70, respectively. Across most organism-antibiotic combinations, RF accuracy was numerically higher than the classification accuracies obtained with KARGA and ResFinder, which generally remained near 0.50. Increasing pathogen abundance from 5% to 10% and increasing the number of selected features from 2,500 to 5,000 generally produced modest improvements in classification accuracy, although the magnitude of improvement varied across organism-antibiotic combinations and sequencing platforms. Conclusions: Genome-wide k-mer machine learning can recover phenotype-associated antimicrobial resistance signals from simulated respiratory metagenomes, although performance depends strongly on the organism, antibiotic, and sequencing platform. These results represent a simulation-based proof of concept.",
+  "authors": [
+    "Sy, M. A.",
+    "Prosperi, M.",
+    "Benos, P. V.",
+    "Marini, S."
+  ],
+  "doi": "10.64898/2026.11.20.768127",
+  "first_seen": "2026-11-23",
+  "id": "biorxiv:10.64898/2026.11.20.768127",
+  "metadata": {
+    "abstract": "Background: Targeted therapy for patients with suspected respiratory infections traditionally requires bacterial culture followed by phenotypic antimicrobial susceptibility testing (AST), a process that can take up to 5 days. In acute respiratory distress syndrome (ARDS), delays in identifying the causative pathogen and its resistance profile may be especially harmful because patients are critically ill and often receive broad-spectrum empiric antibiotics. The growing burden of antimicrobial resistance (AMR) further complicates clinical decision-making by reducing effective treatment options and increasing the risk of inadequate initial therapy. Culture-free, AI-driven computational metagenomic strategies have the potential to drastically shorten this window, enabling more rapid targeted therapy prescription. To show the feasibility of such approaches, we develop a proof-of-concept framework based on clinical metagenomics. Methods: We simulated respiratory metagenomes using real-world bacterial genomes with associated antimicrobial susceptibility phenotypes. Each simulated metagenome contained a fixed commensal background and one clinically important respiratory pathogen, Acinetobacter baumannii, Klebsiella pneumoniae, or Pseudomonas aeruginosa, at 5% or 10% bacterial read abundance. Realistic reads were simulated for Oxford Nanopore, PacBio, and Illumina sequencing platforms. Random Forest (RF) classifiers were trained and evaluated using five-fold, strain-grouped cross-validation with fold-specific {chi}2-ranked 13-mer features. ResFinder and KARGA were included as reference-based metagenomics benchmarks and evaluated using the same five held-out folds across the three sequencing platforms and two pathogen-abundance conditions. Results: RF performance varied substantially across species, antibiotics, and sequencing platforms. The strongest and most consistent results were observed for K. pneumoniae, with accuracy reaching approximately 0.96 for ceftazidime, 0.93 for amikacin, and 0.92 for ciprofloxacin. Performance for P. aeruginosa was more heterogeneous: long-read models performed well for amikacin, reaching 0.89 with PacBio and 0.88 with Nanopore, whereas Illumina performed substantially better for ciprofloxacin, ceftazidime, and levofloxacin, reaching accuracies of approximately 0.87, 0.77, and 0.70, respectively. Across most organism-antibiotic combinations, RF accuracy was numerically higher than the classification accuracies obtained with KARGA and ResFinder, which generally remained near 0.50. Increasing pathogen abundance from 5% to 10% and increasing the number of selected features from 2,500 to 5,000 generally produced modest improvements in classification accuracy, although the magnitude of improvement varied across organism-antibiotic combinations and sequencing platforms. Conclusions: Genome-wide k-mer machine learning can recover phenotype-associated antimicrobial resistance signals from simulated respiratory metagenomes, although performance depends strongly on the organism, antibiotic, and sequencing platform. These results represent a simulation-based proof of concept.",
+    "author_corresponding": "Simone Marini",
+    "author_corresponding_institution": "University of Florida",
+    "authors": "Sy, M. A.; Prosperi, M.; Benos, P. V.; Marini, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-23",
+    "doi": "10.64898/2026.11.20.768127",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/23/2026.11.20.768127.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Machine learning prediction of antimicrobial resistance in respiratory metagenomes",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Florida",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics"
+  ],
+  "source": "biorxiv",
+  "summary": "Random Forest classifiers on 13-mer features predict antibiotic resistance of K. pneumoniae, P. aeruginosa and A. baumannii in simulated respiratory…",
+  "title": "Machine learning prediction of antimicrobial resistance in respiratory metagenomes",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.20.768127"
+}

@@ -1,0 +1,37 @@
+{
+  "abstract": "The number of structures fluorescence microscopy can image in one sample is limited by how few fluorophores can be separated without significant spectral overlap. Semantic unmixing circumvents this limit by imaging two structures in one fluorescent channel and computationally separating the superimposed image into one image per structure. Because pixels rarely identify their structure, unmixing requires both local and long-range spatial context. The relative brightness of the two structures is unknown and can be very uneven, so predictions must remain accurate across mixing severities, from balanced mixtures to ones where a structure is barely visible. Existing methods either process small image patches or add context through auxiliary pathways that slow inference on large images. We present MambaSplit, a hierarchical state-space encoder with a convolutional decoder that captures context across large tiles in linear time and predicts both channels in one deterministic pass. MambaSplit trains either on computationally summed channel images with random mixing ratios, where a lightweight head estimates the unknown ratio and conditions the decoder on it, or on experimentally acquired superpositions. Across five datasets and nine mixing ratios, MambaSplit achieves the highest RI-PSNR, by up to 3.0 dB, in 11 of 15 dataset-severity combinations and ties in one more, while running 5.9x faster than the strongest baseline. On acquired superpositions, fine-tuning a model pretrained on summed inputs matches or exceeds all baselines. Ablations show that accuracy and robustness come mainly from the training recipe: large tiles, mixing ratios sampled across their full range (up to 11 dB over fixed-ratio training), and independently drawn channel crops (3.9 dB on BioSR). The state-space backbone makes large tiles affordable, enabling high-content screening and event-driven smart microscopy.",
+  "authors": [
+    "Aman Kukde",
+    "Ruggiero Santeramo",
+    "Federico Carrara",
+    "Ashesh Ashesh",
+    "Igor Zubarev",
+    "Florian Jug"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-23",
+  "id": "arxiv:2611.26703",
+  "metadata": {
+    "arxiv_primary_category": "eess.IV",
+    "categories": [
+      "eess.IV",
+      "cs.CV",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.26703v1</ns0:id>\n    <ns0:title>MambaSplit: Severity-Robust and Inference-Efficient Semantic Unmixing of Fluorescence Microscopy Image Data</ns0:title>\n    <ns0:updated>2026-11-19T19:02:02Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.26703v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.26703v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The number of structures fluorescence microscopy can image in one sample is limited by how few fluorophores can be separated without significant spectral overlap. Semantic unmixing circumvents this limit by imaging two structures in one fluorescent channel and computationally separating the superimposed image into one image per structure. Because pixels rarely identify their structure, unmixing requires both local and long-range spatial context. The relative brightness of the two structures is unknown and can be very uneven, so predictions must remain accurate across mixing severities, from balanced mixtures to ones where a structure is barely visible. Existing methods either process small image patches or add context through auxiliary pathways that slow inference on large images. We present MambaSplit, a hierarchical state-space encoder with a convolutional decoder that captures context across large tiles in linear time and predicts both channels in one deterministic pass. MambaSplit trains either on computationally summed channel images with random mixing ratios, where a lightweight head estimates the unknown ratio and conditions the decoder on it, or on experimentally acquired superpositions. Across five datasets and nine mixing ratios, MambaSplit achieves the highest RI-PSNR, by up to 3.0 dB, in 11 of 15 dataset-severity combinations and ties in one more, while running 5.9x faster than the strongest baseline. On acquired superpositions, fine-tuning a model pretrained on summed inputs matches or exceeds all baselines. Ablations show that accuracy and robustness come mainly from the training recipe: large tiles, mixing ratios sampled across their full range (up to 11 dB over fixed-ratio training), and independently drawn channel crops (3.9 dB on BioSR). The state-space backbone makes large tiles affordable, enabling high-content screening and event-driven smart microscopy.</ns0:summary>\n    <ns0:category term=\"eess.IV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.CV\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-19T19:02:02Z</ns0:published>\n    <ns1:comment>28 pages, 15 figures, 23 tables; main paper (8 pages) followed by supplementary material</ns1:comment>\n    <ns1:primary_category term=\"eess.IV\" />\n    <ns0:author>\n      <ns0:name>Aman Kukde</ns0:name>\n      <ns1:affiliation>Fondazione Human Technopole, Milan, Italy</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ruggiero Santeramo</ns0:name>\n      <ns1:affiliation>Fondazione Human Technopole, Milan, Italy</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Federico Carrara</ns0:name>\n      <ns1:affiliation>Fondazione Human Technopole, Milan, Italy</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ashesh Ashesh</ns0:name>\n      <ns1:affiliation>Fondazione Human Technopole, Milan, Italy</ns1:affiliation>\n      <ns1:affiliation>IIT Hyderabad, Hyderabad, India</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Igor Zubarev</ns0:name>\n      <ns1:affiliation>Fondazione Human Technopole, Milan, Italy</ns1:affiliation>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Florian Jug</ns0:name>\n      <ns1:affiliation>Fondazione Human Technopole, Milan, Italy</ns1:affiliation>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-19",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "MambaSplit: a hierarchical state-space encoder with convolutional decoder for semantic unmixing of fluorescence microscopy, handling mixing severity and…",
+  "title": "MambaSplit: Severity-Robust and Inference-Efficient Semantic Unmixing of Fluorescence Microscopy Image Data",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.26703v1"
+}

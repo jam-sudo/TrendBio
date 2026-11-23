@@ -1,0 +1,36 @@
+{
+  "abstract": "Predicting holo-like protein conformations from apo structures is essential in structure-based drug design. Most existing apo-to-holo models operate in Cartesian space and achieve strong global accuracy. However, high global accuracy does not ensure physically valid local backbone geometry. Internal-coordinate models offer local control and validity, but regressive generation can amplify angular errors, known as the lever-arm effect. We introduce CrypticFlow, a hierarchical flow-matching model that combines these two complementary representations. An ESM-3-conditioned E(3)-equivariant graph network first generates sparse C$α$ anchors in Cartesian space. A conditional midpoint Transformer then recursively fills the gaps in local internal coordinates. During recursive generation, the decoder constrains the distance between each midpoint and any sequence-adjacent parent anchor to the corresponding apo C$α$-C$α$ distance. On the D3PM test split, CrypticFlow achieves the lowest median and mean C$α$ RMSD at published baseline capacities. Across five independent training models, the median and mean direct RMSD are 1.333 $\\pm$ 0.056 angstroms and 2.766 $\\pm$ 0.041 angstroms, respectively. The quality of local geometry also improves substantially. Our model achieves 99.58 $\\pm$ 0.02% adjacent-distance fidelity and 95.87 $\\pm$ 0.25% pseudo-angle fidelity, measured within 0.2 angstroms and 20° of the holo reference. Then, we reconstruct the predicted C$α$-only traces into all-atom structures using the cg2all coarse-to-all-atom backmapping method and evaluate their physical and geometric quality with MolProbity. Our model achieves a MolProbity score of 3.034 $\\pm$ 0.054, outperforming the evaluated baselines. These results show that a hierarchical flow-matching model with hybrid coordinates can recover global accuracy while retaining local fidelity.",
+  "authors": [
+    "Minjong Kim",
+    "Jaemin Sim",
+    "Dongwoo Kim",
+    "Myunghyun Jang",
+    "Eun-Sol Kim",
+    "Juyong Lee"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-23",
+  "id": "arxiv:2611.27162",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "q-bio.BM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.27162v1</ns0:id>\n    <ns0:title>Hierarchical Hybrid-Coordinate Flow Matching for Accurate and Physically Plausible Apo-to-Holo Protein Generation</ns0:title>\n    <ns0:updated>2026-11-20T05:47:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.27162v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.27162v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Predicting holo-like protein conformations from apo structures is essential in structure-based drug design. Most existing apo-to-holo models operate in Cartesian space and achieve strong global accuracy. However, high global accuracy does not ensure physically valid local backbone geometry. Internal-coordinate models offer local control and validity, but regressive generation can amplify angular errors, known as the lever-arm effect. We introduce CrypticFlow, a hierarchical flow-matching model that combines these two complementary representations. An ESM-3-conditioned E(3)-equivariant graph network first generates sparse C$α$ anchors in Cartesian space. A conditional midpoint Transformer then recursively fills the gaps in local internal coordinates. During recursive generation, the decoder constrains the distance between each midpoint and any sequence-adjacent parent anchor to the corresponding apo C$α$-C$α$ distance. On the D3PM test split, CrypticFlow achieves the lowest median and mean C$α$ RMSD at published baseline capacities. Across five independent training models, the median and mean direct RMSD are 1.333 $\\pm$ 0.056 angstroms and 2.766 $\\pm$ 0.041 angstroms, respectively. The quality of local geometry also improves substantially. Our model achieves 99.58 $\\pm$ 0.02% adjacent-distance fidelity and 95.87 $\\pm$ 0.25% pseudo-angle fidelity, measured within 0.2 angstroms and 20° of the holo reference. Then, we reconstruct the predicted C$α$-only traces into all-atom structures using the cg2all coarse-to-all-atom backmapping method and evaluate their physical and geometric quality with MolProbity. Our model achieves a MolProbity score of 3.034 $\\pm$ 0.054, outperforming the evaluated baselines. These results show that a hierarchical flow-matching model with hybrid coordinates can recover global accuracy while retaining local fidelity.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.BM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-20T05:47:46Z</ns0:published>\n    <ns1:comment>36 pages, 11 figures, 25 tables</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Minjong Kim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jaemin Sim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dongwoo Kim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Myunghyun Jang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Eun-Sol Kim</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Juyong Lee</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-20",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "arxiv",
+  "summary": "CrypticFlow: hierarchical flow-matching model combining Cartesian C-alpha anchors and internal-coordinate midpoints to generate holo protein conformations from…",
+  "title": "Hierarchical Hybrid-Coordinate Flow Matching for Accurate and Physically Plausible Apo-to-Holo Protein Generation",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.27162v1"
+}
