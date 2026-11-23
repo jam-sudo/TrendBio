@@ -19,9 +19,14 @@ jobs:
       run:
         working-directory: ops/screen-readers
     steps:
-      - uses: actions/checkout@v4
-        with:
-          sparse-checkout: ops/screen-readers
+      - name: Fetch the reader suite at this revision
+        working-directory: .
+        shell: bash
+        run: |
+          mkdir -p ops/screen-readers
+          for file in package.json package-lock.json playwright.config.ts research.spec.ts; do
+            curl --fail --silent --show-error --location --retry 3 "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/ops/screen-readers/${file}" -o "ops/screen-readers/${file}"
+          done
       - uses: actions/setup-node@v4
         with:
           node-version: 22
