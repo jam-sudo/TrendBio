@@ -283,6 +283,7 @@ it("retains original ranks and paper versions in the reviewed Computer Science s
   expect(await review.locator("h3").first().isVisible()).toBe(true);
   const topics = review.locator("ol > li");
   expect(await topics.evaluateAll(nodes => nodes.map(li => Number(li.getAttribute("value"))))).toEqual([9, 35, 38]);
+  expect(await topics.first().getByLabel("Supporting papers (4) for rank 9").count()).toBe(1);
   const papers = await topics.locator("a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href") ?? ""));
   expect(new Set(papers).size).toBe(10);
   expect(papers.every(url => /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d+v\d+$/.test(url))).toBe(true);
