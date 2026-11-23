@@ -770,7 +770,7 @@
     0.0016423711786046624,
     -0.019387289881706238
   ],
-  "headline": "Protein and metabolite language models link molecular features to biological function",
+  "headline": "Fragment anchors and spectral language models advance metabolite annotation",
   "history": [
     {
       "attached_item_ids": [],
@@ -879,10 +879,38 @@
         "rise_ratio": 0.8571428571428571,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "metabolomics",
+      "count_7d": 3,
+      "date": "2026-11-23",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.11.766011",
+        "biorxiv:10.64898/2026.11.16.766993",
+        "pubmed:10.1093/nar/gkag1246"
+      ],
+      "rank": 39,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 0.8571428571428571,
+        "total": 0.5636017160309503,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_ratio": 0.8571428571428571,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Language Models For Biological Data",
+  "label": "Language Models For Metabolomics",
   "related": [
     "early-risk-model-multidisease-0fc6",
     "dna-foundation-4b28",
@@ -892,8 +920,8 @@
     "genomics"
   ],
   "slug": "biological-brain-types-006a",
-  "summary": "Recent preprints apply language-model embeddings to brain cell-type protein networks, MS2 spectra, and ontology entity normalization.",
-  "synthesis": "The dominant thread is the use of learned language-model representations to map heterogeneous biological inputs onto functional or ontological structure. SEMPER aligns protein language model embeddings with cell-type-specific protein interaction networks across 442 adult human brain cell types and is designed for zero-shot use. Spec2Function infers biological function directly from MS2 spectra using a dual-encoder contrastive model combined with retrieval-augmented generation. The third item addresses a complementary bottleneck: a modular workflow combining BM25, fuzzy and n-gram matching, and SapBERT retrieval with reranking normalizes entities across HPO, Cell Ontology, Uberon, and GO. What is new is the joint use of contrastive alignment and retrieval to connect molecular or textual features to biological meaning, rather than a single shared dataset or task.",
+  "summary": "Untargeted metabolomics annotation is moving beyond whole-spectrum similarity toward fragment-level anchors and learned spectrum-to-function mapping.",
+  "synthesis": "The dominant thread is extracting biological meaning from tandem mass spectra in untargeted metabolomics. ANCHor moves annotation beyond whole-spectrum similarity by using fragment anchors shared among similar spectra, and it is applied to untargeted metabolomics features. Spec2Function takes a complementary route, inferring biological functions directly from MS2 spectra with a dual-encoder contrastive model and retrieval-augmented generation. What is new is the coupling of contrastive spectrum representations with retrieval-augmented generation to link spectra to function, rather than to structural identity alone. SynCED, a published update of the Toxin and Toxin Target Database, is a reference resource for synthetic chemical exposure data. It is heterogeneous relative to the two preprints and is included as a database rather than as a modelling advance.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-19"
+  "synthesized_on": "2026-11-23"
 }

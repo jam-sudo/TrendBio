@@ -770,7 +770,7 @@
     -0.0009340760298073292,
     -0.008446828462183475
   ],
-  "headline": "Generative models learn single-cell trajectories and perturbation responses",
+  "headline": "Generative flow and bridge models capture single-cell state transitions",
   "history": [
     {
       "attached_item_ids": [],
@@ -1098,6 +1098,35 @@
         "rise_ratio": 1.0,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "single-cell",
+      "count_7d": 4,
+      "date": "2026-11-23",
+      "item_ids": [
+        "arxiv:2611.22256",
+        "arxiv:2611.23953",
+        "arxiv:2611.24763",
+        "arxiv:2611.24764"
+      ],
+      "rank": 37,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5739004051593306,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1112,8 +1141,8 @@
     "transcriptomics"
   ],
   "slug": "learning-body-interaction-fa56",
-  "summary": "Recent preprints apply flow matching and Schrödinger bridges to infer single-cell dynamics from snapshots, perturbations, and spatial transcriptomics data.",
-  "synthesis": "The dominant thread is learning generative dynamics that transport cell states over time, with flow matching and Schrödinger bridges as the shared mathematical machinery. Elysium is a simulation-free unbalanced Schrödinger bridge solver that jointly learns state transitions and mass change for reconstructing single-cell trajectories. HORIZON applies flow matching to spatiotemporal cell dynamics from spatial transcriptomics and removes rigid frame motion before modeling. MitoWorld is a stochastic world model that generates single-cell future images under gene knockdown, combining latent dynamics, a division hazard, and diffusion rendering. The fourth preprint is a methodological comparison of four interpolation paths for flow-based models of molecular conformations, including a new operator-based path tested on a toy potential, and it addresses path design rather than single-cell data. What is new across the set is explicit modeling of division, mass change, and perturbation response within generative trajectory frameworks.",
+  "summary": "Four recent preprints extend generative trajectory models to division, mass change, and perturbation response in single-cell and spatial data.",
+  "synthesis": "The shared thread is learning generative dynamics that transport cell states over time, using flow matching or Schrödinger bridges as the core machinery. ST-FateFlow couples gene-expression and spatial velocity fields with a time-conditioned differentiation potential learned from time-resolved spatial transcriptomics. HORIZON applies flow matching to spatiotemporal cell dynamics and removes rigid frame motion before modeling. Elysium is a simulation-free unbalanced Schrödinger bridge solver that jointly learns state transitions and mass change. MitoWorld generates single-cell future images under gene knockdown by combining latent dynamics, a division hazard, and diffusion rendering. What is new across the set is explicit treatment of division, mass change, and perturbation response within generative trajectory frameworks.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-20"
+  "synthesized_on": "2026-11-23"
 }

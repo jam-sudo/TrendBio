@@ -770,7 +770,7 @@
     0.0037969020195305347,
     -0.03764509782195091
   ],
-  "headline": "Structure-free and language-model-conditioned models target affinity, kinetics and turnover",
+  "headline": "Sequence- and descriptor-based models target binding, kinetics, turnover and molecular properties",
   "history": [
     {
       "attached_item_ids": [],
@@ -1542,10 +1542,40 @@
         "rise_ratio": 1.5238095238095237,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "ml-ai",
+      "count_7d": 5,
+      "date": "2026-11-23",
+      "item_ids": [
+        "arxiv:2611.23777",
+        "biorxiv:10.64898/2026.11.15.766718",
+        "pubmed:10.1093/bioinformatics/btag838",
+        "pubmed:10.1093/bioinformatics/btag843",
+        "pubmed:10.1371/journal.pcbi.1014925"
+      ],
+      "rank": 18,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.03966780060320203,
+        "rise": 1.3333333333333333,
+        "total": 0.7536882114608385,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 3,
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Binding Prediction Model Design",
+  "label": "Structure Free Binding Prediction Models",
   "related": [
     "conformational-protein-8241",
     "builder-capsid-20a5",
@@ -1553,8 +1583,8 @@
   ],
   "secondary_categories": [],
   "slug": "sequences-promoter-38cf",
-  "summary": "New models predict affinity, dissociation kinetics and turnover from sequence and ligand representations, shifting scoring away from docked structures.",
-  "synthesis": "The common thread is predicting protein-ligand and related molecular quantities from learned representations rather than from explicit complex geometry. STORM is a lightweight structure-free model for binding affinity. MGCA pairs ESM2 embeddings with Morgan fingerprints in a multi-granularity cross-attention mixture-of-experts to predict dissociation kinetics (Koff). EnzRef adapts frozen protein language models with reference-centered cross-attention and role-aware recomposition of reactant/product conditions for enzyme turnover. ReMoD-Mol (multimodal fusion with distillation) and ontology pre-training for metabolites extend the representation question to property prediction. The provided summaries do not describe validation protocols or benchmark diagnostics for binding scores, so evidence on scoring reliability is limited to the baseline comparisons reported, such as ReMoD-Mol against 14 baselines.",
+  "summary": "Five reports tailor architectures to binding affinity, Koff, kcat-like turnover and property prediction without explicit complex structures.",
+  "synthesis": "The dominant thread is architecture design for predicting protein-ligand and related molecular quantities from learned representations of sequences, fingerprints and graphs, not from explicit complex geometry. STORM is presented as a lightweight structure-free binding affinity model. MGCA combines ESM2 and Morgan fingerprints in a multi-granularity cross-attention mixture-of-experts for dissociation kinetics (Koff). EnzRef adapts frozen protein language models with reference-centered cross-attention and role-aware recomposition of reactant/product conditions for enzyme turnover. ReMoD-Mol (modality weighting plus descriptor-guided distillation) and ontology pre-training for metabolites extend the representation question to property prediction. The summaries give no validation protocols or benchmark diagnostics beyond ReMoD-Mol's comparison with 14 baselines, so evidence on generalization and scoring reliability remains limited.",
   "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-22"
+  "synthesized_on": "2026-11-23"
 }

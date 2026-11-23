@@ -770,7 +770,7 @@
     -0.016954120248556137,
     -0.05191381648182869
   ],
-  "headline": "Headline Metrics Miss Timing, Calibration and Cross-Platform Transfer Failures",
+  "headline": "Clinical ML evaluation exposes limits of AUC, same-platform validation and uncalibrated confidence",
   "history": [
     {
       "attached_item_ids": [],
@@ -1304,6 +1304,34 @@
         "rise_ratio": 1.263157894736842,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "ml-ai",
+      "count_7d": 3,
+      "date": "2026-11-23",
+      "item_ids": [
+        "arxiv:2611.20274",
+        "arxiv:2611.26159",
+        "biorxiv:10.64898/2026.11.16.766934"
+      ],
+      "rank": 11,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.6,
+        "total": 0.8353874303166647,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_ratio": 1.6,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1315,8 +1343,8 @@
   ],
   "secondary_categories": [],
   "slug": "end-structural-df64",
-  "summary": "Preprints show that AUC, C-index and same-modality validation can overstate clinical model performance.",
-  "synthesis": "The three preprints share an evaluation-focused thread rather than a new architecture. The mammography study shows that AUC and C-index are insensitive to diagnosis timing and proposes a two-stage whether-versus-when model to address this. CALIFUSE treats disagreement among several frozen pathology foundation models as informative, using representational heterogeneity and Jensen-Shannon chunk agreement to obtain calibrated uncertainty in whole-slide image classification. The glioblastoma circulating microRNA study tests CTGAN and TVAE augmentation and finds that same-modality validation overstates performance, with cross-platform AUROC falling to roughly 0.40-0.47, near chance. Together these works question whether headline discrimination metrics reflect clinically relevant behavior, namely timing, calibration and transfer across platforms. All three are unreviewed preprints, so the findings remain provisional.",
-  "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-21"
+  "summary": "Three preprints show headline discrimination metrics can hide timing insensitivity, weak uncertainty calibration and near-chance cross-platform transfer.",
+  "synthesis": "The common thread is evaluation rather than architecture. The mammography study reports that AUC and C-index for breast cancer risk models are insensitive to diagnosis timing, and proposes a two-stage whether-versus-when model. CALIFUSE fuses several frozen pathology foundation models and uses representational disagreement and Jensen-Shannon chunk agreement to obtain calibrated uncertainty in whole-slide image classification. The glioblastoma circulating miRNA study tests CTGAN and TVAE augmentation and finds that same-modality validation overstates performance, with cross-platform AUROC around 0.40-0.47, near chance. Together they point to timing, calibration and cross-platform transfer as properties that standard discrimination metrics do not capture. All three are preprints, so the findings are provisional.",
+  "synthesis_model": "claude-sonnet-5-5",
+  "synthesized_on": "2026-11-23"
 }

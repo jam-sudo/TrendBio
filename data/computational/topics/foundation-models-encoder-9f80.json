@@ -770,7 +770,7 @@
     0.01187832560390234,
     -0.04667270928621292
   ],
-  "headline": "Auditable ML for peptide ADMET and binding prediction with realistic training data",
+  "headline": "Interpretable ML for peptide ADMET and simulated binding training data",
   "history": [
     {
       "attached_item_ids": [],
@@ -2760,6 +2760,35 @@
         "rise_ratio": 1.037037037037037,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "ml-ai",
+      "count_7d": 4,
+      "date": "2026-11-23",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.16.766906",
+        "biorxiv:10.64898/2026.11.18.767182",
+        "biorxiv:10.64898/2026.11.19.767872",
+        "pubmed:10.1093/nar/gkag1244"
+      ],
+      "rank": 22,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.12,
+        "total": 0.6904004051593308,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 1,
+        "rise_ratio": 1.12,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -2774,8 +2803,8 @@
     "tools-infra"
   ],
   "slug": "foundation-models-encoder-9f80",
-  "summary": "Recent preprints pair peptide ADMET prediction with simulated binding data, raising the bar for auditable model evaluation before candidate ranking.",
-  "synthesis": "The dominant thread is machine learning for peptide and macrocycle pharmacology, with ADMET prediction as the central endpoint. AIO targets cyclic peptides and macrocycles with an interpretable multimodal framework that uses solvent-aware contrastive pretraining. VReceptor generates sequence-dependent peptide binding data through a virtual receptor simulation that applies pharmacophore-inspired weighting, offering a route to training data for such models. Related work extends the interpretability concern to other modalities: PTM-BDL links typed post-translational modification states to drug response (IC50, resistance), with site-level integrated-gradients attributions, and ADCdb 2.0 compiles ADMET profiles for 542 antibody-drug conjugates alongside clinical and bioactivity data. What is new is the combination of simulated training data with attribution at the level of individual sites, which makes model behaviour inspectable before candidates are ranked.",
+  "summary": "Simulated peptide binding data and site-level attributions aim to make ADMET models inspectable before candidate ranking.",
+  "synthesis": "The dominant thread is machine learning for peptide and macrocycle pharmacology, with ADMET prediction as the central endpoint. AIO applies an interpretable multimodal framework to cyclic peptides and macrocycles, using solvent-aware contrastive pretraining. VReceptor simulates sequence-dependent peptide binding data through pharmacophore-inspired weighting, offering a route to training data for such models. PTM-BDL extends the interpretability concern to post-translational modification states, linking typed PTM states with sequence, structure and drug features to predict drug response (IC50, resistance), with site-level integrated-gradients attributions. ADCdb 2.0 is a reference resource rather than a model, compiling ADMET profiles for 542 antibody-drug conjugates alongside clinical and bioactivity data. What is new is the pairing of simulated training data with attribution at individual sites, which makes model behaviour inspectable before candidates are ranked.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-21"
+  "synthesized_on": "2026-11-23"
 }
