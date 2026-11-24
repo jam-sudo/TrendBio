@@ -1,0 +1,42 @@
+{
+  "abstract": "DNA methylation is largely shared among individuals of the same cell type, yet at specific genomic sites it differs substantially between individuals. Methods that predict methylation are usually evaluated by their accuracy over all sites. Because methylation at most sites is shared, this accuracy cannot show whether a method predicts an individual's methylation where individuals differ. We present individual-level methylation prediction at sites where individuals differ as a new challenge. Given the reference genome sequence, the methylation of other individuals of the same cell type, and measurements at some sites of a target individual, but not the individual's genotype, the task is to predict the target individual's methylation class (unmethylated, intermediate, or methylated) at the remaining sites. We evaluate predictions separately at sites with low and high variation across individuals. We compare four approaches: the average of other individuals, a sequence model (the DNA language model Nucleotide Transformer) fine-tuned on other individuals' methylation, the same model further fine-tuned on the target individual's measurements, and a local class-average approach using the target individual's nearby training-site class labels. Across 32 individuals from six human cell types, the average of other individuals matched or slightly exceeded both sequence models at sites with low variation among individuals. At the most variable sites, the average of other individuals performed worse than a random predictor that assigns classes at the observed class frequencies, whereas both sequence models performed substantially better than the average. Both sequence models also achieved higher mean weighted F1 than the local class-average approach. Fine-tuning on the target individual's measurements improved predictions more inside regions where other individuals show bimodal methylation (a mix of methylated and unmethylated DNA molecules within one sample) than outside them. Among the most variable sites, it also improved predictions at CpG islands for 25 of the 32 individuals. We conclude that individual-level methylation prediction is a distinct problem that is particularly challenging at sites where individuals differ, and that the benefit of an individual's own measurements is concentrated in genomic contexts identifiable from other individuals' methylation and genomic annotations.",
+  "authors": [
+    "Zucker, R.",
+    "Linial, M.",
+    "Hope, T."
+  ],
+  "doi": "10.64898/2026.11.21.768291",
+  "first_seen": "2026-11-24",
+  "id": "biorxiv:10.64898/2026.11.21.768291",
+  "metadata": {
+    "abstract": "DNA methylation is largely shared among individuals of the same cell type, yet at specific genomic sites it differs substantially between individuals. Methods that predict methylation are usually evaluated by their accuracy over all sites. Because methylation at most sites is shared, this accuracy cannot show whether a method predicts an individual's methylation where individuals differ. We present individual-level methylation prediction at sites where individuals differ as a new challenge. Given the reference genome sequence, the methylation of other individuals of the same cell type, and measurements at some sites of a target individual, but not the individual's genotype, the task is to predict the target individual's methylation class (unmethylated, intermediate, or methylated) at the remaining sites. We evaluate predictions separately at sites with low and high variation across individuals. We compare four approaches: the average of other individuals, a sequence model (the DNA language model Nucleotide Transformer) fine-tuned on other individuals' methylation, the same model further fine-tuned on the target individual's measurements, and a local class-average approach using the target individual's nearby training-site class labels. Across 32 individuals from six human cell types, the average of other individuals matched or slightly exceeded both sequence models at sites with low variation among individuals. At the most variable sites, the average of other individuals performed worse than a random predictor that assigns classes at the observed class frequencies, whereas both sequence models performed substantially better than the average. Both sequence models also achieved higher mean weighted F1 than the local class-average approach. Fine-tuning on the target individual's measurements improved predictions more inside regions where other individuals show bimodal methylation (a mix of methylated and unmethylated DNA molecules within one sample) than outside them. Among the most variable sites, it also improved predictions at CpG islands for 25 of the 32 individuals. We conclude that individual-level methylation prediction is a distinct problem that is particularly challenging at sites where individuals differ, and that the benefit of an individual's own measurements is concentrated in genomic contexts identifiable from other individuals' methylation and genomic annotations.",
+    "author_corresponding": "Tom Hope",
+    "author_corresponding_institution": "The Hebrew University of Jerusalem",
+    "authors": "Zucker, R.; Linial, M.; Hope, T.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-23",
+    "doi": "10.64898/2026.11.21.768291",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/23/2026.11.21.768291.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "How predictable is an individual's DNA methylation?",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "The Hebrew University of Jerusalem",
+  "preprint_id": null,
+  "primary_category": "genetics",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "quantitative"
+  ],
+  "source": "biorxiv",
+  "summary": "Shows that predicting an individual's DNA methylation at sites where people differ is a distinct, hard problem; sequence models beat the population average…",
+  "title": "How predictable is an individual's DNA methylation?",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.21.768291"
+}

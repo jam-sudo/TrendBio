@@ -770,7 +770,7 @@
     0.01309107057750225,
     -0.04531227424740791
   ],
-  "headline": "Nucleic-acid foundation models specialize by taxon and molecule, and move into regulatory design",
+  "headline": "Nucleic-acid foundation models specialize by taxon, modification, RNA class and design task",
   "history": [
     {
       "attached_item_ids": [],
@@ -936,21 +936,56 @@
         "rise_ratio": 1.7142857142857142,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantitative",
+      "count_7d": 9,
+      "date": "2026-11-24",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.12.766050",
+        "biorxiv:10.64898/2026.11.12.766109",
+        "biorxiv:10.64898/2026.11.12.766258",
+        "biorxiv:10.64898/2026.11.13.766567",
+        "biorxiv:10.64898/2026.11.16.767190",
+        "biorxiv:10.64898/2026.11.17.767007",
+        "biorxiv:10.64898/2026.11.17.767377",
+        "biorxiv:10.64898/2026.11.17.767455",
+        "biorxiv:10.64898/2026.11.20.768117"
+      ],
+      "rank": 6,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.046088634587311716,
+        "rise": 1.7142857142857142,
+        "total": 0.8756840571589226,
+        "volume": 0.5856274687844196
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 9,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.7142857142857142,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
   "label": "Genomic Sequence Foundation Models",
   "related": [
-    "protein-model-93eb",
     "prediction-antimicrobial-peptide-e8c1",
-    "decoding-pathology-17b5"
+    "variant-foundation-90f7",
+    "machine-prediction-fde3"
   ],
   "secondary_categories": [
     "genetics"
   ],
   "slug": "models-foundation-782d",
-  "summary": "New preprints extend DNA and RNA foundation models to parasite genomes, modified bases, ncRNA, and constrained enhancer design, with diagnostic benchmarking.",
-  "synthesis": "The dominant thread is specialization of nucleic-acid foundation models beyond generic DNA pretraining. On the genomic side, an apicomplexan-specific model pretrained on 455 assemblies improves regulatory signal prediction in the small, data-sparse Plasmodium falciparum genome, while ModBERT conditions pretraining on population variants and long-read CpG methylation to predict chromatin features and variant effects. Evaluation is becoming diagnostic rather than leaderboard-driven: LAMP dissects why post-training sequence-to-function models on personal genomes fails to improve expression prediction, implicating distal sequence, and fine-tuned Borzoi and AlphaGenome are benchmarked against variant-based predictors for whole-blood expression in admixed Latino individuals. A parallel RNA track adds B-RANKO's bidirectional decoder-only ncRNA generator, LncRFM's structure-guided masking across 24.7M lncRNAs, and MARRI's mechanism-aware encoding of opening penalties and hybridization gains. Design is likewise constrained: GENECraft couples a genomic language model to a functional oracle without training, and REGAL programs enhancer grammar via reinforcement learning with cross-species validation.",
-  "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-23"
+  "summary": "Nine preprints extend sequence foundation models to Plasmodium, methylation, ncRNA and lncRNA, with variant-effect diagnostics and generative regulatory DNA design.",
+  "synthesis": "The common thread is moving nucleic-acid foundation models from generic pretraining toward specialized inputs, objectives and uses. An apicomplexan model pretrained on 455 assemblies targets regulatory prediction in the data-sparse P. falciparum genome, and ModBERT adds population variants and long-read CpG methylation to pretraining. For RNA, B-RANKO (bidirectional decoder-only ncRNA), LncRFM (structure-guided masking, 24.7M sequences) and MARRI (opening penalties and hybridization gains) encode RNA-specific properties. Evaluation is diagnostic: LAMP links failed personal-genome fine-tuning to distal sequence, and Borzoi and AlphaGenome are compared with variant-based methods in admixed Latino individuals. GENECraft and REGAL use these models for controllable regulatory DNA and enhancer design, REGAL with cross-species validation. All nine are preprints, so the claims remain unreviewed.",
+  "synthesis_model": "claude-sonnet-5-5",
+  "synthesized_on": "2026-11-24"
 }

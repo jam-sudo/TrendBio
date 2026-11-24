@@ -1,0 +1,43 @@
+{
+  "abstract": "Probabilistic discrete-range models, including dispersal-extinction-cladogenesis (DEC), DIVALIKE, BAYAREALIKE, founder-event speciation (+J), spatial modifiers, and time stratification, underpin historical biogeography. As empirical datasets grow, however, BioGeoBEARS workflows face slow multi-area optimization and branch-wise rejection stochastic mapping that fails on rare stepping-stone pathways and scales poorly across posterior trees. Standard fixed-tree pruning likelihoods also retain an absorbing null range without conditioning on extant tip survival, which often drives extinction estimates toward zero and inflates founder-event support, whereas DEC* avoids null absorption only by forbidding single-area extirpation. Boundary Hessian failures and single-tree point estimates also leave parameter, model, phylogenetic, and mapping uncertainties unquantified. Here we present RustBEARS, a Rust engine with BioGeoBEARS-compatible R and Python packages. Across 1,339 configurations from 77 studies, RustBEARS matches BioGeoBEARS log-likelihoods (median |delta lnL| = 9.95 x 10^-14) and ancestral probabilities (<= 1.50 x 10^-14), accelerates 64- to 256-state optimization 2.8- to 17.3-fold on one core and 4.1- to 36.1-fold on eight cores over the fastest BioGeoBEARS setting, and replaces trial-limited rejection with Uniformization stochastic mapping (170.9-fold median speedup for 200-map Python runs across 30 studies). RustBEARS also introduces whole-tree tip-survival conditioning for unstratified and chronologically emerging island models alongside five frequentist uncertainty tools. Across 58 extant clades from this 77-study archive, survival conditioning cuts near-zero DEC extinction estimates from 62.1% to 0.0% (87.9% finite interior, 12.1% ceiling-censored) and lowers AICc preference for DEC+J from 75.9% to 36.2%.",
+  "authors": [
+    "He, J.",
+    "Chen, J.",
+    "Chen, W.",
+    "Xie, L."
+  ],
+  "doi": "10.64898/2026.11.20.768172",
+  "first_seen": "2026-11-24",
+  "id": "biorxiv:10.64898/2026.11.20.768172",
+  "metadata": {
+    "abstract": "Probabilistic discrete-range models, including dispersal-extinction-cladogenesis (DEC), DIVALIKE, BAYAREALIKE, founder-event speciation (+J), spatial modifiers, and time stratification, underpin historical biogeography. As empirical datasets grow, however, BioGeoBEARS workflows face slow multi-area optimization and branch-wise rejection stochastic mapping that fails on rare stepping-stone pathways and scales poorly across posterior trees. Standard fixed-tree pruning likelihoods also retain an absorbing null range without conditioning on extant tip survival, which often drives extinction estimates toward zero and inflates founder-event support, whereas DEC* avoids null absorption only by forbidding single-area extirpation. Boundary Hessian failures and single-tree point estimates also leave parameter, model, phylogenetic, and mapping uncertainties unquantified. Here we present RustBEARS, a Rust engine with BioGeoBEARS-compatible R and Python packages. Across 1,339 configurations from 77 studies, RustBEARS matches BioGeoBEARS log-likelihoods (median |delta lnL| = 9.95 x 10^-14) and ancestral probabilities (<= 1.50 x 10^-14), accelerates 64- to 256-state optimization 2.8- to 17.3-fold on one core and 4.1- to 36.1-fold on eight cores over the fastest BioGeoBEARS setting, and replaces trial-limited rejection with Uniformization stochastic mapping (170.9-fold median speedup for 200-map Python runs across 30 studies). RustBEARS also introduces whole-tree tip-survival conditioning for unstratified and chronologically emerging island models alongside five frequentist uncertainty tools. Across 58 extant clades from this 77-study archive, survival conditioning cuts near-zero DEC extinction estimates from 62.1% to 0.0% (87.9% finite interior, 12.1% ceiling-censored) and lowers AICc preference for DEC+J from 75.9% to 36.2%.",
+    "author_corresponding": "Jian He",
+    "author_corresponding_institution": "School of Ecology and Nature Conservation, Beijing Forestry University",
+    "authors": "He, J.; Chen, J.; Chen, W.; Xie, L.",
+    "biorxiv_category": "evolutionary biology",
+    "category": "evolutionary biology",
+    "date": "2026-11-23",
+    "doi": "10.64898/2026.11.20.768172",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/23/2026.11.20.768172.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "RustBEARS: Survival-Conditioned Likelihoods, Uniformization Stochastic Mapping, and Uncertainty Quantification for Historical Biogeography",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "School of Ecology and Nature Conservation, Beijing Forestry University",
+  "preprint_id": null,
+  "primary_category": "evolution",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "quantitative"
+  ],
+  "source": "biorxiv",
+  "summary": "RustBEARS, a Rust engine for historical biogeography, matches BioGeoBEARS likelihoods, speeds optimization and stochastic mapping, and adds…",
+  "title": "RustBEARS: Survival-Conditioned Likelihoods, Uniformization Stochastic Mapping, and Uncertainty Quantification for Historical Biogeography",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.20.768172"
+}
