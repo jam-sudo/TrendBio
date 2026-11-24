@@ -45,6 +45,7 @@ it("publishes the selected materials papers and recovered biology originals at t
   expect(new Set(papers).size).toBe(7);
   expect(papers.every(url => /^https:\/\/(doi\.org|arxiv\.org)\//.test(url!))).toBe(true);
   await page.setContent(read("collections/energy/index.html"));
+  expect(await page.locator(".rank-category").first().textContent()).toBe("Energy Storage & Power Grids");
   expect(await page.locator("#electrode-processing li a").count()).toBe(4);
   expect(await page.locator("#grid-dispatch li a").count()).toBe(5);
   await page.setContent(read("biology/index.html"));
