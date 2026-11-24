@@ -74,7 +74,10 @@ it("finds a dated Physics ranking and its sources from field-filtered search", a
   expect(await page.locator("main details[open] li > a").count()).toBe(3);
   expect(await page.getByRole("note").textContent()).toContain("Editorial correction");
   await page.locator("main a[href*='/day/2026-11-01/#']").click();
-  expect(await page.locator(":target h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
+  const dated = page.locator(":target .topic-link");
+  expect(await dated.textContent()).toBe("Optical cavities reveal sources of readout noise");
+  await dated.click();
+  expect(await page.locator(":target details[open] li > a").count()).toBe(3);
   await visit("/search/?q=readout+noise&field=physics&category=" + encodeURIComponent(optics));
   await finished();
   await field.selectOption("computational");

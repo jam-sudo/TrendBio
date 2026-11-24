@@ -1,0 +1,15 @@
+---
+interface Props { date: string; editions: { date: string; href: string }[] }
+const { date, editions } = Astro.props;
+const index = editions.findIndex(issue => issue.date === date);
+const previous = index >= 0 && editions[index + 1], next = index > 0 && editions[index - 1];
+---
+<h1 class="day-title"><time datetime={date}>{date}</time></h1>
+{(previous || next) && <nav class="day-navigation" aria-label="Day navigation">
+  {previous && <a href={previous.href} rel="prev">← {previous.date}</a>}
+  {previous && next && <span aria-hidden="true">·</span>}
+  {next && <a href={next.href} rel="next">{next.date} →</a>}
+</nav>}
+<style>
+  .day-navigation { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-bottom: 1.5rem; font-size: var(--t3); }
+</style>

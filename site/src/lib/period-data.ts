@@ -1,6 +1,7 @@
 import type { Topic } from "./types";
 import { allTopics, loadDays, loadTaxonomy, rankedTopics } from "./data";
 import { allMonths, allWeeks, indexHistories, rankPeriod, type Period, type PeriodRanked } from "./periods";
+import type { Field } from "./editions";
 
 export interface RankedPeriod extends Period { topics: PeriodRanked[] }
 const shared = globalThis as typeof globalThis & {
@@ -8,11 +9,11 @@ const shared = globalThis as typeof globalThis & {
 };
 const cache = shared.trendbioRankedPeriods ??= new WeakMap();
 
-function buildPeriods() {
-  const days = loadDays("computational");
-  const topics = allTopics("computational");
+function buildPeriods(field: Field) {
+  const days = loadDays(field);
+  const topics = allTopics(field);
   const index = indexHistories(topics, days);
-  const taxonomy = loadTaxonomy("computational");
+  const taxonomy = loadTaxonomy(field);
   const rank = (period: Period): RankedPeriod => ({ ...period, topics: rankPeriod(index, period.start, period.end, taxonomy) });
   const weeks = allWeeks(days).map(rank), months = allMonths(days).map(rank);
   const supplemental = new Map<string, Map<string, PeriodRanked>>();
@@ -29,11 +30,11 @@ function buildPeriods() {
 }
 
 // All period routes share one loaded dataset and one history index; each entry is aggregated once per period kind.
-export function loadPeriods() {
-  const topics = allTopics("computational");
+export function loadPeriods(field: Field = "computational") {
+  const topics = allTopics(field);
   let cached = cache.get(topics);
   if (!cached) {
-    cached = buildPeriods();
+    cached = buildPeriods(field);
     cache.set(topics, cached);
   }
   return cached;

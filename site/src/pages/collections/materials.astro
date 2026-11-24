@@ -1,19 +1,23 @@
 ---
+import CollectionTopics from "../../components/CollectionTopics.astro";
 import Base from "../../layouts/Base.astro";
 import trial from "../../../../docs/expansion-measurements/2026-11-21/materials.json";
 ---
 <Base collection="materials" landing title="Materials Science collection — TrendBio" canonicalPath="/collections/materials/"
   description="A cross-field reading collection on heat transport and polymer flow, with original research from physics, chemistry and engineering.">
-  <article class="prose">
-    <p>Seven selected papers from <time>{trial.start}</time> to <time>{trial.end}</time>. The groups below are reading selections.</p>
-    {trial.groups.map(group => <section id={group.id}>
-      <h2>{group.title}</h2><p>{group.note}</p>
-      <ul>{group.papers.map(paper => <li><a href={paper.url}>{paper.title}</a> · {paper.source} · <time datetime={paper.date}>{paper.date}</time></li>)}</ul>
-    </section>)}
-    <details><summary>Sources and selection</summary>
+  <article>
+    <p class="collection-date">Seven selected papers from <time>{trial.start}</time> to <time>{trial.end}</time>. The groups below are reading selections.</p>
+    <CollectionTopics field="materials" label="Materials Science" groups={trial.groups} />
+    <details id="sources"><summary>Sources and selection</summary>
       <p>The four-week source pool contained {Object.entries(trial.sources).map(([source,count]) => `${count} from ${source}`).join(", ")}. We matched arXiv identifiers across versions, DOIs, declared version links and normalized titles, leaving {trial.distinct.toLocaleString("en-US")} distinct records. Unlinked versions with different titles can remain.</p>
       <p>We selected original studies from multiple weeks whose abstracts address the same material property. Dates are first submissions on arXiv and publication dates for journals. The collection has no scheduled ranking.</p>
     </details>
     <p>Related editions · <a href="/physics-expanded/">Expanded Physics</a> · <a href="/chemistry/">Chemistry</a> · <a href="/engineering/">Engineering</a></p>
   </article>
 </Base>
+
+<style>
+  .collection-date { margin-block-end: .5rem; color: var(--muted); font-size: var(--t3); }
+  summary { cursor: pointer; }
+  details + p { margin-top: 1rem; }
+</style>

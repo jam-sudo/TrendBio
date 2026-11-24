@@ -1,12 +1,17 @@
 ---
 import { loadPeriods } from "../lib/period-data";
-interface Props { current: "day" | "week" | "month" }
-const { current } = Astro.props;
-const { weeks, months } = loadPeriods();
-const links = [
-  { kind: "day", label: "Today", href: "/" },
-  { kind: "week", label: "This week", href: weeks[0] ? `/week/${weeks[0].id}/` : "/week/" },
-  { kind: "month", label: "This month", href: months[0] ? `/month/${months[0].id}/` : "/month/" },
+import { fieldPath, isDaily, type Field } from "../lib/editions";
+interface Props { current: "day" | "week" | "month"; field?: Field; issueDate?: string; issueUrl?: string }
+const { current, field = "computational", issueDate, issueUrl } = Astro.props;
+const prefix = fieldPath(field);
+const data = isDaily(field) ? loadPeriods(field) : null;
+const links = data ? [
+  { kind: "day", label: "Today", href: `${prefix}/` },
+  { kind: "week", label: "This week", href: data.weeks[0] ? `${prefix}/week/${data.weeks[0].id}/` : `${prefix}/week/` },
+  { kind: "month", label: "This month", href: data.months[0] ? `${prefix}/month/${data.months[0].id}/` : `${prefix}/month/` },
+] : [
+  { kind: "day", label: issueDate ?? "Pilot", href: issueUrl ?? `${prefix}/` },
+  { kind: "archive", label: "Editions", href: `${prefix}/#editions` },
 ];
 ---
 <nav class="period-links" aria-label="Ranking period">

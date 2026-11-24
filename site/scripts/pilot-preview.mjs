@@ -17,7 +17,7 @@ const attr = (node, key) => node.attrs.find(a => a.name === key)?.value;
 const children = (node, tag) => node.childNodes.filter(child => child.tagName === tag);
 const text = node => node.nodeName === '#text' ? node.value : (node.childNodes ?? []).map(text).join('');
 
-const document = parse(readFileSync(join(dist, domain, 'day', date, 'index.html'), 'utf8'));
+const document = parse(readFileSync(join(dist, domain, 'day', date, 'papers', 'index.html'), 'utf8'));
 const nodes = [...elements(document)];
 assert.equal(attr(nodes.find(n => n.tagName === 'html'), 'lang'), 'en');
 const main = nodes.find(n => n.tagName === 'main');

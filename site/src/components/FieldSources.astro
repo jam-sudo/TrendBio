@@ -1,0 +1,69 @@
+---
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { parse } from "yaml";
+import type { Day } from "../lib/types";
+import type { Edition } from "../lib/editions";
+import { loadEditionAudit, loadEditionVenues, loadTaxonomy } from "../lib/data";
+import biologyAudit from "../../../docs/expansion-measurements/2026-11-21/biology-source-review.json";
+
+interface Props { field: Edition; day: Day | null; landing?: boolean }
+const { field, day, landing = false } = Astro.props;
+const biology = field === "biology";
+const categories = new Map(loadTaxonomy(field).map(category => [category.slug, category.label]));
+const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
+const archives: string[] = day?.run.arxiv_categories ?? source.arxiv?.categories ?? [];
+const subjectCounts = field === "physics-expanded" && day ? loadEditionAudit(field, day.date)?.arxiv_subjects : null;
+const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints?.arxiv_category?.[code]?.[0]) ?? code);
+const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
+const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
+const observedVenues = ["computer-information", "engineering", "agriculture-food-veterinary"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
+const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
+const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
+const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
+const conferences: string[] = source.drops?.conferences ?? [];
+const halVolumes: { title: string; volume_doi: string; conference: string; collection: string }[] = source.crossref?.hal_proceedings ?? [];
+const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
+const publisherUrls = new Map(publishers.map(journal => [journal.title, new URL(".", journal.endpoint).href]));
+---
+    {biology && landing && <details id="coverage-review">
+      <summary>Coverage review · six additional biology papers · November 21, 2026</summary>
+      <p>We checked 39 abstracts from Nature Communications and arXiv population and evolution papers for November 12–18. Seventeen reported a biological finding, six needed further review and sixteen had a different primary outcome. Of the seventeen, eleven were already in CompBio and six were absent from both stores on November 20.</p>
+      <p>These six papers supplement the daily edition. They carry no rank.</p>
+      <ul>{biologyAudit.recovered.map(p => <li><a href={p.url}>{p.title}</a></li>)}</ul>
+    </details>}
+    {biology && !landing && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
+    {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map((name, i) => <>{i > 0 && ", "}{publisherUrls.has(name)
+      ? <a href={publisherUrls.get(name)}>{name}</a>
+      : name === "arxiv" ? "arXiv" : name}</>)}</span>.</p>}
+    {archives.length > 0 && <details class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"} open={archiveGroups.size <= 5}>
+      <summary>{day?.run.arxiv_mailings ? "First-version arXiv subjects in this edition" : day?.run.arxiv_categories ? "arXiv subjects queried for this edition" : "Current coverage on arXiv"} ({archives.length})</summary>
+      <ul>{Array.from(archiveGroups, ([category, codes]) => <li>
+        {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
+          {category} · {codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)}
+        </>}
+      </li>)}</ul>
+    </details>}
+    {subjectCounts && <details class="subject-counts"><summary>arXiv papers by subject</summary>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Preprints by arXiv subject"><table><caption>Stored preprints for this edition. A cross-listed paper can appear under several subjects. Ranked papers support at least one displayed topic.</caption>
+        <thead><tr><th scope="col">Subject</th><th scope="col">Primary</th><th scope="col">Cross-listed</th><th scope="col">Ranked</th></tr></thead>
+        <tbody>{Object.entries(subjectCounts).map(([code, counts]) => <tr>
+          <th scope="row" translate="no">{code}</th><td>{counts.primary}</td><td>{counts.cross_listed}</td><td>{counts.ranked}</td>
+        </tr>)}</tbody>
+      </table></div>
+    </details>}
+    {!observedVenues && followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
+      ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
+      : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
+    {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
+    {conferences.length > 0 && <p class="coverage">The current pilot follows regular papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
+    {halVolumes.filter(volume => !observedVenues || observedVenues.includes(volume.title)).map(volume =>
+      <p class="coverage"><a href={`https://doi.org/${volume.volume_doi}`}>{volume.conference} proceedings</a> with author-deposited abstracts from <a href={`https://hal.science/${volume.collection}`}>HAL</a>.</p>)}
+    {!observedVenues && publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
+
+<style>
+  .coverage { color: var(--muted); }
+  summary { cursor: pointer; }
+  .subject-counts caption { margin: .6rem 0; text-align: start; }
+  .subject-counts th, .subject-counts td { padding: .25rem; overflow-wrap: normal; }
+</style>

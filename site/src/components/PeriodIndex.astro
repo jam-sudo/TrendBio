@@ -3,19 +3,21 @@ import Base from "../layouts/Base.astro";
 import PeriodLinks from "./PeriodLinks.astro";
 import { loadPeriods } from "../lib/period-data";
 import { periodRows } from "../lib/leaderboard";
-interface Props { kind: "week" | "month" }
-const { kind } = Astro.props;
-const data = loadPeriods();
+import { fieldLabel, fieldPath, type Field } from "../lib/editions";
+interface Props { field?: Field; kind: "week" | "month" }
+const { kind, field = "computational" } = Astro.props;
+const prefix = fieldPath(field);
+const data = loadPeriods(field);
 const periods = kind === "week" ? data.weeks : data.months;
 const title = kind === "week" ? "Weekly rankings" : "Monthly rankings";
 ---
-<Base description={`${title}: top topics in computational biology`} canonicalPath={`/${kind}/`} title={`${title} — TrendBio`} lastRun={data.days[0]?.run.finished}>
+<Base edition={field === "computational" ? undefined : field} description={`${title}: top topics in ${field === "computational" ? "computational biology" : fieldLabel(field)}`} canonicalPath={`${prefix}/${kind}/`} title={`${title} — TrendBio`} lastRun={data.days[0]?.run.finished}>
   <h1>{title}</h1>
-  <PeriodLinks current={kind} />
+  <PeriodLinks {field} current={kind} />
   <ul class="period-list">
     {periods.map((period) => {
-      const top = periodRows(period.topics.slice(0, 1))[0];
-      return <li><a href={`/${kind}/${period.id}/`}>{period.label}{period.soFar && " · so far"}</a>
+      const top = periodRows(period.topics.slice(0, 1), field)[0];
+      return <li><a href={`${prefix}/${kind}/${period.id}/`}>{period.label}{period.soFar && " · so far"}</a>
         {top && <p>#1 · {top.headline}{top.autoLabel && <span class="auto-label"> (auto label)</span>}</p>}
       </li>;
     })}

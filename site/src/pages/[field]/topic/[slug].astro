@@ -1,9 +1,11 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import TopicIntro from "../../../components/TopicIntro.astro";
+import { rankMedal } from "../../../lib/categories";
 import FieldEvidence from "../../../components/FieldEvidence.astro";
 import CrossCoverage from "../../../components/CrossCoverage.astro";
-import { loadTaxonomy } from "../../../lib/data";
-import { datedTopic, fieldLabel, publicEditions, topicAppearances, type Edition } from "../../../lib/editions";
+import { loadTopic, loadTaxonomy } from "../../../lib/data";
+import { datedEvidence, datedTopic, publicEditions, topicAppearances, type Edition } from "../../../lib/editions";
 import { crossCoverage } from "../../../lib/shared-papers";
 
 export function getStaticPaths() {
@@ -14,25 +16,25 @@ const slug = Astro.params.slug!;
 const appearances = topicAppearances(field).get(slug)!;
 const { day, row } = appearances[0];
 const category = loadTaxonomy(field).find(c => c.slug === row.category)?.label ?? row.category;
-const label = fieldLabel(field);
+const history = (loadTopic(field, slug)?.history ?? []).filter(entry => entry.date <= day.date);
 ---
 <Base edition={field} title={`${row.headline} — TrendBio`} description={row.summary || row.headline}
   canonicalPath={`/${field}/topic/${slug}/`} lastRun={day.run.finished}>
   <article class="prose" data-pagefind-body data-pagefind-filter={`category:${category}`}>
-    <p class="context"><a href={datedTopic(field, day.date, slug)} data-pagefind-filter={`field:${field}`}>
-      <span data-pagefind-meta="field">{label}</span> · <time datetime={day.date}>{day.date}</time> · #{row.rank}
-    </a> · {category}</p>
-    <h1 data-pagefind-meta="title">{row.headline}</h1>
-    <p>{row.summary}</p>
+    <TopicIntro {field} category={row.category} categoryLabel={category} rank={row.rank} title={row.headline} summary={row.summary}
+      {history} signals={row.signals} signalDate={day.date} windowDays={day.run.window_days} date={day.date} backUrl={datedTopic(field, day.date, slug)} />
     <FieldEvidence {field} {day} {row} expanded />
     <CrossCoverage matches={crossCoverage(field, day.date, slug)} date={day.date} />
-    {appearances.length > 1 && <section data-pagefind-ignore>
-      <h2>Ranking history</h2>
-      <ul>{appearances.map(({ day, row }) => <li><a href={datedTopic(field, day.date, slug)}>{day.date} · #{row.rank}</a></li>)}</ul>
-    </section>}
+    <section id="topic-history" aria-labelledby="history-heading" data-pagefind-ignore>
+      <h2 id="history-heading">Topic history</h2>
+      <table><thead><tr><th scope="col">Date</th><th scope="col">Rank</th></tr></thead><tbody>
+        {appearances.map(({ day, row }) => <tr><td><a href={datedEvidence(field, day.date, slug)} aria-label={`${day.date} · #${row.rank}`}><time datetime={day.date}>{day.date}</time></a></td>
+          <td><span aria-hidden="true">{rankMedal(row.rank)}</span><span class="sr-only">#{row.rank}</span></td></tr>)}
+      </tbody></table>
+    </section>
   </article>
 </Base>
 <style>
   article { overflow-wrap: anywhere; }
-  .context { color: var(--muted); font-size: var(--t3); }
+  section { margin-top: 2.5rem; }
 </style>

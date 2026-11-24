@@ -5,7 +5,7 @@ import { chromium, type Browser, type Page } from "playwright";
 import { createContext } from "astro/middleware";
 import { atomFeed } from "../src/lib/feeds";
 import { industryItems, loadDays, loadTaxonomy } from "../src/lib/data";
-import { datedTopic, fieldLabel, publicEditions } from "../src/lib/editions";
+import { datedEvidence, fieldLabel, publicEditions } from "../src/lib/editions";
 import sample from "./fixtures/feed.json";
 
 let browser: Browser, page: Page;
@@ -73,7 +73,7 @@ it("publishes field and category feeds with dated evidence links, including empt
       expect(feed.title).toBe(`TrendBio — ${fieldLabel(field)} — ${category?.label ?? "Top 5"}`);
       expect(feed.entries).toEqual(expected.map(({ day, row }) => ({
         id: `tag:trendbio.dev,${day.date}:${field}/${row.slug}`, title: row.headline, summary: row.summary,
-        link: new URL(datedTopic(field, day.date, row.slug), site).href, updated: day.run.finished, author: undefined,
+        link: new URL(datedEvidence(field, day.date, row.slug), site).href, updated: day.run.finished, author: undefined,
       })));
       expect(readFileSync("dist/about/index.html", "utf8")).toContain(`href="${path}"`);
     }

@@ -1,20 +1,17 @@
 import type { APIRoute } from "astro";
-import { editions, pilotDates, publicEditions, topicAppearances } from "../lib/editions";
-import { loadDays } from "../lib/data";
+import { editions, publicEditions, topicAppearances } from "../lib/editions";
+import { fieldPages } from "../lib/field-pages";
+import { pilotIssues } from "../lib/pilot-topics";
 import { loadPeriods, topicPages } from "../lib/period-data";
 
 export const GET: APIRoute = ({ site }) => {
   const { days, weeks, months, paperDays } = loadPeriods();
   const today = new Date().toISOString().slice(0, 10);
   const entries = [
-    ...editions.flatMap(field => {
-      const editionsByDate = loadDays(field);
-      return [
-        { path: `/${field}/`, date: editionsByDate[0]?.date ?? today },
-        ...pilotDates(field).map(date => ({ path: `/pilots/${field}/${date}/`, date })),
-        ...editionsByDate.map(({ date }) => ({ path: `/${field}/day/${date}/`, date })),
-      ];
-    }),
+    ...editions.flatMap(field => [
+      ...fieldPages(field).map(page => ({ path: `/${field}/${page.path ? page.path + "/" : ""}`, date: page.date ?? today })),
+      ...pilotIssues(field).flatMap(date => ["", "papers/"].map(suffix => ({ path: `/pilots/${field}/${date}/${suffix}`, date }))),
+    ]),
     ...publicEditions.flatMap(field => Array.from(topicAppearances(field), ([slug, appearances]) =>
       ({ path: `/${field}/topic/${slug}/`, date: appearances[0].day.date }))),
     ...["/", "/fields/", "/collections/materials/", "/collections/energy/", "/topics/", "/map/", "/archive/", "/about/", "/week/", "/month/"].map(path => ({ path, date: today })),

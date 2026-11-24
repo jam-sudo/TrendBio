@@ -130,3 +130,8 @@ th:last-child, td:last-child { padding-right: 0; }
   .page-shell > main { grid-row: 2; }
   footer { width: min(100% - 480px, 1120px); }
 }
+
+.topic-link { text-decoration: none; }
+.topic-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+.topic-link:focus-visible { outline: none; }
+.topic-link:focus-visible::after { outline: 2px solid var(--fg); outline-offset: 4px; }

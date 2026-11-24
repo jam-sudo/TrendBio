@@ -26,6 +26,8 @@ const { title = "TrendBio", description, canonicalPath, lastRun, landing = false
 const summary = truncateDescription(description);
 const canonical = new URL(canonicalPath, Astro.site).href;
 const directory = canonicalPath === "/fields/";
+const otherPilot = edition && edition !== "computer-information" && editionInfo[edition].stage === "Pilot" ? edition : undefined;
+const fieldLink = otherPilot === "agriculture-food-veterinary" ? "Agriculture" : otherPilot === "astronomy" ? "Astronomy" : otherPilot && editionInfo[otherPilot].label;
 const compBio = canonicalPath === "/" || /^\/(day|week|month|topic|topics|map|archive)(\/|$)/.test(canonicalPath);
 const searchField = edition ?? collection ?? (compBio ? "computational" : undefined);
 const feed = collection ? undefined : !edition ? "/feed.xml" : publicEditions.includes(edition) ? `/${edition}/feed.xml` : undefined;
@@ -65,17 +67,16 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
     <div class="page-shell">
     <header class:list={{ "home-header": landing }}>
       <div class="header-top">
-      <a class="wordmark" href="/">{landing && !edition && !collection && <Helix staticMark />}TrendBio</a>
+      <a class="wordmark" href="/">{landing && <Helix staticMark />}TrendBio</a>
       <nav aria-label="Main navigation">
         <div class="field-bar">
           <div class="field-links" role="group" aria-label="Science field">
-            <a href="/fields/" aria-label="Browse science fields" aria-current={directory ? "page" : undefined}>Fields</a>
+            <a href="/fields/" aria-label={otherPilot ? `Browse science fields, current field: ${fieldLabel(otherPilot)}` : "Browse science fields"} aria-current={directory ? "page" : otherPilot ? "location" : undefined}>{fieldLink ?? "Fields"}</a>
             <a href="/biology/" aria-current={edition === "biology" ? "true" : undefined}>Biology</a>
             <a href="/" aria-current={compBio ? "true" : undefined}>CompBio</a>
             {publicEditions.filter(field => field !== "biology").map(field =>
               <a href={`/${field}/`} aria-current={edition === field ? "true" : undefined}>{editionInfo[field].label}</a>)}
             <a href="/computer-information/" aria-current={edition === "computer-information" ? "true" : undefined}>Computer Science</a>
-            {edition && edition !== "computer-information" && editionInfo[edition].stage === "Pilot" && <a href={`/${edition}/`} aria-current="true">{editionInfo[edition].label}</a>}
           </div>
         </div>
         <div class="nav-links">
@@ -86,6 +87,14 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
             <a href="/archive">Archive</a>
             <a href="/about">About</a>
           </>}
+          {edition && (publicEditions.includes(edition) ? <>
+            <a href={`/${edition}/`}>Today</a><a href={`/${edition}/topics/`}>Topics</a>
+            <a href={`/${edition}/map/`}>Map</a><a href={`/${edition}/archive/`}>Archive</a><a href="/about/">About</a>
+          </> : <>
+            <a href={`/${edition}/`}>Latest</a><a href={`/${edition}/#rankings`}>Topics</a>
+            <a href={`/${edition}/#editions`}>Archive</a><a href={`/${edition}/#sources`}>Sources</a><a href="/about/">About</a>
+          </>)}
+          {collection && <><a href={`/collections/${collection}/`}>Collection</a><a href={`/collections/${collection}/#topics`}>Topics</a><a href={`/collections/${collection}/#sources`}>Sources</a><a href="/about/">About</a></>}
           <button id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">Theme <span aria-hidden="true">☾</span></button>
         </div>
       </nav>
@@ -108,7 +117,7 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <!--email_off--><main id="main" tabindex="-1"><slot /></main><!--/email_off-->
-    {!edition && !collection && <SponsorColumns heroAligned={landing} />}
+    <SponsorColumns heroAligned={landing} />
     </div>
     <footer>
       {collection ? <p>Source records from arXiv and Crossref.</p> : <p>Auto-curated from {Astro.props.editionSources ?? (edition ? editionInfo[edition].source : "bioRxiv, arXiv, PubMed, GitHub and industry sources")}. Summaries are machine-generated.</p>}

@@ -38,8 +38,9 @@ it("builds a 404 page with the main landmark and recovery links, plus the favico
 
 it("publishes the selected materials papers and recovered biology originals at their review locations", async () => {
   await page.setContent(read("collections/materials/index.html"));
-  const groups = page.locator("main section[id]");
+  const groups = page.locator("main article.topic-card[id]");
   expect(await groups.count()).toBe(2);
+  expect(await groups.locator(".rank").count()).toBe(0);
   const papers = await groups.locator("li a").evaluateAll(links => links.map(link => link.getAttribute("href")));
   expect(new Set(papers).size).toBe(7);
   expect(papers.every(url => /^https:\/\/(doi\.org|arxiv\.org)\//.test(url!))).toBe(true);
@@ -113,9 +114,6 @@ it("builds valid XML covering the index and every public HTML route with lastmod
       entries: [...doc.querySelectorAll("url")].map(el => ({ loc: el.querySelector("loc")?.textContent, date: el.querySelector("lastmod")?.textContent })) };
   }, read("sitemap.xml"));
   expect(parsed.error).toBeUndefined();
-  const { weeks, months, paperDays } = loadPeriods();
-  const topicSlugs = new Set([...rankedTopics.map(topic => topic.slug), ...[...weeks, ...months].flatMap(period => period.topics.map(topic => topic.slug))]);
-  const fieldPages = editions.reduce((n, field) => n + 1 + getDataIndex(field).days.length, 0);
   const fieldTopics = new Map<string, string>();
   for (const field of publicEditions) {
     for (const day of getDataIndex(field).days) {
@@ -125,12 +123,24 @@ it("builds valid XML covering the index and every public HTML route with lastmod
       }
     }
   }
-  expect(parsed.entries).toHaveLength(10 + editions.flatMap(pilotDates).length + fieldPages + days.length + paperDays.length + weeks.length + months.length + topicSlugs.size + fieldTopics.size);
   const urls = new Map(parsed.entries.map(({ loc, date }) => [loc, date]));
   for (const [url, date] of fieldTopics) expect(urls.get(url)).toBe(date);
   expect(urls.size).toBe(parsed.entries.length);
-  for (const path of readdirSync("dist", { recursive: true, encoding: "utf8" }).filter(path => path.endsWith("index.html"))) {
-    expect(urls.has(`https://trendbio.dev/${path.replace(/index\.html$/, "")}`), path).toBe(path !== "search/index.html");
+  const publicPaths = readdirSync("dist", { recursive: true, encoding: "utf8" })
+    .filter(path => path.endsWith("index.html") && path !== "search/index.html")
+    .map(path => "https://trendbio.dev/" + path.slice(0, -"index.html".length));
+  expect(new Set(urls.keys())).toEqual(new Set(publicPaths));
+  for (const field of editions) {
+    for (const date of pilotDates(field)) {
+      for (const suffix of ["", "papers/"]) expect(urls.get(`https://trendbio.dev/pilots/${field}/${date}/${suffix}`)).toBe(date);
+    }
+  }
+  for (const field of publicEditions) {
+    for (const path of ["topics/", "map/", "archive/", "week/", "month/"]) expect(urls.has(`https://trendbio.dev/${field}/${path}`)).toBe(true);
+    for (const day of getDataIndex(field).days) expect(urls.get(`https://trendbio.dev/${field}/day/${day.date}/papers/`)).toBe(day.date);
+    for (const [kind, periods] of [["week", loadPeriods(field).weeks], ["month", loadPeriods(field).months]] as const) {
+      for (const period of periods) expect(urls.has(`https://trendbio.dev/${field}/${kind}/${period.id}/`)).toBe(true);
+    }
   }
   for (const { date } of days) expect(urls.get(`https://trendbio.dev/day/${date}/`)).toBe(date);
   for (const topic of rankedTopics) expect(urls.get(`https://trendbio.dev/topic/${topic.slug}/`))
@@ -193,15 +203,19 @@ it("links the Physics edition, its dated ranking and its own supporting papers",
   for (const path of ["physics/index.html", "physics/day/2026-11-01/index.html"]) {
     await page.setContent(read(path));
     const main = page.locator("main");
-    expect(await page.getByRole("heading", { level: 1 }).textContent()).toBe(path === "physics/index.html" ? "What moved in physics today?" : "Physics");
+    const landing = path === "physics/index.html";
+    expect(await page.getByRole("heading", { level: 1 }).textContent()).toBe(landing ? "What moved in physics today?" : "2026-11-01");
     expect(await page.locator(".hero").count()).toBe(path === "physics/index.html" ? 1 : 0);
     expect(await main.locator('[data-arxiv-scope="current"]').textContent()).toContain("Current coverage");
-    expect(await main.locator("ol h3").textContent()).toBe("Optical cavities reveal sources of readout noise");
-    const latest = path === "physics/index.html" ? main.locator("ol h3 a") : main.getByRole("link", { name: /Latest topic/ });
-    expect(await latest.getAttribute("href")).toBe("/physics/topic/cavity-readout-fixture/");
+    const title = main.locator(".topic-card.featured h2 a");
+    expect(await title.textContent()).toBe("Optical cavities reveal sources of readout noise");
+    expect(await title.getAttribute("href")).toBe(landing ? "/physics/topic/cavity-readout-fixture/" : "/physics/day/2026-11-01/papers/#cavity-readout-fixture");
+    expect(await main.getByRole("link", { name: "View all ›" }).getAttribute("href")).toBe("/physics/archive/");
+    expect(await main.getByRole("link", { name: "Read editorial correction" }).getAttribute("href")).toBe("/physics/day/2026-11-01/papers/#cavity-readout-fixture");
+    const target = (await title.getAttribute("href"))!.split("#")[0];
+    await page.setContent(read(target.slice(1) + "index.html"));
     expect(await main.locator('a[href^="https://example.org/physics/"]').count()).toBe(3);
-    const archiveLink = path === "physics/index.html" ? "/physics/day/2026-11-01/" : "/physics/#editions";
-    expect(await main.locator(`a[href="${archiveLink}"]`).count()).toBe(1);
+    expect(await main.getByRole("note").textContent()).toContain("Editorial correction");
   }
 });
 
@@ -294,7 +308,8 @@ it("links each science field and its dated pilots while omitting retired fields"
     expect(href).toMatch(new RegExp(`^/pilots/${field}/\\d{4}-\\d{2}-\\d{2}/$`));
     const sample = read(href!.slice(1) + "index.html");
     expect(sample).toContain('lang="en"');
-    expect(sample).toContain('class="rankings"');
+    expect(sample).toContain('class="topic-card featured"');
+    expect(sample).toContain(`href="${href}papers/#`);
     expect(sample).toContain(`href="/${field}/"`);
   }
 });
@@ -302,13 +317,53 @@ it("links each science field and its dated pilots while omitting retired fields"
 it("retains original ranks and paper versions in the reviewed Computer Science selection", async () => {
   await page.setContent(read("computer-information/index.html"));
   const review = page.locator("#ranking-review-2026-11-18");
-  expect(await review.locator("h3").first().isVisible()).toBe(true);
-  const topics = review.locator("ol > li");
+  const cards = review.locator("article.topic-card");
+  expect(await cards.first().getByRole("heading").isVisible()).toBe(true);
+  expect(await cards.evaluateAll(nodes => nodes.map(card => Number(card.getAttribute("data-rank"))))).toEqual([9, 35, 38]);
+  expect(await cards.first().locator(".topic-link").getAttribute("href")).toBe("/pilots/computer-information/2026-11-18/papers/#review-2026-11-18-9");
+  await page.setContent(read("pilots/computer-information/2026-11-18/papers/index.html"));
+  const topics = page.locator("main ol > li");
   expect(await topics.evaluateAll(nodes => nodes.map(li => Number(li.getAttribute("value"))))).toEqual([9, 35, 38]);
   expect(await topics.first().getByLabel("Supporting papers (4) for rank 9").count()).toBe(1);
   const papers = await topics.locator("a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href") ?? ""));
   expect(new Set(papers).size).toBe(10);
   expect(papers.every(url => /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d+v\d+$/.test(url))).toBe(true);
+});
+
+it("uses the CompBio card layout and working category filters on every field landing and dated pilot", async () => {
+  for (const field of editions) {
+    const paths = [`${field}/`, ...pilotDates(field).map(date => `pilots/${field}/${date}/`)];
+    for (const path of paths) {
+      await page.setContent(read(path + "index.html"));
+      const main = page.getByRole("main");
+      expect(await main.getByRole("navigation", { name: "Ranking period" }).count(), path).toBe(1);
+      const cards = main.locator("article[data-rank]");
+      const ranks = await cards.evaluateAll(nodes => nodes.map(node => Number(node.getAttribute("data-rank"))));
+      expect(ranks, path).toEqual([...new Set(ranks)].sort((a, b) => a - b));
+      if (!ranks.length) {
+        expect(await main.locator(".notice").textContent(), path).toContain("no topic cleared");
+        continue;
+      }
+      expect(await main.locator(".topic-list > .topic-card").count(), path).toBe(Math.min(5, ranks.length));
+      expect(await main.locator(".compact-list > .compact-row").count(), path).toBe(Math.max(0, ranks.length - 5));
+      expect(await cards.first().locator("h2 a.topic-link").isVisible(), path).toBe(true);
+      const group = main.getByRole("group", { name: "Topic categories" });
+      const category = group.locator("button[data-cat]:enabled").nth(1);
+      await category.click();
+      const value = await category.getAttribute("data-cat");
+      const selected = await main.locator("article[data-rank]:not([hidden])").evaluateAll(nodes => nodes.map(node => node.getAttribute("data-topic-cats")!.split(" ")));
+      expect(selected.length, path).toBeGreaterThan(0);
+      expect(selected.every(categories => categories.includes(value!)), path).toBe(true);
+      await group.getByRole("button", { name: "All", exact: true }).click();
+      expect(await main.locator("article[data-rank]:not([hidden])").count(), path).toBe(ranks.length);
+      if (path.startsWith("pilots/")) {
+        const links = await cards.locator(".topic-link").evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
+        await page.setContent(read(path + "papers/index.html"));
+        const original = page.locator("main ol.rankings > li").filter({ hasNot: page.locator("[data-editorial-withdrawal]") });
+        expect(links, path).toEqual(await original.evaluateAll((nodes, path) => nodes.map(node => "/" + path + "papers/#" + node.id), path));
+      }
+    }
+  }
 });
 
 it("keeps the Biology beta and CompBio as distinct editions", async () => {
@@ -323,15 +378,18 @@ it("keeps the Biology beta and CompBio as distinct editions", async () => {
 
 it("shows the sources collected for a Computing edition even when no group ranks", async () => {
   await page.setContent(read("computer-information/day/2026-11-11/index.html"));
+  await page.locator("#sources > summary").click();
   const main = page.getByRole("main");
   expect(await main.locator("[data-edition-venues] span").textContent()).toBe("Proceedings of the 37th Conference on l'Interaction Humain-Machine, arXiv");
   expect(await main.getByRole("link", { name: "IHM proceedings" }).getAttribute("href")).toBe("https://doi.org/10.1145/3845948");
   expect(await main.getByRole("link", { name: "HAL", exact: true }).getAttribute("href")).toBe("https://hal.science/IHM-2026");
-  expect(await main.locator("ol.rankings li").count()).toBe(0);
+  expect(await main.locator("article[data-rank]").count()).toBe(0);
+  expect(await main.locator(".notice").textContent()).toContain("no topic cleared");
 });
 
 it("lists the journals represented in a dated Agriculture pilot and links its regional publisher", async () => {
   await page.setContent(read("agriculture-food-veterinary/day/2026-09-30/index.html"));
+  await page.locator("#sources > summary").click();
   const coverage = page.locator("main .coverage");
   expect(await coverage.count()).toBe(1);
   expect(await coverage.locator("span").textContent()).toBe("Agrociencia Uruguay, Agronomy");
@@ -346,10 +404,13 @@ it("links a dated mathematics edition to the arXiv subjects queried at the time"
   const main = page.getByRole("main");
   expect(await main.locator('[data-arxiv-scope="edition"] a').evaluateAll(links => links.map(a => a.getAttribute("href"))))
     .toEqual(["https://arxiv.org/list/math.NA/recent"]);
-  expect(await main.locator('a[href^="https://example.org/math/"]').count()).toBe(3);
   expect(await main.locator(".coverage").count()).toBe(1);
   expect(await page.locator("footer").textContent()).toContain("Auto-curated from arXiv.");
   expect(await main.getByRole("heading", { name: "Quadrature error bounds depend on smoothness" }).count()).toBe(1);
+  const papers = (await main.locator(".topic-link").getAttribute("href"))!;
+  expect(papers).toMatch(/^\/math\/day\/2026-11-01\/papers\/#/);
+  await page.setContent(read(papers.slice(1).split("#")[0] + "index.html"));
+  expect(await main.locator('a[href^="https://example.org/math/"]').count()).toBe(3);
 });
 
 it("credits the Earth pilot papers and links their datasets as supporting material", async () => {
@@ -357,8 +418,10 @@ it("credits the Earth pilot papers and links their datasets as supporting materi
   expect(await page.locator("[data-window-days=\"28\"]").textContent()).toBe("Evidence window of 28 days from 2026-10-05 through 2026-11-01 (UTC).");
   const main = page.getByRole("main");
   expect(await main.locator(".coverage").textContent()).toBe("Journals represented in this edition’s collection include Ocean Science.");
-  expect(await main.locator("summary").first().textContent()).toBe("3 supporting papers");
-  await main.locator("summary").first().click();
+  const papers = (await main.locator(".topic-link").getAttribute("href"))!;
+  expect(papers).toMatch(/^\/earth-environment\/day\/2026-11-01\/papers\/#/);
+  await page.setContent(read(papers.slice(1).split("#")[0] + "index.html"));
+  expect(await main.locator("li[id] details[open] > summary").textContent()).toBe("3 supporting papers");
   expect(await main.locator('a[href^="https://example.org/earth/"]').count()).toBe(3);
   expect(await main.getByRole("link", { name: "CC BY" }).count()).toBe(2);
   expect(await main.getByRole("link", { name: "CC0" }).getAttribute("href")).toBe("https://creativecommons.org/publicdomain/zero/1.0/");

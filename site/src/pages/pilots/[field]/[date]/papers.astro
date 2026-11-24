@@ -1,0 +1,23 @@
+---
+import { readFileSync } from "node:fs";
+import Base from "../../../../layouts/Base.astro";
+import ReviewedPapers from "../../../../components/ReviewedPapers.astro";
+import { editions, fieldLabel, type Edition } from "../../../../lib/editions";
+import { isReviewedSelection, pilotIssues } from "../../../../lib/pilot-topics";
+export function getStaticPaths() {
+  return editions.flatMap(field => pilotIssues(field).map(date => ({ params: { field, date } })));
+}
+const field = Astro.params.field as Edition, date = Astro.params.date!, label = fieldLabel(field);
+const path = `/pilots/${field}/${date}/`, reviewed = isReviewedSelection(field, date);
+const article = reviewed ? null : readFileSync(`pilot-editions/${field}/${date}.html`, "utf8");
+---
+<Base edition={field} title={`${label} pilot papers · ${date} — TrendBio`} canonicalPath={`${path}papers/`}
+  description={`Supporting papers, summaries and editorial notes from the ${date} ${label} pilot.`} editionSources="the sources listed in this dated edition">
+  <div class="prose"><p><a href={path}>View this edition’s rankings</a></p>
+    {reviewed ? <><h1>{label} papers · <time datetime={date}>{date}</time></h1><h2>Reviewed topics</h2><ReviewedPapers /></> : <Fragment set:html={article} />}
+  </div>
+</Base>
+<style>
+  .prose :global(.rankings > li), .prose :global(li[id^="review-"]) { padding-block: 1rem; border-top: 1px solid var(--border); }
+  .prose :global(.correction) { border-inline-start: 3px solid var(--muted); padding-inline-start: .75rem; }
+</style>

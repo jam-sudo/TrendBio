@@ -1,157 +1,31 @@
 ---
-import { editionChanges } from "../../lib/rank-changes";
-import EditionComparison from "../../components/EditionComparison.astro";
-import RankChange from "../../components/RankChange.astro";
-import RankingSignals from "../../components/RankingSignals.astro";
-import biologyAudit from "../../../../docs/expansion-measurements/2026-11-21/biology-source-review.json";
-import { csReview, pilotRows, placementChecks } from "../../lib/pilot-topics";
-import Base from "../../layouts/Base.astro";
-import PilotCollection from "../../components/PilotCollection.astro";
-import FieldEvidence from "../../components/FieldEvidence.astro";
-import CrossCoverage from "../../components/CrossCoverage.astro";
-import { crossCoverage } from "../../lib/shared-papers";
-import { loadDays, loadEditionAudit, loadEditionVenues, loadTaxonomy } from "../../lib/data";
-import type { Day } from "../../lib/types";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
-import { parse } from "yaml";
-import { editionInfo, editions, pilotDates, publicEditions, type Edition } from "../../lib/editions";
+import EditionRanking from "../../components/EditionRanking.astro";
+import FieldReading from "../../components/FieldReading.astro";
+import TopicsPage from "../../components/TopicsPage.astro";
+import MapPage from "../../components/MapPage.astro";
+import ArchivePage from "../../components/ArchivePage.astro";
+import PeriodPage from "../../components/PeriodPage.astro";
+import PeriodIndex from "../../components/PeriodIndex.astro";
+import { editions, type Edition } from "../../lib/editions";
+import { fieldPages } from "../../lib/field-pages";
+import { pilotIssues } from "../../lib/pilot-topics";
 
 export function getStaticPaths() {
-  return editions.flatMap(field => {
-    const days = loadDays(field);
-    return [
-      { params: { field, edition: undefined }, props: { day: days[0] ?? null } },
-      ...days.map(day => ({ params: { field, edition: `day/${day.date}` }, props: { day } })),
-    ];
-  });
+  return editions.flatMap(field => fieldPages(field).map(page => ({
+    params: { field, edition: page.path || undefined }, props: { page },
+  })));
 }
-
-interface Props { day: Day | null }
-const { day } = Astro.props;
+interface Props { page: ReturnType<typeof fieldPages>[number] }
+const { page } = Astro.props;
 const field = Astro.params.field as Edition;
-const biology = field === "biology";
-
-const { label, stage } = editionInfo[field];
-const days = loadDays(field);
-const categories = new Map(loadTaxonomy(field).map(category => [category.slug, category.label]));
-const source = parse(readFileSync(resolve("../config/sources", `${field}.yaml`), "utf8"));
-const archives: string[] = day?.run.arxiv_categories ?? source.arxiv?.categories ?? [];
-const subjectCounts = field === "physics-expanded" && day ? loadEditionAudit(field, day.date)?.arxiv_subjects : null;
-const archiveGroups = Map.groupBy(archives, code => categories.get(source.hints?.arxiv_category?.[code]?.[0]) ?? code);
-const showCollectedJournals = field === "earth-environment" || field === "chemistry" || field === "math";
-const editionVenues = showCollectedJournals && day ? loadEditionVenues(field, day.date)?.filter(name => name !== "arxiv") : null;
-const observedVenues = ["computer-information", "engineering", "agriculture-food-veterinary"].includes(field) && day ? loadEditionVenues(field, day.date) : null;
-const journals: string[] = editionVenues ?? source.crossref?.journal_titles ?? Object.keys(source.hints?.journal ?? {});
-const followsCrossref = source.crossref && (!day || (day.run.source_status.crossref && day.run.source_status.crossref !== "skipped"));
-const medicalJournals: { title: string }[] = source.europepmc?.journals ?? [];
-const conferences: string[] = source.drops?.conferences ?? [];
-const halVolumes: { title: string; volume_doi: string; conference: string; collection: string }[] = source.crossref?.hal_proceedings ?? [];
-const publishers: { title: string; endpoint: string }[] = source.oai?.journals ?? [];
-const publisherUrls = new Map(publishers.map(journal => [journal.title, new URL(".", journal.endpoint).href]));
-const isPublic = publicEditions.includes(field);
-const comparison = isPublic && day ? editionChanges(day) : null;
-const samples = Astro.params.edition ? [] : pilotDates(field);
-const latestSample = samples[0];
-const sampleRows = latestSample ? pilotRows(field, latestSample) : [];
-const checked = latestSample ? placementChecks(field, latestSample) : [];
-const windowDays = day?.run.window_days ?? 7;
-const windowStart = day && new Date(Date.parse(day.date + "T00:00:00Z") - (windowDays - 1) * 86_400_000).toISOString().slice(0, 10);
-const path = Astro.params.edition ? `/${field}/${Astro.params.edition}/` : `/${field}/`;
+const path = page.path ? `/${field}/${page.path}/` : `/${field}/`;
+const pilotDate = page.view === "landing" && page.date && pilotIssues(field).includes(page.date) ? page.date : undefined;
 ---
-
-<Base edition={field} editionSources={["physics-expanded", "math"].includes(field) && !followsCrossref ? "arXiv" : undefined}
-  title={day ? `${label} · ${day.date} — TrendBio` : `${label} — TrendBio`}
-  description={`${stage === "Pilot" ? "Pilot" : "Daily"} ${label.toLowerCase()} research trends with the papers behind each ranking.`}
-  canonicalPath={path} landing={!Astro.params.edition} lastRun={day?.run.finished}>
-  <div class="prose">
-    {Astro.params.edition && <h1>{label}{stage && <small> {stage}</small>}</h1>}
-    {!Astro.params.edition && ["physics-expanded", "chemistry", "engineering"].includes(field) && <p>Related reading · <a href="/collections/materials/">Materials Science collection</a> · <a href="/collections/energy/">Energy Storage &amp; Power Grids collection</a></p>}
-    {latestSample && <section aria-label="Dated pilot editions">
-      <h2>Pilot editions</h2>
-      {field === "computer-information" && csReview.edition >= latestSample && <p>Latest reviewed selection · <a href={`#ranking-review-${csReview.edition}`}><time datetime={csReview.edition}>{csReview.edition}</time> ranking review</a> · {csReview.selected_topics.length} source-checked topics</p>}
-      <p>Last full pilot · <a href={`/pilots/${field}/${latestSample}/`}><time datetime={latestSample}>{latestSample}</time> rankings and papers</a> · {sampleRows.length} active {sampleRows.length === 1 ? "topic" : "topics"}</p>
-      {samples.length > 1 && <details><summary>Earlier full pilots</summary><ul>{samples.slice(1).map(date => <li><a href={`/pilots/${field}/${date}/`}>{date} rankings and papers</a></li>)}</ul></details>}
-      {checked.length > 0 && <details><summary>Field placement review · November 20, 2026</summary><p>One supporting paper checked at {checked.length === 1 ? "rank" : "ranks"} {checked.map(c => c.original_rank).join(" and ")} in the {latestSample} pilot.</p></details>}
-    </section>}
-    {!Astro.params.edition && stage === "Pilot" && <details>
-      <summary>Research categories</summary><ul>{Array.from(categories.values(), label => <li>{label}</li>)}</ul>
-    </details>}
-    {!Astro.params.edition && stage === "Pilot" && <PilotCollection {field} />}
-    {biology && !Astro.params.edition && <details id="coverage-review">
-      <summary>Coverage review · six additional biology papers · November 21, 2026</summary>
-      <p>We checked 39 abstracts from Nature Communications and arXiv population and evolution papers for November 12–18. Seventeen reported a biological finding, six needed further review and sixteen had a different primary outcome. Of the seventeen, eleven were already in CompBio and six were absent from both stores on November 20.</p>
-      <p>These six papers supplement the daily edition. They carry no rank.</p>
-      <ul>{biologyAudit.recovered.map(p => <li><a href={p.url}>{p.title}</a></li>)}</ul>
-    </details>}
-    {biology && Astro.params.edition && <p class="coverage">Experimental, observational and computational biology from selected bioRxiv subjects and PubMed journals.</p>}
-    {observedVenues && observedVenues.length > 0 && <p class="coverage" data-edition-venues>Sources in this edition’s collection include <span translate="no">{observedVenues.map((name, i) => <>{i > 0 && ", "}{publisherUrls.has(name)
-      ? <a href={publisherUrls.get(name)}>{name}</a>
-      : name === "arxiv" ? "arXiv" : name}</>)}</span>.</p>}
-    {archives.length > 0 && <details class="coverage" data-arxiv-scope={day?.run.arxiv_categories ? "edition" : "current"} open={archiveGroups.size <= 5}>
-      <summary>{day?.run.arxiv_mailings ? "First-version arXiv subjects in this edition" : day?.run.arxiv_categories ? "arXiv subjects queried for this edition" : "Current coverage on arXiv"} ({archives.length})</summary>
-      <ul>{Array.from(archiveGroups, ([category, codes]) => <li>
-        {codes.length === 1 ? <a href={`https://arxiv.org/list/${codes[0]}/recent`}>{category}</a> : <>
-          {category} · {codes.map((code, index) => <>{index > 0 && ", "}<a href={`https://arxiv.org/list/${code}/recent`} translate="no">{code}</a></>)}
-        </>}
-      </li>)}</ul>
-    </details>}
-    {subjectCounts && <details class="subject-counts"><summary>arXiv papers by subject</summary>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Preprints by arXiv subject"><table><caption>Stored preprints for this edition. A cross-listed paper can appear under several subjects. Ranked papers support at least one displayed topic.</caption>
-        <thead><tr><th scope="col">Subject</th><th scope="col">Primary</th><th scope="col">Cross-listed</th><th scope="col">Ranked</th></tr></thead>
-        <tbody>{Object.entries(subjectCounts).map(([code, counts]) => <tr>
-          <th scope="row" translate="no">{code}</th><td>{counts.primary}</td><td>{counts.cross_listed}</td><td>{counts.ranked}</td>
-        </tr>)}</tbody>
-      </table></div>
-    </details>}
-    {!observedVenues && followsCrossref && journals.length > 0 && <p class="coverage">{showCollectedJournals
-      ? (editionVenues ? "Journals represented in this edition’s collection include" : "The current pilot follows")
-      : "Research articles from"} <span translate="no">{journals.join(", ")}</span>.</p>}
-    {medicalJournals.length > 0 && <p class="coverage">Research articles indexed in Europe PMC from <span translate="no">{medicalJournals.map(j => j.title).join(", ")}</span>.</p>}
-    {conferences.length > 0 && <p class="coverage">The current pilot follows regular papers from {conferences.map((name, i) => <>{i > 0 && " · "}<a href={`https://drops.dagstuhl.de/entities/conference/${name}`} translate="no">{name}</a></>)} (DROPS).</p>}
-    {halVolumes.filter(volume => !observedVenues || observedVenues.includes(volume.title)).map(volume =>
-      <p class="coverage"><a href={`https://doi.org/${volume.volume_doi}`}>{volume.conference} proceedings</a> with author-deposited abstracts from <a href={`https://hal.science/${volume.collection}`}>HAL</a>.</p>)}
-    {!observedVenues && publishers.length > 0 && <p class="coverage">Publisher records from {publishers.map((journal, i) => <>{i > 0 && " · "}<a href={new URL(".", journal.endpoint).href} translate="no">{journal.title}</a></>)}.</p>}
-    {day ? <>
-      <h2>Research trends · <time datetime={day.date}>{day.date}</time></h2>
-      {!isPublic && <p data-window-days={windowDays}>Evidence window of {windowDays} days from {windowStart} through {day.date} (UTC).</p>}
-      {day.run.arxiv_mailings && <p data-arxiv-mailings>This edition uses the date of a new or cross-listed entry in the Physics group mailing and the subject tags returned with version 1. An individual subject can announce the same paper on a later date. Paper links open version 1. <a href="https://info.arxiv.org/help/availability.html">Announcement dates</a> · <a href="https://info.arxiv.org/help/cross.html">Subject cross-listing</a></p>}
-      {field === "physics-expanded" && !day.run.arxiv_mailings && <p data-arxiv-submission-dates>The arXiv window uses first submission dates. Paper links open the versions retrieved during collection, which can include revisions made after the edition date.</p>}
-      {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
-      {day.ranked.length === 0 && <p>No topic cleared the ranking threshold for this date.</p>}
-      {comparison && <EditionComparison {...comparison} {field} />}
-      <ol class="rankings">
-        {day.ranked.map(row => <li value={row.rank} id={row.slug}>
-          <p class="category">{categories.get(row.category) ?? row.category}</p>
-          <h3>{isPublic && !Astro.params.edition ? <a href={`/${field}/topic/${row.slug}/`}>{row.headline}</a> : row.headline}</h3>
-          {comparison && <div class="movement"><RankChange movement={comparison.rows.get(row.slug)} /></div>}
-          <p>{row.summary}</p>
-          {day.run.notes.includes(`synthesis-fallback:${row.slug}`) && <small>Fallback summary from source text</small>}
-          <FieldEvidence {field} {day} {row} />
-          {isPublic && Astro.params.edition && <a data-edition-navigation href={`/${field}/topic/${row.slug}/`} aria-label={`Latest topic: ${row.headline}`}>Latest topic</a>}
-          {isPublic && <CrossCoverage date={day.date} matches={crossCoverage(field, day.date, row.slug)} />}
-        </li>)}
-      </ol>
-      {isPublic && <RankingSignals {day} />}
-      {Astro.params.edition ? <p class="archive"><a href={`/${field}/#editions`}>Browse {field} editions</a></p> : <details class="archive" id="editions"><summary>{label} editions by date</summary>
-        <ul>{days.map(({ date }) => <li><a href={`/${field}/day/${date}/`}>{date}</a></li>)}</ul>
-      </details>}
-    </> : !samples.length && <p>The first {field} ranking will appear after the first collection run.</p>}
-  </div>
-</Base>
-
-<style>
-  time { white-space: nowrap; }
-  .coverage, .category, [data-window-days] { color: var(--muted); }
-  .rankings { padding-inline-start: 2.5rem; }
-  .rankings > li { border-top: 1px solid var(--border); padding: 1rem 0 1rem .5rem; }
-  .movement { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .rankings > li::marker { font-weight: 700; }
-  .category { margin: 0; font-size: var(--t3); }
-  h3 { margin: .25rem 0; font-size: 1.15rem; }
-  .rankings p { margin-bottom: .5rem; }
-  summary { cursor: pointer; }
-  .subject-counts caption { margin: .6rem 0; text-align: start; }
-  .subject-counts th, .subject-counts td { padding: .25rem; overflow-wrap: normal; }
-  .archive { margin-block-start: 2rem; }
-</style>
+{(page.view === "landing" || page.view === "day") &&
+  <EditionRanking {field} day={!pilotDate && page.day?.date === page.date ? page.day : undefined} {pilotDate} {path} landing={page.view === "landing"} />}
+{page.view === "papers" && <FieldReading {field} day={page.day!} />}
+{page.view === "topics" && <TopicsPage {field} />}
+{page.view === "map" && <MapPage {field} />}
+{page.view === "archive" && <ArchivePage {field} />}
+{(page.view === "week" || page.view === "month") && (page.period
+  ? <PeriodPage {field} kind={page.view} period={page.period} /> : <PeriodIndex {field} kind={page.view} />)}

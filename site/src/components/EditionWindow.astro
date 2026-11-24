@@ -1,0 +1,11 @@
+---
+import { isDaily } from "../lib/editions";
+import type { Day } from "../lib/types";
+interface Props { day: Day }
+const { day } = Astro.props;
+const days = day.run.window_days ?? 7;
+const start = new Date(Date.parse(day.date) - (days - 1) * 86_400_000).toISOString().slice(0, 10);
+---
+{!isDaily(day.domain) && <p data-window-days={days}>Evidence window of {days} days from {start} through {day.date} (UTC).</p>}
+{day.run.arxiv_mailings && <p data-arxiv-mailings>This edition uses the date of a new or cross-listed entry in the Physics group mailing and the subject tags returned with version 1. An individual subject can announce the same paper on a later date. Paper links open version 1. <a href="https://info.arxiv.org/help/availability.html">Announcement dates</a> · <a href="https://info.arxiv.org/help/cross.html">Subject cross-listing</a></p>}
+{day.domain === "physics-expanded" && !day.run.arxiv_mailings && <p data-arxiv-submission-dates>The arXiv window uses first submission dates. Paper links open the versions retrieved during collection, which can include revisions made after the edition date.</p>}

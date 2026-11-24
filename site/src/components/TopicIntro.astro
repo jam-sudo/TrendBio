@@ -1,0 +1,26 @@
+---
+import CategoryIcon from "./CategoryIcon.astro";
+import SignalBadges from "./SignalBadges.astro";
+import Sparkline from "./Sparkline.astro";
+import { fieldLabel, type Field } from "../lib/editions";
+import { growthContext } from "../lib/scoring";
+import type { Signals, TopicDay } from "../lib/types";
+interface Props {
+  field: Field; category: string; categoryLabel: string; rank?: number | null; title: string; summary?: string | null;
+  history: TopicDay[]; signals?: Signals; signalDate?: string; windowDays?: number; backUrl?: string; date?: string;
+}
+const { field, category, categoryLabel, rank, title, summary, history, signals, signalDate, windowDays, backUrl, date } = Astro.props;
+---
+{backUrl && <nav aria-label="Breadcrumb"><a href={backUrl}>← {date}</a></nav>}
+<p class="rank-category" data-pagefind-filter={`field:${field}`} data-pagefind-meta={`field:${fieldLabel(field)}`}>
+  <CategoryIcon {field} slug={category} size={36} /> <span>{rank ? `#${rank}` : "Topic"} · {categoryLabel}</span>
+</p>
+<h1 data-pagefind-meta="title">{title}</h1>
+{summary && <p>{summary}</p>}
+{signals && signalDate && <SignalBadges {signals} context={growthContext(signals, signalDate, history, windowDays)} />}
+<Sparkline {history} />
+<style>
+  nav { margin-bottom: 1.5rem; font-size: var(--t3); }
+  .rank-category { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; color: var(--muted); font-size: var(--t3); }
+  h1 { margin-top: 0; }
+</style>

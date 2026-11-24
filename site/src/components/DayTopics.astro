@@ -12,54 +12,65 @@ import { loadTaxonomy } from "../lib/data";
 import type { Day } from "../lib/types";
 import type { LeaderboardTopic } from "../lib/leaderboard";
 import { scoring } from "../lib/scoring";
+import { fieldPath, isDaily, type Field } from "../lib/editions";
 
 interface Props {
   topics: LeaderboardTopic[];
   day?: Day | null;
   period?: "week" | "month";
+  field?: Field;
+  issueDate?: string;
+  heading?: string;
+  issueUrl?: string;
 }
 
-const { day, topics: ranked, period } = Astro.props;
+const { day, topics: ranked, period, field = "computational", issueDate = day?.date, heading, issueUrl } = Astro.props;
 const { featured_n, display_open_n, top_n } = scoring;
-const comparison = day && !period ? editionChanges(day) : null;
-const compact = ranked.filter((topic) => topic.rank > featured_n && topic.rank <= display_open_n);
-const more = ranked.filter((topic) => topic.rank > display_open_n);
-const categories = loadTaxonomy("computational");
+const regular = isDaily(field), prefix = fieldPath(field);
+const comparison = day && regular && !period ? editionChanges(day) : null;
+const compact = ranked.slice(featured_n, display_open_n);
+const more = ranked.slice(display_open_n);
+const taxonomy = [...loadTaxonomy(field)];
+for (const topic of ranked) {
+  if (topic.categoryLabel && !taxonomy.some(category => category.slug === topic.category)) {
+    taxonomy.push({ slug: topic.category, label: topic.categoryLabel, covers: "" });
+  }
+}
 const topicCategories = ranked.map((topic) => [
   topic.category, ...topic.secondary_categories,
 ]);
-const counts = Object.fromEntries(categories.map(({ slug }) => [
+const counts = Object.fromEntries(taxonomy.map(({ slug }) => [
   slug, topicCategories.filter((slugs) => slugs.includes(slug)).length,
 ]));
+const categories = regular ? taxonomy : taxonomy.filter(category => counts[category.slug]);
+const archive = regular ? `${prefix}/archive/` : `${prefix}/#editions`;
 ---
 
-<div class="section-heading ranking-heading">
-  <PeriodLinks current={period ?? "day"} />
-  <h2>Top {top_n}</h2>
-  <a href={period ? `/${period}/` : "/archive/"}>View all ›</a>
+<div class="section-heading ranking-heading" id="rankings">
+  <PeriodLinks {field} current={period ?? "day"} {issueDate} {issueUrl} />
+  <h2>{heading ?? (regular ? `Top ${top_n}` : "Pilot rankings")}</h2>
+  <a href={period ? `${prefix}/${period}/` : archive}>View all ›</a>
 </div>
 {day?.run.status === "degraded" && <p class="notice"><span class="badge">PARTIAL</span> Some sources or summaries were unavailable for this run.</p>}
-{day?.run.backfilled && <p class="notice"><span class="badge">BACKFILLED</span> Code and industry signals are partial for backfilled days.</p>}
+{day?.run.backfilled && <p class="notice"><span class="badge">BACKFILLED</span> {field === "computational" ? "Code and industry signals are partial for backfilled days." : "This edition was assembled after the publication date."}</p>}
 {ranked.length === 0 && <p class="notice"><span class="badge">{period ? "QUIET PERIOD" : "QUIET DAY"}</span> {period ? "No topic history in this period." : "Quiet day: no topic cleared the bar."}</p>}
 {comparison && <EditionComparison {...comparison} field={day!.domain} />}
-<CategoryChips categories={categories} counts={counts} />
+{ranked.length > 0 && <CategoryChips {field} categories={categories} counts={counts} />}
 <div class="topic-list">
-  {ranked.filter((topic) => topic.rank <= featured_n).map((topic) => <TopicCard movement={comparison?.rows.get(topic.slug)} ranked={topic} date={day?.date} featured={topic.rank === 1} />)}
+  {ranked.slice(0, featured_n).map((topic, index) => <TopicCard {field} movement={comparison?.rows.get(topic.slug)} ranked={topic} date={issueDate} featured={index === 0} />)}
 </div>
 {compact.length > 0 && <div class="compact-list open-list">
-  {compact.map((topic) => <TopicCard movement={comparison?.rows.get(topic.slug)} ranked={topic} date={day?.date} compact period={!!period} />)}
+  {compact.map((topic) => <TopicCard {field} movement={comparison?.rows.get(topic.slug)} ranked={topic} date={issueDate} compact period={!!period} />)}
 </div>}
 {more.length > 0 && <details data-more-topics>
   <summary><span class="closed-label">Show {more.length} more</span><span class="open-label">Show less</span></summary>
   <div class="compact-list">
-    {more.map((topic) => <TopicCard movement={comparison?.rows.get(topic.slug)} ranked={topic} date={day?.date} compact period={!!period} />)}
+    {more.map((topic) => <TopicCard {field} movement={comparison?.rows.get(topic.slug)} ranked={topic} date={issueDate} compact period={!!period} />)}
   </div>
 </details>}
 
-{day && !period && <RankingSignals {day} />}
-{day && <IndustryList day={day.date} />}
-{day && <CodeList day={day.date} />}
-{day && <SharedList day={day.date} />}
+{day && regular && !period && <RankingSignals {day} />}
+{day && field === "computational" && <><IndustryList day={day.date} /><CodeList day={day.date} /><SharedList day={day.date} /></>}
 
 <style>
   .ranking-heading { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin-bottom: 0.5rem; }

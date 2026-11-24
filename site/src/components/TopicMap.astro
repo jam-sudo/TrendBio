@@ -4,17 +4,19 @@ import { categoryStyle } from "../lib/categories";
 import type { Category } from "../lib/data";
 import type { MapData } from "../lib/types";
 
-interface Props { map: MapData; categories: Category[] }
-const { map, categories } = Astro.props;
+import { fieldPath, type Field } from "../lib/editions";
+interface Props { map: MapData; categories: Category[]; field?: Field }
+const { map, categories, field = "computational" } = Astro.props;
+const prefix = fieldPath(field);
 const counts = Object.fromEntries(categories.map(({ slug }) => [slug, map.points.filter(p => p.category === slug).length]));
-const colors = Object.fromEntries(categories.map(({ slug, label }) => [slug, { hue: categoryStyle(slug).hue, label }]));
+const colors = Object.fromEntries(categories.map(({ slug, label }) => [slug, { hue: categoryStyle(slug, field).hue, label }]));
 const months = [...new Set(map.points.flatMap(p => p.months))].sort();
 const titles = new Map(map.points.map(point => [point.slug, point.headline]));
 const json = JSON.stringify(map).replace(/</g, "\\u003c");
 const external = Buffer.byteLength(json, "utf8") > 600_000;
 ---
-<section class="topic-map" aria-label="Topic relationship map" data-map data-colors={JSON.stringify(colors)}>
-  <CategoryChips categories={categories} counts={counts} />
+<section class="topic-map" aria-label="Topic relationship map" data-map data-prefix={prefix} data-colors={JSON.stringify(colors)}>
+  <CategoryChips {field} categories={categories} counts={counts} />
   <div class="map-controls">
     <label for="map-month">Activity: <output id="map-month-label" for="map-month">All time</output></label>
     <input id="map-month" type="range" min="0" max={months.length} value={months.length} step="1" aria-valuetext="All time" />
@@ -30,14 +32,14 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
     <summary>Browse topics as a list</summary>
     <ul class="map-links" aria-label="Research topics">
       {map.points.map(point => <li data-map-slug={point.slug}>
-        <a href={`/topic/${point.slug}/`}>{point.headline}</a>
+        <a href={`${prefix}/topic/${point.slug}/`}>{point.headline}</a>
         <span>{colors[point.category]?.label ?? point.category} · {point.size} items · last ranked {point.last_ranked}</span>
         {point.neighbors.length > 0 && <span>Nearest topics: {point.neighbors.map(slug => titles.get(slug) ?? slug).join(" · ")}</span>}
       </li>)}
     </ul>
   </details>
   <noscript><style>.topic-map .map-stage,.topic-map .map-controls,.topic-map .category-chips,.topic-map .map-hint{display:none}</style></noscript>
-  <script id="topic-map-data" type="application/json" is:inline data-src={external ? "/map.json" : undefined} set:html={external ? "null" : json} />
+  <script id="topic-map-data" type="application/json" is:inline data-src={external ? `${prefix}/map.json` : undefined} set:html={external ? "null" : json} />
 </section>
 
 <script is:inline type="module">
@@ -152,7 +154,7 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
     document.addEventListener('keydown', event => { if (event.key === 'Escape' && hovered) clearHover(); });
     canvas.addEventListener('click', event => {
       const point = hit(event);
-      if (point) window.location.assign(`/topic/${encodeURIComponent(point.slug)}/`);
+      if (point) window.location.assign(`${root.dataset.prefix}/topic/${encodeURIComponent(point.slug)}/`);
     });
     root.querySelector('[data-category-chips]').addEventListener('click', event => {
       const button = event.target.closest('button[data-cat]');

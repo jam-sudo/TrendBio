@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+import DayTopics from "./DayTopics.astro";
+import EditionDayHeading from "./EditionDayHeading.astro";
+import EditionWindow from "./EditionWindow.astro";
+import FieldSources from "./FieldSources.astro";
+import PilotCollection from "./PilotCollection.astro";
+import { loadDays, loadTaxonomy } from "../lib/data";
+import { editionSources, fieldLabel, isDaily, type Edition } from "../lib/editions";
+import { csReview, isReviewedSelection, pilotCards, pilotCoverage, pilotEntries, pilotIssues, placementChecks } from "../lib/pilot-topics";
+import { dailyRows } from "../lib/leaderboard";
+import type { Day } from "../lib/types";
+
+interface Props { field: Edition; day?: Day; pilotDate?: string; path: string; landing?: boolean }
+const { field, day, pilotDate, path, landing = false } = Astro.props;
+const regular = isDaily(field), label = fieldLabel(field), date = pilotDate ?? day?.date;
+const dates = new Map(loadDays(field).map(issue => [issue.date, `/${field}/day/${issue.date}/`]));
+for (const published of pilotIssues(field)) dates.set(published, `/pilots/${field}/${published}/`);
+const issues = Array.from(dates, ([date, href]) => ({ date, href })).sort((a,b) => b.date.localeCompare(a.date));
+const reviewed = !!pilotDate && isReviewedSelection(field, pilotDate);
+const rows = pilotDate ? pilotCards(field, pilotDate) : dailyRows(day ?? null, !landing || !regular);
+const withdrawn = pilotDate ? pilotEntries(field, pilotDate).filter(row => row.withdrawn) : [];
+const checks = date ? placementChecks(field, date) : [];
+const issueUrl = pilotDate ? `/pilots/${field}/${pilotDate}/` : day ? `/${field}/day/${day.date}/` : undefined;
+const coverage = pilotDate && !reviewed ? pilotCoverage(field, pilotDate) : undefined;
+---
+<Base edition={field} editionSources={pilotDate ? "the sources listed in this dated edition" : editionSources(day)} {landing} title={`${label}${date ? ` · ${date}` : ""} — TrendBio`} canonicalPath={path}
+  description={`${regular ? "Daily" : "Pilot"} ${label} research trends with the papers behind each ranking.`} lastRun={day?.run.finished}>
+  {!landing && date && <EditionDayHeading {date} editions={issues} />}
+  <section id={reviewed ? `ranking-review-${date}` : undefined} aria-label={`${label} rankings`}>
+    <DayTopics {field} day={pilotDate ? null : day} topics={rows} issueDate={date} {issueUrl} heading={reviewed ? "Reviewed topics" : undefined} />
+  </section>
+  {withdrawn.length > 0 && <details class="edition-info"><summary>Editorial withdrawals ({withdrawn.length})</summary>
+    <ul>{withdrawn.map(row => <li id={row.slug}>Rank {row.rank} · <a href={`/pilots/${field}/${date}/papers/#${row.slug}`}>{row.title}</a> · {row.summary}</li>)}</ul>
+  </details>}
+  {landing && <section class="edition-info" aria-label={regular ? "Dated editions" : "Dated pilot editions"}>
+    <details id="editions"><summary>{label} editions by date</summary>
+      {issues.length > 0 ? <ul>{issues.map(issue => <li><a href={issue.href}>{issue.date} · {isReviewedSelection(field, issue.date) ? "Reviewed selection" : "Rankings and papers"}</a></li>)}</ul>
+        : <p>The first {label} ranking will appear after the first collection run.</p>}
+      {field === "computer-information" && !reviewed && <div id={`ranking-review-${csReview.edition}`}>
+        {csReview.selected_topics.map(topic => <p id={`review-${csReview.edition}-${topic.rank}`}><a href={`/pilots/${field}/${csReview.edition}/papers/#review-${csReview.edition}-${topic.rank}`}>Rank {topic.rank} · {topic.headline}</a></p>)}
+      </div>}
+    </details>
+  </section>}
+  <details id="sources" class="edition-info"><summary>Sources and coverage</summary>
+    {day && <EditionWindow {day} />}
+    {coverage !== undefined ? <Fragment set:html={coverage} /> : reviewed ? <p>Each reviewed topic links to the arXiv versions used in this selection.</p> : <FieldSources {field} day={day ?? null} {landing} />}
+    {!regular && landing && <>
+      {pilotDate && <details><summary>Current source coverage</summary><FieldSources {field} day={null} /></details>}
+      <details><summary>Research categories</summary><ul>{loadTaxonomy(field).map(category => <li>{category.label}</li>)}</ul></details>
+      <PilotCollection {field} />
+    </>}
+    {checks.length > 0 && <p>Field placement review, November 20, 2026 · One supporting paper checked at {checks.length === 1 ? "rank" : "ranks"} {checks.map(check => check.original_rank).join(" and ")} in the {date} pilot.</p>}
+    {!regular && issueUrl && <p><a href={`${issueUrl}papers/`}>Read the dated edition with its sources</a></p>}
+  </details>
+  {["physics-expanded", "chemistry", "engineering"].includes(field) && <p class="related">Related reading · <a href="/collections/materials/">Materials Science</a> · <a href="/collections/energy/">Energy Storage &amp; Power Grids</a></p>}
+  <script>
+    function revealTarget() {
+      const target = document.getElementById(location.hash.slice(1));
+      let disclosure = target?.closest("details");
+      while (disclosure) {
+        disclosure.open = true;
+        disclosure = disclosure.parentElement?.closest("details");
+      }
+    }
+    revealTarget();
+    window.addEventListener("hashchange", revealTarget);
+  </script>
+</Base>
+<style>
+  .edition-info, .related { margin-block: 1rem; }
+  .edition-info { overflow-wrap: anywhere; }
+  summary { cursor: pointer; padding-block: .35rem; }
+</style>

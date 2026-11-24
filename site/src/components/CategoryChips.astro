@@ -1,21 +1,22 @@
 ---
 import CategoryIcon from "./CategoryIcon.astro";
-import { categoryStyle } from "../lib/categories";
+import { categoryStyle, type CardField } from "../lib/categories";
 import type { Category } from "../lib/data";
 
 interface Props {
   categories: Category[];
   counts: Record<string, number>;
+  field?: CardField;
 }
 
-const { categories, counts } = Astro.props;
+const { categories, counts, field } = Astro.props;
 ---
 
 <div class="category-chips" role="group" aria-label="Topic categories" data-category-chips>
   <button type="button" data-cat="all" aria-pressed="true">All</button>
   {categories.filter(({ slug }) => slug !== "industry" || counts[slug]).map(({ slug, label }) => (
-    <button type="button" data-cat={slug} aria-pressed="false" disabled={!counts[slug]} style={`--category-hue: ${categoryStyle(slug).hue}`}>
-      <CategoryIcon slug={slug} size={16} /> {label}
+    <button type="button" data-cat={slug} aria-pressed="false" disabled={!counts[slug]} style={`--category-hue: ${categoryStyle(slug, field).hue}`}>
+      <CategoryIcon slug={slug} size={16} {field} /> {label}
     </button>
   ))}
 </div>

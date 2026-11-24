@@ -1,0 +1,23 @@
+---
+import FeaturedCard from "./FeaturedCard.astro";
+interface Props {
+  field: "materials" | "energy"; label: string;
+  groups: { id: string; title: string; note: string; papers: { title: string; url: string; source: string; date: string }[] }[];
+}
+const { field, label, groups } = Astro.props;
+---
+<div class="section-heading" id="topics"><h2>Reading selections</h2><a href="#sources">Sources and selection</a></div>
+<div class="collection-list">
+  {groups.map((group, index) => <FeaturedCard {field} category={group.id} categoryLabel={label} id={group.id}
+    title={group.title} summary={group.note} stats={[{ label: "papers", value: group.papers.length }]} featured={index === 0}>
+    <details><summary>{group.papers.length} supporting papers</summary>
+      <ul>{group.papers.map(paper => <li><a href={paper.url}>{paper.title}</a> · {paper.source} · <time datetime={paper.date}>{paper.date}</time></li>)}</ul>
+    </details>
+  </FeaturedCard>)}
+</div>
+<style>
+  .collection-list { display: grid; gap: .5rem; margin-bottom: 1rem; }
+  details { margin-top: .5rem; font-size: var(--t3); }
+  summary { cursor: pointer; }
+  li + li { margin-top: .5rem; }
+</style>

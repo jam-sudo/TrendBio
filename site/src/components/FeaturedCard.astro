@@ -1,0 +1,52 @@
+---
+import CategoryIcon from "./CategoryIcon.astro";
+import SignalLine from "./SignalLine.astro";
+import { categoryStyle, rankMedal, type CardField } from "../lib/categories";
+import type { Stat } from "../lib/leaderboard";
+interface Props {
+  field: CardField; category: string; categoryLabel: string; categories?: string[];
+  rank?: number; id?: string; title: string; url?: string; summary?: string;
+  fallbackLabel?: string; stats: Stat[]; featured?: boolean;
+}
+const { field, category, categoryLabel, categories, rank, id, title, url, summary, fallbackLabel, stats, featured } = Astro.props;
+---
+<article {id} data-rank={rank} class:list={["topic-card", { featured, unranked: !rank }]} data-topic-cats={categories?.join(" ")}
+  tabindex={id && !rank ? "-1" : undefined} style={`--category-hue: ${categoryStyle(category, field).hue}`}>
+  {rank && <span class="rank"><span aria-hidden="true">{rankMedal(rank)}</span><span class="sr-only">Rank {rank}</span></span>}
+  <CategoryIcon {field} slug={category} size={36} />
+  <div class="topic-copy">
+    <div class="row-meta"><p class="rank-category">{categoryLabel}</p><slot name="movement" /></div>
+    <h2>{url ? <a class="topic-link" href={url}>{title}{fallbackLabel && <span class="auto-label">{fallbackLabel}</span>}</a> : title}</h2>
+    <slot name="tools" />
+    {summary && <p class="summary">{summary}</p>}
+    <slot />
+  </div>
+  <SignalLine {stats} />
+</article>
+<style>
+  .topic-card { position: relative; display: grid; grid-template-columns: 24px 36px minmax(0, 1fr) auto; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: oklch(var(--tint-lightness) 0.015 var(--category-hue)); padding: 1.25rem; min-width: 0; overflow-wrap: anywhere; }
+  .topic-card:hover { border-color: var(--muted); }
+  .unranked { grid-template-columns: 36px minmax(0, 1fr) auto; }
+  .rank { text-align: center; }
+  .row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .rank-category { width: fit-content; font-size: .75rem; font-weight: 700; color: var(--fg); background: oklch(var(--tile-lightness) 0.06 var(--category-hue)); padding: 2px 8px; border-radius: 4px; margin: 0; }
+  h2 { margin: 0 0 0.375rem; }
+  .auto-label { color: var(--muted); font-size: var(--t3); font-weight: 400; }
+  .summary { font-size: var(--t3); color: var(--muted); margin: 0; }
+  .featured .summary { font-size: var(--t2); }
+  @media (max-width: 800px) {
+    .topic-card { grid-template-columns: 24px 36px minmax(0, 1fr); gap: 0.75rem; padding: 1rem; }
+    .topic-card :global(.signal-line) { grid-column: 3; }
+    .unranked { grid-template-columns: 36px minmax(0, 1fr); }
+    .unranked :global(.signal-line) { grid-column: 2; }
+  }
+  @media (max-width: 480px) {
+    .topic-card { align-items: start; }
+    .topic-copy { grid-column: 1 / -1; }
+    .row-meta { margin-bottom: .35rem; }
+    .topic-card :global(.signal-line) { grid-column: 1 / -1; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+    .rank { align-self: center; }
+    .topic-card :global(.category-tile) { grid-column: 2; }
+    .unranked :global(.category-tile) { grid-column: 1; }
+  }
+</style>

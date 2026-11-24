@@ -41,7 +41,13 @@ export function datedTopic(field: Field, date: string, slug: string): string {
 }
 
 export function datedEvidence(field: Field, date: string, slug: string): string {
-  return field === "computational" ? `/day/${date}/papers/#${encodeURIComponent(slug)}` : datedTopic(field, date, slug);
+  return `${fieldPath(field)}/day/${date}/papers/#${encodeURIComponent(slug)}`;
+}
+
+export const fieldPath = (field: Field) => field === "computational" ? "" : `/${field}`;
+export const isDaily = (field: string) => field === "computational" || publicEditions.some(edition => edition === field);
+export function editionSources(day?: Day) {
+  if (day && ["physics-expanded", "math"].includes(day.domain) && (!day.run.source_status.crossref || day.run.source_status.crossref === "skipped")) return "arXiv";
 }
 
 const byIssue = new WeakMap<Day[], Map<string, { day: Day; row: RankedTopic }[]>>();

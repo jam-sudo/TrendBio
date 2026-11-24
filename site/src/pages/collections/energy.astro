@@ -1,19 +1,23 @@
 ---
+import CollectionTopics from "../../components/CollectionTopics.astro";
 import Base from "../../layouts/Base.astro";
 import trial from "../../../../docs/expansion-measurements/2026-11-23/energy.json";
 ---
 <Base collection="energy" landing title="Energy Storage & Power Grids collection — TrendBio" canonicalPath="/collections/energy/"
   description="Nine original studies on battery electrode processing and power-grid dispatch in a four-week reading collection, with journal articles and a preprint.">
-  <article class="prose">
-    <p>Nine selected papers from <time datetime={trial.start}>October 26</time> through <time datetime={trial.end}>November 22, 2026</time>.</p>
-    {trial.groups.map(group => <section id={group.id}>
-      <h2>{group.title}</h2><p>{group.note}</p>
-      <ul>{group.papers.map(paper => <li><a href={paper.url}>{paper.title}</a> · {paper.source} · <time datetime={paper.date}>{paper.date}</time></li>)}</ul>
-    </section>)}
-    <details><summary>Sources and selection</summary>
+  <article>
+    <p class="collection-date">Nine selected papers from <time datetime={trial.start}>October 26</time> through <time datetime={trial.end}>November 22, 2026</time>.</p>
+    <CollectionTopics field="energy" label="Energy Storage &amp; Power Grids" groups={trial.groups} />
+    <details id="sources"><summary>Sources and selection</summary>
       <p>The four-week search returned {trial.sources.Batteries} journal article records from <a href="https://www.mdpi.com/journal/batteries">Batteries</a> and {trial.sources.Energies} from <a href="https://www.mdpi.com/journal/energies">Energies</a> in Crossref. A title search in <a href="https://arxiv.org/list/eess.SY/recent">arXiv Systems and Control</a> for “microgrid”, “battery storage” or “power grid” returned {trial.sources.arXiv} preprints.</p>
       <p>We selected original studies whose abstracts describe an electrode processing experiment or a battery operating decision. Journal dates are publication dates and preprint dates are first submissions. Both journals share a publisher, and the arXiv search covers one subject. This is a dated reading collection with no scheduled ranking.</p>
     </details>
     <p>Related reading · <a href="/collections/materials/">Materials Science</a> · <a href="/chemistry/">Chemistry</a> · <a href="/engineering/">Engineering</a></p>
   </article>
 </Base>
+
+<style>
+  .collection-date { margin-block-end: .5rem; color: var(--muted); font-size: var(--t3); }
+  summary { cursor: pointer; }
+  details + p { margin-top: 1rem; }
+</style>

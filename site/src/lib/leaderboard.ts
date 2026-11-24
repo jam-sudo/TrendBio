@@ -1,8 +1,9 @@
-import { loadItems, loadTopic } from "./data";
+import { loadCorrection, loadItems, loadTopic } from "./data";
 import { selectToolNames, type ToolName } from "./tool-names";
 import type { Day, Signals } from "./types";
 import { periodHeadline, type PeriodRanked } from "./periods";
 import { growthContext } from "./scoring";
+import type { Field } from "./editions";
 
 export interface Stat { label: string; value: string | number; spoken?: string; context?: string }
 export interface LeaderboardTopic {
@@ -10,8 +11,11 @@ export interface LeaderboardTopic {
   slug: string;
   headline: string;
   evidenceDate?: string;
+  url?: string;
+  correction?: boolean;
   summary?: string;
   category: string;
+  categoryLabel?: string;
   secondary_categories: string[];
   stats: Stat[];
   autoLabel?: boolean;
@@ -33,26 +37,28 @@ export function signalStats(signals: Signals, context: string): Stat[] {
 export function dailyRows(day: Day | null, dated = false): LeaderboardTopic[] {
   if (!day) return [];
   return day.ranked.map(row => {
-    const topic = loadTopic("computational", row.slug);
+    const topic = loadTopic(day.domain, row.slug);
     const history = topic?.history ?? [];
     const ids = history.find(entry => entry.date === day.date)?.item_ids ?? [];
+    const synthesis = row.synthesis ?? (topic?.synthesized_on === day.date ? topic.synthesis : "");
     return { ...row, evidenceDate: dated ? day.date : undefined,
+      correction: day.domain !== "computational" && !!loadCorrection(day.domain, day.date, row.slug, [row.headline, row.summary, synthesis ?? ""], ids),
       fallbackSummary: day.run.notes.includes(`synthesis-fallback:${row.slug}`),
-      toolNames: selectToolNames(row.rank <= 20 ? loadItems("computational", ids) : [], row.rank),
+      toolNames: selectToolNames(day.domain === "computational" && row.rank <= 20 ? loadItems(day.domain, ids) : [], row.rank),
       secondary_categories: topic?.secondary_categories ?? [],
       stats: signalStats(row.signals, growthContext(row.signals, day.date, history, day.run.window_days)),
     };
   });
 }
 
-export function periodRows(topics: PeriodRanked[]): LeaderboardTopic[] {
+export function periodRows(topics: PeriodRanked[], field: Field = "computational"): LeaderboardTopic[] {
   return topics.map(topic => {
-    const history = loadTopic("computational", topic.slug)?.history ?? [];
+    const history = loadTopic(field, topic.slug)?.history ?? [];
     const peak = history.find(entry => entry.date === topic.rise_date);
     return { ...topic,
       headline: periodHeadline(topic),
       autoLabel: !topic.headline,
-      toolNames: selectToolNames(topic.rank <= 20 ? loadItems("computational", topic.latest_item_ids) : [], topic.rank),
+      toolNames: selectToolNames(field === "computational" && topic.rank <= 20 ? loadItems(field, topic.latest_item_ids) : [], topic.rank),
       stats: [
         { label: "days ranked", value: topic.days_ranked },
         { label: "best rank", value: topic.best_rank === null ? "—" : `#${topic.best_rank}` },

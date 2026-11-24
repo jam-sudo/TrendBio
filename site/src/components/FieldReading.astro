@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import FieldEvidence from "./FieldEvidence.astro";
+import FieldSources from "./FieldSources.astro";
+import EditionWindow from "./EditionWindow.astro";
+import { loadTaxonomy } from "../lib/data";
+import { datedTopic, editionSources, fieldLabel, isDaily, topicAppearances, type Edition } from "../lib/editions";
+import { loadPeriods } from "../lib/period-data";
+import { periodHeadline } from "../lib/periods";
+import type { Day } from "../lib/types";
+
+interface Props { field: Edition; day: Day }
+const { field, day } = Astro.props;
+const label = fieldLabel(field), path = `/${field}/day/${day.date}/`, regular = isDaily(field);
+const categories = new Map(loadTaxonomy(field).map(c => [c.slug, c.label]));
+const extra = regular ? Array.from(loadPeriods(field).supplemental.get(day.date)?.values() ?? [])
+  .filter(topic => !day.ranked.some(row => row.slug === topic.slug)) : [];
+---
+<Base edition={field} editionSources={editionSources(day)} title={`${label} papers · ${day.date} — TrendBio`} canonicalPath={`${path}papers/`}
+  description={`Topic summaries and supporting papers from the ${day.date} ${label} edition.`} lastRun={day.run.finished}>
+  <article class="prose">
+    <h1>{label} papers · <time datetime={day.date}>{day.date}</time></h1>
+    <p data-edition-navigation><a href={path}>View this day’s rankings</a></p>
+    <h2>Sources and coverage</h2>
+    <EditionWindow {day} />
+    <FieldSources {field} {day} />
+    {day.run.status === "degraded" && <p>Some sources or summaries were unavailable for this edition.</p>}
+    {!day.ranked.length && <p>No topic cleared the ranking threshold for this date.</p>}
+    {day.ranked.length > 0 && <h2>Ranked topics</h2>}
+    <ol class="rankings">{day.ranked.map(row => <li value={row.rank} id={row.slug} tabindex="-1">
+      <p class="category">{categories.get(row.category) ?? row.category}</p>
+      <h3>{row.headline}</h3><p>{row.summary}</p>
+      <FieldEvidence {field} {day} {row} expanded />
+      <p data-edition-navigation><a href={datedTopic(field, day.date, row.slug)}>Rank in this edition</a>
+        {regular && <> · <a href={`/${field}/topic/${row.slug}/`}>Latest topic</a></>}</p>
+    </li>)}</ol>
+    {extra.map(topic => <section id={topic.slug} tabindex="-1">
+      <p>Period ranking · Auto label</p><h2>{periodHeadline(topic)}</h2>
+      <FieldEvidence {field} {day} row={{ slug: topic.slug, headline: periodHeadline(topic), summary: "" }} expanded />
+      {topicAppearances(field).has(topic.slug) && <p data-edition-navigation><a href={`/${field}/topic/${topic.slug}/`}>Latest topic</a></p>}
+    </section>)}
+  </article>
+</Base>
+<style>
+  .rankings { padding-inline-start: 2rem; }
+  .rankings > li, section { border-top: 1px solid var(--border); padding-block: 1.5rem; }
+  .category { color: var(--muted); margin-bottom: .25rem; }
+  h3 { margin-block: 0 .5rem; }
+</style>
