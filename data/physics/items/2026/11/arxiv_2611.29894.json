@@ -1,0 +1,32 @@
+{
+  "abstract": "Cosmological analyses of Type Ia supernovae use a covariance matrix to describe statistical noise and systematic\n  uncertainties. To fit a Hubble diagram with an unbinned covariance matrix, the CPU cost scales as O(N^3) for N\n  supernovae, which has motivated compression into bins that loses information and reduces self-calibration power. To\n  remove the need for lossy compression, we present a method that greatly reduces CPU time for matrix inversion and\n  cosmology fitting, as well as matrix storage. For systematic covariances constructed from K per-supernova\n  distance-shift vectors, we retain the exact representation C = D + U U^T, with diagonal statistical covariance D,\n  and use the Woodbury factorization identity to efficiently invert C, significantly reducing computing time and disk\n  storage without losing information. We implement this method in SNANA and validate it on simulated samples for LSST\n  (N ~ 5,300, K = 18), Roman+LSST (N ~ 15,000, K = 30), and 10-yr LSST (N ~ 134,400, K = 18). For 10-yr LSST, matrix\n  inversion and cosmology fit time is ~10 weeks using a dense (unbinned) matrix with 18 billion elements, and is\n  reduced to ~1.5 hr using the factorization method. It also reduces covariance matrix disk storage by a factor of\n  1,800 (36 GB to 20 MB). In all validation tests, the best-fit cosmological parameters are nearly identical to the\n  unbinned fit, and the dark energy figure of merit (FoM) agrees to better than 0.1% accuracy; the small differences\n  are likely due to numerical artifacts in the pipeline. For the LSST and Roman era, this factorization method enables\n  large unbinned supernova analyses with significantly reduced computing resources compared to previous analyses using\n  a dense matrix, while preserving all information in the covariance model.",
+  "authors": [
+    "Ayan Mitra",
+    "Anish Mukherjee",
+    "Richard Kessler"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-24",
+  "id": "arxiv:2611.29894",
+  "metadata": {
+    "arxiv_primary_category": "astro-ph.CO",
+    "categories": [
+      "astro-ph.CO"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.29894v1</ns0:id>\n    <ns0:title>Binning is Sinning: Absolution for the Unbinned Supernova Hubble Diagram</ns0:title>\n    <ns0:updated>2026-11-23T01:49:32Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.29894v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.29894v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Cosmological analyses of Type Ia supernovae use a covariance matrix to describe statistical noise and systematic\n  uncertainties. To fit a Hubble diagram with an unbinned covariance matrix, the CPU cost scales as O(N^3) for N\n  supernovae, which has motivated compression into bins that loses information and reduces self-calibration power. To\n  remove the need for lossy compression, we present a method that greatly reduces CPU time for matrix inversion and\n  cosmology fitting, as well as matrix storage. For systematic covariances constructed from K per-supernova\n  distance-shift vectors, we retain the exact representation C = D + U U^T, with diagonal statistical covariance D,\n  and use the Woodbury factorization identity to efficiently invert C, significantly reducing computing time and disk\n  storage without losing information. We implement this method in SNANA and validate it on simulated samples for LSST\n  (N ~ 5,300, K = 18), Roman+LSST (N ~ 15,000, K = 30), and 10-yr LSST (N ~ 134,400, K = 18). For 10-yr LSST, matrix\n  inversion and cosmology fit time is ~10 weeks using a dense (unbinned) matrix with 18 billion elements, and is\n  reduced to ~1.5 hr using the factorization method. It also reduces covariance matrix disk storage by a factor of\n  1,800 (36 GB to 20 MB). In all validation tests, the best-fit cosmological parameters are nearly identical to the\n  unbinned fit, and the dark energy figure of merit (FoM) agrees to better than 0.1% accuracy; the small differences\n  are likely due to numerical artifacts in the pipeline. For the LSST and Roman era, this factorization method enables\n  large unbinned supernova analyses with significantly reduced computing resources compared to previous analyses using\n  a dense matrix, while preserving all information in the covariance model.</ns0:summary>\n    <ns0:category term=\"astro-ph.CO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-23T01:49:32Z</ns0:published>\n    <ns1:comment>12 pages, 4 figures</ns1:comment>\n    <ns1:primary_category term=\"astro-ph.CO\" />\n    <ns0:author>\n      <ns0:name>Ayan Mitra</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Anish Mukherjee</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Richard Kessler</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "cosmology",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "Presents a Woodbury factorization method for unbinned Type Ia supernova covariance matrices, cutting LSST-scale fit time from ~10 weeks to ~1.5 hr and storage…",
+  "title": "Binning is Sinning: Absolution for the Unbinned Supernova Hubble Diagram",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.29894v1"
+}

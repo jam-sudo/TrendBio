@@ -1,0 +1,31 @@
+{
+  "abstract": "Rigorous coupled-wave analysis (RCWA) is the standard full-wave solver for periodic metasurfaces, but every solve diagonalises a dense nonsymmetric matrix for each layer. Inverse design repeats this step for every wavelength, angle and polarisation of an objective. On a graphics processor it is the slow step, and its derivative fails where eigenvalues coincide or a diffraction order reaches cutoff. Here we introduce SPECTRA-RCWA, an RCWA forward and adjoint solver that never diagonalises the layer matrix. Each layer step uses three entire functions of the half-size layer matrix, evaluated by matrix products alone, and an admittance recursion, or scattering-matrix doubling for thick layers, keeps the evanescent orders stable. One adjoint field gives the gradient for every design value without a computational graph, and all solves of an objective run as one batch. For 144 solves with 578 x 578 layer matrices, the value and the gradient take 0.25 s on one graphics card, 218 times less than with a differentiable eigendecomposition code. The truncated-series solver TorchRDIT loses accuracy beyond a few tenths of a micrometre unless the user slices the layer; SPECTRA-RCWA keeps single-precision accuracy in layers several wavelengths thick with no setting changed and is 47 to 65 times faster at matched accuracy. Its single-precision gradient stays within 4e-5 of a double-precision reference at a cutoff, where eigendecomposition gradients are wrong by order one. A freeform metagrating designed in 3.4 min on a desktop processor deflects both polarisations by 65 degrees with a band-averaged efficiency of 75%.",
+  "authors": [
+    "Hyoseok Park"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-24",
+  "id": "arxiv:2611.30305",
+  "metadata": {
+    "arxiv_primary_category": "physics.optics",
+    "categories": [
+      "physics.optics",
+      "physics.comp-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.30305v1</ns0:id>\n    <ns0:title>SPECTRA-RCWA: A Spectral Propagation Engine for Coupled-Wave Theory with Recursive Admittance</ns0:title>\n    <ns0:updated>2026-11-23T08:56:27Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.30305v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.30305v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Rigorous coupled-wave analysis (RCWA) is the standard full-wave solver for periodic metasurfaces, but every solve diagonalises a dense nonsymmetric matrix for each layer. Inverse design repeats this step for every wavelength, angle and polarisation of an objective. On a graphics processor it is the slow step, and its derivative fails where eigenvalues coincide or a diffraction order reaches cutoff. Here we introduce SPECTRA-RCWA, an RCWA forward and adjoint solver that never diagonalises the layer matrix. Each layer step uses three entire functions of the half-size layer matrix, evaluated by matrix products alone, and an admittance recursion, or scattering-matrix doubling for thick layers, keeps the evanescent orders stable. One adjoint field gives the gradient for every design value without a computational graph, and all solves of an objective run as one batch. For 144 solves with 578 x 578 layer matrices, the value and the gradient take 0.25 s on one graphics card, 218 times less than with a differentiable eigendecomposition code. The truncated-series solver TorchRDIT loses accuracy beyond a few tenths of a micrometre unless the user slices the layer; SPECTRA-RCWA keeps single-precision accuracy in layers several wavelengths thick with no setting changed and is 47 to 65 times faster at matched accuracy. Its single-precision gradient stays within 4e-5 of a double-precision reference at a cutoff, where eigendecomposition gradients are wrong by order one. A freeform metagrating designed in 3.4 min on a desktop processor deflects both polarisations by 65 degrees with a band-averaged efficiency of 75%.</ns0:summary>\n    <ns0:category term=\"physics.optics\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.comp-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-23T08:56:27Z</ns0:published>\n    <ns1:comment>21 pages, 6 figures, Supplementary Information included. Code: https://github.com/hyoseokp/spectra-rcwa (pip install spectra-rcwa), DOI 10.5281/zenodo.24459564</ns1:comment>\n    <ns1:primary_category term=\"physics.optics\" />\n    <ns0:author>\n      <ns0:name>Hyoseok Park</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "optics",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "SPECTRA-RCWA is a diagonalisation-free forward and adjoint RCWA solver for periodic metasurfaces, using matrix functions and admittance recursion; it speeds…",
+  "title": "SPECTRA-RCWA: A Spectral Propagation Engine for Coupled-Wave Theory with Recursive Admittance",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.30305v1"
+}

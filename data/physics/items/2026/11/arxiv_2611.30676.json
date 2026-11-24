@@ -1,0 +1,41 @@
+{
+  "abstract": "The quantum charge-coupled device (QCCD) architecture is a promising approach to scalable trapped-ion quantum computing, enabling flexible qubit interactions by transporting ions between dedicated trap zones. Programs for such systems require operations beyond conventional circuit primitives: ion shuttling, physical SWAPs, trap splitting and merging, and cooling. Motional excitation accumulated during transport increases the mean phonon number of ions and degrades the fidelity of the two-qubit Molmer-Sorensen gates. However, existing quantum error correction (QEC) simulation frameworks do not jointly track per-ion motional excitation and explicitly schedule cooling operations with their transport time and heating costs. We develop a full-stack software framework for QEC experiments and simulations on linear QCCD systems with a single ion species, comprising an intermediate representation (IR) supporting QCCD-native operations, a compiler that translates syndrome-extraction circuits into the IR, and a heating-aware noise-injection pipeline that generates noisy Stim circuits. The compiler updates the mean phonon number of each ion throughout the schedule, and the pipeline derives gate-dependent error rates from the tracked phonon states and per-ion timing, enabling the evaluation of finite-size logical-error scaling of the rotated surface code under transport- and heating-aware noise. We show that transport-induced heating prevents logical error rates from decreasing with increasing code distance under the evaluated conditions, and that indirectly cooling the ion pairs involved in two-qubit gates, by merging them with precooled coolant ions immediately before each gate, restores this decrease. By sweeping the duration and post-cooling mean phonon number of an abstract cooling instruction, we characterize their trade-off and identify the region in which logical-error scaling is maintained.",
+  "authors": [
+    "Eitaro Ishikawa",
+    "Noah Hirai",
+    "Koichiro Miyanishi",
+    "Hana Ebi",
+    "Kazufumi Tanji",
+    "Isamu Kudo",
+    "Kenji Toyoda",
+    "Masahiro Takeoka",
+    "Hiroki Takahashi",
+    "Takahiko Satoh",
+    "Shin Nishio"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-24",
+  "id": "arxiv:2611.30676",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph",
+      "cs.ET"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.30676v1</ns0:id>\n    <ns0:title>THeatA: Transport- and Heating-aware QEC simulation with Cooling Strategies for QCCD Trapped-Ion Systems</ns0:title>\n    <ns0:updated>2026-11-23T13:29:40Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.30676v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.30676v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>The quantum charge-coupled device (QCCD) architecture is a promising approach to scalable trapped-ion quantum computing, enabling flexible qubit interactions by transporting ions between dedicated trap zones. Programs for such systems require operations beyond conventional circuit primitives: ion shuttling, physical SWAPs, trap splitting and merging, and cooling. Motional excitation accumulated during transport increases the mean phonon number of ions and degrades the fidelity of the two-qubit Molmer-Sorensen gates. However, existing quantum error correction (QEC) simulation frameworks do not jointly track per-ion motional excitation and explicitly schedule cooling operations with their transport time and heating costs. We develop a full-stack software framework for QEC experiments and simulations on linear QCCD systems with a single ion species, comprising an intermediate representation (IR) supporting QCCD-native operations, a compiler that translates syndrome-extraction circuits into the IR, and a heating-aware noise-injection pipeline that generates noisy Stim circuits. The compiler updates the mean phonon number of each ion throughout the schedule, and the pipeline derives gate-dependent error rates from the tracked phonon states and per-ion timing, enabling the evaluation of finite-size logical-error scaling of the rotated surface code under transport- and heating-aware noise. We show that transport-induced heating prevents logical error rates from decreasing with increasing code distance under the evaluated conditions, and that indirectly cooling the ion pairs involved in two-qubit gates, by merging them with precooled coolant ions immediately before each gate, restores this decrease. By sweeping the duration and post-cooling mean phonon number of an abstract cooling instruction, we characterize their trade-off and identify the region in which logical-error scaling is maintained.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.ET\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-23T13:29:40Z</ns0:published>\n    <ns1:comment>14 pages, 8 figures + 6 page appendix with 6 additional figures. Comments are welcome</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Eitaro Ishikawa</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Noah Hirai</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Koichiro Miyanishi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hana Ebi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kazufumi Tanji</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Isamu Kudo</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kenji Toyoda</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Masahiro Takeoka</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Hiroki Takahashi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Takahiko Satoh</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shin Nishio</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "Introduces THeatA, a full-stack framework simulating QEC on linear QCCD trapped-ion systems that tracks per-ion phonon numbers and heating, showing transport…",
+  "title": "THeatA: Transport- and Heating-aware QEC simulation with Cooling Strategies for QCCD Trapped-Ion Systems",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.30676v1"
+}
