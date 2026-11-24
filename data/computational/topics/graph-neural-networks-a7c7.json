@@ -770,7 +770,7 @@
     0.008440808393061161,
     -0.020054377615451813
   ],
-  "headline": "Foundation models and registration tools link microscopy to single-cell spatial data",
+  "headline": "Foundation models decode single-cell and 3D tissue structure from microscopy and H&E",
   "history": [
     {
       "attached_item_ids": [],
@@ -5074,6 +5074,38 @@
         "rise_ratio": 1.0588235294117647,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "ml-ai",
+      "count_7d": 6,
+      "date": "2026-11-24",
+      "item_ids": [
+        "biorxiv:10.64898/2026.11.12.766082",
+        "biorxiv:10.64898/2026.11.14.766416",
+        "biorxiv:10.64898/2026.11.16.766951",
+        "biorxiv:10.64898/2026.11.17.767301",
+        "biorxiv:10.64898/2026.11.17.767412",
+        "pubmed:10.1038/s41592-026-03310-8"
+      ],
+      "rank": 25,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 1.125,
+        "total": 0.7054868939072335,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 1,
+        "rise_baseline": "four_week_mean",
+        "rise_ratio": 1.125,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -5081,12 +5113,12 @@
   "related": [
     "segmentation-self-supervised-49da",
     "untitled-topic-e99e",
-    "amr-cabbage-cdaf"
+    "untitled-topic-3dcd"
   ],
   "secondary_categories": [],
   "slug": "graph-neural-networks-a7c7",
-  "summary": "Foundation models and denoisers for multiplexed and histology images now reach single-cell and 3D tissue resolution.",
-  "synthesis": "The dominant thread is computational extraction of single-cell and tissue-level information from microscopy and histology images. SAM2 extends a segmentation foundation model to joint 2D and 3D light and electron microscopy, while Loki2 applies a single-cell pathology foundation model, trained on UniSeg with 15M cells, to H&E images to recover transcriptomic and protein signals. sc-HistoMorphomics profiles 194 nuclear features in H&E whole-slide images and links them to spatial transcriptomics, and GenVinci reconstructs 3D tissue from histology to map senescence. Registration and denoising steps support these analyses: MeXalign coregisters LA-ICP-TOFMS and immunofluorescence via single-cell masks, SpillOT removes spillover in multiplexed images, and Space-map aligns serial sections into 3D atlases. A kidney benchmark with 543 annotated tiles provides a public reference for segmentation methods. The recurring novelty is extending single-cell resolution to 3D and multimodal inference directly from routine stains.",
+  "summary": "Foundation models and 3D registration tools now extend single-cell resolution to multimodal inference from routine stains.",
+  "synthesis": "The dominant thread is computational recovery of single-cell and tissue-level information from images. Segmentation and foundation models extend this across modalities: SAM2 addresses joint 2D and 3D light and electron microscopy, and Loki2 applies a single-cell pathology model, trained on UniSeg with 15M cells, to H&E to recover transcriptomic and protein signals. sc-HistoMorphomics links 194 nuclear morphology features in H&E whole-slide images to spatial transcriptomics, and GenVinci reconstructs 3D tissue from histology to map senescence. Space-map addresses the 3D axis directly by aligning serial sections into single-cell atlases from spatial transcriptomics and proteomics. A kidney benchmark of unstained brightfield images, with 18 whole-slide images and 543 annotated tiles, supplies a public reference for comparing U-Net, DeepLabv3+, TransUNet, SAM and FixMatchSeg. The new element is single-cell resolution extended to 3D and multimodal inference from routine stains.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-21"
+  "synthesized_on": "2026-11-24"
 }

@@ -1,0 +1,40 @@
+{
+  "abstract": "Read mapping, a key step of genome sequence analysis, matches each fragment of a sequenced genome (a read) to its location in a reference genome. A genome graph is a graph-based reference genome that represents the genetic diversity of a population as alternative paths, and thus improves read mapping accuracy. However, the size and complexity of a genome graph make sequence-to-graph (S2G) mapping a major bottleneck. Prior software and hardware approaches for S2G mapping perform redundant costly operations (e.g., graph traversals and dynamic programming) that do not lead to valid mappings. Our key observation is that a genome graph consists of small subgraphs that share a limited set of recurring topologies, which we call motifs. We propose Motivo, a topology-aware algorithm-architecture co-design for S2G mapping. Motivo's algorithm uses motifs in two ways. First, it stores the precomputed motifs of each node in a compact index, which replaces a graph traversal with a single memory lookup. Second, it uses the topology of a motif and the properties of its nodes to identify the few most suitable mapping paths with arithmetic operations. The algorithm enables high-performance execution on CPUs and GPUs and high-performance, low-energy execution on Motivo-ASIC, an accelerator we co-design with it. Motivo-CPU provides 2.1-18.4x, 2.8-343x, and 1.4-10.1x speedups over GraphAligner, vg, and minigraph, and Motivo-GPU provides 1.5-1.6x speedups over vg-giraffe. Motivo-ASIC provides 7.4-11.7x (138-274x) speedups over state-of-the-art CPU-based tools for short (long) reads. Compared to SeGraM (short reads) and HARP (long reads), Motivo-ASIC achieves 5.3x and 4.0-4.3x higher throughput per Watt and 1.7x and 2.7-3.0x higher throughput per mm$^2$, respectively. Motivo maintains equal or higher mapping accuracy than other tools (96.8%-99.7%) for short and long reads on two types of genome graphs.",
+  "authors": [
+    "Eirini Maria Tzermpou",
+    "Konstantina Koliogeorgi",
+    "Konstantinos Kanellopoulos",
+    "Ataberk Olgun",
+    "Nisa Bostancı",
+    "Dimitrios Soudris",
+    "Nika Mansouri Ghiasi",
+    "Onur Mutlu"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-24",
+  "id": "arxiv:2611.29410",
+  "metadata": {
+    "arxiv_primary_category": "cs.AR",
+    "categories": [
+      "cs.AR",
+      "cs.DC",
+      "q-bio.GN",
+      "q-bio.QM"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.29410v1</ns0:id>\n    <ns0:title>Motivo: A Motif-Based Algorithm-Architecture Co-Design for Fast and Energy-Efficient Graph-Based Genome Analysis</ns0:title>\n    <ns0:updated>2026-11-22T11:25:32Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.29410v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.29410v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Read mapping, a key step of genome sequence analysis, matches each fragment of a sequenced genome (a read) to its location in a reference genome. A genome graph is a graph-based reference genome that represents the genetic diversity of a population as alternative paths, and thus improves read mapping accuracy. However, the size and complexity of a genome graph make sequence-to-graph (S2G) mapping a major bottleneck. Prior software and hardware approaches for S2G mapping perform redundant costly operations (e.g., graph traversals and dynamic programming) that do not lead to valid mappings. Our key observation is that a genome graph consists of small subgraphs that share a limited set of recurring topologies, which we call motifs. We propose Motivo, a topology-aware algorithm-architecture co-design for S2G mapping. Motivo's algorithm uses motifs in two ways. First, it stores the precomputed motifs of each node in a compact index, which replaces a graph traversal with a single memory lookup. Second, it uses the topology of a motif and the properties of its nodes to identify the few most suitable mapping paths with arithmetic operations. The algorithm enables high-performance execution on CPUs and GPUs and high-performance, low-energy execution on Motivo-ASIC, an accelerator we co-design with it. Motivo-CPU provides 2.1-18.4x, 2.8-343x, and 1.4-10.1x speedups over GraphAligner, vg, and minigraph, and Motivo-GPU provides 1.5-1.6x speedups over vg-giraffe. Motivo-ASIC provides 7.4-11.7x (138-274x) speedups over state-of-the-art CPU-based tools for short (long) reads. Compared to SeGraM (short reads) and HARP (long reads), Motivo-ASIC achieves 5.3x and 4.0-4.3x higher throughput per Watt and 1.7x and 2.7-3.0x higher throughput per mm$^2$, respectively. Motivo maintains equal or higher mapping accuracy than other tools (96.8%-99.7%) for short and long reads on two types of genome graphs.</ns0:summary>\n    <ns0:category term=\"cs.AR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.DC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.GN\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-22T11:25:32Z</ns0:published>\n    <ns1:primary_category term=\"cs.AR\" />\n    <ns0:author>\n      <ns0:name>Eirini Maria Tzermpou</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Konstantina Koliogeorgi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Konstantinos Kanellopoulos</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ataberk Olgun</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nisa Bostancı</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Dimitrios Soudris</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nika Mansouri Ghiasi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Onur Mutlu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "genomics",
+  "published_at": "2026-11-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "arxiv",
+  "summary": "Motivo: motif-indexed algorithm and ASIC accelerator for sequence-to-graph read mapping on genome graphs, with large CPU/GPU/ASIC speedups.",
+  "title": "Motivo: A Motif-Based Algorithm-Architecture Co-Design for Fast and Energy-Efficient Graph-Based Genome Analysis",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.29410v1"
+}

@@ -1,0 +1,44 @@
+{
+  "abstract": "Live-cell imaging tracks multiple protein levels within individual cells across divisions in real time, enabling direct measurement of how regulatory dynamics are inherited by a daughter cell from her mother. This technology presents a unique opportunity to directly observe longitudinal dynamics, in contrast to single-cell RNA sequencing, which can only measure cells cross-sectionally. However, there is a lack of computational methods for analyzing live-cell imaging data. Existing frameworks based on ordinary differential equations (ODEs) estimate networks from individual time series, but adapting them to mother-daughter pairs poses a dilemma: pooling both cells forces complete inheritance, while fitting each cell separately starves the short daughter trajectory of timepoints needed for reliable estimation. To address this gap, we develop PRNODE (Protein Regulatory Networks via ODEs), which models each cell's network as a deviation from a shared regulatory scaffold and estimates the scaffold and both deviations jointly under a fused group-lasso penalty. The mother's longer time series thereby supports the daughter's estimate, while allowing the two networks to differ wherever the data demand it. We then propose a novel measure of inheritance based on comparing the rate of change of protein levels between the mother's and daughter's networks. Across simulation studies, we find that PRNODE outperforms existing ODE estimation methods in recovering the networks of daughter cells and in estimating inheritance. Finally, we apply PRNODE to many mother-daughter pairs of Saccharomyces cerevisiae observed over a 9-hour period at 12-minute intervals. Many estimated networks show a negative feedback loop between the cell-cycle inhibitor Whi5 and the cyclin Clb2, which together sustain cell-cycle oscillations. We also find that the measured inheritance tracks the number of regulatory edges a daughter shares with her mother with the same sign, more than the presence of any single edge. PRNODE is available as an R package at https://github.com/shirmath/LIC_methods.",
+  "authors": [
+    "Mathur, S.",
+    "Wu, W.",
+    "Kennedy, T.",
+    "Arguello-Miranda, O.",
+    "Lin, K. Z."
+  ],
+  "doi": "10.64898/2026.11.20.767944",
+  "first_seen": "2026-11-24",
+  "id": "biorxiv:10.64898/2026.11.20.767944",
+  "metadata": {
+    "abstract": "Live-cell imaging tracks multiple protein levels within individual cells across divisions in real time, enabling direct measurement of how regulatory dynamics are inherited by a daughter cell from her mother. This technology presents a unique opportunity to directly observe longitudinal dynamics, in contrast to single-cell RNA sequencing, which can only measure cells cross-sectionally. However, there is a lack of computational methods for analyzing live-cell imaging data. Existing frameworks based on ordinary differential equations (ODEs) estimate networks from individual time series, but adapting them to mother-daughter pairs poses a dilemma: pooling both cells forces complete inheritance, while fitting each cell separately starves the short daughter trajectory of timepoints needed for reliable estimation. To address this gap, we develop PRNODE (Protein Regulatory Networks via ODEs), which models each cell's network as a deviation from a shared regulatory scaffold and estimates the scaffold and both deviations jointly under a fused group-lasso penalty. The mother's longer time series thereby supports the daughter's estimate, while allowing the two networks to differ wherever the data demand it. We then propose a novel measure of inheritance based on comparing the rate of change of protein levels between the mother's and daughter's networks. Across simulation studies, we find that PRNODE outperforms existing ODE estimation methods in recovering the networks of daughter cells and in estimating inheritance. Finally, we apply PRNODE to many mother-daughter pairs of Saccharomyces cerevisiae observed over a 9-hour period at 12-minute intervals. Many estimated networks show a negative feedback loop between the cell-cycle inhibitor Whi5 and the cyclin Clb2, which together sustain cell-cycle oscillations. We also find that the measured inheritance tracks the number of regulatory edges a daughter shares with her mother with the same sign, more than the presence of any single edge. PRNODE is available as an R package at https://github.com/shirmath/LIC_methods.",
+    "author_corresponding": "Kevin Z Lin",
+    "author_corresponding_institution": "University of Washington",
+    "authors": "Mathur, S.; Wu, W.; Kennedy, T.; Arguello-Miranda, O.; Lin, K. Z.",
+    "biorxiv_category": "cell biology",
+    "category": "cell biology",
+    "date": "2026-11-23",
+    "doi": "10.64898/2026.11.20.767944",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/23/2026.11.20.767944.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Joint Estimation of Mother and Daughter Protein Regulatory Networks Quantifies Inheritance in Yeast Lineages",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "University of Washington",
+  "preprint_id": null,
+  "primary_category": "systems",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "PRNODE jointly estimates mother and daughter protein regulatory networks via ODEs with a fused group-lasso, quantifying inheritance in yeast live-cell imaging…",
+  "title": "Joint Estimation of Mother and Daughter Protein Regulatory Networks Quantifies Inheritance in Yeast Lineages",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.20.767944"
+}

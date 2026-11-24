@@ -1,0 +1,36 @@
+{
+  "abstract": "Scalp electroencephalography (EEG) is routinely denoised before it reaches a downstream model, and the denoising literature scores a method by how closely its output matches a clean reference waveform. That reference does not exist for real scalp recordings: it is synthesized by adding artifact templates to signals merely presumed clean, and even an exact separation would return cortical activity blurred by volume conduction rather than the activity itself. Fidelity to it is therefore an unvalidatable objective, and whether it predicts any downstream benefit has gone largely unexamined. We report an audit that examines it. Holding a seizure-detection pipeline fixed and varying only the preprocessing stage, we find that five standard denoising methods, spanning analytic, cross-channel and supervised deep families, all fail to improve on the unprocessed signal, and most degrade it. To say what such a stage must instead do, we formalize a label-only, classifier-free probe that reads it by the separability geometry it induces on task-relevant features, decomposing any change into a between-class distance and a within-class scatter term. On a transform that does improve the task, the probe attributes the entire gain to a roughly one-quarter reduction of within-class scatter, with class separation statistically unchanged. What a downstream model benefits from is therefore variance suppression on task-relevant structure, which waveform-fidelity metrics neither measure nor reward.",
+  "authors": [
+    "Xianglong Bao",
+    "Zhe Wang",
+    "Kewen Wang",
+    "Ming Jin"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-24",
+  "id": "arxiv:2611.29256",
+  "metadata": {
+    "arxiv_primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "eess.SP",
+      "q-bio.NC"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.29256v1</ns0:id>\n    <ns0:title>Denoised but Not Improved: What EEG Denoising Does to a Downstream Task</ns0:title>\n    <ns0:updated>2026-11-22T05:54:20Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.29256v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.29256v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Scalp electroencephalography (EEG) is routinely denoised before it reaches a downstream model, and the denoising literature scores a method by how closely its output matches a clean reference waveform. That reference does not exist for real scalp recordings: it is synthesized by adding artifact templates to signals merely presumed clean, and even an exact separation would return cortical activity blurred by volume conduction rather than the activity itself. Fidelity to it is therefore an unvalidatable objective, and whether it predicts any downstream benefit has gone largely unexamined. We report an audit that examines it. Holding a seizure-detection pipeline fixed and varying only the preprocessing stage, we find that five standard denoising methods, spanning analytic, cross-channel and supervised deep families, all fail to improve on the unprocessed signal, and most degrade it. To say what such a stage must instead do, we formalize a label-only, classifier-free probe that reads it by the separability geometry it induces on task-relevant features, decomposing any change into a between-class distance and a within-class scatter term. On a transform that does improve the task, the probe attributes the entire gain to a roughly one-quarter reduction of within-class scatter, with class separation statistically unchanged. What a downstream model benefits from is therefore variance suppression on task-relevant structure, which waveform-fidelity metrics neither measure nor reward.</ns0:summary>\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"eess.SP\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"q-bio.NC\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-22T05:54:20Z</ns0:published>\n    <ns1:comment>Accepted at the IEEE Symposium on CI in Health and Medicine</ns1:comment>\n    <ns1:primary_category term=\"cs.LG\" />\n    <ns0:author>\n      <ns0:name>Xianglong Bao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhe Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Kewen Wang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ming Jin</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-22",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "systems"
+  ],
+  "source": "arxiv",
+  "summary": "Audits EEG denoising methods in a fixed seizure-detection pipeline, finding standard denoisers fail to improve downstream performance; proposes a…",
+  "title": "Denoised but Not Improved: What EEG Denoising Does to a Downstream Task",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.29256v1"
+}
