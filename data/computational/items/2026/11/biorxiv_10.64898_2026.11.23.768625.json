@@ -1,0 +1,44 @@
+{
+  "abstract": "Motivation: Counting k-mers in large genomic datasets is a foundational primitive in bioinformatics, supporting applications such as genome assembly, variant discovery, metagenomic profiling, and sequence database indexing. As sequencing throughput grows, k-mer counting is routinely applied to collections of hundreds to thousands of files. Even a modest per-file speedup compounds into hours of saved computation across such collections. Methods: Sorting and hashing are the two main ways of counting k-mers, and practice has largely settled on the former, of which KMC3 (Kokot et al., 2017) is the most refined expression. We reconsider this choice and analyze both approaches using a cost model that charges computation and memory transfers together. We show that the outcome of the comparison rests on two matters: how abundant the k-mers are, and whether the hash tables fit in cache. Sorting is faster only when data is mostly unique and the hash tables do not fit in cache. We then design a k-mer counting algorithm in the light of this analysis. We adopt the consolidated paradigm based on first partitioning the k-mers by their minimizer, thus obtaining partitions of super-k-mers, and then counting each partition independently in parallel. In particular, super-k-mers are deduplicated before counting, and the number of partitions is chosen so that the hash tables fit in cache whenever possible. The algorithm avoids writing temporary data to disk if enough internal memory is available. Results: We implemented this strategy in a tool named Tuna and show that it is faster than KMC3 on all but one of our inputs, spanning bacterial and human assemblies, metagenomes and read sets, by up to 4.3x. The advantage of Tuna compared to KMC3 in the counting step alone widens to 6.8x as k-mer abundance grows, as the analysis predicts. On the largest input tested, 614 GB of human sequencing reads, Tuna counts within 4 GB of memory and 0.7 TB of temporary disk. On that input the two tools finish within 1.1x of each other under the full 256 GB budget, and restricting every tool to the same 8 GB budget widens the advantage of Tuna over KMC3 to 1.8x. Software: The software is freely available at github.com/vicLeva/tuna under the MIT license.",
+  "authors": [
+    "Levallois, V.",
+    "Patro, R.",
+    "Peterlongo, P.",
+    "Pibiri, G. E."
+  ],
+  "doi": "10.64898/2026.11.23.768625",
+  "first_seen": "2026-11-25",
+  "id": "biorxiv:10.64898/2026.11.23.768625",
+  "metadata": {
+    "abstract": "Motivation: Counting k-mers in large genomic datasets is a foundational primitive in bioinformatics, supporting applications such as genome assembly, variant discovery, metagenomic profiling, and sequence database indexing. As sequencing throughput grows, k-mer counting is routinely applied to collections of hundreds to thousands of files. Even a modest per-file speedup compounds into hours of saved computation across such collections. Methods: Sorting and hashing are the two main ways of counting k-mers, and practice has largely settled on the former, of which KMC3 (Kokot et al., 2017) is the most refined expression. We reconsider this choice and analyze both approaches using a cost model that charges computation and memory transfers together. We show that the outcome of the comparison rests on two matters: how abundant the k-mers are, and whether the hash tables fit in cache. Sorting is faster only when data is mostly unique and the hash tables do not fit in cache. We then design a k-mer counting algorithm in the light of this analysis. We adopt the consolidated paradigm based on first partitioning the k-mers by their minimizer, thus obtaining partitions of super-k-mers, and then counting each partition independently in parallel. In particular, super-k-mers are deduplicated before counting, and the number of partitions is chosen so that the hash tables fit in cache whenever possible. The algorithm avoids writing temporary data to disk if enough internal memory is available. Results: We implemented this strategy in a tool named Tuna and show that it is faster than KMC3 on all but one of our inputs, spanning bacterial and human assemblies, metagenomes and read sets, by up to 4.3x. The advantage of Tuna compared to KMC3 in the counting step alone widens to 6.8x as k-mer abundance grows, as the analysis predicts. On the largest input tested, 614 GB of human sequencing reads, Tuna counts within 4 GB of memory and 0.7 TB of temporary disk. On that input the two tools finish within 1.1x of each other under the full 256 GB budget, and restricting every tool to the same 8 GB budget widens the advantage of Tuna over KMC3 to 1.8x. Software: The software is freely available at github.com/vicLeva/tuna under the MIT license.",
+    "author_corresponding": "Giulio Ermanno Pibiri",
+    "author_corresponding_institution": "Ca' Foscari University of Venice",
+    "authors": "Levallois, V.; Patro, R.; Peterlongo, P.; Pibiri, G. E.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-24",
+    "doi": "10.64898/2026.11.23.768625",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/24/2026.11.23.768625.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "To sort or to hash? Revisiting k-mer counting",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Ca' Foscari University of Venice",
+  "preprint_id": null,
+  "primary_category": "tools-infra",
+  "published_at": "2026-11-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genomics",
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "Revisits sorting vs hashing for k-mer counting with a cost model; introduces Tuna, a minimizer-partitioned counter faster than KMC3 on diverse genomic inputs.",
+  "title": "To sort or to hash? Revisiting k-mer counting",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.23.768625"
+}

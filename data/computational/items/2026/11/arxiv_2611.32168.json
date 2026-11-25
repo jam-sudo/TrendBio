@@ -1,0 +1,40 @@
+{
+  "abstract": "Discrete structure tokenizers are the standard way to give a language model access to protein three-dimensional structure, yet they are selected on how accurately they can be read, their reconstruction fidelity, while the property that governs generation is how well a model can write them. We measure this property, writability, directly: holding the base model, data, recipe and compute fixed, we swap only the tokenizer and train the same 9B model to emit structure tokens residue by residue, over eight tokenizers, four compute budgets and three evaluation sets (96 cells). At 2B tokens final writability runs from TM 0.662 down to 0.378 under identical conditions, with five of the eight arms clearing the TM 0.5 mark at which a fold is usually called correct and three falling short of it. Neither codebook size nor reconstruction ceiling explains where an arm lands; the best and worst both use 8192 codewords. What does explain the spread is local structure preservation of the code space. In DPLM-2 a one-bit codeword error costs 0.019 TM where a random codeword costs 0.347, and the trained model's own errors are correspondingly local, at 0.51 of the random Hamming expectation; FoldToken4 fails both tests at the same codebook size and is 0.13 TM less writable. Three controls discipline how such a benchmark may be read. A same-recipe rerun puts the noise floor at $σ=0.0067$ TM, which collapses an apparent six-way ranking into four tiers. A reference-free geometry panel turns out to be nearly orthogonal to TM (Pearson $-0.58$), with the worst arm by TM producing the most physically valid backbones. And two pre-registered interventions are null for a reason the mechanism measurements reveal: the quantity they target saturates at 1.5B tokens while TM is still rising. All 131 evaluation cells, including raw generated token streams, are released.",
+  "authors": [
+    "Yong Liu",
+    "Zhanpeng Shi",
+    "Peicong Lin",
+    "Zhenyi Zhong",
+    "Yizhou Dang",
+    "Wendi Wu",
+    "Haoling Li",
+    "Jiayu Gu",
+    "Duo An",
+    "Shuangjia Zheng"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-25",
+  "id": "arxiv:2611.32168",
+  "metadata": {
+    "arxiv_primary_category": "q-bio.QM",
+    "categories": [
+      "q-bio.QM",
+      "cs.AI"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.32168v1</ns0:id>\n    <ns0:title>Benchmarking Protein Structure Tokenizers as Generation Targets for Language Models</ns0:title>\n    <ns0:updated>2026-11-24T08:19:49Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.32168v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.32168v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Discrete structure tokenizers are the standard way to give a language model access to protein three-dimensional structure, yet they are selected on how accurately they can be read, their reconstruction fidelity, while the property that governs generation is how well a model can write them. We measure this property, writability, directly: holding the base model, data, recipe and compute fixed, we swap only the tokenizer and train the same 9B model to emit structure tokens residue by residue, over eight tokenizers, four compute budgets and three evaluation sets (96 cells). At 2B tokens final writability runs from TM 0.662 down to 0.378 under identical conditions, with five of the eight arms clearing the TM 0.5 mark at which a fold is usually called correct and three falling short of it. Neither codebook size nor reconstruction ceiling explains where an arm lands; the best and worst both use 8192 codewords. What does explain the spread is local structure preservation of the code space. In DPLM-2 a one-bit codeword error costs 0.019 TM where a random codeword costs 0.347, and the trained model's own errors are correspondingly local, at 0.51 of the random Hamming expectation; FoldToken4 fails both tests at the same codebook size and is 0.13 TM less writable. Three controls discipline how such a benchmark may be read. A same-recipe rerun puts the noise floor at $σ=0.0067$ TM, which collapses an apparent six-way ranking into four tiers. A reference-free geometry panel turns out to be nearly orthogonal to TM (Pearson $-0.58$), with the worst arm by TM producing the most physically valid backbones. And two pre-registered interventions are null for a reason the mechanism measurements reveal: the quantity they target saturates at 1.5B tokens while TM is still rising. All 131 evaluation cells, including raw generated token streams, are released.</ns0:summary>\n    <ns0:category term=\"q-bio.QM\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-24T08:19:49Z</ns0:published>\n    <ns1:primary_category term=\"q-bio.QM\" />\n    <ns0:author>\n      <ns0:name>Yong Liu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhanpeng Shi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Peicong Lin</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Zhenyi Zhong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yizhou Dang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Wendi Wu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Haoling Li</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Jiayu Gu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Duo An</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shuangjia Zheng</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "arxiv",
+  "summary": "Benchmarks eight protein structure tokenizers by how well a 9B language model can write them, finding writability tracks local code-space structure rather than…",
+  "title": "Benchmarking Protein Structure Tokenizers as Generation Targets for Language Models",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.32168v1"
+}
