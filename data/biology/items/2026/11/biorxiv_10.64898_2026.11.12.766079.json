@@ -1,0 +1,42 @@
+{
+  "abstract": "Unmanned aerial vehicle (UAV) imagery has made wildlife surveys faster and safer, but a detected animal is not yet a conservation record. Detector confidence scores are often poorly calibrated, exact coordinates of threatened species can expose them to harm, and an observation is rarely tied back to the image, model, and settings that produced it. WildTrust-UAV addresses these three problems in one framework. It pairs a YOLO11 detector with stochastic-view uncertainty estimation, temperature scaling fitted on validation data, a selective gateway that accepts, defers, or rejects each detection, role-based disclosure of animal locations, and a provenance record that hashes the source image, model, configuration, prediction, uncertainty, timestamp, and nonce. Records are aggregated in a Merkle tree and signed with Ed25519 so that any observation can be verified independently. We report three evaluations on the public WAID dataset. In the detection experiment, two YOLO11n runs reached mAP@0.50 of 0.901 and 0.903 and mAP@0.50:0.95 of 0.527 on a 2,000-image held-out test set. In a separate reliability experiment on 122,720 test detections, temperature scaling reduced expected calibration error from 0.0715 to 0.0179 and the Brier score from 0.0353 to 0.0222. Composite uncertainty identified erroneous detections with an AUROC of 0.904, although confidence alone did better (0.992). Deferring the least reliable detections lowered selective risk from 0.722 at near-full coverage to 0.610 at 69.9% coverage, so considerable error remains in the candidate set. In the provenance experiment, the verifier rejected all 4,500 tampered submissions across nine attack scenarios and accepted all 500 genuine controls, with batch construction and signing taking 0.1 to 2.5 ms. Location policies used synthetic coordinates, and the ledger is a local prototype. Calibration and verifiable records can thus be added to a UAV detection pipeline at low cost, while combining uncertainty signals does not automatically improve error detection.",
+  "authors": [
+    "Verma, P.",
+    "Tripathi, R. N.",
+    "Kinyua, J."
+  ],
+  "doi": "10.64898/2026.11.12.766079",
+  "first_seen": "2026-11-25",
+  "id": "biorxiv:10.64898/2026.11.12.766079",
+  "metadata": {
+    "abstract": "Unmanned aerial vehicle (UAV) imagery has made wildlife surveys faster and safer, but a detected animal is not yet a conservation record. Detector confidence scores are often poorly calibrated, exact coordinates of threatened species can expose them to harm, and an observation is rarely tied back to the image, model, and settings that produced it. WildTrust-UAV addresses these three problems in one framework. It pairs a YOLO11 detector with stochastic-view uncertainty estimation, temperature scaling fitted on validation data, a selective gateway that accepts, defers, or rejects each detection, role-based disclosure of animal locations, and a provenance record that hashes the source image, model, configuration, prediction, uncertainty, timestamp, and nonce. Records are aggregated in a Merkle tree and signed with Ed25519 so that any observation can be verified independently. We report three evaluations on the public WAID dataset. In the detection experiment, two YOLO11n runs reached mAP@0.50 of 0.901 and 0.903 and mAP@0.50:0.95 of 0.527 on a 2,000-image held-out test set. In a separate reliability experiment on 122,720 test detections, temperature scaling reduced expected calibration error from 0.0715 to 0.0179 and the Brier score from 0.0353 to 0.0222. Composite uncertainty identified erroneous detections with an AUROC of 0.904, although confidence alone did better (0.992). Deferring the least reliable detections lowered selective risk from 0.722 at near-full coverage to 0.610 at 69.9% coverage, so considerable error remains in the candidate set. In the provenance experiment, the verifier rejected all 4,500 tampered submissions across nine attack scenarios and accepted all 500 genuine controls, with batch construction and signing taking 0.1 to 2.5 ms. Location policies used synthetic coordinates, and the ledger is a local prototype. Calibration and verifiable records can thus be added to a UAV detection pipeline at low cost, while combining uncertainty signals does not automatically improve error detection.",
+    "author_corresponding": "Ravindra Nath Tripathi",
+    "author_corresponding_institution": "Pennsylvania State University College of Information Sciences and Technology",
+    "authors": "Verma, P.; Tripathi, R. N.; Kinyua, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-24",
+    "doi": "10.64898/2026.11.12.766079",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/24/2026.11.12.766079.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "WildTrust-UAV: uncertainty-aware wildlife detection with privacy-preserving spatial disclosure and verifiable inference provenance",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Pennsylvania State University College of Information Sciences and Technology",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ecology"
+  ],
+  "source": "biorxiv",
+  "summary": "WildTrust-UAV pairs a YOLO11 wildlife detector with temperature-scaled calibration, uncertainty-based deferral, location privacy, and Merkle/Ed25519 provenance…",
+  "title": "WildTrust-UAV: uncertainty-aware wildlife detection with privacy-preserving spatial disclosure and verifiable inference provenance",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.12.766079"
+}
