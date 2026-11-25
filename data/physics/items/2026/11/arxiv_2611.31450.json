@@ -1,0 +1,34 @@
+{
+  "abstract": "We use symbolic regression to diagnose the parameter dependence of a black-box multi-fidelity emulator of the Lyman-alpha forest 1D flux power spectrum. Symbolic regression is appealing in its ability to reduce complex parameter spaces, thereby reducing compute time and offering potential interpretability in parameter inter-dependencies. Starting from a pretrained Gaussian-process (GP) emulator that connects low- and high-resolution PRIYA simulations, we search for explicit equations describing the dependence of the power spectrum on resolution and each cosmological and astrophysical parameter. We find that symbolic regression can recover equations that reproduce the emulator values well, but accurate predictions do not guarantee accurate parameter derivatives, making such equations unreliable for downstream applications such as Fisher forecasts. We therefore introduce a derivative-faithfulness diagnostic that directly compares the parameter gradient of each symbolic equation to the GP, and explore a derivative-matching (Sobolev) loss to improve this agreement. At z = 3.6, the Sobolev objective yields derivative-faithful equations for 9 of the 11 PRIYA parameters constraining the Lyman-alpha forest, with the approach only ineffective on h and AGN, whose 1D power spectrum imprints are weak or degenerate. Redefining the training objective with the Sobolev loss is a more robust and computationally efficient approach to gradient-matching repair than increasing model complexity. Our methods present potential mitigation strategies for failure modes of PySR, enabling downstream Fisher forecasts in some of these cases. Further, we document limitations potentially relevant to future work bridging symbolic regression with emulators. Our results demonstrate symbolic regression as an emulator diagnostic tool, with particular utility for low-dimensional or weakly coupled parameter dependencies.",
+  "authors": [
+    "Aidan Behmer",
+    "Ming-Feng Ho",
+    "Camille Avestruz",
+    "Yanhui Yang",
+    "Simeon Bird"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-25",
+  "id": "arxiv:2611.31450",
+  "metadata": {
+    "arxiv_primary_category": "astro-ph.CO",
+    "categories": [
+      "astro-ph.CO"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.31450v1</ns0:id>\n    <ns0:title>Symbolic Regression Diagnostics of 1D Lyman Alpha Forest Emulator</ns0:title>\n    <ns0:updated>2026-11-23T19:25:06Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.31450v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.31450v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>We use symbolic regression to diagnose the parameter dependence of a black-box multi-fidelity emulator of the Lyman-alpha forest 1D flux power spectrum. Symbolic regression is appealing in its ability to reduce complex parameter spaces, thereby reducing compute time and offering potential interpretability in parameter inter-dependencies. Starting from a pretrained Gaussian-process (GP) emulator that connects low- and high-resolution PRIYA simulations, we search for explicit equations describing the dependence of the power spectrum on resolution and each cosmological and astrophysical parameter. We find that symbolic regression can recover equations that reproduce the emulator values well, but accurate predictions do not guarantee accurate parameter derivatives, making such equations unreliable for downstream applications such as Fisher forecasts. We therefore introduce a derivative-faithfulness diagnostic that directly compares the parameter gradient of each symbolic equation to the GP, and explore a derivative-matching (Sobolev) loss to improve this agreement. At z = 3.6, the Sobolev objective yields derivative-faithful equations for 9 of the 11 PRIYA parameters constraining the Lyman-alpha forest, with the approach only ineffective on h and AGN, whose 1D power spectrum imprints are weak or degenerate. Redefining the training objective with the Sobolev loss is a more robust and computationally efficient approach to gradient-matching repair than increasing model complexity. Our methods present potential mitigation strategies for failure modes of PySR, enabling downstream Fisher forecasts in some of these cases. Further, we document limitations potentially relevant to future work bridging symbolic regression with emulators. Our results demonstrate symbolic regression as an emulator diagnostic tool, with particular utility for low-dimensional or weakly coupled parameter dependencies.</ns0:summary>\n    <ns0:category term=\"astro-ph.CO\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-23T19:25:06Z</ns0:published>\n    <ns1:comment>16 pages, 7 figures</ns1:comment>\n    <ns1:primary_category term=\"astro-ph.CO\" />\n    <ns0:author>\n      <ns0:name>Aidan Behmer</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Ming-Feng Ho</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Camille Avestruz</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yanhui Yang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Simeon Bird</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "cosmology",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "Uses symbolic regression to diagnose a GP emulator of the Lyman-alpha forest 1D flux power spectrum; a Sobolev loss improves derivative fidelity for most…",
+  "title": "Symbolic Regression Diagnostics of 1D Lyman Alpha Forest Emulator",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.31450v1"
+}

@@ -1,0 +1,853 @@
+{
+  "date": "2026-11-25",
+  "domain": "physics",
+  "ranked": [
+    {
+      "category": "quantum",
+      "headline": "Coherent and correlated noise shape gate design, twirling, and bosonic error correction",
+      "rank": 1,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 2.1666666666666665,
+        "total": 1.1289802243329732,
+        "volume": 0.6098681622198213
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 10,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 2.1666666666666665,
+        "star_gain_7d": 0
+      },
+      "slug": "pauli-noise-27c9",
+      "summary": "New preprints analyze how coherent, correlated, and structured noise degrade gates and QEC, and how twirling or protocol design restores Pauli-like behavior.",
+      "synthesis": "The dominant thread is the treatment of non-ideal noise structure in quantum hardware. Two preprints address converting coherent errors to stochastic Pauli noise: single-realization Pauli twirling reduces error-accumulation variance from Θ(L²) to O(L) in structured two-qubit circuits, and a generalized Bloch-vector analysis shows randomized compiling yields near-isotropic contraction. Correlated and structured noise is examined directly: a general average-gate-infidelity expression under spatiotemporally correlated noise finds CZ and sqrt(iSWAP) more resilient, and circuit-QED experiments show structured environmental noise makes photon loss Fock-state dependent, producing non-Markovian transients relevant to binomial codes. Complementary hardware-specific work proposes measurement-free QEC for single-photon loss in cavities, reset-assisted control via noisy mediators, parallel transversal CZ gates in trapped ions, a CCZ gate beyond strong Rydberg blockade, and confidence-aware Yb tweezer readout at half the imaging time. A Fe2+:forsterite qubit proposal is peripheral."
+    },
+    {
+      "category": "quantum",
+      "headline": "Fault-tolerant circuit design shifts focus from code distance to circuit-level faults",
+      "rank": 2,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 2.0,
+        "total": 1.0503441203176629,
+        "volume": 0.5856274687844196
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 9,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 2.0,
+        "star_gain_7d": 0
+      },
+      "slug": "codes-distance-49c0",
+      "summary": "New preprints target circuit distance, leakage, loss and magic-state fault distance directly, rather than nominal code parameters, for practical QEC.",
+      "synthesis": "The dominant thread is that fault-tolerance performance is set by how faults propagate through concrete circuits, not by nominal code distance. The singlet-flag scheme restores circuit distance for shuttled qLDPC codes in silicon, lowering logical error rates 2-10x. CP-SAT synthesis of syndrome-extraction circuits for CSS qLDPC codes reduces logical error rates. Block Checks with a Pareto tree search improve depth–operation trade-offs for fault-tolerant state preparation. The cultivation analysis gives an exact theory of harmful faults and shows that S-gate proxies overstate the fault distance of T-gate cultivation. Non-Pauli noise also features prominently: foliated surface codes are shown optimal against space- and time-like skip-gate leakage, and Ellis provides fast exact Pauli-frame simulation under qubit loss. Alongside these, code-construction work covers high-rate small color codes, ancilla-free code quilts for logical Pauli-product measurements, and CSS-T-Product codes for tailored magic-state factories."
+    },
+    {
+      "category": "quantum",
+      "headline": "Classical and hybrid methods push simulation and state preparation toward 100-qubit scales",
+      "rank": 3,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.8333333333333333,
+        "total": 0.9713245938114166,
+        "volume": 0.5588306254094444
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 8,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.8333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "time-controlled-criticality-bc5c",
+      "summary": "Several preprints extend tensor-network, semiclassical and GPU trajectory methods to ~100-qubit devices, QEC codes and DMRG-based state preparation.",
+      "synthesis": "The dominant thread is scaling classical computational tools that either emulate quantum hardware or compile resources for it. On the simulation side, pre-trajectory sampling with batched GPU execution now handles mid-circuit measurements and general Kraus channels; compiled Clifford-augmented MPS reach distance-9 surface codes under coherent noise; a polynomial-cost effective-Hamiltonian method models couplings in 96-transmon processors and predicts 100-qubit quench dynamics; and cluster spin-LSC treats a sensor plus strongly coupled bath spins quantum mechanically to simulate spin-qubit decoherence. On state preparation, two works load DMRG matrix product states onto hardware by exploiting spin symmetry—abelian block-sparse protocols (Toffoli counts cut up to 135x) and non-Abelian SU(2) via Wigner–Eckart reduction—while PP-VarQITE combines Pauli propagation with variational imaginary time for shallow thermal-state circuits up to 98 qubits. A separate result reports an opto-electronic Ising machine with single-shot readout of over 100,000 spins."
+    },
+    {
+      "category": "quantum",
+      "headline": "Quantum neural networks sidestep variational training while expressivity gets formalized",
+      "rank": 4,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.04856622969057083,
+        "rise": 1.8333333333333333,
+        "total": 0.9227583641208458,
+        "volume": 0.5588306254094444
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 8,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.8333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "learning-quantum-40ee",
+      "summary": "Preprints replace variational loops with gated fixed feature maps, Riemannian flows or RL training, and bound observables reachable by fixed-readout QNNs.",
+      "synthesis": "The dominant thread is reducing reliance on standard variational optimization of quantum neural networks while clarifying what these models can represent. Soft-MoQE uses a classical gating network to mix fixed quantum feature maps, avoiding variational quantum training, and matches trainable QNNs on MNIST. An autonomous scheme based on Riemannian gradients removes measurements and classical feedback from the training loop. A fully quantum Transformer combines SVD-based non-unitary circuits with quantum nonlinear activations and is trained by multi-agent RL without backpropagation. On expressivity, contractive layers add all-to-all couplings with a single trainable parameter on Rydberg arrays. A separate analysis characterizes the effective observables reachable by fixed-readout QNNs under unitary, mixed-unitary and CPTP resources and proves strict inclusions between these classes. Related work uses ML to extrapolate gate, measurement and reset syntax for scaling holographic circuits. Applications include QFT-based hybrid PointNet models for LiDAR classification and a quantum-inspired spiking VAE for LHC di-jet anomaly detection. All works are preprints."
+    },
+    {
+      "category": "cosmology",
+      "headline": "Stage-IV forecasts weigh dynamical dark energy, systematics biases, and analysis speedups",
+      "rank": 5,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.6666666666666667,
+        "total": 0.891831145474997,
+        "volume": 0.5288743031666463
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 7,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.6666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "dark-4pcf-cb95",
+      "summary": "New forecasts for Simons Observatory, CMB-S4, LSST and Euclid-like surveys test whether w0wa hints and new-physics claims survive priors and systematics.",
+      "synthesis": "The dominant thread is forecasting and method development for testing departures from LCDM with upcoming data. On dark energy, a Bayesian MCMC forecast asks whether Simons Observatory and CMB-S4 can separate w0waCDM from LCDM shadow models. A separate analysis finds that the CMB+BAO preference for early recombination disappears under w0wa, which yields the lowest AIC. Lensing ratios of galaxy-CMB and galaxy-galaxy lensing are proposed as geometric probes of dark energy and curvature for LSST and Simons Observatory. Several papers address systematics and tractability. Neglected light-cone and relativistic effects bias local fNL by ~2σ for a Euclid-like survey and by >10σ for a MegaMapper-like one. A Woodbury factorization makes unbinned LSST-scale supernova fits feasible, cutting fit time from ~10 weeks to ~1.5 hr. Other methodological contributions include a hybrid EFT for diffuse-baryon power spectra and binaryfog, a surrogate for testing how astrophysical priors affect new-physics evidence in pulsar timing arrays."
+    },
+    {
+      "category": "quantum",
+      "headline": "Quantum algorithms cut resource costs for chemistry, PDEs and optimization via structured representations",
+      "rank": 6,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.6666666666666667,
+        "total": 0.891831145474997,
+        "volume": 0.5288743031666463
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 7,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.6666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "quantum-algorithm-f265",
+      "summary": "Seven preprints report lower gate and qubit costs for chemistry, PDEs and combinatorial optimization on fault-tolerant and near-term hardware.",
+      "synthesis": "The common thread is resource reduction through problem-specific structure. For fault-tolerant chemistry, a sum-of-squares Hamiltonian in first quantisation yields up to 16x fewer Toffoli gates, while canonical polyadic decomposition of Coulomb-like potentials on real-space grids lowers T-gate scaling and qubit counts. An end-to-end algorithm treats the variable-coefficient linearized Poisson-Boltzmann equation for a biomolecular system. A quantum-classical framework uses simulated annealing and quantum-assisted ground-state estimation to find compact many-fermion bases. On near-term hardware, FLICD outperforms COBYLA in simulation for variational circuit optimization, QUBO and HOBO encodings of the traveling salesman problem are compared, and QSSD uses fixed-angle QAOA sampling on IBM devices up to 152 qubits, reaching 0.95 approximation on benchmarks."
+    },
+    {
+      "category": "quantum",
+      "headline": "Sharper quantum resource criteria and security bounds for entanglement, magic, and channels",
+      "rank": 7,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.6666666666666667,
+        "total": 0.891831145474997,
+        "volume": 0.5288743031666463
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 7,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.6666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "uncertainty-topic-be90",
+      "summary": "Seven preprints tighten certification and bounds for entanglement, nonstabilizerness, nonlocality, channel capacity, and pseudorandom unitary security.",
+      "synthesis": "The items converge on quantifying and certifying quantum resources under constrained access. Scrambling is tied to entanglement cost in non-local quantum computation, with tripartite mutual information as a faithful witness. Magic is certified via a stabilizer pigeonhole criterion and worst-case random access codes, while a separate work shows the stabilizer norm of the Choi state does not fully fix Pauli-limited channel certification robustness once positivity is imposed. Nonlocal extremal behaviours in Q2222 receive explicit normal cones with device-independent applications. Cryptographic and information-theoretic limits also tighten: birthday-scale non-adaptive security of the DPFC strong pseudorandom unitary, with adaptive security failing; an entanglement attack on quantum differential privacy and an entanglement-assisted remedy; and an amplitude-damping two-way capacity bound tighter than PLOB."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "Orbital, disorder and interaction effects drive Hall responses beyond spin and Chern-number descriptions",
+      "rank": 8,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.04459155727374985,
+        "rise": 1.6666666666666667,
+        "total": 0.8472395882012471,
+        "volume": 0.5288743031666463
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 7,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.6666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "hall-quantum-4ded",
+      "summary": "Seven preprints tie Hall-type and orbital responses to orbital degrees of freedom, disorder and interactions in 2D and 3D materials, including graphene and oxide interfaces.",
+      "synthesis": "The common thread is that Hall-type and related responses are traced to orbital character, quantum geometry, disorder and interactions rather than to spin magnetism or pristine band topology alone. Orbital-focused studies report defect-enhanced magnetoelectric responses in an orbital antiferromagnet, orbital Hall currents generated by disorder in amorphous systems including amorphous graphene, and intrinsic anomalous Hall conductivity from an orbital exchange field in spinless MoS2. Further work covers quantum-geometric nonlinear conductivity in SrTiO3 gases for (001) versus (111) interfaces, 3D quantum Hall responses where Chern numbers fail to characterize chiral behavior, and Bernal graphene with predicted anomalous Hall metals and measured hysteretic first-order transitions. The new element is treating disorder, defects and orbital or pseudospin order as active design variables for Hall responses."
+    },
+    {
+      "category": "cosmology",
+      "headline": "Early and late dark energy, inflationary features, and new probes tested against joint datasets",
+      "rank": 9,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.5,
+        "total": 0.8117368939072336,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      },
+      "slug": "astrometric-precision-incoherent-4af7",
+      "summary": "Six preprints test scalar-field dark energy and inflationary features against CMB, DESI, Pantheon+ and JWST, and add clustering and pulsar-timing probes.",
+      "synthesis": "The dominant thread is confronting extensions of ΛCDM with combined datasets. Two papers address the Hubble tension with scalar-field dark energy: a double-power potential unifying early and late dark energy against CMB, DESI BAO and Pantheon+, and axion early dark energy combined with JWST high-redshift galaxy abundances, which reports H0≈72.76 km/s/Mpc. A third searches for oscillatory primordial power spectrum features from axion monodromy inflation using Planck PR4, DESI DR2, Pantheon+ and ACT/SPT. The remaining items extend the toolkit: a hybrid Lagrangian bias expansion for post-reconstruction galaxy clustering, interpretable neural marked statistics targeting non-Gaussian information, and NANOGrav 15-yr binary-pulsar orbital perturbations constraining ultralight dark matter couplings. What is new is the joint use of DESI-era and JWST data with these models and methods."
+    },
+    {
+      "category": "quantum",
+      "headline": "Memory-assisted and repeater-based protocols advance long-distance entanglement and key distribution",
+      "rank": 10,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.5,
+        "total": 0.8117368939072336,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      },
+      "slug": "quantum-amplification-linear-c32f",
+      "summary": "Preprints pair a 546 Hz heralded atom-atom link over 20 km with MDI-QKD, repeater and spin-chain proposals for distributing entanglement.",
+      "synthesis": "The common thread is entanglement distribution and secure-key generation across separated nodes, with emphasis on reducing resource overhead. Theory proposals include in-memory MDI-QKD, which reports higher key rates and halved memory requirements, and sequential repeater designs in which simple repetition and parity codes outperform unencoded strategies. Measured spin-chain dynamics is proposed for generating pure entangled states between distant qubits in a single channel, while virtual autopurification builds virtual copies from subregions of one translationally invariant system. Experimentally, a 546 Hz heralded atom-atom link over 20 km of fiber uses two 15x15 memory arrays without active phase stabilization, and a three-party frequency-bin secret sharing scheme maintains correlations under 20 MHz pseudorandom basis switching."
+    },
+    {
+      "category": "quantum",
+      "headline": "New methods extend quantum dynamics to disorder, nonsecular baths, anharmonic environments and driving",
+      "rank": 11,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.5,
+        "total": 0.8117368939072336,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      },
+      "slug": "quantum-topic-350f",
+      "summary": "Six November 2026 preprints advance controlled, benchmarked approaches to open-system and many-body quantum dynamics beyond standard approximations.",
+      "synthesis": "The dominant thread is the development of tractable, validated formalisms for quantum dynamics in regimes where standard approximations fail. Two papers address open-system descriptions: a nonsecular quantum master equation obeying TR-KMS detailed balance with a time-uniform O(λ²) error bound, and a transfer tensor generalization to time-inhomogeneous driven systems via block-TTI sub-stroboscopic sampling. Thermofield dynamics with ML-MCTDH and Bogoliubov transforms targets anharmonic (Morse) baths. A matrix-rational framework treats disorder-averaged spin density-matrix dynamics with generic spin-momentum couplings. The remaining two address many-body dynamics: generalized Bloch oscillations of a doublon defect in a 1D antiferromagnetic t-Jz chain, and adaptive ghost Gutzwiller dynamics matching DMFT references for Hubbard quenches over longer times. Common to most is explicit benchmarking against numerical or exact references."
+    },
+    {
+      "category": "cosmology",
+      "headline": "ML emulators and generative models are replacing costly steps in cosmological inference",
+      "rank": 12,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.04058684469536168,
+        "rise": 1.5,
+        "total": 0.7711500492118719,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      },
+      "slug": "inference-fit-6a61",
+      "summary": "Six preprints test ML-based emulation, reconstruction and systematics mitigation for SKA, SPHEREx, kSZ, mm-wave and 21-cm analyses, with pipeline variability quantified.",
+      "synthesis": "The dominant thread is the construction and stress-testing of inference components for upcoming surveys, with machine learning substituting for expensive or non-optimal steps. Vision Transformers outperform quadratic estimators in kSZ velocity reconstruction, and Wavelet-CFM generates jointly correlated lensing, kSZ, tSZ and CIB maps quickly. A differentiable GPU-accelerated hybrid forward model targets uncertainty quantification in global 21-cm inference, while symbolic regression diagnoses a Lyman-alpha flux power spectrum GP emulator, with a Sobolev loss improving derivative fidelity for most cases. SPHEREx work uses an information-criterion-driven non-linear deprojection of imaging systematics, tested on lognormal mocks. SKA SDC3b reports inter-team variability among 16 EoR pipelines, a reminder that validation across methods remains necessary. Not all items concern the same observable or method."
+    },
+    {
+      "category": "cosmology",
+      "headline": "FRB dispersion measures probe baryons and cosmology while CMB analyses model foreground and systematic biases",
+      "rank": 13,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.04058684469536168,
+        "rise": 1.5,
+        "total": 0.7711500492118719,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      },
+      "slug": "lsst-gravitational-waves-66df",
+      "summary": "Six preprints from 18–24 November pair FRB dispersion-measure cosmology with quantified CMB biases from CO emission, birefringence and polarization calibration.",
+      "synthesis": "Two strands share a focus on forward modeling for survey analyses. Fast radio burst work uses dispersion measures as a cosmological probe: IllustrisTNG-based mapping of baryon density across large-scale structure, a first Ωm–w inference from 125 localized bursts alone, and a tentative 143 pc cm^-3 excess toward DESI galaxy groups from 117 localized FRBs. The CMB papers quantify systematics: an analytic halo model for CO and CO×CIB as a foreground, with ~2σ parameter bias in CMB-HD-like settings; polarization-angle calibration transfer between Simons Observatory LAT and SAT; and positive small-scale lensing bandpower bias from unmodeled anisotropic birefringence, addressed by joint MUSE estimation. The strands are linked by method rather than data. The group-excess result is tentative, and the FRB cosmological constraints rest on a cosmology-dependent DM model."
+    },
+    {
+      "category": "cosmology",
+      "headline": "Early-universe phase transitions, GW sources and inhomogeneity are modeled beyond standard approximations",
+      "rank": 14,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.3333333333333333,
+        "total": 0.7308560120640406,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "cosmological-order-phase-transitions-5f33",
+      "summary": "Five preprints refine early-universe modeling, from nonlinear-gravity phase transitions to GW source models, with DESI DR2 constraints on inhomogeneity-driven acceleration.",
+      "synthesis": "The dominant thread is replacing simplified assumptions with more complete dynamics in cosmological modeling. One preprint simulates a first-order phase transition with full nonlinear general relativity (BSSN), reporting a gravitational wave peak amplitude of about 5e-11. Another models GW spectra from slowly evolving sources (turbulence, sound waves, bubble collisions) using constant-in-time and coherent-decay prescriptions. Warm inflation work shows shear viscosity in the radiation bath sources stochastic vector perturbations through fluctuating hydrodynamics. The neutrino self-interaction paper argues renormalizable theories imply resonant mediator behavior that modifies the Boltzmann hierarchy and the CMB ΔN_eff treatment. The late-time paper uses DESI DR2 BAO and SNe Ia to constrain Misner-Sharp mass in an exact GR solution where inhomogeneities induce acceleration. These are heterogeneous in epoch but share a focus on dynamics beyond standard approximations."
+    },
+    {
+      "category": "cosmology",
+      "headline": "DESI-motivated dark energy evolution tested through scalar-field models and inhomogeneous averaging",
+      "rank": 15,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.3333333333333333,
+        "total": 0.7308560120640406,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "dark-energy-constraining-early-6aff",
+      "summary": "Five preprints probe the DESI-motivated dark energy behavior via scalar potentials, axion-like models, early dark energy tails, and averaged inhomogeneous cosmologies.",
+      "synthesis": "The common thread is testing what physical structure could underlie a DESI-motivated evolving dark energy signal and related scalar-field phenomenology. One preprint reconstructs two-field canonical-phantom potentials reproducing a phantom-divide transition. Another confronts a generalised axion-like quintessence model with CMB, BAO, supernova, SH0ES, chronometer and GRB data against LambdaCDM. The early dark energy work argues that the post-peak damping tail carries information on the scalar potential beyond peak parameters. A separate preprint asks whether DESI's redshift dependence can instead arise from dark-energy-free averaged dust cosmologies. The chameleon paper is adjacent: it gives exact n=1 multilayer solutions and forecasts CANNEX Casimir-force constraints."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "Moiré and hybrid-mode engineering tunes polaritons, phonons and flatbands in graphene and THz structures",
+      "rank": 16,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.3333333333333333,
+        "total": 0.7308560120640406,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "entangled-microwaves-nonlinear-scattering-ed74",
+      "summary": "New preprints show moiré and hybrid-resonance control of polaritons, electron-phonon coupling and chiral phonons in graphene, plus THz flatbands.",
+      "synthesis": "The items do not concern magnon microwave generation; the dominant thread is engineered hybrid excitations in graphene-based and related photonic systems. Several works treat moiré structure as a control knob: gate-tunable hyperbolic plasmon-phonon polaritons in twisted bilayer graphene, a Fano resonance from coupling between moiré flat-band electronic excitations and hBN out-of-plane optical phonons, and reconfigurable chiral phonons in asymmetrically stacked graphene moiré superlattices probed by helicity-resolved Raman spectroscopy. Complementary studies address hybrid plasmon-phonon eigenmodes with vortex states in a graphene ring on silica, and high-Q collective flatbands with zero group velocity in Mie-grating THz metasurfaces. What is new is the direct observation of moiré-induced interlayer electron-phonon coupling and the demonstration of tunability of polaritons, phonons and flatbands."
+    },
+    {
+      "category": "cosmology",
+      "headline": "Field-level emulators and equivalence mappings extend simulation mocks to forests, gas and dark energy",
+      "rank": 17,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03654280060320203,
+        "rise": 1.3333333333333333,
+        "total": 0.6943132114608386,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "cross-power-spectrum-b133",
+      "summary": "Five preprints use simulations to test or replace costly modelling: U-Net emulators, w0 mappings for dynamical dark energy, and a null test for assembly bias.",
+      "synthesis": "The common thread is using simulations and mocks as validation targets for cheaper or more general modelling of cosmological observables. Two papers use 3D U-Nets as field-level emulators: one maps density and velocity fields to Lyman-alpha flux, reproducing P1D, bispectrum and trispectrum across IllustrisTNG and FLAMINGO, and one predicts hot gas temperature and electron density from dark matter in CAMELS IllustrisTNG. Two papers show that N-body dynamics depend only on the expansion history a(τ), so constant-w simulations can reproduce CPL and general w(z) models, with power spectra agreeing within 0.2% in one case. A fifth proposes luminosity-weighted marked correlations as a null test for assembly bias using DESI-BGS mocks. New relative to the prior synthesis is the focus on field-level emulation and equivalence mapping rather than EFT or EBL cross-correlation forecasts."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "Stacking, displacement field and driving reshape valley and topological bands in layered graphene and hBN",
+      "rank": 18,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.03654280060320203,
+        "rise": 1.3333333333333333,
+        "total": 0.6943132114608386,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      },
+      "slug": "graphene-engineering-5eb6",
+      "summary": "Five preprints show stacking order, displacement field and Floquet driving tuning valley, Berry curvature and flat-band physics in graphene multilayers and hBN.",
+      "synthesis": "The common thread is that stacking geometry and external fields set the low-energy band structure of layered materials. In ABA trilayer graphene, a displacement field inverts band edges, reverses Berry curvature and splits valleys. In thick rhombohedral graphene, superconductivity is reported with valley-imbalanced Fermi pockets and enhanced by in-plane field. In twisted monolayer-N-layer rhombohedral graphene, narrow topological bands arise from hybridization of Dirac cone and surface states. Floquet driving of twisted bilayer graphene heterostructures yields valley polarization and Chern-number transitions, and shift current in hBN multilayers is proposed as a probe of stacking. The new element relative to strain-focused work is the emphasis on stacking and gating or driving as design and diagnostic handles. The items do not establish one mechanism across systems."
+    },
+    {
+      "category": "cosmology",
+      "headline": "Nonlinear collapse and halo growth tests separate dark energy and gravity models",
+      "rank": 19,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.1666666666666667,
+        "total": 0.6489004051593307,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "clustering-dark-energy-064b",
+      "summary": "Nonlinear spherical-collapse and N-body results probe model degeneracies that background and linear-level parametrizations leave unresolved.",
+      "synthesis": "The common thread is using nonlinear structure formation to discriminate beyond-ΛCDM models that background or linear descriptions cannot separate. Two papers argue that w(a) plus a linear sound speed does not fully specify clustering dark energy, and use spherical-collapse simulations, including a fully nonlinear fluid method that splits the dark energy action into kinetic and potential parts. ELEPHANT N-body simulations test whether halo merger-rate universality survives in f(R) chameleon and DGP gravity, with mass accretion deviating. A further paper generalizes scale-dependent equation-of-state dark matter to cosmological scales and finds it cannot be the sole dark matter component. The new element is nonlinear-regime discrimination of dark sector and gravity models."
+    },
+    {
+      "category": "optics",
+      "headline": "Gain, loss, and nonreciprocal coupling set BIC merging, symmetry constraints, and eigenstate splitting",
+      "rank": 20,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.1666666666666667,
+        "total": 0.6489004051593307,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "edge-non-hermitian-4a89",
+      "summary": "Four preprints show how gain, loss, and coupling asymmetry control non-Hermitian photonic and spectral features, from BIC merging to exceptional-point splitting.",
+      "synthesis": "The common thread is control of non-Hermitian spectral structure through gain-loss balance and coupling asymmetry. One preprint uses a four-mode model of C2-symmetric photonic-crystal slabs, where coupling sign governs BIC merging, Q~k^-6 scaling, and flatband formation. Another finds that T-symmetry breaking induced by gain and loss is forbidden in time-dependent T-symmetric systems, even for random gain-loss distributions. A third introduces pseudo-altermagnetism, in which balanced gain and loss mimic altermagnetic spin splitting with movable nodal structures. A fourth shows that tunable nonreciprocal coupling near a second-order polarization exceptional point produces state-selective eigenstate splitting. What is new is the set of specific control knobs and constraints, not a single unified result; the summaries do not tie the items to edge phenomena in particular."
+    },
+    {
+      "category": "optics",
+      "headline": "Spatiotemporal metasurfaces program knotted, toroidal and entanglement-analogue light",
+      "rank": 21,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.1666666666666667,
+        "total": 0.6489004051593307,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "optimization-framework-skyrmionic-7fd4",
+      "summary": "Four preprints dated November 2026 report space-time control of polarization topology and multipartite coherence in classical waves.",
+      "synthesis": "The dominant thread is the use of spatiotemporal structure as a programmable degree of freedom for polarization. Three preprints apply this principle directly. One constructs vectorial spatiotemporal wavepackets whose polarization-encoded topological knots appear as linked and knotted Stokes trajectories. Two use space-time metasurfaces: one synthesizes coherent polarization states into programmable quantum-inspired bits, and the other realizes Bell- and GHZ-like multipartite coherence in classical electromagnetic waves. The fourth paper, on a graphene optoelectronic metasurface, generates and tunes topological terahertz toroidal pulses through transient vectorial photocurrents. It shares the vectorial-topology theme but not the same programming route. What is new is the extension of explicit spatiotemporal design from polarization topology alone to the joint control of topology, coherence and temporal structure in classical fields."
+    },
+    {
+      "category": "optics",
+      "headline": "Computational recovery of optical information from constrained and imperfect measurements",
+      "rank": 22,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.1666666666666667,
+        "total": 0.6489004051593307,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "untitled-topic-876d",
+      "summary": "Recent preprints target specific error sources and resource bottlenecks in ptychography, single-pixel imaging, and hyperspectral microscopy.",
+      "synthesis": "The common thread across these preprints is the recovery of optical information from imperfect or resource-limited measurements, addressed either computationally or through engineered acquisition. Two items concern ptychography. A stochastic gradient descent framework for X-ray ptychographic reconstruction reports peak GPU memory reduced to 65% and time reduced to 22% relative to the comparison method. Physics-simulation-trained residual learning restores diffraction patterns in MCP-based EUV ptychography, yielding an edge-response width of about 1.08 μm at 57 nm. In single-pixel imaging, a unified calibration and composite-readout framework converts temporal mixing into a measurement resource. Event-camera Fourier-transform hyperspectral microscopy with continuous birefringent interferometer scanning achieves real-time widefield spectral acquisition. The modalities differ; what is new in each is a targeted treatment of a specific error source or resource bottleneck."
+    },
+    {
+      "category": "optics",
+      "headline": "Tunable bound-state-in-continuum resonances in perovskite and dielectric metasurfaces",
+      "rank": 23,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.032445020257966535,
+        "rise": 1.1666666666666667,
+        "total": 0.6164553849013641,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "high-nanoantenna-b3b2",
+      "summary": "Recent preprints demonstrate reversible tuning of BIC resonances by vapor anion exchange and liquid-crystal integration.",
+      "synthesis": "The dominant thread is engineering resonant response in metasurfaces through mode coupling and environment. Two items address quasi-bound states in the continuum (quasi-BICs): a MAPbBr3 perovskite metasurface whose BIC resonances shift reversibly and continuously under HCl/HBr vapor anion exchange, and a symmetric silicon metasurface in a nematic liquid crystal whose anisotropy-induced quasi-BICs are actively tunable. A third reports polarization-independent self-hybridized strong coupling between Brillouin-zone-folding quasi-BICs and A excitons in bulk WS2 metasurfaces. The NbOCl2 study of room-temperature antiferroelectricity is a materials result outside the resonant-nanostructure thread. What is new is reversible, continuous spectral control via chemical exchange and liquid-crystal integration, alongside excitonic strong coupling in bulk material. All four are preprints."
+    },
+    {
+      "category": "optics",
+      "headline": "Mobility edges, flat bands and BICs in photonic, acoustic and non-Hermitian lattices",
+      "rank": 24,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.032445020257966535,
+        "rise": 1.1666666666666667,
+        "total": 0.6164553849013641,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "photonic-edge-025e",
+      "summary": "Recent preprints report exact mobility edges in a 2D photonic quasicrystal and nonlocality requirements for accidental BICs in metasurfaces.",
+      "synthesis": "The common thread is the control of mode localization and confinement in engineered wave systems, where flat bands, bound states in the continuum and mobility edges determine which modes are trapped. The experimental preprint on a two-dimensional photonic quasicrystal reports exact mobility edges and flat-band states realized with auxiliary subsystems and photonic waveguides. The metasurface study models bound states in the continuum through converging reflection and transmission zeros and argues that accidental BICs require nonlocal, spatially extended coupling. The acoustic preprint demonstrates BICs in a 3D-printed labyrinthine meta-atom within a waveguide, with symmetry breaking central to the resulting states. The non-Hermitian tight-binding study addresses a different question: a single nonlinear phase shift on boundary sites restores extended modes in a 1D model exhibiting the skin effect. The new element across these items is the explicit use of nonlocality, symmetry breaking and boundary nonlinearity as handles on mode localization."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "Theory proposals for superconducting noise bounds, thermometry and spin-charge conversion",
+      "rank": 25,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.032445020257966535,
+        "rise": 1.1666666666666667,
+        "total": 0.6164553849013641,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "quantum-spin-96c3",
+      "summary": "Four preprints, mostly theoretical, propose noise bounds, detectors and spin-charge conversion in superconducting and quantum-dot devices.",
+      "synthesis": "The common thread is phase-coherent quantum transport, where superconducting or Josephson elements are used to control charge, spin and thermal responses. One preprint derives a Cramér-Rao-based lower bound on current noise in coherent electron transport via Floquet-Nambu scattering. A numerical study proposes a flux-driven DC-SQUID threshold detector intended to reduce thermal noise and detect microwave pulses near the single-photon energy scale. A two-orbital quantum dot Josephson junction with Rashba spin-orbit coupling and Zeeman splitting is proposed to map a temperature difference onto a phase difference for noise-optimized thermometry. A theory proposal argues that the inverse spin Hall effect in a superconductor could approach unity spin-to-charge conversion in a nonlocal spin-valve geometry. All four items are preprints, and the multiorbital and spin-conversion items are theoretical proposals, so the new content consists of design predictions rather than experimental demonstrations."
+    },
+    {
+      "category": "optics",
+      "headline": "Tunable control of light and spin waves in compact photonic platforms",
+      "rank": 26,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.032445020257966535,
+        "rise": 1.1666666666666667,
+        "total": 0.6164553849013641,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.1666666666666667,
+        "star_gain_7d": 0
+      },
+      "slug": "untitled-topic-e003",
+      "summary": "Recent preprints report tunable cavity magnonics, epsilon-near-zero confinement, integrated polarizers, and near-unity frequency conversion in compact platforms.",
+      "synthesis": "The common thread is engineering the response of confined electromagnetic and spin waves in compact platforms, with emphasis on tunable or dynamically modulated behavior rather than fixed response. The CrCl3 tripartite van der Waals cavity magnonic device is experimental, using hierarchical anti-crossing to obtain reduced magnon loss and a tunable coupled-mode Hamiltonian. The inverse-designed transparent conducting oxide cavities are theoretical, operating at the epsilon-near-zero point to give stronger light confinement and interface-controlled dynamics. The MXene-derived TiO2 integrated polarizers on silicon photonics report a figure of merit of 17.5 and power tolerance above 2 W. The hollow-core fiber frequency conversion study is theoretical and proposes near-unity efficiency above 99 percent through transient molecular modulation. The items differ in method and maturity and do not share one mechanism; what is new is the focus on device-level control of loss, confinement, and conversion efficiency."
+    },
+    {
+      "category": "optics",
+      "headline": "Angle-resolved SHG separates surface and buried-interface contributions in Ta2O5 films",
+      "rank": 27,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5653874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "contrast-microscope-differential-interference-9f8b",
+      "summary": "Three November 2026 preprints refine interface-sensitive optical and thermal probes, from SHG modelling to cross-technique thermometry of monolayer TMDs.",
+      "synthesis": "The dominant thread is the resolution of interfacial properties using optical and thermal probes. The preprint arXiv:2611.25746 applies angle- and polarisation-resolved second-harmonic generation to separate surface, bulk and buried-interface contributions in Ta2O5 thin films. The preprint arXiv:2611.30448 examines the formal basis of surface SHG modelling and reports that transfer matrix and multiple reflection formalisms agree only under specific interface implementations, which is relevant to how such contributions are extracted. The preprint arXiv:2611.26129 addresses a different interfacial quantity, thermal boundary conductance in four monolayer TMDs on sapphire, by benchmarking Raman thermometry, SThM and FDTR against one another. The new elements are the explicit separation of buried-interface contributions and the systematic cross-technique comparison of interfacial thermal transport. The items do not establish a shared measurement platform, and the TMD thermal study is methodologically distinct from the SHG work."
+    },
+    {
+      "category": "other-physics",
+      "headline": "Resonant cavities and Casimir setups probe ultralight dark matter couplings",
+      "rank": 28,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5653874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "dark-matter-scattering-dce0",
+      "summary": "Existing axion and dark-photon cavity experiments can probe millicharged dark matter, while new Casimir proposals target axion-mediated spin forces.",
+      "synthesis": "The three preprints share a dominant thread: laboratory detectors designed for light, weakly coupled particles, with axions and dark photons as reference targets. The cavity study shows that resonant microwave cavities built for axion and dark-photon searches can probe ultralight millicharged dark matter through TE modes. The Casimir proposal extends the axion search to spin-dependent interactions, using reversed polarization of magnetically compensated sources to access axion-mediated spin forces. The cost-optimization paper addresses the QCD axion with mass between 10^-11 and 10^-8 eV, motivated by grand unification and string theory, and focuses on detector design economics. What is new is the reuse of established apparatus for dark matter candidates beyond the canonical axion, combined with explicit attention to cost optimization of the detectors themselves."
+    },
+    {
+      "category": "optics",
+      "headline": "Quantum formalisms for light propagation in time-varying and resonant media",
+      "rank": 29,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5653874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "formalism-theory-e9e5",
+      "summary": "Three November 2026 preprints apply quantum-mechanical frameworks to electrodynamics in time-varying and resonant optical systems.",
+      "synthesis": "Three preprints from November 2026 develop quantum-mechanical formalisms for electromagnetic wave propagation and light-matter coupling. Two address time-varying optical media. One presents a semiclassical theory that links frequency-time operators to quantum mechanics. The other models a time-modulated dispersive medium from an ensemble of laser-dressed quantum emitters and solves Maxwell's equations using Floquet theory. The third applies Feshbach projection to derive a Hermitian light-matter Hamiltonian for a mechanical oscillator coupled to a one-dimensional electromagnetic field. The common thread is the use of operator-based quantum formalisms to describe classical field dynamics. The new element is the derivation of effective optical descriptions from explicit microscopic quantum structure."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "Interface modes at graphene domain walls classified by bulk-difference invariants",
+      "rank": 30,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5653874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "topological-bound-continuum-f684",
+      "summary": "Recent preprints classify interface and dislocation states in bilayer and rhombohedral graphene and two-band crystals via bulk topological invariants.",
+      "synthesis": "The three preprints share a common thread: localized boundary or defect states whose existence and character are fixed by bulk topological invariants. In AB-stacked bilayer graphene mass-wall junctions, the authors report valley-topology-protected interface states among bound states in the continuum. A second preprint shows that dislocations in inversion-symmetric two-band crystals with cancelling band inversions bind a half-integer charge that reveals bulk polarization, and that this charge is robust. A third classifies valley-resolved interface modes at domain walls in ABC-stacked rhombohedral graphene using a bulk-difference invariant, and shows which invariant values admit such modes. What is new is the explicit linkage of invariant-based classification to specific interface and defect geometries. The dislocation study is not a graphene system, so the shared thread is methodological rather than material-specific."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "Wavefunction geometry probes topological and flat-band states beyond band energies",
+      "rank": 31,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5653874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "topological-mass-windings-f7df",
+      "summary": "Three November 2026 preprints apply wavefunction and quantum-geometric quantities to Thouless pumps, Chern flat bands and helicoidal metrics.",
+      "synthesis": "The three preprints share a focus on quantities defined by the wavefunction and its geometry rather than by band energies alone. Pseudo-entropy in the Rice-Mele model under Thouless pumping and in the open Kitaev chain depends on the reference state and the subsystem partition, so it probes the state beyond the spectrum. In a Chern flat band, single-site DMFT with Hubbard interaction on overcomplete coherent orbitals yields a Mott transition tuned by the Berry curvature fraction, accompanied by emergent heavy fermions. A scalar Schrödinger particle in a helicoidal metric within a hard-wall cylinder shows time-reversal degeneracy, twist-dependent avoided crossings and twist-activated dipole transitions, linking geometric twist to spectral and optical response. The dominant thread is the role of quantum geometry in tuning topological and correlated phases; the helicoidal-metric study is the least direct fit, as it treats a single particle in curved geometry rather than lattice band topology."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "Nonadiabatic tunneling and non-integer harmonics in driven correlated insulators",
+      "rank": 32,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5653874303166646,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "transfer-molecular-ec8b",
+      "summary": "Ultrafast optical and terahertz methods now resolve nonadiabatic strong-field dynamics in NiPS3 and Sr2CuO3 under intense driving.",
+      "synthesis": "Three preprints address nonadiabatic light-driven dynamics in correlated insulators, with different emphasis. The NiPS3 study uses time-resolved optical spectroscopy to report nonadiabatic quantum tunneling and ponderomotive blue-shifted resonances near the Keldysh regime. The Sr2CuO3 study, combining experiment and simulation, reports non-integer, blueshifted high harmonic generation driven by mid-infrared pulses, which it attributes to many-body nonadiabatic gating. The Yb-laser terahertz platform is methodological: it combines multi-pass-cell compression, spintronic THz generation and air-biased detection over a broad bandwidth, offering a measurement route suited to such nonequilibrium studies. The new element is the joint treatment of tunneling and harmonic response in driven correlated insulators, probed with broadband, high-sensitivity techniques."
+    },
+    {
+      "category": "condensed-matter",
+      "headline": "New topological invariants for half-chiral, fractal, and valley-mode lattice phases",
+      "rank": 33,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.028269371515833232,
+        "rise": 1.0,
+        "total": 0.5371180588008314,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      },
+      "slug": "phases-symtft-1132",
+      "summary": "Recent preprints extend symmetry-protected classification to half-chiral symmetry, spectral localizer invariants, and fractal lattice geometries.",
+      "synthesis": "The dominant thread across these preprints is symmetry-constrained classification of lattice topological phases, with the protecting symmetry or invariant generalized in each case. One study identifies phases protected by half-chiral symmetry, where chiral symmetry acts on only one sublattice, and characterizes them with real-space invariants and zero-energy modes. A second generalizes the spectral localizer to unify Z and Z2 invariants for hinge modes, Dirac nodes, and valley boundary modes. A third realizes SSH, Haldane, Qi-Wu-Zhang, and Z2 insulators on fractal lattices, including site-eliminated, projected, and patterned constructions. What is new is the widening of protecting symmetries and invariants rather than a single shared method. The fractal study transfers established models to fractal geometries, while the other two works redefine the symmetry or invariant that controls classification."
+    }
+  ],
+  "run": {
+    "arxiv_categories": [
+      "quant-ph",
+      "physics.optics",
+      "cond-mat.mes-hall",
+      "astro-ph.CO"
+    ],
+    "backfilled": false,
+    "finished": "2026-11-25T06:22:45.103703Z",
+    "model_cost_usd": 0.2838706000000011,
+    "notes": [],
+    "source_status": {
+      "arxiv": "ok",
+      "biorxiv": "skipped",
+      "github": "skipped",
+      "pubmed": "skipped",
+      "rss": "skipped"
+    },
+    "started": "2026-11-25T06:20:32.722015Z",
+    "status": "ok",
+    "synthesis_model": "claude-opus-5-5"
+  }
+}

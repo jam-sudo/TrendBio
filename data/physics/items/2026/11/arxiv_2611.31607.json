@@ -1,0 +1,31 @@
+{
+  "abstract": "On neutral-atom and trapped-ion machines, a transversal gate needs only one syndrome round, so a logical gate takes up to d times less time than with lattice surgery. However, transversal gates make decoding harder, because a transversal CNOT copies errors between two blocks of physical qubits, so a decoder must read all blocks of a circuit together. Algorithmic decoders for such circuits gain accuracy at the cost of speed. Neural decoders ease this trade-off, but they must infer from data where errors go across each gate and how logical outcomes propagate through the circuit, although both are known exactly. In this work, we present Duet, a neural decoder for logical Clifford circuits with transversal gates that builds in this known information and learns only which errors occurred. Duet leverages three insights. First, each transversal gate moves an error to a fixed place, so the network exchanges features only between the sites that a gate connects. Second, a logical outcome propagates through Clifford gates exactly and linearly, so the network predicts only the flips that the errors of each layer cause and combines the layers by a soft XOR. Third, every circuit is built from the same few gates, so the network takes the gates of each layer as input and one network per code distance decodes circuits of different sizes and depths. We pair Duet with the search decoder Tesseract, which re-decodes the few shots on which the network is least confident. On general circuits with 2 to 4 blocks and up to 16 layers, Duet alone is already more accurate than matching at every distance, and with Tesseract it fails 44 times less often than LoMatching at distance 9. On the random circuits of the Lukin group, it fails 0.299 times as often as their neural decoder at distance 7. The composition stays fast and takes 2.4 to 121.7 μs per layer, less than their network takes per gate at every distance.",
+  "authors": [
+    "Yicheng Guang",
+    "Yuliang Xiong",
+    "Xun Gao",
+    "Yueqi Chen"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-25",
+  "id": "arxiv:2611.31607",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.31607v1</ns0:id>\n    <ns0:title>Neural Decoding of Logical Clifford Circuits with Transversal Gates</ns0:title>\n    <ns0:updated>2026-11-23T21:53:24Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.31607v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.31607v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>On neutral-atom and trapped-ion machines, a transversal gate needs only one syndrome round, so a logical gate takes up to d times less time than with lattice surgery. However, transversal gates make decoding harder, because a transversal CNOT copies errors between two blocks of physical qubits, so a decoder must read all blocks of a circuit together. Algorithmic decoders for such circuits gain accuracy at the cost of speed. Neural decoders ease this trade-off, but they must infer from data where errors go across each gate and how logical outcomes propagate through the circuit, although both are known exactly. In this work, we present Duet, a neural decoder for logical Clifford circuits with transversal gates that builds in this known information and learns only which errors occurred. Duet leverages three insights. First, each transversal gate moves an error to a fixed place, so the network exchanges features only between the sites that a gate connects. Second, a logical outcome propagates through Clifford gates exactly and linearly, so the network predicts only the flips that the errors of each layer cause and combines the layers by a soft XOR. Third, every circuit is built from the same few gates, so the network takes the gates of each layer as input and one network per code distance decodes circuits of different sizes and depths. We pair Duet with the search decoder Tesseract, which re-decodes the few shots on which the network is least confident. On general circuits with 2 to 4 blocks and up to 16 layers, Duet alone is already more accurate than matching at every distance, and with Tesseract it fails 44 times less often than LoMatching at distance 9. On the random circuits of the Lukin group, it fails 0.299 times as often as their neural decoder at distance 7. The composition stays fast and takes 2.4 to 121.7 μs per layer, less than their network takes per gate at every distance.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-23T21:53:24Z</ns0:published>\n    <ns1:comment>28 pages, 4 figures, 21 tables. Code, trained networks and raw data: https://github.com/a85tract/Duet</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Yicheng Guang</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yuliang Xiong</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Xun Gao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Yueqi Chen</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [],
+  "source": "arxiv",
+  "summary": "Duet, a neural decoder for logical Clifford circuits with transversal gates on neutral-atom and trapped-ion machines, exploits known error propagation to…",
+  "title": "Neural Decoding of Logical Clifford Circuits with Transversal Gates",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.31607v1"
+}
