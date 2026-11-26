@@ -1,14 +1,16 @@
 ---
 import { loadPeriods } from "../lib/period-data";
 import { fieldPath, isDaily, type Field } from "../lib/editions";
-interface Props { current: "day" | "week" | "month"; field?: Field; issueDate?: string; issueUrl?: string }
-const { current, field = "computational", issueDate, issueUrl } = Astro.props;
+interface Props { current: "day" | "week" | "month"; field?: Field; issueDate?: string; issueUrl?: string; archiveDate?: string; index?: boolean }
+const { current, field = "computational", issueDate, issueUrl, archiveDate, index } = Astro.props;
 const prefix = fieldPath(field);
 const data = isDaily(field) ? loadPeriods(field) : null;
+const week = archiveDate ? data?.weeks.find(p => p.start <= archiveDate && archiveDate <= p.end) : data?.weeks[0];
+const month = archiveDate ? data?.months.find(p => p.start <= archiveDate && archiveDate <= p.end) : data?.months[0];
 const links = data ? [
-  { kind: "day", label: "Today", href: `${prefix}/` },
-  { kind: "week", label: "This week", href: data.weeks[0] ? `${prefix}/week/${data.weeks[0].id}/` : `${prefix}/week/` },
-  { kind: "month", label: "This month", href: data.months[0] ? `${prefix}/month/${data.months[0].id}/` : `${prefix}/month/` },
+  { kind: "day", label: archiveDate ? "Day" : "Today", href: archiveDate ? `${prefix}/day/${archiveDate}/` : `${prefix}/` },
+  { kind: "week", label: index ? "Weeks" : archiveDate ? "Week" : "This week", href: !index && week ? `${prefix}/week/${week.id}/` : `${prefix}/week/` },
+  { kind: "month", label: index ? "Months" : archiveDate ? "Month" : "This month", href: !index && month ? `${prefix}/month/${month.id}/` : `${prefix}/month/` },
 ] : [
   { kind: "day", label: issueDate ?? "Pilot", href: issueUrl ?? `${prefix}/` },
   { kind: "archive", label: "Editions", href: `${prefix}/#editions` },

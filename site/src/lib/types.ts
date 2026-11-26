@@ -55,6 +55,7 @@ export interface Scores {
 export interface TopicDay {
   date: string;
   category?: string | null;
+  secondary_categories?: string[];
   research_question?: string | null;
   result_passages?: Record<string, string>;
   result_review?: string | null;

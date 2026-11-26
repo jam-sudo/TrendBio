@@ -21,5 +21,5 @@ const editions = days.map(({ date }) => ({ date, href: `/day/${date}/` }));
 
 <Base description={`Top ${day.ranked.length} computational-biology topics on ${day.date}: ${day.ranked.find(({ rank }) => rank === 1)?.headline ?? "No topic cleared the bar"}`} canonicalPath={`/day/${day.date}/`} title={`${day.date} — TrendBio`} lastRun={day.run.finished}>
   <EditionDayHeading date={day.date} {editions} />
-  <DayTopics day={day} topics={dailyRows(day, true)} />
+  <DayTopics day={day} topics={dailyRows(day, true)} archiveDate={day.date} />
 </Base>

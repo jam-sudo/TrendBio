@@ -137,7 +137,7 @@ def build(root: Path) -> None:
             subtotal = sum(scoring["weights"][name] * value for name, value in components.items())
             penalty = scoring["yesterday_penalty"] * subtotal if history and history[-1].rank is not None else 0.0
             scores = Scores(**components, penalty=penalty, total=subtotal - penalty)
-            history.append(TopicDay(date=today, rank=rank, item_ids=[item.id for item in current],
+            history.append(TopicDay(date=today, category=category, secondary_categories=secondary, rank=rank, item_ids=[item.id for item in current],
                                     count_7d=len(counted), signals=signals, scores=scores))
         synthesis = (
             f"Activity around {label.lower()} now spans research records, a code release, and a workflow announcement. "

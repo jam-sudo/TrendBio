@@ -479,7 +479,7 @@ describe("built site accessibility and responsive layout", () => {
     expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"]).analyze()).violations).toEqual([]);
     await page.keyboard.press("Home");
     expect(await all.getAttribute("aria-pressed")).toBe("true");
-    expect(await visible.count()).toBe(40);
+    expect(await visible.count()).toBe(20);
   }, 30_000);
 
   it("opens compact rows natively and reveals a category present only in the collapsed rows", async () => {
@@ -515,5 +515,15 @@ describe("built site accessibility and responsive layout", () => {
     expect(await visible.count()).toBe(1);
     expect(await visible.locator('.rank').textContent()).toBe('Rank 21');
     expect(await visible.locator('.topic-link').getAttribute('href')).toBe('/topic/long-read-assembly-0021/');
+    expect(await details.locator('summary').innerText()).toBe('Hide 1 topic');
+    await details.locator('summary').click();
+    expect(await details.locator('summary').innerText()).toBe('Show 1 more');
+    await page.locator('[data-topic-cats]').evaluateAll(rows => rows.forEach((row, index) => {
+      row.setAttribute('data-topic-cats', index === 0 ? 'industry' : 'genomics');
+    }));
+    await industry.click();
+    expect(await details.isVisible()).toBe(false);
+    await page.locator('[data-cat="all"]').click();
+    expect(await details.locator('summary').innerText()).toBe('Show 20 more');
   }, 30_000);
 });

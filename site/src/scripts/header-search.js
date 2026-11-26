@@ -69,7 +69,7 @@ if (input) {
           list.append(link);
         }
         open(results.length ? '' : message.dataset.empty);
-        if (results.length) status.textContent = message.dataset.count.replace('{n}', results.length);
+        if (results.length) status.textContent = `${results.length} ${results.length === 1 ? 'result' : 'results'} shown`;
         all.hidden = false;
       } catch { if (isCurrent()) close(); }
     }, 150);

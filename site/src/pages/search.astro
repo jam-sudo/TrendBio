@@ -98,8 +98,8 @@ for (const field of fields) {
     more.hidden = !batch.more;
     more.textContent = 'Show more results';
     status.textContent = batch.count
-      ? `${batch.count} ${batch.count === 1 ? 'topic' : 'topics'} found${batch.complete ? '' : ' so far'}. Showing ${batch.shown}.`
-      : 'No topics found. Try another term or category.';
+      ? `${batch.count} ${batch.count === 1 ? 'result' : 'results'} found${batch.complete ? '' : ' so far'}. Showing ${batch.shown}.`
+      : 'No results found. Try another term or category.';
     if (moveFocus && (document.activeElement === more || document.activeElement === document.body)) (firstLink ?? status).focus();
   }
 

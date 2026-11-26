@@ -24,17 +24,24 @@ const { categories, counts, field } = Astro.props;
 <script is:inline>
   document.querySelectorAll('[data-category-chips]').forEach((row) => {
     const buttons = [...row.querySelectorAll('[data-cat]')];
+    let unfilteredOpen;
     row.addEventListener('click', (event) => {
       const chosen = event.target.closest('button[data-cat]');
       if (!chosen || chosen.disabled) return;
-      buttons.forEach((button) => {
-        button.setAttribute('aria-pressed', String(button === chosen));
+      const filtered = chosen.dataset.cat !== 'all';
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(button === chosen)));
+      document.querySelectorAll('[data-topic-cats]').forEach(card => {
+        card.hidden = filtered && !card.dataset.topicCats.split(/\s+/).includes(chosen.dataset.cat);
       });
-      document.querySelectorAll('[data-topic-cats]').forEach((card) => {
-        card.hidden = chosen.dataset.cat !== 'all' && !card.dataset.topicCats.split(/\s+/).includes(chosen.dataset.cat);
-      });
-      if (chosen.dataset.cat !== 'all') {
-        document.querySelectorAll('[data-more-topics]').forEach((details) => { details.open = true; });
+      const more = document.querySelector('[data-more-topics]');
+      if (more) {
+        const count = more.querySelectorAll('[data-topic-cats]:not([hidden])').length;
+        if (filtered) unfilteredOpen ??= more.open;
+        more.open = filtered ? count > 0 : unfilteredOpen ?? more.open;
+        if (!filtered) unfilteredOpen = undefined;
+        more.hidden = !count;
+        more.querySelector('.closed-label').textContent = `Show ${count} more`;
+        more.querySelector('.open-label').textContent = filtered ? `Hide ${count} topic${count === 1 ? '' : 's'}` : 'Show less';
       }
     });
     row.addEventListener('keydown', (event) => {

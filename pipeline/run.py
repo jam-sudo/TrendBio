@@ -432,6 +432,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 entry = next(entry for entry in topic.history if entry.date == day)
                 entry.rank, entry.signals, entry.scores = ranks.get(topic.slug), signals, scores
                 entry.category = topic.category
+                entry.secondary_categories = list(topic.secondary_categories)
             _related(list(topics.values()))
             for topic in topics.values():
                 store.put_topic(topic)

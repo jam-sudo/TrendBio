@@ -50,7 +50,7 @@ try {
     const count = result.contents.length;
     if (stem === null) {
       assert.equal(count, 0, query);
-      assert.equal(await page.locator('#search-status').textContent(), 'No topics found. Try another term or category.');
+      assert.equal(await page.locator('#search-status').textContent(), 'No results found. Try another term or category.');
     } else {
       assert.ok(count > 0, `${query}: no matches`);
       // Independent content assertion: the expected term/stem must start an indexed word.
@@ -67,8 +67,26 @@ try {
     assert.deepEqual(await page.locator('#search-results a').evaluateAll(links => links.map(a => a.getAttribute('href'))),
       filtered.map(result => result.url), query);
     if (count) assert.equal(await page.locator('#search-status').textContent(),
-      `${count} ${count === 1 ? 'topic' : 'topics'} found. Showing ${count}.`);
+      `${count} ${count === 1 ? 'result' : 'results'} found. Showing ${count}.`);
     rows.push({ query, raw: result.raw, filtered: count, content: stem === null ? 'empty' : `contains ${stem}` });
+  }
+  for (const [term, path] of [
+    ['MinLA', '/physics/day/2026-11-22/papers/#quantum-circuit-compilation-0208'],
+    ['Blossom', '/physics/day/2026-11-23/papers/#decoding-codes-88bf'],
+  ]) {
+    if (!existsSync('dist' + path.split('#')[0] + 'index.html')) continue;
+    await page.goto(`http://127.0.0.1:${server.port}${path}`);
+    const paper = await page.locator(':target details li a').filter({ hasText: term }).first().textContent();
+    await page.goto(`http://127.0.0.1:${server.port}/search/?q=${term}&field=physics`);
+    await page.waitForFunction(() => /found(?: so far)?\./.test(document.getElementById('search-status').textContent));
+    const urls = await page.locator('#search-results a').evaluateAll(links => links.map(a => a.href));
+    let found = false;
+    for (const url of urls) {
+      await page.goto(url);
+      const result = new URL(url).hash ? page.locator(':target') : page.locator('main article');
+      if (await result.getByRole('link', { name: paper, exact: true }).count()) { found = true; break; }
+    }
+    assert.ok(found, `${term}: no Physics search result links to the archived paper`);
   }
   const html = readFileSync('dist/index.html', 'utf8');
   assert.equal(existsSync('dist/search-match.js'), false);
@@ -100,7 +118,7 @@ try {
     if (!firstQuery) firstQuery = [...requests];
     if (query === 'qqzzxxnomatch') {
       assert.equal(links.length, 0);
-      assert.equal(await home.locator('#header-search-message').textContent(), 'No topics found');
+      assert.equal(await home.locator('#header-search-message').textContent(), 'No results found');
     } else {
       assert.ok(links.length > 0 && links.length <= 6, query);
       const candidates = await home.evaluate(async query => {

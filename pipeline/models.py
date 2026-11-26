@@ -61,6 +61,7 @@ class Scores(BaseModel):
 class TopicDay(BaseModel):
     date: date
     category: str | None = None
+    secondary_categories: list[str] = Field(default_factory=list, exclude_if=lambda categories: not categories)
     research_question: str | None = Field(default=None, exclude_if=lambda question: question is None)
     result_passages: dict[str, str] = Field(default_factory=dict, exclude_if=lambda passages: not passages)
     result_review: str | None = Field(default=None, exclude_if=lambda review: review is None)

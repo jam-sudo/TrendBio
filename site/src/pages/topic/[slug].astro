@@ -8,8 +8,8 @@ import EvidenceList from "../../components/EvidenceList.astro";
 import CrossCoverage from "../../components/CrossCoverage.astro";
 import { crossCoverage } from "../../lib/shared-papers";
 import { latestDay, loadDay, loadNote, loadTaxonomy, loadTopic } from "../../lib/data";
-import { hasPapers, topicEvidence } from "../../lib/citations";
-import { topicPages } from "../../lib/period-data";
+import { hasPapers, laterPapers, topicEvidence, topicSnapshot } from "../../lib/citations";
+import { loadPeriods, topicPages } from "../../lib/period-data";
 import type { Topic } from "../../lib/types";
 import { datedEvidence, topicAppearances } from "../../lib/editions";
 
@@ -20,32 +20,41 @@ export function getStaticPaths() {
 interface Props { topic: Topic }
 const { topic } = Astro.props;
 const domain = "computational";
-const history = [...topic.history].sort((a, b) => b.date.localeCompare(a.date));
-const latestEntry = history[0];
+const snapshot = topicSnapshot(topic);
+const { history, entry, issue, headline, summary, synthesis, category } = snapshot;
 const ranked = history.filter((entry) => entry.rank !== null);
-const latestRanked = ranked[0];
-const category = loadTaxonomy(domain).find(({ slug }) => slug === topic.category)?.label ?? topic.category;
+const categoryLabel = loadTaxonomy(domain).find(({ slug }) => slug === category)?.label ?? "Category unrecorded";
 const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
-const headline = topic.headline ?? topic.label;
 const publishedDates = new Set(topicAppearances(domain).get(topic.slug)?.map(({ day }) => day.date));
 function historyLink(date: string) {
   if (publishedDates.has(date)) return datedEvidence(domain, date, topic.slug);
   return loadDay(domain, date) ? `/day/${date}/` : undefined;
 }
-const evidence = topicEvidence(topic);
-const previousRanked = ranked.find((entry) => entry.date < latestEntry.date);
+const evidence = topicEvidence(topic, snapshot);
+const later = laterPapers(snapshot);
+const archivedIds = new Set(later.length ? history.filter(day =>
+  publishedDates.has(day.date) || loadPeriods().supplemental.get(day.date)?.has(topic.slug)).flatMap(day => day.item_ids) : []);
+const previousRanked = entry && ranked.find(day => day.date < entry.date);
 ---
 
 <Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
-  <article class="prose" data-pagefind-body data-pagefind-filter={`category:${category}`}>
-    <TopicIntro field={domain} category={topic.category} categoryLabel={category} rank={latestRanked?.rank} title={headline} summary={topic.summary}
-      history={topic.history} signals={latestEntry?.signals} signalDate={latestEntry?.date} date={latestRanked?.date}
-      backUrl={latestRanked && loadDay(domain, latestRanked.date) ? `/day/${latestRanked.date}/` : undefined} />
-    {topic.synthesis !== null && readingParagraphs(topic.synthesis).map(paragraph => <p>{paragraph}</p>)}
+  <article class="prose" data-pagefind-body data-pagefind-filter={`category:${categoryLabel}`}>
+    <TopicIntro field={domain} {category} {categoryLabel} rank={issue?.row.rank ?? entry?.rank} title={headline} {summary}
+      history={topic.history.filter(day => entry && day.date <= entry.date)} signals={issue?.row.signals ?? entry?.signals}
+      signalDate={entry?.date} windowDays={issue?.day.run.window_days} date={entry?.date}
+      backUrl={entry && loadDay(domain, entry.date) ? `/day/${entry.date}/` : undefined} />
+    {snapshot.singleSource && <p><small>This headline and summary describe one supporting work.</small></p>}
+    {synthesis && readingParagraphs(synthesis).map(paragraph => <p>{paragraph}</p>)}
     <EditorNote html={loadNote(topic.slug)} />
+    {entry && evidence.length > 0 && <p>Sources recorded on <time datetime={entry.date}>{entry.date}</time>.</p>}
     {hasPapers(evidence) && <p data-pagefind-ignore><a href={`/topic/${topic.slug}/citations.bib`} download>Export citations (BibTeX)</a></p>}
-    <EvidenceList items={evidence} oneLiners={topic.item_one_liners} previousRanked={previousRanked} />
-    {latestRanked && <CrossCoverage date={latestRanked.date} matches={crossCoverage(domain, latestRanked.date, topic.slug)} />}
+    <EvidenceList items={evidence} oneLiners={snapshot.oneLiners} previousRanked={previousRanked} />
+    {later.length > 0 && <section id="later-papers" aria-labelledby="later-heading">
+      <h2 id="later-heading" data-pagefind-ignore>Papers in later updates</h2>
+      {later.map(({ date, papers }) => <><h3 data-pagefind-ignore><time datetime={date}>{date}</time></h3>
+        <ul>{papers.map(paper => <li data-pagefind-ignore={archivedIds.has(paper.id) || undefined}><a href={paper.url}>{paper.title}</a></li>)}</ul></>)}
+    </section>}
+    {issue && <CrossCoverage date={issue.day.date} matches={crossCoverage(domain, issue.day.date, topic.slug)} />}
     {related.length > 0 && <section id="related-topics" aria-labelledby="related-heading" data-pagefind-ignore>
       <h2 id="related-heading">Related topics</h2>
       <ul>{related.map((entry) => <li>{entry.history.some((day) => day.rank !== null)

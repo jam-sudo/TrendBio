@@ -103,7 +103,7 @@ it("prefills and runs URL queries, and shows an empty state for nonsense", async
   expect(await page.getByRole("searchbox").inputValue()).toBe("Binder");
   expect(await page.locator("#search-results a").count()).toBeGreaterThan(0);
   await page.getByRole("searchbox").fill("zzzxqnotaword98765");
-  await expect.poll(() => page.getByRole("status").textContent()).toBe("No topics found. Try another term or category.");
+  await expect.poll(() => page.getByRole("status").textContent()).toBe("No results found. Try another term or category.");
   expect(await page.locator("#search-results li").count()).toBe(0);
   await page.getByRole("searchbox").fill("");
   await expect.poll(() => page.getByRole("status").textContent()).toContain("Enter a term");
@@ -193,7 +193,7 @@ it('loads dependencies only on focus and shows six headline/category options', a
   expect(await options().locator('small').allTextContents()).toHaveLength(6);
   expect(await combo().getAttribute('aria-expanded')).toBe('true');
   expect(await combo().getAttribute('aria-activedescendant')).toBeNull();
-  expect(await page.locator('#header-search-status').textContent()).toBe('6 topics shown');
+  expect(await page.locator('#header-search-status').textContent()).toBe('6 results shown');
   expect(await page.getByRole('link', { name: 'See all results' }).getAttribute('href')).toBe('/search/?q=reproducible&field=computational');
 });
 
@@ -201,7 +201,7 @@ it('shows no topics for nonsense and lets See all results open the full search',
   await visit('/');
   await combo().fill('zzzxqnotaword98765');
   await dropdownReady();
-  expect(await page.locator('#header-search-message').textContent()).toBe('No topics found');
+  expect(await page.locator('#header-search-message').textContent()).toBe('No results found');
   expect(await options().count()).toBe(0);
   await page.getByRole('link', { name: 'See all results' }).click();
   await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=zzzxqnotaword98765&field=computational');
@@ -373,4 +373,22 @@ it("finds both energy collection groups and keeps the query when searching acros
   await finished();
   expect(await page.getByRole("searchbox").inputValue()).toBe("energy storage");
   expect(await page.getByLabel("Field", { exact: true }).inputValue()).toBe("");
+});
+
+it.each(["energy", "materials"])("opens the %s sources from a link, a repeated keyboard activation, and a direct URL", async name => {
+  const path = `/collections/${name}/`;
+  await visit(path);
+  const sources = page.locator("details#sources");
+  const content = sources.locator("p").first();
+  const link = page.getByRole("link", { name: "Sources and selection", exact: true });
+  expect(await content.isVisible()).toBe(false);
+  await link.click();
+  expect(await content.isVisible()).toBe(true);
+  await sources.locator("summary").click();
+  await link.focus();
+  await page.keyboard.press("Enter");
+  expect(await content.isVisible()).toBe(true);
+  await visit("/about/");
+  await visit(path + "#sources");
+  await content.waitFor({ state: "visible" });
 });

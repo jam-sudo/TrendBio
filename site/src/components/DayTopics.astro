@@ -22,6 +22,7 @@ interface Props {
   issueDate?: string;
   heading?: string;
   issueUrl?: string;
+  archiveDate?: string;
 }
 
 const { day, topics: ranked, period, field = "computational", issueDate = day?.date, heading, issueUrl } = Astro.props;
@@ -47,7 +48,7 @@ const archive = regular ? `${prefix}/archive/` : `${prefix}/#editions`;
 ---
 
 <div class="section-heading ranking-heading" id="rankings">
-  <PeriodLinks {field} current={period ?? "day"} {issueDate} {issueUrl} />
+  <PeriodLinks {field} current={period ?? "day"} {issueDate} {issueUrl} archiveDate={Astro.props.archiveDate} />
   <h2>{heading ?? (regular ? `Top ${top_n}` : "Pilot rankings")}</h2>
   <a href={period ? `${prefix}/${period}/` : archive}>View all ›</a>
 </div>

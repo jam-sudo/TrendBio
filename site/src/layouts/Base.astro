@@ -105,8 +105,8 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
         <input id="header-search-query" type="search" name="q" placeholder="Search topics, papers, tools" />
         {searchField && <input type="hidden" name="field" value={searchField} />}
         <div id="header-search-panel" hidden>
-          <div id="header-search-options" role="listbox" aria-label="Topics"></div>
-          <p id="header-search-message" data-loading="Searching…" data-empty="No topics found" data-count="{n} topics shown"></p>
+          <div id="header-search-options" role="listbox" aria-label="Search results"></div>
+          <p id="header-search-message" data-loading="Searching…" data-empty="No results found"></p>
           <a id="header-search-all" tabindex="-1">See all results</a>
         </div>
         <span id="header-search-status" class="sr-only" role="status" aria-live="polite"></span>
@@ -117,6 +117,26 @@ const feedLabel = edition ? `${fieldLabel(edition)} feed` : "TrendBio RSS";
       (()=>{const b=document.getElementById('theme-toggle'),h=document.documentElement;function sync(){const l=h.dataset.theme==='light';b.setAttribute('aria-label','Switch to '+(l?'dark':'light')+' theme');b.setAttribute('aria-pressed',String(l));b.lastElementChild.textContent=l?'☀':'☾'}sync();b.onclick=()=>{h.dataset.theme=h.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('trendbio-theme',h.dataset.theme)}catch{}sync()}})();
     </script>
     <!--email_off--><main id="main" tabindex="-1"><slot /></main><!--/email_off-->
+    <script>
+      function revealTarget(hash: string) {
+        if (!hash) return;
+        let id: string;
+        try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+        const target = document.getElementById(id);
+        let opened = false;
+        for (let details = target?.closest("details"); details; details = details.parentElement?.closest("details")) {
+          if (!details.open) { details.open = true; opened = true; }
+        }
+        if (opened) target?.scrollIntoView();
+      }
+      revealTarget(location.hash);
+      window.addEventListener("hashchange", () => revealTarget(location.hash));
+      document.addEventListener("click", event => {
+        const link = event.target instanceof Element && event.target.closest<HTMLAnchorElement>("a[href]");
+        if (!link || event.defaultPrevented || event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (link.origin === location.origin && link.pathname === location.pathname && link.search === location.search) revealTarget(link.hash);
+      });
+    </script>
     <SponsorColumns heroAligned={landing} />
     </div>
     <footer>

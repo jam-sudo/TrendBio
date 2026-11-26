@@ -130,14 +130,16 @@ describe("built topic pages", () => {
       cpSync("../fixtures/data", data, { recursive: true });
       const changed = structuredClone(topic);
       const published = items.find((item) => item.type === "published")!;
+      const other = structuredClone(rankedTopics(domain).find((entry) => entry.slug !== slug)!);
+      const laterPaper = loadItems(domain, other.history.at(-1)!.item_ids).find(item => item.type === "preprint")!;
+      for (const date of ["2026-10-30", "2026-10-31"]) changed.history.find(entry => entry.date === date)!.item_ids.push(laterPaper.id);
       changed.history.push({ ...latest, date: "2026-11-02", rank: null,
-        item_ids: [published.id, published.preprint_id!], count_7d: 1,
+        item_ids: [laterPaper.id], count_7d: 1,
         signals: { published: 1, preprint: 0, code: 0, industry: 0, star_gain_7d: 0, rise_ratio: 1.49 } });
       changed.related = [];
       changed.headline = null;
       changed.label = "auto label example";
       writeFileSync(join(data, domain, "topics", `${slug}.json`), JSON.stringify(changed));
-      const other = rankedTopics(domain).find((entry) => entry.slug !== slug)!;
       other.history = other.history.slice(-2).map((entry, index) => ({ ...entry,
         rank: index === 0 ? 3 : null, item_ids: [] }));
       other.history.reverse();
@@ -163,15 +165,23 @@ describe("built topic pages", () => {
       expect(section(reentry, "added")).not.toContain(published.url);
       expect(reentry.split(`href="${addedPaper.url}"`)).toHaveLength(2);
       const html = readFileSync(join(output, `topic/${slug}/index.html`), "utf8");
-      expect(headings(html)).toEqual(["Editor's note", "Published papers", "Topic history"]);
+      expect(headings(html)).toEqual(["Editor's note", "Published papers", "Preprints", "Code &amp; tools", "Industry", "Papers in later updates", "Topic history"]);
       expect(html).toContain("#2 ·");
       expect(html).toContain('href="/day/2026-11-01/"');
-      expect(html).toContain("1 published");
-      expect(html).not.toContain("vs 4-wk avg");
+      expect(section(html, "published")).toContain(published.url);
+      expect(section(html, "later-papers")).toContain(laterPaper.url);
+      expect(section(html, "later-papers")).toContain("2026-11-02");
+      const citations = readFileSync(join(output, `topic/${slug}/citations.bib`), "utf8");
+      expect(citations).toContain(published.url);
+      expect(citations).not.toContain(laterPaper.url);
+      const archive = JSON.parse(readFileSync(join(output, "archive-search.json"), "utf8"));
+      expect(archive.filter((record: { url: string; content: string }) => record.url.endsWith(`#${slug}`) && record.content.includes(laterPaper.title)))
+        .toMatchObject([{ url: `/day/2026-10-31/papers/#${slug}`, filters: { field: ["computational"] } }]);
       expect(section(html, "topic-history")).not.toContain("2026-11-02");
       const short = readFileSync(join(output, `topic/${other.slug}/index.html`), "utf8");
-      expect(short).toContain("#3 ·");
-      expect(short).toContain(other.label);
+      const archived = loadDay(domain, "2026-11-01")!.ranked.find(row => row.slug === other.slug)!;
+      expect(short).toContain(`#${archived.rank} ·`);
+      expect(short).toContain(archived.headline);
       const week = readFileSync(join(output, "week/2026-W44/index.html"), "utf8");
       const issued = loadDay(domain, "2026-11-01")!.ranked.find(row => row.slug === slug)!;
       expect(week).toContain(issued.headline);

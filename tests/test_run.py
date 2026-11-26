@@ -262,7 +262,16 @@ def test_physics_replay_resynthesizes_when_the_reviewed_passage_changes(ctx, mon
     assert store.get_topic(day.ranked[0].slug).history[-1].result_review != first_review
 
 
-def test_run_day_writes_day_topics_items(ctx):
+def test_run_day_writes_day_topics_items(ctx, monkeypatch):
+    enrich = ctx.deps.llm.enrich
+
+    def mixed_categories(item, taxonomy, hints):
+        result = enrich(item, taxonomy, hints)
+        if item.id == ctx.items[-1].id:
+            result.primary = 'systems'
+        return result
+
+    monkeypatch.setattr(ctx.deps.llm, 'enrich', mixed_categories)
     result = run_day('computational', TODAY, ctx.store, ctx.deps)
     assert ctx.store.get_day(TODAY) == result
     assert ctx.store.get_map().points
@@ -276,6 +285,8 @@ def test_run_day_writes_day_topics_items(ctx):
         if topic.slug in {row.slug for row in result.ranked}:
             entry = next(entry for entry in topic.history if entry.date == TODAY)
             assert entry.rank and entry.signals.preprint == 3
+            assert entry.category == topic.category == 'structural'
+            assert entry.secondary_categories == topic.secondary_categories == ['systems']
         else:
             assert all(entry.date != TODAY for entry in topic.history)
 

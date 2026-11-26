@@ -116,6 +116,7 @@ describe("built landing hero", () => {
     expect(script).toBeDefined();
     runInNewContext(script!, {
       document: {
+        querySelector: () => null,
         querySelectorAll: (selector: string) => selector === "[data-topic-cats]" ? cards : [row],
       },
     });

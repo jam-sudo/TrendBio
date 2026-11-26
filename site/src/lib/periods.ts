@@ -94,7 +94,9 @@ export function periodHeadline(topic: Pick<PeriodRanked, "headline" | "label">) 
   return topic.headline || topic.label.replace(/\b\p{L}/gu, letter => letter.toUpperCase());
 }
 
-export type HistoryIndex = Map<string, { topic: Topic; entry: TopicDay; hasIssue: boolean; published?: RankedTopic }[]>;
+export type HistoryIndex = Map<string, {
+  slug: string; entry: TopicDay; category: string; secondary: string[]; hasIssue: boolean; published?: RankedTopic;
+}[]>;
 
 export function indexHistories(topics: Topic[], days?: Day[]): HistoryIndex {
   const cached = !days && cache.histories.get(topics);
@@ -102,10 +104,18 @@ export function indexHistories(topics: Topic[], days?: Day[]): HistoryIndex {
   const editions = new Map(days?.map(day => [day.date, new Map(day.ranked.map(row => [row.slug, row]))]));
   const index: HistoryIndex = new Map();
   for (const topic of topics) {
-    for (const entry of topic.history) {
-      const entries = index.get(entry.date) ?? [];
+    let category = "uncategorized";
+    let secondary: string[] = [];
+    for (const entry of [...topic.history].sort((a, b) => a.date.localeCompare(b.date))) {
       const issue = editions.get(entry.date);
-      entries.push({ topic, entry, hasIssue: !!issue, published: issue?.get(topic.slug) });
+      const published = issue?.get(topic.slug);
+      // A returning topic can add empty continuity days to an already closed period.
+      if (!published && entry.rank === null && !entry.item_ids.length && !entry.attached_item_ids?.length
+          && !entry.count_7d && !entry.scores.total && !entry.signals.rise_ratio) continue;
+      const entries = index.get(entry.date) ?? [];
+      category = published?.category ?? entry.category ?? category;
+      if (published || entry.category || entry.item_ids.length) secondary = entry.secondary_categories ?? [];
+      entries.push({ slug: topic.slug, entry, category, secondary, hasIssue: !!issue, published });
       index.set(entry.date, entries);
     }
   }
@@ -122,15 +132,17 @@ export function rankPeriod(topics: Topic[] | HistoryIndex, start: string, end: s
   if (cached) return cached;
   const totals = new Map<string, PeriodRanked & { itemIds: Set<string> }>();
   for (let date = new Date(`${start}T00:00:00Z`); dateString(date) <= end; date.setUTCDate(date.getUTCDate() + 1)) {
-    for (const { topic, entry, hasIssue, published } of index.get(dateString(date)) ?? []) {
-      let total = totals.get(topic.slug);
+    for (const { slug, entry, category, secondary, hasIssue, published } of index.get(dateString(date)) ?? []) {
+      let total = totals.get(slug);
       if (!total) {
         // The original keyword label is part of the immutable slug. Synthesis can rewrite topic.label.
-        const label = topic.slug.replace(/-[0-9a-f]{4}$/, "").replaceAll("-", " ");
-        total = { slug: topic.slug, headline: null, label, category: topic.category,
-          secondary_categories: topic.secondary_categories, period_score: 0, days_ranked: 0,
+        const label = slug.replace(/-[0-9a-f]{4}$/, "").replaceAll("-", " ");
+        total = { slug, headline: null, label, category, secondary_categories: secondary, period_score: 0, days_ranked: 0,
           best_rank: null, items: 0, rise: 0, rise_date: entry.date, rank: 0, latest_item_ids: [], itemIds: new Set() };
-        totals.set(topic.slug, total);
+        totals.set(slug, total);
+      } else {
+        total.category = category;
+        total.secondary_categories = secondary;
       }
       if (published?.headline) {
         total.headline = published.headline;

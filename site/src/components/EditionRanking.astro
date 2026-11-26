@@ -28,7 +28,7 @@ const coverage = pilotDate && !reviewed ? pilotCoverage(field, pilotDate) : unde
   description={`${regular ? "Daily" : "Pilot"} ${label} research trends with the papers behind each ranking.`} lastRun={day?.run.finished}>
   {!landing && date && <EditionDayHeading {date} editions={issues} />}
   <section id={reviewed ? `ranking-review-${date}` : undefined} aria-label={`${label} rankings`}>
-    <DayTopics {field} day={pilotDate ? null : day} topics={rows} issueDate={date} {issueUrl} heading={reviewed ? "Reviewed topics" : undefined} />
+    <DayTopics {field} day={pilotDate ? null : day} topics={rows} issueDate={date} {issueUrl} archiveDate={landing ? undefined : date} heading={reviewed ? "Reviewed topics" : undefined} />
   </section>
   {withdrawn.length > 0 && <details class="edition-info"><summary>Editorial withdrawals ({withdrawn.length})</summary>
     <ul>{withdrawn.map(row => <li id={row.slug}>Rank {row.rank} · <a href={`/pilots/${field}/${date}/papers/#${row.slug}`}>{row.title}</a> · {row.summary}</li>)}</ul>
@@ -54,18 +54,6 @@ const coverage = pilotDate && !reviewed ? pilotCoverage(field, pilotDate) : unde
     {!regular && issueUrl && <p><a href={`${issueUrl}papers/`}>Read the dated edition with its sources</a></p>}
   </details>
   {["physics-expanded", "chemistry", "engineering"].includes(field) && <p class="related">Related reading · <a href="/collections/materials/">Materials Science</a> · <a href="/collections/energy/">Energy Storage &amp; Power Grids</a></p>}
-  <script>
-    function revealTarget() {
-      const target = document.getElementById(location.hash.slice(1));
-      let disclosure = target?.closest("details");
-      while (disclosure) {
-        disclosure.open = true;
-        disclosure = disclosure.parentElement?.closest("details");
-      }
-    }
-    revealTarget();
-    window.addEventListener("hashchange", revealTarget);
-  </script>
 </Base>
 <style>
   .edition-info, .related { margin-block: 1rem; }

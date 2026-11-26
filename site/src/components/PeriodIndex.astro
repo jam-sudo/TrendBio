@@ -13,7 +13,7 @@ const title = kind === "week" ? "Weekly rankings" : "Monthly rankings";
 ---
 <Base edition={field === "computational" ? undefined : field} description={`${title}: top topics in ${field === "computational" ? "computational biology" : fieldLabel(field)}`} canonicalPath={`${prefix}/${kind}/`} title={`${title} — TrendBio`} lastRun={data.days[0]?.run.finished}>
   <h1>{title}</h1>
-  <PeriodLinks {field} current={kind} />
+  <PeriodLinks {field} current={kind} index />
   <ul class="period-list">
     {periods.map((period) => {
       const top = periodRows(period.topics.slice(0, 1), field)[0];

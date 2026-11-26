@@ -43,6 +43,7 @@ describe("period boundaries and selection", () => {
     const base = topics[0], entry = base.history[0];
     const candidates = Array.from({ length: 60 }, (_, i) => ({ ...base, slug: `topic-${String(i).padStart(2, "0")}`,
       category: `category-${Math.floor(i / 12)}`, history: [{ ...entry, date: "2026-10-26", rank: null,
+        category: `category-${Math.floor(i / 12)}`,
         scores: { ...entry.scores, total: 100 - i }, item_ids: ["shared"] }],
     }));
     const ranked = rankPeriod(candidates, "2026-10-26", "2026-11-01", taxonomy);
@@ -83,6 +84,26 @@ describe("period boundaries and selection", () => {
     expect(rankPeriod(index, "2026-10-31", "2026-10-31", taxonomy)[0].headline).toBeNull();
   });
 
+  it("keeps closed ranks and filters when a later edition reclassifies a topic", () => {
+    const { days } = loadPeriods();
+    const copy = structuredClone(topics);
+    const rank = () => rankPeriod(indexHistories(copy, days), "2026-10-26", "2026-11-01", taxonomy);
+    const before = rank();
+    for (const topic of copy) {
+      topic.category = "future";
+      topic.secondary_categories = ["also-future"];
+      topic.history.push({ ...topic.history.at(-1)!, date: "2026-11-02", category: "future", secondary_categories: ["also-future"] });
+    }
+    const entry = copy[0].history.at(-1)!;
+    copy.push({ ...copy[0], slug: "returning-after-the-period", history: [
+      { ...entry, date: "2026-10-31", rank: null, count_7d: 0, item_ids: [], attached_item_ids: [],
+        scores: { ...entry.scores, total: 0 }, signals: { ...entry.signals, rise_ratio: 0 } }, entry,
+    ] });
+    expect(rank()).toEqual(before);
+    expect(before.some(topic => topic.secondary_categories.length)).toBe(true);
+    expect(before.some(topic => topic.category === "uncategorized")).toBe(false);
+  });
+
   it("indexes histories once and ranks a year of periods without traversing histories again", () => {
     const copies = structuredClone(topics);
     const reads = copies.map((topic) => {
@@ -104,7 +125,7 @@ describe("built period pages", () => {
   it.each(["week/2026-W44", "month/2026-10"])("renders %s with shared cards, stats and navigation", (path) => {
     const html = page(path);
     expect(html).toContain('aria-label="Ranking period"');
-    expect(html).toMatch(new RegExp(`href="/${path.startsWith("week") ? "week/2026-W44" : "month/2026-11"}/" aria-current="page"`));
+    expect(html).toContain(`href="/${path}/" aria-current="page"`);
     const rows = html.match(/\bdata-topic-cats="/g) ?? [];
     expect(rows.length).toBeGreaterThan(5);
     expect(rows.length).toBeLessThanOrEqual(40);
@@ -119,11 +140,14 @@ describe("built period pages", () => {
   });
 
   it("links current periods from daily pages and month headings from the archive", () => {
-    for (const html of [readFileSync("dist/index.html", "utf8"), page("day/2026-10-30")]) {
-      expect(html).toMatch(/href="\/" aria-current="page"/);
-      expect(html).toContain('href="/week/2026-W44/"');
-      expect(html).toContain('href="/month/2026-11/"');
-    }
+    const home = readFileSync("dist/index.html", "utf8");
+    expect(home).toMatch(/href="\/" aria-current="page"/);
+    expect(home).toContain('href="/month/2026-11/"');
+    const dated = page("day/2026-10-30");
+    expect(dated).toContain('href="/day/2026-10-30/" aria-current="page"');
+    expect(dated).toContain('href="/week/2026-W44/"');
+    expect(dated).toContain('href="/month/2026-10/"');
+    expect(page("month")).toContain('href="/month/" aria-current="page"');
     expect(page("archive")).toMatch(/<h2[^>]*id="heading-2026-10"[^>]*>\s*<a[^>]*href="\/month\/2026-10\/"/);
     expect(page("month/2026-11")).toContain("so far");
     expect(page("month/2026-10")).not.toContain("so far");

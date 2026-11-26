@@ -19,7 +19,8 @@ const previous = periods[index + 1], next = periods[index - 1];
     <a href={`${prefix}/${kind}/`}>All {kind === "week" ? "weeks" : "months"}</a>
     {next && <a href={`${prefix}/${kind}/${next.id}/`} rel="next">{next.label} →</a>}
   </nav>
-  <DayTopics {field} topics={periodRows(period.topics, field)} period={kind} />
+  <DayTopics {field} topics={periodRows(period.topics, field)} period={kind}
+    archiveDate={data.days.find(day => period.start <= day.date && day.date <= period.end)?.date} />
 </Base>
 <style>
   .period-navigation { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-bottom: 1.5rem; font-size: var(--t3); }

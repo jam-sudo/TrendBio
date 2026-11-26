@@ -1,13 +1,49 @@
 import { createHash } from "node:crypto";
 import { loadItems } from "./data";
-import type { Item, Topic } from "./types";
+import { topicAppearances } from "./editions";
+import type { Item, Topic, TopicDay } from "./types";
 
-export function topicEvidence(topic: Topic): Item[] {
-  const latest = [...topic.history].sort((a, b) => b.date.localeCompare(a.date))[0];
-  return loadItems("computational", [...(latest?.item_ids ?? []), ...(latest?.attached_item_ids ?? [])]);
+export function topicSnapshot(topic: Topic) {
+  const history = [...topic.history].sort((a, b) => b.date.localeCompare(a.date));
+  const appearances = topicAppearances("computational").get(topic.slug) ?? [];
+  const byDate = new Map(history.map(entry => [entry.date, entry]));
+  const synthesized = topic.synthesized_on ? byDate.get(topic.synthesized_on) : undefined;
+  const issue = appearances.find(({ day }) => day.date === synthesized?.date)
+    ?? appearances.find(({ day }) => byDate.has(day.date));
+  const entry = (issue && byDate.get(issue.day.date)) ?? synthesized ?? history.find(entry => entry.rank !== null)
+    ?? history.find(entry => entry.item_ids.length) ?? history[0];
+  const hasSynthesis = !!entry && entry === synthesized;
+  const row = issue?.row;
+  const singleSource = issue?.day.run.notes.includes(`synthesis-fallback:${topic.slug}`);
+  return {
+    entry, history, issue, singleSource, category: row?.category ?? entry?.category ?? "uncategorized",
+    headline: row?.headline || (hasSynthesis && topic.headline) || topic.label,
+    summary: row?.summary ?? (hasSynthesis ? topic.summary : null),
+    synthesis: singleSource ? null : row?.synthesis ?? (hasSynthesis ? topic.synthesis : null),
+    oneLiners: hasSynthesis && !singleSource ? topic.item_one_liners : {},
+  };
 }
 
-export const hasPapers = (items: Item[]) => items.some(item => item.type === "published" || item.type === "preprint");
+const evidenceIds = (entry?: TopicDay) => [...new Set([...(entry?.item_ids ?? []), ...(entry?.attached_item_ids ?? [])])];
+export const isPaper = (item: Item) => item.type === "published" || item.type === "preprint";
+export const hasPapers = (items: Item[]) => items.some(isPaper);
+
+export function topicEvidence(topic: Topic, snapshot = topicSnapshot(topic)): Item[] {
+  return loadItems("computational", evidenceIds(snapshot.entry));
+}
+
+export function laterPapers({ entry, history }: ReturnType<typeof topicSnapshot>) {
+  if (!entry) return [];
+  const seen = new Set(evidenceIds(entry));
+  const later = [];
+  for (const day of history.filter(day => day.date > entry.date).reverse()) {
+    const ids = evidenceIds(day).filter(id => !seen.has(id));
+    ids.forEach(id => seen.add(id));
+    const papers = loadItems("computational", ids).filter(isPaper);
+    if (papers.length) later.push({ date: day.date, papers });
+  }
+  return later.reverse();
+}
 
 export function escapeBibtex(value: string): string {
   return value.replace(/\\|[{}%&#_$~^]/g, char => ({
