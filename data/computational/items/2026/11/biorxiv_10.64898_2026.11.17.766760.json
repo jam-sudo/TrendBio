@@ -1,0 +1,41 @@
+{
+  "abstract": "Defects in homologous recombination and the DNA damage response (DDR) make gynecologic and breast tumors sensitive to platinum chemotherapy and PARP inhibitors, but identifying them requires costly genomic testing that reads permanent genomic scars rather than current pathway activity. Routine hematoxylin and eosin (H&E) slides are available for nearly every patient. This project asked whether H&E morphology carries information about functional DDR protein signaling across five cancer types in a single model. We matched 1,673 diagnostic whole-slide images from The Cancer Genome Atlas (TCGA) to Level 4 reverse-phase protein array (RPPA) data for 1,527 patients with breast (BRCA, n = 858), endometrial (UCEC, n = 403), cervical (CESC, n = 146), ovarian (OV, n = 72), and uterine carcinosarcoma (UCS, n = 48) tumors. Slides were tiled at 0.5 m/px and Macenko-normalized, yielding 20.4 million tiles. Tiles were embedded with two frozen pathology foundation models, UNI2-h and Virchow2. A gated attention-based multiple instance learning (ABMIL) network jointly regressed six RPPA pathway scores, including a DNA_damage composite of 11 DDR proteins. Performance was assessed by out-of-fold Spearman correlation under 5-fold, cancer-type-stratified, site-grouped cross-validation and compared against a baseline that predicts each patient's cancer-type mean. Predicted DNA_damage correlated with measured values ({rho} = 0.43 for both encoders) and exceeded the cancer-type baseline ({rho} = 0.31; {Delta} {rho} = +0.13). The signal held within cancer types (within-type {rho} = 0.29 for UNI2-h, 0.30 for Virchow2). With the original UNI encoder, it survived site-held-out folds with residualized targets (within-type {rho} = 0.26), and it vanished when targets were shuffled within cancer type (within-type {rho} [&le;] 0.00 for all three encoders). All six pathway scores were predicted above baseline; Cell_cycle was strongest ({rho} {approx} 0.59). In interpretability analyses, the top 10 attention tiles per slide contained more tumor (+1.8 SD), larger tumor nuclei (+1.0 to +1.3 SD), and fewer lymphocytes (-0.6 SD) than the bottom 10 tiles; 13 of 14 morphometric features differed (q < 0.05). Attention agreed with Integrated Gradients (median {rho} {approx} 0.70). Routine H&E contains a moderate, reproducible signal of DDR protein abundance beyond cancer type, concentrated in tumor-dense regions with enlarged nuclei. Separating this signal from proliferation and predicting phosphorylated CHK1 and CHK2 directly are the next steps toward a functional, slide-based DDR biomarker.",
+  "authors": [
+    "Lane, S. P.",
+    "Zou, Y. S."
+  ],
+  "doi": "10.64898/2026.11.17.766760",
+  "first_seen": "2026-11-26",
+  "id": "biorxiv:10.64898/2026.11.17.766760",
+  "metadata": {
+    "abstract": "Defects in homologous recombination and the DNA damage response (DDR) make gynecologic and breast tumors sensitive to platinum chemotherapy and PARP inhibitors, but identifying them requires costly genomic testing that reads permanent genomic scars rather than current pathway activity. Routine hematoxylin and eosin (H&E) slides are available for nearly every patient. This project asked whether H&E morphology carries information about functional DDR protein signaling across five cancer types in a single model. We matched 1,673 diagnostic whole-slide images from The Cancer Genome Atlas (TCGA) to Level 4 reverse-phase protein array (RPPA) data for 1,527 patients with breast (BRCA, n = 858), endometrial (UCEC, n = 403), cervical (CESC, n = 146), ovarian (OV, n = 72), and uterine carcinosarcoma (UCS, n = 48) tumors. Slides were tiled at 0.5 m/px and Macenko-normalized, yielding 20.4 million tiles. Tiles were embedded with two frozen pathology foundation models, UNI2-h and Virchow2. A gated attention-based multiple instance learning (ABMIL) network jointly regressed six RPPA pathway scores, including a DNA_damage composite of 11 DDR proteins. Performance was assessed by out-of-fold Spearman correlation under 5-fold, cancer-type-stratified, site-grouped cross-validation and compared against a baseline that predicts each patient's cancer-type mean. Predicted DNA_damage correlated with measured values ({rho} = 0.43 for both encoders) and exceeded the cancer-type baseline ({rho} = 0.31; {Delta} {rho} = +0.13). The signal held within cancer types (within-type {rho} = 0.29 for UNI2-h, 0.30 for Virchow2). With the original UNI encoder, it survived site-held-out folds with residualized targets (within-type {rho} = 0.26), and it vanished when targets were shuffled within cancer type (within-type {rho} [&le;] 0.00 for all three encoders). All six pathway scores were predicted above baseline; Cell_cycle was strongest ({rho} {approx} 0.59). In interpretability analyses, the top 10 attention tiles per slide contained more tumor (+1.8 SD), larger tumor nuclei (+1.0 to +1.3 SD), and fewer lymphocytes (-0.6 SD) than the bottom 10 tiles; 13 of 14 morphometric features differed (q < 0.05). Attention agreed with Integrated Gradients (median {rho} {approx} 0.70). Routine H&E contains a moderate, reproducible signal of DDR protein abundance beyond cancer type, concentrated in tumor-dense regions with enlarged nuclei. Separating this signal from proliferation and predicting phosphorylated CHK1 and CHK2 directly are the next steps toward a functional, slide-based DDR biomarker.",
+    "author_corresponding": "Samantha P Lane",
+    "author_corresponding_institution": "Johns Hopkins University",
+    "authors": "Lane, S. P.; Zou, Y. S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-25",
+    "doi": "10.64898/2026.11.17.766760",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/25/2026.11.17.766760.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Deep Learning Prediction of DNA Damage Response Protein Signaling from H&E Histopathology and Reverse-Phase Protein Arrays in Pan-Gynecologic and Breast Cancers",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Johns Hopkins University",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "Deep ABMIL models on H&E whole-slide images from TCGA predict RPPA DNA damage response protein signaling across five gynecologic and breast cancers (rho 0.43).",
+  "title": "Deep Learning Prediction of DNA Damage Response Protein Signaling from H&E Histopathology and Reverse-Phase Protein Arrays in Pan-Gynecologic and Breast Cancers",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.17.766760"
+}

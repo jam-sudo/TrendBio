@@ -770,7 +770,7 @@
     -0.021609755232930183,
     -0.05133624002337456
   ],
-  "headline": "Hybrid mechanistic and learned models advance quantitative forecasting of pathogen spread",
+  "headline": "Extended models forecast epidemic spread and host-virus immune dynamics",
   "history": [
     {
       "attached_item_ids": [],
@@ -1109,6 +1109,35 @@
         "rise_ratio": 0.8571428571428571,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "systems",
+      "count_7d": 3,
+      "date": "2026-11-26",
+      "item_ids": [
+        "arxiv:2611.31334",
+        "biorxiv:10.64898/2026.11.20.768156",
+        "pubmed:10.1371/journal.pcbi.1014985"
+      ],
+      "rank": 37,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.0,
+        "rise": 0.8571428571428571,
+        "total": 0.5636017160309503,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 2,
+        "published": 1,
+        "rise_baseline": "field_median",
+        "rise_ratio": 0.8571428571428571,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1120,8 +1149,8 @@
   ],
   "secondary_categories": [],
   "slug": "forecasting-infectious-0468",
-  "summary": "Recent preprints and publications extend forecasting with memory terms, simulation-informed training, and sequence-derived features.",
-  "synthesis": "The dominant thread is quantitative prediction of pathogen spread from observed data, with most items pairing a model class with explicit evaluation. A Caputo fractional-order hybrid SIR model adds memory effects and is tested out of sample on COVID-19 data from Bangladesh and the United States. Mantis 2 jointly trains on simulated and observed outbreak data to forecast six variables up to 16 weeks ahead, outperforming machine learning and statistical baselines. Sequence-derived graph-Laplacian features with machine learning estimate growth rates of emerging SARS-CoV-2 lineages from US and UK genomic data. A hybrid ODE-DynNet with multi-agent reinforcement learning reconstructs hidden epidemic states from incomplete reports and optimizes testing and isolation in Shenzhen. What is new is the range of extensions: memory terms, simulation-informed joint training, sequence-derived spectral features, and learned control under incomplete observation.",
+  "summary": "Recent work tests epidemic forecasting against 2020/21 and 2024/25 surveillance data while adding heterogeneity and immune feedback terms.",
+  "synthesis": "The dominant thread is model-based quantification of infection dynamics, with each item pairing an explicit model class with data. The German study is the only published item here, operating as a real-time multi-model, multi-target ensemble for ARI, SARI, influenza and RSV during the 2024/25 season. The Epimetheus preprint transfers turbulence decomposition to epidemiological time series, using scale-dependent fluctuations to probe population heterogeneity. The avian coronavirus preprint is a host-virus model in which nonlinear cytokine responses to RNA viral dynamics are proposed to drive strain-specific immune outcomes. What is new relative to purely case-count forecasting is attention to unobserved structure: heterogeneity across populations and feedback between viral load and innate immunity.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-17"
+  "synthesized_on": "2026-11-26"
 }

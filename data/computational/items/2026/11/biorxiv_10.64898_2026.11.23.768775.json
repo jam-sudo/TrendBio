@@ -1,0 +1,43 @@
+{
+  "abstract": "RNA recognizes small molecules and proteins through their three dimensional structures, but sparse functional annotations limit task specific learning of transferable structural features. We present BRIDGE, an inverse-folding encoder pretrained on 2,501 RNA chain records from experimental structures. Each nucleotide is represented by its phosphorus atom and five ribose atoms (P, C1', C2', C3', C4', O4'). Base coordinates are not encoder inputs. From these atoms, the encoder is trained to predict nucleotide identity, solvent accessible surface area (SASA) and base geometry. With matched readouts, frozen BRIDGE representations reach a three-model ensemble pooled average precision (AP) of 0.627 for external ligand-binding site prediction and 0.647 for RNA-protein interface prediction, compared with 0.503 and 0.516 for frozen, randomly initialized encoders. Under the evaluated full-adaptation recipes, pretrained initialization reaches AP 0.703 for ligand binding and 0.641 for protein interfaces, versus 0.635 and 0.623 for training from scratch. Sequence-only pretraining, without SASA or base-geometry targets, also transfers to both tasks. Whether the base-geometry objectives add further value depends on the task and adaptation mode. In decoy ranking and apo/holo evaluations, transfer depends on the readout and the test set, and small target panels and downstream training overlap in the apo/holo evaluation limit broader conclusions. These results support inverse-folding pretraining as a route to transferable RNA structural representations that do not require observed base coordinates at inference.",
+  "authors": [
+    "Song, J.",
+    "Ko, J.",
+    "Lee, J.",
+    "Shin, W.-H."
+  ],
+  "doi": "10.64898/2026.11.23.768775",
+  "first_seen": "2026-11-26",
+  "id": "biorxiv:10.64898/2026.11.23.768775",
+  "metadata": {
+    "abstract": "RNA recognizes small molecules and proteins through their three dimensional structures, but sparse functional annotations limit task specific learning of transferable structural features. We present BRIDGE, an inverse-folding encoder pretrained on 2,501 RNA chain records from experimental structures. Each nucleotide is represented by its phosphorus atom and five ribose atoms (P, C1', C2', C3', C4', O4'). Base coordinates are not encoder inputs. From these atoms, the encoder is trained to predict nucleotide identity, solvent accessible surface area (SASA) and base geometry. With matched readouts, frozen BRIDGE representations reach a three-model ensemble pooled average precision (AP) of 0.627 for external ligand-binding site prediction and 0.647 for RNA-protein interface prediction, compared with 0.503 and 0.516 for frozen, randomly initialized encoders. Under the evaluated full-adaptation recipes, pretrained initialization reaches AP 0.703 for ligand binding and 0.641 for protein interfaces, versus 0.635 and 0.623 for training from scratch. Sequence-only pretraining, without SASA or base-geometry targets, also transfers to both tasks. Whether the base-geometry objectives add further value depends on the task and adaptation mode. In decoy ranking and apo/holo evaluations, transfer depends on the readout and the test set, and small target panels and downstream training overlap in the apo/holo evaluation limit broader conclusions. These results support inverse-folding pretraining as a route to transferable RNA structural representations that do not require observed base coordinates at inference.",
+    "author_corresponding": "Woong-Hee Shin",
+    "author_corresponding_institution": "Korea University College of Medicine",
+    "authors": "Song, J.; Ko, J.; Lee, J.; Shin, W.-H.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-24",
+    "doi": "10.64898/2026.11.23.768775",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/24/2026.11.23.768775.source.xml",
+    "license": "cc_no",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BRIDGE: Backbone Representation for Inverse-folding-Driven Generalizable RNA Encoding",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Korea University College of Medicine",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-24",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "structural"
+  ],
+  "source": "biorxiv",
+  "summary": "BRIDGE is an inverse-folding encoder pretrained on 2,501 RNA structures using backbone atoms, improving frozen and fine-tuned AP for ligand-binding and…",
+  "title": "BRIDGE: Backbone Representation for Inverse-folding-Driven Generalizable RNA Encoding",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.23.768775"
+}
