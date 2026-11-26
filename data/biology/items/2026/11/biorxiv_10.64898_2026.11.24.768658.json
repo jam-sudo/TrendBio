@@ -1,0 +1,41 @@
+{
+  "abstract": "Deep learning (DL) methods can address many challenges posed by high-dimensional and sparse microbiome data. In this study we applied and compared deep (DNN) and shallow (SNN) feedforward neural networks combined with five dimensionality-reduction techniques: Principal Component Analysis (PCA), Singular Value Decomposition (SVD), Non-negative Matrix Factorization (NMF), Autoencoder based Embeddings (AE), and convolutional layers (Conv). To establish baseline classification performance, the XGBoost was used, as it represents a robust machine learning based classifier with a relatively low number of hyperparameters. The task was to classify effective microorganism (EM) treatments based on intestine bacterial family abundance in common carp. In particular, the experiment involved 25 ponds that were divided into experimental groups. In each pond, the intestinal microbiome of five individuals was determined by sequencing two hypervariable regions of the gene encoding the 16s rRNA gene sequencing. The sequence reads were processed by QIIME2 and taxonomically annotated to the SILVA database, what resulted in 126 annotated families that were used as features in all downstream analyses. Abundance tables from 125 samples, transformed using the Centered Log-Ratio (CLR) method, were used to evaluate ten dimensionality-reduction and Deep learning configurations considering five-, three-, and two-classification scenarios. The DL models were optimized using cross-validation. To combat the overfitting that was present due to sparsity and small sample size, dropout and kernel regularization were implemented. During testing autoencoder embeddings achieved the highest classification accuracy (0.84), exceeding the XGBoost baseline (0.64), while embedding based on convolutional layers significantly reduced performance (0.44). PCA and SVD transformations showed comparable results (0.65), whereas NMF often failed to converge, likely due to incompatibility with CLR-transformed data. Best classification results were obtained for models that implemented AE embedding, it is most likely caused by their ability to capture non-linear patterns in the data. All models showed stable training behavior, with loss functions consistently decreasing across epochs. The SNN models were markedly less computationally intensive, than DNN. AE and NMF based embeddings were the most resource hungry (Wall Clock Time and RAM). Our results show (1): SNN architectures performed slightly worse than DNN, due to the fact of lesser informative capacity of the models. (2): Dimensionality reduction impacts model performance, though not always positively. (3) EM supplementation causes significant changes in microbiome that can be captured by DL architectures. Future work will include feature-importance analysis, integration of environmental and host metadata, exploration of larger datasets and more advanced architectures. As well as validation of model quality on simulated datasets. Overall, these results indicate that DNN architectures combined with AE embeddings have potential to be used as high accuracy classification tools. Those tools when combined with feature importance can help researchers to understand changes made by EM supplementation in a microbial community.",
+  "authors": [
+    "Sztuka, M.",
+    "Szyda, J."
+  ],
+  "doi": "10.64898/2026.11.24.768658",
+  "first_seen": "2026-11-26",
+  "id": "biorxiv:10.64898/2026.11.24.768658",
+  "metadata": {
+    "abstract": "Deep learning (DL) methods can address many challenges posed by high-dimensional and sparse microbiome data. In this study we applied and compared deep (DNN) and shallow (SNN) feedforward neural networks combined with five dimensionality-reduction techniques: Principal Component Analysis (PCA), Singular Value Decomposition (SVD), Non-negative Matrix Factorization (NMF), Autoencoder based Embeddings (AE), and convolutional layers (Conv). To establish baseline classification performance, the XGBoost was used, as it represents a robust machine learning based classifier with a relatively low number of hyperparameters. The task was to classify effective microorganism (EM) treatments based on intestine bacterial family abundance in common carp. In particular, the experiment involved 25 ponds that were divided into experimental groups. In each pond, the intestinal microbiome of five individuals was determined by sequencing two hypervariable regions of the gene encoding the 16s rRNA gene sequencing. The sequence reads were processed by QIIME2 and taxonomically annotated to the SILVA database, what resulted in 126 annotated families that were used as features in all downstream analyses. Abundance tables from 125 samples, transformed using the Centered Log-Ratio (CLR) method, were used to evaluate ten dimensionality-reduction and Deep learning configurations considering five-, three-, and two-classification scenarios. The DL models were optimized using cross-validation. To combat the overfitting that was present due to sparsity and small sample size, dropout and kernel regularization were implemented. During testing autoencoder embeddings achieved the highest classification accuracy (0.84), exceeding the XGBoost baseline (0.64), while embedding based on convolutional layers significantly reduced performance (0.44). PCA and SVD transformations showed comparable results (0.65), whereas NMF often failed to converge, likely due to incompatibility with CLR-transformed data. Best classification results were obtained for models that implemented AE embedding, it is most likely caused by their ability to capture non-linear patterns in the data. All models showed stable training behavior, with loss functions consistently decreasing across epochs. The SNN models were markedly less computationally intensive, than DNN. AE and NMF based embeddings were the most resource hungry (Wall Clock Time and RAM). Our results show (1): SNN architectures performed slightly worse than DNN, due to the fact of lesser informative capacity of the models. (2): Dimensionality reduction impacts model performance, though not always positively. (3) EM supplementation causes significant changes in microbiome that can be captured by DL architectures. Future work will include feature-importance analysis, integration of environmental and host metadata, exploration of larger datasets and more advanced architectures. As well as validation of model quality on simulated datasets. Overall, these results indicate that DNN architectures combined with AE embeddings have potential to be used as high accuracy classification tools. Those tools when combined with feature importance can help researchers to understand changes made by EM supplementation in a microbial community.",
+    "author_corresponding": "Joanna Szyda",
+    "author_corresponding_institution": "Wroclaw University of Science and Technology",
+    "authors": "Sztuka, M.; Szyda, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-25",
+    "doi": "10.64898/2026.11.24.768658",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/25/2026.11.24.768658.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Does embedding impact classification performance ? A small sample perspective",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Wroclaw University of Science and Technology",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "microbial-ecology"
+  ],
+  "source": "biorxiv",
+  "summary": "Compares deep and shallow neural networks with dimensionality reduction to classify effective microorganism treatments from carp gut bacterial family…",
+  "title": "Does embedding impact classification performance ? A small sample perspective",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.24.768658"
+}

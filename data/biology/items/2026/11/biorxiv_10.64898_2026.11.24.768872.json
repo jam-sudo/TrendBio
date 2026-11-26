@@ -1,0 +1,45 @@
+{
+  "abstract": "Post-sequencing computational processing of tumor-normal whole-genome sequencing (WGS) remains computationally intensive and can delay somatic variant detection in clinical and translational workflows. We developed and evaluated BRISANCE, a graphics processing unit (GPU)-accelerated pipeline based on NVIDIA Parabricks for detecting somatic single-nucleotide variants and short insertions/deletions, using matched tumor-normal WGS data from the Cancer Genome in a Bottle HG008 pancreatic ductal adenocarcinoma model. Concordance with the DRAGEN-derived comparator call set was assessed using allele-level variant-set comparison, RTG Tools haplotype-aware benchmarking, and IGV manual review of four literature-reported HG008-T sample loci. Runtime was measured in two analyses: a fixed CPU-GPU comparison and GPU-scaling experiments. At the analyzed whole-genome call-set level, the PASS-filtered, positive-TLOD Parabricks set and the PASS-filtered DRAGEN set contained 17,134 and 16,885 variants, respectively, sharing 14,430 variants and yielding an intersection-over-union overlap of 73.66%. Shared fractions were 76.09% for single-nucleotide variants and 69.06% for insertions/deletions. Using the DRAGEN-derived call set as a comparator rather than a validated truth set, RTG score-based filtering increased comparator-based precision from 0.8375 to 0.9110 and F-measure from 0.8569 to 0.8821. Qualitative IGV review showed consistent read-level support at the four selected HG008-T loci. In the fixed CPU-GPU comparison using the HG008 tumor-normal dataset, the summed runtime of the evaluated preprocessing and somatic variant-calling components was 10.6 hours for the GPU-accelerated workflow versus 219.4 hours for the CPU-based workflow, corresponding to a 95.1% reduction and a 20.6-fold speedup under the evaluated conditions. In GPU-scaling experiments, alignment/preprocessing reached its shortest runtimes with 6-8 GPUs, whereas MutectCaller reached its shortest runtime with 2-3 GPUs, depending on CPU-thread configuration. Full-input Nextflow execution reproduced the historical CHROM/POS/REF/ALT record set, and a configuration-based interface was developed for user-defined analyses.",
+  "authors": [
+    "Porfirio de Aguiar, M.",
+    "Bispo, S.",
+    "Teixeira, S. A.",
+    "Reis, R. M.",
+    "Sussuchi da Silva, L.",
+    "Santos, L. G. C."
+  ],
+  "doi": "10.64898/2026.11.24.768872",
+  "first_seen": "2026-11-26",
+  "id": "biorxiv:10.64898/2026.11.24.768872",
+  "metadata": {
+    "abstract": "Post-sequencing computational processing of tumor-normal whole-genome sequencing (WGS) remains computationally intensive and can delay somatic variant detection in clinical and translational workflows. We developed and evaluated BRISANCE, a graphics processing unit (GPU)-accelerated pipeline based on NVIDIA Parabricks for detecting somatic single-nucleotide variants and short insertions/deletions, using matched tumor-normal WGS data from the Cancer Genome in a Bottle HG008 pancreatic ductal adenocarcinoma model. Concordance with the DRAGEN-derived comparator call set was assessed using allele-level variant-set comparison, RTG Tools haplotype-aware benchmarking, and IGV manual review of four literature-reported HG008-T sample loci. Runtime was measured in two analyses: a fixed CPU-GPU comparison and GPU-scaling experiments. At the analyzed whole-genome call-set level, the PASS-filtered, positive-TLOD Parabricks set and the PASS-filtered DRAGEN set contained 17,134 and 16,885 variants, respectively, sharing 14,430 variants and yielding an intersection-over-union overlap of 73.66%. Shared fractions were 76.09% for single-nucleotide variants and 69.06% for insertions/deletions. Using the DRAGEN-derived call set as a comparator rather than a validated truth set, RTG score-based filtering increased comparator-based precision from 0.8375 to 0.9110 and F-measure from 0.8569 to 0.8821. Qualitative IGV review showed consistent read-level support at the four selected HG008-T loci. In the fixed CPU-GPU comparison using the HG008 tumor-normal dataset, the summed runtime of the evaluated preprocessing and somatic variant-calling components was 10.6 hours for the GPU-accelerated workflow versus 219.4 hours for the CPU-based workflow, corresponding to a 95.1% reduction and a 20.6-fold speedup under the evaluated conditions. In GPU-scaling experiments, alignment/preprocessing reached its shortest runtimes with 6-8 GPUs, whereas MutectCaller reached its shortest runtime with 2-3 GPUs, depending on CPU-thread configuration. Full-input Nextflow execution reproduced the historical CHROM/POS/REF/ALT record set, and a configuration-based interface was developed for user-defined analyses.",
+    "author_corresponding": "Murilo Porfirio de Aguiar",
+    "author_corresponding_institution": "Barretos Cancer Hospital",
+    "authors": "Porfirio de Aguiar, M.; Bispo, S.; Teixeira, S. A.; Reis, R. M.; Sussuchi da Silva, L.; Santos, L. G. C.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-25",
+    "doi": "10.64898/2026.11.24.768872",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/25/2026.11.24.768872.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "BRISANCE: A GPU-Accelerated Pipeline for Somatic Short-Variant Detection in Whole-Genome Sequencing Data",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Barretos Cancer Hospital",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genetics"
+  ],
+  "source": "biorxiv",
+  "summary": "BRISANCE, a GPU-accelerated Parabricks pipeline, detects somatic variants in tumor-normal WGS of HG008 with 73.66% overlap to DRAGEN and a 20.6-fold runtime…",
+  "title": "BRISANCE: A GPU-Accelerated Pipeline for Somatic Short-Variant Detection in Whole-Genome Sequencing Data",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.24.768872"
+}

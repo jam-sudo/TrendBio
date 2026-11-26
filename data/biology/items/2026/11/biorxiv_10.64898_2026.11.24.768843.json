@@ -1,0 +1,40 @@
+{
+  "abstract": "Quality attributes of therapeutic mRNA include sequence identity, transcript completeness, and poly(A) tail length. While these attributes require monitoring from development through manufacturing, each needs a separate assay. Nanopore direct RNA sequencing enables rapid quality control because it measures all three on the same molecules within a single run, and the resulting data are available during sequencing. However, N1-methylpseudouridine (m1{Psi}), which often replaces uridine in therapeutic mRNAs, alters the nanopore signal, biasing basecalling and poly(A) estimation. We present mRNAspect, a pipeline combining real-time analysis and m1{Psi} bias correction. mRNAspect includes a fine-tuned basecaller and a poly(A) correction based on the reference sequence. mRNAspect is a packaged macOS app that ingests POD5 or BAM files by watching the MinKNOW output directory as sequencing proceeds. Its graphical user interface shows the latest snapshot of the results, and it writes HTML reports as each input file is processed and a PDF report when the run is finished. When measured on Linux with a single NVIDIA RTX 2080 Ti, each 3-min batch of sequencing (about 5,700 reads) was processed in 38 s. The basecaller was fine-tuned on in vitro transcribed (IVT) constructs and cDNA-IVT libraries. Across 10 m1{Psi} constructs held out from training, the fine-tuned basecaller reduced the error rate from 20.1% to 7.2%, compared with 3.0% for unmodified RNA. A poly(A) correction was fitted to constructs with both modified and unmodified pairs. The correction accounts for the fraction of uridine in the reference sequence and the number of uridines within the 12-nt sequence adjacent to the tail. Across eight constructs, the correction reduced the poly(A) tail length difference between modified and unmodified pairs from up to 9.0 nt to within 1.8 nt.",
+  "authors": [
+    "Lee, S."
+  ],
+  "doi": "10.64898/2026.11.24.768843",
+  "first_seen": "2026-11-26",
+  "id": "biorxiv:10.64898/2026.11.24.768843",
+  "metadata": {
+    "abstract": "Quality attributes of therapeutic mRNA include sequence identity, transcript completeness, and poly(A) tail length. While these attributes require monitoring from development through manufacturing, each needs a separate assay. Nanopore direct RNA sequencing enables rapid quality control because it measures all three on the same molecules within a single run, and the resulting data are available during sequencing. However, N1-methylpseudouridine (m1{Psi}), which often replaces uridine in therapeutic mRNAs, alters the nanopore signal, biasing basecalling and poly(A) estimation. We present mRNAspect, a pipeline combining real-time analysis and m1{Psi} bias correction. mRNAspect includes a fine-tuned basecaller and a poly(A) correction based on the reference sequence. mRNAspect is a packaged macOS app that ingests POD5 or BAM files by watching the MinKNOW output directory as sequencing proceeds. Its graphical user interface shows the latest snapshot of the results, and it writes HTML reports as each input file is processed and a PDF report when the run is finished. When measured on Linux with a single NVIDIA RTX 2080 Ti, each 3-min batch of sequencing (about 5,700 reads) was processed in 38 s. The basecaller was fine-tuned on in vitro transcribed (IVT) constructs and cDNA-IVT libraries. Across 10 m1{Psi} constructs held out from training, the fine-tuned basecaller reduced the error rate from 20.1% to 7.2%, compared with 3.0% for unmodified RNA. A poly(A) correction was fitted to constructs with both modified and unmodified pairs. The correction accounts for the fraction of uridine in the reference sequence and the number of uridines within the 12-nt sequence adjacent to the tail. Across eight constructs, the correction reduced the poly(A) tail length difference between modified and unmodified pairs from up to 9.0 nt to within 1.8 nt.",
+    "author_corresponding": "Sua Lee",
+    "author_corresponding_institution": "Seoul National University",
+    "authors": "Lee, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-25",
+    "doi": "10.64898/2026.11.24.768843",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/25/2026.11.24.768843.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "mRNAspect: Real-Time Quality Control of Therapeutic mRNA with N1-Methylpseudouridine Bias Correction Using Nanopore Direct RNA Sequencing",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Seoul National University",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "molecular-cell"
+  ],
+  "source": "biorxiv",
+  "summary": "mRNAspect is a real-time nanopore direct RNA sequencing pipeline that corrects N1-methylpseudouridine signal bias, improving basecalling and poly(A) tail…",
+  "title": "mRNAspect: Real-Time Quality Control of Therapeutic mRNA with N1-Methylpseudouridine Bias Correction Using Nanopore Direct RNA Sequencing",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.24.768843"
+}

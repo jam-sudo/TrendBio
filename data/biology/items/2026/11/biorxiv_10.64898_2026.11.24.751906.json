@@ -1,0 +1,42 @@
+{
+  "abstract": "Imaging-based spatial transcriptomics (ST) measures gene expression at single-cell resolution, but imperfect segmentation often misassigns transcripts between neighboring cells, a problem known as transcript spillover. This spillover is niche-dependent and can therefore confound downstream analyses that rely on niche-specific differential expression. True spillover cannot be directly quantified in experimental ST data, so existing correction methods infer contamination indirectly from transcript positions or expression structure. Here we introduce SYNDRI, a post-segmentation correction method that frames spillover detection as a supervised, gene-level classification task. We develop SYNDRI-SIM to generate labeled training data by simulating spillover between spatially mapped scRNA-seq profiles. SYNDRI uses a transformer to predict gene-level spillover probabilities conditioned on each cell's expression, identity, and local neighborhood, without requiring transcript-level coordinates or deconvolution. On held-out simulated data, SYNDRI achieves an AUPRC of 0.86, compared with 0.64 for the next-best method. Across MERFISH, CosMx, and Xenium datasets, SYNDRI achieves the highest aggregate performance across metrics of cell-type separation, reference similarity, and preservation of within-cell-type heterogeneity. In a CosMx lung cancer dataset, SYNDRI removes nearly all potentially contaminating tumor and macrophage markers from differential expression between tumor-associated and stromal fibroblasts while retaining native fibroblast markers. These results demonstrate the utility of learning from simulated spillover to improve the interpretation of spatial gene expression.",
+  "authors": [
+    "Winchell, J.",
+    "Ma, J.",
+    "Krieger, S."
+  ],
+  "doi": "10.64898/2026.11.24.751906",
+  "first_seen": "2026-11-26",
+  "id": "biorxiv:10.64898/2026.11.24.751906",
+  "metadata": {
+    "abstract": "Imaging-based spatial transcriptomics (ST) measures gene expression at single-cell resolution, but imperfect segmentation often misassigns transcripts between neighboring cells, a problem known as transcript spillover. This spillover is niche-dependent and can therefore confound downstream analyses that rely on niche-specific differential expression. True spillover cannot be directly quantified in experimental ST data, so existing correction methods infer contamination indirectly from transcript positions or expression structure. Here we introduce SYNDRI, a post-segmentation correction method that frames spillover detection as a supervised, gene-level classification task. We develop SYNDRI-SIM to generate labeled training data by simulating spillover between spatially mapped scRNA-seq profiles. SYNDRI uses a transformer to predict gene-level spillover probabilities conditioned on each cell's expression, identity, and local neighborhood, without requiring transcript-level coordinates or deconvolution. On held-out simulated data, SYNDRI achieves an AUPRC of 0.86, compared with 0.64 for the next-best method. Across MERFISH, CosMx, and Xenium datasets, SYNDRI achieves the highest aggregate performance across metrics of cell-type separation, reference similarity, and preservation of within-cell-type heterogeneity. In a CosMx lung cancer dataset, SYNDRI removes nearly all potentially contaminating tumor and macrophage markers from differential expression between tumor-associated and stromal fibroblasts while retaining native fibroblast markers. These results demonstrate the utility of learning from simulated spillover to improve the interpretation of spatial gene expression.",
+    "author_corresponding": "Spencer Krieger",
+    "author_corresponding_institution": "Dartmouth College",
+    "authors": "Winchell, J.; Ma, J.; Krieger, S.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-25",
+    "doi": "10.64898/2026.11.24.751906",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/25/2026.11.24.751906.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "SYNDRI: Context-aware removal of transcript spillover in imaging-based spatial transcriptomics",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Dartmouth College",
+  "preprint_id": null,
+  "primary_category": "quantitative",
+  "published_at": "2026-11-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "genetics"
+  ],
+  "source": "biorxiv",
+  "summary": "SYNDRI, a transformer-based supervised method trained on simulated data, removes transcript spillover in imaging spatial transcriptomics, improving…",
+  "title": "SYNDRI: Context-aware removal of transcript spillover in imaging-based spatial transcriptomics",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.24.751906"
+}
