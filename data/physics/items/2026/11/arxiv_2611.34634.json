@@ -1,0 +1,34 @@
+{
+  "abstract": "Reinforcement learning (RL) emerges as a prominent approach to quantum architecture search (QAS), the automated design of quantum circuits. However, transferring what an agent has learned from one number of qubits to another is still weakly explored: the state, the action space and the neural network of a state-of-the-art RL-QAS agent all grow with the number of qubits, which makes transfer learning across qubit counts prohibitive. We make this transfer possible by introducing LatentRL-QAS, a latent space transfer and refresh framework for RL-based QAS. At its core, a circuit variational autoencoder encodes a circuit as one token per gate and maps circuits on any number of qubits into the same latent space. An RL agent navigates this space instead of adding gates, so its state, actions and network have the same size at every qubit count. The latent space is periodically refreshed with the agent's new discoveries and, for a larger system, grown from the solutions of the smaller one, so what is transferred is the representation of circuits, not network weights or past experience. To show transfer, we consider absolutely maximally entangled (AME) states, a resource for quantum error correction. LatentRL-QAS discovers the five- and six-qubit AME states without being shown them and prepares them in 89-99% of evaluation episodes, whereas the baseline RL-QAS fails to find them with the same budget, even with a network 10 to 17 times larger. LatentRL-QAS remains robust under depolarizing noise with single-qubit gate errors amplified 10x and two-qubit gate errors 5x compared with IBM quantum hardware. By decoupling the RL agent from the number of qubits, LatentRL-QAS lets quantum architecture search reuse circuit representations learned on smaller problems, providing a foundation for the transferable design of circuits across quantum optimization problems.",
+  "authors": [
+    "Maria Ilektra Plakitsi",
+    "Sebastian Feld",
+    "Akash Kundu"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-26",
+  "id": "arxiv:2611.34634",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.34634v1</ns0:id>\n    <ns0:title>LatentRL-QAS: Transfer via Latent Reinforcement Learning for Quantum Architecture Search</ns0:title>\n    <ns0:updated>2026-11-25T16:20:02Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.34634v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.34634v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Reinforcement learning (RL) emerges as a prominent approach to quantum architecture search (QAS), the automated design of quantum circuits. However, transferring what an agent has learned from one number of qubits to another is still weakly explored: the state, the action space and the neural network of a state-of-the-art RL-QAS agent all grow with the number of qubits, which makes transfer learning across qubit counts prohibitive. We make this transfer possible by introducing LatentRL-QAS, a latent space transfer and refresh framework for RL-based QAS. At its core, a circuit variational autoencoder encodes a circuit as one token per gate and maps circuits on any number of qubits into the same latent space. An RL agent navigates this space instead of adding gates, so its state, actions and network have the same size at every qubit count. The latent space is periodically refreshed with the agent's new discoveries and, for a larger system, grown from the solutions of the smaller one, so what is transferred is the representation of circuits, not network weights or past experience. To show transfer, we consider absolutely maximally entangled (AME) states, a resource for quantum error correction. LatentRL-QAS discovers the five- and six-qubit AME states without being shown them and prepares them in 89-99% of evaluation episodes, whereas the baseline RL-QAS fails to find them with the same budget, even with a network 10 to 17 times larger. LatentRL-QAS remains robust under depolarizing noise with single-qubit gate errors amplified 10x and two-qubit gate errors 5x compared with IBM quantum hardware. By decoupling the RL agent from the number of qubits, LatentRL-QAS lets quantum architecture search reuse circuit representations learned on smaller problems, providing a foundation for the transferable design of circuits across quantum optimization problems.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.LG\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-25T16:20:02Z</ns0:published>\n    <ns1:comment>26 pages main text + references and appendices (41 pages total), 6 figures, 10 tables</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Maria Ilektra Plakitsi</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Sebastian Feld</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Akash Kundu</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "LatentRL-QAS uses a circuit variational autoencoder and latent-space reinforcement learning to transfer quantum circuit design across qubit counts, finding 5-…",
+  "title": "LatentRL-QAS: Transfer via Latent Reinforcement Learning for Quantum Architecture Search",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.34634v1"
+}

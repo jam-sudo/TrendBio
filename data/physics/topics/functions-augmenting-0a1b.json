@@ -770,7 +770,7 @@
     -0.011800895445048809,
     -0.055478643625974655
   ],
-  "headline": "Learned and empirical mappings link dark matter halos to galaxies, gas and lensing mass maps",
+  "headline": "Public pipelines for halo occupation, voids, N-body and forward-modelled photometry mature",
   "history": [
     {
       "attached_item_ids": [],
@@ -1010,10 +1010,40 @@
         "rise_ratio": 1.1666666666666667,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "cosmology",
+      "count_7d": 4,
+      "date": "2026-11-26",
+      "item_ids": [
+        "arxiv:2611.26785",
+        "arxiv:2611.28882",
+        "arxiv:2611.30647",
+        "arxiv:2611.33092"
+      ],
+      "rank": 18,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.0,
+        "total": 0.5739004051593306,
+        "volume": 0.4093360343955374
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 4,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Painting Baryons Onto Dark Matter",
+  "label": "Galaxy Halo Modelling Tools",
   "related": [
     "inference-fit-6a61",
     "halo-evolution-cdde",
@@ -1021,8 +1051,8 @@
   ],
   "secondary_categories": [],
   "slug": "functions-augmenting-0a1b",
-  "summary": "Five preprints apply ML and empirical halo-galaxy models from z~2.3 protoclusters to z>6 JWST galaxies, in both forward and inverse directions.",
-  "synthesis": "The common thread is the use of simulation-trained or empirical models to link dark matter structure to baryonic observables. In the forward direction, Extremely Randomized Trees and Gaussian Processes populate the 2.8 Gpc FLAMINGO-10k dark-matter-only run with a galaxy catalogue. An empirical model predicts individual halo concentrations from assembly histories in cold and warm dark matter over z=0-5. A flexible model connecting halo mass, stellar mass, SFR and UV magnitude is fit to JWST UV luminosity functions and angular correlations at z>6. In the inverse direction, deep learning infers cluster mass maps and subhalo substructure from HST imaging, matching CLASH lensing, and a CNN reconstructs IGM column-density maps from noisy KCWI Lyα cubes of z~2.3 protoclusters. The new element is the span of scales, redshifts and observables, though methods and targets differ across the items.",
+  "summary": "New code releases and validation tests cover HOD fitting, void finding, N-body convergence and differentiable SPHEREx photometry ahead of Stage IV surveys.",
+  "synthesis": "The items share a methodological focus on the infrastructure connecting dark matter structure to survey observables. SciPIC-lite provides a public, flexible Halo Occupation Distribution pipeline for clustering observables. PhotoNs-3 is tested against GADGET for accuracy and convergence in power spectra, halo profiles and mass functions at Stage IV requirements, bearing on the simulated dark matter backbone onto which galaxies are painted. The Popcorn Void Finder reimplementation documents the algorithm and reports a change from a power-law to a Schechter-like void size function. Hesperos and Eosphoros add a differentiable forced-photometry operator and forward model for SPHEREx spectrophotometry. The new element is emphasis on reproducibility, validation and differentiability rather than new astrophysical results; the items address different stages of the pipeline and are not a single analysis chain.",
   "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-24"
+  "synthesized_on": "2026-11-26"
 }

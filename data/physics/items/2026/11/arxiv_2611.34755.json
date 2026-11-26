@@ -1,0 +1,32 @@
+{
+  "abstract": "While hybrid quantum-classical physics-informed neural networks (QCPINNs) are often described as efficient because they have fewer trainable parameters than classical PINNs, parameter count does not measure wall-clock cost. To examine this gap on a one-dimensional seawater temperature diffusion benchmark, with the quantum circuits simulated on a CPU, we time the four cumulative stages a PINN needs (the forward pass, the first- and second-order input gradients, and the PDE-loss parameter gradient) for a classical PINN, four hybrid configurations that differ in qubit count and circuit depth, and size-matched classical controls that share the hybrids' classical layers. We find that the hybrids are 14-56x slower than the classical PINN for the forward pass and 10-97x slower for the PDE-loss parameter gradient, and even against the size-matched controls, they remain 9-85x slower. Further, over the tested ranges, runtime increased approximately exponentially with qubit count, approximately linearly with circuit depth, and sub-linearly with batch size, while for the circuit-only forward pass, a second simulator backend was 10-165x slower under the same calling pattern. Although the hybrids have 38-44% fewer parameters than the classical PINN, this reduction comes from their smaller classical layers, as the quantum circuit accounts for at most 2.5% of each hybrid's parameters. Yet parameter count failed to predict runtime even among the classical networks, since the size-matched controls, despite having fewer parameters than the classical PINN, run slower than it. Our conclusion is that fewer parameters did not mean lower cost: every hybrid took at least ten times longer than the classical PINN at every stage, and the gap grew quickly with the number of qubits.",
+  "authors": [
+    "Leyan Lyu",
+    "Shabnam Jabeen"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-26",
+  "id": "arxiv:2611.34755",
+  "metadata": {
+    "arxiv_primary_category": "quant-ph",
+    "categories": [
+      "quant-ph",
+      "physics.comp-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.34755v1</ns0:id>\n    <ns0:title>Fewer Parameters, Longer Runtimes: The Wall-Clock Cost of Hybrid Quantum Physics-Informed Neural Networks</ns0:title>\n    <ns0:updated>2026-11-25T17:26:46Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.34755v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.34755v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>While hybrid quantum-classical physics-informed neural networks (QCPINNs) are often described as efficient because they have fewer trainable parameters than classical PINNs, parameter count does not measure wall-clock cost. To examine this gap on a one-dimensional seawater temperature diffusion benchmark, with the quantum circuits simulated on a CPU, we time the four cumulative stages a PINN needs (the forward pass, the first- and second-order input gradients, and the PDE-loss parameter gradient) for a classical PINN, four hybrid configurations that differ in qubit count and circuit depth, and size-matched classical controls that share the hybrids' classical layers. We find that the hybrids are 14-56x slower than the classical PINN for the forward pass and 10-97x slower for the PDE-loss parameter gradient, and even against the size-matched controls, they remain 9-85x slower. Further, over the tested ranges, runtime increased approximately exponentially with qubit count, approximately linearly with circuit depth, and sub-linearly with batch size, while for the circuit-only forward pass, a second simulator backend was 10-165x slower under the same calling pattern. Although the hybrids have 38-44% fewer parameters than the classical PINN, this reduction comes from their smaller classical layers, as the quantum circuit accounts for at most 2.5% of each hybrid's parameters. Yet parameter count failed to predict runtime even among the classical networks, since the size-matched controls, despite having fewer parameters than the classical PINN, run slower than it. Our conclusion is that fewer parameters did not mean lower cost: every hybrid took at least ten times longer than the classical PINN at every stage, and the gap grew quickly with the number of qubits.</ns0:summary>\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"physics.comp-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-25T17:26:46Z</ns0:published>\n    <ns1:comment>20 pages, 4 figures, 14 tables</ns1:comment>\n    <ns1:primary_category term=\"quant-ph\" />\n    <ns0:author>\n      <ns0:name>Leyan Lyu</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Shabnam Jabeen</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-25",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "other-physics"
+  ],
+  "source": "arxiv",
+  "summary": "Timing study of hybrid quantum-classical PINNs on a 1D seawater temperature diffusion benchmark finds hybrids 9-97x slower than classical PINNs despite 38-44%…",
+  "title": "Fewer Parameters, Longer Runtimes: The Wall-Clock Cost of Hybrid Quantum Physics-Informed Neural Networks",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.34755v1"
+}

@@ -1,0 +1,35 @@
+{
+  "abstract": "Switch-based quantum datacenters connect quantum processing units (QPUs) through photonic switches and shared Bell-state measurement (BSM) devices. Sharing BSMs saves hardware, but fixed connectivity constrains access to these resources. Local communication can overload one rack's BSMs while others remain idle; reaching those idle resources incurs additional optical loss and retries through switches and quantum frequency converters (QFCs). Programs remain locked into this locality-contention tradeoff as their communication patterns change.\n  We propose Schism, an architecture that lets programs dynamically change which QPUs share each BSM pool. Schism places BSM pools at aggregation switches and QFCs on their core-facing uplinks. Top-of-rack switches establish reconfigurable native-wavelength circuits from QPUs to these pools, forming scale-up domains bounded by the optical loss budget. Reconfiguration reshapes resource sharing across racks without moving QPUs or migrating quantum states. Our key insight is that QPU grouping jointly determines photon-path loss and contention for BSM resources: locality alone cannot identify the best grouping, and a grouping pays off only if its savings outweigh the delay of reconfiguring to it. We develop an optimization framework that combines graph partitioning with resource-constrained completion-time estimates and dynamic programming to select how QPUs share BSM pools and when those groupings reconfigure, between or within circuit phases.\n  Our evaluation using SeQUeNCe with trapped-ion parameters shows that Schism achieves communication speedups of 4.9-7.3x across 11 workloads on 32 QPUs compared to Fixed Clos connectivity and 3.6-8.3x compared to SwitchQNet. Schism also outperforms a hypothetical network-wide switch by 1.35-1.38x on the eight workloads whose phases fit in a pool, and trails it by 1.1-1.75x on the other three.",
+  "authors": [
+    "Daniel Alexander",
+    "Deeksha P Rao",
+    "Nilesh Vyas",
+    "Vamsi Addanki"
+  ],
+  "doi": null,
+  "first_seen": "2026-11-26",
+  "id": "arxiv:2611.31193",
+  "metadata": {
+    "arxiv_primary_category": "cs.NI",
+    "categories": [
+      "cs.NI",
+      "cs.AR",
+      "quant-ph"
+    ],
+    "xml": "<ns0:entry xmlns:ns0=\"http://www.w3.org/2005/Atom\" xmlns:ns1=\"http://arxiv.org/schemas/atom\">\n    <ns0:id>http://arxiv.org/abs/2611.31193v1</ns0:id>\n    <ns0:title>Schism: Reconfigurable Scale-Up Domains for Distributed Quantum Computing</ns0:title>\n    <ns0:updated>2026-11-23T18:45:22Z</ns0:updated>\n    <ns0:link href=\"https://arxiv.org/abs/2611.31193v1\" rel=\"alternate\" type=\"text/html\" />\n    <ns0:link href=\"https://arxiv.org/pdf/2611.31193v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\" />\n    <ns0:summary>Switch-based quantum datacenters connect quantum processing units (QPUs) through photonic switches and shared Bell-state measurement (BSM) devices. Sharing BSMs saves hardware, but fixed connectivity constrains access to these resources. Local communication can overload one rack's BSMs while others remain idle; reaching those idle resources incurs additional optical loss and retries through switches and quantum frequency converters (QFCs). Programs remain locked into this locality-contention tradeoff as their communication patterns change.\n  We propose Schism, an architecture that lets programs dynamically change which QPUs share each BSM pool. Schism places BSM pools at aggregation switches and QFCs on their core-facing uplinks. Top-of-rack switches establish reconfigurable native-wavelength circuits from QPUs to these pools, forming scale-up domains bounded by the optical loss budget. Reconfiguration reshapes resource sharing across racks without moving QPUs or migrating quantum states. Our key insight is that QPU grouping jointly determines photon-path loss and contention for BSM resources: locality alone cannot identify the best grouping, and a grouping pays off only if its savings outweigh the delay of reconfiguring to it. We develop an optimization framework that combines graph partitioning with resource-constrained completion-time estimates and dynamic programming to select how QPUs share BSM pools and when those groupings reconfigure, between or within circuit phases.\n  Our evaluation using SeQUeNCe with trapped-ion parameters shows that Schism achieves communication speedups of 4.9-7.3x across 11 workloads on 32 QPUs compared to Fixed Clos connectivity and 3.6-8.3x compared to SwitchQNet. Schism also outperforms a hypothetical network-wide switch by 1.35-1.38x on the eight workloads whose phases fit in a pool, and trails it by 1.1-1.75x on the other three.</ns0:summary>\n    <ns0:category term=\"cs.NI\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"cs.AR\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:category term=\"quant-ph\" scheme=\"http://arxiv.org/schemas/atom\" />\n    <ns0:published>2026-11-23T18:45:22Z</ns0:published>\n    <ns1:comment>14 pages, 9 figures</ns1:comment>\n    <ns1:primary_category term=\"cs.NI\" />\n    <ns0:author>\n      <ns0:name>Daniel Alexander</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Deeksha P Rao</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Nilesh Vyas</ns0:name>\n    </ns0:author>\n    <ns0:author>\n      <ns0:name>Vamsi Addanki</ns0:name>\n    </ns0:author>\n  </ns0:entry>\n  "
+  },
+  "org": null,
+  "preprint_id": null,
+  "primary_category": "quantum",
+  "published_at": "2026-11-23",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "optics"
+  ],
+  "source": "arxiv",
+  "summary": "Schism proposes reconfigurable scale-up domains for quantum datacenters, dynamically regrouping QPUs sharing Bell-state measurement pools; simulations show…",
+  "title": "Schism: Reconfigurable Scale-Up Domains for Distributed Quantum Computing",
+  "type": "preprint",
+  "url": "http://arxiv.org/abs/2611.31193v1"
+}
