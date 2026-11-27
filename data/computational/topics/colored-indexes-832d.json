@@ -770,7 +770,7 @@
     0.0007230448536574841,
     -0.04765218496322632
   ],
-  "headline": "Flow matching and inverse-folding encoders target conformational change and RNA design",
+  "headline": "Flow matching and learned search generate protein and RNA structures under physical and verifier constraints",
   "history": [
     {
       "attached_item_ids": [],
@@ -1295,19 +1295,54 @@
         "rise_ratio": 2.823529411764706,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "structural",
+      "count_7d": 9,
+      "date": "2026-11-27",
+      "item_ids": [
+        "arxiv:2611.27162",
+        "arxiv:2611.33812",
+        "biorxiv:10.64898/2026.11.18.767577",
+        "biorxiv:10.64898/2026.11.20.768033",
+        "biorxiv:10.64898/2026.11.20.768221",
+        "biorxiv:10.64898/2026.11.23.768775",
+        "pubmed:10.1016/j.cels.2026.101784",
+        "pubmed:10.1021/acs.jcim.6c02897",
+        "pubmed:10.1371/journal.pcbi.1014965"
+      ],
+      "rank": 7,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.05973311510679224,
+        "rise": 2.1818181818181817,
+        "total": 1.1349291870290525,
+        "volume": 0.5856274687844196
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 3,
+        "rise_baseline": "four_week_mean",
+        "rise_ratio": 2.1818181818181817,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
   "label": "Structure Informed Generative Modeling",
   "related": [
     "end-ampair-ee7c",
-    "rna-prediction-7112",
-    "builder-capsid-20a5"
+    "associated-oyster-3ec6",
+    "rna-prediction-7112"
   ],
   "secondary_categories": [],
   "slug": "colored-indexes-832d",
-  "summary": "Two independent apo-to-holo flow-matching models, plus RNA inverse-design search and inverse-folding pretraining, push structure conditioning into generation.",
-  "synthesis": "The dominant thread is generative modeling conditioned on explicit structural representations, with the apo-to-holo transition as a shared testbed: CrypticFlow couples Cartesian C-alpha anchors with internal-coordinate midpoints in a hierarchical flow-matching scheme aimed at physical plausibility, while A2Holo runs dual-stream flow matching over protein language model embeddings and 3D coordinates. On the RNA side, KnitNet replaces single-pass decoding with learned inference-time search guided by verifier feedback for exact inverse folding, BRIDGE pretrains an inverse-folding encoder on backbone atoms from 2,501 structures as a transferable representation for ligand-binding tasks, and MXfold2 is extended to backpropagate through discrete folding via implicit maximum-likelihood gradients to learn from chemical probing. Discriminative work runs alongside: SCOPE for catalytic residues, RAVEN's frozen random graph reservoirs with physics-informed fingerprints, ProtBFF's biophysical descriptors for ΔΔG, and evidence that language model attention alone predicts allosteric residues without structure.",
-  "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-26"
+  "summary": "Two apo-to-holo flow-matching models and RNA design methods using verifier feedback or probing data show structure-conditioned generation moving toward physical fidelity.",
+  "synthesis": "The dominant thread is generative modeling conditioned on explicit structural representations. Apo-to-holo conformational transition serves as a shared testbed: CrypticFlow combines Cartesian C-alpha anchors with internal-coordinate midpoints in hierarchical flow matching, while A2Holo runs dual-stream flow matching over protein language model embeddings and 3D structure. For RNA, KnitNet adds learned inference-time search driven by verifier feedback for exact inverse design, BRIDGE pretrains an inverse-folding encoder on backbone atoms from 2,501 structures, and MXfold2 learns from chemical probing through implicit maximum-likelihood gradients across discrete folding. Predictive work on catalytic residues, binding affinity, ΔΔG and allostery runs alongside; the allostery study notably uses language model attention without structure. The common novelty is coupling learned models to physical or verifiable structural constraints.",
+  "synthesis_model": "claude-sonnet-5-5",
+  "synthesized_on": "2026-11-27"
 }
