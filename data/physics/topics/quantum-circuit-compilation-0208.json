@@ -770,7 +770,7 @@
     0.009440101683139801,
     -0.06002383306622505
   ],
-  "headline": "Quantum compilers optimize physical cost: atom transport, pulse latency, coupling limits",
+  "headline": "Full-stack quantum workflows meet end-to-end cost estimates against classical baselines",
   "history": [
     {
       "attached_item_ids": [],
@@ -1060,19 +1060,50 @@
         "rise_ratio": 1.1428571428571428,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantum",
+      "count_7d": 5,
+      "date": "2026-11-27",
+      "item_ids": [
+        "arxiv:2611.29983",
+        "arxiv:2611.31514",
+        "arxiv:2611.33454",
+        "arxiv:2611.33883",
+        "arxiv:2611.34889"
+      ],
+      "rank": 11,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.3333333333333333,
+        "total": 0.7308560120640406,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Hardware Aware Quantum Compilation",
+  "label": "Quantum Software Stacks And Resource",
   "related": [
-    "quantum-adapted-fddb",
     "learning-quantum-1f91",
-    "quantum-topic-6ccd"
+    "quantum-topic-6ccd",
+    "quantum-rydberg-6779"
   ],
   "secondary_categories": [],
   "slug": "quantum-circuit-compilation-0208",
-  "summary": "Compilers now optimize atom transport, pulse latency and routing directly, as QEC simulators add ion heating, coherent noise and mid-circuit measurement.",
-  "synthesis": "The dominant thread is compilation scored by platform-level cost rather than abstract gate count. NEAT optimizes AOD-based atom transport, placement, routing and scheduling for neutral-atom arrays. SCOPE uses an operator Schmidt time surrogate to cut pulse execution latency and reports gains over EPOC on 104 benchmarks. The quspect SDK selects routings after coupling-constrained resynthesis, using 0.616x the two-qubit gates of Qiskit O3 on 55 circuits. CAVQS and a persistent-occupancy compiler for independent-set problems add synthesis and constraint-preserving structure. A second thread makes QEC simulation more hardware-realistic. THeatA tracks per-ion phonon numbers under QCCD transport. Compiled Clifford-augmented MPS reach distance-9 surface codes under coherent noise. MASQ provides exact near-Clifford sampling, and pre-trajectory GPU sampling now handles general Kraus channels and mid-circuit measurements. GEARS uses syndrome feedback with gate-error amplification for in-situ recalibration, reducing measurement needs about eightfold.",
-  "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-24"
+  "summary": "New stack and workflow papers appear alongside end-to-end estimates that test chemistry and ML advantage claims against classical methods and fault-tolerant targets.",
+  "synthesis": "The current items shift from hardware-aware compilation per se to the surrounding software and cost-accounting layer. Cqlib offers a Rust-core stack with Python and C interfaces spanning simulation, compilation, algorithms, and QCIS hardware, while TyxonQ links QM/MM, fragment embedding, classical CCSD/FCI, and quantum solvers to MD engines for incremental quantum integration. The DOE blueprint sets a fault-tolerant target of 100+ logical qubits by 2028, scaling to 1,000-10,000. Two estimation papers temper advantage expectations: quantum linear solver training for linearized neural networks crosses over classically only at very large sizes, and SHCI/TrimCI benchmarks on 26 chemistry instances find classical computation cheaper for six of seven systems. The common thread is evaluating quantum workflows by end-to-end runtime and cost rather than abstract algorithmic scaling.",
+  "synthesis_model": "claude-sonnet-5-5",
+  "synthesized_on": "2026-11-27"
 }
