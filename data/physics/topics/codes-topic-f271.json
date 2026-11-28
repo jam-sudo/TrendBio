@@ -770,7 +770,7 @@
     9.030453657032922e-05,
     -0.04818335920572281
   ],
-  "headline": "Search and solver-based synthesis optimizes fault-tolerant and algorithmic quantum circuits",
+  "headline": "Symmetry and code structure are exploited to cut costs of quantum state-preparation and compilation",
   "history": [
     {
       "attached_item_ids": [],
@@ -1043,10 +1043,41 @@
         "rise_ratio": 1.3333333333333333,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantum",
+      "count_7d": 5,
+      "date": "2026-11-28",
+      "item_ids": [
+        "arxiv:2611.28353",
+        "arxiv:2611.29313",
+        "arxiv:2611.30014",
+        "arxiv:2611.32388",
+        "arxiv:2611.32805"
+      ],
+      "rank": 10,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.0,
+        "rise": 1.3333333333333333,
+        "total": 0.7308560120640406,
+        "volume": 0.4557067470936043
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 5,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.3333333333333333,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Automated Quantum Circuit Synthesis",
+  "label": "Structure Exploiting Quantum Circuit Synthesis",
   "related": [
     "time-controlled-criticality-bc5c",
     "codes-distance-49c0",
@@ -1054,8 +1085,8 @@
   ],
   "secondary_categories": [],
   "slug": "codes-topic-f271",
-  "summary": "Six preprints apply constraint solving, tree search, LLM-driven search and verified compilation to cut circuit cost across error-correction and algorithm layers.",
-  "synthesis": "The common thread is automated, search-based design of quantum circuits under explicit cost or correctness constraints. For fault tolerance, Block Checks with Pareto tree search target depth-operation trade-offs in state preparation, while CP-SAT synthesis exploits code structure to lower logical error rates in syndrome extraction for CSS quantum LDPC codes. At the algorithm level, LLM-driven search redesigns the approximate RNS modular exponentiation pipeline for RSA-2048, reducing expected Toffoli count by up to 78.6%. QBlue is extended to block-encoding algorithms with machine-checked verification, evaluated on 279 programs against PennyLane. Structure-aware compilation for independent-set optimization and context-aware variational synthesis with mid-circuit reconstruction complete the picture. The novelty lies in coupling optimization with structural or formal guarantees, though the preprints address different circuit classes.",
+  "summary": "Five preprints use symmetry, code structure, or constraints to reduce Toffoli counts and circuit resources in state preparation, compilation, and magic-state factories.",
+  "synthesis": "The dominant thread is circuit construction that exploits explicit structure to reduce resource cost. Two preprints prepare DMRG matrix product states by using spin symmetry: abelian-symmetric block-sparse protocols cut Toffoli counts by up to 135x, and a non-Abelian SU(2) approach uses Wigner-Eckart reduction and Clebsch-Gordan transforms. CSS-T-Product codes, whose transversal phase gates implement multi-qubit logical diagonal gates, enable tailored magic-state factories. A structure-aware compiler with persistent occupancy encoding preserves constraints for independent-set optimization circuits. PP-VarQITE combines Pauli propagation with variational imaginary-time evolution for shallow thermal-state circuits, demonstrated on up to 98 qubits. The items address different circuit classes and do not share a single method; the common element is tying synthesis to symmetry or code structure.",
   "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-26"
+  "synthesized_on": "2026-11-28"
 }

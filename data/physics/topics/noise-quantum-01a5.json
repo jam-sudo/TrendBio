@@ -770,7 +770,7 @@
     0.006398641504347324,
     -0.05361320450901985
   ],
-  "headline": "Decoders, compilers and simulators are co-designed for fault-tolerant quantum hardware",
+  "headline": "Decoders, verified compilers, and hardware-aware simulation target the classical layer of FTQC",
   "history": [
     {
       "attached_item_ids": [],
@@ -1094,6 +1094,38 @@
         "rise_ratio": 1.5,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "quantum",
+      "count_7d": 6,
+      "date": "2026-11-28",
+      "item_ids": [
+        "arxiv:2611.28388",
+        "arxiv:2611.28427",
+        "arxiv:2611.30676",
+        "arxiv:2611.31158",
+        "arxiv:2611.34481",
+        "arxiv:2611.34891"
+      ],
+      "rank": 9,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.04058684469536168,
+        "rise": 1.5,
+        "total": 0.7711500492118719,
+        "volume": 0.49491262604822334
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.5,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1105,8 +1137,8 @@
   ],
   "secondary_categories": [],
   "slug": "noise-quantum-01a5",
-  "summary": "New work targets the classical stack of fault-tolerant machines: microsecond GPU decoding, loss-aware decoders, verified compilers, speculation and trapped-ion QEC simulation.",
-  "synthesis": "The common thread is classical software and control that must keep pace with, or resource-optimize, fault-tolerant quantum computation. On decoding, a GPU decoder for bivariate bicycle codes sustains one syndrome round per microsecond under circuit-level noise, and a loss-aware CNN decoder with a fast sampler reduces logical error rates for qubit loss in surface and high-rate qLDPC codes. On compilation, QBlue is extended to block-encoding algorithms with machine-checked verification, and LLM-driven search cuts the expected Toffoli count for RSA-2048 factoring by up to 78.6%. Froq adds safe speculative execution on live quantum states through recovery contracts, while THeatA models transport and heating in QCCD trapped-ion QEC. Hardware-aware and verifiable design is the common emphasis.",
+  "summary": "Six preprints from 20–25 Nov 2026 address FTQC's classical stack: real-time decoding, verified compilation, speculative execution, and trapped-ion QEC modeling.",
+  "synthesis": "The dominant thread is the classical software and control stack required to run fault-tolerant quantum computation. Two decoder papers address throughput and noise realism: a GPU decoder for bivariate bicycle codes sustains one syndrome round per microsecond under circuit-level noise, and a loss-aware CNN decoder with a fast sampler lowers logical error rates for qubit loss in surface and high-rate qLDPC codes. On compilation, QBlue's machine-checked Hamiltonian simulation compiler is extended to block-encoding algorithms, and LLM-driven search cuts the expected Toffoli count for RSA-2048 factoring by up to 78.6%. Froq introduces speculative execution on live quantum states using recovery contracts, while THeatA adds per-ion phonon and heating tracking to QCCD trapped-ion QEC simulation. The common emphasis is verifiable, hardware-aware design.",
   "synthesis_model": "claude-sonnet-5-5",
-  "synthesized_on": "2026-11-27"
+  "synthesized_on": "2026-11-28"
 }

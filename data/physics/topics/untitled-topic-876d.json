@@ -770,7 +770,7 @@
     0.002244600560516119,
     -0.04167383536696434
   ],
-  "headline": "Physics-Trained Surrogates for Optical Imaging Design and Blind Deconvolution",
+  "headline": "Simulation-trained surrogates couple optical physics to design and inverse imaging",
   "history": [
     {
       "attached_item_ids": [],
@@ -1068,6 +1068,35 @@
         "rise_ratio": 1.0,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "optics",
+      "count_7d": 3,
+      "date": "2026-11-28",
+      "item_ids": [
+        "arxiv:2611.30079",
+        "arxiv:2611.30580",
+        "arxiv:2611.34607"
+      ],
+      "rank": 32,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.25,
+        "penalty": 0.028269371515833232,
+        "rise": 1.0,
+        "total": 0.5371180588008314,
+        "volume": 0.3525828687777642
+      },
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 3,
+        "published": 0,
+        "rise_baseline": "field_median",
+        "rise_ratio": 1.0,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
@@ -1079,8 +1108,8 @@
   ],
   "secondary_categories": [],
   "slug": "untitled-topic-876d",
-  "summary": "Simulation-trained surrogates now link physical models to optical design and blind PSF estimation in these preprints.",
-  "synthesis": "The three preprints share a reliance on physics-based simulation to train or guide learned models for optical systems, although their roles differ. A surrogate-guided design of incoherent multispectral diffractive optical networks targets onboard satellite image classification, treating the optical hardware as a design variable rather than a reconstruction problem. A neural surrogate for scintillator light-guide photon transport, trained via adjoint Monte Carlo sampling, makes detector readout differentiable so that geometry and readout can be co-optimized. DeepBlur, trained on physical simulations, addresses the inverse problem instead, estimating spatially varying 2D point spread functions blindly from single microscopy images to improve deconvolution. What is new across the set is the use of differentiable or simulation-trained surrogates to couple forward physics with either design or inference, rather than a single shared modality. The dominant thread is therefore the surrogate-mediated coupling of physical models to computational optical imaging, not a common instrument.",
+  "summary": "Physics-based simulation now trains surrogates that link forward optics to design and inverse imaging tasks.",
+  "synthesis": "The three preprints share a reliance on physics-based simulation to train or guide learned models for optical systems, although their roles differ. The incoherent multispectral diffractive optical network paper uses a surrogate-guided design approach for onboard satellite image classification, treating the optical hardware as a design variable. The scintillator detector paper trains a neural surrogate for light-guide photon transport via adjoint Monte Carlo sampling, making readout differentiable so that geometry and readout can be co-designed. DeepBlur, trained on physical simulations, instead addresses the inverse problem, blindly estimating spatially varying 2D point spread functions from single fluorescence microscopy images to improve deconvolution. The dominant thread is the surrogate-mediated coupling of physical models to computational optical imaging. What is new is the use of differentiable or simulation-trained surrogates to link forward physics with either design or inference, rather than a shared instrument or modality.",
   "synthesis_model": "claude-haiku-5-5",
-  "synthesized_on": "2026-11-27"
+  "synthesized_on": "2026-11-28"
 }
