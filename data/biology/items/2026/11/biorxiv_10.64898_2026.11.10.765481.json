@@ -1,0 +1,45 @@
+{
+  "abstract": "IntroductionSpiral ganglion neurons (SGNs) transmit auditory information and are a histological marker that have been quantified for decades to study various hearing loss pathologies in human temporal bone (hTB) specimens. Historically, quantification of SGNs has been labor-intensive and subject to manual bias and error. With the advent of digital microscopy, this study introduces and assesses the accuracy of a deep learning model for SGN quantification, providing an efficient approach that enables in-depth analysis of SGN distribution through three-dimensional frequency mapping.\n\nMethodsDigitized mid-modiolar slides from six hTBs from the Mass Eye and Ear Otopathology Laboratory Collection, representing a range of ages, post-mortem times, and diagnoses, were selected to train a computer vision model. Using Dragonfly 2024.1, the nucleus and cytoplasm of each SGN were manually segmented against background and used as the training corpus. The model was systemically evaluated in eighteen new cases to assess its accuracy across diverse histopathological presentations. For the specimen with the lowest performance, five small regions were manually annotated to augment the training dataset to evaluate the adaptability of the model. Next, the model was applied to every available slide that includes Rosenthals canal for a single case to assess model performance throughout the entire cochlea. Model performance was evaluated by comparing model SGN counts with counts by an experienced investigator, classifying each model prediction as a true positive, false positive, or false negative. Using coordinates output by the model, three-dimensional reconstructions were generated to analyze model performance from base to apex.\n\nResultsA U-Net convolutional neural network was developed with an average Dice coefficient of 0.91. Across eighteen cases representing diverse SGN morphologies and densities, the model achieved an F1-score of 0.91. For the case with the lowest performance, fine-tuning the model by adding additional training data from the same case improved the r2 value from 0.919 to 0.996. When applied to all available slides from a single case, the model achieved an F1-score of 0.96 across the entire cochlea.\n\nConclusionWe present the pretrained SGN Base Model: an approach for quantifying SGNs in hTB specimens that improves efficiency while maintaining high accuracy in comparison to manual quantification. The model performs robustly throughout the cochlea and is adaptable to a diverse range of archival hTB specimens with variable SGN densities and morphologies. Model-generated spatial coordinates for each SGN enable three-dimensional analysis and detailed mapping of SGN density from base to apex.",
+  "authors": [
+    "Hall, A. K.",
+    "Wang, H.",
+    "Kim, N.",
+    "Giardina, C. K.",
+    "Arenberg, J. G.",
+    "Quesnel, A. M."
+  ],
+  "doi": "10.64898/2026.11.10.765481",
+  "first_seen": "2026-11-28",
+  "id": "biorxiv:10.64898/2026.11.10.765481",
+  "metadata": {
+    "abstract": "IntroductionSpiral ganglion neurons (SGNs) transmit auditory information and are a histological marker that have been quantified for decades to study various hearing loss pathologies in human temporal bone (hTB) specimens. Historically, quantification of SGNs has been labor-intensive and subject to manual bias and error. With the advent of digital microscopy, this study introduces and assesses the accuracy of a deep learning model for SGN quantification, providing an efficient approach that enables in-depth analysis of SGN distribution through three-dimensional frequency mapping.\n\nMethodsDigitized mid-modiolar slides from six hTBs from the Mass Eye and Ear Otopathology Laboratory Collection, representing a range of ages, post-mortem times, and diagnoses, were selected to train a computer vision model. Using Dragonfly 2024.1, the nucleus and cytoplasm of each SGN were manually segmented against background and used as the training corpus. The model was systemically evaluated in eighteen new cases to assess its accuracy across diverse histopathological presentations. For the specimen with the lowest performance, five small regions were manually annotated to augment the training dataset to evaluate the adaptability of the model. Next, the model was applied to every available slide that includes Rosenthals canal for a single case to assess model performance throughout the entire cochlea. Model performance was evaluated by comparing model SGN counts with counts by an experienced investigator, classifying each model prediction as a true positive, false positive, or false negative. Using coordinates output by the model, three-dimensional reconstructions were generated to analyze model performance from base to apex.\n\nResultsA U-Net convolutional neural network was developed with an average Dice coefficient of 0.91. Across eighteen cases representing diverse SGN morphologies and densities, the model achieved an F1-score of 0.91. For the case with the lowest performance, fine-tuning the model by adding additional training data from the same case improved the r2 value from 0.919 to 0.996. When applied to all available slides from a single case, the model achieved an F1-score of 0.96 across the entire cochlea.\n\nConclusionWe present the pretrained SGN Base Model: an approach for quantifying SGNs in hTB specimens that improves efficiency while maintaining high accuracy in comparison to manual quantification. The model performs robustly throughout the cochlea and is adaptable to a diverse range of archival hTB specimens with variable SGN densities and morphologies. Model-generated spatial coordinates for each SGN enable three-dimensional analysis and detailed mapping of SGN density from base to apex.",
+    "author_corresponding": "Alicia M Quesnel",
+    "author_corresponding_institution": "Mass Eye and Ear",
+    "authors": "Hall, A. K.; Wang, H.; Kim, N.; Giardina, C. K.; Arenberg, J. G.; Quesnel, A. M.",
+    "biorxiv_category": "neuroscience",
+    "category": "neuroscience",
+    "date": "2026-11-27",
+    "doi": "10.64898/2026.11.10.765481",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/27/2026.11.10.765481.source.xml",
+    "license": "cc_by_nc",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "A Deep Learning Model for Quantifying and Mapping Human Spiral Ganglion Neurons (SGNs): The SGN Base Model",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Mass Eye and Ear",
+  "preprint_id": null,
+  "primary_category": "neuroscience",
+  "published_at": "2026-11-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "quantitative"
+  ],
+  "source": "biorxiv",
+  "summary": "Deep learning U-Net model quantifies and maps human spiral ganglion neurons in temporal bone slides, achieving F1-score 0.91 across cases and 0.96 across a…",
+  "title": "A Deep Learning Model for Quantifying and Mapping Human Spiral Ganglion Neurons (SGNs): The SGN Base Model",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.10.765481"
+}

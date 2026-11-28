@@ -1,0 +1,43 @@
+{
+  "abstract": "Automated seizure detection from electroencephalography (EEG) is a key step toward closed-loop brain-computer interface (BCI) systems and clinical decision support. We present DualBranchEEG, a dual-branch network that fuses (i) a temporal branch--a three-block 1-D convolutional encoder, a two-layer bidirectional LSTM and an additive attention layer--operating on the raw z-scored waveform, with (ii) a spectral branch--an MLP on log-power spectral density (PSD) features from Welch's method. We evaluate three-class classification (normal, interictal, ictal) on the Bonn University EEG dataset (500 single-channel recordings, 173.61 Hz) using a single stratified 70/15/15 split (seed 42). We position this work as a transparent reference implementation and exploratory comparison, not as evidence of superiority. A CNN-BiLSTM baseline (728,387 parameters; last-time-step readout, no attention, no augmentation) attains 96.00% test accuracy (72/75) and a macro AUC-ROC of 0.9795; five-fold stratified cross-validation of this baseline gives 98.40 {+/-} 1.52% accuracy and 0.9952 {+/-} 0.0071 AUC-ROC. The full DualBranchEEG (823,556 parameters) attains the same 96.00% test accuracy, macro F1 of 0.9543 and macro AUC-ROC of 0.9952. In the ablation, CNN-only, BiLSTM-only and CNN+BiLSTM+attention variants each reach 94.67%, and the full model is one test recording better; with only 75 test recordings these differences lie within sampling uncertainty (95% Wilson interval for 96.00%: 88.9-98.6%). Band-power differences between all class pairs are significant in all five canonical EEG bands. Grad-CAM, t-SNE and attention visualisations are reported as qualitative diagnostics only. We document all known methodological limitations, including PSD standardisation fitted on all 500 recordings and Welch's default 50% segment overlap.",
+  "authors": [
+    "Singh, R.",
+    "Cherukuri, J. V.",
+    "Somanna, A.",
+    "Jauhari, S."
+  ],
+  "doi": "10.64898/2026.11.25.768266",
+  "first_seen": "2026-11-28",
+  "id": "biorxiv:10.64898/2026.11.25.768266",
+  "metadata": {
+    "abstract": "Automated seizure detection from electroencephalography (EEG) is a key step toward closed-loop brain-computer interface (BCI) systems and clinical decision support. We present DualBranchEEG, a dual-branch network that fuses (i) a temporal branch--a three-block 1-D convolutional encoder, a two-layer bidirectional LSTM and an additive attention layer--operating on the raw z-scored waveform, with (ii) a spectral branch--an MLP on log-power spectral density (PSD) features from Welch's method. We evaluate three-class classification (normal, interictal, ictal) on the Bonn University EEG dataset (500 single-channel recordings, 173.61 Hz) using a single stratified 70/15/15 split (seed 42). We position this work as a transparent reference implementation and exploratory comparison, not as evidence of superiority. A CNN-BiLSTM baseline (728,387 parameters; last-time-step readout, no attention, no augmentation) attains 96.00% test accuracy (72/75) and a macro AUC-ROC of 0.9795; five-fold stratified cross-validation of this baseline gives 98.40 {+/-} 1.52% accuracy and 0.9952 {+/-} 0.0071 AUC-ROC. The full DualBranchEEG (823,556 parameters) attains the same 96.00% test accuracy, macro F1 of 0.9543 and macro AUC-ROC of 0.9952. In the ablation, CNN-only, BiLSTM-only and CNN+BiLSTM+attention variants each reach 94.67%, and the full model is one test recording better; with only 75 test recordings these differences lie within sampling uncertainty (95% Wilson interval for 96.00%: 88.9-98.6%). Band-power differences between all class pairs are significant in all five canonical EEG bands. Grad-CAM, t-SNE and attention visualisations are reported as qualitative diagnostics only. We document all known methodological limitations, including PSD standardisation fitted on all 500 recordings and Welch's default 50% segment overlap.",
+    "author_corresponding": "Aryan Somanna",
+    "author_corresponding_institution": "KPMG",
+    "authors": "Singh, R.; Cherukuri, J. V.; Somanna, A.; Jauhari, S.",
+    "biorxiv_category": "neuroscience",
+    "category": "neuroscience",
+    "date": "2026-11-27",
+    "doi": "10.64898/2026.11.25.768266",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/27/2026.11.25.768266.source.xml",
+    "license": "cc_by_nc_nd",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "DualBranchEEG: A Dual-Branch CNN BiLSTM Network with Temporal Attention and Spectral Features for Three Class EEG Seizure Classification",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "KPMG",
+  "preprint_id": null,
+  "primary_category": "neuroscience",
+  "published_at": "2026-11-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "quantitative"
+  ],
+  "source": "biorxiv",
+  "summary": "Dual-branch CNN-BiLSTM network with attention and Welch PSD features classifies normal, interictal and ictal EEG on the Bonn dataset; gains over baselines are…",
+  "title": "DualBranchEEG: A Dual-Branch CNN BiLSTM Network with Temporal Attention and Spectral Features for Three Class EEG Seizure Classification",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.25.768266"
+}
