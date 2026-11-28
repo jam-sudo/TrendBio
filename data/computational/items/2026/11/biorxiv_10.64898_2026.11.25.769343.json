@@ -1,0 +1,45 @@
+{
+  "abstract": "Motivation: Protein structure representations are often learned by reconstructing coordinates, yet reconstruction quality does not necessarily track performance on biological prediction tasks. We therefore investigate whether joint-embedding prediction can capture information useful for biological prediction while retaining recoverable backbone geometry. Results: We introduce PS-JEPA, a self-supervised model that learns protein structure representations by predicting masked residue embeddings from visible backbone context. The encoder combines geometric graph encoding with bidirectional Mamba and is pretrained without a coordinate-reconstruction objective. On StructTokenBench, frozen PS-JEPA representations achieve a mean remote-homology macro F1 (x100) of 72.24, compared with 67.12 for GearNet-Edge, the strongest baseline for this category, while remaining competitive in functional and flexibility prediction. A separately trained decoder reconstructs backbones from these frozen representations, achieving a mean C RMSD of 1.61 [A] on 309 external test chains filtered to exclude sequence matches to training and reference data. In an exploratory test of unconditional generation, a learned latent prior with the same decoder yields 62 of 384 backbones (16.15%) that meet the computational designability criterion. Together, these results show that joint-embedding prediction can learn representations that support both biological prediction and backbone reconstruction. Availability and Implementation: https://github.com/ahexlwang/PS-JEPA",
+  "authors": [
+    "Hwang, U.",
+    "Shin, Y.",
+    "Song, J.",
+    "Kim, D.",
+    "Sim, J.",
+    "Lee, J."
+  ],
+  "doi": "10.64898/2026.11.25.769343",
+  "first_seen": "2026-11-28",
+  "id": "biorxiv:10.64898/2026.11.25.769343",
+  "metadata": {
+    "abstract": "Motivation: Protein structure representations are often learned by reconstructing coordinates, yet reconstruction quality does not necessarily track performance on biological prediction tasks. We therefore investigate whether joint-embedding prediction can capture information useful for biological prediction while retaining recoverable backbone geometry. Results: We introduce PS-JEPA, a self-supervised model that learns protein structure representations by predicting masked residue embeddings from visible backbone context. The encoder combines geometric graph encoding with bidirectional Mamba and is pretrained without a coordinate-reconstruction objective. On StructTokenBench, frozen PS-JEPA representations achieve a mean remote-homology macro F1 (x100) of 72.24, compared with 67.12 for GearNet-Edge, the strongest baseline for this category, while remaining competitive in functional and flexibility prediction. A separately trained decoder reconstructs backbones from these frozen representations, achieving a mean C RMSD of 1.61 [A] on 309 external test chains filtered to exclude sequence matches to training and reference data. In an exploratory test of unconditional generation, a learned latent prior with the same decoder yields 62 of 384 backbones (16.15%) that meet the computational designability criterion. Together, these results show that joint-embedding prediction can learn representations that support both biological prediction and backbone reconstruction. Availability and Implementation: https://github.com/ahexlwang/PS-JEPA",
+    "author_corresponding": "Juyong Lee",
+    "author_corresponding_institution": "College of Pharmacy, Seoul National University, 1 Gwanak-ro, Gwanak-gu, Seoul 08826, Republic of Korea",
+    "authors": "Hwang, U.; Shin, Y.; Song, J.; Kim, D.; Sim, J.; Lee, J.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-27",
+    "doi": "10.64898/2026.11.25.769343",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/27/2026.11.25.769343.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Learning Protein Structure Representations through Joint-Embedding Prediction",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "College of Pharmacy, Seoul National University, 1 Gwanak-ro, Gwanak-gu, Seoul 08826, Republic of Korea",
+  "preprint_id": null,
+  "primary_category": "structural",
+  "published_at": "2026-11-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "ml-ai"
+  ],
+  "source": "biorxiv",
+  "summary": "PS-JEPA learns protein structure representations by predicting masked residue embeddings without coordinate reconstruction, improving remote-homology…",
+  "title": "Learning Protein Structure Representations through Joint-Embedding Prediction",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.25.769343"
+}

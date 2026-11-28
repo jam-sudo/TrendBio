@@ -1,0 +1,46 @@
+{
+  "abstract": "Significance: Fluorescence lifetime imaging microscopy (FLIM) of NAD(P)H can measure the metabolism of single cells without labels. However, its weak autofluorescence requires long acquisitions that can lead to phototoxicity, while shorter acquisitions leave too few photons for current cell segmentation methods. This trade-off is aggravated in 3D live-cell models, such as spheroids and organoids, and in thin, highly adherent 2D cultures. Aim: We develop Thin2Seg to adapt a generalist segmentation network to low-photon FLIM using unlabeled recordings and a single annotated training image. The method also assesses which predicted cell masks remain stable under photon loss without additional manual annotations. Approach: We use binomial photon thinning to generate low-photon views of full-photon FLIM recordings. During training, the student network uses these low-photon views to predict the features that a teacher network extracts from the corresponding full-photon images. We evaluate Thin2Seg on macrophage and small intestinal organoid datasets against three approaches: fine-tuning on full-photon images, photon augmentation, and segmentation after denoising. We also use the predicted macrophage masks to pool photons within each cell and estimate fluorescence lifetimes. Results: Thin2Seg achieved the highest mean segmentation F1 scores among the methods tested on both datasets at median budgets of 1 and 0.5 photons per cell pixel. At these budgets, 8-12% of masks accepted by label-free certification failed the overlap criterion against full-photon predictions, compared with 14-48% of masks accepted by Cellpose's flow-error check. At 1 photon per cell pixel, 92% of annotated macrophages were recovered and 53% of lifetimes estimated were within 10% of the full-photon reference. Median cell lifetimes were within 5% of the full-photon values in 95% of macrophage images, and M2a macrophages remained distinguishable from each of the other three polarization states. Conclusions: Thin2Seg enables single-cell segmentation and lifetime analysis of label-free FLIM from much shorter acquisitions. It uses a single annotated training image and segments low-photon FLIM images directly, supporting live-cell analysis at lower photon budgets without a separate image restoration step.",
+  "authors": [
+    "Wang, G.",
+    "Nose, M.",
+    "Zhou, H.",
+    "Dmitriev, R. I.",
+    "Monaghan, M. G.",
+    "Zhang, M."
+  ],
+  "doi": "10.64898/2026.11.26.769454",
+  "first_seen": "2026-11-28",
+  "id": "biorxiv:10.64898/2026.11.26.769454",
+  "metadata": {
+    "abstract": "Significance: Fluorescence lifetime imaging microscopy (FLIM) of NAD(P)H can measure the metabolism of single cells without labels. However, its weak autofluorescence requires long acquisitions that can lead to phototoxicity, while shorter acquisitions leave too few photons for current cell segmentation methods. This trade-off is aggravated in 3D live-cell models, such as spheroids and organoids, and in thin, highly adherent 2D cultures. Aim: We develop Thin2Seg to adapt a generalist segmentation network to low-photon FLIM using unlabeled recordings and a single annotated training image. The method also assesses which predicted cell masks remain stable under photon loss without additional manual annotations. Approach: We use binomial photon thinning to generate low-photon views of full-photon FLIM recordings. During training, the student network uses these low-photon views to predict the features that a teacher network extracts from the corresponding full-photon images. We evaluate Thin2Seg on macrophage and small intestinal organoid datasets against three approaches: fine-tuning on full-photon images, photon augmentation, and segmentation after denoising. We also use the predicted macrophage masks to pool photons within each cell and estimate fluorescence lifetimes. Results: Thin2Seg achieved the highest mean segmentation F1 scores among the methods tested on both datasets at median budgets of 1 and 0.5 photons per cell pixel. At these budgets, 8-12% of masks accepted by label-free certification failed the overlap criterion against full-photon predictions, compared with 14-48% of masks accepted by Cellpose's flow-error check. At 1 photon per cell pixel, 92% of annotated macrophages were recovered and 53% of lifetimes estimated were within 10% of the full-photon reference. Median cell lifetimes were within 5% of the full-photon values in 95% of macrophage images, and M2a macrophages remained distinguishable from each of the other three polarization states. Conclusions: Thin2Seg enables single-cell segmentation and lifetime analysis of label-free FLIM from much shorter acquisitions. It uses a single annotated training image and segments low-photon FLIM images directly, supporting live-cell analysis at lower photon budgets without a separate image restoration step.",
+    "author_corresponding": "Guangchen Wang",
+    "author_corresponding_institution": "Trinity College Dublin",
+    "authors": "Wang, G.; Nose, M.; Zhou, H.; Dmitriev, R. I.; Monaghan, M. G.; Zhang, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-27",
+    "doi": "10.64898/2026.11.26.769454",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/27/2026.11.26.769454.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "Thin2Seg: Single-cell Segmentation of Label-free FLIM at Low Photon Counts",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Trinity College Dublin",
+  "preprint_id": null,
+  "primary_category": "ml-ai",
+  "published_at": "2026-11-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "single-cell",
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "Thin2Seg adapts a generalist segmentation network to low-photon label-free NAD(P)H FLIM using photon thinning and teacher-student training, enabling…",
+  "title": "Thin2Seg: Single-cell Segmentation of Label-free FLIM at Low Photon Counts",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.26.769454"
+}

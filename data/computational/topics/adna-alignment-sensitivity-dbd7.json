@@ -770,7 +770,7 @@
     0.01840878464281559,
     -0.04237746074795723
   ],
-  "headline": "Algorithmic and hardware redesigns cut runtime and memory across core genomics kernels",
+  "headline": "Algorithmic and hardware redesigns cut runtime and memory for core genomics kernels",
   "history": [
     {
       "attached_item_ids": [],
@@ -1240,10 +1240,46 @@
         "rise_ratio": 2.6666666666666665,
         "star_gain_7d": 0
       }
+    },
+    {
+      "attached_item_ids": [],
+      "category": "tools-infra",
+      "count_7d": 7,
+      "date": "2026-11-28",
+      "item_ids": [
+        "arxiv:2611.28741",
+        "arxiv:2611.29410",
+        "biorxiv:10.64898/2026.11.23.768163",
+        "biorxiv:10.64898/2026.11.23.768503",
+        "biorxiv:10.64898/2026.11.23.768625",
+        "biorxiv:10.64898/2026.11.23.768714",
+        "pubmed:10.1093/bioinformatics/btag856"
+      ],
+      "rank": 1,
+      "scores": {
+        "code_velocity": 0.0,
+        "diversity": 0.5,
+        "penalty": 0.08521655727374985,
+        "rise": 3.3333333333333335,
+        "total": 1.6191145882012472,
+        "volume": 0.5288743031666463
+      },
+      "secondary_categories": [
+        "genomics"
+      ],
+      "signals": {
+        "code": 0,
+        "industry": 0,
+        "preprint": 6,
+        "published": 1,
+        "rise_baseline": "four_week_mean",
+        "rise_ratio": 3.3333333333333335,
+        "star_gain_7d": 0
+      }
     }
   ],
   "item_one_liners": {},
-  "label": "Fast Sequence Analysis Algorithms",
+  "label": "Accelerated Sequence Analysis Kernels",
   "related": [
     "alignment-memory-bb92",
     "bacterial-genetic-32fc",
@@ -1253,8 +1289,8 @@
     "genomics"
   ],
   "slug": "adna-alignment-sensitivity-dbd7",
-  "summary": "New aligners, an assembler, a k-mer counter, a placement tool, and accelerators each report large speed or memory gains over established baselines.",
-  "synthesis": "The dominant thread is reducing the cost of core sequence-processing kernels through algorithmic redesign or algorithm–hardware co-design. For alignment, minibwa combines BWA-MEM seeding with minimap2 chaining and is reported ~4x faster than BWA-MEM at comparable accuracy. lWFA and bidirectional lBiWFA extend wavefront alignment to exact local alignment in O(sN) time with reduced memory. VEGA (a RISC-V vector-extension co-design, up to 15.1x over Ara2-RVV) and Motivo (a motif-indexed ASIC for sequence-to-graph mapping) move DP and graph alignment into hardware. Gallifrey uses locally consistent de Bruijn graphs for HiFi draft assembly, reported >6x faster than rust-mdbg with 2x less memory. Tuna revisits sort versus hash k-mer counting with a cost model and minimizer partitioning, outperforming KMC3. New in this set, gPlace extends the theme to phylogenetic placement, matching pplacer output exactly with >3-fold lower memory and >30-fold faster runtime.",
+  "summary": "Seven new tools speed up alignment, assembly, k-mer counting and phylogenetic placement, several matching established tools' output at lower memory.",
+  "synthesis": "The common thread is lowering the cost of core sequence-processing kernels through algorithmic redesign or algorithm–hardware co-design. For read alignment, minibwa pairs BWA-MEM seeding with minimap2 chaining and is reported ~4x faster than BWA-MEM at comparable accuracy. Local wavefront alignment (lWFA) and bidirectional lBiWFA extend WFA to exact local pairwise alignment in O(sN) time with a corrected free-end penalty and reduced memory. Two preprints move alignment into hardware: VEGA, a RISC-V vector-extension co-design for DP alignment (up to 15.1x over Ara2-RVV), and Motivo, a motif-indexed ASIC for sequence-to-graph mapping. Gallifrey builds locally consistent de Bruijn graphs for HiFi draft assembly, running >6x faster than rust-mdbg with half the memory. Tuna uses a cost model to revisit sort-versus-hash k-mer counting and outperforms KMC3. gPlace carries the pattern to phylogenetic placement, reproducing pplacer output exactly with >3-fold lower memory and >30-fold faster runtime.",
   "synthesis_model": "claude-opus-5-5",
-  "synthesized_on": "2026-11-27"
+  "synthesized_on": "2026-11-28"
 }

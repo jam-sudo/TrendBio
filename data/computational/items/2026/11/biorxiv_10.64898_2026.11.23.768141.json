@@ -1,0 +1,50 @@
+{
+  "abstract": "Quantification tools for bottom-up label-free proteomics, including DIA-NN, Spectronaut, MaxQuant, and FragPipe, use different table layouts, column headers, modification notations, and parameter files. Downstream applications maintain separate readers for these outputs. ProteoBridge lets an application request the same quantity, such as unnormalized ion intensity, across reports from different quantification tools. JSON parsing rules describe each tools tables, and software-specific parameter parsers read the settings. The rules currently cover 14 tools and are tested on public inputs. A shared parser organizes the reported quantities into one level for each feature type the tool reports (fragments, ions, peptidoforms, peptides, or proteins) and writes the result as AnnData/MuData, Parquet, or DuckDB. A JSON summary records the structure, provenance, and conversion warnings, such as unmapped modifications. Applications can use the apb-catalog API in Python, R, or TypeScript to map the requested quantity to the field that holds it for each tool and version. Researchers can supply a sample table to add the experimental design and a FASTA database to check peptide sequences. ProteoBridge can serve as a common interface for reading quantification results across tools and versions.",
+  "authors": [
+    "Wolski, W. E.",
+    "Devreese, R.",
+    "Bouwmeester, R.",
+    "Webel, H.",
+    "Schwarz, L.",
+    "Jachmann, C.",
+    "van Puyenbroeck, S.",
+    "Panse, C.",
+    "Rehrauer, H.",
+    "Martens, L.",
+    "Locard-Paulet, M."
+  ],
+  "doi": "10.64898/2026.11.23.768141",
+  "first_seen": "2026-11-28",
+  "id": "biorxiv:10.64898/2026.11.23.768141",
+  "metadata": {
+    "abstract": "Quantification tools for bottom-up label-free proteomics, including DIA-NN, Spectronaut, MaxQuant, and FragPipe, use different table layouts, column headers, modification notations, and parameter files. Downstream applications maintain separate readers for these outputs. ProteoBridge lets an application request the same quantity, such as unnormalized ion intensity, across reports from different quantification tools. JSON parsing rules describe each tools tables, and software-specific parameter parsers read the settings. The rules currently cover 14 tools and are tested on public inputs. A shared parser organizes the reported quantities into one level for each feature type the tool reports (fragments, ions, peptidoforms, peptides, or proteins) and writes the result as AnnData/MuData, Parquet, or DuckDB. A JSON summary records the structure, provenance, and conversion warnings, such as unmapped modifications. Applications can use the apb-catalog API in Python, R, or TypeScript to map the requested quantity to the field that holds it for each tool and version. Researchers can supply a sample table to add the experimental design and a FASTA database to check peptide sequences. ProteoBridge can serve as a common interface for reading quantification results across tools and versions.",
+    "author_corresponding": "Witold E. Wolski",
+    "author_corresponding_institution": "Functional Genomics Center Zurich, ETH Zurich and University of Zurich, Zurich, Switzerland",
+    "authors": "Wolski, W. E.; Devreese, R.; Bouwmeester, R.; Webel, H.; Schwarz, L.; Jachmann, C.; van Puyenbroeck, S.; Panse, C.; Rehrauer, H.; Martens, L.; Locard-Paulet, M.",
+    "biorxiv_category": "bioinformatics",
+    "category": "bioinformatics",
+    "date": "2026-11-27",
+    "doi": "10.64898/2026.11.23.768141",
+    "jatsxml": "https://www.biorxiv.org/content/early/2026/11/27/2026.11.23.768141.source.xml",
+    "license": "cc_by",
+    "published": "NA",
+    "server": "bioRxiv",
+    "title": "ProteoBridge Connects Proteomics Quantification Outputs to Reusable Analysis Workflows",
+    "type": "new results",
+    "version": "1"
+  },
+  "org": "Functional Genomics Center Zurich, ETH Zurich and University of Zurich, Zurich, Switzerland",
+  "preprint_id": null,
+  "primary_category": "proteomics",
+  "published_at": "2026-11-27",
+  "published_doi": null,
+  "relevant": true,
+  "secondary_categories": [
+    "tools-infra"
+  ],
+  "source": "biorxiv",
+  "summary": "ProteoBridge uses JSON parsing rules for 14 label-free proteomics tools (DIA-NN, Spectronaut, MaxQuant, FragPipe) to map outputs into AnnData/MuData, Parquet,…",
+  "title": "ProteoBridge Connects Proteomics Quantification Outputs to Reusable Analysis Workflows",
+  "type": "preprint",
+  "url": "https://doi.org/10.64898/2026.11.23.768141"
+}
