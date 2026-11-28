@@ -14,6 +14,15 @@ from pipeline.store import Store
 logger = logging.getLogger(__name__)
 
 
+def published_map_editions(layout: MapData, store: Store) -> MapData:
+    latest = {row.slug: (day.date, row) for day in store.all_days() for row in day.ranked}
+    for point in layout.points:
+        if point.slug in latest:
+            point.last_ranked, row = latest[point.slug]
+            point.headline, point.category = row.headline, row.category
+    return layout
+
+
 def _layout(vectors, old_coordinates=None, new_vectors=None):
     if len(vectors) == 1:
         return np.full((1, 2), 0.5)
@@ -70,9 +79,10 @@ def build_map(store: Store, cfg: Scoring, *, previous: MapData | None) -> MapDat
         result.points.append(MapData.Point(
             slug=topic.slug, label=topic.label, headline=topic.headline or topic.label,
             category=topic.category, x=float(coordinates[i, 0]), y=float(coordinates[i, 1]),
-            size=sum(len(entry.item_ids) for entry in topic.history),
+            size=len({id for entry in topic.history for id in entry.item_ids}),
+            appearances=sum(len(entry.item_ids) for entry in topic.history),
             first_ranked=min(ranked), last_ranked=max(ranked),
             months=sorted({entry.date.strftime('%Y-%m') for entry in topic.history}),
             neighbors=[topics[j].slug for j in neighbors],
         ))
-    return result
+    return published_map_editions(result, store)

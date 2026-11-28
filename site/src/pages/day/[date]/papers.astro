@@ -3,6 +3,7 @@ import Base from "../../../layouts/Base.astro";
 import FieldEvidence from "../../../components/FieldEvidence.astro";
 import { loadPeriods } from "../../../lib/period-data";
 import { periodHeadline } from "../../../lib/periods";
+import { tiedScore } from "../../../lib/leaderboard";
 import { datedTopic } from "../../../lib/editions";
 import type { Day } from "../../../lib/types";
 
@@ -13,10 +14,10 @@ interface Props { day: Day }
 const { day } = Astro.props;
 const path = `/day/${day.date}/`;
 const rows = [
-  ...day.ranked,
+  ...day.ranked.map(row => ({ ...row, tie: tiedScore(day, row) })),
   ...Array.from(loadPeriods().supplemental.get(day.date)?.values() ?? [])
     .filter(topic => !day.ranked.some(row => row.slug === topic.slug))
-    .map(topic => ({ slug: topic.slug, headline: periodHeadline(topic), summary: "", rank: null })),
+    .map(topic => ({ slug: topic.slug, headline: periodHeadline(topic), summary: "", rank: null, tie: undefined })),
 ];
 ---
 <Base title={`CompBio papers · ${day.date} — TrendBio`} canonicalPath={`${path}papers/`}
@@ -25,7 +26,7 @@ const rows = [
     <h1>CompBio papers · <time datetime={day.date}>{day.date}</time></h1>
     <p><a href={path}>View this day’s rankings</a></p>
     {rows.map(row => <section id={row.slug} tabindex="-1">
-      <p class="context">CompBio · <time datetime={day.date}>{day.date}</time> · {row.rank ? `Rank ${row.rank}` : "Period ranking · Auto label"}</p>
+      <p class="context">CompBio · <time datetime={day.date}>{day.date}</time> · {row.rank ? `Rank ${row.rank}` : "Period ranking · Auto label"}{row.tie && ` · ${row.tie}`}</p>
       <h2>{row.headline}</h2>
       {row.summary && <p>{row.summary}</p>}
       <FieldEvidence field="computational" {day} {row} expanded />

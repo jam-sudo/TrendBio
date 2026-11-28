@@ -33,7 +33,7 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
     <ul class="map-links" aria-label="Research topics">
       {map.points.map(point => <li data-map-slug={point.slug}>
         <a href={`${prefix}/topic/${point.slug}/`}>{point.headline}</a>
-        <span>{colors[point.category]?.label ?? point.category} · {point.size} items · last ranked {point.last_ranked}</span>
+        <span>{colors[point.category]?.label ?? point.category} · {point.size} distinct {point.size === 1 ? "item" : "items"}{point.appearances != null && ` · ${point.appearances} ${point.appearances === 1 ? "appearance" : "appearances"}`} · last ranked {point.last_ranked}</span>
         {point.neighbors.length > 0 && <span>Nearest topics: {point.neighbors.map(slug => titles.get(slug) ?? slug).join(" · ")}</span>}
       </li>)}
     </ul>
@@ -144,7 +144,7 @@ const external = Buffer.byteLength(json, "utf8") > 600_000;
       hovered = hit(event);
       if (!hovered) return clearHover();
       tooltip.querySelector('strong').textContent = hovered.headline;
-      tooltip.querySelector('span').textContent = `${colors[hovered.category]?.label ?? hovered.category} · last ranked ${hovered.last_ranked}`;
+      tooltip.querySelector('span').textContent = `${colors[hovered.category]?.label ?? hovered.category} · ${hovered.size} distinct ${hovered.size === 1 ? 'item' : 'items'} · last ranked ${hovered.last_ranked}`;
       tooltip.hidden = false;
       tooltip.style.left = `${Math.max(8, Math.min(width - tooltip.offsetWidth - 8, hovered.px + 4))}px`;
       tooltip.style.top = `${Math.max(8, Math.min(height - tooltip.offsetHeight - 8, hovered.py + 4))}px`;

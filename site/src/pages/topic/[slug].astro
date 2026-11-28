@@ -3,6 +3,7 @@ import { readingParagraphs } from "../../lib/reading-paragraphs";
 import TopicIntro from "../../components/TopicIntro.astro";
 import { rankMedal } from "../../lib/categories";
 import Base from "../../layouts/Base.astro";
+import { tiedScore } from "../../lib/leaderboard";
 import EditorNote from "../../components/EditorNote.astro";
 import EvidenceList from "../../components/EvidenceList.astro";
 import CrossCoverage from "../../components/CrossCoverage.astro";
@@ -22,6 +23,7 @@ const { topic } = Astro.props;
 const domain = "computational";
 const snapshot = topicSnapshot(topic);
 const { history, entry, issue, headline, summary, synthesis, category } = snapshot;
+const issueDate = issue?.day.date ?? entry?.date;
 const ranked = history.filter((entry) => entry.rank !== null);
 const categoryLabel = loadTaxonomy(domain).find(({ slug }) => slug === category)?.label ?? "Category unrecorded";
 const related = topic.related.map((slug) => loadTopic(domain, slug)).filter((entry): entry is Topic => entry !== null).slice(0, 3);
@@ -39,10 +41,10 @@ const previousRanked = entry && ranked.find(day => day.date < entry.date);
 
 <Base description={headline} canonicalPath={`/topic/${topic.slug}/`} title={`${headline} — TrendBio`} lastRun={latestDay(domain)?.run.finished}>
   <article class="prose" data-pagefind-body data-pagefind-filter={`category:${categoryLabel}`}>
-    <TopicIntro field={domain} {category} {categoryLabel} rank={issue?.row.rank ?? entry?.rank} title={headline} {summary}
-      history={topic.history.filter(day => entry && day.date <= entry.date)} signals={issue?.row.signals ?? entry?.signals}
-      signalDate={entry?.date} windowDays={issue?.day.run.window_days} date={entry?.date}
-      backUrl={entry && loadDay(domain, entry.date) ? `/day/${entry.date}/` : undefined} />
+    <TopicIntro field={domain} {category} {categoryLabel} rank={issue?.row.rank ?? entry?.rank} tie={issue && tiedScore(issue.day, issue.row)} title={headline} {summary}
+      history={topic.history.filter(day => issueDate && day.date <= issueDate)} signals={issue?.row.signals ?? entry?.signals}
+      signalDate={issueDate} windowDays={issue?.day.run.window_days} date={issueDate}
+      backUrl={issueDate && loadDay(domain, issueDate) ? `/day/${issueDate}/` : undefined} />
     {snapshot.singleSource && <p><small>This headline and summary describe one supporting work.</small></p>}
     {synthesis && readingParagraphs(synthesis).map(paragraph => <p>{paragraph}</p>)}
     <EditorNote html={loadNote(topic.slug)} />

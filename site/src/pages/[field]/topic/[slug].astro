@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import { tiedScore } from "../../../lib/leaderboard";
 import TopicIntro from "../../../components/TopicIntro.astro";
 import { rankMedal } from "../../../lib/categories";
 import FieldEvidence from "../../../components/FieldEvidence.astro";
@@ -21,9 +22,9 @@ const history = (loadTopic(field, slug)?.history ?? []).filter(entry => entry.da
 <Base edition={field} title={`${row.headline} — TrendBio`} description={row.summary || row.headline}
   canonicalPath={`/${field}/topic/${slug}/`} lastRun={day.run.finished}>
   <article class="prose" data-pagefind-body data-pagefind-filter={`category:${category}`}>
-    <TopicIntro {field} category={row.category} categoryLabel={category} rank={row.rank} title={row.headline} summary={row.summary}
+    <TopicIntro {field} category={row.category} categoryLabel={category} rank={row.rank} tie={tiedScore(day, row)} title={row.headline} summary={row.summary}
       {history} signals={row.signals} signalDate={day.date} windowDays={day.run.window_days} date={day.date} backUrl={datedTopic(field, day.date, slug)} />
-    <FieldEvidence {field} {day} {row} expanded />
+    <FieldEvidence {field} {day} {row} expanded citationsHref={`/${field}/topic/${slug}/citations.bib`} />
     <CrossCoverage matches={crossCoverage(field, day.date, slug)} date={day.date} />
     <section id="topic-history" aria-labelledby="history-heading" data-pagefind-ignore>
       <h2 id="history-heading">Topic history</h2>

@@ -291,6 +291,7 @@ def test_unranked_topics_untouched(context):
 def test_previous_synthesis_and_one_liner_merge(context, ranked_before):
     ctx = context
     ctx.topic.synthesis = 'Previously saved synthesis'
+    ctx.topic.synthesized_on = TODAY - timedelta(days=1)
     ctx.topic.item_one_liners = {'older:item': 'Retained', ctx.item.id: 'Replaced'}
     ctx.topic.history = [TopicDay(date=TODAY - timedelta(days=1), rank=1 if ranked_before else None,
                                   item_ids=[ctx.item.id], count_7d=1, signals=ctx.sig, scores=ctx.scores)]

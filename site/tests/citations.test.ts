@@ -1,6 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { expect, it } from "vitest";
-import { bibtex, escapeBibtex, hasPapers, topicEvidence } from "../src/lib/citations";
+import { bibtex, escapeBibtex, hasPapers, topicEvidence, topicSnapshot } from "../src/lib/citations";
+import { allTopics } from "../src/lib/data";
+import { fieldPath, publicEditions, topicAppearances } from "../src/lib/editions";
 import { topicPages } from "../src/lib/period-data";
 import type { Item } from "../src/lib/types";
 import fixtures from "./fixtures/citations.json";
@@ -26,16 +28,19 @@ it("escapes BibTeX specials, preserves authors and generates unique ASCII keys",
 });
 
 it("exports exactly the topic evidence papers and links only to existing files", () => {
-  for (const topic of topicPages()) {
-    const path = `dist/topic/${topic.slug}`;
-    const items = topicEvidence(topic);
+  const editions = [{ field: "computational" as const, topics: topicPages() },
+    ...publicEditions.map(field => ({ field, topics: allTopics(field).filter(topic => topicAppearances(field).has(topic.slug)) }))];
+  for (const { field, topics } of editions) for (const topic of topics) {
+    const url = `${fieldPath(field)}/topic/${topic.slug}`;
+    const path = `dist${url}`;
+    const items = topicEvidence(topic, topicSnapshot(topic, field));
     const html = readFileSync(`${path}/index.html`, "utf8");
     expect(existsSync(`${path}/citations.bib`)).toBe(hasPapers(items));
     if (hasPapers(items)) {
       const output = readFileSync(`${path}/citations.bib`, "utf8");
       // The build overlays tool-title fixtures; check counts and identifiers independently of titles.
       expect([...output.matchAll(/^@/gm)]).toHaveLength(new Set(items.filter(item => ["preprint", "published"].includes(item.type)).map(item => item.id)).size);
-      expect(html).toMatch(new RegExp(`href="/topic/${topic.slug}/citations.bib" download[^>]*>Export citations \\(BibTeX\\)</a>`));
+      expect(html).toMatch(new RegExp(`href="${url}/citations.bib" download[^>]*>Export citations \\(BibTeX\\)</a>`));
     } else expect(html).not.toContain("Export citations (BibTeX)");
   }
   expect(readFileSync("dist/sitemap.xml", "utf8")).not.toContain("citations.bib");

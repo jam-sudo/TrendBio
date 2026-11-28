@@ -30,7 +30,8 @@ def test_build_map_normalises_and_neighbors(map_store):
         assert len(set(point.neighbors)) == 3
         topic = topics[point.slug]
         assert point.months == sorted({str(entry.date)[:7] for entry in topic.history})
-        assert point.size == sum(len(entry.item_ids) for entry in topic.history)
+        assert point.size == len({id for entry in topic.history for id in entry.item_ids})
+        assert point.appearances == sum(len(entry.item_ids) for entry in topic.history)
         ranked = [entry.date for entry in topic.history if entry.rank is not None]
         assert (point.first_ranked, point.last_ranked) == (min(ranked), max(ranked))
         vector = np.asarray(topic.centroid)
@@ -49,7 +50,7 @@ def test_build_map_transforms_into_previous_layout(map_store, monkeypatch, caplo
     for topic in topics:
         topic.centroid = rng.normal(size=5).tolist()
         topic.history[0].rank = 1
-    store = SimpleNamespace(all_topics=lambda: topics[:count])
+    store = SimpleNamespace(all_topics=lambda: topics[:count], all_days=list)
     calls = []
     if count >= 10:
         import umap
@@ -92,7 +93,7 @@ def test_map_refits_only_above_twenty_percent(map_store, caplog):
     topics = map_store.all_topics()[:6]
     for topic in topics:
         topic.history[0].rank = 1
-    store = SimpleNamespace(all_topics=lambda: topics[:4])
+    store = SimpleNamespace(all_topics=lambda: topics[:4], all_days=list)
     previous = build_map(store, load_scoring(), previous=None)
     store.all_topics = lambda: topics[:5]
     with caplog.at_level(logging.INFO):
@@ -111,7 +112,7 @@ def test_small_maps_and_arbitrary_dimensions(map_store, count, dimension):
     for i, topic in enumerate(topics):
         topic.centroid = [float(i + 1)] * dimension
         topic.history[0].rank = 1
-    result = build_map(SimpleNamespace(all_topics=lambda: topics), load_scoring(), previous=None)
+    result = build_map(SimpleNamespace(all_topics=lambda: topics, all_days=list), load_scoring(), previous=None)
     assert len(result.points) == count
     assert all(len(p.neighbors) == min(3, count - 1) for p in result.points)
     assert all(0 <= p.x <= 1 and 0 <= p.y <= 1 for p in result.points)

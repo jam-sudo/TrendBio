@@ -6,6 +6,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { chromium, type Browser } from "playwright";
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { editionChanges } from "../src/lib/rank-changes";
+import { tiedScore } from "../src/lib/leaderboard";
 import { loadDays, allTopics, loadItems } from "../src/lib/data";
 import fixtures from "./fixtures/rank-changes.json";
 
@@ -36,6 +37,15 @@ beforeAll(async () => {
   browser = await chromium.launch();
 });
 afterAll(async () => { await browser?.close(); await server?.stop(); if (root) rmSync(root, { recursive: true, force: true }); });
+
+it("labels only exactly equal scores and shows the edition's actual topic count", () => {
+  const day = structuredClone(days[2]);
+  day.ranked.forEach((row, index) => { row.scores = { ...row.scores, total: [9, 8, 8, 7.99999, 6][index] }; });
+  expect(day.ranked.map(row => tiedScore(day, row))).toEqual([undefined, "Tied score · ranks 6–7", "Tied score · ranks 6–7", undefined, undefined]);
+  const output = readFileSync(join(root, "dist/day/2026-10-06/index.html"), "utf8");
+  expect(output).toMatch(/>Top 5<\/h2>/);
+  expect(output).toContain("Tied score · ranks 1–10");
+});
 
 it("compares the previous stored day, distinguishes first-ever from returning and omits unchanged/first-day markers", () => {
   const { rows, previousDate, entered } = editionChanges(days[2], days, topics)!;
@@ -80,15 +90,16 @@ it("opens the papers behind an addition badge and places the new paper first wit
   } finally { await page.close(); }
 });
 
-it.each(["dark", "light"])("renders each marker without clipping at 320, 390 and 1280px with clean axe in %s", async theme => {
+it.each(["dark", "light"])("renders each marker without clipping on mobile, desktop and at double text size in %s", async theme => {
   const context = await browser.newContext();
   const page = await context.newPage();
   try {
     await page.addInitScript(theme => localStorage.setItem("trendbio-theme", theme), theme);
-    for (const width of [320, 390, 1280]) {
+    for (const width of [320, 390, 640, 1280]) {
       await page.setViewportSize({ width, height: 900 });
       for (const path of ["/", "/day/2026-10-06/"]) {
         await page.goto(`http://127.0.0.1:${server.port}${path}`);
+        if (width === 640) await page.evaluate(() => { document.documentElement.style.fontSize = "200%"; });
         for (const [slug, label] of [["new", "New"], ["back", "Back"], ["up", "▲3"], ["down", "▼2"], ["same", ""]]) {
           const row = page.locator(`article[data-topic-cats][id="${slug}"]`);
           const marker = row.locator(".rank-change");

@@ -1382,8 +1382,14 @@ def test_reprocess_only_missing_preserves_synthesis_without_enrichment(ctx, monk
     monkeypatch.setattr(ctx.deps.llm, 'synthesize', capture)
     run_reprocess('computational', start, end, ctx.store, ctx.deps,
                   reenrich=False, only_missing_synthesis=True)
-    assert len(called) == len(set(called)) == 35
-    assert not set(called) & preserved.keys()
+    # The fixture edition outside October cannot supply text for the earlier rankings.
+    # Generate each ranked topic once, then reuse its dated copy on later October days.
+    ranked = {row.slug for day in ctx.store.all_days() if start <= day.date <= end for row in day.ranked}
+    assert len(called) == len(ranked) == 39
+    assert set(called) == ranked
+    for row in ctx.store.get_day(end).ranked:
+        if row.slug in preserved:
+            assert row.headline != preserved[row.slug][1]
     for slug, fields in preserved.items():
         topic = ctx.store.get_topic(slug)
         assert (topic.label, topic.headline, topic.summary, topic.synthesis,
@@ -1574,6 +1580,43 @@ def test_rebuild_keeps_synthesis_of_topic_with_history_before_range(ctx, monkeyp
     assert [entry.date for entry in saved.history] == [start - timedelta(days=1)]
     for field in ('headline', 'summary', 'synthesis', 'synthesis_model', 'synthesized_on', 'item_one_liners'):
         assert getattr(saved, field) == getattr(topic, field)
+
+
+@pytest.mark.parametrize('command', ['resynthesize', 'repair-synthesis'])
+def test_historical_synthesis_reads_prior_edition_and_keeps_latest_topic(ctx, monkeypatch, command):
+    first, middle, last = [run_day('computational', TODAY + timedelta(days=offset), ctx.store, ctx.deps)
+                           for offset in range(3)]
+    slug = last.ranked[0].slug
+    rows = [next(row for row in day.ranked if row.slug == slug) for day in (first, middle, last)]
+    rows[0].synthesis = 'Context from the earlier edition.'
+    middle.run.notes.append(f'synthesis-fallback:{slug}')
+    ctx.store.put_day(first)
+    ctx.store.put_day(middle)
+    topic = ctx.store.get_topic(slug)
+    topic.synthesis = 'Context from the later edition.'
+    tool = ctx.items[0].model_copy(update={'id': 'github:example/reader', 'source': 'github', 'type': 'code'})
+    ctx.store.put_item(tool)
+    entry = next(entry for entry in topic.history if entry.date == middle.date)
+    entry.attached_item_ids.append(tool.id)
+    ctx.store.put_topic(topic)
+    captured = {}
+
+    def synthesize(self, topic, items, signals, previous, model, **kwargs):
+        captured[topic.slug] = (previous, topic.label, {item.id for item in items})
+        return Synthesis(label='Archive topic', headline='Revised archived headline', summary='Revised summary.',
+                         synthesis='Revised synthesis.')
+
+    monkeypatch.setattr(FakeLLM, 'synthesize', synthesize)
+    if command == 'resynthesize':
+        monkeypatch.setattr('pipeline.__main__.build_deps', lambda *args: ctx.deps)
+        result = CliRunner().invoke(app, [command, '--from', str(middle.date), '--to', str(middle.date),
+                                          '--model', 'claude-haiku-5-5', '--data-root', str(ctx.root)])
+        assert result.exit_code == 0, result.output
+    else:
+        run_repair_synthesis('computational', middle.date, middle.date, ctx.store, ctx.deps, retry_fallbacks=True)
+    assert captured[slug] == (rows[0].synthesis, rows[1].headline, set(entry.item_ids + entry.attached_item_ids))
+    assert ctx.store.get_topic(slug) == topic and ctx.store.get_day(last.date) == last
+    assert next(row for row in ctx.store.get_day(middle.date).ranked if row.slug == slug).synthesis == 'Revised synthesis.'
 
 
 def prepare_synthesis_repair(ctx, *, blank_topic=False, bad_row=False):

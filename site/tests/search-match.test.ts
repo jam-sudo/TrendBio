@@ -26,6 +26,17 @@ it("requires every long query word at a word boundary", () => {
   expect(matchesQuery("양자", "세포와 유전체")).toBe(false);
 });
 
+it("matches short scientific terms as whole words, including hyphenated modifiers", () => {
+  expect(matchesQuery("pH", "Phase transitions in solids")).toBe(false);
+  expect(matchesQuery("pH", "pH-dependent emission")).toBe(true);
+  expect(matchesQuery("UV light", "Ultraviolet light")).toBe(false);
+  expect(matchesQuery("UV light", "Light measured in the UV")).toBe(true);
+  expect(matchesQuery("2D", "2D-materials")).toBe(true);
+  expect(matchesQuery("2D", "2D5 spectra")).toBe(false);
+  expect(matchesQuery("R", "Rotation")).toBe(false);
+  expect(matchesQuery("in PoolParty", "PoolParty")).toBe(true);
+});
+
 it("reads bounded pages through the last candidate, keeping matches ordered across retries", async () => {
   const candidates = Array.from({ length: 91 }, (_, id) => ({
     data: vi.fn().mockResolvedValue({ content: id < 20 || id >= 68 ? "PoolParty" : "unrelated", id }),

@@ -1,22 +1,21 @@
 import { createHash } from "node:crypto";
 import { loadItems } from "./data";
-import { topicAppearances } from "./editions";
+import { topicAppearances, type Field } from "./editions";
 import type { Item, Topic, TopicDay } from "./types";
 
-export function topicSnapshot(topic: Topic) {
+export function topicSnapshot(topic: Topic, field: Field = "computational") {
   const history = [...topic.history].sort((a, b) => b.date.localeCompare(a.date));
-  const appearances = topicAppearances("computational").get(topic.slug) ?? [];
+  const appearances = topicAppearances(field).get(topic.slug) ?? [];
   const byDate = new Map(history.map(entry => [entry.date, entry]));
   const synthesized = topic.synthesized_on ? byDate.get(topic.synthesized_on) : undefined;
-  const issue = appearances.find(({ day }) => day.date === synthesized?.date)
-    ?? appearances.find(({ day }) => byDate.has(day.date));
-  const entry = (issue && byDate.get(issue.day.date)) ?? synthesized ?? history.find(entry => entry.rank !== null)
+  const issue = appearances[0];
+  const entry = issue ? byDate.get(issue.day.date) : synthesized ?? history.find(entry => entry.rank !== null)
     ?? history.find(entry => entry.item_ids.length) ?? history[0];
   const hasSynthesis = !!entry && entry === synthesized;
   const row = issue?.row;
   const singleSource = issue?.day.run.notes.includes(`synthesis-fallback:${topic.slug}`);
   return {
-    entry, history, issue, singleSource, category: row?.category ?? entry?.category ?? "uncategorized",
+    field, entry, history, issue, singleSource, category: row?.category ?? entry?.category ?? "uncategorized",
     headline: row?.headline || (hasSynthesis && topic.headline) || topic.label,
     summary: row?.summary ?? (hasSynthesis ? topic.summary : null),
     synthesis: singleSource ? null : row?.synthesis ?? (hasSynthesis ? topic.synthesis : null),
@@ -29,7 +28,11 @@ export const isPaper = (item: Item) => item.type === "published" || item.type ==
 export const hasPapers = (items: Item[]) => items.some(isPaper);
 
 export function topicEvidence(topic: Topic, snapshot = topicSnapshot(topic)): Item[] {
-  return loadItems("computational", evidenceIds(snapshot.entry));
+  return loadItems(snapshot.field, evidenceIds(snapshot.entry));
+}
+
+export function datedPapers(field: Field, entry?: TopicDay): Item[] {
+  return loadItems(field, evidenceIds(entry)).filter(isPaper);
 }
 
 export function laterPapers({ entry, history }: ReturnType<typeof topicSnapshot>) {

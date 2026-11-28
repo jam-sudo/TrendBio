@@ -134,6 +134,7 @@ class MapData(BaseModel):
         x: float = Field(ge=0, le=1)
         y: float = Field(ge=0, le=1)
         size: int = Field(ge=0)
+        appearances: int | None = Field(default=None, ge=0, exclude_if=lambda count: count is None)
         first_ranked: date
         last_ranked: date
         months: list[str]

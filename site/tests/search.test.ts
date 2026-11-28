@@ -207,6 +207,18 @@ it('shows no topics for nonsense and lets See all results open the full search',
   await page.waitForURL(url => url.pathname === '/search/' && url.search === '?q=zzzxqnotaword98765&field=computational');
 });
 
+it('recovers suggestions in the same tab after a failed first module request', async () => {
+  await visit('/');
+  await page.context().setOffline(true);
+  const failed = page.waitForEvent('requestfailed', req => req.url().includes('/pagefind/pagefind.js'));
+  await combo().focus();
+  await failed;
+  await page.context().setOffline(false);
+  await combo().fill('Binder');
+  await expect.poll(() => options().count()).toBeGreaterThan(0);
+  expect(await options().first().textContent()).toContain('Binder');
+});
+
 it.each(['keyboard', 'click'])('opens a dropdown topic with %s', async action => {
   await visit('/');
   await combo().fill('Binder');

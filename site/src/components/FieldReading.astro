@@ -7,6 +7,7 @@ import { loadTaxonomy } from "../lib/data";
 import { datedTopic, editionSources, fieldLabel, isDaily, topicAppearances, type Edition } from "../lib/editions";
 import { loadPeriods } from "../lib/period-data";
 import { periodHeadline } from "../lib/periods";
+import { tiedScore } from "../lib/leaderboard";
 import type { Day } from "../lib/types";
 
 interface Props { field: Edition; day: Day }
@@ -28,7 +29,7 @@ const extra = regular ? Array.from(loadPeriods(field).supplemental.get(day.date)
     {!day.ranked.length && <p>No topic cleared the ranking threshold for this date.</p>}
     {day.ranked.length > 0 && <h2>Ranked topics</h2>}
     <ol class="rankings">{day.ranked.map(row => <li value={row.rank} id={row.slug} tabindex="-1">
-      <p class="category">{categories.get(row.category) ?? row.category}</p>
+      <p class="category">{[categories.get(row.category) ?? row.category, tiedScore(day, row)].filter(Boolean).join(" · ")}</p>
       <h3>{row.headline}</h3><p>{row.summary}</p>
       <FieldEvidence {field} {day} {row} expanded />
       <p data-edition-navigation><a href={datedTopic(field, day.date, row.slug)}>Rank in this edition</a>

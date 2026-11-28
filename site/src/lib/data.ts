@@ -113,7 +113,18 @@ export function getDataIndex(domain: string): DataIndex {
 }
 
 export function loadMap(domain: string): MapData | null {
-  return getDataIndex(domain).map;
+  const { map, topicsBySlug, daysByDate } = getDataIndex(domain);
+  for (const point of map?.points ?? []) {
+    if (point.appearances != null) continue;
+    const topic = topicsBySlug.get(point.slug);
+    if (!topic) continue;
+    const ids = topic.history.flatMap(entry => entry.item_ids);
+    point.appearances = ids.length;
+    point.size = new Set(ids).size;
+    const row = daysByDate.get(point.last_ranked)?.ranked.find(row => row.slug === point.slug);
+    if (row) { point.category = row.category; point.headline = row.headline; }
+  }
+  return map;
 }
 
 export function loadDays(domain: string): Day[] {

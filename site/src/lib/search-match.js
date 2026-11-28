@@ -1,6 +1,10 @@
-function words(text) {
+function normalize(text) {
+  return text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC');
+}
+
+function words(normalized) {
   // Match Pagefind's punctuation removal, including hyphenated and dotted names.
-  return text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC')
+  return normalized
     .replace(/[\p{Pd}\p{Pe}\p{Pf}\p{Pi}\p{Po}\p{Ps}]/gu, '')
     .match(/[\p{L}\p{N}]+/gu) ?? [];
 }
@@ -11,11 +15,23 @@ function singular(word) {
   return word;
 }
 
+const shortStopWords = new Set(['a', 'an', 'as', 'at', 'by', 'in', 'is', 'of', 'on', 'or', 'to']);
+
 export function matchesQuery(query, content) {
-  const terms = words(query).filter(word => word.length >= 3 || /[가-힣]/.test(word)).map(singular);
-  const indexedWords = words(content).map(singular);
+  const queryWords = words(normalize(query));
+  const significant = queryWords.filter(word => !shortStopWords.has(word));
+  const terms = significant.length ? significant : queryWords;
+  if (!terms.length) return false;
+  const normalized = normalize(content);
+  const indexedWords = words(normalized).map(singular);
+  const exact = terms.filter(term => term.length < 3 && !/[가-힣]/.test(term));
+  if (exact.length) {
+    const tokens = new Set([...indexedWords, ...(normalized.match(/[\p{L}\p{N}]+/gu) ?? [])]);
+    if (!exact.every(term => tokens.has(term))) return false;
+  }
   // shortcut: preserve regular plurals, add fuller stemming if other inflections are needed.
-  return terms.every(term => indexedWords.some(word => word.startsWith(term)));
+  const prefixes = terms.filter(term => !exact.includes(term)).map(singular);
+  return prefixes.every(term => indexedWords.some(word => word.startsWith(term)));
 }
 
 export async function filterResults(query, candidates) {

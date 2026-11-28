@@ -88,6 +88,16 @@ try {
     }
     assert.ok(found, `${term}: no Physics search result links to the archived paper`);
   }
+  for (const path of [
+    '/physics/day/2026-11-24/papers/#bilayer-graphene-energy-spectrum-3476',
+    '/physics/day/2026-11-25/papers/#astrometric-precision-incoherent-4af7',
+  ]) {
+    if (!existsSync('dist' + path.split('#')[0] + 'index.html')) continue;
+    await page.goto(`http://127.0.0.1:${server.port}${path}`);
+    const title = await page.locator(':target h3').innerText();
+    await page.goto(`http://127.0.0.1:${server.port}/search/?` + new URLSearchParams({ q: title, field: 'physics' }));
+    await page.locator(`#search-results a[href="${path}"]`).waitFor();
+  }
   const html = readFileSync('dist/index.html', 'utf8');
   assert.equal(existsSync('dist/search-match.js'), false);
   assert.doesNotMatch(html, /\/pagefind\/|search-match/);

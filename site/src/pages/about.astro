@@ -30,7 +30,7 @@ const fields: Field[] = ["computational", ...publicEditions];
     </ul>
     <p>In a seven-day edition, topics with less than {history_days_for_own_baseline} days of history use the median paper count across topics scored in that field on that day. Older topics use the average of the counts one, two, three and four weeks earlier. A missing week counts as zero.</p>
     <p>Longer-window pilots use the average of up to four earlier, non-overlapping windows of the same length when at least two have papers. Otherwise they use the field median.</p>
-    <p>A small penalty applies to topics ranked the day before.</p>
+    <p>A small penalty applies to topics ranked the day before. Daily topics with identical scores are ordered alphabetically by topic ID. Their cards show the range of tied positions.</p>
     <p>Code and industry items attach to at most one research topic when their similarity clears a calibrated threshold. They contribute evidence, diversity and code velocity; paper counts, rise and topic continuity stay paper-only. The separate “From industry” list shows up to eight relevant announcements first seen in the preceding seven days, whether or not they attach to a topic.</p>
     <p>Code appears in the “From code” list because repositories rarely join research topics by text similarity.</p>
     <p>“Shared by researchers” covers Bluesky only and never affects rankings or scores. It excludes accounts linking 20 or more papers a week and can include authors promoting their own work.</p>

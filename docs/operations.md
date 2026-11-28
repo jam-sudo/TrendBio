@@ -149,17 +149,20 @@ and existing embeddings, clears days and topic history in range, then rebuilds d
 chronologically. `--reenrich` replaces summaries, categories and relevance for every
 item via Batches; venue exclusions still apply. The hosted workflow enables
 reenrichment by default with `claude-haiku-5-5`; locally it is opt-in.
-Use `--no-reenrich --only-missing-synthesis` to extend existing days: this retains
-topic identities and existing headlines, summaries and syntheses while rerunning
-clustering and ranking, and synthesizes only topics without a headline. No LLM
-enrichment is performed. The workflow exposes `only_missing_synthesis` (default false):
+Use `--no-reenrich --only-missing-synthesis` to extend existing days with their
+stored evidence and topic identities. When replaying an older edition, the pipeline
+reuses a headline and summary from that date or an earlier ranked edition whose
+supporting items and reviewed findings still apply. A topic whose only copy comes
+from a later edition needs a new synthesis for the earlier date. The newer
+edition keeps its published copy. The workflow option is `only_missing_synthesis`
+(default false).
 
 For a full continuity rebuild, pass `--rebuild-topics`: it removes every topic's
 history in the requested months, deletes topics left empty, and clears synthesis
 only for topics whose entire history is inside the range before replaying days
 chronologically. Items and embeddings remain cached. Combine with `--only-missing-synthesis` to synthesize new
-topics once with the backfill model (Haiku), while keeping synthesis on
-surviving topics with history outside the range. Rebuild the entire affected date
+topics with the backfill model (Haiku) and reuse dated copy when its evidence
+still applies. Rebuild the entire affected date
 range to replace old mega-topics completely.
 
 ```sh

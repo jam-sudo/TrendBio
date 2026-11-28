@@ -37,7 +37,7 @@ from pipeline.sources.github import GithubAdapter
 from pipeline.sources.pubmed import PubmedAdapter
 from pipeline.sources.rss import RssAdapter
 from pipeline.store import Store
-from pipeline.topic_map import build_map
+from pipeline.topic_map import build_map, published_map_editions
 from pipeline.synthesize import synthesize_top
 from pipeline.wipe import validate_month_range, wipe as wipe_store
 
@@ -321,19 +321,21 @@ def resynthesize(start: FromDate, end: ToDate, model: Annotated[str, typer.Optio
                         if topic is None:
                             raise ValueError(f'missing topic: {row.slug}')
                         entry = next(entry for entry in topic.history if entry.date == day)
-                        items = [staged.get_item(id) for id in entry.item_ids]
+                        items = [staged.get_item(id) for id in dict.fromkeys(entry.item_ids + entry.attached_item_ids)]
                         if any(item is None for item in items):
                             raise ValueError(f'missing items for topic: {row.slug}')
                         ranked.append((topic, row.signals, row.scores))
                         items_by_topic[topic.slug] = items
                     topics, selected, notes = synthesize_top(
                         ranked, items_by_topic, staged_deps.llm, staged_deps.budget,
-                        deps.cfg, day, backfill=result.run.backfilled, model=model,
+                        deps.cfg, day, backfill=result.run.backfilled, model=model, load_day=staged.get_day,
                     )
                     for row, topic in zip(result.ranked, topics, strict=True):
                         row.headline, row.summary = topic.headline, topic.summary
-                        row.synthesis = topic.synthesis if topic.synthesized_on == day else None
-                        staged.put_topic(topic)
+                        row.synthesis = (topic.synthesis if topic.synthesized_on == day
+                                         and f'synthesis-fallback:{topic.slug}' not in notes else None)
+                        if not any(entry.rank is not None and entry.date > day for entry in topic.history):
+                            staged.put_topic(topic)
                     result.run.synthesis_model = selected
                     result.run.notes = sorted(set([
                         note for note in result.run.notes if not note.startswith('synthesis-fallback:')
@@ -350,6 +352,8 @@ def resynthesize(start: FromDate, end: ToDate, model: Annotated[str, typer.Optio
             _related(topics)
             for topic in topics:
                 staged.put_topic(topic)
+            if layout := staged.get_map():
+                staged.put_map(published_map_editions(layout, staged))
 
 
 if __name__ == '__main__':

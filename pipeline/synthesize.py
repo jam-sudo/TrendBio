@@ -1,13 +1,15 @@
 import logging
 import time
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date
+from functools import cache
 from threading import Condition
 
 from pipeline.budget import Budget
 from pipeline.config import Scoring
 from pipeline.llm import LLM
-from pipeline.models import Item, Topic
+from pipeline.models import Day, Item, Topic
 from pipeline.score import Scores, Signals
 
 
@@ -45,6 +47,7 @@ def synthesize_top(
     ranked: list[tuple[Topic, Signals, Scores]], items_by_topic: dict[str, list[Item]],
     llm: LLM, budget: Budget, cfg: Scoring, today: date, *, backfill: bool,
     model: str | None = None, skip_slugs: set[str] | None = None,
+    load_day: Callable[[date], Day | None] | None = None,
 ) -> tuple[list[Topic], str, list[str]]:
     started = time.monotonic()
     over_ceiling = budget.over_ceiling()
@@ -54,6 +57,25 @@ def synthesize_top(
     workers, active = cfg.synthesis_workers, 0
     condition = Condition()
     throttled = False
+
+    @cache
+    def edition_rows(when):
+        day = load_day(when) if load_day else None
+        return {row.slug: (row, f'synthesis-fallback:{row.slug}' in day.run.notes)
+                for row in day.ranked} if day else {}
+
+    def previous_synthesis(topic):
+        dates = sorted((entry.date for entry in topic.history
+                        if entry.rank is not None and entry.date < today), reverse=True)
+        for when in dates:
+            row, fallback = edition_rows(when).get(topic.slug, (None, False))
+            if fallback:
+                continue
+            if row and row.synthesis:
+                return row.synthesis
+            if topic.synthesized_on == when and topic.synthesis:
+                return topic.synthesis
+        return None
 
     def throttle():
         nonlocal workers, throttled
@@ -68,8 +90,7 @@ def synthesize_top(
         topic_model = tier_model(position, cfg, backfill, over_ceiling)
         if override:
             topic_model = override if position <= cfg.featured_n else 'claude-haiku-5-5'
-        previous = topic.synthesis if any(day.rank is not None and day.date < today
-                                          for day in topic.history) else None
+        previous = previous_synthesis(topic)
         items = items_by_topic[topic.slug]
         if len(items) > cfg.synthesis_max_items:
             logger.warning('synthesis_truncated topic=%s items=%d selected=%d',
@@ -87,7 +108,15 @@ def synthesize_top(
                 reviewed['research_question'] = entry.research_question
             if entry and entry.result_passages:
                 reviewed['result_passages'] = entry.result_passages
-            result = llm.synthesize(topic, items, signals, previous, topic_model,
+            prompt_topic = topic
+            if (topic.synthesized_on and topic.synthesized_on > today) or any(
+                    h.rank is not None and h.date > today for h in topic.history):
+                row, _ = edition_rows(today).get(topic.slug, (None, False))
+                prompt_topic = topic.model_copy(update={
+                    'category': row.category if row else (entry and entry.category) or topic.category,
+                    'label': row.headline if row else topic.slug.rsplit('-', 1)[0].replace('-', ' '),
+                })
+            result = llm.synthesize(prompt_topic, items, signals, previous, topic_model,
                                     on_repeated_429=throttle, **reviewed)
         finally:
             with condition:

@@ -1,6 +1,6 @@
 import { loadCorrection, loadItems, loadTopic } from "./data";
 import { selectToolNames, type ToolName } from "./tool-names";
-import type { Day, Signals } from "./types";
+import type { Day, RankedTopic, Signals } from "./types";
 import { periodHeadline, type PeriodRanked } from "./periods";
 import { growthContext } from "./scoring";
 import type { Field } from "./editions";
@@ -8,6 +8,7 @@ import type { Field } from "./editions";
 export interface Stat { label: string; value: string | number; spoken?: string; context?: string }
 export interface LeaderboardTopic {
   rank: number;
+  tie?: string;
   slug: string;
   headline: string;
   evidenceDate?: string;
@@ -34,6 +35,11 @@ export function signalStats(signals: Signals, context: string): Stat[] {
   return counts;
 }
 
+export function tiedScore(day: Day, row: RankedTopic) {
+  const ranks = day.ranked.filter(other => other.scores.total === row.scores.total).map(other => other.rank);
+  if (ranks.length > 1) return `Tied score · ranks ${Math.min(...ranks)}–${Math.max(...ranks)}`;
+}
+
 export function dailyRows(day: Day | null, dated = false): LeaderboardTopic[] {
   if (!day) return [];
   return day.ranked.map(row => {
@@ -42,7 +48,7 @@ export function dailyRows(day: Day | null, dated = false): LeaderboardTopic[] {
     const entry = history.find(entry => entry.date === day.date);
     const ids = entry?.item_ids ?? [];
     const synthesis = row.synthesis ?? (topic?.synthesized_on === day.date ? topic.synthesis : "");
-    return { ...row, evidenceDate: dated ? day.date : undefined,
+    return { ...row, tie: tiedScore(day, row), evidenceDate: dated ? day.date : undefined,
       correction: day.domain !== "computational" && !!loadCorrection(day.domain, day.date, row.slug, [row.headline, row.summary, synthesis ?? ""], ids),
       fallbackSummary: day.run.notes.includes(`synthesis-fallback:${row.slug}`),
       toolNames: selectToolNames(day.domain === "computational" && row.rank <= 20 ? loadItems(day.domain, ids) : [], row.rank),

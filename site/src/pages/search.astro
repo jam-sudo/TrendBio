@@ -51,7 +51,7 @@ for (const field of fields) {
 </Base>
 
 <script>
-  import { matchingPages } from '../lib/search-match.js';
+  import { loadSearch } from '../lib/load-search.js';
 
   const form = document.querySelector('form[role="search"]');
   const input = document.getElementById('search-query');
@@ -131,12 +131,11 @@ for (const field of fields) {
     }
     status.textContent = 'Searching…';
     try {
-      const pagefindPath = '/pagefind/pagefind.js';
-      const pagefind = await import(/* @vite-ignore */ pagefindPath);
+      const [pagefind, match] = await loadSearch();
       const filters = { ...(field.value && { field: field.value }), ...(category.value && { category: category.value }) };
       const search = await pagefind.search(query, { filters });
       if (current !== request) return;
-      pages = matchingPages(query, search.results);
+      pages = match.matchingPages(query, search.results);
       await showResults(current);
     } catch {
       if (current === request) status.textContent = 'Search could not load. Please try again.';

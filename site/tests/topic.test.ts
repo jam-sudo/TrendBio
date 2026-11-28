@@ -129,10 +129,17 @@ describe("built topic pages", () => {
       const data = join(temporary, "data");
       cpSync("../fixtures/data", data, { recursive: true });
       const changed = structuredClone(topic);
+      changed.synthesized_on = "2026-10-30";
       const published = items.find((item) => item.type === "published")!;
       const other = structuredClone(rankedTopics(domain).find((entry) => entry.slug !== slug)!);
       const laterPaper = loadItems(domain, other.history.at(-1)!.item_ids).find(item => item.type === "preprint")!;
       for (const date of ["2026-10-30", "2026-10-31"]) changed.history.find(entry => entry.date === date)!.item_ids.push(laterPaper.id);
+      const olderPath = join(data, domain, "days", "2026-10-30.json");
+      const older = JSON.parse(readFileSync(olderPath, "utf8"));
+      Object.assign(older.ranked.find((row: { slug: string }) => row.slug === slug), {
+        headline: "Archived calibration measurements", summary: "Earlier calibration used a separate reference.",
+      });
+      writeFileSync(olderPath, JSON.stringify(older));
       changed.history.push({ ...latest, date: "2026-11-02", rank: null,
         item_ids: [laterPaper.id], count_7d: 1,
         signals: { published: 1, preprint: 0, code: 0, industry: 0, star_gain_7d: 0, rise_ratio: 1.49 } });
@@ -175,6 +182,8 @@ describe("built topic pages", () => {
       expect(citations).toContain(published.url);
       expect(citations).not.toContain(laterPaper.url);
       const archive = JSON.parse(readFileSync(join(output, "archive-search.json"), "utf8"));
+      expect(archive.find((record: { url: string }) => record.url === `/day/2026-10-30/papers/#${slug}`).content)
+        .toContain("Archived calibration measurements\nEarlier calibration used a separate reference.");
       expect(archive.filter((record: { url: string; content: string }) => record.url.endsWith(`#${slug}`) && record.content.includes(laterPaper.title)))
         .toMatchObject([{ url: `/day/2026-10-31/papers/#${slug}`, filters: { field: ["computational"] } }]);
       expect(section(html, "topic-history")).not.toContain("2026-11-02");

@@ -35,6 +35,7 @@ const fallbackLabel = ranked.autoLabel ? (ranked.evidenceDate ? " (auto label)" 
     {date && matches.length > 0 && <CrossCoverage {matches} {date} summary={ranked.summary} />}
   </div>
   <div class="compact-meta">
+    {ranked.tie && <small>{ranked.tie}</small>}
     <RankChange {movement} {papersHref} />
     {!period && rise && <span class="badge"><span aria-hidden="true">{rise.value} {rise.context}</span><span class="sr-only">{rise.spoken ?? rise.value}</span></span>}
     {ranked.fallbackSummary && <small>Fallback summary</small>}
@@ -44,7 +45,7 @@ const fallbackLabel = ranked.autoLabel ? (ranked.evidenceDate ? " (auto label)" 
 </article> : <FeaturedCard {field} category={ranked.category} {categoryLabel}
   categories={[ranked.category, ...secondary]} rank={ranked.rank} id={date ? ranked.slug : undefined}
   title={ranked.headline} {url} {fallbackLabel} summary={ranked.summary} stats={ranked.stats} {featured}>
-  <RankChange slot="movement" {movement} {papersHref} />
+  <Fragment slot="movement">{ranked.tie && <small>{ranked.tie}</small>}<RankChange {movement} {papersHref} /></Fragment>
   <ToolNames slot="tools" names={ranked.toolNames} />
   {ranked.correction && correctionHref && <small><a class="editorial" href={correctionHref}>Read editorial correction</a></small>}
   {ranked.fallbackSummary && <small>Fallback summary from source text</small>}
@@ -53,7 +54,7 @@ const fallbackLabel = ranked.autoLabel ? (ranked.evidenceDate ? " (auto label)" 
 <style>
   .editorial { position: relative; z-index: 1; display: inline-block; padding-block: .25rem; }
   .compact-copy { flex: 1; min-width: 0; }
-  .compact-meta { display: contents; }
+  .compact-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; min-width: 0; max-width: 55%; }
   .compact-row.has-tool-names, .compact-row.has-coverage { height: auto; min-height: 56px; padding-block: 0.5rem; }
   .auto-label { color: var(--muted); font-size: var(--t3); font-weight: 400; }
   .compact-row.period-row { height: auto; min-height: 64px; flex-wrap: wrap; padding-block: 0.5rem; }
@@ -75,7 +76,7 @@ const fallbackLabel = ranked.autoLabel ? (ranked.evidenceDate ? " (auto label)" 
   @media (width < 640px) {
     .compact-row { display: grid; grid-template-columns: 24px 16px minmax(0, 1fr); height: auto; min-height: 56px; padding-block: 0.5rem; }
     .compact-headline, .compact-category { overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: anywhere; }
-    .compact-meta { grid-column: 3; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; min-width: 0; }
+    .compact-meta { grid-column: 3; gap: 0.5rem; max-width: none; }
     .compact-category { max-width: none; }
     .period-row :global(.signal-line) { grid-column: 3; padding-left: 0; }
   }

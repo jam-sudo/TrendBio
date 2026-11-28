@@ -11,6 +11,7 @@ from time import perf_counter
 from contextlib import contextmanager
 from dataclasses import dataclass, replace
 from datetime import date, datetime, timedelta, timezone
+from functools import cache
 from pathlib import Path
 
 import httpx
@@ -36,7 +37,7 @@ from pipeline.sources.base import load_config
 from pipeline.sources.github import GithubAdapter, seed_star_history
 from pipeline.sources.pubmed import PubmedAdapter, pubmed_in_scope
 from pipeline.store import Store
-from pipeline.topic_map import build_map
+from pipeline.topic_map import build_map, published_map_editions
 from pipeline.synthesize import fallback_copy, synthesize_top, tier_model, top_evidence
 from pipeline.wipe import reset_derived, validate_month_range
 
@@ -78,6 +79,28 @@ def _same_synthesis_signals(previous: Signals, current: Signals) -> bool:
         # Older editions stored the ratio without its baseline name.
         previous = previous.model_copy(update={'rise_baseline': current.rise_baseline})
     return previous == current
+
+
+def _restore_archived_copy(topic, original, day, read_edition):
+    current = next(h for h in topic.history if h.date == day)
+    sources = set(current.item_ids + current.attached_item_ids)
+    topic.headline = topic.summary = topic.synthesis = topic.synthesized_on = topic.synthesis_model = None
+    for old in sorted(original.history, key=lambda h: h.date, reverse=True):
+        if old.date > day or old.rank is None or not old.item_ids:
+            continue
+        if not sources.issuperset(old.item_ids + old.attached_item_ids):
+            continue
+        if (old.research_question, old.result_passages, old.result_review) != (
+                current.research_question, current.result_passages, current.result_review):
+            continue
+        issue = read_edition(old.date)
+        if not issue or (old.date != day and f'synthesis-fallback:{topic.slug}' in issue.run.notes):
+            continue
+        row = next((row for row in issue.ranked if row.slug == topic.slug), None)
+        if row and row.headline:
+            topic.headline, topic.summary, topic.synthesis = row.headline, row.summary, row.synthesis
+            topic.synthesized_on, topic.synthesis_model = old.date, issue.run.synthesis_model
+            return
 
 
 def _commit(staged: Store, store: Store) -> None:
@@ -343,6 +366,13 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                                      store.get_embeddings([item.id for item in extras]), strict=True))
             items_by_id = {item.id: item for item in window}
             topics = {topic.slug: topic for topic in store.all_topics()}
+            newer_topics = {}
+            if latest and latest.date > day:
+                newer_topics = {slug: topic for slug, topic in topics.items()
+                                if (topic.synthesized_on and topic.synthesized_on > day)
+                                or any(h.rank is not None and h.date > day for h in topic.history)}
+                for slug, topic in newer_topics.items():
+                    topics[slug] = topic.model_copy(update={'item_one_liners': {}})
             previous_slugs = set(topics)
             items_by_topic = {}
             unchanged = set()
@@ -409,6 +439,13 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                       and _same_synthesis_signals(previous_ranked[topic.slug].signals, signals)
                       and previous_ranked[topic.slug].scores == scores
                       and previous.run.backfilled == backfill}
+            read_edition = cache(store.get_day)
+            for topic, _, _ in ranked:
+                if topic.slug not in newer_topics or not (only_missing_synthesis or topic.slug in cached):
+                    continue
+                _restore_archived_copy(topic, newer_topics[topic.slug], day, read_edition)
+                if not topic.headline:
+                    cached.discard(topic.slug)
             if only_missing_synthesis:
                 cached = {topic.slug for topic, _, _ in ranked if topic.headline}
             if refreshed:
@@ -416,7 +453,7 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
         with _stage('synthesize', model=tier_model(1, deps.cfg, backfill, deps.budget.over_ceiling())) as counts:
             _, model, synthesis_notes = synthesize_top(
                 ranked, items_by_topic,
-                deps.llm, deps.budget, deps.cfg, day, backfill=backfill, skip_slugs=cached,
+                deps.llm, deps.budget, deps.cfg, day, backfill=backfill, skip_slugs=cached, load_day=store.get_day,
             )
             notes.extend(synthesis_notes)
             if previous:
@@ -433,8 +470,11 @@ def run_day(domain: str, day: date, store: Store, deps: Deps, *, backfill: bool 
                 entry.rank, entry.signals, entry.scores = ranks.get(topic.slug), signals, scores
                 entry.category = topic.category
                 entry.secondary_categories = list(topic.secondary_categories)
-            _related(list(topics.values()))
-            for topic in topics.values():
+            # A backfill updates that day's history, while later published topic metadata stays current.
+            stored_topics = [newer_topics[slug].model_copy(update={'history': topic.history})
+                             if slug in newer_topics else topic for slug, topic in topics.items()]
+            _related(stored_topics)
+            for topic in stored_topics:
                 store.put_topic(topic)
             degraded = is_degraded(notes, source_status,
                                    over_ceiling=deps.budget.over_ceiling(),
@@ -821,6 +861,7 @@ def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps
             before = staged_deps.budget.month_spend_usd()
             # Repair uses the requested model for every job, independent of leaderboard tier.
             cfg = deps.cfg.model_copy(update={'backfill_synthesis_model': model})
+            editions = {day.date: day for day in days}
             for when in sorted({key[0] for key in jobs}):
                 keys = sorted(key for key in jobs if key[0] == when)
                 ranked = [(topics[slug].model_copy(deep=True), jobs[when, slug].signals,
@@ -828,6 +869,7 @@ def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps
                 repaired, _, notes = synthesize_top(
                     ranked, {slug: evidence[when, slug] for _, slug in keys},
                     staged_deps.llm, staged_deps.budget, cfg, when, backfill=True,
+                    load_day=lambda date: editions.get(date) or staged.get_day(date),
                 )
                 for key, topic in zip(keys, repaired, strict=True):
                     if missing.get(topic.slug) == key:
@@ -837,9 +879,9 @@ def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps
                     if key in rows:
                         row = rows[key]
                         row.headline, row.summary = topic.headline, topic.summary
-                        row.synthesis = topic.synthesis if topic.synthesized_on == when else None
-                        day = next(day for day in days if day.date == when)
                         note = f'synthesis-fallback:{topic.slug}'
+                        row.synthesis = topic.synthesis if topic.synthesized_on == when and note not in notes else None
+                        day = editions[when]
                         day.run.notes = [saved for saved in day.run.notes if saved != note]
                         if note in notes:
                             day.run.notes.append(note)
@@ -861,14 +903,8 @@ def run_repair_synthesis(domain: str, start: date, end: date, store: Store, deps
                     )
                     day.run.status = 'degraded' if degraded else 'ok'
                     staged.put_day(day)
-            # A map refit can move points; patch only headlines in the existing layout.
-            path = staged.root / domain / 'map.json'
-            if missing and path.exists():
-                payload = json.loads(path.read_text(encoding='utf-8'))
-                for point in payload['points']:
-                    if point['slug'] in missing:
-                        point['headline'] = topics[point['slug']].headline
-                staged._write(path, payload)
+            if layout := staged.get_map():
+                staged.put_map(published_map_editions(layout, staged))
             estimated_usd = staged_deps.budget.month_spend_usd() - before
     degraded_after = sum(day.run.status == 'degraded' for day in days)
     print(f'repair_synthesis_summary topics_repaired={len(missing)} rows_repaired={len(rows)} '

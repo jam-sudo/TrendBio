@@ -1,3 +1,5 @@
+import { loadSearch } from '../lib/load-search.js';
+
 const input = document.getElementById('header-search-query');
 if (input) {
   const part = name => document.getElementById('header-search-' + name);
@@ -8,7 +10,7 @@ if (input) {
   const message = part('message');
   const status = part('status');
   const all = part('all');
-  let modules, request = 0, timer, loading, active = -1;
+  let request = 0, timer, loading, active = -1;
   input.setAttribute('role', 'combobox');
   input.setAttribute('aria-autocomplete', 'list');
   input.setAttribute('aria-controls', list.id);
@@ -48,7 +50,7 @@ if (input) {
     timer = setTimeout(async () => {
       loading = setTimeout(() => { if (isCurrent()) open(message.dataset.loading); }, 300);
       try {
-        const [pagefind, match] = await modules;
+        const [pagefind, match] = await loadSearch();
         if (!isCurrent()) return;
         const search = await pagefind.search(query, field ? { filters: { field } } : undefined);
         if (!isCurrent()) return;
@@ -75,16 +77,13 @@ if (input) {
     }, 150);
   }
   input.addEventListener('focus', () => {
-    const pagefindPath = '/pagefind/pagefind.js';
-    modules ??= Promise.all([
-      import(/* @vite-ignore */ pagefindPath),
-      import('../lib/search-match.js'),
-    ]).catch(() => null);
+    loadSearch().catch(() => {});
     if (innerWidth <= 640 && input.getBoundingClientRect().top > 96) form.scrollIntoView({ block: 'start' });
     schedule();
   });
   window.visualViewport?.addEventListener('resize', fit);
   input.addEventListener('input', schedule);
+  window.addEventListener('online', () => { if (document.activeElement === input) schedule(); });
   input.addEventListener('keydown', event => {
     if (event.isComposing) return;
     if (event.key === 'Escape' || event.key === 'Tab') {

@@ -126,6 +126,7 @@ export interface MapData {
     x: number;
     y: number;
     size: number;
+    appearances?: number;
     first_ranked: string;
     last_ranked: string;
     months: string[];

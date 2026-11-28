@@ -1,17 +1,18 @@
 ---
 import { readingParagraphs } from "../lib/reading-paragraphs";
 import PublicationEvidence from "./PublicationEvidence.astro";
-import { loadCorrection, loadItems, loadTopic } from "../lib/data";
+import { loadCorrection, loadTopic } from "../lib/data";
+import { datedPapers } from "../lib/citations";
 import { publicEditions, type Field } from "../lib/editions";
 import { editionChanges } from "../lib/rank-changes";
 import type { Day, RankedTopic } from "../lib/types";
 
-interface Props { field: Field; day: Day; row: Pick<RankedTopic, "slug" | "headline" | "summary" | "synthesis">; expanded?: boolean }
-const { field, day, row, expanded = false } = Astro.props;
+interface Props { field: Field; day: Day; row: Pick<RankedTopic, "slug" | "headline" | "summary" | "synthesis">; expanded?: boolean; citationsHref?: string }
+const { field, day, row, expanded = false, citationsHref } = Astro.props;
 const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
 const topic = loadTopic(field, row.slug);
 const entry = topic?.history.find(entry => entry.date === day.date);
-const papers = loadItems(field, [...new Set(entry?.item_ids)]).filter(item => item.type === "published" || item.type === "preprint");
+const papers = datedPapers(field, entry);
 const comparison = field === "computational" || publicEditions.includes(field) ? editionChanges(day) : null;
 const added = comparison?.rows.get(row.slug)?.addedPaperIds;
 const groups = added?.size ? [
@@ -25,6 +26,7 @@ const correction = loadCorrection(field, day.date, row.slug, [row.headline, row.
 ---
 {singleSource && <p><small>This headline and summary describe one supporting work.</small></p>}
 {correction && <aside class="correction" role="note"><strong>Editorial correction</strong><div set:html={correction} /></aside>}
+{citationsHref && papers.length > 0 && <p data-pagefind-ignore><a href={citationsHref} download>Export citations (BibTeX)</a></p>}
 {papers.length > 0 && <details open={expanded}>
   <summary>{papers.length} supporting {(papers.length === 1 ? "paper" : "papers")}</summary>
   {synthesis && readingParagraphs(synthesis).map(paragraph => <p>{paragraph}</p>)}
